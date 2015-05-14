@@ -9,7 +9,7 @@
 // @include        http://local.huntedcow.com/fallensword/*
 // @exclude        http://forum.fallensword.com/*
 // @exclude        http://wiki.fallensword.com/*
-// @version        1497
+// @version        1498
 // @downloadURL    https://github.com/fallenswordhelper/fallenswordhelper/raw/master/fallenswordhelper.user.js
 // @grant          none
 // ==/UserScript==
@@ -1902,6 +1902,15 @@ var Helper = {
 				break;
 			default:
 				Helper.injectCreatures();
+				break;
+			}
+			break;
+		case "quests":
+			switch (subPageId) {
+			case "view":
+				Helper.showAllQuestSteps();
+				break;
+			default:
 				break;
 			}
 			break;
@@ -4234,12 +4243,15 @@ injectBazaar: function() {
 						}
 					}
 					var notSave = '|Breaker|Protection|Master Thief|Protect Gold|Disarm|Duelist|Thievery|Master Blacksmith|Master Crafter|Fury Caster|Master Inventor|Sustain|';//Taking the Not Save in case they add new enhancements.
-					var l = data.player.enhancements.length;
-					for(var i=0; i<l; i++) //loop through enhancements
-					{//54 = ca, 26 = doubler
-						var enh = data.player.enhancements[i];
-						if (notSave.indexOf('|'+enh.name+'|')==-1){
-							combatData.player.enhancements[enh.name]=enh.value;
+					if (data.player.enhancements)
+					{
+						var l = data.player.enhancements.length;
+						for(var i=0; i<l; i++) //loop through enhancements
+						{//54 = ca, 26 = doubler
+							var enh = data.player.enhancements[i];
+							if (notSave.indexOf('|'+enh.name+'|')==-1){
+								combatData.player.enhancements[enh.name]=enh.value;
+							}
 						}
 					}
 					//combatData.player.enhancements = data.player.enhancements;
@@ -11170,7 +11182,7 @@ injectArena: function() {
 			'<tr><td align="right">Store Last Quest Page' + Helper.helpLink('Store Last Quest Page', 'This will store the page and sort order of each of the three quest selection pages for next time you visit. If you need to reset the links, turn this option off, '+
 				'click on the link you wish to reset and then turn this option back on again.') +
 				':</td><td><input name="storeLastQuestPage" type="checkbox" value="on"' + (GM_getValue("storeLastQuestPage")?" checked":"") + '></td></tr>' +
-			'<tr><td align="right">Show Next Quest Steps' + Helper.helpLink('Show Next Quest Steps', 'Shows the next quest steps from the UFSG.') +
+			'<tr><td align="right">Show All Quest Steps' + Helper.helpLink('Show All Quest Steps', 'Shows all quest steps in the UFSG.') +
 				':</td><td><input name="showNextQuestSteps" type="checkbox" value="on"' + (GM_getValue("showNextQuestSteps")?" checked":"") + '></td></tr>' +
 			//profile prefs
 			'<tr><th colspan="2" align="left"><b>Profile preferences</b></th></tr>' +
@@ -12474,43 +12486,50 @@ var items=0;
 		}
 
 		// insert next step
+		//~ if (GM_getValue('showNextQuestSteps')) {
+			//~ var table = System.findNode("//table[@width=500]");
+			//~ if (!table.textContent.match(/\d+ xp/i)) {
+				//~ System.xmlhttp('http://guide.fallensword.com/index.php?cmd=quests&subcmd=view&quest_id='+questId, Helper.showNextMissionStep);
+			//~ }
+		//~ }
+	},
+
+	showAllQuestSteps: function() {
 		if (GM_getValue('showNextQuestSteps')) {
-			var table = System.findNode("//table[@width=500]");
-			if (!table.textContent.match(/\d+ xp/i)) {
-				System.xmlhttp('http://guide.fallensword.com/index.php?cmd=quests&subcmd=view&quest_id='+questId, Helper.showNextMissionStep);
-			}
+			$('div[id*="stage"]').show();
+			document.getElementById("next_stage_button").style.display = "none";
 		}
 	},
 
-	showNextMissionStep: function(responseText) {
-		var doc=$(responseText.replace(/[\u0080-\uFFFF]+/g, ""));
-		//find the last row and so find out what stage they are currently on
-		var lastRow = $('td[bgcolor="#634A29"]:last').parent('tr');
-		var currentStage = lastRow.index()/2;
-		var parentTable = lastRow.parents('table:first')
-		var ufsgStageArray = $(doc).find('div[id*="stage_"]');
-		if (currentStage < ufsgStageArray.length || $('td:contains("You have not yet started this quest.")').length > 0) {
-			//parentTable.append("<tr><td height='1' bgcolor='#634A29'></td></tr>");
-			ufsgStageArray.each(function(index){
-				//for all the stages on the usfg for this quest, consider all the ones greater than the current stage
-				if ((currentStage-1) < index || $('td:contains("You have not yet started this quest.")').length > 0) {
-					parentTable.append($(this));
-				}
-			});
-			//fix the column widths of the hidden fields
-			$('div[id*="stage"]').find('table[width=600],table[width=800],td[width=600]').attr('width','');
-			//fix the links to ufsg
-			$('div[id*="stage"]').find('a').each(function(){
-				var ufsgHref = $(this).attr('href');
-				$(this).attr('href','http://guide.fallensword.com/' + ufsgHref);
-				$(this).attr('target','_blank');
-			});
-			//show hidden div's
-			$('div[id*="stage"]').show();
-		} else {
-			parentTable.append("<tr><td style='color:blue;'>No more steps</td></tr>");
-		}
-	},
+	//~ showNextMissionStep: function(responseText) {
+		//~ var doc=$(responseText.replace(/[\u0080-\uFFFF]+/g, ""));
+		//~ //find the last row and so find out what stage they are currently on
+		//~ var lastRow = $('td[bgcolor="#634A29"]:last').parent('tr');
+		//~ var currentStage = lastRow.index()/2;
+		//~ var parentTable = lastRow.parents('table:first')
+		//~ var ufsgStageArray = $(doc).find('div[id*="stage_"]');
+		//~ if (currentStage < ufsgStageArray.length || $('td:contains("You have not yet started this quest.")').length > 0) {
+			//~ //parentTable.append("<tr><td height='1' bgcolor='#634A29'></td></tr>");
+			//~ ufsgStageArray.each(function(index){
+				//~ //for all the stages on the usfg for this quest, consider all the ones greater than the current stage
+				//~ if ((currentStage-1) < index || $('td:contains("You have not yet started this quest.")').length > 0) {
+					//~ parentTable.append($(this));
+				//~ }
+			//~ });
+			//~ //fix the column widths of the hidden fields
+			//~ $('div[id*="stage"]').find('table[width=600],table[width=800],td[width=600]').attr('width','');
+			//~ //fix the links to ufsg
+			//~ $('div[id*="stage"]').find('a').each(function(){
+				//~ var ufsgHref = $(this).attr('href');
+				//~ $(this).attr('href','http://guide.fallensword.com/' + ufsgHref);
+				//~ $(this).attr('target','_blank');
+			//~ });
+			//~ //show hidden div's
+			//~ $('div[id*="stage"]').show();
+		//~ } else {
+			//~ parentTable.append("<tr><td style='color:blue;'>No more steps</td></tr>");
+		//~ }
+	//~ },
 
 	trackThisQuest: function(evt) {
 		var currentTrackedQuest = GM_getValue("questBeingTracked").split(";");
