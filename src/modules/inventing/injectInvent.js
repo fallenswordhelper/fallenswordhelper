@@ -7,7 +7,6 @@ import daDoInvent from '../_dataAccess/daDoInvent';
 import insertElement from '../common/insertElement';
 import insertTextBeforeEnd from '../common/insertTextBeforeEnd';
 import jsonFail from '../common/jsonFail';
-import onclick from '../common/onclick';
 import onsubmit from '../common/onsubmit';
 import outputResult from '../common/outputResult';
 import { pCC } from '../support/layout';
@@ -37,7 +36,7 @@ function initResults(str) {
 }
 
 function quickInvent(e) {
-  e.preventDefault()
+  e.preventDefault();
   const amountToInvent = Number(invAmount.value);
   if (!amountToInvent) {
     initResults('');
@@ -55,17 +54,6 @@ function makeCell(injector) {
   const myCell = myRow.insertCell(-1);
   myCell.className = 'fshCenter';
   return myCell;
-}
-
-function makeInvForm(myCell) {
-  const invForm = createForm({
-    action: "#",
-  });
-  onsubmit(invForm, quickInvent);
-  makeInvAmount(invForm);
-  insertElement(createBr(), invForm);
-  makeQuickInv(invForm);
-  insertElement(myCell, invForm);
 }
 
 function makeInvAmount(myCell) {
@@ -86,6 +74,17 @@ function makeQuickInv(myCell) {
     value: 'Quick invent items',
   });
   insertElement(myCell, quickInv);
+}
+
+function makeInvForm(myCell) {
+  const invForm = createForm({
+    action: '#',
+  });
+  onsubmit(invForm, quickInvent);
+  makeInvAmount(invForm);
+  insertElement(createBr(), invForm);
+  makeQuickInv(invForm);
+  insertElement(myCell, invForm);
 }
 
 function makeInvResultHeader(myCell) {
