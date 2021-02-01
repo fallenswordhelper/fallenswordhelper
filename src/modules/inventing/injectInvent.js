@@ -1,10 +1,11 @@
-import arrayFrom from '../common/arrayFrom';
+import createAnchor from '../common/cElement/createAnchor';
 import createBr from '../common/cElement/createBr';
 import createForm from '../common/cElement/createForm';
 import createInput from '../common/cElement/createInput';
 import createOl from '../common/cElement/createOl';
 import createSpan from '../common/cElement/createSpan';
 import daDoInvent from '../_dataAccess/daDoInvent';
+import getText from '../common/getText';
 import insertElement from '../common/insertElement';
 import insertTextBeforeEnd from '../common/insertTextBeforeEnd';
 import jsonFail from '../common/jsonFail';
@@ -21,38 +22,43 @@ let invResultHeader;
 let invResults;
 
 function parseIngredientTable(table) {
-    const [have, need] = getText(querySelector('tr:nth-child(2) td', table)).split('/').map(v => parseInt(v))
-    return Object({
-      'id'   : querySelector('img', table).src.match(/(\d+)\.[A-z]+$/)[1],
-      'have' : have,
-      'need' : need,
-    });
+  const [have, need] = getText(querySelector('tr:nth-child(2) td', table)).split('/').map((v) => parseInt(v, 10));
+  return Object({
+    id: querySelector('img', table).src.match(/(\d+)\.[A-z]+$/)[1],
+    have,
+    need,
+  });
 }
 
 function ingredients() {
   const componentTables = querySelectorArray(
-    '#pCC > table:nth-child(1) >' +
-    'tbody:nth-child(1) > tr:nth-child(9) >' +
-    'td:nth-child(1) > table:nth-child(1) >' +
-    'tbody:nth-child(1) > tr:nth-child(7) >' +
-    'td:nth-child(1) > table:nth-child(1) table');
-  const components = componentTables.map(table => parseIngredientTable(table));
-  
-  const itemTables = querySelectorArray(
-    '#pCC > table:nth-child(1) >' +
-    'tbody:nth-child(1) > tr:nth-child(9) >' +
-    'td:nth-child(1) > table:nth-child(1) >' +
-    'tbody:nth-child(1) > tr:nth-child(4) >' +
-    'td:nth-child(1) > table:nth-child(1) table');
-  const items = itemTables.map(table => parseIngredientTable(table));
-  
+    '#pCC > table:nth-child(1) >'
+    + 'tbody:nth-child(1) > tr:nth-child(9) >'
+    + 'td:nth-child(1) > table:nth-child(1) >'
+    + 'tbody:nth-child(1) > tr:nth-child(7) >'
+    + 'td:nth-child(1) > table:nth-child(1) table',
+  );
+  const components = componentTables.map((table) => parseIngredientTable(table));
 
-  return {'items': items, 'components': components};
+  const itemTables = querySelectorArray(
+    '#pCC > table:nth-child(1) >'
+    + 'tbody:nth-child(1) > tr:nth-child(9) >'
+    + 'td:nth-child(1) > table:nth-child(1) >'
+    + 'tbody:nth-child(1) > tr:nth-child(4) >'
+    + 'td:nth-child(1) > table:nth-child(1) table',
+  );
+  const items = itemTables.map((table) => parseIngredientTable(table));
+
+  return { items, components };
 }
 
 function findMaxInv() {
-  var ingredientsObject = ingredients();
-  return ingredientsObject.components.concat(ingredientsObject.items).reduce((max, ingred) => Math.min(max, Math.floor(ingred.have / ingred.need)), Infinity);
+  const ingredientsObject = ingredients();
+  const ingredientsArray = ingredientsObject.components.concat(ingredientsObject.items);
+  return ingredientsArray.reduce(
+    (max, ingred) => Math.min(max, Math.floor(ingred.have / ingred.need)),
+    Infinity,
+  );
 }
 
 function processResult(r) {
@@ -104,11 +110,11 @@ function makeInvAmount(myCell) {
   });
   insertElement(myCell, invAmount);
 
-  maxAnchor = createAnchor({
-    href: '#'
+  const maxAnchor = createAnchor({
+    href: '#',
   });
   maxAnchor.text = '(max)';
-  onclick(maxAnchor, function(e) {
+  onclick(maxAnchor, (e) => {
     e.preventDefault();
     invAmount.value = findMaxInv();
   });
