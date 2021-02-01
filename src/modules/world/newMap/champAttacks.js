@@ -53,7 +53,7 @@ export default function addListeners() {
         + '.actionListItem.creature:not(.creature-0) '
         + '.verb.attack',
       );
-      if (uncommonAttacks.length < e.keyCode - 49) {
+      if (e.keyCode - 49 < uncommonAttacks.length) {
         uncommonAttacks[e.keyCode - 49].click();
       }
     }
