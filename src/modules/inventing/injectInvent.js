@@ -17,6 +17,29 @@ let invAmount;
 let invResultHeader;
 let invResults;
 
+function ingredients() {
+	var componentTable = $('#pCC > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(9) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(7) > td:nth-child(1) > table:nth-child(1)');
+	var components = componentTable.find('table').toArray().map(table => Object({
+			'id'    : $(table).find("img").attr("src").match(/(\d+)\.[A-z]+/)[1],
+			'have'  : parseInt($(table).find("tr:nth-child(2) td").text().match(/\d+/)[0]),
+			'need'  : parseInt($(table).find("tr:nth-child(2) td").text().match(/\d+\s*$/)[0]),
+	}));
+
+	var itemTable = $("#pCC > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(9) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(1) > table:nth-child(1)");
+	var items = itemTable.find('table').toArray().map(table => Object({
+			'id'    : $(table).find("img").attr("src").match(/(\d+)\.[A-z]+/)[1],
+			'have'  : parseInt($(table).find("tr:nth-child(2) td").text().match(/\d+/)[0]),
+			'need'  : parseInt($(table).find("tr:nth-child(2) td").text().match(/\d+\s*$/)[0]),
+	}));
+
+	return {'items': items, 'components': components};
+}
+
+function findMaxInv() {
+	var ingredientsObject = ingredients();
+	return ingredientsObject.components.concat(ingredientsObject.items).reduce((max, ingred) => Math.min(max, Math.floor(ingred.have / ingred.need)), Infinity);
+}
+
 function processResult(r) {
   if (r.item) {
     return `<span class="fshGreen">You successfully invented the item [${
