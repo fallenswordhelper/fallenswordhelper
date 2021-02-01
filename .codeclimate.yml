@@ -11,6 +11,5 @@ plugins:
   eslint:
     enabled: true
     channel: "eslint-7"
-    config: .eslintrc.yml
   fixme:
     enabled: true
