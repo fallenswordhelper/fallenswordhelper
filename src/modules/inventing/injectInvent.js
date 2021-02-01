@@ -136,7 +136,7 @@ function makeInvForm(myCell) {
   });
   onsubmit(invForm, quickInvent);
   makeInvAmount(invForm);
-  insertElement(createBr(), invForm);
+  insertElement(invForm, createBr());
   makeQuickInv(invForm);
   insertElement(myCell, invForm);
 }
