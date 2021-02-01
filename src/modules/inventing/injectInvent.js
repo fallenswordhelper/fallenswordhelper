@@ -24,7 +24,7 @@ let invResults;
 function parseIngredientTable(table) {
   const [have, need] = getText(querySelector('tr:nth-child(2) td', table)).split('/').map((v) => parseInt(v, 10));
   return Object({
-    id: querySelector('img', table).src.match(/(\d+)\.[A-z]+$/)[1],
+    id: querySelector('img', table).src.match(/(\d+)\.[A-Za-z]+$/)[1],
     have,
     need,
   });
