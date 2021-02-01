@@ -1,3 +1,4 @@
+import arrayFrom from '../common/arrayFrom';
 import createBr from '../common/cElement/createBr';
 import createForm from '../common/cElement/createForm';
 import createInput from '../common/cElement/createInput';
@@ -11,26 +12,39 @@ import onsubmit from '../common/onsubmit';
 import outputResult from '../common/outputResult';
 import { pCC } from '../support/layout';
 import querySelector from '../common/querySelector';
+import querySelectorArray from '../common/querySelectorArray';
 import setInnerHtml from '../dom/setInnerHtml';
 
 let invAmount;
 let invResultHeader;
 let invResults;
 
-function ingredients() {
-	var componentTable = $('#pCC > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(9) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(7) > td:nth-child(1) > table:nth-child(1)');
-	var components = componentTable.find('table').toArray().map(table => Object({
-			'id'    : $(table).find("img").attr("src").match(/(\d+)\.[A-z]+/)[1],
-			'have'  : parseInt($(table).find("tr:nth-child(2) td").text().match(/\d+/)[0]),
-			'need'  : parseInt($(table).find("tr:nth-child(2) td").text().match(/\d+\s*$/)[0]),
-	}));
+function parseIngredientTable(table) {
+		const [have, need] = getText(querySelector('tr:nth-child(2) td', table)).split('/').map(v => parseInt(v))
+		return Object({
+			'id'   : querySelector('img', table).src.match(/(\d+)\.[A-z]+$/)[1],
+			'have' : have,
+			'need' : need,
+		});
+}
 
-	var itemTable = $("#pCC > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(9) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(1) > table:nth-child(1)");
-	var items = itemTable.find('table').toArray().map(table => Object({
-			'id'    : $(table).find("img").attr("src").match(/(\d+)\.[A-z]+/)[1],
-			'have'  : parseInt($(table).find("tr:nth-child(2) td").text().match(/\d+/)[0]),
-			'need'  : parseInt($(table).find("tr:nth-child(2) td").text().match(/\d+\s*$/)[0]),
-	}));
+function ingredients() {
+	const componentTables = querySelectorArray(
+		'#pCC > table:nth-child(1) >' +
+		'tbody:nth-child(1) > tr:nth-child(9) >' +
+		'td:nth-child(1) > table:nth-child(1) >' +
+		'tbody:nth-child(1) > tr:nth-child(7) >' +
+		'td:nth-child(1) > table:nth-child(1) table');
+	const components = componentTables.map(table => parseIngredientTable(table));
+	
+	const itemTables = querySelectorArray(
+		'#pCC > table:nth-child(1) >' +
+		'tbody:nth-child(1) > tr:nth-child(9) >' +
+		'td:nth-child(1) > table:nth-child(1) >' +
+		'tbody:nth-child(1) > tr:nth-child(4) >' +
+		'td:nth-child(1) > table:nth-child(1) table');
+	const items = itemTables.map(table => parseIngredientTable(table));
+	
 
 	return {'items': items, 'components': components};
 }
