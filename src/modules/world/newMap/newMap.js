@@ -1,4 +1,5 @@
 import './newMap.css';
+import addListeners from './champAttacks';
 import { buffInfo } from './buffInfo/buffInfo';
 import combatLogger from './combatLogger';
 import createStyle from '../../common/cElement/createStyle';
@@ -118,6 +119,7 @@ const usualRoutines = [
   buffInfo,
   fixDebuff,
   interceptMouseEvents,
+  addListeners,
 ];
 
 export default function subscribes() {
