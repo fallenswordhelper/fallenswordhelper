@@ -34,21 +34,21 @@ function toggleAttackImages(showCommon) {
 export default function addListeners() {
   let nineDown = false;
   on(document, 'keydown', (e) => {
-    if (e.key === '9') {
+    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.key === '9') {
       toggleAttackImages(false);
       nineDown = true;
     }
   });
 
   on(document, 'keyup', (e) => {
-    if (e.key === '9') {
+    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.key === '9') {
       toggleAttackImages(true);
       nineDown = false;
     }
   });
 
-  const html = getElementsByTagName('html')[0];
-  on(html, 'keydown', (e) => {
+  const body = getElementsByTagName('body')[0];
+  on(body, 'keydown', (e) => {
     if (nineDown && e.key.match(/[1-8]/)) {
       e.stopPropagation();
       const uncommonAttacks = querySelectorArray(
