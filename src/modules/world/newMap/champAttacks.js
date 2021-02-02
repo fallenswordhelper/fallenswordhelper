@@ -32,29 +32,33 @@ function toggleAttackImages(showCommon) {
 }
 
 export default function addListeners() {
+  let nineDown = false;
   on(document, 'keydown', (e) => {
-    if (e.key === 'Shift') {
+    if (e.key === '9') {
       toggleAttackImages(false);
+      nineDown = true;
     }
   });
 
   on(document, 'keyup', (e) => {
-    if (e.key === 'Shift') {
+    if (e.key === '9') {
       toggleAttackImages(true);
+      nineDown = false;
     }
   });
 
   const html = getElementsByTagName('html')[0];
-  on(html, 'keyup', (e) => {
-    if (e.shiftKey && e.key.match(/[*&^%$#@!]/)) {
+  on(html, 'keydown', (e) => {
+    if (nineDown && e.key.match(/[1-8]/)) {
       e.stopPropagation();
       const uncommonAttacks = querySelectorArray(
         '#actionList '
         + '.actionListItem.creature:not(.creature-0) '
         + '.verb.attack',
       );
-      if (e.keyCode - 49 < uncommonAttacks.length) {
-        uncommonAttacks[e.keyCode - 49].click();
+      const index = parseInt(e.key, 10) - 1;
+      if (index < uncommonAttacks.length) {
+        uncommonAttacks[index].click();
       }
     }
   });
