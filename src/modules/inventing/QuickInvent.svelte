@@ -13,22 +13,26 @@
 	}
 
 	function quickInventDone(json) {
-		if (jsonFail(json, invResults)) { return; }
-		results = [...results, json.r];
+		results = [...results, json];
 	}
 
-  function quickInvent() {
-    if (!amountToInvent) {
-      results = [];
-      invResults = '';
-      return;
-    }
+  async function quickInvent() {
+		results = [];
+		invResults = '';
+    if (!amountToInvent) { return; }
     invResults = `Inventing ${amountToInvent} Items`;
-    for (let i = 0; i < amountToInvent; i += 1) {
-      daDoInvent(recipeID).then(quickInventDone);
+		let i = 0;
+		while(i < amountToInvent) {
+      await daDoInvent(recipeID)
+				.then((json) => {
+					results = [...results, json];
+					if(!json.s) { 
+						i = amountToInvent; 
+					}
+				});
+			i += 1;
     }
   }
-
 </script>
 <form class="fshCenter" on:submit|preventDefault={quickInvent}>
   <label for="quick-invent-amount">Select how many to quick invent</label>
@@ -43,16 +47,15 @@
   <a href="#" on:click|preventDefault={handleMax}>(max)</a>
   <br/>
   <input class="custombutton" type="submit" value="Quick Invent"/>
-  <!-- inv result container -->
   <div>
-    <!-- inv result header -->
     <span>{invResults}</span>
-    <!-- inv results -->
     <ol>
-    {#each results as r}
+    {#each results as json}
       <li>
-        {#if r.item}
-        <span class="fshGreen">You successfully invented the item {r.item.n}.</span>
+				{#if !json.s }
+				<span>{json.e.message}</span>
+        {:else if json.r.item}
+        <span class="fshGreen">You successfully invented the item {json.r.item.n}.</span>
         {:else}
         <span class="fshRed">You have failed to invent the item.</span>
         {/if}
