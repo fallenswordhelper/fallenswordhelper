@@ -1,6 +1,7 @@
 <script>
   import daDoInvent from '../_dataAccess/daDoInvent';
   import jsonFail from '../common/jsonFail';
+  import { sendEvent } from '../support/fshGa';
 
   export let max;
   export let recipeID;
@@ -8,29 +9,27 @@
   let invResults = '';
   let results = [];
 
-	function handleMax() {
-		amountToInvent = max;
-	}
-
-	function quickInventDone(json) {
-		results = [...results, json];
-	}
+  function maxInvent() {
+    amountToInvent = max;
+    sendEvent('inventing', 'maxInventButton');
+  }
 
   async function quickInvent() {
-		results = [];
-		invResults = '';
+    sendEvent('inventing', 'quickInvent');
+    results = [];
+    invResults = '';
     if (!amountToInvent) { return; }
     invResults = `Inventing ${amountToInvent} Items`;
-		let i = 0;
-		while(i < amountToInvent) {
+    let i = 0;
+    while(i < amountToInvent) {
       await daDoInvent(recipeID)
-				.then((json) => {
-					results = [...results, json];
-					if(!json.s) { 
-						i = amountToInvent; 
-					}
-				});
-			i += 1;
+        .then((json) => {
+          results = [...results, json];
+          if(!json.s) {
+            i = amountToInvent;
+          }
+        });
+      i += 1;
     }
   }
 </script>
@@ -44,7 +43,7 @@
     step="1"
     class="custominput fshNumberInput"
     bind:value={amountToInvent} />
-  <a href="#" on:click|preventDefault={handleMax}>(max)</a>
+  <a id="max-invent" href="#max" on:click|preventDefault={maxInvent}>(max)</a>
   <br/>
   <input class="custombutton" type="submit" value="Quick Invent"/>
   <div>
@@ -52,8 +51,8 @@
     <ol>
     {#each results as json}
       <li>
-				{#if !json.s }
-				<span>{json.e.message}</span>
+        {#if !json.s }
+        <span>{json.e.message}</span>
         {:else if json.r.item}
         <span class="fshGreen">You successfully invented the item {json.r.item.n}.</span>
         {:else}
