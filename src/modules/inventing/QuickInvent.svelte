@@ -1,6 +1,5 @@
 <script>
   import daDoInvent from '../_dataAccess/daDoInvent';
-  import jsonFail from '../common/jsonFail';
   import { sendEvent } from '../support/fshGa';
 
   export let max;
@@ -20,16 +19,14 @@
     invResults = '';
     if (!amountToInvent) { return; }
     invResults = `Inventing ${amountToInvent} Items`;
-    let i = 0;
-    while(i < amountToInvent) {
+    for(let i = 0; i< amountToInvent; i++) {
+      /* eslint-disable no-await-in-loop, no-loop-func */
       await daDoInvent(recipeID)
         .then((json) => {
           results = [...results, json];
-          if(!json.s) {
-            i = amountToInvent;
-          }
+          if(!json.s) { i = amountToInvent; }
         });
-      i += 1;
+      /* eslint-enable no-await-in-loop, no-loop-func */
     }
   }
 </script>
