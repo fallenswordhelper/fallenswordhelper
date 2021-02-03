@@ -1,166 +1,19 @@
-import createAnchor from '../common/cElement/createAnchor';
-import createBr from '../common/cElement/createBr';
-import createForm from '../common/cElement/createForm';
-import createInput from '../common/cElement/createInput';
-import createOl from '../common/cElement/createOl';
-import createSpan from '../common/cElement/createSpan';
-import daDoInvent from '../_dataAccess/daDoInvent';
-import getText from '../common/getText';
-import insertElement from '../common/insertElement';
-import insertTextBeforeEnd from '../common/insertTextBeforeEnd';
-import jsonFail from '../common/jsonFail';
-import onclick from '../common/onclick';
-import onsubmit from '../common/onsubmit';
-import outputResult from '../common/outputResult';
+import QuickInvent from './QuickInvent.svelte';
+import { findMaxInv } from './parseRecipe';
 import { pCC } from '../support/layout';
 import querySelector from '../common/querySelector';
-import querySelectorArray from '../common/querySelectorArray';
-import setInnerHtml from '../dom/setInnerHtml';
 
-let invAmount;
-let invResultHeader;
-let invResults;
-
-function parseIngredientTable(table) {
-  const [have, need] = getText(querySelector('tr:nth-child(2) td', table)).split('/').map((v) => parseInt(v, 10));
-  return Object({
-    id: querySelector('img', table).src.match(/(\d+)\.[A-Za-z]+$/)[1],
-    have,
-    need,
-  });
-}
-
-function ingredients() {
-  const componentTables = querySelectorArray(
-    '#pCC > table:nth-child(1) >'
-    + 'tbody:nth-child(1) > tr:nth-child(9) >'
-    + 'td:nth-child(1) > table:nth-child(1) >'
-    + 'tbody:nth-child(1) > tr:nth-child(7) >'
-    + 'td:nth-child(1) > table:nth-child(1) table',
-  );
-  const components = componentTables.map((table) => parseIngredientTable(table));
-
-  const itemTables = querySelectorArray(
-    '#pCC > table:nth-child(1) >'
-    + 'tbody:nth-child(1) > tr:nth-child(9) >'
-    + 'td:nth-child(1) > table:nth-child(1) >'
-    + 'tbody:nth-child(1) > tr:nth-child(4) >'
-    + 'td:nth-child(1) > table:nth-child(1) table',
-  );
-  const items = itemTables.map((table) => parseIngredientTable(table));
-
-  return { items, components };
-}
-
-function findMaxInv() {
-  const ingredientsObject = ingredients();
-  const ingredientsArray = ingredientsObject.components.concat(ingredientsObject.items);
-  return ingredientsArray.reduce(
-    (max, ingred) => Math.min(max, Math.floor(ingred.have / ingred.need)),
-    Infinity,
-  );
-}
-
-function processResult(r) {
-  if (r.item) {
-    return `<span class="fshGreen">You successfully invented the item [${
-      r.item.n}].</span>`;
-  }
-  return '<span class="fshRed">You have failed to invent the item.</span>';
-}
-
-function quickInventDone(json) {
-  if (jsonFail(json, invResults)) { return; }
-  outputResult(processResult(json.r), invResults);
-}
-
-function initResults(str) {
-  setInnerHtml(str, invResultHeader);
-  setInnerHtml('', invResults);
-}
-
-function quickInvent(e) {
-  e.preventDefault();
-  const amountToInvent = Number(invAmount.value);
-  if (!amountToInvent) {
-    initResults('');
-    return;
-  }
+export default function injectInvent() {
   const recipeID = querySelector('input[name="recipe_id"]').value;
-  initResults(`Inventing ${String(amountToInvent)} Items`);
-  for (let i = 0; i < amountToInvent; i += 1) {
-    daDoInvent(recipeID).then(quickInventDone);
-  }
-}
-
-function makeCell(injector) {
+  const max = findMaxInv();
+  const injector = pCC.lastElementChild;
   const myRow = injector.insertRow(-1);
   const myCell = myRow.insertCell(-1);
   myCell.className = 'fshCenter';
-  return myCell;
-}
-
-function makeInvAmount(myCell) {
-  insertTextBeforeEnd(myCell, 'Select how many to quick invent');
-  invAmount = createInput({
-    className: 'custominput fshNumberInput',
-    min: 0,
-    type: 'number',
-    value: 1,
+  const props = { max, recipeID };
+  const app = new QuickInvent({
+    props,
+    target: myCell,
   });
-  insertElement(myCell, invAmount);
-
-  const maxAnchor = createAnchor({
-    href: '#',
-  });
-  maxAnchor.text = '(max)';
-  onclick(maxAnchor, (e) => {
-    e.preventDefault();
-    invAmount.value = findMaxInv();
-  });
-  insertElement(myCell, maxAnchor);
-}
-
-function makeQuickInv(myCell) {
-  const quickInv = createInput({
-    className: 'custombutton',
-    type: 'submit',
-    value: 'Quick invent items',
-  });
-  insertElement(myCell, quickInv);
-}
-
-function makeInvForm(myCell) {
-  const invForm = createForm({
-    action: '#',
-  });
-  onsubmit(invForm, quickInvent);
-  makeInvAmount(invForm);
-  insertElement(invForm, createBr());
-  makeQuickInv(invForm);
-  insertElement(myCell, invForm);
-}
-
-function makeInvResultHeader(myCell) {
-  invResultHeader = createSpan();
-  insertElement(myCell, invResultHeader);
-}
-
-function makeInvResults(myCell) {
-  invResults = createOl();
-  insertElement(myCell, invResults);
-}
-
-function resultContainer(myCell) {
-  makeInvResultHeader(myCell);
-  makeInvResults(myCell);
-}
-
-function makeLayout(injector) {
-  makeInvForm(makeCell(injector));
-  resultContainer(makeCell(injector));
-}
-
-export default function injectInvent() {
-  makeLayout(pCC.lastElementChild);
+  console.log(app);
 }
