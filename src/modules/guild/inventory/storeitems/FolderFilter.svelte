@@ -4,8 +4,7 @@
   import { sendEvent } from '../../../support/fshGa';
 
   const dispatch = createEventDispatcher();
-  let inv = { folders: {} };
-  export { inv as default };
+  export let inv = { folders: {} };
 
   function doFilter(id) {
     sendEvent('storeitems', 'Filter Folder');
