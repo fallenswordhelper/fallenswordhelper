@@ -1,6 +1,12 @@
 ---
 parserOptions:
   ecmaVersion: 2020
+plugins:
+  - "svelte3"
+overrides:
+  - files:
+    - "*.svelte"
+    processor: "svelte3/svelte3"
 extends:
   - "airbnb-base"
 globals:
@@ -38,8 +44,7 @@ rules:
   consistent-return: off # 74
   import/no-extraneous-dependencies:
     - error
-    - devDependencies:
-      - "scripts/*"
+    - packageDir: './'
   import/no-mutable-exports: off # 98
   import/order: off
   no-plusplus:

@@ -1,11 +1,11 @@
 <script>
   import calf from '../../../support/calf';
-	import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import { sendEvent } from '../../../support/fshGa';
   import setValue from '../../../system/setValue';
 
-	const dispatch = createEventDispatcher();
-  const label = (pref) => pref ? 'Hide' : 'Show';
+  const dispatch = createEventDispatcher();
+  const label = (pref) => (pref ? 'Hide' : 'Show');
 
   export let showExtraLinks = false;
   export let showQuickDropLinks = false;

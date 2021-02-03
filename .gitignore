@@ -5,3 +5,4 @@ cert.crt
 favicon.ico
 key.pem
 Notes.txt
+dist/resources/watch/

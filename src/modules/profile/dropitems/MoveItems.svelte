@@ -1,10 +1,11 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import getText from '../../common/getText';
   import { sendEvent } from '../../support/fshGa';
 
-	const dispatch = createEventDispatcher();
-  export let folders;
+  const dispatch = createEventDispatcher();
+  let folders;
+  export { folders as default };
   let folderId;
 
   const getFolderId = (folder) => folder.parentNode.href.match(/&folder_id=(-?\d+)/i)[1];
