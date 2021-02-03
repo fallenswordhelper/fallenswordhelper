@@ -12,6 +12,11 @@
 		amountToInvent = max;
 	}
 
+	function quickInventDone(json) {
+		if (jsonFail(json, invResults)) { return; }
+		results = [...results, json.r];
+	}
+
   function quickInvent() {
     if (!amountToInvent) {
       results = [];
@@ -20,7 +25,7 @@
     }
     invResults = `Inventing ${amountToInvent} Items`;
     for (let i = 0; i < amountToInvent; i += 1) {
-      daDoInvent(recipeID).then(r => results = [...results, r]);
+      daDoInvent(recipeID).then(quickInventDone);
     }
   }
 
@@ -37,7 +42,7 @@
     bind:value={amountToInvent} />
   <a href="#" on:click|preventDefault={handleMax}>(max)</a>
   <br/>
-  <input class="custombutton" type="submit"/>
+  <input class="custombutton" type="submit" value="Quick Invent"/>
   <!-- inv result container -->
   <div>
     <!-- inv result header -->
@@ -47,7 +52,7 @@
     {#each results as r}
       <li>
         {#if r.item}
-        <span class="fshGreen">You successfully invented the item ${r.item.n}.</span>
+        <span class="fshGreen">You successfully invented the item {r.item.n}.</span>
         {:else}
         <span class="fshRed">You have failed to invent the item.</span>
         {/if}
