@@ -57,13 +57,13 @@
     "rollup-plugin-terser": "^7.0.2",
     "stylelint": "^13.8.0",
     "stylelint-config-recommended": "^3.0.0",
-    "stylelint-config-standard": "^20.0.0"
+    "stylelint-config-standard": "^20.0.0",
+    "svelte": "^3.31.0"
   },
   "dependencies": {
     "css-tooltip": "^0.3.4",
     "idb-keyval": "^5.0.2",
     "smart-table-core": "^3.0.7",
-    "smart-table-vanilla": "^0.2.0",
-    "svelte": "^3.31.0"
+    "smart-table-vanilla": "^0.2.0"
   }
 }
