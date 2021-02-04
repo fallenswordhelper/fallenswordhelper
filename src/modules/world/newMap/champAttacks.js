@@ -58,7 +58,7 @@ function attackChamp(e) {
   }
 }
 
-export default function addListeners() {
+export default function champAttacks() {
   nineListeners();
   const body = getElementsByTagName('body')[0];
   on(body, 'keydown', attackChamp);
