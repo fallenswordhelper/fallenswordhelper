@@ -1,6 +1,6 @@
 import './newMap.css';
-import addListeners from './champAttacks';
 import { buffInfo } from './buffInfo/buffInfo';
+import champAttacks from './champAttacks';
 import combatLogger from './combatLogger';
 import createStyle from '../../common/cElement/createStyle';
 import doNotKill from './doNotKill/doNotKill';

@@ -2,9 +2,7 @@ import getElementsByTagName from '../../common/getElementsByTagName';
 import on from '../../common/on';
 import querySelectorArray from '../../common/querySelectorArray';
 
-let isNineDown = false;
-
-function toggleAttackImages(showCommon) {
+function showChampAttack(toggle) {
   const commonAttacks = querySelectorArray(
     '#actionList .actionListItem.creature.creature-0 .verb.attack',
   );
@@ -12,9 +10,9 @@ function toggleAttackImages(showCommon) {
     '#actionList .actionListItem.creature:not(.creature-0) .verb.attack',
   );
 
-  const [g1, g2] = showCommon
-    ? [uncommonAttacks, commonAttacks]
-    : [commonAttacks, uncommonAttacks];
+  const [g1, g2] = toggle
+    ? [commonAttacks, uncommonAttacks]
+    : [uncommonAttacks, commonAttacks];
 
   const blankURL = 'url("https://cdn2.fallensword.com/ui/world/icon_action_attack.png")';
   const numberedURLPrefix = 'url("https://cdn2.fallensword.com/ui/world/icon_action_attack_';
@@ -25,41 +23,31 @@ function toggleAttackImages(showCommon) {
   });
 }
 
-function nineDown(e) {
-  if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.key === '9') {
-    toggleAttackImages(false);
-    isNineDown = true;
-  }
-}
-
-function nineUp(e) {
-  if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.key === '9') {
-    toggleAttackImages(true);
-    isNineDown = false;
-  }
-}
-
-function nineListeners() {
-  on(document, 'keydown', nineDown);
-  on(document, 'keyup', nineUp);
-}
-
-function attackChamp(e) {
-  if (!isNineDown || !e.key.match(/[1-8]/)) { return; }
+function champAttackListener(e) {
+  if (!e.ctrlKey
+    || !e.shiftKey
+    || e.target.tagName === 'INPUT'
+    || e.target.tagName === 'TEXTAREA') { return; }
+  showChampAttack(true);
+  if (!e.key.match(/[*&^%$#@!]/)) { return; }
   e.stopPropagation();
   const uncommonAttacks = querySelectorArray(
     '#actionList '
     + '.actionListItem.creature:not(.creature-0) '
     + '.verb.attack',
   );
-  const index = parseInt(e.key, 10) - 1;
+  const index = e.keyCode - 49;
   if (index < uncommonAttacks.length) {
     uncommonAttacks[index].click();
   }
 }
 
+function hideChampAttackListener(e) {
+  if (!e.ctrlKey || !e.shiftKey) { showChampAttack(false); }
+}
+
 export default function champAttacks() {
-  nineListeners();
   const body = getElementsByTagName('body')[0];
-  on(body, 'keydown', attackChamp);
+  on(body, 'keydown', champAttackListener);
+  on(body, 'keyup', hideChampAttackListener);
 }
