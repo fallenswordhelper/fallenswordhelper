@@ -1,8 +1,0 @@
-.vscode/
-node_modules/
-.eslintcache
-cert.crt
-favicon.ico
-key.pem
-Notes.txt
-dist/resources/watch/
