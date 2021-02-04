@@ -119,7 +119,7 @@ const usualRoutines = [
   buffInfo,
   fixDebuff,
   interceptMouseEvents,
-  addListeners,
+  champAttacks,
 ];
 
 export default function subscribes() {
