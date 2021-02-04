@@ -12,7 +12,6 @@ const setupMoves = () => {
   runDefault(import('../../arena/arenaSetup/setup'));
 };
 const storeMoves = () => { runDefault(import('../../arena/store')); };
-const results = () => { runDefault(import('../../arena/results')); };
 
 const arena = {
   '-': { '-': injectArena },
@@ -22,10 +21,5 @@ const arena = {
   pickmove: { '-': storeMoves },
   setup: { '-': setupMoves },
 };
-
-// eslint-disable-next-line no-unused-labels, no-labels
-devLbl: { //  arena results
-  arena.results = { '-': results };
-}
 
 export default arena;

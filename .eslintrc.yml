@@ -1,6 +1,7 @@
 ---
 parserOptions:
   ecmaVersion: 2020
+  sourceType: module
 plugins:
   - "svelte3"
 overrides:
