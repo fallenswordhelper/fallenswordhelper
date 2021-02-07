@@ -12,30 +12,14 @@ export function parseIngredientTable(table) {
 }
 
 export function ingredients() {
-  const componentTables = querySelectorArray(
-    '#pCC > table:nth-child(1) >'
-    + 'tbody:nth-child(1) > tr:nth-child(9) >'
-    + 'td:nth-child(1) > table:nth-child(1) >'
-    + 'tbody:nth-child(1) > tr:nth-child(7) >'
-    + 'td:nth-child(1) > table:nth-child(1) table',
-  );
-  const components = componentTables.map((table) => parseIngredientTable(table));
-
-  const itemTables = querySelectorArray(
-    '#pCC > table:nth-child(1) >'
-    + 'tbody:nth-child(1) > tr:nth-child(9) >'
-    + 'td:nth-child(1) > table:nth-child(1) >'
-    + 'tbody:nth-child(1) > tr:nth-child(4) >'
-    + 'td:nth-child(1) > table:nth-child(1) table',
-  );
-  const items = itemTables.map((table) => parseIngredientTable(table));
-
-  return { items, components };
+  const ingredientTables = querySelectorArray(
+    '#pCC td[background^="https://cdn2.fallensword.com/ui/inventory/"]',
+  ).map((td) => td.parentElement.parentElement);
+  return ingredientTables.map((table) => parseIngredientTable(table));
 }
 
 export function findMaxInv() {
-  const ingredientsObject = ingredients();
-  const ingredientsArray = ingredientsObject.components.concat(ingredientsObject.items);
+  const ingredientsArray = ingredients();
   return ingredientsArray.reduce(
     (max, ingred) => Math.min(max, Math.floor(ingred.have / ingred.need)),
     Infinity,
