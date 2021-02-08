@@ -3,16 +3,17 @@ import on from '../../common/on';
 import querySelectorArray from '../../common/querySelectorArray';
 
 function showChampAttack(toggle) {
-  const commonAttacks = querySelectorArray(
-    '#actionList .actionListItem.creature.creature-0 .verb.attack',
+  const normalAttacks = querySelectorArray(
+    '#actionList .actionListItem.creature.creature-0 .verb.attack, '
+    + '#actionList .actionListItem.creature.creature-5 .verb.attack',
   );
-  const uncommonAttacks = querySelectorArray(
-    '#actionList .actionListItem.creature:not(.creature-0) .verb.attack',
+  const championAttacks = querySelectorArray(
+    '#actionList .actionListItem.creature.creature-1 .verb.attack',
   );
 
   const [g1, g2] = toggle
-    ? [commonAttacks, uncommonAttacks]
-    : [uncommonAttacks, commonAttacks];
+    ? [normalAttacks, championAttacks]
+    : [championAttacks, normalAttacks];
 
   const blankURL = 'url("https://cdn2.fallensword.com/ui/world/icon_action_attack.png")';
   const numberedURLPrefix = 'url("https://cdn2.fallensword.com/ui/world/icon_action_attack_';
@@ -29,16 +30,14 @@ function champAttackListener(e) {
     || e.target.tagName === 'INPUT'
     || e.target.tagName === 'TEXTAREA') { return; }
   showChampAttack(true);
-  if (!e.key.match(/[*&^%$#@!]/)) { return; }
+  if (!e.code.match(/(Digit|Numpad)[1-8]/)) { return; }
   e.stopPropagation();
-  const uncommonAttacks = querySelectorArray(
-    '#actionList '
-    + '.actionListItem.creature:not(.creature-0) '
-    + '.verb.attack',
+  const championAttacks = querySelectorArray(
+    '#actionList .actionListItem.creature.creature-1 .verb.attack',
   );
-  const index = e.keyCode - 49;
-  if (index < uncommonAttacks.length) {
-    uncommonAttacks[index].click();
+  const index = parseInt(e.code.slice(-1), 10) - 1;
+  if (index < championAttacks.length) {
+    championAttacks[index].click();
   }
 }
 
