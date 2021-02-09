@@ -1,12 +1,14 @@
+import { cdn } from '../../system/system';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import on from '../../common/on';
 import querySelectorArray from '../../common/querySelectorArray';
+import { sendEvent } from '../../support/fshGa';
 
 const creatureTypeIndex = ['NORMAL', 'CHAMPION', 'ELITE', 'SUPER ELITE', 'TITAN', 'LEGENDARY'];
 
 function getCreatureAttacks(creatureTypes) {
   if (typeof creatureTypes === 'string') {
-    const index = creatureTypeIndex.indexOf(creatureTypes.toUpperCase);
+    const index = creatureTypeIndex.indexOf(creatureTypes.toUpperCase());
     return querySelectorArray(
       `#actionList .actionListItem.creature.creature-${index} .verb.attack`,
     );
@@ -26,8 +28,8 @@ function showChampAttack(toggle) {
     ? [normalAttacks, championAttacks]
     : [championAttacks, normalAttacks];
 
-  const blankURL = 'url("https://cdn2.fallensword.com/ui/world/icon_action_attack.png")';
-  const numberedURLPrefix = 'url("https://cdn2.fallensword.com/ui/world/icon_action_attack_';
+	const blankURL = `url("${cdn}ui/world/icon_action_attack.png")`;
+	const numberedURLPrefix = `url("${cdn}ui/world/icon_action_attack_`;
 
   g1.forEach((e) => { e.style.backgroundImage = blankURL; });
   g2.filter((e, i) => i < 8).forEach((e, i) => {
@@ -46,6 +48,7 @@ function champAttackListener(e) {
   const championAttacks = getCreatureAttacks('CHAMPION');
   const index = parseInt(e.code.slice(-1), 10) - 1;
   if (index < championAttacks.length) {
+    sendEvent('world', 'ChampionAttack');
     championAttacks[index].click();
   }
 }
