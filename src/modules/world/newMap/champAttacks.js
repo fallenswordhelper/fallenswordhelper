@@ -2,14 +2,25 @@ import getElementsByTagName from '../../common/getElementsByTagName';
 import on from '../../common/on';
 import querySelectorArray from '../../common/querySelectorArray';
 
+const creatureTypeIndex = ['NORMAL', 'CHAMPION', 'ELITE', 'SUPER ELITE', 'TITAN', 'LEGENDARY'];
+
+function getCreatureAttacks(creatureTypes) {
+  if (typeof creatureTypes === 'string') {
+    const index = creatureTypeIndex.indexOf(creatureTypes.toUpperCase);
+    return querySelectorArray(
+      `#actionList .actionListItem.creature.creature-${index} .verb.attack`,
+    );
+  }
+  if (Symbol.iterator in Object(creatureTypes)) {
+    const attacks = Array.from(creatureTypes).map((c) => getCreatureAttacks(c));
+    return attacks.flat();
+  }
+  return false;
+}
+
 function showChampAttack(toggle) {
-  const normalAttacks = querySelectorArray(
-    '#actionList .actionListItem.creature.creature-0 .verb.attack, '
-    + '#actionList .actionListItem.creature.creature-5 .verb.attack',
-  );
-  const championAttacks = querySelectorArray(
-    '#actionList .actionListItem.creature.creature-1 .verb.attack',
-  );
+  const normalAttacks = getCreatureAttacks(['NORMAL', 'LEGENDARY']);
+  const championAttacks = getCreatureAttacks('CHAMPION');
 
   const [g1, g2] = toggle
     ? [normalAttacks, championAttacks]
@@ -32,9 +43,7 @@ function champAttackListener(e) {
   showChampAttack(true);
   if (!e.code.match(/(Digit|Numpad)[1-8]/)) { return; }
   e.stopPropagation();
-  const championAttacks = querySelectorArray(
-    '#actionList .actionListItem.creature.creature-1 .verb.attack',
-  );
+  const championAttacks = getCreatureAttacks('CHAMPION');
   const index = parseInt(e.code.slice(-1), 10) - 1;
   if (index < championAttacks.length) {
     championAttacks[index].click();
