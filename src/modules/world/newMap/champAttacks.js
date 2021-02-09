@@ -1,40 +1,53 @@
 import { cdn } from '../../system/system';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import on from '../../common/on';
+import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
 import { sendEvent } from '../../support/fshGa';
 
 const creatureTypeIndex = ['NORMAL', 'CHAMPION', 'ELITE', 'SUPER ELITE', 'TITAN', 'LEGENDARY'];
 
-function getCreatureAttacks(creatureTypes) {
+function getAttack(creatureElement) {
+  return querySelector('.verb.attack', creatureElement);
+}
+
+function getCreatures(creatureTypes) {
   if (typeof creatureTypes === 'string') {
     const index = creatureTypeIndex.indexOf(creatureTypes.toUpperCase());
     return querySelectorArray(
-      `#actionList .actionListItem.creature.creature-${index} .verb.attack`,
+      `#actionList .actionListItem.creature.creature-${index}`,
     );
   }
   if (Symbol.iterator in Object(creatureTypes)) {
-    const attacks = Array.from(creatureTypes).map((c) => getCreatureAttacks(c));
-    return attacks.flat();
+    const creatures = Array.from(creatureTypes).map(getCreatures);
+    return creatures.flat();
   }
   return false;
 }
 
 function showChampAttack(toggle) {
-  const normalAttacks = getCreatureAttacks(['NORMAL', 'LEGENDARY']);
-  const championAttacks = getCreatureAttacks('CHAMPION');
+  const normalCreatures = getCreatures(['LEGENDARY', 'NORMAL']);
+  const championCreatures = getCreatures('CHAMPION');
 
   const [g1, g2] = toggle
-    ? [normalAttacks, championAttacks]
-    : [championAttacks, normalAttacks];
+    ? [normalCreatures, championCreatures]
+    : [championCreatures, normalCreatures];
 
-	const blankURL = `url("${cdn}ui/world/icon_action_attack.png")`;
-	const numberedURLPrefix = `url("${cdn}ui/world/icon_action_attack_`;
+  const blankURL = `url("${cdn}ui/world/icon_action_attack.png")`;
+  const numberedURLPrefix = `url("${cdn}ui/world/icon_action_attack_`;
 
-  g1.forEach((e) => { e.style.backgroundImage = blankURL; });
-  g2.filter((e, i) => i < 8).forEach((e, i) => {
-    e.style.backgroundImage = `${numberedURLPrefix}${i + 1}.png")`;
-  });
+  g1.map(getAttack)
+    .filter((e) => e !== null)
+    .forEach((e) => {
+      e.style.backgroundImage = blankURL;
+    });
+  g2.splice(0, 8)
+    .map(getAttack)
+    .forEach((e, i) => {
+      if (e !== null) {
+        e.style.backgroundImage = `${numberedURLPrefix}${i + 1}.png")`;
+      }
+    });
 }
 
 function champAttackListener(e) {
@@ -45,11 +58,14 @@ function champAttackListener(e) {
   showChampAttack(true);
   if (!e.code.match(/(Digit|Numpad)[1-8]/)) { return; }
   e.stopPropagation();
-  const championAttacks = getCreatureAttacks('CHAMPION');
+  const championCreatures = getCreatures('CHAMPION');
   const index = parseInt(e.code.slice(-1), 10) - 1;
-  if (index < championAttacks.length) {
-    sendEvent('world', 'ChampionAttack');
-    championAttacks[index].click();
+  if (index < championCreatures.length) {
+    const attack = getAttack(championCreatures[index]);
+    if (attack !== null) {
+      sendEvent('world', 'ChampionAttack');
+      attack.click();
+    }
   }
 }
 
