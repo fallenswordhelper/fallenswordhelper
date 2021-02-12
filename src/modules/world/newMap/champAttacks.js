@@ -11,22 +11,15 @@ function getAttack(creatureElement) {
   return querySelector('.verb.attack', creatureElement);
 }
 
-function getCreatures(creatureTypes) {
-  if (typeof creatureTypes === 'string') {
-    const index = creatureTypeIndex.indexOf(creatureTypes.toUpperCase());
-    return querySelectorArray(
-      `#actionList .actionListItem.creature.creature-${index}`,
-    );
-  }
-  if (Symbol.iterator in Object(creatureTypes)) {
-    const creatures = Array.from(creatureTypes).map(getCreatures);
-    return creatures.flat();
-  }
-  return false;
+function getCreatures(creatureType) {
+  const index = creatureTypeIndex.indexOf(creatureType.toUpperCase());
+  return querySelectorArray(
+    `#actionList .actionListItem.creature.creature-${index}`,
+  );
 }
 
 function showChampAttack(toggle) {
-  const normalCreatures = getCreatures(['LEGENDARY', 'NORMAL']);
+  const normalCreatures = ['LEGENDARY', 'NORMAL'].flatmap((e) => getCreatures(e));
   const championCreatures = getCreatures('CHAMPION');
 
   const [g1, g2] = toggle
