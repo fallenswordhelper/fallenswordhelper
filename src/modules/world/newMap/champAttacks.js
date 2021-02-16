@@ -20,7 +20,7 @@ function getCreatures(creatureType) {
 }
 
 function showChampAttack(toggle) {
-  const normalCreatures = ['LEGENDARY', 'NORMAL'].flatMap((e) => getCreatures(e));
+  const normalCreatures = ['LEGENDARY', 'NORMAL'].flatMap(getCreatures);
   const championCreatures = getCreatures('CHAMPION');
 
   const [g1, g2] = toggle
@@ -36,7 +36,7 @@ function showChampAttack(toggle) {
         'attack-5', 'attack-6', 'attack-7', 'attack-8');
       e.style.backgroundImage = '';
     });
-  g2.splice(0, 8)
+  g2.slice(0, 8)
     .map(getAttack)
     .forEach((e, i) => {
       if (e !== null) {
