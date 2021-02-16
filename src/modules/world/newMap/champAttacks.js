@@ -6,6 +6,7 @@ import querySelectorArray from '../../common/querySelectorArray';
 import { sendEvent } from '../../support/fshGa';
 
 const creatureTypeIndex = ['NORMAL', 'CHAMPION', 'ELITE', 'SUPER ELITE', 'TITAN', 'LEGENDARY'];
+let ctrlShiftDown = false;
 
 function getAttack(creatureElement) {
   return querySelector('.verb.attack', creatureElement);
@@ -19,6 +20,7 @@ function getCreatures(creatureType) {
 }
 
 function showChampAttack(toggle) {
+console.log(`CHECK: ${toggle}`);
   const normalCreatures = ['LEGENDARY', 'NORMAL'].flatMap((e) => getCreatures(e));
   const championCreatures = getCreatures('CHAMPION');
 
@@ -50,7 +52,8 @@ function champAttackListener(e) {
     || !e.shiftKey
     || e.target.tagName === 'INPUT'
     || e.target.tagName === 'TEXTAREA') { return; }
-  showChampAttack(true);
+  if (!ctrlShiftDown) { showChampAttack(true); }
+  ctrlShiftDown = true;
   if (!e.code.match(/(Digit|Numpad)[1-8]/)) { return; }
   const championCreatures = getCreatures('CHAMPION');
   const index = parseInt(e.code.slice(-1), 10) - 1;
@@ -64,7 +67,10 @@ function champAttackListener(e) {
 }
 
 function hideChampAttackListener(e) {
-  if (!e.ctrlKey || !e.shiftKey) { showChampAttack(false); }
+  if (ctrlShiftDown && (!e.ctrlKey || !e.shiftKey)) {
+    ctrlShiftDown = false;
+    showChampAttack(false);
+  }
 }
 
 export default function champAttacks() {
