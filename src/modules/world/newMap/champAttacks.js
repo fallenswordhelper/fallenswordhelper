@@ -20,7 +20,6 @@ function getCreatures(creatureType) {
 }
 
 function showChampAttack(toggle) {
-console.log(`CHECK: ${toggle}`);
   const normalCreatures = ['LEGENDARY', 'NORMAL'].flatMap((e) => getCreatures(e));
   const championCreatures = getCreatures('CHAMPION');
 
