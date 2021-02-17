@@ -19,15 +19,14 @@
     invResults = '';
     if (!amountToInvent) { return; }
     invResults = `Inventing ${amountToInvent} Items`;
-    for(let i = 0; i< amountToInvent; i++) {
-      /* eslint-disable no-await-in-loop, no-loop-func */
-      await daDoInvent(recipeID)
-        .then((json) => {
-          results = [...results, json];
-          if(!json.s) { i = amountToInvent; }
-        });
-      /* eslint-enable no-await-in-loop, no-loop-func */
-    }
+    const requests = Array(amountToInvent).fill(recipeID);
+    requests.reduce(async (prev, recipe) => {
+      await prev;
+      return daDoInvent(recipe).then((json) => {
+        results = [...results, json];
+      });
+
+    }, Promise.resolve());
   }
 </script>
 <form class="fshCenter" on:submit|preventDefault={quickInvent}>
