@@ -24,6 +24,7 @@
       await prev;
       return daDoInvent(recipe).then((json) => {
         results = [...results, json];
+        if (json.e.message) { throw 'Inventing failure'; }
       });
 
     }, Promise.resolve());
