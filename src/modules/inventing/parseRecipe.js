@@ -15,7 +15,7 @@ export function ingredients() {
   const ingredientTables = querySelectorArray(
     '#pCC td[background^="https://cdn2.fallensword.com/ui/inventory/"]',
   ).map((td) => td.parentElement.parentElement);
-  return ingredientTables.map((table) => parseIngredientTable(table));
+  return ingredientTables.map(parseIngredientTable);
 }
 
 export function findMaxInv() {
