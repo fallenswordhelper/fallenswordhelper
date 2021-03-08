@@ -1,5 +1,6 @@
 import add from '../support/task';
 import colouredDots from '../common/colouredDots';
+import combatCountDown from './combatCountDown';
 import doStatTotal from './doStatTotal';
 import executeAll from '../common/executeAll';
 import getIsSelf from './getIsSelf';
@@ -62,6 +63,7 @@ function updateDom() {
     doCompressBio,
     doStatTotal,
     doBuffLevels,
+		combatCountDown
   ]);
   add(3, colouredDots);
 }

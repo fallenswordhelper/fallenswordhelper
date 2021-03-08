@@ -11,6 +11,7 @@ export default function combatCountdown() {
   const infoMsg = getElement('info-msg');
 
   const text = getText(infoMsg);
+	if (text === undefined) { return; }
   const match = text.match(re);
   if (!match) { return; }
   const prefix = match[1];
@@ -18,14 +19,15 @@ export default function combatCountdown() {
   const seconds = parseInt(match[6], 10);
 
   const t0 = document.timeline.currentTime;
-  const endTime = t0 + 60 * minutes + seconds;
+  const endTime = t0 + (60 * minutes + seconds) * 1000;
+
 
   const timer = makeTimer(
     () => {
       const tf = document.timeline.currentTime;
-      const delta = tf - t0;
+      const delta = Math.max(endTime - tf, 0);
 
-      const time = splitTime(Math.floor(delta));
+      const time = splitTime(Math.floor(delta / 1000));
 
       let timeString = prefix;
       if (time[1] > 0) {
