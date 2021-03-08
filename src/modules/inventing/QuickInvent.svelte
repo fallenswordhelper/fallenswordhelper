@@ -21,11 +21,13 @@
     invResults = `Inventing ${amountToInvent} Items`;
     const requests = Array(amountToInvent).fill(recipeID);
     requests.reduce(async (prev, recipe) => {
-      await prev;
-      return daDoInvent(recipe).then((json) => {
+      const data = await prev;
+      if (!data || data.s) {
+        const json = await daDoInvent(recipe);
         results = [...results, json];
-        if (json.e.message) { throw Error('Inventing failure'); }
-      });
+        return json;
+      }
+      return data;
     }, Promise.resolve());
   }
 </script>
@@ -38,7 +40,8 @@
     min="0"
     step="1"
     class="custominput fshNumberInput"
-    bind:value={amountToInvent} />
+    bind:value={amountToInvent}
+    required />
   <a id="max-invent" href="#max" on:click|preventDefault={maxInvent}>(max)</a>
   <br/>
   <input class="custombutton" type="submit" value="Quick Invent"/>

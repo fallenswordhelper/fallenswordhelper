@@ -1,3 +1,4 @@
+import { cdn } from '../system/system';
 import getText from '../common/getText';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
@@ -13,7 +14,7 @@ export function parseIngredientTable(table) {
 
 export function ingredients() {
   const ingredientTables = querySelectorArray(
-    '#pCC td[background^="https://cdn2.fallensword.com/ui/inventory/"]',
+    `#pCC td[background^="${cdn}ui/inventory/"]`,
   ).map((td) => td.parentElement.parentElement);
   return ingredientTables.map(parseIngredientTable);
 }
