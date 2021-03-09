@@ -8,6 +8,16 @@
   let invResults = '';
   let results = [];
 
+  function highlight(node, { duration }) {
+    
+    return {
+      duration,
+      css: (t) => {
+        return `background-color: rgba(202, 151, 62, ${1 - t});`
+      }
+    }
+  }
+
   function maxInvent() {
     amountToInvent = max;
     sendEvent('inventing', 'maxInventButton');
@@ -24,14 +34,14 @@
       const data = await prev;
       if (!data || data.s) {
         const json = await daDoInvent(recipe);
-        results = [...results, json];
+        results = [json, ...results];
         return json;
       }
       return data;
     }, Promise.resolve());
   }
 </script>
-<form class="fshCenter" on:submit|preventDefault={quickInvent}>
+<form class="fshCenter" on:submit|preventDefault={quickInvent} style="margin-top: 12px;">
   <label for="quick-invent-amount">Select how many to quick invent</label>
   <input
     type="number"
@@ -43,13 +53,12 @@
     bind:value={amountToInvent}
     required />
   <a id="max-invent" href="#max" on:click|preventDefault={maxInvent}>(max)</a>
-  <br/>
-  <input class="custombutton" type="submit" value="Quick Invent"/>
+  <input class="custombutton" type="submit" value="Quick Invent" style="margin-left: 8px;"/>
   <div>
     <span>{invResults}</span>
-    <ol>
+    <ol id="invResults">
     {#each results as json}
-      <li>
+      <li in:highlight="{{duration: 1000}}">
         {#if !json.s }
         <span>{json.e.message}</span>
         {:else if json.r.item}

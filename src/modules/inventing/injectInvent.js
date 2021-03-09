@@ -14,6 +14,12 @@ export default function injectInvent() {
   const recipeID = querySelector('input[name="recipe_id"]').value;
   const max = findMaxInv();
   const injector = pCC.lastElementChild;
+
+  const sepRow = injector.insertRow(-1);
+  const sepCell = sepRow.insertCell(-1);
+  sepCell.className = 'header';
+  sepCell.setAttribute('height', '1');
+
   const myRow = injector.insertRow(-1);
   const myCell = myRow.insertCell(-1);
   myCell.className = 'fshCenter';
