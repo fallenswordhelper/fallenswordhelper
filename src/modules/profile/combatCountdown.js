@@ -1,5 +1,6 @@
 import getElement from '../common/getElement';
 import getText from '../common/getText';
+import getValue from '../system/getValue';
 import makeTimer from '../system/makeTimer';
 import numberIsNaN from '../common/numberIsNaN';
 import setText from '../dom/setText';
@@ -39,7 +40,13 @@ export default function combatCountdown() {
 
       setText(timeString, infoMsg);
 
-      if (tf > endTime) { timer.abort(); }
+      if (tf > endTime) {
+        timer.abort();
+        if (getValue('playNewMessageSound')) {
+          // eslint-disable-next-line no-undef
+          new Audio(getValue('defaultMessageSound')).play();
+        }
+      }
     },
     1000,
   );
