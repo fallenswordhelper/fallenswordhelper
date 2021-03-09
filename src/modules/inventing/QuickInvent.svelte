@@ -9,13 +9,10 @@
   let results = [];
 
   function highlight(node, { duration }) {
-    
     return {
       duration,
-      css: (t) => {
-        return `background-color: rgba(202, 151, 62, ${1 - t});`
-      }
-    }
+      css: (t) => `background-color: rgba(202, 151, 62, ${1 - t});`,
+    };
   }
 
   function maxInvent() {
@@ -58,7 +55,7 @@
     <span>{invResults}</span>
     <ol id="invResults">
     {#each results as json}
-      <li in:highlight="{{duration: 1000}}">
+      <li in:highlight="{{ duration: 1000 }}">
         {#if !json.s }
         <span>{json.e.message}</span>
         {:else if json.r.item}
