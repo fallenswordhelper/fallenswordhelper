@@ -55,7 +55,8 @@ function codedBy() {
         ['2536682', 'dkwizard'], ['1570854', 'jesiegel'],
         ['2156859', 'ByteBoy'], ['2169401', 'McBush']])
     }, with valuable contributions by ${
-      listOfCoders([['524660', 'Nabalac'], ['37905', 'Ananasii']])
+      listOfCoders([['524660', 'Nabalac'], ['37905', 'Ananasii'],
+        ['1674838', 'Lusterless']])
     }</span></td></tr>`;
 }
 

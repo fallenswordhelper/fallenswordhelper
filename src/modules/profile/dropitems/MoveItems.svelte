@@ -1,9 +1,9 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import getText from '../../common/getText';
   import { sendEvent } from '../../support/fshGa';
 
-	const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
   export let folders;
   let folderId;
 

@@ -1,5 +1,6 @@
 import './newMap.css';
 import { buffInfo } from './buffInfo/buffInfo';
+import champAttacks from './champAttacks';
 import combatLogger from './combatLogger';
 import createStyle from '../../common/cElement/createStyle';
 import doNotKill from './doNotKill/doNotKill';
@@ -118,6 +119,7 @@ const usualRoutines = [
   buffInfo,
   fixDebuff,
   interceptMouseEvents,
+  champAttacks,
 ];
 
 export default function subscribes() {

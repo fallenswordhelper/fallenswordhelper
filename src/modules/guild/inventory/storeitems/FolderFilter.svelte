@@ -3,7 +3,7 @@
   import entries from '../../../common/entries';
   import { sendEvent } from '../../../support/fshGa';
 
-	const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
   export let inv = { folders: {} };
 
   function doFilter(id) {
