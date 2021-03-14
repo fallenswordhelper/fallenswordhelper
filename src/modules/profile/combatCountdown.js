@@ -18,6 +18,13 @@ function makeTimeString(millis) {
   return timeString;
 }
 
+function playSound() {
+  if (getValue('playNewMessageSound')) {
+    // eslint-disable-next-line no-undef
+    new Audio(getValue('defaultMessageSound')).play();
+  }
+}
+
 function startTimer(endTime, prefix, infoMsg) {
   const timer = makeTimer(
     () => {
@@ -29,15 +36,11 @@ function startTimer(endTime, prefix, infoMsg) {
 
       if (ct > endTime) {
         timer.abort();
-        if (getValue('playNewMessageSound')) {
-          // eslint-disable-next-line no-undef
-          new Audio(getValue('defaultMessageSound')).play();
-        }
+        playSound();
       }
     },
     1000,
   );
-  return timer;
 }
 
 function parseTimeString(text) {
