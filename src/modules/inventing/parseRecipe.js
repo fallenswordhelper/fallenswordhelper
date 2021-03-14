@@ -3,16 +3,16 @@ import getText from '../common/getText';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
 
-export function parseIngredientTable(table) {
+function parseIngredientTable(table) {
   const [have, need] = getText(querySelector('tr:nth-child(2) td', table)).split('/').map((v) => parseInt(v, 10));
-  return Object({
-    id: querySelector('img', table).src.match(/(\d+)\.[A-Za-z]+$/)[1],
+  return {
     have,
     need,
-  });
+    id: querySelector('img', table).src.match(/(\d+)\.[A-Za-z]+$/)[1],
+  };
 }
 
-export function ingredients() {
+function ingredients() {
   const ingredientTables = querySelectorArray(
     `#pCC td[background^="${cdn}ui/inventory/"]`,
   ).map((td) => td.parentElement.parentElement);
