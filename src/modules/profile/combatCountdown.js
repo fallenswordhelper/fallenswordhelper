@@ -40,21 +40,25 @@ function startTimer(endTime, prefix, infoMsg) {
   return timer;
 }
 
-export default function combatCountdown() {
+function parseTimeString(text) {
   const re = /(\S+ cannot be attacked again for another )(((\d{1,2}) minute\(s\)) and )?((\d{1,2}) second\(s\))/;
-
-  const infoMsg = getElement('info-msg');
-
-  const text = getText(infoMsg);
-  const match = text !== undefined ? text.match(re) : false;
-  if (!match) { return; }
-
+  const match = text !== undefined ? text.match(re) : null;
+  if (match === null) { return false; }
   const prefix = match[1];
   const minutes = match[4] === undefined ? 0 : parseInt(match[4], 10);
   const seconds = parseInt(match[6], 10);
+  return { prefix, minutes, seconds };
+}
+
+export default function combatCountdown() {
+  const infoMsg = getElement('info-msg');
+  const text = getText(infoMsg);
+
+  const timeLeft = parseTimeString(text);
+  if (timeLeft === false) { return; }
 
   const startTime = document.timeline.currentTime;
-  const endTime = startTime + (60 * minutes + seconds) * 1000;
+  const endTime = startTime + (60 * timeLeft.minutes + timeLeft.seconds) * 1000;
 
-  startTimer(endTime, prefix, infoMsg);
+  startTimer(endTime, timeLeft.prefix, infoMsg);
 }
