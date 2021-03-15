@@ -22,7 +22,6 @@ function setTimer(ms, signal, callback) {
   scheduleFrame(start);
 }
 export default function makeTimer(fn, ms) {
-  // eslint-disable-next-line no-undef
   const controller = new AbortController();
   setTimer(ms, controller.signal, fn);
   return controller;

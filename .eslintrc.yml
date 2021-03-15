@@ -4,6 +4,7 @@ parserOptions:
 extends:
   - "airbnb-base"
 globals:
+  AbortController: readonly
   Blob: readonly
   clearTimeout: readonly
   console: readonly
