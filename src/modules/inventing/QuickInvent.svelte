@@ -49,7 +49,7 @@
     class="custominput fshNumberInput"
     bind:value={amountToInvent}
     required />
-  <a id="max-invent" href="#max" on:click|preventDefault={maxInvent}>(max)</a>
+	<button type="button" class="fshBl" on:click={maxInvent}>(max)</button>
   <input class="custombutton" type="submit" value="Quick Invent" style="margin-left: 8px;"/>
   <div>
     <span>{invResults}</span>
