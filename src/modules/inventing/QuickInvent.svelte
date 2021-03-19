@@ -1,18 +1,21 @@
 <script>
   import daDoInvent from '../_dataAccess/daDoInvent';
   import { sendEvent } from '../support/fshGa';
+  import { slide } from 'svelte/transition';
 
   export let max;
   export let recipeID;
   let amountToInvent = 1;
-  let invResults = '';
-  let results = [];
+  let successes = 0;
+  let failures = 0;
+  let progress = 0;
+  let errorMessage = '';
 
-  function highlight(node, { duration }) {
-    return {
-      duration,
-      css: (t) => `background-color: rgba(202, 151, 62, ${1 - t});`,
-    };
+  function reset() {
+    successes = 0;
+    failures = 0;
+    progress = 0;
+    errorMessage = '';
   }
 
   function maxInvent() {
@@ -22,16 +25,17 @@
 
   async function quickInvent() {
     sendEvent('inventing', 'quickInvent');
-    results = [];
-    invResults = '';
     if (!amountToInvent) { return; }
-    invResults = `Inventing ${amountToInvent} Items`;
+    reset();
     const requests = Array(amountToInvent).fill(recipeID);
     requests.reduce(async (prev, recipe) => {
       const data = await prev;
       if (!data || data.s) {
         const json = await daDoInvent(recipe);
-        results = [json, ...results];
+        if (!json.s) errorMessage = json.e.message;
+        else if (json.r.item) successes += 1;
+        else failures += 1;
+        progress = 100 * ((successes + failures) / amountToInvent);
         return json;
       }
       return data;
@@ -49,22 +53,27 @@
     class="custominput fshNumberInput"
     bind:value={amountToInvent}
     required />
-	<button type="button" class="fshBl" on:click={maxInvent}>(max)</button>
+  <button type="button" class="fshBl" on:click={maxInvent}>(max)</button>
   <input class="custombutton" type="submit" value="Quick Invent" style="margin-left: 8px;"/>
   <div>
-    <span>{invResults}</span>
-    <ol id="invResults">
-    {#each results as json}
-      <li in:highlight="{{ duration: 1000 }}">
-        {#if !json.s }
-        <span>{json.e.message}</span>
-        {:else if json.r.item}
-        <span class="fshGreen">You successfully invented the item {json.r.item.n}.</span>
-        {:else}
-        <span class="fshRed">You have failed to invent the item.</span>
-        {/if}
-      </li>
-    {/each}
-    </ol>
+    {#if errorMessage}
+    <div style="border: 2px solid #FFF; margin: 10px auto; width: 80%; background: #D3CFC1" transition:slide|local>
+      <div style="background: #8E8668; color: #FFF; font-size: smaller">INFORMATION</div>
+      <div>{errorMessage}</div>
+    </div>
+    {/if}
+    <div class="composing-progress" style="margin: 0px auto; font-weight: bold; color: #fff; left: 0px;">
+      <div class="composing-progress-bar" style="background-position: right top; width: {progress}%; transition: width 0.4s ease-out; position: absolute; top: 0px">
+			</div>
+			<p style="position: relative;">{successes + failures} / {amountToInvent}</p>
+    </div>
+    <div style="margin-top: 36px;">
+      <div style="display: inline-block; width: 250px;" class="fshQs fshGreen">
+        Successes: {successes}
+      </div>
+      <div style="display: inline-block; width: 250px;" class="fshQs fshRed">
+        Failures: {failures}
+      </div>
+    </div>
   </div>
 </form>
