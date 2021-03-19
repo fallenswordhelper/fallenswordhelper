@@ -5,7 +5,7 @@
 
   export let max;
   export let recipeID;
-  let amountToInvent = 5;
+  let amountToInvent = 1;
   let successes = 0;
   let failures = 0;
   let progress = 0;
@@ -62,10 +62,12 @@
       <div>{errorMessage}</div>
     </div>
     {/if}
-    <div class="composing-progress" style="margin: 0px auto; position: initial;">
-      <div class="composing-progress-bar" style="background-position: right top; width: {progress}%; transition: width 0.4s ease-out;"></div>
+    <div class="composing-progress" style="margin: 0px auto; font-weight: bold; color: #fff; left: 0px;">
+      <div class="composing-progress-bar" style="background-position: right top; width: {progress}%; transition: width 0.4s ease-out; position: absolute; top: 0px">
+			</div>
+			<p style="position: relative;">{successes + failures} / {amountToInvent}</p>
     </div>
-    <div>
+    <div style="margin-top: 36px;">
       <div style="display: inline-block; width: 250px;" class="fshQs fshGreen">
         Successes: {successes}
       </div>
