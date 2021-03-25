@@ -27,8 +27,7 @@ function isUseable(item) {
 function itemImage(item) {
   let ret = cdn;
   if (item.b === 13699) {
-    ret += `composing/${item.extra.design}_${
-      item.extra.color}.png`;
+    ret += `composing/${item.x.d}_${item.x.c}.png`;
   } else {
     ret += `items/${item.b}.gif`;
   }

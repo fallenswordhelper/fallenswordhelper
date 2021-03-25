@@ -1,8 +1,7 @@
-// import { $dataAccess } from './_dataAccess';
+import $dataAccess from './_dataAccess';
 import appGuildManage from '../app/guild/manage';
-// import guildManage from './fallbacks/guildManage';
+import guildManage from './fallbacks/guildManage';
 
 export default function daGuildManage() {
-  // return $dataAccess(appGuildManage, guildManage);
-  return appGuildManage();
+  return $dataAccess(appGuildManage, guildManage);
 }

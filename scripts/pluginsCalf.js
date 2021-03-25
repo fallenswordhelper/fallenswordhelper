@@ -62,7 +62,7 @@ export default function calfPlugins(dir, jsccValues, labels) {
     del(dir),
     svelte({ emitCss: true }),
     resolve(),
-    replace({ values: { ...jsccValues, _CALFVER: calfVer } }),
+    replace({ preventAssignment: true, values: { ...jsccValues, _CALFVER: calfVer } }),
     strip(labels),
     json({ compact: true }),
     styles(),

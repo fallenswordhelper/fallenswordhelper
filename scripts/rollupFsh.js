@@ -12,7 +12,7 @@ export default function rollupFsh(outdir, jsccValues) {
     },
     plugins: [
       clear({ targets: [`dist/Releases/${outdir}`] }),
-      replace({ values: jsccValues }),
+      replace({ preventAssignment: true, values: jsccValues }),
     ],
     external: [jsccValues._CALFJS], // eslint-disable-line no-underscore-dangle
     treeshake: !watch,
