@@ -29,16 +29,16 @@
     reset();
     const requests = Array(amountToInvent).fill(recipeID);
     requests.reduce(async (prev, recipe) => {
-      const data = await prev;
-      if (!data || data.s) {
-        const json = await daDoInvent(recipe);
-        if (!json.s) errorMessage = json.e.message;
-        else if (json.r.item) successes += 1;
+      const prevData = await prev;
+      if (!prevData || prevData.s === true) {
+        const data = await daDoInvent(recipe);
+        if (data.s === false) errorMessage = data.e.message;
+        else if (data.r.success_count > 0) successes += 1;
         else failures += 1;
         progress = 100 * ((successes + failures) / amountToInvent);
-        return json;
+        return data;
       }
-      return data;
+      return prevData;
     }, Promise.resolve());
   }
 </script>
@@ -64,8 +64,8 @@
     {/if}
     <div class="composing-progress" style="margin: 0px auto; font-weight: bold; color: #fff; left: 0px;">
       <div class="composing-progress-bar" style="background-position: right top; width: {progress}%; transition: width 0.4s ease-out; position: absolute; top: 0px">
-			</div>
-			<p style="position: relative;">{successes + failures} / {amountToInvent}</p>
+      </div>
+      <p style="position: relative;">{successes + failures} / {amountToInvent}</p>
     </div>
     <div style="margin-top: 36px;">
       <div style="display: inline-block; width: 250px;" class="fshQs fshGreen">
