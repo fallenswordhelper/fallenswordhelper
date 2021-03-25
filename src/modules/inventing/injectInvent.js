@@ -16,11 +16,10 @@ let invResultHeader;
 let invResults;
 
 function processResult(r) {
-  if (r.item) {
-    return `<span class="fshGreen">You successfully invented the item [${
-      r.item.n}].</span>`;
+  if (r.success_count > 0) {
+    return '<span class="fshGreen">You successfully invented.</span>';
   }
-  return '<span class="fshRed">You have failed to invent the item.</span>';
+  return '<span class="fshRed">You have failed to invent.</span>';
 }
 
 function quickInventDone(json) {
