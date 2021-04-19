@@ -49,7 +49,7 @@ function getParamsFromUrl() {
   cmd = getParam('cmd');
   subcmd = getParam('subcmd');
   subcmd2 = getParam('subcmd2');
-  if (cmd === 'points') { type = `/${getParam('type')}`; }
+  if (['points', 'privatemessage'].includes(cmd)) { type = `/${getParam('type')}`; }
 }
 
 function getParamsFromPage() {

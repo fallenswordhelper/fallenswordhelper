@@ -17,7 +17,8 @@ let nowUtc;
 let lastCheckUtc;
 
 function findChatTable(logScreen) {
-  if (logScreen === 'Chat') {
+  // if (logScreen === 'Chat') {
+  if (['Chat', 'Leader'].includes(logScreen)) {
     return querySelector('#pCC table table table table');
   }
   return querySelector('#pCC > table:last-of-type');
@@ -79,8 +80,8 @@ function makeRowStyle(logScreen, rowTags) {
     .map(partial(toStyle, spacing));
 }
 
-function processRows(logScreen, dateColumn, chatTable) {
-  const rowTags = dataRows(chatTable.rows, 3, 0).map(partial(typeMap, dateColumn));
+function processRows(logScreen, dateColumn, chatTable, cols) {
+  const rowTags = dataRows(chatTable.rows, cols, 0).map(partial(typeMap, dateColumn));
   doBuffLinks(logScreen, rowTags);
   const rowStyle = makeRowStyle(logScreen, rowTags);
   if (rowStyle.length) {
@@ -88,18 +89,18 @@ function processRows(logScreen, dateColumn, chatTable) {
   }
 }
 
-function doLogColoring(logScreen, dateColumn, chatTable) {
+function doLogColoring(logScreen, dateColumn, chatTable, cols) {
   chatTable.classList.add('fshLogColoring');
   nowUtc = new Date().setUTCSeconds(0, 0) - 1;
   const lastCheckScreen = `last${logScreen}Check`;
   lastCheckUtc = getLastCheck(lastCheckScreen);
-  processRows(logScreen, dateColumn, chatTable);
+  processRows(logScreen, dateColumn, chatTable, cols);
   onclick(chatTable, doBuffLinkClick);
   setValue(lastCheckScreen, nowUtc);
 }
 
-export default function addLogColoring(logScreen, dateColumn) {
+export default function addLogColoring(logScreen, dateColumn, cols) {
   if (!getValue('enableLogColoring')) { return; }
   const chatTable = findChatTable(logScreen);
-  if (chatTable) { doLogColoring(logScreen, dateColumn, chatTable); }
+  if (chatTable) { doLogColoring(logScreen, dateColumn, chatTable, cols); }
 }

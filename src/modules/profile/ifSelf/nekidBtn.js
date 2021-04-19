@@ -13,7 +13,7 @@ import setInnerHtml from '../../dom/setInnerHtml';
 let profileCombatSetDiv;
 
 function clearBox(link, json) {
-  if (json.s) {
+  if (json && json.s) {
     setInnerHtml('', link.parentNode);
   }
 }

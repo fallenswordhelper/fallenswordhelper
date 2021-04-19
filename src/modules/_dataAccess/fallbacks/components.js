@@ -3,6 +3,7 @@ import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import querySelectorArray from '../../common/querySelectorArray';
 import retryAjax from '../../ajax/retryAjax';
+import sum from '../../common/sum';
 
 const componentRe = /\?item_id=(\d+)&inv_id=(\d+)&.*&vcode=([0-9a-f]+)/;
 
@@ -23,7 +24,7 @@ function processPages(prm) {
   const asDocs = prm.map(createDocument);
   const perPage = asDocs.map(getComponents);
   const r = [].concat(...perPage);
-  const cm = asDocs.map(getSlots).reduce((a, b) => a + b, 0);
+  const cm = asDocs.map(getSlots).reduce(sum, 0);
   return { h: { cm }, r };
 }
 

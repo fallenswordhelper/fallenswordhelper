@@ -231,5 +231,7 @@
   "enableItemColoring":false,
   "checkAllOfType":false,
   "enableFolderFilter":false,
-  "moveXmasBox":false
+  "moveXmasBox":false,
+  "lastPrivateMsgCheck":0,
+  "lastLeaderCheck":0
 }

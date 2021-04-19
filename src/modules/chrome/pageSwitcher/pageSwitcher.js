@@ -4,7 +4,6 @@ import composing from './composing';
 import guild from './guild/guild';
 import injectWorld from '../../world/injectWorld';
 import items from './items';
-import log from './log';
 import news from './news';
 import noCmd from './noCmd';
 import notepad from './notepad';
@@ -36,6 +35,8 @@ const ladder = () => { runDefault(import('../../ladder/ladder')); };
 const marketplace = () => { runDefault(import('../../marketplace')); };
 const points = () => { runDefault(import('./points')); };
 const superelite = () => { runDefault(import('../../seLog/superelite')); };
+const privateMsg = () => { runDefault(import('../../logs/privateMsg')); };
+const playerLog = () => { runDefault(import('../../logs/playerLog')); };
 
 export default {
   settings: { '-': { '-': injectSettings } },
@@ -47,7 +48,7 @@ export default {
   auctionhouse,
   guild,
   bank: { '-': { '-': injectBank } },
-  log,
+  log: { '-': { '-': playerLog } },
   potionbazaar: { '-': { '-': injectBazaar } },
   marketplace: { createreq: { '-': marketplace } },
   quickbuff: { '-': { '-': injectQuickBuff } }, // No ga
@@ -75,4 +76,5 @@ export default {
   superelite: { '-': { '-': superelite } },
   '-': noCmd,
   combat: { attackplayer: { '-': injectProfile } },
+  privatemessage: { '-': { '-': privateMsg } },
 };

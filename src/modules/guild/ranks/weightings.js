@@ -11,6 +11,7 @@ import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import replaceChild from '../../common/replaceChild';
 import roundToString from '../../common/roundToString';
+import sum from '../../common/sum';
 
 const privLookup = [
   [0x2, 5], //       Bank Withdraw
@@ -29,7 +30,7 @@ function calcPermWeight(perms) {
   return roundToString(
     privLookup.filter(([flag]) => bitwiseAnd(perms, flag))
       .reduce((a, [, weight]) => a + weight - 1, 0)
-    + perms.toString(2).split('').map(Number).reduce((a, b) => a + b, 0),
+    + perms.toString(2).split('').map(Number).reduce(sum, 0),
     1,
   );
 }

@@ -72,6 +72,7 @@ function importBuffs(obj, buffs) {
 }
 
 export default function playerDataObject(json) {
+  if (!json) { return; }
   const buffs = reduceBuffArray(json._skills);
   const obj = {};
   importStats(obj, json);

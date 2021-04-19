@@ -19,6 +19,7 @@ function addMembrListToForage(membrList) {
 }
 
 function membrListToHash(guildId, data) {
+  if (!data) { return; }
   const memberObj = fromEntries(data.map((o) => [o.username, o]));
   return { [guildId]: { lastUpdate: now, ...memberObj } };
 }

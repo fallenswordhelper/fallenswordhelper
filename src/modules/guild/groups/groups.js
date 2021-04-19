@@ -18,6 +18,7 @@ function displayMinGroupLevel() {
 function fixTable() {
   // Cows don't add!
   const tds = querySelectorArray('#pCC td.header-dark');
+  if (tds.length < 5) { return; }
   tds[0].setAttribute('width', '20%');
   tds[1].setAttribute('width', '44%');
   tds[2].setAttribute('width', '7%');

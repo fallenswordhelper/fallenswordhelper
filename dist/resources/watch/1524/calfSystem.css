@@ -1067,13 +1067,6 @@ button.svelte-h3aclh{background:transparent;border:none;color:blue;cursor:pointe
   font-size: x-small;
 }
 
-.newGuildLog {
-  background-image: url('https://cdn2.fallensword.com/ui/misc/log_1.png');
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
 .whosGotWhat {
   border: 1px solid black;
   margin: auto;

@@ -7,6 +7,7 @@ function notSeenErrorMessage(json) {
 }
 
 export default function jsonFail(json, handle) {
+  if (!json) { return true; }
   if (notSeenErrorMessage(json)) {
     lastMsg = json.e.message;
     outputResult(json.e.message, handle);

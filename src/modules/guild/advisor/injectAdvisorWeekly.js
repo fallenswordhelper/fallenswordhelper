@@ -91,7 +91,7 @@ export default function injectAdvisorWeekly(list) { // jQuery
     + '</span>', list);
 
   const prm = [getMembrList(false)]
-    .concat([1, 2, 3, 4, 5, 6, 7].map(partial(getAdvisorPage, list)));
+    .concat([1, 2, 3, 4, 5, 6, 7, 8].map(partial(getAdvisorPage, list)));
 
   allthen(prm, partial(addAdvisorPages, list));
   // eslint-disable-next-line no-unused-labels, no-labels

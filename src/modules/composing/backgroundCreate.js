@@ -43,7 +43,7 @@ function createSuccess(temp) {
 
 function potionDone(temp, data) {
   const resultNode = temp.parentNode;
-  if (!resultNode) { return; }
+  if (!resultNode || !data) { return; }
   if (data.error) {
     setInnerHtml(`<div class="fshScs">${data.error}</div>`, resultNode);
   } else {

@@ -1,10 +1,10 @@
 import addCommas from '../system/addCommas';
 import contains from '../common/contains';
 import getArrayByTagName from '../common/getArrayByTagName';
+import getPlayers from '../common/getPlayers';
 import lastActivityMins from '../common/lastActivityMins';
 import { lastActivityRE } from '../support/constants';
 import { pCC } from '../support/layout';
-import querySelectorArray from '../common/querySelectorArray';
 import setTipped from '../common/setTipped';
 
 const ACTIVE = 0;
@@ -32,7 +32,7 @@ function getActive(dots) {
 export default function activeMembers() {
   const members = getArrayByTagName('b', pCC).find(contains('Members'));
   if (members) {
-    const dots = querySelectorArray('#pCC a[data-tipped*="Last Activity"]');
+    const dots = getPlayers();
     const memberStats = getActive(dots);
     members.classList.add('tip-static');
     setTipped(`Active: ${memberStats[ACTIVE]}/${dots.length}<br>Stamina: ${

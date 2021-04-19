@@ -17,7 +17,7 @@ function clearTheTimeout() {
 }
 
 function goodData(data) {
-  return data.s && isArray(data.r);
+  return data && data.s && isArray(data.r);
 }
 
 function titanToShow(dynamic) {

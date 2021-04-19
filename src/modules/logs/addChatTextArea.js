@@ -1,13 +1,14 @@
+import arrayFrom from '../common/arrayFrom';
 import clickThis from '../common/clickThis';
+import closestTable from '../common/closestTable';
+import contains from '../common/contains';
 import createTextArea from '../common/cElement/createTextArea';
-import getArrayByTagName from '../common/getArrayByTagName';
-import getElementsByTagName from '../common/getElementsByTagName';
+import getArrayByClassName from '../common/getArrayByClassName';
 import getValue from '../system/getValue';
 import insertElement from '../common/insertElement';
 import on from '../common/on';
 import { pCC } from '../support/layout';
 import partial from '../common/partial';
-import querySelector from '../common/querySelector';
 
 function removeCrlf(fshTxt) {
   // eslint-disable-next-line no-param-reassign
@@ -18,26 +19,11 @@ function setDoChat(el) {
   el.setAttribute('form', 'dochat');
 }
 
-function giveFormId() {
-  const formList = getElementsByTagName('form', pCC);
-  formList[0].id = 'dochat';
-  return formList[0];
-}
-
-function giveInputsId() {
-  const filteredList = getArrayByTagName('input', pCC).slice(0, 7);
-  filteredList.forEach(setDoChat);
-  return filteredList[5];
-}
-
-function rearrangeTable(btnMass) {
-  const theTable = querySelector('#pCC table table');
+function rearrangeTable(elements) {
+  const theTable = closestTable(elements[5]);
   theTable.rows[0].cells[0].remove();
-  const myCell = theTable.insertRow(-1).insertCell(-1);
-  insertElement(myCell, btnMass);
-  const ourTd = theTable.rows[0].cells[0];
-  ourTd.rowSpan = 2;
-  return ourTd;
+  insertElement(theTable.insertRow(-1).insertCell(-1), elements[6]);
+  theTable.rows[0].cells[0].rowSpan = 2;
 }
 
 function keypress(sendBtn, evt) {
@@ -47,30 +33,30 @@ function keypress(sendBtn, evt) {
   }
 }
 
-function makeTextArea(sendBtn) {
+function makeTextArea() {
   const fshTxt = createTextArea({
     cols: 72,
+    maxLength: 512,
     name: 'msg',
     required: true,
     rows: 2,
   });
   setDoChat(fshTxt);
-  on(fshTxt, 'keypress', partial(keypress, sendBtn));
   return fshTxt;
 }
 
-function hasTextEntry() {
-  const btnMass = querySelector('input[value="Send As Mass"]');
-  if (!btnMass) { return; }
-  const theForm = giveFormId();
-  const sendBtn = giveInputsId();
-  const ourTd = rearrangeTable(btnMass);
-  const fshTxt = makeTextArea(sendBtn);
-  ourTd.replaceChild(fshTxt, ourTd.children[0]);
-  on(theForm, 'submit', partial(removeCrlf, fshTxt));
-}
+const dont = () => !pCC
+  || getArrayByClassName('header', pCC).filter(contains('Posted\xa0By')).length !== 1
+  || !getValue('enhanceChatTextEntry');
 
 export default function addChatTextArea() {
-  if (!getValue('enhanceChatTextEntry') || !pCC) { return; }
-  hasTextEntry();
+  if (dont()) { return; }
+  const theForm = document.forms[0];
+  theForm.id = 'dochat';
+  arrayFrom(theForm.elements).forEach(setDoChat);
+  rearrangeTable(theForm.elements);
+  const fshTxt = makeTextArea();
+  on(fshTxt, 'keypress', partial(keypress, theForm.elements[5]));
+  theForm.elements[4].replaceWith(fshTxt);
+  on(theForm, 'submit', partial(removeCrlf, fshTxt));
 }

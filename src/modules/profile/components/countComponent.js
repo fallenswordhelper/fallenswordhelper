@@ -49,7 +49,8 @@ function makeUsedCount(data) {
 function makeTotalRow(tbl, data) {
   const totCell = makeTotalCell(tbl);
   insertElement(totCell, makeUsedCount(data));
-  insertTextBeforeEnd(totCell, ` / ${data.h.cm.toString()}`);
+  // insertTextBeforeEnd(totCell, ` / ${data.h.cm.toString()}`);
+  insertTextBeforeEnd(totCell, ' / TODO');
 }
 
 function makeTallyTable(data) {

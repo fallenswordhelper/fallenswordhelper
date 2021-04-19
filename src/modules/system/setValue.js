@@ -2,10 +2,9 @@ import { GMSTORAGE_PATH } from '../support/constants';
 import isBoolean from '../common/isBoolean';
 import isNumber from '../common/isNumber';
 import isString from '../common/isString';
-import isUndefined from '../common/isUndefined';
 
 function storItem(name, type, value) {
-  if (!isUndefined(Modernizr) && Modernizr.localstorage) {
+  if (Modernizr && Modernizr.localstorage) {
     window.localStorage.setItem(GMSTORAGE_PATH + name, type + value);
   }
 }

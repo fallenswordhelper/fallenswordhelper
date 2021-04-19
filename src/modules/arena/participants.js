@@ -73,7 +73,7 @@ function getMeta(json) {
 }
 
 export default function participants(json) {
-  if (!json.s || !isObject(json.r)) { return; }
+  if (!json || !json.s || !isObject(json.r)) { return; }
   const withMeta = getMeta(json);
   withMeta.forEach(partial(decorate, currentGuildId()));
   withMeta.forEach(partial(testMoves, json));

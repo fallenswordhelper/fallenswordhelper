@@ -60,6 +60,7 @@ function gotGains(gains) {
 function getGains(report) {
   const gains = report.match(/Item Gained: <b>[^<]+<\/b>/g);
   if (gains) { return gotGains(gains); }
+  return '';
 }
 
 function multiScav() {
