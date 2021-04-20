@@ -1,3 +1,4 @@
+import OptIn from './OptIn.svelte';
 import createTr from '../common/cElement/createTr';
 import { defLastLadderReset } from '../support/constants';
 import getValue from '../system/getValue';
@@ -8,6 +9,13 @@ import outputFormat from '../system/outputFormat';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
+
+function startApp(props, target) {
+  return new OptIn({
+    props,
+    target,
+  });
+}
 
 function formatLastReset(lastLadderReset) {
   let m = Math.floor((now - lastLadderReset) / 60000);
@@ -56,4 +64,6 @@ export default function ladder() {
   if (getValue('trackLadderReset')) {
     lastReset();
   }
+  const target = querySelector('#pCC > table:nth-child(7)');
+  startApp({}, target);
 }
