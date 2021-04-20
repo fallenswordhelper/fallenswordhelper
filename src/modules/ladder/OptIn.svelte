@@ -3,6 +3,7 @@
   import dialogMsg from '../common/dialogMsg';
   import indexAjax from '../ajax/indexAjax';
   import { oldActionSpinner } from '../support/constants';
+  import { sendEvent } from '../support/fshGa';
 
   const settings = { cmd: 'settings', subcmd: 'save', tab: '0' };
   $: ladderStatus = settings.pvp_ladder === 1;
@@ -28,6 +29,7 @@
   let promise = getSettings();
 
   function toggleLadder() {
+    sendEvent('ladder', 'toggleOpt');
     promise = indexAjax({
       cache: false,
       data: {
