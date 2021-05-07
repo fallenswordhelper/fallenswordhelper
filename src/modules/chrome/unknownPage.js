@@ -2,7 +2,7 @@ import getElementById from '../common/getElement';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';
-import { screenview } from '../support/fshGa';
+import screenview from '../analytics/screenview';
 import updateBuffLog from '../notepad/buffLog/updateBuffLog';
 import xPath from '../common/xPath';
 import { injectQuestBookFull, inventing, news } from './pageSwitcher/loader';

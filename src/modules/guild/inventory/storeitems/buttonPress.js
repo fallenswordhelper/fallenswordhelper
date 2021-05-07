@@ -7,7 +7,7 @@ import getInv from './getInv';
 import getText from '../../../common/getText';
 import hasClass from '../../../common/hasClass';
 import querySelectorArray from '../../../common/querySelectorArray';
-import { sendEvent } from '../../../support/fshGa';
+import sendEvent from '../../../analytics/sendEvent';
 
 function getInvId(e) {
   return closestTr(e.target).cells[0].children[0].value;

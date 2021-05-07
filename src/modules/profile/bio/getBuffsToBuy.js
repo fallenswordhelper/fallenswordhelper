@@ -6,7 +6,7 @@ import keys from '../../common/keys';
 import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
 import playerName from '../../common/playerName';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 
 function profileBuyBuffsEvent() {
   if (calf.subcmd === '-') { sendEvent('profile', 'formatBuffsToBuy'); }

@@ -6,7 +6,7 @@ import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import jQueryDialog from '../../chrome/jQueryDialog';
 import onclick from '../../common/onclick';
 import querySelector from '../../common/querySelector';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 
 function openQwDialog() {
   sendEvent('profile', 'insertQuickWear');

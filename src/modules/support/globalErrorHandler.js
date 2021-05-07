@@ -1,6 +1,6 @@
 import on from '../common/on';
 import parseError from './parseError';
-import { sendException } from './fshGa';
+import sendException from '../analytics/sendException';
 
 let enabled;
 

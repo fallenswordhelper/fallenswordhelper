@@ -10,7 +10,7 @@
   import navigateTo from '../../common/navigateTo';
   import openQuickBuffByName from '../../common/openQuickBuffByName';
   import playerId from '../../common/playerId';
-  import { sendEvent } from '../../support/fshGa';
+  import sendEvent from '../../analytics/sendEvent';
   import {
     auctionhouseUrl,
     guildSubcmdUrl,

@@ -7,7 +7,7 @@ import insertElement from '../../common/insertElement';
 import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 let profileCombatSetDiv;

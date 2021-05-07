@@ -15,7 +15,7 @@ function aDot(type) {
   let tip = 'Offline';
   if (type === 'greenDiamond') { tip = 'Online'; }
   return `<span class="fshDot ${type
-  } tip-static" data-tipped="${tip}"></span>`;
+  }" data-tooltip="${tip}"></span>`;
 }
 
 export default function onlineDot(obj) {

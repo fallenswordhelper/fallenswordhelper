@@ -9,7 +9,7 @@ import numberIsNaN from '../common/numberIsNaN';
 import onclick from '../common/onclick';
 import querySelector from '../common/querySelector';
 import saveBoxes from './saveBoxes.json';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 import setValue from '../system/setValue';
 import toggleVisibilty from '../common/toggleVisibilty';
 import {

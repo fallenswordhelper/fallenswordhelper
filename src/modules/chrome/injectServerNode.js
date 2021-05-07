@@ -11,8 +11,8 @@ import toggleForce from '../common/toggleForce';
 function doServerNode(topbannerStats, miniboxList) {
   const nodeName = getText(miniboxList.children[7]);
   const serverDiv = createDiv({
-    className: 'tip-static',
-    dataset: { tipped: 'Server' },
+    className: 'tooltip-bottom',
+    dataset: { tooltip: 'Server' },
     textContent: `Server: ${nodeName}`,
   });
   insertElement(topbannerStats, serverDiv);

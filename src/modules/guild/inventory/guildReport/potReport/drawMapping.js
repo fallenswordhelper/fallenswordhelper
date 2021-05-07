@@ -12,7 +12,7 @@ import insertHtmlBeforeEnd from '../../../../common/insertHtmlBeforeEnd';
 import on from '../../../../common/on';
 import once from '../../../../common/once';
 import partial from '../../../../common/partial';
-import { sendEvent } from '../../../../support/fshGa';
+import sendEvent from '../../../../analytics/sendEvent';
 import setInnerHtml from '../../../../dom/setInnerHtml';
 import setText from '../../../../dom/setText';
 
@@ -39,8 +39,6 @@ function insertOption(selectTmp, el) {
 
 function getSelect() {
   const selectTmp = createSelect({
-    className: 'tip-static',
-    dataset: { tipped: 'Set to "Ignore" to exclude from report' },
     style: { width: '130px' },
   });
   return selectTmp;
@@ -50,6 +48,7 @@ function getSelectRow() {
   if (!selectRowTmp) {
     selectRowTmp = getRow();
     const select = getSelect();
+    selectRowTmp.cells[1].dataset.tooltip = 'Set to "Ignore" to exclude from report';
     insertElement(selectRowTmp.cells[1], select);
   }
   return selectRowTmp.cloneNode(true);

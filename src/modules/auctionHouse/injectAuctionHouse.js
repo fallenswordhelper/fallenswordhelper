@@ -38,22 +38,22 @@ function cancelAllAH() {
 }
 
 function makeCancelAll() {
-  const cancelAll = createSpan({
+  const fill = getElementById('fill');
+  if (!fill) { return; }
+  const cancelAllSpan = createSpan({
     className: 'smallLink',
     textContent: 'Cancel All',
   });
-  const fill = getElementById('fill').parentNode.parentNode
-    .nextElementSibling.children[0];
-  fill.classList.add('fshCenter');
-  insertHtmlAfterBegin(fill, ']');
-  insertElementAfterBegin(fill, cancelAll);
-  insertHtmlAfterBegin(fill, '[');
-  onclick(cancelAll, cancelAllAH);
+  const spacer = fill.parentNode.parentNode.nextElementSibling.children[0];
+  spacer.classList.add('fshCenter');
+  insertHtmlAfterBegin(spacer, ']');
+  insertElementAfterBegin(spacer, cancelAllSpan);
+  insertHtmlAfterBegin(spacer, '[');
+  onclick(cancelAllSpan, cancelAllAH);
 }
 
 function autoFill() {
   if (getValue('autoFillMinBidPrice')) {
-    // getElementById('auto-fill').checked = true;
     clickThis(getElementById('auto-fill'));
   }
 }

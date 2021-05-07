@@ -1,7 +1,7 @@
 import AjaxError from './AjaxError';
 import on from '../common/on';
 import partial from '../common/partial';
-import { sendException } from '../support/fshGa';
+import sendException from '../analytics/sendException';
 
 let paused = true;
 let queue = [];
@@ -98,8 +98,6 @@ function add(options, retries, resolve, reject) {
 export default function retryAjax(options) {
   initGlobalHandler();
   if (options) {
-    return new Promise(((resolve, reject) => {
-      add(options, 10, resolve, reject);
-    }));
+    return new Promise((resolve, reject) => { add(options, 10, resolve, reject); });
   }
 }

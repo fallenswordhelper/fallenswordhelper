@@ -1,7 +1,7 @@
 import { composingFragmentType } from '../../support/constants';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import infoBoxFrom from '../../common/InfoBoxFrom';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 
 const extract = (info) => ({ r: { item: { n: info.match(/'(.*)'/)[1] } }, s: true });
 

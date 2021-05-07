@@ -7,7 +7,7 @@ import hasClasses from '../../../common/hasClasses';
 import on from '../../../common/on';
 import partial from '../../../common/partial';
 import processMouseOver from './processMouseOver';
-import { sendEvent } from '../../../support/fshGa';
+import sendEvent from '../../../analytics/sendEvent';
 
 const creatureViewTests = ['verb', 'view', 'tip-static'];
 

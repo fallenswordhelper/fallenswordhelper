@@ -1,17 +1,9 @@
 import all from './all';
 import loadCss from './loadCss';
+import loadScript from './loadScript';
 
-function loadScript() {
-  return new Promise((resolve) => {
-    const scriptTag = document.createElement('script');
-    scriptTag.type = 'text/javascript';
-    scriptTag.onload = () => { resolve(); };
-    scriptTag.src = 'https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js';
-    scriptTag.crossOrigin = 'anonymous';
-    document.body.appendChild(scriptTag);
-  });
-}
+const dt = 'https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js';
 
 export default function loadDataTables() {
-  return all([loadScript(), loadCss('_CSSPATH/dataTables.css')]);
+  return all([loadScript(dt), loadCss('_CSSPATH/dataTables.css')]);
 }

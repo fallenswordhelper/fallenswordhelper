@@ -9,14 +9,14 @@ import toggleVisibilty from '../common/toggleVisibilty';
 
 function makeButton(linkto) {
   return createSpan({
-    className: 'fshLink tip-static',
-    dataset: { linkto, tipped: 'Toggle Section' },
+    className: 'fshLink',
+    dataset: { linkto, tooltip: 'Toggle Section' },
     textContent: 'X',
   });
 }
 
 function wrapper(btn) {
-  const wrap = createSpan({ innerHTML: '[&nbsp;' });
+  const wrap = createSpan({ className: 'fshNoWrap', innerHTML: '[&nbsp;' });
   insertElement(wrap, btn);
   insertHtmlBeforeEnd(wrap, '&nbsp;]');
   return wrap;

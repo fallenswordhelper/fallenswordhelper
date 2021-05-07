@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { sendEvent } from '../../../support/fshGa';
+  import sendEvent from '../../../analytics/sendEvent';
 
   const dispatch = createEventDispatcher();
 

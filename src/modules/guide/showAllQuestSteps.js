@@ -6,6 +6,8 @@ function showStep(e) { e.style.display = 'block'; }
 
 export default function showAllQuestSteps() {
   if (!getValue('showNextQuestSteps')) { return; }
+  const nextStageBtn = getElementById('next_stage_button');
+  if (!nextStageBtn) { return; }
   querySelectorArray('div[id^="stage"]').forEach(showStep);
-  getElementById('next_stage_button').style.display = 'none';
+  nextStageBtn.style.display = 'none';
 }

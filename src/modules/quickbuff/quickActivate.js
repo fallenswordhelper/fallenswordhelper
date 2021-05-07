@@ -1,6 +1,6 @@
 import daQuickbuff from '../_dataAccess/daQuickbuff';
-import partial from '../common/partial';
 import quickbuffSuccess from '../common/quickbuffSuccess';
+import sendEvent from '../analytics/sendEvent';
 import setInnerHtml from '../dom/setInnerHtml';
 
 function processResult(trigger, json) {
@@ -11,9 +11,10 @@ function processResult(trigger, json) {
   }
 }
 
-export default function quickActivate(evt) { // jQuery.min
+export default async function quickActivate(evt) { // jQuery.min
   const trigger = evt.target;
   if (trigger.className !== 'quickbuffActivate') { return; }
-  daQuickbuff([window.self], [trigger.dataset.buffid])
-    .then(partial(processResult, trigger));
+  sendEvent('quickbuff', 'quickActivate');
+  const json = await daQuickbuff([window.self], [trigger.dataset.buffid]);
+  processResult(trigger, json);
 }

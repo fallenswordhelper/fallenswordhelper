@@ -6,6 +6,7 @@ import getTextTrim from '../../common/getTextTrim';
 import hasClass from '../../common/hasClass';
 import hideElement from '../../common/hideElement';
 import hideNodeList from './hideNodeList';
+import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
 import openQuickBuffByName from '../../common/openQuickBuffByName';
 import partial from '../../common/partial';
@@ -40,7 +41,8 @@ function eventHandler([parent, checkOn, checkOff, quickBuff]) {
   return partial(handleEvent, eventsToHandle([parent, checkOn, checkOff, quickBuff]));
 }
 
-function doFixBuffSelected([parent, type, checkOn, quickBuff]) {
+function doFixBuffSelected([parent, type, checkOn, quickBuff]) { // jQuery
+  if (jQueryNotPresent) { return; }
   const checkOff = `${type}-buff-check-off`;
   $(`.${checkOn}`).off('click');
   $(`.${checkOff}`).off('click');

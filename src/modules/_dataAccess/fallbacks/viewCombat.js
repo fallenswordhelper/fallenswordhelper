@@ -5,7 +5,7 @@ import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 
 function getId(e) {
   return Number(e.getAttribute('background').match(/\/(\d+)/)[1]); // FIXME

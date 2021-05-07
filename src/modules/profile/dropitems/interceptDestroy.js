@@ -8,7 +8,7 @@ import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import on from '../../common/on';
 import querySelector from '../../common/querySelector';
 import removeRow from './removeRow';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 import setValue from '../../system/setValue';
 import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
 

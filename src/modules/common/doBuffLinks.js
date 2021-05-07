@@ -6,7 +6,7 @@ import insertElement from './insertElement';
 import onclick from './onclick';
 import openQuickBuffByName from './openQuickBuffByName';
 import { places } from '../support/constants';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 
 function getListItem(words, names) {
   const li = createLi();

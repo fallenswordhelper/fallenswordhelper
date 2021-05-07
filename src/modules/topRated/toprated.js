@@ -4,7 +4,6 @@ import functionPasses from '../common/functionPasses';
 import getElementsByTagName from '../common/getElementsByTagName';
 import getTextTrim from '../common/getTextTrim';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
-import isObject from '../common/isObject';
 import jQueryPresent from '../common/jQueryPresent';
 import onclick from '../common/onclick';
 import { pCC } from '../support/layout';
@@ -28,9 +27,9 @@ function looksLikeTopRated() {
 
 const topRatedTests = [
   () => jQueryPresent(),
-  () => isObject(pCC),
-  () => isObject(pCC.children[0]),
-  () => isObject(pCC.children[0].rows),
+  () => pCC,
+  () => pCC.children[0],
+  () => pCC.children[0].rows,
   () => pCC.children[0].rows.length > 2,
   () => getTextTrim(pCC.children[0].rows[1]).startsWith('Last Updated'),
 ];

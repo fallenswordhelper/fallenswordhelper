@@ -152,5 +152,6 @@ function gotMap(potObj, data) {
 }
 
 export default function potReport(potObj) {
+  if (!pCC) { return; }
   get(storeMap).then(partial(gotMap, potObj));
 }

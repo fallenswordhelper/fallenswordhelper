@@ -1,4 +1,4 @@
-import daViewProfile from '../../_dataAccess/daViewProfile';
+import daViewCombatSet from '../../_dataAccess/daViewCombatSet';
 import expandMenu from './expandMenu';
 import keyHandlerEvent from './keyHandlerEvent';
 import navigateTo from '../../common/navigateTo';
@@ -9,25 +9,19 @@ const jsonTests = [
   (itemIndex, json) => json,
   (itemIndex, json) => json.s,
   (itemIndex, json) => json.r,
-  (itemIndex, json) => json.r.equip_sets,
-  (itemIndex, json) => json.r.equip_sets.length > itemIndex,
+  (itemIndex, json) => json.r.length > itemIndex,
 ];
 
-function funcPasses(itemIndex, json, fn) { return fn(itemIndex, json); }
+const funcPasses = (itemIndex, json, fn) => fn(itemIndex, json);
 
-function goodData(itemIndex, json) {
-  return jsonTests.every(partial(funcPasses, itemIndex, json));
-}
+const goodData = (itemIndex, json) => jsonTests.every(partial(funcPasses, itemIndex, json));
 
-function changeCombatSet(itemIndex, json) {
+export default async function combatSetKey(itemIndex) {
+  const json = await daViewCombatSet();
   if (goodData(itemIndex, json)) {
-    const cbsIndex = json.r.equip_sets[itemIndex].id;
+    keyHandlerEvent('changeCombatSet');
+    const cbsIndex = json.r[itemIndex].id;
     expandMenu('2');
     navigateTo(`${profileUrl + defSubcmd}managecombatset&submit=Use&combatSetId=${cbsIndex}`);
   }
-}
-
-export default function combatSetKey(itemIndex) {
-  keyHandlerEvent('changeCombatSet');
-  daViewProfile().then(partial(changeCombatSet, itemIndex));
 }

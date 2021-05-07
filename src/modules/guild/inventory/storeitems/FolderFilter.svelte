@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import entries from '../../../common/entries';
-  import { sendEvent } from '../../../support/fshGa';
+  import sendEvent from '../../../analytics/sendEvent';
 
   const dispatch = createEventDispatcher();
   export let inv = { folders: {} };

@@ -3,7 +3,7 @@ import getElementsByTagName from '../../common/getElementsByTagName';
 import on from '../../common/on';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 
 const creatureTypeIndex = ['NORMAL', 'CHAMPION', 'ELITE', 'SUPER ELITE', 'TITAN', 'LEGENDARY'];
 let ctrlShiftDown = false;

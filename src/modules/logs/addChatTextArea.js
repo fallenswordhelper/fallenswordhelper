@@ -15,8 +15,12 @@ function removeCrlf(fshTxt) {
   fshTxt.value = fshTxt.value.replace(/\r\n|\n|\r/g, ' ');
 }
 
-function setDoChat(el) {
-  el.setAttribute('form', 'dochat');
+const formAttr = (el) => { el.setAttribute('form', 'dochat'); };
+
+function setDoChat(theForm) {
+  // eslint-disable-next-line no-param-reassign
+  theForm.id = 'dochat';
+  arrayFrom(theForm.elements).forEach(formAttr);
 }
 
 function rearrangeTable(elements) {
@@ -41,7 +45,7 @@ function makeTextArea() {
     required: true,
     rows: 2,
   });
-  setDoChat(fshTxt);
+  formAttr(fshTxt);
   return fshTxt;
 }
 
@@ -52,8 +56,7 @@ const dont = () => !pCC
 export default function addChatTextArea() {
   if (dont()) { return; }
   const theForm = document.forms[0];
-  theForm.id = 'dochat';
-  arrayFrom(theForm.elements).forEach(setDoChat);
+  setDoChat(theForm);
   rearrangeTable(theForm.elements);
   const fshTxt = makeTextArea();
   on(fshTxt, 'keypress', partial(keypress, theForm.elements[5]));

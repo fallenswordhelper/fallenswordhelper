@@ -11,7 +11,7 @@ import partial from '../../../common/partial';
 import { playerIDRE } from '../../../support/constants';
 import playerId from '../../../common/playerId';
 import { queueRecallItem } from '../../../ajaxQueue/queue';
-import { sendEvent } from '../../../support/fshGa';
+import sendEvent from '../../../analytics/sendEvent';
 import setInnerHtml from '../../../dom/setInnerHtml';
 
 const spinner = '<span class="guildReportSpinner" '

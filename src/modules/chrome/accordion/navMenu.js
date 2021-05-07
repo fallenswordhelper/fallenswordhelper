@@ -1,5 +1,5 @@
 import querySelector from '../../common/querySelector';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 
 function sectionClosed(id) {
   return id !== -1
