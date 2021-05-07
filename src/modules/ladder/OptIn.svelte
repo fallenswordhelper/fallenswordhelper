@@ -4,7 +4,6 @@
   import dialogMsg from '../common/dialogMsg';
   import getValue from '../system/getValue';
   import { oldActionSpinner } from '../support/constants';
-  import { sendEvent } from '../support/fshGa';
 
   let ladderStatus;
   let promise = daLadderStatus().then((response) => {
@@ -18,7 +17,6 @@
   });
 
   function toggleLadder() {
-    sendEvent('ladder', 'toggle');
     promise = daToggleLadder(!ladderStatus).then((response) => {
       if (response === undefined) {
         dialogMsg('Could not connect to FS servers.');
