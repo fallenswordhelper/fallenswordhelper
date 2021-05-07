@@ -1,6 +1,8 @@
 import callApp from '../app/callApp';
+import sendEvent from '../analytics/sendEvent';
 
 export default async function toggle(ladderStatus) {
+  sendEvent('ladder', 'toggle');
   const settings = await callApp({ cmd: 'settings' });
   if (settings === undefined || settings.s === false) {
     return settings;
