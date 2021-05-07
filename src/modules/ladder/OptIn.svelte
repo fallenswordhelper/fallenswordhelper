@@ -1,46 +1,37 @@
 <script>
-  import callApp from '../app/callApp';
+  import daLadderStatus from '../_dataAccess/daLadderStatus';
+  import daToggleLadder from '../_dataAccess/daToggleLadder';
   import dialogMsg from '../common/dialogMsg';
-  import indexAjax from '../ajax/indexAjax';
+  import getValue from '../system/getValue';
   import { oldActionSpinner } from '../support/constants';
   import { sendEvent } from '../support/fshGa';
 
-  const settings = { cmd: 'settings', subcmd: 'save', tab: '0' };
-  $: ladderStatus = settings.pvp_ladder === 1;
-
-  async function updateSettings(jsonResponse) {
-    if (jsonResponse === undefined) {
-      dialogMsg('Unable to reach Fallen Sword servers.');
-    } else if (jsonResponse.s === false) {
-      dialogMsg(`An error occured: ${jsonResponse.e.message}`);
+  let ladderStatus;
+  let promise = daLadderStatus().then((response) => {
+    if (response === undefined) {
+      dialogMsg('Could not connect to FS servers.');
+    } else if (response.s === false) {
+      dialogMsg(`An error occured: ${response.e.message}`);
     } else {
-      settings.min_group_level = jsonResponse.r.min_group_join_level;
-      settings.ca_default = jsonResponse.r.skills[0].level;
-      settings.sc_default = jsonResponse.r.skills[1].level;
-      settings.nv_default = jsonResponse.r.skills[2].level;
-      settings.barricade_default = jsonResponse.r.skills[3].level;
-      settings.pvp_ladder = jsonResponse.r.flags[0] ? 1 : 0;
+      ladderStatus = response;
     }
-  }
-  async function getSettings() {
-    await callApp({ cmd: 'settings' }).then(updateSettings);
-  }
-  
-  let promise = getSettings();
+  });
 
   function toggleLadder() {
-    sendEvent('ladder', 'toggleOpt');
-    promise = indexAjax({
-      cache: false,
-      data: {
-        ...settings,
-        pvp_ladder: ladderStatus ? 0 : 1,
-      },
-    }).then(getSettings);
+    sendEvent('ladder', 'toggle');
+    promise = daToggleLadder(!ladderStatus).then((response) => {
+      if (response === undefined) {
+        dialogMsg('Could not connect to FS servers.');
+      } else if (response.s === false) {
+        dialogMsg(`An error occured: ${response.e.message}`);
+      } else {
+        ladderStatus = !ladderStatus;
+      }
+    });
   }
 </script>
 <tr>
-  {#if Object.prototype.hasOwnProperty.call(settings, 'pvp_ladder')}
+  {#if getValue('trackLadderReset')}
   <td height="25">
     You are currently {ladderStatus ? 'on' : 'off'} the ladder.
   </td>
