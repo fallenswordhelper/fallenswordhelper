@@ -1,6 +1,6 @@
-import indexAjaxData from '../ajax/indexAjaxData';
-import querySelector from '../common/querySelector';
-import sendEvent from '../analytics/sendEvent';
+import indexAjaxData from '../../ajax/indexAjaxData';
+import querySelector from '../../common/querySelector';
+import sendEvent from '../../analytics/sendEvent';
 
 function getValue(field, scope) {
   const element = querySelector(`input[name="${field}"]`, scope);
@@ -24,7 +24,7 @@ async function getSettings() {
   return settings;
 }
 
-export default async function toggleFallback(ladderStatus) {
+export default async function toggleLadder(ladderStatus) {
   sendEvent('ladder', 'toggle');
   const settings = await getSettings();
   settings.pvp_ladder = ladderStatus ? 1 : 0;

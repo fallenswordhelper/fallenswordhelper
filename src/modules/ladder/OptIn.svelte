@@ -1,4 +1,5 @@
 <script>
+  // eslint-disable-next-line import/no-named-as-default-member, import/no-named-as-default
   import daLadderStatus from '../_dataAccess/daLadderStatus';
   import daToggleLadder from '../_dataAccess/daToggleLadder';
   import dialogMsg from '../common/dialogMsg';

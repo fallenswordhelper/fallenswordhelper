@@ -1,7 +1,7 @@
 import $dataAccess from './_dataAccess';
 import toggle from '../ladder/toggle';
-import toggleFallback from '../ladder/toggleFallback';
+import toggleLadder from './fallbacks/toggleLadder';
 
 export default function daToggleLadder(ladderStatus) {
-  return $dataAccess(toggle, toggleFallback, ladderStatus);
+  return $dataAccess(toggle, toggleLadder, ladderStatus);
 }
