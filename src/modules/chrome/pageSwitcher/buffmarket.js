@@ -1,7 +1,7 @@
 import runDefault from '../../common/runDefault';
 
-const injectBuyButtons = () => { runDefault(import('../../buffmarket/injectBuyButtons')); };
+const buffmarket = () => { runDefault(import('../../buffmarket/buffmarket')); };
 
 export default {
-  '-': { '-': injectBuyButtons },
+  '-': { '-': buffmarket },
 };
