@@ -4,7 +4,6 @@ import noGa from './noGa';
 const times = {};
 
 export function start(category, variable, label) {
-  if (noGa()) { return; }
   times[`${category}:${variable}:${label}`] = performance.now() * 1000;
 }
 
