@@ -1,9 +1,7 @@
 import buffList from '../../support/buffObj.json';
-import closestTd from '../../common/closestTd';
-import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
-import getText from '../../common/getText';
-import getTextTrim from '../../common/getTextTrim';
+import getMsg from './getMsg';
+import getPlayerName from './getPlayerName';
 import openQuickBuffByName from '../../common/openQuickBuffByName';
 import sendEvent from '../../analytics/sendEvent';
 import toLowerCase from '../../common/toLowerCase';
@@ -15,15 +13,18 @@ function getBuffId(nick) {
   if (thisBuff) { return thisBuff.id; }
 }
 
+const formatIds = (matched) => csvSplit(matched).map(getBuffId).filter((b) => b).join(';');
+
+function getIds(target) {
+  const buffs = /`~(.*)~`/.exec(getMsg(target));
+  if (buffs) {
+    return formatIds(buffs[1]);
+  }
+  return '';
+}
+
 export default function parseBuffs(e) {
   const { target } = e;
-  const playerName = getText(closestTr(target).children[2].children[0]);
-  const msg = getTextTrim(closestTd(target).childNodes[0]);
-  let ids = '';
-  const buffs = /`~(.*)~`/.exec(msg);
-  if (buffs) {
-    ids = csvSplit(buffs[1]).map(getBuffId).filter((b) => b).join(';');
-  }
-  openQuickBuffByName(playerName, ids);
+  openQuickBuffByName(getPlayerName(target), getIds(target));
   sendEvent('privateMsg', 'Buff');
 }

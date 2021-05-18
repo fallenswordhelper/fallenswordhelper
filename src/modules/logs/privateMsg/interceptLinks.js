@@ -1,22 +1,23 @@
 import classPair from '../../common/classPair';
-import closestTr from '../../common/closestTr';
-import getText from '../../common/getText';
-import getTextTrim from '../../common/getTextTrim';
+import getMsg from './getMsg';
+import getPlayerName from './getPlayerName';
 import getValue from '../../system/getValue';
 import onclick from '../../common/onclick';
 import parseBuffs from './parseBuffs';
 import sendEvent from '../../analytics/sendEvent';
 
+function formatTip(target) {
+  const msg = getMsg(target);
+  if (msg.length > 140) {
+    return `${msg.substring(0, 140)}...`;
+  }
+  return msg;
+}
+
 function parseReply(e) {
   if (!getValue('enableChatParsing')) { return; }
   const { target } = e;
-  const playerName = getText(closestTr(target).children[2].children[0]);
-  const msg = getTextTrim(closestTr(target).children[3].childNodes[0]);
-  let tip = msg;
-  if (msg.length > 140) {
-    tip = `${msg.substring(0, 140)}...`;
-  }
-  window.openQuickMsgDialog(playerName, '', tip);
+  window.openQuickMsgDialog(getPlayerName(target), '', formatTip(target));
   e.preventDefault();
   sendEvent('privateMsg', 'parseReply');
 }
