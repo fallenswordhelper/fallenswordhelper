@@ -3,12 +3,11 @@ import addIgnoreLinks from './addIgnoreLinks';
 import addPvPSummary from './addPvPSummary';
 import changeLabels from './changeLabels';
 import colorPlayers from './colorPlayers';
+import getLastTable from './getLastTable';
 import getValue from '../../system/getValue';
-import interceptLinks from './interceptLinks';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import partial from '../../common/partial';
 import processLadder from './processLadder';
-import querySelector from '../../common/querySelector';
 
 const conditionalArray = [
   ['addIgnoreLink', addIgnoreLinks],
@@ -19,19 +18,18 @@ const conditionalArray = [
   ['showPvPSummaryInLog', addPvPSummary],
 ];
 
-function processConditionals(logTable, pair) {
+function processConditionals(logTable, privMsg, pair) {
   if (getValue(pair[0])) {
-    pair[1](logTable);
+    pair[1](logTable, privMsg);
   }
 }
 
-function foundLogTable(logTable) {
-  interceptLinks(logTable);
-  conditionalArray.forEach(partial(processConditionals, logTable));
+function foundLogTable(logTable, privMsg) {
+  conditionalArray.forEach(partial(processConditionals, logTable, privMsg));
 }
 
-export default function addLogWidgets() {
+export default function addLogWidgets(privMsg) {
   if (jQueryNotPresent()) { return; }
-  const logTable = querySelector('#pCC > table:last-of-type');
-  if (logTable) { foundLogTable(logTable); }
+  const logTable = getLastTable();
+  if (logTable) { foundLogTable(logTable, privMsg); }
 }

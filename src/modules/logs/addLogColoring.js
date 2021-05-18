@@ -3,6 +3,7 @@ import dataRows from '../common/dataRows';
 import doBuffLink from '../common/doBuffLink';
 import doBuffLinkClick from '../common/doBuffLinkClick';
 import entries from '../common/entries';
+import getLastTable from './playerLogWidgets/getLastTable';
 import getTextTrim from '../common/getTextTrim';
 import getValue from '../system/getValue';
 import insertElement from '../common/insertElement';
@@ -21,7 +22,7 @@ function findChatTable(logScreen) {
   if (['Chat', 'Leader'].includes(logScreen)) {
     return querySelector('#pCC table table table table');
   }
-  return querySelector('#pCC > table:last-of-type');
+  return getLastTable();
 }
 
 function isOldRow(postAgeMins, postDateUtc) {
