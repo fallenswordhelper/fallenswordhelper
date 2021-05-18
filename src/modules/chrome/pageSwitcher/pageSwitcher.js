@@ -35,7 +35,7 @@ const ladder = () => { runDefault(import('../../ladder/ladder')); };
 const marketplace = () => { runDefault(import('../../marketplace')); };
 const points = () => { runDefault(import('./points')); };
 const superelite = () => { runDefault(import('../../seLog/superelite')); };
-const privateMsg = () => { runDefault(import('../../logs/privateMsg')); };
+const privateMsg = () => { runDefault(import('../../logs/privateMsg/privateMsg')); };
 const playerLog = () => { runDefault(import('../../logs/playerLog')); };
 
 export default {
