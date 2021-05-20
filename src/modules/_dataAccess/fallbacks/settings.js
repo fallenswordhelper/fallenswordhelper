@@ -8,6 +8,38 @@ const skillMap = [
   { name: 'barricade_default', id: 98 },
 ];
 
+function getSkills(form) {
+  const skills = form.getAll('blockedSkillList[]')
+    .map((e) => ({
+      id: parseInt(e, 10),
+      blocked: true,
+      level: 0,
+    }));
+
+  skillMap.forEach((skill) => {
+    const index = skills.findIndex((s) => s.id === skills.id);
+    if (index === -1) {
+      skills.push({
+        id: parseInt(skill.id, 10),
+        blocked: false,
+        level: form.get(skill.name),
+      });
+    } else {
+      skills[index].level = form.get(skill.name);
+    }
+  });
+  return skills;
+}
+
+function getDrops(form) {
+  const entries = [...form.entries()];
+  return entries.filter((e) => e[0].startsWith('discardPref'))
+    .map((e) => ({
+      id: parseInt(e[0][e[0].length - 1], 10),
+      action: parseInt(e[1], 10),
+    }));
+}
+
 export default async function settings() {
   const settingsHTML = await indexAjaxData({ cmd: 'settings' });
   if (settingsHTML === undefined) {
@@ -22,28 +54,8 @@ export default async function settings() {
   const fds = [...settingsPage.forms]
     .map((e) => new FormData(e)); // eslint-disable-line no-undef
 
-  const skills = fds[4].getAll('blockedSkillList[]')
-    .map((e) => ({ id: parseInt(e, 10), blocked: true, level: 0 }));
-
-  const itemDropRarity = [...fds[1].entries()]
-    .filter((e) => e[0].startsWith('discardPref'))
-    .map((e) => ({
-      id: parseInt(e[0][e[0].length - 1], 10),
-      action: parseInt(e[1], 10),
-    }));
-
-  skillMap.forEach((skill) => {
-    const index = skills.findIndex((s) => s.id === skills.id);
-    if (index === -1) {
-      skills.push({
-        id: parseInt(skill.id, 10),
-        blocked: false,
-        level: fds[0].get(skill.name),
-      });
-    } else {
-      skills[index].level = fds.get(skill.name);
-    }
-  });
+  const skills = getSkills(fds[4]);
+  const itemDropRarity = getDrops(fds[1]);
 
   return {
     s: true,

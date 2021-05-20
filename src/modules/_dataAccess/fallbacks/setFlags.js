@@ -21,27 +21,44 @@ function hasError(response) {
   return false;
 }
 
-export default async function setFlags(flags) {
+async function updateSettings(prm, f) {
+  const last = await prm;
+  if (last !== undefined && last !== false) { return last; }
+  const response = await indexAjaxData(f);
+  return hasError(response);
+}
+
+async function getSettings() {
   const settingsHTML = await indexAjaxData({ cmd: 'settings' });
   const check = hasError(settingsHTML);
   if (check !== undefined && check !== false) { return check; }
+  return settingsHTML;
+}
 
+function updateLadder(form, opt) {
+  const data = new FormData(form); // eslint-disable-line no-undef
+  data.append('pvp_ladder', opt);
+  return Object.fromEntries(data.entries());
+}
+
+function updateUI(form, flags) {
+  const ui = new FormData(form); // eslint-disable-line no-undef
+  uiFlags.forEach((f, i) => ui.set(f, flags[i + 1]));
+  return Object.fromEntries(ui.entries());
+}
+
+export default async function setFlags(flags) {
+  const settingsHTML = await getSettings();
+  const check = hasError(settingsHTML);
+  if (check !== undefined && check !== false) { return check; }
   const settingsPage = createDocument(settingsHTML);
 
-  const first = new FormData(settingsPage.forms[0]); // eslint-disable-line no-undef
-  first.append('pvp_ladder', flags[0]);
+  const ladder = updateLadder(settingsPage.forms[0], flags[0]);
+  const ui = updateUI(settingsPage.forms[2], flags);
 
-  const ui = new FormData(settingsPage.forms[2]); // eslint-disable-line no-undef
-  uiFlags.forEach((f, i) => ui.set(f, flags[i + 1]));
-
-  const result = await [first, ui].reduce(async (prm, f) => {
-    const last = await prm;
-    if (last !== undefined && last !== false) { return last; }
-
-    const response = await indexAjaxData(Object.fromEntries(f.entries()));
-    return hasError(response);
-  }, Promise.resolve());
-
-  if (result === false) { return { s: true }; }
+  const result = await [ladder, ui].reduce(updateSettings, Promise.resolve());
+  if (result === false) {
+    return { s: true };
+  }
   return result;
 }
