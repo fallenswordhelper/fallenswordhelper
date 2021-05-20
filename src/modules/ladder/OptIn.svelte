@@ -1,47 +1,38 @@
 <script>
-  // eslint-disable-next-line import/no-named-as-default-member, import/no-named-as-default
-  import daLadderStatus from '../_dataAccess/daLadderStatus';
-  import daToggleLadder from '../_dataAccess/daToggleLadder';
-  import dialogMsg from '../common/dialogMsg';
-  import getValue from '../system/getValue';
   import { oldActionSpinner } from '../support/constants';
 
-  let ladderStatus;
-  let promise = daLadderStatus().then((response) => {
-    if (response === undefined) {
-      dialogMsg('Could not connect to FS servers.');
-    } else if (response.s === false) {
-      dialogMsg(`An error occured: ${response.e.message}`);
-    } else {
-      ladderStatus = response;
-    }
-  });
+  export let isOnLadder;
+  export let toggleLadder;
 
-  function toggleLadder() {
-    promise = daToggleLadder(!ladderStatus).then((response) => {
-      if (response === undefined) {
-        dialogMsg('Could not connect to FS servers.');
-      } else if (response.s === false) {
-        dialogMsg(`An error occured: ${response.e.message}`);
-      } else {
-        ladderStatus = !ladderStatus;
-      }
-    });
+  let opt;
+  async function init() {
+    opt = await isOnLadder();
+  }
+  const loadPromise = init();
+
+  let togglePromise;
+
+  function toggle() {
+    opt = !opt;
+    togglePromise = toggleLadder(opt);
   }
 </script>
 <tr>
-  {#if getValue('trackLadderReset')}
-  <td height="25">
-    You are currently {ladderStatus ? 'on' : 'off'} the ladder.
-  </td>
-  <td align="right">
-    {#await promise}
-    <img src={oldActionSpinner} alt="loading" />
+  <td height="25" colspan="2" class="fshCenter">
+{#await loadPromise}
+<img src={oldActionSpinner} alt="loading" style="display: inline;"/>
+{:then}
+    {#await togglePromise}
+    <img src={oldActionSpinner} alt="loading" style="display: inline;"/>
     {:then}
-    <button type="button" class="custombutton" on:click={toggleLadder}>
-      Opt-{ladderStatus ? 'out' : 'in'}
+    <button type="button" class="custombutton" on:click="{toggle}">
+      {#if opt}
+      Leave the ladder
+      {:else}
+      Join the ladder
+      {/if}
     </button>
-    {/await}
+  {/await}
+{/await}
   </td>
-  {/if}
 </tr>
