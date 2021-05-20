@@ -1,5 +1,6 @@
 import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import isUndefined from '../../common/isUndefined';
 
 const uiFlags = [
   'ui_preference_11',
@@ -12,7 +13,7 @@ const uiFlags = [
 ];
 
 function hasError(response) {
-  if (response === undefined) {
+  if (isUndefined(response)) {
     return {
       s: false,
       r: { e: 'Could not connect to FS servers' },
@@ -23,7 +24,7 @@ function hasError(response) {
 
 async function updateSettings(prm, f) {
   const last = await prm;
-  if (last !== undefined && last !== false) { return last; }
+  if (!isUndefined(last) && last !== false) { return last; }
   const response = await indexAjaxData(f);
   return hasError(response);
 }
@@ -31,7 +32,7 @@ async function updateSettings(prm, f) {
 async function getSettings() {
   const settingsHTML = await indexAjaxData({ cmd: 'settings' });
   const check = hasError(settingsHTML);
-  if (check !== undefined && check !== false) { return check; }
+  if (!isUndefined(check) && check !== false) { return check; }
   return settingsHTML;
 }
 
@@ -50,7 +51,7 @@ function updateUI(form, flags) {
 export default async function setFlags(flags) {
   const settingsHTML = await getSettings();
   const check = hasError(settingsHTML);
-  if (check !== undefined && check !== false) { return check; }
+  if (!isUndefined(check) && check !== false) { return check; }
   const settingsPage = createDocument(settingsHTML);
 
   const ladder = updateLadder(settingsPage.forms[0], flags[0]);

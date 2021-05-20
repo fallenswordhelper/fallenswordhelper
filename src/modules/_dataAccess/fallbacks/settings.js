@@ -1,5 +1,6 @@
 import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import isUndefined from '../../common/isUndefined';
 
 const skillMap = [
   { name: 'ca_default', id: 54 },
@@ -55,7 +56,7 @@ function makeFlags(fds) {
 
 export default async function settings() {
   const settingsHTML = await indexAjaxData({ cmd: 'settings' });
-  if (settingsHTML === undefined) {
+  if (isUndefined(settingsHTML)) {
     return {
       s: false,
       r: { e: 'Could not connect to FS servers' },

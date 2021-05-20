@@ -7,6 +7,7 @@ import dialogMsg from '../common/dialogMsg';
 import getValue from '../system/getValue';
 import insertElement from '../common/insertElement';
 import interceptSubmit from '../common/interceptSubmit';
+import isUndefined from '../common/isUndefined';
 import { now } from '../support/now';
 import outputFormat from '../system/outputFormat';
 import querySelector from '../common/querySelector';
@@ -14,7 +15,7 @@ import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
 
 function daSuccess(response) {
-  if (response === undefined) {
+  if (isUndefined(response)) {
     dialogMsg('Could not connect to FS servers.');
     return false;
   }
