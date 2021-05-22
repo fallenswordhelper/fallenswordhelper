@@ -3,13 +3,13 @@ parserOptions:
   ecmaVersion: 2020
   sourceType: module
 plugins:
-  - "svelte3"
+  - 'svelte3'
 overrides:
   - files:
-    - "*.svelte"
-    processor: "svelte3/svelte3"
+    - '*.svelte'
+    processor: 'svelte3/svelte3'
 extends:
-  - "airbnb-base"
+  - 'airbnb-base'
 globals:
   Blob: readonly
   clearTimeout: readonly
@@ -34,7 +34,7 @@ globals:
   window: readonly
   XPathResult: readonly
   require: readonly
-  "$": readonly
+  '$': readonly
   jQuery: readonly
   GM_info: readonly
   ga: readonly
@@ -48,6 +48,10 @@ rules:
     - error
     - packageDir: './'
   import/no-mutable-exports: off # 98
+  import/no-unresolved:
+    - error
+    - ignore:
+      - '_CALFJS'
   import/order: off
   import/prefer-default-export: off
   no-plusplus:

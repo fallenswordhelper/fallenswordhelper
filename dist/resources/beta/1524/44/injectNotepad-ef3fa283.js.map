@@ -1,0 +1,1 @@
+{"version":3,"file":"injectNotepad-ef3fa283.js","sources":["src/modules/notepad/injectNotepad.js"],"sourcesContent":null,"names":["injectNotepad","jQueryNotPresent","$","attr","css"],"mappings":";AAEe,SAASA,IAClBC,KACJC,EAAE,kBACCC,KAAK,OAAQ,MACbA,KAAK,OAAQ,MACbC,IAAI,SAAU","sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.44"}
