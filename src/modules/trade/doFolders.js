@@ -103,6 +103,7 @@ function forEachInvItem(el) {
   const cell = el.children[0].lastElementChild.children[0];
   if (!cell) { return; }
   const checkbox = cell.children[0];
+  if (!checkbox) { return; }
   const item = invItems[checkbox.getAttribute('value')];
   if (item) {
     el.classList.add(`folderid${item.folder_id}`);

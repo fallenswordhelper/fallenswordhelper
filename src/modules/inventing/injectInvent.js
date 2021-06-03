@@ -95,5 +95,6 @@ function makeLayout(injector) {
 }
 
 export default function injectInvent() {
+  if (!pCC) { return; }
   makeLayout(pCC.lastElementChild);
 }
