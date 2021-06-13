@@ -2,7 +2,7 @@ import badData from '../badData';
 import calf from '../../../support/calf';
 import getCreatureStats from '../getCreatureStats/getCreatureStats';
 import partial from '../../../common/partial';
-import { sendEvent } from '../../../support/fshGa';
+import sendEvent from '../../../analytics/sendEvent';
 import {
   getMonsterPrefs,
   processMonsterLog,

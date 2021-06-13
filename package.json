@@ -1,6 +1,6 @@
 {
   "name": "fallenswordhelper",
-  "version": "15.24.39",
+  "version": "15.24.45",
   "description": "Fallen Sword Helper is a Greasemonkey script meant to enhance the experience of playing Fallen Sword, by removing repetitive tasks, presenting more information at a glance, enhancing the social aspect of the game and creating shortcuts to common tasks.",
   "scripts": {
     "addsourceroot": "node scripts/addSourceRoot.js",
@@ -16,6 +16,7 @@
     "prerollup": "echo Starting rollup",
     "rollup": "rollup -c scripts/rollup.config.js",
     "postrollup": "echo Finished rollup",
+    "prepare": "husky install",
     "silence": "npm config set loglevel silent",
     "test": "npm run eslint",
     "watch": "rollup -c scripts/rollup.watch.config.js -w",
@@ -37,33 +38,33 @@
   "homepage": "https://fallenswordhelper.github.io/fallenswordhelper",
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^11.2.0",
-    "@rollup/plugin-replace": "^2.3.4",
-    "@rollup/plugin-strip": "^2.0.0",
-    "eslint": "^7.20.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-replace": "^2.4.2",
+    "@rollup/plugin-strip": "^2.0.1",
+    "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-svelte3": "^3.1.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-svelte3": "^3.2.0",
     "gzip-size": "^6.0.0",
-    "husky": "^4.3.6",
+    "husky": "^6.0.0",
     "local-web-server": "^4.2.1",
-    "postcss-nesting": "^7.0.1",
-    "rollup": "^2.39.0",
+    "postcss-nesting": "^8.0.1",
+    "rollup": "^2.50.6",
     "rollup-plugin-clear": "^2.0.7",
-    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-styles": "^3.14.1",
     "rollup-plugin-svelte": "^7.1.0",
     "rollup-plugin-terser": "^7.0.2",
-    "stylelint": "^13.10.0",
-    "stylelint-config-recommended": "^4.0.0",
-    "stylelint-config-standard": "^21.0.0"
+    "stylelint": "^13.13.1",
+    "stylelint-config-recommended": "^5.0.0",
+    "stylelint-config-standard": "^22.0.0"
   },
   "dependencies": {
     "css-tooltip": "^0.3.4",
-    "idb-keyval": "^5.0.2",
+    "idb-keyval": "^5.0.6",
     "smart-table-core": "^3.0.7",
     "smart-table-vanilla": "^0.2.0",
-    "svelte": "^3.32.3"
+    "svelte": "^3.38.2"
   }
 }

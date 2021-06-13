@@ -181,8 +181,7 @@ export function injectQuickLinkManager(injector) { // Legacy
   param = {
     id: 'qla',
     headers: ['Name', 'URL',
-      'New [<span class="fshLink tip-static" '
-      + 'data-tipped="Open page in a new window">?</span>]'],
+      'New [<span class="fshLink" data-tooltip="Open page in a new window">?</span>]'],
     fields: ['name', 'url', 'newWindow'],
     tags: ['text', 'text', 'checkbox'],
     currentItems: getValueJSON('quickLinks') || [],

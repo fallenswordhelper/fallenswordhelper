@@ -11,7 +11,7 @@ import jQueryDialog from './jQueryDialog';
 import jQueryPresent from '../common/jQueryPresent';
 import once from '../common/once';
 import onclick from '../common/onclick';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 import {
   injectAuctionSearch,
   injectBuffLog,

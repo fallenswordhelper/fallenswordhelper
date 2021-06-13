@@ -460,5 +460,9 @@
     "helpTitle":"Enable Folder Filter",
     "helpText":"This adds folder filtering to the Store Items page.",
     "network":true
+  },
+  "privateMsgButtons":{
+    "helpTitle":"Private Message Buttons",
+    "helpText":"This adds buttons (Buff, Send, Trade) to private messages."
   }
 }

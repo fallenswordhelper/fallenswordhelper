@@ -1,3 +1,5 @@
 export default function clickThis(el) {
-  el.click();
+  if (el instanceof Element) {
+    el.click();
+  }
 }

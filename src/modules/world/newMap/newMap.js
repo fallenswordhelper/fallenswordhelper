@@ -7,6 +7,7 @@ import doNotKill from './doNotKill/doNotKill';
 import executeAll from '../../common/executeAll';
 import getElementById from '../../common/getElement';
 import getValue from '../../system/getValue';
+import globalTop from './globalTop';
 import hideQTip from '../../common/hideQTip';
 import hideTitanCombatResults from './hideTitanCombatResults';
 import initButtons from './buttons/buttons';
@@ -125,8 +126,9 @@ const usualRoutines = [
 export default function subscribes() {
   executeAll(usualRoutines);
   // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { //  hide titan combat results
+  devLbl: { //  hide titan combat results, global top 100
     hideTitanCombatResults();
+    globalTop();
   }
 }
 

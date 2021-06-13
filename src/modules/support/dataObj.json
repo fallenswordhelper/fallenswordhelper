@@ -233,5 +233,6 @@
   "enableFolderFilter":false,
   "moveXmasBox":false,
   "lastPrivateMsgCheck":0,
-  "lastLeaderCheck":0
+  "lastLeaderCheck":0,
+  "privateMsgButtons":false
 }

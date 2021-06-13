@@ -7,7 +7,7 @@ import isArray from '../common/isArray';
 import { nowSecs } from '../support/now';
 import partial from '../common/partial';
 import playerName from '../common/playerName';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 import uniq from '../common/uniq';
 import { decoratePlayer, initDecorate } from './decoratePlayer';
 import { displaySpinner, hideSpinner } from './displaySpinner';

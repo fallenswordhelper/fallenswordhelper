@@ -18,6 +18,7 @@ function togglePref(evt) {
 
 export default function injectShowTracker() {
   const gs = querySelector('#pCC img.guild_openGuildStore');
+  if (!gs) { return; }
   const td = gs.parentNode;
   const container = createDiv({ className: 'fsh-tracker' });
   const myDiv = createDiv({

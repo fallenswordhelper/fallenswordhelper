@@ -1,6 +1,6 @@
 import getElementById from '../../common/getElement';
 import isObject from '../../common/isObject';
-import { sendException } from '../../support/fshGa';
+import sendException from '../../analytics/sendException';
 
 function foundNav(myNav) {
   if (isObject(myNav)) { return true; }

@@ -1,3 +1,4 @@
-export default function runDefault(prm) {
-  prm.then((m) => m.default());
+export default async function runDefault(prm) {
+  const mod = await prm;
+  mod.default();
 }

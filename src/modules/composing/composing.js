@@ -11,7 +11,7 @@ import onclick from '../common/onclick';
 import { pCC } from '../support/layout';
 import parseComposing from './parseComposing';
 import querySelectorArray from '../common/querySelectorArray';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 
 function moveButtons() {
   if (getValue('moveComposingButtons')) {

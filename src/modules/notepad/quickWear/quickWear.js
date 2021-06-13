@@ -17,7 +17,7 @@ import onclick from '../../common/onclick';
 import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
 import selfIdIs from '../../common/selfIdIs';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
 import setValue from '../../system/setValue';

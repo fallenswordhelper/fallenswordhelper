@@ -5,7 +5,7 @@ import getElementById from '../../common/getElement';
 import insertElementBefore from '../../common/insertElementBefore';
 import on from '../../common/on';
 import partial from '../../common/partial';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 
 function injectToggle(bioCell) {
   const toggle = insertElementBefore(
@@ -32,7 +32,11 @@ function getFontSize(bioCell) {
 export default function compressBio() {
   const bioCell = getElementById('profile-bio');
   if (!bioCell) { return; }
+  const parent = bioCell.parentNode;
+  const { style: { display } } = parent;
+  parent.style.display = 'block';
   if (bioCell.clientHeight / getFontSize(bioCell) > 10) {
     doCompression(bioCell);
   }
+  parent.style.display = display;
 }

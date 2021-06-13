@@ -4,9 +4,10 @@ import getText from './getText';
 let thePlayerId;
 
 export default function playerId() {
-  if (!thePlayerId) {
+  const holdtext = getElementById('holdtext');
+  if (holdtext && !thePlayerId) {
     thePlayerId = Number(
-      getText(getElementById('holdtext'))
+      getText(holdtext)
         .match(/fallensword.com\/\?ref=(\d+)/)[1],
     );
   }

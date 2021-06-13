@@ -5,7 +5,7 @@ import hideQTip from '../../common/hideQTip';
 import navigateTo from '../../common/navigateTo';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 function debuffSuccess(aLink, json) {

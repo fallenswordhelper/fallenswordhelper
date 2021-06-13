@@ -11,7 +11,7 @@ import partial from '../common/partial';
 import participants from './participants';
 import querySelectorArray from '../common/querySelectorArray';
 import redoSort from './redoSort';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 import view from '../app/arena/view';
 import { fshArenaKey, tableOpts } from './assets';
 import {

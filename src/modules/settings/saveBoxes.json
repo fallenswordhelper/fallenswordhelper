@@ -152,5 +152,6 @@
   "enableItemColoring",
   "checkAllOfType",
   "enableFolderFilter",
-  "moveXmasBox"
+  "moveXmasBox",
+  "privateMsgButtons"
 ]

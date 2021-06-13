@@ -13,9 +13,9 @@ import loadCss from '../common/loadCss';
 import lookForHcsData from './lookForHcsData/lookForHcsData';
 import pageSwitcher from './pageSwitcher/pageSwitcher';
 import querySelector from '../common/querySelector';
-import {
-  end, screenview, setup, start,
-} from '../support/fshGa';
+import screenview from '../analytics/screenview';
+import setup from '../analytics/setup';
+import { end, start } from '../analytics/timing';
 
 let cmd;
 let subcmd;

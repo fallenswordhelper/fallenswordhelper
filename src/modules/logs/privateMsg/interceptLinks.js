@@ -1,0 +1,42 @@
+import classPair from '../../common/classPair';
+import getMsg from './getMsg';
+import getPlayerName from './getPlayerName';
+import getValue from '../../system/getValue';
+import onclick from '../../common/onclick';
+import parseBuffs from './parseBuffs';
+import sendEvent from '../../analytics/sendEvent';
+
+function formatTip(target) {
+  const msg = getMsg(target);
+  if (msg.length > 140) {
+    return `${msg.substring(0, 140)}...`;
+  }
+  return msg;
+}
+
+function parseReply(e) {
+  if (!getValue('enableChatParsing')) { return; }
+  const { target } = e;
+  window.openQuickMsgDialog(getPlayerName(target), '', formatTip(target));
+  e.preventDefault();
+  sendEvent('privateMsg', 'parseReply');
+}
+
+const classEvents = [
+  ['pmBuffBtn', parseBuffs],
+  ['fa-reply', parseReply],
+  ['pmTradeUrl', () => sendEvent('privateMsg', 'Trade')],
+  ['pmSecureUrl', () => sendEvent('privateMsg', 'ST')],
+  ['pmAttackUrl', () => sendEvent('privateMsg', 'Attack')],
+  ['pmIgnoreUrl', () => sendEvent('privateMsg', 'Ignore')],
+];
+
+function intercept(e) {
+  const { target } = e;
+  const hdl = classEvents.find((pair) => classPair(target, pair));
+  if (hdl) { hdl[1](e); }
+}
+
+export default function interceptLinks(logTable) {
+  onclick(logTable, intercept);
+}

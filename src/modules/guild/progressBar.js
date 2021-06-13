@@ -7,7 +7,7 @@ import on from '../common/on';
 import { pCC } from '../support/layout';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 import setValue from '../system/setValue';
 import { simpleCheckboxHtml } from '../settings/simpleCheckbox';
 import { defTable, playerLinkSelector } from '../support/constants';
@@ -55,6 +55,7 @@ function changePref() {
 
 function injectPref() {
   const gs = querySelector('#pCC img.guild_openGuildStore');
+  if (!gs) { return; }
   const td = gs.parentNode;
   const prefContainer = insertElement(td,
     createDiv({

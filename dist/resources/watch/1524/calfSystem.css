@@ -976,6 +976,17 @@ button.svelte-h3aclh{background:transparent;border:none;color:blue;cursor:pointe
 #quickTake > div:nth-child(2),
 #quickTake > div:nth-child(4) {height: 10px;}
 
+.pmBuffBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family : inherit;
+  margin: 0;
+  padding: 0;
+  text-decoration: underline;
+  user-select: text;
+}
+
 .moveImg {
   display: inline-block;
   height: 25px;

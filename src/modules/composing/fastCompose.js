@@ -16,7 +16,7 @@ import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';
 import querySelectorArray from '../common/querySelectorArray';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 import setText from '../dom/setText';
 import { subscribe } from '../support/pubsub';
 

@@ -9,7 +9,7 @@ import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import isArray from '../../common/isArray';
 import partial from '../../common/partial';
 import playerId from '../../common/playerId';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { componentList, prepareComponentList } from './prepareComponentList';
 

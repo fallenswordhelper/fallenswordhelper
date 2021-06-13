@@ -1,5 +1,5 @@
 import parseError from '../support/parseError';
-import { sendException } from '../support/fshGa';
+import sendException from '../analytics/sendException';
 import { get as idbGet, set as idbSet } from 'idb-keyval';
 
 const processError = (e) => {

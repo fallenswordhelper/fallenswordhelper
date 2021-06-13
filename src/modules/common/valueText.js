@@ -1,5 +1,7 @@
 import getText from './getText';
 
 export default function valueText(collection) {
-  return getText(collection[0].nextElementSibling);
+  if (collection && collection.length) {
+    return getText(collection[0].nextElementSibling);
+  }
 }

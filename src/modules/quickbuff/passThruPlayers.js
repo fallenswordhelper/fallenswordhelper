@@ -9,7 +9,7 @@ function processQueue() {
     window.addPlayer(requests.shift());
     setTimeout(processQueue, 200);
   } else {
-    firstPlayerStats();
+    setTimeout(firstPlayerStats, 200);
   }
 }
 

@@ -6,7 +6,7 @@ import insertElementAfter from '../../common/insertElementAfter';
 import jQueryDialog from '../jQueryDialog';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 
 function openDialog(text, fn) {
   sendEvent('accordion', text);

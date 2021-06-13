@@ -62,8 +62,10 @@ function guildMembers(force, guildId) {
 }
 
 function setHelperMembrList(guildId, membrList) {
-  calf.membrList = membrList[guildId];
-  return calf.membrList;
+  if (membrList) {
+    calf.membrList = membrList[guildId];
+    return calf.membrList;
+  }
 }
 
 export default function getMembrList(force) {

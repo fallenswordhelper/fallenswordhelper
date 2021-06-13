@@ -11,7 +11,7 @@ import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 function filterMercs(e) { return !e.includes('#000099'); }

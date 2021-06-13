@@ -97,6 +97,8 @@ function makeSpan(el) {
 }
 
 function injectTradeOld() {
+  const itemList = getElementById('item-list');
+  if (!itemList) { return; }
   const multiple = createTr({
     id: 'fshSelectMultiple',
     innerHTML: '<td colspan=6>Select:&ensp;<span id="itemid-1" '
@@ -107,8 +109,7 @@ function injectTradeOld() {
       + 'class="custominput" value="all" size=3></td>',
   });
   onclick(multiple, toggleAllPlants);
-  const el = getElementById('item-list').parentNode.parentNode;
-  insertElementBefore(multiple, el);
+  insertElementBefore(multiple, itemList.parentNode.parentNode);
 }
 
 export default function injectTrade() {

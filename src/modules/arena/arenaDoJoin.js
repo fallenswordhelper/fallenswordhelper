@@ -4,7 +4,7 @@ import injectArena from './arena';
 import { nowSecs } from '../support/now';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 import { get, set } from '../system/idb';
 
 function addId(id, obj) {

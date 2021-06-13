@@ -14,7 +14,7 @@ import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import { insertQuickExtract } from '../../chrome/pageSwitcher/loader';
 import jQueryDialog from '../../chrome/jQueryDialog';
 import onclick from '../../common/onclick';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 
 const buttonLabels = [
   'Enable Quick Del',

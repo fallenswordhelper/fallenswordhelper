@@ -11,7 +11,7 @@ import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import on from '../../common/on';
 import once from '../../common/once';
 import partial from '../../common/partial';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 import { initTable, makeTg } from './trackerTable';
 import { makeInOut, queueRawData } from './rawData';
 

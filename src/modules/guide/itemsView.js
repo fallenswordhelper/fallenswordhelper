@@ -19,6 +19,7 @@ function ahItemHref(name) {
 }
 
 function insertAhLink(target) {
+  if (!target) { return; }
   insertHtmlBeforeEnd(target.parentNode, ` [<a href="${
     ahItemHref(getText(target))
   }" target="_blank"><b class="fshBlue">AH</b></a>]`);

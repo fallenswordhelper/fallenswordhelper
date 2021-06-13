@@ -160,7 +160,7 @@ function makeQtCheckbox(items, injector) {
 }
 
 export default function injectMailbox() {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent() || !pCC) { return; }
   const items = getArrayByTagName('a', pCC);
   if (items.length === 0) { return; } // Empty mailbox
   const injector = pCC.lastElementChild;

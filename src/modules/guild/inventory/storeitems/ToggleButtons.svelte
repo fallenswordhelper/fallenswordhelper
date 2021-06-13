@@ -1,7 +1,7 @@
 <script>
   import calf from '../../../support/calf';
   import { createEventDispatcher } from 'svelte';
-  import { sendEvent } from '../../../support/fshGa';
+  import sendEvent from '../../../analytics/sendEvent';
   import setValue from '../../../system/setValue';
 
   const dispatch = createEventDispatcher();

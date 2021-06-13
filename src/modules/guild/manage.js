@@ -28,10 +28,11 @@ function relicControl(leftHandSideColumnTable) {
 function selfRecallLink(leftHandSideColumnTable) {
   // self recall
   const getLi = getElementsByTagName('li', leftHandSideColumnTable);
+  if (!getLi || !getLi.length) { return; }
   const selfRecall = getLi[getLi.length - 1].parentNode;
   insertHtmlBeforeEnd(selfRecall,
     `<li><a href="${recallUserUrl}${playerName()
-    }" class="tip-static" data-tipped="Self Recall">Self Recall</a></li>`);
+    }" data-tooltip="Self Recall">Self Recall</a></li>`);
 }
 
 function getLhsColTab() {
@@ -62,6 +63,7 @@ function ajaxStuff(leftHandSideColumnTable) {
 }
 
 export default function manage() {
+  if (!pCC) { return; }
   const leftHandSideColumnTable = getLhsColTab();
   lhsAdditions(leftHandSideColumnTable);
   add(3, buffLinks);

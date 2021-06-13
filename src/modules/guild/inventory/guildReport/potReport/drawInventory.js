@@ -3,7 +3,7 @@ import insertElement from '../../../../common/insertElement';
 import keys from '../../../../common/keys';
 import once from '../../../../common/once';
 import partial from '../../../../common/partial';
-import { sendEvent } from '../../../../support/fshGa';
+import sendEvent from '../../../../analytics/sendEvent';
 import setInnerHtml from '../../../../dom/setInnerHtml';
 import sortKeys from './sortKeys';
 

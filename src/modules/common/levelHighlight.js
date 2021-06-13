@@ -1,15 +1,12 @@
-import getElementsByClassName from './getElementsByClassName';
+import asInt from '../chrome/calcs/asInt';
 import getValue from '../system/getValue';
-import intValue from '../system/intValue';
-import valueText from './valueText';
 import { defCharacterVirtualLevel, defStatLevel } from '../support/constants';
 
 let lvlToTest;
 
 function calcLvlToTest() {
   if (!lvlToTest) {
-    lvlToTest = getValue(defCharacterVirtualLevel)
-      || intValue(valueText(getElementsByClassName(defStatLevel)));
+    lvlToTest = getValue(defCharacterVirtualLevel) || asInt(defStatLevel);
   }
   return lvlToTest;
 }

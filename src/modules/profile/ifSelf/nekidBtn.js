@@ -7,7 +7,7 @@ import insertElement from '../../common/insertElement';
 import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import { sendEvent } from '../../support/fshGa';
+import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 let profileCombatSetDiv;
@@ -45,9 +45,9 @@ function makeButton() {
 }
 
 export default function nekidBtn() {
-  const profileRightColumn = getElementById('profileRightColumn');
   profileCombatSetDiv = getElementById('profileCombatSetDiv');
+  if (!profileCombatSetDiv) { return; }
   const targetBr = profileCombatSetDiv.parentNode.nextElementSibling;
   const nekidDiv = makeButton();
-  profileRightColumn.replaceChild(nekidDiv, targetBr);
+  getElementById('profileRightColumn').replaceChild(nekidDiv, targetBr);
 }

@@ -10,7 +10,7 @@ import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryDialog from './jQueryDialog';
 import jQueryPresent from '../common/jQueryPresent';
 import onclick from '../common/onclick';
-import { sendEvent } from '../support/fshGa';
+import sendEvent from '../analytics/sendEvent';
 import { get, set } from '../system/idb';
 
 function getBoxList(boxList) {

@@ -4,7 +4,7 @@ import isFunction from '../common/isFunction';
 import isUndefined from '../common/isUndefined';
 import on from '../common/on';
 import parseError from './parseError';
-import { sendException } from './fshGa';
+import sendException from '../analytics/sendException';
 import { getLength, pop, push } from './sch';
 
 let paused = true;
