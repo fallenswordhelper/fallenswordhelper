@@ -19,7 +19,7 @@ function ingredients() {
   return ingredientTables.map(parseIngredientTable);
 }
 
-export function findMaxInv() {
+export default function parseRecipe() {
   const ingredientsArray = ingredients();
   return ingredientsArray.reduce(
     (max, ingred) => Math.min(max, Math.floor(ingred.have / ingred.need)),

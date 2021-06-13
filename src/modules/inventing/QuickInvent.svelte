@@ -1,6 +1,6 @@
 <script>
   import daDoInvent from '../_dataAccess/daDoInvent';
-  import { sendEvent } from '../support/fshGa';
+  import sendEvent from '../analytics/sendEvent';
   import { slide } from 'svelte/transition';
 
   export let max;
