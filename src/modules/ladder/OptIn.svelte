@@ -17,6 +17,12 @@
     togglePromise = toggleLadder(opt);
   }
 </script>
+<style>
+  button {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+  }
+</style>
 <tr>
   <td height="25" colspan="2" class="fshCenter">
 {#await loadPromise}
@@ -27,9 +33,9 @@
     {:then}
     <button type="button" class="custombutton" on:click="{toggle}">
       {#if opt}
-      Leave the ladder
+      PvP Ladder Opt-out
       {:else}
-      Join the ladder
+      PvP Ladder Opt-in
       {/if}
     </button>
   {/await}
