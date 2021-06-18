@@ -26,7 +26,7 @@ function daSuccess(response) {
   return true;
 }
 
-export async function isOnLadder() {
+async function isOnLadder() {
   const response = await daSettings();
   if (daSuccess(response)) {
     return response.r.flags[0];
@@ -34,10 +34,10 @@ export async function isOnLadder() {
   return response;
 }
 
-export async function toggleLadder(o) {
+async function toggleLadder(o) {
   const response = await daSettings();
   if (!daSuccess(response)) { return; }
-  const flags = await response.r.flags
+  const flags = response.r.flags
     .map((i) => (i ? 1 : 0));
   flags[0] = o ? 1 : 0;
   return daSetFlags(flags);
