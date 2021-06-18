@@ -37,13 +37,13 @@ async function getSettings() {
 }
 
 function updateLadder(form, opt) {
-  const data = new FormData(form); // eslint-disable-line no-undef
+  const data = new FormData(form);
   data.append('pvp_ladder', opt);
   return Object.fromEntries(data.entries());
 }
 
 function updateUI(form, flags) {
-  const ui = new FormData(form); // eslint-disable-line no-undef
+  const ui = new FormData(form);
   uiFlags.forEach((f, i) => ui.set(f, flags[i + 1]));
   return Object.fromEntries(ui.entries());
 }
