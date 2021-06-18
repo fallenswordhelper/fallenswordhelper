@@ -32,7 +32,7 @@ async function updateSettings(prm, f) {
 async function getSettings() {
   const settingsHTML = await indexAjaxData({ cmd: 'settings' });
   const check = hasError(settingsHTML);
-  if (!isUndefined(check) && check !== false) { return check; }
+  if (check) { return check; }
   return settingsHTML;
 }
 
@@ -51,7 +51,7 @@ function updateUI(form, flags) {
 export default async function setFlags(flags) {
   const settingsHTML = await getSettings();
   const check = hasError(settingsHTML);
-  if (!isUndefined(check) && check !== false) { return check; }
+  if (check) { return check; }
   const settingsPage = createDocument(settingsHTML);
 
   const ladder = updateLadder(settingsPage.forms[0], flags[0]);
