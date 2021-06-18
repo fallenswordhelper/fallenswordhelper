@@ -66,7 +66,7 @@ export default async function settings() {
   const settingsPage = createDocument(settingsHTML);
 
   const fds = [...settingsPage.forms]
-    .map((e) => new FormData(e)); // eslint-disable-line no-undef
+    .map((e) => new FormData(e));
 
   const skills = getSkills(fds[4]);
   const itemDropRarity = getDrops(fds[1]);
