@@ -48,7 +48,7 @@ function updateUI(form, flags) {
   return Object.fromEntries(ui.entries());
 }
 
-export default async function setFlags(flags) {
+export default async function settingsFlags(flags) {
   const settingsHTML = await getSettings();
   const check = hasError(settingsHTML);
   if (check) { return check; }

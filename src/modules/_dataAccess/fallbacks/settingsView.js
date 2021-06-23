@@ -1,6 +1,5 @@
 import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
-import isUndefined from '../../common/isUndefined';
 
 const skillMap = [
   { name: 'ca_default', id: 54 },
@@ -54,32 +53,29 @@ function makeFlags(fds) {
   ];
 }
 
-export default async function settings() {
-  const settingsHTML = await indexAjaxData({ cmd: 'settings' });
-  if (isUndefined(settingsHTML)) {
-    return {
-      s: false,
-      r: { e: 'Could not connect to FS servers' },
-    };
-  }
-
-  const settingsPage = createDocument(settingsHTML);
-
-  const fds = [...settingsPage.forms]
-    .map((e) => new FormData(e));
-
-  const skills = getSkills(fds[4]);
-  const itemDropRarity = getDrops(fds[1]);
-
+function resultObject(fds) {
   return {
     s: true,
     r: {
-      skills,
-      item_drop_rarity: itemDropRarity,
+      skills: getSkills(fds[4]),
+      item_drop_rarity: getDrops(fds[1]),
       flags: makeFlags(fds),
       min_group_join_level: parseInt(fds[0].get('min_group_level'), 10),
       item_drop_discard_level: parseInt(fds[1].get('auto_discard_level'), 10),
       player_block_type: parseInt(fds[2].get('block_level'), 10),
     },
   };
+}
+
+export default async function settingsView() {
+  const settingsHTML = await indexAjaxData({ cmd: 'settings' });
+  if (!settingsHTML) {
+    return {
+      s: false,
+      e: { message: 'Could not connect to FS servers', code: 1 },
+    };
+  }
+  const settingsPage = createDocument(settingsHTML);
+  const fds = [...settingsPage.forms].map((e) => new FormData(e));
+  return resultObject(fds);
 }
