@@ -1,5 +1,6 @@
 <script>
   import isBoolean from '../common/isBoolean';
+  import sendEvent from '../analytics/sendEvent';
 
   export let isOnLadder;
   export let toggleLadder;
@@ -15,6 +16,7 @@
   function toggle() {
     opt = !opt;
     togglePromise = toggleLadder(opt);
+    sendEvent('ladder', 'opt in/out');
   }
 </script>
 <style>
