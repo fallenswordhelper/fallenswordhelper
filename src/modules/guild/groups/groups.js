@@ -28,8 +28,10 @@ function fixTable() {
 
 export default function injectGroups() { // jQuery
   if (jQueryNotPresent()) { return; }
+  const joinAll = querySelector('#pCC input[value="Join All Available Groups"]');
+  if (!joinAll) { return; }
   getMembrList(false).then(doGroupPaint);
   displayMinGroupLevel();
-  groupButtons();
+  groupButtons(joinAll);
   fixTable();
 }

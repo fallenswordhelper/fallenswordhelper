@@ -96,9 +96,7 @@ function makeSpan(el) {
   }" class="fshCheckAll fshLink fshNoWrap">${el[0]}</span>`;
 }
 
-function injectTradeOld() {
-  const itemList = getElementById('item-list');
-  if (!itemList) { return; }
+function injectTradeOld(itemList) {
   const multiple = createTr({
     id: 'fshSelectMultiple',
     innerHTML: '<td colspan=6>Select:&ensp;<span id="itemid-1" '
@@ -113,8 +111,10 @@ function injectTradeOld() {
 }
 
 export default function injectTrade() {
+  const itemList = getElementById('item-list');
+  if (!itemList) { return; }
   add(3, doFolders);
-  add(3, injectTradeOld);
+  add(3, injectTradeOld, [itemList]);
   // eslint-disable-next-line no-unused-labels, no-labels
   devLbl: { //  oneByOne
     add(3, oneByOne);

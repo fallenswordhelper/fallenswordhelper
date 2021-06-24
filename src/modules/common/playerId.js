@@ -6,10 +6,10 @@ let thePlayerId;
 export default function playerId() {
   const holdtext = getElementById('holdtext');
   if (holdtext && !thePlayerId) {
-    thePlayerId = Number(
-      getText(holdtext)
-        .match(/fallensword.com\/\?ref=(\d+)/)[1],
-    );
+    const matches = getText(holdtext).match(/fallensword.com\/\?ref=(\d+)/);
+    if (matches) {
+      thePlayerId = Number(matches[1]);
+    }
   }
   return thePlayerId;
 }

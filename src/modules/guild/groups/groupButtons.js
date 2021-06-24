@@ -9,7 +9,6 @@ import hideElement from '../../common/hideElement';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
 import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -57,9 +56,7 @@ function joinUnderButton(buttonRow) {
   onclick(joinUnder, joinAllGroupsUnderSize);
 }
 
-export default function groupButtons() {
-  const joinAll = querySelector('#pCC input[value="Join All Available Groups"]');
-  if (!joinAll) { return; }
+export default function groupButtons(joinAll) {
   const buttonRow = joinAll.parentNode;
   if (calf.enableMaxGroupSizeToJoin) {
     hideElement(joinAll);

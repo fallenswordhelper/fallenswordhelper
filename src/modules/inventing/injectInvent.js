@@ -18,7 +18,9 @@ function addSep(injector) {
 }
 
 export default function injectInvent() {
-  const recipeID = querySelector('input[name="recipe_id"]').value;
+  const inputRecipeId = querySelector('input[name="recipe_id"]');
+  if (!inputRecipeId) { return; }
+  const recipeID = inputRecipeId.value;
   const max = parseRecipe();
   const injector = pCC.lastElementChild;
 

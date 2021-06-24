@@ -27,7 +27,9 @@ function guildPlayer(guildMembers, player) {
 }
 
 function returnPlayer(player, json) {
-  if (json.s && isArray(json.r)) { parsePlayer(player, json.r[0]); }
+  if (json && json.s && isArray(json.r) && json.r.length > 0) {
+    parsePlayer(player, json.r[0]);
+  }
 }
 
 function returnSelf(player, json) {
