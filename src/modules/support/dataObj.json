@@ -234,5 +234,6 @@
   "moveXmasBox":false,
   "lastPrivateMsgCheck":0,
   "lastLeaderCheck":0,
-  "privateMsgButtons":false
+  "privateMsgButtons":false,
+  "optInOnLadderPage":false
 }

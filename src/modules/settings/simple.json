@@ -464,5 +464,10 @@
   "privateMsgButtons":{
     "helpTitle":"Private Message Buttons",
     "helpText":"This adds buttons (Buff, Send, Trade) to private messages."
+  },
+  "optInOnLadderPage":{
+    "helpTitle":"Opt in on Ladder Page",
+    "helpText":"This adds Opt in to the Ladder page.",
+    "network":true
   }
 }
