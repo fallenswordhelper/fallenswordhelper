@@ -153,5 +153,6 @@
   "checkAllOfType",
   "enableFolderFilter",
   "moveXmasBox",
-  "privateMsgButtons"
+  "privateMsgButtons",
+  "optInOnLadderPage"
 ]

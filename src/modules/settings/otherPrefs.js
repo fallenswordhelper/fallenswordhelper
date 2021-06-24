@@ -45,6 +45,7 @@ export default function otherPrefs() {
       'pageTwoLinks',
       'addUfsgLinks',
       'trackLadderReset',
+      'optInOnLadderPage',
       'storeLastScavPage',
     ])}`;
 }

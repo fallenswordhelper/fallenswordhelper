@@ -1,6 +1,7 @@
 import OptIn from './OptIn.svelte';
 import daSettingsFlags from '../_dataAccess/daSettingsFlags';
 import daSettingsView from '../_dataAccess/daSettingsView';
+import getValue from '../system/getValue';
 import isArray from '../common/isArray';
 import querySelector from '../common/querySelector';
 
@@ -27,6 +28,8 @@ function startApp(target) {
 }
 
 export default function optInWidget() {
-  const target = querySelector('#pCC table tbody');
-  startApp(target);
+  if (getValue('optInOnLadderPage')) {
+    const target = querySelector('#pCC table tbody');
+    startApp(target);
+  }
 }
