@@ -17,18 +17,18 @@ function addSep(injector) {
   sepCell.setAttribute('height', '1');
 }
 
-export default function injectInvent() {
-  const inputRecipeId = querySelector('input[name="recipe_id"]');
-  if (!inputRecipeId) { return; }
-  const recipeID = inputRecipeId.value;
-  const max = parseRecipe();
-  const injector = pCC.lastElementChild;
-
-  addSep(injector);
-
+function injectRow(injector) {
   const myRow = injector.insertRow(-1);
   const myCell = myRow.insertCell(-1);
   myCell.className = 'fshCenter';
-  const props = { max, recipeID };
-  startApp(props, myCell);
+  return myCell;
+}
+
+export default function injectInvent() {
+  const inputRecipeId = querySelector('input[name="recipe_id"]');
+  if (!inputRecipeId) { return; }
+  const max = parseRecipe();
+  const injector = pCC.lastElementChild;
+  addSep(injector);
+  startApp({ max, recipeID: inputRecipeId.value }, injectRow(injector));
 }
