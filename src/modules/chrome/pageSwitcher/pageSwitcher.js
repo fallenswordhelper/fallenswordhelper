@@ -1,6 +1,6 @@
 import arena from './arena';
 import auctionhouse from './auctionhouse';
-import buffmarket from './buffmarket';
+// import buffmarket from './buffmarket';
 import composing from './composing';
 import guild from './guild/guild';
 import injectWorld from '../../world/injectWorld';
@@ -38,6 +38,7 @@ const points = () => { runDefault(import('./points')); };
 const superelite = () => { runDefault(import('../../seLog/superelite')); };
 const privateMsg = () => { runDefault(import('../../logs/privateMsg')); };
 const playerLog = () => { runDefault(import('../../logs/playerLog')); };
+const injectBuffmarket = () => { runDefault(import('../../buffmarket/injectBuffmarket')); };
 
 export default {
   settings: { '-': { '-': injectSettings } },
@@ -78,5 +79,5 @@ export default {
   '-': noCmd,
   combat: { attackplayer: { '-': injectProfile } },
   privatemessage: { '-': { '-': privateMsg } },
-  buffmarket,
+  buffmarket: { '-': { '-': injectBuffmarket } },
 };

@@ -1,0 +1,23 @@
+.fshActionRow {
+  height: 23px;
+}
+
+.fshBuffFail {
+  background-color: rgb(177, 177, 177);
+}
+
+.fshBuffSuccess {
+  background-color: rgb(159, 247, 160);
+}
+
+.fshSpin {
+  height: 22px;
+  padding-right: 20px;
+  position: relative;
+  width: 22px;
+}
+
+.fshWaiting {
+  margin: 10px auto 0 auto;
+  width: 290px;
+}
