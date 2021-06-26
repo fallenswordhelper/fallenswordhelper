@@ -1,6 +1,5 @@
 import arena from './arena';
 import auctionhouse from './auctionhouse';
-// import buffmarket from './buffmarket';
 import composing from './composing';
 import guild from './guild/guild';
 import injectWorld from '../../world/injectWorld';
