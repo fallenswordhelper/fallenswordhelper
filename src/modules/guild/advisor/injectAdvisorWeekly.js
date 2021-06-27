@@ -81,11 +81,7 @@ function addAdvisorPages(list, [membrList, ...args]) {
     added.map(partial(makeData, membrList)));
 }
 
-export default function injectAdvisorWeekly(list) { // jQuery
-  const betaOptIn = getValue('betaOptIn');
-  if (betaOptIn) { //  Timing output
-    time('guildAdvisor.injectAdvisorWeekly');
-  }
+function injectAdvisor(list) {
   setInnerHtml('<span class="fshCurveContainer fshFlex">'
     + '<span class="fshCurveEle fshCurveLbl fshOldSpinner"></span>'
     + '<span class="fshSpinnerMsg">&nbsp;Retrieving daily data ...</span>'
@@ -95,6 +91,14 @@ export default function injectAdvisorWeekly(list) { // jQuery
     .concat([1, 2, 3, 4, 5, 6, 7, 8].map(partial(getAdvisorPage, list)));
 
   allthen(prm, partial(addAdvisorPages, list));
+}
+
+export default function injectAdvisorWeekly(list) { // jQuery
+  const betaOptIn = getValue('betaOptIn');
+  if (betaOptIn) { //  Timing output
+    time('guildAdvisor.injectAdvisorWeekly');
+  }
+  injectAdvisor(list);
   if (betaOptIn) { //  Timing output
     timeEnd('guildAdvisor.injectAdvisorWeekly');
   }

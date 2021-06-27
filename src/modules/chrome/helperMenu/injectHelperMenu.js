@@ -18,7 +18,7 @@ import sendEvent from '../../analytics/sendEvent';
 function toggleMenu(evt) {
   if (evt.target.id !== 'helperMenu') { return; }
   const menu = evt.target.children[0];
-  menu.classList.toggle('showMenuDiv');
+  menu.classList.toggle('helperMenuShow');
 }
 
 function callHelperFunction(evt) {
@@ -35,7 +35,7 @@ function eventHandler(evt) {
     callHelperFunction(evt);
     return;
   }
-  if (hasClass('a-reply', evt.target)) {
+  if (hasClass('helperMenuReply', evt.target)) {
     window.openQuickMsgDialog(evt.target.getAttribute('target_player'));
   }
 }
@@ -59,11 +59,11 @@ function haveNode() {
     innerHTML: 'Helper&nbsp;Menu',
   });
   if (getValue('keepHelperMenuOnScreen')) {
-    helperMenu.classList.add('fshFixed');
+    helperMenu.classList.add('helperMenuFixed');
   }
   once(helperMenu, 'mouseenter', showHelperMenu);
   if (getValue('draggableHelperMenu')) {
-    helperMenu.classList.add('fshMove');
+    helperMenu.classList.add('helperMenuMove');
     draggable(helperMenu);
   }
   insertElement(document.body, helperMenu);

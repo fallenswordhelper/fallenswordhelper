@@ -1,45 +1,48 @@
-.column {
+.helperMenuColumn {
   float: left;
-  width: 180px;
   margin-right: 5px;
+  width: 180px;
 }
-.column h3 {
+.helperMenuSectionHeader {
   background: #e0e0e0;
-  font: bold 13px Arial;
+  font: bold 13px Arial, Helvetica, sans-serif;
   margin: 0 0 5px 0;
+  text-align: center;
 }
 .helperMenuDiv {
-  cursor: default;
-  text-decoration: none;
-  text-align: center;
-  position: absolute;
-  color: black;
-  font-size: 12px;
-  border-radius: 5px;
   border:3px solid #ccbb77;
-  z-index: 1;
+  border-radius: 5px;
+  color: black;
+  cursor: default;
+  font-size: 12px;
   opacity: 0;
-  visibility: hidden;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
   transition: opacity 100ms linear, visibility 0s linear 100ms;
+  visibility: hidden;
+  z-index: 1;
 }
-.showMenuDiv {
+.helperMenuShow {
   opacity: 1;
-  visibility: visible;
   transition: opacity 100ms linear, visibility 0s linear;
+  visibility: visible;
 }
-.helperMenuDiv .a-reply {
+.helperMenuReply {
   cursor: pointer;
   text-decoration: underline;
 }
 .helperMenu {
-  position: absolute;
-  top: 0;
-  left: 0;
   color: yellow;
-  font-weight: bold;
   cursor: pointer;
-  text-decoration: underline;
-  z-index: 100100;
+  font-weight: bold;
+  left: 0;
+  position: absolute;
   text-align: center;
+  text-decoration: underline;
+  top: 0;
   white-space: nowrap;
+  z-index: 100100;
 }
+.helperMenuFixed {position: fixed;}
+.helperMenuMove {cursor: move;}
