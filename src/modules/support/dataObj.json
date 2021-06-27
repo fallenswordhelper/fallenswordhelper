@@ -235,5 +235,7 @@
   "lastPrivateMsgCheck":0,
   "lastLeaderCheck":0,
   "privateMsgButtons":false,
-  "optInOnLadderPage":false
+  "optInOnLadderPage":false,
+  "betaOptIn":false,
+  "lastBetaWarning":0
 }

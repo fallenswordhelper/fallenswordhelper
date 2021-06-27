@@ -17,7 +17,7 @@ function hasNetwork(o) {
 export function justLabel(name) {
   const o = mySimpleCheckboxes[name];
   return `${hasNetwork(o)
-  }<label for="${name}">${fallback(o.title, o.helpTitle)
+  }<label class="fshNoWrap" for="${name}">${fallback(o.title, o.helpTitle)
   }${helpLink(o.helpTitle, o.helpText)
   }:</label>`;
 }

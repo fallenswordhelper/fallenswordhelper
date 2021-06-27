@@ -7,6 +7,7 @@ import getElementsByTagName from '../../common/getElementsByTagName';
 import getMembrList from '../../ajax/getMembrList';
 import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
+import getValue from '../../system/getValue';
 import injectAdvisorWeekly from './injectAdvisorWeekly';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
@@ -57,16 +58,15 @@ function summaryLink() {
 }
 
 function injectAdvisorDaily(list, membrList) {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  const betaOptIn = getValue('betaOptIn');
+  if (betaOptIn) { //  Timing output
     time('guildAdvisor.injectAdvisorDaily');
   }
   const data = getData(list, membrList);
   const tfoot = getTfoot(list);
   injectTable(list, tfoot, data);
   summaryLink();
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  if (betaOptIn) { //  Timing output
     timeEnd('guildAdvisor.injectAdvisorDaily');
   }
 }

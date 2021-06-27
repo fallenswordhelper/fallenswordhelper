@@ -154,5 +154,6 @@
   "enableFolderFilter",
   "moveXmasBox",
   "privateMsgButtons",
-  "optInOnLadderPage"
+  "optInOnLadderPage",
+  "betaOptIn"
 ]

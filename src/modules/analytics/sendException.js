@@ -1,8 +1,8 @@
+import getValue from '../system/getValue';
 import noGa from './noGa';
 
 export default function sendException(desc, fatal) {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  sendException
+  if (getValue('betaOptIn')) { //  sendException
     // eslint-disable-next-line no-console
     console.log('sendException', desc);
   }

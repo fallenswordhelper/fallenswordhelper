@@ -1,3 +1,4 @@
+import getValue from '../system/getValue';
 import { log } from '../support/debug';
 import noGa from './noGa';
 
@@ -14,8 +15,7 @@ function sendTiming(category, variable, label) {
     ga('fshApp.send', 'timing', category, variable, Math.round(myTime),
       label);
   }
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  if (getValue('betaOptIn')) { //  Timing output
     log(variable, `${myTime}ms`);
   }
 }

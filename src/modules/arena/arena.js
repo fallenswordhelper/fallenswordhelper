@@ -3,6 +3,7 @@ import arenaFull from './arenaFull';
 import doLvlFilter from './doLvlFilter';
 import filterHeader from './filterHeader';
 import { get } from '../system/idb';
+import getValue from '../system/getValue';
 import interceptSubmit from '../common/interceptSubmit';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import loadDataTables from '../common/loadDataTables';
@@ -52,15 +53,14 @@ function arenaDataTable(tabs, [arena, obj, json]) { // jQuery
 }
 
 function process(tabs, values) {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  const betaOptIn = getValue('betaOptIn');
+  if (betaOptIn) { //  Timing output
     time('arena.process');
   }
   removeHiddenRows();
   arenaDataTable(tabs, values);
   interceptSubmit();
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  if (betaOptIn) { //  Timing output
     timeEnd('arena.process');
   }
 }

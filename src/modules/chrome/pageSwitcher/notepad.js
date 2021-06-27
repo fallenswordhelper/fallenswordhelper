@@ -48,17 +48,13 @@ const notepad = {
   findbuffs: { '-': injectFindBuffs },
   findother: { '-': injectFindOther },
   savesettings: { '-': injectSaveSettings }, // TODO
+  reliclist: { '-': reliclist },
   '-': { '-': injectNotepad },
 };
 
 // eslint-disable-next-line no-unused-labels, no-labels
 devLbl: { //  whosGotWhat
   notepad.whosgotwhat = { '-': whosGotWhat };
-}
-
-// eslint-disable-next-line no-unused-labels, no-labels
-betaLbl: { //  reliclist
-  notepad.reliclist = { '-': reliclist };
 }
 
 export default notepad;

@@ -11,6 +11,7 @@ import executeAll from '../../common/executeAll';
 import { extendOptions } from './options';
 import { get } from '../../system/idb';
 import getMembrList from '../../ajax/getMembrList';
+import getValue from '../../system/getValue';
 import headers from './headers';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
@@ -65,13 +66,12 @@ function doInventory() {
 }
 
 function getInvMan() {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  const betaOptIn = getValue('betaOptIn');
+  if (betaOptIn) { //  Timing output
     time('inventory.getInvMan');
   }
   doInventory();
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  if (betaOptIn) { //  Timing output
     timeEnd('inventory.getInvMan');
   }
 }

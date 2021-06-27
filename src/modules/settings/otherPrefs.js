@@ -47,5 +47,6 @@ export default function otherPrefs() {
       'trackLadderReset',
       'optInOnLadderPage',
       'storeLastScavPage',
+      'betaOptIn',
     ])}`;
 }

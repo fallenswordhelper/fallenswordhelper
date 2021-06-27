@@ -3,6 +3,7 @@ import allthen from '../../common/allthen';
 import createTFoot from '../../common/cElement/createTFoot';
 import daAdvisor from '../../_dataAccess/daAdvisor';
 import getMembrList from '../../ajax/getMembrList';
+import getValue from '../../system/getValue';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -81,8 +82,8 @@ function addAdvisorPages(list, [membrList, ...args]) {
 }
 
 export default function injectAdvisorWeekly(list) { // jQuery
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  const betaOptIn = getValue('betaOptIn');
+  if (betaOptIn) { //  Timing output
     time('guildAdvisor.injectAdvisorWeekly');
   }
   setInnerHtml('<span class="fshCurveContainer fshFlex">'
@@ -94,8 +95,7 @@ export default function injectAdvisorWeekly(list) { // jQuery
     .concat([1, 2, 3, 4, 5, 6, 7, 8].map(partial(getAdvisorPage, list)));
 
   allthen(prm, partial(addAdvisorPages, list));
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  if (betaOptIn) { //  Timing output
     timeEnd('guildAdvisor.injectAdvisorWeekly');
   }
 }

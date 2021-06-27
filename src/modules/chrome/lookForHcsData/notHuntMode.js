@@ -1,7 +1,7 @@
 import calf from '../../support/calf';
 import getCalfPrefs from '../../common/getCalfPrefs';
 import getValue from '../../system/getValue';
-import priorityThree from './priorityThree';
+import priorityThree from './priorityThree/priorityThree';
 
 const calfPrefs = [
   'enableAllyOnlineList',

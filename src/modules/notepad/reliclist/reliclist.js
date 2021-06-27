@@ -1,4 +1,5 @@
 import getRelicList from './getRelicList';
+import getValue from '../../system/getValue';
 import { pCC } from '../../support/layout';
 import padZ from '../../system/padZ';
 import partial from '../../common/partial';
@@ -90,6 +91,7 @@ function processRelicList(thisRelicList) {
 }
 
 export default function reliclist() {
+  if (!getValue('betaOptIn')) { return; }
   setInnerHtml('Loading...', pCC);
   getRelicList().then(processRelicList);
 }

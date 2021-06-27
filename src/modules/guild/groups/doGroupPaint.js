@@ -3,6 +3,7 @@ import csvSplit from '../../common/csvSplit';
 import doBuffLinks from '../../common/doBuffLinks';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getText from '../../common/getText';
+import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onlineDot from '../../common/onlineDot';
@@ -86,15 +87,14 @@ function doGroupRow(membrlist, row) {
 }
 
 export default function doGroupPaint(membrlist) {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  const betaOptIn = getValue('betaOptIn');
+  if (betaOptIn) { //  Timing output
     time('groups.doGroupPaint');
   }
   getArrayByClassName('group-action-container')
     .map((c) => closestTr(c))
     .forEach(partial(doGroupRow, membrlist));
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  if (betaOptIn) { //  Timing output
     timeEnd('groups.doGroupPaint');
   }
 }

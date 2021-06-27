@@ -9,6 +9,7 @@ import getArrayByTagName from '../common/getArrayByTagName';
 import getElementById from '../common/getElement';
 import getElementsByTagName from '../common/getElementsByTagName';
 import getInventoryById from '../ajax/getInventoryById';
+import getValue from '../system/getValue';
 import hasClass from '../common/hasClass';
 import hideElement from '../common/hideElement';
 import insertElement from '../common/insertElement';
@@ -114,8 +115,8 @@ function forEachInvItem(el) {
 }
 
 function processTrade(data) {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  const betaOptIn = getValue('betaOptIn');
+  if (betaOptIn) { //  Timing output
     time('trade.processTrade');
   }
   invItems = data.items;
@@ -123,8 +124,7 @@ function processTrade(data) {
   const nodeList = getArrayByTagName(defTable, getElementById('item-list'));
   nodeList.forEach(forEachInvItem); // TODO unnecessary DOM manipulation
   doFolderHeaders(data.folders);
-  // eslint-disable-next-line no-unused-labels, no-labels
-  betaLbl: { //  Timing output
+  if (betaOptIn) { //  Timing output
     timeEnd('trade.processTrade');
   }
 }

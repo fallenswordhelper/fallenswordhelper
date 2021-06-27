@@ -110,7 +110,7 @@
   },
   "enableLogColoring":{
     "helpTitle":"Enable Log Coloring",
-    "helpText":"Three logs will be colored if this is enabled, Guild Chat, Guild Log and Player Log. It will show any new messages in yellow and anything 20 minutes old ones in brown."
+    "helpText":"Four logs will be colored if this is enabled, Guild Chat, Guild Log, Player Log and Messages.<br>It will show any new messages in yellow and anything older than 20 minutes in brown."
   },
   "enableChatParsing":{
     "helpTitle":"Enable Chat Parsing",
@@ -137,7 +137,7 @@
   },
   "storeLastQuestPage":{
     "helpTitle":"Store Last Quest Page",
-    "helpText":"This will store the page and sort order of each of the three quest selection pages for next time you visit. If you need to reset the links, turn this option off, click on the link you wish to reset and then turn this option back on again."
+    "helpText":"This will store the page and sort order of each of the three quest selection pages for next time you visit.<br>If you need to reset the links, turn this option off, click on the link you wish to reset and then turn this option back on again."
   },
   "showNextQuestSteps":{
     "helpTitle":"Show Next Quest Steps",
@@ -184,7 +184,7 @@
   },
   "enterForSendMessage":{
     "helpTitle":"Enter Sends Message",
-    "helpText":"If enabled, will send a message from the Send Message screen if you press enter. You can still insert a new line by holding down shift when you press enter."
+    "helpText":"If enabled, will send a message from the Send Message screen if you press enter.<br>You can still insert a new line by holding down shift when you press enter."
   },
   "moveComposingButtons":{
     "helpTitle":"Move Composing Buttons",
@@ -428,7 +428,7 @@
   },
   "injectBuffGuide":{
     "helpTitle":"Inject Buff Guide",
-    "helpText":"This attempts to calculate stat movement for barricade, entrench and nightmare visage. These calculations are NOT cumulative and are intended only as a guide."
+    "helpText":"This attempts to calculate stat movement for barricade, entrench and nightmare visage.<br>These calculations are NOT cumulative and are intended only as a guide."
   },
   "statisticsWrap":{
     "helpTitle":"Statistics Wrap",
@@ -469,5 +469,9 @@
     "helpTitle":"Opt in on Ladder Page",
     "helpText":"This adds Opt in to the Ladder page.",
     "network":true
+  },
+  "betaOptIn":{
+    "helpTitle":"FSH Beta Opt-In",
+    "helpText":"This opts you in to beta features and additional debugging info.<br>The beta features are often incomplete, possibly buggy and subject to change at any time"
   }
 }
