@@ -1,6 +1,6 @@
 import calf from '../../support/calf';
 import { insertQuickWear } from '../pageSwitcher/loader';
-import jQueryDialog from '../jQueryDialog';
+import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import keyHandlerEvent from './keyHandlerEvent';
 
 export default function fastWearMgr() {

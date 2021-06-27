@@ -1,0 +1,45 @@
+.column {
+  float: left;
+  width: 180px;
+  margin-right: 5px;
+}
+.column h3 {
+  background: #e0e0e0;
+  font: bold 13px Arial;
+  margin: 0 0 5px 0;
+}
+.helperMenuDiv {
+  cursor: default;
+  text-decoration: none;
+  text-align: center;
+  position: absolute;
+  color: black;
+  font-size: 12px;
+  border-radius: 5px;
+  border:3px solid #ccbb77;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 100ms linear, visibility 0s linear 100ms;
+}
+.showMenuDiv {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 100ms linear, visibility 0s linear;
+}
+.helperMenuDiv .a-reply {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.helperMenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: yellow;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  z-index: 100100;
+  text-align: center;
+  white-space: nowrap;
+}

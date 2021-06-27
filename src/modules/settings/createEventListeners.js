@@ -4,7 +4,7 @@ import dialogMsg from '../common/dialogMsg';
 import getElementById from '../common/getElement';
 import insertElement from '../common/insertElement';
 import jConfirm from '../common/jConfirm';
-import jQueryDialog from '../chrome/jQueryDialog';
+import jQueryDialog from '../chrome/jQueryDialog/jQueryDialog';
 import numberIsNaN from '../common/numberIsNaN';
 import onclick from '../common/onclick';
 import querySelector from '../common/querySelector';

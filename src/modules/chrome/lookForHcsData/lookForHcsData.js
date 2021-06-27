@@ -4,7 +4,7 @@ import dialogMsg from '../../common/dialogMsg';
 import gameHelpLink from './gameHelpLink';
 import getElementById from '../../common/getElement';
 import getValue from '../../system/getValue';
-import injectHelperMenu from '../helperMenu';
+import injectHelperMenu from '../helperMenu/helperMenu';
 import jsonParse from '../../common/jsonParse';
 import notHuntMode from './notHuntMode';
 import { nowSecs } from '../../support/now';

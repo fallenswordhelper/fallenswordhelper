@@ -1,7 +1,8 @@
-import createDiv from '../common/cElement/createDiv';
-import getElementById from '../common/getElement';
-import insertElement from '../common/insertElement';
-import setInnerHtml from '../dom/setInnerHtml';
+import './jQueryDialog.css';
+import createDiv from '../../common/cElement/createDiv';
+import getElementById from '../../common/getElement';
+import insertElement from '../../common/insertElement';
+import setInnerHtml from '../../dom/setInnerHtml';
 
 export default function jQueryDialog(fn) { // jQuery
   let content = getElementById('content');

@@ -12,7 +12,7 @@ import hideElement from '../../common/hideElement';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import { insertQuickExtract } from '../../chrome/pageSwitcher/loader';
-import jQueryDialog from '../../chrome/jQueryDialog';
+import jQueryDialog from '../../chrome/jQueryDialog/jQueryDialog';
 import onclick from '../../common/onclick';
 import sendEvent from '../../analytics/sendEvent';
 

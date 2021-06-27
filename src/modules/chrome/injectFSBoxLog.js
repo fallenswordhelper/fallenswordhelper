@@ -7,7 +7,7 @@ import getText from '../common/getText';
 import { injectFsBoxContent } from './pageSwitcher/loader';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
-import jQueryDialog from './jQueryDialog';
+import jQueryDialog from './jQueryDialog/jQueryDialog';
 import jQueryPresent from '../common/jQueryPresent';
 import onclick from '../common/onclick';
 import sendEvent from '../analytics/sendEvent';
