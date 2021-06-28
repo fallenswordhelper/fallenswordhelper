@@ -1,6 +1,6 @@
 # Fallen Sword Helper
 
-[![Build Status](https://travis-ci.org/fallenswordhelper/fallenswordhelper.svg?branch=master)](https://travis-ci.org/fallenswordhelper/fallenswordhelper)
+[![Build Status](https://www.travis-ci.com/fallenswordhelper/fallenswordhelper.svg?branch=master)](https://www.travis-ci.com/fallenswordhelper/fallenswordhelper)
 [![Build status](https://ci.appveyor.com/api/projects/status/715kmqrhqvuna3aa/branch/master?svg=true)](https://ci.appveyor.com/project/atompkins/fallenswordhelper/branch/master)\
 [![Dependencies Status](https://david-dm.org/fallenswordhelper/fallenswordhelper/status.svg)](https://david-dm.org/fallenswordhelper/fallenswordhelper)
 [![devDependencies Status](https://david-dm.org/fallenswordhelper/fallenswordhelper/dev-status.svg)](https://david-dm.org/fallenswordhelper/fallenswordhelper?type=dev)\
