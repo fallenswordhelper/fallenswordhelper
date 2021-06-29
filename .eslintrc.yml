@@ -8,6 +8,8 @@ overrides:
   - files:
     - '*.svelte'
     processor: 'svelte3/svelte3'
+    rules:
+      import/prefer-default-export: off
 extends:
   - 'airbnb-base'
 globals:
@@ -53,7 +55,6 @@ rules:
     - ignore:
       - '_CALFJS'
   import/order: off
-  import/prefer-default-export: off
   no-plusplus:
     - error
     - allowForLoopAfterthoughts: true
