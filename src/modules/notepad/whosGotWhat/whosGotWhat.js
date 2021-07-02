@@ -1,4 +1,4 @@
-import './whosGotWhat.postcss';
+import './whosGotWhat.css';
 import allthen from '../../common/allthen';
 import createButton from '../../common/cElement/createButton';
 import createDiv from '../../common/cElement/createDiv';

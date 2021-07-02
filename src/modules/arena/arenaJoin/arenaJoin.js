@@ -1,4 +1,4 @@
-import './arenaJoin.postcss';
+import './arenaJoin.css';
 import getElementById from '../../common/getElement';
 import injectArena from '../arena';
 import interceptSubmit from '../../common/interceptSubmit';

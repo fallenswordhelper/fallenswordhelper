@@ -1,4 +1,4 @@
-import './quickWear.postcss';
+import './quickWear.css';
 import createDiv from '../../common/cElement/createDiv';
 import createQuickWear from './createQuickWear';
 import daLoadInventory from '../../_dataAccess/daLoadInventory';

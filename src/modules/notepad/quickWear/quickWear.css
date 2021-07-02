@@ -1,0 +1,8 @@
+.qwPref {
+  float: right;
+  padding: .5em 1em;
+  text-align: center
+}
+.qwPref > input {
+  cursor: pointer;
+}
