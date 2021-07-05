@@ -1,3 +1,6 @@
 export default function dialogMsg(msg) {
-  $('#dialog_msg').html(msg).dialog('open');
+  const dm = $('#dialog_msg');
+  if (dm.dialog('instance')) {
+    dm.html(msg).dialog('open');
+  }
 }
