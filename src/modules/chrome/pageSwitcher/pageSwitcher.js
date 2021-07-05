@@ -65,10 +65,10 @@ export default {
   quests, // UFSG
   items, // UFSG
   creatures, // UFSG
-  masterrealms: { '-': { '-': ufsgAllowBack } }, // UFSG
+  masterrealms: creatures, // UFSG
   realms: { '-': { '-': ufsgAllowBack } }, // UFSG
   relics: { '-': { '-': ufsgAllowBack } }, // UFSG
-  shops: { '-': { '-': ufsgAllowBack } }, // UFSG
+  shops: creatures, // UFSG
   scavenging,
   temple: { '-': { '-': parseTemplePage } },
   composing,
