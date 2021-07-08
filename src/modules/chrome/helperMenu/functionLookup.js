@@ -1,5 +1,5 @@
 import {
-  combatLogs,
+  combatLog,
   injectAuctionSearch,
   injectBuffLog,
   injectFindBuffs,
@@ -15,7 +15,7 @@ import {
 
 export default {
   'Buff Log': injectBuffLog,
-  'Combat Log': combatLogs,
+  'Combat Log': combatLog,
   'Creature Log': injectMonsterLog,
   'Recipe Manager': injectRecipeManager,
   'Quick Links': injectQuickLinkManager,

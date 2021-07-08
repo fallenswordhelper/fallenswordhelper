@@ -8,7 +8,7 @@ import { pCC } from '../../support/layout';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { get, set } from '../../system/idb';
 
-let combatLog = [];
+let combatLogs = [];
 let textArea;
 
 function notepadCopyLog() {
@@ -17,9 +17,9 @@ function notepadCopyLog() {
 }
 
 function clearCombatLog() {
-  combatLog = [];
+  combatLogs = [];
   textArea.value = '[]';
-  set('fsh_combatLog', combatLog);
+  set('fsh_combatLog', combatLogs);
 }
 
 function notepadClearLog() { // jQuery
@@ -28,10 +28,10 @@ function notepadClearLog() { // jQuery
 }
 
 function gotCombatLog(content, data) {
-  if (data) { combatLog = data; }
+  if (data) { combatLogs = data; }
   setInnerHtml('<h1>Combat Logs</h1><br><div align="center">'
     + '<textarea class="fshCombatLog" readonly id="combatLog" '
-    + `name="logs">${JSON.stringify(combatLog)}</textarea>`
+    + `name="logs">${JSON.stringify(combatLogs)}</textarea>`
     + '<br><br><table width="100%"><tr><td colspan="2" align=center>'
     + '<input type="button" class="custombutton" value="Select All" id="copyLog">'
     + '</td><td colspan="2" align=center>'
@@ -42,7 +42,7 @@ function gotCombatLog(content, data) {
   onclick(getElementById('clearLog'), notepadClearLog);
 }
 
-export default async function combatLogs(injector) { // jQuery.min
+export default async function combatLog(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
   const data = await get('fsh_combatLog');
   gotCombatLog(injector || pCC, data);

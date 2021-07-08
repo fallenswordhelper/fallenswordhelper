@@ -3,7 +3,7 @@ import getValue from '../../system/getValue';
 import insertAfterParent from './insertAfterParent';
 import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
 import {
-  combatLogs,
+  combatLog,
   injectBuffLog,
   injectMonsterLog,
   injectQuickLinkManager,
@@ -46,7 +46,7 @@ function buffLogLink(linkConfig) {
 
 function combatLogLink(linkConfig) {
   if (linkConfig.combatLogLink && getValue('keepLogs')) {
-    anchorButton('1', 'Combat Logs', combatLogs,
+    anchorButton('1', 'Combat Logs', combatLog,
       'nav-character-notepad');
   }
 }

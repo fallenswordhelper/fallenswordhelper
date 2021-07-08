@@ -1,6 +1,6 @@
 import runDefault from '../../common/runDefault';
 import {
-  combatLogs,
+  combatLog,
   injectAuctionSearch,
   injectBuffLog,
   injectFindBuffs,
@@ -29,7 +29,7 @@ const whosGotWhat = () => {
 };
 
 const notepad = {
-  showlogs: { '-': combatLogs },
+  showlogs: { '-': combatLog },
   invmanagernew: { '-': injectInventoryManagerNew }, // TODO
   guildinvmgr: { '-': injectInventoryManagerNew }, // TODO
   recipemanager: { '-': injectRecipeManager },
