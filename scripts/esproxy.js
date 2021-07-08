@@ -1,8 +1,12 @@
+'use strict';
+
 const { port: calfPort } = require('./config.json');
 const { core } = require('./getVersion');
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
+
+const ok = 200;
 
 const keys = {
   key: fs.readFileSync('key.pem'),
@@ -16,7 +20,7 @@ function sendFsh(res) {
       .replaceAll('_VER', `${core}a`)
       .replace('_DLURL', `https://localhost:${calfPort}/dist/Releases/watch/fallenswordhelper.user.js`)
       .replace('_CALFJS', `https://localhost:${calfPort}/dist/resources/watch/${core}/calfSystem.js`);
-    res.writeHead(200, { 'Content-Type': 'text/javascript' });
+    res.writeHead(ok, { 'Content-Type': 'text/javascript' });
     res.end(rewrite, 'utf8');
   };
 }

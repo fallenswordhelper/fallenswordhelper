@@ -1,3 +1,5 @@
+'use strict';
+
 const glob = require('tiny-glob');
 const { readFileSync, writeFileSync } = require('fs');
 

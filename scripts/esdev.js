@@ -1,8 +1,9 @@
+'use strict';
+
 const { performance, PerformanceObserver } = require('perf_hooks');
 
 const perfObserver = new PerformanceObserver((items) => {
   items.getEntries().forEach((entry) => {
-    // eslint-disable-next-line no-console
     console.log(entry.name, entry.duration);
   });
 });

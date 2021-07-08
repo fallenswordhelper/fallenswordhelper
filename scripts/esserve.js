@@ -1,3 +1,5 @@
+'use strict';
+
 const { port: calfPort } = require('./config.json');
 const esbuild = require('esbuild');
 const process = require('process');

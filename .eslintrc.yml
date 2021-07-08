@@ -10,6 +10,11 @@ overrides:
     processor: 'svelte3/svelte3'
     rules:
       import/prefer-default-export: off
+  - files:
+    - "scripts/*.js"
+    rules:
+      strict: "off"
+      no-console: "off"
 extends:
   - 'airbnb-base'
 globals:
