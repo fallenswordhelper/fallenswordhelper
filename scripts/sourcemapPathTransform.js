@@ -9,6 +9,6 @@ function transform(file) {
 }
 
 (async function main() {
-  const files = await glob('dist/resources/out/**/*.map');
+  const files = await glob('dist/resources/prod/**/*.map');
   files.forEach((map) => { transform(map); });
 }());
