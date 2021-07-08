@@ -34,6 +34,13 @@ const outputLookup = [
   ['You gained', stash],
 ];
 
+function devHook() {
+  if (calf.userIsDev) { //  da/useItem No Info
+    // eslint-disable-next-line no-console
+    console.log('da/useItem', 'No Info');
+  }
+}
+
 function formatResults(html) {
   const info = infoBoxFrom(html);
   if (info) {
@@ -41,10 +48,7 @@ function formatResults(html) {
     if (thisResult) { return thisResult[1](info); }
   } else {
     sendEvent('da/useItem', 'No Info');
-    if (calf.userIsDev) { //  da/useItem No Info
-      // eslint-disable-next-line no-console
-      console.log('da/useItem', 'No Info');
-    }
+    devHook();
     return { s: false };
   }
   return { e: { message: info }, s: false };

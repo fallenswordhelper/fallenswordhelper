@@ -14,4 +14,4 @@ function getFileSize(file) {
   console.log(`${file}: ${gSizeInKilobytes}KB (gzip)\n`);
 }
 
-getFileSize(`dist/resources/out/${core}/calfSystem.min.js`);
+getFileSize(`dist/resources/prod/${core}/calfSystem.min.js`);
