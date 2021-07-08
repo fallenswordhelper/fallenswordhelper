@@ -1,12 +1,13 @@
 const { port: calfPort } = require('./config.json');
 const esbuild = require('esbuild');
+const process = require('process');
 const proxy = require('./esproxy');
 const sveltePlugin = require('esbuild-svelte');
 const { calfVer, core } = require('./getVersion');
 
 // Start esbuild's server on a random local port
 esbuild.serve({
-  servedir: '/',
+  servedir: process.cwd(),
 }, {
   bundle: true,
   chunkNames: `${calfVer}/[name]-[hash]`,
