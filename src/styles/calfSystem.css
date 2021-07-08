@@ -430,7 +430,7 @@
 
 #fshInv_filter input {width: 200px}
 
-.fshNumberInput {width: 3em;}
+.fshNumberInput {width: 4em;}
 
 .text-input-wrapper {
   border: 1px solid;
@@ -625,3 +625,8 @@ textarea {resize: none;}
   width: 21px;
 }
 
+/* Notepad */
+#notepad_notes {
+  height: 420px;
+  width: 600px;
+}

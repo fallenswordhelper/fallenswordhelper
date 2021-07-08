@@ -1,3 +1,4 @@
+import './worldPrefs.css';
 import bunchOfSimple from './bunchOfSimple';
 import calf from '../support/calf';
 import getValue from '../system/getValue';
@@ -85,11 +86,11 @@ function showSendGold() {
       + 'quickly send gold to a Friend.')
   }:</td><td><input name="sendGoldonWorld" type="checkbox" value="on"${
     isValueChecked('sendGoldonWorld')}>`
-    + `&nbsp;&nbsp;Send <input name="goldAmount" size="5" value="${
+    + `&nbsp;&nbsp;Send <input name="goldAmount" type="number" value="${
       getValue('goldAmount')}"> `
-    + `gold to <input name="goldRecipient" size="10" value="${
+    + `gold to <input name="goldRecipient" value="${
       getValue('goldRecipient')}">`
-    + ` Current total: <input name="currentGoldSentTotal" size="5" value="${
+    + ` Current total: <input name="currentGoldSentTotal" type="number" value="${
       getValue('currentGoldSentTotal')}"></td></tr>`;
 }
 
@@ -101,7 +102,7 @@ function theDoNotKillList() {
       + 'Creature name will show up in red color on world screen and will '
       + 'not be killed by keyboard entry (but can still be killed by '
       + 'mouseclick). Quick kill must be enabled for this function to work.')
-  }:</td><td colspan="3"><input name="doNotKillList" size="60" value="${
+  }:</td><td><input name="doNotKillList" class="fshSettingsText" value="${
     calf.doNotKillList}"></td></tr>`;
 }
 
@@ -109,9 +110,9 @@ function huntingBuffsList(modeLabel, modeName, buffsName, buffs) {
   return `<tr><td class="fshRight">${modeLabel} Hunting Buff List${
     helpLink(`${modeLabel} Hunting Buff List`,
       `${modeLabel} list of hunting buffs.`)
-  }:</td><td colspan="3"><input name="${modeName
-  }" title="Hunting mode name" size="7" value="${modeLabel
-  }"><input name="${buffsName}" size="49" value="${buffs
+  }:</td><td><input name="${modeName
+  }" title="Hunting mode name" value="${modeLabel
+  }"><input name="${buffsName}" value="${buffs
   }"></td></tr>`;
 }
 

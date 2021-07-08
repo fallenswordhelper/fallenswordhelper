@@ -1,12 +1,12 @@
 import runDefault from '../../common/runDefault';
 import {
+  combatLogs,
   injectAuctionSearch,
   injectBuffLog,
   injectFindBuffs,
   injectFindOther,
   injectFsBoxContent,
   injectMonsterLog,
-  injectNotepadShowLogs,
   injectOnlinePlayers,
   injectQuickLinkManager,
   injectRecipeManager,
@@ -20,9 +20,6 @@ const injectInventoryManagerNew = () => {
 const injectNewGuildLog = () => {
   runDefault(import('../../guild/newGuildLog/newGuildLog'));
 };
-const injectNotepad = () => {
-  runDefault(import('../../notepad/injectNotepad'));
-};
 const injectSaveSettings = () => { runDefault(import('../../settings/load')); };
 const reliclist = () => {
   runDefault(import('../../notepad/reliclist/reliclist'));
@@ -32,7 +29,7 @@ const whosGotWhat = () => {
 };
 
 const notepad = {
-  showlogs: { '-': injectNotepadShowLogs },
+  showlogs: { '-': combatLogs },
   invmanagernew: { '-': injectInventoryManagerNew }, // TODO
   guildinvmgr: { '-': injectInventoryManagerNew }, // TODO
   recipemanager: { '-': injectRecipeManager },
@@ -49,7 +46,6 @@ const notepad = {
   findother: { '-': injectFindOther },
   savesettings: { '-': injectSaveSettings }, // TODO
   reliclist: { '-': reliclist },
-  '-': { '-': injectNotepad },
 };
 
 // eslint-disable-next-line no-unused-labels, no-labels

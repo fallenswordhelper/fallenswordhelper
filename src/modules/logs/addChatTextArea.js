@@ -1,3 +1,4 @@
+import './addChatTextArea.css';
 import arrayFrom from '../common/arrayFrom';
 import clickThis from '../common/clickThis';
 import closestTable from '../common/closestTable';
@@ -39,11 +40,10 @@ function keypress(sendBtn, evt) {
 
 function makeTextArea() {
   const fshTxt = createTextArea({
-    cols: 72,
+    className: 'fshChatTextArea',
     maxLength: 512,
     name: 'msg',
     required: true,
-    rows: 2,
   });
   formAttr(fshTxt);
   return fshTxt;

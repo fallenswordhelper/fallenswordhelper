@@ -14,18 +14,18 @@ function quickSend() {
     + `value="on"${
       isValueChecked('showQuickSendLinks')}>`
     + '&nbsp;&nbsp;Send Items To '
-    + `<input name="itemRecipient" size="10" value="${
+    + `<input name="itemRecipient" value="${
       getValue('itemRecipient')}">`;
 }
 
 function makeSendClasses() {
-  return `<tr><td class="fshRight">Quick Select all of type in Send Screen${
+  return `<tr><td class="fshNoWrap fshRight">Quick Select all of type in Send Screen${
     helpLink('Quick Select all of type in Send Screen',
       'This allows you to customize what quick links you would like '
       + 'displayed in your send item screen.<br>Use the format '
       + '[&quot;name&quot;,&quot;itemid&quot;],[&quot;othername&quot;,'
       + '&quot;itemid2&quot;].<br>WARNING: NO REFUNDS ON ERROR')
-  }:</td><td><input name="sendClasses" size="60" value="${
+  }:</td><td><input name="sendClasses" class="fshSettingsText" value="${
     escapeHtml(getValue('sendClasses'))}">`;
 }
 

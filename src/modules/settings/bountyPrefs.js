@@ -9,10 +9,10 @@ function showActiveBounties() {
   }Show Active Bounties${
     helpLink('Show Active Bounties',
       'This will show your active bounties on the right hand side')
-  }:</td><td colspan="3"><input name="enableActiveBountyList" `
+  }:</td><td><input name="enableActiveBountyList" `
     + `type = "checkbox" value = "on"${
       isChecked(calf.enableActiveBountyList)}>&nbsp;`
-    + `<input name="bountyListRefreshTime" size="3" value="${
+    + `<input name="bountyListRefreshTime" class="fshSettingsNumber" type="number" value="${
       calf.bountyListRefreshTime}"> seconds refresh</td></tr>`;
 }
 
@@ -22,7 +22,7 @@ function showWantedBounties() {
     helpLink('Show Wanted Bounties',
       'This will show when someone you want is on the bounty board, '
       + 'the list is displayed on the right hand side')
-  }:</td><td colspan="3"><input name="enableWantedList" `
+  }:</td><td><input name="enableWantedList" `
     + `type="checkbox" value="on"${
       isChecked(calf.enableWantedList)
     }> Refresh time is same as Active Bounties`;
@@ -32,8 +32,8 @@ function wantedNames() {
   return `<tr><td align= "right">Wanted Names${
     helpLink('Wanted Names',
       'The names of the people you want to see on the bounty board '
-      + 'separated by commas (or * for all)')}:</td><td colspan="3">`
-    + `<input name="wantedNames" size="60" value="${calf.wantedNames
+      + 'separated by commas (or * for all)')}:</td><td>`
+    + `<input name="wantedNames" class="fshSettingsText" value="${calf.wantedNames
     }"></td></tr>`;
 }
 

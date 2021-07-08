@@ -35,6 +35,6 @@ export function huntingBuffsHtml() {
 }
 
 export function huntingBuffs() {
-  return `<tr><td class="fshRight">${huntBuff()}</td><td colspan="3">${
+  return `<tr><td class="fshRight">${huntBuff()}</td><td>${
     huntBuffCheck()} ${huntMode()}</td></tr>`;
 }

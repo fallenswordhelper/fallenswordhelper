@@ -1,4 +1,5 @@
 import { fshBuffLog } from '../../support/constants';
+import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElement';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import makePageTemplate from '../lists/makePageTemplate';
@@ -27,4 +28,5 @@ export default function injectBuffLog(injector) { // jQuery.min
   }), content);
   onclick(getElementById('clearBuffs'), clearBuffLog);
   get(fshBuffLog).then(displayBuffLog);
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }

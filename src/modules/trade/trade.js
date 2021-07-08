@@ -1,3 +1,4 @@
+import './trade.css';
 import add from '../support/task';
 import calf from '../support/calf';
 import createTr from '../common/cElement/createTr';
@@ -104,7 +105,7 @@ function injectTradeOld(itemList) {
       + '<span id="itemid-2" class="fshCheckAll fshLink fshNoWrap">'
       + `All Resources</span>${getItemList().map(makeSpan).join('')}`
       + ' &ensp;How&nbsp;many:<input id="fshSendHowMany" type="text" '
-      + 'class="custominput" value="all" size=3></td>',
+      + 'class="custominput fshHowMany" value="all"></td>',
   });
   onclick(multiple, toggleAllPlants);
   insertElementBefore(multiple, itemList.parentNode.parentNode);

@@ -1,6 +1,7 @@
 import './lists.css';
 import defaults from '../../support/dataObj.json';
 import eventHandler5 from '../../common/eventHandler5';
+import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElement';
 import getValueJSON from '../../system/getValueJSON';
 import isArray from '../../common/isArray';
@@ -85,7 +86,7 @@ function generateManageTable() { // Legacy
   result += '<td><span class="HelperTextLink" id="fshAdd">'
     + '[Add]</span></td></tr></table>'
     + '<table width="100%"><tr><td class="fshCenter">'
-    + `<textarea cols=70 rows=20 id="fshEd">${
+    + `<textarea id="fshEd">${
       JSON.stringify(param.currentItems)}</textarea></td></tr>`
     + '<tr><td class="fshCenter"><input id="fshSave" '
     + 'type="button" value="Save" class="custombutton">'
@@ -165,6 +166,7 @@ export function injectAuctionSearch(injector) { // Legacy
   param = auctionSearchParams();
   generateManageTable();
   setupEventHandler(content);
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }
 
 export function injectQuickLinkManager(injector) { // Legacy
@@ -189,4 +191,5 @@ export function injectQuickLinkManager(injector) { // Legacy
   };
   generateManageTable();
   setupEventHandler(content);
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }

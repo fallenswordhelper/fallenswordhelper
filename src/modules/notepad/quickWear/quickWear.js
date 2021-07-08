@@ -5,6 +5,7 @@ import daLoadInventory from '../../_dataAccess/daLoadInventory';
 import equipItem from '../../ajax/equipItem';
 import eventHandler5 from '../../common/eventHandler5';
 import fshTabSet from './fshTabSet';
+import getArrayByClassName from '../../common/getArrayByClassName';
 import getValue from '../../system/getValue';
 import hasClass from '../../common/hasClass';
 import hasClasses from '../../common/hasClasses';
@@ -133,6 +134,7 @@ function hasJquery(injector) { // jQuery.min
   insertHtmlBeforeEnd(content, 'Getting item list from backpack...');
   daLoadInventory().then(partial(showQuickWear, content));
   disableQuickWearPrompts = getValue(defDisableQuickWearPrompts);
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }
 
 export default function insertQuickWear(injector) {

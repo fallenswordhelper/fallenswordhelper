@@ -13,7 +13,7 @@ export const viewArchive = () => { runDefault(import('../../news/viewArchive'));
 export const injectBuffLog = (i) => { import('../../notepad/buffLog/injectBuffLog').then((m) => m.default(i)); };
 export const injectFsBoxContent = (i) => { import('../../notepad/injectFsBoxContent').then((m) => m.default(i)); };
 export const injectMonsterLog = (i) => { import('../../notepad/monstorLog/monstorLog').then((m) => m.default(i)); };
-export const injectNotepadShowLogs = (i) => { import('../../notepad/combatLog').then((m) => m.default(i)); };
+export const combatLogs = (i) => { import('../../notepad/combatLog/combatLog').then((m) => m.default(i)); };
 export const injectOnlinePlayers = (i) => { import('../../notepad/onlinePlayers/injectOnlinePlayers').then((m) => m.default(i)); };
 export const injectRecipeManager = (i) => { import('../../notepad/recipeMgr/recipeMgr').then((m) => m.default(i)); };
 export const insertQuickExtract = (i) => { import('../../notepad/quickExtract/quickExtract').then((m) => m.default(i)); };

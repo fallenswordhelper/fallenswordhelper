@@ -3,6 +3,7 @@ import buffList from '../../support/buffObj.json';
 import calf from '../../support/calf';
 import createDocument from '../../system/createDocument';
 import csvSplit from '../../common/csvSplit';
+import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElement';
 import getText from '../../common/getText';
 import getValue from '../../system/getValue';
@@ -267,6 +268,7 @@ export function injectFindBuffs(injector) { // Legacy
   getBufferProgress();
   setupFindEvent(findBuffsStart);
   setupClearEvent();
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }
 
 export function injectFindOther(injector) { // Native - Bad
@@ -276,4 +278,5 @@ export function injectFindOther(injector) { // Native - Bad
   getBufferProgress();
   setupFindEvent(findOtherStart);
   setupClearEvent();
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }

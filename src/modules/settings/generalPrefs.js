@@ -59,7 +59,7 @@ function guildInfoWidgets() {
 }
 
 function onlineAlliesEnemies() {
-  return `<tr><td class="fshRight">${networkIcon}Show Online Allies/Enemies${
+  return `<tr><td class="fshNoWrap fshRight">${networkIcon}Show Online Allies/Enemies${
     helpLink('Show Online Allies/Enemies',
       'This will show the allies/enemies online list on the right.')}:</td>`
     + '<td><label>Allies&nbsp;'
@@ -68,7 +68,7 @@ function onlineAlliesEnemies() {
     + '<label>Enemies&nbsp;'
     + `<input name="enableEnemyOnlineList" type="checkbox" value="on"${
       isChecked(calf.enableEnemyOnlineList)}></label>&nbsp;&nbsp;`
-    + `<input name="allyEnemyOnlineRefreshTime" size="3" value="${
+    + `<input name="allyEnemyOnlineRefreshTime" class="fshSettingsNumber" type="number" value="${
       getValue('allyEnemyOnlineRefreshTime')}"> seconds refresh</td></tr>`;
 }
 
@@ -77,9 +77,9 @@ function quickLinksLocation() {
     helpLink('Quick Links Screen Location',
       'Determines where the quick links dialog shows on the screen. '
       + 'Default is top 22, left 0.')}:</td>`
-    + `<td>Top: <input name="quickLinksTopPx" size="3" value="${
+    + `<td>Top: <input name="quickLinksTopPx" class="fshSettingsNumber" type="number" value="${
       getValue('quickLinksTopPx')}"> `
-    + `Left: <input name="quickLinksLeftPx" size="3" value="${
+    + `Left: <input name="quickLinksLeftPx" class="fshSettingsNumber" type="number" value="${
       getValue('quickLinksLeftPx')}"></td></tr>`;
 }
 

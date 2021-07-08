@@ -1,3 +1,4 @@
+import getArrayByClassName from '../common/getArrayByClassName';
 import getElementById from '../common/getElement';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import makePageTemplate from './lists/makePageTemplate';
@@ -27,4 +28,5 @@ export default function injectFsBoxContent(injector) { // jQuery.min
   }), content);
   get('fsh_fsboxcontent').then(inject);
   onclick(getElementById('fsboxclear'), clearFsBox, true);
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }

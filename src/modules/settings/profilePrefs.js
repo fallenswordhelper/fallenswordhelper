@@ -16,7 +16,7 @@ function buffGreet() {
       + 'buy buffs. You can use {playername} to insert the target players '
       + 'name. You can also use {buffs} to insert the list of buffs. You '
       + 'can use {cost} to insert the total cost of the buffs.')
-  }:</td><td colspan="3"><input name="buyBuffsGreeting" size="60" `
+  }:</td><td><input name="buyBuffsGreeting" class="fshSettingsText" `
     + `value="${getValue('buyBuffsGreeting')}"></td></tr>`;
 }
 

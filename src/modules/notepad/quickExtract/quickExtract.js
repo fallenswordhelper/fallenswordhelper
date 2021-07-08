@@ -3,6 +3,7 @@ import { composingFragmentType } from '../../support/constants';
 import createTable from '../../common/cElement/createTable';
 import daUseItem from '../../_dataAccess/daUseItem';
 import eventHandler5 from '../../common/eventHandler5';
+import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElement';
 import getInventory from '../../ajax/getInventory';
 import insertElement from '../../common/insertElement';
@@ -168,4 +169,5 @@ export default function insertQuickExtract(injector) { // jQuery.min
   selectMain = true;
   onclick(content, eventHandler5(extractEvents()));
   getInventory().then(prepInv);
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }

@@ -1,3 +1,4 @@
+import './configData.css';
 import bountyPrefs from './bountyPrefs';
 import calf from '../support/calf';
 import equipPrefs from './equipPrefs';
@@ -84,7 +85,7 @@ function corePrefs() {
   ].map(functionPasses).join('');
 }
 
-export default function setupConfigData() {
+export default function ConfigData() {
   calf.configData = '<form><table id="fshSettingsTable">'
     + '<thead><th colspan="2"><b>Fallen Sword Helper configuration '
       + `Settings</b></th></thead>${

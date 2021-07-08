@@ -1,6 +1,7 @@
 import doSortParams from '../../common/doSortParams';
 import generateRecipeTable from './generateRecipeTable';
 import { get } from '../../system/idb';
+import getArrayByClassName from '../../common/getArrayByClassName';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
 import { pCC } from '../../support/layout';
@@ -33,4 +34,5 @@ export default function injectRecipeManager(injector) { // jQuery.min
   const content = injector || pCC;
   get('fsh_recipeBook').then(partial(gotRecipeBook, content));
   onclick(content, rmEvtHdl);
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }

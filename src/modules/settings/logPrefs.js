@@ -8,7 +8,7 @@ function newGuildLogHistory() {
     helpLink('New Guild Log History (pages)',
       'This is the number of pages that the new guild log '
       + 'screen will go back in history.')
-  }:</td><td><input name="newGuildLogHistoryPages" size="3" value="${
+  }:</td><td><input name="newGuildLogHistoryPages" class="fshSettingsNumber" type="number" value="${
     getValue('newGuildLogHistoryPages')}"></td></td></tr>`;
 }
 
@@ -18,7 +18,7 @@ function newLogMessageSound() {
       'The .wav or .ogg file to play when you have unread log messages. '
       + 'This must be a .wav or .ogg file. This option can be turned on/off '
       + 'on the world page. Only works in Firefox 3.5+')
-  }:</td><td colspan="3"><input name="defaultMessageSound" size="60" `
+  }:</td><td><input name="defaultMessageSound" class="fshSettingsText" `
     + `value="${getValue('defaultMessageSound')
     }"></td></tr>`;
 }

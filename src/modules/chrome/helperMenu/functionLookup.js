@@ -1,11 +1,11 @@
 import {
+  combatLogs,
   injectAuctionSearch,
   injectBuffLog,
   injectFindBuffs,
   injectFindOther,
   injectFsBoxContent,
   injectMonsterLog,
-  injectNotepadShowLogs,
   injectOnlinePlayers,
   injectQuickLinkManager,
   injectRecipeManager,
@@ -15,7 +15,7 @@ import {
 
 export default {
   'Buff Log': injectBuffLog,
-  'Combat Log': injectNotepadShowLogs,
+  'Combat Log': combatLogs,
   'Creature Log': injectMonsterLog,
   'Recipe Manager': injectRecipeManager,
   'Quick Links': injectQuickLinkManager,

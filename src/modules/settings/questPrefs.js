@@ -11,10 +11,10 @@ export default function questPrefs() {
       helpLink('Hide Specific Quests',
         'If enabled, this hides quests whose name matches the list '
         + '(separated by commas).')
-    }:</td><td colspan="3"><input name="hideQuests" type="checkbox" `
+    }:</td><td><input name="hideQuests" type="checkbox" `
       + `value="on"${
         isValueChecked('hideQuests')}>`
-      + `&nbsp;<input name="hideQuestNames" size="60" value="${
+      + `&nbsp;<input name="hideQuestNames" class="fshSettingsText" value="${
         getValue('hideQuestNames')}"></td></tr>${
 
         bunchOfSimple([

@@ -3,17 +3,17 @@ import getValue from '../../system/getValue';
 import insertAfterParent from './insertAfterParent';
 import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
 import {
+  combatLogs,
+  injectBuffLog,
+  injectMonsterLog,
+  injectQuickLinkManager,
+  injectRecipeManager,
+} from '../pageSwitcher/loader';
+import {
   defSubcmd,
   notepadBlankUrl,
   profileUrl,
 } from '../../support/constants';
-import {
-  injectBuffLog,
-  injectMonsterLog,
-  injectNotepadShowLogs,
-  injectQuickLinkManager,
-  injectRecipeManager,
-} from '../pageSwitcher/loader';
 
 function recipeManagerLink(linkConfig) {
   if (linkConfig.recipeManagerLink) {
@@ -46,7 +46,7 @@ function buffLogLink(linkConfig) {
 
 function combatLogLink(linkConfig) {
   if (linkConfig.combatLogLink && getValue('keepLogs')) {
-    anchorButton('1', 'Combat Logs', injectNotepadShowLogs,
+    anchorButton('1', 'Combat Logs', combatLogs,
       'nav-character-notepad');
   }
 }
