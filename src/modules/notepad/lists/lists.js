@@ -86,7 +86,7 @@ function generateManageTable() { // Legacy
   result += '<td><span class="HelperTextLink" id="fshAdd">'
     + '[Add]</span></td></tr></table>'
     + '<table width="100%"><tr><td class="fshCenter">'
-    + `<textarea id="fshEd">${
+    + `<textarea id="fshEd" class="fshEd">${
       JSON.stringify(param.currentItems)}</textarea></td></tr>`
     + '<tr><td class="fshCenter"><input id="fshSave" '
     + 'type="button" value="Save" class="custombutton">'
