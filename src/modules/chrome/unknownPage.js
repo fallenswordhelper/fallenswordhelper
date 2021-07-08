@@ -1,3 +1,4 @@
+import calf from '../support/calf';
 import getElementById from '../common/getElement';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import querySelector from '../common/querySelector';
@@ -36,23 +37,16 @@ const unknown = [
       inventing();
     },
   ],
+  [
+    () => calf.userIsDev, // unknownPage
+    // eslint-disable-next-line no-console
+    () => { console.log('Fell through!'); },
+  ],
 ];
-
-// eslint-disable-next-line no-unused-labels, no-labels
-devLbl: { // Fell through!
-  unknown.push(
-    [
-      () => true,
-      // eslint-disable-next-line no-console
-      () => { console.log('Fell through!'); },
-    ],
-  );
-}
 
 export default function unknownPage() { // Legacy
   if (jQueryNotPresent()) { return; }
-  // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { // unknownPage
+  if (calf.userIsDev) { // unknownPage
     // eslint-disable-next-line no-console
     console.log('unknownPage');
   }

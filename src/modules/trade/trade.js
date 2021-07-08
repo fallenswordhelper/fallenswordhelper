@@ -116,8 +116,7 @@ export default function injectTrade() {
   if (!itemList) { return; }
   add(3, doFolders);
   add(3, injectTradeOld, [itemList]);
-  // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { //  oneByOne
+  if (calf.userIsDev) { //  oneByOne
     add(3, oneByOne);
   }
 }

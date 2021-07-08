@@ -1,2 +1,0 @@
-function r(r){return r.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")}export{r as a}
-//# sourceMappingURL=addCommas-b66fde4c.js.map

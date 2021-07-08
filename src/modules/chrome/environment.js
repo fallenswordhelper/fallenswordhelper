@@ -87,8 +87,7 @@ function devHooks() {
 }
 
 function asyncDispatcher() {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { //  asyncDispatcher messages
+  if (calf.userIsDev) { //  asyncDispatcher messages
     devHooks();
   }
   if (isFunction(coreFunction)) {
@@ -115,7 +114,7 @@ async function runCore(cssPrm) {
 }
 
 function badEnv() {
-  return !isFunction(Object.fromEntries) || !navigator.cookieEnabled;
+  return !isFunction(String.prototype.replaceAll) || !navigator.cookieEnabled;
 }
 
 function setVer(fshVer, gmInfo) {
@@ -125,14 +124,15 @@ function setVer(fshVer, gmInfo) {
   } else {
     calf.fshVer = `${fshVer}_native`;
   }
-  calf.calfVer = '_CALFVER';
+  calf.calfVer = defineCalfVer; // eslint-disable-line no-undef
 }
 
 // main event dispatcher
 export default function dispatch(fshVer, gmInfo) {
   start('JS Perf', 'FSH.dispatch');
   if (badEnv()) { return; }
-  const cssPrm = loadCss('_CSSPATH/calfSystem.css');
+  calf.userIsDev = defineUserIsDev; // eslint-disable-line no-undef
+  const cssPrm = loadCss(defineCalfPath); // eslint-disable-line no-undef
   globalErrorHandler();
   setVer(fshVer, gmInfo);
   setup();

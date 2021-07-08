@@ -1,3 +1,4 @@
+import calf from '../../support/calf';
 import runDefault from '../../common/runDefault';
 import {
   combatLog,
@@ -25,6 +26,7 @@ const reliclist = () => {
   runDefault(import('../../notepad/reliclist/reliclist'));
 };
 const whosGotWhat = () => {
+  if (!calf.userIsDev) { return; }
   runDefault(import('../../notepad/whosGotWhat/whosGotWhat'));
 };
 
@@ -46,11 +48,7 @@ const notepad = {
   findother: { '-': injectFindOther },
   savesettings: { '-': injectSaveSettings }, // TODO
   reliclist: { '-': reliclist },
+  whosgotwhat: { '-': whosGotWhat },
 };
-
-// eslint-disable-next-line no-unused-labels, no-labels
-devLbl: { //  whosGotWhat
-  notepad.whosgotwhat = { '-': whosGotWhat };
-}
 
 export default notepad;

@@ -1,5 +1,6 @@
 import './newMap.css';
 import { buffInfo } from './buffInfo/buffInfo';
+import calf from '../../support/calf';
 import champAttacks from './champAttacks';
 import combatLogger from './combatLogger';
 import createStyle from '../../common/cElement/createStyle';
@@ -125,8 +126,7 @@ const usualRoutines = [
 
 export default function subscribes() {
   executeAll(usualRoutines);
-  // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { //  hide titan combat results, global top 100
+  if (calf.userIsDev) { //  hide titan combat results, global top 100
     hideTitanCombatResults();
     globalTop();
   }

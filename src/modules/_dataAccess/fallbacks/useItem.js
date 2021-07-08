@@ -1,3 +1,4 @@
+import calf from '../../support/calf';
 import { composingFragmentType } from '../../support/constants';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import infoBoxFrom from '../../common/InfoBoxFrom';
@@ -20,8 +21,7 @@ function stash(info) {
     return { r: { frags }, s: true };
   }
   sendEvent('da/useItem', 'Bad Msg', info);
-  // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { //  da/useItem Bad Msg
+  if (calf.userIsDev) { //  da/useItem Bad Msg
     // eslint-disable-next-line no-console
     console.log('da/useItem', 'Bad Msg', info);
   }
@@ -41,8 +41,7 @@ function formatResults(html) {
     if (thisResult) { return thisResult[1](info); }
   } else {
     sendEvent('da/useItem', 'No Info');
-    // eslint-disable-next-line no-unused-labels, no-labels
-    devLbl: { //  da/useItem No Info
+    if (calf.userIsDev) { //  da/useItem No Info
       // eslint-disable-next-line no-console
       console.log('da/useItem', 'No Info');
     }

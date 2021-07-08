@@ -1,3 +1,4 @@
+import calf from '../support/calf';
 import intValue from '../system/intValue';
 import { opts } from './setOpts';
 import { lvlTest, playerLvlTest } from '../common/lvlTests';
@@ -24,8 +25,7 @@ function specFilter(_settings, _searchData, _index, rowData) {
 
 export default function doLvlFilter() {
   $.fn.dataTable.ext.search.push(lvlFilter);
-  // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { //  specFilter
+  if (calf.userIsDev) { //  specFilter
     $.fn.dataTable.ext.search.push(specFilter);
   }
 }

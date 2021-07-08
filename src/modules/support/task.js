@@ -1,3 +1,4 @@
+import calf from './calf';
 import fallback from '../system/fallback';
 import isArray from '../common/isArray';
 import isFunction from '../common/isFunction';
@@ -65,8 +66,7 @@ function devLog(args) {
 }
 
 export default function add(priority, fn, args, scope) {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { //  Not sending args as Array
+  if (calf.userIsDev) { //  Not sending args as Array
     devLog(args);
   }
   if (isFunction(fn)) {

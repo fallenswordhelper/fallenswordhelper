@@ -4,6 +4,7 @@ https://github.com/addyosmani/pubsubz
 */
 
 import add from './task';
+import calf from './calf';
 import partial from '../common/partial';
 
 const topics = {};
@@ -12,8 +13,7 @@ let subUid = -1;
 function execute(args, el) { add(3, el.func, [args]); }
 
 export function publish(topic, args) {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { //  pubsubz publish
+  if (calf.userIsDev) { //  pubsubz publish
     // eslint-disable-next-line no-console
     console.log('publish', topic);
   }

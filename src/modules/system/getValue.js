@@ -1,4 +1,5 @@
 import { GMSTORAGE_PATH } from '../support/constants';
+import calf from '../support/calf';
 import defaults from '../support/dataObj.json';
 import isUndefined from '../common/isUndefined';
 
@@ -21,12 +22,9 @@ function fshGetValue(name, defValue) {
 }
 
 export default function getValue(name) {
-  // eslint-disable-next-line no-unused-labels, no-labels
-  devLbl: { //  No default setting available
-    if (isUndefined(defaults[name])) {
-      // eslint-disable-next-line no-console
-      console.log('No default setting available', name, defaults[name]);
-    }
+  if (calf.userIsDev && isUndefined(defaults[name])) { //  No default setting available
+    // eslint-disable-next-line no-console
+    console.log('No default setting available', name, defaults[name]);
   }
   return fshGetValue(name, defaults[name]);
 }
