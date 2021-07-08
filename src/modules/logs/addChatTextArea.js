@@ -13,7 +13,13 @@ import partial from '../common/partial';
 
 function removeCrlf(fshTxt) {
   // eslint-disable-next-line no-param-reassign
-  fshTxt.value = fshTxt.value.replace(/\r\n|\n|\r/g, ' ');
+  fshTxt.value = fshTxt.value
+    .replace(/\r\n|\n|\r/g, ' ')
+    .replace(/'/g, '’')
+    // https://stackoverflow.com/a/27449493/1274806
+    .replace(/(^|\s)(")/g, '$1“') // replace quotes that start a line or follow spaces
+    .replace(/"/g, '”') // replace quotes that start a line or follow spaces
+    .replace('<', '＜'); // open angle bracket - sohail94
 }
 
 const formAttr = (el) => { el.setAttribute('form', 'dochat'); };
