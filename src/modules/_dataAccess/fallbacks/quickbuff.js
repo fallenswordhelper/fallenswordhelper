@@ -2,49 +2,69 @@ import buffReportParser from '../../notepad/buffLog/buffReportParser';
 import createDocument from '../../system/createDocument';
 import getBuffId from '../../common/getBuffId';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import uniq from '../../common/uniq';
 
-const playerName = (result) => result[3] || result[6] || result[7];
-const successObject = (result) => (
-  { id: getBuffId(result[1]), level: Number(result[2]) }
-);
+const successObject = ({ successBuff, successLevel }) => ({
+  id: getBuffId(successBuff),
+  level: Number(successLevel),
+});
 
-function failObject(result) {
-  if (result[4]) {
-    return { id: getBuffId(result[4]), reason: result[5] };
-  }
-  return { id: getBuffId(result[9]), reason: result[8] };
-}
+const castBuffs = (parsedBuffs, o) => parsedBuffs
+  .filter(({ name, successBuff }) => name === o.name && successBuff)
+  .map(successObject);
 
-function byPlayer(acc, curr) {
-  const thisPlayer = playerName(curr);
-  let thisObj = acc.find((o) => o.player.name === thisPlayer);
-  if (!thisObj) {
-    thisObj = { player: { name: thisPlayer }, casts: [], failed: [] };
-    acc.push(thisObj);
-  }
-  if (curr[1]) {
-    thisObj.casts.push(successObject(curr));
-  } else {
-    thisObj.failed.push(failObject(curr));
-  }
-  return acc;
+const failObject = ({ failBuff, failReason }) => ({
+  id: getBuffId(failBuff),
+  reason: failReason,
+});
+
+const blockedObject = ({ blockBuff, blockReason }) => ({
+  id: getBuffId(blockBuff),
+  reason: blockReason,
+});
+
+const blockedBuffs = (parsedBuffs, o) => parsedBuffs
+  .filter(({ name, blockBuff }) => name === o.name && blockBuff)
+  .map(blockedObject);
+
+const failedBuffs = (parsedBuffs, o) => parsedBuffs
+  .filter(({ name, failBuff }) => name === o.name && failBuff)
+  .map(failObject)
+  .concat(blockedBuffs(parsedBuffs, o));
+
+const buffsByPlayer = (parsedBuffs) => uniq(parsedBuffs, 'name').map((o) => ({
+  player: { name: o.name },
+  cast: castBuffs(parsedBuffs, o),
+  failed: failedBuffs(parsedBuffs, o),
+}));
+
+function getKeys(buffResult) {
+  const [,
+    successBuff, successLevel, successName,
+    failBuff, failReason, failName,
+    blockName, blockReason, blockBuff,
+  ] = buffResult;
+  return {
+    name: successName || failName || blockName,
+    successBuff,
+    successLevel,
+    failBuff,
+    failReason,
+    blockReason,
+    blockBuff,
+  };
 }
 
 function buffFormatter(buffsParsed) {
-  const buffsByPlayer = buffsParsed.reduce(byPlayer, []); // FIXME
-  return { r: buffsByPlayer, s: true };
+  return { r: buffsByPlayer(buffsParsed.map(getKeys)), s: true };
 }
 
-function formatResponse(html) {
-  const buffsParsed = buffReportParser(createDocument(html));
-  return buffFormatter(buffsParsed);
-}
-
-export default function quickbuff(userAry, buffAry) {
-  return indexAjaxData({
+export default async function quickbuff(userAry, buffAry) {
+  const html = await indexAjaxData({
     cmd: 'quickbuff',
     subcmd: 'activate',
     targetPlayers: userAry.join(),
     skills: buffAry,
-  }).then(formatResponse);
+  });
+  return buffFormatter(buffReportParser(createDocument(html)));
 }
