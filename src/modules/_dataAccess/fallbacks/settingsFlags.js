@@ -1,6 +1,5 @@
 import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
-import isUndefined from '../../common/isUndefined';
 
 const uiFlags = [
   'ui_preference_11',
@@ -12,27 +11,8 @@ const uiFlags = [
   'ui_preference_23',
 ];
 
-function hasError(response) {
-  if (isUndefined(response)) {
-    return {
-      s: false,
-      r: { e: 'Could not connect to FS servers' },
-    };
-  }
-  return false;
-}
-
-async function updateSettings(prm, f) {
-  const last = await prm;
-  if (!isUndefined(last) && last !== false) { return last; }
-  const response = await indexAjaxData(f);
-  return hasError(response);
-}
-
 async function getSettings() {
   const settingsHTML = await indexAjaxData({ cmd: 'settings' });
-  const check = hasError(settingsHTML);
-  if (check) { return check; }
   return settingsHTML;
 }
 
@@ -50,16 +30,11 @@ function updateUI(form, flags) {
 
 export default async function settingsFlags(flags) {
   const settingsHTML = await getSettings();
-  const check = hasError(settingsHTML);
-  if (check) { return check; }
   const settingsPage = createDocument(settingsHTML);
 
   const ladder = updateLadder(settingsPage.forms[0], flags[0]);
   const ui = updateUI(settingsPage.forms[2], flags);
 
-  const result = await [ladder, ui].reduce(updateSettings, Promise.resolve());
-  if (result === false) {
-    return { s: true };
-  }
-  return result;
+  await Promise.all([ladder, ui].map((f) => indexAjaxData(f)));
+  return { s: true };
 }
