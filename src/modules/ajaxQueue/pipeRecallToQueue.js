@@ -7,7 +7,7 @@ import recallItem from '../ajax/recallItem';
 import useItem from '../ajax/useItem';
 
 function gotBackpack(action, data, bpData) {
-  // TODO assuming backpack is successful...
+  // assuming backpack is successful...
   const lastBackpackItem = bpData.items[bpData.items.length - 1].a;
   if (action === 'wear') {
     return doAction(equipItem, lastBackpackItem, data);

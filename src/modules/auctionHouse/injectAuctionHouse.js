@@ -63,5 +63,4 @@ export default function injectAuctionHouse() {
   makeCancelAll();
   autoFill();
   doStatTotal();
-  // clickThis(getElementById('sort0'));
 }

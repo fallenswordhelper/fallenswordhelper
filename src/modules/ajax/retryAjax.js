@@ -43,7 +43,6 @@ function ignore(ajaxErr) {
 function handleFailure(resolve, ajaxErr) {
   if (!ignore(ajaxErr)) {
     sendException(ajaxErr.toString(), false);
-    // reject(ajaxErr);
     resolve(undefined);
   }
 }
