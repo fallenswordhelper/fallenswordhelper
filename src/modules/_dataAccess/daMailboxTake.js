@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import mailboxTake from './fallbacks/mailboxTake';
 import takeitems from '../app/tempinv/take';
 

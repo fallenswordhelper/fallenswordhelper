@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import components from './fallbacks/components';
 import loadComponents from '../app/profile/loadcomponents';
 

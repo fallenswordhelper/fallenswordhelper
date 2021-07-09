@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import gsTake from './fallbacks/gsTake';
 import takeitem from '../app/guild/inventory/takeitem';
 

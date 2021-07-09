@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import moveItems from './fallbacks/moveItems';
 import sendtofolder from '../app/profile/sendtofolder';
 

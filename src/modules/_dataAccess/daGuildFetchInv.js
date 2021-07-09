@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import appFetchinv from '../app/guild/fetchinv';
 import guildFetchInv from './fallbacks/guildFetchInv';
 

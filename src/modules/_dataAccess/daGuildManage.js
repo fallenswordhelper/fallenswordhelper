@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import appGuildManage from '../app/guild/manage';
 import guildManage from './fallbacks/guildManage';
 

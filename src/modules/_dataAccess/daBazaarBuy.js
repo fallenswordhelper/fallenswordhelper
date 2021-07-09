@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import bazaarBuy from './fallbacks/bazaarBuy';
 import buyitem from '../app/potionbazaar/buyitem';
 

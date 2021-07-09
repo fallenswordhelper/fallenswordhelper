@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import appViewCombatSet from '../app/profile/viewcombatset';
 import viewCombatSets from './fallbacks/viewCombatSets';
 

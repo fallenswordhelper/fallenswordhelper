@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import destroyComponent from '../app/profile/destroycomponent';
 import dropComponent from './fallbacks/dropComponent';
 

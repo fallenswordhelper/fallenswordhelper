@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import fetchinv from './fallbacks/fetchinv';
 import loadInventory from '../app/profile/loadInventory';
 

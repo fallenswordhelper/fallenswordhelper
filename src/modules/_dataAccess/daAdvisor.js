@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import advisorView from '../app/guild/advisorView';
 import viewAdvisor from './fallbacks/viewAdvisor';
 

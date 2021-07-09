@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import appViewCombat from '../app/combat/view';
 import viewCombat from './fallbacks/viewCombat';
 

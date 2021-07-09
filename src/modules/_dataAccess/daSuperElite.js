@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import appSe from '../app/superelite';
 import superelite from './fallbacks/superelite';
 

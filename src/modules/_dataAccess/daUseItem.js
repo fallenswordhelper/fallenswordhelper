@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import useItem from './fallbacks/useItem';
 import useitem from '../app/profile/useitem';
 

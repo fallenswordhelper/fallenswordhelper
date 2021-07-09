@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import ranks from '../app/guild/ranks/ranks';
 import ranksView from './fallbacks/ranksView';
 

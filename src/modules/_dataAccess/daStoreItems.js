@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import dostoreitems from '../app/guild/inventory/dostoreitems';
 import storeitems from './fallbacks/storeitems';
 

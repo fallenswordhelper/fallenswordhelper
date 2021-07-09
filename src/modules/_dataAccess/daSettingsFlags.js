@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import flags from '../app/settings/flags';
 import settingsFlags from './fallbacks/settingsFlags';
 

@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import moveRank from './fallbacks/moveRank';
 import rankPosition from '../app/guild/ranks/position';
 

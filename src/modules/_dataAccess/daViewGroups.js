@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import groupsView from '../app/guild/groups/view';
 import viewGroups from './fallbacks/viewGroups';
 

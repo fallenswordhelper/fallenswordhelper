@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import guildInvRecall from './fallbacks/guildInvRecall';
 import recall from '../app/guild/inventory/recall';
 

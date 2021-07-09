@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import buffMarketBuy from './fallbacks/buffMarketBuy';
 import buy from '../app/buffmarket/buy';
 

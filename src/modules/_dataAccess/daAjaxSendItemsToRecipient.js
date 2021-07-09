@@ -1,4 +1,4 @@
-import $dataAccess from './_dataAccess';
+import $dataAccess from './$dataAccess';
 import appSendItemsToRecipient from '../app/trade/sendItemsToRecipient';
 import sendItemsToRecipient from './fallbacks/sendItemsToRecipient';
 
