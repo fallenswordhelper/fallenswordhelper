@@ -1,6 +1,6 @@
 import runDefault from '../../common/runDefault';
 
-const arena = () => { runDefault(import('../../arena/arena')); };
+const injectArena = () => { runDefault(import('../../arena/arena')); };
 const arenaDoJoin = () => { runDefault(import('../../arena/arenaDoJoin')); };
 const arenaJoin = () => {
   runDefault(import('../../arena/arenaJoin/arenaJoin'));
@@ -13,8 +13,8 @@ const setupMoves = () => {
 };
 const storeMoves = () => { runDefault(import('../../arena/storeMoves')); };
 
-const arenaMap = {
-  '-': { '-': arena },
+const arena = {
+  '-': { '-': injectArena },
   dojoin: { '-': arenaDoJoin },
   join: { '-': arenaJoin },
   completed: { '-': completedArenas },
@@ -22,4 +22,4 @@ const arenaMap = {
   setup: { '-': setupMoves },
 };
 
-export default arenaMap;
+export default arena;
