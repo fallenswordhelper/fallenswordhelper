@@ -8,7 +8,7 @@ import querySelectorArray from '../../common/querySelectorArray';
 import sendEvent from '../../analytics/sendEvent';
 
 function getId(e) {
-  return Number(e.getAttribute('background').match(/\/(\d+)/)[1]); // FIXME
+  return Number(e.getAttribute('background').match(/\/(\d+)/)?.[1]);
 }
 
 function getResult(script, e) {
@@ -23,10 +23,6 @@ const specialMask = [
 ];
 
 function gettokens(spec) {
-  // const [specId, specMatch] = specialMask
-  //   .map(([id, mask]) => [id, spec.match(mask)])
-  //   .find(([, match]) => match);
-  // return {id: specId, params: [specMatch[1], specMatch[2]]};
   const thisTests = specialMask
     .map(([id, mask]) => [id, spec.match(mask)])
     .find(([, match]) => match);
@@ -38,11 +34,10 @@ function gettokens(spec) {
 }
 
 function formatSpecial(pCC) {
-  const spec = querySelectorArray('#specialsDiv', pCC)
+  return querySelectorArray('#specialsDiv', pCC)
     .map(getTextTrim)
     .filter((t) => ['leeched', 'Spell'].some((s) => t.includes(s)))
     .map(gettokens);
-  return spec;
 }
 
 function attacker(header) {
