@@ -1,1 +1,0 @@
-{"version":3,"file":"formToUrl-95d4fbda.js","sources":["src/modules/common/formToUrl.js"],"sourcesContent":null,"names":["formToUrl","form","navigateTo","indexPhp","URLSearchParams","FormData","toString"],"mappings":";AAGe,SAASA,EAAUC,GAChCC,EAAW,GAAGC,KAAY,IAAKC,gBAAgB,IAAIC,SAASJ,IAAQK","sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.50"}
