@@ -16,7 +16,6 @@ import setInnerHtml from './dom/setInnerHtml';
 import setText from './dom/setText';
 import testQuant from './system/testQuant';
 
-let ItemId;
 let bazaarTable = '<table id="fshBazaar"><tr><td colspan="5">Select an item to quick-buy:'
   + '</td></tr><tr><td colspan="5">Select how many to quick-buy</td></tr>'
   + '<tr><td colspan="5"><input id="buy_amount" class="fshNumberInput" '
@@ -35,17 +34,25 @@ let bazaarTable = '<table id="fshBazaar"><tr><td colspan="5">Select an item to q
 const bazaarItem = '<span class="bazaarButton tip-dynamic" style="background-image: '
   + 'url(\'@src@\');" itemid="@itemid@" data-tipped="@tipped@"></span>';
 
+let itemId;
+let inputBuyAmount;
+let tdSelected;
+let spanWarning;
+let spanQuantity;
+let spanResultLabel;
+let olResults;
+
 function testBuyAmount() {
-  return testQuant(getElementById('buy_amount').value);
+  return testQuant(inputBuyAmount.value);
 }
 
 function buyTarget(target, theValue) {
-  setText(theValue, getElementById('quantity'));
-  ItemId = target.getAttribute('itemid');
-  getElementById('fshBazaarWarning').removeAttribute('class');
+  setText(theValue, spanQuantity);
+  itemId = target.getAttribute('itemid');
+  spanWarning.removeAttribute('class');
   const dupNode = target.cloneNode(false);
   dupNode.className = 'bazaarSelected tip-dynamic';
-  const selected = getElementById('selectedItem');
+  const selected = tdSelected;
   setInnerHtml('', selected);
   insertElement(selected, dupNode);
 }
@@ -61,25 +68,24 @@ function select(evt) {
 function quantity() {
   const theValue = testBuyAmount();
   if (theValue) {
-    setText(theValue, getElementById('quantity'));
+    setText(theValue, spanQuantity);
   }
 }
 
 function done(json) {
-  const buyResult = getElementById('buy_result');
+  const buyResult = olResults;
   if (jsonFail(json, buyResult)) { return; }
   if (json.s) {
-    outputResult('You purchased the item!', buyResult);
+    outputResult(`You purchased ${json.r.length} item(s)!`, buyResult);
   }
 }
 
-function buy() { // jQuery.min
-  if (!ItemId) { return; }
-  const buyAmount = getText(getElementById('quantity'));
-  setText(`Buying ${buyAmount} items`, getElementById('buyResultLabel'));
-  for (let i = 0; i < buyAmount; i += 1) {
-    daBazaarBuy(ItemId).then(done);
-  }
+async function buy() { // jQuery.min
+  if (!itemId) { return; }
+  const buyAmount = getText(spanQuantity);
+  setText(`Buying ${buyAmount} items`, spanResultLabel);
+  const json = await daBazaarBuy(itemId, buyAmount);
+  done(json);
 }
 
 function doMiniatures(el, i) {
@@ -93,12 +99,18 @@ function doMiniatures(el, i) {
 }
 
 function evtHandlers() {
+  inputBuyAmount = getElementById('buy_amount');
+  tdSelected = getElementById('selectedItem');
+  spanWarning = getElementById('fshBazaarWarning');
+  spanQuantity = getElementById('quantity');
+  spanResultLabel = getElementById('buyResultLabel');
+  olResults = getElementById('buy_result');
   onclick(getElementById('fshBazaar'), select);
-  on(getElementById('buy_amount'), 'input', quantity);
+  on(inputBuyAmount, 'input', quantity);
   onclick(getElementById('fshBuy'), buy);
 }
 
-export default function bazaar() { // TODO stop using getElementById
+export default function bazaar() {
   if (jQueryNotPresent()) { return; }
   const pbImg = getElementsByTagName('img', pCC)[0];
   pbImg.className = 'fshFloatLeft';

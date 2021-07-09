@@ -9,6 +9,7 @@ import news from './news';
 import noCmd from './noCmd';
 import notepad from './notepad';
 import parseTemplePage from '../notification/parseTemplePage';
+import potionbazaar from './potionbazaar';
 import profile from './profile';
 import questbook from './questbook';
 import quests from './quests';
@@ -20,7 +21,6 @@ import { injectProfile, inventing, ufsgAllowBack } from './loader';
 
 const craftForge = () => { runDefault(import('../../craftForge/craftForge')); };
 const injectBank = () => { runDefault(import('../../bank/injectBank')); };
-const bazaar = () => { runDefault(import('../../bazaar')); };
 const injectFindPlayer = () => {
   runDefault(import('../../injectFindPlayer'));
 };
@@ -65,7 +65,7 @@ export default {
   news,
   notepad,
   points: { '-': { '-': points } },
-  potionbazaar: { '-': { '-': bazaar } },
+  potionbazaar,
   privatemessage: { '-': { '-': privateMsg } },
   profile,
   pvpladder: { '-': { '-': ladder } },
