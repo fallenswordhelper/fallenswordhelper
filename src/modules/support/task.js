@@ -17,7 +17,7 @@ function taskRunner() {
     paused = true;
   } else {
     paused = false;
-    window.postMessage(message, '*');
+    window.postMessage(message, window.location.origin);
   }
 }
 
@@ -46,7 +46,7 @@ function asyncTask() {
 
 function callback(event) {
   const key = event.data;
-  if (typeof key === 'string' && key.indexOf(message) === 0) {
+  if (event.origin === window.location.origin && key === message) {
     asyncTask();
   }
 }

@@ -33,6 +33,18 @@ function forwardResponse(res) {
   };
 }
 
+function handleRequest(req, res, options) {
+  if (req.url === '/dist/Releases/watch/fallenswordhelper.user.js') {
+    fs.readFile('src/fallenswordhelper.user.js', 'utf8', sendFsh(res));
+  } else {
+    // Forward each incoming request to esbuild
+    const proxyReq = http.request(options, forwardResponse(res));
+
+    // Forward the body of the request to esbuild
+    req.pipe(proxyReq, { end: true });
+  }
+}
+
 function requestListener({ host, port }) {
   return (req, res) => {
     const options = {
@@ -43,14 +55,8 @@ function requestListener({ host, port }) {
       headers: req.headers,
     };
 
-    if (req.url === '/dist/Releases/watch/fallenswordhelper.user.js') {
-      fs.readFile('src/fallenswordhelper.user.js', 'utf8', sendFsh(res));
-    } else {
-      // Forward each incoming request to esbuild
-      const proxyReq = http.request(options, forwardResponse(res));
-
-      // Forward the body of the request to esbuild
-      req.pipe(proxyReq, { end: true });
+    if (req.url.startsWith('/dist/resources/watch/') || req.url.startsWith('/src/styles/')) {
+      handleRequest(req, res, options);
     }
   };
 }
