@@ -11,11 +11,6 @@ const uiFlags = [
   'ui_preference_23',
 ];
 
-async function getSettings() {
-  const settingsHTML = await indexAjaxData({ cmd: 'settings' });
-  return settingsHTML;
-}
-
 function updateLadder(form, opt) {
   const data = new FormData(form);
   data.append('pvp_ladder', opt);
@@ -29,7 +24,7 @@ function updateUI(form, flags) {
 }
 
 export default async function settingsFlags(flags) {
-  const settingsHTML = await getSettings();
+  const settingsHTML = await indexAjaxData({ cmd: 'settings' });
   const settingsPage = createDocument(settingsHTML);
 
   const ladder = updateLadder(settingsPage.forms[0], flags[0]);
