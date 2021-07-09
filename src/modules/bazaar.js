@@ -98,13 +98,17 @@ function doMiniatures(el, i) {
     .replace('@tipped@', tipped);
 }
 
-function evtHandlers() {
+function setVars() {
   inputBuyAmount = getElementById('buy_amount');
   tdSelected = getElementById('selectedItem');
   spanWarning = getElementById('fshBazaarWarning');
   spanQuantity = getElementById('quantity');
   spanResultLabel = getElementById('buyResultLabel');
   olResults = getElementById('buy_result');
+}
+
+function evtHandlers() {
+  setVars();
   onclick(getElementById('fshBazaar'), select);
   on(inputBuyAmount, 'input', quantity);
   onclick(getElementById('fshBuy'), buy);
