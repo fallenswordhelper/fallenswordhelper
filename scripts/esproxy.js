@@ -47,16 +47,16 @@ function handleRequest(req, res, options) {
 
 function requestListener({ host, port }) {
   return (req, res) => {
-    const options = {
-      hostname: host,
-      port,
-      path: req.url,
-      method: req.method,
-      headers: req.headers,
-    };
-
-    if (req.url.startsWith('/dist/resources/watch/') || req.url.startsWith('/src/styles/')) {
-      handleRequest(req, res, options);
+    if (req.url.startsWith('/dist/Releases/watch/')
+        || req.url.startsWith('/dist/resources/watch/')
+        || req.url.startsWith('/src/styles/')) {
+      handleRequest(req, res, {
+        hostname: host,
+        port,
+        path: req.url,
+        method: req.method,
+        headers: req.headers,
+      });
     }
   };
 }
