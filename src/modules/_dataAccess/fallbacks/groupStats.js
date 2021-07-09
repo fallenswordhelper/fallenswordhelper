@@ -5,7 +5,6 @@ import indexAjaxData from '../../ajax/indexAjaxData';
 function parseReport(html) {
   const doc = createDocument(html);
   const stats = groupViewStats(doc);
-  // console.log(groupViewStats(doc));
   return {
     r: {
       attributes: [
