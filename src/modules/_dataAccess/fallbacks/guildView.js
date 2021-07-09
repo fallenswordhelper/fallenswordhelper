@@ -6,6 +6,7 @@ import getTextTrim from '../../common/getTextTrim';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import intValue from '../../system/intValue';
 import { nowSecs } from '../../support/now';
+import uniq from '../../common/uniq';
 import { defTable, lastActivityRE, playerIDRE } from '../../support/constants';
 
 const cache = {};
@@ -38,30 +39,24 @@ function fromRow(row) {
     level: Number(getTextTrim(row.cells[2])),
     xp: 0,
     guild_xp: intValue(getTextTrim(row.cells[4])),
-    rank_name: getTextTrim(row.cells[3]),
+    rankName: getTextTrim(row.cells[3]),
   };
 }
 
 function formatRow(row, i) {
-  return { rank_index: i, ...fromTip(row), ...fromRow(row) };
+  return { rankIndex: i, ...fromTip(row), ...fromRow(row) };
 }
 
-function byRank(acc, member) {
-  const thisRankName = member.rank_name;
-  const thisRankIndex = member.rank_index;
-  const thisRankObj = acc.find((e) => e.name === thisRankName);
-  if (thisRankObj) {
-    thisRankObj.members.push(member);
-  } else {
-    acc.push({ id: thisRankIndex, name: thisRankName, members: [member] });
-  }
-  return acc;
+function membersByRank(memberData) {
+  return uniq(memberData, 'rankName').map(({ rankIndex: id, rankName: name }) => ({
+    id,
+    name,
+    members: memberData.filter((member) => member.rankName === name),
+  }));
 }
 
 function rankData(memberList) {
-  const memberRows = dataRows(memberList.rows, 5, 1);
-  const memberData = memberRows.map(formatRow);
-  return memberData.reduce(byRank, []); // FIXME
+  return membersByRank(dataRows(memberList.rows, 5, 1).map(formatRow));
 }
 
 function parseReport(html) {
@@ -74,13 +69,14 @@ function parseReport(html) {
 }
 
 // Incomplete
-export default function guildView(guildId) {
+export default async function guildView(guildId) {
   if (!cache[guildId]) {
-    cache[guildId] = indexAjaxData({
+    const html = await indexAjaxData({
       cmd: 'guild',
       subcmd: 'view',
       guild_id: guildId,
-    }).then(parseReport);
+    });
+    cache[guildId] = parseReport(html);
   }
   return cache[guildId];
 }
