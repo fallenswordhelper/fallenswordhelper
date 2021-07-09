@@ -1,6 +1,6 @@
 import callApp from '../callApp';
 
-export default function viewCombat(id) {
+export default function view(id) {
   return callApp({
     cmd: 'combat',
     subcmd: 'view',

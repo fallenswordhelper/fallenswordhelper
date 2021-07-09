@@ -1,6 +1,6 @@
+import arena from './arena';
 import getElementById from '../common/getElement';
 import infoBox from '../common/infoBox';
-import injectArena from './arena';
 import { nowSecs } from '../support/now';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
@@ -35,7 +35,7 @@ function evalMsg() {
 export default function arenaDoJoin() {
   const tabs = getElementById('arenaTypeTabs');
   if (tabs) {
-    injectArena();
+    arena();
   } else {
     evalMsg();
   }

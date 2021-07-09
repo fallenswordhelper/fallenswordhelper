@@ -98,7 +98,7 @@ function evtHandlers() {
   onclick(getElementById('fshBuy'), buy);
 }
 
-export default function injectBazaar() { // TODO stop using getElementById
+export default function bazaar() { // TODO stop using getElementById
   if (jQueryNotPresent()) { return; }
   const pbImg = getElementsByTagName('img', pCC)[0];
   pbImg.className = 'fshFloatLeft';

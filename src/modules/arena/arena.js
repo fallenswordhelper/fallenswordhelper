@@ -40,10 +40,10 @@ function prepareEnv() {
   doLvlFilter();
 }
 
-function arenaDataTable(tabs, [arena, obj, json]) { // jQuery
+function arenaDataTable(tabs, [arenaOpts, obj, json]) { // jQuery
   const theTables = $('table[width="635"]', tabs);
   theTables.each(redoHead);
-  setOpts(arena);
+  setOpts(arenaOpts);
   orderData(theTables);
   arenaFull(obj);
   participants(json);
@@ -75,7 +75,7 @@ function prepare(tabs) {
   partial(process, tabs));
 }
 
-export default function injectArena() { // jQuery
+export default function arena() { // jQuery
   if (jQueryNotPresent()) { return; }
   const tabs = $('#arenaTypeTabs');
   if (tabs.length === 1) {

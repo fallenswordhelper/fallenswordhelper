@@ -1,5 +1,5 @@
 import guildGroups from './guildGroups';
 
-export default function groupsViewStats(groupId) {
+export default function viewStats(groupId) {
   return guildGroups({ subcmd2: 'viewstats', group_id: groupId });
 }
