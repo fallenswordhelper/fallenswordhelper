@@ -33,12 +33,18 @@ function forwardResponse(res) {
   };
 }
 
-function handleRequest(req, res, options) {
-  if (req.url === '/dist/Releases/watch/fallenswordhelper.user.js') {
-    fs.readFile('src/fallenswordhelper.user.js', 'utf8', sendFsh(res));
-  } else {
+function forwardRequest(host, port, req, res) {
+  if (req.url.startsWith('/dist/Releases/watch/')
+        || req.url.startsWith('/dist/resources/watch/')
+        || req.url.startsWith('/src/styles/')) {
     // Forward each incoming request to esbuild
-    const proxyReq = http.request(options, forwardResponse(res));
+    const proxyReq = http.request({
+      hostname: host,
+      port,
+      path: req.url,
+      method: req.method,
+      headers: req.headers,
+    }, forwardResponse(res));
 
     // Forward the body of the request to esbuild
     req.pipe(proxyReq, { end: true });
@@ -47,16 +53,10 @@ function handleRequest(req, res, options) {
 
 function requestListener({ host, port }) {
   return (req, res) => {
-    if (req.url.startsWith('/dist/Releases/watch/')
-        || req.url.startsWith('/dist/resources/watch/')
-        || req.url.startsWith('/src/styles/')) {
-      handleRequest(req, res, {
-        hostname: host,
-        port,
-        path: req.url,
-        method: req.method,
-        headers: req.headers,
-      });
+    if (req.url === '/dist/Releases/watch/fallenswordhelper.user.js') {
+      fs.readFile('src/fallenswordhelper.user.js', 'utf8', sendFsh(res));
+    } else {
+      forwardRequest(host, port, req, res);
     }
   };
 }
