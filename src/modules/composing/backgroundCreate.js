@@ -53,7 +53,6 @@ function potionDone(temp, data) {
 
 function createPotion(temp) { // jQuery.min
   createPotionFromTemplate(temp.value).then(partial(potionDone, temp));
-  // setTimeout(partial(potionDone, temp, {}, 'faked'), 200);
 }
 
 export default function backgroundCreate(target, temp) {
