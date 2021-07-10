@@ -6,7 +6,7 @@ import { defTable } from '../support/constants';
 import entries from '../common/entries';
 import fallback from '../system/fallback';
 import getArrayByTagName from '../common/getArrayByTagName';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import getElementsByTagName from '../common/getElementsByTagName';
 import getInventoryById from '../ajax/getInventoryById';
 import getValue from '../system/getValue';

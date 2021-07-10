@@ -1,6 +1,6 @@
 import asInt from './asInt';
 import { defStatbarLevel } from '../../support/constants';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import timeBox from './timeBox';

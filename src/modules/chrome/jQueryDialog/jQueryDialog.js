@@ -1,6 +1,6 @@
 import './jQueryDialog.css';
 import createDiv from '../../common/cElement/createDiv';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
 import setInnerHtml from '../../dom/setInnerHtml';
 

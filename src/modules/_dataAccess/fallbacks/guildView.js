@@ -1,6 +1,6 @@
 import createDocument from '../../system/createDocument';
 import dataRows from '../../common/dataRows';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import getTextTrim from '../../common/getTextTrim';
 import indexAjaxData from '../../ajax/indexAjaxData';

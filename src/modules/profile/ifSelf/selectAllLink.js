@@ -1,7 +1,7 @@
 import clickThis from '../../common/clickThis';
 import createSpan from '../../common/cElement/createSpan';
 import { dropItemsUrl } from '../../support/constants';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';

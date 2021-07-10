@@ -2,7 +2,7 @@ import contains from '../../common/contains';
 import createDocument from '../../system/createDocument';
 import { defStatVl } from '../../support/constants';
 import getArrayByTagName from '../../common/getArrayByTagName';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import getText from '../../common/getText';
 import intValue from '../../system/intValue';

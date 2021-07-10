@@ -1,4 +1,4 @@
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import setText from '../../dom/setText';
 
 let targetPlayer;

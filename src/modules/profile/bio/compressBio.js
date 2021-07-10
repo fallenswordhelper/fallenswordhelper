@@ -1,7 +1,7 @@
 import './compressBio.css';
 import createInput from '../../common/cElement/createInput';
 import createLabel from '../../common/cElement/createLabel';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import insertElementBefore from '../../common/insertElementBefore';
 import on from '../../common/on';
 import partial from '../../common/partial';

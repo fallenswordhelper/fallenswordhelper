@@ -1,5 +1,5 @@
 import asInt from './asInt';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import intValue from '../../system/intValue';

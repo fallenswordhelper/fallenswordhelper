@@ -1,5 +1,5 @@
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import hideElement from '../../common/hideElement';
 import onclick from '../../common/onclick';
 import { pCC } from '../../support/layout';

@@ -1,4 +1,4 @@
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 
 export let pCL;
 export let pCC;

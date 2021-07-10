@@ -4,7 +4,7 @@ import clickThis from '../common/clickThis';
 import createSpan from '../common/cElement/createSpan';
 import doStatTotal from '../profile/doStatTotal';
 import getArrayByClassName from '../common/getArrayByClassName';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import getValue from '../system/getValue';
 import indexAjaxData from '../ajax/indexAjaxData';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';

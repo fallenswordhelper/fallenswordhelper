@@ -7,7 +7,7 @@ import createUl from '../common/cElement/createUl';
 import daMailboxTake from '../_dataAccess/daMailboxTake';
 import entries from '../common/entries';
 import getArrayByTagName from '../common/getArrayByTagName';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import hasClass from '../common/hasClass';
 import insertElement from '../common/insertElement';
 import insertElementBefore from '../common/insertElementBefore';

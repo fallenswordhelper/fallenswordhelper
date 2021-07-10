@@ -1,5 +1,5 @@
 import dialogMsg from '../common/dialogMsg';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import getValue from '../system/getValue';
 import isObject from '../common/isObject';
 import jQueryNotPresent from '../common/jQueryNotPresent';

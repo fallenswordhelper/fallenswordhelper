@@ -2,7 +2,7 @@ import './helperMenu.css';
 import createDiv from '../../common/cElement/createDiv';
 import draggable from '../../common/dragStart';
 import functionLookup from './functionLookup';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getHelperMenuBlob from './getHelperMenuBlob';
 import getText from '../../common/getText';
 import getValue from '../../system/getValue';

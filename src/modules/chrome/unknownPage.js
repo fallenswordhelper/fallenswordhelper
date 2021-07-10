@@ -1,5 +1,5 @@
 import calf from '../support/calf';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';

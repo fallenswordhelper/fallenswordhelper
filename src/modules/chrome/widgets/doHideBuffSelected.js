@@ -1,6 +1,6 @@
 import calf from '../../support/calf';
 import getArrayByClassName from '../../common/getArrayByClassName';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import getTextTrim from '../../common/getTextTrim';
 import hasClass from '../../common/hasClass';

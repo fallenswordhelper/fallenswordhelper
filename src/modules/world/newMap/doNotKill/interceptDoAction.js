@@ -1,4 +1,4 @@
-import getElementById from '../../../common/getElement';
+import getElementById from '../../../common/getElementById';
 import isFunction from '../../../common/isFunction';
 import isOnList from './isOnList';
 import isUndefined from '../../../common/isUndefined';

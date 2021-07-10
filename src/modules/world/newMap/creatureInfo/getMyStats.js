@@ -1,4 +1,4 @@
-import getElementById from '../../../common/getElement';
+import getElementById from '../../../common/getElementById';
 import getElementsByClassName from '../../../common/getElementsByClassName';
 import valueText from '../../../common/valueText';
 import {

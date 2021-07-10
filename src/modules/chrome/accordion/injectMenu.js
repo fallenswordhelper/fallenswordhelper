@@ -1,5 +1,5 @@
 import fromEntries from '../../common/fromEntries';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getValue from '../../system/getValue';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import navMenu from './navMenu';

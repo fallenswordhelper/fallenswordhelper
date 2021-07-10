@@ -1,5 +1,5 @@
 import clickThis from '../common/clickThis';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import getElementsByTagName from '../common/getElementsByTagName';
 
 function waitForPlayer(firstPlayer, retries) {

@@ -1,6 +1,6 @@
 import arrayFrom from './arrayFrom';
 import fallback from '../system/fallback';
-import getElementById from './getElement';
+import getElementById from './getElementById';
 import hideElement from './hideElement';
 import isFunction from './isFunction';
 import on from './on';

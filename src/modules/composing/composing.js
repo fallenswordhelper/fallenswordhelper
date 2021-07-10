@@ -1,7 +1,7 @@
 import './composing.css';
 import backgroundCreate from './backgroundCreate';
 import fastCompose from './fastCompose';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import getElementsByClassName from '../common/getElementsByClassName';
 import getValue from '../system/getValue';
 import insertElementBefore from '../common/insertElementBefore';

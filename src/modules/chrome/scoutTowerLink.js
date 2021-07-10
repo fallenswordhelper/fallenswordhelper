@@ -1,5 +1,5 @@
 import { cdn } from '../system/system';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import { scouttowerUrl } from '../support/constants';
 

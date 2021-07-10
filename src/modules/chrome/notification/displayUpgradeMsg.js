@@ -1,4 +1,4 @@
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import notGoldUpgradesPage from './notGoldUpgradesPage';
 import { pointsUrl } from '../../support/constants';

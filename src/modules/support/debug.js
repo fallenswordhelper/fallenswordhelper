@@ -1,4 +1,4 @@
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 
 const timers = {};

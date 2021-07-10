@@ -1,6 +1,6 @@
 import './arenaJoin.css';
 import arena from '../arena';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import interceptSubmit from '../../common/interceptSubmit';
 import showAttribs from './showAttribs';
 import view from '../../app/arena/view';

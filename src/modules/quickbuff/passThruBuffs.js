@@ -1,4 +1,4 @@
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import getUrlParameter from '../system/getUrlParameter';
 
 function tickBuff(id) {

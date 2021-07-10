@@ -5,7 +5,7 @@ import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
 import { defShopPrompt } from '../../support/constants';
 import fetchdata from '../../ajax/fetchdata';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';

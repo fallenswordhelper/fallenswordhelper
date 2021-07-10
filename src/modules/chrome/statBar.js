@@ -1,5 +1,5 @@
 import createAnchor from '../common/cElement/createAnchor';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import insertElement from '../common/insertElement';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
 import onclick from '../common/onclick';

@@ -6,7 +6,7 @@ import combatLogger from './combatLogger';
 import createStyle from '../../common/cElement/createStyle';
 import doNotKill from './doNotKill/doNotKill';
 import executeAll from '../../common/executeAll';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getValue from '../../system/getValue';
 import globalTop from './globalTop';
 import hideQTip from '../../common/hideQTip';

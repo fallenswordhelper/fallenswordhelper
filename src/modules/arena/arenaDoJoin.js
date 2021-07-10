@@ -1,5 +1,5 @@
 import arena from './arena';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import infoBox from '../common/infoBox';
 import { nowSecs } from '../support/now';
 import partial from '../common/partial';

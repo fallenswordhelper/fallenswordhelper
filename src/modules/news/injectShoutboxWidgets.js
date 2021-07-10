@@ -1,4 +1,4 @@
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import on from '../common/on';
 import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';

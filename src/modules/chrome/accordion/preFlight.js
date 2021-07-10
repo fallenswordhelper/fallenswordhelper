@@ -1,4 +1,4 @@
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import isObject from '../../common/isObject';
 import sendException from '../../analytics/sendException';
 

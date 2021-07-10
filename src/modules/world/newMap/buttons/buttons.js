@@ -3,7 +3,7 @@ import createButton from '../../../common/cElement/createButton';
 import createDiv from '../../../common/cElement/createDiv';
 import eventHandler5 from '../../../common/eventHandler5';
 import fixTeleport from './fixTeleport';
-import getElementById from '../../../common/getElement';
+import getElementById from '../../../common/getElementById';
 import getValue from '../../../system/getValue';
 import hideQTip from '../../../common/hideQTip';
 import insertElement from '../../../common/insertElement';

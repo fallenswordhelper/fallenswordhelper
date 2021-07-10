@@ -4,7 +4,7 @@ import calf from '../support/calf';
 import createTr from '../common/cElement/createTr';
 import defaults from '../support/dataObj.json';
 import doFolders from './doFolders';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import getValue from '../system/getValue';
 import hasClass from '../common/hasClass';
 import insertElementBefore from '../common/insertElementBefore';

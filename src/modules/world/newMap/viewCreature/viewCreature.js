@@ -13,7 +13,7 @@ import evalDamage from './evalDamage';
 import evalDefence from './evalDefence';
 import evalExtraBuffs from './evalExtraBuffs';
 import evalHTML from './evalHtml';
-import getElementById from '../../../common/getElement';
+import getElementById from '../../../common/getElementById';
 import insertElement from '../../../common/insertElement';
 import isArray from '../../../common/isArray';
 import makeDoNotKillLink from './makeDoNotKillLink';

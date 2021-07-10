@@ -1,4 +1,4 @@
-import getElementById from './getElement';
+import getElementById from './getElementById';
 import hasClass from './hasClass';
 import setValue from '../system/setValue';
 

@@ -1,5 +1,5 @@
 import bioEvtHdl from './bioEvtHdl';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import onclick from '../../common/onclick';
 import renderBio from './render';
 import setInnerHtml from '../../dom/setInnerHtml';

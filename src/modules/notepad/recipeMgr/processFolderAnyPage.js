@@ -2,7 +2,7 @@ import all from '../../common/all';
 import createDocument from '../../system/createDocument';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';

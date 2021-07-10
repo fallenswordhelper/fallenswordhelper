@@ -1,4 +1,4 @@
-import getElementById from './getElement';
+import getElementById from './getElementById';
 import getText from './getText';
 
 let thePlayerId;

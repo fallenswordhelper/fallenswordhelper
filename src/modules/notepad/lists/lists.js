@@ -2,7 +2,7 @@ import './lists.css';
 import defaults from '../../support/dataObj.json';
 import eventHandler5 from '../../common/eventHandler5';
 import getArrayByClassName from '../../common/getArrayByClassName';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getValueJSON from '../../system/getValueJSON';
 import isArray from '../../common/isArray';
 import isChecked from '../../system/isChecked';

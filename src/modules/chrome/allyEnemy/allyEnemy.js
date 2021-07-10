@@ -5,7 +5,7 @@ import classHandler from '../../common/classHandler';
 import createDiv from '../../common/cElement/createDiv';
 import fallback from '../../system/fallback';
 import getArrayByClassName from '../../common/getArrayByClassName';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';

@@ -1,6 +1,6 @@
 import './hasTitan.css';
 import createDiv from '../../../common/cElement/createDiv';
-import getElementById from '../../../common/getElement';
+import getElementById from '../../../common/getElementById';
 import hasClass from '../../../common/hasClass';
 import insertElement from '../../../common/insertElement';
 import toggleForce from '../../../common/toggleForce';

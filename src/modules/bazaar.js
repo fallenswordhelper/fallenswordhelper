@@ -1,6 +1,6 @@
 import daBazaarBuy from './_dataAccess/daBazaarBuy';
 import getArrayByTagName from './common/getArrayByTagName';
-import getElementById from './common/getElement';
+import getElementById from './common/getElementById';
 import getElementsByTagName from './common/getElementsByTagName';
 import getText from './common/getText';
 import hasClass from './common/hasClass';

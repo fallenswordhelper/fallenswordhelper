@@ -1,5 +1,5 @@
 import createDiv from './cElement/createDiv';
-import getElementById from './getElement';
+import getElementById from './getElementById';
 import insertElement from './insertElement';
 import setText from '../dom/setText';
 

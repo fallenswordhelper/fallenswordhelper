@@ -1,5 +1,5 @@
 import createDiv from '../../../common/cElement/createDiv';
-import getElementById from '../../../common/getElement';
+import getElementById from '../../../common/getElementById';
 import getMembrList from '../../../ajax/getMembrList';
 import getValue from '../../../system/getValue';
 import hideElement from '../../../common/hideElement';

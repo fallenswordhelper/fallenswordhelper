@@ -1,4 +1,4 @@
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import { pCR } from '../../support/layout';
 

@@ -4,7 +4,7 @@ import calf from '../../support/calf';
 import createDocument from '../../system/createDocument';
 import csvSplit from '../../common/csvSplit';
 import getArrayByClassName from '../../common/getArrayByClassName';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import getValue from '../../system/getValue';
 import guildManage from '../../ajax/guildManage';

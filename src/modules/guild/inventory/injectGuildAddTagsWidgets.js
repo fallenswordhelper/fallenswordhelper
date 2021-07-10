@@ -2,7 +2,7 @@ import { cdn } from '../../system/system';
 import clickThis from '../../common/clickThis';
 import createInput from '../../common/cElement/createInput';
 import daGsTake from '../../_dataAccess/daGsTake';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import { injectGuild } from '../../chrome/pageSwitcher/loader';
 import insertElement from '../../common/insertElement';

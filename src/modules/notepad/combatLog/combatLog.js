@@ -1,6 +1,6 @@
 import './combatLog.css';
 import getArrayByClassName from '../../common/getArrayByClassName';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import jConfirm from '../../common/jConfirm';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';

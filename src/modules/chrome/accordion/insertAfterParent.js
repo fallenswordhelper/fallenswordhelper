@@ -1,4 +1,4 @@
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import sendException from '../../analytics/sendException';
 
 export default function insertAfterParent(target, fn, listItem) {

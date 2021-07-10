@@ -1,7 +1,7 @@
 import createButton from '../../../common/cElement/createButton';
 import createDiv from '../../../common/cElement/createDiv';
 import doBuffLinks from '../../../common/doBuffLinks';
-import getElementById from '../../../common/getElement';
+import getElementById from '../../../common/getElementById';
 import insertElement from '../../../common/insertElement';
 import setInnerHtml from '../../../dom/setInnerHtml';
 

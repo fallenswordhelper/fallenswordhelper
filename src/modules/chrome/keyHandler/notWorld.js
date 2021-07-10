@@ -1,4 +1,4 @@
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import keyHandlerEvent from './keyHandlerEvent';
 import navigateTo from '../../common/navigateTo';
 

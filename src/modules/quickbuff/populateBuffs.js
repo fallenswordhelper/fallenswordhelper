@@ -1,4 +1,4 @@
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import outputFormat from '../system/outputFormat';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';

@@ -1,5 +1,5 @@
 import { cdn } from '../../system/system';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import onclick from '../../common/onclick';
 import setInnerHtml from '../../dom/setInnerHtml';
 import toprated from '../../app/toprated';

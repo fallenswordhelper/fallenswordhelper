@@ -1,4 +1,4 @@
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import getText from '../common/getText';
 import intValue from '../system/intValue';
 import {

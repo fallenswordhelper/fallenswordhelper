@@ -4,7 +4,7 @@ import createTable from '../../common/cElement/createTable';
 import daUseItem from '../../_dataAccess/daUseItem';
 import eventHandler5 from '../../common/eventHandler5';
 import getArrayByClassName from '../../common/getArrayByClassName';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getInventory from '../../ajax/getInventory';
 import insertElement from '../../common/insertElement';
 import jConfirm from '../../common/jConfirm';

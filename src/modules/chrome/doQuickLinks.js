@@ -2,7 +2,7 @@ import add from '../support/task';
 import calf from '../support/calf';
 import draggable from '../common/dragStart';
 import escapeHtml from '../system/escapeHtml';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import getValue from '../system/getValue';
 import getValueJSON from '../system/getValueJSON';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';

@@ -3,7 +3,7 @@ import bioEvtHdl from './bioEvtHdl';
 import calf from '../../support/calf';
 import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';

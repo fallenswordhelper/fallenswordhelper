@@ -1,5 +1,5 @@
 import getArrayByClassName from '../common/getArrayByClassName';
-import getElementById from '../common/getElement';
+import getElementById from '../common/getElementById';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import makePageTemplate from './lists/makePageTemplate';
 import onclick from '../common/onclick';

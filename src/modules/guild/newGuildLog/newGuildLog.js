@@ -6,7 +6,7 @@ import createTable from '../../common/cElement/createTable';
 import eventHandler5 from '../../common/eventHandler5';
 import functionPasses from '../../common/functionPasses';
 import getArrayByTagName from '../../common/getArrayByTagName';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import getGuildLogPage from './getGuildLogPage';
 import getText from '../../common/getText';

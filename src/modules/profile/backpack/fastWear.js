@@ -3,7 +3,7 @@ import add from '../../support/task';
 import fastEvent from './fastEvent';
 import fastWearLinks from './fastWearLinks';
 import getBackpack from './getBackpack';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import monkeyBp from './monkeyBp';
 import onclick from '../../common/onclick';

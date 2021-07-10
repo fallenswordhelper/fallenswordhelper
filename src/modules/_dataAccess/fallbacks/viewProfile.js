@@ -1,5 +1,5 @@
 import createDocument from '../../system/createDocument';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getTextTrim from '../../common/getTextTrim';
 import indexAjaxData from '../../ajax/indexAjaxData';
 

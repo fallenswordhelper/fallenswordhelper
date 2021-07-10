@@ -1,6 +1,6 @@
 import addCommas from './system/addCommas';
 import closestTable from './common/closestTable';
-import getElementById from './common/getElement';
+import getElementById from './common/getElementById';
 import on from './common/on';
 import { pCC } from './support/layout';
 import setInnerHtml from './dom/setInnerHtml';

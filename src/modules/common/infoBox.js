@@ -1,4 +1,4 @@
-import getElementById from './getElement';
+import getElementById from './getElementById';
 
 export default function infoBox(scope) {
   const infoMsg = getElementById('info-msg', scope);

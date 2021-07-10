@@ -1,5 +1,5 @@
 import asInt from '../../chrome/calcs/asInt';
-import getElementById from '../../common/getElement';
+import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import setValue from '../../system/setValue';
 import {
