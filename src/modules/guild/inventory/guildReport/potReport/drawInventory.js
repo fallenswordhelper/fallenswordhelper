@@ -33,7 +33,8 @@ function perc2color(percent) {
     r = Math.round(510 - 5.10 * perc);
   }
   const h = r * 0x10000 + g * 0x100 + b;
-  return `#${(`000000${h.toString(16)}`).slice(-6)}`;
+  const colour = (`000000${h.toString(16)}`).slice(-6);
+  return `#${colour}`;
 }
 
 function makeRowsFromPivot(potOpts, pivot, acc, pot) {

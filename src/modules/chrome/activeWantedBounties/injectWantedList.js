@@ -40,12 +40,9 @@ export function injectWantedList() { // Legacy
   if (wantedList.bounty.length === 0) {
     output += '<div class="xsOrange">[No wanted bounties]</div>';
   } else {
-    for (let i = 0; i < wantedList.bounty.length; i += 1) {
-      output += `${acceptBtn(wantedList.bounty[i])
-      }<a class="xsKhaki tip-static" data-tipped="${
-        makeMouseOver(wantedList.bounty[i])
-      }" href="${wantedList.bounty[i].link}">${
-        wantedList.bounty[i].target}</a><br>`;
+    for (const bounty of wantedList.bounty) {
+      output += `${acceptBtn(bounty)}<a class="xsKhaki tip-static" data-tipped="${
+        makeMouseOver(bounty)}" href="${bounty.link}">${bounty.target}</a><br>`;
     }
   }
   insertHtmlBeforeEnd(wantedListDiv, output);

@@ -34,11 +34,14 @@ function buildItemHash(invItems) {
 const tooltip = (type) => ` data-tooltip="INSTANTLY ${
   type} THE ITEM. NO REFUNDS OR DO-OVERS! Use at own risk."`;
 
-const generalButton = (className, extra, text) => `[<button class="fshStoreItemsButton ${
+const generalButton = (className, extra, text) => ` [<button class="fshStoreItemsButton ${
   className}"${extra}>${text}</button>]`;
 
-const actionButton = (color, type, label) => ` ${generalButton(`${
-  color} actionButton tooltip-multiline`, tooltip(type), `Quick ${label}`)}`;
+const actionButton = (color, type, label) => generalButton(
+  `${color} actionButton tooltip-multiline`,
+  tooltip(type),
+  `Quick ${label}`,
+);
 
 const aLink = (href, extra, text) => `[<a href="${href}"${extra}>${text}</a>]`;
 
@@ -71,7 +74,7 @@ function getConditionalArray(prefs, itemHash, invItem) {
     [() => true, () => `&nbsp;${invItem.item_name}`],
     [
       () => hasMultiple(prefs, itemHash, invItem),
-      () => ` ${generalButton('fshBlack', '', 'Check All')}`,
+      () => generalButton('fshBlack', '', 'Check All'),
     ],
     [() => canSend(prefs, invItem), () => actionButton('fshBlue', 'SENDS', 'Send')],
     [() => canDrop(prefs, invItem), () => actionButton('fshRed', 'DROP', 'Drop')],

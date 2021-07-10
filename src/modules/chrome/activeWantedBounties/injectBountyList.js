@@ -30,11 +30,9 @@ export function injectBountyList() { // Legacy
   if (bountyList.bounty.length === 0) {
     output += '<div class="xsOrange">[No active bounties]</div>';
   } else {
-    for (let i = 0; i < bountyList.bounty.length; i += 1) {
-      output += `<a href="${bountyList.bounty[i].link
-      }" class="tip-static" data-tipped="${
-        makeMouseOver(bountyList.bounty[i])}">${
-        bountyList.bounty[i].target}</a><br>`;
+    for (const bounty of bountyList.bounty) {
+      output += `<a href="${bounty.link}" class="tip-static" data-tipped="${
+        makeMouseOver(bounty)}">${bounty.target}</a><br>`;
     }
   }
   insertHtmlBeforeEnd(bountyListDiv, output);
