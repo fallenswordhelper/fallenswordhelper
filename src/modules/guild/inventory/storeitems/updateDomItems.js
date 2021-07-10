@@ -1,7 +1,7 @@
-import add from '../../../support/task';
 import batch from '../../../common/batch';
 import getItems from './getItems';
 import partial from '../../../common/partial';
+import task from '../../../support/task';
 import {
   ahSearchUrl,
   defSubcmd,
@@ -95,5 +95,5 @@ function decorateItems(prefs, itemHash, [inject, invItem]) {
 export default async function updateDomItems(prefs) {
   const invItems = await getItems();
   const itemHash = prefs[checkAllOfType] ? buildItemHash(invItems) : [];
-  add(3, batch, [[5, 3, invItems, 0, partial(decorateItems, prefs, itemHash)]]);
+  task(3, batch, [[5, 3, invItems, 0, partial(decorateItems, prefs, itemHash)]]);
 }

@@ -1,17 +1,17 @@
 import runDefault from '../../common/runDefault';
 
 const globalQuest = () => { runDefault(import('../../topRated/globalQuest')); };
-const injectTopRated = () => { runDefault(import('../../topRated/toprated')); };
+const toprated = () => { runDefault(import('../../topRated/toprated')); };
 
 export default {
-  xp: { '-': injectTopRated },
-  monthlyxp: { '-': injectTopRated },
-  gold: { '-': injectTopRated },
-  killstreak: { '-': injectTopRated },
-  bounties: { '-': injectTopRated },
-  risingstars: { '-': injectTopRated },
-  arena: { '-': injectTopRated },
-  superelites: { '-': injectTopRated },
-  smasher: { '-': injectTopRated },
+  xp: { '-': toprated },
+  monthlyxp: { '-': toprated },
+  gold: { '-': toprated },
+  killstreak: { '-': toprated },
+  bounties: { '-': toprated },
+  risingstars: { '-': toprated },
+  arena: { '-': toprated },
+  superelites: { '-': toprated },
+  smasher: { '-': toprated },
   globalquest: { '-': globalQuest },
 };

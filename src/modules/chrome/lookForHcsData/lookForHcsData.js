@@ -1,4 +1,3 @@
-import add from '../../support/task';
 import calf from '../../support/calf';
 import gameHelpLink from './gameHelpLink';
 import getElementById from '../../common/getElementById';
@@ -6,17 +5,18 @@ import getValue from '../../system/getValue';
 import injectHelperMenu from '../helperMenu/injectHelperMenu';
 import jsonParse from '../../common/jsonParse';
 import notHuntMode from './notHuntMode';
-import replaceKeyHandler from '../keyHandler/keyHandler';
+import replaceKeyHandler from '../keyHandler/replaceKeyHandler';
+import task from '../../support/task';
 
 function prepareEnv() {
   if (getValue('gameHelpLink')) {
-    add(3, gameHelpLink);
+    task(3, gameHelpLink);
   }
   calf.huntingMode = getValue('huntingMode');
-  add(3, replaceKeyHandler);
+  task(3, replaceKeyHandler);
   notHuntMode();
   if (!getValue('hideHelperMenu')) {
-    add(3, injectHelperMenu);
+    task(3, injectHelperMenu);
   }
 }
 

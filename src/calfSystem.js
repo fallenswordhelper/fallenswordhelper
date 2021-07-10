@@ -4,6 +4,6 @@ import './styles/cdn_bg.css';
 import './styles/css-tooltip.css';
 import './styles/grids.css';
 import './styles/spinners.css';
-import dispatch from './modules/chrome/environment';
+import dispatch from './modules/chrome/dispatch';
 
 export default dispatch;

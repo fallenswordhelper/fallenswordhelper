@@ -111,6 +111,6 @@ function worldDialogShop(e, data) {
   if (jDialog) { initQuickBuy(); }
 }
 
-export default function prepareShop() {
+export default function shop() {
   $.subscribe(defShopPrompt, worldDialogShop);
 }

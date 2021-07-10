@@ -128,6 +128,6 @@ function haveJquery(injector) { // jQuery.min
   getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }
 
-export default function injectMonsterLog(injector) {
+export default function monstorLog(injector) {
   if (jQueryPresent()) { haveJquery(injector); }
 }

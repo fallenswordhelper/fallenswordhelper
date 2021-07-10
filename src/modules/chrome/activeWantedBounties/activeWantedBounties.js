@@ -64,7 +64,7 @@ function doHandlers() {
   if (wantedListDiv) { onclick(wantedListDiv, resetList); }
 }
 
-export default function prepareBountyData() {
+export default function activeWantedBounties() {
   if (jQueryNotPresent()) { return; }
   createDivs();
   doHandlers();

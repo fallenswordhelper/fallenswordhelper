@@ -1,9 +1,9 @@
-import add from '../support/task';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getValue from '../system/getValue';
 import includes from '../common/includes';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import { pCL } from '../support/layout';
+import task from '../support/task';
 
 function doMsgSound() {
   const msg = getArrayByTagName('a', pCL).filter(includes('message'));
@@ -15,6 +15,6 @@ function doMsgSound() {
 
 export default function isMessageSound() {
   if (getValue('playNewMessageSound')) {
-    add(3, doMsgSound);
+    task(3, doMsgSound);
   }
 }

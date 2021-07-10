@@ -1,5 +1,4 @@
 import './doFolders.css';
-import add from '../support/task';
 import createDiv from '../common/cElement/createDiv';
 import createTr from '../common/cElement/createTr';
 import { defTable } from '../support/constants';
@@ -18,6 +17,7 @@ import insertHtmlBeforeBegin from '../common/insertHtmlBeforeBegin';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
 import partial from '../common/partial';
+import task from '../support/task';
 import { time, timeEnd } from '../support/debug';
 
 let invItems;
@@ -130,7 +130,7 @@ function processTrade(data) {
 }
 
 function gotInventory(data) {
-  add(3, processTrade, [data]);
+  task(3, processTrade, [data]);
 }
 
 export default function doFolders() { // jQuery.min

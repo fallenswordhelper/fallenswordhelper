@@ -1,5 +1,6 @@
 import './newMap.css';
 import { buffInfo } from './buffInfo/buffInfo';
+import buttons from './buttons/buttons';
 import calf from '../../support/calf';
 import champAttacks from './champAttacks';
 import combatLogger from './combatLogger';
@@ -11,16 +12,15 @@ import getValue from '../../system/getValue';
 import globalTop from './globalTop';
 import hideQTip from '../../common/hideQTip';
 import hideTitanCombatResults from './hideTitanCombatResults';
-import initButtons from './buttons/buttons';
 import injectRelic from './relic/relic';
-import injectSendGoldOnWorld from './sendGold';
 import insertElement from '../../common/insertElement';
 import interceptMouseEvents from './creatureInfo/interceptMouseEvents';
+import monsterLog from './monsterLog/monsterLog';
 import onWorld from './onWorld';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import prepareShop from './shop';
-import startMonsterLog from './monsterLog/monsterLog';
+import sendGold from './sendGold';
+import shop from './shop';
 import viewCreature from './viewCreature/viewCreature';
 import worldPrefs from './worldPrefs/worldPrefs';
 import {
@@ -104,27 +104,27 @@ function fixDebuff() {
 
 const usualRoutines = [
   worldPrefs,
-  injectSendGoldOnWorld,
+  sendGold,
   viewCreature,
   hideGroupButton,
   doMonsterColors,
   doNotKill,
-  startMonsterLog,
+  monsterLog,
   repairButton,
   combatLogger,
   onWorld,
-  prepareShop,
+  shop,
   injectRelic,
   msgCenterOffset,
   hideMapTooltip,
-  initButtons,
+  buttons,
   buffInfo,
   fixDebuff,
   interceptMouseEvents,
   champAttacks,
 ];
 
-export default function subscribes() {
+export default function newMap() {
   executeAll(usualRoutines);
   if (calf.userIsDev) { //  hide titan combat results, global top 100
     hideTitanCombatResults();

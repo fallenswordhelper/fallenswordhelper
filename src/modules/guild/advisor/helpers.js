@@ -1,11 +1,11 @@
 import './advisor.css';
-import add from '../../support/task';
 import createDiv from '../../common/cElement/createDiv';
 import createTable from '../../common/cElement/createTable';
 import insertElement from '../../common/insertElement';
 import partial from '../../common/partial';
 import { playerIdUrl } from '../../support/constants';
 import replaceChild from '../../common/replaceChild';
+import task from '../../support/task';
 
 export const advisorColumns = [
   { title: '<div class="fshBold">Member</div>' },
@@ -60,7 +60,7 @@ function doTable(tbl, data, callback) { // jQuery
 }
 
 function switcheroo(div, targetElement) {
-  add(3, partial(replaceChild, div, targetElement));
+  task(3, partial(replaceChild, div, targetElement));
 }
 
 export function injectTable(targetElement, tfoot, data) {
@@ -68,6 +68,6 @@ export function injectTable(targetElement, tfoot, data) {
   const tbl = createTable({ className: 'fshDataTable fshXSmall hover' });
   insertElement(div, tbl);
   insertElement(tbl, tfoot);
-  add(3, doTable, [tbl, data, partial(switcheroo, div, targetElement)]);
+  task(3, doTable, [tbl, data, partial(switcheroo, div, targetElement)]);
   return div;
 }

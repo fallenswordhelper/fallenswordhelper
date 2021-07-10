@@ -3,7 +3,7 @@ import calf from '../support/calf';
 import getValue from '../system/getValue';
 import { helpLink } from './simpleCheckbox';
 import isChecked from '../system/isChecked';
-import networkIcon from './settingObj';
+import networkIcon from './networkIcon';
 
 const topBlock = [
   'moveGuildList',

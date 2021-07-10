@@ -1,14 +1,14 @@
-import add from '../../support/task';
 import displayUpgradeMsg from './displayUpgradeMsg';
 import getValue from '../../system/getValue';
 import jQueryPresent from '../../common/jQueryPresent';
 import notGoldUpgradesPage from './notGoldUpgradesPage';
 import { now } from '../../support/now';
 import parseGoldUpgrades from './parseGoldUpgrades';
+import task from '../../support/task';
 import upgradesGold from '../../ajax/upgradesGold';
 
 function asyncParse(data) {
-  add(3, parseGoldUpgrades, [data]);
+  task(3, parseGoldUpgrades, [data]);
 }
 
 function checkLastUpgrade() {

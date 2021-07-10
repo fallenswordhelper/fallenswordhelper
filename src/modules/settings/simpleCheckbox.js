@@ -1,7 +1,7 @@
 import fallback from '../system/fallback';
 import isValueChecked from './isValueChecked';
 import mySimpleCheckboxes from './simple.json';
-import networkIcon from './settingObj';
+import networkIcon from './networkIcon';
 
 export function helpLink(title, text) {
   return '&nbsp;[&nbsp;<span class="fshLink tip-static" data-tipped="'

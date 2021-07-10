@@ -159,7 +159,7 @@ function makeQtCheckbox(items, injector) {
     partial(toggleQuickTake, items, injector));
 }
 
-export default function injectMailbox() {
+export default function mailbox() {
   if (jQueryNotPresent() || !pCC) { return; }
   const items = getArrayByTagName('a', pCC);
   if (items.length === 0) { return; } // Empty mailbox

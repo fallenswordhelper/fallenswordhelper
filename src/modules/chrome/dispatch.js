@@ -1,4 +1,3 @@
-import add from '../support/task';
 import calf from '../support/calf';
 import doQuickLinks from './doQuickLinks';
 import getUrlParameter from '../system/getUrlParameter';
@@ -15,6 +14,7 @@ import pageSwitcher from './pageSwitcher/pageSwitcher';
 import querySelector from '../common/querySelector';
 import screenview from '../analytics/screenview';
 import setup from '../analytics/setup';
+import task from '../support/task';
 import { end, start } from '../analytics/timing';
 
 let cmd;
@@ -105,7 +105,7 @@ async function runCore(cssPrm) {
   getCoreFunction();
   await cssPrm;
   lookForHcsData();
-  add(3, asyncDispatcher);
+  task(3, asyncDispatcher);
   isMessageSound();
   /* This must be at the end in order not to
   screw up other findNode calls (Issue 351) */

@@ -14,7 +14,7 @@ import setInnerHtml from './dom/setInnerHtml';
 import setText from './dom/setText';
 import setValue from './system/setValue';
 
-let upgrades;
+let playerUpgrades;
 let currentFSP;
 const warehouse = {};
 
@@ -23,7 +23,7 @@ function includesText(text, el) {
 }
 
 function findText(text) {
-  return upgrades.find(partial(includesText, text));
+  return playerUpgrades.find(partial(includesText, text));
 }
 
 function getInputCell(label) {
@@ -123,8 +123,8 @@ function saveUpgradeValue(upgrade, key) {
   }
 }
 
-export default function storePlayerUpgrades() {
-  upgrades = querySelectorArray('#pCC > table:last-of-type > tbody > '
+export default function upgrades() {
+  playerUpgrades = querySelectorArray('#pCC > table:last-of-type > tbody > '
     + 'tr:nth-child(even) > td:first-child');
   saveUpgradeValue('+1 Max Allies', 'alliestotal');
   saveUpgradeValue('+1 Max Enemies', 'enemiestotal');

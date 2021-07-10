@@ -5,9 +5,9 @@ import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
 import {
   combatLog,
   injectBuffLog,
-  injectMonsterLog,
   injectQuickLinkManager,
-  injectRecipeManager,
+  monstorLog,
+  recipeMgr,
 } from '../pageSwitcher/loader';
 import {
   defSubcmd,
@@ -17,7 +17,7 @@ import {
 
 function recipeManagerLink(linkConfig) {
   if (linkConfig.recipeManagerLink) {
-    anchorButton('1', 'Recipe Manager', injectRecipeManager, 'nav-character-log');
+    anchorButton('1', 'Recipe Manager', recipeMgr, 'nav-character-log');
   }
 }
 
@@ -53,7 +53,7 @@ function combatLogLink(linkConfig) {
 
 function creatureLogLink(linkConfig) {
   if (linkConfig.creatureLogLink && getValue('showMonsterLog')) {
-    anchorButton('1', 'Creature Logs', injectMonsterLog,
+    anchorButton('1', 'Creature Logs', monstorLog,
       'nav-character-notepad');
   }
 }

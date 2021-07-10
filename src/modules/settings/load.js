@@ -43,7 +43,7 @@ function buildSettingsObj(acc, curr) {
   return acc;
 }
 
-export default function injectSaveSettings() { // Hybrid
+export default function load() { // Hybrid
   if (jQueryNotPresent()) { return; }
   const fshSettings = listValues().reduce(buildSettingsObj, {});
   drawBox(pCC, fshSettings);

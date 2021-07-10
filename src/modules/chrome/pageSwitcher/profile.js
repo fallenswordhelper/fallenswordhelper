@@ -1,15 +1,15 @@
 import {
-  injectBioWidgets,
-  injectProfile,
+  bioWidgets,
   injectProfileDropItems,
+  profile,
 } from './loader';
 
 export default {
-  '-': { '-': injectProfile },
-  managecombatset: { '-': injectProfile },
-  report: { '-': injectProfile },
-  equipitem: { '-': injectProfile },
-  useitem: { '-': injectProfile },
-  changebio: { '-': injectBioWidgets },
+  '-': { '-': profile },
+  managecombatset: { '-': profile },
+  report: { '-': profile },
+  equipitem: { '-': profile },
+  useitem: { '-': profile },
+  changebio: { '-': bioWidgets },
   dropitems: { '-': injectProfileDropItems },
 };

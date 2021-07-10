@@ -11,9 +11,9 @@ import getInvTable from './getInvTable';
 import hideElement from '../../common/hideElement';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import { insertQuickExtract } from '../../chrome/pageSwitcher/loader';
 import jQueryDialog from '../../chrome/jQueryDialog/jQueryDialog';
 import onclick from '../../common/onclick';
+import { quickExtract } from '../../chrome/pageSwitcher/loader';
 import sendEvent from '../../analytics/sendEvent';
 
 const buttonLabels = [
@@ -33,7 +33,7 @@ function componentBtnContainer() {
 
 function quickExtractHandler() {
   sendEvent('components', 'insertQuickExtract');
-  jQueryDialog(insertQuickExtract);
+  jQueryDialog(quickExtract);
 }
 
 function addDelBtn(el) {

@@ -1,7 +1,7 @@
-import add from '../../../support/task';
 import badData from '../badData';
 import fetchdata from '../../../ajax/fetchdata';
 import partial from '../../../common/partial';
+import task from '../../../support/task';
 
 const creatureCache = [];
 
@@ -20,7 +20,7 @@ function nextTick(resolve, cached) { resolve(cached); }
 
 function fromCache(cached) {
   return new Promise(((resolve) => {
-    add(3, nextTick, [resolve, cached]);
+    task(3, nextTick, [resolve, cached]);
   }));
 }
 

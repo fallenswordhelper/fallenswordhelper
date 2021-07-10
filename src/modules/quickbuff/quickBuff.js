@@ -18,7 +18,7 @@ function setupEventHandlers() {
   onclick(getElementById('players'), addBuffLevels);
 }
 
-export default function injectQuickBuff() { // jQuery.min
+export default function quickBuff() { // jQuery.min
   if (jQueryNotPresent()) { return; }
   const quickbuffDiv = getElementById('quickbuff');
   if (!quickbuffDiv) { return; }

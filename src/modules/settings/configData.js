@@ -8,9 +8,9 @@ import guildPrefs from './guildPrefs';
 import leftHandLinks from './leftHandLinks';
 import logPrefs from './logPrefs';
 import otherPrefs from './otherPrefs';
-import prefs from './worldPrefs';
 import profilePrefs from './profilePrefs';
 import questPrefs from './questPrefs';
+import worldPrefs from './worldPrefs';
 import { notepadBlankUrl, playerIdUrl } from '../support/constants';
 
 function storageDetails() {
@@ -69,7 +69,7 @@ function corePrefs() {
     // Guild Manage
     guildPrefs,
     // World Screen
-    prefs,
+    worldPrefs,
     // Log screen prefs
     logPrefs,
     // Equipment screen prefs

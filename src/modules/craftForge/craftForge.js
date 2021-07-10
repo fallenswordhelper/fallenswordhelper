@@ -1,5 +1,4 @@
 import './craftForge.css';
-import add from '../support/task';
 import calf from '../support/calf';
 import createDiv from '../common/cElement/createDiv';
 import createInput from '../common/cElement/createInput';
@@ -17,6 +16,7 @@ import makeFolderSpans from '../common/makeFolderSpans';
 import on from '../common/on';
 import onclick from '../common/onclick';
 import { pCC } from '../support/layout';
+import task from '../support/task';
 import toggleForce from '../common/toggleForce';
 import { defTable, itemRE } from '../support/constants';
 
@@ -125,7 +125,7 @@ function doPerfSwitch(inject) {
 function inventory(data) {
   if (data.items && itemTable) {
     invItems = data.items;
-    add(4, enhanceWarehouse);
+    task(4, enhanceWarehouse);
     const inject = doFolderButtons(data.folders);
     doPerfSwitch(inject);
   }
@@ -145,6 +145,6 @@ function getItems() {
 export default function craftForge() {
   if (jQueryPresent()) {
     getInventoryById().then(inventory);
-    add(3, getItems);
+    task(3, getItems);
   }
 }

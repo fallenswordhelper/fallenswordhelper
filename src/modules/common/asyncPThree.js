@@ -1,5 +1,5 @@
-import add from '../support/task';
+import task from '../support/task';
 
 export default function asyncPThree(fnList) {
-  fnList.forEach((fn) => add(3, fn));
+  fnList.forEach((fn) => task(3, fn));
 }

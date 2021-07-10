@@ -16,7 +16,7 @@ function setupPref(prefName, injector) {
   insertElement(injector, flDiv);
 }
 
-export default function guildHall() {
+export default function hall() {
   const prefName = 'collapseHallPosts';
   const theTable = pCC.lastElementChild;
   if (theTable instanceof HTMLTableElement) {

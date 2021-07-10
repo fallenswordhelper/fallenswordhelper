@@ -1,4 +1,3 @@
-import add from '../support/task';
 import colouredDots from '../common/colouredDots';
 import doStatTotal from './doStatTotal';
 import executeAll from '../common/executeAll';
@@ -9,6 +8,7 @@ import interceptSubmit from '../common/interceptSubmit';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import runDefault from '../common/runDefault';
 import shouldRender from './bio/shouldRender';
+import task from '../support/task';
 
 function doGuildRelationship() {
   if (getValue('showGuildRelationship')) {
@@ -63,14 +63,14 @@ function updateDom() {
     doStatTotal,
     doBuffLevels,
   ]);
-  add(3, colouredDots);
+  task(3, colouredDots);
 }
 
 function allowBack() {
   if (!getIsSelf()) { interceptSubmit(); }
 }
 
-export default function injectProfile() {
+export default function profile() {
   if (jQueryNotPresent()) { return; }
   updateDom();
   allowBack();

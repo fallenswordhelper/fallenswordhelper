@@ -1,11 +1,11 @@
-import add from '../support/task';
 import calf from '../support/calf';
-import draggable from '../common/dragStart';
+import draggable from '../common/draggable';
 import escapeHtml from '../system/escapeHtml';
 import getElementById from '../common/getElementById';
 import getValue from '../system/getValue';
 import getValueJSON from '../system/getValueJSON';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import task from '../support/task';
 
 function retBool(bool, ifTrue, ifFalse) {
   if (bool) {
@@ -63,6 +63,6 @@ function injectQuickLinks() {
 
 export default function doQuickLinks() {
   if (!calf.huntingMode) {
-    add(3, injectQuickLinks);
+    task(3, injectQuickLinks);
   }
 }

@@ -65,7 +65,7 @@ function devLog(args) {
   }
 }
 
-export default function add(priority, fn, args, scope) {
+export default function task(priority, fn, args, scope) {
   if (calf.userIsDev) { //  Not sending args as Array
     devLog(args);
   }

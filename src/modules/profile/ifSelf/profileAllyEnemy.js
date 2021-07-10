@@ -27,7 +27,7 @@ function countContacts(isAllies, el) {
     contactSlots(numberOfContacts, getValue(totalKey(isAllies)))}</span>`);
 }
 
-export default function profileParseAllyEnemy() {
+export default function profileAllyEnemy() {
   // Allies/Enemies count/total function
   const headings = querySelectorArray('#profileLeftColumn strong');
   headings.filter(contains('Allies')).forEach(partial(countContacts, true));

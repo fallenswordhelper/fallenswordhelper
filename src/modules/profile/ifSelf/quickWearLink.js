@@ -1,16 +1,16 @@
 import { cmdUrl } from '../../support/constants';
 import createSpan from '../../common/cElement/createSpan';
 import insertElement from '../../common/insertElement';
-import { insertQuickWear } from '../../chrome/pageSwitcher/loader';
 import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import jQueryDialog from '../../chrome/jQueryDialog/jQueryDialog';
 import onclick from '../../common/onclick';
 import querySelector from '../../common/querySelector';
+import { quickWear } from '../../chrome/pageSwitcher/loader';
 import sendEvent from '../../analytics/sendEvent';
 
 function openQwDialog() {
   sendEvent('profile', 'insertQuickWear');
-  jQueryDialog(insertQuickWear);
+  jQueryDialog(quickWear);
 }
 
 export default function quickWearLink() {

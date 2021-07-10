@@ -1,6 +1,6 @@
 import runDefault from '../../../common/runDefault';
 
-const injectReportPaint = () => {
+const guildReport = () => {
   runDefault(import('../../../guild/inventory/guildReport/guildReport'));
 };
 const injectGuildAddTagsWidgets = () => {
@@ -11,7 +11,7 @@ const storeitems = () => {
 };
 
 export default {
-  report: injectReportPaint,
+  report: guildReport,
   addtags: injectGuildAddTagsWidgets,
   removetags: injectGuildAddTagsWidgets,
   storeitems,

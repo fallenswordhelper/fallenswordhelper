@@ -3,7 +3,7 @@ import groups from './groups';
 import hall from './hall';
 import inventory from './inventory';
 import runDefault from '../../../common/runDefault';
-import { injectBioWidgets, injectGuild } from '../loader';
+import { bioWidgets, injectGuild } from '../loader';
 
 const guildChat = () => { runDefault(import('../../../logs/guildChat')); };
 const guildLog = () => { runDefault(import('../../../logs/guildLog')); };
@@ -13,7 +13,7 @@ const guildMailbox = () => {
 const injectGuildBank = () => {
   runDefault(import('../../../bank/injectGuildBank'));
 };
-const injectGuildRanks = () => {
+const rank = () => {
   runDefault(import('../../../guild/ranks/rank'));
 };
 const injectRPUpgrades = () => {
@@ -31,11 +31,11 @@ export default {
   groups,
   manage: { '-': injectGuild },
   advisor,
-  history: { '-': injectBioWidgets },
+  history: { '-': bioWidgets },
   view: { '-': injectGuild },
   scouttower: { '-': injectScouttower },
   mailbox: { '-': guildMailbox },
-  ranks: { '-': injectGuildRanks },
+  ranks: { '-': rank },
   conflicts: { rpupgrades: injectRPUpgrades },
   bank: { '-': injectGuildBank },
   hall,

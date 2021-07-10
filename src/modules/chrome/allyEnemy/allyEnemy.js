@@ -1,4 +1,3 @@
-import add from '../../support/task';
 import addContacts from './addContacts';
 import calf from '../../support/calf';
 import classHandler from '../../common/classHandler';
@@ -16,6 +15,7 @@ import openQuickBuffByName from '../../common/openQuickBuffByName';
 import { pCR } from '../../support/layout';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
+import task from '../../support/task';
 import {
   enemyBuffCheckOff,
   enemyBuffCheckOn,
@@ -125,11 +125,11 @@ function makeDiv(data) {
 
 function nextTick(data) {
   if (data) {
-    add(3, makeDiv, [data]);
+    task(3, makeDiv, [data]);
   }
 }
 
-export default function prepareAllyEnemyList() {
+export default function allyEnemy() {
   if (jQueryNotPresent()) { return; }
   myStats(false).then(nextTick);
 }

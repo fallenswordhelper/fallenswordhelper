@@ -41,7 +41,7 @@ function isMatch(data, el) {
 
 function logType(data, ary) { return ary.some(partial(isMatch, data)); }
 
-export default function rowProfile(data) {
+export default function profiler(data) {
   const myIndex = lookup.findIndex(partial(logType, data));
   if (myIndex === -1) { return 0; }
   return myIndex;

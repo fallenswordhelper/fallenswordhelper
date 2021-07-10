@@ -1,4 +1,3 @@
-import add from '../../../../support/task';
 import batch from '../../../../common/batch';
 import createDiv from '../../../../common/cElement/createDiv';
 import createInput from '../../../../common/cElement/createInput';
@@ -15,6 +14,7 @@ import partial from '../../../../common/partial';
 import sendEvent from '../../../../analytics/sendEvent';
 import setInnerHtml from '../../../../dom/setInnerHtml';
 import setText from '../../../../dom/setText';
+import task from '../../../../support/task';
 
 let mapping;
 let selectRowTmp;
@@ -96,7 +96,7 @@ export function drawMapping(potOpts) {
   const mapTbl = createTable({ innerHTML: '<tbody></tbody>' });
   mapping.replaceChild(mapTbl, mapping.children[0]);
   on(mapping, 'mousedown', partial(renderDropDown, potOpts.myMap));
-  add(3, batch, [
+  task(3, batch, [
     [
       5,
       3,

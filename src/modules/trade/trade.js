@@ -1,5 +1,4 @@
 import './trade.css';
-import add from '../support/task';
 import calf from '../support/calf';
 import createTr from '../common/cElement/createTr';
 import defaults from '../support/dataObj.json';
@@ -14,6 +13,7 @@ import onclick from '../common/onclick';
 import oneByOne from './oneByOne';
 import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
+import task from '../support/task';
 
 function getHowMany(itemTables) {
   const howMany = parseInt(getElementById('fshSendHowMany').value, 10);
@@ -111,12 +111,12 @@ function injectTradeOld(itemList) {
   insertElementBefore(multiple, itemList.parentNode.parentNode);
 }
 
-export default function injectTrade() {
+export default function trade() {
   const itemList = getElementById('item-list');
   if (!itemList) { return; }
-  add(3, doFolders);
-  add(3, injectTradeOld, [itemList]);
+  task(3, doFolders);
+  task(3, injectTradeOld, [itemList]);
   if (calf.userIsDev) { //  oneByOne
-    add(3, oneByOne);
+    task(3, oneByOne);
   }
 }

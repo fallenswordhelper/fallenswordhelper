@@ -17,21 +17,15 @@ import runDefault from '../../common/runDefault';
 import scavenging from './scavenging';
 import toprated from './toprated';
 import trade from './trade';
-import { injectProfile, inventing, ufsgAllowBack } from './loader';
+import { profile as injectProfile, inventing, ufsgAllowBack } from './loader';
 
 const craftForge = () => { runDefault(import('../../craftForge/craftForge')); };
 const injectBank = () => { runDefault(import('../../bank/injectBank')); };
-const injectFindPlayer = () => {
-  runDefault(import('../../injectFindPlayer'));
-};
+const injectFindPlayer = () => { runDefault(import('../../injectFindPlayer')); };
 const injectMailbox = () => { runDefault(import('../../mailbox/mailbox')); };
-const injectQuickBuff = () => {
-  runDefault(import('../../quickbuff/quickBuff'));
-};
+const quickBuff = () => { runDefault(import('../../quickbuff/quickBuff')); };
 const injectTitan = () => { runDefault(import('../../injectTitan')); };
-const injectSettings = () => {
-  runDefault(import('../../settings/injectSettings'));
-};
+const injectSettings = () => { runDefault(import('../../settings/injectSettings')); };
 const ladder = () => { runDefault(import('../../ladder/ladder')); };
 const marketplace = () => { runDefault(import('../../marketplace')); };
 const points = () => { runDefault(import('./points')); };
@@ -70,7 +64,7 @@ export default {
   profile,
   pvpladder: { '-': { '-': ladder } },
   questbook,
-  quickbuff: { '-': { '-': injectQuickBuff } }, // No ga
+  quickbuff: { '-': { '-': quickBuff } }, // No ga
   scavenging,
   settings: { '-': { '-': injectSettings } },
   superelite: { '-': { '-': superelite } },

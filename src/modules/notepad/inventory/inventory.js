@@ -1,11 +1,10 @@
-import add from '../../support/task';
 import allthen from '../../common/allthen';
 import { buildInv } from './buildInv';
 import calf from '../../support/calf';
 import clearButton from './clearButton';
 import currentGuildId from '../../common/currentGuildId';
 import decorate from './decorate';
-import doTable from './table';
+import doTable from './doTable';
 import entries from '../../common/entries';
 import eventHandlers from './eventHandlers/eventHandlers';
 import executeAll from '../../common/executeAll';
@@ -22,6 +21,7 @@ import { pCC } from '../../support/layout';
 import setChecks from './setChecks';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setLvls from './setLvls';
+import task from '../../support/task';
 import {
   lvlFilter, rarityFilter, setFilter, typeFilter,
 } from './filters';
@@ -62,7 +62,7 @@ function doInventory() {
   const fshInv = doTable();
   eventHandlers(fshInv);
   // eslint-disable-next-line no-use-before-define
-  $('#fshRefresh').on('click', injectInventoryManagerNew);
+  $('#fshRefresh').on('click', inventory);
   clearButton(fshInv);
 }
 
@@ -78,7 +78,7 @@ function getInvMan() {
 }
 
 function asyncCall() {
-  add(3, getInvMan);
+  task(3, getInvMan);
 }
 
 function syncInvMan() { // jQuery
@@ -90,7 +90,7 @@ function syncInvMan() { // jQuery
   allthen(prm, asyncCall);
 }
 
-export default function injectInventoryManagerNew() {
+export default function inventory() {
   if (jQueryNotPresent()) { return; }
   if (calf.subcmd === 'guildinvmgr' && !currentGuildId()) { return; }
   doSpinner();

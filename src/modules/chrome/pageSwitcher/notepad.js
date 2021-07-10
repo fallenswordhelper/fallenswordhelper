@@ -7,24 +7,18 @@ import {
   injectFindBuffs,
   injectFindOther,
   injectFsBoxContent,
-  injectMonsterLog,
   injectOnlinePlayers,
   injectQuickLinkManager,
-  injectRecipeManager,
-  insertQuickExtract,
-  insertQuickWear,
+  monstorLog,
+  quickExtract,
+  quickWear,
+  recipeMgr,
 } from './loader';
 
-const injectInventoryManagerNew = () => {
-  runDefault(import('../../notepad/inventory/inventory'));
-};
-const injectNewGuildLog = () => {
-  runDefault(import('../../guild/newGuildLog/newGuildLog'));
-};
-const injectSaveSettings = () => { runDefault(import('../../settings/load')); };
-const reliclist = () => {
-  runDefault(import('../../notepad/reliclist/reliclist'));
-};
+const inventory = () => { runDefault(import('../../notepad/inventory/inventory')); };
+const newGuildLog = () => { runDefault(import('../../guild/newGuildLog/newGuildLog')); };
+const load = () => { runDefault(import('../../settings/load')); };
+const reliclist = () => { runDefault(import('../../notepad/reliclist/reliclist')); };
 const whosGotWhat = () => {
   if (!calf.userIsDev) { return; }
   runDefault(import('../../notepad/whosGotWhat/whosGotWhat'));
@@ -32,21 +26,21 @@ const whosGotWhat = () => {
 
 const notepad = {
   showlogs: { '-': combatLog },
-  invmanagernew: { '-': injectInventoryManagerNew }, // TODO
-  guildinvmgr: { '-': injectInventoryManagerNew }, // TODO
-  recipemanager: { '-': injectRecipeManager },
+  invmanagernew: { '-': inventory }, // TODO
+  guildinvmgr: { '-': inventory }, // TODO
+  recipemanager: { '-': recipeMgr },
   auctionsearch: { '-': injectAuctionSearch },
   onlineplayers: { '-': injectOnlinePlayers },
   quicklinkmanager: { '-': injectQuickLinkManager },
-  monsterlog: { '-': injectMonsterLog },
-  quickextract: { '-': insertQuickExtract },
-  quickwear: { '-': insertQuickWear },
+  monsterlog: { '-': monstorLog },
+  quickextract: { '-': quickExtract },
+  quickwear: { '-': quickWear },
   fsboxcontent: { '-': injectFsBoxContent },
   bufflogcontent: { '-': injectBuffLog },
-  newguildlog: { '-': injectNewGuildLog }, // TODO
+  newguildlog: { '-': newGuildLog }, // TODO
   findbuffs: { '-': injectFindBuffs },
   findother: { '-': injectFindOther },
-  savesettings: { '-': injectSaveSettings }, // TODO
+  savesettings: { '-': load }, // TODO
   reliclist: { '-': reliclist },
   whosgotwhat: { '-': whosGotWhat },
 };

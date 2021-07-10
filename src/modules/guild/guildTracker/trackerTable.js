@@ -1,5 +1,4 @@
 import './trackerTable.css';
-import add from '../../support/task';
 import alpha from '../../common/alpha';
 import createDiv from '../../common/cElement/createDiv';
 import createTBody from '../../common/cElement/createTBody';
@@ -13,6 +12,7 @@ import keys from '../../common/keys';
 import on from '../../common/on';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
+import task from '../../support/task';
 import {
   act, cur, gxp, lvl, max, utc, vl,
 } from './indexConstants';
@@ -77,7 +77,7 @@ function drawRows() {
 
 function queueDrawRows() {
   tgCont.classList.add('fshSpinner');
-  add(3, drawRows);
+  task(3, drawRows);
 }
 
 function myChange(e) {

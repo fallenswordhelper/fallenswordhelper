@@ -2,7 +2,7 @@ import bunchOfSimple from './bunchOfSimple';
 import escapeHtml from '../system/escapeHtml';
 import getValue from '../system/getValue';
 import isValueChecked from './isValueChecked';
-import networkIcon from './settingObj';
+import networkIcon from './networkIcon';
 import { helpLink, simpleCheckbox } from './simpleCheckbox';
 
 function quickSend() {

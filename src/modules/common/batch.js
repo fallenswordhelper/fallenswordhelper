@@ -1,12 +1,12 @@
-import add from '../support/task';
 import isFunction from './isFunction';
+import task from '../support/task';
 
 function moreToDo(limit, ctr, list) {
   return list && performance.now() < limit && ctr < list.length;
 }
 
 function maybeEndFn(priority, endFn) {
-  if (isFunction(endFn)) { add(priority, endFn); }
+  if (isFunction(endFn)) { task(priority, endFn); }
 }
 
 export default function batch([dur, priority, itemsAry, ctr, doFn, endFn]) {
@@ -17,7 +17,7 @@ export default function batch([dur, priority, itemsAry, ctr, doFn, endFn]) {
     localCounter += 1;
   }
   if (localCounter < itemsAry.length) {
-    add(priority, batch, [[
+    task(priority, batch, [[
       dur, priority, itemsAry, localCounter, doFn, endFn]]);
   } else {
     maybeEndFn(priority, endFn);

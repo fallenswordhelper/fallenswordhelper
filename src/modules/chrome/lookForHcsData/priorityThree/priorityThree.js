@@ -13,9 +13,9 @@ import getValue from '../../../system/getValue';
 import guildActivityTracker from './guildActivityTracker';
 import guildLogHref from './guildLogHref';
 import injectMenu from '../../accordion/injectMenu';
-import injectQuickMsgDialogJQ from '../../messaging/messaging';
 import joinAll from './joinAll';
 import levelCalc from './levelCalc';
+import messaging from '../../messaging/messaging';
 import scoutTower from './scoutTower';
 import seTracker from './seTracker';
 import staminaCalc from './staminaCalc';
@@ -74,7 +74,7 @@ const p3functions = [
   callUpgrade,
   callComposing,
   injectMenu,
-  injectQuickMsgDialogJQ,
+  messaging,
   statbar,
   staminaCalc,
   levelCalc,

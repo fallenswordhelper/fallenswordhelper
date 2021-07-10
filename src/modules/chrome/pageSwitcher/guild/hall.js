@@ -1,9 +1,9 @@
-import { injectBioWidgets } from '../loader';
+import { bioWidgets } from '../loader';
 import runDefault from '../../../common/runDefault';
 
-const guildHall = () => { runDefault(import('../../../guild/hall/hall')); };
+const hall = () => { runDefault(import('../../../guild/hall/hall')); };
 
 export default {
-  '-': guildHall,
-  post: injectBioWidgets,
+  '-': hall,
+  post: bioWidgets,
 };

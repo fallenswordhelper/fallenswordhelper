@@ -165,7 +165,7 @@ function setupTable(content) {
   insertElement(content, extTbl);
 }
 
-export default function insertQuickExtract(injector) { // jQuery.min
+export default function quickExtract(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
   const content = injector || pCC;
   setupTable(content);

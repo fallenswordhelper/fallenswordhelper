@@ -34,7 +34,7 @@ function initMonsterLog() {
   }
 }
 
-export default function startMonsterLog() { // jQuery.min
+export default function monsterLog() { // jQuery.min
   getMonsterPrefs();
   $.subscribe('-1-success.action-response '
     + '4-success.action-response '

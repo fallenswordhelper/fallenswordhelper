@@ -188,7 +188,7 @@ function levelStats(e, data) {
   }
 }
 
-export default function initButtons() {
+export default function buttons() {
   injectButtons();
   $.subscribe(defRealmUpdate, realmUpdate);
   $.subscribe(defPlayerLevel, levelStats);

@@ -137,7 +137,7 @@ function joinFuncs() {
   ].join('');
 }
 
-export default function prefs() {
+export default function worldPrefs() {
   // World Screen
   return '<tr><th colspan="2"><b>'
     + `World screen/Hunting preferences</b></th></tr>${

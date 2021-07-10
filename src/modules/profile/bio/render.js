@@ -4,7 +4,7 @@ function buffToggles(acc, buff, i) {
     buff.replace(/(`~)|(~`)|(\{b\})|(\{\/b\})/g, '')}</span>`);
 }
 
-export default function renderBio(_bioContents) {
+export default function render(_bioContents) {
   // This is also called by bio preview
   let bioContents = _bioContents.replace(/\{b\}/g, '`~')
     .replace(/\{\/b\}/g, '~`');

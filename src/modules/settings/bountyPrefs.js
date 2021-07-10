@@ -2,7 +2,7 @@ import bunchOfSimple from './bunchOfSimple';
 import calf from '../support/calf';
 import { helpLink } from './simpleCheckbox';
 import isChecked from '../system/isChecked';
-import networkIcon from './settingObj';
+import networkIcon from './networkIcon';
 
 function showActiveBounties() {
   return `<tr><td align= "right">${networkIcon

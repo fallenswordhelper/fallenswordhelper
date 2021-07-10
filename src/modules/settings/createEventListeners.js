@@ -14,7 +14,7 @@ import setValue from '../system/setValue';
 import toggleVisibilty from '../common/toggleVisibilty';
 import {
   combatLog,
-  injectMonsterLog,
+  monstorLog,
 } from '../chrome/pageSwitcher/loader';
 
 function findEl(el, name) {
@@ -90,7 +90,7 @@ function showLogs() {
 
 function showMonsterLogs() {
   sendEvent('settingsPage', 'injectMonsterLog');
-  jQueryDialog(injectMonsterLog);
+  jQueryDialog(monstorLog);
 }
 
 function doTickAll() {

@@ -1,10 +1,10 @@
 import runDefault from '../../common/runDefault';
 
-const injectTrade = () => { runDefault(import('../../trade/trade')); };
+const trade = () => { runDefault(import('../../trade/trade')); };
 
 export default {
-  '-': { '-': injectTrade },
-  sendgold: { '-': injectTrade },
-  createsecure: { '-': injectTrade },
-  docreatesecure: { '-': injectTrade },
+  '-': { '-': trade },
+  sendgold: { '-': trade },
+  createsecure: { '-': trade },
+  docreatesecure: { '-': trade },
 };

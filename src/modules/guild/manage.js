@@ -1,4 +1,3 @@
-import add from '../support/task';
 import buffLinks from './buffLinks';
 import conflictInfo from './conflictInfo';
 import contains from '../common/contains';
@@ -13,6 +12,7 @@ import partial from '../common/partial';
 import playerName from '../common/playerName';
 import progressBar from './progressBar';
 import setInnerHtml from '../dom/setInnerHtml';
+import task from '../support/task';
 import { guildSubcmdUrl, recallUserUrl } from '../support/constants';
 import { logoToggle, statToggle, structureToggle } from './panelToggle';
 
@@ -40,7 +40,7 @@ function getLhsColTab() {
 }
 
 function lhsAdd(leftHandSideColumnTable, fn) {
-  add(3, fn, [leftHandSideColumnTable]);
+  task(3, fn, [leftHandSideColumnTable]);
 }
 
 function lhsAdditions(leftHandSideColumnTable) {
@@ -57,16 +57,16 @@ function ajaxStuff(leftHandSideColumnTable) {
   if (jQueryNotPresent()) { return; }
   // Detailed conflict information
   if (getValue('detailedConflictInfo')) {
-    add(3, conflictInfo, [leftHandSideColumnTable]);
+    task(3, conflictInfo, [leftHandSideColumnTable]);
   }
-  add(4, guildTracker);
+  task(4, guildTracker);
 }
 
 export default function manage() {
   if (!pCC) { return; }
   const leftHandSideColumnTable = getLhsColTab();
   lhsAdditions(leftHandSideColumnTable);
-  add(3, buffLinks);
+  task(3, buffLinks);
   ajaxStuff(leftHandSideColumnTable);
   progressBar();
 }

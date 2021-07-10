@@ -11,7 +11,7 @@ import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
 import { pCC } from '../../support/layout';
-import renderBio from './render';
+import render from './render';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setValue from '../../system/setValue';
 import testQuant from '../../system/testQuant';
@@ -115,11 +115,11 @@ function bioHeight() {
 
 function updateBioCharacters() {
   const bioContents = convertTextToHtml(textArea.value);
-  const rendered = renderBio(bioContents);
+  const rendered = render(bioContents);
   setInnerHtml(rendered || bioContents, previewArea);
 }
 
-export default function injectBioWidgets() {
+export default function bioWidgets() {
   bioEditLines = getValue('bioEditLines');
   textArea = getElementById('textInputBox');
   if (!textArea) { return; }

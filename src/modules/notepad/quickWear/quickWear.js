@@ -137,6 +137,6 @@ function hasJquery(injector) { // jQuery.min
   getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }
 
-export default function insertQuickWear(injector) {
+export default function quickWear(injector) {
   if (jQueryPresent()) { hasJquery(injector); }
 }

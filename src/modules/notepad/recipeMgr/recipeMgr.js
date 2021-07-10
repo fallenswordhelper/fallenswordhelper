@@ -29,7 +29,7 @@ function rmEvtHdl(evt) {
   }
 }
 
-export default function injectRecipeManager(injector) { // jQuery.min
+export default function recipeMgr(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
   const content = injector || pCC;
   get('fsh_recipeBook').then(partial(gotRecipeBook, content));

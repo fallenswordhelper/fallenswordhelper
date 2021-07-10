@@ -1,5 +1,4 @@
 import './rawData.css';
-import add from '../../support/task';
 import createBr from '../../common/cElement/createBr';
 import createButton from '../../common/cElement/createButton';
 import createDiv from '../../common/cElement/createDiv';
@@ -11,6 +10,7 @@ import jsonParse from '../../common/jsonParse';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import { set } from '../../system/idb';
+import task from '../../support/task';
 
 let ioText;
 let saveBtn;
@@ -25,7 +25,7 @@ function drawRawData(trackerData) {
 export function queueRawData(trackerData) {
   if (trackerData) {
     io.classList.add('fshSpinner');
-    add(4, drawRawData, [trackerData]);
+    task(4, drawRawData, [trackerData]);
   }
 }
 

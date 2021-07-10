@@ -1,6 +1,6 @@
 import './helperMenu.css';
 import createDiv from '../../common/cElement/createDiv';
-import draggable from '../../common/dragStart';
+import draggable from '../../common/draggable';
 import functionLookup from './functionLookup';
 import getElementById from '../../common/getElementById';
 import getHelperMenuBlob from './getHelperMenuBlob';

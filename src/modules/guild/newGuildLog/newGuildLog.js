@@ -19,8 +19,8 @@ import onclick from '../../common/onclick';
 import { pCC } from '../../support/layout';
 import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import partial from '../../common/partial';
+import profiler from './profiler';
 import querySelector from '../../common/querySelector';
-import rowProfile from './profiler';
 import selfIdIs from '../../common/selfIdIs';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
@@ -77,7 +77,7 @@ function getTableList(tableList) {
       break;
     }
     tmpGuildLog.push([currPage * 100 + i, timestamp, myDate, myMsg,
-      rowProfile(myMsg)]);
+      profiler(myMsg)]);
   }
 }
 
@@ -268,7 +268,7 @@ function gotOptions(guildLog) {
   getGuildLogPage(1).then(processFirstPage);
 }
 
-export default function injectNewGuildLog() { // jQuery.min
+export default function newGuildLog() { // jQuery.min
   if (jQueryNotPresent()) { return; }
   get('fsh_guildLog').then(gotOptions);
 }

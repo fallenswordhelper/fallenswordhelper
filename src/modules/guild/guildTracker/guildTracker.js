@@ -3,7 +3,7 @@ import calf from '../../support/calf';
 import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
 import createUl from '../../common/cElement/createUl';
-import draggable from '../../common/dragStart';
+import draggable from '../../common/draggable';
 import { get } from '../../system/idb';
 import injectShowTracker from './injectShowTracker';
 import insertElement from '../../common/insertElement';

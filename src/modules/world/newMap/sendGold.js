@@ -40,7 +40,7 @@ function prepareSendGoldOnWorld() {
   $.subscribe(defPlayerGold, updateSendGoldOnWorld);
 }
 
-export default function injectSendGoldOnWorld() { // jQuery
+export default function sendGold() { // jQuery
   initSendGoldOnWorld();
   if (sendGoldonWorld) { prepareSendGoldOnWorld(); }
 }

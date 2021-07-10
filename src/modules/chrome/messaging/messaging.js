@@ -27,7 +27,7 @@ function openQuickMsgDialog(name, msg, tip) { // jQuery
   }
 }
 
-export default function injectQuickMsgDialogJQ() {
+export default function messaging() {
   if (jQueryNotPresent()) { return; }
   window.openQuickMsgDialog = openQuickMsgDialog;
 }

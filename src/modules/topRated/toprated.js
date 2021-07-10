@@ -38,6 +38,6 @@ function testforTopRated() {
   return topRatedTests.every(functionPasses);
 }
 
-export default function injectTopRated() {
+export default function toprated() {
   if (testforTopRated()) { looksLikeTopRated(); }
 }

@@ -61,7 +61,7 @@ function makeRanks(json) {
   return entries(json).filter(notLastUpdate).reduce(rankArray, []); // FIXME
 }
 
-export default function injectGuildRanks() { // jQuery.min
+export default function rank() { // jQuery.min
   if (jQueryNotPresent()) { return; }
   getMembrList(false).then(makeRanks).then(gotMembers);
 }

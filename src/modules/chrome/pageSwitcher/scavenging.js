@@ -1,10 +1,8 @@
 import runDefault from '../../common/runDefault';
 
-const injectScavenging = () => {
-  runDefault(import('../../scavenging/scavenging'));
-};
+const scavenging = () => { runDefault(import('../../scavenging/scavenging')); };
 
 export default {
-  '-': { '-': injectScavenging },
-  process: { '-': injectScavenging },
+  '-': { '-': scavenging },
+  process: { '-': scavenging },
 };
