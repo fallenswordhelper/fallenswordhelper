@@ -1,6 +1,7 @@
 import arrayFrom from '../../common/arrayFrom';
 import batch from '../../common/batch';
 import entries from '../../common/entries';
+import fromEntries from '../../common/fromEntries';
 import getMembrList from '../../ajax/getMembrList';
 import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
@@ -8,6 +9,8 @@ import jQueryNotPresent from '../../common/jQueryNotPresent';
 import notLastUpdate from '../../common/notLastUpdate';
 import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
+import uniq from '../../common/uniq';
+import values from '../../common/values';
 import weightings from './weightings';
 import { doButtons, setCharacterRow } from './doButtons';
 
@@ -47,18 +50,13 @@ function gotMembers(memberRanks) {
   }
 }
 
-function rankArray(acc, ary) {
-  const thisRank = acc.find(partial(aRank, ary[1].rank_name));
-  if (thisRank) {
-    thisRank[1].push(ary[0]);
-  } else {
-    acc.push([ary[1].rank_name, [ary[0]]]);
-  }
-  return acc;
-}
-
 function makeRanks(json) {
-  return entries(json).filter(notLastUpdate).reduce(rankArray, []); // FIXME
+  const members = values(fromEntries(entries(json).filter(notLastUpdate)));
+  return uniq(members.map((m) => m.rank_name))
+    .map((r) => [
+      r,
+      members.filter((m) => m.rank_name === r).map((m) => m.username),
+    ]);
 }
 
 export default function rank() { // jQuery.min

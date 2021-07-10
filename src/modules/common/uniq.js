@@ -6,6 +6,7 @@ function genericFilter(removeBy, seen, item) {
     return seen.set(myItem, true);
   }
 }
+
 export default function uniq(arr, removeBy) {
   return arr.filter(partial(genericFilter, removeBy, new Map()));
 }
