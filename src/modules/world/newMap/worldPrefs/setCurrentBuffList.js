@@ -5,8 +5,7 @@ export let huntingBuffs;
 export let huntingBuffsName;
 
 export function setCurrentBuffList() {
-  // eslint-disable-next-line no-sparse-arrays
-  const lookup = [,
+  const lookup = [null,
     [calf.buffs, calf.buffsName],
     [calf.buffs2, calf.buffs2Name],
     [calf.buffs3, calf.buffs3Name],
