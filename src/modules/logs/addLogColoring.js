@@ -18,7 +18,6 @@ let nowUtc;
 let lastCheckUtc;
 
 function findChatTable(logScreen) {
-  // if (logScreen === 'Chat') {
   if (['Chat', 'Leader'].includes(logScreen)) {
     return querySelector('#pCC table table table table');
   }

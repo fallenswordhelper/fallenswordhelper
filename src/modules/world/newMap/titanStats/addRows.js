@@ -1,15 +1,11 @@
 import insertElement from '../../../common/insertElement';
 import partial from '../../../common/partial';
 
-// colSpan = attributes[0]
-// anElement = attributes[1]
-// isHeader = attributes[2]
-
-function addNextCell(row, attributes) {
+function addNextCell(row, [colSpan, anElement, isHeader]) {
   const aCell = row.insertCell(-1);
-  [aCell.colSpan] = attributes;
-  if (attributes[2]) { aCell.className = 'header'; }
-  insertElement(aCell, attributes[1]);
+  aCell.colSpan = colSpan;
+  if (isHeader) { aCell.className = 'header'; }
+  insertElement(aCell, anElement);
   return aCell;
 }
 
