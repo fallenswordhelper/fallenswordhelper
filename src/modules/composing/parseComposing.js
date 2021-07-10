@@ -13,9 +13,7 @@ const timeRE = /ETA:\s*(\d+)h\s*(\d+)m\s*(\d+)s/;
 function timeRemaining(el) {
   const timeArr = timeRE.exec(getText(el));
   if (timeArr) {
-    const milli = (timeArr[1] * 3600 + timeArr[2] * 60 + Number(timeArr[3]))
-      * 1000 + now;
-    return milli;
+    return (timeArr[1] * 3600 + timeArr[2] * 60 + Number(timeArr[3])) * 1000 + now;
   }
   return 0;
 }
