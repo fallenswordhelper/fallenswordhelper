@@ -38,10 +38,9 @@ function insertOption(selectTmp, el) {
 }
 
 function getSelect() {
-  const selectTmp = createSelect({
+  return createSelect({
     style: { width: '130px' },
   });
-  return selectTmp;
 }
 
 function getSelectRow() {

@@ -21,7 +21,6 @@ function meta(report) {
 
 export default function buffReportParser(scope) {
   buildTransform();
-  const buffsAttempted = querySelectorArray('#quickbuff-report font:not(font *)', scope)
+  return querySelectorArray('#quickbuff-report font:not(font *)', scope)
     .map(getTextTrim).map(meta);
-  return buffsAttempted;
 }
