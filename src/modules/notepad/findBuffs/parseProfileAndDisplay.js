@@ -53,7 +53,6 @@ function nameCell(doc, callback, lastActivity, bioCellHtml) { // Legacy
   const playerHREF = callback.href;
   const bioTip = bioCellHtml.replace(/'|"|\n/g, '');
   return `<nobr>${lastActivityIMG}&nbsp;<a href="${playerHREF}" target="new" `
-    // FIXME - It kind works now, but not guaranteed?
     + 'class="tip-static" '
     + `data-tipped="${bioTip}">${innerPlayerName}</a>`
     + '&nbsp;<span class="fshBlue">[<span class="a-reply fshLink" '
