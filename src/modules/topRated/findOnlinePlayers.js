@@ -12,14 +12,17 @@ import uniq from '../common/uniq';
 import { decoratePlayer, initDecorate } from './decoratePlayer';
 import { displaySpinner, hideSpinner } from './displaySpinner';
 
+const thisMember = ([, player], member) => member.name === player;
+const big = ([guild]) => guild !== -1;
+const getMembers = ({ members }) => members;
+const small = ([guild]) => guild === -1;
+
 function parsePlayer(player, data) {
   decoratePlayer(player[0], player[2], {
     last_login: String(data.last_activity),
     virtual_level: data.vl,
   });
 }
-
-function thisMember(player, member) { return member.name === player[1]; }
 
 function guildPlayer(guildMembers, player) {
   const member = guildMembers.find(partial(thisMember, player));
@@ -41,12 +44,8 @@ function returnSelf(player, json) {
   }
 }
 
-function big(guild) { return guild[0] !== -1; }
-
-function getMembers(acc, curr) { return acc.concat(curr.members); }
-
 function parseGuild(guild, json) {
-  const guildMembers = uniq(json.r.ranks, 'id').reduce(getMembers, []);
+  const guildMembers = uniq(json.r.ranks, 'id').flatMap(getMembers);
   guild[1].forEach(partial(guildPlayer, guildMembers));
 }
 
@@ -55,8 +54,6 @@ function returnGuild(guild, json) { if (json.s) { parseGuild(guild, json); } }
 function ajaxGuild(guild) {
   return daGuildView(guild[0]).then(partial(returnGuild, guild));
 }
-
-function small(guild) { return guild[0] === -1; }
 
 function ajaxPlayer(player) {
   if (player[1] !== playerName()) {

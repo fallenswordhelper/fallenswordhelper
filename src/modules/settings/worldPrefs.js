@@ -107,13 +107,10 @@ function theDoNotKillList() {
 }
 
 function huntingBuffsList(modeLabel, modeName, buffsName, buffs) {
-  return `<tr><td class="fshRight">${modeLabel} Hunting Buff List${
-    helpLink(`${modeLabel} Hunting Buff List`,
-      `${modeLabel} list of hunting buffs.`)
-  }:</td><td><input name="${modeName
-  }" title="Hunting mode name" value="${modeLabel
-  }"><input name="${buffsName}" value="${buffs
-  }"></td></tr>`;
+  const help = helpLink(`${modeLabel} Hunting Buff List`, `${modeLabel} list of hunting buffs.`);
+  return `<tr><td class="fshRight">${modeLabel} Hunting Buff List${help}:</td><td><input name="${
+    modeName}" title="Hunting mode name" value="${modeLabel}"><input name="${buffsName}" value="${
+    buffs}"></td></tr>`;
 }
 
 function huntingBuffsLists() {

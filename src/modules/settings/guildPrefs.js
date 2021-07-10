@@ -10,16 +10,17 @@ function injectSettingsGuildData(guildType) {
     title = ' title="This is automatically detected"';
     disabled = ' disabled';
   }
+  const guildValue = getValue(`guild${guildType}`);
+  const guildMessage = getValue(`guild${guildType}Message`);
   return `<input${title} name="guild${guildType}" class="fshSettingsText" value="${
-    getValue(`guild${guildType}`)}"${disabled}>`
+    guildValue}"${disabled}>`
 
     + '<br><span class="fshPoint" '
     + `id="toggleShowGuild${guildType}Message" data-linkto="showGuild${
       guildType}Message"> &#x00bb;</span>`
 
     + `<div id="showGuild${guildType}Message" class="fshHide">`
-    + `<input name="guild${guildType}Message" class="fshSettingsText" value="${
-      getValue(`guild${guildType}Message`)}">`
+    + `<input name="guild${guildType}Message" class="fshSettingsText" value="${guildMessage}">`
     + '</div>';
 }
 
