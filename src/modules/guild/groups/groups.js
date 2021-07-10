@@ -26,7 +26,7 @@ function fixTable() {
   tds[4].setAttribute('width', '7%');
 }
 
-export default function injectGroups() { // jQuery
+export default function groups() { // jQuery
   if (jQueryNotPresent()) { return; }
   const joinAll = querySelector('#pCC input[value="Join All Available Groups"]');
   if (!joinAll) { return; }

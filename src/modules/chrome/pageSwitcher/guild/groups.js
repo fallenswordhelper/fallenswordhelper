@@ -1,6 +1,6 @@
 import runDefault from '../../../common/runDefault';
 
-const injectGroups = () => {
+const groups = () => {
   runDefault(import('../../../guild/groups/groups'));
 };
 const injectGroupStats = () => {
@@ -9,7 +9,7 @@ const injectGroupStats = () => {
 
 export default {
   viewstats: injectGroupStats,
-  joinallgroupsundersize: injectGroups,
-  joinall: injectGroups,
-  '-': injectGroups,
+  joinallgroupsundersize: groups,
+  joinall: groups,
+  '-': groups,
 };

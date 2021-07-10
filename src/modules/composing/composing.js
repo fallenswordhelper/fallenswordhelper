@@ -57,6 +57,6 @@ function hasJQuery() {
   fastCompose();
 }
 
-export default function injectComposing() {
+export default function composing() {
   if (jQueryPresent() && pCC) { hasJQuery(); }
 }

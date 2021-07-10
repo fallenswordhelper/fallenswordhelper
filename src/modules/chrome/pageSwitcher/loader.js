@@ -1,7 +1,7 @@
 import runDefault from '../../common/runDefault';
 
 export const injectBioWidgets = () => { runDefault(import('../../profile/bio/bioWidgets')); };
-export const injectGuild = () => { runDefault(import('../../guild/guild')); };
+export const injectGuild = () => { runDefault(import('../../guild/injectGuild')); };
 export const injectProfile = () => { runDefault(import('../../profile/profile')); };
 export const injectProfileDropItems = () => { runDefault(import('../../profile/dropitems/injectProfileDropItems')); };
 export const injectQuestBookFull = () => { runDefault(import('../../questbook/injectQuestBookFull')); };

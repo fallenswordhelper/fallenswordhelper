@@ -1,10 +1,10 @@
 import runDefault from '../../../common/runDefault';
 
-const injectAdvisor = () => {
+const guildAdvisor = () => {
   runDefault(import('../../../guild/advisor/guildAdvisor'));
 };
 
 export default {
-  '-': injectAdvisor,
-  weekly: injectAdvisor,
+  '-': guildAdvisor,
+  weekly: guildAdvisor,
 };

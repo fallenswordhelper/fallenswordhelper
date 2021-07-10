@@ -79,7 +79,7 @@ function switcher(list) {
   }
 }
 
-export default function injectAdvisor() {
+export default function guildAdvisor() {
   if (jQueryNotPresent()) { return; }
   const list = getElementsByTagName('table', pCC)[1];
   if (!list) { return; }

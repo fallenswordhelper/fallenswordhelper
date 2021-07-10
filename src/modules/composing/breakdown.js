@@ -114,7 +114,7 @@ function setupHandlers() {
   onclick(getElementById(prefDisableBreakdownPrompts), togglePref);
 }
 
-export default function composingBreakdown() {
+export default function breakdown() {
   if (jQueryNotPresent()) { return; }
   perfFilter('composing');
   disableBreakdownPrompts = getValue(prefDisableBreakdownPrompts);
