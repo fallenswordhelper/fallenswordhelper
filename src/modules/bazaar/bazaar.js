@@ -1,22 +1,24 @@
-import daBazaarBuy from './_dataAccess/daBazaarBuy';
-import getArrayByTagName from './common/getArrayByTagName';
-import getElementById from './common/getElementById';
-import getElementsByTagName from './common/getElementsByTagName';
-import getText from './common/getText';
-import hasClass from './common/hasClass';
-import insertElement from './common/insertElement';
-import insertHtmlBeforeEnd from './common/insertHtmlBeforeEnd';
-import jQueryNotPresent from './common/jQueryNotPresent';
-import jsonFail from './common/jsonFail';
-import on from './common/on';
-import onclick from './common/onclick';
-import outputResult from './common/outputResult';
-import { pCC } from './support/layout';
-import setInnerHtml from './dom/setInnerHtml';
-import setText from './dom/setText';
-import testQuant from './system/testQuant';
+import './bazaar.css';
+import daBazaarBuy from '../_dataAccess/daBazaarBuy';
+import getArrayByTagName from '../common/getArrayByTagName';
+import getElementById from '../common/getElementById';
+import getElementsByTagName from '../common/getElementsByTagName';
+import getText from '../common/getText';
+import hasClass from '../common/hasClass';
+import insertElement from '../common/insertElement';
+import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import jQueryNotPresent from '../common/jQueryNotPresent';
+import jsonFail from '../common/jsonFail';
+import on from '../common/on';
+import onclick from '../common/onclick';
+import outputResult from '../common/outputResult';
+import { pCC } from '../support/layout';
+import querySelector from '../common/querySelector';
+import setInnerHtml from '../dom/setInnerHtml';
+import setText from '../dom/setText';
+import testQuant from '../system/testQuant';
 
-let bazaarTable = '<table id="fshBazaar"><tr><td colspan="5">Select an item to quick-buy:'
+let bazaarTable = '<table class="fshBazaar"><tr><td colspan="5">Select an item to quick-buy:'
   + '</td></tr><tr><td colspan="5">Select how many to quick-buy</td></tr>'
   + '<tr><td colspan="5"><input id="buy_amount" class="fshNumberInput" '
   + 'type="number" min="0" max="99" value="1"></td></tr><tr><td>@0@</td>'
@@ -24,7 +26,7 @@ let bazaarTable = '<table id="fshBazaar"><tr><td colspan="5">Select an item to q
   + '<td>@6@</td><td>@7@</td><td>@8@</td><td>@9@</td></tr><tr>'
   + '<td colspan="3">Selected item:</td><td id="selectedItem" colspan="2">'
   + '</td></tr><tr><td colspan="5">'
-  + '<span id="fshBazaarWarning" class="fshHide">'
+  + '<span class="fshBazaarWarning fshHide">'
   + 'Warning:<br>pressing [<span id="fshBuy" class="fshLink">This button'
   + '</span>] now will buy the <span id="quantity">1</span> item(s) WITHOUT '
   + 'confirmation!</span></td></tr><tr><td colspan="5">'
@@ -49,7 +51,7 @@ function testBuyAmount() {
 function buyTarget(target, theValue) {
   setText(theValue, spanQuantity);
   itemId = target.getAttribute('itemid');
-  spanWarning.removeAttribute('class');
+  spanWarning.classList.remove('fshHide');
   const dupNode = target.cloneNode(false);
   dupNode.className = 'bazaarSelected tip-dynamic';
   const selected = tdSelected;
@@ -101,7 +103,7 @@ function doMiniatures(el, i) {
 function setVars() {
   inputBuyAmount = getElementById('buy_amount');
   tdSelected = getElementById('selectedItem');
-  spanWarning = getElementById('fshBazaarWarning');
+  spanWarning = querySelector('.fshBazaarWarning');
   spanQuantity = getElementById('quantity');
   spanResultLabel = getElementById('buyResultLabel');
   olResults = getElementById('buy_result');
@@ -109,7 +111,7 @@ function setVars() {
 
 function evtHandlers() {
   setVars();
-  onclick(getElementById('fshBazaar'), select);
+  onclick(querySelector('.fshBazaar'), select);
   on(inputBuyAmount, 'input', quantity);
   onclick(getElementById('fshBuy'), buy);
 }

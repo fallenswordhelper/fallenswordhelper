@@ -77,25 +77,6 @@
   align-self: center;
 }
 
-/* Bazaar */
-.bazaarButton {
-  display: inline-block;
-  height: 20px;
-  width: 20px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  cursor: pointer;
-}
-.bazaarSelected {
-  display: inline-block;
-  height: 45px;
-  width: 45px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-
 /* Guild Add/Remove Tags */
 .guildTagSpinner {
   width: 14px;
@@ -376,12 +357,6 @@
   font-size: xx-small;
   border: none;
   height: 11px;
-}
-
-#fshBazaar {font-size: x-small;}
-#fshBazaar #fshBazaarWarning {
-  color: red;
-  font-size: small
 }
 
 /* Relic */
