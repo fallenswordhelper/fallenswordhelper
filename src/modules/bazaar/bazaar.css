@@ -8,20 +8,20 @@
 }
 
 .bazaarButton {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
   display: inline-block;
   height: 20px;
   width: 20px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  cursor: pointer;
 }
 
 .bazaarSelected {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   display: inline-block;
   height: 45px;
   width: 45px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
 }
