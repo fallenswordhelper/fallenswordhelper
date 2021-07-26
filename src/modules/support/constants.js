@@ -45,7 +45,7 @@ export const newGuildLogUrl = `${indexPhp}${newGuildLogLoc}`;
 export const auctionhouseUrl = `${cmdUrl}auctionhouse`;
 export const ahSearchUrl = `${auctionhouseUrl}&search=`;
 export const logUrl = `${cmdUrl}log`;
-export const doAddIgnore = `${logUrl}${defSubcmd}doaddignore&ignore_username=`;
+export const doAddIgnore = `${cmdUrl}ignore${defSubcmd}add&ignore_username=`;
 export const profileUrl = `${cmdUrl}profile`;
 export const playerIdUrl = `${profileUrl}&player_id=`;
 export const dropItemsUrl = `${profileUrl}${defSubcmd}dropitems`;
