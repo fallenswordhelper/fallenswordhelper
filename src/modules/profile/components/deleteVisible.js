@@ -25,5 +25,6 @@ function blatElement(visibleComponents, a) {
 }
 
 export default function deleteVisible(ary) {
+  console.log('deleteVisible', ary); // eslint-disable-line no-console
   ary.forEach(partial(blatElement, getVisibleComponents()));
 }

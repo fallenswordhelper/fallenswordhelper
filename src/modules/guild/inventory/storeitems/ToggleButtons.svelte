@@ -1,4 +1,5 @@
 <script>
+  import LinkButtonBracketed from '../../../common/LinkButtonBracketed.svelte';
   import calf from '../../../support/calf';
   import { createEventDispatcher } from 'svelte';
   import sendEvent from '../../../analytics/sendEvent';
@@ -30,32 +31,8 @@
   }
 </script>
 
-<style>
-  button {
-    background: transparent;
-    border: none;
-    color: blue;
-    cursor: pointer;
-    font-family : inherit;
-    font-size: 12px;
-    margin: 0;
-    padding: 0;
-    text-decoration: underline;
-    user-select: text;
-  }
-  button:first-of-type {
-    width: 11.8em;
-  }
-  button:nth-of-type(2) {
-    width: 10.6em;
-  }
-  button:nth-of-type(3) {
-    width: 10.8em;
-  }
-</style>
-
-[<button on:click={toggleShowExtraLinks}>{label(showExtraLinks)} AH and UFSG Links</button>]&nbsp;
-[<button on:click={toggleShowQuickDropLinks}>{label(showQuickDropLinks)} Quick Drop links</button>]&nbsp;
+<LinkButtonBracketed --button-width="11.8em" on:click={toggleShowExtraLinks}>{label(showExtraLinks)} AH and UFSG Links</LinkButtonBracketed>&nbsp;
+<LinkButtonBracketed --button-width="10.6em" on:click={toggleShowQuickDropLinks}>{label(showQuickDropLinks)} Quick Drop links</LinkButtonBracketed>&nbsp;
 {#if calf.subcmd2 === 'storeitems'}
-  [<button on:click={selectLocked}>Select All Guild Locked</button>]
+  <LinkButtonBracketed --button-width="10.8em" on:click={selectLocked}>Select All Guild Locked</LinkButtonBracketed>
 {/if}

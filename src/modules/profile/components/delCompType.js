@@ -18,6 +18,7 @@ function doSpinner(td) {
 }
 
 function destroyed(data) {
+  console.log('destroyed', data); // eslint-disable-line no-console
   if (data.s && isArray(data.r)) {
     deleteVisible(data.r);
     updateUsedCount(data.r.length);

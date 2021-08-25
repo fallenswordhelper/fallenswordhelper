@@ -1,5 +1,7 @@
+import calf from '../../support/calf';
 import classHandler from '../../common/classHandler';
 import clickThis from '../../common/clickThis';
+import componentsNew from '../components_new/components';
 import countComponent from './countComponent';
 import createDiv from '../../common/cElement/createDiv';
 import decorateButton from './decorateButton';
@@ -74,5 +76,10 @@ function addComposingButtons(thisInvTable) {
 export default function components() {
   const thisInvTable = getInvTable();
   if (!thisInvTable) { return; }
-  addComposingButtons(thisInvTable);
+  const test = 1;
+  if (test && calf.userIsDev) {
+    componentsNew();
+  } else {
+    addComposingButtons(thisInvTable);
+  }
 }
