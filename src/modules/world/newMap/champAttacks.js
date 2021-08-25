@@ -1,5 +1,4 @@
 import { cdn } from '../../system/system';
-import getElementsByTagName from '../../common/getElementsByTagName';
 import on from '../../common/on';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
@@ -47,6 +46,7 @@ function showChampAttack(toggle) {
 }
 
 function champAttackListener(e) {
+  // console.log(e);
   if (!e.ctrlKey
     || !e.shiftKey
     || e.target.tagName === 'INPUT'
@@ -66,14 +66,16 @@ function champAttackListener(e) {
 }
 
 function hideChampAttackListener(e) {
+  // console.log(e);
   if (ctrlShiftDown && (!e.ctrlKey || !e.shiftKey)) {
+    // console.log('release');
     ctrlShiftDown = false;
     showChampAttack(false);
   }
 }
 
 export default function champAttacks() {
-  const body = getElementsByTagName('body')[0];
+  const { body } = document;
   on(body, 'keydown', champAttackListener);
   on(body, 'keyup', hideChampAttackListener);
 }
