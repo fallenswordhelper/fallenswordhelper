@@ -1,2 +1,0 @@
-import{a as o}from"./chunk-6HK7Y3PF.js";import{a as u}from"./chunk-AN5TC666.js";import{a as i}from"./chunk-DEDCEYVR.js";var e={},s=-1;function f(r,n){o(3,n.func,[r])}function b(r,n){if(u.userIsDev&&console.log("publish",r),!!e[r])return e[r].forEach(i(f,n)),!0}function c(r,n){e[r]||(e[r]=[]),s+=1;let t=s.toString();return e[r].push({token:t,func:n}),t}function p(r,n){return e[r]?e[r][0].token:c(r,n)}export{b as a,c as b,p as c};
-//# sourceMappingURL=chunk-TPTVELUB.js.map

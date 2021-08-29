@@ -295,7 +295,6 @@ table.dataTable td {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
   color: #333;
   border: 1px solid #cacaca;
-  background-color: white;
   background: linear-gradient(to bottom, white 0%, #dcdcdc 100%);
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
@@ -310,7 +309,6 @@ table.dataTable td {
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   color: white;
   border: 1px solid #111;
-  background-color: #585858;
   background: linear-gradient(to bottom, #585858 0%, #111 100%);
 }
 .dataTables_wrapper .dataTables_paginate .ellipsis {
@@ -327,7 +325,6 @@ table.dataTable td {
   padding-top: 20px;
   text-align: center;
   font-size: 1.2em;
-  background-color: white;
   background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
 }
 .dataTables_wrapper .dataTables_length,
