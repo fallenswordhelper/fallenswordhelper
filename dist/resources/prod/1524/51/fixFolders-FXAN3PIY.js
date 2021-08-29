@@ -1,2 +1,0 @@
-import{a as f,b as n}from"./chunk-75KYA3CN.js";import"./chunk-ND3XCMOS.js";import{a}from"./chunk-GLHEJYH7.js";import"./chunk-EPYDL6MF.js";import"./chunk-TDNJGM62.js";import{b as t}from"./chunk-7DPOBF7C.js";import{a as c}from"./chunk-DEDCEYVR.js";function m(o,r){let e=`${t}ui/misc/${r}.png`;o.src!==e&&(o.src=e)}function i(o,r){r.dataset.folder===o?m(r,"folder_on"):m(r,"folder")}function p(o){a(".backpackFolderImage").forEach(c(i,String(o.folderId)))}function d(){let o=f();o&&n(o,p)}export{d as default};
-//# sourceMappingURL=fixFolders-FXAN3PIY.js.map
