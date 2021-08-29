@@ -45,7 +45,7 @@ export const newGuildLogUrl = `${indexPhp}${newGuildLogLoc}`;
 export const auctionhouseUrl = `${cmdUrl}auctionhouse`;
 export const ahSearchUrl = `${auctionhouseUrl}&search=`;
 export const logUrl = `${cmdUrl}log`;
-export const doAddIgnore = `${logUrl}${defSubcmd}doaddignore&ignore_username=`;
+export const doAddIgnore = `${cmdUrl}ignore${defSubcmd}add&ignore_username=`;
 export const profileUrl = `${cmdUrl}profile`;
 export const playerIdUrl = `${profileUrl}&player_id=`;
 export const dropItemsUrl = `${profileUrl}${defSubcmd}dropitems`;
@@ -159,3 +159,5 @@ export const oldActionSpinner = `${cdn}ui/world/action_spinner.gif`;
 export const combatSelector = '.fa-swords';
 export const noteSelector = '.fa-envelope';
 export const playerLinkSelector = 'a[href*="&player_id="]';
+
+export const darkCurseMultiplier = 0.001;
