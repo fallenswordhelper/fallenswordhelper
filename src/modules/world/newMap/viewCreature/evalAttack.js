@@ -1,3 +1,5 @@
+import { darkCurseMultiplier } from '../../../support/constants';
+
 /* eslint-disable no-param-reassign */
 function calcAttack(combat) {
   if (combat.callback.groupExists) {
@@ -6,9 +8,13 @@ function calcAttack(combat) {
   return combat.player.attackValue;
 }
 
+function calcDc(combat) {
+  return Math.floor(combat.creature.defense * combat.player.darkCurseLevel
+    * darkCurseMultiplier);
+}
+
 function calcHitByHowMuch(combat) {
-  const remainingDef = combat.creature.defense - combat.creature.defense
-    * combat.player.darkCurseLevel * 0.002;
+  const remainingDef = combat.creature.defense - calcDc(combat);
   if (combat.combatEvaluatorBias === 3) {
     return combat.overallAttackValue - Math.ceil(remainingDef) - 50;
   }
@@ -20,9 +26,7 @@ export default function evalAttack(combat) {
   const atkValue = calcAttack(combat);
   // Attack:
   if (combat.player.darkCurseLevel > 0) {
-    combat.extraNotes += `DC Bonus Attack = ${
-      Math.floor(combat.creature.defense
-      * combat.player.darkCurseLevel * 0.002)}<br>`;
+    combat.extraNotes += `DC Bonus Attack = ${calcDc(combat)}<br>`;
   }
   combat.nightmareVisageAttackMovedToDefense = Math.floor((atkValue
     + combat.counterAttackBonusAttack)

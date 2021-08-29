@@ -39,5 +39,7 @@ esbuild.serve({
   format: 'esm',
   outdir: `${dist}${calfPath}`,
   plugins: [sveltePlugin()],
+  sourcemap: true,
+  sourcesContent: false,
   splitting: true,
 });

@@ -4,6 +4,10 @@ import { defCharacterVirtualLevel, defStatLevel } from '../support/constants';
 
 let lvlToTest;
 
+function getModifier(tests, levelToTest) {
+  return tests.find(([test]) => test(levelToTest))?.[1](levelToTest);
+}
+
 function calcLvlToTest() {
   if (!lvlToTest) {
     lvlToTest = getValue(defCharacterVirtualLevel) || asInt(defStatLevel);
@@ -11,42 +15,73 @@ function calcLvlToTest() {
   return lvlToTest;
 }
 
+const lowerPvpCalcs = [
+  [(levelToTest) => levelToTest > 3999 + 50, () => 50],
+  [(levelToTest) => levelToTest > 3999 + 40, (levelToTest) => levelToTest - 4000],
+  [(levelToTest) => levelToTest > 2999 + 40, () => 40],
+  [(levelToTest) => levelToTest > 2999 + 30, (levelToTest) => levelToTest - 3000],
+  [(levelToTest) => levelToTest > 1999 + 30, () => 30],
+  [(levelToTest) => levelToTest > 1999 + 20, (levelToTest) => levelToTest - 2000],
+  [(levelToTest) => levelToTest > 999 + 20, () => 20],
+  [(levelToTest) => levelToTest > 999 + 10, (levelToTest) => levelToTest - 1000],
+  [(levelToTest) => levelToTest > 199 + 10, () => 10],
+  [(levelToTest) => levelToTest > 199 + 5, (levelToTest) => levelToTest - 200],
+  [(levelToTest) => levelToTest > 5, () => 5],
+  [(levelToTest) => levelToTest > 0, (levelToTest) => levelToTest - 1],
+];
+
+function calcLowerPvpLevel(levelToTest) {
+  return levelToTest - getModifier(lowerPvpCalcs, levelToTest);
+}
+
 export function getLowerPvpLevel() {
-  const levelToTest = calcLvlToTest();
-  let modifier = 10;
-  if (levelToTest <= 209) { modifier = levelToTest - 200; }
-  if (levelToTest <= 205) { modifier = 5; }
-  return levelToTest - modifier;
+  return calcLowerPvpLevel(calcLvlToTest());
+}
+
+const upperPvPCalcs = [
+  [(levelToTest) => levelToTest > 3999, () => 50],
+  [(levelToTest) => levelToTest > 2999, () => 40],
+  [(levelToTest) => levelToTest > 1999, () => 30],
+  [(levelToTest) => levelToTest > 999, () => 20],
+  [(levelToTest) => levelToTest > 199, () => 10],
+  [() => true, () => 5],
+];
+
+function calcUpperPvpLevel(levelToTest) {
+  return levelToTest + getModifier(upperPvPCalcs, levelToTest);
 }
 
 export function getUpperPvpLevel() {
-  const levelToTest = calcLvlToTest();
-  let modifier = 10;
-  if (levelToTest < 200) { modifier = 5; }
-  return levelToTest + modifier;
+  return calcUpperPvpLevel(calcLvlToTest());
 }
 
 const lowerGvgCalcs = [
-  [(levelToTest) => levelToTest >= 800, () => 100],
-  [(levelToTest) => levelToTest >= 752, (levelToTest) => levelToTest - 701],
-  [(levelToTest) => levelToTest >= 351, () => 50],
-  [(levelToTest) => levelToTest >= 326, (levelToTest) => levelToTest - 301],
-  [() => true, () => 25],
+  [(levelToTest) => levelToTest > 700 + 100, () => 100],
+  [(levelToTest) => levelToTest > 700 + 50, (levelToTest) => levelToTest - 701],
+  [(levelToTest) => levelToTest > 300 + 50, () => 50],
+  [(levelToTest) => levelToTest > 300 + 25, (levelToTest) => levelToTest - 301],
+  [(levelToTest) => levelToTest > 49 + 25, () => 25],
+  [(levelToTest) => levelToTest > 49, (levelToTest) => levelToTest - 50],
 ];
 
-function lowerModifier(levelToTest) {
-  return lowerGvgCalcs.find(([test]) => test(levelToTest))[1](levelToTest);
+function calcLowerGvgLevel(levelToTest) {
+  return levelToTest - getModifier(lowerGvgCalcs, levelToTest);
 }
 
 export function getLowerGvGLevel() {
-  const levelToTest = calcLvlToTest();
-  return levelToTest - lowerModifier(levelToTest);
+  return calcLowerGvgLevel(calcLvlToTest());
+}
+
+const upperGvgCalcs = [
+  [(levelToTest) => levelToTest > 700, () => 100],
+  [(levelToTest) => levelToTest > 300, () => 50],
+  [(levelToTest) => levelToTest > 49, () => 25],
+];
+
+function calcUpperGvgLevel(levelToTest) {
+  return levelToTest + getModifier(upperGvgCalcs, levelToTest);
 }
 
 export function getUpperGvgLevel() {
-  const levelToTest = calcLvlToTest();
-  let modifier = 100;
-  if (levelToTest <= 700) { modifier = 50; }
-  if (levelToTest <= 300) { modifier = 25; }
-  return levelToTest + modifier;
+  return calcUpperGvgLevel(calcLvlToTest());
 }
