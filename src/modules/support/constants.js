@@ -159,3 +159,5 @@ export const oldActionSpinner = `${cdn}ui/world/action_spinner.gif`;
 export const combatSelector = '.fa-swords';
 export const noteSelector = '.fa-envelope';
 export const playerLinkSelector = 'a[href*="&player_id="]';
+
+export const darkCurseMultiplier = 0.001;

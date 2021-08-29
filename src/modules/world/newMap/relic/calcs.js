@@ -1,4 +1,3 @@
-import { defenderMultiplier } from '../../../support/constants';
 import fallback from '../../../system/fallback';
 import playerDataObject from '../../../common/playerDataObject';
 import reduceBuffArray from '../../../common/reduceBuffArray';
@@ -33,6 +32,7 @@ import {
   lDCloakedElement,
   processingStatus,
 } from './secondaryElements';
+import { darkCurseMultiplier, defenderMultiplier } from '../../../support/constants';
 
 let defRawAttack;
 let defBuffedAttack;
@@ -180,11 +180,15 @@ function updateDefenderBuffedAttack(nmvEffect) {
   setTextCommas(defBuffedAttack, attackBuffedElement);
 }
 
+function calcDcEffect(points) {
+  return 1 - points * darkCurseMultiplier;
+}
+
 function updateDefenderBuffedDefense(nmv, defWithConst) {
   const defBuffedDefense = defWithConst + nmv;
   setTextCommas(defBuffedDefense, defenseBuffedElement);
-  setTextCommas(Math.ceil(defBuffedDefense * 0.55), dc225Element);
-  setTextCommas(Math.ceil(defBuffedDefense * 0.65), dc175Element);
+  setTextCommas(Math.ceil(defBuffedDefense * calcDcEffect(225)), dc225Element);
+  setTextCommas(Math.ceil(defBuffedDefense * calcDcEffect(175)), dc175Element);
 }
 
 function updateDefenderBuffedArmor() {
