@@ -122,13 +122,13 @@ const usualRoutines = [
   fixDebuff,
   interceptMouseEvents,
   champAttacks,
+  globalTop,
 ];
 
 export default function newMap() {
   executeAll(usualRoutines);
   if (calf.userIsDev) { //  hide titan combat results, global top 100
     hideTitanCombatResults();
-    globalTop();
   }
 }
 
