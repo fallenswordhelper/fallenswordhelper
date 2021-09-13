@@ -1,4 +1,5 @@
 import './helperMenu.css';
+import classHandler from '../../common/classHandler';
 import createDiv from '../../common/cElement/createDiv';
 import draggable from '../../common/draggable';
 import functionLookup from './functionLookup';
@@ -7,7 +8,6 @@ import getHelperMenuBlob from './getHelperMenuBlob';
 import getText from '../../common/getText';
 import getValue from '../../system/getValue';
 import gsDl from './gsDl';
-import hasClass from '../../common/hasClass';
 import insertElement from '../../common/insertElement';
 import isFunction from '../../common/isFunction';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
@@ -22,8 +22,8 @@ function toggleMenu(evt) {
   menu.classList.toggle('helperMenuShow');
 }
 
-function callHelperFunction(evt) {
-  const functionPath = getText(evt.target);
+function callHelperFunction(target) {
+  const functionPath = getText(target);
   const fn = functionLookup[functionPath];
   if (jQueryPresent() && isFunction(fn)) {
     sendEvent('helperMenu', functionPath);
@@ -31,18 +31,13 @@ function callHelperFunction(evt) {
   }
 }
 
-function eventHandler(evt) {
-  if (hasClass('fshLink', evt.target)) {
-    callHelperFunction(evt);
-    return;
-  }
-  if (hasClass('helperMenuReply', evt.target)) {
-    window.openQuickMsgDialog(evt.target.getAttribute('target_player'));
-  }
-  if (hasClass('helperDl', evt.target)) {
-    gsDl();
-  }
-}
+const classEvents = [
+  ['fshLink', callHelperFunction],
+  ['helperMenuReply', (target) => {
+    window.openQuickMsgDialog(target.getAttribute('target_player'));
+  }],
+  ['helperDl', gsDl],
+];
 
 function showHelperMenu(evt) {
   const helperMenu = evt.target;
@@ -53,7 +48,7 @@ function showHelperMenu(evt) {
   });
   insertElement(helperMenu, helperMenuDiv);
   onclick(helperMenu, toggleMenu);
-  onclick(helperMenuDiv, eventHandler, true);
+  onclick(helperMenuDiv, classHandler(classEvents));
 }
 
 function haveNode() {
