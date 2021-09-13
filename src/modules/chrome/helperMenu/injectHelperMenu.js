@@ -6,6 +6,7 @@ import getElementById from '../../common/getElementById';
 import getHelperMenuBlob from './getHelperMenuBlob';
 import getText from '../../common/getText';
 import getValue from '../../system/getValue';
+import gsDl from './gsDl';
 import hasClass from '../../common/hasClass';
 import insertElement from '../../common/insertElement';
 import isFunction from '../../common/isFunction';
@@ -38,6 +39,9 @@ function eventHandler(evt) {
   if (hasClass('helperMenuReply', evt.target)) {
     window.openQuickMsgDialog(evt.target.getAttribute('target_player'));
   }
+  if (hasClass('helperDl', evt.target)) {
+    gsDl();
+  }
 }
 
 function showHelperMenu(evt) {
@@ -49,7 +53,7 @@ function showHelperMenu(evt) {
   });
   insertElement(helperMenu, helperMenuDiv);
   onclick(helperMenu, toggleMenu);
-  onclick(helperMenuDiv, eventHandler);
+  onclick(helperMenuDiv, eventHandler, true);
 }
 
 function haveNode() {
