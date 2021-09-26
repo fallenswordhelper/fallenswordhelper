@@ -3,7 +3,8 @@ import guildStore from '../../_dataAccess/export/guildStore';
 import insertElement from '../../common/insertElement';
 
 const header = 'item_id,inv_id,item_name,rarity,type,durability,max_durability,guild_tag,'
-  + 'in_guide,player_id,equipped,craft,forge,attack,defense,armor,hp,damage,min_level\n';
+  + 'in_guide,player_id,equipped,craft,forge,attack,defense,armor,hp,damage,stamina,min_level,'
+  + 'set_name\n';
 
 const toCsv = (json) => json.items.map(
   (item) => [
@@ -25,7 +26,9 @@ const toCsv = (json) => json.items.map(
     item.stats?.armor ?? '',
     item.stats?.hp ?? '',
     item.stats?.damage ?? '',
+    item.stats?.stamina ?? '',
     item.stats?.min_level ?? '',
+    item.stats?.set_name ?? '',
   ].join(','),
 ).join('\n');
 
@@ -44,5 +47,6 @@ function downloadCsv(csv) {
 
 export default async function gsDl() {
   const json = await guildStore();
+  // console.log(json);
   downloadCsv(`${header}${toCsv(json)}`);
 }
