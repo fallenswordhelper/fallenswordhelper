@@ -9,7 +9,7 @@ import doNotKill from './doNotKill/doNotKill';
 import executeAll from '../../common/executeAll';
 import getElementById from '../../common/getElementById';
 import getValue from '../../system/getValue';
-import globalTop from './globalTop';
+import globalTop from './globalTop/globalTop';
 import hideQTip from '../../common/hideQTip';
 import hideTitanCombatResults from './hideTitanCombatResults';
 import injectRelic from './relic/relic';
@@ -122,13 +122,13 @@ const usualRoutines = [
   fixDebuff,
   interceptMouseEvents,
   champAttacks,
+  globalTop,
 ];
 
 export default function newMap() {
   executeAll(usualRoutines);
   if (calf.userIsDev) { //  hide titan combat results, global top 100
     hideTitanCombatResults();
-    globalTop();
   }
 }
 
