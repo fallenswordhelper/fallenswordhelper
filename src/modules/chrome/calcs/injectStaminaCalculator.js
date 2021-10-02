@@ -6,7 +6,11 @@ import intValue from '../../system/intValue';
 import timeBox from './timeBox';
 import valueText from '../../common/valueText';
 
-const getStamVals = (m) => valueText(getElementsByClassName('stat-name', m)).split(' / ');
+function getStamVals(staminaMouseover) {
+  return /([,0-9]+)\s\/\s([,0-9]+)/.exec(
+    valueText(getElementsByClassName('stat-name', staminaMouseover)),
+  );
+}
 
 function maxStamAt(nextGain, stamVals) {
   return `<dt class="stat-stamina-nextHuntTime">Max Stam At</dt>${
@@ -14,7 +18,7 @@ function maxStamAt(nextGain, stamVals) {
       valueText(nextGain),
       // get the max hours to still be inside stamina maximum
       Math.floor(
-        (intValue(stamVals[1]) - intValue(stamVals[0]))
+        (intValue(stamVals[2]) - intValue(stamVals[1]))
         / asInt('stat-stamina-gainPerHour'),
       ),
     )}`;
@@ -25,7 +29,7 @@ export default function injectStaminaCalculator() {
   if (nextGain.length === 0) { return; }
   const staminaMouseover = getElementById('statbar-stamina-tooltip-stamina');
   const stamVals = getStamVals(staminaMouseover);
-  if (stamVals.length === 2) {
+  if (stamVals) {
     insertHtmlBeforeEnd(staminaMouseover, maxStamAt(nextGain, stamVals));
   }
 }

@@ -7,10 +7,10 @@ import sendEvent from '../../analytics/sendEvent';
 const extract = (info) => ({ r: { item: { n: info.match(/'(.*)'/)[1] } }, s: true });
 
 function fragObj(pair) {
-  const thisResult = pair.split(' x ');
+  const thisResult = pair.match(/(\d+) x (.*)/);
   return {
-    amount: thisResult[0],
-    type: composingFragmentType.indexOf(thisResult[1]),
+    amount: thisResult[1],
+    type: composingFragmentType.indexOf(thisResult[2]),
   };
 }
 

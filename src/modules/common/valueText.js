@@ -1,7 +1,7 @@
-import getTextTrim from './getTextTrim';
+import getText from './getText';
 
 export default function valueText(collection) {
   if (collection && collection.length) {
-    return getTextTrim(collection[0].nextElementSibling);
+    return getText(collection[0].nextElementSibling);
   }
 }

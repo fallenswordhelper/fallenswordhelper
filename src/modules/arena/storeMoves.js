@@ -9,7 +9,7 @@ function getCount(moveImg) {
 }
 
 function getCounts(acc, moveImg) {
-  const moveId = /\/(\d{1,2})\.png/.exec(moveImg.src)[1];
+  const moveId = /(\d+)\.png/.exec(moveImg.src)[1];
   acc[moveId] = Number(getCount(moveImg));
   return acc;
 }
