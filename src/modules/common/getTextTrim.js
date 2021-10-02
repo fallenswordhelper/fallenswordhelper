@@ -4,6 +4,6 @@ import isString from './isString';
 export default function getTextTrim(node) {
   const text = getText(node);
   if (isString(text)) {
-    return getText(node).trim();
+    return text.trim();
   }
 }
