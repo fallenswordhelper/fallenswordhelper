@@ -1,5 +1,6 @@
 <script>
   import CountRow from './CountRow.svelte';
+  import all from '../../common/all';
   import daComponents from '../../_dataAccess/daComponents';
   import daProfileLimits from '../../_dataAccess/daProfileLimits';
   import getAsyncData from './getAsyncData';
@@ -14,9 +15,7 @@
         del: componentsJson.filter(({ b }) => b === o.b).map(({ a }) => a),
         delPending: false,
       })]));
-    // console.log('aggregate', aggregate);
     compStore.set(aggregate);
-    // console.log('aggregate keys', [...aggregate.keys()]);
     return [...aggregate.keys()];
   }
 
@@ -24,13 +23,9 @@
     const components = await getAsyncData(daComponents);
     return rollupComponents(components.r);
   }
-
-  function getPromise() {
-    return Promise.all([getComponents(), getAsyncData(daProfileLimits)]);
-  }
 </script>
 
-{#await getPromise()}
+{#await all([getComponents(), getAsyncData(daProfileLimits)])}
   <div class="compSumSpin"><span class="fshSpinner fshSpinner12"></span></div>
 {:then [rollup, {r: profileLimits}]}
   <div>

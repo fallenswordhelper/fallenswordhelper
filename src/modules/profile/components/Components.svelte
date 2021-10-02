@@ -1,5 +1,4 @@
 <script>
-  import Alert from '../../alert/Alert.svelte';
   import Count from './Count.svelte';
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import { createEventDispatcher } from 'svelte';
@@ -48,4 +47,3 @@
     <div><LinkButtonBracketed --button-color="red" on:click|once={deleteAllVisible}>Delete All Visible</LinkButtonBracketed></div>
   {/if}
 </div>
-<Alert/>
