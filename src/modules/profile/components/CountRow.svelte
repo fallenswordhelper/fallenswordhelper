@@ -24,6 +24,13 @@
   }
 </script>
 
+<style>
+  .compDel {
+    background-color: rgb(0, 0, 0, 0.25);
+    height: 20px;
+  }
+</style>
+
 {#if item.get('del').length}
   <tr>
     <td>

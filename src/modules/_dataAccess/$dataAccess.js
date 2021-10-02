@@ -1,5 +1,5 @@
 export default function $dataAccess(appFn, fallbackFn, ...args) {
-  const appBad = false;
+  const appBad = 0;
   if (appBad) {
     return fallbackFn(...args);
   }

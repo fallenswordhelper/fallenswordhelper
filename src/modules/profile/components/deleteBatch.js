@@ -7,13 +7,15 @@ import dynamicAlert from '../../alert/dynamicAlert';
 import partial from '../../common/partial';
 import uniq from '../../common/uniq';
 
+function updateItem(invIds, itemType) {
+  if (!itemType) { return; }
+  const items = itemType.get('del').filter((i) => !invIds.includes(i));
+  itemType.set('del', items);
+}
+
 function deleteComponent(itemId, invIds) {
   compStore.update((m) => {
-    const itemType = m.get(itemId);
-    if (itemType) {
-      const items = itemType.get('del').filter((i) => !invIds.includes(i));
-      itemType.set('del', items);
-    }
+    updateItem(invIds, m.get(itemId));
     return m;
   });
 }
