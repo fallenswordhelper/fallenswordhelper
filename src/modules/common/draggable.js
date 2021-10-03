@@ -25,8 +25,8 @@ function setMouseCoord(event) {
 
 function getTransformXY(trans) {
   if (trans === 'none') { return [0, 0]; }
-  const matrix = trans.match(/(\d+), (\d+), (\d+), (\d+), (-?\d+), (-?\d+)/);
-  return [Number(matrix[5]), Number(matrix[6])];
+  const matrix = trans.split(/\(|\)/)[1].split(', ');
+  return [Number(matrix[4]), Number(matrix[5])];
 }
 
 function setOffsets() {

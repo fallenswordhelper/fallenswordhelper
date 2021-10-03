@@ -117,7 +117,7 @@ function updateProcessed() {
 function calcLastActivity(doc) {
   const innerPcc = getElementById('pCC', doc);
   const lastActivityElement = getElementsByTagName('p', innerPcc)[0];
-  return /(\d+) mins, (\d+) secs/.exec(getText(lastActivityElement));
+  return /(\d{1,2}) mins, (\d{1,2}) secs/.exec(getText(lastActivityElement));
 }
 
 function getExtend(doc) {

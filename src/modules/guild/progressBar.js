@@ -17,7 +17,7 @@ let enableStamBars;
 let thisStyle;
 
 function getStamPerc(a) {
-  const mo = a.dataset.tipped.match(/(\d+) \/ (\d+)/);
+  const mo = a.dataset.tipped.match(/Stamina:<\/td><td>(\d{1,12}) \/ (\d{1,12})<\/td>/);
   return Math.min(Math.round((Number(mo[1]) / Number(mo[2])) * 100), 100);
 }
 

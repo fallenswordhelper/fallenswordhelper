@@ -21,6 +21,7 @@ import retryAjax from '../../ajax/retryAjax';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setValue from '../../system/setValue';
 import stringSort from '../../system/stringSort';
+import trim from '../../common/trim';
 import { buffCustom, otherCustom } from './assets';
 import { calcMinLvl, setMinLvl } from './minLvl';
 import { getBufferProgress, updateProgress } from './bufferProgress';
@@ -70,7 +71,7 @@ function calcNextPage(curPage, maxPage) { // Legacy
 
 function addPlayerToSearchList(onlinePlayer, onlinePlayerName) {
   // add online player to search list (all but self)
-  if (playerName() !== onlinePlayerName.trim()) {
+  if (playerName() !== trim(onlinePlayerName)) {
     onlinePlayers.push(onlinePlayer);
   }
 }
@@ -239,7 +240,8 @@ function findBuffsStart() { // Legacy
 }
 
 function findOtherStart() { // Legacy
-  const textToSearchFor = $('#textToSearchFor').val().replace(/\s*,\s*/, ',');
+  const textToSearchFor = $('#textToSearchFor').val().split(',').map(trim)
+    .join(',');
   setValue('textToSearchFor', textToSearchFor);
   findBuffNicks = textToSearchFor;
   findBuffMinCastLevel = 1;

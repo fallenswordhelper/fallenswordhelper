@@ -1,6 +1,4 @@
 import addCommas from '../system/addCommas';
-import calcGxp from './calcGxp';
-import calf from '../support/calf';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import querySelector from '../common/querySelector';
 
@@ -27,9 +25,6 @@ function injectLock(xpLock) {
   const actualXP = getIntFromRegExp(xpLockmouseover, /XP: <b>(\d*)/);
   insertHtmlBeforeEnd(xpLock.parentNode.nextElementSibling,
     ` (<b>${mightBePositive(actualXP, xpLockXP)}</b>)`);
-  if (calf.userIsDev) { //  calculate GXP
-    calcGxp();
-  }
 }
 
 export default function guildXPLock() {

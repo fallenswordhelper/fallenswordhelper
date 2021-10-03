@@ -40,7 +40,7 @@ function getRe(type, label) {
   if (label === 'amount') {
     return new RegExp(`\\+(\\d+) ${type}`);
   }
-  return /(\d+)\xA0/;
+  return /(\d{1,3})\xA0/;
 }
 
 function getValue(type, element, label) {
@@ -117,7 +117,7 @@ function saveUpgradeValue(upgrade, key) {
   const text = findText(upgrade);
   const ratio = text.nextElementSibling.nextElementSibling;
   if (ratio) {
-    const valueRE = /(\d+) \/ 115/;
+    const valueRE = /(\d{1,3}) \/ 115/;
     const value = Number(valueRE.exec(ratio.innerHTML)[1]);
     setValue(key, value + 5);
   }

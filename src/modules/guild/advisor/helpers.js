@@ -6,6 +6,7 @@ import partial from '../../common/partial';
 import { playerIdUrl } from '../../support/constants';
 import replaceChild from '../../common/replaceChild';
 import task from '../../support/task';
+import trim from '../../common/trim';
 
 export const advisorColumns = [
   { title: '<div class="fshBold">Member</div>' },
@@ -38,7 +39,7 @@ export function playerLevel(f, membrList) {
 export function playerRank(f, membrList) {
   if (!membrList[f]) { return ''; }
   return `<div class="fshAdvRank">${
-    membrList[f].rank_name.trim()}</div>`;
+    trim(membrList[f].rank_name)}</div>`;
 }
 
 function doTable(tbl, data, callback) { // jQuery
