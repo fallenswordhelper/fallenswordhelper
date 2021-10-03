@@ -25,7 +25,7 @@ function setMouseCoord(event) {
 
 function getTransformXY(trans) {
   if (trans === 'none') { return [0, 0]; }
-  const matrix = trans.split(/\(|\)/)[1].split(', ');
+  const matrix = trans.split(/[()]/)[1].split(', ');
   return [Number(matrix[4]), Number(matrix[5])];
 }
 
