@@ -15,7 +15,7 @@ function debuffSuccess(aLink, json) {
 function doDebuff(fastDebuff, aLink) {
   if (fastDebuff) {
     sendEvent('profile', 'doDebuff');
-    const buffId = aLink.href.match(/(\d+)$/)[1];
+    const buffId = aLink.href.match(/=(\d{1,3})$/)[1];
     daRemoveSkill(buffId).then(errorDialog).then(partial(debuffSuccess, aLink));
   } else {
     navigateTo(aLink.href);

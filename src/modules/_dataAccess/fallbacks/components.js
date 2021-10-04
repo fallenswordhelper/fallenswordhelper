@@ -1,9 +1,8 @@
-import allthen from '../../common/allthen';
+import all from '../../common/all';
 import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import querySelectorArray from '../../common/querySelectorArray';
 import retryAjax from '../../ajax/retryAjax';
-import sum from '../../common/sum';
 
 const componentRe = /\?item_id=(\d+)&inv_id=(\d+)&.*&vcode=([0-9a-f]+)/;
 
@@ -18,24 +17,12 @@ function details(a) {
 
 const getComponents = (doc) => querySelectorArray('a[href*="=destroycomponent&"]', doc).map(details);
 
-const getSlots = (doc) => querySelectorArray('td[background*="1x1mini"]', doc).length;
-
-function processPages(prm) {
-  const asDocs = prm.map(createDocument);
-  const perPage = asDocs.map(getComponents);
-  const r = [].concat(...perPage);
-  const cm = asDocs.map(getSlots).reduce(sum, 0);
-  return { h: { cm }, r };
-}
-
-function firstPage(html) {
-  const doc = createDocument(html);
-  const pages = querySelectorArray('a[href*="profile&component_page="]', doc);
-  const profiles = pages.map((a) => retryAjax(a.href));
-  return allthen(profiles, processPages);
-}
-
 // Incomplete
-export default function components() {
-  return indexAjaxData({ cmd: 'profile' }).then(firstPage);
+export default async function components() {
+  const profileHtml = await indexAjaxData({ cmd: 'profile' });
+  const profileDoc = createDocument(profileHtml);
+  const pages = querySelectorArray('a[href*="profile&component_page="]', profileDoc);
+  const profiles = await all([profileHtml, ...pages.slice(1).map((a) => retryAjax(a.href))]);
+  const asDocs = profiles.map(createDocument);
+  return { r: asDocs.flatMap(getComponents), s: true };
 }

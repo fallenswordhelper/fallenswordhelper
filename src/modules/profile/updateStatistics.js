@@ -4,11 +4,12 @@ import getElementById from '../common/getElementById';
 import getElementsByTagName from '../common/getElementsByTagName';
 import getText from '../common/getText';
 import setInnerHtml from '../dom/setInnerHtml';
+import trim from '../common/trim';
 
 function removeStatTable(el) {
   const tde = getElementsByTagName('td', el);
   setInnerHtml(`<span id="${tde[0].id}">${
-    tde[0].innerHTML.replace(/&nbsp;/g, ' ').trim()}</span> `
+    trim(tde[0].innerHTML.replace(/&nbsp;/g, ' '))}</span> `
     + `<div class="profile-stat-bonus">${getText(tde[1])}</div>`,
   el.parentNode);
 }

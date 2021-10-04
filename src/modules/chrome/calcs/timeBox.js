@@ -12,10 +12,10 @@ function formatShortDate(aDate) {
 }
 
 export default function timeBox(nextGainTime, hrsToGo) {
-  const nextGain = /([0-9]+)m ([0-9]+)s/.exec(nextGainTime);
+  const nextGain = nextGainTime.split(' ').map((p) => p.slice(0, -1));
   if (!nextGain) { return; }
   return `<dd>${formatShortDate(new Date(
-    now + ((hrsToGo * 60 + Number(nextGain[1])) * 60
-    + Number(nextGain[2])) * 1000,
+    now + ((hrsToGo * 60 + Number(nextGain[0])) * 60
+    + Number(nextGain[1])) * 1000,
   ))}</dd>`;
 }

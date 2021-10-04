@@ -1,4 +1,5 @@
 <script>
+  import LinkButton from '../../../common/LinkButton.svelte';
   import { createEventDispatcher } from 'svelte';
   import entries from '../../../common/entries';
   import sendEvent from '../../../analytics/sendEvent';
@@ -13,25 +14,18 @@
 </script>
 
 <style>
-  button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-family : inherit;
-    font-size: 12px;
-    margin: auto 3px;
-    padding: 0;
-    text-decoration: underline;
-    user-select: text;
+  td {
+    --button-color: black;
+    --button-margin: auto 3px;
   }
 </style>
 
 <tr class="fshCenter">
   <td colspan="3">
-    <button on:click={() => doFilter('-2')} type="button">All</button>
-    <button on:click={() => doFilter('-1')} type="button">Main</button>
+    <LinkButton on:click={() => doFilter('-2')}>All</LinkButton>
+    <LinkButton on:click={() => doFilter('-1')}>Main</LinkButton>
     {#each entries(inv.folders) as [id, name]}
-      <button on:click={() => doFilter(id)} type="button">{name}</button>
+      <LinkButton on:click={() => doFilter(id)}>{name}</LinkButton>
     {/each}
   </td>
 </tr>

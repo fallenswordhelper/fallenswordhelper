@@ -1,4 +1,5 @@
 import createDocument from '../../system/createDocument';
+import fromEntries from '../../common/fromEntries';
 import indexAjaxData from '../../ajax/indexAjaxData';
 
 const uiFlags = [
@@ -14,13 +15,13 @@ const uiFlags = [
 function updateLadder(form, opt) {
   const data = new FormData(form);
   data.append('pvp_ladder', opt);
-  return Object.fromEntries(data.entries());
+  return fromEntries(data.entries());
 }
 
 function updateUI(form, flags) {
   const ui = new FormData(form);
   uiFlags.forEach((f, i) => ui.set(f, flags[i + 1]));
-  return Object.fromEntries(ui.entries());
+  return fromEntries(ui.entries());
 }
 
 export default async function settingsFlags(flags) {

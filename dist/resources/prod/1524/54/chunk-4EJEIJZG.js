@@ -1,0 +1,2 @@
+import{V as t}from"./chunk-4X7HEDV6.js";function a(e,s){return`<div class="parent"><a href="${t}quests&subcmd=view&quest_id=${e}" class="fshTempleOne" data-tooltip="Search for this quest on the Ultimate Fallen Sword Guide" target="_blank"></a>&nbsp;<a href="https://wiki.fallensword.com/index.php?title=${s.replace(/ /g,"_")}" class="fshWiki" data-tooltip="Search for this quest on the Wiki" target="_blank"></a></div>`}export{a};
+//# sourceMappingURL=chunk-4EJEIJZG.js.map

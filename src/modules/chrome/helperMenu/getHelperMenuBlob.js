@@ -1,7 +1,10 @@
+import calf from '../../support/calf';
 import getValue from '../../system/getValue';
 import { newGuildLogUrl, notepadBlankUrl, playerIdUrl } from '../../support/constants';
 
-const topSection = '<div class="helperMenuColumn"><div class="helperMenuSectionHeader">Character</div><ul>'
+const leadIn = '<div class="helperMenuColumn">';
+
+const topSection = '<div class="helperMenuSectionHeader">Character</div><ul>'
   + '<li><span class="fshLink">Buff Log</span></li>'
   + '<li><span class="fshLink">Combat Log</span></li>'
   + '<li><span class="fshLink">Creature Log</span></li>'
@@ -28,10 +31,17 @@ const betaSection = '<div class="helperMenuSectionHeader">Beta Features</div><ul
 const bottomSection = '<div class="helperMenuSectionHeader">FSH developer quick links</div><ul>'
   + '<li><span class="helperMenuReply" target_player="PointyHair">PM</span> '
   + `<a href="${playerIdUrl}1963510">PointyHair</a></li>`
-  + '</ul></div>';
+  + '</ul>';
+
+const devSection = '<div class="helperMenuSectionHeader">Dev links</div>'
+  + '<ul><li><button class="helperDl">GS Export</button></li></ul>';
+
+const leadOut = '</div>';
 
 export default function getHelperMenuBlob() {
-  return `${topSection}`
+  return `${leadIn}${topSection}`
     + `${getValue('betaOptIn') ? betaSection : ''}`
-    + `${bottomSection}`;
+    + `${bottomSection}`
+    + `${calf.userIsDev ? devSection : ''}`
+    + `${leadOut}`;
 }

@@ -8,24 +8,14 @@ import insertElementBefore from '../common/insertElementBefore';
 import { pCC } from '../support/layout';
 import querySelectorArray from '../common/querySelectorArray';
 
-const titanRe = /(\s*A ')([^']*)(' titan has been spotted in )([^!]*)(!)/;
-
-function makeALink(href, label) {
-  return `<a href="${href}" target="_blank">${label}</a>`;
-}
-
-function creatureSearchHref(name) {
-  return `${guideUrl}creatures&search_name=${name}`;
-}
-
-function realmSearchHref(name) {
-  return `${guideUrl}realms&search_name=${name}`;
-}
+const creatureSearchHref = (name) => `${guideUrl}creatures&search_name=${encodeURIComponent(name)}`;
+const titanRe = /( titan has been spotted in )([^!]+)(!)/;
+const realmSearchHref = (name) => `${guideUrl}realms&search_name=${encodeURIComponent(name)}`;
+const makeALink = (name) => `<a href="${realmSearchHref(name)}" target="_blank">${name}</a>`;
 
 function makeUfsgLink(img) {
-  const myName = encodeURIComponent(getTitle(img));
   const myLink = createAnchor({
-    href: creatureSearchHref(myName),
+    href: creatureSearchHref(getTitle(img)),
     target: '_blank',
   });
   insertElementBefore(myLink, img);
@@ -33,19 +23,25 @@ function makeUfsgLink(img) {
 }
 
 function titanSpotted(el) {
-  return titanRe.test(el.firstChild.nodeValue); // Text Node
+  return titanRe.test(el.lastChild.nodeValue); // Text Node
 }
 
 function reformatNews(el) {
-  const news = el.firstChild.nodeValue.match(titanRe); // Text Node
-  news[2] = makeALink(creatureSearchHref(news[2]), news[2]);
-  news[4] = makeALink(realmSearchHref(news[4]), news[4]);
+  const news = el.lastChild.nodeValue.match(titanRe); // Text Node
+  news[2] = makeALink(news[2]);
   return news.slice(1).join('');
 }
 
+function updateTitanAnchor(el) {
+  const anchor = el.children[0];
+  anchor.href = creatureSearchHref(anchor.textContent);
+  anchor.target = '_blank';
+}
+
 function titanLink(el) {
+  updateTitanAnchor(el);
   const newSpan = createSpan({ innerHTML: reformatNews(el) });
-  el.replaceChild(newSpan, el.firstChild); // Text Node
+  el.replaceChild(newSpan, el.lastChild); // Text Node
 }
 
 export default function addUfsgLinks() {

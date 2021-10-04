@@ -1,4 +1,5 @@
 <script>
+  import LinkButton from '../common/LinkButton.svelte';
   import daDoInvent from '../_dataAccess/daDoInvent';
   import sendEvent from '../analytics/sendEvent';
   import { slide } from 'svelte/transition';
@@ -53,7 +54,7 @@
     class="custominput fshNumberInput"
     bind:value={amountToInvent}
     required />
-  <button type="button" class="fshBl" on:click={maxInvent}>(max)</button>
+  <LinkButton on:click={maxInvent}>(max)</LinkButton>
   <input class="custombutton" type="submit" value="Quick Invent" style="margin-left: 8px;"/>
   <div>
     {#if errorMessage}

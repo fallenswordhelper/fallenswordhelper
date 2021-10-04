@@ -41,11 +41,11 @@ function common(e) {
 function location(e) {
   const loc = getTextTrim(e[0].cells[1]);
   if (loc !== 'n/a') {
-    const kills = getTextTrim(e[0].cells[2]).match(/(\d+)\/(\d+)/);
+    const kills = getTextTrim(e[0].cells[2]).split('/');
     return {
       realm: loc,
-      current_hp: Number(kills[1]),
-      max_hp: Number(kills[2]),
+      current_hp: Number(kills[0]),
+      max_hp: Number(kills[1]),
     };
   }
 }

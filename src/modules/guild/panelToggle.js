@@ -6,6 +6,7 @@ import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import onclick from '../common/onclick';
 import setInnerHtml from '../dom/setInnerHtml';
 import toggleVisibilty from '../common/toggleVisibilty';
+import trim from '../common/trim';
 
 function makeButton(linkto) {
   return createSpan({
@@ -41,7 +42,7 @@ export function logoToggle(leftHandSideColumnTable) {
 
 export function statToggle(leftHandSideColumnTable) {
   const leaveGuildCell = leftHandSideColumnTable.rows[4].cells[1].children[0];
-  setInnerHtml(leaveGuildCell.innerHTML.trim(), leaveGuildCell);
+  setInnerHtml(trim(leaveGuildCell.innerHTML), leaveGuildCell);
   thisToggle(leaveGuildCell,
     leftHandSideColumnTable.rows[6].cells[0].children[0],
     'statisticsControl');

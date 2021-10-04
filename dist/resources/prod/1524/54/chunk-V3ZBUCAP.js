@@ -1,0 +1,2 @@
+import{a as i}from"./chunk-XT45MXLG.js";import{a as f,b as n}from"./chunk-WHB77CI2.js";import{a as r}from"./chunk-OHOH67XG.js";import{a as o}from"./chunk-UBK43KQH.js";import{a as t}from"./chunk-6U4GCDKS.js";function m(e){return n("fsh_selfProfile",e),e}function u(e){return e&&{...e,lastUpdate:r}}function l(){return i(o()).then(u).then(m)}function p(e){return!e||e.lastUpdate<r-t.allyEnemyOnlineRefreshTime?l():e}function s(e){return e?l():f("fsh_selfProfile").then(p)}export{s as a};
+//# sourceMappingURL=chunk-V3ZBUCAP.js.map

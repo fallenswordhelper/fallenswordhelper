@@ -31,8 +31,5 @@ function makeButtons(acc, curr, i) {
 export default function doBuffLinks(members) {
   const chunks = chunk(16, members);
   const ul = createUl();
-  if (chunks.length > 1) {
-    insertElement(ul, getListItem('Buff All', members.join(',')));
-  }
   return chunks.reduce(makeButtons, ul);
 }

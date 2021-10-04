@@ -6,7 +6,7 @@
 .helperMenuSectionHeader {
   background: #e0e0e0;
   font: bold 13px Arial, Helvetica, sans-serif;
-  margin: 0 0 5px 0;
+  margin: 4px 0 2px 0;
   text-align: center;
 }
 .helperMenuDiv {
@@ -46,3 +46,14 @@
 }
 .helperMenuFixed {position: fixed;}
 .helperMenuMove {cursor: move;}
+.helperDl {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  text-decoration: underline;
+  user-select: text;
+}

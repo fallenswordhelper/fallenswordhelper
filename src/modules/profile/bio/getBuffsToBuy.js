@@ -7,6 +7,7 @@ import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
 import playerName from '../../common/playerName';
 import sendEvent from '../../analytics/sendEvent';
+import trim from '../../common/trim';
 
 function profileBuyBuffsEvent() {
   if (calf.subcmd === '-') { sendEvent('profile', 'formatBuffsToBuy'); }
@@ -51,7 +52,7 @@ function formatGreetingText(greetingText, buffCost) {
 function formatBuffsToBuy(buffCost) { // Legacy
   profileBuyBuffsEvent();
   const targetPlayer = getTargetPlayer();
-  let greetingText = getValue('buyBuffsGreeting').trim();
+  let greetingText = trim(getValue('buyBuffsGreeting'));
   greetingText = greetingText.replace(/{playername}/g, targetPlayer);
   greetingText = formatGreetingText(greetingText, buffCost);
   window.openQuickMsgDialog(targetPlayer, greetingText, '');

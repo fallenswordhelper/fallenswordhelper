@@ -2,6 +2,7 @@ import calf from '../../../support/calf';
 import { defPlayerBuffs } from '../../../support/constants';
 import partial from '../../../common/partial';
 import setInnerHtml from '../../../dom/setInnerHtml';
+import trim from '../../../common/trim';
 import {
   huntingBuffs,
   huntingBuffsName,
@@ -14,7 +15,7 @@ function buildBuffHash(acc, curr) {
 }
 
 function findMissingBuffs(buffHash, acc, curr) {
-  if (!buffHash[curr.trim()]) { acc.push(curr); }
+  if (!buffHash[trim(curr)]) { acc.push(curr); }
   return acc;
 }
 

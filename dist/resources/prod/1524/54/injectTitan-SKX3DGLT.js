@@ -1,0 +1,2 @@
+import{b as n}from"./chunk-PL52TDTI.js";import{a as o}from"./chunk-6YCYI5QI.js";import"./chunk-N6OIOPGP.js";import"./chunk-ZKT3V6EP.js";import{F as e}from"./chunk-4X7HEDV6.js";import"./chunk-XZ2D5B2Y.js";function s(){let r=n.children[0],t=r.insertRow(2);o(t,"<br>"),t=r.insertRow(3),o(t,`<td class="fshCenter fshBold">[ <a href="${e}">Scout Tower</a> ]</td>`)}export{s as default};
+//# sourceMappingURL=injectTitan-SKX3DGLT.js.map

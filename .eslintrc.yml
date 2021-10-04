@@ -9,6 +9,8 @@ overrides:
     - '*.svelte'
     processor: 'svelte3/svelte3'
     rules:
+      no-label-var: off
+      import/first: off
       import/prefer-default-export: off
   - files:
     - "scripts/*.js"
