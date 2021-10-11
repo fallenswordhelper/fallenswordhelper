@@ -5,7 +5,7 @@ import querySelectorArray from '../../common/querySelectorArray';
 import sendEvent from '../../analytics/sendEvent';
 
 const creatureTypeIndex = ['NORMAL', 'CHAMPION', 'ELITE', 'SUPER ELITE', 'TITAN', 'LEGENDARY'];
-let ctrlShiftDown = false;
+let altShiftDown = false;
 
 function getAttack(creatureElement) {
   return querySelector('.verb.attack', creatureElement);
@@ -46,13 +46,12 @@ function showChampAttack(toggle) {
 }
 
 function champAttackListener(e) {
-  // console.log(e);
-  if (!e.ctrlKey
+  if (!e.altKey
     || !e.shiftKey
     || e.target.tagName === 'INPUT'
     || e.target.tagName === 'TEXTAREA') { return; }
-  if (!ctrlShiftDown) { showChampAttack(true); }
-  ctrlShiftDown = true;
+  if (!altShiftDown) { showChampAttack(true); }
+  altShiftDown = true;
   if (!e.code.match(/(Digit|Numpad)[1-8]/)) { return; }
   const championCreatures = getCreatures('CHAMPION');
   const index = parseInt(e.code.slice(-1), 10) - 1;
@@ -66,10 +65,8 @@ function champAttackListener(e) {
 }
 
 function hideChampAttackListener(e) {
-  // console.log(e);
-  if (ctrlShiftDown && (!e.ctrlKey || !e.shiftKey)) {
-    // console.log('release');
-    ctrlShiftDown = false;
+  if (altShiftDown && (!e.ctrlKey || !e.shiftKey)) {
+    altShiftDown = false;
     showChampAttack(false);
   }
 }
