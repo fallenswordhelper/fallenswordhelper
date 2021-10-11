@@ -47,11 +47,12 @@ function handleFinalResult(finalResult) {
   }
 }
 
-async function onBtnClick(e) {
-  const user = querySelector('form[name="sendItemForm"] [name="target_username"]');
-  const items = querySelectorArray('[name="sendItemList[]"]:checked')
-    .map((el) => [el, user.value, [el.value]]);
-  if (!items.length) { return; }
+const checkedItems = () => querySelectorArray('[name="sendItemList[]"]:checked');
+const getUser = () => querySelector('form[name="sendItemForm"] [name="target_username"]').value;
+const getItems = (user) => checkedItems().map((el) => [el, user, [el.value]]);
+const syncSend = (items) => items.reduce(sendThem, Promise.resolve({ s: 1 }));
+
+async function doSend(e, items) {
   sendEvent('trade', 'oneByOne');
   const spinner = createSpan({
     className: 'fshSpinner fshRelative',
@@ -59,9 +60,14 @@ async function onBtnClick(e) {
   });
   const myBtn = e.target;
   myBtn.replaceWith(spinner);
-  const finalResult = await items.reduce(sendThem, Promise.resolve({ s: 1 }));
+  const finalResult = await syncSend(items);
   handleFinalResult(finalResult);
   spinner.replaceWith(myBtn);
+}
+
+function onBtnClick(e) {
+  const items = getItems(getUser());
+  if (items.length) { doSend(e, items); }
 }
 
 export default function oneByOne() {
