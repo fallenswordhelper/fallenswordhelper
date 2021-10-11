@@ -4,9 +4,9 @@
 }
 .fastPray td {padding: 1px;}
 .fastPray span {
+  background-repeat: no-repeat;
   cursor: pointer;
   display: inline-block;
   height: 16px;
   width: 16px;
-  background-repeat: no-repeat;
 }
