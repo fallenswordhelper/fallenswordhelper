@@ -2,7 +2,7 @@ import getText from '../../common/getText';
 import toLowerCase from '../../common/toLowerCase';
 
 const numRE = /[^a-zA-Z0-9.,+\- ]/g;
-const priceRE = /([+-]{0,1}[.\d]+ *k)|([+-]{0,1}[.\d]+ *fsp)|([+-]{0,1}[.\d]+ *stam)/;
+const priceRE = /([+-]?[.\d]{1,10} {0,10}k)|([+-]?[.\d]{1,10} {0,10}fsp)|([+-]?[.\d]{1,10} {0,10}stam)/;
 
 function thisLine(node) {
   return node && node.nodeName !== 'BR';

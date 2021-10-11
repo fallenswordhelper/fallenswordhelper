@@ -8,6 +8,7 @@ import isOnList from '../doNotKill/isOnList';
 import onclick from '../../../common/onclick';
 import setText from '../../../dom/setText';
 import setValue from '../../../system/setValue';
+import trim from '../../../common/trim';
 
 let creatureBody;
 let dnkName;
@@ -72,7 +73,7 @@ function doNotKillLink() {
 export default function makeDoNotKillLink(thisName, dialogViewCreature) {
   getCreatureBody(dialogViewCreature);
   if (creatureBody) {
-    dnkName = thisName.trim();
+    dnkName = trim(thisName);
     doNotKillLink();
   }
 }

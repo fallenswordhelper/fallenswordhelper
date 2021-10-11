@@ -6,7 +6,7 @@ import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import reduceBuffArray from '../common/reduceBuffArray';
 
-const packRE = />\s*([ a-zA-Z]+) Level (\d+)/g;
+const packRE = />([^>(]+) \(Level (\d{1,4})/g;
 
 const makeSpan = (bf) => `<br><span class="fshRed fshNoWrap">${bf[1]} ${
   bf[2]} active</span>`;

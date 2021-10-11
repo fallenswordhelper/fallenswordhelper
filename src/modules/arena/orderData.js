@@ -21,10 +21,10 @@ function checkTournamentId(row, theCells) { // jQuery
 
 function players(theCells) { // jQuery
   const cell = theCells.eq(1);
-  const matches = /(\d+)\s\/\s(\d+)/.exec(cell.text());
+  const matches = cell.text().split(/\s\/\s/);
   if (matches) {
     cell.attr('data-order',
-      (Number(matches[1]) - Number(matches[2])) * 100 + Number(matches[2]));
+      (Number(matches[0]) - Number(matches[1])) * 100 + Number(matches[1]));
   }
 }
 

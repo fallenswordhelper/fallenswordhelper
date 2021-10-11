@@ -1,0 +1,2 @@
+function t(e,a,d,i){let s="";a!==""&&(s=`&nbsp;(${a})`);let r="";return d&&(r=`[<span class="fshLink" id="${d}">${i}</span>]`),`<table width=100%><tbody><tr class="fshHeader"><td width="90%"><b>&nbsp;${e}</b>${s}<td width="10%" class="fshBtnBox">${r}</td></tr><tbody></table>`}function n(e){return`${t(e.title,e.comment,e.spanId,e.button)}<div class="fshSmall" id="${e.divId}"></div>`}export{t as a,n as b};
+//# sourceMappingURL=chunk-TGJLFJD5.js.map

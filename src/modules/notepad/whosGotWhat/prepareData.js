@@ -3,6 +3,7 @@ import lastActivityToDays from '../../common/lastActivityToDays';
 import { nowSecs } from '../../support/now';
 import partial from '../../common/partial';
 import toLowerCase from '../../common/toLowerCase';
+import trim from '../../common/trim';
 
 function byMember(acc, curr) {
   // if (curr.item_id === 11503) { // Zombie Brew
@@ -31,7 +32,7 @@ function decorateMembers(pots, obj, i) {
     slot: i + 1,
     name_lower: toLowerCase(obj.name),
     lvl_reverse: 0 - obj.level,
-    rank_lower: toLowerCase(obj.rank_name.trim()),
+    rank_lower: toLowerCase(trim(obj.rank_name)),
     gxp: addCommas(obj.guild_xp),
     gxp_reverse: 0 - obj.guild_xp,
     activity: lastActivityToDays(obj.last_activity),

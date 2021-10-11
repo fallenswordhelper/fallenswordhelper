@@ -1,6 +1,6 @@
 import createBr from '../common/cElement/createBr';
 import createSpan from '../common/cElement/createSpan';
-import dialogMsg from '../common/dialogMsg';
+import dynamicAlert from '../alert/dynamicAlert';
 import getElementById from '../common/getElementById';
 import insertElement from '../common/insertElement';
 import jConfirm from '../common/jConfirm';
@@ -80,7 +80,7 @@ function saveConfig() { // jQuery
   saveNumeric('combatEvaluatorBias');
   saveOther('enabledHuntingMode');
   saveBoxes.forEach(saveValueForm);
-  dialogMsg('FS Helper Settings Saved');
+  dynamicAlert('FS Helper Settings Saved');
 }
 
 function showLogs() {
