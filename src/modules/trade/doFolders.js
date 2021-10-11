@@ -17,6 +17,7 @@ import insertHtmlBeforeBegin from '../common/insertHtmlBeforeBegin';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
 import partial from '../common/partial';
+import sendEvent from '../analytics/sendEvent';
 import task from '../support/task';
 import { time, timeEnd } from '../support/debug';
 
@@ -62,6 +63,7 @@ function hideFolderItem(folderid, el) {
 }
 
 function doHideFolder(evt) {
+  sendEvent('trade', 'doHideFolder');
   const items = getArrayByTagName(defTable, getItemDiv());
   items.forEach(partial(hideFolderItem, evt.target.id));
 }

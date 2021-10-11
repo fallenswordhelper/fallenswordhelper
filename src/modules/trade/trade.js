@@ -13,6 +13,7 @@ import onclick from '../common/onclick';
 import oneByOne from './oneByOne';
 import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
+import sendEvent from '../analytics/sendEvent';
 import task from '../support/task';
 
 function getHowMany(itemTables) {
@@ -68,6 +69,7 @@ function doTheChecks(itemid, itemTables) {
 }
 
 function doCheckAll(evt) {
+  sendEvent('trade', 'doCheckAll');
   const itemList = getElementById('item-div')
     || getElementById('item-list');
   const itemTables = querySelectorArray('table:not(.fshHide)', itemList);
@@ -116,7 +118,7 @@ export default function trade() {
   if (!itemList) { return; }
   task(3, doFolders);
   task(3, injectTradeOld, [itemList]);
-  if (calf.userIsDev) { //  oneByOne
+  if (getValue('betaOptIn')) { //  oneByOne
     task(3, oneByOne);
   }
 }
