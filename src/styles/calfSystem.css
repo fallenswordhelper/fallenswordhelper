@@ -271,19 +271,6 @@
 #minibox-allies-list .fshPowderBlue {color: PowderBlue;}
 #minibox-allies-list .fshHide {display: none;}
 
-.fastPray {text-align: center;}
-.fastPray table {
-  float: left;
-}
-.fastPray td {padding: 1px;}
-.fastPray span {
-  cursor: pointer;
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-  background-repeat: no-repeat;
-}
-
 .quickbuffTable {margin: 0 auto;}
 .quickbuffTableHeader {
   text-align: center;

@@ -1,0 +1,12 @@
+.fastPray {text-align: center;}
+.fastPray table {
+  float: left;
+}
+.fastPray td {padding: 1px;}
+.fastPray span {
+  cursor: pointer;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background-repeat: no-repeat;
+}

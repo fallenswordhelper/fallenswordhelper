@@ -1,3 +1,4 @@
+import './displayDisconnectedFromGodsMessage.css';
 import { cmdUrl } from '../../support/constants';
 import getElementById from '../../common/getElementById';
 import hideQTip from '../../common/hideQTip';
@@ -5,6 +6,9 @@ import indexAjaxData from '../../ajax/indexAjaxData';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import once from '../../common/once';
 import saveTempleSettings from './saveTempleSettings';
+import sendEvent from '../../analytics/sendEvent';
+
+let helperPrayToGods;
 
 const havePrayedMsg = '<span class="notification-icon"></span>'
   + '<p class="notification-content">'
@@ -24,20 +28,18 @@ const godsNotification = '<li class="notification">'
   + '<p class="notification-content">Bow down to the gods</p>'
   + '</a></span></li>';
 
-function havePrayed() {
-  getElementById('helperPrayToGods').outerHTML = havePrayedMsg;
-  saveTempleSettings(false);
-}
-
-function prayToGods(e) { // jQuery
+async function prayToGods(e) {
   const myGod = e.target.getAttribute('praytype');
   if (!myGod) { return; }
-  indexAjaxData({ cmd: 'temple', subcmd: 'pray', type: myGod })
-    .then(havePrayed);
+  sendEvent('notification', 'prayToGods');
   hideQTip(e.target);
+  await indexAjaxData({ cmd: 'temple', subcmd: 'pray', type: myGod });
+  helperPrayToGods.outerHTML = havePrayedMsg;
+  saveTempleSettings(false);
 }
 
 export default function displayDisconnectedFromGodsMessage() {
   insertHtmlAfterBegin(getElementById('notifications'), godsNotification);
-  once(getElementById('helperPrayToGods'), 'click', prayToGods);
+  helperPrayToGods = getElementById('helperPrayToGods');
+  once(helperPrayToGods, 'click', prayToGods);
 }

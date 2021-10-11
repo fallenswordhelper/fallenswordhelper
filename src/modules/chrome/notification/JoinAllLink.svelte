@@ -3,6 +3,7 @@
   import daJoinAll from '../../_dataAccess/daJoinAll';
   import daViewGroups from '../../_dataAccess/daViewGroups';
   import playerName from '../../common/playerName';
+  import sendEvent from '../../analytics/sendEvent';
   import { joinUnderUrl, joinallUrl } from '../../support/constants';
 
   const smallEnough = (g) => !calf.enableMaxGroupSizeToJoin
@@ -38,6 +39,7 @@
 
   function handleClick(e) {
     e.preventDefault();
+    sendEvent('notification', 'Join All');
     joining = 1;
   }
 </script>
