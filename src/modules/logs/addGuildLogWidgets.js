@@ -2,30 +2,20 @@ import arrayFrom from '../common/arrayFrom';
 import contains from '../common/contains';
 import dataRows from '../common/dataRows';
 import getArrayByTagName from '../common/getArrayByTagName';
-import getText from '../common/getText';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getValue from '../system/getValue';
 import { pCC } from '../support/layout';
 import playerId from '../common/playerId';
-import playerName from '../common/playerName';
-import searchPlayerHref from '../common/searchPlayerHref';
-import setInnerHtml from '../dom/setInnerHtml';
+import { playerLinkSelector } from '../support/constants';
+import querySelectorArray from '../common/querySelectorArray';
 
-function getPlayer(playerAry) { // Legacy
-  if (playerAry) { return Number(playerAry[1]); }
-  return 0;
-}
+const getPlayerId = (a) => getCustomUrlParameter(a.href, 'player_id');
 
 function msgDoesNotIncludePlayer(aRow) {
-  const messageHTML = aRow.cells[2].innerHTML;
-  const doublerPlayerMessageRE = /member\s<a\shref="index\.php\?cmd=profile&amp;player_id=(\d+)/;
-  const secondPlayer = doublerPlayerMessageRE.exec(messageHTML);
-  const singlePlayerMessageRE = /<a\shref="index\.php\?cmd=profile&amp;player_id=(\d+)/;
-  const firstPlayer = singlePlayerMessageRE.exec(messageHTML);
-  const firstPlayerID = getPlayer(firstPlayer);
-  const secondPlayerID = getPlayer(secondPlayer);
-  return firstPlayer
-    && firstPlayerID !== playerId()
-    && secondPlayerID !== playerId();
+  const playerLinks = querySelectorArray(playerLinkSelector, aRow);
+  const playerIds = playerLinks.map(getPlayerId).map(Number);
+  return playerIds.length
+    && !playerIds.some((i) => i === playerId());
 }
 
 // eslint-disable-next-line no-param-reassign
@@ -39,34 +29,8 @@ function findPlayers(aRow) { // Legacy
   }
 }
 
-function dimIfNotMe(aRow, hasInvited, targetPlayerName) {
-  if (!hasInvited && targetPlayerName !== playerName()) {
-    $(aRow).find('td').removeClass('row').css('font-size', 'xx-small');
-    // eslint-disable-next-line no-param-reassign
-    aRow.style.color = 'gray';
-  }
-}
-
-function likeInvite(aRow, hasInvited) {
-  const message = aRow.cells[2].innerHTML;
-  const parts = message.split('\'');
-  const targetPlayerName = parts[1];
-  parts[1] = searchPlayerHref(targetPlayerName);
-  setInnerHtml(parts.join('\''), aRow.cells[2]);
-  dimIfNotMe(aRow, hasInvited, targetPlayerName);
-}
-
-function guildInvite(aRow) { // Legacy
-  const msg = getText(aRow.cells[2]);
-  const hasInvited = msg.includes('has invited the player');
-  if (msg.charAt(0) === '\'' || hasInvited) {
-    likeInvite(aRow, hasInvited);
-  }
-}
-
 function processGuildWidgetRow(aRow) { // Legacy
   findPlayers(aRow);
-  guildInvite(aRow);
 }
 
 function getMessageHeader() {
