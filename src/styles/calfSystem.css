@@ -107,7 +107,7 @@
 /* Quick Links */
 .fshQuickLinks {
   position: absolute;
-  z-index: 100050;
+  z-index: 50;
   text-align: left;
   white-space: nowrap;
   color: black;

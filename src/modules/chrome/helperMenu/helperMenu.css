@@ -21,7 +21,6 @@
   text-decoration: none;
   transition: opacity 100ms linear, visibility 0s linear 100ms;
   visibility: hidden;
-  z-index: 1;
 }
 .helperMenuShow {
   opacity: 1;
@@ -42,7 +41,7 @@
   text-decoration: underline;
   top: 0;
   white-space: nowrap;
-  z-index: 100100;
+  z-index: 75;
 }
 .helperMenuFixed {position: fixed;}
 .helperMenuMove {cursor: move;}
