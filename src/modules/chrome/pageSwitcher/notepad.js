@@ -16,7 +16,7 @@ import {
 } from './loader';
 
 const inventory = () => { runDefault(import('../../notepad/inventory/inventory')); };
-const newGuildLog = () => { runDefault(import('../../guild/newGuildLog/newGuildLog')); };
+const newGuildLog = () => { runDefault(import('../../notepad/newGuildLog/newGuildLog')); };
 const load = () => { runDefault(import('../../settings/load')); };
 const reliclist = () => { runDefault(import('../../notepad/reliclist/reliclist')); };
 const whosGotWhat = () => {
