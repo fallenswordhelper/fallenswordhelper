@@ -235,12 +235,12 @@ function refresh() {
 }
 
 function guildLogEvents() {
-  return [
+  return eventHandler5([
     [(target) => target.tagName === 'INPUT', toggleItem],
     [selfIdIs('fshAll'), selectAll],
     [selfIdIs('fshNone'), selectNone],
     [selfIdIs('rfsh'), refresh],
-  ];
+  ]);
 }
 
 function setOpts(guildLog) {
@@ -262,7 +262,7 @@ function gotOptions(guildLog) {
   setOpts(guildLog);
   setInnerHtml(guildLogFilter, pCC);
   getElements();
-  onclick(fshNewGuildLog, eventHandler5(guildLogEvents()));
+  onclick(fshNewGuildLog, guildLogEvents());
   setChecks();
   setMaxPage();
   getGuildLogPage(1).then(processFirstPage);
