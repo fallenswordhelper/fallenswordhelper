@@ -33,9 +33,9 @@ const statFields = (stats) => [
 const fields = (item) => [
   ...mainFields(item),
   ...statFields(item.stats),
-];
+].join(',');
 
-const toCsv = (json) => json.items.map(fields().join(',')).join('\n');
+const toCsv = (json) => json.items.map(fields).join('\n');
 
 function downloadCsv(csv) {
   const href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
