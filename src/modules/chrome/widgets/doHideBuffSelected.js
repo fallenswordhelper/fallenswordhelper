@@ -42,7 +42,7 @@ function eventHandler([parent, checkOn, checkOff, quickBuff]) {
 }
 
 function doFixBuffSelected([parent, type, checkOn, quickBuff]) { // jQuery
-  if (jQueryNotPresent) { return; }
+  if (jQueryNotPresent()) { return; }
   const checkOff = `${type}-buff-check-off`;
   $(`.${checkOn}`).off('click');
   $(`.${checkOff}`).off('click');
