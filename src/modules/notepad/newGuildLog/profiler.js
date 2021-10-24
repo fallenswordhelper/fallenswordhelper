@@ -28,9 +28,9 @@ const lookup = [
     'has just initiated a conflict with the guild',
     'has initiated a conflict with your guild',
     'is participating in the conflict against'],
-  ['bought the Titan Reward item',
+  ['Titan Reward item',
     'from your guild\'s contribution to the defeat of the titan',
-    'a 7 day cooldown has been activated on your guild for this titan'],
+    '7 day cooldown has been activated on your guild for this titan'],
 ];
 
 function isMatch(data, el) {
