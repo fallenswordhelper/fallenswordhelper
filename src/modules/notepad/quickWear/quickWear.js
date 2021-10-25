@@ -98,7 +98,7 @@ function evts5() {
 }
 
 function goodData(appInv) {
-  return appInv && appInv.s && isArray(appInv?.r?.inventories);
+  return appInv && appInv.s && isArray(appInv.r?.inventories);
 }
 
 function makePref(thisList) {
