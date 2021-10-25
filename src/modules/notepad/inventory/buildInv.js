@@ -21,8 +21,8 @@ function doInventory() {
 const composedPot = (el) => el.t === 15;
 
 function getComposedFromBp(data) {
-  if (!isArray(data.r)) { return; }
-  composed = Array.prototype.concat.apply([], data.r.map((el) => el.items))
+  if (!isArray(data?.r?.inventories)) { return; }
+  composed = Array.prototype.concat.apply([], data.r.inventories.map((el) => el.items))
     .filter(composedPot);
 }
 

@@ -97,7 +97,7 @@ export default function showAHInvManager(itemList) {
   const invCount = {};
   const quickSL = getValueJSON('quickSearchList') || [];
   // fill up the Inv Counter
-  itemList.r.forEach(partial(folder, invCount, quickSL));
+  itemList.r.inventories.forEach(partial(folder, invCount, quickSL));
   const im = createDiv();
   insertHtmlBeforeEnd(im, buildHTML(invCount, quickSL));
   return im;

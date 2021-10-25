@@ -80,7 +80,7 @@ function processFolder(folderId, aFolder) {
 
 function hideFolders(target) {
   const folderId = target.dataset.folder;
-  itemList.r.forEach(partial(processFolder, folderId));
+  itemList.r.inventories.forEach(partial(processFolder, folderId));
 }
 
 function togglePref() {
@@ -98,7 +98,7 @@ function evts5() {
 }
 
 function goodData(appInv) {
-  return appInv && appInv.s && isArray(appInv.r);
+  return appInv && appInv.s && isArray(appInv?.r?.inventories);
 }
 
 function makePref(thisList) {

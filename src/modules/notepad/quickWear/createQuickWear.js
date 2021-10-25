@@ -57,7 +57,7 @@ function folderHtml(folderObj) {
 }
 
 function makeFolderSpans(appInv) {
-  return makeFolderSpan('0', 'All') + appInv.r.map(folderHtml).join('');
+  return makeFolderSpan('0', 'All') + appInv.r.inventories.map(folderHtml).join('');
 }
 
 function addRows(tbody, currentPlayerId, aFolder) {
@@ -76,7 +76,7 @@ function makeQwTable(appInv) {
   const tbody = createTBody();
   insertElement(tbl, tbody);
   initSort();
-  appInv.r.forEach(partial(addRows, tbody, playerId()));
+  appInv.r.inventories.forEach(partial(addRows, tbody, playerId()));
   return tbl;
 }
 

@@ -40,8 +40,8 @@ function expandFrags(frag) {
 }
 
 function processResult(r) {
-  if (r.items.length) {
-    return `You successfully extracted 1 '${r.items[0].n
+  if (r.components?.length) {
+    return `You successfully extracted 1 '${r.components?.[0].n
     }' component(s) from 1 resource(s).</span>`;
   }
   if (r.frags) {
