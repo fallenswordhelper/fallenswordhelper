@@ -21,14 +21,16 @@ import {
   guildKills,
   maxHp,
   statusText,
+  titanLocation,
+  titanName,
   totalPct,
 } from './placeholders';
 
 export let titanTbl;
 
 export function clearMemberRows() {
-  while (titanTbl.rows.length > 7) {
-    titanTbl.deleteRow(7);
+  while (titanTbl.rows.length > 8) {
+    titanTbl.deleteRow(8);
   }
 }
 
@@ -51,6 +53,7 @@ export function buildTitanInfoTable() {
   titanTbl = createTable({ className: 'fshCenter' });
   buildAssets();
   addRows(titanTbl, [
+    [[[5, titanName, true], [1, titanLocation, true]]],
     [[[2, titanHp, true], [4, yourGuild, true]]],
     [[[2, makeTitanHpWrapper()], [4, guildKills]]],
     [[[2, current, true], [4, makePctWrapper(currentPct)]], true],

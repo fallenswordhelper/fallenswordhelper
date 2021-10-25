@@ -10,7 +10,6 @@ import roundToString from '../../../common/roundToString';
 import setInnerHtml from '../../../dom/setInnerHtml';
 import setText from '../../../dom/setText';
 import textSpan from '../../../common/cElement/textSpan';
-import { titanId } from './hasTitan';
 import { clearMemberRows, titanTbl } from './buildTitanInfoTable';
 import {
   cooldownText,
@@ -19,8 +18,11 @@ import {
   guildKills,
   maxHp,
   statusText,
+  titanLocation,
+  titanName,
   totalPct,
 } from './placeholders';
+import { titanId, titanLoc } from './hasTitan';
 
 function formatOffset(secs) {
   const aDate = new Date(now + secs * 1000);
@@ -58,6 +60,8 @@ function setAllText(ary) {
 
 function doTopLabels(ourTitan) {
   setAllText([
+    [ourTitan.creature.name.replace(' (Titan)', ''), titanName],
+    [titanLoc, titanLocation],
     [ourTitan.current_hp, currentHp],
     [ourTitan.max_hp, maxHp],
     [ourTitan.kills, guildKills],

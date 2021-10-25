@@ -80,7 +80,8 @@ function killsSummary(aRow) {
 }
 
 function guideLink(aRow) {
-  const myName = encodeURIComponent(getTitanName(aRow));
+  const titanName = getTitanName(aRow);
+  const myName = encodeURIComponent(titanName);
   const myImg = aRow.cells[0].children[0];
   const myLink = createAnchor({
     href: `${guideUrl}creatures&search_name=${myName}`,
@@ -88,6 +89,7 @@ function guideLink(aRow) {
   });
   insertElement(myLink, myImg);
   insertElement(aRow.cells[0], myLink);
+  insertHtmlBeforeEnd(aRow.cells[0], titanName.replace(' (Titan)', ''));
 
   const realmCell = aRow.cells[1];
   const realmName = getText(realmCell);

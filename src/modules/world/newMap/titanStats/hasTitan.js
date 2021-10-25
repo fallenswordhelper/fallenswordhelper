@@ -13,6 +13,7 @@ import { clearTitanDiv, initVars } from './placeholders';
 
 export let titanDiv;
 export let titanId;
+export let titanLoc;
 
 export function hideTitanDiv() {
   titanId = null;
@@ -26,6 +27,7 @@ export function hideTitanDiv() {
 export function hasTitan(el) {
   if (el.type === 0) {
     titanId = el.base_creature_id;
+    titanLoc = `(${el.x},${el.y})`;
     return true;
   }
   return false;
