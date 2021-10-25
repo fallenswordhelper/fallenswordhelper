@@ -79,8 +79,7 @@ function killsSummary(aRow) {
   injectSummary(aRow, titanHP);
 }
 
-function guideLink(aRow) {
-  const titanName = getTitanName(aRow);
+function imgLink(aRow, titanName) {
   const myName = encodeURIComponent(titanName);
   const myImg = aRow.cells[0].children[0];
   const myLink = createAnchor({
@@ -89,12 +88,20 @@ function guideLink(aRow) {
   });
   insertElement(myLink, myImg);
   insertElement(aRow.cells[0], myLink);
-  insertHtmlBeforeEnd(aRow.cells[0], titanName.replace(' (Titan)', ''));
+}
 
+function realmLink(aRow) {
   const realmCell = aRow.cells[1];
   const realmName = getText(realmCell);
   setInnerHtml(`<a href="${guideUrl}realms&search_name=${
     realmName}" target="_blank">${realmName}</a>`, realmCell);
+}
+
+function guideLink(aRow) {
+  const titanName = getTitanName(aRow);
+  imgLink(aRow, titanName);
+  insertHtmlBeforeEnd(aRow.cells[0], titanName.replace(' (Titan)', ''));
+  realmLink(aRow);
 }
 
 function decorate(newTitans, aRow) {

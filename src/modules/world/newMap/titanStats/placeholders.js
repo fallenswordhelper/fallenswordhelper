@@ -12,16 +12,24 @@ export let totalPct;
 export let statusText;
 export let cooldownText;
 
-export function initVars() {
+function part1() {
   titanName = createSpan({ innerHTML: '&nbsp;' });
   titanLocation = createSpan({ innerHTML: '&nbsp;' });
   currentHp = createSpan();
   maxHp = createSpan();
+}
+
+function part2() {
   guildKills = createSpan();
   currentPct = createSpan();
   totalPct = createSpan();
   statusText = createSpan();
   cooldownText = createSpan();
+}
+
+export function initVars() {
+  part1();
+  part2();
 }
 
 export function clearTitanDiv() {
