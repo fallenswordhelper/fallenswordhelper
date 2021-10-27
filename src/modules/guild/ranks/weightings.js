@@ -26,14 +26,14 @@ const privLookup = [
   [0x400000, 4], //   Can Kick Members
 ];
 
-function calcPermWeight(perms) {
-  return roundToString(
-    privLookup.filter(([flag]) => bitwiseAnd(perms, flag))
-      .reduce((a, [, weight]) => a + weight - 1, 0)
-    + perms.toString(2).split('').map(Number).reduce(sum, 0),
-    1,
-  );
-}
+const sumWeights = (a, [, weight]) => a + weight - 1;
+const getWeighted = (perms) => privLookup
+  .filter(([flag]) => bitwiseAnd(perms, flag))
+  .reduce(sumWeights, 0);
+const unsignedShiftZero = (signed) => signed >>> 0; // eslint-disable-line no-bitwise
+const toBinary = (number) => unsignedShiftZero(number).toString(2);
+const addBits = (number) => toBinary(number).split('').map(Number).reduce(sum, 0);
+const calcPermWeight = (perms) => roundToString(getWeighted(perms) + addBits(perms), 1);
 
 function parseRankData(memberRanks, row) {
   // Makes a weighted calculation of available permissions and gets tax rate
@@ -49,7 +49,7 @@ function parseRankData(memberRanks, row) {
 
 function gotRankData(theRows, spinner, json) {
   if (json.s) {
-    theRows.forEach(partial(parseRankData, [json.r['0']].concat(json.r.ranks)));
+    theRows.forEach(partial(parseRankData, json.r));
     spinner.classList.remove('fshSpinner');
   }
 }
