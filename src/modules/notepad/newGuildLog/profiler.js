@@ -6,7 +6,7 @@ const lookup = [
   ['(Potion)'],
   ['recalled the item', 'took the item', 'auto-returned the',
     'stored the item'],
-  ['has added flags to', 'has removed flags to'],
+  ['has added flags to', 'has removed flags to', 'has added tags to', 'has removed some tags from'],
   ['relic. This relic now has an empower level of',
     'relic. The relic empower level has been reset to zero.',
     'failed to capture the relic', 'captured the relic', 'captured your relic',
