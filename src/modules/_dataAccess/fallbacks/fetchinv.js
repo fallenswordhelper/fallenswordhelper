@@ -14,6 +14,7 @@ function formatResponse(json) {
   return { r: itemsByFolder, s: true };
 }
 
+// TODO out of date
 export default function fetchinv() {
   return backpack().then(formatResponse);
 }

@@ -7,7 +7,7 @@ import sendEvent from '../../analytics/sendEvent';
 const extract = (info) => ({ r: { item: { n: info.match(/'(.*)'/)[1] } }, s: true });
 
 function fragObj(pair) {
-  const thisResult = pair.match(/(\d+) x (.*)/);
+  const thisResult = pair.match(/(\d+) x (.*)/); // TODO fix RegExp
   return {
     amount: thisResult[1],
     type: composingFragmentType.indexOf(thisResult[2]),
@@ -54,6 +54,7 @@ function formatResults(html) {
   return { e: { message: info }, s: false };
 }
 
+// TODO out-of-date
 export default function useItem(backpackInvId) {
   return indexAjaxData({
     cmd: 'profile',

@@ -23,7 +23,7 @@ function extractMembers(thisRank) {
 }
 
 function processGuild(guild) {
-  return guild.r.ranks.flatMap(extractMembers);
+  return guild.r.flatMap(extractMembers);
 }
 
 function decorateMembers(pots, obj, i) {

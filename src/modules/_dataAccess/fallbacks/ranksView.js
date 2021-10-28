@@ -37,7 +37,8 @@ function processRanks(html) {
   return allthen(editButton.map(rankFromInput), formatPerms);
 }
 
-// Incomplete
+// TODO - this is no good, only works for leaders
+// start with guild/manage and handle error on rankPerms
 export default function ranksView() {
   return indexAjaxData({
     cmd: 'guild',

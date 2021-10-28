@@ -5,7 +5,7 @@ import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
 import createSelect from '../../common/cElement/createSelect';
 import createTable from '../../common/cElement/createTable';
-import daGuildManage from '../../_dataAccess/daGuildManage';
+import daRanksView from '../../_dataAccess/daRanksView';
 import displayChange from './displayChange';
 import guildStore from '../../_dataAccess/export/guildStore';
 import insertElement from '../../common/insertElement';
@@ -147,5 +147,5 @@ function showMe(dataAry) {
 
 export default function whosGotWhat() {
   setInnerHtml('Loading...', pCC);
-  allthen([guildStore(), daGuildManage()], showMe);
+  allthen([guildStore(), daRanksView()], showMe);
 }

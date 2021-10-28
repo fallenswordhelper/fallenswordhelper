@@ -1,4 +1,4 @@
-import daGuildManage from '../_dataAccess/daGuildManage';
+import daRanksView from '../_dataAccess/daRanksView';
 import fallback from '../system/fallback';
 import lastActivityToDays from '../common/lastActivityToDays';
 import { nowSecs } from '../support/now';
@@ -84,7 +84,7 @@ function processRank(newArchive, rank) {
 
 function doMerge() { // jQuery.min
   const newArchive = { lastUpdate: nowSecs, members: {} };
-  guild.r.ranks.forEach(partial(processRank, newArchive));
+  guild.r.forEach(partial(processRank, newArchive));
   set('fsh_guildActivity', newArchive);
 }
 
@@ -102,7 +102,7 @@ function gotActivity(data) { // jQuery.min
     oldArchive = { lastUpdate: 0, members: {} };
   }
   if (nowSecs > fallback(oldArchive.lastUpdate, 0) + 300) { // 5 mins - probably want to increase
-    daGuildManage().then(gotGuild);
+    daRanksView().then(gotGuild);
   }
 }
 
