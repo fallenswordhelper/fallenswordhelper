@@ -17,9 +17,9 @@ function getResult(script, e) {
 }
 
 const specialMask = [
-  [18, /(\w+)+ leeched the buff '([A-Za-z ]+)'./],
+  [18, /(\w+)+ leeched the buff '([A-Za-z ]+)'./], // FIXME
   [21,
-    /(\w+)+ was mesmerized by Spell Breaker, losing the '([A-Za-z ]+)' buff./],
+    /(\w+)+ was mesmerized by Spell Breaker, losing the '([A-Za-z ]+)' buff./], // FIXME
 ];
 
 function gettokens(spec) {
@@ -89,7 +89,7 @@ function parseReport(id, html) {
   };
 }
 
-// Incomplete
+// TODO Broken
 export default function viewCombat(id) {
   return combatView(id).then(partial(parseReport, id));
 }

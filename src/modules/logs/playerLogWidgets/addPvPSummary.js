@@ -50,18 +50,18 @@ function highlightSpecials(acc, el) {
   return acc;
 }
 
-function parseCombat(json, color) {
-  return result(json.r.xp_gain, 'XP stolen', color)
-    + result(json.r.gold_gain, 'Gold lost', color)
-    + result(json.r.gold_stolen, 'Gold stolen', color)
-    + result(json.r.pvp_prestige_gain, 'Prestige gain', color)
-    + result(json.r.pvp_rating_change, 'PvP change', color)
-    + json.r.specials.reduce(highlightSpecials, '');
+function parseCombat(combat, color) {
+  return result(combat.xp_gain, 'XP stolen', color)
+    + result(combat.gold_gain, 'Gold lost', color)
+    + result(combat.gold_stolen, 'Gold stolen', color)
+    + result(combat.pvp_prestige_gain, 'Prestige gain', color)
+    + result(combat.pvp_rating_change, 'PvP change', color)
+    + combat.specials.reduce(highlightSpecials, '');
 }
 
 function updateTd([r, msgHtml, json]) {
   const [color, pre] = parseCombatWinner(r, msgHtml);
-  const summaryDiv = parseCombat(json, color);
+  const summaryDiv = parseCombat(json.r.combat, color);
   r.cells[2].firstChild.remove();
   insertHtmlAfterBegin(r.cells[2], pre);
   insertElement(r.cells[2], createDiv({ innerHTML: summaryDiv }));
