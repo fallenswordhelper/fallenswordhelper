@@ -8,6 +8,8 @@ import toLowerCase from '../../common/toLowerCase';
 
 let characterRow;
 
+const upOrDown = (evt) => ['Up', 'Down'].includes(evt.target.value);
+
 function notValidRow(thisRankRow, targetRowNum) {
   return characterRow >= Math.min(thisRankRow.rowIndex, targetRowNum)
     || targetRowNum < 1
@@ -42,10 +44,6 @@ function overrideUpDown(evt) {
   shuffleRows(evt, thisRankRow, targetRowNum);
 }
 
-function upOrDown(evt) {
-  return ['Up', 'Down'].includes(evt.target.value);
-}
-
 function ajaxifyRankControls(evt) {
   if (upOrDown(evt)) { overrideUpDown(evt); }
 }
@@ -56,8 +54,8 @@ export function doButtons() {
   }
 }
 
-export function setCharacterRow(row, thisRank) {
-  if (thisRank && thisRank[1].includes(playerName())) {
+export function setCharacterRow(row, members) {
+  if (members.includes(playerName())) {
     characterRow = row.rowIndex;
   }
 }

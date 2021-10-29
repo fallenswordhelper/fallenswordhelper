@@ -1,7 +1,5 @@
 import bitwiseAnd from '../../common/bitwiseAnd';
 import createInput from '../../common/cElement/createInput';
-import createSpan from '../../common/cElement/createSpan';
-import daRanksView from '../../_dataAccess/daRanksView';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
@@ -9,7 +7,6 @@ import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
-import replaceChild from '../../common/replaceChild';
 import roundToString from '../../common/roundToString';
 import sum from '../../common/sum';
 
@@ -47,39 +44,26 @@ function parseRankData(memberRanks, row) {
   }
 }
 
-function gotRankData(theRows, spinner, json) {
-  if (json.s) {
-    theRows.forEach(partial(parseRankData, json.r));
-    spinner.classList.remove('fshSpinner');
-  }
+function fetchRankData(theRows, memberRanks) {
+  theRows.forEach(partial(parseRankData, memberRanks));
 }
 
-function fetchRankData(theRows, weightButton) {
-  const spinner = createSpan({
-    className: 'fshBlock fshRelative fshSpinner fshSpinner12',
-    style: { height: '15px', width: '136px' },
-  });
-  replaceChild(spinner, weightButton);
-  daRanksView().then(partial(gotRankData, theRows, spinner));
-}
-
-function injectWeightButton(theRows, addNewRank) {
+function injectWeightButton(theRows, memberRanks, addNewRank) {
   const weightButton = createInput({
     className: 'custombutton',
     type: 'button',
     value: 'Get Rank Weightings',
   });
-  onclick(weightButton,
-    partial(fetchRankData, theRows, weightButton));
+  onclick(weightButton, partial(fetchRankData, theRows, memberRanks));
   const theTd = addNewRank.parentNode.parentNode;
   insertHtmlBeforeEnd(theTd, '&nbsp;');
   insertElement(theTd, weightButton);
 }
 
-export default function weightings(theRows) {
+export default function weightings(theRows, memberRanks) {
   // gather rank info button
   const addNewRank = querySelector('#pCC a[href*="=ranks&subcmd2=add"]');
   if (addNewRank) {
-    injectWeightButton(theRows, addNewRank);
+    injectWeightButton(theRows, memberRanks, addNewRank);
   }
 }
