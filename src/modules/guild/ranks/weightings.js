@@ -8,6 +8,7 @@ import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import roundToString from '../../common/roundToString';
+import sendEvent from '../../analytics/sendEvent';
 import sum from '../../common/sum';
 
 const privLookup = [
@@ -45,6 +46,7 @@ function parseRankData(memberRanks, row) {
 }
 
 function fetchRankData(theRows, memberRanks) {
+  sendEvent('ranks', 'fetchRankData');
   theRows.forEach(partial(parseRankData, memberRanks));
 }
 

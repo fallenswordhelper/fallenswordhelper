@@ -4,6 +4,7 @@ import insertElementBefore from '../../common/insertElementBefore';
 import onclick from '../../common/onclick';
 import { pCC } from '../../support/layout';
 import playerName from '../../common/playerName';
+import sendEvent from '../../analytics/sendEvent';
 import toLowerCase from '../../common/toLowerCase';
 
 let characterRow;
@@ -37,6 +38,7 @@ function shuffleRows(evt, thisRankRow, targetRowNum) {
 }
 
 function overrideUpDown(evt) {
+  sendEvent('ranks', 'overrideUpDown');
   const thisRankRow = evt.target.parentNode.parentNode.parentNode;
   const targetRowNum = thisRankRow.rowIndex
     + getTargetRowNumber(evt.target.value);
