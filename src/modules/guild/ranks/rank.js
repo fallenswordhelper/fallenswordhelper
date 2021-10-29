@@ -9,8 +9,13 @@ import partial from '../../common/partial';
 import weightings from './weightings';
 import { doButtons, setCharacterRow } from './doButtons';
 
-const findTheRows = () => arrayFrom(pCC.lastElementChild.previousElementSibling.rows?.[7]
-  ?.children[0]?.children[0]?.rows);
+function findTheRows() {
+  const theRows = pCC.lastElementChild.previousElementSibling.rows
+    ?.[7]?.children[0]?.children[0]?.rows;
+  if (theRows) {
+    return arrayFrom(theRows);
+  }
+}
 
 function writeRanks(memberRanks, row) {
   const rankCell = row.children[0];
