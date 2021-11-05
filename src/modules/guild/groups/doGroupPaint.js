@@ -14,11 +14,20 @@ import { time, timeEnd } from '../../support/debug';
 
 const xRE = /([a-zA-Z]{3}), (\d{1,2}) ([a-zA-Z]{3}) (\d{1,2}):(\d{2}):(\d{2}) UTC/;
 
-function dateFromUTC(x, curYear) {
+function guessYear(targetMonth) {
+  let curYear = new Date().getFullYear();
+  const thisMonth = months[new Date().getMonth()];
+  if (thisMonth === 'Dec' && targetMonth === 'Jan') {
+    curYear += 1;
+  }
+  return curYear;
+}
+
+function dateFromUTC(x) {
   const groupDate = new Date();
   groupDate.setUTCDate(x[2]);
   groupDate.setUTCMonth(months.indexOf(x[3]));
-  groupDate.setUTCFullYear(curYear);
+  groupDate.setUTCFullYear(guessYear(x[3]));
   groupDate.setUTCHours(x[4]);
   groupDate.setUTCMinutes(x[5]);
   return groupDate;
@@ -27,9 +36,8 @@ function dateFromUTC(x, curYear) {
 function groupLocalTime(row) {
   const theDateCell = row.cells[3];
   const x = xRE.exec(getText(theDateCell));
-  const curYear = new Date().getFullYear(); // TODO Boundary condition
   insertHtmlBeforeEnd(theDateCell, `<br><span class="fshBlue fshXSmall">Local: ${
-    dateFromUTC(x, curYear).toString().substr(0, 21)}</span>`);
+    dateFromUTC(x).toString().substr(0, 21)}</span>`);
 }
 
 function creatorDotAndLink(membrlist, creatorCell) {
