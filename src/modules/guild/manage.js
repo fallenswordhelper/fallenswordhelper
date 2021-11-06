@@ -66,7 +66,7 @@ export default function manage() {
   if (!pCC) { return; }
   const leftHandSideColumnTable = getLhsColTab();
   lhsAdditions(leftHandSideColumnTable);
-  task(3, buffLinks);
+  if (getValue('showBuffLinks')) { task(3, buffLinks); }
   ajaxStuff(leftHandSideColumnTable);
   progressBar();
 }

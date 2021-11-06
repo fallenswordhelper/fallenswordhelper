@@ -473,5 +473,9 @@
   "betaOptIn":{
     "helpTitle":"FSH Beta Opt-In",
     "helpText":"This opts you in to beta features and additional debugging info.<br>The beta features are often incomplete, possibly buggy and subject to change at any time"
+  },
+  "showBuffLinks":{
+    "helpTitle":"Show Buff Links",
+    "helpText":"This shows buffs links after guild members names"
   }
 }

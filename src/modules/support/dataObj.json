@@ -237,5 +237,5 @@
   "privateMsgButtons":false,
   "optInOnLadderPage":false,
   "betaOptIn":false,
-  "lastBetaWarning":0
+  "showBuffLinks":false
 }

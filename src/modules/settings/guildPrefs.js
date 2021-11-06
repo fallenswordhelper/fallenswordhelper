@@ -63,5 +63,6 @@ export default function guildPrefs() {
         'ajaxifyRankControls',
         'detailedConflictInfo',
         'enableHistoryCompressor',
+        'showBuffLinks',
       ])}`;
 }
