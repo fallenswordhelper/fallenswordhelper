@@ -1,8 +1,10 @@
 import './potReport.css';
 import createDiv from '../../../../common/cElement/createDiv';
+import entries from '../../../../common/entries';
 import eventHandler5 from '../../../../common/eventHandler5';
 import extend from '../../../../common/extend';
 import fallback from '../../../../system/fallback';
+import fromEntries from '../../../../common/fromEntries';
 import insertElement from '../../../../common/insertElement';
 import isChecked from '../../../../system/isChecked';
 import keys from '../../../../common/keys';
@@ -32,9 +34,18 @@ function update(potOpts, pot) {
   if (!potOpts.myMap[pot]) { potOpts.myMap[pot] = pot; }
 }
 
+function cleanMap(myMap, potObj) {
+  return fromEntries(
+    entries(myMap)
+      .map(([key, value]) => [key, value, potObj[key]])
+      .filter(([, value, count]) => value !== 'Ignore' || count)
+      .map(([key, value]) => [key, value]),
+  );
+}
+
 function buildMap(potOpts, potObj) {
   keys(potObj).forEach(partial(update, potOpts));
-  return sortKeys(potOpts.myMap);
+  return sortKeys(cleanMap(potOpts.myMap, potObj));
 }
 
 function createContainer(potOpts) {
@@ -146,6 +157,8 @@ function buildPanels(potOpts, potObj) {
 function gotMap(potObj, data) {
   const potOpts = extend({}, defaultOpts); // deep clone
   extend(potOpts, fallback(data, {}));
+  console.log('potOpts', potOpts);
+  console.log('potObj', potObj);
   potOpts.myMap = buildMap(potOpts, potObj);
   set(storeMap, potOpts);
   buildPanels(potOpts, potObj);
