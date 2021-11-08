@@ -157,8 +157,6 @@ function buildPanels(potOpts, potObj) {
 function gotMap(potObj, data) {
   const potOpts = extend({}, defaultOpts); // deep clone
   extend(potOpts, fallback(data, {}));
-  console.log('potOpts', potOpts);
-  console.log('potObj', potObj);
   potOpts.myMap = buildMap(potOpts, potObj);
   set(storeMap, potOpts);
   buildPanels(potOpts, potObj);
