@@ -14,7 +14,6 @@ const calfPrefs = [
   'hideGuildInfoBuff',
   'hideGuildInfoMessage',
   'hideBuffSelected',
-  'fixBuffSelected',
   'enableTempleAlert',
   'enableUpgradeAlert',
   'enableComposingAlert',

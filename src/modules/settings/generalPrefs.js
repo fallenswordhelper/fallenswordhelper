@@ -21,7 +21,6 @@ const middleBlock = [
   'enableComposingAlert',
   'enhanceOnlineDots',
   'hideBuffSelected',
-  'fixBuffSelected',
   'hideHelperMenu',
   'keepHelperMenuOnScreen',
   'draggableHelperMenu',
@@ -39,9 +38,11 @@ const bottomBlock = [
 
 function guildInfoWidgets() {
   return '<tr><td class="fshRight"><label for="enableGuildInfoWidgets">'
-    + `Enable Guild Info Widgets${helpLink('Enable Guild Info Widgets',
+    + `Enable Guild Info Widgets${helpLink(
+      'Enable Guild Info Widgets',
       'Enabling this option will enable the Guild Info Widgets '
-      + '(coloring on the Guild Info panel)')}:</label></td><td>`
+      + '(coloring on the Guild Info panel)',
+    )}:</label></td><td>`
     + '<input id="enableGuildInfoWidgets" name="enableGuildInfoWidgets" '
     + `type="checkbox" value="on"${isChecked(calf.enableGuildInfoWidgets)}>`
     + '&nbsp;<label>Hide Message&gt;'
@@ -60,8 +61,10 @@ function guildInfoWidgets() {
 
 function onlineAlliesEnemies() {
   return `<tr><td class="fshNoWrap fshRight">${networkIcon}Show Online Allies/Enemies${
-    helpLink('Show Online Allies/Enemies',
-      'This will show the allies/enemies online list on the right.')}:</td>`
+    helpLink(
+      'Show Online Allies/Enemies',
+      'This will show the allies/enemies online list on the right.',
+    )}:</td>`
     + '<td><label>Allies&nbsp;'
     + `<input name="enableAllyOnlineList" type="checkbox" value="on"${
       isChecked(calf.enableAllyOnlineList)}></label>&nbsp;&nbsp;`
@@ -74,9 +77,11 @@ function onlineAlliesEnemies() {
 
 function quickLinksLocation() {
   return `<tr><td class="fshRight">Quick Links Screen Location${
-    helpLink('Quick Links Screen Location',
+    helpLink(
+      'Quick Links Screen Location',
       'Determines where the quick links dialog shows on the screen. '
-      + 'Default is top 22, left 0.')}:</td>`
+      + 'Default is top 22, left 0.',
+    )}:</td>`
     + `<td>Top: <input name="quickLinksTopPx" class="fshSettingsNumber" type="number" value="${
       getValue('quickLinksTopPx')}"> `
     + `Left: <input name="quickLinksLeftPx" class="fshSettingsNumber" type="number" value="${

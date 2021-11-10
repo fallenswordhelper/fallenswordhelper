@@ -50,10 +50,6 @@
     "helpTitle":"Hide Buff Selected",
     "helpText":"Hides the buff selected functionality in the online allies and guild info section."
   },
-  "fixBuffSelected":{
-    "helpTitle":"Fix Buff Selected",
-    "helpText":"Fixes the buff selected functionality in the online allies and guild info section."
-  },
   "hideHelperMenu":{
     "helpTitle":"Hide Helper Menu",
     "helpText":"Hides the helper menu from top left."
