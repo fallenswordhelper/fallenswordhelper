@@ -23,12 +23,6 @@ function doFastWear() {
   }
 }
 
-function doFixFolders() {
-  if (getValue('fixFolderImages')) {
-    runDefault(import('../backpack/fixFolders'));
-  }
-}
-
 function doComponents() {
   if (getValue('componentWidgets')) {
     runDefault(import('../components/components'));
@@ -60,7 +54,6 @@ export default function ifSelf() {
       doFastDebuff,
       doAllyEnemy,
       doFastWear,
-      doFixFolders,
       doComponents,
       doQuickWearLink,
       doSelectAllLink,

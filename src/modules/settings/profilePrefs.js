@@ -28,7 +28,6 @@ const part2 = [
   'nekidButton',
   'selectAllLink',
   'enableQuickDrink',
-  'fixFolderImages',
   'componentWidgets',
   'fastDebuff',
   'disableDeactivatePrompts',
