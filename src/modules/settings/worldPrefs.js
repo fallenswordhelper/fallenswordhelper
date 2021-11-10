@@ -57,22 +57,14 @@ function combatEvalBias() {
       + '<br>Conservative = 1.1053 and 1.1 (Safest)'
       + '<br>Semi-Conservative = 1.1 and 1.053'
       + '<br>Adventurous = 1.053 and 1 (Bleeding Edge)'
-      + '<br>Conservative+ = 1.1053 and 1 with the attack calculation '
-      + 'changed to +-48 per RJEM',
+      + '<br>Conservative+ = 1.1053 and 1 with the attack calculation changed to +-48 per RJEM',
     )
   }:</td><td><select name="combatEvaluatorBias">`
-    + `<option value="0"${
-      isSelected(calf.combatEvaluatorBias, 0)
-    }>Conservative</option>`
-    + `<option value="1"${
-      isSelected(calf.combatEvaluatorBias, 1)
-    }>Semi-Conservative</option>`
-    + `<option value="2"${
-      isSelected(calf.combatEvaluatorBias, 2)
-    }>Adventurous</option>`
+    + `<option value="0"${isSelected(calf.combatEvaluatorBias, 0)}>Conservative</option>`
+    + `<option value="1"${isSelected(calf.combatEvaluatorBias, 1)}>Semi-Conservative</option>`
+    + `<option value="2"${isSelected(calf.combatEvaluatorBias, 2)}>Adventurous</option>`
     + `<option value="3"${
-      isSelected(calf.combatEvaluatorBias, 3)
-    }>Conservative+</option></select></td></tr>`;
+      isSelected(calf.combatEvaluatorBias, 3)}>Conservative+</option></select></td></tr>`;
 }
 
 function keepCreatureLog() {
