@@ -1,8 +1,9 @@
 import buffList from '../../support/buffObj.json';
+import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
 import getMsg from './getMsg';
-import getPlayerName from './getPlayerName';
-import openQuickBuffByName from '../../common/openQuickBuffByName';
+import getPlayerId from '../../common/getPlayerId';
+import openQuickBuffById from '../../common/openQuickBuffById';
 import sendEvent from '../../analytics/sendEvent';
 import toLowerCase from '../../common/toLowerCase';
 
@@ -23,8 +24,10 @@ function getIds(target) {
   return '';
 }
 
+const getPlyrId = (target) => getPlayerId(closestTr(target).children[2].children[0].href);
+
 export default function parseBuffs(e) {
   const { target } = e;
-  openQuickBuffByName(getPlayerName(target), getIds(target));
+  openQuickBuffById(getPlyrId(target), getIds(target));
   sendEvent('privateMsg', 'Buff');
 }

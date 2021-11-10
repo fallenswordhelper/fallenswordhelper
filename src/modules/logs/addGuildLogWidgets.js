@@ -2,18 +2,18 @@ import arrayFrom from '../common/arrayFrom';
 import contains from '../common/contains';
 import dataRows from '../common/dataRows';
 import getArrayByTagName from '../common/getArrayByTagName';
-import getCustomUrlParameter from '../system/getCustomUrlParameter';
+import getPlayerId from '../common/getPlayerId';
 import getValue from '../system/getValue';
 import { pCC } from '../support/layout';
 import playerId from '../common/playerId';
 import { playerLinkSelector } from '../support/constants';
 import querySelectorArray from '../common/querySelectorArray';
 
-const getPlayerId = (a) => getCustomUrlParameter(a.href, 'player_id');
+const getPlyrId = (a) => getPlayerId(a.href);
 
 function msgDoesNotIncludePlayer(aRow) {
   const playerLinks = querySelectorArray(playerLinkSelector, aRow);
-  const playerIds = playerLinks.map(getPlayerId).map(Number);
+  const playerIds = playerLinks.map(getPlyrId).map(Number);
   return playerIds.length
     && !playerIds.some((i) => i === playerId());
 }

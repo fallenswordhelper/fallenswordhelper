@@ -11,8 +11,8 @@ import insertElementBefore from '../../../common/insertElementBefore';
 import makeToggleBtn from './makeToggleBtn';
 import on from '../../../common/on';
 import onclick from '../../../common/onclick';
-import openQuickBuffByName from '../../../common/openQuickBuffByName';
-import playerName from '../../../common/playerName';
+import openQuickBuffById from '../../../common/openQuickBuffById';
+import playerId from '../../../common/playerId';
 import setText from '../../../dom/setText';
 import setValue from '../../../system/setValue';
 import textSpan from '../../../common/cElement/textSpan';
@@ -40,7 +40,7 @@ function doFormGroup(target) {
 }
 
 function openQuickBuff() {
-  openQuickBuffByName(playerName());
+  openQuickBuffById(playerId());
 }
 
 function openRealmMap() {

@@ -8,7 +8,7 @@
   import getValue from '../../system/getValue';
   import joinGroups from '../../common/joinGroups';
   import navigateTo from '../../common/navigateTo';
-  import openQuickBuffByName from '../../common/openQuickBuffByName';
+  import openQuickBuffById from '../../common/openQuickBuffById';
   import playerId from '../../common/playerId';
   import sendEvent from '../../analytics/sendEvent';
   import {
@@ -30,7 +30,7 @@
   function quickbuff(e) {
     e.target.blur();
     qbEvent('quickbuff');
-    openQuickBuffByName(playername);
+    openQuickBuffById(playerid);
   }
 
   function join() {

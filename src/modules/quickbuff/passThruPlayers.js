@@ -6,7 +6,7 @@ let requests;
 
 function processQueue() {
   if (requests.length) {
-    window.addPlayer(requests.shift());
+    window.addPlayers([requests.shift()]);
     setTimeout(processQueue, 200);
   } else {
     setTimeout(firstPlayerStats, 200);

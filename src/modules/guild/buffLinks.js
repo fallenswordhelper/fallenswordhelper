@@ -1,7 +1,8 @@
 import batch from '../common/batch';
+import getPlayerId from '../common/getPlayerId';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import onclick from '../common/onclick';
-import openQuickBuffByName from '../common/openQuickBuffByName';
+import openQuickBuffById from '../common/openQuickBuffById';
 import { pCC } from '../support/layout';
 import { playerIdUrl } from '../support/constants';
 import querySelectorAll from '../common/querySelectorAll';
@@ -12,7 +13,7 @@ function insertBuffLink(el) {
 
 function openQuickBuff(evt) {
   if (evt.target.className !== 'smallLink') { return; }
-  openQuickBuffByName(evt.target.previousElementSibling.text);
+  openQuickBuffById(getPlayerId(evt.target.previousElementSibling.href));
 }
 
 export default function buffLinks() {

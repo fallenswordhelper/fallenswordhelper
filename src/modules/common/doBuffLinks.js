@@ -2,11 +2,11 @@ import chunk from './chunk';
 import createButton from './cElement/createButton';
 import createLi from './cElement/createLi';
 import createUl from './cElement/createUl';
+import fshOpen from '../chrome/fshOpen';
 import insertElement from './insertElement';
 import onclick from './onclick';
-import openQuickBuffByName from './openQuickBuffByName';
-import { places } from '../support/constants';
 import sendEvent from '../analytics/sendEvent';
+import { places, quickbuffUrl } from '../support/constants';
 
 function getListItem(words, names) {
   const li = createLi();
@@ -16,7 +16,7 @@ function getListItem(words, names) {
   });
   onclick(btn, (evt) => {
     evt.target.blur();
-    openQuickBuffByName(names);
+    fshOpen(`${quickbuffUrl}&players=${names}`, 'fsQuickBuff', 618, 1000, ',scrollbars');
     sendEvent('doBuffLinks', words);
   });
   insertElement(li, btn);

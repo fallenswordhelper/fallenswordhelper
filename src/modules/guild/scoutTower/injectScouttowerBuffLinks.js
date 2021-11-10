@@ -1,24 +1,24 @@
 import arrayFrom from '../../common/arrayFrom';
 import containsText from '../../common/containsText';
 import dataRows from '../../common/dataRows';
-import getText from '../../common/getText';
+import getPlayerId from '../../common/getPlayerId';
 import hasClass from '../../common/hasClass';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';
-import openQuickBuffByName from '../../common/openQuickBuffByName';
+import openQuickBuffById from '../../common/openQuickBuffById';
 
 function buffIndividual(target) {
   if (target.previousElementSibling) {
-    openQuickBuffByName(getText(target.previousElementSibling));
+    openQuickBuffById(getPlayerId(target.previousElementSibling.href));
   }
 }
 
-function memberName(el) { return getText(el.cells[0].children[0].children[0]); }
+const memberId = (el) => getPlayerId(el.cells[0].children[0].href);
 
 function buffAll(target) {
   const titanTable = target.parentNode.parentNode.parentNode.parentNode;
-  const shortList = dataRows(titanTable.rows, 3, 0).map(memberName);
-  openQuickBuffByName(shortList.join());
+  const shortList = dataRows(titanTable.rows, 3, 0).map(memberId).join();
+  openQuickBuffById(shortList);
 }
 
 function buffEvent(e) {

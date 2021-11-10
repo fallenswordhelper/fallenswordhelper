@@ -1,12 +1,14 @@
-import getTextTrim from './getTextTrim';
+import getPlayerId from './getPlayerId';
 import hasClass from './hasClass';
-import openQuickBuffByName from './openQuickBuffByName';
+import openQuickBuffById from './openQuickBuffById';
+import sendEvent from '../analytics/sendEvent';
 
 const isBuffLink = (target) => hasClass('fshBl', target)
   && target.previousElementSibling;
 
 export default function doBuffLinkClick(e) {
   if (isBuffLink(e.target)) {
-    openQuickBuffByName(getTextTrim(e.target.previousElementSibling));
+    sendEvent('common', 'doBuffLinkClick');
+    openQuickBuffById(getPlayerId(e.target.previousElementSibling.href));
   }
 }
