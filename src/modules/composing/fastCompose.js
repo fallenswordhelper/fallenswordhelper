@@ -37,8 +37,7 @@ function composePots(button, templateId) {
   if (openTemplates.length < button.value) { return; }
   for (let i = 0; i < button.value; i += 1) {
     openTemplates[i].value = templateId;
-    backgroundCreate(openTemplates[i].nextElementSibling.nextElementSibling,
-      openTemplates[i]);
+    backgroundCreate(openTemplates[i].nextElementSibling.nextElementSibling, openTemplates[i]);
   }
 }
 
@@ -104,9 +103,10 @@ function drawList(fcDiv) {
 
 export default function fastCompose() {
   const buttonDiv = querySelector('#pCC div.centered');
-  insertHtmlAfterEnd(buttonDiv.children[1],
-    ' | <label for="fast-compose"><span class="sendLink">'
-    + 'Fast Compose</span></label>');
+  insertHtmlAfterEnd(
+    buttonDiv.children[1],
+    ' | <label for="fast-compose"><span class="sendLink">Fast Compose</span></label>',
+  );
   const fcDiv = createDiv({ className: 'centered' });
   insertElementAfter(fcDiv, buttonDiv);
   const fcCheck = createInput({ id: 'fast-compose', type: 'checkbox' });

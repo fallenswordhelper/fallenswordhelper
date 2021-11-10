@@ -123,8 +123,7 @@ function doCombatEval(data, playerJson, groupData) {
   // playerdata
   combat.player = playerDataObject(playerJson);
   biasVars(combat);
-  combat.creature = creatureData(data.response.data,
-    combat.player.superEliteSlayerMultiplier);
+  combat.creature = creatureData(data.response.data, combat.player.superEliteSlayerMultiplier);
   buffProcessing(combat);
   combat.evaluatorHTML = evalHTML(combat);
   if (groupData.groupExists) {

@@ -17,7 +17,6 @@ export function queueTakeItem(invId, action) {
 
 export function queueRecallItem(invId, playerId, mode, action) {
   // You have to chain them because they could be modifying the backpack
-  dfr = getDfr().then(partial(pipeRecallToQueue,
-    invId, playerId, mode, action));
+  dfr = getDfr().then(partial(pipeRecallToQueue, invId, playerId, mode, action));
   return dfr;
 }

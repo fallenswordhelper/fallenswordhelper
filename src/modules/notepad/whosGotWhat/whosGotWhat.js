@@ -126,8 +126,7 @@ function showMe(dataAry) {
   const top = insertElement(el, createDiv({ className: 'st-top-container' }));
   const tableContainer = insertElement(el, createDiv());
   const domTable = makeTable(tableContainer);
-  const bottom = insertElement(el,
-    createDiv({ className: 'st-bottom-container' }));
+  const bottom = insertElement(el, createDiv({ className: 'st-bottom-container' }));
   const tableState = {
     sort: { pointer: 'slot', direction: 'asc' },
     slice: { page: 1, size: 0 },

@@ -23,8 +23,7 @@ function players(theCells) { // jQuery
   const cell = theCells.eq(1);
   const matches = cell.text().split(/\s\/\s/);
   if (matches) {
-    cell.attr('data-order',
-      (Number(matches[0]) - Number(matches[1])) * 100 + Number(matches[1]));
+    cell.attr('data-order', (Number(matches[0]) - Number(matches[1])) * 100 + Number(matches[1]));
   }
 }
 

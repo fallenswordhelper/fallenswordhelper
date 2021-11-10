@@ -104,10 +104,10 @@ function makePopup() {
 }
 
 function addOverlay() {
-  insertHtmlBeforeEnd(trDialog,
-    '<div class="fsh-dialog-overlay">'
-    + '<label class="fsh-dialog-cancel" for="tracker"></label>'
-    + '</div>');
+  insertHtmlBeforeEnd(
+    trDialog,
+    '<div class="fsh-dialog-overlay"><label class="fsh-dialog-cancel" for="tracker"></label></div>',
+  );
 }
 
 function gotActivity(data) {

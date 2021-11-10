@@ -10,8 +10,13 @@ import querySelector from '../../common/querySelector';
 
 function parseDateAsTimestamp(textDate) {
   const dateAry = textDate.split(/[: /[]/);
-  return new Date(Number(dateAry[4]), months.indexOf(dateAry[3]),
-    Number(dateAry[2]), Number(dateAry[0]), Number(dateAry[1]));
+  return new Date(
+    Number(dateAry[4]),
+    months.indexOf(dateAry[3]),
+    Number(dateAry[2]),
+    Number(dateAry[0]),
+    Number(dateAry[1]),
+  );
 }
 
 function calcCd(e) {

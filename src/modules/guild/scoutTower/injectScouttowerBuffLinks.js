@@ -36,14 +36,12 @@ function evtHdl(e) {
 }
 
 function playerBufflink(el) {
-  insertHtmlBeforeEnd(el.cells[0],
-    ' <button class="fshBl fshXSmall">[b]</button>');
+  insertHtmlBeforeEnd(el.cells[0], ' <button class="fshBl fshXSmall">[b]</button>');
 }
 
 function doBuffLinks(titanTable) {
   dataRows(titanTable.rows, 3, 0).forEach(playerBufflink);
-  insertHtmlBeforeEnd(titanTable.rows[0].cells[0],
-    ' <button class="fshBl fshXSmall">all</button>');
+  insertHtmlBeforeEnd(titanTable.rows[0].cells[0], ' <button class="fshBl fshXSmall">all</button>');
 }
 
 function myTables(el, i) { return el.rows.length > 1 && i > 1; }

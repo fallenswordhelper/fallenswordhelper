@@ -4,7 +4,7 @@ import getElementById from '../common/getElementById';
 import getElementsByClassName from '../common/getElementsByClassName';
 import getElementsByTagName from '../common/getElementsByTagName';
 import getText from '../common/getText';
-import { injectFsBoxContent } from './pageSwitcher/loader';
+import injectFsBoxContent from './pageSwitcher/loader/injectFsBoxContent';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryDialog from './jQueryDialog/jQueryDialog';
@@ -20,8 +20,7 @@ function getBoxList(boxList) {
 
 function storeFSBox(_boxList) {
   let boxList = getBoxList(_boxList);
-  const fsbox = getElementsByClassName('message',
-    getElementById('minibox-fsbox'))[0].innerHTML;
+  const fsbox = getElementsByClassName('message', getElementById('minibox-fsbox'))[0].innerHTML;
   if (boxList.indexOf(fsbox) < 0) { boxList = `<br>${fsbox}${boxList}`; }
   if (boxList.length > 10000) { boxList = boxList.substring(0, 10000); }
   set('fsh_fsboxcontent', boxList);
@@ -32,9 +31,10 @@ function storeMsg(nodediv) {
   if (playerName.length === 0) { return; }
   get('fsh_fsboxcontent').then(storeFSBox);
   playerName = getText(playerName[0]);
-  insertHtmlBeforeEnd(nodediv,
-    `<span class="fshPaleVioletRed">[ <a href="${doAddIgnore
-    }${playerName}">Ignore</a> ]</span> `);
+  insertHtmlBeforeEnd(
+    nodediv,
+    `<span class="fshPaleVioletRed">[ <a href="${doAddIgnore}${playerName}">Ignore</a> ]</span> `,
+  );
 }
 
 function openDialog() {

@@ -101,8 +101,7 @@ function updateStamCount(type, upgrade, evt) {
 
 function injectUpgradeHelper(type) {
   const upgrade = findText(type);
-  on(getInputElement(upgrade), 'keyup',
-    partial(updateStamCount, type, upgrade));
+  on(getInputElement(upgrade), 'keyup', partial(updateStamCount, type, upgrade));
 }
 
 function injectPoints() {

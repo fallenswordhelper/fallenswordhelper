@@ -43,13 +43,17 @@ export function logoToggle(leftHandSideColumnTable) {
 export function statToggle(leftHandSideColumnTable) {
   const leaveGuildCell = leftHandSideColumnTable.rows[4].cells[1].children[0];
   setInnerHtml(trim(leaveGuildCell.innerHTML), leaveGuildCell);
-  thisToggle(leaveGuildCell,
+  thisToggle(
+    leaveGuildCell,
     leftHandSideColumnTable.rows[6].cells[0].children[0],
-    'statisticsControl');
+    'statisticsControl',
+  );
 }
 
 export function structureToggle(leftHandSideColumnTable) {
-  thisToggle(leftHandSideColumnTable.rows[15].cells[1].children[0],
+  thisToggle(
+    leftHandSideColumnTable.rows[15].cells[1].children[0],
     leftHandSideColumnTable.rows[17].cells[0].children[0],
-    'guildStructureControl');
+    'guildStructureControl',
+  );
 }

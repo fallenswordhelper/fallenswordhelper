@@ -21,8 +21,8 @@ function getBioLines(bioCellHtml, findBuffNicks) {
 }
 
 function getSustain(doc) {
-  const sustainLink = getArrayByTagName('a',
-    getElementById('profileLeftColumn', doc)).find(contains('Sustain'));
+  const sustainLink = getArrayByTagName('a', getElementById('profileLeftColumn', doc))
+    .find(contains('Sustain'));
   if (sustainLink) {
     const sustainText = sustainLink.parentNode.parentNode.parentNode
       .nextElementSibling.children[0].dataset.tipped;
@@ -68,8 +68,7 @@ function openMsg(evt) {
 function doNameCell(o) {
   const newCell = o.newRow.insertCell(0);
   newCell.style.verticalAlign = 'top';
-  setInnerHtml(nameCell(o.doc, o.callback, o.lastActivity, o.bioCellHtml),
-    newCell);
+  setInnerHtml(nameCell(o.doc, o.callback, o.lastActivity, o.bioCellHtml), newCell);
   $('.a-reply').on('click', openMsg);
 }
 
@@ -105,8 +104,7 @@ function buffCell(newRow, textLineArray) {
 
 function updateProcessed() {
   const processedBuffers = getElementById('buffersProcessed');
-  const potentialBuffers = parseInt(getText(getElementById('potentialBuffers')),
-    10);
+  const potentialBuffers = parseInt(getText(getElementById('potentialBuffers')), 10);
   const processedBuffersCount = parseInt(getText(processedBuffers), 10);
   setInnerHtml(processedBuffersCount + 1, processedBuffers);
   if (potentialBuffers === processedBuffersCount + 1) {

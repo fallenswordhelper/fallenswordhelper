@@ -25,8 +25,7 @@ function goDown(target, disappear) {
 
 function fadeAway() {
   const target = $('#composingMessageContainer');
-  target.animate({ opacity: 0 }, 500,
-    partial(goDown, target, partial(disappearance, target)));
+  target.animate({ opacity: 0 }, 500, partial(goDown, target, partial(disappearance, target)));
 }
 
 function msgText(message, bgcolor) {
@@ -101,15 +100,15 @@ function togglePref() {
 }
 
 function prefBox() {
-  insertHtmlBeforeEnd(pCC,
+  insertHtmlBeforeEnd(
+    pCC,
     `<table class="fshTblCenter"><tbody>${
-      simpleCheckbox(prefDisableBreakdownPrompts)
-    }</tbody></table>`);
+      simpleCheckbox(prefDisableBreakdownPrompts)}</tbody></table>`,
+  );
 }
 
 function setupHandlers() {
-  onclick(getElementById('breakdown-selected-items').parentNode, breakEvt,
-    true);
+  onclick(getElementById('breakdown-selected-items').parentNode, breakEvt, true);
   onclick(getElementById('composing-items'), itemClick);
   onclick(getElementById(prefDisableBreakdownPrompts), togglePref);
 }

@@ -21,8 +21,7 @@ function relicControl(leftHandSideColumnTable) {
     .filter(contains('Relics'));
   if (relic.length !== 1) { return; }
   const thisFont = relic[0].parentNode.nextElementSibling.children[0];
-  setInnerHtml(`[ <a href="${guildSubcmdUrl}reliclist">Control</a> ]&nbsp;`,
-    thisFont);
+  setInnerHtml(`[ <a href="${guildSubcmdUrl}reliclist">Control</a> ]&nbsp;`, thisFont);
 }
 
 function selfRecallLink(leftHandSideColumnTable) {
@@ -30,9 +29,10 @@ function selfRecallLink(leftHandSideColumnTable) {
   const getLi = getElementsByTagName('li', leftHandSideColumnTable);
   if (!getLi || !getLi.length) { return; }
   const selfRecall = getLi[getLi.length - 1].parentNode;
-  insertHtmlBeforeEnd(selfRecall,
-    `<li><a href="${recallUserUrl}${playerName()
-    }" data-tooltip="Self Recall">Self Recall</a></li>`);
+  insertHtmlBeforeEnd(
+    selfRecall,
+    `<li><a href="${recallUserUrl}${playerName()}" data-tooltip="Self Recall">Self Recall</a></li>`,
+  );
 }
 
 function getLhsColTab() {

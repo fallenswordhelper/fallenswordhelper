@@ -19,11 +19,13 @@ function searchGuildMembers(o) {
 }
 
 function allyHelpLink() {
-  return helpLink('Search Allies/Enemies',
+  return helpLink(
+    'Search Allies/Enemies',
     'The checkbox enables searching your own personal '
     + 'allies/enemies list for buffs.<br><br>'
     + 'Additional profiles to search can be added in the text '
-    + 'field to the right, separated by commas.');
+    + 'field to the right, separated by commas.',
+  );
 }
 
 function searchAlly(o, extraProfile) {

@@ -21,15 +21,21 @@ function setName(fshInv, e) { // jQuery
 
 function takeItem(e) { // jQuery
   const target = $(e.target);
-  doAction(partial(queueTakeItem, target.attr('invid'), target.attr('action')),
-    target);
+  doAction(partial(queueTakeItem, target.attr('invid'), target.attr('action')), target);
 }
 
 function recallItem(e) { // jQuery
   const target = $(e.target);
-  doAction(partial(queueRecallItem, target.attr('invid'),
-    target.attr('playerid'), target.attr('mode'), target.attr('action')),
-  target);
+  doAction(
+    partial(
+      queueRecallItem,
+      target.attr('invid'),
+      target.attr('playerid'),
+      target.attr('mode'),
+      target.attr('action'),
+    ),
+    target,
+  );
 }
 
 function wearItem(e) { // jQuery
@@ -92,8 +98,7 @@ function spanClickHandlers(fshInv) {
 
 function setupClickHandlers(fshInv) { // jQuery
   elementClickHandlers(fshInv);
-  $('table.fshInvFilter').on('click', 'input[type="checkbox"]',
-    partial(getChecks, fshInv));
+  $('table.fshInvFilter').on('click', 'input[type="checkbox"]', partial(getChecks, fshInv));
   spanClickHandlers(fshInv);
 }
 

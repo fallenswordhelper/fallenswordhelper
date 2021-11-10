@@ -41,9 +41,7 @@ function getCooldownHtml(cooldown) {
 }
 
 function currentPctText(ourTitan) {
-  return roundToString(
-    getKillsPct(ourTitan.max_hp - ourTitan.current_hp, ourTitan.kills), 2,
-  );
+  return roundToString(getKillsPct(ourTitan.max_hp - ourTitan.current_hp, ourTitan.kills), 2);
 }
 
 function totalPctText(ourTitan) {

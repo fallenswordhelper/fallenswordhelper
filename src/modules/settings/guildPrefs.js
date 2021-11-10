@@ -39,9 +39,11 @@ function guildNames() {
 
 function pvpTargets() {
   return `<tr><td class="fshRight">Highlight Valid PvP Targets${
-    helpLink('Highlight Valid PvP Targets',
+    helpLink(
+      'Highlight Valid PvP Targets',
       'Enabling this option will highlight targets in OTHER guilds that '
-      + 'are within your level range to attack for PvP or GvG.')
+      + 'are within your level range to attack for PvP or GvG.',
+    )
   }:</td><td>PvP: <input name="highlightPlayersNearMyLvl" `
     + `type="checkbox" value="on"${
       isValueChecked('highlightPlayersNearMyLvl')

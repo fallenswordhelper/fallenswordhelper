@@ -42,8 +42,10 @@ function changePref() {
 
 const injectPref = () => {
   const submitBtn = querySelector('input[type="submit"]');
-  insertHtmlBeforeEnd(submitBtn.parentNode,
-    `&nbsp;&nbsp;${simpleCheckboxHtml(prefAjaxifyDestroy)}`);
+  insertHtmlBeforeEnd(
+    submitBtn.parentNode,
+    `&nbsp;&nbsp;${simpleCheckboxHtml(prefAjaxifyDestroy)}`,
+  );
   on(submitBtn.parentNode, 'change', changePref);
 };
 

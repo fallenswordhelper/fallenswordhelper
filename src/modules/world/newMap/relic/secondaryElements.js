@@ -74,15 +74,16 @@ function missingMembers(membrList) {
   guildMemberList = membrList;
   twoMinutesAgo = nowSecs - 120;
   sevenDaysAgo = nowSecs - 604800;
-  const filtered = keys(guildMemberList)
-    .filter(availableMembers).map(makeLinks);
-  insertHtmlBeforeEnd(containerDiv,
+  const filtered = keys(guildMemberList).filter(availableMembers).map(makeLinks);
+  insertHtmlBeforeEnd(
+    containerDiv,
     '<div class="fshFloatLeft fshRelicLowDiv">'
     + `<table class="relicT"><thead><tr><th>${
       filtered.length.toString()}`
     + ' Offline guild members not at relic:</th></tr></thead>'
     + `<tbody><tr><td>${filtered.join(' ')}</td></tr></tbody>`
-    + '</table></div>');
+    + '</table></div>',
+  );
 }
 
 function setDefVars() {

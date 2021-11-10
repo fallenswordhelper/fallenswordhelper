@@ -28,10 +28,12 @@ function gotPrimary(buffImg, bold, primaryStat) {
   const buffEffect = Math.floor(
     primaryStat * (Number(bold[1].replace(/[+%]/g, '')) / 100),
   );
-  setTipped(buffImg.dataset.tipped.replace('</center></div>',
+  setTipped(buffImg.dataset.tipped.replace(
+    '</center></div>',
     `<br>Buff Effect: ${String(buffEffect)}<br>${bold[2]}: ${
       String(primaryStat - buffEffect)}&nbsp;&nbsp;${bold[3]}: ${
-      String(secondaryStat + buffEffect)}$&`), buffImg);
+      String(secondaryStat + buffEffect)}$&`,
+  ), buffImg);
 }
 
 function gotImg(buffImg) {

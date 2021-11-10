@@ -1,4 +1,4 @@
-import { injectQuestBookFull } from './loader';
+import injectQuestBookFull from './loader/injectQuestBookFull';
 import runDefault from '../../common/runDefault';
 
 const injectQuestTracker = () => { runDefault(import('../../questbook/injectQuestTracker')); };

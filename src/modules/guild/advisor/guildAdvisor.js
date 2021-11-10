@@ -40,8 +40,13 @@ function cellText(cell, i) {
 
 function bodyText(membrList, row) {
   const foo = arrayFrom(row.cells, cellText);
-  foo.splice(0, 1, playerName(foo[0], membrList),
-    playerLevel(foo[0], membrList), playerRank(foo[0], membrList));
+  foo.splice(
+    0,
+    1,
+    playerName(foo[0], membrList),
+    playerLevel(foo[0], membrList),
+    playerRank(foo[0], membrList),
+  );
   return foo;
 }
 

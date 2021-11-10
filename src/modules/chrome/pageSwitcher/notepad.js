@@ -1,19 +1,17 @@
 import calf from '../../support/calf';
+import combatLog from './loader/combatLog';
+import injectAuctionSearch from './loader/injectAuctionSearch';
+import injectBuffLog from './loader/injectBuffLog';
+import injectFindBuffs from './loader/injectFindBuffs';
+import injectFindOther from './loader/injectFindOther';
+import injectFsBoxContent from './loader/injectFsBoxContent';
+import injectOnlinePlayers from './loader/injectOnlinePlayers';
+import injectQuickLinkManager from './loader/injectQuickLinkManager';
+import monstorLog from './loader/monstorLog';
+import quickExtract from './loader/quickExtract';
+import quickwear from './loader/quickwear';
+import recipeMgr from './loader/recipeMgr';
 import runDefault from '../../common/runDefault';
-import {
-  combatLog,
-  injectAuctionSearch,
-  injectBuffLog,
-  injectFindBuffs,
-  injectFindOther,
-  injectFsBoxContent,
-  injectOnlinePlayers,
-  injectQuickLinkManager,
-  monstorLog,
-  quickExtract,
-  quickWear,
-  recipeMgr,
-} from './loader';
 
 const inventory = () => { runDefault(import('../../notepad/inventory/inventory')); };
 const newGuildLog = () => { runDefault(import('../../notepad/newGuildLog/newGuildLog')); };
@@ -34,7 +32,7 @@ const notepad = {
   quicklinkmanager: { '-': injectQuickLinkManager },
   monsterlog: { '-': monstorLog },
   quickextract: { '-': quickExtract },
-  quickwear: { '-': quickWear },
+  quickwear: { '-': quickwear },
   fsboxcontent: { '-': injectFsBoxContent },
   bufflogcontent: { '-': injectBuffLog },
   newguildlog: { '-': newGuildLog }, // TODO

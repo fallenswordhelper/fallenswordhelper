@@ -23,8 +23,7 @@ function clearCombatLog() {
 }
 
 function notepadClearLog() { // jQuery
-  jConfirm('Clear Combat Log',
-    'Are you sure you want to clear your log?', clearCombatLog);
+  jConfirm('Clear Combat Log', 'Are you sure you want to clear your log?', clearCombatLog);
 }
 
 function gotCombatLog(content, data) {

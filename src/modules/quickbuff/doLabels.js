@@ -6,8 +6,7 @@ import setTipped from '../common/setTipped';
 function addStamCost(el, nameSpan) {
   const dataTipped = nameSpan.dataset.tipped;
   const { cost } = el.previousElementSibling.dataset;
-  setTipped(dataTipped.replace('</center>', `<br>Stamina Cost: ${cost}$&`),
-    nameSpan);
+  setTipped(dataTipped.replace('</center>', `<br>Stamina Cost: ${cost}$&`), nameSpan);
 }
 
 function canBeDimmed(el, nameSpan) {

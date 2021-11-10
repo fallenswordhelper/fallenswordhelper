@@ -40,8 +40,7 @@ function pvpHighlight(guildId, data) {
 
 export default function decoratePlayer(aTable, data) {
   const guildId = getGuild(aTable);
-  insertHtmlBeforeEnd(aTable.rows[0],
-    `<td>${onlineDot({ last_login: data.last_login })}</td>`);
+  insertHtmlBeforeEnd(aTable.rows[0], `<td>${onlineDot({ last_login: data.last_login })}</td>`);
   if (pvpHighlight(guildId, data)) {
     aTable.parentNode.parentNode.classList.add('lvlHighlight');
   }

@@ -10,8 +10,7 @@ function isNotBound() {
 }
 
 function isNotComponent() {
-  return !containsText('Component',
-    xPath('.//tr[td/b/text() = "Type:"]/td[2]'));
+  return !containsText('Component', xPath('.//tr[td/b/text() = "Type:"]/td[2]'));
 }
 
 function ahItemHref(name) {

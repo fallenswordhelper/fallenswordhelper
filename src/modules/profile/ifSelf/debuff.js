@@ -49,7 +49,10 @@ function interceptDebuff(fastDebuff, e) {
 export default function debuff(fastDebuff, disableDeactivatePrompts) {
   const profileRightColumn = getElementById('profileRightColumn');
   if (profileRightColumn) {
-    onclick(profileRightColumn.lastElementChild,
-      partial(interceptDebuff, fastDebuff), disableDeactivatePrompts);
+    onclick(
+      profileRightColumn.lastElementChild,
+      partial(interceptDebuff, fastDebuff),
+      disableDeactivatePrompts,
+    );
   }
 }

@@ -64,8 +64,7 @@ function setupBackgroundCheck() {
   if (lastCheckSecs >= 600) {
     doBackgroundCheck();
   } else {
-    timeoutId = window.setTimeout(doBackgroundCheck,
-      (600 - lastCheckSecs) * 1000);
+    timeoutId = window.setTimeout(doBackgroundCheck, (600 - lastCheckSecs) * 1000);
   }
 }
 

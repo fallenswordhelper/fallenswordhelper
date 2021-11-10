@@ -68,9 +68,14 @@ function summaryHtml(guildKills, currentHP, totalHP) {
 
 function injectSummary(aRow, titanHP) {
   const titanHPArray = titanHP.split('/');
-  insertHtmlBeforeEnd(aRow.cells[3],
-    summaryHtml(Number(getText(aRow.cells[3])), Number(titanHPArray[0]),
-      Number(titanHPArray[1])));
+  insertHtmlBeforeEnd(
+    aRow.cells[3],
+    summaryHtml(
+      Number(getText(aRow.cells[3])),
+      Number(titanHPArray[0]),
+      Number(titanHPArray[1]),
+    ),
+  );
 }
 
 function killsSummary(aRow) {

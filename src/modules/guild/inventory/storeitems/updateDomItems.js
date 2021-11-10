@@ -52,8 +52,11 @@ function doAhLinks(invItem) {
   return aLink(`${ahSearchUrl}${encodeURIComponent(invItem.item_name)}`, '', 'AH');
 }
 
-const doUfsgLink = (invItem) => aLink(`${guideUrl}items${defSubcmd}view&item_id=${invItem.item_id}`,
-  ' target="_blank"', 'UFSG');
+const doUfsgLink = (invItem) => aLink(
+  `${guideUrl}items${defSubcmd}view&item_id=${invItem.item_id}`,
+  ' target="_blank"',
+  'UFSG',
+);
 
 const hasMultiple = (prefs, itemHash, invItem) => prefs[checkAllOfType]
   && itemHash[invItem.item_id] > 1;

@@ -6,8 +6,16 @@ function reviver(key, value) {
     const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/
       .exec(value);
     if (a) {
-      return new Date(Date.UTC(Number(a[1]), Number(a[2]) - 1, Number(a[3]),
-        Number(a[4]), Number(a[5]), Number(a[6])));
+      return new Date(
+        Date.UTC(
+          Number(a[1]),
+          Number(a[2]) - 1,
+          Number(a[3]),
+          Number(a[4]),
+          Number(a[5]),
+          Number(a[6]),
+        ),
+      );
     }
   }
   return value;

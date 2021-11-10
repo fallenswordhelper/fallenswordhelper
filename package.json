@@ -36,9 +36,9 @@
   "devDependencies": {
     "esbuild": "^0.13.12",
     "esbuild-svelte": "^0.5.7",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.24.2",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-svelte3": "^3.2.1",
     "gzip-size": "^6.0.0",
     "husky": "^7.0.4",

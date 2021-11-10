@@ -1,5 +1,5 @@
 import runDefault from '../../common/runDefault';
-import { ufsgAllowBack } from './loader';
+import ufsgAllowBack from './loader/ufsgAllowBack';
 
 const imgFix = () => { runDefault(import('../../guide/imgFix')); };
 

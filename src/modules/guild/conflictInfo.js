@@ -22,8 +22,7 @@ function conflictHeader(insertHere) {
 }
 
 function conflictRow(insertHere, aRow) {
-  buildRow(insertHere,
-    aRow.cells[0].innerHTML, `<b>${aRow.cells[6].innerHTML}</b>`);
+  buildRow(insertHere, aRow.cells[0].innerHTML, `<b>${aRow.cells[6].innerHTML}</b>`);
 }
 
 function hazConflict(conflictTable, curPage, insertHere) { // Legacy
@@ -34,9 +33,7 @@ function hazConflict(conflictTable, curPage, insertHere) { // Legacy
 }
 
 function activeConflicts(doc, curPage, insertHere) { // Legacy
-  const conflictTable = querySelector(
-    '#pCC > table > tbody > tr > td > table', doc,
-  );
+  const conflictTable = querySelector('#pCC > table > tbody > tr > td > table', doc);
   if (conflictTable && conflictTable.rows.length > 3) {
     hazConflict(conflictTable, curPage, insertHere);
   }

@@ -40,8 +40,7 @@ function guildInfoWidgets() {
   return '<tr><td class="fshRight"><label for="enableGuildInfoWidgets">'
     + `Enable Guild Info Widgets${helpLink(
       'Enable Guild Info Widgets',
-      'Enabling this option will enable the Guild Info Widgets '
-      + '(coloring on the Guild Info panel)',
+      'Enabling this option will enable the Guild Info Widgets (coloring on the Guild Info panel)',
     )}:</label></td><td>`
     + '<input id="enableGuildInfoWidgets" name="enableGuildInfoWidgets" '
     + `type="checkbox" value="on"${isChecked(calf.enableGuildInfoWidgets)}>`
@@ -79,8 +78,7 @@ function quickLinksLocation() {
   return `<tr><td class="fshRight">Quick Links Screen Location${
     helpLink(
       'Quick Links Screen Location',
-      'Determines where the quick links dialog shows on the screen. '
-      + 'Default is top 22, left 0.',
+      'Determines where the quick links dialog shows on the screen. Default is top 22, left 0.',
     )}:</td>`
     + `<td>Top: <input name="quickLinksTopPx" class="fshSettingsNumber" type="number" value="${
       getValue('quickLinksTopPx')}"> `

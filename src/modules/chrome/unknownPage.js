@@ -1,12 +1,14 @@
 import calf from '../support/calf';
 import getElementById from '../common/getElementById';
+import injectQuestBookFull from './pageSwitcher/loader/injectQuestBookFull';
+import inventing from './pageSwitcher/loader/inventing';
 import jQueryNotPresent from '../common/jQueryNotPresent';
+import news from './pageSwitcher/loader/news';
 import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';
 import screenview from '../analytics/screenview';
 import updateBuffLog from '../notepad/buffLog/updateBuffLog';
 import xPath from '../common/xPath';
-import { injectQuestBookFull, inventing, news } from './pageSwitcher/loader';
 
 const unknown = [
   [

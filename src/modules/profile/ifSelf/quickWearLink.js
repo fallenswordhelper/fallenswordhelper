@@ -5,12 +5,12 @@ import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import jQueryDialog from '../../chrome/jQueryDialog/jQueryDialog';
 import onclick from '../../common/onclick';
 import querySelector from '../../common/querySelector';
-import { quickWear } from '../../chrome/pageSwitcher/loader';
+import quickwear from '../../chrome/pageSwitcher/loader/quickwear';
 import sendEvent from '../../analytics/sendEvent';
 
 function openQwDialog() {
   sendEvent('profile', 'insertQuickWear');
-  jQueryDialog(quickWear);
+  jQueryDialog(quickwear);
 }
 
 export default function quickWearLink() {

@@ -59,8 +59,7 @@ export function initInventory(potOpts, potObj, panels) {
   if (potOpts.pottab1) {
     drawInventory(potOpts, potObj);
   } else {
-    once(panels.parentNode.children[0], 'change',
-      partial(drawInventory, potOpts, potObj));
+    once(panels.parentNode.children[0], 'change', partial(drawInventory, potOpts, potObj));
   }
   insertElement(panels, inventory);
 }

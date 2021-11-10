@@ -16,8 +16,10 @@ import setInnerHtml from '../../dom/setInnerHtml';
 function filterMercs(e) { return !e.includes('#000099'); }
 
 function joined(container) {
-  setInnerHtml('<span class="fshXSmall fshBlue" style="line-height: 19px;">Joined</span>',
-    container);
+  setInnerHtml(
+    '<span class="fshXSmall fshBlue" style="line-height: 19px;">Joined</span>',
+    container,
+  );
 }
 
 function joinGroup(groupID, container) { // jQuery.min

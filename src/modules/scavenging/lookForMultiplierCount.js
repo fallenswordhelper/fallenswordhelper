@@ -48,8 +48,7 @@ function initMaxTimes(maxTimes, statbarGold, gold) {
 
 function foundMultiplierCount(multCnt) {
   clearWidth(multCnt);
-  initMaxTimes(makeMaxTimes(multCnt), getElementById('statbar-gold'),
-    getElementById('gold'));
+  initMaxTimes(makeMaxTimes(multCnt), getElementById('statbar-gold'), getElementById('gold'));
 }
 
 export default function lookForMultiplierCount() {

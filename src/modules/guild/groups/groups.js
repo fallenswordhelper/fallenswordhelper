@@ -10,8 +10,10 @@ import querySelectorArray from '../../common/querySelectorArray';
 function displayMinGroupLevel() {
   const minGroupLevel = getValue('minGroupLevel');
   if (minGroupLevel) {
-    insertHtmlBeforeEnd(querySelector('#pCC > table > tbody > tr > td > table td'),
-      `<div class="fshBlue"> Current Min Level Setting: ${minGroupLevel}</div>`);
+    insertHtmlBeforeEnd(
+      querySelector('#pCC > table > tbody > tr > td > table td'),
+      `<div class="fshBlue"> Current Min Level Setting: ${minGroupLevel}</div>`,
+    );
   }
 }
 

@@ -23,8 +23,7 @@ function checkUpgrade(limit) {
     setValue('needToDoUpgrade', true);
   } else {
     setValue('needToDoUpgrade', false);
-    setValue('lastUpgradeCheck',
-      Date.parse(`${getTextTrim(limit.nextElementSibling)} GMT`));
+    setValue('lastUpgradeCheck', Date.parse(`${getTextTrim(limit.nextElementSibling)} GMT`));
   }
 }
 

@@ -57,11 +57,13 @@ function injectPref() {
   const gs = querySelector('#pCC img.guild_openGuildStore');
   if (!gs) { return; }
   const td = gs.parentNode;
-  const prefContainer = insertElement(td,
+  const prefContainer = insertElement(
+    td,
     createDiv({
       className: 'fshCenter',
       innerHTML: simpleCheckboxHtml(prefEnableStamBars),
-    }));
+    }),
+  );
   on(prefContainer, 'change', changePref);
 }
 

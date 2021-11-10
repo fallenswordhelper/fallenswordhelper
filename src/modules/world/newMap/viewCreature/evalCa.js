@@ -35,8 +35,10 @@ function lowestCaStats(combat) {
 
 function caRunning(combat) {
   calcLowest(combat);
-  combat.lowestFeasibleCALevel = Math.max(combat.lowestCALevelToStillHit,
-    combat.lowestCALevelToStillKill);
+  combat.lowestFeasibleCALevel = Math.max(
+    combat.lowestCALevelToStillHit,
+    combat.lowestCALevelToStillKill,
+  );
   combat.extraNotes += `Lowest CA to still 1-hit this creature = ${
     combat.lowestFeasibleCALevel}<br>`;
   if (combat.lowestFeasibleCALevel !== 0) {

@@ -45,7 +45,9 @@ function formatToUse(greetingText, el) { return el[0](greetingText); }
 
 function formatGreetingText(greetingText, buffCost) {
   return buyFormatter.find(partial(formatToUse, greetingText))[1](
-    greetingText, keys(buffCost.buffs).join(', '), buffCost,
+    greetingText,
+    keys(buffCost.buffs).join(', '),
+    buffCost,
   );
 }
 

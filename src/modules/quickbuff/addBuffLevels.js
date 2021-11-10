@@ -32,8 +32,7 @@ function buffRunning(el, playerBuffLevel, playerSpan) {
   const myLvl = parseBuffLevel(lvlSpan);
   const fshPlayerSpan = newPlayerSpan(el, playerSpan);
   const buffColor = getBuffColor(myLvl, playerBuffLevel);
-  setInnerHtml(` <span class="${buffColor}">[${playerBuffLevel}]</span>`,
-    fshPlayerSpan);
+  setInnerHtml(` <span class="${buffColor}">[${playerBuffLevel}]</span>`, fshPlayerSpan);
 }
 
 function thisBuff(myBuffName, arr) {

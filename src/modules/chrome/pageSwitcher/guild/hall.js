@@ -1,4 +1,4 @@
-import { bioWidgets } from '../loader';
+import bioWidgets from '../loader/bioWidgets';
 import runDefault from '../../../common/runDefault';
 
 const hall = () => { runDefault(import('../../../guild/hall/hall')); };

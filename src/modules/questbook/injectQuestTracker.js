@@ -17,8 +17,7 @@ function injectGuideButtons() {
   const injectHere = getElementsByTagName('td', pCC)[0];
   const questName = getText(getElementsByTagName('font', injectHere)[1])
     .replace(/"/g, '');
-  insertHtmlBeforeEnd(injectHere,
-    guideButtons(getUrlParameter('quest_id'), questName));
+  insertHtmlBeforeEnd(injectHere, guideButtons(getUrlParameter('quest_id'), questName));
 }
 
 export default function injectQuestTracker() {

@@ -7,8 +7,10 @@ import networkIcon from './networkIcon';
 function showActiveBounties() {
   return `<tr><td align= "right">${networkIcon
   }Show Active Bounties${
-    helpLink('Show Active Bounties',
-      'This will show your active bounties on the right hand side')
+    helpLink(
+      'Show Active Bounties',
+      'This will show your active bounties on the right hand side',
+    )
   }:</td><td><input name="enableActiveBountyList" `
     + `type = "checkbox" value = "on"${
       isChecked(calf.enableActiveBountyList)}>&nbsp;`
@@ -19,9 +21,11 @@ function showActiveBounties() {
 function showWantedBounties() {
   return `<tr><td align= "right">${networkIcon
   }Show Wanted Bounties${
-    helpLink('Show Wanted Bounties',
+    helpLink(
+      'Show Wanted Bounties',
       'This will show when someone you want is on the bounty board, '
-      + 'the list is displayed on the right hand side')
+      + 'the list is displayed on the right hand side',
+    )
   }:</td><td><input name="enableWantedList" `
     + `type="checkbox" value="on"${
       isChecked(calf.enableWantedList)
@@ -29,12 +33,12 @@ function showWantedBounties() {
 }
 
 function wantedNames() {
-  return `<tr><td align= "right">Wanted Names${
-    helpLink('Wanted Names',
-      'The names of the people you want to see on the bounty board '
-      + 'separated by commas (or * for all)')}:</td><td>`
-    + `<input name="wantedNames" class="fshSettingsText" value="${calf.wantedNames
-    }"></td></tr>`;
+  return `<tr><td align= "right">Wanted Names${helpLink(
+    'Wanted Names',
+    'The names of the people you want to see on the bounty board '
+    + 'separated by commas (or * for all)',
+  )}:</td><td><input name="wantedNames" class="fshSettingsText" value="${
+    calf.wantedNames}"></td></tr>`;
 }
 
 export default function bountyPrefs() {

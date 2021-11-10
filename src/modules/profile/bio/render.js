@@ -12,9 +12,11 @@ export default function render(_bioContents) {
   if (!buffs) { return; }
   bioContents = buffs.reduce(buffToggles, bioContents);
   if (bioContents.indexOf('[cmd]') < 0) { bioContents += '[cmd]'; }
-  bioContents = bioContents.replace('[cmd]',
+  bioContents = bioContents.replace(
+    '[cmd]',
     '<br><input id="fshSendBuffMsg" '
     + 'class="custombutton" type="button" value="Ask For Buffs"><br>'
-    + '<span id="buffCost" class="fshRed">&nbsp;</span>');
+    + '<span id="buffCost" class="fshRed">&nbsp;</span>',
+  );
   return bioContents;
 }

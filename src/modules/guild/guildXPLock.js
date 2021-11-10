@@ -23,8 +23,10 @@ function injectLock(xpLock) {
   const xpLockmouseover = xpLock.dataset.tipped;
   const xpLockXP = getIntFromRegExp(xpLockmouseover, /XP Lock: <b>(\d*)/);
   const actualXP = getIntFromRegExp(xpLockmouseover, /XP: <b>(\d*)/);
-  insertHtmlBeforeEnd(xpLock.parentNode.nextElementSibling,
-    ` (<b>${mightBePositive(actualXP, xpLockXP)}</b>)`);
+  insertHtmlBeforeEnd(
+    xpLock.parentNode.nextElementSibling,
+    ` (<b>${mightBePositive(actualXP, xpLockXP)}</b>)`,
+  );
 }
 
 export default function guildXPLock() {

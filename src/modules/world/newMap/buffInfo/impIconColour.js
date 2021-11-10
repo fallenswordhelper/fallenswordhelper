@@ -7,7 +7,6 @@ const colorHash = [
 export default function impIconColour() { // jQuery
   const imp = $('#actionlist-shield-imp');
   if (imp.length === 1) {
-    imp.css('background-color',
-      colorHash[imp.text()] || '#ad8043');
+    imp.css('background-color', colorHash[imp.text()] || '#ad8043');
   }
 }

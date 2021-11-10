@@ -94,8 +94,7 @@ function calcNmvEffect(buffs) {
 function doGroupAttackBuffedElement() {
   const storedFlinchEffectValue = Math.ceil(groupStats.attack
     * leadDefender.flinchLevel * 0.001);
-  setTextCommas(groupStats.attack - storedFlinchEffectValue,
-    groupAttackBuffedElement);
+  setTextCommas(groupStats.attack - storedFlinchEffectValue, groupAttackBuffedElement);
 }
 
 function calcDefWithConst(buffs) {

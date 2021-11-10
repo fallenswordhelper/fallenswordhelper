@@ -48,9 +48,11 @@ function addStats(el) {
   const statTable = closestTable(el);
   const statObj = arrayFrom(statTable.rows).reduce(reduceStatTable, {});
   const totalStats = calcTotalStats(statObj);
-  insertHtmlBeforeBegin(getLastIndex(statObj, statTable),
+  insertHtmlBeforeBegin(
+    getLastIndex(statObj, statTable),
     `<tr class="fshDodgerBlue"><td>Stat Total:</td><td align="right">${
-      totalStats}&nbsp;</td></tr>`);
+      totalStats}&nbsp;</td></tr>`,
+  );
 }
 
 function fshDataFilter(data) {

@@ -8,9 +8,10 @@ import setValue from '../../system/setValue';
 function doneSendGold(data) {
   const info = infoBoxFrom(data);
   if (info === 'You successfully sent gold!' || info === '') {
-    setValue('currentGoldSentTotal',
-      parseInt(getValue('currentGoldSentTotal'), 10)
-      + parseInt(getValue('goldAmount'), 10));
+    setValue(
+      'currentGoldSentTotal',
+      parseInt(getValue('currentGoldSentTotal'), 10) + parseInt(getValue('goldAmount'), 10),
+    );
     GameData.fetch(defFetchPlayerStats);
   }
 }

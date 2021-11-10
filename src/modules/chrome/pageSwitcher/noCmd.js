@@ -1,5 +1,6 @@
+import news from './loader/news';
 import runDefault from '../../common/runDefault';
-import { news, viewArchive } from './loader';
+import viewArchive from './loader/viewArchive';
 
 const unknownPage = () => { runDefault(import('../unknownPage')); };
 

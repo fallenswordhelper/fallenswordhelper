@@ -55,8 +55,7 @@ function parseRecipe(tblCells, bgGif) {
 
 export default function processRecipe(output, recipebook, recipe, html) {
   const doc = createDocument(html);
-  insertHtmlBeforeEnd(output,
-    `Parsing blueprint ${recipe.name}...<br>`);
+  insertHtmlBeforeEnd(output, `Parsing blueprint ${recipe.name}...<br>`);
   const tblCells = getTblCells(doc);
   // eslint-disable-next-line no-param-reassign
   recipe.items = parseRecipe(tblCells, '/inventory/2x3.');

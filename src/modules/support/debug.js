@@ -11,8 +11,7 @@ function getFootWrap() {
 
 export function log(text, value) {
   if (getFootWrap()) {
-    insertHtmlBeforeEnd(footWrap,
-      `<br>${text}: ${value} (${typeof value})`);
+    insertHtmlBeforeEnd(footWrap, `<br>${text}: ${value} (${typeof value})`);
   }
 }
 

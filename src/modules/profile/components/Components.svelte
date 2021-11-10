@@ -3,7 +3,7 @@
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import { createEventDispatcher } from 'svelte';
   import jQueryDialog from '../../chrome/jQueryDialog/jQueryDialog';
-  import { quickExtract } from '../../chrome/pageSwitcher/loader';
+  import quickExtract from '../../chrome/pageSwitcher/loader/quickExtract';
   import sendEvent from '../../analytics/sendEvent';
 
   let quickDelete;

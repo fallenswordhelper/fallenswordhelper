@@ -9,8 +9,14 @@ import { now, nowSecs } from '../../support/now';
 function parseDateAsOffset(textDate) {
   const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);
   return Math.floor(
-    (now - Date.UTC(Number(dateAry[2]), months.indexOf(dateAry[1]),
-      Number(dateAry[0]), Number(dateAry[3]), Number(dateAry[4]), 0)) / 1000,
+    (now - Date.UTC(
+      Number(dateAry[2]),
+      months.indexOf(dateAry[1]),
+      Number(dateAry[0]),
+      Number(dateAry[3]),
+      Number(dateAry[4]),
+      0,
+    )) / 1000,
   );
 }
 

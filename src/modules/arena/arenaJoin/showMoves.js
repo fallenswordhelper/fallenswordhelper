@@ -22,8 +22,7 @@ function getContainer(movesController) {
 function injectImg(container, id) {
   let move = String(id - 1);
   if (id === 0) { move = 'x'; }
-  insertHtmlBeforeEnd(container,
-    `<img src="${cdn}arena/${move}.png" class="moveImg">`);
+  insertHtmlBeforeEnd(container, `<img src="${cdn}arena/${move}.png" class="moveImg">`);
 }
 
 function thisOptions(currentSet, e) {

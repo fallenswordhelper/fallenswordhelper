@@ -1,8 +1,6 @@
-import {
-  bioWidgets,
-  injectProfileDropItems,
-  profile,
-} from './loader';
+import bioWidgets from './loader/bioWidgets';
+import injectProfileDropItems from './loader/injectProfileDropItems';
+import profile from './loader/profile';
 
 export default {
   '-': { '-': profile },

@@ -62,15 +62,16 @@ function ajaxExtract(el) { daUseItem(el).then(partial(quickDoneExtracted, el)); 
 
 function doExtract(target) {
   const inventoryIDs = resourceList[target.id.replace('fshExtr', '')].invIDs;
-  setInnerHtml(`extracting all ${inventoryIDs.length} resources`,
-    target.parentNode);
+  setInnerHtml(`extracting all ${inventoryIDs.length} resources`, target.parentNode);
   inventoryIDs.forEach(ajaxExtract);
 }
 
 function extractAllSimilar(target) {
-  jConfirm('Extract Resources',
+  jConfirm(
+    'Extract Resources',
     'Are you sure you want to extract all similar items?',
-    partial(doExtract, target));
+    partial(doExtract, target),
+  );
 }
 
 function inMain(item) {

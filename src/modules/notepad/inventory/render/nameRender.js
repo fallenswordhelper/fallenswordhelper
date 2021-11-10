@@ -20,8 +20,7 @@ function isPartOfSet(row) {
 
 function nameRenderDisplay(data, row) {
   const t = getT(row);
-  const p = player(theInv.player_id, row.player_id,
-    theInv.guild_id);
+  const p = player(theInv.player_id, row.player_id, theInv.guild_id);
 
   let bold = data;
   if (row.equipped) { bold = `<b>${data}</b>`; }

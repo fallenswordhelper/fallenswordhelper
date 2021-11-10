@@ -8,8 +8,10 @@ import task from '../support/task';
 function doMsgSound() {
   const msg = getArrayByTagName('a', pCL).filter(includes('message'));
   if (msg.length) {
-    insertHtmlBeforeEnd(document.body,
-      `<audio src="${getValue('defaultMessageSound')}" autoplay=true />`);
+    insertHtmlBeforeEnd(
+      document.body,
+      `<audio src="${getValue('defaultMessageSound')}" autoplay=true />`,
+    );
   }
 }
 

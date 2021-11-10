@@ -18,8 +18,7 @@ function clickOnPerf(el) {
 }
 
 function selectPerf() {
-  const items = getArrayByClassName('selectable-item',
-    getElementById(`${target}-items`));
+  const items = getArrayByClassName('selectable-item', getElementById(`${target}-items`));
   if (items.length === 0) { return; } // ?
   items.forEach(clickOnPerf);
 }
@@ -27,8 +26,7 @@ function selectPerf() {
 function drawFilters(data) {
   inv = data.items;
   const buttonDiv = createDiv({ className: 'fshAC' });
-  insertHtmlBeforeEnd(buttonDiv,
-    '<button class="fshBl">Perfect</button>');
+  insertHtmlBeforeEnd(buttonDiv, '<button class="fshBl">Perfect</button>');
   insertElement(pCC, buttonDiv);
   onclick(buttonDiv, selectPerf);
 }

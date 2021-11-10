@@ -57,8 +57,7 @@ function buildElements(thePage, index, element) {
 
 function processTheRows(doc, input) {
   const thePage = input.attr('value');
-  const theRows = $('#pCC img[src$="/world/icon_action_view.png',
-    doc).parent().parent().parent();
+  const theRows = $('#pCC img[src$="/world/icon_action_view.png', doc).parent().parent().parent();
   theRows.each(partial(buildElements, thePage));
 }
 

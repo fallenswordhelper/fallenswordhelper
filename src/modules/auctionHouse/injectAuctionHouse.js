@@ -30,8 +30,7 @@ function doCancel(cancelButton) { // jQuery.min
 }
 
 function cancelAllAH() {
-  const cancelButtons = getArrayByClassName('auctionCancel',
-    getElementById('resultRows'));
+  const cancelButtons = getArrayByClassName('auctionCancel', getElementById('resultRows'));
   if (cancelButtons.length === 0) { return; }
   const prm = cancelButtons.map(doCancel);
   allthen(prm, doRefresh);

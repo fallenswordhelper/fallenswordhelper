@@ -22,8 +22,7 @@ function drawButtons(bp, theSpan) {
       actionClass(toUse)}">${actionText(toUse)}</button>`,
   });
   if (bp.options.checkboxesEnabled) {
-    insertElement(myDiv,
-      theSpan.parentNode.nextElementSibling.nextElementSibling);
+    insertElement(myDiv, theSpan.parentNode.nextElementSibling.nextElementSibling);
   }
   insertElement(theSpan.parentNode.parentNode, myDiv);
 }

@@ -13,8 +13,7 @@ import {
 import { time, timeEnd } from '../../support/debug';
 
 function returnAdvisorPage(list, e, response) {
-  insertHtmlBeforeEnd(list.lastElementChild.lastElementChild,
-    ` day ${e},`);
+  insertHtmlBeforeEnd(list.lastElementChild.lastElementChild, ` day ${e},`);
   return response.r;
 }
 
@@ -76,9 +75,7 @@ function makeData(membrList, el) {
 
 function addAdvisorPages(list, [membrList, ...args]) {
   const added = addUpStats(args);
-  injectTable(list,
-    makeTfoot(added),
-    added.map(partial(makeData, membrList)));
+  injectTable(list, makeTfoot(added), added.map(partial(makeData, membrList)));
 }
 
 function injectAdvisor(list) {

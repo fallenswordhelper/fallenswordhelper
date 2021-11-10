@@ -4,10 +4,12 @@ import isChecked from '../system/isChecked';
 import isSelected from '../system/isSelected';
 
 function huntBuff() {
-  return `Hunting Buffs${helpLink('Hunting Buffs',
+  return `Hunting Buffs${helpLink(
+    'Hunting Buffs',
     'Customize which buffs are designated as hunting buffs. '
     + 'You must type the full name of each buff, separated by commas. '
-    + 'Use the checkbox to enable/disable them.')}:`;
+    + 'Use the checkbox to enable/disable them.',
+  )}:`;
 }
 
 function huntBuffCheck() {
@@ -18,9 +20,10 @@ function huntBuffCheck() {
 
 function huntMode() {
   return `Enabled Hunting Mode${
-    helpLink('Enabled Hunting Mode',
-      'This will determine which list of buffs gets checked '
-      + 'on the world screen.')}:<select name="enabledHuntingMode">`
+    helpLink(
+      'Enabled Hunting Mode',
+      'This will determine which list of buffs gets checked on the world screen.',
+    )}:<select name="enabledHuntingMode">`
     + `<option value="1"${
       isSelected(calf.enabledHuntingMode, '1')}>${calf.buffsName}</option>`
     + `<option value="2"${

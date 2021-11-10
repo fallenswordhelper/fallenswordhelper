@@ -53,9 +53,11 @@ function useProfileInventoryItem(target) {
   if (disableQuickWearPrompts) {
     doUseItem(target);
   } else {
-    jConfirm('Use/Extract Item',
+    jConfirm(
+      'Use/Extract Item',
       'Are you sure you want to use/extract the item?',
-      partial(doUseItem, target));
+      partial(doUseItem, target),
+    );
   }
 }
 

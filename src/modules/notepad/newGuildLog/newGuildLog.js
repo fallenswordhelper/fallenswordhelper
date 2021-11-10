@@ -129,8 +129,7 @@ function dataRow(r) {
   const myRow = myTable.insertRow(-1);
   r.push(myRow);
   if (!options.checks[r[4]]) { myRow.className = 'fshHide'; }
-  makeCell(myRow,
-    '<i class="fas fa-user-friends" style="color: rgb(122,95,46);"></i>');
+  makeCell(myRow, '<i class="fas fa-user-friends" style="color: rgb(122,95,46);"></i>');
   makeCell(myRow, `<nobr>${r[2]}</nobr>`);
   makeCell(myRow, r[3]);
 }

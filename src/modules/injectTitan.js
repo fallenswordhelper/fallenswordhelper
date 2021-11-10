@@ -7,7 +7,8 @@ export default function injectTitan() {
   let newRow = titanTable.insertRow(2);
   insertHtmlBeforeEnd(newRow, '<br>');
   newRow = titanTable.insertRow(3);
-  insertHtmlBeforeEnd(newRow,
-    `<td class="fshCenter fshBold">[ <a href="${
-      scouttowerUrl}">Scout Tower</a> ]</td>`);
+  insertHtmlBeforeEnd(
+    newRow,
+    `<td class="fshCenter fshBold">[ <a href="${scouttowerUrl}">Scout Tower</a> ]</td>`,
+  );
 }

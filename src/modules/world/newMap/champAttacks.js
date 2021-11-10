@@ -31,8 +31,16 @@ function showChampAttack(toggle) {
   g1.map(getAttack)
     .filter((e) => e !== null)
     .forEach((e) => {
-      e.classList.remove('attack-1', 'attack-2', 'attack-3', 'attack-4',
-        'attack-5', 'attack-6', 'attack-7', 'attack-8');
+      e.classList.remove(
+        'attack-1',
+        'attack-2',
+        'attack-3',
+        'attack-4',
+        'attack-5',
+        'attack-6',
+        'attack-7',
+        'attack-8',
+      );
       e.style.backgroundImage = '';
     });
   g2.slice(0, 8)

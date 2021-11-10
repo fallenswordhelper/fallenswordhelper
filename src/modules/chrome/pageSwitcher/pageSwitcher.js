@@ -3,7 +3,9 @@ import auctionhouse from './auctionhouse';
 import composing from './composing';
 import creatures from './creatures';
 import guild from './guild/guild';
+import injectProfile from './loader/profile';
 import injectWorld from '../../world/injectWorld';
+import inventing from './loader/inventing';
 import items from './items';
 import news from './news';
 import noCmd from './noCmd';
@@ -17,7 +19,7 @@ import runDefault from '../../common/runDefault';
 import scavenging from './scavenging';
 import toprated from './toprated';
 import trade from './trade';
-import { profile as injectProfile, inventing, ufsgAllowBack } from './loader';
+import ufsgAllowBack from './loader/ufsgAllowBack';
 
 const craftForge = () => { runDefault(import('../../craftForge/craftForge')); };
 const injectBank = () => { runDefault(import('../../bank/injectBank')); };

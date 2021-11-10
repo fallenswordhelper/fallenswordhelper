@@ -27,8 +27,10 @@ function guildMailboxTake(href) {
 
 function takeResult(target, data) {
   if (data.r === 0) {
-    setInnerHtml('<span class="fshGreen">Taken</span>',
-      closestTable(target).nextElementSibling.rows[0].cells[0]);
+    setInnerHtml(
+      '<span class="fshGreen">Taken</span>',
+      closestTable(target).nextElementSibling.rows[0].cells[0],
+    );
   }
 }
 
@@ -47,6 +49,8 @@ function guildMailboxEvent(e) { // jQuery.min
 export default function guildMailbox() {
   if (jQueryNotPresent()) { return; }
   onclick(pCC, guildMailboxEvent);
-  insertHtmlBeforeEnd(querySelector('#pCC td[height="25"]'),
-    '<span class="sendLink">Take All</span>');
+  insertHtmlBeforeEnd(
+    querySelector('#pCC td[height="25"]'),
+    '<span class="sendLink">Take All</span>',
+  );
 }

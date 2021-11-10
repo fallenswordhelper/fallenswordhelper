@@ -23,10 +23,11 @@ const enableSeTracker = 'enableSeTracker';
 let trackerCell;
 
 function addRow(trackerTable, se) {
-  insertHtmlBeforeEnd(trackerTable,
-    `<tr><td class="fshCenter">${se[0]}</td>`
-    + `<td class="fshBold fshCenter fshCooldown">${
-      formatUtcDateTime(new Date(se[1] * 1000))}</td></tr>`);
+  insertHtmlBeforeEnd(
+    trackerTable,
+    `<tr><td class="fshCenter">${se[0]}</td><td class="fshBold fshCenter fshCooldown">${
+      formatUtcDateTime(new Date(se[1] * 1000))}</td></tr>`,
+  );
 }
 
 function buildTrackerTable(seAry) {

@@ -46,8 +46,7 @@ function testGuildies(myGuild, button, arena) {
 }
 
 function hazPlayers(myGuild, button, arena) {
-  setTipped(arena.players.map(partial(listPlayers, myGuild)).join('<br>'),
-    button);
+  setTipped(arena.players.map(partial(listPlayers, myGuild)).join('<br>'), button);
   button.classList.add('tip-static');
   if (myGuild && button.value === 'Join') {
     testGuildies(myGuild, button, arena);

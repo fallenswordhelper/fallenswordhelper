@@ -18,8 +18,7 @@ function updateInfoDiv(infoDiv, potName) {
   infoDiv.children[0].classList.add('fshPot');
   // eslint-disable-next-line no-param-reassign
   infoDiv.children[0].style.backgroundImage = randomBackgroundImage();
-  setInnerHtml(`Creating '<span class="fshBold">${potName}</span>' Potion`,
-    infoDiv.children[2]);
+  setInnerHtml(`Creating '<span class="fshBold">${potName}</span>' Potion`, infoDiv.children[2]);
   setInnerHtml('', infoDiv.children[3]);
 }
 
@@ -36,8 +35,10 @@ function createSuccess(temp) {
   const myParent = temp.parentNode;
   if (!myParent) { return; }
   setInnerHtml('<div class="fshScs">Success</div>', myParent);
-  updateInfoDiv(myParent.previousElementSibling.previousElementSibling,
-    temp[temp.selectedIndex].text);
+  updateInfoDiv(
+    myParent.previousElementSibling.previousElementSibling,
+    temp[temp.selectedIndex].text,
+  );
   amILast();
 }
 

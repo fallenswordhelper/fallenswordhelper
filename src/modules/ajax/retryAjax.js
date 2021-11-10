@@ -52,8 +52,7 @@ function failFilter([fn, opt, retries, resolve, reject]) {
     if (retries > 0 && jqXhr.status === 503) {
       setTimeout(fn, 100, opt, retries - 1, resolve, reject);
     } else {
-      handleFailure(resolve,
-        new AjaxError([opt, jqXhr, textStatus, errorThrown]));
+      handleFailure(resolve, new AjaxError([opt, jqXhr, textStatus, errorThrown]));
     }
   };
 }

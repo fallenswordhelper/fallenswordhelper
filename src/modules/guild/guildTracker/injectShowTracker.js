@@ -11,8 +11,7 @@ import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
 
 function togglePref(evt) {
   if (evt.target.id === defEnableGuildActivityTracker) {
-    setValue(defEnableGuildActivityTracker,
-      !getValue(defEnableGuildActivityTracker));
+    setValue(defEnableGuildActivityTracker, !getValue(defEnableGuildActivityTracker));
   }
 }
 

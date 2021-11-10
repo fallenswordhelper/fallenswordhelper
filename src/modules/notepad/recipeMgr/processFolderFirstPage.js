@@ -21,8 +21,10 @@ function notThisPage(el, i) { return i !== 0; }
 function pageNumber(el) { return el.value; }
 
 function otherPages(doc) {
-  return getArrayByTagName('option',
-    getElementsByClassName('customselect', getElementById('pCC', doc))[0])
+  return getArrayByTagName(
+    'option',
+    getElementsByClassName('customselect', getElementById('pCC', doc))[0],
+  )
     .filter(notThisPage).map(pageNumber);
 }
 

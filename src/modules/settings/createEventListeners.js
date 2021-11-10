@@ -1,3 +1,4 @@
+import combatLog from '../chrome/pageSwitcher/loader/combatLog';
 import createBr from '../common/cElement/createBr';
 import createSpan from '../common/cElement/createSpan';
 import dynamicAlert from '../alert/dynamicAlert';
@@ -5,6 +6,7 @@ import getElementById from '../common/getElementById';
 import insertElement from '../common/insertElement';
 import jConfirm from '../common/jConfirm';
 import jQueryDialog from '../chrome/jQueryDialog/jQueryDialog';
+import monstorLog from '../chrome/pageSwitcher/loader/monstorLog';
 import numberIsNaN from '../common/numberIsNaN';
 import onclick from '../common/onclick';
 import querySelector from '../common/querySelector';
@@ -12,10 +14,6 @@ import saveBoxes from './saveBoxes.json';
 import sendEvent from '../analytics/sendEvent';
 import setValue from '../system/setValue';
 import toggleVisibilty from '../common/toggleVisibilty';
-import {
-  combatLog,
-  monstorLog,
-} from '../chrome/pageSwitcher/loader';
 
 function findEl(el, name) {
   return querySelector(`#fshSettingsTable ${el}[name="${name}"]`);
@@ -30,8 +28,7 @@ function findSelect(name) {
 }
 
 function toggleTickAllBuffs(e) { // jQuery
-  const allItems = $('input[name^="blockedSkillList"]:visible',
-    '#settingsTabs-4');
+  const allItems = $('input[name^="blockedSkillList"]:visible', '#settingsTabs-4');
   const tckTxt = $(e.target);
   allItems.prop('checked', tckTxt.text() === 'Tick all buffs');
   if (tckTxt.text() === 'Tick all buffs') {
@@ -42,9 +39,11 @@ function toggleTickAllBuffs(e) { // jQuery
 }
 
 function clearStorage() {
-  jConfirm('Clear localStorage',
+  jConfirm(
+    'Clear localStorage',
     'Are you sure you want to clear you localStorage?',
-    () => { localStorage.clear(); });
+    () => { localStorage.clear(); },
+  );
 }
 
 function saveValueForm(name) {

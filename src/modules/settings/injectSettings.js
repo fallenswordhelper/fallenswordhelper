@@ -18,8 +18,7 @@ function doFshSettings(settingsTabs) {
   setupConfigData();
   addTab(settingsTabs);
   createEventListeners();
-  setValue('minGroupLevel',
-    querySelector('input[name="min_group_level"]').value);
+  setValue('minGroupLevel', querySelector('input[name="min_group_level"]').value);
 }
 
 export default function injectSettings() { // jQuery

@@ -41,9 +41,11 @@ function fshButton(classPrefix, label) {
 }
 
 function addTemplateRow(index, text) {
-  addRow(index, fshButton('del', 'Del'),
-    `<span class="ui-widget-content fshBlck add-template">${
-      text}</span>`);
+  addRow(
+    index,
+    fshButton('del', 'Del'),
+    `<span class="ui-widget-content fshBlck add-template">${text}</span>`,
+  );
 }
 
 function insertTemplate(target) {
@@ -82,9 +84,11 @@ export default function showMsgTemplate() {
   if (getValue('enableMessageTemplates') && !showingTemplates) {
     onclick(getTable(), classHandler(classEvents));
     getFshTemplate().forEach(makeRows);
-    addRow(-1,
+    addRow(
+      -1,
       fshButton('add', 'Add'),
-      '<input id="newTmpl" class="ui-widget-content fshTmpl">');
+      '<input id="newTmpl" class="ui-widget-content fshTmpl">',
+    );
     showingTemplates = true;
   }
 }

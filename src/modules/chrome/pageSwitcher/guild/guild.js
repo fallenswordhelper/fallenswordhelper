@@ -1,9 +1,10 @@
 import advisor from './advisor';
+import bioWidgets from '../loader/bioWidgets';
 import groups from './groups';
 import hall from './hall';
+import injectGuild from '../loader/injectGuild';
 import inventory from './inventory';
 import runDefault from '../../../common/runDefault';
-import { bioWidgets, injectGuild } from '../loader';
 
 const guildChat = () => { runDefault(import('../../../logs/guildChat')); };
 const guildLog = () => { runDefault(import('../../../logs/guildLog')); };

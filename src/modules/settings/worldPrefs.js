@@ -15,8 +15,7 @@ import {
 function worldGroup() {
   // World Screen
   return `<tr><td class="fshRight">Hide Create Group Button${
-    helpLink('Hide Create Group Button',
-      'Enabling this option will hide the Create Group button')
+    helpLink('Hide Create Group Button', 'Enabling this option will hide the Create Group button')
   }:</td><td>`
     + `<input name="hideChampionsGroup" type="checkbox" value="on"${
       isValueChecked('hideChampionsGroup')}>`
@@ -38,9 +37,11 @@ function worldGroup() {
 
 function keepCombatLogs() {
   return `<tr><td class="fshRight">Keep Combat Logs${
-    helpLink('Keep Combat Logs',
+    helpLink(
+      'Keep Combat Logs',
       'Save combat logs to a temporary variable. '
-      + 'Press <u>Show logs</u> on the right to display and copy them')
+      + 'Press <u>Show logs</u> on the right to display and copy them',
+    )
   }:</td><td><input name="keepLogs" type="checkbox" value="on"${
     isValueChecked('keepLogs')}>&nbsp;&nbsp;`
     + '<input type="button" class="custombutton" value="Show Logs" '
@@ -49,14 +50,16 @@ function keepCombatLogs() {
 
 function combatEvalBias() {
   return `<tr><td class="fshRight">Combat Evaluator Bias${
-    helpLink('Combat Evaluator Bias',
+    helpLink(
+      'Combat Evaluator Bias',
       'This changes the bias of the combat evaluator for the damage and '
       + 'HP evaluation. It will not change the attack bias (1.1053).'
       + '<br>Conservative = 1.1053 and 1.1 (Safest)'
       + '<br>Semi-Conservative = 1.1 and 1.053'
       + '<br>Adventurous = 1.053 and 1 (Bleeding Edge)'
       + '<br>Conservative+ = 1.1053 and 1 with the attack calculation '
-      + 'changed to +-48 per RJEM')
+      + 'changed to +-48 per RJEM',
+    )
   }:</td><td><select name="combatEvaluatorBias">`
     + `<option value="0"${
       isSelected(calf.combatEvaluatorBias, 0)
@@ -81,9 +84,11 @@ function keepCreatureLog() {
 
 function showSendGold() {
   return `<tr><td class="fshRight">Show Send Gold${
-    helpLink('Show Gold on World Screen',
+    helpLink(
+      'Show Gold on World Screen',
       'This will show an icon below the world map to allow you to '
-      + 'quickly send gold to a Friend.')
+      + 'quickly send gold to a Friend.',
+    )
   }:</td><td><input name="sendGoldonWorld" type="checkbox" value="on"${
     isValueChecked('sendGoldonWorld')}>`
     + `&nbsp;&nbsp;Send <input name="goldAmount" type="number" value="${
@@ -96,12 +101,14 @@ function showSendGold() {
 
 function theDoNotKillList() {
   return `<tr><td class="fshRight">Do Not Kill List${
-    helpLink('Do Not Kill List',
+    helpLink(
+      'Do Not Kill List',
       'List of creatures that will not be killed by quick kill. '
       + 'You must type the full name of each creature, separated by commas. '
       + 'Creature name will show up in red color on world screen and will '
       + 'not be killed by keyboard entry (but can still be killed by '
-      + 'mouseclick). Quick kill must be enabled for this function to work.')
+      + 'mouseclick). Quick kill must be enabled for this function to work.',
+    )
   }:</td><td><input name="doNotKillList" class="fshSettingsText" value="${
     calf.doNotKillList}"></td></tr>`;
 }
@@ -114,13 +121,9 @@ function huntingBuffsList(modeLabel, modeName, buffsName, buffs) {
 }
 
 function huntingBuffsLists() {
-  return huntingBuffsList(
-    calf.buffsName, 'huntingBuffsName', 'huntingBuffs', calf.buffs,
-  ) + huntingBuffsList(
-    calf.buffs2Name, 'huntingBuffs2Name', 'huntingBuffs2', calf.buffs2,
-  ) + huntingBuffsList(
-    calf.buffs3Name, 'huntingBuffs3Name', 'huntingBuffs3', calf.buffs3,
-  );
+  return huntingBuffsList(calf.buffsName, 'huntingBuffsName', 'huntingBuffs', calf.buffs)
+    + huntingBuffsList(calf.buffs2Name, 'huntingBuffs2Name', 'huntingBuffs2', calf.buffs2)
+    + huntingBuffsList(calf.buffs3Name, 'huntingBuffs3Name', 'huntingBuffs3', calf.buffs3);
 }
 
 function joinFuncs() {

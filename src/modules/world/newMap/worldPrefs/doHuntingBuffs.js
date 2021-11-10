@@ -30,9 +30,7 @@ function clearBuffDiv(missingBuffsDiv) {
 
 function lookForMissingBuffs(missingBuffsDiv, data) {
   const buffHash = data.b.reduce(buildBuffHash, {});
-  const missingBuffs = huntingBuffs.reduce(
-    partial(findMissingBuffs, buffHash), [],
-  );
+  const missingBuffs = huntingBuffs.reduce(partial(findMissingBuffs, buffHash), []);
   if (missingBuffs.length > 0) {
     displayMissingBuffs(missingBuffsDiv, missingBuffs);
   } else {

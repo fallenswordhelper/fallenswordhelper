@@ -4,7 +4,7 @@ import createInput from '../../common/cElement/createInput';
 import daGsTake from '../../_dataAccess/daGsTake';
 import getElementById from '../../common/getElementById';
 import getElementsByTagName from '../../common/getElementsByTagName';
-import { injectGuild } from '../../chrome/pageSwitcher/loader';
+import injectGuild from '../../chrome/pageSwitcher/loader/injectGuild';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';

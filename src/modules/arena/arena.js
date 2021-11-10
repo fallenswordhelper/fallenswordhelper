@@ -66,13 +66,15 @@ function process(tabs, values) {
 }
 
 function prepare(tabs) {
-  allthen([
-    get(fshArenaKey),
-    get('fsh_arenaFull'),
-    view().catch(() => ({})),
-    loadDataTables(),
-  ],
-  partial(process, tabs));
+  allthen(
+    [
+      get(fshArenaKey),
+      get('fsh_arenaFull'),
+      view().catch(() => ({})),
+      loadDataTables(),
+    ],
+    partial(process, tabs),
+  );
 }
 
 export default function arena() { // jQuery

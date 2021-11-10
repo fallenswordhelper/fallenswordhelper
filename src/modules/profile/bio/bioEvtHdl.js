@@ -21,17 +21,24 @@ function totalCost(acc, pair) {
 
 function hazBuffs() {
   const myEntries = entries(buffCost.buffs);
-  const totalText = formatCost(myEntries.reduce(totalCost,
+  const totalText = formatCost(myEntries.reduce(
+    totalCost,
     {
-      k: 0, fsp: 0, stam: 0, unknown: 0,
-    }));
-  setInnerHtml('<span class="tip-static" '
+      k: 0,
+      fsp: 0,
+      stam: 0,
+      unknown: 0,
+    },
+  ));
+  setInnerHtml(
+    '<span class="tip-static" '
     + 'data-tipped="This is an estimated cost based on how the script finds '
     + 'the cost associated with buffs from viewing bio. It can be incorrect, '
     + `please use with discretion.<br><hr><table border=0>${
       myEntries.map(buffRows).join('')}</table><b>Total: ${
       totalText}</b>">Estimated Cost: <b>${totalText}</b></span>`,
-  getElementById('buffCost'));
+    getElementById('buffCost'),
+  );
   buffCost.buffCostTotalText = totalText;
 }
 
