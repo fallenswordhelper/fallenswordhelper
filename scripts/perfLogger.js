@@ -6,4 +6,4 @@ function perfLogger(items) {
   });
 }
 
-module.exports = { perfLogger };
+module.exports = perfLogger;
