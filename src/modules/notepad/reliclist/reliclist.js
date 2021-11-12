@@ -46,7 +46,7 @@ function formatTime(time) {
 }
 
 function makeRow(relic) {
-  return `<tr><td>${relic.min_level}</td>`
+  return `<tr><td>${relic.location.realm.min_level}</td>`
     + `<td>${relicName(relic)}</td>`
     + `<td>${guildName(relic.guild)}</td>`
     + `<td>${allAttribs(relic.attributes)}</td>`
@@ -86,7 +86,7 @@ function makeTable(thisRelicList) {
 }
 
 function processRelicList(thisRelicList) {
-  thisRelicList.sort((a, b) => a.min_level - b.min_level);
+  thisRelicList.sort((a, b) => a.location.realm.min_level - b.location.realm.min_level);
   setInnerHtml(makeTable(thisRelicList), pCC);
 }
 
