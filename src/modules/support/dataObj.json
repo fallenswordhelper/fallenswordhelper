@@ -235,5 +235,6 @@
   "privateMsgButtons":false,
   "optInOnLadderPage":false,
   "betaOptIn":false,
-  "showBuffLinks":false
+  "showBuffLinks":false,
+  "disableDestroyPrompts":false
 }
