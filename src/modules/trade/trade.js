@@ -118,7 +118,5 @@ export default function trade() {
   if (!itemList) { return; }
   task(3, doFolders);
   task(3, injectTradeOld, [itemList]);
-  if (getValue('betaOptIn')) { //  oneByOne
-    task(3, oneByOne);
-  }
+  task(3, oneByOne);
 }
