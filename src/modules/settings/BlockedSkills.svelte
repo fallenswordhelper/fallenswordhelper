@@ -31,9 +31,9 @@ function saveBlockedSkillList() {
   const skills = getBlockedSkills();
   if (listName === '-1') {
     const name = window.prompt('Name your new blocked skill set');
-    if (name === undefined) { return; }
+    if (name === undefined || name.trim().length === 0) { return; }
     blockedSkillLists = [...blockedSkillLists, {
-      name,
+      name: name.trim().substring(0, 50),
       skills,
     }];
     listName = name;
