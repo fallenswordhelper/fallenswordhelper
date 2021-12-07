@@ -16,47 +16,31 @@ import injectMenu from '../../accordion/injectMenu';
 import joinAll from './joinAll';
 import levelCalc from './levelCalc';
 import messaging from '../../messaging/messaging';
+import moveRHSBoxToLHS from './moveRHSBoxToLHS';
+import moveRHSBoxUpOnRHS from './moveRHSBoxUpOnRHS';
 import scoutTower from './scoutTower';
 import seTracker from './seTracker';
 import staminaCalc from './staminaCalc';
 import statbar from './statbar';
 
-function moveUp(title) {
-  import('../moveRHSBoxUpOnRHS').then((m) => m.default(title));
-}
-
-function moveLeft(title) {
-  import('../moveRHSBoxToLHS').then((m) => m.default(title));
-}
-
 function doMoveGuildList() {
-  if (getValue('moveGuildList')) {
-    moveUp('minibox-guild');
-  }
+  if (getValue('moveGuildList')) { moveRHSBoxUpOnRHS('minibox-guild'); }
 }
 
 function doMoveAllyList() {
-  if (getValue('moveOnlineAlliesList')) {
-    moveUp('minibox-allies');
-  }
+  if (getValue('moveOnlineAlliesList')) { moveRHSBoxUpOnRHS('minibox-allies'); }
 }
 
 function doMoveFsBox() {
-  if (getValue('moveFSBox')) {
-    moveLeft('minibox-fsbox');
-  }
+  if (getValue('moveFSBox')) { moveRHSBoxToLHS('minibox-fsbox'); }
 }
 
 function doMoveDailyQuest() {
-  if (getValue('moveDailyQuest')) {
-    moveLeft('minibox-daily-quest');
-  }
+  if (getValue('moveDailyQuest')) { moveRHSBoxToLHS('minibox-daily-quest'); }
 }
 
 function doMoveXmas() {
-  if (getValue('moveXmasBox')) {
-    moveLeft('minibox-xmas');
-  }
+  if (getValue('moveXmasBox')) { moveRHSBoxToLHS('minibox-xmas'); }
 }
 
 // move boxes in opposite order that you want them to appear.
