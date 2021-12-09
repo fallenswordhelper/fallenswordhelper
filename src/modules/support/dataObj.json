@@ -236,5 +236,6 @@
   "optInOnLadderPage":false,
   "betaOptIn":false,
   "showBuffLinks":false,
+  "disableDestroyPrompts":false,
   "blockedSkillLists": "[]"
 }
