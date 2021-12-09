@@ -1,12 +1,12 @@
 import BlockedSkills from './BlockedSkills.svelte';
 
-function startApp(props, target) {
+function startApp(target) {
   return new BlockedSkills({
-    props,
+    props: {},
     target,
   });
 }
 
 export default function blockedSkills() {
-  startApp({}, document.getElementById('settingsTabs-4'));
+  startApp(document.getElementById('settingsTabs-4'));
 }

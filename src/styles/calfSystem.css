@@ -592,16 +592,3 @@ textarea {resize: none;}
   height: 420px;
   width: 600px;
 }
-
-/* Information Box */
-div.infobox {
-  border: 2px solid rgb(255, 255, 255);
-  margin: 10px auto;
-  width: 80%; background:
-  rgb(211, 207, 193);
-}
-div.infobox div.infobox-header {
-  background: rgb(142, 134, 104);
-  color: rgb(255, 255, 255);
-  font-size: smaller;
-}

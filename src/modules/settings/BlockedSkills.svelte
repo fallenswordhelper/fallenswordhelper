@@ -1,6 +1,5 @@
 <script>
 import getValueJSON from '../system/getValueJSON';
-import isUndefined from '../common/isUndefined';
 import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';
 import querySelectorArray from '../common/querySelectorArray';
@@ -11,7 +10,17 @@ let newListName = '';
 let error = false;
 let listName = '';
 
-function apply() {
+function checkForErrors(checks, arg = null) {
+  return checks.some((c) => {
+    if (c[0](arg)) {
+      error = c[1](arg);
+      return true;
+    }
+    return false;
+  });
+}
+
+function submitSkillChanges() {
   querySelector('input[value="Save Blocked Skill Changes"]').click();
 }
 
@@ -26,7 +35,8 @@ function storeBlockedSkillsLists() {
 function getCheckedSkills() {
   return querySelectorArray('input[name="blockedSkillList[]"]', document)
     .filter((i) => i.checked)
-    .map((i) => i.value);
+    .map((i) => i.value)
+    .sort();
 }
 
 function clearCheckedSkills() {
@@ -44,8 +54,14 @@ function applyList() {
   }
 
   const skillList = blockedSkillLists.find((l) => l.name === listName);
-  if (!skillList) {
-    error = `Unable to find list "${listName}". Try refreshing the page.`;
+
+  const checks = [
+    [
+      (list) => !list,
+      (list) => `Unable to find list "${list.name}". Try refreshing the page.`,
+    ],
+  ];
+  if (checkForErrors(checks, skillList)) {
     return;
   }
 
@@ -54,7 +70,7 @@ function applyList() {
     querySelector(`input[name="blockedSkillList[]"][value="${skill}"]`)
       .checked = true;
   });
-  apply();
+  submitSkillChanges();
 }
 
 function checkForDuplicates(list) {
@@ -65,12 +81,7 @@ function checkForDuplicates(list) {
     if (l.skills.length !== list.skills.length) {
       return false;
     }
-    for (let i = 0; i < l.skills.length; i++) {
-      if (l.skills[i] !== list.skills[i]) {
-        return false;
-      }
-    }
-    return true;
+    return l.skills.every((s, i) => s === list.skills[i]);
   });
 }
 
@@ -78,63 +89,77 @@ function deleteList() {
   clearMessages();
   blockedSkillLists = blockedSkillLists.filter((l) => l.name !== listName);
   storeBlockedSkillsLists();
-  listName = '-1';
+  listName = '';
 }
 
 function createList() {
   clearMessages();
 
   const cleanListName = newListName.trim();
-  if (!cleanListName.length) {
-    error = 'You must name your list.';
-    return;
-  }
-  if (cleanListName.length > 50) {
-    error = 'List names can only be at most 50 characters long.';
-    return;
-  }
-  if (blockedSkillLists.some((l) => l.name === cleanListName)) {
-    error = `You already have a list named ${cleanListName}.`;
-    return;
-  }
-
   const newList = {
     name: cleanListName,
     skills: getCheckedSkills(),
   };
 
-  if (checkForDuplicates(newList)) {
-    error = 'You already have a list with these skills.';
+  const checks = [
+    [
+      (list) => !list.name.length,
+      () => 'You must name your list.',
+    ],
+    [
+      (list) => list.name.length > 50,
+      () => 'List names can only be at most 50 characters long.',
+    ],
+    [
+      (list) => blockedSkillLists.some((l) => l.name === list.name),
+      (list) => `You already have a list named ${list.name}.`,
+    ],
+    [
+      (list) => checkForDuplicates(list),
+      () => 'You already have a list with these skills.',
+    ],
+  ];
+
+  if (checkForErrors(checks, newList)) {
     return;
   }
-
   blockedSkillLists = [...blockedSkillLists, newList];
   listName = newList.name;
   newListName = '';
   storeBlockedSkillsLists();
 
-  apply();
+  submitSkillChanges();
 }
 
 function updateList() {
   clearMessages();
+  if (!listName) {
+    return;
+  }
+
+  const skillList = {
+    name: listName,
+    skill: getCheckedSkills(),
+  };
+
+  const checks = [
+    [
+      (list) => blockedSkillLists.some((l) => l.name === list.name),
+      (list) => `Cannot find list named "${list.name}". Try refreshing the page.`,
+    ],
+    [
+      (list) => checkForDuplicates(list),
+      () => 'You already have a list with these skills.',
+    ],
+  ];
+  if (checkForErrors(checks, skillList)) {
+    return;
+  }
+
   const index = blockedSkillLists.findIndex((l) => l.name === listName);
-  if (isUndefined(index)) {
-    error = `Cannot find list named "${listName}". Try refreshing the page.`;
-    return;
-  }
-
-  const skills = getCheckedSkills();
-  const skillList = { name: listName, skills };
-
-  if (checkForDuplicates(skillList)) {
-    error = 'You already have a list with these skills.';
-    return;
-  }
-
   blockedSkillLists[index] = skillList;
   storeBlockedSkillsLists();
-  apply();
+  submitSkillChanges();
 }
 
 function findLoadList() {
@@ -143,12 +168,7 @@ function findLoadList() {
     if (l.skills.length !== skills.length) {
       return false;
     }
-    for (let i = 0; i < l.skills.length; i++) {
-      if (l.skills[i] !== skills[i]) {
-        return false;
-      }
-    }
-    return true;
+    return l.skills.every((s, i) => s === skills[i]);
   });
   if (list) {
     listName = list.name;
@@ -161,12 +181,13 @@ function findLoadList() {
 
 findLoadList();
 </script>
-<div class='fshCenter' style='argin-top: 12px'>
+<div class='fshCenter'>
+  <span class='fshBold'>Saved Blocked Skill Sets</span><br/>
   <div>
     <select id='fsh-skillSets' bind:value={listName}>
-        {#each blockedSkillLists as bsl (bsl.name)}
-        <option value={bsl.name}>{bsl.name}</option>
-        {/each}
+      {#each blockedSkillLists as bsl (bsl.name)}
+      <option value={bsl.name}>{bsl.name}</option>
+      {/each}
     </select>
     <input class='custominput'
       type='button'
@@ -182,7 +203,7 @@ findLoadList();
       value='Update'
       on:click|self={updateList} />
   </div>
-  <div style="margin-top: 6px">
+  <div id="newlists">
     <input
       class='custominput'
       type='text'
@@ -204,3 +225,19 @@ findLoadList();
     </div>
   {/if}
 </div>
+<style>
+div.infobox {
+  background: #D3CFC1;
+  border: 2px solid white;
+  margin: 10px auto;
+  width: 80%;
+}
+
+div.infobox div.infobox-header {
+  background: #8E8668;
+  color: white;
+  font-size: smaller;
+}
+
+div#newlists { margin-top: 4px; }
+</style>
