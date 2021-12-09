@@ -161,7 +161,7 @@ function findLoadList() {
 
 findLoadList();
 </script>
-<div style='text-align: center; margin-top: 12px'>
+<div class='fshCenter' style='argin-top: 12px'>
   <div>
     <select id='fsh-skillSets' bind:value={listName}>
         {#each blockedSkillLists as bsl (bsl.name)}
@@ -198,8 +198,8 @@ findLoadList();
       on:click|self={createList}/>
   </div>
   {#if error}
-  <div style="border: 2px solid rgb(255, 255, 255); margin: 10px auto; width: 80%; background: rgb(211, 207, 193);">
-    <div style="background: rgb(142, 134, 104); color: rgb(255, 255, 255); font-size: smaller;">INFORMATION</div>
+  <div class="infobox">
+    <div class="infobox-header">INFORMATION</div>
       <div>{error}</div>
     </div>
   {/if}
