@@ -1,7 +1,7 @@
-import blockedSkills from './blockedSkills';
 import calf from '../support/calf';
 import createEventListeners from './createEventListeners';
 import getVars from './getVars';
+import injectBlockedSkills from './injectBlockedSkills';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import querySelector from '../common/querySelector';
 import setValue from '../system/setValue';
@@ -27,5 +27,5 @@ export default function injectSettings() { // jQuery
   const settingsTabs = $('#settingsTabs');
   const tabsInstance = settingsTabs.tabs('instance');
   if (tabsInstance) { doFshSettings(settingsTabs); }
-  blockedSkills();
+  injectBlockedSkills();
 }

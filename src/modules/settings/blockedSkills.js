@@ -1,12 +1,26 @@
-import BlockedSkills from './BlockedSkills.svelte';
+import querySelector from '../common/querySelector';
+import querySelectorAll from '../common/querySelectorAll';
+import querySelectorArray from '../common/querySelectorArray';
 
-function startApp(target) {
-  return new BlockedSkills({
-    props: {},
-    target,
-  });
+export function checkSkill(skillId) {
+  querySelector(`input[name="blockedSkillList[]"][value="${skillId}"]`)
+    .checked = true;
 }
 
-export default function blockedSkills() {
-  startApp(document.getElementById('settingsTabs-4'));
+export function getCheckedSkills() {
+  return querySelectorArray('input[name="blockedSkillList[]"]')
+    .filter((i) => i.checked)
+    .map((i) => i.value)
+    .sort();
+}
+
+export function clearCheckedSkills() {
+  const inputs = querySelectorAll('input[name="blockedSkillList[]"]');
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].checked = false;
+  }
+}
+
+export function submitSkillChanges() {
+  querySelector('input[value="Save Blocked Skill Changes"]').click();
 }

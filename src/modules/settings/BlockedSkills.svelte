@@ -1,77 +1,17 @@
 <script>
 import getValueJSON from '../system/getValueJSON';
-import querySelector from '../common/querySelector';
-import querySelectorAll from '../common/querySelectorAll';
-import querySelectorArray from '../common/querySelectorArray';
 import setValue from '../system/setValue';
+import {
+  checkSkill,
+  clearCheckedSkills,
+  getCheckedSkills,
+  submitSkillChanges,
+} from './blockedSkills';
 
 let blockedSkillLists = getValueJSON('blockedSkillLists');
 let newListName = '';
 let error = false;
 let listName = '';
-
-function checkForErrors(checks, arg = null) {
-  return checks.some((c) => {
-    if (c[0](arg)) {
-      error = c[1](arg);
-      return true;
-    }
-    return false;
-  });
-}
-
-function submitSkillChanges() {
-  querySelector('input[value="Save Blocked Skill Changes"]').click();
-}
-
-function clearMessages() {
-  error = false;
-}
-
-function storeBlockedSkillsLists() {
-  setValue('blockedSkillLists', JSON.stringify(blockedSkillLists));
-}
-
-function getCheckedSkills() {
-  return querySelectorArray('input[name="blockedSkillList[]"]', document)
-    .filter((i) => i.checked)
-    .map((i) => i.value)
-    .sort();
-}
-
-function clearCheckedSkills() {
-  const inputs = querySelectorAll('input[name="blockedSkillList[]"]');
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].checked = false;
-  }
-}
-
-function applyList() {
-  clearMessages();
-
-  if (!listName) {
-    return;
-  }
-
-  const skillList = blockedSkillLists.find((l) => l.name === listName);
-
-  const checks = [
-    [
-      (list) => !list,
-      (list) => `Unable to find list "${list.name}". Try refreshing the page.`,
-    ],
-  ];
-  if (checkForErrors(checks, skillList)) {
-    return;
-  }
-
-  clearCheckedSkills();
-  skillList.skills.forEach((skill) => {
-    querySelector(`input[name="blockedSkillList[]"][value="${skill}"]`)
-      .checked = true;
-  });
-  submitSkillChanges();
-}
 
 function checkForDuplicates(list) {
   return blockedSkillLists.some((l) => {
@@ -83,6 +23,78 @@ function checkForDuplicates(list) {
     }
     return l.skills.every((s, i) => s === list.skills[i]);
   });
+}
+
+const loadListChecks = [
+  [
+    (list) => !list,
+    (list) => `Unable to find list "${list.name}". Try refreshing the page.`,
+  ],
+];
+
+const updateListChecks = [
+  [
+    (list) => blockedSkillLists.some((l) => l.name === list.name),
+    (list) => `Cannot find list named "${list.name}". Try refreshing the page.`,
+  ],
+  [
+    (list) => checkForDuplicates(list),
+    () => 'You already have a list with these skills.',
+  ],
+];
+
+const newListChecks = [
+  [
+    (list) => !list.name.length,
+    () => 'You must name your list.',
+  ],
+  [
+    (list) => list.name.length > 50,
+    () => 'List names can only be at most 50 characters long.',
+  ],
+  [
+    (list) => blockedSkillLists.some((l) => l.name === list.name),
+    (list) => `You already have a list named ${list.name}.`,
+  ],
+  [
+    (list) => checkForDuplicates(list),
+    () => 'You already have a list with these skills.',
+  ],
+];
+
+function checkForErrors(checks, ...args) {
+  const errPair = checks.find(([test]) => test(...args));
+  if (errPair) {
+    error = errPair[1](...args);
+    return true;
+  }
+  return false;
+}
+
+function clearMessages() {
+  error = false;
+}
+
+function storeBlockedSkillsLists() {
+  setValue('blockedSkillLists', JSON.stringify(blockedSkillLists));
+}
+
+function applyList() {
+  clearMessages();
+
+  if (!listName) {
+    return;
+  }
+
+  const skillList = blockedSkillLists.find((l) => l.name === listName);
+
+  if (checkForErrors(loadListChecks, skillList)) {
+    return;
+  }
+
+  clearCheckedSkills();
+  skillList.skills.forEach(checkSkill);
+  submitSkillChanges();
 }
 
 function deleteList() {
@@ -101,26 +113,7 @@ function createList() {
     skills: getCheckedSkills(),
   };
 
-  const checks = [
-    [
-      (list) => !list.name.length,
-      () => 'You must name your list.',
-    ],
-    [
-      (list) => list.name.length > 50,
-      () => 'List names can only be at most 50 characters long.',
-    ],
-    [
-      (list) => blockedSkillLists.some((l) => l.name === list.name),
-      (list) => `You already have a list named ${list.name}.`,
-    ],
-    [
-      (list) => checkForDuplicates(list),
-      () => 'You already have a list with these skills.',
-    ],
-  ];
-
-  if (checkForErrors(checks, newList)) {
+  if (checkForErrors(newListChecks, newList)) {
     return;
   }
   blockedSkillLists = [...blockedSkillLists, newList];
@@ -142,17 +135,7 @@ function updateList() {
     skill: getCheckedSkills(),
   };
 
-  const checks = [
-    [
-      (list) => blockedSkillLists.some((l) => l.name === list.name),
-      (list) => `Cannot find list named "${list.name}". Try refreshing the page.`,
-    ],
-    [
-      (list) => checkForDuplicates(list),
-      () => 'You already have a list with these skills.',
-    ],
-  ];
-  if (checkForErrors(checks, skillList)) {
+  if (checkForErrors(updateListChecks, skillList)) {
     return;
   }
 
@@ -226,18 +209,18 @@ findLoadList();
   {/if}
 </div>
 <style>
-div.infobox {
+.infobox {
   background: #D3CFC1;
   border: 2px solid white;
   margin: 10px auto;
   width: 80%;
 }
 
-div.infobox div.infobox-header {
+.infobox .infobox-header {
   background: #8E8668;
   color: white;
   font-size: smaller;
 }
 
-div#newlists { margin-top: 4px; }
+#newlists { margin-top: 4px; }
 </style>
