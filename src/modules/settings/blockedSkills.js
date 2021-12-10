@@ -15,10 +15,9 @@ export function getCheckedSkills() {
 }
 
 export function clearCheckedSkills() {
-  const inputs = querySelectorAll('input[name="blockedSkillList[]"]');
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].checked = false;
-  }
+  querySelectorAll('input[name="blockedSkillList[]"]')
+    // eslint-disable-next-line no-param-reassign
+    .forEach((i) => { i.checked = false; });
 }
 
 export function submitSkillChanges() {

@@ -34,7 +34,7 @@ const loadListChecks = [
 
 const updateListChecks = [
   [
-    (list) => blockedSkillLists.some((l) => l.name === list.name),
+    (list) => !blockedSkillLists.some((l) => l.name === list.name),
     (list) => `Cannot find list named "${list.name}". Try refreshing the page.`,
   ],
   [
@@ -132,7 +132,7 @@ function updateList() {
 
   const skillList = {
     name: listName,
-    skill: getCheckedSkills(),
+    skills: getCheckedSkills(),
   };
 
   if (checkForErrors(updateListChecks, skillList)) {
