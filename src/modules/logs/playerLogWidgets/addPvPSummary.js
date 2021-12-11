@@ -17,7 +17,7 @@ const getCombats = async ([r, msgHtml]) => [
   r, msgHtml, await getCombat(r, /combat_id=(\d+)/.exec(msgHtml)[1]),
 ];
 
-function parseCombatWinner(r, msgHtml) {
+function parseCombatWinner(msgHtml) {
   const victory = /You were victorious over/.test(msgHtml);
   if (victory) {
     return [green, `You were <span class="${green}">victorious</span> over `];
@@ -59,7 +59,7 @@ function parseCombat(combat, color) {
 }
 
 function updateTd([r, msgHtml, json]) {
-  const [color, pre] = parseCombatWinner(r, msgHtml);
+  const [color, pre] = parseCombatWinner(msgHtml);
   if (pre) {
     const summaryDiv = parseCombat(json.r.combat, color);
     r.cells[2].firstChild.remove();
