@@ -17,14 +17,6 @@ function checkForDuplicates(list) {
   return blockedSkillLists.filter((l) => l.name !== list.name)
     .filter((l) => l.skills.length === list.skills.length)
     .find((l) => l.skills.every((s, i) => s === list.skills[i]));
-    if (l.name === list.name) {
-      return false;
-    }
-    if (l.skills.length !== list.skills.length) {
-      return false;
-    }
-    return l.skills.every((s, i) => s === list.skills[i]);
-  });
 }
 
 const loadListChecks = [
