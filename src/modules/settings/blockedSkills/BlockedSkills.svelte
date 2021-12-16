@@ -1,84 +1,48 @@
 <script>
-import getValueJSON from '../system/getValueJSON';
-import setValue from '../system/setValue';
+import getValueJSON from '../../system/getValueJSON';
+import setValue from '../../system/setValue';
+import {
+  checkLoadList,
+  checkNewList,
+  checkUpdateList,
+} from './errorChecks';
 import {
   checkSkill,
   clearCheckedSkills,
+  findList,
   getCheckedSkills,
   submitSkillChanges,
 } from './blockedSkills';
 
 let blockedSkillLists = getValueJSON('blockedSkillLists');
 let newListName = '';
-let error = false;
 let listName = '';
-
-function checkForDuplicates(list) {
-  return blockedSkillLists.filter((l) => l.name !== list.name)
-    .filter((l) => l.skills.length === list.skills.length)
-    .find((l) => l.skills.every((s, i) => s === list.skills[i]));
-    if (l.name === list.name) {
-      return false;
-    }
-    if (l.skills.length !== list.skills.length) {
-      return false;
-    }
-    return l.skills.every((s, i) => s === list.skills[i]);
-  });
-}
-
-const loadListChecks = [
-  [
-    (list) => !list,
-    (list) => `Unable to find list "${list.name}". Try refreshing the page.`,
-  ],
-];
-
-const updateListChecks = [
-  [
-    (list) => !blockedSkillLists.some((l) => l.name === list.name),
-    (list) => `Cannot find list named "${list.name}". Try refreshing the page.`,
-  ],
-  [
-    (list) => checkForDuplicates(list),
-    () => 'You already have a list with these skills.',
-  ],
-];
-
-const newListChecks = [
-  [
-    (list) => !list.name.length,
-    () => 'You must name your list.',
-  ],
-  [
-    (list) => list.name.length > 50,
-    () => 'List names can only be at most 50 characters long.',
-  ],
-  [
-    (list) => blockedSkillLists.some((l) => l.name === list.name),
-    (list) => `You already have a list named ${list.name}.`,
-  ],
-  [
-    (list) => checkForDuplicates(list),
-    () => 'You already have a list with these skills.',
-  ],
-];
-
-function checkForErrors(checks, ...args) {
-  const errPair = checks.find(([test]) => test(...args));
-  if (errPair) {
-    error = errPair[1](...args);
-    return true;
-  }
-  return false;
-}
+let infoBoxHeader = '';
+let infoBoxText = '';
 
 function clearMessages() {
-  error = false;
+  infoBoxText = '';
 }
 
-function storeBlockedSkillsLists() {
+function infoBox(msg, header = 'INFORMATION') {
+  infoBoxHeader = header;
+  infoBoxText = msg;
+}
+
+async function submitChanges() {
+  infoBox('Applying changes...');
+  const response = await submitSkillChanges();
+  if (response.s) {
+    infoBox('Blocked Skill settings updated!');
+  } else {
+    infoBox(response.e, 'ERROR');
+  }
+}
+
+async function storeBlockedSkillsLists() {
+  infoBox('Applying list...');
   setValue('blockedSkillLists', JSON.stringify(blockedSkillLists));
+  submitChanges();
 }
 
 function applyList() {
@@ -90,13 +54,14 @@ function applyList() {
 
   const skillList = blockedSkillLists.find((l) => l.name === listName);
 
-  if (checkForErrors(loadListChecks, skillList)) {
+  infoBox(checkLoadList(blockedSkillLists, skillList), 'ERROR');
+  if (infoBoxText) {
     return;
   }
 
   clearCheckedSkills();
   skillList.skills.forEach(checkSkill);
-  submitSkillChanges();
+  submitChanges();
 }
 
 function deleteList() {
@@ -104,26 +69,28 @@ function deleteList() {
   blockedSkillLists = blockedSkillLists.filter((l) => l.name !== listName);
   storeBlockedSkillsLists();
   listName = '';
+  infoBox('Blocked skill list deleted');
 }
 
 function createList() {
   clearMessages();
 
-  const cleanListName = newListName.trim();
   const newList = {
-    name: cleanListName,
+    name: newListName.trim(),
     skills: getCheckedSkills(),
   };
 
-  if (checkForErrors(newListChecks, newList)) {
+  infoBox(checkNewList(blockedSkillLists, newList), 'ERROR');
+  if (infoBoxText) {
     return;
   }
+
   blockedSkillLists = [...blockedSkillLists, newList];
   listName = newList.name;
   newListName = '';
   storeBlockedSkillsLists();
 
-  submitSkillChanges();
+  submitChanges();
 }
 
 function updateList() {
@@ -137,30 +104,25 @@ function updateList() {
     skills: getCheckedSkills(),
   };
 
-  if (checkForErrors(updateListChecks, skillList)) {
+  infoBox(checkUpdateList(blockedSkillLists, skillList), 'ERROR');
+  if (infoBoxText) {
     return;
   }
 
   const index = blockedSkillLists.findIndex((l) => l.name === listName);
   blockedSkillLists[index] = skillList;
   storeBlockedSkillsLists();
-  submitSkillChanges();
+  submitChanges();
 }
 
 function findLoadList() {
-  const skills = getCheckedSkills();
-  const list = blockedSkillLists.find((l) => {
-    if (l.skills.length !== skills.length) {
-      return false;
-    }
-    return l.skills.every((s, i) => s === skills[i]);
-  });
+  const list = findList(blockedSkillLists, getCheckedSkills());
   if (list) {
     listName = list.name;
   }
 
   if (blockedSkillLists.length >= 10) {
-    error = 'Having more than 10 blocked skills lists may slow down this page.';
+    infoBox('Having more than 10 blocked skills lists may slow down this page.');
   }
 }
 
@@ -203,10 +165,10 @@ findLoadList();
       value='Save New Blocked Skill Set'
       on:click|self={createList}/>
   </div>
-  {#if error}
+  {#if infoBoxText}
   <div class="infobox">
-    <div class="infobox-header">INFORMATION</div>
-      <div>{error}</div>
+    <div class="infobox-header">{infoBoxHeader}</div>
+      <div>{infoBoxText}</div>
     </div>
   {/if}
 </div>
