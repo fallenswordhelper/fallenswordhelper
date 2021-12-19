@@ -25,8 +25,11 @@ function clearMessages() {
 }
 
 function infoBox(msg, header = 'INFORMATION') {
-  infoBoxHeader = header;
-  infoBoxText = msg;
+  if (msg) {
+    infoBoxHeader = header;
+    infoBoxText = msg;
+    return true;
+  }
 }
 
 async function submitChanges() {
@@ -39,10 +42,9 @@ async function submitChanges() {
   }
 }
 
-async function storeBlockedSkillsLists() {
+function storeBlockedSkillsLists() {
   infoBox('Applying list...');
   setValue('blockedSkillLists', JSON.stringify(blockedSkillLists));
-  submitChanges();
 }
 
 function applyList() {
@@ -54,8 +56,7 @@ function applyList() {
 
   const skillList = blockedSkillLists.find((l) => l.name === listName);
 
-  infoBox(checkLoadList(blockedSkillLists, skillList), 'ERROR');
-  if (infoBoxText) {
+  if (infoBox(checkLoadList(blockedSkillLists, skillList), 'ERROR')) {
     return;
   }
 
@@ -80,8 +81,7 @@ function createList() {
     skills: getCheckedSkills(),
   };
 
-  infoBox(checkNewList(blockedSkillLists, newList), 'ERROR');
-  if (infoBoxText) {
+  if (infoBox(checkNewList(blockedSkillLists, newList), 'ERROR')) {
     return;
   }
 
@@ -104,8 +104,7 @@ function updateList() {
     skills: getCheckedSkills(),
   };
 
-  infoBox(checkUpdateList(blockedSkillLists, skillList), 'ERROR');
-  if (infoBoxText) {
+  if (infoBox(checkUpdateList(blockedSkillLists, skillList), 'ERROR')) {
     return;
   }
 
@@ -115,32 +114,31 @@ function updateList() {
   submitChanges();
 }
 
-function findLoadList() {
-  const list = findList(blockedSkillLists, getCheckedSkills());
-  if (list) {
-    listName = list.name;
-  }
-
-  if (blockedSkillLists.length >= 10) {
-    infoBox('Having more than 10 blocked skills lists may slow down this page.');
-  }
+const list = findList(blockedSkillLists, getCheckedSkills());
+if (list) {
+  listName = list.name;
 }
 
-findLoadList();
+if (blockedSkillLists.length >= 10) {
+  infoBox('Having more than 10 blocked skills lists may slow down this page.');
+}
 </script>
+
 <div class='fshCenter'>
   <span class='fshBold'>Saved Blocked Skill Sets</span><br/>
   <div>
     <select id='fsh-skillSets' bind:value={listName}>
       {#each blockedSkillLists as bsl (bsl.name)}
-      <option value={bsl.name}>{bsl.name}</option>
+        <option value={bsl.name}>{bsl.name}</option>
       {/each}
     </select>
-    <input class='custominput'
+    <input
+      class='custominput'
       type='button'
       value='Use'
       on:click|self={applyList} />
-    <input class='custominput'
+    <input
+      class='custominput'
       type='button'
       value='Delete'
       on:click|self={deleteList} />
@@ -150,7 +148,7 @@ findLoadList();
       value='Update'
       on:click|self={updateList} />
   </div>
-  <div id="newlists">
+  <div class="newlists">
     <input
       class='custominput'
       type='text'
@@ -163,15 +161,16 @@ findLoadList();
       class='custominput'
       type='button'
       value='Save New Blocked Skill Set'
-      on:click|self={createList}/>
+      on:click|self={createList} />
   </div>
   {#if infoBoxText}
-  <div class="infobox">
-    <div class="infobox-header">{infoBoxHeader}</div>
+    <div class="infobox">
+      <div class="infobox-header">{infoBoxHeader}</div>
       <div>{infoBoxText}</div>
     </div>
   {/if}
 </div>
+
 <style>
 .infobox {
   background: #D3CFC1;
@@ -180,11 +179,11 @@ findLoadList();
   width: 80%;
 }
 
-.infobox .infobox-header {
+.infobox-header {
   background: #8E8668;
   color: white;
   font-size: smaller;
 }
 
-#newlists { margin-top: 4px; }
+.newlists { margin-top: 4px; }
 </style>
