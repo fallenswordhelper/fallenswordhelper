@@ -1,4 +1,4 @@
-import daUpdateBlockedSkills from '../../_dataAccess/daUpdateBlockedSkills';
+import daSkills from '../../_dataAccess/daSkills';
 import querySelector from '../../common/querySelector';
 import querySelectorAll from '../../common/querySelectorAll';
 import querySelectorArray from '../../common/querySelectorArray';
@@ -22,8 +22,18 @@ export function clearCheckedSkills() {
 }
 
 export function submitSkillChanges() {
-  const skills = getCheckedSkills();
-  return daUpdateBlockedSkills(skills);
+  const checkboxes = querySelectorAll('input[name="blockedSkillList[]"]');
+  const level = [];
+  const blocked = [];
+  for (const i of checkboxes) {
+    level[i.value] = 0;
+    blocked[i.value] = i.checked ? 1 : 0;
+  }
+  level[54] = Number(querySelector('input[name="ca_default"]').value);
+  level[101] = Number(querySelector('input[name="sc_default"]').value);
+  level[60] = Number(querySelector('input[name="nv_default"]').value);
+  level[98] = Number(querySelector('input[name="barricade_default"]').value);
+  return daSkills(level, blocked);
 }
 
 export function checkForDuplicates(blockedSkillLists, list) {
