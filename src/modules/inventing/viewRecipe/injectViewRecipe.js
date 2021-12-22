@@ -1,10 +1,10 @@
-import createAnchor from '../common/cElement/createAnchor';
-import insertElement from '../common/insertElement';
-import insertElementBefore from '../common/insertElementBefore';
-import querySelector from '../common/querySelector';
-import querySelectorArray from '../common/querySelectorArray';
-import xPath from '../common/xPath';
-import { defSubcmd, guideUrl } from '../support/constants';
+import createAnchor from '../../common/cElement/createAnchor';
+import insertElement from '../../common/insertElement';
+import insertElementBefore from '../../common/insertElementBefore';
+import querySelector from '../../common/querySelector';
+import querySelectorArray from '../../common/querySelectorArray';
+import xPath from '../../common/xPath';
+import { defSubcmd, guideUrl } from '../../support/constants';
 
 function getItemId(el) {
   if (!el) { return; }

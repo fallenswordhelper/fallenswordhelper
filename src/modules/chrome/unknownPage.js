@@ -1,13 +1,12 @@
 import calf from '../support/calf';
 import getElementById from '../common/getElementById';
 import injectQuestBookFull from './pageSwitcher/loader/injectQuestBookFull';
-import inventing from './pageSwitcher/loader/inventing';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import news from './pageSwitcher/loader/news';
 import querySelector from '../common/querySelector';
-import querySelectorAll from '../common/querySelectorAll';
 import screenview from '../analytics/screenview';
 import updateBuffLog from '../notepad/buffLog/updateBuffLog';
+import viewRecipe from './pageSwitcher/loader/viewRecipe';
 import xPath from '../common/xPath';
 
 const unknown = [
@@ -33,10 +32,10 @@ const unknown = [
     },
   ],
   [
-    () => querySelectorAll('#pCC img[title="Inventing"]').length > 0,
+    () => querySelector('#pCC input[value="doinvent"]'),
     () => {
       screenview('unknown.recipes.inventing');
-      inventing();
+      viewRecipe();
     },
   ],
   [

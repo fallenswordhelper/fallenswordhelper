@@ -237,5 +237,6 @@
   "betaOptIn":false,
   "showBuffLinks":false,
   "disableDestroyPrompts":false,
-  "blockedSkillLists": "[]"
+  "blockedSkillLists": "[]",
+  "ajaxifyMoveRecipe": false
 }

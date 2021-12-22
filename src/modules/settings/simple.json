@@ -473,5 +473,10 @@
   "disableDestroyPrompts":{
     "helpTitle":"Disable Destroy Prompts",
     "helpText":"If enabled, will disable prompts when you destroy items.<br>NO REFUNDS OR DO-OVERS! Use at own risk."
+  },
+  "ajaxifyMoveRecipe":{
+    "helpTitle":"Ajaxify Move Recipe",
+    "helpText":"Move recipe without page redirect.",
+    "network":true
   }
 }

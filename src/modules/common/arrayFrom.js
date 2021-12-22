@@ -1,3 +1,3 @@
-const arrayFrom = (e, mapFn) => Array.from(e, mapFn);
-
-export default arrayFrom;
+export default function arrayFrom(e, mapFn) {
+  return Array.from(e, mapFn);
+}

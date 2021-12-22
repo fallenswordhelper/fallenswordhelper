@@ -5,7 +5,7 @@ import creatures from './creatures';
 import guild from './guild/guild';
 import injectProfile from './loader/profile';
 import injectWorld from '../../world/injectWorld';
-import inventing from './loader/inventing';
+import inventing from './inventing';
 import items from './items';
 import news from './news';
 import noCmd from './noCmd';
@@ -55,7 +55,7 @@ export default {
   findplayer: { '-': { '-': injectFindPlayer } },
   guild,
   hellforge: { '-': { '-': craftForge } },
-  inventing: { viewrecipe: { '-': inventing } },
+  inventing,
   log: { '-': { '-': playerLog } },
   marketplace: { createreq: { '-': marketplace } },
   news,

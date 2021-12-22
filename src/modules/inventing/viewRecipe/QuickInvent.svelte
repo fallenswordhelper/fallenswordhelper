@@ -1,7 +1,7 @@
 <script>
-  import LinkButton from '../common/LinkButton.svelte';
-  import daDoInvent from '../_dataAccess/daDoInvent';
-  import sendEvent from '../analytics/sendEvent';
+  import LinkButton from '../../common/LinkButton.svelte';
+  import daDoInvent from '../../_dataAccess/daDoInvent';
+  import sendEvent from '../../analytics/sendEvent';
   import { slide } from 'svelte/transition';
 
   export let max;

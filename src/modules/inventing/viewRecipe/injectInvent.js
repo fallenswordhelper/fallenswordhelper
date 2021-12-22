@@ -1,7 +1,7 @@
 import QuickInvent from './QuickInvent.svelte';
-import { pCC } from '../support/layout';
+import { pCC } from '../../support/layout';
 import parseRecipe from './parseRecipe';
-import querySelector from '../common/querySelector';
+import querySelector from '../../common/querySelector';
 
 function startApp(props, target) {
   return new QuickInvent({
