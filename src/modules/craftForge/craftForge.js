@@ -143,7 +143,7 @@ function getItems() {
 }
 
 export default function craftForge() {
-  if (jQueryPresent()) {
+  if (jQueryPresent() && pCC) {
     getInventoryById().then(inventory);
     task(3, getItems);
   }

@@ -103,7 +103,7 @@ function stColor(el, item) {
 }
 
 function forEachInvItem(el) {
-  const cell = el.children[0].lastElementChild.children[0];
+  const cell = el.children[0]?.lastElementChild.children[0];
   if (!cell) { return; }
   const checkbox = cell.children[0];
   if (!checkbox) { return; }
