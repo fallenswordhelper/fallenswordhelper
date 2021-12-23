@@ -5,11 +5,10 @@
   "scripts": {
     "prebuild": "npm run test",
     "build": "npm run esbuild",
-    "postbuild": "npm run sourcemapPathTransform && npm run getsize",
+    "postbuild": "npm run sourcemapPathTransform",
     "esbuild": "node scripts/esbuild.js",
     "esdev": "node scripts/esdev.js",
     "eslint": "eslint . --cache",
-    "getsize": "node scripts/getCalfSize.js",
     "minor": "npm --no-git-tag-version version minor",
     "patch": "npm --no-git-tag-version version patch",
     "prepare": "husky install",
@@ -40,7 +39,6 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-svelte3": "^3.2.1",
-    "gzip-size": "^6.0.0",
     "husky": "^7.0.4",
     "local-web-server": "^5.1.1",
     "tiny-glob": "^0.2.9"
