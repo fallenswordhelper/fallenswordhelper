@@ -51,9 +51,12 @@ export function statToggle(leftHandSideColumnTable) {
 }
 
 export function structureToggle(leftHandSideColumnTable) {
-  thisToggle(
-    leftHandSideColumnTable.rows[15].cells[1].children[0],
-    leftHandSideColumnTable.rows[17].cells[0].children[0],
-    'guildStructureControl',
-  );
+  const structureHeader = leftHandSideColumnTable.rows[15]?.cells[1].children[0];
+  if (structureHeader) {
+    thisToggle(
+      structureHeader,
+      leftHandSideColumnTable.rows[17].cells[0].children[0],
+      'guildStructureControl',
+    );
+  }
 }
