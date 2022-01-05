@@ -1,18 +1,15 @@
 import all from '../../common/all';
 import createDocument from '../../system/createDocument';
-import getArrayByTagName from '../../common/getArrayByTagName';
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
-import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
 import processRecipe from './processRecipe';
+import querySelectorArray from '../../common/querySelectorArray';
 import retryAjax from '../../ajax/retryAjax';
 
 function recipeAry(doc) {
-  const innerPcc = getElementById('pCC', doc);
-  const scope = innerPcc.children[0].rows[6].cells[0].children[0];
-  return getArrayByTagName('a', scope);
+  return querySelectorArray('#pCC a[href*="=viewrecipe&"]', doc);
 }
 
 function makeRecipe(el) {
