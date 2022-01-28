@@ -42,11 +42,14 @@ function expandFrags(frag) {
 function processResult(r) {
   if (r.components?.length) {
     return `You successfully extracted 1 '${r.components?.[0].n
-    }' component(s) from 1 resource(s).</span>`;
+    }' component(s) from 1 resource(s).`;
   }
   if (r.frags) {
     return `You gained ${r.frags.map(expandFrags).join(', ')
     } Fragments by opening the Fragment Stash.`;
+  }
+  if (r.mailbox_items?.length) {
+    return `You opened the container and received 1 x ${r.mailbox_items?.[0].n}`;
   }
   return '<span class="fshRed">You failed to extract any components from '
     + 'resource(s).</span>';
