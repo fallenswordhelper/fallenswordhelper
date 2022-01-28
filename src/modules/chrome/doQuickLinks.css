@@ -1,6 +1,7 @@
 .fshQuickLinks {
   border: 3px solid #ccbb77;
   border-radius: 5px;
+  box-sizing: content-box;
   color: black;
   font-size: 12px;
   position: absolute;
