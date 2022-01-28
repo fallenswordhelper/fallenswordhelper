@@ -1,3 +1,4 @@
+import './doQuickLinks.css';
 import calf from '../support/calf';
 import draggable from '../common/draggable';
 import escapeHtml from '../system/escapeHtml';

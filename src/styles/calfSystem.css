@@ -104,19 +104,6 @@
   margin: 0 160px 0 0;
 }
 
-/* Quick Links */
-.fshQuickLinks {
-  position: absolute;
-  z-index: 50;
-  text-align: left;
-  white-space: nowrap;
-  color: black;
-  font-size: 12px;
-  border-radius: 5px;
-  border: 3px solid #ccbb77;
-  width: 100px;
-}
-
 /* Lists */
 .HelperTextLink {
   color: blue;
@@ -219,7 +206,6 @@
 .fshBlock {display: inline-block;}
 .fshNoWrap {white-space: nowrap;}
 .fshBold {font-weight: bold;}
-.fshFixed {position: fixed;}
 .fshRelative {position: relative;}
 .fshXSmall {font-size: x-small;}
 .fshXXSmall {font-size: xx-small;}
