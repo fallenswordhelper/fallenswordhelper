@@ -45,7 +45,7 @@
 }
 .helperMenuFixed {position: fixed;}
 .helperMenuMove {cursor: move;}
-.helperDl {
+.helperDevBtn {
   background: transparent;
   border: none;
   cursor: pointer;

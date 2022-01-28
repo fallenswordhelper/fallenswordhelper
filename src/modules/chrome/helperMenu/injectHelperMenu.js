@@ -14,6 +14,7 @@ import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import jQueryPresent from '../../common/jQueryPresent';
 import once from '../../common/once';
 import onclick from '../../common/onclick';
+import quickExtractNew from '../../notepad/quickExtract/quickExtractNew';
 import sendEvent from '../../analytics/sendEvent';
 
 function toggleMenu(evt) {
@@ -31,12 +32,23 @@ function callHelperFunction(target) {
   }
 }
 
+function doQuickExtract(target) {
+  if (getValue('betaOptIn')) {
+    sendEvent('helperMenu', 'quickExtractNew');
+    quickExtractNew();
+  } else {
+    callHelperFunction(target);
+  }
+}
+
 const classEvents = [
   ['fshLink', callHelperFunction],
   ['helperMenuReply', (target) => {
+    sendEvent('helperMenu', 'helperMenuReply');
     window.openQuickMsgDialog(target.getAttribute('target_player'));
   }],
   ['helperDl', gsDl],
+  ['helperQuickExtract', doQuickExtract],
 ];
 
 function showHelperMenu(evt) {
