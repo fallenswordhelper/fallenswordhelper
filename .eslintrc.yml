@@ -24,12 +24,12 @@ globals:
   clearTimeout: readonly
   console: readonly
   document: readonly
+  Document: readonly
   DOMParser: readonly
   Element: readonly
   EventTarget: readonly
   FormData: readonly
   getComputedStyle: readonly
-  HTMLDocument: readonly
   HTMLTableElement: readonly
   Image: readonly
   localStorage: readonly
