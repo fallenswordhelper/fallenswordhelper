@@ -1,14 +1,11 @@
 import Confirm from './Confirm.svelte';
+import instantiate from './instantiate';
 
 const props = { visible: true };
 let thisModal;
 
 function promiseConfirm(resolve) {
-  if (thisModal) {
-    thisModal.$set(props);
-  } else {
-    thisModal = new Confirm({ props, target: document.body });
-  }
+  thisModal = instantiate(props, thisModal, Confirm);
   thisModal.$on('yes', () => resolve(true));
   thisModal.$on('no', () => resolve(false));
 }

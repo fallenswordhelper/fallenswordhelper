@@ -1,12 +1,9 @@
 import QuickExtract from './QuickExtract.svelte';
+import instantiate from '../../modal/instantiate';
 
 const props = { visible: true };
 let thisModal;
 
 export default function quickExtractNew() {
-  if (thisModal) {
-    thisModal.$set(props);
-  } else {
-    thisModal = new QuickExtract({ props, target: document.body });
-  }
+  thisModal = instantiate(props, thisModal, QuickExtract);
 }
