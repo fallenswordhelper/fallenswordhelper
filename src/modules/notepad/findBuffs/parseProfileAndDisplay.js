@@ -51,7 +51,7 @@ function nameCell(doc, callback, lastActivity, bioCellHtml) { // Legacy
   const lastActivityMinutes = parseInt(lastActivity[1], 10);
   const lastActivityIMG = onlineDot({ min: lastActivityMinutes });
   const playerHREF = callback.href;
-  const bioTip = bioCellHtml.replace(/'|"|\n/g, '');
+  const bioTip = bioCellHtml.replace(/['"\n]/g, '');
   return `<nobr>${lastActivityIMG}&nbsp;<a href="${playerHREF}" target="new" `
     + 'class="tip-static" '
     + `data-tipped="${bioTip}">${innerPlayerName}</a>`

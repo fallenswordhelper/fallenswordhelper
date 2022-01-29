@@ -5,7 +5,7 @@ import sortDesc from './sortDesc';
 
 function intFromString(val) {
   if (typeof val === 'string') {
-    return parseInt(val.replace(/,|#/g, ''), 10);
+    return parseInt(val.replace(/[,#]/g, ''), 10);
   }
   return val;
 }
