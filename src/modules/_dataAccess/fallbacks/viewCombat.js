@@ -3,7 +3,6 @@ import createDocument from '../../system/createDocument';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
-import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
 import sendEvent from '../../analytics/sendEvent';
 
@@ -16,28 +15,27 @@ function getResult(script, e) {
   return Number(script.match(thisRe)[1]);
 }
 
-const specialMask = [
-  [18, /(\w+)+ leeched the buff '([A-Za-z ]+)'./], // FIXME
-  [21,
-    /(\w+)+ was mesmerized by Spell Breaker, losing the '([A-Za-z ]+)' buff./], // FIXME
-];
-
 function gettokens(spec) {
-  const thisTests = specialMask
-    .map(([id, mask]) => [id, spec.match(mask)])
+  const matchTokens = [[18, 'leeched'], [21, 'Spell']]
+    .map(([id, token]) => [
+      id,
+      spec.includes(token),
+      spec.split(' ')[0],
+      spec.split('\'')[1],
+    ])
     .find(([, match]) => match);
-  if (!thisTests) {
+  if (!matchTokens) {
     sendEvent('Logs', 'Missing PvP Special', spec);
     return { id: -1, params: ['-1', '-1'] };
   }
-  return { id: thisTests[0], params: [thisTests[1][1], thisTests[1][2]] };
+  return { id: matchTokens[0], params: [matchTokens[2], matchTokens[3]] };
 }
 
 function formatSpecial(pCC) {
-  return querySelectorArray('#specialsDiv', pCC)
-    .map(getTextTrim)
-    .filter((t) => ['leeched', 'Spell'].some((s) => t.includes(s)))
-    .map(gettokens);
+  const divs = querySelectorArray('#specialsDiv', pCC);
+  const texts = divs.map(getTextTrim);
+  const filtered = texts.filter((t) => ['leeched', 'Spell'].some((s) => t.includes(s)));
+  return filtered.map(gettokens);
 }
 
 function attacker(header) {
@@ -84,12 +82,14 @@ function parseReport(id, html) {
   const doc = createDocument(html);
   const pCC = getElementById('pCC', doc);
   return {
-    r: reportObject(id, pCC),
+    r: {
+      combat: reportObject(id, pCC),
+    },
     s: true,
   };
 }
 
-// TODO Broken
-export default function viewCombat(id) {
-  return combatView(id).then(partial(parseReport, id));
+export default async function viewCombat(id) {
+  const html = await combatView(id);
+  return parseReport(id, html);
 }
