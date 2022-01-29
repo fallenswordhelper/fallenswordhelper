@@ -4,8 +4,9 @@ import indexAjaxData from '../../ajax/indexAjaxData';
 import infoBoxFrom from '../../common/InfoBoxFrom';
 import sendEvent from '../../analytics/sendEvent';
 
-const components = (info) => ({ r: { components: [{ n: info.match(/'(.*)'/)[1] }] }, s: true });
-const zombie = (info) => ({ r: { mailbox_items: [{ n: info.match(/'(.*)'/)[1] }] }, s: true });
+const ret = (info, prop) => ({ r: { [prop]: [{ n: info.match(/'(.*)'/)[1] }] }, s: true });
+const components = (info) => ret(info, 'components');
+const zombie = (info) => ret(info, 'mailbox_items');
 
 function fragObj(pair) {
   const thisResult = pair.split(' x ');
@@ -16,7 +17,7 @@ function fragObj(pair) {
 }
 
 function stash(info) {
-  const reAry = info.match(/You gained +(.*) Fragment\(s\)/);
+  const reAry = info.match(/You gained {1,2}}(.*) Fragment\(s\)/);
   if (reAry) {
     const frags = reAry[1].split(', ').map(fragObj);
     return { r: { frags }, s: true };
