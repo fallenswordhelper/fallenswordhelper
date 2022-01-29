@@ -26,7 +26,7 @@ const urlPatch = [
   [/&search=.+/],
   [/&target=.+/],
   [/&xcv=[0-9a-f]{32}/],
-  [/\?ref=[0-9]+/],
+  [/\?ref=\d+/],
 ];
 
 function stripExtra(acc, curr) {
