@@ -24,27 +24,34 @@ function lastActivityTimestamp(tipped) {
   return nowSecs - secs;
 }
 
-function playerObject(el, tipped, mo) {
+function fromElement(el) {
   return {
-    current_stamina: Number(mo[1]),
-    guild_id: currentGuildId(),
     guild_xp: guildXp(el),
     id: playerId(el),
-    image_version: 0,
+    name: getTextTrim(el),
+    rank: rank(el),
+  };
+}
+
+function fromTipped(tipped) {
+  const mo = tipped.match(/Stamina:<\/td><td>(\d{1,12}) \/ (\d{1,12})<\/td>/);
+  return {
+    current_stamina: Number(mo[1]),
     last_activity: lastActivityTimestamp(tipped),
     level: level(tipped),
     max_stamina: Number(mo[2]),
-    name: getTextTrim(el),
-    rank: rank(el),
     vl: vl(tipped),
-    xp: -1,
   };
 }
 
 function parsePlayerLink(el) {
-  const { tipped } = el.dataset;
-  const mo = tipped.match(/Stamina:<\/td><td>(\d{1,12}) \/ (\d{1,12})<\/td>/);
-  return playerObject(el, tipped, mo);
+  return {
+    guild_id: currentGuildId(),
+    image_version: 0,
+    xp: -1,
+    ...fromElement(el),
+    ...fromTipped(el.dataset.tipped),
+  };
 }
 
 function getRanks(players, firstPlayer, index) {
