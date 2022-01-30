@@ -1,6 +1,7 @@
 import closestTr from '../../common/closestTr';
 import createDocument from '../../system/createDocument';
 import currentGuildId from '../../common/currentGuildId';
+import fromEntries from '../../common/fromEntries';
 import getTextTrim from '../../common/getTextTrim';
 import guildManage from '../../ajax/guildManage';
 import { nowSecs } from '../../support/now';
@@ -21,20 +22,20 @@ function lastActivityTimestamp(tipped) {
 function parsePlayerLink(el) {
   const { tipped } = el.dataset;
   const mo = tipped.match(/Stamina:<\/td><td>(\d{1,12}) \/ (\d{1,12})<\/td>/);
-  return {
-    current_stamina: Number(mo[1]),
-    guild_id: currentGuildId(),
-    guild_xp: Number(getTextTrim(closestTr(el).cells[4]).replaceAll(',', '')),
-    id: Number(playerIDRE.exec(el.href)[1]),
-    image_version: 0,
-    last_activity: lastActivityTimestamp(tipped),
-    level: Number(/Level:.+?(\d+)/.exec(tipped)[1]),
-    max_stamina: Number(mo[2]),
-    name: getTextTrim(el),
-    rank: getTextTrim(closestTr(el).cells[3]),
-    vl: Number(/VL:.+?(\d+)/.exec(tipped)[1]),
-    xp: -1,
-  };
+  return fromEntries([
+    ['current_stamina', Number(mo[1])],
+    ['guild_id', currentGuildId()],
+    ['guild_xp', Number(getTextTrim(closestTr(el).cells[4]).replaceAll(',', ''))],
+    ['id', Number(playerIDRE.exec(el.href)[1])],
+    ['image_version', 0],
+    ['last_activity', lastActivityTimestamp(tipped)],
+    ['level', Number(/Level,.+?(\d+)/.exec(tipped)[1])],
+    ['max_stamina', Number(mo[2])],
+    ['name', getTextTrim(el)],
+    ['rank', getTextTrim(closestTr(el).cells[3])],
+    ['vl', Number(/VL,.+?(\d+)/.exec(tipped)[1])],
+    ['xp', -1],
+  ]);
 }
 
 function getRanks(players, firstPlayer, index) {
