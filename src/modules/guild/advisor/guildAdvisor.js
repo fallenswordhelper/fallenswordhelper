@@ -11,6 +11,7 @@ import getValue from '../../system/getValue';
 import injectAdvisorWeekly from './injectAdvisorWeekly';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
+import interceptSubmit from '../../common/interceptSubmit';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
 import { pCC } from '../../support/layout';
@@ -89,4 +90,5 @@ export default function guildAdvisor() {
   const list = getElementsByTagName('table', pCC)[1];
   if (!list) { return; }
   loadDataTables().then(() => switcher(list));
+  interceptSubmit();
 }
