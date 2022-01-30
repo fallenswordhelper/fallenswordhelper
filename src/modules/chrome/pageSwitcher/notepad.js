@@ -24,8 +24,8 @@ const whosGotWhat = () => {
 
 const notepad = {
   showlogs: { '-': combatLog },
-  invmanagernew: { '-': inventory }, // TODO
-  guildinvmgr: { '-': inventory }, // TODO
+  invmanagernew: { '-': inventory }, // active
+  guildinvmgr: { '-': inventory }, // active
   recipemanager: { '-': recipeMgr },
   auctionsearch: { '-': injectAuctionSearch },
   onlineplayers: { '-': injectOnlinePlayers },
@@ -35,10 +35,10 @@ const notepad = {
   quickwear: { '-': quickwear },
   fsboxcontent: { '-': injectFsBoxContent },
   bufflogcontent: { '-': injectBuffLog },
-  newguildlog: { '-': newGuildLog }, // TODO
+  newguildlog: { '-': newGuildLog }, // active
   findbuffs: { '-': injectFindBuffs },
   findother: { '-': injectFindOther },
-  savesettings: { '-': load }, // TODO
+  savesettings: { '-': load }, // active
   reliclist: { '-': reliclist },
   whosgotwhat: { '-': whosGotWhat },
 };
