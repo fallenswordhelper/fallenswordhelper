@@ -7,7 +7,6 @@ import injectFsBoxContent from '../pageSwitcher/loader/injectFsBoxContent';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
 import injectQuickLinkManager from '../pageSwitcher/loader/injectQuickLinkManager';
 import monstorLog from '../pageSwitcher/loader/monstorLog';
-import quickExtract from '../pageSwitcher/loader/quickExtract';
 import quickwear from '../pageSwitcher/loader/quickwear';
 import recipeMgr from '../pageSwitcher/loader/recipeMgr';
 
@@ -21,7 +20,6 @@ export default {
   'Find Other': injectFindOther,
   'Online Players': injectOnlinePlayers,
   'AH Quick Search': injectAuctionSearch,
-  'Quick Extract': quickExtract,
   'Quick Wear': quickwear,
   'FS Box Log': injectFsBoxContent,
 };

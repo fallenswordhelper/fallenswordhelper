@@ -14,7 +14,7 @@ import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import jQueryPresent from '../../common/jQueryPresent';
 import once from '../../common/once';
 import onclick from '../../common/onclick';
-import quickExtractNew from '../../notepad/quickExtract/quickExtractNew';
+import quickExtract from '../pageSwitcher/loader/quickExtract';
 import sendEvent from '../../analytics/sendEvent';
 
 function toggleMenu(evt) {
@@ -32,13 +32,9 @@ function callHelperFunction(target) {
   }
 }
 
-function doQuickExtract(target) {
-  if (getValue('betaOptIn')) {
-    sendEvent('helperMenu', 'quickExtractNew');
-    quickExtractNew();
-  } else {
-    callHelperFunction(target);
-  }
+function doQuickExtract() {
+  sendEvent('helperMenu', 'quickExtract');
+  quickExtract();
 }
 
 const classEvents = [
