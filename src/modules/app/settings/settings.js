@@ -1,6 +1,5 @@
-import callApp from '../callApp';
-import extend from '../../common/extend';
+import getApp from '../getApp';
 
 export default function settings(data) {
-  return callApp(extend({ cmd: 'settings' }, data));
+  return getApp({ cmd: 'settings', ...data });
 }

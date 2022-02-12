@@ -1,7 +1,7 @@
-import callApp from '../callApp';
+import getApp from '../getApp';
 
 export default function viewItemByVCode(itemId, invId, vcode) {
-  return callApp({
+  return getApp({
     cmd: 'fetchitem',
     item_id: itemId,
     inv_id: invId,

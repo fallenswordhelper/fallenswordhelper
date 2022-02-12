@@ -1,5 +1,7 @@
+import jsonStringify from './jsonStringify';
+
 export default function stringifyError(err) {
-  return JSON.stringify(
+  return jsonStringify(
     err,
     Object.getOwnPropertyNames(Object.getPrototypeOf(err)),
     1,

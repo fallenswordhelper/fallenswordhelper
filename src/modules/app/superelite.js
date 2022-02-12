@@ -1,5 +1,5 @@
-import callApp from './callApp';
+import getApp from './getApp';
 
 export default function superelite() {
-  return callApp({ cmd: 'superelite' });
+  return getApp({ cmd: 'superelite' });
 }

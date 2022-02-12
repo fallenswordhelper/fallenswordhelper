@@ -4,6 +4,7 @@ import getValue from '../system/getValue';
 import isObject from '../common/isObject';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import jsonParse from '../common/jsonParse';
+import jsonStringify from '../common/jsonStringify';
 import keys from '../common/keys';
 import listValues from '../system/listValues';
 import { pCC } from '../support/layout';
@@ -20,7 +21,7 @@ function drawBox(content, fshSettings) {
     + 'background-color:white;'
     + 'font-family:Consolas,\'Lucida Console\',\'Courier New\',monospace;" '
     + `id="HelperfshSettings" name="fshSettings">${
-      JSON.stringify(fshSettings)}</textarea>`
+      jsonStringify(fshSettings)}</textarea>`
     + '<br><input id="HelperLoadSettings" class="custombutton" '
     + 'type="submit" value="Load Settings!" /></center>', content);
 }

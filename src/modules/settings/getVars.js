@@ -1,6 +1,7 @@
 import calf from '../support/calf';
 import getCalfPrefs from '../common/getCalfPrefs';
 import getValue from '../system/getValue';
+import jsonStringify from '../common/jsonStringify';
 
 function mapCalfPref(el) { calf[el[0]] = getValue(el[1]); }
 
@@ -29,6 +30,6 @@ function simpleVars() {
 export default function getVars() {
   mappedVars();
   simpleVars();
-  calf.storage = ((JSON.stringify(localStorage).length / (5 * 1024 * 1024))
+  calf.storage = ((jsonStringify(localStorage).length / (5 * 1024 * 1024))
     * 100).toFixed(2);
 }

@@ -1,20 +1,20 @@
+import entries from './entries';
 import isObject from './isObject';
-import keys from './keys';
 import partial from './partial';
 
-function overwriteKey(obj, mixins, fn, key) {
-  if (isObject(mixins[key]) && mixins[key] !== null) {
+function overwriteKey(obj, fn, [key, value]) {
+  if (isObject(value) && value !== null) {
     // eslint-disable-next-line no-param-reassign
-    obj[key] = fn(mixins[key].constructor(), mixins[key]);
+    obj[key] = fn(value.constructor(), value);
   } else {
     // eslint-disable-next-line no-param-reassign
-    obj[key] = mixins[key];
+    obj[key] = value;
   }
 }
 
 export default function extend(obj, mixins) {
   if (isObject(mixins)) {
-    keys(mixins).forEach(partial(overwriteKey, obj, mixins, extend));
+    entries(mixins).forEach(partial(overwriteKey, obj, extend));
   }
   return obj;
 }

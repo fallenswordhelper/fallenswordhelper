@@ -1,7 +1,7 @@
-import callApp from '../callApp';
+import getApp from '../getApp';
 
 export default function senditems(user, invIdAry) {
-  return callApp({
+  return getApp({
     cmd: 'trade',
     subcmd: 'senditems',
     xc: window.ajaxXC,

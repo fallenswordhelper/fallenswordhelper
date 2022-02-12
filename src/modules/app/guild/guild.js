@@ -1,6 +1,5 @@
-import callApp from '../callApp';
-import extend from '../../common/extend';
+import getApp from '../getApp';
 
 export default function guild(data) {
-  return callApp(extend({ cmd: 'guild' }, data));
+  return getApp({ cmd: 'guild', ...data });
 }

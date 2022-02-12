@@ -1,8 +1,8 @@
 import './potReport.css';
 import createDiv from '../../../../common/cElement/createDiv';
+import deepClone from '../../../../common/deepClone';
 import entries from '../../../../common/entries';
 import eventHandler5 from '../../../../common/eventHandler5';
-import extend from '../../../../common/extend';
 import fallback from '../../../../system/fallback';
 import fromEntries from '../../../../common/fromEntries';
 import insertElement from '../../../../common/insertElement';
@@ -155,8 +155,7 @@ function buildPanels(potOpts, potObj) {
 }
 
 function gotMap(potObj, data) {
-  const potOpts = extend({}, defaultOpts); // deep clone
-  extend(potOpts, fallback(data, {}));
+  const potOpts = { ...deepClone(defaultOpts), ...fallback(data, {}) };
   potOpts.myMap = buildMap(potOpts, potObj);
   set(storeMap, potOpts);
   buildPanels(potOpts, potObj);

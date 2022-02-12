@@ -1,7 +1,7 @@
-import callApp from './callApp';
+import getApp from './getApp';
 
 export default function quickbuff(userAry, buffAry) {
-  return callApp({
+  return getApp({
     cmd: 'quickbuff',
     subcmd: 'activate',
     username: userAry,

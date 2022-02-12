@@ -1,6 +1,5 @@
-import callApp from '../callApp';
-import extend from '../../common/extend';
+import getApp from '../getApp';
 
 export default function arena(data) {
-  return callApp(extend({ cmd: 'arena' }, data));
+  return getApp({ cmd: 'arena', ...data });
 }

@@ -1,8 +1,7 @@
-import callApp from '../callApp';
+import profile from './profile';
 
 export default function sendtofolder(folderId, itemsAry) {
-  return callApp({
-    cmd: 'profile',
+  return profile({
     subcmd: 'sendtofolder',
     folder_id: folderId,
     folderItem: itemsAry,

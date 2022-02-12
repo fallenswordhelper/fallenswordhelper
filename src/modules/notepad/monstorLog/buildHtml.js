@@ -1,7 +1,6 @@
 import addCommas from '../../system/addCommas';
 import { cdn } from '../../system/system';
 import entries from '../../common/entries';
-import extend from '../../common/extend';
 import keys from '../../common/keys';
 
 function imgHtml(imageId) {
@@ -34,7 +33,8 @@ function formatEnhancements(enhancements) {
 }
 
 export default function buildHtml(data, key) {
-  return extend(data[key], {
+  return {
+    ...data[key],
     name: key,
     image: imgHtml(data[key].image_id),
     level: addCommas(data[key].level),
@@ -44,5 +44,5 @@ export default function buildHtml(data, key) {
     damage: statMinMax(data[key].damage),
     hp: statMinMax(data[key].hp),
     enhancements: formatEnhancements(data[key].enhancements),
-  });
+  };
 }

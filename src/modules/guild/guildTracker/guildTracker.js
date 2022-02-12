@@ -8,6 +8,7 @@ import { get } from '../../system/idb';
 import injectShowTracker from './injectShowTracker';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
+import jsonStringify from '../../common/jsonStringify';
 import on from '../../common/on';
 import once from '../../common/once';
 import partial from '../../common/partial';
@@ -112,7 +113,7 @@ function addOverlay() {
 
 function gotActivity(data) {
   if (data) {
-    trackerData = JSON.stringify(data);
+    trackerData = jsonStringify(data);
     initTable(data.members);
   }
 }
