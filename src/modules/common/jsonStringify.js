@@ -1,3 +1,3 @@
-export default function jsonStringify(obj) {
-  return JSON.stringify(obj);
+export default function jsonStringify(value, replacer, space) {
+  return JSON.stringify(value, replacer, space);
 }

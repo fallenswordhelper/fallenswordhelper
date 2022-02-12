@@ -1,18 +1,9 @@
+import api from './api';
 import entries from '../common/entries';
 import fromEntries from '../common/fromEntries';
 import isUndefined from '../common/isUndefined';
-import retryAjax from '../ajax/retryAjax';
 
 let hud;
-
-function callApp(data, options) {
-  return retryAjax({
-    url: 'app.php',
-    data: { browser: 1, v: 9, ...data },
-    dataType: 'json',
-    ...options,
-  });
-}
 
 const listItemToEntry = ({ k, v }) => [k, v];
 const entryToListItem = ([k, v]) => ({ k, v });
@@ -38,7 +29,7 @@ function updateHud(json) {
 
 function callWithHudCount(data, options) {
   const hudCount = hud?.mc?.find(({ k }) => k === 0)?.v;
-  return callApp({
+  return api({
     ...data,
     ...!isUndefined(hudCount) && { hc: hudCount },
   }, options);
