@@ -1,7 +1,7 @@
-import callApp from './callApp';
+import getApp from './getApp';
 
 export default function bank(mode, amount) {
-  return callApp({
+  return getApp({
     cmd: 'bank',
     subcmd: 'transaction',
     mode,
