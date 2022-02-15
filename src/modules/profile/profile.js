@@ -1,7 +1,6 @@
 import colouredDots from '../common/colouredDots';
 import doStatTotal from './doStatTotal';
 import executeAll from '../common/executeAll';
-import getIsSelf from './getIsSelf';
 import getValue from '../system/getValue';
 import ifSelf from './ifSelf/ifSelf';
 import interceptSubmit from '../common/interceptSubmit';
@@ -66,12 +65,8 @@ function updateDom() {
   task(3, colouredDots);
 }
 
-function allowBack() {
-  if (!getIsSelf()) { interceptSubmit(); }
-}
-
 export default function profile() {
   if (jQueryNotPresent()) { return; }
   updateDom();
-  allowBack();
+  interceptSubmit();
 }

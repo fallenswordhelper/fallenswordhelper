@@ -4,7 +4,6 @@ import { playerIdUrl } from '../../support/constants';
 
 function rowHtml(obj) {
   return `<td>${obj.slot}</td>`
-    // + `<td>${obj.name}</td>`
     + `<td><a href="${playerIdUrl}${obj.id}">${obj.name}</a></td>`
     + `<td>${obj.level}</td>`
     + `<td>${obj.rank_name}</td>`
@@ -25,7 +24,6 @@ function rowFactory(aRow) {
 }
 
 export default function displayChange(domTable, table, displayed) {
-  // console.log(table.getTableState());
   const domTBody = domTable.tBodies[0];
   const thisTBody = createTBody();
   for (const r of displayed) {

@@ -52,6 +52,5 @@ function downloadCsv(csv) {
 
 export default async function gsDl() {
   const json = await guildStore();
-  // console.log(json);
   downloadCsv(`${header}${toCsv(json)}`);
 }

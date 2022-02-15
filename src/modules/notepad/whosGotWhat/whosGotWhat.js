@@ -118,9 +118,7 @@ function makePager(bottom, table) {
 }
 
 function showMe(dataAry) {
-  // console.log(dataAry);
   const data = prepareData(dataAry);
-  // console.log('data', data);
   setInnerHtml('', pCC);
   const el = insertElement(pCC, createDiv());
   const top = insertElement(el, createDiv({ className: 'st-top-container' }));
@@ -141,7 +139,6 @@ function showMe(dataAry) {
   const tableComponent = tableComponentFactory({ el, table });
   tableComponent.onDisplayChange(partial(displayChange, domTable, table));
   tableComponent.exec();
-  // slice.selectNextPage();
 }
 
 export default function whosGotWhat() {

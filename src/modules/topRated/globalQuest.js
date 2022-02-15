@@ -11,7 +11,7 @@ import setInnerHtml from '../dom/setInnerHtml';
 function globalQuestAllowBack(topTable) { // jQuery
   const thisSelect = getElementsByTagName('select', topTable)[0];
   $(thisSelect).off();
-  on(pCC, 'change', (e) => formToUrl(e.target.form));
+  on(pCC, 'change', (e) => formToUrl({ target: e.target.form }));
 }
 
 function playerLink(el) {

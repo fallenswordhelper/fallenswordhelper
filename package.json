@@ -1,6 +1,6 @@
 {
   "name": "fallenswordhelper",
-  "version": "15.24.64",
+  "version": "15.24.66",
   "description": "Fallen Sword Helper is a Greasemonkey script meant to enhance the experience of playing Fallen Sword, by removing repetitive tasks, presenting more information at a glance, enhancing the social aspect of the game and creating shortcuts to common tasks.",
   "scripts": {
     "prebuild": "npm run test",
@@ -33,21 +33,21 @@
   },
   "homepage": "https://fallenswordhelper.github.io/fallenswordhelper",
   "devDependencies": {
-    "esbuild": "^0.14.10",
-    "esbuild-svelte": "^0.6.0",
-    "eslint": "^8.6.0",
+    "esbuild": "^0.14.19",
+    "esbuild-svelte": "^0.6.2",
+    "eslint": "^8.8.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-svelte3": "^3.2.1",
+    "eslint-plugin-svelte3": "^3.4.0",
     "husky": "^7.0.4",
     "local-web-server": "^5.1.1",
     "tiny-glob": "^0.2.9"
   },
   "dependencies": {
     "css-tooltip": "^0.3.4",
-    "idb-keyval": "^6.0.3",
+    "idb-keyval": "^6.1.0",
     "smart-table-core": "^3.0.7",
     "smart-table-vanilla": "^0.2.0",
-    "svelte": "^3.44.3"
+    "svelte": "^3.46.4"
   }
 }

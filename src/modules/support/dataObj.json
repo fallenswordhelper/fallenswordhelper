@@ -238,5 +238,8 @@
   "showBuffLinks":false,
   "disableDestroyPrompts":false,
   "blockedSkillLists": "[]",
-  "ajaxifyMoveRecipe": false
+  "ajaxifyMoveRecipe": false,
+  "selectST": true,
+  "selectMain": true,
+  "disableQuickExtractPrompts": false
 }

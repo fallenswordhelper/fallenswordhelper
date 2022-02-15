@@ -50,7 +50,7 @@ function addMarketplaceWarning() {
   const price = getPrice();
   if (price) {
     const sellPrice = price.value;
-    if (sellPrice.search(/^[0-9]+$/) !== -1) {
+    if (sellPrice.search(/^\d+$/) !== -1) {
       marketplaceWarning(sellPrice);
     } else { clearWarning(); }
   }

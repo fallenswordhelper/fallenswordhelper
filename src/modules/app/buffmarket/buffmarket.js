@@ -1,5 +1,5 @@
-import callApp from '../callApp';
+import getApp from '../getApp';
 
 export default function buffmarket(data) {
-  return callApp({ cmd: 'buffmarket', ...data });
+  return getApp({ cmd: 'buffmarket', ...data });
 }

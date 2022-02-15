@@ -7,6 +7,7 @@ import getValueJSON from '../../system/getValueJSON';
 import isArray from '../../common/isArray';
 import isChecked from '../../system/isChecked';
 import jsonParse from '../../common/jsonParse';
+import jsonStringify from '../../common/jsonStringify';
 import makePageHeader from './makePageHeader';
 import makePageTemplate from './makePageTemplate';
 import onclick from '../../common/onclick';
@@ -87,7 +88,7 @@ function generateManageTable() { // Legacy
     + '[Add]</span></td></tr></table>'
     + '<table width="100%"><tr><td class="fshCenter">'
     + `<textarea id="fshEd" class="fshEd">${
-      JSON.stringify(param.currentItems)}</textarea></td></tr>`
+      jsonStringify(param.currentItems)}</textarea></td></tr>`
     + '<tr><td class="fshCenter"><input id="fshSave" '
     + 'type="button" value="Save" class="custombutton">'
     + '&nbsp;<input id="fshReset" type="button" value="Reset" '

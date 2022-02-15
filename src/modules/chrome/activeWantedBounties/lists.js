@@ -1,5 +1,4 @@
 import basicBounty from './basicBounty';
-import extend from '../../common/extend';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import getValue from '../../system/getValue';
@@ -20,7 +19,7 @@ function hasActiveBounties(activeTable) {
 }
 
 function bountyData(theCells) {
-  return extend(basicBounty(theCells), { progress: getText(theCells[5]) });
+  return { ...basicBounty(theCells), progress: getText(theCells[5]) };
 }
 
 function getAllBounties(activeTable) {

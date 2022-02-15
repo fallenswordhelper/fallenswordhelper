@@ -1,6 +1,5 @@
-import callApp from '../callApp';
-import extend from '../../common/extend';
+import getApp from '../getApp';
 
 export default function composing(data) {
-  return callApp(extend({ cmd: 'composing' }, data));
+  return getApp({ cmd: 'composing', ...data });
 }

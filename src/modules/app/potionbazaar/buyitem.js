@@ -1,7 +1,7 @@
-import callApp from '../callApp';
+import getApp from '../getApp';
 
 export default function buyitem(item, quantity) {
-  return callApp({
+  return getApp({
     cmd: 'potionbazaar',
     subcmd: 'buyitem',
     item_id: item,

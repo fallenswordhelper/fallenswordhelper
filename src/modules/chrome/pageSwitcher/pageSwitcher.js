@@ -15,6 +15,7 @@ import potionbazaar from './potionbazaar';
 import profile from './profile';
 import questbook from './questbook';
 import quests from './quests';
+import repairall from './repairall';
 import runDefault from '../../common/runDefault';
 import scavenging from './scavenging';
 import toprated from './toprated';
@@ -23,18 +24,18 @@ import ufsgAllowBack from './loader/ufsgAllowBack';
 
 const craftForge = () => { runDefault(import('../../craftForge/craftForge')); };
 const injectBank = () => { runDefault(import('../../bank/injectBank')); };
+const injectBuffmarket = () => { runDefault(import('../../buffmarket/injectBuffmarket')); };
 const injectFindPlayer = () => { runDefault(import('../../injectFindPlayer')); };
 const injectMailbox = () => { runDefault(import('../../mailbox/mailbox')); };
-const quickBuff = () => { runDefault(import('../../quickbuff/quickBuff')); };
-const injectTitan = () => { runDefault(import('../../injectTitan')); };
 const injectSettings = () => { runDefault(import('../../settings/injectSettings')); };
+const injectTitan = () => { runDefault(import('../../injectTitan')); };
 const ladder = () => { runDefault(import('../../ladder/ladder')); };
 const marketplace = () => { runDefault(import('../../marketplace')); };
-const points = () => { runDefault(import('./points')); };
-const superelite = () => { runDefault(import('../../seLog/superelite')); };
-const privateMsg = () => { runDefault(import('../../logs/privateMsg/privateMsg')); };
 const playerLog = () => { runDefault(import('../../logs/playerLog')); };
-const injectBuffmarket = () => { runDefault(import('../../buffmarket/injectBuffmarket')); };
+const points = () => { runDefault(import('./points')); };
+const privateMsg = () => { runDefault(import('../../logs/privateMsg/privateMsg')); };
+const quickBuff = () => { runDefault(import('../../quickbuff/quickBuff')); };
+const superelite = () => { runDefault(import('../../seLog/superelite')); };
 
 export default {
   creatures, // UFSG
@@ -48,6 +49,7 @@ export default {
   arena,
   auctionhouse,
   bank: { '-': { '-': injectBank } },
+  blacksmith: { repairall: { '-': repairall } },
   buffmarket: { '-': { '-': injectBuffmarket } },
   combat: { attackplayer: { '-': injectProfile } },
   composing,
@@ -66,7 +68,7 @@ export default {
   profile,
   pvpladder: { '-': { '-': ladder } },
   questbook,
-  quickbuff: { '-': { '-': quickBuff } }, // No ga
+  quickbuff: { '-': { '-': quickBuff } },
   scavenging,
   settings: { '-': { '-': injectSettings } },
   superelite: { '-': { '-': superelite } },

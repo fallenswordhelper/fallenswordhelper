@@ -1,7 +1,7 @@
 import fallback from '../system/fallback';
 
 function getDoc(doc, context) {
-  if (doc instanceof HTMLDocument) { return doc; }
+  if (doc instanceof Document) { return doc; }
   if (context) { return context.ownerDocument; }
   return document;
 }

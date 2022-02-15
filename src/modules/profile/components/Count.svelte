@@ -1,8 +1,6 @@
 <script>
   import CountRow from './CountRow.svelte';
-  import all from '../../common/all';
   import daComponents from '../../_dataAccess/daComponents';
-  import daProfileLimits from '../../_dataAccess/daProfileLimits';
   import getAsyncData from './getAsyncData';
   import objectToMap from '../../common/objectToMap';
   import uniq from '../../common/uniq';
@@ -21,13 +19,14 @@
 
   async function getComponents() {
     const components = await getAsyncData(daComponents);
-    return rollupComponents(components.r);
+    const rollup = rollupComponents(components.r);
+    return { rollup, maxComp: components.h?.p[56]?.v };
   }
 </script>
 
-{#await all([getComponents(), getAsyncData(daProfileLimits)])}
+{#await getComponents()}
   <div class="compSumSpin"><span class="fshSpinner fshSpinner12"></span></div>
-{:then [rollup, {r: profileLimits}]}
+{:then {rollup, maxComp}}
   <div>
     <table class="fshTblCenter">
       <thead><tr><th colspan="3">Component Summary</th></tr></thead>
@@ -39,7 +38,7 @@
       <tfoot>
         <tr>
           <td>Total:</td>
-          <td colspan="2">{$total} / {profileLimits.max_components}</td>
+          <td colspan="2">{$total} / {maxComp}</td>
         </tr>
       </tfoot>
     </table>

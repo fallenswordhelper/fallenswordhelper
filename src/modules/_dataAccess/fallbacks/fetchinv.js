@@ -11,10 +11,9 @@ function byFolder(items, folder) {
 
 function formatResponse(json) {
   const itemsByFolder = json.folders.map(partial(byFolder, json.items));
-  return { r: itemsByFolder, s: true };
+  return { r: { inventories: itemsByFolder }, s: true };
 }
 
-// TODO out of date
 export default function fetchinv() {
   return backpack().then(formatResponse);
 }

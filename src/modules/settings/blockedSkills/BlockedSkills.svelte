@@ -1,6 +1,6 @@
 <script>
 import getValueJSON from '../../system/getValueJSON';
-import setValue from '../../system/setValue';
+import setValueJSON from '../../system/setValueJSON';
 import {
   checkLoadList,
   checkNewList,
@@ -44,7 +44,7 @@ async function submitChanges() {
 
 function storeBlockedSkillsLists() {
   infoBox('Applying list...');
-  setValue('blockedSkillLists', JSON.stringify(blockedSkillLists));
+  setValueJSON('blockedSkillLists', blockedSkillLists);
 }
 
 function applyList() {

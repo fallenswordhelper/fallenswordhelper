@@ -1,0 +1,14 @@
+.fshQuickLinks {
+  border: 3px solid #ccbb77;
+  border-radius: 5px;
+  box-sizing: content-box;
+  color: black;
+  font-size: 12px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 100px;
+  z-index: 50;
+}
+
+.fshFixed {position: fixed;}

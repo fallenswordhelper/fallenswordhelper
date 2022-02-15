@@ -2,12 +2,12 @@ import entries from './entries';
 import isObject from './isObject';
 import partial from './partial';
 
-function mutate(fn, obj, arr) {
-  if (isObject(arr[1]) && arr[1] !== null) {
-    fn(obj[arr[0]], arr[1]);
+function mutate(fn, obj, [key, value]) {
+  if (isObject(value) && value !== null) {
+    fn(obj[key], value);
   } else {
-    // eslint-disable-next-line prefer-destructuring, no-param-reassign
-    obj[arr[0]] = arr[1];
+    // eslint-disable-next-line no-param-reassign
+    obj[key] = value;
   }
 }
 

@@ -2,6 +2,7 @@ import bitwiseAnd from '../../../common/bitwiseAnd';
 import calf from '../../../support/calf';
 import { defFetchWorldRealmActions } from '../../../support/constants';
 import jsonParse from '../../../common/jsonParse';
+import jsonStringify from '../../../common/jsonStringify';
 import partial from '../../../common/partial';
 
 function noAction(myData) {
@@ -25,7 +26,7 @@ function xhrDataFilter(data) {
   myData.actions = myData.actions.filter(
     partial(subLvlMobs, getLvlToTest(myData)),
   );
-  return JSON.stringify(myData);
+  return jsonStringify(myData);
 }
 
 function isActionList(originalOptions) {

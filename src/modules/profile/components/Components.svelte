@@ -2,7 +2,6 @@
   import Count from './Count.svelte';
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import { createEventDispatcher } from 'svelte';
-  import jQueryDialog from '../../chrome/jQueryDialog/jQueryDialog';
   import quickExtract from '../../chrome/pageSwitcher/loader/quickExtract';
   import sendEvent from '../../analytics/sendEvent';
 
@@ -24,7 +23,7 @@
 
   function insertQuickExtract() {
     sendEvent('components', 'insertQuickExtract');
-    jQueryDialog(quickExtract);
+    quickExtract();
   }
 
   function deleteAllVisible() {

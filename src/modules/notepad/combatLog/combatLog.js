@@ -3,6 +3,7 @@ import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElementById';
 import jConfirm from '../../common/jConfirm';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
+import jsonStringify from '../../common/jsonStringify';
 import onclick from '../../common/onclick';
 import { pCC } from '../../support/layout';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -30,7 +31,7 @@ function gotCombatLog(content, data) {
   if (data) { combatLogs = data; }
   setInnerHtml('<h1>Combat Logs</h1><br><div align="center">'
     + '<textarea class="fshCombatLog" readonly id="combatLog" '
-    + `name="logs">${JSON.stringify(combatLogs)}</textarea>`
+    + `name="logs">${jsonStringify(combatLogs)}</textarea>`
     + '<br><br><table width="100%"><tr><td colspan="2" align=center>'
     + '<input type="button" class="custombutton" value="Select All" id="copyLog">'
     + '</td><td colspan="2" align=center>'

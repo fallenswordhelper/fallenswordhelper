@@ -1,6 +1,5 @@
-import callApp from '../callApp';
-import extend from '../../common/extend';
+import getApp from '../getApp';
 
 export default function inventing(data) {
-  return callApp(extend({ cmd: 'inventing' }, data));
+  return getApp({ cmd: 'inventing', ...data });
 }

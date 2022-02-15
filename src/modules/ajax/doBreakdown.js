@@ -1,8 +1,7 @@
-import indexAjax from './indexAjax';
+import indexAjaxPost from './indexAjaxPost';
 
 export default function doBreakdown(selectedList) {
-  return indexAjax({
-    type: 'POST',
+  return indexAjaxPost({
     data: {
       cmd: 'composing',
       subcmd: 'dobreakdown',

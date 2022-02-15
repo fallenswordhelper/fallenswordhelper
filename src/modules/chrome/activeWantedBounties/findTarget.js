@@ -1,6 +1,5 @@
 import basicBounty from './basicBounty';
 import calf from '../../support/calf';
-import extend from '../../common/extend';
 import getTextTrim from '../../common/getTextTrim';
 import { wantedArray, wantedList } from './lists';
 
@@ -13,11 +12,12 @@ function acceptBtn(theCells) {
 }
 
 function getTarget(theCells) {
-  return extend(basicBounty(theCells), {
+  return {
+    ...basicBounty(theCells),
     offerer: getTextTrim(theCells[1].children[0].children[0]),
     tickets: getTextTrim(theCells[5]),
     accept: acceptBtn(theCells),
-  });
+  };
 }
 
 const isWanted = [

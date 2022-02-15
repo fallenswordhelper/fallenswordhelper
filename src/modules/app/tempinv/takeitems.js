@@ -1,7 +1,7 @@
-import callApp from '../callApp';
+import getApp from '../getApp';
 
 export default function takeitems(invIdAry) {
-  return callApp({
+  return getApp({
     cmd: 'tempinv',
     subcmd: 'takeitems',
     item: invIdAry,
