@@ -13,6 +13,10 @@ function parseFormattedInt(str) {
   return parseInt(str.replace(/,/g, ''), 10);
 }
 
+function formatInt(i) {
+  return i.toLocaleString('En-US');
+}
+
 function toggleSubmit(b) {
   const depositButton = querySelector('input[value="Deposit"]');
   const withdrawButton = querySelector('input[value="Withdraw"]');
@@ -43,27 +47,40 @@ function showError(message) {
   });
 }
 
-function updateBankDetails(amountChange) {
+function getBankDetails() {
   const fields = querySelectorArray('#pCC td > b');
   const wallet = querySelector('#statbar-gold');
+  return {
+    balance: parseFormattedInt(fields[0].textContent),
+    deposits: parseInt(fields[1].textContent, 10),
+    wallet: parseFormattedInt(wallet.textContent),
+  };
+}
 
-  const oldBalance = parseFormattedInt(fields[0].textContent);
-  const newBalance = oldBalance + amountChange;
-  const oldWalletBalance = parseFormattedInt(wallet.textContent);
-  const newWalletBalance = oldWalletBalance - amountChange;
-  const newMaxDeposit = Math.ceil(newWalletBalance / 4);
-  // Wallet
-  wallet.textContent = newWalletBalance.toLocaleString('en-US');
-  // Balance
-  fields[0].textContent = newBalance.toLocaleString('en-US');
-  // Deposits
-  if (amountChange > 0) {
-    fields[1].textContent = parseInt(fields[1].textContent, 10) - 1;
-  }
-  // Max Deposit
-  fields[4].textContent = newMaxDeposit.toLocaleString('en-US');
+function setBankDetails(balance, deposits, cash) {
+  const fields = querySelectorArray('#pCC td > b');
+  const wallet = querySelector('#statbar-gold');
+  const newMaxDeposit = Math.ceil(cash / 4);
 
-  updateInputs(newMaxDeposit, newBalance);
+  wallet.textContent = formatInt(cash);
+  fields[0].textContent = formatInt(balance);
+  fields[1].textContent = deposits;
+  fields[4].textContent = formatInt(newMaxDeposit);
+
+  updateInputs(newMaxDeposit, balance);
+}
+
+function updateBankDetails(amountChange) {
+  const bank = getBankDetails();
+
+  const newBalance = bank.balance + amountChange;
+  const newWalletBalance = bank.wallet - amountChange;
+
+  setBankDetails(
+    newBalance,
+    bank.deposits - (amountChange > 0),
+    newWalletBalance,
+  );
 }
 
 function handleResponse(response, amount) {
