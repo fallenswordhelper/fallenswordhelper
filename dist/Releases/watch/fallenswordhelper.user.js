@@ -12,7 +12,7 @@
 // @exclude        https://www.fallensword.com/app.php*
 // @exclude        https://www.fallensword.com/fetchdata.php*
 // @version        1524a
-// @downloadURL    http://localhost:9966/dist/Releases/watch/fallenswordhelper.user.js
+// @downloadURL    https://localhost:9966/dist/Releases/watch/fallenswordhelper.user.js
 // @grant          none
 // @run-at         document-body
 // ==/UserScript==
@@ -21,7 +21,7 @@
 
 // EVERYTHING MUST BE IN main()
 function fshMain(gmInfo) {
-  import('http://localhost:9966/dist/resources/watch/1524/calfSystem.js')
+  import('https://localhost:9966/dist/resources/watch/1524/calfSystem.js')
     .then((m) => m.default('1524a', gmInfo));
 } // end of var main
 

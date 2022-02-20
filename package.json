@@ -15,7 +15,7 @@
     "silence": "npm config set loglevel silent",
     "sourcemapPathTransform": "node scripts/sourcemapPathTransform.js",
     "test": "npm run eslint",
-    "watch": "node scripts/esserve.js",
+    "watch": "node scripts/esserve.mjs",
     "ws": "ws"
   },
   "repository": {

@@ -1,6 +1,6 @@
 .vscode
 node_modules
 .eslintcache
-cert.crt
+cert.pem
 key.pem
 Notes.txt
