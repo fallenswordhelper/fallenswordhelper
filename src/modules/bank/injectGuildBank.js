@@ -1,17 +1,9 @@
-import ajaxifyBank from './ajaxifyBank';
+import daGuildBankDeposit from '../_dataAccess/daGuildBankDeposit';
+import daGuildBankWithdraw from '../_dataAccess/daGuildBankWithdraw';
+import on from '../common/on';
+import submitBank from './submitBank';
 
 export default function injectGuildBank() {
-  ajaxifyBank({
-    headSelector: '#pCC b',
-    headText: 'Guild Bank',
-    appLink: false,
-    depoPos: 3,
-    balPos: 2,
-    data: {
-      cmd: 'guild',
-      subcmd: 'bank',
-      subcmd2: 'transaction',
-    },
-    initWithdraw: '1',
-  });
+  on(document.forms.depositForm, 'submit', submitBank(daGuildBankDeposit));
+  on(document.forms.withdrawForm, 'submit', submitBank(daGuildBankWithdraw));
 }
