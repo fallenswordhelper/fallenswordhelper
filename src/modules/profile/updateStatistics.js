@@ -17,6 +17,9 @@ function removeStatTable(el) {
 }
 
 export default function updateStatistics() {
-  const charStats = getElementsByTagName(defTable, getElementById('profileLeftColumn'))[0];
-  getArrayByTagName(defTable, charStats).forEach(removeStatTable);
+  const pLC = getElementById('profileLeftColumn');
+  if (pLC) {
+    const charStats = getElementsByTagName(defTable, pLC)[0];
+    getArrayByTagName(defTable, charStats).forEach(removeStatTable);
+  }
 }
