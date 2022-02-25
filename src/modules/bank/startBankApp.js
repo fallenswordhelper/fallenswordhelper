@@ -20,12 +20,13 @@ function updateWallet(amount) {
 }
 
 function getBankDetails() {
-  const fields = querySelectorArray('#pCC td:first-child table b');
+  const fields = querySelectorArray('#pCC td:first-child table b')
+    .map((f) => getText(f));
   const walletNode = getElementById('statbar-gold');
   return {
-    balance: intValue(getText(fields[0])),
-    deposits: Number(getText(fields[1])),
-    maxDeposits: Number(getText(fields[2])),
+    balance: intValue(fields[0]),
+    deposits: Number(fields[1]),
+    maxDeposits: Number(fields[2]),
     wallet: intValue(getText(walletNode)),
   };
 }
