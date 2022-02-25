@@ -1,9 +1,6 @@
-import daGuildBankDeposit from '../_dataAccess/daGuildBankDeposit';
-import daGuildBankWithdraw from '../_dataAccess/daGuildBankWithdraw';
-import on from '../common/on';
-import submitBank from './submitBank';
+import daGuildBankTransaction from '../_dataAccess/daGuildBankTransaction';
+import startBankApp from './startBankApp';
 
 export default function injectGuildBank() {
-  on(document.forms.depositForm, 'submit', submitBank(daGuildBankDeposit));
-  on(document.forms.withdrawForm, 'submit', submitBank(daGuildBankWithdraw));
+  startBankApp(daGuildBankTransaction);
 }

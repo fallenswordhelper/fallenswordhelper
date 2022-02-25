@@ -1,9 +1,6 @@
-import daBankDeposit from '../_dataAccess/daBankDeposit';
-import daBankWithdraw from '../_dataAccess/daBankWithdraw';
-import on from '../common/on';
-import submitBank from './submitBank';
+import daBankTransaction from '../_dataAccess/daBankTransaction';
+import startBankApp from './startBankApp';
 
 export default function injectBank() {
-  on(document.forms.depositForm, 'submit', submitBank(daBankDeposit));
-  on(document.forms.withdrawForm, 'submit', submitBank(daBankWithdraw));
+  startBankApp(daBankTransaction);
 }
