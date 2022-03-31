@@ -41,7 +41,7 @@ function parseRankData(memberRanks, row) {
   if (thisRank) {
     insertHtmlAfterBegin(rankCell, `<span class="fshBlue">(${
       calcPermWeight(thisRank.permissions)
-    }) Tax:(${thisRank.tax}%)</span> `);
+    }) Tax:(${thisRank.tax || 0}%)</span> `);
   }
 }
 
