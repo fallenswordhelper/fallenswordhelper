@@ -35,7 +35,7 @@ const calcPermWeight = (perms) => roundToString(getWeighted(perms) + addBits(per
 
 function parseRankData(memberRanks, row) {
   // Makes a weighted calculation of available permissions and gets tax rate
-  const rankCell = row.children[0];
+  const [rankCell] = row.children;
   const rankName = getText(rankCell.firstChild); // Text Node
   const thisRank = memberRanks.find((r) => r && r.name === rankName);
   if (thisRank) {
