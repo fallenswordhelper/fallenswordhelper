@@ -3,5 +3,5 @@ import appTopRated from '../app/toprated';
 import toprated from './fallbacks/toprated';
 
 export default function daTopRated(subcmd) {
-  return $dataAccess(appTopRated, toprated, subcmd);
+  return $dataAccess(toprated, appTopRated, subcmd);
 }
