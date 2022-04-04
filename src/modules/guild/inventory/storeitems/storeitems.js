@@ -1,46 +1,19 @@
 import CheckAll from './CheckAll.svelte';
-import FolderFilter from './FolderFilter.svelte';
 import arrayFrom from '../../../common/arrayFrom';
-import batch from '../../../common/batch';
-import closestTr from '../../../common/closestTr';
-import getCheckboxesArray from './getCheckboxesArray';
+import doFolderFilter from './doFolderFilter';
+import doMoveItems from './doMoveItems';
 import getCheckboxesVisible from './getCheckboxesVisible';
 import getInv from './getInv';
 import getValue from '../../../system/getValue';
 import injectStoreItems from './injectStoreItems';
 import jQueryPresent from '../../../common/jQueryPresent';
-import partial from '../../../common/partial';
-import toggleForce from '../../../common/toggleForce';
-
-function updateList(inv, id, ctx) {
-  ctx.checked = false;
-  const tr = closestTr(ctx);
-  const folder = inv.items[ctx.value].folder_id;
-  const force = id !== -2 && id !== folder;
-  toggleForce(tr, force);
-  toggleForce(tr.nextElementSibling, force);
-}
-
-function doFilter(inv, e) {
-  batch([
-    5,
-    3,
-    getCheckboxesArray(),
-    0,
-    partial(updateList, inv, Number(e.detail)),
-  ]);
-}
 
 async function doFolders() {
   const inv = await getInv();
   if (!inv || !inv.folders) { return; }
   const form = document.forms[0];
-  const folderFilter = new FolderFilter({
-    anchor: form,
-    props: { inv },
-    target: form.parentNode,
-  });
-  folderFilter.$on('filter', partial(doFilter, inv));
+  doFolderFilter(inv, form);
+  doMoveItems(inv, form);
 }
 
 function doCheckAll() {

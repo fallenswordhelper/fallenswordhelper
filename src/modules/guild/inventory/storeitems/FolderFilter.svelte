@@ -17,6 +17,7 @@
   td {
     --button-color: black;
     --button-margin: auto 3px;
+    padding: 2px 0;
   }
 </style>
 

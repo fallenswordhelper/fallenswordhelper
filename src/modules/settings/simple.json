@@ -450,7 +450,7 @@
   },
   "enableFolderFilter":{
     "helpTitle":"Enable Folder Filter",
-    "helpText":"This adds folder filtering to the Store Items page.",
+    "helpText":"This adds folder filtering to the Store Items page, including moving tagged items between folders",
     "network":true
   },
   "privateMsgButtons":{
