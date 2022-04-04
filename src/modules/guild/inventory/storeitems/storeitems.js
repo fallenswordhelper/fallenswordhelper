@@ -11,7 +11,7 @@ import jQueryPresent from '../../../common/jQueryPresent';
 async function doFolders() {
   const inv = await getInv();
   if (!inv || !inv.folders) { return; }
-  const form = document.forms[0];
+  const [form] = document.forms;
   doFolderFilter(inv, form);
   doMoveItems(inv, form);
 }
@@ -22,7 +22,8 @@ function doCheckAll() {
 }
 
 function addCheckAll() {
-  const submitButton = arrayFrom(document.forms[0].elements).filter((e) => e.type === 'submit')[0];
+  const [thisForm] = document.forms;
+  const submitButton = arrayFrom(thisForm.elements).filter((e) => e.type === 'submit')[0];
   const checkAll = new CheckAll({
     anchor: submitButton,
     target: submitButton.parentNode,

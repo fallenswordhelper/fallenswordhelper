@@ -11,7 +11,7 @@ import removeRow from './removeRow';
 import sendEvent from '../../analytics/sendEvent';
 
 const folderMap = (i) => ({
-  id: i.parentNode.href.match(/&folder_id=(-?\d+)/i)[1],
+  id: i.parentNode.href.match(/&folder_id=(?<fid>-?\d+)/i).groups.fid,
   name: getText(i.parentNode.parentNode),
 });
 
