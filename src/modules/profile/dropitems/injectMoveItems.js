@@ -10,9 +10,8 @@ import querySelectorArray from '../../common/querySelectorArray';
 import removeRow from './removeRow';
 import sendEvent from '../../analytics/sendEvent';
 
-const getFolder = (href) => href.match(/&folder_id=(?<fid>-?\d+)/i);
 const folderMap = (i) => ({
-  id: getFolder(i.parentNode.href).groups.fid,
+  id: /&folder_id=(-?\d+)/i.exec(i.parentNode.href)[0],
   name: getText(i.parentNode.parentNode),
 });
 
