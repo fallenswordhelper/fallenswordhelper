@@ -8,8 +8,8 @@ import {
 } from './guildTracker/indexConstants';
 import { get, set } from '../system/idb';
 
-let oldArchive;
-let guild;
+let oldArchive = 0;
+let guild = 0;
 
 function pushNewRecord(member) {
   oldArchive.members[member.name].push([
