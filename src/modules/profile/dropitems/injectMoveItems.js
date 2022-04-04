@@ -4,6 +4,7 @@ import closestTable from '../../common/closestTable';
 import closestTr from '../../common/closestTr';
 import daSendToFolder from '../../_dataAccess/daSendToFolder';
 import getCheckedItems from './getCheckedItems';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 import getText from '../../common/getText';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
@@ -11,7 +12,7 @@ import removeRow from './removeRow';
 import sendEvent from '../../analytics/sendEvent';
 
 const folderMap = (i) => ({
-  id: /&folder_id=(-?\d+)/i.exec(i.parentNode.href)[0],
+  id: getCustomUrlParameter(i.parentNode.href, 'folder_id'),
   name: getText(i.parentNode.parentNode),
 });
 
