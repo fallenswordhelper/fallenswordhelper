@@ -1,8 +1,8 @@
-import daRanksView from '../_dataAccess/daRanksView';
 import fallback from '../system/fallback';
 import lastActivityToDays from '../common/lastActivityToDays';
 import { nowSecs } from '../support/now';
 import partial from '../common/partial';
+import ranksView from '../_dataAccess/fallbacks/ranksView';
 import {
   act, cur, gxp, lvl, max, utc, vl,
 } from './guildTracker/indexConstants';
@@ -95,17 +95,19 @@ function gotGuild(data) {
   }
 }
 
-function gotActivity(data) { // jQuery.min
+async function gotActivity(data) { // jQuery.min
   if (data) {
     oldArchive = data;
   } else {
     oldArchive = { lastUpdate: 0, members: {} };
   }
   if (nowSecs > fallback(oldArchive.lastUpdate, 0) + 300) { // 5 mins - probably want to increase
-    daRanksView().then(gotGuild);
+    const json = await ranksView();
+    gotGuild(json);
   }
 }
 
-export default function guildActivity() { // jQuery.min
-  get('fsh_guildActivity').then(gotActivity);
+export default async function guildActivity() { // jQuery.mins
+  const data = await get('fsh_guildActivity');
+  gotActivity(data);
 }
