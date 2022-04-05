@@ -96,11 +96,7 @@ function gotGuild(data) {
 }
 
 async function gotActivity(data) { // jQuery.min
-  if (data) {
-    oldArchive = data;
-  } else {
-    oldArchive = { lastUpdate: 0, members: {} };
-  }
+  oldArchive = data ?? { lastUpdate: 0, members: {} };
   if (nowSecs > fallback(oldArchive.lastUpdate, 0) + 300) { // 5 mins - probably want to increase
     const json = await ranksView();
     gotGuild(json);
