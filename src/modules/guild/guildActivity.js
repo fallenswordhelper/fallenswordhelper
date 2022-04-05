@@ -9,7 +9,6 @@ import {
 import { get, set } from '../system/idb';
 
 let oldArchive = 0;
-let guild = 0;
 
 function pushNewRecord(member) {
   oldArchive.members[member.name].push([
@@ -82,16 +81,15 @@ function processRank(newArchive, rank) {
   rank.members.forEach(partial(processMemberRecord, newArchive));
 }
 
-function doMerge() { // jQuery.min
+function doMerge(guild) { // jQuery.min
   const newArchive = { lastUpdate: nowSecs, members: {} };
   guild.r.forEach(partial(processRank, newArchive));
   set('fsh_guildActivity', newArchive);
 }
 
 function gotGuild(data) {
-  if (data && data.r) {
-    guild = data;
-    doMerge();
+  if (data?.r) {
+    doMerge(data);
   }
 }
 
