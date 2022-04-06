@@ -12,8 +12,8 @@ import quickbuffSuccess from '../../../common/quickbuffSuccess';
 import setText from '../../../dom/setText';
 import toggleForce from '../../../common/toggleForce';
 
-let impDiv;
-let impRemainingSpan;
+let impDiv = 0;
+let impRemainingSpan = 0;
 
 function refreshBuffs(json) {
   if (quickbuffSuccess(json)) {
