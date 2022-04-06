@@ -7,8 +7,12 @@
   font-weight: bold;
 }
 .cR .xSmallLink {
+  background: transparent;
+  border: none;
+  color: darkgreen;
   cursor: pointer;
-  text-decoration: underline;
-  color: blue;
   font-size: xx-small;
+  padding: 0;
+  text-decoration: underline;
+  user-select: text;
 }
