@@ -1,10 +1,8 @@
 import './potReport.css';
 import createDiv from '../../../../common/cElement/createDiv';
 import deepClone from '../../../../common/deepClone';
-import entries from '../../../../common/entries';
 import eventHandler5 from '../../../../common/eventHandler5';
 import fallback from '../../../../system/fallback';
-import fromEntries from '../../../../common/fromEntries';
 import insertElement from '../../../../common/insertElement';
 import isChecked from '../../../../system/isChecked';
 import keys from '../../../../common/keys';
@@ -34,18 +32,9 @@ function update(potOpts, pot) {
   if (!potOpts.myMap[pot]) { potOpts.myMap[pot] = pot; }
 }
 
-function cleanMap(myMap, potObj) {
-  return fromEntries(
-    entries(myMap)
-      .map(([key, value]) => [key, value, potObj[key]])
-      .filter(([, value, count]) => value !== 'Ignore' || count)
-      .map(([key, value]) => [key, value]),
-  );
-}
-
 function buildMap(potOpts, potObj) {
   keys(potObj).forEach(partial(update, potOpts));
-  return sortKeys(cleanMap(potOpts.myMap, potObj));
+  return sortKeys(potOpts.myMap);
 }
 
 function createContainer(potOpts) {
