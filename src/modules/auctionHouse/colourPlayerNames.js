@@ -25,7 +25,7 @@ async function doColours() {
 
 export default async function colourPlayerNames() {
   await doColours();
-  $(document).ajaxSuccess((e, jqXHR, options) => {
+  $(document).ajaxSuccess((_e, _jqXHR, options) => {
     if (options.url.endsWith('=ajaxsearch')) {
       doColours();
     }
