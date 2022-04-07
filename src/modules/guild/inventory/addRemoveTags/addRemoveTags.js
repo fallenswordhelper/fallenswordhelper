@@ -1,52 +1,18 @@
-import { cdn } from '../../../system/system';
-import clickThis from '../../../common/clickThis';
+import clickHandler from './clickHandler';
 import createInput from '../../../common/cElement/createInput';
-import daGsTake from '../../../_dataAccess/daGsTake';
 import getElementById from '../../../common/getElementById';
 import getElementsByTagName from '../../../common/getElementsByTagName';
 import injectGuild from '../../../chrome/pageSwitcher/loader/injectGuild';
 import insertElement from '../../../common/insertElement';
 import insertHtmlBeforeEnd from '../../../common/insertHtmlBeforeEnd';
+import interceptSubmit from './interceptSubmit';
 import onclick from '../../../common/onclick';
 import { pCC } from '../../../support/layout';
-import partial from '../../../common/partial';
 import querySelectorArray from '../../../common/querySelectorArray';
-import setText from '../../../dom/setText';
 
 function doItemTable(checkbox) {
   insertHtmlBeforeEnd(checkbox.parentNode.nextElementSibling
     .nextElementSibling, '&nbsp;<span class="sendLink">Fast BP</span>');
-}
-
-function doCheckAll() {
-  querySelectorArray('#pCC input[name="tagIndex[]"]').forEach(clickThis);
-}
-
-function takeResult(target, data) {
-  if (data.s) {
-    target.removeAttribute('style');
-    // eslint-disable-next-line no-param-reassign
-    target.className = 'fshGreen';
-    setText('Taken', target);
-  }
-}
-
-function fastBp(el) {
-  const itmId = el.parentNode.previousElementSibling.previousElementSibling
-    .children[0].value;
-  daGsTake(itmId).then(partial(takeResult, el));
-  setText('', el);
-  // eslint-disable-next-line no-param-reassign
-  el.className = 'guildTagSpinner';
-  // eslint-disable-next-line no-param-reassign
-  el.style.backgroundImage = `url('${cdn
-  }ui/misc/spinner.gif')`;
-}
-
-function evtHdlr(e) {
-  const { target } = e;
-  if (target.value === 'Check All') { doCheckAll(); }
-  if (target.className === 'sendLink') { fastBp(target); }
 }
 
 function paintTable() {
@@ -62,9 +28,10 @@ function checkAllBtn() {
 }
 
 function doItemTagging() {
-  onclick(pCC, evtHdlr);
+  onclick(pCC, clickHandler);
   paintTable();
   checkAllBtn();
+  interceptSubmit();
 }
 
 export default function addRemoveTags() {
