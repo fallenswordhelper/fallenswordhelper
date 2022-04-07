@@ -81,7 +81,7 @@ const subClass = [
 function doFastRecall(target) {
   const theTd = target.parentNode.parentNode;
   if (!theTd) { return; }
-  const { href } = theTd.children[0];
+  const [{ href }] = theTd.children;
   if (!href) { return; }
   subClass.find(partial(classPair, target))[1](theTd, href);
   setInnerHtml(spinner, theTd);
