@@ -1,17 +1,17 @@
-import { cdn } from '../../system/system';
-import clickThis from '../../common/clickThis';
-import createInput from '../../common/cElement/createInput';
-import daGsTake from '../../_dataAccess/daGsTake';
-import getElementById from '../../common/getElementById';
-import getElementsByTagName from '../../common/getElementsByTagName';
-import injectGuild from '../../chrome/pageSwitcher/loader/injectGuild';
-import insertElement from '../../common/insertElement';
-import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
-import partial from '../../common/partial';
-import querySelectorArray from '../../common/querySelectorArray';
-import setText from '../../dom/setText';
+import { cdn } from '../../../system/system';
+import clickThis from '../../../common/clickThis';
+import createInput from '../../../common/cElement/createInput';
+import daGsTake from '../../../_dataAccess/daGsTake';
+import getElementById from '../../../common/getElementById';
+import getElementsByTagName from '../../../common/getElementsByTagName';
+import injectGuild from '../../../chrome/pageSwitcher/loader/injectGuild';
+import insertElement from '../../../common/insertElement';
+import insertHtmlBeforeEnd from '../../../common/insertHtmlBeforeEnd';
+import onclick from '../../../common/onclick';
+import { pCC } from '../../../support/layout';
+import partial from '../../../common/partial';
+import querySelectorArray from '../../../common/querySelectorArray';
+import setText from '../../../dom/setText';
 
 function doItemTable(checkbox) {
   insertHtmlBeforeEnd(checkbox.parentNode.nextElementSibling
@@ -67,7 +67,7 @@ function doItemTagging() {
   checkAllBtn();
 }
 
-export default function injectGuildAddTagsWidgets() {
+export default function addRemoveTags() {
   if (getElementById('tagging_cost')) {
     doItemTagging();
   } else {
