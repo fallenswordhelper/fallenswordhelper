@@ -16,7 +16,7 @@ const lookup = {
 async function doColours() {
   const playerLinks = getPlayerLinks();
   if (!playerLinks.length) { return; }
-  const playerTags = await getPlayerTags();
+  const playerTags = await getPlayerTags(playerLinks);
   if (!playerTags.length) { return; }
   playerTags.forEach(([a, type]) => {
     a.classList.add(lookup[type]);
