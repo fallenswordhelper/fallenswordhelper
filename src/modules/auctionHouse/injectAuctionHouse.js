@@ -5,6 +5,7 @@ import colourPlayerNames from './colourPlayerNames';
 import createSpan from '../common/cElement/createSpan';
 import doStatTotal from '../profile/doStatTotal';
 import getArrayByClassName from '../common/getArrayByClassName';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getElementById from '../common/getElementById';
 import getValue from '../system/getValue';
 import indexAjaxData from '../ajax/indexAjaxData';
@@ -18,15 +19,14 @@ function doRefresh() {
   clickThis(getElementById('refresh'));
 }
 
-function doCancel(cancelButton) { // jQuery.min
-  const itemImage = cancelButton.parentNode.parentNode.children[0].children[0];
-  // eslint-disable-next-line no-param-reassign
-  cancelButton.outerHTML = `<img src="${
+function doCancel(ctx) {
+  const [itemImage] = ctx.parentNode.parentNode.children[0].children;
+  ctx.outerHTML = `<img src="${
     cdn}ui/misc/spinner.gif" width="14" height="14">`;
   return indexAjaxData({
     cmd: 'auctionhouse',
     subcmd: 'cancel',
-    auction_id: /inv_id=(\d+)/.exec(itemImage.dataset.tipped)[1],
+    auction_id: getCustomUrlParameter(itemImage.dataset.tipped, 'inv_id'),
   });
 }
 
@@ -44,7 +44,7 @@ function makeCancelAll() {
     className: 'smallLink',
     textContent: 'Cancel All',
   });
-  const spacer = fill.parentNode.parentNode.nextElementSibling.children[0];
+  const [spacer] = fill.parentNode.parentNode.nextElementSibling.children;
   spacer.classList.add('fshCenter');
   insertHtmlAfterBegin(spacer, ']');
   insertElementAfterBegin(spacer, cancelAllSpan);

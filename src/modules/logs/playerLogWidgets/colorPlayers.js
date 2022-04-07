@@ -8,7 +8,7 @@ import querySelectorArray from '../../common/querySelectorArray';
 import relatePlayer from './relatePlayer';
 
 function doMsgHeader(logTable, privMsg) {
-  const messageHeader = logTable.rows[0].cells[2];
+  const [, , messageHeader] = logTable.rows[0].cells;
   if (messageHeader && !privMsg) {
     insertHtmlBeforeEnd(messageHeader, '&nbsp;&nbsp;'
       + '<span class="fshWhite">(Guild mates show up in '
