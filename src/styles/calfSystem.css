@@ -369,13 +369,6 @@
 .lvlHighlight {background-color: #4671C8;}
 .lvlGvGHighlight {background-color: #FF9900;}
 
-.fshInvFilter {
-  width: 100%;
-}
-.fshInvFilter th {
-  background-color: #cd9e4b;
-}
-
 #fshInv_filter input {width: 200px}
 
 .fshNumberInput {width: 4em;}

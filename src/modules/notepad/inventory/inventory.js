@@ -1,3 +1,4 @@
+import './inventory.css';
 import allthen from '../../common/allthen';
 import { buildInv } from './buildInv';
 import calf from '../../support/calf';
