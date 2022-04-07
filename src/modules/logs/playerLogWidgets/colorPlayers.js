@@ -1,13 +1,11 @@
 import closestTr from '../../common/closestTr';
 import createStyle from '../../common/cElement/createStyle';
 import entries from '../../common/entries';
-import getTextTrim from '../../common/getTextTrim';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import isGuildMate from './isGuildMate';
 import { playerLinkSelector } from '../../support/constants';
 import querySelectorArray from '../../common/querySelectorArray';
-import { isAlly, isEnemy } from './isAllyEnemy';
+import relatePlayer from './relatePlayer';
 
 function doMsgHeader(logTable, privMsg) {
   const messageHeader = logTable.rows[0].cells[2];
@@ -19,20 +17,7 @@ function doMsgHeader(logTable, privMsg) {
 }
 
 async function playerType(a) {
-  let type = '';
-  const playerName = getTextTrim(a);
-  const [guildMate, ally, enemy] = await Promise.all([
-    isGuildMate(playerName),
-    isAlly(playerName),
-    isEnemy(playerName),
-  ]);
-  if (guildMate) {
-    type = 'guild';
-  } else if (ally) {
-    type = 'ally';
-  } else if (enemy) {
-    type = 'enemy';
-  }
+  const [, type] = await relatePlayer(a);
   return [
     `.fshPlayerColoring tr:nth-of-type(${closestTr(a).rowIndex + 1})`
       + ' td:nth-of-type(3) > a:first-of-type',

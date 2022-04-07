@@ -1,6 +1,7 @@
 import allthen from '../common/allthen';
 import { cdn } from '../system/system';
 import clickThis from '../common/clickThis';
+import colourPlayerNames from './colourPlayerNames';
 import createSpan from '../common/cElement/createSpan';
 import doStatTotal from '../profile/doStatTotal';
 import getArrayByClassName from '../common/getArrayByClassName';
@@ -62,4 +63,5 @@ export default function injectAuctionHouse() {
   makeCancelAll();
   autoFill();
   doStatTotal();
+  colourPlayerNames();
 }
