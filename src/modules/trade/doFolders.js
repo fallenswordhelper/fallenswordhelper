@@ -21,7 +21,11 @@ import sendEvent from '../analytics/sendEvent';
 import task from '../support/task';
 import { time, timeEnd } from '../support/debug';
 
-let invItems;
+const shouldShow = (hidden, all, hasFolder) => hidden && fallback(all, hasFolder);
+const shouldHide = (hidden, all, hasFolder) => !hidden && !all && !hasFolder;
+const stColor = (el, item) => { if (item.is_in_st) el.classList.add('isInST'); };
+
+let invItems = {};
 
 function getItemDiv() {
   let itemDiv = getElementById('item-div');
@@ -36,14 +40,6 @@ function getItemDiv() {
     insertElementBefore(itemDiv, itemList);
   }
   return itemDiv;
-}
-
-function shouldShow(hidden, all, hasFolder) {
-  return hidden && fallback(all, hasFolder);
-}
-
-function shouldHide(hidden, all, hasFolder) {
-  return !hidden && !all && !hasFolder;
 }
 
 function hideFolderItem(folderid, el) {
@@ -74,9 +70,8 @@ function hideFolder(evt) {
 }
 
 function folderSpan(pair) {
-  return ` &ensp;<span id="folderid${pair[0]
-  }" class="fshLink fshNoWrap" fid=${pair[0]}>${
-    pair[1]}</span> `;
+  return ` &ensp;<span id="folderid${pair[0]}" class="fshLink fshNoWrap" fid=${
+    pair[0]}>${pair[1]}</span> `;
 }
 
 function doFolderHeaders(folders) {
@@ -96,24 +91,19 @@ function doFolderHeaders(folders) {
   insertElementBefore(foldersRow, el);
 }
 
-function stColor(el, item) {
-  if (item.is_in_st) {
-    el.classList.add('isInST');
-  }
+function tagItem(el, checkbox, item) {
+  el.classList.add(`folderid${item.folder_id}`);
+  if (invItems.fshHasST) stColor(el, item);
+  checkbox.classList.add(`itemid${item.item_id}`);
+  checkbox.classList.add(`itemtype${item.type}`);
+  if (item.guild_tag !== -1) checkbox.classList.add('isGuildTagged');
 }
 
 function forEachInvItem(el) {
-  const cell = el.children[0]?.lastElementChild.children[0];
-  if (!cell) { return; }
-  const checkbox = cell.children[0];
+  const checkbox = el.children[0]?.lastElementChild.children[0]?.children[0];
   if (!checkbox) { return; }
-  const item = invItems[checkbox.getAttribute('value')];
-  if (item) {
-    el.classList.add(`folderid${item.folder_id}`);
-    if (invItems.fshHasST) { stColor(el, item); }
-    checkbox.classList.add(`itemid${item.item_id}`);
-    checkbox.classList.add(`itemtype${item.type}`);
-  }
+  const item = invItems[checkbox.value];
+  if (item) tagItem(el, checkbox, item);
 }
 
 function processTrade(data) {
@@ -131,11 +121,8 @@ function processTrade(data) {
   }
 }
 
-function gotInventory(data) {
-  task(3, processTrade, [data]);
-}
-
-export default function doFolders() { // jQuery.min
+export default async function doFolders() {
   if (jQueryNotPresent()) { return; }
-  getInventoryById().then(gotInventory);
+  const data = await getInventoryById();
+  task(3, processTrade, [data]);
 }
