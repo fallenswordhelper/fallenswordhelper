@@ -1,5 +1,6 @@
 import batch from '../../../common/batch';
 import calf from '../../../support/calf';
+import closestTd from '../../../common/closestTd';
 import getText from '../../../common/getText';
 import onlineDot from '../../../common/onlineDot';
 import { playerIdUrl } from '../../../support/constants';
@@ -18,6 +19,10 @@ function updateMemberHeader(el) {
   if (calf.membrList[oldhtml]) {
     setInnerHtml(memberHeader(oldhtml), el);
   }
+  setInnerHtml(
+    '<span class="fshFloatRight fshXSmall">[ <button class="fshBl fshBls" type="button">X</button> ]</span>',
+    closestTd(el).nextElementSibling,
+  );
 }
 
 export default function reportHeader() {
