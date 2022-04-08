@@ -10,6 +10,7 @@ import entries from '../../common/entries';
 import eventHandlers from './eventHandlers/eventHandlers';
 import executeAll from '../../common/executeAll';
 import { extendOptions } from './options';
+import fromEntries from '../../common/fromEntries';
 import { get } from '../../system/idb';
 import getMembrList from '../../ajax/getMembrList';
 import getValue from '../../system/getValue';
@@ -29,21 +30,16 @@ import {
 } from './filters';
 import { time, timeEnd } from '../../support/debug';
 
-function doSpinner() { // jQuery
+const rekey = ([, o]) => [o.id, o];
+
+function doSpinner() {
   setInnerHtml(`<span id="fshInvMan"><img src = "${
     oldActionSpinner}">&nbsp;Getting inventory data...</span>`, pCC);
 }
 
-function hydrate(acc, pair) {
-  // eslint-disable-next-line prefer-destructuring
-  acc[pair[1].id] = pair[1];
-  return acc;
-}
-
 function rekeyMembrList() {
   // Rekey membrList from names to id's
-  calf.membrList = entries(calf.membrList).filter(notLastUpdate)
-    .reduce(hydrate, {});
+  calf.membrList = fromEntries(entries(calf.membrList).filter(notLastUpdate).map(rekey));
 }
 
 function prepareLayout() {
@@ -71,31 +67,25 @@ function doInventory() {
 
 function getInvMan() {
   const betaOptIn = getValue('betaOptIn');
-  if (betaOptIn) { //  Timing output
-    time('inventory.getInvMan');
-  }
+  if (betaOptIn) time('inventory.getInvMan'); // Timing output
   doInventory();
-  if (betaOptIn) { //  Timing output
-    timeEnd('inventory.getInvMan');
-  }
+  if (betaOptIn) timeEnd('inventory.getInvMan'); // Timing output
 }
 
 function asyncCall() {
   task(3, getInvMan);
 }
 
-function syncInvMan() { // jQuery
+function syncInvMan() {
   const prm = [loadDataTables(), buildInv()];
-  if (calf.subcmd === 'guildinvmgr') {
-    prm.push(getMembrList(false).then(rekeyMembrList));
-  }
+  if (calf.subcmd === 'guildinvmgr') prm.push(getMembrList(false).then(rekeyMembrList));
   prm.push(get(`fsh_${calf.subcmd}`).then(extendOptions));
   allthen(prm, asyncCall);
 }
 
 export default function inventory() {
-  if (jQueryNotPresent()) { return; }
-  if (calf.subcmd === 'guildinvmgr' && !currentGuildId()) { return; }
+  if (jQueryNotPresent()) return;
+  if (calf.subcmd === 'guildinvmgr' && !currentGuildId()) return;
   doSpinner();
   syncInvMan();
 }

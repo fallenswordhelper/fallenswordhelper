@@ -29,9 +29,6 @@
     margin-top: 10px;
     text-align: right;
   }
-  span {
-    margin-left: 10px;
-  }
   button {
     font-size: 12px;
   }
