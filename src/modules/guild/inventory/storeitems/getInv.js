@@ -1,6 +1,6 @@
 import getInventoryById from '../../../ajax/getInventoryById';
 
-let invPrm;
+let invPrm = 0;
 
 export default function getInv() {
   if (!invPrm) {

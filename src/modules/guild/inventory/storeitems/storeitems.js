@@ -10,7 +10,7 @@ import jQueryPresent from '../../../common/jQueryPresent';
 
 async function doFolders() {
   const inv = await getInv();
-  if (!inv || !inv.folders) { return; }
+  if (!inv.folders) { return; }
   const [form] = document.forms;
   doFolderFilter(inv, form);
   doMoveItems(inv, form);

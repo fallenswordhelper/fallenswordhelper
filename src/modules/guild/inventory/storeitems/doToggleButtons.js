@@ -19,7 +19,7 @@ async function selectLocked() {
   const visibleCheckboxes = getCheckboxesVisible();
   if (!visibleCheckboxes.length) { return; }
   const inv = await getInv();
-  if (!inv || !inv.items) { return; }
+  if (!inv.items) { return; }
   visibleCheckboxes
     .map((cb) => [cb, inv.items[cb.value]])
     .filter(([, invItem]) => invItem)

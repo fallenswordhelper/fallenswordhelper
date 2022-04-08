@@ -16,7 +16,7 @@ function updateName(checkboxes, item) {
 
 async function updateNamesForComposedPots(checkboxes) {
   const inv = await getInv();
-  if (!inv || !inv.items) { return {}; }
+  if (!inv.items) { return {}; }
   return fromEntries(entries(inv.items).map(([key, obj]) => [key, {
     ...obj,
     item_name: updateName(checkboxes, obj),

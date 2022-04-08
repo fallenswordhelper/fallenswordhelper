@@ -3,21 +3,12 @@ import asyncFilter from '../common/asyncFilter';
 import asyncSome from '../common/asyncSome';
 import clickThis from '../common/clickThis';
 import getCustomUrlParameter from '../system/getCustomUrlParameter';
-import getInventoryById from '../ajax/getInventoryById';
+import getInv from '../guild/inventory/storeitems/getInv';
 import numberIsNaN from '../common/numberIsNaN';
 import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
 import sendEvent from '../analytics/sendEvent';
-
-let invprm = 0;
-
-function getInv() {
-  if (!invprm) {
-    invprm = getInventoryById();
-  }
-  return invprm;
-}
 
 function injectQuickSelect() {
   return new QuickSelect({
@@ -71,7 +62,7 @@ async function perfItems(howMany, auctionItems) {
     .forEach(clickThis);
 }
 
-async function handlePerf(e) {
+function handlePerf(e) {
   sendEvent('ahQuickCreate', 'Perfect Filter');
   selectType(e, perfItems);
 }
