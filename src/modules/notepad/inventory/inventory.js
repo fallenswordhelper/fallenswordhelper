@@ -19,6 +19,7 @@ import loadDataTables from '../../common/loadDataTables';
 import notLastUpdate from '../../common/notLastUpdate';
 import { oldActionSpinner } from '../../support/constants';
 import { pCC } from '../../support/layout';
+import recallAll from './recallAll/recallAll';
 import setChecks from './setChecks';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setLvls from './setLvls';
@@ -65,6 +66,7 @@ function doInventory() {
   // eslint-disable-next-line no-use-before-define
   $('#fshRefresh').on('click', inventory);
   clearButton(fshInv);
+  recallAll();
 }
 
 function getInvMan() {
