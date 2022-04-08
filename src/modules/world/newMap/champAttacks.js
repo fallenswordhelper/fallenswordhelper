@@ -69,10 +69,10 @@ function champAttackListener(e) {
   if (!e.altKey
     || !e.shiftKey
     || e.target.tagName === 'INPUT'
-    || e.target.tagName === 'TEXTAREA') { return; }
-  if (!altShiftDown) { showChampAttack(true); }
+    || e.target.tagName === 'TEXTAREA') return;
+  if (!altShiftDown) showChampAttack(true);
   altShiftDown = true;
-  if (!/(Digit|Numpad)[1-8]/.test(e.code)) { return; }
+  if (!/(?:Digit|Numpad)[1-8]/.test(e.code)) return;
   const championCreatures = getCreatures('CHAMPION');
   const index = parseInt(e.code.slice(-1), 10) - 1;
   if (index < championCreatures.length) tryAttack(championCreatures[index]);

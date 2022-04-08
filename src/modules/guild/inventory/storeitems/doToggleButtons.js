@@ -5,7 +5,7 @@ import updateDomItems from './updateDomItems';
 import { showExtraLinks, showQuickDropLinks } from './constants';
 
 function makeToggleButtons(prefs) {
-  const form = document.forms[0];
+  const [form] = document.forms;
   return new ToggleButtons({
     props: {
       showExtraLinks: prefs[showExtraLinks],
@@ -17,9 +17,9 @@ function makeToggleButtons(prefs) {
 
 async function selectLocked() {
   const visibleCheckboxes = getCheckboxesVisible();
-  if (!visibleCheckboxes.length) { return; }
+  if (!visibleCheckboxes.length) return;
   const inv = await getInv();
-  if (!inv.items) { return; }
+  if (!inv.items) return;
   visibleCheckboxes
     .map((cb) => [cb, inv.items[cb.value]])
     .filter(([, invItem]) => invItem)

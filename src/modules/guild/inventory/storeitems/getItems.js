@@ -5,18 +5,18 @@ import getCheckboxesArray from './getCheckboxesArray';
 import getInv from './getInv';
 import getTextTrim from '../../../common/getTextTrim';
 
-let itemsCache;
+let itemsCache = 0;
 
 function updateName(checkboxes, item) {
-  if (item.item_id !== 13699) { return item.item_name; }
+  if (item.item_id !== 13699) return item.item_name;
   const thisItem = checkboxes.find((cb) => cb.value === String(item.inv_id));
-  if (!thisItem) { return item.item_name; }
+  if (!thisItem) return item.item_name;
   return getTextTrim(thisItem.parentNode.parentNode.children[2]);
 }
 
 async function updateNamesForComposedPots(checkboxes) {
   const inv = await getInv();
-  if (!inv.items) { return {}; }
+  if (!inv.items) return {};
   return fromEntries(entries(inv.items).map(([key, obj]) => [key, {
     ...obj,
     item_name: updateName(checkboxes, obj),
@@ -25,14 +25,15 @@ async function updateNamesForComposedPots(checkboxes) {
 
 async function getItemsFromInventory(checkboxes) {
   if (!itemsCache) {
-    itemsCache = await updateNamesForComposedPots(checkboxes);
+    const updated = await updateNamesForComposedPots(checkboxes);
+    itemsCache = updated;
   }
   return itemsCache;
 }
 
 export default async function getItems() {
   const checkboxes = getCheckboxesArray();
-  if (!checkboxes.length) { return []; }
+  if (!checkboxes.length) return [];
   const items = await getItemsFromInventory(checkboxes);
   return checkboxes
     .map((cb) => [
