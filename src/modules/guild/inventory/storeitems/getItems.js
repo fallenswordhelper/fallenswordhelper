@@ -5,7 +5,7 @@ import getCheckboxesArray from './getCheckboxesArray';
 import getInv from './getInv';
 import getTextTrim from '../../../common/getTextTrim';
 
-let itemsCache = 0;
+let itemsprm = 0;
 
 function updateName(checkboxes, item) {
   if (item.item_id !== 13699) return item.item_name;
@@ -23,12 +23,9 @@ async function updateNamesForComposedPots(checkboxes) {
   }]));
 }
 
-async function getItemsFromInventory(checkboxes) {
-  if (!itemsCache) {
-    const updated = await updateNamesForComposedPots(checkboxes);
-    itemsCache = updated;
-  }
-  return itemsCache;
+function getItemsFromInventory(checkboxes) {
+  if (!itemsprm) itemsprm = updateNamesForComposedPots(checkboxes);
+  return itemsprm;
 }
 
 export default async function getItems() {
