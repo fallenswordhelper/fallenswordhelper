@@ -1,4 +1,5 @@
 import './trade.css';
+import arrayfromList from '../common/arrayfromList';
 import calf from '../support/calf';
 import createTr from '../common/cElement/createTr';
 import defaults from '../support/dataObj.json';
@@ -7,7 +8,6 @@ import getElementById from '../common/getElementById';
 import getValue from '../system/getValue';
 import hasClass from '../common/hasClass';
 import insertElementBefore from '../common/insertElementBefore';
-import jsonParse from '../common/jsonParse';
 import numberIsNaN from '../common/numberIsNaN';
 import onclick from '../common/onclick';
 import oneByOne from './oneByOne';
@@ -30,7 +30,6 @@ const getCheckbox = (el) => el.children[0].lastElementChild.children[0].children
 const doCheck = (bool, ctx) => { ctx.checked = bool; };
 const unCheckAll = (checkbox) => { doCheck(false, checkbox); };
 const checkAll = (checkbox) => { doCheck(true, checkbox); };
-const arrayfromList = (classes) => jsonParse(`[${classes}]`);
 const makeSpan = (el) => ` &ensp;<span id="itemid${
   el[1]}" class="fshCheckAll fshLink fshNoWrap">${el[0]}</span>`;
 

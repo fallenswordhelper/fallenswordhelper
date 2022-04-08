@@ -1,4 +1,5 @@
 import { cdn } from '../../system/system';
+import clickThis from '../../common/clickThis';
 import on from '../../common/on';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
@@ -56,6 +57,14 @@ function showChampAttack(toggle) {
     .forEach(addAttribs);
 }
 
+function tryAttack(creature) {
+  const attack = getAttack(creature);
+  if (attack) {
+    sendEvent('world', 'ChampionAttack');
+    clickThis(attack);
+  }
+}
+
 function champAttackListener(e) {
   if (!e.altKey
     || !e.shiftKey
@@ -66,13 +75,7 @@ function champAttackListener(e) {
   if (!e.code.match(/(Digit|Numpad)[1-8]/)) { return; }
   const championCreatures = getCreatures('CHAMPION');
   const index = parseInt(e.code.slice(-1), 10) - 1;
-  if (index < championCreatures.length) {
-    const attack = getAttack(championCreatures[index]);
-    if (attack !== null) {
-      sendEvent('world', 'ChampionAttack');
-      attack.click();
-    }
-  }
+  if (index < championCreatures.length) tryAttack(championCreatures[index]);
 }
 
 function hideChampAttackListener(e) {

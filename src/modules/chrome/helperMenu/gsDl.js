@@ -1,3 +1,4 @@
+import clickThis from '../../common/clickThis';
 import createAnchor from '../../common/cElement/createAnchor';
 import guildStore from '../../_dataAccess/export/guildStore';
 import insertElement from '../../common/insertElement';
@@ -45,7 +46,7 @@ function downloadCsv(csv) {
     style: { display: 'none' },
   });
   insertElement(document.body, a);
-  a.click();
+  clickThis(a);
   document.body.removeChild(a);
   setTimeout(() => { URL.revokeObjectURL(href); }, 0);
 }
