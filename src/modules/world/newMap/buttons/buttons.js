@@ -24,15 +24,15 @@ import {
   worldUrl,
 } from '../../../support/constants';
 
-let buttonContainer;
-let realmLvl;
-let yourLvl;
-let formGroup;
-let quickBuff;
-let realmMap;
-let ufsgMap;
-let soundCheck;
-let huntCheck;
+let buttonContainer = 0;
+let realmLvl = 0;
+let yourLvl = 0;
+let formGroup = 0;
+let quickBuff = 0;
+let realmMap = 0;
+let ufsgMap = 0;
+let soundCheck = 0;
+let huntCheck = 0;
 
 function doFormGroup(target) {
   hideQTip(target);
