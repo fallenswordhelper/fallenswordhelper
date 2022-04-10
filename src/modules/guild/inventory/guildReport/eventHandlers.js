@@ -88,6 +88,7 @@ function doFastRecall(target) {
 }
 
 function collapsible(target) {
+  sendEvent('GuildReport', 'Collapsible');
   let tr = closestTr(target).nextElementSibling;
   const mode = tr.className === 'fshHide' ? '' : 'fshHide';
   while (tr && !tr.children[0].hasAttribute('bgcolor')) {
