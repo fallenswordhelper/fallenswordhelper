@@ -10,6 +10,7 @@ import roundToString from '../../../common/roundToString';
 import setInnerHtml from '../../../dom/setInnerHtml';
 import setText from '../../../dom/setText';
 import textSpan from '../../../common/cElement/textSpan';
+import trimTitanName from '../../../common/trimTitanName';
 import { clearMemberRows, titanTbl } from './buildTitanInfoTable';
 import {
   cooldownText,
@@ -58,7 +59,7 @@ function setAllText(ary) {
 
 function doTopLabels(ourTitan) {
   setAllText([
-    [ourTitan.creature.name.replace(' (Titan)', ''), titanName],
+    [trimTitanName(ourTitan.creature.name), titanName],
     [titanLoc, titanLocation],
     [ourTitan.current_hp, currentHp],
     [ourTitan.max_hp, maxHp],

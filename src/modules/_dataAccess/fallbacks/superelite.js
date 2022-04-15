@@ -31,7 +31,7 @@ function parseReport(html) {
   const doc = createDocument(html);
   const logTable = querySelector('#pCC table table', doc);
   if (!logTable) { return { s: false }; }
-  const rows = dataRows(logTable.rows, 4, 1);
+  const rows = dataRows(logTable, 4, 1);
   const data = rows.map(formatRow);
   return { r: data, s: true, t: `0 ${String(nowSecs)}` };
 }

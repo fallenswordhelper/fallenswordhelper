@@ -14,7 +14,7 @@ const getMsgCell = (tr) => [getTextTrim(tr.children[2]), tr.children[3]];
 
 function addMsgButtons(logTable) {
   if (!getValue('privateMsgButtons')) { return; }
-  const msgCells = dataRows(logTable.rows, 6, 0).map(getMsgCell);
+  const msgCells = dataRows(logTable, 6, 0).map(getMsgCell);
   msgCells.forEach(([sender, msgCell]) => {
     insertHtmlBeforeEnd(msgCell, '&nbsp;&nbsp;[ '
       + `<button class="pmBuffBtn" type="button">Buff</button> | <a class="pmTradeUrl" href="${

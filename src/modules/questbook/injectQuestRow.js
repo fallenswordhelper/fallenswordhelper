@@ -35,5 +35,5 @@ function decorate(questsToHide, aRow) {
 
 export default function injectQuestRow(questTable) {
   const questsToHide = isHideQuests();
-  dataRows(questTable.rows, 5, 0).forEach(partial(decorate, questsToHide));
+  dataRows(questTable, 5, 0).forEach(partial(decorate, questsToHide));
 }

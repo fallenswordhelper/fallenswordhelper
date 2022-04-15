@@ -29,7 +29,7 @@ function hazConflict(conflictTable, curPage, insertHere) { // Legacy
   if (curPage === 1) {
     conflictHeader(insertHere);
   }
-  dataRows(conflictTable.rows, 7, 0).forEach(partial(conflictRow, insertHere));
+  dataRows(conflictTable, 7, 0).forEach(partial(conflictRow, insertHere));
 }
 
 function activeConflicts(doc, curPage, insertHere) { // Legacy

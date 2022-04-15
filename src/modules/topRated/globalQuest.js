@@ -22,5 +22,5 @@ function playerLink(el) {
 export default function globalQuest() {
   const topTable = getElementsByTagName(defTable, pCC)[3];
   globalQuestAllowBack(topTable);
-  dataRows(topTable.rows, 4, 1).forEach(playerLink);
+  dataRows(topTable, 4, 1).forEach(playerLink);
 }

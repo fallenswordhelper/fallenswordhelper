@@ -43,7 +43,7 @@ function guildLogWidgetsEnabled() { // Legacy
   const logTable = messageNameCell.parentNode.parentNode.parentNode;
   messageNameCell.innerHTML += '&nbsp;&nbsp;<span class="fshWhite">'
     + '(Guild Log messages not involving self are dimmed!)</span>';
-  dataRows(logTable.rows, 3, 0).forEach(processGuildWidgetRow);
+  dataRows(logTable, 3, 0).forEach(processGuildWidgetRow);
 }
 
 export default function addGuildLogWidgets() {

@@ -58,7 +58,7 @@ function location(e) {
 function contributors(e) {
   const contribs = e[2].cells[0].children;
   if (contribs.length === 1) {
-    const thisRows = dataRows(contribs[0].rows, 3, 0);
+    const thisRows = dataRows(contribs[0], 3, 0);
     return {
       contributors: thisRows.map((r) => ({
         kills: Number(getTextTrim(r.cells[1])),

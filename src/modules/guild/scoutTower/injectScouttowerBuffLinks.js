@@ -17,7 +17,7 @@ const memberId = (el) => getPlayerId(el.cells[0].children[0].href);
 
 function buffAll(target) {
   const titanTable = target.parentNode.parentNode.parentNode.parentNode;
-  const shortList = dataRows(titanTable.rows, 3, 0).map(memberId).join();
+  const shortList = dataRows(titanTable, 3, 0).map(memberId).join();
   openQuickBuffById(shortList);
 }
 
@@ -40,7 +40,7 @@ function playerBufflink(el) {
 }
 
 function doBuffLinks(titanTable) {
-  dataRows(titanTable.rows, 3, 0).forEach(playerBufflink);
+  dataRows(titanTable, 3, 0).forEach(playerBufflink);
   insertHtmlBeforeEnd(titanTable.rows[0].cells[0], ' <button class="fshBl fshXSmall">all</button>');
 }
 

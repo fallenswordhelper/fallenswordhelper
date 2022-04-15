@@ -81,7 +81,7 @@ function makeRowStyle(logScreen, rowTags) {
 }
 
 function processRows(logScreen, dateColumn, chatTable, cols) {
-  const rowTags = dataRows(chatTable.rows, cols, 0).map(partial(typeMap, dateColumn));
+  const rowTags = dataRows(chatTable, cols, 0).map(partial(typeMap, dateColumn));
   doBuffLinks(logScreen, rowTags);
   const rowStyle = makeRowStyle(logScreen, rowTags);
   if (rowStyle.length) {
