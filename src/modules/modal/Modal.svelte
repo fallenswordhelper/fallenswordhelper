@@ -4,6 +4,7 @@
   import calf from '../support/calf';
   import { createEventDispatcher } from 'svelte';
 
+  export let modal;
   export let visible = true;
 
   const dispatch = createEventDispatcher();
@@ -34,7 +35,7 @@
 </script>
 
 <ModalBackground { visible } on:click={close}>
-  <ModalDialog { visible } on:close={close}>
+  <ModalDialog { visible } on:close={close} bind:modal>
     <slot></slot>
   </ModalDialog>
 </ModalBackground>

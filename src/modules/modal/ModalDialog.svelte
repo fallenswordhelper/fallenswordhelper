@@ -9,12 +9,12 @@
   import { createEventDispatcher } from 'svelte';
   import querySelectorArray from '../common/querySelectorArray';
 
+  export let modal;
   export let visible = true;
 
   const dispatch = createEventDispatcher();
   const close = () => dispatch('close');
 
-  let modal;
   $: modalVisible = visible;
   let previouslyFocused;
   let prevOnTop;
