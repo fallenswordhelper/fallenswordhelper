@@ -28,9 +28,9 @@ function calcCd(e) {
 }
 
 function creature(e) {
-  const mobImg = e[0].cells[0].children[0];
+  const [mobImg] = e[0].cells[0].children;
   return {
-    base_id: Number(mobImg.src.match(/s\/(\w+)\.p/)[1].slice(0, -32)),
+    base_id: Number(mobImg.src.split('/').slice(-1)[0].slice(0, -36)),
     name: mobImg.title,
   };
 }

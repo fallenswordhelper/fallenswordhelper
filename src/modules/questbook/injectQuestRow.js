@@ -1,4 +1,5 @@
 import dataRows from '../common/dataRows';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getTextTrim from '../common/getTextTrim';
 import getValue from '../system/getValue';
 import guideButtons from './guideButtons';
@@ -29,7 +30,7 @@ function doHideQuests(hideQuests, questName, aRow) {
 function decorate(questsToHide, aRow) {
   const questName = replaceDoubleSpace(getTextTrim(aRow.cells[0]));
   doHideQuests(questsToHide, questName, aRow);
-  const questID = /quest_id=(\d+)/.exec(aRow.cells[4].innerHTML)[1];
+  const questID = getCustomUrlParameter(aRow.cells[0].children[0].href, 'quest_id');
   setInnerHtml(guideButtons(questID, questName), aRow.cells[4]);
 }
 

@@ -40,7 +40,7 @@ function activeConflicts(doc, curPage, insertHere) { // Legacy
 }
 
 function getMaxPage(page) {
-  return Number(page.parentNode.innerHTML.match(/of&nbsp;(\d*)/)[1]);
+  return Number(page.nextSibling.textContent.split('\xa0')[2]);
 }
 
 function getNextPage(curPage, fn, callback) {
@@ -60,7 +60,7 @@ function gotConflictInfo(callback, responseText) { // Legacy
 }
 
 export default function conflictInfo(leftHandSideColumnTable) { // jQuery.min
-  const statCtrl = leftHandSideColumnTable.rows[6].cells[0].children[0];
+  const [statCtrl] = leftHandSideColumnTable.rows[6].cells[0].children;
   if (statCtrl) {
     conflicts(1).then(partial(gotConflictInfo, { node: statCtrl }));
   }

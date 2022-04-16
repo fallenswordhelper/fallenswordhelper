@@ -17,7 +17,7 @@ import { defTable, guideUrl } from '../../support/constants';
 
 function imgLink(aRow) {
   const myName = encodeURIComponent(aRow.titanName);
-  const myImg = aRow.tr.cells[0].children[0];
+  const [myImg] = aRow.tr.cells[0].children;
   const myLink = createAnchor({
     href: `${guideUrl}creatures&search_name=${myName}`,
     target: '_blank',
@@ -27,7 +27,7 @@ function imgLink(aRow) {
 }
 
 function realmLink(aRow) {
-  const realmCell = aRow.tr.cells[1];
+  const [, realmCell] = aRow.tr.cells;
   const realmName = getText(realmCell);
   setInnerHtml(`<a href="${guideUrl}realms&search_name=${
     realmName}" target="_blank">${realmName}</a>`, realmCell);
