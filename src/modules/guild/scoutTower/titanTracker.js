@@ -4,6 +4,7 @@ import fromEntries from '../../common/fromEntries';
 import getText from '../../common/getText';
 import { now } from '../../support/now';
 import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
+import trimTitanName from '../../common/trimTitanName';
 import uniq from '../../common/uniq';
 import { get, set } from '../../system/idb';
 
@@ -33,6 +34,7 @@ const makeEntry = ({ titanName, tr }) => [titanName, dataObj(tr)];
 function remainingTitans(oldTitans, visibleTitans) {
   return fromEntries(
     entries(oldTitans)
+      .map(([n, o]) => [trimTitanName(n), o])
       .filter(([n]) => !visibleTitans[n])
       .filter(([, d]) => d.coolTime > now)
       .map(([n, d]) => [n, { ...d, seen: 'no' }]),
