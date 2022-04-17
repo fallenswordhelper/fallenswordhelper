@@ -36,7 +36,7 @@
   font-size: x-small;
 }
 
-#quickbuff div.buff-block p label.fshDim span {
+#quickbuff #buff-outer .fshDim span {
   color: #999999;
 }
 
