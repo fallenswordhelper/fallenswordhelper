@@ -241,5 +241,6 @@
   "ajaxifyMoveRecipe": false,
   "selectST": true,
   "selectMain": true,
-  "disableQuickExtractPrompts": false
+  "disableQuickExtractPrompts": false,
+  "qbSortBuffsAlphabetically": false
 }

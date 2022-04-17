@@ -12,6 +12,7 @@ import passThruBuffs from './passThruBuffs';
 import passThruPlayers from './passThruPlayers';
 import quickActivate from './quickActivate';
 import { quickBuffHeader } from './assets';
+import quickbuffSort from './sortBuffs';
 
 function setupEventHandlers() {
   onclick(getElementById('helperQBheader'), quickActivate);
@@ -30,5 +31,6 @@ export default function quickBuff() { // jQuery.min
     passThruPlayers,
     setupEventHandlers,
     firstPlayerStats,
+    quickbuffSort,
   ]);
 }

@@ -281,6 +281,22 @@
   color: #999999;
 }
 
+#quickbuffSortCheckboxContainer {
+  display: block;                
+  width: 578px;                  
+  float: left;                   
+  clear: left;                   
+  color: #e0c493;                
+  font-size: 12px;               
+  padding: 5px 0;                
+  margin: 0;                     
+}                                
+                                 
+#quickbuffSortCheckbox {         
+  float: left;                   
+  margin: 1px 3px 0 3px;         
+}                                
+
 .profile-stat-bonus {font-size: x-small;}
 #minibox-enemy {margin: 0 0 10px; overflow: hidden}
 #fshResetEnemy {
