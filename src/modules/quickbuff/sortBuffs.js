@@ -50,7 +50,7 @@ export default function quickbuffSort() {
   }
   const quickbuffCheckAllCheckbox = getElementById('check-all');
   insertHtmlAfterEnd(quickbuffCheckAllCheckbox, quickBuffSortCheckbox);
-  const quickbuffSortCheckbox = getElementById('quickbuffSortCheckbox');
+  const quickbuffSortCheckbox = querySelector('.quickbuffSortCheckbox');
   const qbSortPref = getValue(quickbuffSortStorageName);
   quickbuffSortCheckbox.checked = qbSortPref;
   if (qbSortPref) {

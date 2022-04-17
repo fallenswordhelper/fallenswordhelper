@@ -40,7 +40,7 @@
   color: #999999;
 }
 
-#quickbuffSortCheckboxContainer {
+.quickbuffSortCheckboxContainer {
   clear: left;
   color: #e0c493;
   display: block;
@@ -51,7 +51,7 @@
   width: 578px;
 }
 
-#quickbuffSortCheckbox {
+.quickbuffSortCheckbox {
   float: left;
   margin: 1px 3px 0 3px;
 }

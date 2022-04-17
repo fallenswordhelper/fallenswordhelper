@@ -23,8 +23,8 @@ export const excludeBuff = [
   98, // Barricade
   101, // Severe Condition
 ];
-export const quickBuffSortCheckbox = '<p id="quickbuffSortCheckboxContainer">'
-  + '<input id="quickbuffSortCheckbox" type="checkbox">'
+export const quickBuffSortCheckbox = '<p class="quickbuffSortCheckboxContainer">'
+  + '<input id="quickbuffSortCheckbox" class="quickbuffSortCheckbox" type="checkbox">'
   + '<label for="quickbuffSortCheckbox">Sort buffs alphabetically</label>'
   + '</p>';
 export const quickbuffSortStorageName = 'qbSortBuffsAlphabetically';
