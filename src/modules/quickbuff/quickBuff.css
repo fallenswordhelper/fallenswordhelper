@@ -18,11 +18,11 @@
   cursor: pointer;
 }
 
-#quickbuff .player h1 {
+.player h1 {
   float: left;
 }
 
-#quickbuff .player p {
+.player p {
   clear: both;
 }
 
@@ -36,7 +36,7 @@
   font-size: x-small;
 }
 
-#quickbuff #buff-outer .fshDim span {
+#quickbuff div.buff-block p label.fshDim span {
   color: #999999;
 }
 
