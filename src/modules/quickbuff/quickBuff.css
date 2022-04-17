@@ -1,0 +1,39 @@
+.quickbuffTable {margin: 0 auto;}
+.quickbuffTableHeader {
+  text-align: center;
+  padding: 0 4px;
+  color: orange;
+}
+.quickbuffTableDetail {
+  text-align: center;
+  padding: 0 4px;
+}
+.quickbuffActivate {
+  cursor: pointer;
+  color: red;
+}
+
+#quickbuff .player h1 {float: left;}
+#quickbuff .player p {clear: both;}
+
+.fshBuffOn {color: white; font-size: x-small;}
+.fshLastActivity {color: #cccccc; font-size: x-small;}
+#quickbuff #buff-outer .fshDim span {
+  color: #999999;
+}
+
+#quickbuffSortCheckboxContainer {
+  display: block;
+  width: 578px;
+  float: left;
+  clear: left;
+  color: #e0c493;
+  font-size: 12px;
+  padding: 5px 0;
+  margin: 0;
+}
+
+#quickbuffSortCheckbox {
+  float: left;
+  margin: 1px 3px 0 3px;
+}  

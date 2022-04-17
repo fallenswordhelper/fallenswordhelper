@@ -1,3 +1,4 @@
+import './quickBuff.css';
 import addBuffLevels from './addBuffLevels';
 import doLabels from './doLabels';
 import executeAll from '../common/executeAll';
