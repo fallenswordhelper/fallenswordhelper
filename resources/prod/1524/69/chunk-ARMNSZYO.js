@@ -1,2 +1,0 @@
-import{a as n}from"./chunk-4DHVQHJT.js";import{b as u}from"./chunk-X53ITBGR.js";function o(t,r){if(typeof r=="string"){let e=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(r);if(e)return new Date(Date.UTC(Number(e[1]),Number(e[2])-1,Number(e[3]),Number(e[4]),Number(e[5]),Number(e[6])))}return r}function m(t){let r=u(t),e;return r&&(e=n(r,o)),e}export{m as a};
-//# sourceMappingURL=chunk-ARMNSZYO.js.map

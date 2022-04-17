@@ -1,2 +1,0 @@
-import{b as e}from"./chunk-X53ITBGR.js";import{a as i}from"./chunk-UMFA3PXI.js";function L(n){i[n]=e(n)}var f=["recipeManagerLink","medalGuideLink","inventoryManagerLink","buffLogLink","combatLogLink","creatureLogLink","quickLinksLink","auctionSearchLink","onlinePlayersLink","findOtherLink","findBuffsLink","guildInventoryLink","newGuildLogLink","topRatedLink"];export{L as a,f as b};
-//# sourceMappingURL=chunk-42H7WZ5E.js.map

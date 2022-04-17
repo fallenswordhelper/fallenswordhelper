@@ -1,0 +1,2 @@
+.fshTakeGrid>div>div:nth-child(2){text-align:center}#fshQuickTake,#fshQuickTake:checked~form,#fshQuickTake~#qtOn,#fshQuickTake:checked~#qtOff,#fshQuickTake~#quickTake{display:none}#fshQuickTake:checked~#qtOn,#fshQuickTake:checked~#quickTake{display:block}#quickTake>div:nth-child(2),#quickTake>div:nth-child(4){height:10px}
+/*# sourceMappingURL=mailbox-OWJFXDHL.css.map */
