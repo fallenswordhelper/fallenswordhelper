@@ -1,39 +1,57 @@
-.quickbuffTable {margin: 0 auto;}
+.quickbuffTable {
+  margin: 0 auto;
+}
+
 .quickbuffTableHeader {
-  text-align: center;
-  padding: 0 4px;
   color: orange;
-}
-.quickbuffTableDetail {
-  text-align: center;
   padding: 0 4px;
+  text-align: center;
 }
+
+.quickbuffTableDetail {
+  padding: 0 4px;
+  text-align: center;
+}
+
 .quickbuffActivate {
-  cursor: pointer;
   color: red;
+  cursor: pointer;
 }
 
-#quickbuff .player h1 {float: left;}
-#quickbuff .player p {clear: both;}
+#quickbuff .player h1 {
+  float: left;
+}
 
-.fshBuffOn {color: white; font-size: x-small;}
-.fshLastActivity {color: #cccccc; font-size: x-small;}
+#quickbuff .player p {
+  clear: both;
+}
+
+.fshBuffOn {
+  color: white;
+  font-size: x-small;
+}
+
+.fshLastActivity {
+  color: #cccccc;
+  font-size: x-small;
+}
+
 #quickbuff #buff-outer .fshDim span {
   color: #999999;
 }
 
 #quickbuffSortCheckboxContainer {
-  display: block;
-  width: 578px;
-  float: left;
   clear: left;
   color: #e0c493;
+  display: block;
+  float: left;
   font-size: 12px;
-  padding: 5px 0;
   margin: 0;
+  padding: 5px 0;
+  width: 578px;
 }
 
 #quickbuffSortCheckbox {
   float: left;
   margin: 1px 3px 0 3px;
-}  
+}
