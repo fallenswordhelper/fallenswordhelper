@@ -7,6 +7,7 @@
   import fromEntries from '../../common/fromEntries';
   import sendEvent from '../../analytics/sendEvent';
   import toggleForce from '../../common/toggleForce';
+  import trimTitanName from '../../common/trimTitanName';
   import { get, set } from '../../system/idb';
 
   export let theTitans;
@@ -23,7 +24,7 @@
   const titanPref = ({ titanName }) => titans.find(([n]) => n === titanName)[1];
   const mergePrefs = () => entries({
     ...fromEntries(entries(theTitans).map(([n]) => [n, true])),
-    ...fromEntries(titans),
+    ...fromEntries(titans.map(([n, o]) => [trimTitanName(n), o])),
   }).sort(byName);
 
   function testVis(ctx) {
