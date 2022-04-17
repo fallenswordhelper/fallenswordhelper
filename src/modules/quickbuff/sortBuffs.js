@@ -42,12 +42,15 @@ function onSortBuffsCheckboxChanged(event) {
   sortBuffs(event.target.checked);
 }
 
-export default function quickbuffSort() {
-  // store the default order of buffs
+function storeDefaultBuffOrder() {
   for (let i = 1; i <= 3; i++) {
     const block = `block${i}`;
     defaultBuffOrder[block] = querySelectorAll(`#${block} > p`);
   }
+}
+
+export default function quickbuffSort() {
+  storeDefaultBuffOrder();
   const quickbuffCheckAllCheckbox = getElementById('check-all');
   insertHtmlAfterEnd(quickbuffCheckAllCheckbox, quickBuffSortCheckbox);
   const quickbuffSortCheckbox = querySelector('.quickbuffSortCheckbox');
