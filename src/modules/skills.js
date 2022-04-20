@@ -15,15 +15,14 @@ const getTip = (a) => [
 const getMatches = ([id, lvl, tip]) => [
   id,
   lvl,
-  />([^<]+)</.exec(tip),
-  />Stamina: (\d+)</.exec(tip),
+  tip.split(/<|>/),
 ];
 
-const getStam = ([id, lvl, nameMatch, stamMatch]) => [
+const getStam = ([id, lvl, tipSplit]) => [
   id,
   lvl,
-  nameMatch[1],
-  stamMatch[1],
+  tipSplit[2],
+  tipSplit[tipSplit.length - 3].split(' ')[1],
 ];
 
 const getLabels = ([id, lvl, name, stam]) => [
@@ -58,5 +57,6 @@ export default function skills() {
     .map(getLabels)
     .map(doConcat)
     .join('\n');
-  console.log(as); // eslint-disable-line no-console
+  // eslint-disable-next-line no-console
+  console.log(as); // skipcq: JS-0002
 }
