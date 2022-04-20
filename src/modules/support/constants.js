@@ -161,3 +161,14 @@ export const noteSelector = '.fa-envelope';
 export const playerLinkSelector = 'a[href*="&player_id="]';
 
 export const darkCurseMultiplier = 0.002;
+
+export const levelDefaults = [
+  [54, 'ca_default'],
+  [101, 'sc_default'],
+  [60, 'nv_default'],
+  [98, 'barricade_default'],
+  [179, 'relentless_default'],
+  [181, 'aegis_shield_default'],
+];
+
+export const blockedSkillsCheckboxes = 'input[name="blockedSkillList[]"]';

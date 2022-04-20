@@ -3,8 +3,7 @@ import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import querySelectorAll from '../../common/querySelectorAll';
 import querySelectorArray from '../../common/querySelectorArray';
-
-const blockedSkillsCheckboxes = 'input[name="blockedSkillList[]"]';
+import { blockedSkillsCheckboxes, levelDefaults } from '../../support/constants';
 
 export function checkSkill(skillId) {
   querySelector(`${blockedSkillsCheckboxes}[value="${skillId}"]`)
@@ -24,14 +23,7 @@ export function clearCheckedSkills() {
     .forEach((i) => { i.checked = false; });
 }
 
-const specials = [
-  [54, 'ca_default'],
-  [60, 'nv_default'],
-  [98, 'barricade_default'],
-  [101, 'sc_default'],
-];
-
-function updateSpecials(level, [index, inputName]) {
+function updateLevelDefaults(level, [index, inputName]) {
   // eslint-disable-next-line no-param-reassign
   level[index] = Number(querySelector(`input[name="${inputName}"]`).value);
 }
@@ -44,7 +36,7 @@ export function submitSkillChanges() {
     level[i.value] = 0;
     blocked[i.value] = i.checked ? 1 : 0;
   }
-  specials.forEach(partial(updateSpecials, level));
+  levelDefaults.forEach(partial(updateLevelDefaults, level));
   return daSkills(level, blocked);
 }
 

@@ -1,6 +1,8 @@
+import fromEntries from '../../common/fromEntries';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import indexAjaxPost from '../../ajax/indexAjaxPost';
 import infoBoxFrom from '../../common/InfoBoxFrom';
+import { levelDefaults } from '../../support/constants';
 import settingsView from './settingsView';
 
 async function updateLevels(level) {
@@ -15,10 +17,7 @@ async function updateLevels(level) {
     tab: '0',
     pvp_ladder: settings.r.flags[0] ? 1 : 0,
     min_group_level: settings.r.min_group_join_level,
-    ca_default: level[54],
-    sc_default: level[101],
-    nv_default: level[60],
-    barricade_default: level[98],
+    ...fromEntries(levelDefaults.map(([id, ctl]) => [ctl, level[id]])),
   });
   return infoBoxFrom(responseHtml);
 }

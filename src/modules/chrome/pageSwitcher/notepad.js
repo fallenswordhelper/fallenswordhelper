@@ -18,7 +18,7 @@ const newGuildLog = () => { runDefault(import('../../notepad/newGuildLog/newGuil
 const load = () => { runDefault(import('../../settings/load')); };
 const reliclist = () => { runDefault(import('../../notepad/reliclist/reliclist')); };
 const whosGotWhat = () => {
-  if (!calf.userIsDev) { return; }
+  if (!calf.userIsDev) { return; } // whosGotWhat
   runDefault(import('../../notepad/whosGotWhat/whosGotWhat'));
 };
 

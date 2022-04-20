@@ -1,34 +1,22 @@
 import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import querySelector from '../../common/querySelector';
+import querySelectorArray from '../../common/querySelectorArray';
+import { blockedSkillsCheckboxes, levelDefaults } from '../../support/constants';
 
-const skillMap = [
-  { name: 'ca_default', id: 54 },
-  { name: 'sc_default', id: 101 },
-  { name: 'nv_default', id: 60 },
-  { name: 'barricade_default', id: 98 },
-];
-
-function getSkills(form) {
-  const skills = form.getAll('blockedSkillList[]')
-    .map((e) => ({
-      id: parseInt(e, 10),
-      blocked: true,
-      level: 0,
-    }));
-
-  skillMap.forEach((skill) => {
-    const index = skills.findIndex((s) => s.id === skills.id);
-    if (index === -1) {
-      skills.push({
-        id: parseInt(skill.id, 10),
-        blocked: false,
-        level: form.get(skill.name),
-      });
-    } else {
-      skills[index].level = form.get(skill.name);
-    }
-  });
-  return skills;
+function getSkills(settingsPage) {
+  const buffLevels = levelDefaults.map(([id, ctl]) => ({
+    id,
+    level: Number(querySelector(`input[name="${ctl}"]`, settingsPage).value),
+    blocked: querySelector(`${blockedSkillsCheckboxes}[value="${id}"]`, settingsPage).checked,
+  }));
+  return [
+    ...buffLevels,
+    ...querySelectorArray(`${blockedSkillsCheckboxes}:checked`, settingsPage)
+      .map((i) => ({ id: Number(i.value), level: 0, blocked: i.checked }))
+      .filter((b) => !buffLevels.find(({ id }) => b.id === id))
+      .sort((a, b) => a.id - b.id),
+  ];
 }
 
 function getDrops(form) {
@@ -53,11 +41,12 @@ function makeFlags(fds) {
   ];
 }
 
-function resultObject(fds) {
+function resultObject(settingsPage) {
+  const fds = [...settingsPage.forms].map((e) => new FormData(e));
   return {
     s: true,
     r: {
-      skills: getSkills(fds[4]),
+      skills: getSkills(settingsPage),
       item_drop_rarity: getDrops(fds[1]),
       flags: makeFlags(fds),
       min_group_join_level: parseInt(fds[0].get('min_group_level'), 10),
@@ -75,7 +64,5 @@ export default async function settingsView() {
       e: { message: 'Could not connect to FS servers', code: 1 },
     };
   }
-  const settingsPage = createDocument(settingsHTML);
-  const fds = [...settingsPage.forms].map((e) => new FormData(e));
-  return resultObject(fds);
+  return resultObject(createDocument(settingsHTML));
 }

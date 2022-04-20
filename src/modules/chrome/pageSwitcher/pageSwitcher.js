@@ -1,5 +1,6 @@
 import arena from './arena';
 import auctionhouse from './auctionhouse';
+import calf from '../../support/calf';
 import composing from './composing';
 import creatures from './creatures';
 import guild from './guild/guild';
@@ -37,6 +38,11 @@ const privateMsg = () => { runDefault(import('../../logs/privateMsg/privateMsg')
 const quickBuff = () => { runDefault(import('../../quickbuff/quickBuff')); };
 const superelite = () => { runDefault(import('../../seLog/superelite')); };
 
+const skills = () => {
+  if (!calf.userIsDev) { return; } // skills
+  runDefault(import('../../skills'));
+};
+
 export default {
   creatures, // UFSG
   items, // UFSG
@@ -71,6 +77,7 @@ export default {
   quickbuff: { '-': { '-': quickBuff } },
   scavenging,
   settings: { '-': { '-': injectSettings } },
+  skills: { '-': { '-': skills } },
   superelite: { '-': { '-': superelite } },
   tempinv: { '-': { '-': injectMailbox } },
   temple: { '-': { '-': parseTemplePage } },
