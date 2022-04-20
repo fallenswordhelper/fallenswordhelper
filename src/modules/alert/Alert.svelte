@@ -4,15 +4,23 @@
   import { onDestroy } from 'svelte';
 
   export let ms = 3000;
-  let visible;
-  let timeout;
+  let visible = false;
+  let timeout = 0;
+  let transform = '';
+
+  async function showMsg() {
+    const vvp = window.visualViewport;
+    const offsetLeft = (vvp.offsetLeft + vvp.width) - window.innerWidth;
+    transform = `translate(${offsetLeft}px, ${vvp.offsetTop}px)`;
+    visible = true;
+  }
 
   const onMessageChange = (message, mms) => {
     clearTimeout(timeout);
     if (!message) { // hide Alert if message is empty
       visible = false;
     } else {
-      visible = true; // show alert
+      showMsg(); // show alert
       // and hide it after ms milliseconds
       if (mms > 0) {
         timeout = setTimeout(() => {
@@ -32,7 +40,7 @@
 {#if visible}
   <div role="alert" on:click="{() => { visible = false; }}" transition:fly="{{
     delay: 250, duration: 300, x: 0, y: -100, opacity: 0.5,
-  }}">
+  }}" style:transform>
     <p>{ $alert }</p>
   </div>
 {/if}
