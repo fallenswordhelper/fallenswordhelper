@@ -18,17 +18,17 @@ export const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
   'Sep', 'Oct', 'Nov', 'Dec'];
 
 export const mercRE = [
-  /<td>Attack:<\/td><td>(\d+)<\/td>/,
-  /<td>Defense:<\/td><td>(\d+)<\/td>/,
-  /<td>Armor:<\/td><td>(\d+)<\/td>/,
-  /<td>Damage:<\/td><td>(\d+)<\/td>/,
-  /<td>HP:<\/td><td>(\d+)<\/td>/,
+  /<td>Attack:<\/td><td>(?<attack>\d+)<\/td>/,
+  /<td>Defense:<\/td><td>(?<defense>\d+)<\/td>/,
+  /<td>Armor:<\/td><td>(?<armor>\d+)<\/td>/,
+  /<td>Damage:<\/td><td>(?<damage>\d+)<\/td>/,
+  /<td>HP:<\/td><td>(?<hp>\d+)<\/td>/,
 ];
 
-export const lastActivityRE = /<td>Last Activity:<\/td><td>(\d+)d (\d+)h (\d+)m (\d+)s<\/td>/;
-export const playerIDRE = /player_id=(\d+)/;
-export const itemRE = /item_id=(\d+)&inv_id=(\d+)/;
-export const guildRE = /guild_id=(\d+)/;
+export const lastActivityRE = /<td>Last Activity:<\/td><td>(?<d>\d+)d (?<h>\d+)h (?<m>\d+)m (?<s>\d+)s<\/td>/;
+export const playerIDRE = /player_id=(?<playerId>\d+)/;
+export const itemRE = /item_id=(?<itemId>\d+)&inv_id=(?<invId>\d+)/;
+export const guildRE = /guild_id=(?<guildId>\d+)/;
 
 export const defenderMultiplier = 0.2;
 

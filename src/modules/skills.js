@@ -15,7 +15,7 @@ const getTip = (a) => [
 const getMatches = ([id, lvl, tip]) => [
   id,
   lvl,
-  tip.split(/<|>/),
+  tip.split(/[<>]/),
 ];
 
 const getStam = ([id, lvl, tipSplit]) => [
