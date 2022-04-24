@@ -1,9 +1,14 @@
-import './arenaJoin.css';
+import ArenaJoin from './ArenaJoin.svelte';
 import arena from '../arena';
 import getElementById from '../../common/getElementById';
 import interceptSubmit from '../../common/interceptSubmit';
-import showAttribs from './showAttribs';
-import view from '../../app/arena/view';
+import { pCC } from '../../support/layout';
+
+function startApp(constructor) {
+  return new constructor({
+    target: pCC,
+  });
+}
 
 export default function arenaJoin() {
   const tabs = getElementById('arenaTypeTabs');
@@ -11,6 +16,6 @@ export default function arenaJoin() {
     arena();
   } else {
     interceptSubmit();
-    view().catch(() => ({})).then(showAttribs);
+    startApp(ArenaJoin);
   }
 }
