@@ -1,2 +1,0 @@
-.fshCompressor{margin-bottom:.5em;padding-bottom:.5em;position:relative}.fshCompressor>label{position:absolute;top:100%}.fshCompressor>input{display:none}.fshCompressor>label:after{content:"More ..."}.fshCompressor>input:checked+label:after{content:"Less ..."}.fshCompressor>input~div{height:10em;overflow:hidden}.fshCompressor>input:checked~div{height:100%}
-/*# sourceMappingURL=compressBio-N5HW2GJ6.css.map */

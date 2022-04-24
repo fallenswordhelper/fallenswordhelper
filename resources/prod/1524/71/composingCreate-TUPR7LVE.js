@@ -1,2 +1,0 @@
-import{a as l}from"./chunk-4SKJEDIT.js";import{a as o}from"./chunk-PZSZ5776.js";import{a as i}from"./chunk-2HQGE3TS.js";import{a as e}from"./chunk-QKRGEODM.js";function t(){o("composing-skill-level-input").value=l(o("composing-skill-level-max"))}function m(){i(o("composing-add-skill"),t),e(o("composing-skill-select"),"change",t)}export{m as default};
-//# sourceMappingURL=composingCreate-TUPR7LVE.js.map
