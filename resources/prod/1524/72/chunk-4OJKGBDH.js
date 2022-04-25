@@ -1,2 +1,0 @@
-import{a}from"./chunk-BWYRR4E3.js";import{a as l}from"./chunk-SJ4JHGNU.js";import{a as n}from"./chunk-4KLZTRYV.js";import{a as i}from"./chunk-EGI62KCW.js";function f(){let o=i("fshmsg");return o||(o=l({id:"fshmsg"}),n(document.body,o),$(o).dialog({autoOpen:!1,dialogClass:"no-close",draggable:!1,modal:!0,resizable:!1})),o}function r(o,e,s){$(s).dialog("option",{buttons:{Yes(){e(),$(this).dialog("close")},No(){$(this).dialog("close")}},title:o}).dialog("open")}function m(o,e,s){let t=f();a(e,t),r(o,s,t)}export{m as a};
-//# sourceMappingURL=chunk-4OJKGBDH.js.map
