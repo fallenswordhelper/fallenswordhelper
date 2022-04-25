@@ -8,15 +8,15 @@
 </script>
 
 <div class="grid">
-  <ItemImage class="med" item={anItem(equipment, 'Gloves')}/>
-  <ItemImage class="med" item={anItem(equipment, 'Helmet')}/>
-  <ItemImage class="sml" item={anItem(equipment, 'Amulet')}/>
-  <ItemImage class="lrg" item={anItem(equipment, 'Weapon')}/>
-  <ItemImage class="lrg" item={anItem(equipment, 'Armor')}/>
-  <ItemImage class="lrg" item={anItem(equipment, 'Shield')}/>
-  <ItemImage class="sml" item={anItem(equipment, 'Ring')}/>
-  <ItemImage class="med" item={anItem(equipment, 'Boots')}/>
-  <ItemImage class="sml" item={anItem(equipment, 'Rune')}/>
+  <ItemImage item={anItem(equipment, 'Gloves')}/>
+  <ItemImage item={anItem(equipment, 'Helmet')}/>
+  <ItemImage item={anItem(equipment, 'Amulet')}/>
+  <ItemImage lrg={1} item={anItem(equipment, 'Weapon')}/>
+  <ItemImage lrg={1} item={anItem(equipment, 'Armor')}/>
+  <ItemImage lrg={1} item={anItem(equipment, 'Shield')}/>
+  <ItemImage item={anItem(equipment, 'Ring')}/>
+  <ItemImage item={anItem(equipment, 'Boots')}/>
+  <ItemImage item={anItem(equipment, 'Rune')}/>
 </div>
 
 <style>
