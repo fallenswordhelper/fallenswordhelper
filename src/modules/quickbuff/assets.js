@@ -22,6 +22,8 @@ export const excludeBuff = [
   61, // Quest Finder
   98, // Barricade
   101, // Severe Condition
+  179, // Relentless
+  181, // Aegis Shield
 ];
 export const quickBuffSortCheckbox = '<p class="quickbuffSortCheckboxContainer">'
   + '<input id="quickbuffSortCheckbox" class="quickbuffSortCheckbox" type="checkbox">'
