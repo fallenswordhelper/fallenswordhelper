@@ -59,13 +59,31 @@ function initSite() {
   ga('fsh.send', 'pageview');
 }
 
-export default function setup() {
+function analyticsSetup() {
   if (isAuto()) { return; }
   if (isUndefined(window.ga)) {
     loadScript('https://www.google-analytics.com/analytics.js');
-    // eslint-disable-next-line
-    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    window.ga = window.ga || function gafn() {
+      ga.q = ga.q || [];
+      // eslint-disable-next-line prefer-rest-params
+      ga.q.push(arguments);
+    };
+    ga.l = +new Date();
   }
   initApp();
   initSite();
+}
+
+function gtagSetup() {
+  loadScript('https://www.googletagmanager.com/gtag/js?id=G-14Y99WX8XL');
+  window.dataLayer = window.dataLayer || [];
+  // eslint-disable-next-line prefer-rest-params
+  window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', 'G-14Y99WX8XL');
+}
+
+export default function setup() {
+  analyticsSetup();
+  gtagSetup();
 }
