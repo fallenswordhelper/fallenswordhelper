@@ -68,7 +68,7 @@ function analyticsSetup() {
       // eslint-disable-next-line prefer-rest-params
       ga.q.push(arguments);
     };
-    ga.l = +new Date();
+    ga.l = Number(new Date());
   }
   initApp();
   initSite();
