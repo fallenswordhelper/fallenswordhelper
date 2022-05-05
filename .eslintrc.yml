@@ -34,6 +34,7 @@ globals:
   HTMLTableElement: readonly
   Image: readonly
   localStorage: readonly
+  MutationObserver: readonly
   navigator: readonly
   Node: readonly
   performance: readonly

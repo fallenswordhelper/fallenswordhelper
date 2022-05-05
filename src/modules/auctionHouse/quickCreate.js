@@ -4,6 +4,8 @@ import asyncSome from '../common/asyncSome';
 import clickThis from '../common/clickThis';
 import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getInv from '../guild/inventory/storeitems/getInv';
+import getInvId from './getInvId';
+import highlightSts from './highlightSts';
 import numberIsNaN from '../common/numberIsNaN';
 import { pCC } from '../support/layout';
 import partial from '../common/partial';
@@ -20,7 +22,6 @@ const getTipped = (el) => el.parentNode.parentNode.dataset.tipped;
 const getSearch = (el) => getTipped(el).split('?')[1];
 const getItemId = (el) => getCustomUrlParameter(getSearch(el), 'item_id');
 const toSlice = (howMany) => (numberIsNaN(Number(howMany)) ? Infinity : Number(howMany));
-const getInvId = (el) => getCustomUrlParameter(getTipped(el), 'inv_id');
 const getItemType = async (el) => (await getInv()).items[getInvId(el)].type;
 const isResource = async (el) => (await getItemType(el)) === 12;
 const getItemCraft = async (el) => (await getInv()).items[getInvId(el)].craft;
@@ -36,9 +37,11 @@ const runTest = async (selectId, el, fn) => Boolean(await fn(selectId, el));
 const someTest = (selectId, el) => asyncSome(typeTests, partial(runTest, selectId, el));
 const doTests = async (selectId, el) => Boolean(await someTest(selectId, el));
 const filterItems = (id, items) => asyncFilter(items, partial(doTests, id));
+const notInSt = async (el) => !(await getInv()).items[getInvId(el)].is_in_st;
+const checkForSt = (inSt, items) => (inSt ? items : asyncFilter(items, notInSt));
 
-async function selectItems([selectId, howMany], auctionItems) {
-  (await filterItems(selectId, auctionItems))
+async function selectItems([selectId, howMany, inSt], auctionItems) {
+  (await filterItems(selectId, await checkForSt(inSt, auctionItems)))
     .slice(0, toSlice(howMany))
     .forEach(clickThis);
 }
@@ -56,8 +59,8 @@ function handleSelect(e) {
   selectType(e, selectItems);
 }
 
-async function perfItems(howMany, auctionItems) {
-  (await asyncFilter(auctionItems, isPerfect))
+async function perfItems([howMany, inSt], auctionItems) {
+  (await asyncFilter(await checkForSt(inSt, auctionItems), isPerfect))
     .slice(0, toSlice(howMany))
     .forEach(clickThis);
 }
@@ -67,8 +70,10 @@ function handlePerf(e) {
   selectType(e, perfItems);
 }
 
-export default function quickCreate() {
+export default async function quickCreate() {
+  const inv = await getInv();
   const quickSelect = injectQuickSelect();
   quickSelect.$on('select', handleSelect);
   quickSelect.$on('perf', handlePerf);
+  if (inv.items.fshHasST) highlightSts(inv);
 }

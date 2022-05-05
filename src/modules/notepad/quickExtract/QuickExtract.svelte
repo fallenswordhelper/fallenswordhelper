@@ -2,6 +2,7 @@
   import LinkButton from '../../common/LinkButton.svelte';
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import ModalTitled from '../../modal/ModalTitled.svelte';
+  import SelectInST from '../../common/SelectInST.svelte';
   import all from '../../common/all';
   import alpha from '../../common/alpha';
   import confirm from '../../modal/confirm';
@@ -45,7 +46,6 @@
 
   function toggleSelectST() {
     sendEvent('quickExtract', 'toggleSelectST');
-    setValue(prefSelectST, selectST);
     updateExtract();
   }
 
@@ -111,10 +111,7 @@
   <div>
     Select which type of plants you wish to extract all of. Only select extractable resources.
     <br>
-    <label>
-      <input bind:checked={selectST} on:change={toggleSelectST} type="checkbox">
-      Select items in ST
-    </label>&nbsp;
+    <SelectInST bind:inSt={selectST} on:toggle={toggleSelectST} />&nbsp;
     <label>
       <input bind:checked={selectMain} on:change={toggleSelectMain} type="checkbox">
       Main Folder Only
