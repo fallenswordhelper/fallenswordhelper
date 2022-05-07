@@ -3,7 +3,7 @@ import daGlobalContrib from '../../../_dataAccess/daGlobalContrib';
 import getElementById from '../../../common/getElementById';
 import onclick from '../../../common/onclick';
 
-let gt;
+let gt = 0;
 
 const props = () => ({ promise: daGlobalContrib() });
 
