@@ -20,7 +20,7 @@
 
 {#await promise}
   Loading...
-{:then { r: { list }}}
+{:then { r: list }}
   <table id="world-event-contrib-table">
     <tr>
       <td class="header"></td>
@@ -28,18 +28,18 @@
       <td class="header">Username</td>
       <td class="header">Kills</td>
     </tr>
-    {#each list as data, i}
+    {#each list as { player, value }, i}
       <tr>
         <td>{i + 1}</td>
         <td>
-          {#if data.guild}
-            <a href="{guildViewUrl}{data.guild.id}">
-              <img src="{cdn}guilds/{data.guild.id}_mini.png" alt="guild logo">
+          {#if player.guild_id}
+            <a href="{guildViewUrl}{player.guild_id}">
+              <img src="{cdn}guilds/{player.guild_id}_mini.png" alt="guild logo">
             </a>
           {/if}
         </td>
-        <td><a href="{showPlayerUrl}{data.player.name}">{data.player.name}</a></td>
-        <td>{data.value}</td>
+        <td><a href="{showPlayerUrl}{player.name}">{player.name}</a></td>
+        <td>{value}</td>
       </tr>
     {/each}
   </table>

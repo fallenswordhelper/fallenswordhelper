@@ -1,11 +1,11 @@
 import GlobalTop from './GlobalTop.svelte';
-import daTopRated from '../../../_dataAccess/daTopRated';
+import daGlobalContrib from '../../../_dataAccess/daGlobalContrib';
 import getElementById from '../../../common/getElementById';
 import onclick from '../../../common/onclick';
 
 let gt;
 
-const props = () => ({ promise: daTopRated('globalquest') });
+const props = () => ({ promise: daGlobalContrib() });
 
 function startApp(target) {
   if (!gt) {
