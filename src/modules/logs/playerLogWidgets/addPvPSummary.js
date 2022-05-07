@@ -3,6 +3,7 @@ import closestTr from '../../common/closestTr';
 import { combatSelector } from '../../support/constants';
 import createDiv from '../../common/cElement/createDiv';
 import getCombat from './getCombat';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import querySelector from '../../common/querySelector';
@@ -11,9 +12,9 @@ import querySelectorArray from '../../common/querySelectorArray';
 const green = 'fshGreen';
 const red = 'fshRed';
 
-const isPvp = (r) => querySelector(combatSelector, r);
-const getCombats = async ([r, msgHtml]) => [
-  r, msgHtml, await getCombat(r, /combat_id=(\d+)/.exec(msgHtml)[1]),
+const isPvp = ([, r]) => querySelector(combatSelector, r);
+const getCombats = async ([cl, r, msgHtml]) => [
+  r, msgHtml, await getCombat(r, getCustomUrlParameter(cl.href, 'combat_id')),
 ];
 
 function parseCombatWinner(msgHtml) {
@@ -71,9 +72,9 @@ function updateTd([r, msgHtml, json]) {
 
 function notGuild(combatLinks) {
   return combatLinks
-    .map(closestTr)
+    .map((cl) => [cl, closestTr(cl)])
     .filter(isPvp)
-    .map((r) => [r, r.cells[2].innerHTML])
+    .map(([cl, r]) => [cl, r, r.cells[2].innerHTML])
     .map(getCombats);
 }
 
