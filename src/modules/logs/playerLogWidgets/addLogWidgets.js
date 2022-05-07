@@ -18,9 +18,9 @@ const conditionalArray = [
   ['showPvPSummaryInLog', addPvPSummary],
 ];
 
-function processConditionals(logTable, privMsg, pair) {
-  if (getValue(pair[0])) {
-    pair[1](logTable, privMsg);
+function processConditionals(logTable, privMsg, [pref, fn]) {
+  if (getValue(pref)) {
+    fn(logTable, privMsg);
   }
 }
 
