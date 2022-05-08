@@ -86,7 +86,7 @@ function corePrefs() {
 }
 
 export default function ConfigData() {
-  calf.configData = '<form><table id="fshSettingsTable">'
+  calf.configData = '<form><table class="fshSettingsTable">'
     + '<thead><th colspan="2"><b>Fallen Sword Helper configuration '
       + `Settings</b></th></thead>${
         storageDetails()}${linkToWebsite()}${corePrefs()

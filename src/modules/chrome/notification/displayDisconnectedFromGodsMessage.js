@@ -8,7 +8,7 @@ import once from '../../common/once';
 import saveTempleSettings from './saveTempleSettings';
 import sendEvent from '../../analytics/sendEvent';
 
-let helperPrayToGods;
+let helperPrayToGods = 0;
 
 const havePrayedMsg = '<span class="notification-icon"></span>'
   + '<p class="notification-content">'

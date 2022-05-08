@@ -1,6 +1,3 @@
-#fshAllyEnemy .fshHide {
-  display: none;
-}
 #fshAllyEnemy .fshWhite {
   color: white;
 }
@@ -37,7 +34,7 @@
   font-size: xx-small;
   text-decoration: underline;
 }
-#minibox-enemy {
+.minibox-enemy {
   margin: 0 0 10px;
   overflow: hidden
 }
@@ -61,7 +58,6 @@
   background-position: -270px -80px;
 }
 .enemy-icon {
-  display: inline-block;
   float: left;
   height: 12px;
   margin: 1px 0 1px 2px;

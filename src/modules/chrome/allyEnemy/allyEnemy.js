@@ -9,12 +9,14 @@ import getElementById from '../../common/getElementById';
 import getPlayerId from '../../common/getPlayerId';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
+// import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import myStats from '../../ajax/myStats';
 import onclick from '../../common/onclick';
 import openQuickBuffById from '../../common/openQuickBuffById';
 import { pCL } from '../../support/layout';
+// import { pCR } from '../../support/layout';
 import partial from '../../common/partial';
 import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -120,12 +122,13 @@ function makeDiv(data) {
   });
   let wrapper = '<h3>Allies/Enemies</h3><div class="minibox-content">'
     + '<h4>Online Contacts <span id="fshResetEnemy">Reset</span></h4>'
-    + '<div id="minibox-enemy"><ul id="fshContactList"></ul>';
+    + '<div class="minibox-enemy"><ul id="fshContactList"></ul>';
   if (!calf.hideBuffSelected) {
     wrapper += `<ul class="${enemySelectedBuff}">Quick Buff Selected</ul>`;
   }
   wrapper += '</div></div>';
   insertHtmlBeforeEnd(fshAllyEnemy, wrapper);
+  // insertElementAfterBegin(pCR, fshAllyEnemy);
   insertElement(pCL, fshAllyEnemy);
   onclick(fshAllyEnemy, eventHandler);
   injectAllyEnemyList(data);

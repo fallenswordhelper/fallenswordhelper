@@ -1,9 +1,9 @@
-#fshSettingsTable {
+.fshSettingsTable {
   border-spacing: 10px;
 }
 .fshHelpTitle {
-  font-weight: bold;
   color: #FFF380;
+  font-weight: bold;
 }
 .networkIcon {display: inline-block;}
 .fshSettingsText {

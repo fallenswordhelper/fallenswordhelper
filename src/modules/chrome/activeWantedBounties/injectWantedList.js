@@ -8,7 +8,7 @@ import setValueJSON from '../../system/setValueJSON';
 import { wantedList } from './lists';
 import { wantedListDiv } from './createDivs';
 
-export let wantedListReset;
+export let wantedListReset = 0;
 
 function makeMouseOver(el) {
   return `Target Level:  ${el.lvl

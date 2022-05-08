@@ -16,7 +16,7 @@ import setValue from '../system/setValue';
 import toggleVisibilty from '../common/toggleVisibilty';
 
 function findEl(el, name) {
-  return querySelector(`#fshSettingsTable ${el}[name="${name}"]`);
+  return querySelector(`.fshSettingsTable ${el}[name="${name}"]`);
 }
 
 function findInput(name) {

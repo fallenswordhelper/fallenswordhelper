@@ -3,8 +3,8 @@ import createDiv from '../../common/cElement/createDiv';
 import insertElement from '../../common/insertElement';
 import { pCL } from '../../support/layout';
 
-export let bountyListDiv;
-export let wantedListDiv;
+export let bountyListDiv = 0;
+export let wantedListDiv = 0;
 
 function createMiniBox() {
   return createDiv({ className: 'minibox' });
