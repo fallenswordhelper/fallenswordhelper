@@ -52,7 +52,7 @@ function doBuffCheck() {
 
 function doMsgButton() {
   if (!calf.hideGuildInfoMessage) {
-    return `<span class="${enemySendMessage} guild-icon left `
+    return `<span class="${enemySendMessage} enemy-icon `
       + 'guild-minibox-action tip-static" data-tipped="Send Message"></span>';
   }
   return '';
@@ -60,7 +60,7 @@ function doMsgButton() {
 
 function doBuffButton() {
   if (!calf.hideGuildInfoBuff) {
-    return `<span class="${enemyQuickbuff} guild-icon left `
+    return `<span class="${enemyQuickbuff} enemy-icon `
       + 'guild-minibox-action tip-static" data-tipped="Quick Buff"></span>';
   }
   return '';
@@ -68,7 +68,7 @@ function doBuffButton() {
 
 function doSecureButton(val) {
   if (!calf.hideGuildInfoSecureTrade) {
-    return '<a class="enemy-secure-trade guild-icon left guild-minibox-action'
+    return '<a class="enemy-secure-trade enemy-icon guild-minibox-action'
       + ` tip-static" href="${secureUrl}${
         val.username}" data-tipped="Secure Trade"></a>`;
   }
@@ -77,7 +77,7 @@ function doSecureButton(val) {
 
 function doTradeButton(val) {
   if (!calf.hideGuildInfoTrade) {
-    return '<a class="enemy-trade guild-icon left guild-minibox-action '
+    return '<a class="enemy-trade enemy-icon guild-minibox-action '
       + `tip-static" href="${tradeUrl}${
         val.username}" data-tipped="Send Gold/Items/FSP"></a>`;
   }

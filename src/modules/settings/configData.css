@@ -1,6 +1,17 @@
+#fshSettingsTable {
+  border-spacing: 10px;
+}
+.fshHelpTitle {
+  font-weight: bold;
+  color: #FFF380;
+}
+.networkIcon {display: inline-block;}
 .fshSettingsText {
-    width: 340px;
+  width: 340px;
 }
 .fshSettingsNumber {
-    width: 40px;
+  width: 40px;
+}
+.unstable {
+  cursor: default
 }

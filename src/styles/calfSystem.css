@@ -63,15 +63,6 @@
   font-size: 11px;
 }
 
-
-/* Settings */
-#fshSettingsTable {border-spacing: 10px;}
-.networkIcon {display: inline-block;}
-.fshHelpTitle {
-  font-weight: bold;
-  color: #FFF380;
-}
-
 /* Advisor */
 .fshSpinnerMsg {
   align-self: center;
@@ -239,15 +230,6 @@
   font-size: 11px;
 }
 
-#fshAllyEnemy .fshHide {display: none;}
-#fshAllyEnemy .fshWhite {color: white;}
-#fshAllyEnemy .fshRed {color: red;}
-#fshAllyEnemy .fshDodgerBlue {color: DodgerBlue;}
-#fshAllyEnemy .fshPowderBlue {color: PowderBlue;}
-#fshAllyEnemy .fshLightSkyBlue {color: LightSkyBlue;}
-#fshAllyEnemy .fshPaleVioletRed {color: PaleVioletRed;}
-#fshAllyEnemy .fshPink {color: pink;}
-
 #minibox-guild-members-list .fshGreen {color: green;}
 #minibox-guild-members-list .fshWhite {color: white;}
 #minibox-guild-members-list .fshGrey {color: grey;}
@@ -258,49 +240,6 @@
 #minibox-allies-list .fshHide {display: none;}
 
 .profile-stat-bonus {font-size: x-small;}
-#minibox-enemy {margin: 0 0 10px; overflow: hidden}
-#fshResetEnemy {
-  font-size: xx-small;
-  cursor: pointer;
-  text-decoration: underline;
-}
-.enemy-send-message {
-  cursor: pointer;
-  background-position: -198px -80px;
-}
-.enemy-quickbuff {
-  cursor: pointer;
-  background-position: -210px -80px;
-}
-.enemy-secure-trade {background-position: -222px -80px;}
-.enemy-trade {background-position: -234px -80px;}
-.player-row {white-space: nowrap}
-#fshAllyEnemy .enemy-quick-buff {
-  clear: both;
-  text-align: center;
-  font-size: 11px;
-  margin: 0;
-  padding-top: 5px;
-  color: #F7EAC9;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.enemy-buff-check-on,
-.enemy-buff-check-off {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin: 0 1px 2px 0;
-  vertical-align: bottom;
-  background: transparent url('https://cdn2.fallensword.com/ui/misc/icons.png');
-  cursor: pointer;
-}
-.enemy-buff-check-off {
-  background-position: -246px -80px;
-}
-.enemy-buff-check-on {
-  background-position: -270px -80px;
-}
 
 .fshMoveItem {
   font-size: xx-small;

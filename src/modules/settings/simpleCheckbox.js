@@ -14,12 +14,16 @@ function hasNetwork(o) {
   return '';
 }
 
+const stability = (o) => (
+  o.unstable
+    ? '<span class="unstable" data-tooltip="Warning: Causes page instability">&#128498;</span>'
+    : ''
+);
+
 export function justLabel(name) {
   const o = mySimpleCheckboxes[name];
-  return `${hasNetwork(o)
-  }<label class="fshNoWrap" for="${name}">${fallback(o.title, o.helpTitle)
-  }${helpLink(o.helpTitle, o.helpText)
-  }:</label>`;
+  return `${hasNetwork(o)}${stability(o)}<label class="fshNoWrap" for="${name}">${
+    fallback(o.title, o.helpTitle)}${helpLink(o.helpTitle, o.helpText)}:</label>`;
 }
 
 export function justCheckbox(name) {

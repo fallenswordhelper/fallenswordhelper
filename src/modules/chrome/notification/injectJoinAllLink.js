@@ -3,7 +3,7 @@ import getElementById from '../../common/getElementById';
 
 function mountApp(newGroup) {
   return new JoinAllLink({
-    anchor: newGroup,
+    anchor: newGroup.nextElementSibling,
     target: newGroup.parentNode,
   });
 }

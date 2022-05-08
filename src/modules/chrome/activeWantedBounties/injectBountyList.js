@@ -21,7 +21,7 @@ export function injectBountyList() { // Legacy
   setValueJSON('bountyList', bountyList);
   setInnerHtml('', bountyListDiv);
   const heading = createDiv(
-    { innerHTML: `<a href="${bountyUrl}">Active Bounties</a> ` },
+    { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">Active Bounties</a> ` },
   );
   bountyListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
   insertElement(heading, bountyListReset);

@@ -1,7 +1,7 @@
 import calf from '../../support/calf';
 import createDiv from '../../common/cElement/createDiv';
-import insertElementAfterBegin from '../../common/insertElementAfterBegin';
-import { pCR } from '../../support/layout';
+import insertElement from '../../common/insertElement';
+import { pCL } from '../../support/layout';
 
 export let bountyListDiv;
 export let wantedListDiv;
@@ -11,12 +11,12 @@ function createMiniBox() {
 }
 
 export function createDivs() {
-  if (calf.enableWantedList) {
-    wantedListDiv = createMiniBox();
-    insertElementAfterBegin(pCR, wantedListDiv);
-  }
   if (calf.enableActiveBountyList) {
     bountyListDiv = createMiniBox();
-    insertElementAfterBegin(pCR, bountyListDiv);
+    insertElement(pCL, bountyListDiv);
+  }
+  if (calf.enableWantedList) {
+    wantedListDiv = createMiniBox();
+    insertElement(pCL, wantedListDiv);
   }
 }

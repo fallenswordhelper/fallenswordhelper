@@ -1,11 +1,13 @@
 {
   "moveGuildList":{
     "helpTitle":"Move Guild Info List",
-    "helpText":"This will Move the Guild Info List higher on the bar on the right"
+    "helpText":"This will Move the Guild Info List higher on the bar on the right",
+    "unstable": true
   },
   "moveOnlineAlliesList":{
     "helpTitle":"Move Online Allies List",
-    "helpText":"This will Move the Online Allies List higher on the bar on the right"
+    "helpText":"This will Move the Online Allies List higher on the bar on the right",
+    "unstable": true
   },
   "enableOnlineAlliesWidgets":{
     "helpTitle":"Enable Online Allies Widgets",
@@ -13,15 +15,18 @@
   },
   "moveFSBox":{
     "helpTitle":"Move FS box",
-    "helpText":"This will move the FS box to the left, under the menu, for better visibility (unless it is already hidden.)"
+    "helpText":"This will move the FS box to the left, under the menu, for better visibility (unless it is already hidden.)",
+    "unstable": true
   },
   "moveDailyQuest":{
     "helpTitle":"Move Daily Quest",
-    "helpText":"This will move the Daily Quest to the left, under the menu, for better visibility (unless it is already hidden.)"
+    "helpText":"This will move the Daily Quest to the left, under the menu, for better visibility.",
+    "unstable": true
   },
   "moveXmasBox":{
     "helpTitle":"Move Christmas Offer",
-    "helpText":"This will move the Christmas Offer to the left, under the menu, for better visibility."
+    "helpText":"This will move the Christmas Offer to the left, under the menu, for better visibility.",
+    "unstable": true
   },
   "gameHelpLink":{
     "helpTitle":"&quot;Game Help&quot; Settings Link",
@@ -48,7 +53,8 @@
   },
   "hideBuffSelected":{
     "helpTitle":"Hide Buff Selected",
-    "helpText":"Hides the buff selected functionality in the online allies and guild info section."
+    "helpText":"Hides the buff selected functionality in the online allies and guild info section.",
+    "unstable": true
   },
   "hideHelperMenu":{
     "helpTitle":"Hide Helper Menu",
@@ -86,7 +92,8 @@
   },
   "fsboxlog":{
     "helpTitle":"Enable FS Box Log",
-    "helpText":"This enables the functionality to keep a log of recent seen FS Box message."
+    "helpText":"This enables the functionality to keep a log of recent seen FS Box message.",
+    "unstable": true
   },
   "keepBuffLog":{
     "helpTitle":"Enable Buff Log",
@@ -119,7 +126,8 @@
   },
   "enhanceChatTextEntry":{
     "helpTitle":"Enhance Chat Text Entry",
-    "helpText":"If checked, this will enhance the entry field for entering chat text on the guild chat page."
+    "helpText":"If checked, this will enhance the entry field for entering chat text on the guild chat page.",
+    "unstable": true
   },
   "showExtraLinks":{
     "helpTitle":"Show Extra Links",
@@ -151,7 +159,8 @@
   },
   "enableBioCompressor":{
     "helpTitle":"Enable Bio Compressor",
-    "helpText":"This will compress long bios and provide a link to expand the compressed section."
+    "helpText":"This will compress long bios and provide a link to expand the compressed section.",
+    "unstable": true
   },
   "showStatBonusTotal":{
     "helpTitle":"Show Stat Bonus Total",
@@ -184,7 +193,8 @@
   },
   "moveComposingButtons":{
     "helpTitle":"Move Composing Buttons",
-    "helpText":"If enabled, will move composing buttons to the top of the composing screen."
+    "helpText":"If enabled, will move composing buttons to the top of the composing screen.",
+    "unstable": true
   },
   "draggableHelperMenu":{
     "helpTitle":"Draggable Helper Menu",
@@ -375,7 +385,8 @@
   },
   "wrapGuildChat":{
     "helpTitle":"Wrap Guild Chat",
-    "helpText":"This forces word wrap in guild chat."
+    "helpText":"This forces word wrap in guild chat.",
+    "unstable": true
   },
   "colorPlayerNames":{
     "helpTitle":"Color Player Names",
@@ -424,19 +435,23 @@
   },
   "statisticsWrap":{
     "helpTitle":"Statistics Wrap",
-    "helpText":"This fixes the wrapping of the statistics section."
+    "helpText":"This fixes the wrapping of the statistics section.",
+    "unstable": true
   },
   "showGuildRelationship":{
     "helpTitle":"Show Guild Relationship",
-    "helpText":"This show the guild relationship in players&apos; profiles."
+    "helpText":"This show the guild relationship in players&apos; profiles.",
+    "unstable": true
   },
   "showQuickButtons":{
     "helpTitle":"Show Quick Buttons",
-    "helpText":"This shows quick access buttons under the avatar in players&apos; profiles."
+    "helpText":"This shows quick access buttons under the avatar in players&apos; profiles.",
+    "unstable": true
   },
   "showBuffLevel":{
     "helpTitle":"Show Buff Level",
-    "helpText":"This shows level underneath buffs in players&apos; profiles."
+    "helpText":"This shows level underneath buffs in players&apos; profiles.",
+    "unstable": true
   },
   "enableItemColoring":{
     "helpTitle":"Enable Item Coloring",

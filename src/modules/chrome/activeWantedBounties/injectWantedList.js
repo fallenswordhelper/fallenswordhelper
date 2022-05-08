@@ -31,7 +31,7 @@ export function injectWantedList() { // Legacy
   setValueJSON('wantedList', wantedList);
   setInnerHtml('', wantedListDiv);
   const heading = createDiv(
-    { innerHTML: `<a href="${bountyUrl}">Wanted Bounties</a> ` },
+    { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">Wanted Bounties</a> ` },
   );
   wantedListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
   insertElement(heading, wantedListReset);

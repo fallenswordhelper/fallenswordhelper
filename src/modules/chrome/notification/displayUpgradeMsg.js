@@ -1,5 +1,5 @@
 import getElementById from '../../common/getElementById';
-import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
+import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import notGoldUpgradesPage from './notGoldUpgradesPage';
 import { pointsUrl } from '../../support/constants';
 
@@ -9,6 +9,6 @@ const goldUpgradeMsg = `<li class="notification"><a href="${pointsUrl}&type=1"><
 
 export default function displayUpgradeMsg() {
   if (notGoldUpgradesPage()) {
-    insertHtmlAfterBegin(getElementById('notifications'), goldUpgradeMsg);
+    insertHtmlBeforeEnd(getElementById('notifications'), goldUpgradeMsg);
   }
 }

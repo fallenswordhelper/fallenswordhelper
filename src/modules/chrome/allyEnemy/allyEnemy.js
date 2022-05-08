@@ -1,3 +1,4 @@
+import './allyEnemy.css';
 import addContacts from './addContacts';
 import calf from '../../support/calf';
 import classHandler from '../../common/classHandler';
@@ -7,13 +8,13 @@ import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElementById';
 import getPlayerId from '../../common/getPlayerId';
 import getText from '../../common/getText';
-import insertElementAfterBegin from '../../common/insertElementAfterBegin';
+import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import myStats from '../../ajax/myStats';
 import onclick from '../../common/onclick';
 import openQuickBuffById from '../../common/openQuickBuffById';
-import { pCR } from '../../support/layout';
+import { pCL } from '../../support/layout';
 import partial from '../../common/partial';
 import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -125,7 +126,7 @@ function makeDiv(data) {
   }
   wrapper += '</div></div>';
   insertHtmlBeforeEnd(fshAllyEnemy, wrapper);
-  insertElementAfterBegin(pCR, fshAllyEnemy);
+  insertElement(pCL, fshAllyEnemy);
   onclick(fshAllyEnemy, eventHandler);
   injectAllyEnemyList(data);
 }
