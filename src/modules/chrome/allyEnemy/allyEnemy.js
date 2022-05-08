@@ -9,14 +9,12 @@ import getElementById from '../../common/getElementById';
 import getPlayerId from '../../common/getPlayerId';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
-// import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import myStats from '../../ajax/myStats';
 import onclick from '../../common/onclick';
 import openQuickBuffById from '../../common/openQuickBuffById';
 import { pCL } from '../../support/layout';
-// import { pCR } from '../../support/layout';
 import partial from '../../common/partial';
 import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -128,7 +126,6 @@ function makeDiv(data) {
   }
   wrapper += '</div></div>';
   insertHtmlBeforeEnd(fshAllyEnemy, wrapper);
-  // insertElementAfterBegin(pCR, fshAllyEnemy);
   insertElement(pCL, fshAllyEnemy);
   onclick(fshAllyEnemy, eventHandler);
   injectAllyEnemyList(data);
