@@ -30,7 +30,6 @@
 <style>
   div {
     margin-top: 10px;
-    text-align: right;
   }
   button {
     font-size: 12px;
