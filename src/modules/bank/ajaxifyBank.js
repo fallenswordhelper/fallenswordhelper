@@ -100,9 +100,9 @@ function bankWithdrawal(bankSettings, e) { // jQuery
   doAjax(bankSettings);
 }
 
-function linkToGuildBank(bankSettings, bank) { // jQuery
+function linkToGuildBank(bankSettings) { // jQuery
   if (bankSettings.appLink) {
-    bank.after(`<div class="fshCenter"><a href="${
+    $('#pCC').append(`<div class="fshCenter"><a href="${
       guildSubcmdUrl}bank">Go to Guild Bank</a></div>`);
   }
 }
@@ -116,8 +116,8 @@ function captureButtons(bankSettings, depo, withdraw) { // jQuery
   withdraw.on('click', partial(bankWithdrawal, bankSettings));
 }
 
-function appLink(bankSettings, bank) { // jQuery
-  linkToGuildBank(bankSettings, bank);
+function appLink(bankSettings) { // jQuery
+  linkToGuildBank(bankSettings);
   const depo = $(inputDepo);
   if (depo.length !== 1) { return; }
   const withdraw = $('#pCC input[value="Withdraw"]');
@@ -128,7 +128,7 @@ function appLink(bankSettings, bank) { // jQuery
 function hasJquery(bankSettings) { // jQuery
   const bank = $(bankSettings.headSelector);
   if (bank.length !== 0 && bank.eq(0).text() === bankSettings.headText) {
-    appLink(bankSettings, bank);
+    appLink(bankSettings);
   }
 }
 
