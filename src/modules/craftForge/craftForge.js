@@ -1,150 +1,79 @@
 import './craftForge.css';
+import CraftForge from './CraftForge.svelte';
 import calf from '../support/calf';
+import closestTable from '../common/closestTable';
+import closestTr from '../common/closestTr';
 import createDiv from '../common/cElement/createDiv';
-import createInput from '../common/cElement/createInput';
-import createLabel from '../common/cElement/createLabel';
-import getArrayByTagName from '../common/getArrayByTagName';
-import getElementsByTagName from '../common/getElementsByTagName';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getInventoryById from '../ajax/getInventoryById';
-import hasClass from '../common/hasClass';
 import hideElement from '../common/hideElement';
 import insertElement from '../common/insertElement';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
-import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryPresent from '../common/jQueryPresent';
-import makeFolderSpans from '../common/makeFolderSpans';
-import on from '../common/on';
-import onclick from '../common/onclick';
 import { pCC } from '../support/layout';
-import task from '../support/task';
-import toggleForce from '../common/toggleForce';
-import { defTable, itemRE } from '../support/constants';
+import querySelector from '../common/querySelector';
+import querySelectorArray from '../common/querySelectorArray';
 
-let itemTable;
-let itemsAry;
-let invItems;
-let folderId = 0;
-let perfBox;
-let itemGrid;
+let inv = 0;
+let itemGrid = 0;
+let prm = 0;
+let thisItemTable = 0;
+let warehouse = 0;
 
-function whichTableHasItems() {
-  const allTables = getElementsByTagName(defTable, pCC.lastElementChild);
-  if (calf.cmd === 'crafting') {
-    return allTables[1];
-  }
-  return allTables[0];
+const getAnchors = () => querySelectorArray(`a[href*="=${calf.cmd}&"]`, pCC);
+const invId = (a) => getCustomUrlParameter(a.href, 'inv_id');
+const getInvItem = (a) => [a, inv.items[invId(a)]];
+const getItemTable = () => closestTable(querySelector('img[src*="/items/"]', pCC));
+const emptyRow = () => closestTr(thisItemTable).previousElementSibling.children[0];
+const showFolder = (item, currentFolder) => currentFolder === -2
+    || (currentFolder === -3 && item.equipped)
+    || item.folder_id === currentFolder;
+const showPerf = (item, wantsPerfect) => !wantsPerfect || item.craft === 'Perfect';
+const showItem = (item, currentFolder, wantsPerfect) => showFolder(item, currentFolder)
+  && showPerf(item, wantsPerfect);
+
+function getWarehouse() {
+  if (!warehouse) warehouse = getAnchors().map(getInvItem);
+  return warehouse;
 }
 
-function insertItem(item) {
+function startCraftForge() {
+  return new CraftForge({
+    props: { prm },
+    target: emptyRow(),
+  });
+}
+
+function insertItem([a]) {
   const itemDiv = createDiv();
-  const aLink = item[0].parentNode;
-  insertElement(itemDiv, aLink);
+  insertElement(itemDiv, a);
   insertElement(itemGrid, itemDiv);
 }
 
-function drawingNewItemTable() {
+function drawingNewItemTable(wh) {
   if (!itemGrid) {
-    itemGrid = createDiv({ className: 'fshItemGrid' });
-    itemsAry.forEach(insertItem);
-    insertElementAfterBegin(itemTable.parentNode, itemGrid);
-    hideElement(itemTable);
+    itemGrid = createDiv({ className: 'fshCraftForgeGrid' });
+    wh.forEach(insertItem);
+    insertElementAfterBegin(thisItemTable.parentNode, itemGrid);
+    hideElement(thisItemTable);
   }
 }
 
-function testFolder(item) {
-  return folderId !== 0 && item[2] !== folderId;
-}
-
-function testCraft(item) {
-  return perfBox.checked && item[3] !== 'Perfect';
-}
-
-function afn(item) {
-  const myDiv = item[0].parentNode.parentNode;
-  toggleForce(myDiv, testFolder(item) || testCraft(item));
-}
-
-function reDrawGrid() {
-  drawingNewItemTable();
-  itemsAry.forEach(afn);
-}
-
-function doHideFolders(evt) {
-  if (!hasClass('fshFolder', evt.target)) { return; }
-  const evtFid = Number(evt.target.dataset.folder);
-  if (evtFid !== folderId) {
-    folderId = evtFid;
-    reDrawGrid();
-  }
-}
-
-function getFolderId(item) {
-  if (item.equipped) { return -2; }
-  return item.folder_id;
-}
-
-function addProps(item) {
-  const invItem = invItems[item[1]];
-  if (invItem) {
-    item.push(getFolderId(invItem), invItem.craft);
-  }
-}
-
-function enhanceWarehouse() {
-  itemsAry.forEach(addProps);
-}
-
-function doFolderButtons(folders) {
-  const inject = itemTable.parentNode.parentNode
-    .previousElementSibling.children[0];
-  inject.classList.add('fshCenter');
-  onclick(inject, doHideFolders);
-  insertHtmlBeforeEnd(inject, makeFolderSpans(folders, true));
-  return inject;
-}
-
-function doPerfSwitch(inject) {
-  if (calf.cmd === 'crafting') {
-    perfBox = { checked: false };
-    return;
-  }
-  const perfLabel = createLabel({
-    className: 'fshVMid',
-    innerHTML: '<span class="fshLink">Perfect</span> ',
+function doFilter({ detail: [currentFolder, wantsPerfect] }) {
+  const wh = getWarehouse();
+  drawingNewItemTable(wh);
+  wh.forEach(([a, item]) => {
+    const myDiv = a.parentNode;
+    myDiv.classList.toggle('fshCraftForgeShow', showItem(item, currentFolder, wantsPerfect));
   });
-  perfBox = createInput({
-    className: 'fshVMid',
-    type: 'checkbox',
-  });
-  on(perfBox, 'change', reDrawGrid);
-  insertElement(perfLabel, perfBox);
-  insertHtmlBeforeEnd(inject, ' &ensp;');
-  insertElement(inject, perfLabel);
 }
 
-function inventory(data) {
-  if (data.items && itemTable) {
-    invItems = data.items;
-    task(4, enhanceWarehouse);
-    const inject = doFolderButtons(data.folders);
-    doPerfSwitch(inject);
-  }
-}
-
-function imgItemId(img) {
-  const { tipped } = img.dataset;
-  const matches = tipped.match(itemRE);
-  return [img, matches[2]];
-}
-
-function getItems() {
-  itemTable = whichTableHasItems();
-  itemsAry = getArrayByTagName('img', itemTable).map(imgItemId);
-}
-
-export default function craftForge() {
+export default async function craftForge() {
   if (jQueryPresent() && pCC) {
-    getInventoryById().then(inventory);
-    task(3, getItems);
+    prm = getInventoryById();
+    thisItemTable = getItemTable();
+    const cf = startCraftForge();
+    cf.$on('doFilter', doFilter);
+    inv = await prm;
   }
 }

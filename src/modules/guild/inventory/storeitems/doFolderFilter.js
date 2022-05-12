@@ -3,6 +3,7 @@ import batch from '../../../common/batch';
 import closestTr from '../../../common/closestTr';
 import getCheckboxesArray from './getCheckboxesArray';
 import partial from '../../../common/partial';
+import sendEvent from '../../../analytics/sendEvent';
 import toggleForce from '../../../common/toggleForce';
 
 function startFolderFilter(inv, form) {
@@ -23,6 +24,7 @@ function updateList(inv, id, ctx) {
 }
 
 function doFilter(inv, e) {
+  sendEvent('storeitems', 'Filter Folder');
   batch([
     5,
     3,

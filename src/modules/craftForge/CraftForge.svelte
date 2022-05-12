@@ -1,0 +1,47 @@
+<script>
+  import FolderButtons from '../common/FolderButtons.svelte';
+  import calf from '../support/calf';
+  import { createEventDispatcher } from 'svelte';
+
+  let currentFolder = -2;
+  const dispatch = createEventDispatcher();
+  export let prm = 0;
+  let wantsPerfect = false;
+
+  function doFilter(e) {
+    currentFolder = Number(e.detail);
+    dispatch('doFilter', [currentFolder, wantsPerfect]);
+  }
+
+  function perfChange() {
+    dispatch('doFilter', [currentFolder, wantsPerfect]);
+  }
+</script>
+
+{#await prm then inv}
+  <div class="buttonContainer">
+    <FolderButtons folders={inv.folders} needsWorn=1 on:filter={doFilter}/>
+  </div>
+  {#if calf.cmd === 'hellforge'}
+    <div>
+      <label>
+        Perfect
+        <input bind:checked={wantsPerfect} on:change={perfChange} type="checkbox">
+      </label>
+    </div>
+  {/if}
+{/await}
+
+<style>
+  div {
+    text-align: center;
+  }
+  .buttonContainer {
+    --button-color: black;
+    --button-margin: auto 3px;
+    padding: 2px 0;
+  }
+  label, input {
+    vertical-align: middle;
+  }
+</style>
