@@ -1,19 +1,21 @@
-.fshCraftForgeGrid {
-  display: grid;
-  gap: 2px;
-  grid-template-columns: repeat(9, 60px);
-  justify-content: center;
+@layer craftForge {
+  .fshCraftForgeGrid {
+    display: grid;
+    gap: 2px;
+    grid-template-columns: repeat(9, 60px);
+    justify-content: center;
+  }
+
+  .fshCraftForgeGrid div {
+    align-items: center;
+    background: url('https://cdn2.fallensword.com/ui/inventory/2x3.png');
+    display: none;
+    height: 90px;
+    justify-content: center;
+    width: 60px;
+  }
 }
 
-.fshCraftForgeGrid div {
-  align-items: center;
-  background: url('https://cdn2.fallensword.com/ui/inventory/2x3.png');
-  display: none;
-  height: 90px;
-  justify-content: center;
-  width: 60px;
-}
-
-div.fshCraftForgeShow {
+.fshCraftForgeShow {
   display: flex;
 }

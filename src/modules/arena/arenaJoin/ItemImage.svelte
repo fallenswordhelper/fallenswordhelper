@@ -1,19 +1,15 @@
 <script>
-  import { cdn } from '../../system/system';
-  import playerId from '../../common/playerId';
+  import ItemImg from '../../common/ItemImg.svelte';
 
   let className = '';
 
   export let item = 0;
   export { className as class };
-
-  const src = (i) => `${cdn}items/${i.b}.gif`;
-  const tipped = (i) => `fetchitem.php?item_id=${i.b}&inv_id=${i.a}&t=1&p=${playerId()}`;
 </script>
 
 <div class="{className}">
   {#if item}
-    <img alt="{item.name}" src="{src(item)}" class="tip-dynamic" data-tipped="{tipped(item)}">
+    <ItemImg {item} t=1/>
   {/if}
 </div>
 

@@ -1,7 +1,6 @@
 import './lists.css';
 import defaults from '../../support/dataObj.json';
 import eventHandler5 from '../../common/eventHandler5';
-import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElementById';
 import getValueJSON from '../../system/getValueJSON';
 import isArray from '../../common/isArray';
@@ -167,7 +166,6 @@ export function injectAuctionSearch(injector) { // Legacy
   param = auctionSearchParams();
   generateManageTable();
   setupEventHandler(content);
-  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }
 
 export function injectQuickLinkManager(injector) { // Legacy
@@ -192,5 +190,4 @@ export function injectQuickLinkManager(injector) { // Legacy
   };
   generateManageTable();
   setupEventHandler(content);
-  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }

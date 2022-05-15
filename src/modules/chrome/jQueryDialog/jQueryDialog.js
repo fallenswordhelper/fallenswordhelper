@@ -1,5 +1,6 @@
 import './jQueryDialog.css';
 import createDiv from '../../common/cElement/createDiv';
+import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -23,5 +24,6 @@ export default function jQueryDialog(fn) { // jQuery
     },
     resizable: false,
   });
+  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
   fn(content);
 }

@@ -51,7 +51,7 @@
     top: 0;
     transform: translateX(-100vw);
     width: 100%;
-    z-index: 80;
+    z-index: 200;
   }
 
   .visible {

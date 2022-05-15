@@ -1,5 +1,4 @@
 import './combatLog.css';
-import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElementById';
 import jConfirm from '../../common/jConfirm';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
@@ -46,5 +45,4 @@ export default async function combatLog(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
   const data = await get('fsh_combatLog');
   gotCombatLog(injector || pCC, data);
-  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }

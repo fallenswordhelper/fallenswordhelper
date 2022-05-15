@@ -1,5 +1,5 @@
 <script>
-  import ItemImage from './ItemImg.svelte';
+  import ItemImage from './ItemImage.svelte';
   import { itemType } from '../../support/constants';
 
   export let equipment = 0;

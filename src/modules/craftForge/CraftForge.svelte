@@ -2,6 +2,7 @@
   import FolderButtons from '../common/FolderButtons.svelte';
   import calf from '../support/calf';
   import { createEventDispatcher } from 'svelte';
+  import sendEvent from '../analytics/sendEvent';
 
   let currentFolder = -2;
   const dispatch = createEventDispatcher();
@@ -9,11 +10,13 @@
   let wantsPerfect = false;
 
   function doFilter(e) {
+    sendEvent('craftForge', 'doFilter');
     currentFolder = Number(e.detail);
     dispatch('doFilter', [currentFolder, wantsPerfect]);
   }
 
   function perfChange() {
+    sendEvent('craftForge', 'perfChange');
     dispatch('doFilter', [currentFolder, wantsPerfect]);
   }
 </script>

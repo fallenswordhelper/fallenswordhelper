@@ -4,7 +4,6 @@ import createDocument from '../../system/createDocument';
 import doRefreshButton from './doRefreshButton';
 import { doTable } from './doTable';
 import filterHeaderOnlinePlayers from './filterHeaderOnlinePlayers';
-import getArrayByClassName from '../../common/getArrayByClassName';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
 import { now } from '../../support/now';
@@ -120,5 +119,4 @@ export default function injectOnlinePlayers(content) { // jQuery
     context = $('#pCC');
   }
   loadDataTables().then(injectOnlinePlayersNew);
-  getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
 }
