@@ -61,8 +61,8 @@ function processTheRows(doc, input) {
 }
 
 function getLastPage(input) {
-  console.log(input.parent().text(), input.parent().text().match(/(\d+)/g));
-  return parseInt(input.parent().text().match(/(?<page>\d+)/).groups.page, 10);
+  const matches = input.parent().text().match(/(?<page>\d+)/);
+  return parseInt(matches.groups.page, 10);
 }
 
 function getOtherPages(callback, input) {

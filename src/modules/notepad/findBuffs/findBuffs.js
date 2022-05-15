@@ -154,7 +154,8 @@ function parsePlayerLink(el) {
   const { tipped } = el.dataset;
   const lastActivityMinutes = calcLastActMins(tipped);
   // check if they are high enough level to cast the buff
-  const vlevel = Number(/VL:.+?(?<vl>\d+)/.exec(tipped).groups.vl);
+  const matches = /VL:.+?(?<vl>\d+)/.exec(tipped);
+  const vlevel = Number(matches.groups.vl);
   const minPlayerVirtualLevel = calcMinLvl();
   if (isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel)) {
     addPlayerToSearchList(el.href, getText(el));
