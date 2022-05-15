@@ -15,10 +15,10 @@ import resetEvt from './resetEvt';
 import setValue from '../../system/setValue';
 import { get, set } from '../../system/idb';
 
-let context;
-let onlinePlayers;
-let onlinePages;
-let lastPage;
+let context = 0;
+let onlinePlayers = 0;
+let onlinePages = 0;
+let lastPage = 0;
 
 function gotOnlinePlayers(value) { // jQuery
   onlinePlayers = value || {};
@@ -61,7 +61,8 @@ function processTheRows(doc, input) {
 }
 
 function getLastPage(input) {
-  return parseInt(input.parent().text().match(/(\d+)/g)[0], 10);
+  console.log(input.parent().text(), input.parent().text().match(/(\d+)/g));
+  return parseInt(input.parent().text().match(/(?<page>\d+)/).groups.page, 10);
 }
 
 function getOtherPages(callback, input) {
@@ -113,10 +114,6 @@ function injectOnlinePlayersNew() { // jQuery
 
 export default function injectOnlinePlayers(content) { // jQuery
   if (jQueryNotPresent()) { return; }
-  if (content) {
-    context = $(content);
-  } else {
-    context = $('#pCC');
-  }
+  context = content ? $(content) : $('#pCC');
   loadDataTables().then(injectOnlinePlayersNew);
 }

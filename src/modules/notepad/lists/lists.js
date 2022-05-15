@@ -16,7 +16,7 @@ import setInnerHtml from '../../dom/setInnerHtml';
 import setValueJSON from '../../system/setValueJSON';
 import { auctionSearchBlurb, auctionSearchParams } from './assets';
 
-let param;
+let param = 0;
 
 function hasUrl(j) {
   return param.url && param.url[j] !== '';
@@ -120,12 +120,7 @@ function buildNewItem() { // Legacy
 
 function addQuickItem() { // Legacy
   const isArrayOnly = param.fields.length === 0;
-  let newItem = {};
-  if (isArrayOnly) {
-    newItem = getElementById('fshIn0').value;
-  } else {
-    newItem = buildNewItem();
-  }
+  const newItem = isArrayOnly ? getElementById('fshIn0').value : buildNewItem();
   param.currentItems.push(newItem);
   generateManageTable();
 }

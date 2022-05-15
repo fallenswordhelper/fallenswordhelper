@@ -13,8 +13,8 @@ import setInnerHtml from '../../dom/setInnerHtml';
 import stringSort from '../../system/stringSort';
 import { get, set } from '../../system/idb';
 
-let content;
-let monsterAry;
+let content = 0;
+let monsterAry = 0;
 
 function noMobs() {
   setInnerHtml('<span>No monster information! Please enable entity log '

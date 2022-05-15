@@ -9,7 +9,7 @@ import setInnerHtml from '../../dom/setInnerHtml';
 import { get, set } from '../../system/idb';
 
 let combatLogs = [];
-let textArea;
+let textArea = 0;
 
 function notepadCopyLog() {
   textArea.focus();

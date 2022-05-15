@@ -30,13 +30,13 @@ import {
   showPlayerUrl,
 } from '../../support/constants';
 
-let findBuffNicks;
-let findBuffMinCastLevel;
-let onlinePlayers;
-let onlinePlayersSetting;
-export let extraProfile;
-let profilePagesToSearch;
-let profilePagesToSearchProcessed;
+let findBuffNicks = 0;
+let findBuffMinCastLevel = 0;
+let onlinePlayers = 0;
+let onlinePlayersSetting = 0;
+export let extraProfile = 0;
+let profilePagesToSearch = 0;
+let profilePagesToSearchProcessed = 0;
 
 function gotProfile(j, html) {
   parseProfileAndDisplay(html, {
@@ -154,7 +154,7 @@ function parsePlayerLink(el) {
   const { tipped } = el.dataset;
   const lastActivityMinutes = calcLastActMins(tipped);
   // check if they are high enough level to cast the buff
-  const vlevel = Number(/VL:.+?(\d+)/.exec(tipped)[1]);
+  const vlevel = Number(/VL:.+?(?<vl>\d+)/.exec(tipped).groups.vl);
   const minPlayerVirtualLevel = calcMinLvl();
   if (isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel)) {
     addPlayerToSearchList(el.href, getText(el));
