@@ -1,2 +1,0 @@
-import{a as n}from"./chunk-BKJXISW2.js";import{a as i}from"./chunk-MZYLPE6K.js";import{a as o}from"./chunk-O7BO2JV6.js";import{a as e}from"./chunk-K4FZKNLQ.js";function l(r){let t=e("content");t?o("",t):(t=n({id:"content",style:{display:"none"}}),i(document.body,t)),$(t).dialog({width:640,modal:!0,position:{my:"top",at:"top",offset:"0 60",collision:"none"},resizable:!1}),r(t)}export{l as a};
-//# sourceMappingURL=chunk-4OQ4D4CB.js.map
