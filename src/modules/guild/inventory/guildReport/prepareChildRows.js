@@ -5,9 +5,9 @@ import partial from '../../../common/partial';
 import potReport from './potReport/potReport';
 import querySelectorAll from '../../../common/querySelectorAll';
 
-let nodeArray;
-let nodeList;
-let potObj;
+let nodeArray = 0;
+let nodeList = 0;
+let potObj = 0;
 
 function doPaintChild(inject, localCounter) {
   const el = nodeList[localCounter];

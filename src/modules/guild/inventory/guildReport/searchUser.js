@@ -5,8 +5,8 @@ import getUrlParameter from '../../../system/getUrlParameter';
 import querySelectorAll from '../../../common/querySelectorAll';
 import querySelectorArray from '../../../common/querySelectorArray';
 
-let findUser;
-let foundUser;
+let findUser = 0;
+let foundUser = 0;
 
 function hideOther(el) {
   if (el.children[0].hasAttribute('bgcolor')) {

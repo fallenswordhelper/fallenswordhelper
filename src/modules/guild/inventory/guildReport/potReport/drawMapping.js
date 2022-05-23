@@ -16,8 +16,8 @@ import setInnerHtml from '../../../../dom/setInnerHtml';
 import setText from '../../../../dom/setText';
 import task from '../../../../support/task';
 
-let mapping;
-let selectRowTmp;
+let mapping = 0;
+let selectRowTmp = 0;
 
 function getRow() {
   const rowTmp = createTr();
