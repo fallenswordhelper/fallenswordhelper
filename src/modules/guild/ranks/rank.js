@@ -31,7 +31,7 @@ function writeRanks(memberRanks, row) {
 function gotMembers(memberRanks) {
   const theRows = findTheRows();
   if (theRows) {
-    batch([5, 3, theRows, 1, partial(writeRanks, memberRanks)]);
+    batch([3, theRows, 1, partial(writeRanks, memberRanks)]);
     weightings(theRows, memberRanks);
     doButtons();
   }

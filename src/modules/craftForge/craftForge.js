@@ -1,18 +1,20 @@
 import './craftForge.css';
 import CraftForge from './CraftForge.svelte';
+import batch from '../common/batch';
 import calf from '../support/calf';
 import closestTable from '../common/closestTable';
 import closestTr from '../common/closestTr';
 import createDiv from '../common/cElement/createDiv';
-import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getInventoryById from '../ajax/getInventoryById';
 import hideElement from '../common/hideElement';
 import insertElement from '../common/insertElement';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
 import jQueryPresent from '../common/jQueryPresent';
 import { pCC } from '../support/layout';
+import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
+import task from '../support/task';
 
 let inv = 0;
 let itemGrid = 0;
@@ -21,7 +23,7 @@ let thisItemTable = 0;
 let warehouse = 0;
 
 const getAnchors = () => querySelectorArray(`a[href*="=${calf.cmd}&"]`, pCC);
-const invId = (a) => getCustomUrlParameter(a.href, 'inv_id');
+const invId = (a) => a.href.split('=')[2];
 const getInvItem = (a) => [a, inv.items[invId(a)]];
 const getItemTable = () => closestTable(querySelector('img[src*="/items/"]', pCC));
 const emptyRow = () => closestTr(thisItemTable).previousElementSibling.children[0];
@@ -44,28 +46,30 @@ function startCraftForge() {
   });
 }
 
-function insertItem([a]) {
+function insertItem(currentFolder, wantsPerfect, [a, item]) {
   const itemDiv = createDiv();
+  if (showItem(item, currentFolder, wantsPerfect)) itemDiv.classList.add('fshCraftForgeShow');
   insertElement(itemDiv, a);
   insertElement(itemGrid, itemDiv);
 }
 
-function drawingNewItemTable(wh) {
-  if (!itemGrid) {
-    itemGrid = createDiv({ className: 'fshCraftForgeGrid' });
-    wh.forEach(insertItem);
-    insertElementAfterBegin(thisItemTable.parentNode, itemGrid);
-    hideElement(thisItemTable);
-  }
-}
-
-function doFilter({ detail: [currentFolder, wantsPerfect] }) {
-  const wh = getWarehouse();
-  drawingNewItemTable(wh);
+function updateVisibility(wh, currentFolder, wantsPerfect) {
   wh.forEach(([a, item]) => {
     const myDiv = a.parentNode;
     myDiv.classList.toggle('fshCraftForgeShow', showItem(item, currentFolder, wantsPerfect));
   });
+}
+
+function doFilter({ detail: [currentFolder, wantsPerfect] }) {
+  const wh = getWarehouse();
+  if (!itemGrid) {
+    itemGrid = createDiv({ className: 'fshCraftForgeGrid' });
+    insertElementAfterBegin(thisItemTable.parentNode, itemGrid);
+    hideElement(thisItemTable);
+    task(3, batch, [[5, 3, wh, 0, partial(insertItem, currentFolder, wantsPerfect)]]);
+  } else {
+    updateVisibility(wh, currentFolder, wantsPerfect);
+  }
 }
 
 export default async function craftForge() {

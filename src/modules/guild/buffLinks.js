@@ -18,6 +18,6 @@ function openQuickBuff(evt) {
 
 export default function buffLinks() {
   const members = querySelectorAll(`#pCC a[href^="${playerIdUrl}"]`);
-  batch([5, 3, members, 0, insertBuffLink]);
+  batch([3, members, 0, insertBuffLink]);
   onclick(pCC, openQuickBuff);
 }

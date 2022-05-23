@@ -98,5 +98,5 @@ function decorateItems(prefs, itemHash, [inject, invItem]) {
 export default async function updateDomItems(prefs) {
   const invItems = await getItems();
   const itemHash = prefs[checkAllOfType] ? buildItemHash(invItems) : [];
-  task(3, batch, [[5, 3, invItems, 0, partial(decorateItems, prefs, itemHash)]]);
+  task(3, batch, [[3, invItems, 0, partial(decorateItems, prefs, itemHash)]]);
 }

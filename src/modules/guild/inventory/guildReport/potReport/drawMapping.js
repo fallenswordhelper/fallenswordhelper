@@ -97,7 +97,6 @@ export function drawMapping(potOpts) {
   on(mapping, 'mousedown', partial(renderDropDown, potOpts.myMap));
   task(3, batch, [
     [
-      5,
       3,
       entries(potOpts.myMap),
       0,

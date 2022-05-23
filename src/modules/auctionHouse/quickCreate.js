@@ -1,4 +1,4 @@
-import QuickSelect from './QuickSelect.svelte';
+import QuickCreate from './QuickCreate.svelte';
 import asyncFilter from '../common/asyncFilter';
 import asyncSome from '../common/asyncSome';
 import clickThis from '../common/clickThis';
@@ -12,8 +12,8 @@ import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
 import sendEvent from '../analytics/sendEvent';
 
-function injectQuickSelect() {
-  return new QuickSelect({
+function injectQuickCreate() {
+  return new QuickCreate({
     target: pCC,
   });
 }
@@ -70,10 +70,15 @@ function handlePerf(e) {
   selectType(e, perfItems);
 }
 
+function handleToggle() {
+  sendEvent('ahQuickCreate', 'toggleSelectST');
+}
+
 export default async function quickCreate() {
   const inv = await getInv();
-  const quickSelect = injectQuickSelect();
+  const quickSelect = injectQuickCreate();
   quickSelect.$on('select', handleSelect);
   quickSelect.$on('perf', handlePerf);
+  quickSelect.$on('toggle', handleToggle);
   if (inv.items.fshHasST) highlightSts(inv);
 }

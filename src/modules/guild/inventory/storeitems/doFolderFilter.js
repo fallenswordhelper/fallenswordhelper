@@ -26,7 +26,6 @@ function updateList(inv, id, ctx) {
 function doFilter(inv, e) {
   sendEvent('storeitems', 'Filter Folder');
   batch([
-    5,
     3,
     getCheckboxesArray(),
     0,

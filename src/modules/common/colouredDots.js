@@ -17,7 +17,6 @@ function changeOnlineDot(contactLink) {
 export default function colouredDots() {
   if (!getValue('enhanceOnlineDots')) { return; }
   batch([
-    5,
     3,
     getPlayers(),
     0,

@@ -17,4 +17,10 @@
 <label>
   <input bind:checked={inSt} on:change={toggleSelectST} type="checkbox">
   Select items in ST
-</label>&nbsp;
+</label>
+
+<style>
+  input {
+    vertical-align: text-top;
+  }
+</style>

@@ -171,6 +171,10 @@
     width: 640px;
   }
 
+  input {
+    vertical-align: text-top;
+  }
+
   table {
     width: 100%;
   }

@@ -27,5 +27,5 @@ export default function searchUser() {
   const userNode = userNodes.some(contains(findUser));
   if (!userNode) { return; }
   const nodeList = querySelectorAll('#pCC table table tr');
-  batch([5, 2, nodeList, 0, hideOther]);
+  batch([2, nodeList, 0, hideOther]);
 }
