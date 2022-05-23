@@ -239,7 +239,7 @@
   "disableDestroyPrompts":false,
   "blockedSkillLists": "[]",
   "ajaxifyMoveRecipe": false,
-  "selectST": true,
+  "selectST": false,
   "selectMain": true,
   "disableQuickExtractPrompts": false,
   "qbSortBuffsAlphabetically": false
