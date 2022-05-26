@@ -1,2 +1,0 @@
-import{a as r}from"./chunk-3FI2HRMQ.js";import"./chunk-TTKNE24C.js";import{a as e}from"./chunk-T5HQ7FPX.js";import{b as o}from"./chunk-IRX7VNA6.js";import"./chunk-ZOSLBUG4.js";import"./chunk-O5WVQXEQ.js";import"./chunk-KIM4IHFF.js";import"./chunk-AQ577ZPT.js";function n(t){t.style.display="block"}function s(){if(!o("showNextQuestSteps"))return;let t=e("next_stage_button");!t||(r('div[id^="stage"]').forEach(n),t.style.display="none")}export{s as default};
-//# sourceMappingURL=showAllQuestSteps-BOLGTILP.js.map
