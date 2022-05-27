@@ -25,16 +25,16 @@ const basicTagReplacements = [
   [/</g, '&lt'],
   [/>/g, '&gt'],
   [/\n/g, '<br>'],
-  [/\[(\/?[biu])\]/g, '<$1>'],
+  [/\[(?<type>\/?[biu])\]/g, '<$1>'],
   [/\\\\/g, '&#92'],
   [/\\/g, ''],
 ];
 
 const guildTagReplacements = [
-  [/\[(\/?block)\]/g, '<$1quote>'],
+  [/\[(?<type>\/?block)\]/g, '<$1quote>'],
   [/\[list\]/g, '<ul class="list">'],
   [/\[\/list\]/g, '</ul>'],
-  [/\[\*\]([^[]*)/g, '<li>$1</li>'],
+  [/\[\*\](?<line>[^[]*)/g, '<li>$1</li>'],
 ];
 
 function replaceTag(acc, re) { return acc.replace(re[0], re[1]); }
@@ -52,9 +52,7 @@ function convertTextToHtml(inputText) {
 function bioPreview() {
   let widthClass = 'fshBioProfile';
   if (calf.cmd === 'guild') {
-    if (calf.subcmd === 'hall') { widthClass = 'fshBioHall'; } else {
-      widthClass = 'fshBioGuild';
-    }
+    widthClass = calf.subcmd === 'hall' ? 'fshBioHall' : 'fshBioGuild';
   }
   const previewContainer = createDiv({
     className:
