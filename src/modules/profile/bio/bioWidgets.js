@@ -16,10 +16,10 @@ import setInnerHtml from '../../dom/setInnerHtml';
 import setValue from '../../system/setValue';
 import testQuant from '../../system/testQuant';
 
-let bioEditLines;
-let textArea;
-let previewArea;
-let theBox;
+let bioEditLines = 0;
+let textArea = 0;
+let previewArea = 0;
+let theBox = 0;
 
 const basicTagReplacements = [
   [/</g, '&lt'],
@@ -34,7 +34,7 @@ const guildTagReplacements = [
   [/\[(\/?block)\]/g, '<$1quote>'],
   [/\[list\]/g, '<ul class="list">'],
   [/\[\/list\]/g, '</ul>'],
-  [/\[\*\](.*?)<br>/g, '<li>$1</li>'],
+  [/\[\*\]([^[]*)/g, '<li>$1</li>'],
 ];
 
 function replaceTag(acc, re) { return acc.replace(re[0], re[1]); }
