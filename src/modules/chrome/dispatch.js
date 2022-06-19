@@ -17,12 +17,12 @@ import setup from '../analytics/setup';
 import task from '../support/task';
 import { end, start } from '../analytics/timing';
 
-let cmd;
-let subcmd;
-let subcmd2;
+let cmd = 0;
+let subcmd = 0;
+let subcmd2 = 0;
 let type = '';
-let coreFunction;
-let functionPath;
+let coreFunction = 0;
+let functionPath = 0;
 
 function getParam(param) {
   return getUrlParameter(param) || '-';
@@ -77,11 +77,11 @@ function getCoreFunction() {
 
 function devHooks() {
   /* eslint-disable no-console */
-  console.log('functionPath', functionPath);
+  console.log('functionPath', functionPath); // skipcq: JS-0002
   if (!coreFunction) {
-    console.log('No Core Function.');
+    console.log('No Core Function.'); // skipcq: JS-0002
   } else if (!isFunction(coreFunction)) {
-    console.log('Not Core Function.');
+    console.log('Not Core Function.'); // skipcq: JS-0002
   }
   /* eslint-enable no-console */
 }

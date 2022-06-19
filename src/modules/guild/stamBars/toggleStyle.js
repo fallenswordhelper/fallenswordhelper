@@ -8,7 +8,7 @@ import { defTable, playerLinkSelector } from '../../support/constants';
 let thisStyle = 0;
 
 function getStamPerc(a) {
-  const mo = a.dataset.tipped.match(/Stamina:<\/td><td>(\d{1,12}) \/ (\d{1,12})<\/td>/);
+  const mo = a.dataset.tipped.match(/Stamina:<\/td><td>(?<stam>\d{1,12}) \/ (?<max>\d{1,12})<\/td>/);
   return Math.min(Math.round((Number(mo[1]) / Number(mo[2])) * 100), 100);
 }
 

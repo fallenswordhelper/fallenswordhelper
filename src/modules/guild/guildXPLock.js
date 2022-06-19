@@ -15,8 +15,8 @@ function mightBePositive(actualXP, xpLockXP) {
 
 function injectLock(xpLock) {
   const xpLockmouseover = xpLock.dataset.tipped;
-  const xpLockXP = getIntFromRegExp(xpLockmouseover, /XP Lock: <b>(\d*)/);
-  const actualXP = getIntFromRegExp(xpLockmouseover, /XP: <b>(\d*)/);
+  const xpLockXP = getIntFromRegExp(xpLockmouseover, /XP Lock: <b>(?<lockXp>\d*)/);
+  const actualXP = getIntFromRegExp(xpLockmouseover, /XP: <b>(?<realXp>\d*)/);
   insertHtmlBeforeEnd(
     xpLock.parentNode.nextElementSibling,
     ` (<b>${mightBePositive(actualXP, xpLockXP)}</b>)`,
