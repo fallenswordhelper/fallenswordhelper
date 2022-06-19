@@ -10,8 +10,8 @@ import jQueryNotPresent from '../common/jQueryNotPresent';
 import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import playerName from '../common/playerName';
-import progressBar from './progressBar';
 import setInnerHtml from '../dom/setInnerHtml';
+import stamBars from './stamBars/stamBars';
 import task from '../support/task';
 import { guildSubcmdUrl, recallUserUrl } from '../support/constants';
 import { logoToggle, statToggle, structureToggle } from './panelToggle';
@@ -68,5 +68,5 @@ export default function manage() {
   lhsAdditions(leftHandSideColumnTable);
   if (getValue('showBuffLinks')) { task(3, buffLinks); }
   ajaxStuff(leftHandSideColumnTable);
-  progressBar();
+  stamBars();
 }

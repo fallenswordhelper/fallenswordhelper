@@ -18,7 +18,7 @@ function lvlFilter(_settings, data) {
 function specFilter(_settings, _searchData, _index, rowData) {
   const test = 0;
   if (test) {
-    return rowData[4]['@data-order'] === '0';
+    return rowData[4]['@data-order'] === '0' && rowData[6]['@data-order'] === '0';
   }
   return true;
 }

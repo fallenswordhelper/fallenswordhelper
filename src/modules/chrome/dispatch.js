@@ -100,10 +100,10 @@ function asyncDispatcher() {
 
 async function runCore(cssPrm) {
   start('JS Perf', 'FSH.runCore');
-  initNow();
-  initPcc();
   getCoreFunction();
   await cssPrm;
+  initNow();
+  initPcc();
   lookForHcsData();
   task(3, asyncDispatcher);
   isMessageSound();
@@ -114,7 +114,7 @@ async function runCore(cssPrm) {
 }
 
 function badEnv() {
-  return !isFunction(String.prototype.replaceAll) || !navigator.cookieEnabled;
+  return !isFunction(Object.hasOwn) || !navigator.cookieEnabled;
 }
 
 function setVer(fshVer, gmInfo) {

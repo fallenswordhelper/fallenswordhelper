@@ -3,14 +3,8 @@ import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import querySelector from '../common/querySelector';
 
 function getIntFromRegExp(theText, rxSearch) {
-  let result;
   const matches = theText.replace(/,/g, '').match(rxSearch);
-  if (matches) {
-    result = parseInt(matches[1], 10);
-  } else {
-    result = 0;
-  }
-  return result;
+  return matches ? parseInt(matches[1], 10) : 0;
 }
 
 function mightBePositive(actualXP, xpLockXP) {

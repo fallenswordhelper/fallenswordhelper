@@ -1,0 +1,7 @@
+#pCC img[src*="/guilds/"][width="200"] {
+  border-color: transparent !important;
+}
+
+#pCC img[src*="/guilds/"][width="200"] ~ a[target="_blank"] {
+  word-break: break-all;
+}

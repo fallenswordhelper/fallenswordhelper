@@ -84,7 +84,7 @@ function syncInvMan() {
 }
 
 export default function inventory() {
-  if (jQueryNotPresent()) return;
+  if (jQueryNotPresent() || !pCC) return;
   if (calf.subcmd === 'guildinvmgr' && !currentGuildId()) return;
   doSpinner();
   syncInvMan();

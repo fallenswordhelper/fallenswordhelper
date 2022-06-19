@@ -40,4 +40,5 @@ export default {
   conflicts: { rpupgrades: injectRPUpgrades },
   bank: { '-': injectGuildBank },
   hall,
+  '-': { '-': injectGuild },
 };
