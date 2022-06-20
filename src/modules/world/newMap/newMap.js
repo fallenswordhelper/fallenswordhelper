@@ -14,7 +14,6 @@ import hideQTip from '../../common/hideQTip';
 import hideTitanCombatResults from './hideTitanCombatResults';
 import injectRelic from './relic/relic';
 import interceptMouseEvents from './creatureInfo/interceptMouseEvents';
-import interceptNotifications from './interceptNotifications';
 import monsterLog from './monsterLog/monsterLog';
 import onWorld from './onWorld';
 import repairButton from './repairButton';
@@ -52,7 +51,6 @@ const usualRoutines = [
   interceptMouseEvents,
   champAttacks,
   globalTop,
-  interceptNotifications,
 ];
 
 export default function newMap() {

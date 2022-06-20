@@ -13,6 +13,7 @@ import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
 import getValue from '../../system/getValue';
 import hideElement from '../../common/hideElement';
+import hideGuildLogMsg from './hideGuildLogMsg';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
@@ -267,7 +268,9 @@ function gotOptions(guildLog) {
   getGuildLogPage(1).then(processFirstPage);
 }
 
-export default function newGuildLog() { // jQuery.min
+export default async function newGuildLog() { // jQuery.min
   if (jQueryNotPresent()) { return; }
-  get('fsh_guildLog').then(gotOptions);
+  const logPrm = get('fsh_guildLog');
+  hideGuildLogMsg();
+  gotOptions(await logPrm);
 }
