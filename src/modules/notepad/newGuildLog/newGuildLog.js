@@ -32,23 +32,24 @@ import {
 import { get, set } from '../../system/idb';
 
 let options = {};
-let fshNewGuildLog;
-let fshOutput;
-let maxPagesToFetch;
-let maxPage;
-let doc;
-let currPage;
-let lastPage;
+let fshNewGuildLog = 0;
+let fshOutput = 0;
+let maxPagesToFetch = 0;
+let maxPage = 0;
+let doc = 0;
+let currPage = 0;
+let lastPage = 0;
 let tmpGuildLog = [];
 let completeReload = true;
-let myTable;
+let myTable = 0;
 
 function parsePage(data) {
   doc = createDocument(data);
   const pageInput = querySelector('input[name="page"]', doc);
   if (pageInput) {
     currPage = Number(pageInput.value);
-    lastPage = Number(/\d+/.exec(getText(pageInput.parentNode))[0]);
+    const matches = /\d+/.exec(getText(pageInput.parentNode));
+    lastPage = Number(matches[0]);
     if (currPage === 1) { maxPage = Math.min(lastPage, maxPagesToFetch); }
     setText(`Loading ${currPage} of ${maxPage}...`, fshOutput);
   }
