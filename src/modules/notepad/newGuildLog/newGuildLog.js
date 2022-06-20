@@ -43,16 +43,18 @@ let tmpGuildLog = [];
 let completeReload = true;
 let myTable = 0;
 
+function updatePages(pageInput) {
+  currPage = Number(pageInput.value);
+  const matches = /\d+/.exec(getText(pageInput.parentNode));
+  lastPage = Number(matches[0]);
+  if (currPage === 1) { maxPage = Math.min(lastPage, maxPagesToFetch); }
+  setText(`Loading ${currPage} of ${maxPage}...`, fshOutput);
+}
+
 function parsePage(data) {
   doc = createDocument(data);
   const pageInput = querySelector('input[name="page"]', doc);
-  if (pageInput) {
-    currPage = Number(pageInput.value);
-    const matches = /\d+/.exec(getText(pageInput.parentNode));
-    lastPage = Number(matches[0]);
-    if (currPage === 1) { maxPage = Math.min(lastPage, maxPagesToFetch); }
-    setText(`Loading ${currPage} of ${maxPage}...`, fshOutput);
-  }
+  if (pageInput) updatePages(pageInput);
 }
 
 function seenRowBefore(timestamp, myMsg) {
