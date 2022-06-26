@@ -2,6 +2,7 @@ import calf from '../../support/calf';
 import getCalfPrefs from '../../common/getCalfPrefs';
 import getValue from '../../system/getValue';
 import priorityThree from './priorityThree/priorityThree';
+import useNewGuildLog from '../useNewGuildLog';
 
 const calfPrefs = [
   'enableAllyOnlineList',
@@ -22,6 +23,7 @@ const calfPrefs = [
   'wantedGuildMembers',
   'enableMaxGroupSizeToJoin',
   'maxGroupSizeToJoin',
+  'useNewGuildLog',
 ];
 
 function getEnvVars() {
@@ -33,5 +35,6 @@ function getEnvVars() {
 export default function notHuntMode() {
   if (calf.huntingMode) { return; }
   getEnvVars();
+  if (calf.useNewGuildLog) useNewGuildLog();
   priorityThree();
 }

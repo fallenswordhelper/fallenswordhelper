@@ -11,7 +11,6 @@ import fsBoxLog from './fsBoxLog';
 import gameStats from './gameStats';
 import getValue from '../../../system/getValue';
 import guildActivityTracker from './guildActivityTracker';
-import guildLogHref from './guildLogHref';
 import injectMenu from '../../accordion/injectMenu';
 import joinAll from './joinAll';
 import levelCalc from './levelCalc';
@@ -65,7 +64,6 @@ const p3functions = [
   fsBoxLog,
   expandQb,
   joinAll,
-  guildLogHref,
   gameStats,
   scoutTower,
   guildActivityTracker,

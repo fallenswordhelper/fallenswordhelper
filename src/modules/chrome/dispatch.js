@@ -114,7 +114,7 @@ async function runCore(cssPrm) {
 }
 
 function badEnv() {
-  return !isFunction(Object.hasOwn) || !navigator.cookieEnabled;
+  return !('showPicker' in HTMLInputElement.prototype) || !navigator.cookieEnabled;
 }
 
 function setVer(fshVer, gmInfo) {

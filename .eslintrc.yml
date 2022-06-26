@@ -31,6 +31,7 @@ globals:
   EventTarget: readonly
   FormData: readonly
   getComputedStyle: readonly
+  HTMLInputElement: readonly
   HTMLTableElement: readonly
   Image: readonly
   localStorage: readonly
