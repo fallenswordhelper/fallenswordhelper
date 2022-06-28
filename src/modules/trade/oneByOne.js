@@ -53,7 +53,7 @@ const getItems = (user) => checkedItems().map((el) => [el, user, [el.value]]);
 const syncSend = (items) => items.reduce(sendThem, Promise.resolve({ s: 1 }));
 
 async function doSend(e, items) {
-  sendEvent('trade', 'oneByOne');
+  sendEvent('Trade', 'oneByOne');
   const spinner = createSpan({
     className: 'fshSpinner fshRelative',
     style: { marginLeft: '40px' },
