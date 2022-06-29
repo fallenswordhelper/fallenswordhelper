@@ -8,23 +8,16 @@ import trim from '../../common/trim';
 function byMember(acc, curr) {
   // if (curr.item_id === 11503) { // Zombie Brew
   if (!curr.equipped) {
+  // if (curr.equipped) {
     acc[curr.player_id] = acc[curr.player_id] || [];
     acc[curr.player_id].push(curr);
   }
   return acc;
 }
 
-function addRank(rankName, thisMember) {
-  return { ...thisMember, rank_name: rankName };
-}
-
-function extractMembers(thisRank) {
-  return thisRank.members.map(partial(addRank, thisRank.name));
-}
-
-function processGuild(guild) {
-  return guild.r.flatMap(extractMembers);
-}
+const addRank = (rankName, thisMember) => ({ ...thisMember, rank_name: rankName });
+const extractMembers = (thisRank) => thisRank.members.map(partial(addRank, thisRank.name));
+const processGuild = (guild) => guild.r.flatMap(extractMembers);
 
 function decorateMembers(pots, obj, i) {
   return {
