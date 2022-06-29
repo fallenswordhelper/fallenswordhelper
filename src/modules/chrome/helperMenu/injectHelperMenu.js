@@ -43,7 +43,7 @@ const classEvents = [
     sendEvent('helperMenu', 'helperMenuReply');
     window.openQuickMsgDialog(target.getAttribute('target_player'));
   }],
-  ['helperDl', gsDl],
+  ['helperGsDl', gsDl],
   ['helperQuickExtract', doQuickExtract],
 ];
 

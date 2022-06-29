@@ -26,6 +26,7 @@ const topSection = '<div class="helperMenuSectionHeader">Character</div><ul>'
 
 const betaSection = '<div class="helperMenuSectionHeader">Beta Features</div><ul>'
   + `<li><a href="${notepadBlankUrl}reliclist">Relic List</a><sup class="fshRed">beta</sup></li>`
+  + '<li><button class="helperDevBtn helperGsDl" type="button">GS Export</button><sup class="fshRed">beta</sup></li>'
   + '</ul>';
 
 const bottomSection = '<div class="helperMenuSectionHeader">FSH developer quick links</div><ul>'
@@ -33,8 +34,7 @@ const bottomSection = '<div class="helperMenuSectionHeader">FSH developer quick 
   + `<a href="${playerIdUrl}1963510">PointyHair</a></li>`
   + '</ul>';
 
-const devSection = '<div class="helperMenuSectionHeader">Dev links</div>'
-  + '<ul><li><button class="helperDevBtn helperDl" type="button">GS Export</button></li></ul>';
+const devSection = '<div class="helperMenuSectionHeader">Dev links</div>';
 
 const leadOut = '</div>';
 
