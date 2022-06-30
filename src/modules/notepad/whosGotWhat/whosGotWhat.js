@@ -5,7 +5,6 @@ import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
 import createSelect from '../../common/cElement/createSelect';
 import createTable from '../../common/cElement/createTable';
-import daRanksView from '../../_dataAccess/daRanksView';
 import displayChange from './displayChange';
 import guildStore from '../../_dataAccess/export/guildStore';
 import insertElement from '../../common/insertElement';
@@ -14,6 +13,7 @@ import onclick from '../../common/onclick';
 import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
 import prepareData from './prepareData';
+import ranksView from '../../_dataAccess/fallbacks/ranksView';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { table as tableComponentFactory } from 'smart-table-vanilla';
 import theadHtml from './assets';
@@ -143,5 +143,5 @@ function showMe(dataAry) {
 
 export default function whosGotWhat() {
   setInnerHtml('Loading...', pCC);
-  allthen([guildStore(), daRanksView()], showMe);
+  allthen([guildStore(), ranksView()], showMe);
 }
