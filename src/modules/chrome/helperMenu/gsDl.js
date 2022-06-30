@@ -1,5 +1,6 @@
 import clickThis from '../../common/clickThis';
 import createAnchor from '../../common/cElement/createAnchor';
+import currentGuildId from '../../common/currentGuildId';
 import guildStore from '../../_dataAccess/export/guildStore';
 import insertElement from '../../common/insertElement';
 
@@ -52,6 +53,7 @@ function downloadCsv(csv) {
 }
 
 export default async function gsDl() {
+  if (!currentGuildId()) return;
   const json = await guildStore();
   downloadCsv(`${header}${toCsv(json)}`);
 }
