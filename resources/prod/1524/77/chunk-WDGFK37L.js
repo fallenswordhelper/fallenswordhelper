@@ -1,2 +1,0 @@
-import{a as f}from"./chunk-U2PCCPBA.js";import{a as r}from"./chunk-ISHIO47H.js";import{G as i,q as t,r as n}from"./chunk-N7OQJWUZ.js";function u(o){return window.location.search!==t||o.parentNode.id!=="notification-guild-log"}function l(o){if(u(o))return;let e=o.parentNode;e&&f(e)}function c(o){o.href=n}function d(o){o.forEach(c),l(o[o.length-1])}function g(){let o=r(`#pCL a[href="${i}"]`);o.length>0&&d(o)}export{g as a};
-//# sourceMappingURL=chunk-WDGFK37L.js.map
