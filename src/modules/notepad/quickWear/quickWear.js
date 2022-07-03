@@ -12,10 +12,9 @@ import isArray from '../../common/isArray';
 import jQueryPresent from '../../common/jQueryPresent';
 import onclick from '../../common/onclick';
 import { pCC } from '../../support/layout';
-import partial from '../../common/partial';
 import selfIdIs from '../../common/selfIdIs';
 import setValue from '../../system/setValue';
-import showAHInvManager from './showAHInvManager';
+import showAHInvManager from './AHInvManager/showAHInvManager';
 import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
 import { subscribeOnce } from '../../support/pubsub';
 
@@ -39,14 +38,10 @@ function makePref(thisList) {
   }));
 }
 
-function injectContent(thisFn, appInv, thisDiv) {
-  insertElement(thisDiv, thisFn(appInv));
-}
-
 function buildQuickWear(content, appInv) {
   subscribeOnce('qwtab-header', makePref);
-  subscribeOnce('qwtab0', partial(injectContent, createQuickWear, appInv));
-  subscribeOnce('qwtab1', partial(injectContent, showAHInvManager, appInv));
+  subscribeOnce('qwtab0', (thisDiv) => createQuickWear(appInv, thisDiv));
+  subscribeOnce('qwtab1', (thisDiv) => showAHInvManager(appInv, thisDiv));
   fshTabSet(content, ['Quick Wear / Use / Extract<br>Manager',
     'Inventory Manager Counter<br>filtered by AH Quick Search'], 'qwtab');
   onclick(content, eventHandler5(evts5()));

@@ -48,6 +48,7 @@
     "idb-keyval": "^6.1.0",
     "smart-table-core": "^3.0.7",
     "smart-table-vanilla": "^0.2.0",
-    "svelte": "^3.48.0"
+    "svelte": "^3.48.0",
+    "svelte-virtual-scroll-list": "^1.1.0"
   }
 }
