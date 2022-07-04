@@ -18,7 +18,7 @@ import {
 } from '../../chrome/lookForHcsData/priorityThree/indexConstants';
 
 let actBody = 0;
-let selMember = 0;
+let selMember = '';
 let tgCont = 0;
 let memberSelect = 0;
 let myMembers = 0;
