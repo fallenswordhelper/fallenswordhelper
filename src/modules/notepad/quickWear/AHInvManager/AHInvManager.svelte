@@ -7,6 +7,7 @@
   import VirtualScroll from 'svelte-virtual-scroll-list';
   import alpha from '../../../common/alpha';
   import getValueJSON from '../../../system/getValueJSON';
+  import { heightGuess } from '../../../support/layout';
   import uniq from '../../../common/uniq';
 
   export let itemList = 0;
@@ -61,7 +62,7 @@
   <VirtualScroll
     data={theStuff}
     key="id"
-    keeps="{Math.floor(window.screen.height / 10)}"
+    keeps="{Math.floor(heightGuess / 10)}"
     estimateSize="14"
     let:data={item}
   >

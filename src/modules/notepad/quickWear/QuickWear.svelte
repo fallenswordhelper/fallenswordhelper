@@ -9,6 +9,7 @@
   import daEquipItem from '../../_dataAccess/daEquipItem';
   import daUseItem from '../../_dataAccess/daUseItem';
   import fromEntries from '../../common/fromEntries';
+  import { heightGuess } from '../../support/layout';
   import sendEvent from '../../analytics/sendEvent';
 
   const prompt = 'Are you sure you want to use/extract the item?';
@@ -47,10 +48,6 @@
   }
 </script>
 
-<!--
-  pageMode={true}
--->
-
 <div class="folderButtons">
   <FolderButtons {folders} on:filter={doFilter}/>
 </div>
@@ -58,7 +55,7 @@
   <VirtualScroll
     data={items}
     key="a"
-    keeps="{Math.floor(window.screen.height / 22)}"
+    keeps="{Math.floor(heightGuess / 22)}"
     estimateSize="30"
     let:data={item}
   >
