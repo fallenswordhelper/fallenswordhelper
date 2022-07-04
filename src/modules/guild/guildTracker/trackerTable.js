@@ -15,7 +15,7 @@ import setInnerHtml from '../../dom/setInnerHtml';
 import task from '../../support/task';
 import {
   act, cur, gxp, lvl, max, utc, vl,
-} from './indexConstants';
+} from '../../chrome/lookForHcsData/priorityThree/indexConstants';
 
 let actBody;
 let selMember;

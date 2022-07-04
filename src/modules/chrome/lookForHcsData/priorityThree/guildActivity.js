@@ -1,12 +1,12 @@
-import fallback from '../system/fallback';
-import lastActivityToDays from '../common/lastActivityToDays';
-import { nowSecs } from '../support/now';
-import partial from '../common/partial';
-import ranksView from '../_dataAccess/fallbacks/ranksView';
+import fallback from '../../../system/fallback';
+import lastActivityToDays from '../../../common/lastActivityToDays';
+import { nowSecs } from '../../../support/now';
+import partial from '../../../common/partial';
+import ranksView from '../../../_dataAccess/fallbacks/ranksView';
 import {
   act, cur, gxp, lvl, max, utc, vl,
-} from './guildTracker/indexConstants';
-import { get, set } from '../system/idb';
+} from './indexConstants';
+import { get, set } from '../../../system/idb';
 
 let oldArchive = 0;
 

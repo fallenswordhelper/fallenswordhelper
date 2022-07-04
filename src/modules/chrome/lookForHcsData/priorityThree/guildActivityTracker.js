@@ -5,6 +5,6 @@ import runDefault from '../../../common/runDefault';
 
 export default function guildActivityTracker() {
   if (jQueryPresent() && getValue(defEnableGuildActivityTracker)) {
-    runDefault(import('../../../guild/guildActivity'));
+    runDefault(import('./guildActivity'));
   }
 }
