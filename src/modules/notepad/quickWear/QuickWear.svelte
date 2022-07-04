@@ -9,7 +9,7 @@
   import daEquipItem from '../../_dataAccess/daEquipItem';
   import daUseItem from '../../_dataAccess/daUseItem';
   import fromEntries from '../../common/fromEntries';
-  import { heightGuess } from '../../support/layout';
+  import getHeightGuess from './getHeightGuess';
   import sendEvent from '../../analytics/sendEvent';
 
   const prompt = 'Are you sure you want to use/extract the item?';
@@ -55,7 +55,7 @@
   <VirtualScroll
     data={items}
     key="a"
-    keeps="{Math.floor(heightGuess / 22)}"
+    keeps="{Math.floor(getHeightGuess() / 22)}"
     estimateSize="30"
     let:data={item}
   >
