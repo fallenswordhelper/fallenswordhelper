@@ -17,11 +17,11 @@ import {
   act, cur, gxp, lvl, max, utc, vl,
 } from '../../chrome/lookForHcsData/priorityThree/indexConstants';
 
-let actBody;
-let selMember;
-let tgCont;
-let memberSelect;
-let myMembers;
+let actBody = 0;
+let selMember = 0;
+let tgCont = 0;
+let memberSelect = 0;
+let myMembers = 0;
 
 function addOption(acc, member) {
   return `${acc}<option value="${member}">${member}</option>`;
