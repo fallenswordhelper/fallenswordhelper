@@ -1,4 +1,6 @@
+import { entries } from 'idb-keyval';
 import fallback from '../../../system/fallback';
+import fromEntries from '../../../common/fromEntries';
 import lastActivityToDays from '../../../common/lastActivityToDays';
 import { nowSecs } from '../../../support/now';
 import partial from '../../../common/partial';
@@ -81,7 +83,7 @@ function processRank(newArchive, rank) {
   rank.members.forEach(partial(processMemberRecord, newArchive));
 }
 
-function doMerge(guild) { // jQuery.min
+function doMerge(guild) {
   const newArchive = { lastUpdate: nowSecs, members: {} };
   guild.r.forEach(partial(processRank, newArchive));
   set('fsh_guildActivity', newArchive);
@@ -93,15 +95,31 @@ function gotGuild(data) {
   }
 }
 
-async function gotActivity(data) { // jQuery.min
-  oldArchive = data ?? { lastUpdate: 0, members: {} };
+function trimActivity(members) {
+  const aYearAgo = nowSecs - (365 * 24 * 60 * 60);
+  return fromEntries(
+    entries(members)
+      .map(([name, record]) => [name, record.filter((r) => r[utc] > aYearAgo)]),
+  );
+}
+
+function getOld(data) {
+  const loseData = 0;
+  if (loseData && data) {
+    return { ...data, members: trimActivity(data.members) };
+  }
+  return data ?? { lastUpdate: 0, members: {} };
+}
+
+async function gotActivity(data) {
+  oldArchive = getOld(data);
   if (nowSecs > fallback(oldArchive.lastUpdate, 0) + 300) { // 5 mins - probably want to increase
     const json = await ranksView();
     gotGuild(json);
   }
 }
 
-export default async function guildActivity() { // jQuery.mins
+export default async function guildActivity() {
   const data = await get('fsh_guildActivity');
   gotActivity(data);
 }
