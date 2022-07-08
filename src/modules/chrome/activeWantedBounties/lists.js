@@ -7,12 +7,12 @@ import { nowSecs } from '../../support/now';
 import setValue from '../../system/setValue';
 import shouldBeArray from '../../system/shouldBeArray';
 
-export let bountyList = {};
-export let wantedList = {};
-export let activeBountyListPosted = false;
+export let bountyList = {}; // skipcq: JS-E1009
+export let wantedList = {}; // skipcq: JS-E1009
+export let activeBountyListPosted = false; // skipcq: JS-E1009
 let bountyListRefreshTime = 0;
-export let bwNeedsRefresh = false;
-export let wantedArray = [];
+export let bwNeedsRefresh = false; // skipcq: JS-E1009
+export let wantedArray = []; // skipcq: JS-E1009
 
 function hasActiveBounties(activeTable) {
   return !/No bounties active/.test(activeTable.rows[1].cells[0].innerHTML);
