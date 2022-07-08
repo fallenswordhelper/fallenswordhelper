@@ -7,12 +7,12 @@ import { nowSecs } from '../../support/now';
 import setValue from '../../system/setValue';
 import shouldBeArray from '../../system/shouldBeArray';
 
-export let bountyList;
-export let wantedList;
-export let activeBountyListPosted;
-let bountyListRefreshTime;
-export let bwNeedsRefresh;
-export let wantedArray;
+export let bountyList = {};
+export let wantedList = {};
+export let activeBountyListPosted = false;
+let bountyListRefreshTime = 0;
+export let bwNeedsRefresh = false;
+export let wantedArray = [];
 
 function hasActiveBounties(activeTable) {
   return !/No bounties active/.test(activeTable.rows[1].cells[0].innerHTML);
@@ -49,27 +49,29 @@ export function getActiveBountyList(doc) { // Legacy
   activeBountyListPosted = true;
 }
 
-function testBountyList() {
-  return bountyList
-    && nowSecs - bountyList.lastUpdate > bountyListRefreshTime;
+function testBountyList(enableActiveList) {
+  if (enableActiveList) {
+    return bountyList && nowSecs - bountyList.lastUpdate > bountyListRefreshTime;
+  }
 }
 
-function testWantedList() {
-  return wantedList
-    && nowSecs - wantedList.lastUpdate > bountyListRefreshTime;
+function testWantedList(enableWantedList) {
+  if (enableWantedList) {
+    return wantedList && nowSecs - wantedList.lastUpdate > bountyListRefreshTime;
+  }
 }
 
-function testCacheInvalid() {
-  return testBountyList() || testWantedList();
+function testCacheInvalid(enableActiveList, enableWantedList) {
+  return testBountyList(enableActiveList) || testWantedList(enableWantedList);
 }
 
-export function invalidateCache() {
+export function invalidateCache(enableActiveList, enableWantedList) {
   bountyList = getValueJSON('bountyList');
   wantedList = getValueJSON('wantedList');
   bountyListRefreshTime = getValue('bountyListRefreshTime');
   bwNeedsRefresh = getValue('bwNeedsRefresh');
   if (bwNeedsRefresh) { return; }
-  if (testCacheInvalid()) {
+  if (testCacheInvalid(enableActiveList, enableWantedList)) {
     bwNeedsRefresh = true; // invalidate cache
   }
 }

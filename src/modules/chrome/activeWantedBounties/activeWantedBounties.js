@@ -39,7 +39,7 @@ function needsRefresh() {
 }
 
 function retrieveBountyInfo(enableActiveList, enableWantedList) {
-  invalidateCache();
+  invalidateCache(enableActiveList, enableWantedList);
   if (needsRefresh()) {
     doRefresh();
     bountyPage(1).then(parseBountyPageForWorld);
