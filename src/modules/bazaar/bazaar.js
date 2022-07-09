@@ -8,6 +8,7 @@ import getText from '../common/getText';
 import hasClass from '../common/hasClass';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import { itmRe } from '../support/constants';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import jsonFail from '../common/jsonFail';
 import on from '../common/on';
@@ -93,10 +94,11 @@ async function buy() { // jQuery.min
 function doMiniatures(el, i) {
   const item = el.children[0];
   const { tipped } = item.dataset;
+  const itemMatch = tipped.match(itmRe);
   bazaarTable = bazaarTable
     .replace(`@${i}@`, bazaarItem)
     .replace('@src@', item.getAttribute('src'))
-    .replace('@itemid@', tipped.match(/\?item_id=(\d+)/)[1])
+    .replace('@itemid@', itemMatch[1])
     .replace('@tipped@', tipped);
 }
 

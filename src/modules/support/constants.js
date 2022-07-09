@@ -28,8 +28,10 @@ export const mercRE = [
 export const lastActivityRE = /<td>Last Activity:<\/td><td>(?<d>\d+)d (?<h>\d+)h (?<m>\d+)m (?<s>\d+)s<\/td>/;
 export const playerIDRE = /player_id=(?<playerId>\d+)/;
 export const itemRE = /item_id=(?<itemId>\d+)&inv_id=(?<invId>\d+)/;
+export const itmRe = /fetchitem.php\?item_id=(\d+)&inv_id=-1&t=2&p=(\d+)&vcode=([a-z0-9]+)/i;
 export const guildRE = /guild_id=(?<guildId>\d+)/;
 export const vlRe = /VL:.+?(?<vl>\d+)/;
+export const stamRe = /Stamina:<\/td><td>(?<stam>\d{1,12}) \/ (?<max>\d{1,12})<\/td>/;
 
 export const defenderMultiplier = 0.2;
 

@@ -3,12 +3,12 @@ import getElementsByTagName from '../../common/getElementsByTagName';
 import { getPcc } from '../../support/layout';
 import insertElement from '../../common/insertElement';
 import querySelectorArray from '../../common/querySelectorArray';
-import { defTable, playerLinkSelector } from '../../support/constants';
+import { defTable, playerLinkSelector, stamRe } from '../../support/constants';
 
 let thisStyle = 0;
 
 function getStamPerc(a) {
-  const mo = a.dataset.tipped.match(/Stamina:<\/td><td>(?<stam>\d{1,12}) \/ (?<max>\d{1,12})<\/td>/);
+  const mo = a.dataset.tipped.match(stamRe);
   return Math.min(Math.round((Number(mo[1]) / Number(mo[2])) * 100), 100);
 }
 

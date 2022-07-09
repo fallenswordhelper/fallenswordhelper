@@ -4,8 +4,8 @@ import getArrayByTagName from '../common/getArrayByTagName';
 import { getPcc } from '../support/layout';
 import getPlayers from '../common/getPlayers';
 import lastActivityMins from '../common/lastActivityMins';
-import { lastActivityRE } from '../support/constants';
 import setTipped from '../common/setTipped';
+import { lastActivityRE, stamRe } from '../support/constants';
 
 const ACTIVE = 0;
 const STAMINA = 1;
@@ -20,7 +20,7 @@ function countActive(acc, curr) {
   if (mins < 44640) {
     acc[ACTIVE] += 1;
     acc[STAMINA]
-      += Number(/Stamina:<\/td><td>(\d+)/.exec(curr.dataset.tipped)[1]);
+      += Number(stamRe.exec(curr.dataset.tipped)[1]);
   }
   return acc;
 }

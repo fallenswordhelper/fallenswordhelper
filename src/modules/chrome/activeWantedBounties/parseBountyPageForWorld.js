@@ -15,7 +15,8 @@ function getWantedBountyList(doc) {
   const page = querySelector('#pCC input[name="page"]', doc);
   if (!page) { return; }
   curPage = Number(page.value);
-  maxPage = Number(page.parentNode.innerHTML.match(/of&nbsp;(\d*)/)[1]);
+  const maxMatch = page.parentNode.innerHTML.match(/of&nbsp;(\d*)/);
+  maxPage = Number(maxMatch[1]);
   const activeTable = getElementById('bounty-info', doc).parentNode.parentNode
     .nextElementSibling.children[0].children[0];
   if (activeTable) { findTarget(activeTable); }

@@ -11,12 +11,12 @@ import {
   lastActivityRE,
   playerIDRE,
   playerLinkSelector,
+  stamRe,
   vlRe,
 } from '../../support/constants';
 
 const guildXp = (el) => Number(getTextTrim(closestTr(el).cells[4]).replaceAll(',', ''));
 const playerId = (el) => Number(playerIDRE.exec(el.href)[1]);
-const level = (tipped) => Number(/Level:.+?(\d+)/.exec(tipped)[1]);
 const rank = (el) => getTextTrim(closestTr(el).cells[3]);
 const vl = (tipped) => Number(vlRe.exec(tipped)[1]);
 
@@ -39,11 +39,12 @@ function fromElement(el) {
 }
 
 function fromTipped(tipped) {
-  const mo = tipped.match(/Stamina:<\/td><td>(\d{1,12}) \/ (\d{1,12})<\/td>/);
+  const mo = tipped.match(stamRe);
+  const ml = /Level:.+?(\d+)/.exec(tipped);
   return {
     current_stamina: Number(mo[1]),
     last_activity: lastActivityTimestamp(tipped),
-    level: level(tipped),
+    level: Number(ml[1]),
     max_stamina: Number(mo[2]),
     vl: vl(tipped),
   };

@@ -3,9 +3,8 @@ import getArrayByTagName from '../../common/getArrayByTagName';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
+import { itmRe } from '../../support/constants';
 import partial from '../../common/partial';
-
-const itmRE = /fetchitem.php\?item_id=(\d+)&inv_id=-1&t=2&p=(\d+)&vcode=([a-z0-9]+)/i;
 
 function getTblCells(doc) {
   return getArrayByTagName('td', getElementById('pCC', doc));
@@ -18,7 +17,7 @@ function background(bgGif, el) {
 
 function splitMouseover(img) {
   const mouseOver = img.dataset.tipped;
-  return mouseOver.match(itmRE);
+  return mouseOver.match(itmRe);
 }
 
 function buildResult(img, mouseOverRX) {
