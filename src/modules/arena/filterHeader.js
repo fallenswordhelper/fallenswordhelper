@@ -13,7 +13,7 @@ function makeTheRow() {
 
 function hideMovesCheckbox(aTable) { // jQuery
   const fshHideMoves = $('#fshHideMoves', aTable);
-  if (getOpts()?.hideMoves != null) {
+  if (getOpts()?.hideMoves != null) { // skipcq: JS-0050
     fshHideMoves.prop('checked', getOpts().hideMoves);
     $('.moveMax').toggle(!getOpts().hideMoves);
   }
