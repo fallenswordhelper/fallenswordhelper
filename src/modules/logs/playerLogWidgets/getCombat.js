@@ -9,8 +9,8 @@ import { get, set } from '../../system/idb';
 
 const storageKey = 'fsh_pvpCombat';
 
-let combatPrm;
-let newCache;
+let combatPrm = 0;
+let newCache = 0;
 
 function currentCombatRecord(sevenDays, [key, val]) {
   return key === 'lastCheck' || (val.logTime && val.logTime > sevenDays);

@@ -15,8 +15,8 @@ import {
   getUpperPvpLevel,
 } from '../common/levelHighlight';
 
-let highlightPlayersNearMyLvl;
-let highlightGvGPlayersNearMyLvl;
+let highlightPlayersNearMyLvl = 0;
+let highlightGvGPlayersNearMyLvl = 0;
 
 function isPvpTarget(vlevel) {
   return highlightPlayersNearMyLvl

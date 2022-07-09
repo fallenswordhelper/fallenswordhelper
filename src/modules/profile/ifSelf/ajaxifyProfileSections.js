@@ -6,7 +6,7 @@ import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import retryAjax from '../../ajax/retryAjax';
 
-let bpc;
+let bpc = 0;
 
 function bp() {
   if (!bpc) {

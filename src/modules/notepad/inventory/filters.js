@@ -2,7 +2,7 @@ import { getOptions } from './options';
 import intValue from '../../system/intValue';
 import { lvlTest, playerLvlTest } from '../../common/lvlTests';
 
-let itemLvlTest;
+let itemLvlTest = 0;
 
 function doLvlFilter(_settings, data) {
   return lvlTest(itemLvlTest, intValue(data[1]), getOptions().fshMinLvl, getOptions().fshMaxLvl);

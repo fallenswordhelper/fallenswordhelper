@@ -4,7 +4,7 @@ import { invManFilter } from './assets';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 export default function headers() {
-  let reportTitle;
+  let reportTitle = '';
   if (getTheInv().player_id) {
     reportTitle = `<b>&nbsp;Inventory Manager</b> ${
       getTheInv().items.length

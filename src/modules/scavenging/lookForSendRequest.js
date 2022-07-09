@@ -10,7 +10,7 @@ import setLastScav from './setLastScav';
 
 /* global sendRequest:true */
 
-let fshSummary;
+let fshSummary = 0;
 
 function getSummary() {
   if (!fshSummary) {

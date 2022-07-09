@@ -7,12 +7,12 @@ import interceptSubmit from '../common/interceptSubmit';
 import partial from '../common/partial';
 import setValue from '../system/setValue';
 
-let normalLink;
-let seasonLink;
-let activeLink;
-let completeLink;
-let notStartedLink;
-let currentPageValue;
+let normalLink = 0;
+let seasonLink = 0;
+let activeLink = 0;
+let completeLink = 0;
+let notStartedLink = 0;
+let currentPageValue = 0;
 
 const currentLocationValue = [0, 3, 0, 1, 2];
 

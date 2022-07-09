@@ -7,7 +7,7 @@ import playerName from '../../common/playerName';
 import sendEvent from '../../analytics/sendEvent';
 import toLowerCase from '../../common/toLowerCase';
 
-let characterRow;
+let characterRow = 0;
 
 const upOrDown = (evt) => ['Up', 'Down'].includes(evt.target.value);
 

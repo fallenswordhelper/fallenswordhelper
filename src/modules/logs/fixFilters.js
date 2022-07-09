@@ -5,10 +5,10 @@ import navigateTo from '../common/navigateTo';
 import on from '../common/on';
 import onclick from '../common/onclick';
 
-let thisType;
-let injectType;
-let prevPage;
-let nextPage;
+let thisType = 0;
+let injectType = 0;
+let prevPage = 0;
+let nextPage = 0;
 
 const strategies = [
   ['All', () => ''],

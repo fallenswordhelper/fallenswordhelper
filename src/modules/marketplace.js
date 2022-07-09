@@ -5,9 +5,9 @@ import { getPcc } from './support/layout';
 import on from './common/on';
 import setInnerHtml from './dom/setInnerHtml';
 
-let amt;
-let prc;
-let warn;
+let amt = 0;
+let prc = 0;
+let warn = 0;
 
 function getAmount() {
   if (!amt) { amt = getElementById('amount'); }

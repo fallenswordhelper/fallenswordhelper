@@ -2,7 +2,7 @@ import getElementsByTagName from '../common/getElementsByTagName';
 import { getPcc } from '../support/layout';
 import getText from '../common/getText';
 
-let playerName;
+let playerName = 0;
 
 export default function getPlayerName() {
   if (!playerName) {

@@ -10,8 +10,8 @@ import setValue from '../system/setValue';
 import { simpleCheckbox } from '../settings/simpleCheckbox';
 import { defLastLadderReset, defTable } from '../support/constants';
 
-let lastLadderReset;
-let trackLadderReset;
+let lastLadderReset = 0;
+let trackLadderReset = 0;
 
 function checkForPvPLadder(row) {
   if (trackLadderReset && containsText('PvP Ladder', row.children[1].children[0])) {
