@@ -7,16 +7,16 @@ import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
 import stringSort from '../../system/stringSort';
 import {
+  getOutput,
+  getRecipebook,
   gotRecipeBook,
-  output,
   parseInventingStart,
-  recipebook,
 } from './parseInventing';
 
 function sortRecipeTable(evt) { // Legacy
   doSortParams(evt.target);
-  recipebook.recipe.sort(stringSort);
-  generateRecipeTable(output, recipebook);
+  getRecipebook().recipe.sort(stringSort);
+  generateRecipeTable(getOutput(), getRecipebook());
 }
 
 function rmEvtHdl(evt) {

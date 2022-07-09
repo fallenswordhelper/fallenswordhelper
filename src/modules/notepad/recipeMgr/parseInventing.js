@@ -8,8 +8,11 @@ import processFirstPage from './processFirstPage';
 import { set } from '../../system/idb';
 import setInnerHtml from '../../dom/setInnerHtml';
 
-export let recipebook;
-export let output;
+let recipebook = 0;
+let output = 0;
+
+export const getRecipebook = () => recipebook;
+export const getOutput = () => output;
 
 function displayStuff() {
   insertHtmlBeforeEnd(output, 'Finished parsing ... formatting ...');
