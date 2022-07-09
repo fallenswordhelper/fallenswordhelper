@@ -34,7 +34,7 @@ function lookForMissingBuffs(missingBuffsDiv, data) {
   }
 }
 
-function huntingBuffsEnabled(missingBuffsDiv, evt, data) {
+function huntingBuffsEnabled(missingBuffsDiv, data) {
   if (calf.showBuffs) {
     lookForMissingBuffs(missingBuffsDiv, data);
   } else {
@@ -43,7 +43,7 @@ function huntingBuffsEnabled(missingBuffsDiv, evt, data) {
 }
 
 function dataEventsPlayerBuffs(missingBuffsDiv, evt, data) {
-  if (getHuntingBuffs()) { huntingBuffsEnabled(missingBuffsDiv, evt, data); }
+  if (getHuntingBuffs()) { huntingBuffsEnabled(missingBuffsDiv, data); }
 }
 
 export default function doHuntingBuffs(missingBuffsDiv) { // jQuery.min

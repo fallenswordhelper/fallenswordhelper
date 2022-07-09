@@ -10,7 +10,7 @@ import onclick from '../../../common/onclick';
 import { prefTypes } from './constants';
 import updateDomItems from './updateDomItems';
 
-export default async function injectStoreItems() {
+export default function injectStoreItems() {
   if (jQueryNotPresent()) { return; }
   const checkboxes = getCheckboxes();
   if (!checkboxes) { return; }

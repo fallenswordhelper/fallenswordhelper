@@ -41,8 +41,8 @@ function allAttribs(attribs) {
 
 function formatTime(time) {
   if (!time) { return ''; }
-  const t = splitTime(time);
-  return `${padZ(t[0])}d ${padZ(t[1])}h ${padZ(t[2])}m ${padZ(t[3])}s`;
+  const [day, hour, min, sec] = splitTime(time);
+  return `${padZ(day)}d ${padZ(hour)}h ${padZ(min)}m ${padZ(sec)}s`;
 }
 
 function makeRow(relic) {

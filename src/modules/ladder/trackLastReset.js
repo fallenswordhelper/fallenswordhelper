@@ -7,10 +7,10 @@ import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
 
 function formatLastReset(lastLadderReset) {
-  let m = Math.floor((getNow() - lastLadderReset) / 60000);
-  const h = Math.floor(m / 60);
-  m %= 60;
-  return `${outputFormat(h, ' hours, ') + m} mins`;
+  let min = Math.floor((getNow() - lastLadderReset) / 60000);
+  const hour = Math.floor(min / 60);
+  min %= 60;
+  return `${outputFormat(hour, ' hours, ') + min} mins`;
 }
 
 function formatTime() {
