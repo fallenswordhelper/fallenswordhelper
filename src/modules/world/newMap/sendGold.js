@@ -4,7 +4,7 @@ import doSendGold from './doSendGold';
 import getValue from '../../system/getValue';
 import { getSendGoldOnWorld, initSendGoldOnWorld } from './sendGoldPref';
 
-let goldAmount;
+let goldAmount = 0;
 
 function statbarGoldBackground(colour) {
   $('#statbar-gold').css('background-color', colour);

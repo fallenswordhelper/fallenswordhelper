@@ -8,12 +8,13 @@ import {
   defNeedToCompose,
 } from '../support/constants';
 
-const timeRE = /ETA:\s*(?<h>\d+)h\s*(?<d>\d+)m\s*(?<s>\d+)s/;
+const timeRE = /ETA:\s*(?<h>\d+)h\s*(?<m>\d+)m\s*(?<s>\d+)s/;
 
 function timeRemaining(el) {
   const timeArr = timeRE.exec(getText(el));
   if (timeArr) {
-    return (timeArr[1] * 3600 + timeArr[2] * 60 + Number(timeArr[3])) * 1000 + getNow();
+    const { h, m, s } = timeArr.groups;
+    return (h * 3600 + m * 60 + Number(s)) * 1000 + getNow();
   }
   return 0;
 }
