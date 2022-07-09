@@ -11,9 +11,9 @@ import {
 } from './buildTitanInfoTable';
 import { clearTitanDiv, initVars } from './placeholders';
 
-let titanDiv;
-let titanId;
-let titanLoc;
+let titanDiv = 0;
+let titanId = 0;
+let titanLoc = '';
 
 export const getTitanDiv = () => titanDiv;
 export const getTitanId = () => titanId;

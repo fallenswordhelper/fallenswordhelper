@@ -26,7 +26,7 @@ import {
   getTotalPct,
 } from './placeholders';
 
-let titanTbl;
+let titanTbl = 0;
 
 export const getTitanTbl = () => titanTbl;
 

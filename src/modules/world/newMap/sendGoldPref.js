@@ -1,6 +1,6 @@
 import getValue from '../../system/getValue';
 
-let sendGoldOnWorld;
+let sendGoldOnWorld = 0;
 
 export const getSendGoldOnWorld = () => sendGoldOnWorld;
 

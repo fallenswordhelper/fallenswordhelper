@@ -1,8 +1,8 @@
 import calf from '../../../../support/calf';
 import isArray from '../../../../common/isArray';
 
-let huntingBuffs;
-let huntingBuffsName;
+let huntingBuffs = 0;
+let huntingBuffsName = '';
 
 export const getHuntingBuffs = () => huntingBuffs;
 export const getHuntingBuffsName = () => huntingBuffsName;

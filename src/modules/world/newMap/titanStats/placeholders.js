@@ -2,15 +2,15 @@ import createSpan from '../../../common/cElement/createSpan';
 import setInnerHtml from '../../../dom/setInnerHtml';
 import setText from '../../../dom/setText';
 
-let titanName;
-let titanLocation;
-let currentHp;
-let maxHp;
-let guildKills;
-let currentPct;
-let totalPct;
-let statusText;
-let cooldownText;
+let titanName = 0;
+let titanLocation = 0;
+let currentHp = 0;
+let maxHp = 0;
+let guildKills = 0;
+let currentPct = 0;
+let totalPct = 0;
+let statusText = 0;
+let cooldownText = 0;
 
 export const getTitanName = () => titanName;
 export const getTitanLocation = () => titanLocation;

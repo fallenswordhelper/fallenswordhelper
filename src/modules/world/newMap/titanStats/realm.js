@@ -1,4 +1,4 @@
-let realmName;
+let realmName = '';
 
 export const getRealmName = () => realmName;
 
