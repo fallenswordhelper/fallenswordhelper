@@ -3,12 +3,12 @@ import calf from '../../../support/calf';
 import { cdn } from '../../../system/system';
 import {
   getMyStats,
-  statArmor,
-  statAttack,
-  statDamage,
-  statDefense,
-  statHp,
-  statLevel,
+  getStatArmor,
+  getStatAttack,
+  getStatDamage,
+  getStatDefense,
+  getStatHp,
+  getStatLevel,
 } from './getMyStats';
 
 function tipHeader(creature) {
@@ -23,29 +23,29 @@ function tipClassLevel(creature, myLvlClas) {
   return `<tr><td>Class:&nbsp;</td><td width="40%">${
     creature.creature_class}</td><td>Level:&nbsp;</td><td width="40%">${
     creature.level} (your level:<span class="${myLvlClas}">${
-    statLevel}</span>)</td></tr>`;
+    getStatLevel()}</span>)</td></tr>`;
 }
 
 function tipAttackDefense(creature) {
   return `<tr><td>Attack:&nbsp;</td><td width="40%">${
     creature.attack} (your defense:<span class="fshYellow">${
-    statDefense}</span>)</td><td>Defense:&nbsp;</td><td width="40%">${
+    getStatDefense()}</span>)</td><td>Defense:&nbsp;</td><td width="40%">${
     creature.defense} (your attack:<span class="fshYellow">${
-    statAttack}</span>)</td></tr>`;
+    getStatAttack()}</span>)</td></tr>`;
 }
 
 function tipArmorDamage(creature) {
   return `<tr><td>Armor:&nbsp;</td><td width="40%">${
     creature.armor} (your damage:<span class="fshYellow">${
-    statDamage}</span>)</td><td>Damage:&nbsp;</td><td width="40%">${
+    getStatDamage()}</span>)</td><td>Damage:&nbsp;</td><td width="40%">${
     creature.damage} (your armor:<span class="fshYellow">${
-    statArmor}</span>)</td></tr>`;
+    getStatArmor()}</span>)</td></tr>`;
 }
 
 function tipHp(creature, oneHitNumber) {
   return `<tr><td>HP:&nbsp;</td><td width="40%">${
     creature.hp} (your HP:<span class="fshYellow">${
-    statHp}</span>)(1H: <span class="fshRed">${
+    getStatHp()}</span>)(1H: <span class="fshRed">${
     oneHitNumber}</span>)</td><td>Gold:&nbsp;</td><td width="40%">${
     creature.gold}</td></tr>`;
 }
@@ -90,7 +90,7 @@ function doMouseOver(creature) {
     * calf.generalVariable);
   let myLvlClas = 'fshYellow';
   getMyStats();
-  if (statLevel > creature.level) { myLvlClas = 'fshRed'; }
+  if (getStatLevel() > creature.level) { myLvlClas = 'fshRed'; }
   return makeMonsterTip(creature, oneHitNumber, myLvlClas);
 }
 

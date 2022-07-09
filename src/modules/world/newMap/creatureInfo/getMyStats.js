@@ -9,12 +9,19 @@ import {
   defStatHp,
 } from '../../../support/constants';
 
-export let statLevel;
-export let statDefense;
-export let statAttack;
-export let statDamage;
-export let statArmor;
-export let statHp;
+let statLevel;
+let statDefense;
+let statAttack;
+let statDamage;
+let statArmor;
+let statHp;
+
+export const getStatLevel = () => statLevel;
+export const getStatDefense = () => statDefense;
+export const getStatAttack = () => statAttack;
+export const getStatDamage = () => statDamage;
+export const getStatArmor = () => statArmor;
+export const getStatHp = () => statHp;
 
 function getStatText(statTooltip, statClassName) {
   return valueText(getElementsByClassName(statClassName, statTooltip));
