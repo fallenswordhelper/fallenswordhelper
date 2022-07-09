@@ -2,7 +2,7 @@ import addCommas from '../../system/addCommas';
 import { defPlayerGold } from '../../support/constants';
 import doSendGold from './doSendGold';
 import getValue from '../../system/getValue';
-import { initSendGoldOnWorld, sendGoldonWorld } from './sendGoldPref';
+import { getSendGoldOnWorld, initSendGoldOnWorld } from './sendGoldPref';
 
 let goldAmount;
 
@@ -42,5 +42,5 @@ function prepareSendGoldOnWorld() {
 
 export default function sendGold() { // jQuery
   initSendGoldOnWorld();
-  if (sendGoldonWorld) { prepareSendGoldOnWorld(); }
+  if (getSendGoldOnWorld()) { prepareSendGoldOnWorld(); }
 }
