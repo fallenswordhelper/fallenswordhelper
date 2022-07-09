@@ -1,14 +1,13 @@
 import calf from '../../support/calf';
-import displayDisconnectedFromGodsMessage
-  from './displayDisconnectedFromGodsMessage';
+import displayDisconnectedFromGodsMessage from './displayDisconnectedFromGodsMessage';
+import { getNow } from '../../support/now';
 import getValue from '../../system/getValue';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
-import { now } from '../../support/now';
 import parseTemplePage from './parseTemplePage';
 
 function checkLastUpdate(templeAlertLastUpdate) {
-  return !templeAlertLastUpdate || now > templeAlertLastUpdate;
+  return !templeAlertLastUpdate || getNow() > templeAlertLastUpdate;
 }
 
 function doWeNeedToParse() {

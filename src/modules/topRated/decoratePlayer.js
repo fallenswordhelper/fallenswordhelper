@@ -1,9 +1,9 @@
 import currentGuildId from '../common/currentGuildId';
+import { getNowSecs } from '../support/now';
 import getValue from '../system/getValue';
 import { guildRE } from '../support/constants';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import isUndefined from '../common/isUndefined';
-import { nowSecs } from '../support/now';
 import onlineDot from '../common/onlineDot';
 import { getLowerPvpLevel, getUpperPvpLevel } from '../common/levelHighlight';
 
@@ -23,7 +23,7 @@ function getMyGuildId() {
 const highlightTests = [
   () => highlightPlayersNearMyLvl || getPref(),
   (guildId) => isUndefined(guildId) || guildId !== (myGuildId || getMyGuildId()),
-  (guildId, data) => data.last_login >= nowSecs - 604800,
+  (guildId, data) => data.last_login >= getNowSecs() - 604800,
   (guildId, data) => data.virtual_level >= getLowerPvpLevel(),
   (guildId, data) => data.virtual_level <= getUpperPvpLevel(),
 ];

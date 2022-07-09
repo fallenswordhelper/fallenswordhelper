@@ -4,12 +4,12 @@ import getTextTrim from '../../common/getTextTrim';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import { months } from '../../support/constants';
 import querySelector from '../../common/querySelector';
-import { now, nowSecs } from '../../support/now';
+import { getNow, getNowSecs } from '../../support/now';
 
 function parseDateAsOffset(textDate) {
   const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);
   return Math.floor(
-    (now - Date.UTC(
+    (getNow() - Date.UTC(
       Number(dateAry[2]),
       months.indexOf(dateAry[1]),
       Number(dateAry[0]),
@@ -33,7 +33,7 @@ function parseReport(html) {
   if (!logTable) { return { s: false }; }
   const rows = dataRows(logTable, 4, 1);
   const data = rows.map(formatRow);
-  return { r: data, s: true, t: `0 ${String(nowSecs)}` };
+  return { r: data, s: true, t: `0 ${String(getNowSecs())}` };
 }
 
 // Incomplete

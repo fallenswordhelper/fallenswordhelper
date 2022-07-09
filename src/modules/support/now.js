@@ -1,9 +1,16 @@
-export let now;
-export let nowSecs;
+let now = 0;
+let nowSecs = 0;
 
-export function initNow() {
+export function getNow() {
   if (!now) {
     now = Date.now();
-    nowSecs = Math.floor(now / 1000);
   }
+  return now;
+}
+
+export function getNowSecs() {
+  if (!nowSecs) {
+    nowSecs = Math.floor(getNow() / 1000);
+  }
+  return nowSecs;
 }

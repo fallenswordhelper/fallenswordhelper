@@ -1,4 +1,4 @@
-import { nowSecs } from '../support/now';
+import { getNowSecs } from '../support/now';
 import partial from './partial';
 
 const getMins = [
@@ -16,7 +16,7 @@ const getMins = [
   },
   (obj, min) => {
     if (obj.last_login) {
-      return Math.floor((nowSecs - obj.last_login) / 60);
+      return Math.floor((getNowSecs() - obj.last_login) / 60);
     }
     return min;
   },

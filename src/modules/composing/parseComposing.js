@@ -1,7 +1,7 @@
 import calf from '../support/calf';
 import getArrayByClassName from '../common/getArrayByClassName';
+import { getNow } from '../support/now';
 import getText from '../common/getText';
-import { now } from '../support/now';
 import setValue from '../system/setValue';
 import {
   defLastComposeCheck,
@@ -13,7 +13,7 @@ const timeRE = /ETA:\s*(\d+)h\s*(\d+)m\s*(\d+)s/;
 function timeRemaining(el) {
   const timeArr = timeRE.exec(getText(el));
   if (timeArr) {
-    return (timeArr[1] * 3600 + timeArr[2] * 60 + Number(timeArr[3])) * 1000 + now;
+    return (timeArr[1] * 3600 + timeArr[2] * 60 + Number(timeArr[3])) * 1000 + getNow();
   }
   return 0;
 }

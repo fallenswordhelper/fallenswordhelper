@@ -2,10 +2,10 @@ import arrayFrom from '../../common/arrayFrom';
 import chunk from '../../common/chunk';
 import createDocument from '../../system/createDocument';
 import dataRows from '../../common/dataRows';
+import { getNow } from '../../support/now';
 import getTextTrim from '../../common/getTextTrim';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import { months } from '../../support/constants';
-import { now } from '../../support/now';
 import querySelector from '../../common/querySelector';
 
 function parseDateAsTimestamp(textDate) {
@@ -23,7 +23,7 @@ function calcCd(e) {
   const cdText = getTextTrim(e[1]);
   if (cdText === 'No active cooldown') { return 0; }
   return Math.ceil(
-    (parseDateAsTimestamp(cdText.slice(16)) - now) / 1000,
+    (parseDateAsTimestamp(cdText.slice(16)) - getNow()) / 1000,
   );
 }
 

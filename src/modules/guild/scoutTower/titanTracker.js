@@ -1,8 +1,8 @@
 import TitanTracker from './TitanTracker.svelte';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
+import { getNow } from '../../support/now';
 import getText from '../../common/getText';
-import { now } from '../../support/now';
 import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import trimTitanName from '../../common/trimTitanName';
 import uniq from '../../common/uniq';
@@ -36,7 +36,7 @@ function remainingTitans(oldTitans, visibleTitans) {
     entries(oldTitans)
       .map(([n, o]) => [trimTitanName(n), o])
       .filter(([n]) => !visibleTitans[n])
-      .filter(([, d]) => d.coolTime > now)
+      .filter(([, d]) => d.coolTime > getNow())
       .map(([n, d]) => [n, { ...d, seen: 'no' }]),
   );
 }

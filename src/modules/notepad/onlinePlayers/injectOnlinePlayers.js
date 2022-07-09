@@ -4,9 +4,9 @@ import createDocument from '../../system/createDocument';
 import doRefreshButton from './doRefreshButton';
 import { doTable } from './doTable';
 import filterHeaderOnlinePlayers from './filterHeaderOnlinePlayers';
+import { getNow } from '../../support/now';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
-import { now } from '../../support/now';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
 import onlinePlayersPage from '../../ajax/onlinePlayersPage';
@@ -93,7 +93,7 @@ function refreshEvt() { // Bad jQuery
   onlinePages = 0;
   onlinePlayers = {};
   onlinePlayersPage(1).then(getOnlinePlayers);
-  setValue('lastOnlineCheck', now);
+  setValue('lastOnlineCheck', getNow());
   updateStatus('Parsing online players...');
 }
 

@@ -1,9 +1,9 @@
 import calf from '../support/calf';
 import daComposing from '../_dataAccess/daComposing';
 import displayComposeMsg from './displayComposeMsg';
+import { getNow } from '../support/now';
 import getValue from '../system/getValue';
 import jQueryPresent from '../common/jQueryPresent';
-import { now } from '../support/now';
 import setValue from '../system/setValue';
 import {
   defLastComposeCheck,
@@ -23,7 +23,7 @@ function potsBrewing(potions) {
   const minTimeInSecs = Math.min.apply(null, potions.map(getTime));
   if (minTimeInSecs > 0) {
     setValue(defNeedToCompose, false);
-    setValue(defLastComposeCheck, now + minTimeInSecs * 1000);
+    setValue(defLastComposeCheck, getNow() + minTimeInSecs * 1000);
   } else {
     displayAlert();
   }
@@ -43,7 +43,7 @@ function checkAppResponse(json) {
 
 function checkLastCompose() { // jQuery.min
   const lastComposeCheck = getValue(defLastComposeCheck);
-  if (lastComposeCheck && now < lastComposeCheck) { return; }
+  if (lastComposeCheck && getNow() < lastComposeCheck) { return; }
   daComposing().then(checkAppResponse);
 }
 

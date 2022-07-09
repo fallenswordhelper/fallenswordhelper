@@ -1,9 +1,9 @@
 import closestTr from '../../common/closestTr';
 import createDocument from '../../system/createDocument';
 import currentGuildId from '../../common/currentGuildId';
+import { getNowSecs } from '../../support/now';
 import getTextTrim from '../../common/getTextTrim';
 import guildManage from '../../ajax/guildManage';
-import { nowSecs } from '../../support/now';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
 import uniq from '../../common/uniq';
@@ -21,7 +21,7 @@ function lastActivityTimestamp(tipped) {
   const hours = Number(lastActivity[2]) + days * 24;
   const mins = Number(lastActivity[3]) + hours * 60;
   const secs = Number(lastActivity[4]) + mins * 60;
-  return nowSecs - secs;
+  return getNowSecs() - secs;
 }
 
 function fromElement(el) {

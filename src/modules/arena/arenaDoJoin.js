@@ -1,7 +1,7 @@
 import arena from './arena';
 import getElementById from '../common/getElementById';
+import { getNowSecs } from '../support/now';
 import infoBox from '../common/infoBox';
-import { nowSecs } from '../support/now';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import sendEvent from '../analytics/sendEvent';
@@ -9,7 +9,7 @@ import { get, set } from '../system/idb';
 
 function addId(id, obj) {
   const newObj = obj || {};
-  newObj[id] = nowSecs;
+  newObj[id] = getNowSecs();
   set('fsh_arenaFull', newObj);
 }
 

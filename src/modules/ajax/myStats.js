@@ -1,6 +1,6 @@
 import calf from '../support/calf';
+import { getNow } from '../support/now';
 import getProfile from './getProfile';
-import { now } from '../support/now';
 import playerName from '../common/playerName';
 import { get, set } from '../system/idb';
 
@@ -11,7 +11,7 @@ function sendMyProfileToForage(data) {
 
 function addLastUpdateDate(data) {
   if (data) {
-    return { ...data, lastUpdate: now };
+    return { ...data, lastUpdate: getNow() };
   }
   return data;
 }
@@ -23,7 +23,7 @@ function getMyProfile() {
 }
 
 function getProfileFromForage(data) {
-  if (!data || data.lastUpdate < now - calf.allyEnemyOnlineRefreshTime) {
+  if (!data || data.lastUpdate < getNow() - calf.allyEnemyOnlineRefreshTime) {
     return getMyProfile();
   }
   return data;

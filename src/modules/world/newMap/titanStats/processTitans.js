@@ -1,9 +1,9 @@
 import addRows from './addRows';
 import getKillsPct from '../../../guild/scoutTower/getKillsPct';
+import { getNow } from '../../../support/now';
 import { getRealmName } from './realm';
 import getTitanString from '../../../guild/scoutTower/getTitanString';
 import { months } from '../../../support/constants';
-import { now } from '../../../support/now';
 import padZ from '../../../system/padZ';
 import partial from '../../../common/partial';
 import roundToString from '../../../common/roundToString';
@@ -26,7 +26,7 @@ import {
 import { getTitanId, getTitanLoc } from './hasTitan';
 
 function formatOffset(secs) {
-  const aDate = new Date(now + secs * 1000);
+  const aDate = new Date(getNow() + secs * 1000);
   return `${padZ(aDate.getHours())}:${padZ(aDate.getMinutes())} ${
     padZ(aDate.getDate())}/${months[aDate.getMonth()]}/${
     aDate.getFullYear()}`;

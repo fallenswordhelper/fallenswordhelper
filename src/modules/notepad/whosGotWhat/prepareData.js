@@ -1,6 +1,6 @@
 import addCommas from '../../system/addCommas';
+import { getNowSecs } from '../../support/now';
 import lastActivityToDays from '../../common/lastActivityToDays';
-import { nowSecs } from '../../support/now';
 import partial from '../../common/partial';
 import toLowerCase from '../../common/toLowerCase';
 import trim from '../../common/trim';
@@ -29,7 +29,7 @@ function decorateMembers(pots, obj, i) {
     gxp: addCommas(obj.guild_xp),
     gxp_reverse: 0 - obj.guild_xp,
     activity: lastActivityToDays(obj.last_activity),
-    act: obj.last_activity - nowSecs,
+    act: obj.last_activity - getNowSecs(),
     pack: (pots[obj.id] || []).length,
     pack_reverse: 0 - (pots[obj.id] || []).length,
     stam: addCommas(obj.max_stamina),

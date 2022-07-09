@@ -1,6 +1,6 @@
 import calf from '../../support/calf';
 import formatLastActivity from '../../system/formatLastActivity';
-import { nowSecs } from '../../support/now';
+import { getNowSecs } from '../../support/now';
 import partial from '../../common/partial';
 import {
   enemyBuffCheckOn,
@@ -25,7 +25,7 @@ function allyOrEnemy(type, test) {
 }
 
 function band(lastLogin, ary) {
-  return ary[0](nowSecs - lastLogin);
+  return ary[0](getNowSecs() - lastLogin);
 }
 
 function contactColor(lastLogin, type) {
@@ -85,7 +85,7 @@ function doTradeButton(val) {
 }
 
 function recent(val) {
-  return nowSecs - val.last_login < 1800;
+  return getNowSecs() - val.last_login < 1800;
 }
 
 function addContact(type, val) {

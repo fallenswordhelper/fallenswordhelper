@@ -1,10 +1,10 @@
 <script>
   import entries from '../../common/entries';
-  import { now } from '../../support/now';
+  import { getNow } from '../../support/now';
 
   export let theTitans;
 
-  const onCd = ([, data]) => data.coolTime > now;
+  const onCd = ([, data]) => data.coolTime > getNow();
   const int = ([, a], [, b]) => a.coolTime - b.coolTime;
 
   const titansOnCooldown = () => entries(theTitans).filter(onCd).sort(int);

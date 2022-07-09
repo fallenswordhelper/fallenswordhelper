@@ -1,12 +1,12 @@
 import createDiv from '../../../common/cElement/createDiv';
 import getElementById from '../../../common/getElementById';
 import getMembrList from '../../../ajax/getMembrList';
+import { getNowSecs } from '../../../support/now';
 import getValue from '../../../system/getValue';
 import hideElement from '../../../common/hideElement';
 import insertElement from '../../../common/insertElement';
 import insertHtmlBeforeEnd from '../../../common/insertHtmlBeforeEnd';
 import keys from '../../../common/keys';
-import { nowSecs } from '../../../support/now';
 import partial from '../../../common/partial';
 import { playerIdUrl } from '../../../support/constants';
 import { atkStats, defStats, proc } from './assets';
@@ -102,8 +102,8 @@ function makeLinks(key) {
 
 function missingMembers(membrList) {
   guildMemberList = membrList;
-  twoMinutesAgo = nowSecs - 120;
-  sevenDaysAgo = nowSecs - 604800;
+  twoMinutesAgo = getNowSecs() - 120;
+  sevenDaysAgo = getNowSecs() - 604800;
   const filtered = keys(guildMemberList).filter(availableMembers).map(makeLinks);
   insertHtmlBeforeEnd(
     getContainerDiv(),
