@@ -6,11 +6,11 @@ import closestTable from '../common/closestTable';
 import closestTr from '../common/closestTr';
 import createDiv from '../common/cElement/createDiv';
 import getInventoryById from '../ajax/getInventoryById';
+import { getPcc } from '../support/layout';
 import hideElement from '../common/hideElement';
 import insertElement from '../common/insertElement';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
 import jQueryPresent from '../common/jQueryPresent';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
@@ -22,10 +22,10 @@ let prm = 0;
 let thisItemTable = 0;
 let warehouse = 0;
 
-const getAnchors = () => querySelectorArray(`a[href*="=${calf.cmd}&"]`, pCC);
+const getAnchors = () => querySelectorArray(`a[href*="=${calf.cmd}&"]`, getPcc());
 const invId = (a) => a.href.split('=')[2];
 const getInvItem = (a) => [a, inv.items[invId(a)]];
-const getItemTable = () => closestTable(querySelector('img[src*="/items/"]', pCC));
+const getItemTable = () => closestTable(querySelector('img[src*="/items/"]', getPcc()));
 const emptyRow = () => closestTr(thisItemTable).previousElementSibling.children[0];
 const showFolder = (item, currentFolder) => currentFolder === -2
     || (currentFolder === -3 && item.equipped)
@@ -73,7 +73,7 @@ function doFilter({ detail: [currentFolder, wantsPerfect] }) {
 }
 
 export default async function craftForge() {
-  if (jQueryPresent() && pCC) {
+  if (jQueryPresent() && getPcc()) {
     prm = getInventoryById();
     thisItemTable = getItemTable();
     const cf = startCraftForge();

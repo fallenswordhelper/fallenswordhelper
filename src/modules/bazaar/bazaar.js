@@ -3,6 +3,7 @@ import daBazaarBuy from '../_dataAccess/daBazaarBuy';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getElementById from '../common/getElementById';
 import getElementsByTagName from '../common/getElementsByTagName';
+import { getPcc } from '../support/layout';
 import getText from '../common/getText';
 import hasClass from '../common/hasClass';
 import insertElement from '../common/insertElement';
@@ -12,7 +13,6 @@ import jsonFail from '../common/jsonFail';
 import on from '../common/on';
 import onclick from '../common/onclick';
 import outputResult from '../common/outputResult';
-import { pCC } from '../support/layout';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
@@ -118,9 +118,9 @@ function evtHandlers() {
 
 export default function bazaar() {
   if (jQueryNotPresent()) { return; }
-  const pbImg = getElementsByTagName('img', pCC)[0];
+  const pbImg = getElementsByTagName('img', getPcc())[0];
   pbImg.className = 'fshFloatLeft';
-  getArrayByTagName('a', pCC).forEach(doMiniatures);
+  getArrayByTagName('a', getPcc()).forEach(doMiniatures);
   bazaarTable = bazaarTable.replace(/@\d@/g, '');
   insertHtmlBeforeEnd(pbImg.parentNode, bazaarTable);
   evtHandlers();

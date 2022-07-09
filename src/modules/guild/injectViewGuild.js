@@ -2,10 +2,10 @@ import compressHistory from './compressHistory';
 import createStyle from '../common/cElement/createStyle';
 import currentGuildId from '../common/currentGuildId';
 import getElementsByTagName from '../common/getElementsByTagName';
+import { getPcc } from '../support/layout';
 import getUrlParameter from '../system/getUrlParameter';
 import getValue from '../system/getValue';
 import insertElement from '../common/insertElement';
-import { pCC } from '../support/layout';
 import querySelectorArray from '../common/querySelectorArray';
 import { defTable, lastActivityRE } from '../support/constants';
 import {
@@ -72,7 +72,7 @@ function gvgTargetStyle(gvgTargets) {
 
 function memberListStyle(pvpTargets, gvgTargets) {
   if (pvpTargets.length + gvgTargets.length) {
-    const tables = getElementsByTagName(defTable, pCC);
+    const tables = getElementsByTagName(defTable, getPcc());
     const memberList = tables[tables.length - 1];
     memberList.classList.add('fshHighlight');
   }

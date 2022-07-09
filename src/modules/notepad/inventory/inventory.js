@@ -13,13 +13,13 @@ import { extendOptions } from './options';
 import fromEntries from '../../common/fromEntries';
 import { get } from '../../system/idb';
 import getMembrList from '../../ajax/getMembrList';
+import { getPcc } from '../../support/layout';
 import getValue from '../../system/getValue';
 import headers from './headers';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
 import notLastUpdate from '../../common/notLastUpdate';
 import { oldActionSpinner } from '../../support/constants';
-import { pCC } from '../../support/layout';
 import recallAll from './recallAll/recallAll';
 import setChecks from './setChecks';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -34,7 +34,7 @@ const rekey = ([, o]) => [o.id, o];
 
 function doSpinner() {
   setInnerHtml(`<span id="fshInvMan"><img src = "${
-    oldActionSpinner}">&nbsp;Getting inventory data...</span>`, pCC);
+    oldActionSpinner}">&nbsp;Getting inventory data...</span>`, getPcc());
 }
 
 function rekeyMembrList() {
@@ -84,7 +84,7 @@ function syncInvMan() {
 }
 
 export default function inventory() {
-  if (jQueryNotPresent() || !pCC) return;
+  if (jQueryNotPresent() || !getPcc()) return;
   if (calf.subcmd === 'guildinvmgr' && !currentGuildId()) return;
   doSpinner();
   syncInvMan();

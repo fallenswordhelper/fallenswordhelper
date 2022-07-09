@@ -9,6 +9,7 @@ import getArrayByTagName from '../../common/getArrayByTagName';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import getGuildLogPage from './getGuildLogPage';
+import { getPcc } from '../../support/layout';
 import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
 import getValue from '../../system/getValue';
@@ -17,7 +18,6 @@ import hideGuildLogMsg from './hideGuildLogMsg';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import partial from '../../common/partial';
 import profiler from './profiler';
@@ -159,7 +159,7 @@ function buildTable() {
   tmpGuildLog.forEach(buildRow);
 
   const injector = getElementById('fshInjectHere');
-  pCC.replaceChild(myTable, injector);
+  getPcc().replaceChild(myTable, injector);
   addLogColoring('myGuildLog', 1, 3);
   addGuildLogWidgets();
 }
@@ -263,7 +263,7 @@ function setMaxPage() {
 
 function gotOptions(guildLog) {
   setOpts(guildLog);
-  setInnerHtml(guildLogFilter, pCC);
+  setInnerHtml(guildLogFilter, getPcc());
   getElements();
   onclick(fshNewGuildLog, guildLogEvents());
   setChecks();

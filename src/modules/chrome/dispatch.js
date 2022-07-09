@@ -2,7 +2,6 @@ import calf from '../support/calf';
 import doQuickLinks from './doQuickLinks';
 import getUrlParameter from '../system/getUrlParameter';
 import globalErrorHandler from '../support/globalErrorHandler';
-import { initPcc } from '../support/layout';
 import isFunction from '../common/isFunction';
 import isMessageSound from './isMessageSound';
 import isObject from '../common/isObject';
@@ -101,7 +100,6 @@ async function runCore(cssPrm) {
   start('JS Perf', 'FSH.runCore');
   getCoreFunction();
   await cssPrm;
-  initPcc();
   lookForHcsData();
   task(3, asyncDispatcher);
   isMessageSound();

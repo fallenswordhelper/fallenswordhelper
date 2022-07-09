@@ -2,10 +2,10 @@ import './buffmarket.css';
 import createDocument from '../system/createDocument';
 import daBuffMarketBuy from '../_dataAccess/daBuffMarketBuy';
 import fromEntries from '../common/fromEntries';
+import { getPcc } from '../support/layout';
 import indexAjaxData from '../ajax/indexAjaxData';
 import on from '../common/on';
 import onclick from '../common/onclick';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
@@ -50,5 +50,5 @@ export default function injectBuffmarket() {
   const buffResults = querySelector('#buff-results');
   if (!buffResults) { return; }
   injectSearch(buffResults);
-  onclick(pCC, interceptClick, true);
+  onclick(getPcc(), interceptClick, true);
 }

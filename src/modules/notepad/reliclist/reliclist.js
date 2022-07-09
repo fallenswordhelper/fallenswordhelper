@@ -1,6 +1,6 @@
+import { getPcc } from '../../support/layout';
 import getRelicList from './getRelicList';
 import getValue from '../../system/getValue';
-import { pCC } from '../../support/layout';
 import padZ from '../../system/padZ';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -87,11 +87,11 @@ function makeTable(thisRelicList) {
 
 function processRelicList(thisRelicList) {
   thisRelicList.sort((a, b) => a.location.realm.min_level - b.location.realm.min_level);
-  setInnerHtml(makeTable(thisRelicList), pCC);
+  setInnerHtml(makeTable(thisRelicList), getPcc());
 }
 
 export default function reliclist() {
   if (!getValue('betaOptIn')) { return; }
-  setInnerHtml('Loading...', pCC);
+  setInnerHtml('Loading...', getPcc());
   getRelicList().then(processRelicList);
 }

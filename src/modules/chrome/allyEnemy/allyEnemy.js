@@ -6,6 +6,7 @@ import createDiv from '../../common/cElement/createDiv';
 import fallback from '../../system/fallback';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElementById';
+import { getPcl } from '../../support/layout';
 import getPlayerId from '../../common/getPlayerId';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
@@ -14,7 +15,6 @@ import jQueryNotPresent from '../../common/jQueryNotPresent';
 import myStats from '../../ajax/myStats';
 import onclick from '../../common/onclick';
 import openQuickBuffById from '../../common/openQuickBuffById';
-import { pCL } from '../../support/layout';
 import partial from '../../common/partial';
 import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -126,7 +126,7 @@ function makeDiv(data) {
   }
   wrapper += '</div></div>';
   insertHtmlBeforeEnd(fshAllyEnemy, wrapper);
-  insertElement(pCL, fshAllyEnemy);
+  insertElement(getPcl(), fshAllyEnemy);
   onclick(fshAllyEnemy, eventHandler);
   injectAllyEnemyList(data);
 }

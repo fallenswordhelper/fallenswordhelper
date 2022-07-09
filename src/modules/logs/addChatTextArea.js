@@ -5,10 +5,10 @@ import closestTable from '../common/closestTable';
 import contains from '../common/contains';
 import createTextArea from '../common/cElement/createTextArea';
 import getArrayByClassName from '../common/getArrayByClassName';
+import { getPcc } from '../support/layout';
 import getValue from '../system/getValue';
 import insertElement from '../common/insertElement';
 import on from '../common/on';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 
 function removeCrlf(fshTxt) {
@@ -55,8 +55,8 @@ function makeTextArea() {
   return fshTxt;
 }
 
-const dont = () => !pCC
-  || getArrayByClassName('header', pCC).filter(contains('Posted\xa0By')).length !== 1
+const dont = () => !getPcc()
+  || getArrayByClassName('header', getPcc()).filter(contains('Posted\xa0By')).length !== 1
   || !getValue('enhanceChatTextEntry');
 
 export default function addChatTextArea() {

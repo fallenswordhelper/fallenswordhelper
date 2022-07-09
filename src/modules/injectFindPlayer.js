@@ -1,9 +1,9 @@
 import doBuffLink from './common/doBuffLink';
 import doBuffLinkClick from './common/doBuffLinkClick';
+import { getPcc } from './support/layout';
 import insertHtmlBeforeEnd from './common/insertHtmlBeforeEnd';
 import interceptSubmit from './common/interceptSubmit';
 import onclick from './common/onclick';
-import { pCC } from './support/layout';
 import querySelector from './common/querySelector';
 import querySelectorArray from './common/querySelectorArray';
 import {
@@ -40,9 +40,9 @@ function doFindPlayer() {
 }
 
 function doBuffLinks() {
-  const playerLinks = querySelectorArray(playerLinkSelector, pCC);
+  const playerLinks = querySelectorArray(playerLinkSelector, getPcc());
   playerLinks.forEach(doBuffLink);
-  onclick(pCC, doBuffLinkClick);
+  onclick(getPcc(), doBuffLinkClick);
 }
 
 export default function injectFindPlayer() {

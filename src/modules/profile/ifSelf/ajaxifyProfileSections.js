@@ -1,8 +1,8 @@
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 import getElementById from '../../common/getElementById';
+import { getPcc } from '../../support/layout';
 import hideElement from '../../common/hideElement';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
 import retryAjax from '../../ajax/retryAjax';
 
@@ -61,5 +61,5 @@ function testForSection(evt) {
 }
 
 export default function ajaxifyProfileSections() {
-  onclick(pCC, testForSection);
+  onclick(getPcc(), testForSection);
 }

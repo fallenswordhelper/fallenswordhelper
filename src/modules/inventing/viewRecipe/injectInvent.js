@@ -1,5 +1,5 @@
 import QuickInvent from './QuickInvent.svelte';
-import { pCC } from '../../support/layout';
+import { getPcc } from '../../support/layout';
 import parseRecipe from './parseRecipe';
 import querySelector from '../../common/querySelector';
 
@@ -28,7 +28,7 @@ export default function injectInvent() {
   const inputRecipeId = querySelector('input[name="recipe_id"]');
   if (!inputRecipeId) { return; }
   const max = parseRecipe();
-  const injector = pCC.lastElementChild;
+  const injector = getPcc().lastElementChild;
   addSep(injector);
   startApp({ max, recipeID: inputRecipeId.value }, injectRow(injector));
 }

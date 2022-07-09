@@ -1,8 +1,8 @@
 import daRankPosition from '../../_dataAccess/daRankPosition';
+import { getPcc } from '../../support/layout';
 import getValue from '../../system/getValue';
 import insertElementBefore from '../../common/insertElementBefore';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import playerName from '../../common/playerName';
 import sendEvent from '../../analytics/sendEvent';
 import toLowerCase from '../../common/toLowerCase';
@@ -52,7 +52,7 @@ function ajaxifyRankControls(evt) {
 
 export function doButtons() {
   if (characterRow && getValue('ajaxifyRankControls')) {
-    onclick(pCC, ajaxifyRankControls, true);
+    onclick(getPcc(), ajaxifyRankControls, true);
   }
 }
 

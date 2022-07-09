@@ -2,10 +2,10 @@ import all from '../common/all';
 import closestTable from '../common/closestTable';
 import createSpan from '../common/cElement/createSpan';
 import decoratePlayer from './decoratePlayer';
+import { getPcc } from '../support/layout';
 import getProfile from '../ajax/getProfile';
 import getTextTrim from '../common/getTextTrim';
 import hideQTip from '../common/hideQTip';
-import { pCC } from '../support/layout';
 import { playerLinkSelector } from '../support/constants';
 import querySelectorArray from '../common/querySelectorArray';
 import sendEvent from '../analytics/sendEvent';
@@ -28,7 +28,7 @@ async function ajaxPlayer([tbl, player]) {
 }
 
 async function prepareAjax() {
-  const players = querySelectorArray(playerLinkSelector, pCC).map(addPlayerName);
+  const players = querySelectorArray(playerLinkSelector, getPcc()).map(addPlayerName);
   await all(players.map(ajaxPlayer));
 }
 

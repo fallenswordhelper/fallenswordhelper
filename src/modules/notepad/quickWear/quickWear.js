@@ -5,13 +5,13 @@ import createDiv from '../../common/cElement/createDiv';
 import createQuickWear from './createQuickWear';
 import eventHandler5 from '../../common/eventHandler5';
 import fshTabSet from './fshTabSet';
+import { getPcc } from '../../support/layout';
 import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import isArray from '../../common/isArray';
 import jQueryPresent from '../../common/jQueryPresent';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import selfIdIs from '../../common/selfIdIs';
 import setValue from '../../system/setValue';
 import showAHInvManager from './AHInvManager/showAHInvManager';
@@ -56,7 +56,7 @@ function showQuickWear(content, appInv) {
 }
 
 async function hasJquery(injector) {
-  const content = injector || pCC;
+  const content = injector || getPcc();
   if (!content) { return; }
   insertHtmlBeforeEnd(content, 'Getting item list from backpack...');
   calf.disableQuickWearPrompts = getValue(defDisableQuickWearPrompts);

@@ -1,9 +1,9 @@
 import calf from '../../support/calf';
 import getElementsByTagName from '../../common/getElementsByTagName';
+import { getPcc } from '../../support/layout';
 import getText from '../../common/getText';
 import getValue from '../../system/getValue';
 import keys from '../../common/keys';
-import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
 import playerName from '../../common/playerName';
 import sendEvent from '../../analytics/sendEvent';
@@ -14,7 +14,7 @@ function profileBuyBuffsEvent() {
 }
 
 function getTargetPlayer() {
-  let targetPlayer = getElementsByTagName('h1', pCC);
+  let targetPlayer = getElementsByTagName('h1', getPcc());
   if (targetPlayer.length !== 0) {
     targetPlayer = getText(targetPlayer[0]);
   } else {

@@ -61,7 +61,6 @@ rules:
   import/no-extraneous-dependencies:
     - error
     - packageDir: './'
-  import/no-mutable-exports: off # 98
   import/no-unresolved:
     - error
     - ignore:

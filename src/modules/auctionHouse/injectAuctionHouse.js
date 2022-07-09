@@ -7,13 +7,13 @@ import doStatTotal from '../profile/doStatTotal';
 import getArrayByClassName from '../common/getArrayByClassName';
 import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getElementById from '../common/getElementById';
+import { getPcc } from '../support/layout';
 import getValue from '../system/getValue';
 import indexAjaxData from '../ajax/indexAjaxData';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
 import insertHtmlAfterBegin from '../common/insertHtmlAfterBegin';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
-import { pCC } from '../support/layout';
 
 function doRefresh() {
   clickThis(getElementById('refresh'));
@@ -59,7 +59,7 @@ function autoFill() {
 }
 
 export default function injectAuctionHouse() {
-  if (jQueryNotPresent() || !pCC) { return; }
+  if (jQueryNotPresent() || !getPcc()) { return; }
   makeCancelAll();
   autoFill();
   doStatTotal();

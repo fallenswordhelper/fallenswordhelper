@@ -5,13 +5,13 @@ import createDiv from '../common/cElement/createDiv';
 import createInput from '../common/cElement/createInput';
 import createTable from '../common/cElement/createTable';
 import getArrayByClassName from '../common/getArrayByClassName';
+import { getPcc } from '../support/layout';
 import insertElement from '../common/insertElement';
 import insertElementAfter from '../common/insertElementAfter';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import once from '../common/once';
 import onclick from '../common/onclick';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';
@@ -85,7 +85,7 @@ function setupFastCompose(fcDiv, compSlots, openSlots) {
     .map(keyValuePairs);
   const myTable = buildTable(templates, compSlots, openSlots);
   insertElement(fcDiv, myTable);
-  onclick(pCC, handleClick);
+  onclick(getPcc(), handleClick);
   subscribe('quickcreate', partial(quickcreate, myTable));
 }
 

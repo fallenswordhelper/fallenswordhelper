@@ -2,9 +2,9 @@ import alpha from '../common/alpha';
 import createDiv from '../common/cElement/createDiv';
 import entries from '../common/entries';
 import getElementById from '../common/getElementById';
+import { getPcc } from '../support/layout';
 import insertElement from '../common/insertElement';
 import isFunction from '../common/isFunction';
-import { pCC } from '../support/layout';
 import setInnerHtml from '../dom/setInnerHtml';
 import setLastScav from './setLastScav';
 
@@ -15,7 +15,7 @@ let fshSummary;
 function getSummary() {
   if (!fshSummary) {
     fshSummary = createDiv();
-    insertElement(pCC, fshSummary);
+    insertElement(getPcc(), fshSummary);
   }
   setInnerHtml('', fshSummary);
   return fshSummary;

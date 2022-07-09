@@ -1,8 +1,8 @@
 import addCommas from './system/addCommas';
 import closestTable from './common/closestTable';
 import getElementById from './common/getElementById';
+import { getPcc } from './support/layout';
 import on from './common/on';
-import { pCC } from './support/layout';
 import setInnerHtml from './dom/setInnerHtml';
 
 let amt;
@@ -57,5 +57,5 @@ function addMarketplaceWarning() {
 }
 
 export default function marketplace() {
-  on(pCC, 'keyup', addMarketplaceWarning);
+  on(getPcc(), 'keyup', addMarketplaceWarning);
 }

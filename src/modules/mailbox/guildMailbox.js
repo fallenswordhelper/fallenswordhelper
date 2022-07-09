@@ -2,11 +2,11 @@ import clickThis from '../common/clickThis';
 import closestTable from '../common/closestTable';
 import dialog from '../ajax/dialog';
 import getArrayByTagName from '../common/getArrayByTagName';
+import { getPcc } from '../support/layout';
 import infoBoxFrom from '../common/InfoBoxFrom';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import retryAjax from '../ajax/retryAjax';
@@ -42,13 +42,13 @@ function guildMailboxEvent(e) { // jQuery.min
     guildMailboxTake(anchor).then(partial(takeResult, target));
   }
   if (target.className === 'sendLink') {
-    getArrayByTagName('img', pCC).forEach(clickThis);
+    getArrayByTagName('img', getPcc()).forEach(clickThis);
   }
 }
 
 export default function guildMailbox() {
   if (jQueryNotPresent()) { return; }
-  onclick(pCC, guildMailboxEvent);
+  onclick(getPcc(), guildMailboxEvent);
   insertHtmlBeforeEnd(
     querySelector('#pCC td[height="25"]'),
     '<span class="sendLink">Take All</span>',

@@ -5,9 +5,9 @@ import classPair from '../../../common/classPair';
 import closestTr from '../../../common/closestTr';
 import equipItem from '../../../ajax/equipItem';
 import getElementsByTagName from '../../../common/getElementsByTagName';
+import { getPcc } from '../../../support/layout';
 import itemId from './itemId';
 import onclick from '../../../common/onclick';
-import { pCC } from '../../../support/layout';
 import partial from '../../../common/partial';
 import { playerIDRE } from '../../../support/constants';
 import playerId from '../../../common/playerId';
@@ -104,5 +104,5 @@ const classEvts = [
 ];
 
 export default function eventHandlers() {
-  onclick(getElementsByTagName('table', pCC)[1], classHandler(classEvts));
+  onclick(getElementsByTagName('table', getPcc())[1], classHandler(classEvts));
 }

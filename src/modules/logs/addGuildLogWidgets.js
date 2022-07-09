@@ -2,9 +2,9 @@ import arrayFrom from '../common/arrayFrom';
 import contains from '../common/contains';
 import dataRows from '../common/dataRows';
 import getArrayByTagName from '../common/getArrayByTagName';
+import { getPcc } from '../support/layout';
 import getPlayerId from '../common/getPlayerId';
 import getValue from '../system/getValue';
-import { pCC } from '../support/layout';
 import playerId from '../common/playerId';
 import { playerLinkSelector } from '../support/constants';
 import querySelectorArray from '../common/querySelectorArray';
@@ -34,7 +34,7 @@ function processGuildWidgetRow(aRow) { // Legacy
 }
 
 function getMessageHeader() {
-  return getArrayByTagName('td', pCC).find(contains('Message'));
+  return getArrayByTagName('td', getPcc()).find(contains('Message'));
 }
 
 function guildLogWidgetsEnabled() { // Legacy

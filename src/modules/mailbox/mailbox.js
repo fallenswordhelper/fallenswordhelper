@@ -8,6 +8,7 @@ import daMailboxTake from '../_dataAccess/daMailboxTake';
 import entries from '../common/entries';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getElementById from '../common/getElementById';
+import { getPcc } from '../support/layout';
 import hasClass from '../common/hasClass';
 import insertElement from '../common/insertElement';
 import insertElementBefore from '../common/insertElementBefore';
@@ -18,7 +19,6 @@ import jsonFail from '../common/jsonFail';
 import once from '../common/once';
 import onclick from '../common/onclick';
 import outputResult from '../common/outputResult';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
 
@@ -140,7 +140,7 @@ function makeQtDiv(itemList) {
   const takeResult = makeTakeResult(qt);
   insertElement(qt, createDiv());
   makeItemTable(itemList, qt, takeResult);
-  insertElement(pCC, qt);
+  insertElement(getPcc(), qt);
 }
 
 function toggleQuickTake(items, injector) {
@@ -159,10 +159,10 @@ function makeQtCheckbox(items, injector) {
 }
 
 export default function mailbox() {
-  if (jQueryNotPresent() || !pCC) { return; }
-  const items = getArrayByTagName('a', pCC);
+  if (jQueryNotPresent() || !getPcc()) { return; }
+  const items = getArrayByTagName('a', getPcc());
   if (items.length === 0) { return; } // Empty mailbox
-  const injector = pCC.lastElementChild;
+  const injector = getPcc().lastElementChild;
   makeQtCheckbox(items, injector);
   makeQtLabel('qtOff', 'Quick Take', injector);
 }

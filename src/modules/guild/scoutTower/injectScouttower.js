@@ -1,6 +1,7 @@
 import createAnchor from '../../common/cElement/createAnchor';
 import dataRows from '../../common/dataRows';
 import getElementsByTagName from '../../common/getElementsByTagName';
+import { getPcc } from '../../support/layout';
 import getText from '../../common/getText';
 import getTitle from '../../common/getTitle';
 import injectScouttowerBuffLinks from './injectScouttowerBuffLinks';
@@ -8,7 +9,6 @@ import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import killsSummary from './killsSummary';
-import { pCC } from '../../support/layout';
 import querySelector from '../../common/querySelector';
 import setInnerHtml from '../../dom/setInnerHtml';
 import titanTracker from './titanTracker';
@@ -66,7 +66,7 @@ const makeTitanRows = (titanTables) => dataRows(titanTables[1], 4, 0).map(meta).
 
 export default function injectScouttower() {
   if (jQueryNotPresent()) return;
-  const titanTables = getElementsByTagName(defTable, pCC);
+  const titanTables = getElementsByTagName(defTable, getPcc());
   injectScouttowerBuffLinks(titanTables);
   const titanRows = makeTitanRows(titanTables);
   titanRows.forEach(decorate);

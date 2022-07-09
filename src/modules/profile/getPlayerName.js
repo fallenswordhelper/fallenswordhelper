@@ -1,12 +1,12 @@
 import getElementsByTagName from '../common/getElementsByTagName';
+import { getPcc } from '../support/layout';
 import getText from '../common/getText';
-import { pCC } from '../support/layout';
 
 let playerName;
 
 export default function getPlayerName() {
   if (!playerName) {
-    playerName = getText(getElementsByTagName('h1', pCC)[0]);
+    playerName = getText(getElementsByTagName('h1', getPcc())[0]);
   }
   return playerName;
 }

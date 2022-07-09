@@ -6,11 +6,11 @@ import createInput from '../../common/cElement/createInput';
 import createSelect from '../../common/cElement/createSelect';
 import createTable from '../../common/cElement/createTable';
 import displayChange from './displayChange';
+import { getPcc } from '../../support/layout';
 import guildStore from '../../_dataAccess/export/guildStore';
 import insertElement from '../../common/insertElement';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
 import prepareData from './prepareData';
 import ranksView from '../../_dataAccess/fallbacks/ranksView';
@@ -119,8 +119,8 @@ function makePager(bottom, table) {
 
 function showMe(dataAry) {
   const data = prepareData(dataAry);
-  setInnerHtml('', pCC);
-  const el = insertElement(pCC, createDiv());
+  setInnerHtml('', getPcc());
+  const el = insertElement(getPcc(), createDiv());
   const top = insertElement(el, createDiv({ className: 'st-top-container' }));
   const tableContainer = insertElement(el, createDiv());
   const domTable = makeTable(tableContainer);
@@ -142,6 +142,6 @@ function showMe(dataAry) {
 }
 
 export default function whosGotWhat() {
-  setInnerHtml('Loading...', pCC);
+  setInnerHtml('Loading...', getPcc());
   allthen([guildStore(), ranksView()], showMe);
 }

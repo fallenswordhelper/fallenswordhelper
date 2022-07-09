@@ -1,10 +1,10 @@
 import addCommas from '../system/addCommas';
 import contains from '../common/contains';
 import getArrayByTagName from '../common/getArrayByTagName';
+import { getPcc } from '../support/layout';
 import getPlayers from '../common/getPlayers';
 import lastActivityMins from '../common/lastActivityMins';
 import { lastActivityRE } from '../support/constants';
-import { pCC } from '../support/layout';
 import setTipped from '../common/setTipped';
 
 const ACTIVE = 0;
@@ -30,7 +30,7 @@ function getActive(dots) {
 }
 
 export default function activeMembers() {
-  const members = getArrayByTagName('b', pCC).find(contains('Members'));
+  const members = getArrayByTagName('b', getPcc()).find(contains('Members'));
   if (members) {
     const dots = getPlayers();
     const memberStats = getActive(dots);

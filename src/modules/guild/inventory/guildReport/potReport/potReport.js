@@ -3,12 +3,12 @@ import createDiv from '../../../../common/cElement/createDiv';
 import deepClone from '../../../../common/deepClone';
 import eventHandler5 from '../../../../common/eventHandler5';
 import fallback from '../../../../system/fallback';
+import { getPcc } from '../../../../support/layout';
 import insertElement from '../../../../common/insertElement';
 import isChecked from '../../../../system/isChecked';
 import keys from '../../../../common/keys';
 import on from '../../../../common/on';
 import onclick from '../../../../common/onclick';
-import { pCC } from '../../../../support/layout';
 import partial from '../../../../common/partial';
 import selfIdIs from '../../../../common/selfIdIs';
 import sortKeys from './sortKeys';
@@ -128,7 +128,7 @@ function cellEventHandlers(potOpts, potObj, myCell) {
 }
 
 function injectCell(potOpts, potObj) {
-  const myCell = pCC.lastElementChild.insertRow(2).insertCell(-1);
+  const myCell = getPcc().lastElementChild.insertRow(2).insertCell(-1);
   cellEventHandlers(potOpts, potObj, myCell);
   return myCell;
 }
@@ -151,6 +151,6 @@ function gotMap(potObj, data) {
 }
 
 export default function potReport(potObj) {
-  if (!pCC) { return; }
+  if (!getPcc()) { return; }
   get(storeMap).then(partial(gotMap, potObj));
 }

@@ -1,12 +1,12 @@
 import doBreakdown from '../ajax/doBreakdown';
 import getElementById from '../common/getElementById';
+import { getPcc } from '../support/layout';
 import getValue from '../system/getValue';
 import hasClass from '../common/hasClass';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import navigateTo from '../common/navigateTo';
 import onclick from '../common/onclick';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import perfFilter from '../common/perfFilter';
 import setValue from '../system/setValue';
@@ -101,7 +101,7 @@ function togglePref() {
 
 function prefBox() {
   insertHtmlBeforeEnd(
-    pCC,
+    getPcc(),
     `<table class="fshTblCenter"><tbody>${
       simpleCheckbox(prefDisableBreakdownPrompts)}</tbody></table>`,
   );

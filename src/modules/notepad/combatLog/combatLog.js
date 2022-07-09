@@ -1,10 +1,10 @@
 import './combatLog.css';
 import getElementById from '../../common/getElementById';
+import { getPcc } from '../../support/layout';
 import jConfirm from '../../common/jConfirm';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import jsonStringify from '../../common/jsonStringify';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { get, set } from '../../system/idb';
 
@@ -44,5 +44,5 @@ function gotCombatLog(content, data) {
 export default async function combatLog(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
   const data = await get('fsh_combatLog');
-  gotCombatLog(injector || pCC, data);
+  gotCombatLog(injector || getPcc(), data);
 }

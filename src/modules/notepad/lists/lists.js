@@ -2,6 +2,7 @@ import './lists.css';
 import defaults from '../../support/dataObj.json';
 import eventHandler5 from '../../common/eventHandler5';
 import getElementById from '../../common/getElementById';
+import { getPcc } from '../../support/layout';
 import getValueJSON from '../../system/getValueJSON';
 import isArray from '../../common/isArray';
 import isChecked from '../../system/isChecked';
@@ -10,7 +11,6 @@ import jsonStringify from '../../common/jsonStringify';
 import makePageHeader from './makePageHeader';
 import makePageTemplate from './makePageTemplate';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import selfIdIs from '../../common/selfIdIs';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setValueJSON from '../../system/setValueJSON';
@@ -154,7 +154,7 @@ function setupEventHandler(content) {
 }
 
 export function injectAuctionSearch(injector) { // Legacy
-  const content = injector || pCC;
+  const content = injector || getPcc();
   setInnerHtml(makePageHeader('Trade Hub Quick Search', '', '', '')
     + auctionSearchBlurb, content);
   // global parameters for the meta function generateManageTable
@@ -164,7 +164,7 @@ export function injectAuctionSearch(injector) { // Legacy
 }
 
 export function injectQuickLinkManager(injector) { // Legacy
-  const content = injector || pCC;
+  const content = injector || getPcc();
   setInnerHtml(makePageTemplate({
     title: 'Quick Links',
     comment: '',

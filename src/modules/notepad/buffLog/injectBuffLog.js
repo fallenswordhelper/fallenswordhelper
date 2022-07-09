@@ -1,9 +1,9 @@
 import { fshBuffLog } from '../../support/constants';
 import getElementById from '../../common/getElementById';
+import { getPcc } from '../../support/layout';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import makePageTemplate from '../lists/makePageTemplate';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { get, set } from '../../system/idb';
 
@@ -17,7 +17,7 @@ function clearBuffLog() {
 
 export default function injectBuffLog(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
-  const content = injector || pCC;
+  const content = injector || getPcc();
   setInnerHtml(makePageTemplate({
     title: 'Buff Log',
     comment: '',

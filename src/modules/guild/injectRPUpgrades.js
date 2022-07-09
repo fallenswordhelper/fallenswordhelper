@@ -1,8 +1,8 @@
 import getArrayByTagName from '../common/getArrayByTagName';
+import { getPcc } from '../support/layout';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import myStats from '../ajax/myStats';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import reduceBuffArray from '../common/reduceBuffArray';
 
@@ -21,7 +21,7 @@ function checkForBuffs(myBuffs, el) {
 }
 
 function postWarnings(myBuffs) {
-  const packsRow = pCC.children[0].rows[9];
+  const packsRow = getPcc().children[0].rows[9];
   if (!packsRow) { return; }
   getArrayByTagName('a', packsRow.cells[0].children[0])
     .forEach(partial(checkForBuffs, myBuffs));

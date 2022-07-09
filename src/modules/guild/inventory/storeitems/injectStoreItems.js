@@ -3,10 +3,10 @@ import buttonPress from './buttonPress';
 import doStatTotal from '../../../profile/doStatTotal';
 import doToggleButtons from './doToggleButtons';
 import getCheckboxes from './getCheckboxes';
+import { getPcc } from '../../../support/layout';
 import getValue from '../../../system/getValue';
 import jQueryNotPresent from '../../../common/jQueryNotPresent';
 import onclick from '../../../common/onclick';
-import { pCC } from '../../../support/layout';
 import { prefTypes } from './constants';
 import updateDomItems from './updateDomItems';
 
@@ -20,5 +20,5 @@ export default async function injectStoreItems() {
   if (prefs.some((v) => v)) {
     updateDomItems(prefs);
   }
-  onclick(pCC, buttonPress);
+  onclick(getPcc(), buttonPress);
 }

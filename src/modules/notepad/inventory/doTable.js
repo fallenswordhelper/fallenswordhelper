@@ -6,12 +6,12 @@ import createdRow from './render/createdRow';
 import dropRender from './render/dropRender';
 import durabilityRender from './render/durabilityRender';
 import forgeRender from './render/forgeRender';
+import { getPcc } from '../../support/layout';
 import { getTheInv } from './buildInv';
 import gsRender from './render/gsRender';
 import insertElement from '../../common/insertElement';
 import { itemType } from '../../support/constants';
 import nameRender from './render/nameRender';
-import { pCC } from '../../support/layout';
 import sendRender from './render/sendRender';
 import wearUseRender from './render/wearUseRender';
 import whereData from './render/whereData';
@@ -95,7 +95,7 @@ function injectTable() {
     className: 'hover fshXSmall',
     id: tableId(),
   });
-  insertElement(pCC, fshInv);
+  insertElement(getPcc(), fshInv);
   return fshInv;
 }
 

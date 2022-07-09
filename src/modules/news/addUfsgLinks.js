@@ -1,11 +1,11 @@
 import createAnchor from '../common/cElement/createAnchor';
 import createSpan from '../common/cElement/createSpan';
 import getArrayByClassName from '../common/getArrayByClassName';
+import { getPcc } from '../support/layout';
 import getTitle from '../common/getTitle';
 import { guideUrl } from '../support/constants';
 import insertElement from '../common/insertElement';
 import insertElementBefore from '../common/insertElementBefore';
-import { pCC } from '../support/layout';
 import querySelectorArray from '../common/querySelectorArray';
 
 const creatureSearchHref = (name) => `${guideUrl}creatures&search_name=${encodeURIComponent(name)}`;
@@ -47,6 +47,6 @@ function titanLink(el) {
 export default function addUfsgLinks() {
   querySelectorArray('.news_body img[src*="/creatures/"]')
     .forEach(makeUfsgLink);
-  getArrayByClassName('news_body_tavern', pCC)
+  getArrayByClassName('news_body_tavern', getPcc())
     .filter(titanSpotted).forEach(titanLink);
 }
