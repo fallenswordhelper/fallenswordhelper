@@ -9,7 +9,7 @@ import insertElementBefore from '../common/insertElementBefore';
 import querySelectorArray from '../common/querySelectorArray';
 
 const creatureSearchHref = (name) => `${guideUrl}creatures&search_name=${encodeURIComponent(name)}`;
-const titanRe = /( titan has been spotted in )([^!]+)(!)/;
+const titanRe = /(?<a> titan has been spotted in )(?<b>[^!]+)(?<c>!)/;
 const realmSearchHref = (name) => `${guideUrl}realms&search_name=${encodeURIComponent(name)}`;
 const makeALink = (name) => `<a href="${realmSearchHref(name)}" target="_blank">${name}</a>`;
 

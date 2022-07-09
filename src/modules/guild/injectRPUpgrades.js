@@ -6,7 +6,7 @@ import myStats from '../ajax/myStats';
 import partial from '../common/partial';
 import reduceBuffArray from '../common/reduceBuffArray';
 
-const packRE = />([^>(]+) \(Level (\d{1,4})/g;
+const packRE = />(?<a>[^>(]+) \(Level (?<b>\d{1,4})/g;
 
 const makeSpan = (bf) => `<br><span class="fshRed fshNoWrap">${bf[1]} ${
   bf[2]} active</span>`;

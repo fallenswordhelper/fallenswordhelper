@@ -11,7 +11,7 @@ function colourNewRow(row, id) { // jQuery
 }
 
 function checkTournamentId(row, theCells) { // jQuery
-  const matches = /#\s(\d+)/.exec(theCells.eq(0).text());
+  const matches = /#\s(?<id>\d+)/.exec(theCells.eq(0).text());
   if ([matches, getOpts()?.id].every(isObject)) {
     // eslint-disable-next-line prefer-destructuring
     getOpts().id[matches[1]] = matches[1];
@@ -33,7 +33,7 @@ function joinCost(theCells) {
 }
 
 function boolData(i, el) { // jQuery
-  const matches = /(\d)\.png/.exec($('img', el).attr('src'));
+  const matches = /(?<move>\d)\.png/.exec($('img', el).attr('src'));
   if (matches) { $(el).attr('data-order', matches[1]); }
 }
 

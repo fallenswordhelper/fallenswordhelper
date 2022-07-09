@@ -28,7 +28,7 @@ function getPxScroll(val) {
 }
 
 function shuffleRows(evt, thisRankRow, targetRowNum) {
-  const matchRankId = evt.target.getAttribute('onclick').match(/rank_id=(\d+)/);
+  const matchRankId = evt.target.getAttribute('onclick').match(/rank_id=(?<rankId>\d+)/);
   daRankPosition(toLowerCase(evt.target.value), matchRankId[1]);
   const injectRow = thisRankRow.parentNode.rows[targetRowNum];
   insertElementBefore(thisRankRow, injectRow);

@@ -17,7 +17,7 @@ function removeCrlf(fshTxt) {
     .replace(/\r\n|\n|\r/g, ' ')
     .replace(/'/g, '’')
     // https://stackoverflow.com/a/27449493/1274806
-    .replace(/(^|\s)(")/g, '$1“') // replace quotes that start a line or follow spaces
+    .replace(/(?<a>^|\s)(?<b>")/g, '$1“') // replace quotes that start a line or follow spaces
     .replace(/"/g, '”') // replace quotes that start a line or follow spaces
     .replace('<', '＜'); // open angle bracket - sohail94
 }

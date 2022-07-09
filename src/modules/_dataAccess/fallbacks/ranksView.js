@@ -40,7 +40,7 @@ function fromElement(el) {
 
 function fromTipped(tipped) {
   const mo = tipped.match(stamRe);
-  const ml = /Level:.+?(\d+)/.exec(tipped);
+  const ml = /Level:.+?(?<l>\d+)/.exec(tipped);
   return {
     current_stamina: Number(mo[1]),
     last_activity: lastActivityTimestamp(tipped),

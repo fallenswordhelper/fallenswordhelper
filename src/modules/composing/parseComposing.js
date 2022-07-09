@@ -8,7 +8,7 @@ import {
   defNeedToCompose,
 } from '../support/constants';
 
-const timeRE = /ETA:\s*(\d+)h\s*(\d+)m\s*(\d+)s/;
+const timeRE = /ETA:\s*(?<h>\d+)h\s*(?<d>\d+)m\s*(?<s>\d+)s/;
 
 function timeRemaining(el) {
   const timeArr = timeRE.exec(getText(el));
