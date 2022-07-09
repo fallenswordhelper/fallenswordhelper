@@ -1,10 +1,10 @@
 import { defTable } from '../support/constants';
 import isObject from '../common/isObject';
 import { moveRe } from './assets';
-import { oldIds, opts } from './setOpts';
+import { getOldIds, getOpts } from './setOpts';
 
 function colourNewRow(row, id) { // jQuery
-  if (oldIds && !oldIds[id]) {
+  if (!getOldIds()?.[id]) {
     row.css('background-color', '#F5F298');
     row.find('tr').css('background-color', '#F5F298');
   }
@@ -12,9 +12,9 @@ function colourNewRow(row, id) { // jQuery
 
 function checkTournamentId(row, theCells) { // jQuery
   const matches = /#\s(\d+)/.exec(theCells.eq(0).text());
-  if ([matches, opts, opts.id].every(isObject)) {
+  if ([matches, getOpts()?.id].every(isObject)) {
     // eslint-disable-next-line prefer-destructuring
-    opts.id[matches[1]] = matches[1];
+    getOpts().id[matches[1]] = matches[1];
     colourNewRow(row, matches[1]);
   }
 }
@@ -42,7 +42,7 @@ function theBools(theCells) {
 }
 
 function hazMaxMoves(matches, row) { // jQuery
-  if (opts.moves[matches[1]] && opts.moves[matches[1]] === 3) {
+  if (getOpts().moves[matches[1]] && getOpts().moves[matches[1]] === 3) {
     row.addClass('moveMax');
   }
 }
@@ -57,7 +57,7 @@ function optsHazMoves(cell, row) { // jQuery
 
 function maxMoves(theCells, row) { // jQuery
   const cell = theCells.eq(8);
-  if (opts && opts.moves) {
+  if (getOpts()?.moves) {
     optsHazMoves(cell, row);
   }
 }
