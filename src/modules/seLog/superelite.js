@@ -16,11 +16,11 @@ import {
   disableBackgroundChecks,
   doBackgroundCheck,
   getFshSeLog,
-  oldLog,
+  getOldLog,
 } from './seLog';
 
 const enableSeTracker = 'enableSeTracker';
-let trackerCell;
+let trackerCell = 0;
 
 function addRow(trackerTable, se) {
   insertHtmlBeforeEnd(
@@ -57,8 +57,8 @@ function displayTracker(seAry) {
 function valueNumeric(a, b) { return a[1] - b[1]; }
 
 function gotSeLog() {
-  if (oldLog && oldLog.se) {
-    displayTracker(entries(oldLog.se).sort(valueNumeric));
+  if (getOldLog()?.se) {
+    displayTracker(entries(getOldLog().se).sort(valueNumeric));
   }
 }
 
