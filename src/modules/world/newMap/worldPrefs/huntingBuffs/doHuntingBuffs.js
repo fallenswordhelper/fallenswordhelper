@@ -1,13 +1,9 @@
-import calf from '../../../support/calf';
-import { defPlayerBuffs } from '../../../support/constants';
-import partial from '../../../common/partial';
-import setInnerHtml from '../../../dom/setInnerHtml';
-import trim from '../../../common/trim';
-import {
-  huntingBuffs,
-  huntingBuffsName,
-  setCurrentBuffList,
-} from './setCurrentBuffList';
+import calf from '../../../../support/calf';
+import { defPlayerBuffs } from '../../../../support/constants';
+import partial from '../../../../common/partial';
+import setInnerHtml from '../../../../dom/setInnerHtml';
+import trim from '../../../../common/trim';
+import { getHuntingBuffs, getHuntingBuffsName, setCurrentBuffList } from './setCurrentBuffList';
 
 function buildBuffHash(acc, curr) {
   acc[curr.name] = true;
@@ -20,7 +16,7 @@ function findMissingBuffs(buffHash, acc, curr) {
 }
 
 function displayMissingBuffs(missingBuffsDiv, missingBuffs) {
-  setInnerHtml(`You are missing some ${huntingBuffsName} hunting buffs<br>(${
+  setInnerHtml(`You are missing some ${getHuntingBuffsName()} hunting buffs<br>(${
     missingBuffs.join(', ')})`, missingBuffsDiv);
 }
 
@@ -30,7 +26,7 @@ function clearBuffDiv(missingBuffsDiv) {
 
 function lookForMissingBuffs(missingBuffsDiv, data) {
   const buffHash = data.b.reduce(buildBuffHash, {});
-  const missingBuffs = huntingBuffs.reduce(partial(findMissingBuffs, buffHash), []);
+  const missingBuffs = getHuntingBuffs().reduce(partial(findMissingBuffs, buffHash), []);
   if (missingBuffs.length > 0) {
     displayMissingBuffs(missingBuffsDiv, missingBuffs);
   } else {
@@ -47,7 +43,7 @@ function huntingBuffsEnabled(missingBuffsDiv, evt, data) {
 }
 
 function dataEventsPlayerBuffs(missingBuffsDiv, evt, data) {
-  if (huntingBuffs) { huntingBuffsEnabled(missingBuffsDiv, evt, data); }
+  if (getHuntingBuffs()) { huntingBuffsEnabled(missingBuffsDiv, evt, data); }
 }
 
 export default function doHuntingBuffs(missingBuffsDiv) { // jQuery.min

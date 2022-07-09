@@ -1,6 +1,6 @@
 import buildFshDivs from './buildFshDivs';
 import calf from '../../../support/calf';
-import doHuntingBuffs from './doHuntingBuffs';
+import doHuntingBuffs from './huntingBuffs/doHuntingBuffs';
 import getCombatBias from './getCombatBias';
 import getValue from '../../../system/getValue';
 import interceptXHR from './interceptXHR';

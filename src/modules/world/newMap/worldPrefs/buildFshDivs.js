@@ -8,7 +8,7 @@ import on from '../../../common/on';
 import onclick from '../../../common/onclick';
 import { simpleCheckboxHtml } from '../../../settings/simpleCheckbox';
 import { toggleBuffInfo } from '../buffInfo/buffInfo';
-import toggleEnabledHuntingMode from './toggleEnabledHuntingMode';
+import toggleEnabledHuntingMode from './huntingBuffs/toggleEnabledHuntingMode';
 import { toggleHidePlayerActions } from '../prepareHidePlayerActions';
 import toggleShowCreatureInfo from './toggleShowCreatureInfo';
 import toggleShowHuntingBuffs from './toggleShowHuntingBuffs';
