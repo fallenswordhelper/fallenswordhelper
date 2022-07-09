@@ -11,47 +11,77 @@ import partial from '../../../common/partial';
 import { playerIdUrl } from '../../../support/constants';
 import { atkStats, defStats, proc } from './assets';
 import {
-  containerDiv,
-  fetchStatsBtn,
-  leftDiv,
-  myDefenders,
+  getContainerDiv,
+  getFetchStatsBtn,
+  getLeftDiv,
+  getMyDefenders,
 } from './primaryElements';
 
 let guildMemberList;
 let twoMinutesAgo;
 let sevenDaysAgo;
-export let relicCountElement;
-export let lDPercentageElement;
-export let lDCloakedElement;
-export let attackElement;
-export let attackBuffedElement;
-export let defenseElement;
-export let defenseBuffedElement;
-export let armorElement;
-export let armorBuffedElement;
-export let damageElement;
-export let damageBuffedElement;
-export let hpElement;
-export let hpBuffedElement;
-export let defCloakedElement;
-export let defProcessedElement;
-export let dc225Element;
-export let dc175Element;
-export let groupAttackElement;
-export let groupAttackBuffedElement;
-export let groupDefenseElement;
-export let groupDefenseBuffedElement;
-export let groupArmorElement;
-export let groupArmorBuffedElement;
-export let groupDamageElement;
-export let groupDamageBuffedElement;
-export let groupHPElement;
-export let groupHPBuffedElement;
-export let processingStatus;
+
+let relicCountElement;
+let ldPercentageElement;
+let ldCloakedElement;
+let attackElement;
+let attackBuffedElement;
+let defenseElement;
+let defenseBuffedElement;
+let armorElement;
+let armorBuffedElement;
+let damageElement;
+let damageBuffedElement;
+let hpElement;
+let hpBuffedElement;
+let defCloakedElement;
+let defProcessedElement;
+let dc225Element;
+let dc175Element;
+let groupAttackElement;
+let groupAttackBuffedElement;
+let groupDefenseElement;
+let groupDefenseBuffedElement;
+let groupArmorElement;
+let groupArmorBuffedElement;
+let groupDamageElement;
+let groupDamageBuffedElement;
+let groupHPElement;
+let groupHPBuffedElement;
+let processingStatus;
+
+export const getRelicCountElement = () => relicCountElement;
+export const getLdPercentageElement = () => ldPercentageElement;
+export const getLdCloakedElement = () => ldCloakedElement;
+export const getAttackElement = () => attackElement;
+export const getAttackBuffedElement = () => attackBuffedElement;
+export const getDefenseElement = () => defenseElement;
+export const getDefenseBuffedElement = () => defenseBuffedElement;
+export const getArmorElement = () => armorElement;
+export const getArmorBuffedElement = () => armorBuffedElement;
+export const getDamageElement = () => damageElement;
+export const getDamageBuffedElement = () => damageBuffedElement;
+export const getHpElement = () => hpElement;
+export const getHpBuffedElement = () => hpBuffedElement;
+export const getDefCloakedElement = () => defCloakedElement;
+export const getDefProcessedElement = () => defProcessedElement;
+export const getDc225Element = () => dc225Element;
+export const getDc175Element = () => dc175Element;
+export const getGroupAttackElement = () => groupAttackElement;
+export const getGroupAttackBuffedElement = () => groupAttackBuffedElement;
+export const getGroupDefenseElement = () => groupDefenseElement;
+export const getGroupDefenseBuffedElement = () => groupDefenseBuffedElement;
+export const getGroupArmorElement = () => groupArmorElement;
+export const getGroupArmorBuffedElement = () => groupArmorBuffedElement;
+export const getGroupDamageElement = () => groupDamageElement;
+export const getGroupDamageBuffedElement = () => groupDamageBuffedElement;
+export const getGroupHPElement = () => groupHPElement;
+export const getGroupHPBuffedElement = () => groupHPBuffedElement;
+export const getProcessingStatus = () => processingStatus;
 
 const available = [
   (key) => key !== 'lastUpdate',
-  (key) => !myDefenders.includes(key),
+  (key) => !getMyDefenders().includes(key),
   (key) => guildMemberList[key].last_login,
   (key) => Number(guildMemberList[key].last_login) < twoMinutesAgo,
   (key) => Number(guildMemberList[key].last_login) > sevenDaysAgo,
@@ -76,7 +106,7 @@ function missingMembers(membrList) {
   sevenDaysAgo = nowSecs - 604800;
   const filtered = keys(guildMemberList).filter(availableMembers).map(makeLinks);
   insertHtmlBeforeEnd(
-    containerDiv,
+    getContainerDiv(),
     '<div class="fshFloatLeft fshRelicLowDiv">'
     + `<table class="relicT"><thead><tr><th>${
       filtered.length.toString()}`
@@ -88,8 +118,8 @@ function missingMembers(membrList) {
 
 function setDefVars() {
   relicCountElement = getElementById('relicCount');
-  lDPercentageElement = getElementById('LDPercentage');
-  lDCloakedElement = getElementById('LDCloaked');
+  ldPercentageElement = getElementById('LDPercentage');
+  ldCloakedElement = getElementById('LDCloaked');
   attackElement = getElementById('attackValue');
   attackBuffedElement = getElementById('attackValueBuffed');
   defenseElement = getElementById('defenseValue');
@@ -120,23 +150,23 @@ function setAtkVars() {
 }
 
 export function prepareSecondaryDivs(relicData) {
-  hideElement(fetchStatsBtn);
+  hideElement(getFetchStatsBtn());
   const hideRelicOffline = getValue('hideRelicOffline');
   if (relicData.is_owner && !hideRelicOffline) {
     getMembrList(true).then(missingMembers);
   }
-  insertHtmlBeforeEnd(leftDiv, proc);
+  insertHtmlBeforeEnd(getLeftDiv(), proc);
   processingStatus = getElementById('ProcessingStatus');
   const midDiv = createDiv({
     className: 'fshFloatLeft fshRelicMidDiv',
     innerHTML: defStats,
   });
-  insertElement(containerDiv, midDiv);
+  insertElement(getContainerDiv(), midDiv);
   setDefVars();
   const rightDiv = createDiv({
     className: 'fshFloatLeft fshRelicRightDiv',
     innerHTML: atkStats,
   });
-  insertElement(containerDiv, rightDiv);
+  insertElement(getContainerDiv(), rightDiv);
   setAtkVars();
 }

@@ -19,20 +19,13 @@ import {
   storeLeadDefender,
   storeMercStats,
 } from './calcs';
-import {
-  fetchStatsBtn,
-  myDefenders,
-  primaryElementsSetup,
-} from './primaryElements';
-import {
-  prepareSecondaryDivs,
-  processingStatus,
-} from './secondaryElements';
+import { getFetchStatsBtn, getMyDefenders, primaryElementsSetup } from './primaryElements';
+import { getProcessingStatus, prepareSecondaryDivs } from './secondaryElements';
 
 let relicData;
 
 function ajaxFailure(err) {
-  setText(err.message, processingStatus);
+  setText(err.message, getProcessingStatus());
 }
 
 function hasMerc(disband) {
@@ -78,7 +71,7 @@ function getDefenderProfile(el, i) {
 }
 
 function getDefenders() {
-  return myDefenders.map(getDefenderProfile);
+  return getMyDefenders().map(getDefenderProfile);
 }
 
 function buildStatPrm() {
@@ -102,7 +95,7 @@ function viewRelic(e, data) {
   relicData = data.response.data;
   if (relicData.defenders.length > 0) {
     primaryElementsSetup(relicData);
-    once(fetchStatsBtn, 'click', getStats);
+    once(getFetchStatsBtn(), 'click', getStats);
   }
 }
 
