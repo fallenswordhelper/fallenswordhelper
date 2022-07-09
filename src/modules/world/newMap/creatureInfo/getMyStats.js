@@ -9,12 +9,12 @@ import {
   defStatHp,
 } from '../../../support/constants';
 
-let statLevel;
-let statDefense;
-let statAttack;
-let statDamage;
-let statArmor;
-let statHp;
+let statLevel = 0;
+let statDefense = 0;
+let statAttack = 0;
+let statDamage = 0;
+let statArmor = 0;
+let statHp = 0;
 
 export const getStatLevel = () => statLevel;
 export const getStatDefense = () => statDefense;

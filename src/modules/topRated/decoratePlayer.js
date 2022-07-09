@@ -7,8 +7,8 @@ import isUndefined from '../common/isUndefined';
 import onlineDot from '../common/onlineDot';
 import { getLowerPvpLevel, getUpperPvpLevel } from '../common/levelHighlight';
 
-let highlightPlayersNearMyLvl;
-let myGuildId;
+let highlightPlayersNearMyLvl = 0;
+let myGuildId = 0;
 
 function getPref() {
   highlightPlayersNearMyLvl = getValue('highlightPlayersNearMyLvl');

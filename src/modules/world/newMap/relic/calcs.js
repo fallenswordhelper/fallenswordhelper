@@ -34,18 +34,18 @@ import {
   getProcessingStatus,
 } from './secondaryElements';
 
-let defRawAttack;
-let defBuffedAttack;
-let defRawDefense;
-let defRawArmor;
-let defRawDamage;
-let defBuffedDamage;
-let defRawHp;
-let defCloaked;
-let defProcessed;
-let leadDefender;
-let groupStats;
-let mercStats;
+let defRawAttack = 0;
+let defBuffedAttack = 0;
+let defRawDefense = 0;
+let defRawArmor = 0;
+let defRawDamage = 0;
+let defBuffedDamage = 0;
+let defRawHp = 0;
+let defCloaked = 0;
+let defProcessed = 0;
+let leadDefender = 0;
+let groupStats = 0;
+let mercStats = 0;
 
 function deductMercStats() {
   groupStats.attack -= mercStats.attack;

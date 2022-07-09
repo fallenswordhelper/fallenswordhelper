@@ -4,7 +4,7 @@ import round from '../../../common/round';
 import setText from '../../../dom/setText';
 import { getLdPercentageElement, getRelicCountElement } from './secondaryElements';
 
-let relicMultiplier;
+let relicMultiplier = 0;
 
 export const getRelicMultiplier = () => relicMultiplier;
 

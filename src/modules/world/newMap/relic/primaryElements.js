@@ -5,10 +5,10 @@ import getElementById from '../../../common/getElementById';
 import insertElement from '../../../common/insertElement';
 import setInnerHtml from '../../../dom/setInnerHtml';
 
-let containerDiv;
-let leftDiv;
-let fetchStatsBtn;
-let myDefenders;
+let containerDiv = 0;
+let leftDiv = 0;
+let fetchStatsBtn = 0;
+let myDefenders = 0;
 
 export const getContainerDiv = () => containerDiv;
 export const getLeftDiv = () => leftDiv;

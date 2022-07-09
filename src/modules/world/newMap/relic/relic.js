@@ -22,7 +22,7 @@ import {
 import { getFetchStatsBtn, getMyDefenders, primaryElementsSetup } from './primaryElements';
 import { getProcessingStatus, prepareSecondaryDivs } from './secondaryElements';
 
-let relicData;
+let relicData = 0;
 
 function ajaxFailure(err) {
   setText(err.message, getProcessingStatus());
