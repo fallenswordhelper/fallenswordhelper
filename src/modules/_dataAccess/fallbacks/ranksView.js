@@ -7,13 +7,18 @@ import guildManage from '../../ajax/guildManage';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
 import uniq from '../../common/uniq';
-import { lastActivityRE, playerIDRE, playerLinkSelector } from '../../support/constants';
+import {
+  lastActivityRE,
+  playerIDRE,
+  playerLinkSelector,
+  vlRe,
+} from '../../support/constants';
 
 const guildXp = (el) => Number(getTextTrim(closestTr(el).cells[4]).replaceAll(',', ''));
 const playerId = (el) => Number(playerIDRE.exec(el.href)[1]);
 const level = (tipped) => Number(/Level:.+?(\d+)/.exec(tipped)[1]);
 const rank = (el) => getTextTrim(closestTr(el).cells[3]);
-const vl = (tipped) => Number(/VL:.+?(\d+)/.exec(tipped)[1]);
+const vl = (tipped) => Number(vlRe.exec(tipped)[1]);
 
 function lastActivityTimestamp(tipped) {
   const lastActivity = lastActivityRE.exec(tipped);

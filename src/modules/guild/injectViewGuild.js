@@ -7,7 +7,7 @@ import getUrlParameter from '../system/getUrlParameter';
 import getValue from '../system/getValue';
 import insertElement from '../common/insertElement';
 import querySelectorArray from '../common/querySelectorArray';
-import { defTable, lastActivityRE } from '../support/constants';
+import { defTable, lastActivityRE, vlRe } from '../support/constants';
 import {
   getLowerGvGLevel,
   getLowerPvpLevel,
@@ -32,7 +32,7 @@ function isGvgTarget(vlevel) {
 
 const getLastActivity = (a) => [a, lastActivityRE.exec(a.dataset.tipped)[1]];
 const recentActivity = ([, lastActDays]) => lastActDays < 7;
-const getVLevel = ([a]) => [a, Number(/VL:.+?(\d+)/.exec(a.dataset.tipped)[1])];
+const getVLevel = ([a]) => [a, Number(vlRe.exec(a.dataset.tipped)[1])];
 const getFlags = ([a, vlevel]) => [
   a.parentNode.parentNode.rowIndex,
   isPvpTarget(vlevel),

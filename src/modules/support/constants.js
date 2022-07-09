@@ -29,6 +29,7 @@ export const lastActivityRE = /<td>Last Activity:<\/td><td>(?<d>\d+)d (?<h>\d+)h
 export const playerIDRE = /player_id=(?<playerId>\d+)/;
 export const itemRE = /item_id=(?<itemId>\d+)&inv_id=(?<invId>\d+)/;
 export const guildRE = /guild_id=(?<guildId>\d+)/;
+export const vlRe = /VL:.+?(?<vl>\d+)/;
 
 export const defenderMultiplier = 0.2;
 

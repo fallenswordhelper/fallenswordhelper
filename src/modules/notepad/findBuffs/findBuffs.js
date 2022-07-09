@@ -28,6 +28,7 @@ import {
   lastActivityRE,
   profileUrl,
   showPlayerUrl,
+  vlRe,
 } from '../../support/constants';
 
 let findBuffNicks = 0;
@@ -154,7 +155,7 @@ function parsePlayerLink(el) {
   const { tipped } = el.dataset;
   const lastActivityMinutes = calcLastActMins(tipped);
   // check if they are high enough level to cast the buff
-  const matches = /VL:.+?(?<vl>\d+)/.exec(tipped);
+  const matches = vlRe.exec(tipped);
   const vlevel = Number(matches.groups.vl);
   const minPlayerVirtualLevel = calcMinLvl();
   if (isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel)) {
