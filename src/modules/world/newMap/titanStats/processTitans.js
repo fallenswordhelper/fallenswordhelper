@@ -1,11 +1,11 @@
 import addRows from './addRows';
 import getKillsPct from '../../../guild/scoutTower/getKillsPct';
+import { getRealmName } from './realm';
 import getTitanString from '../../../guild/scoutTower/getTitanString';
 import { months } from '../../../support/constants';
 import { now } from '../../../support/now';
 import padZ from '../../../system/padZ';
 import partial from '../../../common/partial';
-import { realmName } from './realm';
 import roundToString from '../../../common/roundToString';
 import setInnerHtml from '../../../dom/setInnerHtml';
 import setText from '../../../dom/setText';
@@ -87,7 +87,7 @@ function doMemberRows(ourTitan) {
 }
 
 function currentTitan(el) {
-  return el.realm && el.creature.base_id === getTitanId() && el.realm === realmName;
+  return el.realm && el.creature.base_id === getTitanId() && el.realm === getRealmName();
 }
 
 export default function processTitans(r) {
