@@ -34,7 +34,7 @@ let findBuffNicks = 0;
 let findBuffMinCastLevel = 0;
 let onlinePlayers = 0;
 let onlinePlayersSetting = 0;
-export let extraProfile = 0;
+let extraProfile = 0;
 let profilePagesToSearch = 0;
 let profilePagesToSearchProcessed = 0;
 
