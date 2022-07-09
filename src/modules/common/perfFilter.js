@@ -9,8 +9,8 @@ import insertHtmlBeforeEnd from './insertHtmlBeforeEnd';
 import jQueryNotPresent from './jQueryNotPresent';
 import onclick from './onclick';
 
-let inv;
-let target;
+let inv = 0;
+let target = 0;
 
 function clickOnPerf(el) {
   const thisItem = el.id.replace(`${target}-item-`, '');

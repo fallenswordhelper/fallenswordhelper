@@ -8,8 +8,8 @@ import { injectWantedList } from './injectWantedList';
 import querySelector from '../../common/querySelector';
 import { getActiveBountyList, getActiveBountyListPosted } from './lists';
 
-let curPage;
-let maxPage;
+let curPage = 0;
+let maxPage = 0;
 
 function getWantedBountyList(doc) {
   const page = querySelector('#pCC input[name="page"]', doc);

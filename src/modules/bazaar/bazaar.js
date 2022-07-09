@@ -37,13 +37,13 @@ let bazaarTable = '<table class="fshBazaar"><tr><td colspan="5">Select an item t
 const bazaarItem = '<span class="bazaarButton tip-dynamic" style="background-image: '
   + 'url(\'@src@\');" itemid="@itemid@" data-tipped="@tipped@"></span>';
 
-let itemId;
-let inputBuyAmount;
-let tdSelected;
-let spanWarning;
-let spanQuantity;
-let spanResultLabel;
-let olResults;
+let itemId = 0;
+let inputBuyAmount = 0;
+let tdSelected = 0;
+let spanWarning = 0;
+let spanQuantity = 0;
+let spanResultLabel = 0;
+let olResults = 0;
 
 function testBuyAmount() {
   return testQuant(inputBuyAmount.value);

@@ -14,7 +14,7 @@ import { simpleCheckbox } from '../settings/simpleCheckbox';
 import { composingUrl, defSubcmd } from '../support/constants';
 
 const prefDisableBreakdownPrompts = 'disableBreakdownPrompts';
-let disableBreakdownPrompts;
+let disableBreakdownPrompts = 0;
 const selectedList = [];
 
 function disappearance(target) { target.hide(); }
