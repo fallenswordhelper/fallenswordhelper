@@ -42,7 +42,7 @@ function huntingBuffsEnabled(missingBuffsDiv, data) {
   }
 }
 
-function dataEventsPlayerBuffs(missingBuffsDiv, evt, data) {
+function dataEventsPlayerBuffs(missingBuffsDiv, _evt, data) {
   if (getHuntingBuffs()) { huntingBuffsEnabled(missingBuffsDiv, data); }
 }
 
