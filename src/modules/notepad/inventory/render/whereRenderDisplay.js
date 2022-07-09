@@ -1,9 +1,9 @@
 import entries from '../../../common/entries';
+import { getTheInv } from '../buildInv';
 import isSelected from '../../../system/isSelected';
 import partial from '../../../common/partial';
 import { playerIdUrl } from '../../../support/constants';
 import playerName from './playerName';
-import { theInv } from '../buildInv';
 
 function whereRenderGuildDisplay(row) {
   if (row.player_id === -1) { return 'Guild Store'; }
@@ -30,5 +30,5 @@ export default function whereRenderDisplay(data, type, row) {
   }
   if (row.equipped) { return 'Worn'; }
   return `<select class="fshMoveItem" data-inv="${row.inv_id}">${
-    makeFolderOptions(row.folder_id, theInv.folders)}</select>`;
+    makeFolderOptions(row.folder_id, getTheInv().folders)}</select>`;
 }

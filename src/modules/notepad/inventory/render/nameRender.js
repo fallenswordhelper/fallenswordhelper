@@ -1,5 +1,5 @@
 import canRecall from './canRecall';
-import { theInv } from '../buildInv';
+import { getTheInv } from '../buildInv';
 import { ahSearchUrl, rarity } from '../../../support/constants';
 
 function getT(row) {
@@ -20,7 +20,7 @@ function isPartOfSet(row) {
 
 function nameRenderDisplay(data, row) {
   const t = getT(row);
-  const p = player(theInv.player_id, row.player_id, theInv.guild_id);
+  const p = player(getTheInv().player_id, row.player_id, getTheInv().guild_id);
 
   let bold = data;
   if (row.equipped) { bold = `<b>${data}</b>`; }

@@ -1,12 +1,12 @@
 import { defaultOptions } from '../assets';
-import { options } from '../options';
+import { getOptions } from '../options';
 import saveOptions from '../saveOptions';
 
 export default function resetLvls(fshInv) { // jQuery
-  options.fshMinLvl = defaultOptions.fshMinLvl;
-  options.fshMaxLvl = defaultOptions.fshMaxLvl;
-  saveOptions(options);
-  $('#fshMinLvl').val(options.fshMinLvl);
-  $('#fshMaxLvl').val(options.fshMaxLvl);
+  getOptions().fshMinLvl = defaultOptions.fshMinLvl;
+  getOptions().fshMaxLvl = defaultOptions.fshMaxLvl;
+  saveOptions(getOptions());
+  $('#fshMinLvl').val(getOptions().fshMinLvl);
+  $('#fshMaxLvl').val(getOptions().fshMaxLvl);
   $(fshInv).DataTable().draw(false);
 }

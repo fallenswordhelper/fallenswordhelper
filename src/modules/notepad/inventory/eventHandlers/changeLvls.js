@@ -1,12 +1,12 @@
 import changeMinMax from '../../../common/changeMinMax';
-import { options } from '../options';
+import { getOptions } from '../options';
 import partial from '../../../common/partial';
 import saveOptions from '../saveOptions';
 
 function newOpts(newMin, newMax) {
-  options.fshMinLvl = newMin;
-  options.fshMaxLvl = newMax;
-  saveOptions(options);
+  getOptions().fshMinLvl = newMin;
+  getOptions().fshMaxLvl = newMax;
+  saveOptions(getOptions());
 }
 
 function redrawTable(fshInv) {

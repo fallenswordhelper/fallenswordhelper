@@ -7,8 +7,10 @@ import getInventory from '../../ajax/getInventory';
 import isArray from '../../common/isArray';
 import partial from '../../common/partial';
 
-export let theInv;
 let composed = [];
+let theInv = {};
+
+export const getTheInv = () => theInv;
 
 function cacheTheInv(data) {
   theInv = data;

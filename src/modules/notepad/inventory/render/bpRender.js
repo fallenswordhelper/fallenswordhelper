@@ -1,4 +1,4 @@
-import { theInv } from '../buildInv';
+import { getTheInv } from '../buildInv';
 
 function bpDisplayType(type, row) {
   if (type !== 'display') { return 'BP'; }
@@ -13,6 +13,6 @@ function bpDisplayType(type, row) {
 
 export default function bpRender(where, type, row) {
   if (row.folder_id || row.player_id
-    === theInv.current_player_id) { return; }
+    === getTheInv().current_player_id) { return; }
   return bpDisplayType(type, row);
 }

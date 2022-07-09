@@ -1,13 +1,13 @@
-import { options } from '../options';
+import { getOptions } from '../options';
 import querySelectorArray from '../../../common/querySelectorArray';
 import saveOptions from '../saveOptions';
 
 export default function getChecks(fshInv) { // jQuery
-  options.checkedElements = {};
+  getOptions().checkedElements = {};
   querySelectorArray('table.fshInvFilter input[type="checkbox"][item]:checked')
     .forEach(
-      (el) => { options.checkedElements[el.getAttribute('item')] = 1; },
+      (el) => { getOptions().checkedElements[el.getAttribute('item')] = 1; },
     );
-  saveOptions(options);
+  saveOptions(getOptions());
   $(fshInv).DataTable().draw(false);
 }

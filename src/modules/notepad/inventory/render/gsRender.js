@@ -1,11 +1,11 @@
 import canRecall from './canRecall';
 import fallback from '../../../system/fallback';
-import { theInv } from '../buildInv';
+import { getTheInv } from '../buildInv';
 
 function gsRecall(row) {
   return `<span class="fshLink recallItem" invid="${
     row.inv_id}" playerid="${
-    fallback(row.player_id, theInv.player_id)
+    fallback(row.player_id, getTheInv().player_id)
   }" mode="1" action="recall">GS</span>`;
 }
 

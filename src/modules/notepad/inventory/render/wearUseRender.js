@@ -1,4 +1,4 @@
-import { theInv } from '../buildInv';
+import { getTheInv } from '../buildInv';
 
 function userInvNotEquipped(row) {
   return row.folder_id && !row.equipped;
@@ -6,7 +6,7 @@ function userInvNotEquipped(row) {
 
 function guidInvNotEquipped(row) {
   return row.player_id && !row.equipped
-    && row.player_id === theInv.current_player_id;
+    && row.player_id === getTheInv().current_player_id;
 }
 
 const locations = [
@@ -15,7 +15,7 @@ const locations = [
     (row, act) => `takeItem" action="${act.a}`,
   ],
   [
-    (row) => row.player_id && row.player_id !== theInv.current_player_id,
+    (row) => row.player_id && row.player_id !== getTheInv().current_player_id,
     (row, act) => `recallItem" playerid="${
       row.player_id}" mode="0" action="${act.a}`,
   ],

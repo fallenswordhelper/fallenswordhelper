@@ -1,6 +1,6 @@
-import { options } from './options';
+import { getOptions } from './options';
 
 export default function setLvls() { // jQuery
-  $('#fshMinLvl').val(options.fshMinLvl);
-  $('#fshMaxLvl').val(options.fshMaxLvl);
+  $('#fshMinLvl').val(getOptions().fshMinLvl);
+  $('#fshMaxLvl').val(getOptions().fshMaxLvl);
 }
