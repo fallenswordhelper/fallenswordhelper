@@ -4,13 +4,8 @@ import isArray from '../../../../common/isArray';
 let huntingBuffs;
 let huntingBuffsName;
 
-export function getHuntingBuffs() {
-  return huntingBuffs;
-}
-
-export function getHuntingBuffsName() {
-  return huntingBuffsName;
-}
+export const getHuntingBuffs = () => huntingBuffs;
+export const getHuntingBuffsName = () => huntingBuffsName;
 
 export function setCurrentBuffList() {
   const lookup = [null,
