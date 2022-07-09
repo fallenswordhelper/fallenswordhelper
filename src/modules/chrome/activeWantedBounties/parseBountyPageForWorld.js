@@ -6,7 +6,7 @@ import getElementById from '../../common/getElementById';
 import { injectBountyList } from './injectBountyList';
 import { injectWantedList } from './injectWantedList';
 import querySelector from '../../common/querySelector';
-import { activeBountyListPosted, getActiveBountyList } from './lists';
+import { getActiveBountyList, getActiveBountyListPosted } from './lists';
 
 let curPage;
 let maxPage;
@@ -22,7 +22,7 @@ function getWantedBountyList(doc) {
 }
 
 function hazActiveBountyList(doc) {
-  if (calf.enableActiveBountyList && !activeBountyListPosted) {
+  if (calf.enableActiveBountyList && !getActiveBountyListPosted()) {
     getActiveBountyList(doc);
     injectBountyList();
   }

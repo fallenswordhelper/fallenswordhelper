@@ -1,7 +1,7 @@
 import basicBounty from './basicBounty';
 import calf from '../../support/calf';
 import getTextTrim from '../../common/getTextTrim';
-import { wantedArray, wantedList } from './lists';
+import { getWantedArray, getWantedList } from './lists';
 
 function acceptBtn(theCells) {
   const cell = theCells[6];
@@ -21,8 +21,8 @@ function getTarget(theCells) {
 }
 
 const isWanted = [
-  () => wantedArray.includes('*'),
-  (target) => wantedArray.includes(target),
+  () => getWantedArray().includes('*'),
+  (target) => getWantedArray().includes(target),
   (target, theRow) => calf.wantedGuildMembers
     && getTextTrim(theRow.cells[6]) === '[n/a]',
 ];
@@ -34,7 +34,7 @@ function wanted(target, theRow) {
 
 function wantedTarget(target, theRow) {
   if (wanted(target, theRow)) {
-    wantedList.bounty.push(getTarget(theRow.cells));
+    getWantedList().bounty.push(getTarget(theRow.cells));
   }
 }
 

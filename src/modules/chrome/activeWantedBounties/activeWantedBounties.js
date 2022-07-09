@@ -6,32 +6,32 @@ import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
 import parseBountyPageForWorld from './parseBountyPageForWorld';
 import setValueJSON from '../../system/setValueJSON';
+import { createDivs, getBountyListDiv, getWantedListDiv } from './createDivs';
 import {
-  bountyList,
-  bwNeedsRefresh,
   doRefresh,
+  getBountyList,
+  getBwNeedsRefresh,
+  getWantedList,
   invalidateCache,
-  wantedList,
 } from './lists';
-import { bountyListDiv, createDivs, wantedListDiv } from './createDivs';
-import { bountyListReset, injectBountyList } from './injectBountyList';
-import { injectWantedList, wantedListReset } from './injectWantedList';
+import { getBountyListReset, injectBountyList } from './injectBountyList';
+import { getWantedListReset, injectWantedList } from './injectWantedList';
 
 function notRefreshed(enableActiveBountyList, enableWantedList) {
   if (enableWantedList) {
-    wantedList.isRefreshed = false;
+    getWantedList().isRefreshed = false;
     injectWantedList();
   }
   if (enableActiveBountyList) {
-    bountyList.isRefreshed = false;
+    getBountyList().isRefreshed = false;
     injectBountyList();
   }
 }
 
 const refreshConditions = [
-  () => !bountyList,
-  () => !wantedList,
-  () => bwNeedsRefresh,
+  () => !getBountyList(),
+  () => !getWantedList(),
+  () => getBwNeedsRefresh(),
 ];
 
 function needsRefresh() {
@@ -49,19 +49,19 @@ function retrieveBountyInfo(enableActiveList, enableWantedList) {
 }
 
 function resetList(e) {
-  if (e.target === bountyListReset) {
+  if (e.target === getBountyListReset()) {
     setValueJSON('bountyList', null);
     retrieveBountyInfo(calf.enableActiveBountyList, calf.enableWantedList);
   }
-  if (e.target === wantedListReset) {
+  if (e.target === getWantedListReset()) {
     setValueJSON('wantedList', null);
     retrieveBountyInfo(calf.enableActiveBountyList, calf.enableWantedList);
   }
 }
 
 function doHandlers() {
-  if (bountyListDiv) { onclick(bountyListDiv, resetList); }
-  if (wantedListDiv) { onclick(wantedListDiv, resetList); }
+  if (getBountyListDiv()) { onclick(getBountyListDiv(), resetList); }
+  if (getWantedListDiv()) { onclick(getWantedListDiv(), resetList); }
 }
 
 export default function activeWantedBounties() {

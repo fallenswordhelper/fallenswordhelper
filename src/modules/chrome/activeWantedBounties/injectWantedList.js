@@ -1,14 +1,16 @@
 import { bountyUrl } from '../../support/constants';
 import createDiv from '../../common/cElement/createDiv';
 import createSpan from '../../common/cElement/createSpan';
+import { getWantedList } from './lists';
+import { getWantedListDiv } from './createDivs';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setValueJSON from '../../system/setValueJSON';
-import { wantedList } from './lists';
-import { wantedListDiv } from './createDivs';
 
-export let wantedListReset = 0;
+let wantedListReset = 0;
+
+export const getWantedListReset = () => wantedListReset;
 
 function makeMouseOver(el) {
   return `Target Level:  ${el.lvl
@@ -28,22 +30,22 @@ function acceptBtn(bounty) {
 }
 
 export function injectWantedList() { // Legacy
-  setValueJSON('wantedList', wantedList);
-  setInnerHtml('', wantedListDiv);
+  setValueJSON('wantedList', getWantedList());
+  setInnerHtml('', getWantedListDiv());
   const heading = createDiv(
     { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">Wanted Bounties</a> ` },
   );
   wantedListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
   insertElement(heading, wantedListReset);
-  insertElement(wantedListDiv, heading);
+  insertElement(getWantedListDiv(), heading);
   let output = '';
-  if (wantedList.bounty.length === 0) {
+  if (getWantedList().bounty.length === 0) {
     output += '<div class="xsOrange">[No wanted bounties]</div>';
   } else {
-    for (const bounty of wantedList.bounty) {
+    for (const bounty of getWantedList().bounty) {
       output += `${acceptBtn(bounty)}<a class="xsKhaki tip-static" data-tipped="${
         makeMouseOver(bounty)}" href="${bounty.link}">${bounty.target}</a><br>`;
     }
   }
-  insertHtmlBeforeEnd(wantedListDiv, output);
+  insertHtmlBeforeEnd(getWantedListDiv(), output);
 }
