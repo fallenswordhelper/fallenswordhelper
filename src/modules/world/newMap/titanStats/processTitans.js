@@ -11,19 +11,19 @@ import setInnerHtml from '../../../dom/setInnerHtml';
 import setText from '../../../dom/setText';
 import textSpan from '../../../common/cElement/textSpan';
 import trimTitanName from '../../../common/trimTitanName';
-import { clearMemberRows, titanTbl } from './buildTitanInfoTable';
+import { clearMemberRows, getTitanTbl } from './buildTitanInfoTable';
 import {
-  cooldownText,
-  currentHp,
-  currentPct,
-  guildKills,
-  maxHp,
-  statusText,
-  titanLocation,
-  titanName,
-  totalPct,
+  getCooldownText,
+  getCurrentHp,
+  getCurrentPct,
+  getGuildKills,
+  getMaxHp,
+  getStatusText,
+  getTitanLocation,
+  getTitanName,
+  getTotalPct,
 } from './placeholders';
-import { titanId, titanLoc } from './hasTitan';
+import { getTitanId, getTitanLoc } from './hasTitan';
 
 function formatOffset(secs) {
   const aDate = new Date(now + secs * 1000);
@@ -59,16 +59,16 @@ function setAllText(ary) {
 
 function doTopLabels(ourTitan) {
   setAllText([
-    [trimTitanName(ourTitan.creature.name), titanName],
-    [titanLoc, titanLocation],
-    [ourTitan.current_hp, currentHp],
-    [ourTitan.max_hp, maxHp],
-    [ourTitan.kills, guildKills],
-    [currentPctText(ourTitan), currentPct],
-    [totalPctText(ourTitan), totalPct],
+    [trimTitanName(ourTitan.creature.name), getTitanName()],
+    [getTitanLoc(), getTitanLocation()],
+    [ourTitan.current_hp, getCurrentHp()],
+    [ourTitan.max_hp, getMaxHp()],
+    [ourTitan.kills, getGuildKills()],
+    [currentPctText(ourTitan), getCurrentPct()],
+    [totalPctText(ourTitan), getTotalPct()],
   ]);
-  setInnerHtml(statusTextHtml(ourTitan), statusText);
-  setInnerHtml(getCooldownHtml(ourTitan.cooldown), cooldownText);
+  setInnerHtml(statusTextHtml(ourTitan), getStatusText());
+  setInnerHtml(getCooldownHtml(ourTitan.cooldown), getCooldownText());
 }
 
 function memberRow(ourTitan, member) {
@@ -83,11 +83,11 @@ function doMemberRows(ourTitan) {
   clearMemberRows();
   if (!ourTitan.contributors) { return; }
   const memberRows = ourTitan.contributors.map(partial(memberRow, ourTitan));
-  addRows(titanTbl, memberRows);
+  addRows(getTitanTbl(), memberRows);
 }
 
 function currentTitan(el) {
-  return el.realm && el.creature.base_id === titanId && el.realm === realmName;
+  return el.realm && el.creature.base_id === getTitanId() && el.realm === realmName;
 }
 
 export default function processTitans(r) {

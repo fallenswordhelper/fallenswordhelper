@@ -1,13 +1,22 @@
 import textSpan from '../../../common/cElement/textSpan';
 
-export let current;
-export let kills;
-export let member;
-export let pctTotal;
-export let status;
-export let titanHp;
-export let total;
-export let yourGuild;
+let current;
+let kills;
+let member;
+let pctTotal;
+let status;
+let titanHp;
+let total;
+let yourGuild;
+
+export const getCurrent = () => current;
+export const getKills = () => kills;
+export const getMember = () => member;
+export const getPctTotal = () => pctTotal;
+export const getStatus = () => status;
+export const getTitanHp = () => titanHp;
+export const getTotal = () => total;
+export const getYourGuild = () => yourGuild;
 
 function partOne() {
   current = textSpan('Current');
