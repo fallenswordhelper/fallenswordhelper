@@ -1,6 +1,5 @@
 import { arenaFilter } from './assets';
 import defaults from '../support/dataObj.json';
-import isObject from '../common/isObject';
 import {
   changeLvls, getOpts, hideMoves, resetLvls,
 } from './setOpts';
@@ -14,7 +13,7 @@ function makeTheRow() {
 
 function hideMovesCheckbox(aTable) { // jQuery
   const fshHideMoves = $('#fshHideMoves', aTable);
-  if (isObject(getOpts()) && 'hideMoves' in getOpts()) {
+  if (getOpts()?.hideMoves != null) {
     fshHideMoves.prop('checked', getOpts().hideMoves);
     $('.moveMax').toggle(!getOpts().hideMoves);
   }
@@ -23,20 +22,12 @@ function hideMovesCheckbox(aTable) { // jQuery
 
 function minLvlValue(aTable) { // jQuery
   const fshMinLvl = $('#fshMinLvl', aTable);
-  if (isObject(getOpts()) && 'minLvl' in getOpts()) {
-    fshMinLvl.val(getOpts().minLvl);
-  } else {
-    fshMinLvl.val(defaults.arenaMinLvl);
-  }
+  fshMinLvl.val(getOpts()?.minLvl ?? defaults.arenaMinLvl);
 }
 
 function maxLvlValue(aTable) { // jQuery
   const fshMaxLvl = $('#fshMaxLvl', aTable);
-  if (isObject(getOpts()) && 'maxLvl' in getOpts()) {
-    fshMaxLvl.val(getOpts().maxLvl);
-  } else {
-    fshMaxLvl.val(defaults.arenaMaxLvl);
-  }
+  fshMaxLvl.val(getOpts()?.maxLvl ?? defaults.arenaMaxLvl);
 }
 
 function eventHandlers(aTable) {
