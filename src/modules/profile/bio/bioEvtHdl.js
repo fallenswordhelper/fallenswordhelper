@@ -2,7 +2,9 @@ import entries from '../../common/entries';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import hasClass from '../../common/hasClass';
+import regExpExec from '../../common/regExpExec';
 import setInnerHtml from '../../dom/setInnerHtml';
+import bioSendEvent from './bioSendEvent';
 import formatCost from './formatCost';
 import getBuffsToBuy from './getBuffsToBuy';
 import getPrice from './getPrice';
@@ -67,7 +69,7 @@ function getBuffCost(buffNameNode) {
   let cost;
   if (price) {
     type = priceUnit(price);
-    [cost] = price[0].match(/([+-]?[.\d]+)/);
+    [cost] = regExpExec(/[+-]?[.\d]+/, price[0]);
   } else {
     type = 'unknown';
     cost = '1';
@@ -77,6 +79,7 @@ function getBuffCost(buffNameNode) {
 }
 
 function toggleBuffsToBuy(buffNameNode) { // Legacy
+  bioSendEvent('toggleBuffsToBuy');
   const selected = hasClass('fshBlue', buffNameNode);
   buffNameNode.classList.toggle('fshBlue');
   buffNameNode.classList.toggle('fshYellow');

@@ -1,17 +1,12 @@
-import sendEvent from '../../analytics/sendEvent';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import getText from '../../common/getText';
 import keys from '../../common/keys';
 import partial from '../../common/partial';
 import playerName from '../../common/playerName';
 import trim from '../../common/trim';
-import calf from '../../support/calf';
 import { getPcc } from '../../support/layout';
 import getValue from '../../system/getValue';
-
-function profileBuyBuffsEvent() {
-  if (calf.subcmd === '-') { sendEvent('profile', 'formatBuffsToBuy'); }
-}
+import bioSendEvent from './bioSendEvent';
 
 function getTargetPlayer() {
   let targetPlayer = getElementsByTagName('h1', getPcc());
@@ -52,7 +47,7 @@ function formatGreetingText(greetingText, buffCost) {
 }
 
 function formatBuffsToBuy(buffCost) { // Legacy
-  profileBuyBuffsEvent();
+  bioSendEvent('formatBuffsToBuy');
   const targetPlayer = getTargetPlayer();
   let greetingText = trim(getValue('buyBuffsGreeting'));
   greetingText = greetingText.replace(/{playername}/g, targetPlayer);
