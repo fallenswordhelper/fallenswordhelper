@@ -148,16 +148,17 @@ function doGroupAttributeElements(buffs) {
   doGroupDamageBuffedElement(buffs, fortitudeBonusHP);
 }
 
+function genericUpdate(baseValue, buffValue, getElementFn) {
+  const intermediateValue = Math.ceil(baseValue * fallback(buffValue, 0) * 0.001);
+  setTextCommas(baseValue - intermediateValue, getElementFn());
+}
+
 function flinchEffectOnDefenders(buffs) {
-  const flinchEffectValue = Math.ceil(defBuffedAttack
-    * fallback(buffs.Flinch, 0) * 0.001);
-  setTextCommas(defBuffedAttack - flinchEffectValue, getAttackBuffedElement());
+  genericUpdate(defBuffedAttack, buffs.Flinch, getAttackBuffedElement);
 }
 
 function terrorizeEffectOnDefenders(buffs) {
-  const terrorizeEffectValue = Math.ceil(defBuffedDamage
-    * fallback(buffs.Terrorize, 0) * 0.001);
-  setTextCommas(defBuffedDamage - terrorizeEffectValue, getDamageBuffedElement());
+  genericUpdate(defBuffedDamage, buffs.Terrorize, getDamageBuffedElement);
 }
 
 function doBuffs(buffs) {
