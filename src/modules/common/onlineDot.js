@@ -1,5 +1,20 @@
-import lastActivityMins from './lastActivityMins';
+import { getNowSecs } from '../support/now';
 import partial from './partial';
+
+const getMins = [
+  (obj, min) => (obj.day ? min + parseInt(obj.day, 10) * 1440 : min),
+  (obj, min) => (obj.hour ? min + parseInt(obj.hour, 10) * 60 : min),
+  (obj, min) => (obj.min ? min + parseInt(obj.min, 10) : min),
+  (obj, min) => (obj.last_login ? Math.floor((getNowSecs() - obj.last_login) / 60) : min),
+  // last_login is 'false' over 30 days
+  (obj, min) => ('last_login' in obj && !obj.last_login ? 99999 : min),
+];
+
+function sum(obj, acc, curr) { return curr(obj, acc); }
+
+function lastActivityMins(obj) {
+  return getMins.reduce(partial(sum, obj), 0);
+}
 
 const getDot = [
   [2, 'greenDiamond'],

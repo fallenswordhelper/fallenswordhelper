@@ -1,4 +1,5 @@
 import currentGuildId from '../common/currentGuildId';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import { guildRE } from '../support/constants';
 import getGuildALink from './getGuildALink';
 
@@ -8,8 +9,8 @@ let isOwnGuild;
 function findGuildId() {
   const guildALink = getGuildALink();
   if (guildALink) {
-    const matches = guildRE.exec(guildALink.href);
-    if (matches) { return Number(matches[1]); }
+    const id = regExpFirstCapture(guildRE, guildALink.href);
+    if (id) return Number(id);
   }
 }
 

@@ -8,6 +8,7 @@ import insertElement from '../../common/insertElement';
 import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 let profileCombatSetDiv;
@@ -19,7 +20,7 @@ function clearBox(link, json) {
 }
 
 function removeItem(link) {
-  const item = /inventory_id=(\d+)/.exec(link.href)[1];
+  const item = regExpFirstCapture(/inventory_id=(\d+)/, link.href);
   if (item) {
     daUnequipItem(item).then(partial(clearBox, link));
   }

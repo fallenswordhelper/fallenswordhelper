@@ -1,11 +1,12 @@
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import { defTable } from '../support/constants';
 
 const sortClasses = 'td.sorting, td.sorting_asc, td.sorting_desc';
 
 function calculateSortOrder(target) {
   const classes = target.attr('class');
-  const test = /sorting([^\s]+)/.exec(classes);
-  if (test && test[1] === '_desc') { return 'asc'; }
+  const test = regExpFirstCapture(/sorting([^\s]+)/, classes);
+  if (test === '_desc') { return 'asc'; }
   return 'desc';
 }
 

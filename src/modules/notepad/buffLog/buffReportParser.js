@@ -1,5 +1,6 @@
 import getTextTrim from '../../common/getTextTrim';
 import querySelectorArray from '../../common/querySelectorArray';
+import regExpExec from '../../common/regExpExec';
 
 let transform;
 
@@ -16,7 +17,7 @@ function buildTransform() {
 }
 
 function meta(report) {
-  return transform.exec(report);
+  return regExpExec(transform, report);
 }
 
 export default function buffReportParser(scope) {

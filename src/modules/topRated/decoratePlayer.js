@@ -3,6 +3,7 @@ import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import isUndefined from '../common/isUndefined';
 import { getLowerPvpLevel, getUpperPvpLevel } from '../common/levelHighlight';
 import onlineDot from '../common/onlineDot';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import { guildRE } from '../support/constants';
 import { getNowSecs } from '../support/now';
 import getValue from '../system/getValue';
@@ -30,7 +31,7 @@ const highlightTests = [
 
 function getGuild(tbl) {
   if (tbl.rows[0].cells[0].children[0]) {
-    return Number(guildRE.exec(tbl.rows[0].cells[0].children[0].href)[1]);
+    return Number(regExpFirstCapture(guildRE, tbl.rows[0].cells[0].children[0].href));
   }
 }
 

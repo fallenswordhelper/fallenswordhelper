@@ -1,12 +1,13 @@
 import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import { defenderMultiplier, mercRE } from '../support/constants';
 import createDocument from '../system/createDocument';
 import indexAjaxData from './indexAjaxData';
 
 function addMercStat(mouseover, stat, i) {
   return stat
-    + Math.round(Number(mercRE[i].exec(mouseover)[1]) * defenderMultiplier);
+    + Math.round(Number(regExpFirstCapture(mercRE[i], mouseover)) * defenderMultiplier);
 }
 
 function addMercStats(acc, merc) {

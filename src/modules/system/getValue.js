@@ -4,9 +4,9 @@ import { GMSTORAGE_PATH } from '../support/constants';
 import defaults from '../support/dataObj.json';
 
 const reviver = [
-  ['S]', (value) => value.substr(2)],
-  ['N]', (value) => parseInt(value.substr(2), 10)],
-  ['B]', (value) => value.substr(2) === 'true'],
+  ['S]', (value) => value.slice(2)],
+  ['N]', (value) => parseInt(value.slice(2), 10)],
+  ['B]', (value) => value.slice(2) === 'true'],
 ];
 
 function retrieve(value) {

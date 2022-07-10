@@ -1,5 +1,6 @@
 import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
+import dateUtc from '../../common/dateUtc';
 import doBuffLinks from '../../common/doBuffLinks';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getText from '../../common/getText';
@@ -7,12 +8,13 @@ import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onlineDot from '../../common/onlineDot';
 import partial from '../../common/partial';
+import regExpExec from '../../common/regExpExec';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { months, playerIdUrl } from '../../support/constants';
 import { time, timeEnd } from '../../support/debug';
 import getValue from '../../system/getValue';
 
-const xRE = /([a-zA-Z]{3}), (\d{1,2}) ([a-zA-Z]{3}) (\d{1,2}):(\d{2}):(\d{2}) UTC/;
+const dateRe = /([a-zA-Z]{3}), (\d{1,2}) ([a-zA-Z]{3}) (\d{1,2}):(\d{2}):(\d{2}) UTC/;
 
 function guessYear(targetMonth) {
   let curYear = new Date().getFullYear();
@@ -23,21 +25,21 @@ function guessYear(targetMonth) {
   return curYear;
 }
 
-function dateFromUTC(x) {
-  const groupDate = new Date();
-  groupDate.setUTCDate(x[2]);
-  groupDate.setUTCMonth(months.indexOf(x[3]));
-  groupDate.setUTCFullYear(guessYear(x[3]));
-  groupDate.setUTCHours(x[4]);
-  groupDate.setUTCMinutes(x[5]);
-  return groupDate;
+function dateLocalFromUtc([,, day, month, hour, minute]) {
+  return new Date(dateUtc([
+    guessYear(month),
+    month,
+    day,
+    hour,
+    minute,
+  ]));
 }
 
 function groupLocalTime(row) {
   const theDateCell = row.cells[3];
-  const x = xRE.exec(getText(theDateCell));
+  const dateMatches = regExpExec(dateRe, getText(theDateCell));
   insertHtmlBeforeEnd(theDateCell, `<br><span class="fshBlue fshXSmall">Local: ${
-    dateFromUTC(x).toString().substr(0, 21)}</span>`);
+    dateLocalFromUtc(dateMatches).toString().slice(0, 21)}</span>`);
 }
 
 function creatorDotAndLink(membrlist, creatorCell) {

@@ -6,16 +6,17 @@ import csvSplit from '../../common/csvSplit';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
+import lastActivity from '../../common/lastActivity';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import playerName from '../../common/playerName';
 import querySelectorArray from '../../common/querySelectorArray';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import trim from '../../common/trim';
 import setInnerHtml from '../../dom/setInnerHtml';
 import buffList from '../../support/buffObj.json';
 import calf from '../../support/calf';
 import {
-  lastActivityRE,
   profileUrl,
   showPlayerUrl,
   vlRe,
@@ -139,13 +140,6 @@ function findBuffsParseOnlinePlayersStart() { // Legacy
   }
 }
 
-function calcLastActMins(tipped) {
-  const lastActivity = lastActivityRE.exec(tipped);
-  const lastActivityDays = parseInt(lastActivity[1], 10);
-  const lastActivityHours = parseInt(lastActivity[2], 10) + lastActivityDays * 24;
-  return parseInt(lastActivity[3], 10) + lastActivityHours * 60;
-}
-
 function isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel) {
   return lastActivityMinutes < 5 && vlevel >= findBuffMinCastLevel
     && vlevel >= minPlayerVirtualLevel;
@@ -153,12 +147,11 @@ function isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel) {
 
 function parsePlayerLink(el) {
   const { tipped } = el.dataset;
-  const lastActivityMinutes = calcLastActMins(tipped);
+  const { mins } = lastActivity(tipped);
   // check if they are high enough level to cast the buff
-  const matches = vlRe.exec(tipped);
-  const vlevel = Number(matches.groups.vl);
+  const vlevel = Number(regExpFirstCapture(vlRe, tipped));
   const minPlayerVirtualLevel = calcMinLvl();
-  if (isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel)) {
+  if (isValidPlayer(mins, vlevel, minPlayerVirtualLevel)) {
     addPlayerToSearchList(el.href, getText(el));
   }
 }

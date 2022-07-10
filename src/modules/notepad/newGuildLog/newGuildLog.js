@@ -13,6 +13,7 @@ import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
+import regExpExec from '../../common/regExpExec';
 import selfIdIs from '../../common/selfIdIs';
 import toggleForce from '../../common/toggleForce';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -45,8 +46,8 @@ let myTable = 0;
 
 function updatePages(pageInput) {
   currPage = Number(pageInput.value);
-  const matches = /\d+/.exec(getText(pageInput.parentNode));
-  lastPage = Number(matches[0]);
+  const [matches] = regExpExec(/\d+/, getText(pageInput.parentNode));
+  lastPage = Number(matches);
   if (currPage === 1) { maxPage = Math.min(lastPage, maxPagesToFetch); }
   setText(`Loading ${currPage} of ${maxPage}...`, fshOutput);
 }

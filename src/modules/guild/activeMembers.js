@@ -1,9 +1,10 @@
 import contains from '../common/contains';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getPlayers from '../common/getPlayers';
-import lastActivityMins from '../common/lastActivityMins';
+import lastActivity from '../common/lastActivity';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import setTipped from '../common/setTipped';
-import { lastActivityRE, stamRe } from '../support/constants';
+import { stamRe } from '../support/constants';
 import { getPcc } from '../support/layout';
 import addCommas from '../system/addCommas';
 
@@ -11,16 +12,10 @@ const ACTIVE = 0;
 const STAMINA = 1;
 
 function countActive(acc, curr) {
-  const lastActivity = lastActivityRE.exec(curr.dataset.tipped);
-  const mins = lastActivityMins({
-    min: lastActivity[3],
-    hour: lastActivity[2],
-    day: lastActivity[1],
-  });
+  const { mins } = lastActivity(curr.dataset.tipped);
   if (mins < 44640) {
     acc[ACTIVE] += 1;
-    acc[STAMINA]
-      += Number(stamRe.exec(curr.dataset.tipped)[1]);
+    acc[STAMINA] += Number(regExpFirstCapture(stamRe, curr.dataset.tipped));
   }
   return acc;
 }

@@ -1,4 +1,5 @@
 import isObject from '../common/isObject';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import { defTable } from '../support/constants';
 import { moveRe } from './assets';
 import { getOldIds, getOpts } from './setOpts';
@@ -11,11 +12,10 @@ function colourNewRow(row, id) { // jQuery
 }
 
 function checkTournamentId(row, theCells) { // jQuery
-  const matches = /#\s(?<id>\d+)/.exec(theCells.eq(0).text());
-  if ([matches, getOpts()?.id].every(isObject)) {
-    // eslint-disable-next-line prefer-destructuring
-    getOpts().id[matches[1]] = matches[1];
-    colourNewRow(row, matches[1]);
+  const tournamentId = regExpFirstCapture(/#\s(?<id>\d+)/, theCells.eq(0).text());
+  if (tournamentId && isObject(getOpts()?.id)) {
+    getOpts().id[tournamentId] = tournamentId;
+    colourNewRow(row, tournamentId);
   }
 }
 
@@ -33,25 +33,23 @@ function joinCost(theCells) {
 }
 
 function boolData(i, el) { // jQuery
-  const matches = /(?<move>\d)\.png/.exec($('img', el).attr('src'));
-  if (matches) { $(el).attr('data-order', matches[1]); }
+  const matches = regExpFirstCapture(/(?<move>\d)\.png/, $('img', el).attr('src'));
+  if (matches) { $(el).attr('data-order', matches); }
 }
 
 function theBools(theCells) {
   theCells.slice(4, 7).each(boolData);
 }
 
-function hazMaxMoves(matches, row) { // jQuery
-  if (getOpts().moves[matches[1]] && getOpts().moves[matches[1]] === 3) {
-    row.addClass('moveMax');
-  }
+function hazMaxMoves(moveId, row) { // jQuery
+  if (getOpts()?.moves?.[moveId] === 3) row.addClass('moveMax');
 }
 
 function optsHazMoves(cell, row) { // jQuery
-  const matches = moveRe.exec($('img', cell).attr('src'));
-  if (matches) {
-    hazMaxMoves(matches, row);
-    cell.attr('data-order', matches[1]);
+  const moveId = regExpFirstCapture(moveRe, $('img', cell).attr('src'));
+  if (moveId) {
+    hazMaxMoves(moveId, row);
+    cell.attr('data-order', moveId);
   }
 }
 

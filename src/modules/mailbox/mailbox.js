@@ -18,6 +18,7 @@ import once from '../common/once';
 import onclick from '../common/onclick';
 import outputResult from '../common/outputResult';
 import partial from '../common/partial';
+import regExpExec from '../common/regExpExec';
 import setInnerHtml from '../dom/setInnerHtml';
 import { itemRE } from '../support/constants';
 import { getPcc } from '../support/layout';
@@ -36,7 +37,7 @@ function makeQtLabel(id, text, injector) {
 function reduceItems(acc, curr) {
   const img = curr.children[0];
   const { tipped } = img.dataset;
-  const itemIDs = itemRE.exec(tipped);
+  const itemIDs = regExpExec(itemRE, tipped);
   if (!itemIDs) { return acc; }
   const itemId = itemIDs[1];
   const invId = itemIDs[2];

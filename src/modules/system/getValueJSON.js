@@ -1,10 +1,10 @@
 import jsonParse from '../common/jsonParse';
+import regExpExec from '../common/regExpExec';
 import getValue from './getValue';
 
 function reviver(key, value) {
   if (typeof value === 'string') {
-    const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/
-      .exec(value);
+    const a = regExpExec(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/, value);
     if (a) {
       return new Date(
         Date.UTC(

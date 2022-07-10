@@ -7,6 +7,7 @@ import hideElement from '../../common/hideElement';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 import calf from '../../support/calf';
 import { defJoinallgroupsundersize } from '../../support/constants';
@@ -43,7 +44,7 @@ function doJoinUnderSize(joinButton) {
       style: { height: '19px', width: '19px' },
     });
     joinButton.parentNode.replaceChild(container, joinButton);
-    const groupID = /confirmJoin\((\d+)\)/.exec(joinButton.href)[1];
+    const groupID = regExpFirstCapture(/confirmJoin\((\d+)\)/, joinButton.href);
     joinGroup(groupID, container);
   }
 }
