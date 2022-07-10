@@ -14,11 +14,7 @@ function buildHtml(list, adjective, rowMap) {
   return bounties.map(rowMap).join('');
 }
 
-export default function injectList([getDivFn, pref, getListFn, adjective, rowMap]) {
-  const listDiv = getDivFn();
-  const list = getListFn();
-  setValueJSON(pref, list);
-  setInnerHtml('', listDiv);
+function getReset(listDiv, list, adjective, rowMap) {
   const heading = createDiv(
     { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">${adjective} Bounties</a> ` },
   );
@@ -27,4 +23,12 @@ export default function injectList([getDivFn, pref, getListFn, adjective, rowMap
   insertElement(listDiv, heading);
   insertHtmlBeforeEnd(listDiv, buildHtml(list, adjective, rowMap));
   return bountyListReset;
+}
+
+export default function injectList([getDivFn, pref, getListFn, adjective, rowMap]) {
+  const listDiv = getDivFn();
+  const list = getListFn();
+  setValueJSON(pref, list);
+  setInnerHtml('', listDiv);
+  return getReset(listDiv, list, adjective, rowMap);
 }
