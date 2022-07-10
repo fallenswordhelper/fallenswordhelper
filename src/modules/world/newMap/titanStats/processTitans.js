@@ -53,12 +53,8 @@ function statusTextHtml(ourTitan) {
   return getTitanString(ourTitan.kills, ourTitan.max_hp, ourTitan.current_hp);
 }
 
-function setAllText(ary) {
-  ary.forEach(([txt, ctx]) => { setText(txt, ctx()); });
-}
-
-function doTopLabels(ourTitan) {
-  setAllText([
+function setAllText(ourTitan) {
+  [
     [trimTitanName(ourTitan.creature.name), getTitanName],
     [getTitanLoc(), getTitanLocation],
     [ourTitan.current_hp, getCurrentHp],
@@ -66,7 +62,11 @@ function doTopLabels(ourTitan) {
     [ourTitan.kills, getGuildKills],
     [currentPctText(ourTitan), getCurrentPct],
     [totalPctText(ourTitan), getTotalPct],
-  ]);
+  ].forEach(([txt, ctx]) => setText(txt, ctx()));
+}
+
+function doTopLabels(ourTitan) {
+  setAllText(ourTitan);
   setInnerHtml(statusTextHtml(ourTitan), getStatusText());
   setInnerHtml(getCooldownHtml(ourTitan.cooldown), getCooldownText());
 }

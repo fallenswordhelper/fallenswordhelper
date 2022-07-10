@@ -1,12 +1,7 @@
-import { bountyUrl } from '../../support/constants';
-import createDiv from '../../common/cElement/createDiv';
-import createSpan from '../../common/cElement/createSpan';
 import { getBountyList } from './lists';
 import { getBountyListDiv } from './createDivs';
-import insertElement from '../../common/insertElement';
-import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import setInnerHtml from '../../dom/setInnerHtml';
-import setValueJSON from '../../system/setValueJSON';
+import injectList from './injectList';
+import listRow from './listRow';
 
 let bountyListReset = 0;
 
@@ -20,27 +15,15 @@ function makeMouseOver(el) {
 }
 
 function bountyRow(bounty) {
-  return `<a href="${bounty.link}" class="xsKhaki tip-static" data-tipped="${
-    makeMouseOver(bounty)}">${bounty.target}</a><br>`;
-}
-
-function buildHtml() {
-  const bounties = getBountyList().bounty;
-  if (bounties.length === 0) {
-    return '<div class="xsOrange">[No active bounties]</div>';
-  }
-  return bounties.map(bountyRow).join('');
+  return listRow(bounty, makeMouseOver);
 }
 
 export function injectBountyList() { // Legacy
-  const bountyListDiv = getBountyListDiv();
-  setValueJSON('bountyList', getBountyList());
-  setInnerHtml('', bountyListDiv);
-  const heading = createDiv(
-    { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">Active Bounties</a> ` },
-  );
-  bountyListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
-  insertElement(heading, bountyListReset);
-  insertElement(bountyListDiv, heading);
-  insertHtmlBeforeEnd(bountyListDiv, buildHtml());
+  bountyListReset = injectList([
+    getBountyListDiv,
+    'bountyList',
+    getBountyList,
+    'Active',
+    bountyRow,
+  ]);
 }

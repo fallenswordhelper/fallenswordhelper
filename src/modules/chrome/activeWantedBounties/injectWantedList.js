@@ -1,12 +1,7 @@
-import { bountyUrl } from '../../support/constants';
-import createDiv from '../../common/cElement/createDiv';
-import createSpan from '../../common/cElement/createSpan';
 import { getWantedList } from './lists';
 import { getWantedListDiv } from './createDivs';
-import insertElement from '../../common/insertElement';
-import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import setInnerHtml from '../../dom/setInnerHtml';
-import setValueJSON from '../../system/setValueJSON';
+import injectList from './injectList';
+import listRow from './listRow';
 
 let wantedListReset = 0;
 
@@ -22,35 +17,22 @@ function makeMouseOver(el) {
 }
 
 function acceptBtn(bounty) {
-  if (bounty.accept) {
-    return `<span class="xsGreen" onclick="${bounty.accept
-    }">[a]</span>&nbsp;`;
-  }
-  return '';
+  return bounty.accept ? `<span class="xsGreen" onclick="${bounty.accept}">[a]</span>&nbsp;` : '';
 }
 
 function wantedRow(bounty) {
-  return `${acceptBtn(bounty)}<a class="xsKhaki tip-static" data-tipped="${
-    makeMouseOver(bounty)}" href="${bounty.link}">${bounty.target}</a><br>`;
-}
-
-function buildHtml() {
-  const bounties = getWantedList().bounty;
-  if (bounties.length === 0) {
-    return '<div class="xsOrange">[No wanted bounties]</div>';
-  }
-  return bounties.map(wantedRow).join('');
+  return [
+    acceptBtn(bounty),
+    listRow(bounty, makeMouseOver),
+  ].join('');
 }
 
 export function injectWantedList() { // Legacy
-  const wantedListDiv = getWantedListDiv();
-  setValueJSON('wantedList', getWantedList());
-  setInnerHtml('', wantedListDiv);
-  const heading = createDiv(
-    { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">Wanted Bounties</a> ` },
-  );
-  wantedListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
-  insertElement(heading, wantedListReset);
-  insertElement(wantedListDiv, heading);
-  insertHtmlBeforeEnd(wantedListDiv, buildHtml());
+  wantedListReset = injectList([
+    getWantedListDiv,
+    'wantedList',
+    getWantedList,
+    'Wanted',
+    wantedRow,
+  ]);
 }
