@@ -45,18 +45,25 @@ function tipClassLevel(creature, myLvlClas) {
   ]);
 }
 
-function tipAttackDefense(creature) {
+function genericStatRow(first, second) {
   return genericRow([
-    ...genericColumns(['Attack', creature.attack, 'defense', 'fshYellow', getStatDefense]),
-    ...genericColumns(['Defense', creature.defense, 'attack', 'fshYellow', getStatAttack]),
+    ...genericColumns(first),
+    ...genericColumns(second),
   ]);
 }
 
+function tipAttackDefense(creature) {
+  return genericStatRow(
+    ['Attack', creature.attack, 'defense', 'fshYellow', getStatDefense],
+    ['Defense', creature.defense, 'attack', 'fshYellow', getStatAttack],
+  );
+}
+
 function tipArmorDamage(creature) {
-  return genericRow([
-    ...genericColumns(['Armor', creature.armor, 'damage', 'fshYellow', getStatDamage]),
-    ...genericColumns(['Damage', creature.damage, 'armor', 'fshYellow', getStatArmor]),
-  ]);
+  return genericStatRow(
+    ['Armor', creature.armor, 'damage', 'fshYellow', getStatDamage],
+    ['Damage', creature.damage, 'armor', 'fshYellow', getStatArmor],
+  );
 }
 
 function tipHp(creature, oneHitNumber) {
