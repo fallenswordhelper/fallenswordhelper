@@ -6,6 +6,7 @@ import getText from '../../common/getText';
 import onlineDot from '../../common/onlineDot';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
+import regExpExec from '../../common/regExpExec';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { defStatVl } from '../../support/constants';
@@ -116,8 +117,7 @@ function updateProcessed() {
 function calcLastActivity(doc) {
   const innerPcc = getElementById('pCC', doc);
   const lastActivityElement = getElementsByTagName('p', innerPcc)[0];
-  const matches = /(\d{1,2}) mins, (\d{1,2}) secs/.exec(getText(lastActivityElement));
-  return matches;
+  return regExpExec(/(\d{1,2}) mins, (\d{1,2}) secs/, getText(lastActivityElement));
 }
 
 function getExtend(doc) {
