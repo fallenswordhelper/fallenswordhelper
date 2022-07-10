@@ -54,18 +54,18 @@ function statusTextHtml(ourTitan) {
 }
 
 function setAllText(ary) {
-  ary.forEach(([txt, ctx]) => { setText(txt, ctx); });
+  ary.forEach(([txt, ctx]) => { setText(txt, ctx()); });
 }
 
 function doTopLabels(ourTitan) {
   setAllText([
-    [trimTitanName(ourTitan.creature.name), getTitanName()],
-    [getTitanLoc(), getTitanLocation()],
-    [ourTitan.current_hp, getCurrentHp()],
-    [ourTitan.max_hp, getMaxHp()],
-    [ourTitan.kills, getGuildKills()],
-    [currentPctText(ourTitan), getCurrentPct()],
-    [totalPctText(ourTitan), getTotalPct()],
+    [trimTitanName(ourTitan.creature.name), getTitanName],
+    [getTitanLoc(), getTitanLocation],
+    [ourTitan.current_hp, getCurrentHp],
+    [ourTitan.max_hp, getMaxHp],
+    [ourTitan.kills, getGuildKills],
+    [currentPctText(ourTitan), getCurrentPct],
+    [totalPctText(ourTitan), getTotalPct],
   ]);
   setInnerHtml(statusTextHtml(ourTitan), getStatusText());
   setInnerHtml(getCooldownHtml(ourTitan.cooldown), getCooldownText());

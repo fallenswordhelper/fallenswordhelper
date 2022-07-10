@@ -25,20 +25,22 @@ function bountyRow(bounty) {
 }
 
 function buildHtml() {
-  if (getBountyList().bounty.length === 0) {
+  const bounties = getBountyList().bounty;
+  if (bounties.length === 0) {
     return '<div class="xsOrange">[No active bounties]</div>';
   }
-  return getBountyList().bounty.map(bountyRow).join('');
+  return bounties.map(bountyRow).join('');
 }
 
 export function injectBountyList() { // Legacy
+  const bountyListDiv = getBountyListDiv();
   setValueJSON('bountyList', getBountyList());
-  setInnerHtml('', getBountyListDiv());
+  setInnerHtml('', bountyListDiv);
   const heading = createDiv(
     { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">Active Bounties</a> ` },
   );
   bountyListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
   insertElement(heading, bountyListReset);
-  insertElement(getBountyListDiv(), heading);
-  insertHtmlBeforeEnd(getBountyListDiv(), buildHtml());
+  insertElement(bountyListDiv, heading);
+  insertHtmlBeforeEnd(bountyListDiv, buildHtml());
 }

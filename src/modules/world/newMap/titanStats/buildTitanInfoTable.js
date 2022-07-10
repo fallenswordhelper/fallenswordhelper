@@ -3,6 +3,7 @@ import createSpan from '../../../common/cElement/createSpan';
 import createTable from '../../../common/cElement/createTable';
 import insertElement from '../../../common/insertElement';
 import insertTextBeforeEnd from '../../../common/insertTextBeforeEnd';
+import partial from '../../../common/partial';
 import {
   buildAssets,
   getCurrent,
@@ -55,14 +56,14 @@ export function buildTitanInfoTable() {
   titanTbl = createTable({ className: 'fshCenter' });
   buildAssets();
   addRows(titanTbl, [
-    [[[5, getTitanName(), true], [1, getTitanLocation(), true]]],
-    [[[2, getTitanHp(), true], [4, getYourGuild(), true]]],
-    [[[2, makeTitanHpWrapper()], [4, getGuildKills()]]],
-    [[[2, getCurrent(), true], [4, makePctWrapper(getCurrentPct())]], true],
-    [[[2, getTotal(), true], [4, makePctWrapper(getTotalPct())]], true],
-    [[[2, getStatus(), true], [4, getStatusText()]], true],
-    [[[6, getCooldownText()]]],
-    [[[2, getMember(), true], [2, getKills(), true],
-      [2, getPctTotal(), true]]],
+    [[[5, getTitanName, true], [1, getTitanLocation, true]]],
+    [[[2, getTitanHp, true], [4, getYourGuild, true]]],
+    [[[2, makeTitanHpWrapper], [4, getGuildKills]]],
+    [[[2, getCurrent, true], [4, partial(makePctWrapper, getCurrentPct())]], true],
+    [[[2, getTotal, true], [4, partial(makePctWrapper, getTotalPct())]], true],
+    [[[2, getStatus, true], [4, getStatusText]], true],
+    [[[6, getCooldownText]]],
+    [[[2, getMember, true], [2, getKills, true],
+      [2, getPctTotal, true]]],
   ]);
 }

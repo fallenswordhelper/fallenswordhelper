@@ -29,23 +29,28 @@ function acceptBtn(bounty) {
   return '';
 }
 
+function wantedRow(bounty) {
+  return `${acceptBtn(bounty)}<a class="xsKhaki tip-static" data-tipped="${
+    makeMouseOver(bounty)}" href="${bounty.link}">${bounty.target}</a><br>`;
+}
+
+function buildHtml() {
+  const bounties = getWantedList().bounty;
+  if (bounties.length === 0) {
+    return '<div class="xsOrange">[No wanted bounties]</div>';
+  }
+  return bounties.map(wantedRow).join('');
+}
+
 export function injectWantedList() { // Legacy
+  const wantedListDiv = getWantedListDiv();
   setValueJSON('wantedList', getWantedList());
-  setInnerHtml('', getWantedListDiv());
+  setInnerHtml('', wantedListDiv);
   const heading = createDiv(
     { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">Wanted Bounties</a> ` },
   );
   wantedListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
   insertElement(heading, wantedListReset);
-  insertElement(getWantedListDiv(), heading);
-  let output = '';
-  if (getWantedList().bounty.length === 0) {
-    output += '<div class="xsOrange">[No wanted bounties]</div>';
-  } else {
-    for (const bounty of getWantedList().bounty) {
-      output += `${acceptBtn(bounty)}<a class="xsKhaki tip-static" data-tipped="${
-        makeMouseOver(bounty)}" href="${bounty.link}">${bounty.target}</a><br>`;
-    }
-  }
-  insertHtmlBeforeEnd(getWantedListDiv(), output);
+  insertElement(wantedListDiv, heading);
+  insertHtmlBeforeEnd(wantedListDiv, buildHtml());
 }
