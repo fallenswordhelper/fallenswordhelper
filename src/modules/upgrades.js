@@ -7,6 +7,7 @@ import numberIsNaN from './common/numberIsNaN';
 import on from './common/on';
 import partial from './common/partial';
 import querySelectorArray from './common/querySelectorArray';
+import regExpFirstCapture from './common/regExpFirstCapture';
 import setInnerHtml from './dom/setInnerHtml';
 import setText from './dom/setText';
 import { cmdUrl } from './support/constants';
@@ -117,7 +118,7 @@ function saveUpgradeValue(upgrade, key) {
   const ratio = text.nextElementSibling.nextElementSibling;
   if (ratio) {
     const valueRE = /(\d{1,3}) \/ 115/;
-    const value = Number(valueRE.exec(ratio.innerHTML)[1]);
+    const value = Number(regExpFirstCapture(valueRE, ratio.innerHTML));
     setValue(key, value + 5);
   }
 }

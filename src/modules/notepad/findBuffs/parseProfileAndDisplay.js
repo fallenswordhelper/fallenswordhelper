@@ -6,6 +6,7 @@ import getText from '../../common/getText';
 import onlineDot from '../../common/onlineDot';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { defStatVl } from '../../support/constants';
 import createDocument from '../../system/createDocument';
@@ -26,7 +27,7 @@ function getSustain(doc) {
   if (sustainLink) {
     const sustainText = sustainLink.parentNode.parentNode.parentNode
       .nextElementSibling.children[0].dataset.tipped;
-    return parseInt(sustainLevelRE.exec(sustainText)[1], 10) || -1;
+    return parseInt(regExpFirstCapture(sustainLevelRE, sustainText), 10) || -1;
   }
   return 0;
 }
@@ -115,7 +116,8 @@ function updateProcessed() {
 function calcLastActivity(doc) {
   const innerPcc = getElementById('pCC', doc);
   const lastActivityElement = getElementsByTagName('p', innerPcc)[0];
-  return /(\d{1,2}) mins, (\d{1,2}) secs/.exec(getText(lastActivityElement));
+  const matches = /(\d{1,2}) mins, (\d{1,2}) secs/.exec(getText(lastActivityElement));
+  return matches;
 }
 
 function getExtend(doc) {

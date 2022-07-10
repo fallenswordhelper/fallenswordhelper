@@ -1,10 +1,14 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
 import sendEvent from '../../analytics/sendEvent';
 import infoBoxFrom from '../../common/InfoBoxFrom';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import calf from '../../support/calf';
 import { composingFragmentType } from '../../support/constants';
 
-const ret = (info, prop) => ({ r: { [prop]: [{ n: info.match(/'(.*)'/)[1] }] }, s: true });
+const ret = (info, prop) => ({
+  r: { [prop]: [{ n: regExpFirstCapture(/'(.*)'/, info) }] },
+  s: true,
+});
 const components = (info) => ret(info, 'components');
 const zombie = (info) => ret(info, 'mailbox_items');
 
