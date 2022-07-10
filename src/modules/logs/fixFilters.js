@@ -5,7 +5,7 @@ import navigateTo from '../common/navigateTo';
 import on from '../common/on';
 import onclick from '../common/onclick';
 
-let thisType = 0;
+let thisType = '';
 let injectType = 0;
 let prevPage = 0;
 let nextPage = 0;

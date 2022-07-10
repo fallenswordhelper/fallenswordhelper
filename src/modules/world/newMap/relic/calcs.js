@@ -79,11 +79,13 @@ function updateDefenderElements() {
 }
 
 function updateGroupValues() {
-  setTextCommas(groupStats.attack, getGroupAttackElement());
-  setTextCommas(groupStats.defense, getGroupDefenseElement());
-  setTextCommas(groupStats.armor, getGroupArmorElement());
-  setTextCommas(groupStats.damage, getGroupDamageElement());
-  setTextCommas(groupStats.hp, getGroupHPElement());
+  [
+    [groupStats.attack, getGroupAttackElement],
+    [groupStats.defense, getGroupDefenseElement],
+    [groupStats.armor, getGroupArmorElement],
+    [groupStats.damage, getGroupDamageElement],
+    [groupStats.hp, getGroupHPElement],
+  ].forEach(([value, elementFn]) => setTextCommas(value, elementFn()));
 }
 
 function calcNmvEffect(buffs) {
@@ -154,14 +156,17 @@ function terrorizeEffectOnDefenders(buffs) {
   setTextCommas(defBuffedDamage - terrorizeEffectValue, getDamageBuffedElement());
 }
 
+function doBuffs(buffs) {
+  doGroupAttributeElements(buffs);
+  flinchEffectOnDefenders(buffs); // Effect on defending group from Flinch on attacking group.
+  terrorizeEffectOnDefenders(buffs);
+}
+
 function calculateGroup() {
   setText('Processing attacking group stats ... ', getProcessingStatus());
   if (mercStats) { deductMercStats(); }
   updateGroupValues();
-  const buffs = reduceBuffArray(GameData.player().buffs);
-  doGroupAttributeElements(buffs);
-  flinchEffectOnDefenders(buffs); // Effect on defending group from Flinch on attacking group.
-  terrorizeEffectOnDefenders(buffs);
+  doBuffs(reduceBuffArray(GameData.player().buffs));
   setText('Done.', getProcessingStatus());
 }
 

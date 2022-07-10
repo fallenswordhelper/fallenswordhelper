@@ -19,6 +19,18 @@ function makeMouseOver(el) {
   }<br>Progress:  ${el.progress}`;
 }
 
+function bountyRow(bounty) {
+  return `<a href="${bounty.link}" class="xsKhaki tip-static" data-tipped="${
+    makeMouseOver(bounty)}">${bounty.target}</a><br>`;
+}
+
+function buildHtml() {
+  if (getBountyList().bounty.length === 0) {
+    return '<div class="xsOrange">[No active bounties]</div>';
+  }
+  return getBountyList().bounty.map(bountyRow).join('');
+}
+
 export function injectBountyList() { // Legacy
   setValueJSON('bountyList', getBountyList());
   setInnerHtml('', getBountyListDiv());
@@ -28,14 +40,5 @@ export function injectBountyList() { // Legacy
   bountyListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
   insertElement(heading, bountyListReset);
   insertElement(getBountyListDiv(), heading);
-  let output = '';
-  if (getBountyList().bounty.length === 0) {
-    output += '<div class="xsOrange">[No active bounties]</div>';
-  } else {
-    for (const bounty of getBountyList().bounty) {
-      output += `<a href="${bounty.link}" class="xsKhaki tip-static" data-tipped="${
-        makeMouseOver(bounty)}">${bounty.target}</a><br>`;
-    }
-  }
-  insertHtmlBeforeEnd(getBountyListDiv(), output);
+  insertHtmlBeforeEnd(getBountyListDiv(), buildHtml());
 }
