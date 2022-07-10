@@ -261,6 +261,11 @@ function setMaxPage() {
   maxPage = maxPagesToFetch;
 }
 
+async function startProcessing() {
+  const firstPage = await getGuildLogPage(1);
+  processFirstPage(firstPage);
+}
+
 function gotOptions(guildLog) {
   setOpts(guildLog);
   setInnerHtml(guildLogFilter, getPcc());
@@ -268,7 +273,7 @@ function gotOptions(guildLog) {
   onclick(fshNewGuildLog, guildLogEvents());
   setChecks();
   setMaxPage();
-  getGuildLogPage(1).then(processFirstPage);
+  startProcessing();
 }
 
 export default async function newGuildLog() { // jQuery.min
