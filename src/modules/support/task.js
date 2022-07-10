@@ -61,7 +61,7 @@ function initMessageHandler() {
 function devLog(args) {
   if (args && !isArray(args)) {
     // eslint-disable-next-line no-console
-    console.log('addTask isArray(args)', isArray(args));
+    console.log('addTask isArray(args)', isArray(args)); // skipcq: JS-0002
   }
 }
 

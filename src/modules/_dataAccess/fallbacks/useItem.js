@@ -25,7 +25,7 @@ function stash(info) {
   sendEvent('da/useItem', 'Bad Msg', info);
   if (calf.userIsDev) { //  da/useItem Bad Msg
     // eslint-disable-next-line no-console
-    console.log('da/useItem', 'Bad Msg', info);
+    console.log('da/useItem', 'Bad Msg', info); // skipcq: JS-0002
   }
 }
 
@@ -40,7 +40,7 @@ const outputLookup = [
 function devHook() {
   if (calf.userIsDev) { //  da/useItem No Info
     // eslint-disable-next-line no-console
-    console.log('da/useItem', 'No Info');
+    console.log('da/useItem', 'No Info'); // skipcq: JS-0002
   }
 }
 

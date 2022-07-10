@@ -13,7 +13,7 @@ async function isOnLadder() {
   return myFlags?.[0];
 }
 
-async function toggleLadder(o) {
+function toggleLadder(o) {
   if (isArray(myFlags)) {
     myFlags[0] = o;
     return daSettingsFlags(myFlags);

@@ -24,7 +24,7 @@ function fshGetValue(name, defValue) {
 export default function getValue(name) {
   if (calf.userIsDev && isUndefined(defaults[name])) { //  No default setting available
     // eslint-disable-next-line no-console
-    console.log('No default setting available', name, defaults[name]);
+    console.log('No default setting available', name, defaults[name]); // skipcq: JS-0002
   }
   return fshGetValue(name, defaults[name]);
 }

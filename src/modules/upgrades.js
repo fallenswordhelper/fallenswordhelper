@@ -40,7 +40,7 @@ function getRe(type, label) {
   if (label === 'amount') {
     return new RegExp(`\\+(\\d+) ${type}`);
   }
-  return /(\d{1,3})\xA0/;
+  return /(\d{1,3})\xA0/u;
 }
 
 function getValue(type, element, label) {
