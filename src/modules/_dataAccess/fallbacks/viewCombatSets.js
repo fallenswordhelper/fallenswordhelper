@@ -1,7 +1,7 @@
-import arrayFrom from '../../common/arrayFrom';
-import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import arrayFrom from '../../common/arrayFrom';
 import querySelector from '../../common/querySelector';
+import createDocument from '../../system/createDocument';
 
 // Incomplete
 export default async function viewCombatSets() {

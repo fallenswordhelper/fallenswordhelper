@@ -1,5 +1,11 @@
-import buffInfoDiv from './buffInfoDiv';
 import calf from '../../../support/calf';
+import {
+  defPlayerBuffs,
+  defPlayerUpdate,
+  defTeleport,
+} from '../../../support/constants';
+import setValue from '../../../system/setValue';
+import buffInfoDiv from './buffInfoDiv';
 import doCa from './doCa';
 import doDbl from './doDbl';
 import doDeathDealer from './doDeathDealer';
@@ -8,13 +14,7 @@ import getBuff from './getBuff';
 import getCooldown from './getCooldown';
 import impIconColour from './impIconColour';
 import impWarning from './impWarning';
-import setValue from '../../../system/setValue';
 import titanKs from './titanKs';
-import {
-  defPlayerBuffs,
-  defPlayerUpdate,
-  defTeleport,
-} from '../../../support/constants';
 import { doCountdown, tpCooldown } from './tpCooldown';
 
 let dd;

@@ -1,18 +1,18 @@
 import ajaxSendItems from '../../../ajax/ajaxSendItems';
+import dropItem from '../../../ajax/dropItem';
+import equipItem from '../../../ajax/equipItem';
+import moveItem from '../../../ajax/moveItem';
+import storeItems from '../../../ajax/storeItems';
+import useItem from '../../../ajax/useItem';
+import { queueRecallItem, queueTakeItem } from '../../../ajaxQueue/queue';
+import partial from '../../../common/partial';
 import allChecks from './allChecks';
 import changeLvls from './changeLvls';
 import clearChecks from './clearChecks';
 import doAction from './doAction';
-import dropItem from '../../../ajax/dropItem';
-import equipItem from '../../../ajax/equipItem';
 import getChecks from './getChecks';
-import moveItem from '../../../ajax/moveItem';
-import partial from '../../../common/partial';
 import resetChecks from './resetChecks';
 import resetLvls from './resetLvls';
-import storeItems from '../../../ajax/storeItems';
-import useItem from '../../../ajax/useItem';
-import { queueRecallItem, queueTakeItem } from '../../../ajaxQueue/queue';
 
 function setName(fshInv, e) { // jQuery
   $(fshInv).DataTable().search($(e.target).attr('set')).draw();

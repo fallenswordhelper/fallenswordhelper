@@ -1,10 +1,10 @@
-import { defTable } from '../support/constants';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getElementById from '../common/getElementById';
 import getElementsByTagName from '../common/getElementsByTagName';
 import getText from '../common/getText';
-import setInnerHtml from '../dom/setInnerHtml';
 import trim from '../common/trim';
+import setInnerHtml from '../dom/setInnerHtml';
+import { defTable } from '../support/constants';
 
 function removeStatTable(el) {
   const tde = getElementsByTagName('td', el);

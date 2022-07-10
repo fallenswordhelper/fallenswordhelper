@@ -1,8 +1,8 @@
-import createDocument from '../system/createDocument';
-import indexAjaxData from './indexAjaxData';
 import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
 import { defenderMultiplier, mercRE } from '../support/constants';
+import createDocument from '../system/createDocument';
+import indexAjaxData from './indexAjaxData';
 
 function addMercStat(mouseover, stat, i) {
   return stat

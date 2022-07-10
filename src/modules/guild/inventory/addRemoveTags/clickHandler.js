@@ -1,9 +1,9 @@
-import { cdn } from '../../../system/system';
-import clickThis from '../../../common/clickThis';
 import daGsTake from '../../../_dataAccess/daGsTake';
+import clickThis from '../../../common/clickThis';
 import partial from '../../../common/partial';
 import querySelectorArray from '../../../common/querySelectorArray';
 import setText from '../../../dom/setText';
+import { cdn } from '../../../system/system';
 
 function doCheckAll() {
   querySelectorArray('#pCC input[name="tagIndex[]"]').forEach(clickThis);

@@ -1,5 +1,5 @@
-import { defTable } from '../support/constants';
 import isObject from '../common/isObject';
+import { defTable } from '../support/constants';
 import { moveRe } from './assets';
 import { getOldIds, getOpts } from './setOpts';
 

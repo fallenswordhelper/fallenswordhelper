@@ -1,17 +1,17 @@
-import addButton from './addButton';
-import calf from '../../support/calf';
+import indexAjaxData from '../../ajax/indexAjaxData';
+import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
 import csvSplit from '../../common/csvSplit';
-import { defJoinallgroupsundersize } from '../../support/constants';
-import fetchGroupStatsButton from './fetchGroupStatsButton';
 import getText from '../../common/getText';
 import hideElement from '../../common/hideElement';
-import indexAjaxData from '../../ajax/indexAjaxData';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
-import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
+import calf from '../../support/calf';
+import { defJoinallgroupsundersize } from '../../support/constants';
+import addButton from './addButton';
+import fetchGroupStatsButton from './fetchGroupStatsButton';
 
 function filterMercs(e) { return !e.includes('#000099'); }
 

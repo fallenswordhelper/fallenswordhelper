@@ -1,11 +1,11 @@
 import daViewCombat from '../../_dataAccess/daViewCombat';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
-import { getNowSecs } from '../../support/now';
 import getTextTrim from '../../common/getTextTrim';
-import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import partial from '../../common/partial';
+import { getNowSecs } from '../../support/now';
 import { get, set } from '../../system/idb';
+import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 
 const storageKey = 'fsh_pvpCombat';
 

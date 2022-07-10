@@ -1,6 +1,6 @@
+import sendException from '../analytics/sendException';
 import on from '../common/on';
 import parseError from './parseError';
-import sendException from '../analytics/sendException';
 
 let enabled;
 

@@ -1,5 +1,5 @@
-import allthen from '../../common/allthen';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import allthen from '../../common/allthen';
 import infoBoxFrom from '../../common/InfoBoxFrom';
 import partial from '../../common/partial';
 

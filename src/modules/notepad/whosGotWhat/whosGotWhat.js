@@ -1,27 +1,27 @@
 import './whosGotWhat.css';
+import {
+  paginationDirective,
+  searchDirective,
+  smartTable,
+} from 'smart-table-core';
+import { table as tableComponentFactory } from 'smart-table-vanilla';
+import guildStore from '../../_dataAccess/export/guildStore';
+import ranksView from '../../_dataAccess/fallbacks/ranksView';
 import allthen from '../../common/allthen';
 import createButton from '../../common/cElement/createButton';
 import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
 import createSelect from '../../common/cElement/createSelect';
 import createTable from '../../common/cElement/createTable';
-import displayChange from './displayChange';
-import { getPcc } from '../../support/layout';
-import guildStore from '../../_dataAccess/export/guildStore';
 import insertElement from '../../common/insertElement';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import prepareData from './prepareData';
-import ranksView from '../../_dataAccess/fallbacks/ranksView';
 import setInnerHtml from '../../dom/setInnerHtml';
-import { table as tableComponentFactory } from 'smart-table-vanilla';
+import { getPcc } from '../../support/layout';
 import theadHtml from './assets';
-import {
-  paginationDirective,
-  searchDirective,
-  smartTable,
-} from 'smart-table-core';
+import displayChange from './displayChange';
+import prepareData from './prepareData';
 
 function makeTable(el) {
   return insertElement(el, createTable({

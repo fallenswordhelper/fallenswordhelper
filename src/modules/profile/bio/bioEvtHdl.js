@@ -1,11 +1,11 @@
 import entries from '../../common/entries';
-import formatCost from './formatCost';
-import getBuffsToBuy from './getBuffsToBuy';
 import getElementById from '../../common/getElementById';
-import getPrice from './getPrice';
 import getText from '../../common/getText';
 import hasClass from '../../common/hasClass';
 import setInnerHtml from '../../dom/setInnerHtml';
+import formatCost from './formatCost';
+import getBuffsToBuy from './getBuffsToBuy';
+import getPrice from './getPrice';
 
 const buffCost = { count: 0, buffs: {} };
 

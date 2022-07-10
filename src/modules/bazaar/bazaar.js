@@ -3,12 +3,10 @@ import daBazaarBuy from '../_dataAccess/daBazaarBuy';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getElementById from '../common/getElementById';
 import getElementsByTagName from '../common/getElementsByTagName';
-import { getPcc } from '../support/layout';
 import getText from '../common/getText';
 import hasClass from '../common/hasClass';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
-import { itmRe } from '../support/constants';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import jsonFail from '../common/jsonFail';
 import on from '../common/on';
@@ -17,6 +15,8 @@ import outputResult from '../common/outputResult';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
+import { itmRe } from '../support/constants';
+import { getPcc } from '../support/layout';
 import testQuant from '../system/testQuant';
 
 let bazaarTable = '<table class="fshBazaar"><tr><td colspan="5">Select an item to quick-buy:'

@@ -1,11 +1,11 @@
 import daRemoveSkill from '../../_dataAccess/daRemoveSkill';
+import sendEvent from '../../analytics/sendEvent';
 import errorDialog from '../../common/errorDialog';
 import getElementById from '../../common/getElementById';
 import hideQTip from '../../common/hideQTip';
 import navigateTo from '../../common/navigateTo';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 function debuffSuccess(aLink, json) {

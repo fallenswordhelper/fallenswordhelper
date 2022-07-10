@@ -1,9 +1,9 @@
-import arrayFrom from '../../common/arrayFrom';
-import createDocument from '../../system/createDocument';
-import getTextTrim from '../../common/getTextTrim';
 import indexAjaxData from '../../ajax/indexAjaxData';
-import intValue from '../../system/intValue';
+import arrayFrom from '../../common/arrayFrom';
+import getTextTrim from '../../common/getTextTrim';
 import querySelector from '../../common/querySelector';
+import createDocument from '../../system/createDocument';
+import intValue from '../../system/intValue';
 
 const getInt = (cell) => intValue(getTextTrim(cell));
 

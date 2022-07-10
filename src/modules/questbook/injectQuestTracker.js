@@ -1,10 +1,10 @@
 import getElementsByTagName from '../common/getElementsByTagName';
-import { getPcc } from '../support/layout';
 import getText from '../common/getText';
+import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import { getPcc } from '../support/layout';
 import getUrlParameter from '../system/getUrlParameter';
 import getValue from '../system/getValue';
 import guideButtons from './guideButtons';
-import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 
 function updateBackHref() {
   const lastActiveQuestPage = getValue('lastActiveQuestPage');

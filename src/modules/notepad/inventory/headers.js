@@ -1,7 +1,7 @@
-import { getPcc } from '../../support/layout';
-import { getTheInv } from './buildInv';
-import { invManFilter } from './assets';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { getPcc } from '../../support/layout';
+import { invManFilter } from './assets';
+import { getTheInv } from './buildInv';
 
 export default function headers() {
   let reportTitle = '';

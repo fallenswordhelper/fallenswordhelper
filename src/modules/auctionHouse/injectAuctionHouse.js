@@ -1,19 +1,19 @@
-import allthen from '../common/allthen';
-import { cdn } from '../system/system';
-import clickThis from '../common/clickThis';
-import colourPlayerNames from './colourPlayerNames';
-import createSpan from '../common/cElement/createSpan';
-import doStatTotal from '../profile/doStatTotal';
-import getArrayByClassName from '../common/getArrayByClassName';
-import getCustomUrlParameter from '../system/getCustomUrlParameter';
-import getElementById from '../common/getElementById';
-import { getPcc } from '../support/layout';
-import getValue from '../system/getValue';
 import indexAjaxData from '../ajax/indexAjaxData';
+import allthen from '../common/allthen';
+import createSpan from '../common/cElement/createSpan';
+import clickThis from '../common/clickThis';
+import getArrayByClassName from '../common/getArrayByClassName';
+import getElementById from '../common/getElementById';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
 import insertHtmlAfterBegin from '../common/insertHtmlAfterBegin';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
+import doStatTotal from '../profile/doStatTotal';
+import { getPcc } from '../support/layout';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
+import getValue from '../system/getValue';
+import { cdn } from '../system/system';
+import colourPlayerNames from './colourPlayerNames';
 
 function doRefresh() {
   clickThis(getElementById('refresh'));

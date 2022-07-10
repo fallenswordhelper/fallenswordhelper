@@ -1,5 +1,5 @@
-import $dataAccess from './$dataAccess';
 import advisorView from '../app/guild/advisorView';
+import $dataAccess from './$dataAccess';
 import viewAdvisor from './fallbacks/viewAdvisor';
 
 export default function daAdvisor(period) {

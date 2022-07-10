@@ -1,20 +1,20 @@
 import './lists.css';
-import defaults from '../../support/dataObj.json';
 import eventHandler5 from '../../common/eventHandler5';
 import getElementById from '../../common/getElementById';
-import { getPcc } from '../../support/layout';
-import getValueJSON from '../../system/getValueJSON';
 import isArray from '../../common/isArray';
-import isChecked from '../../system/isChecked';
 import jsonParse from '../../common/jsonParse';
 import jsonStringify from '../../common/jsonStringify';
-import makePageHeader from './makePageHeader';
-import makePageTemplate from './makePageTemplate';
 import onclick from '../../common/onclick';
 import selfIdIs from '../../common/selfIdIs';
 import setInnerHtml from '../../dom/setInnerHtml';
+import defaults from '../../support/dataObj.json';
+import { getPcc } from '../../support/layout';
+import getValueJSON from '../../system/getValueJSON';
+import isChecked from '../../system/isChecked';
 import setValueJSON from '../../system/setValueJSON';
 import { auctionSearchBlurb, auctionSearchParams } from './assets';
+import makePageHeader from './makePageHeader';
+import makePageTemplate from './makePageTemplate';
 
 let param = 0;
 

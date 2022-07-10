@@ -1,5 +1,5 @@
-import { guildViewUrl } from '../support/constants';
 import querySelector from '../common/querySelector';
+import { guildViewUrl } from '../support/constants';
 
 let haveGuildALink;
 let guildALink;

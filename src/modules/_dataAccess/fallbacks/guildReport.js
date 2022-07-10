@@ -1,8 +1,8 @@
-import createDocument from '../../system/createDocument';
-import getTextTrim from '../../common/getTextTrim';
 import indexAjaxData from '../../ajax/indexAjaxData';
-import itemId from '../../guild/inventory/guildReport/itemId';
+import getTextTrim from '../../common/getTextTrim';
 import querySelectorArray from '../../common/querySelectorArray';
+import itemId from '../../guild/inventory/guildReport/itemId';
+import createDocument from '../../system/createDocument';
 
 function details(td) {
   if (!td.children[0].href) { return { a: -1, n: '-1', t: -1 }; }

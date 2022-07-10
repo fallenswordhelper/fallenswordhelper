@@ -2,17 +2,17 @@
 import getValueJSON from '../../system/getValueJSON';
 import setValueJSON from '../../system/setValueJSON';
 import {
-  checkLoadList,
-  checkNewList,
-  checkUpdateList,
-} from './errorChecks';
-import {
   checkSkill,
   clearCheckedSkills,
   findList,
   getCheckedSkills,
   submitSkillChanges,
 } from './blockedSkills';
+import {
+  checkLoadList,
+  checkNewList,
+  checkUpdateList,
+} from './errorChecks';
 
 let blockedSkillLists = getValueJSON('blockedSkillLists');
 let newListName = '';

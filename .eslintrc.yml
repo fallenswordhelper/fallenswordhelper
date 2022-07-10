@@ -65,7 +65,11 @@ rules:
     - error
     - ignore:
       - '_CALFJS'
-  import/order: off
+  import/order:
+    - error
+    - alphabetize:
+        order: asc
+        caseInsensitive: true
   no-plusplus:
     - error
     - allowForLoopAfterthoughts: true
@@ -79,10 +83,3 @@ rules:
       - _saveState
       - _showPage
       - _skills
-  sort-imports:
-    - error
-    - memberSyntaxSortOrder:
-      - none
-      - single
-      - multiple
-      - all

@@ -1,8 +1,8 @@
-import getMsg from './getMsg';
-import getQuickMessageDialog from './getQuickMessageDialog';
-import getValue from '../../system/getValue';
 import isUndefined from '../../common/isUndefined';
 import on from '../../common/on';
+import getValue from '../../system/getValue';
+import getMsg from './getMsg';
+import getQuickMessageDialog from './getQuickMessageDialog';
 
 let enterForSendMessage;
 let handlerEnabled;

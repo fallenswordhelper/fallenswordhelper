@@ -1,6 +1,6 @@
-import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 import querySelectorArray from '../../common/querySelectorArray';
 import setText from '../../dom/setText';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 
 export default function changeLabels(logTable) {
   querySelectorArray('a[href*="=trade&"]', logTable)

@@ -1,8 +1,8 @@
+import partial from '../../../../common/partial';
+import trim from '../../../../common/trim';
+import setInnerHtml from '../../../../dom/setInnerHtml';
 import calf from '../../../../support/calf';
 import { defPlayerBuffs } from '../../../../support/constants';
-import partial from '../../../../common/partial';
-import setInnerHtml from '../../../../dom/setInnerHtml';
-import trim from '../../../../common/trim';
 import { getHuntingBuffs, getHuntingBuffsName, setCurrentBuffList } from './setCurrentBuffList';
 
 function buildBuffHash(acc, curr) {

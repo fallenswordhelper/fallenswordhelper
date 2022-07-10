@@ -1,11 +1,11 @@
 import './combatLog.css';
 import getElementById from '../../common/getElementById';
-import { getPcc } from '../../support/layout';
 import jConfirm from '../../common/jConfirm';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import jsonStringify from '../../common/jsonStringify';
 import onclick from '../../common/onclick';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { getPcc } from '../../support/layout';
 import { get, set } from '../../system/idb';
 
 let combatLogs = [];

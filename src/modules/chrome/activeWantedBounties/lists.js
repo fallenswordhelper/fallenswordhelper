@@ -1,11 +1,11 @@
-import basicBounty from './basicBounty';
 import getElementById from '../../common/getElementById';
-import { getNowSecs } from '../../support/now';
 import getText from '../../common/getText';
+import { getNowSecs } from '../../support/now';
 import getValue from '../../system/getValue';
 import getValueJSON from '../../system/getValueJSON';
 import setValue from '../../system/setValue';
 import shouldBeArray from '../../system/shouldBeArray';
+import basicBounty from './basicBounty';
 
 let bountyListRefreshTime = 0;
 

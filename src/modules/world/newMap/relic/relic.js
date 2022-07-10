@@ -1,16 +1,15 @@
-import all from '../../../common/all';
-import allthen from '../../../common/allthen';
-import badData from '../badData';
-import createDocument from '../../../system/createDocument';
-import { defRelicView } from '../../../support/constants';
 import getGroupStats from '../../../ajax/getGroupStats';
 import getMercStats from '../../../ajax/getMercStats';
 import getProfile from '../../../ajax/getProfile';
 import indexAjaxData from '../../../ajax/indexAjaxData';
+import all from '../../../common/all';
+import allthen from '../../../common/allthen';
 import once from '../../../common/once';
-import { parseGuild } from './parseGuild';
 import querySelector from '../../../common/querySelector';
 import setText from '../../../dom/setText';
+import { defRelicView } from '../../../support/constants';
+import createDocument from '../../../system/createDocument';
+import badData from '../badData';
 import {
   doCalculations,
   parseDefender,
@@ -19,6 +18,7 @@ import {
   storeLeadDefender,
   storeMercStats,
 } from './calcs';
+import { parseGuild } from './parseGuild';
 import { getFetchStatsBtn, getMyDefenders, primaryElementsSetup } from './primaryElements';
 import { getProcessingStatus, prepareSecondaryDivs } from './secondaryElements';
 

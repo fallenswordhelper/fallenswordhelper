@@ -1,12 +1,12 @@
 import dataRows from '../common/dataRows';
-import { defTable } from '../support/constants';
 import formToUrl from '../common/formToUrl';
 import getElementsByTagName from '../common/getElementsByTagName';
-import { getPcc } from '../support/layout';
 import getText from '../common/getText';
 import on from '../common/on';
 import searchPlayerHref from '../common/searchPlayerHref';
 import setInnerHtml from '../dom/setInnerHtml';
+import { defTable } from '../support/constants';
+import { getPcc } from '../support/layout';
 
 function globalQuestAllowBack(topTable) { // jQuery
   const [thisSelect] = getElementsByTagName('select', topTable);

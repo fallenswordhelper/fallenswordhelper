@@ -1,11 +1,11 @@
-import doGroupPaint from './doGroupPaint';
 import getMembrList from '../../ajax/getMembrList';
-import getValue from '../../system/getValue';
-import groupButtons from './groupButtons';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
+import getValue from '../../system/getValue';
+import doGroupPaint from './doGroupPaint';
+import groupButtons from './groupButtons';
 
 function displayMinGroupLevel() {
   const minGroupLevel = getValue('minGroupLevel');

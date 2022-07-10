@@ -1,9 +1,9 @@
+import setInnerHtml from '../dom/setInnerHtml';
+import { lastActivityRE } from '../support/constants';
+import getValue from '../system/getValue';
 import batch from './batch';
 import getPlayers from './getPlayers';
-import getValue from '../system/getValue';
-import { lastActivityRE } from '../support/constants';
 import onlineDot from './onlineDot';
-import setInnerHtml from '../dom/setInnerHtml';
 
 function changeOnlineDot(contactLink) {
   const lastActivity = lastActivityRE.exec(contactLink.dataset.tipped);

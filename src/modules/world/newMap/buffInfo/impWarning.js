@@ -1,16 +1,16 @@
 import './impWarning.css';
+import daQuickbuff from '../../../_dataAccess/daQuickbuff';
 import createButton from '../../../common/cElement/createButton';
 import createSpan from '../../../common/cElement/createSpan';
-import daQuickbuff from '../../../_dataAccess/daQuickbuff';
-import { defFetchPlayerBuffs } from '../../../support/constants';
-import getBuff from './getBuff';
 import insertElement from '../../../common/insertElement';
 import insertHtmlBeforeEnd from '../../../common/insertHtmlBeforeEnd';
 import onclick from '../../../common/onclick';
 import playerName from '../../../common/playerName';
 import quickbuffSuccess from '../../../common/quickbuffSuccess';
-import setText from '../../../dom/setText';
 import toggleForce from '../../../common/toggleForce';
+import setText from '../../../dom/setText';
+import { defFetchPlayerBuffs } from '../../../support/constants';
+import getBuff from './getBuff';
 
 let impDiv = 0;
 let impRemainingSpan = 0;

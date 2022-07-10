@@ -1,6 +1,6 @@
+import partial from '../../common/partial';
 import { defAfterUpdateActionlist } from '../../support/constants';
 import getValue from '../../system/getValue';
-import partial from '../../common/partial';
 
 function hideGroupByType(type) { // jQuery
   $(`#actionList li.creature-${type.toString()} a.create-group`).hide();

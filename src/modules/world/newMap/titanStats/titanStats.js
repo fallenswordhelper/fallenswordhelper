@@ -1,11 +1,11 @@
-import calf from '../../../support/calf';
 import daScoutTower from '../../../_dataAccess/daScoutTower';
 import isArray from '../../../common/isArray';
 import partial from '../../../common/partial';
-import processTitans from './processTitans';
-import { setRealm } from './realm';
+import calf from '../../../support/calf';
 import setValue from '../../../system/setValue';
 import { hasTitan, hideTitanDiv, setupTitanDiv } from './hasTitan';
+import processTitans from './processTitans';
+import { setRealm } from './realm';
 
 let timeoutId;
 

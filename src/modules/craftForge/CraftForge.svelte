@@ -1,8 +1,8 @@
 <script>
-  import FolderButtons from '../common/FolderButtons.svelte';
-  import calf from '../support/calf';
   import { createEventDispatcher } from 'svelte';
   import sendEvent from '../analytics/sendEvent';
+  import FolderButtons from '../common/FolderButtons.svelte';
+  import calf from '../support/calf';
 
   let currentFolder = -2;
   const dispatch = createEventDispatcher();

@@ -1,8 +1,8 @@
+import indexAjaxData from '../../ajax/indexAjaxData';
+import getBuffId from '../../common/getBuffId';
+import uniq from '../../common/uniq';
 import buffReportParser from '../../notepad/buffLog/buffReportParser';
 import createDocument from '../../system/createDocument';
-import getBuffId from '../../common/getBuffId';
-import indexAjaxData from '../../ajax/indexAjaxData';
-import uniq from '../../common/uniq';
 
 const successObject = ({ successBuff, successLevel }) => ({
   id: getBuffId(successBuff),

@@ -1,6 +1,6 @@
 import currentGuildId from '../common/currentGuildId';
-import getGuildALink from './getGuildALink';
 import { guildRE } from '../support/constants';
+import getGuildALink from './getGuildALink';
 
 let haveIsOwnGuild;
 let isOwnGuild;

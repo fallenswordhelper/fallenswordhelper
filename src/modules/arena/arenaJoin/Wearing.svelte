@@ -1,15 +1,15 @@
 <script>
-  import WearingGrid from './WearingGrid.svelte';
-  import all from '../../common/all';
-  import createDocument from '../../system/createDocument';
   import daLoadInventory from '../../_dataAccess/daLoadInventory';
   import daUseCombatSet from '../../_dataAccess/daUseCombatSet';
   import daViewCombatSet from '../../_dataAccess/daViewCombatSet';
+  import retryAjax from '../../ajax/retryAjax';
+  import all from '../../common/all';
   import getText from '../../common/getText';
   import querySelector from '../../common/querySelector';
   import querySelectorArray from '../../common/querySelectorArray';
-  import retryAjax from '../../ajax/retryAjax';
   import setText from '../../dom/setText';
+  import createDocument from '../../system/createDocument';
+  import WearingGrid from './WearingGrid.svelte';
 
   let equipment = 0;
   let combatSets = 0;

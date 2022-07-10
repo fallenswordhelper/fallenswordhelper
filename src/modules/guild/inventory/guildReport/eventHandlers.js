@@ -1,19 +1,19 @@
 import './guildReport.css';
-import { cdn } from '../../../system/system';
+import equipItem from '../../../ajax/equipItem';
+import { queueRecallItem } from '../../../ajaxQueue/queue';
+import sendEvent from '../../../analytics/sendEvent';
 import classHandler from '../../../common/classHandler';
 import classPair from '../../../common/classPair';
 import closestTr from '../../../common/closestTr';
-import equipItem from '../../../ajax/equipItem';
 import getElementsByTagName from '../../../common/getElementsByTagName';
-import { getPcc } from '../../../support/layout';
-import itemId from './itemId';
 import onclick from '../../../common/onclick';
 import partial from '../../../common/partial';
-import { playerIDRE } from '../../../support/constants';
 import playerId from '../../../common/playerId';
-import { queueRecallItem } from '../../../ajaxQueue/queue';
-import sendEvent from '../../../analytics/sendEvent';
 import setInnerHtml from '../../../dom/setInnerHtml';
+import { playerIDRE } from '../../../support/constants';
+import { getPcc } from '../../../support/layout';
+import { cdn } from '../../../system/system';
+import itemId from './itemId';
 
 const spinner = '<span class="guildReportSpinner" '
   + `style="background-image: url('${cdn}ui/misc/spinner.gif');"></span>`;

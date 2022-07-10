@@ -1,5 +1,5 @@
-import expandMenu from './expandMenu';
 import joinGroups from '../../common/joinGroups';
+import expandMenu from './expandMenu';
 import keyHandlerEvent from './keyHandlerEvent';
 
 export default function joinAllGroup() {

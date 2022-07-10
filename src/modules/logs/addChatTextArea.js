@@ -1,15 +1,15 @@
 import './addChatTextArea.css';
 import arrayFrom from '../common/arrayFrom';
+import createTextArea from '../common/cElement/createTextArea';
 import clickThis from '../common/clickThis';
 import closestTable from '../common/closestTable';
 import contains from '../common/contains';
-import createTextArea from '../common/cElement/createTextArea';
 import getArrayByClassName from '../common/getArrayByClassName';
-import { getPcc } from '../support/layout';
-import getValue from '../system/getValue';
 import insertElement from '../common/insertElement';
 import on from '../common/on';
 import partial from '../common/partial';
+import { getPcc } from '../support/layout';
+import getValue from '../system/getValue';
 
 function removeCrlf(fshTxt) {
   // eslint-disable-next-line no-param-reassign

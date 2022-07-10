@@ -1,13 +1,13 @@
-import calf from '../../support/calf';
+import sendEvent from '../../analytics/sendEvent';
 import getElementsByTagName from '../../common/getElementsByTagName';
-import { getPcc } from '../../support/layout';
 import getText from '../../common/getText';
-import getValue from '../../system/getValue';
 import keys from '../../common/keys';
 import partial from '../../common/partial';
 import playerName from '../../common/playerName';
-import sendEvent from '../../analytics/sendEvent';
 import trim from '../../common/trim';
+import calf from '../../support/calf';
+import { getPcc } from '../../support/layout';
+import getValue from '../../system/getValue';
 
 function profileBuyBuffsEvent() {
   if (calf.subcmd === '-') { sendEvent('profile', 'formatBuffsToBuy'); }

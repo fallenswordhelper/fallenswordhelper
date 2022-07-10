@@ -1,7 +1,7 @@
-import calf from '../support/calf';
-import { getOpts } from './setOpts';
-import intValue from '../system/intValue';
 import { lvlTest, playerLvlTest } from '../common/lvlTests';
+import calf from '../support/calf';
+import intValue from '../system/intValue';
+import { getOpts } from './setOpts';
 
 function hazOpts(_settings, data) {
   const min = getOpts().minLvl;

@@ -2,8 +2,8 @@ import createSpan from '../../../common/cElement/createSpan';
 import insertElement from '../../../common/insertElement';
 import insertTextBeforeEnd from '../../../common/insertTextBeforeEnd';
 import round from '../../../common/round';
-import setText from '../../../dom/setText';
 import toggleForce from '../../../common/toggleForce';
+import setText from '../../../dom/setText';
 
 let ddDiv;
 let ddSpan;

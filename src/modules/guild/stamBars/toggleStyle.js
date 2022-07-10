@@ -1,9 +1,9 @@
 import createStyle from '../../common/cElement/createStyle';
 import getElementsByTagName from '../../common/getElementsByTagName';
-import { getPcc } from '../../support/layout';
 import insertElement from '../../common/insertElement';
 import querySelectorArray from '../../common/querySelectorArray';
 import { defTable, playerLinkSelector, stamRe } from '../../support/constants';
+import { getPcc } from '../../support/layout';
 
 let thisStyle = 0;
 

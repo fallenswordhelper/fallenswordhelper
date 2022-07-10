@@ -1,11 +1,11 @@
+import partial from '../../common/partial';
+import splitTime from '../../common/splitTime';
+import setInnerHtml from '../../dom/setInnerHtml';
+import { defSubcmd, guideUrl, guildViewUrl } from '../../support/constants';
 import { getPcc } from '../../support/layout';
-import getRelicList from './getRelicList';
 import getValue from '../../system/getValue';
 import padZ from '../../system/padZ';
-import partial from '../../common/partial';
-import setInnerHtml from '../../dom/setInnerHtml';
-import splitTime from '../../common/splitTime';
-import { defSubcmd, guideUrl, guildViewUrl } from '../../support/constants';
+import getRelicList from './getRelicList';
 
 function relicName(relic) {
   return `<a href="${guideUrl}relics${defSubcmd}view&relic_id=${relic.id}">`

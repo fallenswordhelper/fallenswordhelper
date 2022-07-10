@@ -1,12 +1,12 @@
+import indexAjaxData from '../../ajax/indexAjaxData';
 import arrayFrom from '../../common/arrayFrom';
 import chunk from '../../common/chunk';
-import createDocument from '../../system/createDocument';
 import dataRows from '../../common/dataRows';
-import { getNow } from '../../support/now';
 import getTextTrim from '../../common/getTextTrim';
-import indexAjaxData from '../../ajax/indexAjaxData';
-import { months } from '../../support/constants';
 import querySelector from '../../common/querySelector';
+import { months } from '../../support/constants';
+import { getNow } from '../../support/now';
+import createDocument from '../../system/createDocument';
 
 function parseDateAsTimestamp(textDate) {
   const dateAry = textDate.split(/[: /[]/);

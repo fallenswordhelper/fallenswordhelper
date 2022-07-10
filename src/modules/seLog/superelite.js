@@ -1,17 +1,17 @@
-import calf from '../support/calf';
-import createTBody from '../common/cElement/createTBody';
 import createTable from '../common/cElement/createTable';
+import createTBody from '../common/cElement/createTBody';
 import entries from '../common/entries';
 import formatUtcDateTime from '../common/formatUtcDateTime';
-import { getPcc } from '../support/layout';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import on from '../common/on';
 import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
-import setValue from '../system/setValue';
 import { simpleCheckboxHtml } from '../settings/simpleCheckbox';
+import calf from '../support/calf';
+import { getPcc } from '../support/layout';
+import setValue from '../system/setValue';
 import {
   disableBackgroundChecks,
   doBackgroundCheck,

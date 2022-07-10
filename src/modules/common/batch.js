@@ -1,5 +1,5 @@
-import isFunction from './isFunction';
 import task from '../support/task';
+import isFunction from './isFunction';
 
 function moreToDo(limit, ctr, list) {
   return list && performance.now() < limit && ctr < list.length;

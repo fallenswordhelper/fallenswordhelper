@@ -1,23 +1,22 @@
 'use strict';
 
-const perfLogger = require('./perfLogger');
-const { performance, PerformanceObserver } = require('perf_hooks');
-
-const perfObserver = new PerformanceObserver(perfLogger);
-perfObserver.observe({ entryTypes: ['measure'], buffer: true });
-
-performance.mark('example-start');
-
-const cleanTarget = require('./cleanTarget');
-const esbuild = require('esbuild');
-const { github } = require('./config.json');
-const sveltePlugin = require('esbuild-svelte');
-const { calfVer, core, version } = require('./getVersion');
 const {
   copyFileSync,
   readFileSync,
   writeFileSync,
 } = require('fs');
+const { performance, PerformanceObserver } = require('perf_hooks');
+const esbuild = require('esbuild');
+const sveltePlugin = require('esbuild-svelte');
+const cleanTarget = require('./cleanTarget');
+const { github } = require('./config.json');
+const { calfVer, core, version } = require('./getVersion');
+const perfLogger = require('./perfLogger');
+
+const perfObserver = new PerformanceObserver(perfLogger);
+perfObserver.observe({ entryTypes: ['measure'], buffer: true });
+
+performance.mark('example-start');
 
 const dist = 'dist/';
 const fshPath = 'Releases/Current';

@@ -1,8 +1,8 @@
-import bioEvtHdl from './bioEvtHdl';
 import getElementById from '../../common/getElementById';
 import onclick from '../../common/onclick';
-import render from './render';
 import setInnerHtml from '../../dom/setInnerHtml';
+import bioEvtHdl from './bioEvtHdl';
+import render from './render';
 
 function doRender(bioCell) {
   const bioContents = render(bioCell.innerHTML);

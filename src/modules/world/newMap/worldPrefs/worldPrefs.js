@@ -1,11 +1,11 @@
-import buildFshDivs from './buildFshDivs';
 import calf from '../../../support/calf';
-import doHuntingBuffs from './huntingBuffs/doHuntingBuffs';
-import getCombatBias from './getCombatBias';
 import getValue from '../../../system/getValue';
-import interceptXHR from './interceptXHR';
-import { prepareHidePlayerActions } from '../prepareHidePlayerActions';
 import shouldBeArray from '../../../system/shouldBeArray';
+import { prepareHidePlayerActions } from '../prepareHidePlayerActions';
+import buildFshDivs from './buildFshDivs';
+import getCombatBias from './getCombatBias';
+import doHuntingBuffs from './huntingBuffs/doHuntingBuffs';
+import interceptXHR from './interceptXHR';
 
 function mappedArray(a) { calf[a[0]] = shouldBeArray(a[1]); }
 

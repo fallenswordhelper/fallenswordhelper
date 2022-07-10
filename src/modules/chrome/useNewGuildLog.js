@@ -1,6 +1,6 @@
+import sendEvent from '../analytics/sendEvent';
 import closest from '../common/closest';
 import on from '../common/on';
-import sendEvent from '../analytics/sendEvent';
 import { guildLogUrl, newGuildLogUrl } from '../support/constants';
 
 const conditions = [

@@ -1,6 +1,6 @@
 <script>
-  import { cdn } from '../../../system/system';
   import { guildViewUrl, showPlayerUrl } from '../../../support/constants';
+  import { cdn } from '../../../system/system';
 
   export let promise;
 </script>

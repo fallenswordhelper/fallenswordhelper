@@ -1,5 +1,5 @@
-import { cdn } from '../../system/system';
 import uniq from '../../common/uniq';
+import { cdn } from '../../system/system';
 
 const tip = (playerId, itemId, invId) => `fetchitem.php?item_id=${itemId}&inv_id=${invId}&t=1&p=${
   playerId}`;

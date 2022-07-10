@@ -1,35 +1,35 @@
-import addGuildLogWidgets from '../../logs/addGuildLogWidgets';
-import addLogColoring from '../../logs/addLogColoring';
 import all from '../../common/all';
-import createDocument from '../../system/createDocument';
 import createTable from '../../common/cElement/createTable';
 import eventHandler5 from '../../common/eventHandler5';
 import functionPasses from '../../common/functionPasses';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
-import getGuildLogPage from './getGuildLogPage';
-import { getPcc } from '../../support/layout';
 import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
-import getValue from '../../system/getValue';
 import hideElement from '../../common/hideElement';
-import hideGuildLogMsg from './hideGuildLogMsg';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
-import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import partial from '../../common/partial';
-import profiler from './profiler';
 import querySelector from '../../common/querySelector';
 import selfIdIs from '../../common/selfIdIs';
+import toggleForce from '../../common/toggleForce';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
-import toggleForce from '../../common/toggleForce';
+import addGuildLogWidgets from '../../logs/addGuildLogWidgets';
+import addLogColoring from '../../logs/addLogColoring';
+import { getPcc } from '../../support/layout';
+import createDocument from '../../system/createDocument';
+import getValue from '../../system/getValue';
+import { get, set } from '../../system/idb';
+import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import {
   defChecks, guildLogFilter, headerRow, noChecks,
 } from './assets';
-import { get, set } from '../../system/idb';
+import getGuildLogPage from './getGuildLogPage';
+import hideGuildLogMsg from './hideGuildLogMsg';
+import profiler from './profiler';
 
 let options = {};
 let fshNewGuildLog = 0;

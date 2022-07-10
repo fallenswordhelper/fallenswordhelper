@@ -1,8 +1,8 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import LinkButton from '../common/LinkButton.svelte';
   import QuickSelectClasses from '../common/QuickSelectClasses.svelte';
   import SelectInST from '../common/SelectInST.svelte';
-  import { createEventDispatcher } from 'svelte';
   import getValue from '../system/getValue';
 
   const dispatch = createEventDispatcher();

@@ -1,11 +1,11 @@
-import calf from './calf';
-import fallback from '../system/fallback';
+import sendException from '../analytics/sendException';
 import isArray from '../common/isArray';
 import isFunction from '../common/isFunction';
 import isUndefined from '../common/isUndefined';
 import on from '../common/on';
+import fallback from '../system/fallback';
+import calf from './calf';
 import parseError from './parseError';
-import sendException from '../analytics/sendException';
 import { getLength, pop, push } from './sch';
 
 let paused = true;

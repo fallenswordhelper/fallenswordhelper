@@ -1,11 +1,11 @@
-import all from '../../common/all';
-import chunk from '../../common/chunk';
-import { compStore } from './componentsStore';
-import createDiv from '../../common/cElement/createDiv';
 import daDestroyComponent from '../../_dataAccess/daDestroyComponent';
 import dynamicAlert from '../../alert/dynamicAlert';
+import all from '../../common/all';
+import createDiv from '../../common/cElement/createDiv';
+import chunk from '../../common/chunk';
 import partial from '../../common/partial';
 import uniq from '../../common/uniq';
+import { compStore } from './componentsStore';
 
 function updateItem(invIds, itemType) {
   if (!itemType) { return; }

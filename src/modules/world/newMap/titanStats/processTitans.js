@@ -1,17 +1,17 @@
-import addRows from './addRows';
-import getKillsPct from '../../../guild/scoutTower/getKillsPct';
-import { getNow } from '../../../support/now';
-import { getRealmName } from './realm';
-import getTitanString from '../../../guild/scoutTower/getTitanString';
-import { months } from '../../../support/constants';
-import padZ from '../../../system/padZ';
+import textSpan from '../../../common/cElement/textSpan';
 import partial from '../../../common/partial';
 import roundToString from '../../../common/roundToString';
+import trimTitanName from '../../../common/trimTitanName';
 import setInnerHtml from '../../../dom/setInnerHtml';
 import setText from '../../../dom/setText';
-import textSpan from '../../../common/cElement/textSpan';
-import trimTitanName from '../../../common/trimTitanName';
+import getKillsPct from '../../../guild/scoutTower/getKillsPct';
+import getTitanString from '../../../guild/scoutTower/getTitanString';
+import { months } from '../../../support/constants';
+import { getNow } from '../../../support/now';
+import padZ from '../../../system/padZ';
+import addRows from './addRows';
 import { clearMemberRows, getTitanTbl } from './buildTitanInfoTable';
+import { getTitanId, getTitanLoc } from './hasTitan';
 import {
   getCooldownText,
   getCurrentHp,
@@ -23,7 +23,7 @@ import {
   getTitanName,
   getTotalPct,
 } from './placeholders';
-import { getTitanId, getTitanLoc } from './hasTitan';
+import { getRealmName } from './realm';
 
 function formatOffset(secs) {
   const aDate = new Date(getNow() + secs * 1000);

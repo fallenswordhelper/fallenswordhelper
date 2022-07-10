@@ -1,7 +1,7 @@
 import getBuff from './common/getBuff';
-import getCustomUrlParameter from './system/getCustomUrlParameter';
 import querySelectorArray from './common/querySelectorArray';
 import toLowerCase from './common/toLowerCase';
+import getCustomUrlParameter from './system/getCustomUrlParameter';
 
 const levels = [1, 25, 75, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1400,
   1600, 2000, 2500, 3000, 3500, 4000, 4500];

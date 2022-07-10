@@ -1,8 +1,8 @@
 import closestTd from '../common/closestTd';
-import { fshArenaKey } from './assets';
 import getTextTrim from '../common/getTextTrim';
 import querySelectorArray from '../common/querySelectorArray';
 import { get, set } from '../system/idb';
+import { fshArenaKey } from './assets';
 
 function getCount(moveImg) {
   return /(\d)$/.exec(getTextTrim(closestTd(moveImg)))[1];

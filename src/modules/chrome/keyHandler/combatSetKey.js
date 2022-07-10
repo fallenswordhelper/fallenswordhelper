@@ -1,9 +1,9 @@
 import daViewCombatSet from '../../_dataAccess/daViewCombatSet';
-import expandMenu from './expandMenu';
-import keyHandlerEvent from './keyHandlerEvent';
 import navigateTo from '../../common/navigateTo';
 import partial from '../../common/partial';
 import { defSubcmd, profileUrl } from '../../support/constants';
+import expandMenu from './expandMenu';
+import keyHandlerEvent from './keyHandlerEvent';
 
 const jsonTests = [
   (itemIndex, json) => json,

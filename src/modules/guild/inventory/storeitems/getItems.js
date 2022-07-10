@@ -1,9 +1,9 @@
 import closestTr from '../../../common/closestTr';
 import entries from '../../../common/entries';
 import fromEntries from '../../../common/fromEntries';
+import getTextTrim from '../../../common/getTextTrim';
 import getCheckboxesArray from './getCheckboxesArray';
 import getInv from './getInv';
-import getTextTrim from '../../../common/getTextTrim';
 
 let itemsprm = 0;
 

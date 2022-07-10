@@ -1,6 +1,5 @@
 import getElementById from '../common/getElementById';
 import getText from '../common/getText';
-import intValue from '../system/intValue';
 import {
   defStatArmor,
   defStatAttack,
@@ -8,6 +7,7 @@ import {
   defStatDefense,
   defStatHp,
 } from '../support/constants';
+import intValue from '../system/intValue';
 
 let attackElement;
 let defenseElement;

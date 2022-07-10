@@ -1,9 +1,9 @@
-import calf from '../../support/calf';
-import displayDisconnectedFromGodsMessage from './displayDisconnectedFromGodsMessage';
-import { getNow } from '../../support/now';
-import getValue from '../../system/getValue';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
+import calf from '../../support/calf';
+import { getNow } from '../../support/now';
+import getValue from '../../system/getValue';
+import displayDisconnectedFromGodsMessage from './displayDisconnectedFromGodsMessage';
 import parseTemplePage from './parseTemplePage';
 
 function checkLastUpdate(templeAlertLastUpdate) {

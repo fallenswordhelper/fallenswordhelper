@@ -1,9 +1,9 @@
-import clickThis from './clickThis';
-import createDiv from './cElement/createDiv';
-import getArrayByClassName from './getArrayByClassName';
-import getElementById from './getElementById';
 import getInventoryById from '../ajax/getInventoryById';
 import { getPcc } from '../support/layout';
+import createDiv from './cElement/createDiv';
+import clickThis from './clickThis';
+import getArrayByClassName from './getArrayByClassName';
+import getElementById from './getElementById';
 import insertElement from './insertElement';
 import insertHtmlBeforeEnd from './insertHtmlBeforeEnd';
 import jQueryNotPresent from './jQueryNotPresent';

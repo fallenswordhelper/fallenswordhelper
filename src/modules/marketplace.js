@@ -1,9 +1,9 @@
-import addCommas from './system/addCommas';
 import closestTable from './common/closestTable';
 import getElementById from './common/getElementById';
-import { getPcc } from './support/layout';
 import on from './common/on';
 import setInnerHtml from './dom/setInnerHtml';
+import { getPcc } from './support/layout';
+import addCommas from './system/addCommas';
 
 let amt = 0;
 let prc = 0;

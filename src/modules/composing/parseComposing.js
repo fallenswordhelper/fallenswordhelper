@@ -1,12 +1,12 @@
-import calf from '../support/calf';
 import getArrayByClassName from '../common/getArrayByClassName';
-import { getNow } from '../support/now';
 import getText from '../common/getText';
-import setValue from '../system/setValue';
+import calf from '../support/calf';
 import {
   defLastComposeCheck,
   defNeedToCompose,
 } from '../support/constants';
+import { getNow } from '../support/now';
+import setValue from '../system/setValue';
 
 const timeRE = /ETA:\s*(?<h>\d+)h\s*(?<m>\d+)m\s*(?<s>\d+)s/;
 

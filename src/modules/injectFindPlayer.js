@@ -1,18 +1,18 @@
 import doBuffLink from './common/doBuffLink';
 import doBuffLinkClick from './common/doBuffLinkClick';
-import { getPcc } from './support/layout';
 import insertHtmlBeforeEnd from './common/insertHtmlBeforeEnd';
 import interceptSubmit from './common/interceptSubmit';
-import onclick from './common/onclick';
-import querySelector from './common/querySelector';
-import querySelectorArray from './common/querySelectorArray';
 import {
   getLowerGvGLevel,
   getLowerPvpLevel,
   getUpperGvgLevel,
   getUpperPvpLevel,
 } from './common/levelHighlight';
+import onclick from './common/onclick';
+import querySelector from './common/querySelector';
+import querySelectorArray from './common/querySelectorArray';
 import { playerLinkSelector, searchPlayerUrl } from './support/constants';
+import { getPcc } from './support/layout';
 
 function searchUrl(min, max, guild) {
   return `${searchPlayerUrl}&search_level_min=${

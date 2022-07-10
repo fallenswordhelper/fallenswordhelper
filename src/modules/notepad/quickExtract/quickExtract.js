@@ -1,5 +1,5 @@
-import QuickExtract from './QuickExtract.svelte';
 import instantiate from '../../modal/instantiate';
+import QuickExtract from './QuickExtract.svelte';
 
 const props = { visible: true };
 let thisModal;

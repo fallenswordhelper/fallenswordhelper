@@ -1,18 +1,18 @@
 import './quickBuff.css';
-import addBuffLevels from './addBuffLevels';
-import doLabels from './doLabels';
-import executeAll from '../common/executeAll';
-import firstPlayerStats from './firstPlayerStats';
-import getElementById from '../common/getElementById';
 import getProfile from '../ajax/getProfile';
-import getSustain from './getSustain';
+import executeAll from '../common/executeAll';
+import getElementById from '../common/getElementById';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
+import addBuffLevels from './addBuffLevels';
+import { quickBuffHeader } from './assets';
+import doLabels from './doLabels';
+import firstPlayerStats from './firstPlayerStats';
+import getSustain from './getSustain';
 import passThruBuffs from './passThruBuffs';
 import passThruPlayers from './passThruPlayers';
 import quickActivate from './quickActivate';
-import { quickBuffHeader } from './assets';
 import quickbuffSort from './sortBuffs';
 
 function setupEventHandlers() {

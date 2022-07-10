@@ -1,11 +1,11 @@
-import { fshBuffLog } from '../../support/constants';
 import getElementById from '../../common/getElementById';
-import { getPcc } from '../../support/layout';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
-import makePageTemplate from '../lists/makePageTemplate';
 import onclick from '../../common/onclick';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { fshBuffLog } from '../../support/constants';
+import { getPcc } from '../../support/layout';
 import { get, set } from '../../system/idb';
+import makePageTemplate from '../lists/makePageTemplate';
 
 function displayBuffLog(buffLog) {
   setInnerHtml(buffLog, getElementById('bufflog'));

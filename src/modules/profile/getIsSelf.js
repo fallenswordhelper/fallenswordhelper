@@ -1,5 +1,5 @@
-import getPlayerName from './getPlayerName';
 import playerName from '../common/playerName';
+import getPlayerName from './getPlayerName';
 
 let haveSelf;
 let isSelf;

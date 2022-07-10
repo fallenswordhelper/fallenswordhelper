@@ -9,6 +9,7 @@
     "esbuild": "node scripts/esbuild.js",
     "esdev": "node scripts/esdev.js",
     "eslint": "eslint . --cache",
+    "fix": "eslint . --cache --fix",
     "minor": "npm --no-git-tag-version version minor",
     "patch": "npm --no-git-tag-version version patch",
     "prepare": "husky install",

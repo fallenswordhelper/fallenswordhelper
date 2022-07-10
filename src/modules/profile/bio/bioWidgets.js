@@ -1,20 +1,20 @@
 import './bioWidgets.css';
-import bioEvtHdl from './bioEvtHdl';
-import calf from '../../support/calf';
 import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
 import getElementById from '../../common/getElementById';
-import { getPcc } from '../../support/layout';
-import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
-import render from './render';
 import setInnerHtml from '../../dom/setInnerHtml';
+import calf from '../../support/calf';
+import { getPcc } from '../../support/layout';
+import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
 import testQuant from '../../system/testQuant';
+import bioEvtHdl from './bioEvtHdl';
+import render from './render';
 
 let bioEditLines = 0;
 let textArea = 0;

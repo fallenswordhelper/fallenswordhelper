@@ -1,9 +1,9 @@
-import bunchOfSimple from './bunchOfSimple';
 import calf from '../support/calf';
 import getValue from '../system/getValue';
-import { helpLink } from './simpleCheckbox';
 import isChecked from '../system/isChecked';
+import bunchOfSimple from './bunchOfSimple';
 import networkIcon from './networkIcon';
+import { helpLink } from './simpleCheckbox';
 
 const topBlock = [
   'moveGuildList',

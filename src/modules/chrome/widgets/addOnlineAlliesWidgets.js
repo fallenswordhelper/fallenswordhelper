@@ -1,8 +1,8 @@
+import getElementById from '../../common/getElementById';
 import colouring from './colouring';
 import contactColour from './contactColour';
 import doHideBtn from './doHideBtn';
 import doHideBuffSelected from './doHideBuffSelected';
-import getElementById from '../../common/getElementById';
 
 function alliesColour(el) {
   contactColour(el, {

@@ -1,34 +1,34 @@
 import './inventory.css';
-import allthen from '../../common/allthen';
-import { buildInv } from './buildInv';
-import calf from '../../support/calf';
-import clearButton from './clearButton';
-import currentGuildId from '../../common/currentGuildId';
-import decorate from './decorate';
-import doTable from './doTable';
-import entries from '../../common/entries';
-import eventHandlers from './eventHandlers/eventHandlers';
-import executeAll from '../../common/executeAll';
-import { extendOptions } from './options';
-import fromEntries from '../../common/fromEntries';
-import { get } from '../../system/idb';
 import getMembrList from '../../ajax/getMembrList';
-import { getPcc } from '../../support/layout';
-import getValue from '../../system/getValue';
-import headers from './headers';
+import allthen from '../../common/allthen';
+import currentGuildId from '../../common/currentGuildId';
+import entries from '../../common/entries';
+import executeAll from '../../common/executeAll';
+import fromEntries from '../../common/fromEntries';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
 import notLastUpdate from '../../common/notLastUpdate';
-import { oldActionSpinner } from '../../support/constants';
-import recallAll from './recallAll/recallAll';
-import setChecks from './setChecks';
 import setInnerHtml from '../../dom/setInnerHtml';
-import setLvls from './setLvls';
+import calf from '../../support/calf';
+import { oldActionSpinner } from '../../support/constants';
+import { time, timeEnd } from '../../support/debug';
+import { getPcc } from '../../support/layout';
 import task from '../../support/task';
+import getValue from '../../system/getValue';
+import { get } from '../../system/idb';
+import { buildInv } from './buildInv';
+import clearButton from './clearButton';
+import decorate from './decorate';
+import doTable from './doTable';
+import eventHandlers from './eventHandlers/eventHandlers';
 import {
   lvlFilter, rarityFilter, setFilter, typeFilter,
 } from './filters';
-import { time, timeEnd } from '../../support/debug';
+import headers from './headers';
+import { extendOptions } from './options';
+import recallAll from './recallAll/recallAll';
+import setChecks from './setChecks';
+import setLvls from './setLvls';
 
 const rekey = ([, o]) => [o.id, o];
 

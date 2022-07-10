@@ -1,9 +1,9 @@
 import './worldPrefs.css';
-import bunchOfSimple from './bunchOfSimple';
 import calf from '../support/calf';
 import getValue from '../system/getValue';
-import { huntingBuffs } from './huntingBuffs';
 import isSelected from '../system/isSelected';
+import bunchOfSimple from './bunchOfSimple';
+import { huntingBuffs } from './huntingBuffs';
 import isValueChecked from './isValueChecked';
 import {
   helpLink,

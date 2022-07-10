@@ -1,15 +1,15 @@
-import MoveItems from './MoveItems.svelte';
+import daSendToFolder from '../../_dataAccess/daSendToFolder';
+import sendEvent from '../../analytics/sendEvent';
 import chunk from '../../common/chunk';
 import closestTable from '../../common/closestTable';
 import closestTr from '../../common/closestTr';
-import daSendToFolder from '../../_dataAccess/daSendToFolder';
-import getCheckedItems from './getCheckedItems';
-import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 import getText from '../../common/getText';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
+import getCheckedItems from './getCheckedItems';
+import MoveItems from './MoveItems.svelte';
 import removeRow from './removeRow';
-import sendEvent from '../../analytics/sendEvent';
 
 const folderMap = (i) => ({
   id: getCustomUrlParameter(i.parentNode.href, 'folder_id'),

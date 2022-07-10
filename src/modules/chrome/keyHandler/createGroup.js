@@ -1,7 +1,7 @@
-import expandMenu from './expandMenu';
-import { groupsSubcmdUrl } from '../../support/constants';
-import keyHandlerEvent from './keyHandlerEvent';
 import navigateTo from '../../common/navigateTo';
+import { groupsSubcmdUrl } from '../../support/constants';
+import expandMenu from './expandMenu';
+import keyHandlerEvent from './keyHandlerEvent';
 
 export default function createGroup() {
   keyHandlerEvent('createGroup');

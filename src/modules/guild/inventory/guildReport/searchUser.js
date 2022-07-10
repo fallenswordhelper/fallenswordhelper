@@ -1,9 +1,9 @@
 import batch from '../../../common/batch';
 import contains from '../../../common/contains';
 import containsText from '../../../common/containsText';
-import getUrlParameter from '../../../system/getUrlParameter';
 import querySelectorAll from '../../../common/querySelectorAll';
 import querySelectorArray from '../../../common/querySelectorArray';
+import getUrlParameter from '../../../system/getUrlParameter';
 
 let findUser = 0;
 let foundUser = 0;

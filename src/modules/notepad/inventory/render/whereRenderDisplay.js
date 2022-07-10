@@ -1,8 +1,8 @@
 import entries from '../../../common/entries';
-import { getTheInv } from '../buildInv';
-import isSelected from '../../../system/isSelected';
 import partial from '../../../common/partial';
 import { playerIdUrl } from '../../../support/constants';
+import isSelected from '../../../system/isSelected';
+import { getTheInv } from '../buildInv';
 import playerName from './playerName';
 
 function whereRenderGuildDisplay(row) {

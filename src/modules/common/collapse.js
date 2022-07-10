@@ -1,12 +1,12 @@
-import arrayFrom from './arrayFrom';
 import fallback from '../system/fallback';
+import setValue from '../system/setValue';
+import arrayFrom from './arrayFrom';
 import getElementById from './getElementById';
 import hideElement from './hideElement';
 import isFunction from './isFunction';
 import on from './on';
 import onclick from './onclick';
 import partial from './partial';
-import setValue from '../system/setValue';
 import toggleForce from './toggleForce';
 
 const warehouse = [];

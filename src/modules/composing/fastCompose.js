@@ -1,11 +1,10 @@
 import './fastCompose.css';
-import backgroundCreate from './backgroundCreate';
-import contains from '../common/contains';
+import sendEvent from '../analytics/sendEvent';
 import createDiv from '../common/cElement/createDiv';
 import createInput from '../common/cElement/createInput';
 import createTable from '../common/cElement/createTable';
+import contains from '../common/contains';
 import getArrayByClassName from '../common/getArrayByClassName';
-import { getPcc } from '../support/layout';
 import insertElement from '../common/insertElement';
 import insertElementAfter from '../common/insertElementAfter';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
@@ -16,9 +15,10 @@ import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';
 import querySelectorArray from '../common/querySelectorArray';
-import sendEvent from '../analytics/sendEvent';
 import setText from '../dom/setText';
+import { getPcc } from '../support/layout';
 import { subscribe } from '../support/pubsub';
+import backgroundCreate from './backgroundCreate';
 
 function doTableClass(myTable, slotsLeft) {
   myTable.classList.add(`left-${slotsLeft.toString()}`);

@@ -1,13 +1,13 @@
 import dataRows from '../common/dataRows';
-import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getTextTrim from '../common/getTextTrim';
-import getValue from '../system/getValue';
-import guideButtons from './guideButtons';
 import hideElement from '../common/hideElement';
 import partial from '../common/partial';
 import replaceDoubleSpace from '../common/replaceDoubleSpace';
 import setInnerHtml from '../dom/setInnerHtml';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
+import getValue from '../system/getValue';
 import shouldBeArray from '../system/shouldBeArray';
+import guideButtons from './guideButtons';
 
 function isHideQuests() {
   if (getValue('hideQuests')) {

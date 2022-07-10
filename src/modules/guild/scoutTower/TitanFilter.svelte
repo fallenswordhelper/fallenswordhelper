@@ -1,11 +1,11 @@
 <script>
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import sendEvent from '../../analytics/sendEvent';
   import alpha from '../../common/alpha';
   import arrayFrom from '../../common/arrayFrom';
   import closestTable from '../../common/closestTable';
   import entries from '../../common/entries';
   import fromEntries from '../../common/fromEntries';
-  import sendEvent from '../../analytics/sendEvent';
+  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import toggleForce from '../../common/toggleForce';
   import trimTitanName from '../../common/trimTitanName';
   import { get, set } from '../../system/idb';

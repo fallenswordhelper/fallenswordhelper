@@ -1,16 +1,16 @@
-import addCommas from '../../system/addCommas';
-import allthen from '../../common/allthen';
-import createTFoot from '../../common/cElement/createTFoot';
 import daAdvisor from '../../_dataAccess/daAdvisor';
 import getMembrList from '../../ajax/getMembrList';
-import getValue from '../../system/getValue';
+import allthen from '../../common/allthen';
+import createTFoot from '../../common/cElement/createTFoot';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { time, timeEnd } from '../../support/debug';
+import addCommas from '../../system/addCommas';
+import getValue from '../../system/getValue';
 import {
   injectTable, playerLevel, playerName, playerRank,
 } from './helpers';
-import { time, timeEnd } from '../../support/debug';
 
 function returnAdvisorPage(list, e, response) {
   insertHtmlBeforeEnd(list.lastElementChild.lastElementChild, ` day ${e},`);

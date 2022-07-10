@@ -1,7 +1,7 @@
-import badData from '../badData';
 import fetchdata from '../../../ajax/fetchdata';
 import partial from '../../../common/partial';
 import task from '../../../support/task';
+import badData from '../badData';
 
 const creatureCache = [];
 

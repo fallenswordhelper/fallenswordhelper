@@ -1,7 +1,7 @@
-import calf from '../../support/calf';
 import createDiv from '../../common/cElement/createDiv';
-import { getPcl } from '../../support/layout';
 import insertElement from '../../common/insertElement';
+import calf from '../../support/calf';
+import { getPcl } from '../../support/layout';
 
 let bountyListDiv = 0;
 let wantedListDiv = 0;

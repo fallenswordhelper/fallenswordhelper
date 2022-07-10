@@ -1,6 +1,6 @@
+import setValue from '../system/setValue';
 import getElementById from './getElementById';
 import hasClass from './hasClass';
-import setValue from '../system/setValue';
 
 export default function toggleVisibilty(evt) {
   const anItemId = evt.target.dataset.linkto;

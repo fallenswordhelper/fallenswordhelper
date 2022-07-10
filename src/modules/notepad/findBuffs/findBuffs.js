@@ -1,35 +1,35 @@
+import guildManage from '../../ajax/guildManage';
+import onlinePlayersPage from '../../ajax/onlinePlayersPage';
+import retryAjax from '../../ajax/retryAjax';
 import arrayFrom from '../../common/arrayFrom';
-import buffList from '../../support/buffObj.json';
-import calf from '../../support/calf';
-import createDocument from '../../system/createDocument';
 import csvSplit from '../../common/csvSplit';
 import getElementById from '../../common/getElementById';
-import { getPcc } from '../../support/layout';
 import getText from '../../common/getText';
-import getValue from '../../system/getValue';
-import guildManage from '../../ajax/guildManage';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
-import onlinePlayersPage from '../../ajax/onlinePlayersPage';
-import pageLayout from './pageLayout';
-import parseProfileAndDisplay from './parseProfileAndDisplay';
 import partial from '../../common/partial';
 import playerName from '../../common/playerName';
 import querySelectorArray from '../../common/querySelectorArray';
-import retryAjax from '../../ajax/retryAjax';
-import setInnerHtml from '../../dom/setInnerHtml';
-import setValue from '../../system/setValue';
-import stringSort from '../../system/stringSort';
 import trim from '../../common/trim';
-import { buffCustom, otherCustom } from './assets';
-import { calcMinLvl, setMinLvl } from './minLvl';
-import { getBufferProgress, updateProgress } from './bufferProgress';
+import setInnerHtml from '../../dom/setInnerHtml';
+import buffList from '../../support/buffObj.json';
+import calf from '../../support/calf';
 import {
   lastActivityRE,
   profileUrl,
   showPlayerUrl,
   vlRe,
 } from '../../support/constants';
+import { getPcc } from '../../support/layout';
+import createDocument from '../../system/createDocument';
+import getValue from '../../system/getValue';
+import setValue from '../../system/setValue';
+import stringSort from '../../system/stringSort';
+import { buffCustom, otherCustom } from './assets';
+import { getBufferProgress, updateProgress } from './bufferProgress';
+import { calcMinLvl, setMinLvl } from './minLvl';
+import pageLayout from './pageLayout';
+import parseProfileAndDisplay from './parseProfileAndDisplay';
 
 let findBuffNicks = 0;
 let findBuffMinCastLevel = 0;

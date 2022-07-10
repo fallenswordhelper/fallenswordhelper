@@ -1,6 +1,6 @@
 import getElementById from '../../../common/getElementById';
-import { getPcl } from '../../../support/layout';
 import insertElement from '../../../common/insertElement';
+import { getPcl } from '../../../support/layout';
 
 export default function moveRHSBoxToLHS(title) {
   const boxDiv = getElementById(title);

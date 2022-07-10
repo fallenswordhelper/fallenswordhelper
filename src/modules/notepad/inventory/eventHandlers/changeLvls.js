@@ -1,6 +1,6 @@
 import changeMinMax from '../../../common/changeMinMax';
-import { getOptions } from '../options';
 import partial from '../../../common/partial';
+import { getOptions } from '../options';
 import saveOptions from '../saveOptions';
 
 function newOpts(newMin, newMax) {

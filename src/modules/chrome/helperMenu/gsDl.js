@@ -1,7 +1,7 @@
-import clickThis from '../../common/clickThis';
-import createAnchor from '../../common/cElement/createAnchor';
-import currentGuildId from '../../common/currentGuildId';
 import guildStore from '../../_dataAccess/export/guildStore';
+import createAnchor from '../../common/cElement/createAnchor';
+import clickThis from '../../common/clickThis';
+import currentGuildId from '../../common/currentGuildId';
 import insertElement from '../../common/insertElement';
 
 const header = 'item_id,inv_id,item_name,rarity,type,durability,max_durability,guild_tag,'

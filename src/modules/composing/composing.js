@@ -1,17 +1,17 @@
 import './composing.css';
-import backgroundCreate from './backgroundCreate';
-import fastCompose from './fastCompose';
+import sendEvent from '../analytics/sendEvent';
 import getElementById from '../common/getElementById';
 import getElementsByClassName from '../common/getElementsByClassName';
-import { getPcc } from '../support/layout';
-import getValue from '../system/getValue';
 import insertElementBefore from '../common/insertElementBefore';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import jQueryPresent from '../common/jQueryPresent';
 import onclick from '../common/onclick';
-import parseComposing from './parseComposing';
 import querySelectorArray from '../common/querySelectorArray';
-import sendEvent from '../analytics/sendEvent';
+import { getPcc } from '../support/layout';
+import getValue from '../system/getValue';
+import backgroundCreate from './backgroundCreate';
+import fastCompose from './fastCompose';
+import parseComposing from './parseComposing';
 
 function moveButtons() {
   if (getValue('moveComposingButtons')) {

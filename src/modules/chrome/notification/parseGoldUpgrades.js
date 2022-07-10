@@ -1,10 +1,10 @@
+import getTextTrim from '../../common/getTextTrim';
+import querySelectorAll from '../../common/querySelectorAll';
 import calf from '../../support/calf';
 import createDocument from '../../system/createDocument';
-import displayUpgradeMsg from './displayUpgradeMsg';
-import getTextTrim from '../../common/getTextTrim';
-import notGoldUpgradesPage from './notGoldUpgradesPage';
-import querySelectorAll from '../../common/querySelectorAll';
 import setValue from '../../system/setValue';
+import displayUpgradeMsg from './displayUpgradeMsg';
+import notGoldUpgradesPage from './notGoldUpgradesPage';
 
 function findDoc(data) {
   if (notGoldUpgradesPage()) {

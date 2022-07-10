@@ -1,8 +1,8 @@
 <script>
+  import { onMount } from 'svelte';
+  import draggable from '../common/draggable';
   import Modal from './Modal.svelte';
   import ModalCloseButton from './ModalCloseButton.svelte';
-  import draggable from '../common/draggable';
-  import { onMount } from 'svelte';
 
   export let title = '';
   export let visible = true;

@@ -1,6 +1,6 @@
 import daSuperElite from '../_dataAccess/daSuperElite';
-import { getNowSecs } from '../support/now';
 import partial from '../common/partial';
+import { getNowSecs } from '../support/now';
 import { get, set } from '../system/idb';
 
 let oldLog = 0;

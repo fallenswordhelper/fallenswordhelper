@@ -1,18 +1,18 @@
-import { cmdUrl } from './support/constants';
 import createSpan from './common/cElement/createSpan';
 import getElementById from './common/getElementById';
 import getText from './common/getText';
 import insertElement from './common/insertElement';
 import insertTextBeforeEnd from './common/insertTextBeforeEnd';
-import intValue from './system/intValue';
 import numberIsNaN from './common/numberIsNaN';
 import on from './common/on';
 import partial from './common/partial';
 import querySelectorArray from './common/querySelectorArray';
-import { server } from './system/system';
 import setInnerHtml from './dom/setInnerHtml';
 import setText from './dom/setText';
+import { cmdUrl } from './support/constants';
+import intValue from './system/intValue';
 import setValue from './system/setValue';
+import { server } from './system/system';
 
 let playerUpgrades;
 let currentFSP;

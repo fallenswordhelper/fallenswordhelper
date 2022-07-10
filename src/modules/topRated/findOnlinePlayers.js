@@ -1,14 +1,14 @@
-import all from '../common/all';
-import closestTable from '../common/closestTable';
-import createSpan from '../common/cElement/createSpan';
-import decoratePlayer from './decoratePlayer';
-import { getPcc } from '../support/layout';
 import getProfile from '../ajax/getProfile';
+import sendEvent from '../analytics/sendEvent';
+import all from '../common/all';
+import createSpan from '../common/cElement/createSpan';
+import closestTable from '../common/closestTable';
 import getTextTrim from '../common/getTextTrim';
 import hideQTip from '../common/hideQTip';
-import { playerLinkSelector } from '../support/constants';
 import querySelectorArray from '../common/querySelectorArray';
-import sendEvent from '../analytics/sendEvent';
+import { playerLinkSelector } from '../support/constants';
+import { getPcc } from '../support/layout';
+import decoratePlayer from './decoratePlayer';
 
 const addPlayerName = (a) => [closestTable(a), getTextTrim(a)];
 

@@ -1,5 +1,5 @@
-import { getOptions } from '../options';
 import { inventoryCheckAll } from '../assets';
+import { getOptions } from '../options';
 import setChecks from '../setChecks';
 
 export default function allChecks(fshInv) { // jQuery

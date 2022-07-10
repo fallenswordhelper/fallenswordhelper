@@ -1,12 +1,13 @@
 import './activeWantedBounties.css';
 import bountyPage from '../../ajax/bountyPage';
-import calf from '../../support/calf';
 import functionPasses from '../../common/functionPasses';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
-import parseBountyPageForWorld from './parseBountyPageForWorld';
+import calf from '../../support/calf';
 import setValueJSON from '../../system/setValueJSON';
 import { createDivs, getBountyListDiv, getWantedListDiv } from './createDivs';
+import { getBountyListReset, injectBountyList } from './injectBountyList';
+import { getWantedListReset, injectWantedList } from './injectWantedList';
 import {
   doRefresh,
   getBountyList,
@@ -14,8 +15,7 @@ import {
   getWantedList,
   invalidateCache,
 } from './lists';
-import { getBountyListReset, injectBountyList } from './injectBountyList';
-import { getWantedListReset, injectWantedList } from './injectWantedList';
+import parseBountyPageForWorld from './parseBountyPageForWorld';
 
 function notRefreshed(enableActiveBountyList, enableWantedList) {
   if (enableWantedList) {

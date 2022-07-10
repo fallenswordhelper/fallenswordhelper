@@ -1,5 +1,5 @@
-import bunchOfSimple from './bunchOfSimple';
 import getValue from '../system/getValue';
+import bunchOfSimple from './bunchOfSimple';
 import isValueChecked from './isValueChecked';
 import { helpLink, simpleCheckbox } from './simpleCheckbox';
 

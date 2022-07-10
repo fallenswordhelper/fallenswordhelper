@@ -1,6 +1,6 @@
-import { getPcc } from './support/layout';
 import insertHtmlBeforeEnd from './common/insertHtmlBeforeEnd';
 import { scouttowerUrl } from './support/constants';
+import { getPcc } from './support/layout';
 
 export default function injectTitan() {
   const titanTable = getPcc().children[0];

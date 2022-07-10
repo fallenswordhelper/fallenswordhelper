@@ -1,9 +1,9 @@
-import { getPcc } from '../support/layout';
-import getUrlParameter from '../system/getUrlParameter';
-import { indexPhp } from '../support/constants';
 import navigateTo from '../common/navigateTo';
 import on from '../common/on';
 import onclick from '../common/onclick';
+import { indexPhp } from '../support/constants';
+import { getPcc } from '../support/layout';
+import getUrlParameter from '../system/getUrlParameter';
 
 let thisType = '';
 let injectType = 0;

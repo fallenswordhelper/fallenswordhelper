@@ -1,6 +1,6 @@
 import getTextTrim from '../../common/getTextTrim';
-import isGuildMate from './isGuildMate';
 import { isAlly, isEnemy } from './isAllyEnemy';
+import isGuildMate from './isGuildMate';
 
 export default async function relatePlayer(a) {
   let type = '';

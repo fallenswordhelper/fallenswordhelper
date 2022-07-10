@@ -1,9 +1,9 @@
 <script>
-  import Count from './Count.svelte';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import { createEventDispatcher } from 'svelte';
-  import quickExtract from '../../chrome/pageSwitcher/loader/quickExtract';
   import sendEvent from '../../analytics/sendEvent';
+  import quickExtract from '../../chrome/pageSwitcher/loader/quickExtract';
+  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import Count from './Count.svelte';
 
   let quickDelete;
   let rollup;

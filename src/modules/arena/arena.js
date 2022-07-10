@@ -1,25 +1,25 @@
+import sendEvent from '../analytics/sendEvent';
+import view from '../app/arena/view';
 import allthen from '../common/allthen';
-import arenaFull from './arenaFull';
-import doLvlFilter from './doLvlFilter';
-import filterHeader from './filterHeader';
-import { get } from '../system/idb';
-import getValue from '../system/getValue';
 import interceptSubmit from '../common/interceptSubmit';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import loadDataTables from '../common/loadDataTables';
-import orderData from './orderData';
 import partial from '../common/partial';
-import participants from './participants';
 import querySelectorArray from '../common/querySelectorArray';
-import redoSort from './redoSort';
-import sendEvent from '../analytics/sendEvent';
-import view from '../app/arena/view';
+import { time, timeEnd } from '../support/debug';
+import getValue from '../system/getValue';
+import { get } from '../system/idb';
+import arenaFull from './arenaFull';
 import { fshArenaKey, tableOpts } from './assets';
+import doLvlFilter from './doLvlFilter';
+import filterHeader from './filterHeader';
+import orderData from './orderData';
+import participants from './participants';
+import redoSort from './redoSort';
 import {
   setOpts,
   storeOpts,
 } from './setOpts';
-import { time, timeEnd } from '../support/debug';
 
 function removeHiddenRows() {
   const hiddenRows = querySelectorArray(

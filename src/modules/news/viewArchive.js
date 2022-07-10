@@ -1,14 +1,14 @@
 import collapse from '../common/collapse';
 import containsText from '../common/containsText';
 import getElementsByTagName from '../common/getElementsByTagName';
-import { getPcc } from '../support/layout';
 import getText from '../common/getText';
-import getValue from '../system/getValue';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
-import parseDateAsTimestamp from '../system/parseDateAsTimestamp';
-import setValue from '../system/setValue';
 import { simpleCheckbox } from '../settings/simpleCheckbox';
 import { defLastLadderReset, defTable } from '../support/constants';
+import { getPcc } from '../support/layout';
+import getValue from '../system/getValue';
+import parseDateAsTimestamp from '../system/parseDateAsTimestamp';
+import setValue from '../system/setValue';
 
 let lastLadderReset = 0;
 let trackLadderReset = 0;

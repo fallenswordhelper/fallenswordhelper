@@ -1,3 +1,4 @@
+import sendEvent from '../../../../analytics/sendEvent';
 import batch from '../../../../common/batch';
 import createDiv from '../../../../common/cElement/createDiv';
 import createInput from '../../../../common/cElement/createInput';
@@ -11,7 +12,6 @@ import insertHtmlBeforeEnd from '../../../../common/insertHtmlBeforeEnd';
 import on from '../../../../common/on';
 import once from '../../../../common/once';
 import partial from '../../../../common/partial';
-import sendEvent from '../../../../analytics/sendEvent';
 import setInnerHtml from '../../../../dom/setInnerHtml';
 import setText from '../../../../dom/setText';
 import task from '../../../../support/task';

@@ -3,8 +3,8 @@ Based on
 https://github.com/addyosmani/pubsubz
 */
 
-import calf from './calf';
 import partial from '../common/partial';
+import calf from './calf';
 import task from './task';
 
 const topics = {};

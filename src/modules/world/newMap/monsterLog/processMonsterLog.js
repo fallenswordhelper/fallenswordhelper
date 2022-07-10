@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import calf from '../../../support/calf';
 import partial from '../../../common/partial';
+import calf from '../../../support/calf';
 import { get, set } from '../../../system/idb';
 
 let monsterLog;

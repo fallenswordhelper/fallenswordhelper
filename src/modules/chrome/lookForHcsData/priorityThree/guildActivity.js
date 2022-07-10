@@ -1,14 +1,14 @@
 import { entries } from 'idb-keyval';
-import fallback from '../../../system/fallback';
+import ranksView from '../../../_dataAccess/fallbacks/ranksView';
 import fromEntries from '../../../common/fromEntries';
-import { getNowSecs } from '../../../support/now';
 import lastActivityToDays from '../../../common/lastActivityToDays';
 import partial from '../../../common/partial';
-import ranksView from '../../../_dataAccess/fallbacks/ranksView';
+import { getNowSecs } from '../../../support/now';
+import fallback from '../../../system/fallback';
+import { get, set } from '../../../system/idb';
 import {
   act, cur, gxp, lvl, max, utc, vl,
 } from './indexConstants';
-import { get, set } from '../../../system/idb';
 
 let oldArchive = 0;
 

@@ -1,12 +1,12 @@
+import sendEvent from '../../analytics/sendEvent';
 import createAnchor from '../../common/cElement/createAnchor';
 import createLi from '../../common/cElement/createLi';
-import insertAfterParent from './insertAfterParent';
 import insertElement from '../../common/insertElement';
 import insertElementAfter from '../../common/insertElementAfter';
-import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import sendEvent from '../../analytics/sendEvent';
+import jQueryDialog from '../jQueryDialog/jQueryDialog';
+import insertAfterParent from './insertAfterParent';
 
 function openDialog(text, fn) {
   sendEvent('accordion', text);

@@ -1,14 +1,14 @@
 import './privateMsg.css';
-import addLogColoring from '../addLogColoring';
-import addLogWidgets from '../playerLogWidgets/addLogWidgets';
 import dataRows from '../../common/dataRows';
-import getLastTable from '../playerLogWidgets/getLastTable';
 import getTextTrim from '../../common/getTextTrim';
+import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
+import { secureUrl, tradeUrl } from '../../support/constants';
 import getUrlParameter from '../../system/getUrlParameter';
 import getValue from '../../system/getValue';
-import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
+import addLogColoring from '../addLogColoring';
+import addLogWidgets from '../playerLogWidgets/addLogWidgets';
+import getLastTable from '../playerLogWidgets/getLastTable';
 import interceptLinks from './interceptLinks';
-import { secureUrl, tradeUrl } from '../../support/constants';
 
 const getMsgCell = (tr) => [getTextTrim(tr.children[2]), tr.children[3]];
 

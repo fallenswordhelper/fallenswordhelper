@@ -1,11 +1,11 @@
 import fromEntries from '../../common/fromEntries';
 import getElementById from '../../common/getElementById';
+import jQueryNotPresent from '../../common/jQueryNotPresent';
+import theLinks from '../../settings/leftHandLinks.json';
 import { getPcl } from '../../support/layout';
 import getValue from '../../system/getValue';
-import jQueryNotPresent from '../../common/jQueryNotPresent';
 import navMenu from './navMenu';
 import preFlight from './preFlight';
-import theLinks from '../../settings/leftHandLinks.json';
 
 function updateQuestLink() {
   const lastActiveQuestPage = getValue('lastActiveQuestPage');

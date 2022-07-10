@@ -1,11 +1,11 @@
 import bountyPage from '../../ajax/bountyPage';
+import getElementById from '../../common/getElementById';
+import querySelector from '../../common/querySelector';
 import calf from '../../support/calf';
 import createDocument from '../../system/createDocument';
 import findTarget from './findTarget';
-import getElementById from '../../common/getElementById';
 import { injectBountyList } from './injectBountyList';
 import { injectWantedList } from './injectWantedList';
-import querySelector from '../../common/querySelector';
 import { getActiveBountyList, getActiveBountyListPosted } from './lists';
 
 let curPage = 0;

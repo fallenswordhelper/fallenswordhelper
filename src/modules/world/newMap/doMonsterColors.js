@@ -1,6 +1,6 @@
 import createStyle from '../../common/cElement/createStyle';
-import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
+import getValue from '../../system/getValue';
 
 function injectMonsterStyle() {
   insertElement(document.body, createStyle(

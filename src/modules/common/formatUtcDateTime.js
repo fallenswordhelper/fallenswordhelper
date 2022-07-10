@@ -1,6 +1,6 @@
+import padZ from '../system/padZ';
 import formatDateTime from './formatDateTime';
 import isDate from './isDate';
-import padZ from '../system/padZ';
 
 function utcDatePartsPadded(aDate) {
   return [

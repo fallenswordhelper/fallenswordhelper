@@ -1,24 +1,24 @@
 import './allyEnemy.css';
-import addContacts from './addContacts';
-import calf from '../../support/calf';
-import classHandler from '../../common/classHandler';
+import myStats from '../../ajax/myStats';
+import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
-import fallback from '../../system/fallback';
+import classHandler from '../../common/classHandler';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElementById';
-import { getPcl } from '../../support/layout';
 import getPlayerId from '../../common/getPlayerId';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
-import myStats from '../../ajax/myStats';
 import onclick from '../../common/onclick';
 import openQuickBuffById from '../../common/openQuickBuffById';
 import partial from '../../common/partial';
-import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
+import calf from '../../support/calf';
+import { getPcl } from '../../support/layout';
 import task from '../../support/task';
+import fallback from '../../system/fallback';
+import addContacts from './addContacts';
 import {
   enemyBuffCheckOff,
   enemyBuffCheckOn,

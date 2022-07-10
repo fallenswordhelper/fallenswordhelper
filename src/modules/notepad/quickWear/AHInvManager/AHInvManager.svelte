@@ -1,14 +1,14 @@
 <script>
+  import VirtualScroll from 'svelte-virtual-scroll-list';
+  import alpha from '../../../common/alpha';
+  import uniq from '../../../common/uniq';
+  import getValueJSON from '../../../system/getValueJSON';
+  import getHeightGuess from '../getHeightGuess';
   import Caption from './Caption.svelte';
   import Header from './Header.svelte';
   import Hr from './Hr.svelte';
   import ListItem from './ListItem.svelte';
   import NotFound from './NotFound.svelte';
-  import VirtualScroll from 'svelte-virtual-scroll-list';
-  import alpha from '../../../common/alpha';
-  import getHeightGuess from '../getHeightGuess';
-  import getValueJSON from '../../../system/getValueJSON';
-  import uniq from '../../../common/uniq';
 
   export let itemList = 0;
 

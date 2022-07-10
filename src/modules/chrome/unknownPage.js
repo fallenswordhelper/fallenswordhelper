@@ -1,13 +1,13 @@
-import calf from '../support/calf';
-import getElementById from '../common/getElementById';
-import injectQuestBookFull from './pageSwitcher/loader/injectQuestBookFull';
-import jQueryNotPresent from '../common/jQueryNotPresent';
-import news from './pageSwitcher/loader/news';
-import querySelector from '../common/querySelector';
 import screenview from '../analytics/screenview';
-import updateBuffLog from '../notepad/buffLog/updateBuffLog';
-import viewRecipe from './pageSwitcher/loader/viewRecipe';
+import getElementById from '../common/getElementById';
+import jQueryNotPresent from '../common/jQueryNotPresent';
+import querySelector from '../common/querySelector';
 import xPath from '../common/xPath';
+import updateBuffLog from '../notepad/buffLog/updateBuffLog';
+import calf from '../support/calf';
+import injectQuestBookFull from './pageSwitcher/loader/injectQuestBookFull';
+import news from './pageSwitcher/loader/news';
+import viewRecipe from './pageSwitcher/loader/viewRecipe';
 
 const unknown = [
   [

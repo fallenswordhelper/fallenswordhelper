@@ -1,7 +1,7 @@
-import { getWantedList } from './lists';
 import { getWantedListDiv } from './createDivs';
 import injectList from './injectList';
 import listRow from './listRow';
+import { getWantedList } from './lists';
 
 let wantedListReset = 0;
 

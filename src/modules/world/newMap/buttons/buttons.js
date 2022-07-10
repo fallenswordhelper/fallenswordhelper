@@ -1,21 +1,17 @@
-import calf from '../../../support/calf';
 import createButton from '../../../common/cElement/createButton';
 import createDiv from '../../../common/cElement/createDiv';
-import fixTeleport from './fixTeleport';
+import textSpan from '../../../common/cElement/textSpan';
 import getElementById from '../../../common/getElementById';
-import getValue from '../../../system/getValue';
 import hideQTip from '../../../common/hideQTip';
 import insertElement from '../../../common/insertElement';
 import insertElementBefore from '../../../common/insertElementBefore';
-import makeToggleBtn from './makeToggleBtn';
 import on from '../../../common/on';
 import onclick from '../../../common/onclick';
 import openQuickBuffById from '../../../common/openQuickBuffById';
 import partial from '../../../common/partial';
 import playerId from '../../../common/playerId';
 import setText from '../../../dom/setText';
-import setValue from '../../../system/setValue';
-import textSpan from '../../../common/cElement/textSpan';
+import calf from '../../../support/calf';
 import {
   defPlayerLevel,
   defRealmUpdate,
@@ -23,6 +19,10 @@ import {
   guideUrl,
   worldUrl,
 } from '../../../support/constants';
+import getValue from '../../../system/getValue';
+import setValue from '../../../system/setValue';
+import fixTeleport from './fixTeleport';
+import makeToggleBtn from './makeToggleBtn';
 
 let buttonContainer = 0;
 let realmLvl = 0;

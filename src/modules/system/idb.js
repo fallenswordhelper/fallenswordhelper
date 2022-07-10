@@ -1,6 +1,6 @@
-import parseError from '../support/parseError';
-import sendException from '../analytics/sendException';
 import { get as idbGet, set as idbSet } from 'idb-keyval';
+import sendException from '../analytics/sendException';
+import parseError from '../support/parseError';
 
 const processError = (e) => {
   if (e && e.name !== 'NotFoundError') {

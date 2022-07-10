@@ -1,6 +1,6 @@
-import badData from '../badData';
 import calf from '../../../support/calf';
 import { cdn } from '../../../system/system';
+import badData from '../badData';
 import {
   getMyStats,
   getStatArmor,

@@ -1,22 +1,22 @@
 import './quickWear.css';
 import backpack from '../../ajaxQueue/backpack';
-import calf from '../../support/calf';
 import createDiv from '../../common/cElement/createDiv';
-import createQuickWear from './createQuickWear';
 import eventHandler5 from '../../common/eventHandler5';
-import fshTabSet from './fshTabSet';
-import { getPcc } from '../../support/layout';
-import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import isArray from '../../common/isArray';
 import jQueryPresent from '../../common/jQueryPresent';
 import onclick from '../../common/onclick';
 import selfIdIs from '../../common/selfIdIs';
+import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
+import calf from '../../support/calf';
+import { getPcc } from '../../support/layout';
+import { subscribeOnce } from '../../support/pubsub';
+import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
 import showAHInvManager from './AHInvManager/showAHInvManager';
-import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
-import { subscribeOnce } from '../../support/pubsub';
+import createQuickWear from './createQuickWear';
+import fshTabSet from './fshTabSet';
 
 const defDisableQuickWearPrompts = 'disableQuickWearPrompts';
 

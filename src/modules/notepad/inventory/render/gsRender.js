@@ -1,6 +1,6 @@
-import canRecall from './canRecall';
 import fallback from '../../../system/fallback';
 import { getTheInv } from '../buildInv';
+import canRecall from './canRecall';
 
 function gsRecall(row) {
   return `<span class="fshLink recallItem" invid="${

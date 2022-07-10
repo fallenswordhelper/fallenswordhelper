@@ -1,11 +1,11 @@
-import calf from '../support/calf';
-import createEventListeners from './createEventListeners';
-import getVars from './getVars';
-import injectBlockedSkills from './blockedSkills/injectBlockedSkills';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import querySelector from '../common/querySelector';
+import calf from '../support/calf';
 import setValue from '../system/setValue';
+import injectBlockedSkills from './blockedSkills/injectBlockedSkills';
 import setupConfigData from './configData';
+import createEventListeners from './createEventListeners';
+import getVars from './getVars';
 
 function addTab(tabs) { // jQuery
   tabs.find('.ui-tabs-nav')

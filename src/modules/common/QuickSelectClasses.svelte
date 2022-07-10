@@ -1,9 +1,9 @@
 <script>
-  import LinkButton from './LinkButton.svelte';
-  import arrayfromList from './arrayfromList';
   import { createEventDispatcher } from 'svelte';
   import defaults from '../support/dataObj.json';
   import getValue from '../system/getValue';
+  import arrayfromList from './arrayfromList';
+  import LinkButton from './LinkButton.svelte';
 
   export let wantsTagged = 0;
   const dispatch = createEventDispatcher();

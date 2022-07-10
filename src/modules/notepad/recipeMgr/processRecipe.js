@@ -1,10 +1,10 @@
-import createDocument from '../../system/createDocument';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import { itmRe } from '../../support/constants';
 import partial from '../../common/partial';
+import { itmRe } from '../../support/constants';
+import createDocument from '../../system/createDocument';
 
 function getTblCells(doc) {
   return getArrayByTagName('td', getElementById('pCC', doc));

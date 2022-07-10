@@ -1,12 +1,12 @@
+import retryAjax from '../../ajax/retryAjax';
 import all from '../../common/all';
-import createDocument from '../../system/createDocument';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
-import getFolderImgs from './getFolderImgs';
 import partial from '../../common/partial';
+import createDocument from '../../system/createDocument';
+import getFolderImgs from './getFolderImgs';
 import processFolderAnyPage from './processFolderAnyPage';
-import retryAjax from '../../ajax/retryAjax';
 
 function thisInventFolder(el) {
   return /\/folder_on\./.test(el.getAttribute('src'));

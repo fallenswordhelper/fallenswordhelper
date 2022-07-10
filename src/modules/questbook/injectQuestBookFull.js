@@ -1,11 +1,11 @@
-import { defTable } from '../support/constants';
 import getElementsByTagName from '../common/getElementsByTagName';
-import { getPcc } from '../support/layout';
-import getValue from '../system/getValue';
-import injectQuestRow from './injectQuestRow';
 import interceptSubmit from '../common/interceptSubmit';
 import partial from '../common/partial';
+import { defTable } from '../support/constants';
+import { getPcc } from '../support/layout';
+import getValue from '../system/getValue';
 import setValue from '../system/setValue';
+import injectQuestRow from './injectQuestRow';
 
 let normalLink = 0;
 let seasonLink = 0;

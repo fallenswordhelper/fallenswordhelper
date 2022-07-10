@@ -1,11 +1,11 @@
+import sendEvent from '../../analytics/sendEvent';
 import classPair from '../../common/classPair';
 import closestTr from '../../common/closestTr';
-import getMsg from './getMsg';
 import getText from '../../common/getText';
-import getValue from '../../system/getValue';
 import onclick from '../../common/onclick';
+import getValue from '../../system/getValue';
+import getMsg from './getMsg';
 import parseBuffs from './parseBuffs';
-import sendEvent from '../../analytics/sendEvent';
 
 const getPlayerName = (target) => getText(closestTr(target).children[2].children[0]);
 

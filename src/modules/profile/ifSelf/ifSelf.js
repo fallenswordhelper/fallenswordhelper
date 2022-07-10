@@ -1,7 +1,7 @@
 import executeAll from '../../common/executeAll';
-import getIsSelf from '../getIsSelf';
-import getValue from '../../system/getValue';
 import runDefault from '../../common/runDefault';
+import getValue from '../../system/getValue';
+import getIsSelf from '../getIsSelf';
 import storeVL from './storeVL';
 
 async function doFastDebuff() {

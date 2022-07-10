@@ -1,8 +1,8 @@
+import playerName from '../common/playerName';
 import calf from '../support/calf';
 import { getNow } from '../support/now';
-import getProfile from './getProfile';
-import playerName from '../common/playerName';
 import { get, set } from '../system/idb';
+import getProfile from './getProfile';
 
 function sendMyProfileToForage(data) {
   set('fsh_selfProfile', data);

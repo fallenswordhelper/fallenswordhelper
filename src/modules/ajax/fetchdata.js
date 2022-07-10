@@ -1,5 +1,5 @@
-import retryAjax from './retryAjax';
 import rnd from '../system/rnd';
+import retryAjax from './retryAjax';
 
 export default function fetchdata(data) {
   return retryAjax({

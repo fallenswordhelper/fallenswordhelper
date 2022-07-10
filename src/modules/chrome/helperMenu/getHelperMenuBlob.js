@@ -1,6 +1,6 @@
 import calf from '../../support/calf';
-import getValue from '../../system/getValue';
 import { newGuildLogUrl, notepadBlankUrl, playerIdUrl } from '../../support/constants';
+import getValue from '../../system/getValue';
 
 const leadIn = '<div class="helperMenuColumn">';
 

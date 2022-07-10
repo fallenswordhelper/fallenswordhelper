@@ -1,5 +1,5 @@
-import JoinAllLink from './JoinAllLink.svelte';
 import getElementById from '../../common/getElementById';
+import JoinAllLink from './JoinAllLink.svelte';
 
 function mountApp(newGroup) {
   return new JoinAllLink({

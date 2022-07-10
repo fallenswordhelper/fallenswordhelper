@@ -1,9 +1,9 @@
-import OptIn from './OptIn.svelte';
 import daSettingsFlags from '../_dataAccess/daSettingsFlags';
 import daSettingsView from '../_dataAccess/daSettingsView';
-import getValue from '../system/getValue';
 import isArray from '../common/isArray';
 import querySelector from '../common/querySelector';
+import getValue from '../system/getValue';
+import OptIn from './OptIn.svelte';
 
 let myFlags;
 

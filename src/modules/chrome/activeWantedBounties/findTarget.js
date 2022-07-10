@@ -1,6 +1,6 @@
-import basicBounty from './basicBounty';
-import calf from '../../support/calf';
 import getTextTrim from '../../common/getTextTrim';
+import calf from '../../support/calf';
+import basicBounty from './basicBounty';
 import { getWantedArray, getWantedList } from './lists';
 
 function acceptBtn(theCells) {

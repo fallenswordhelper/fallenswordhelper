@@ -1,6 +1,6 @@
 import closestTr from '../../../common/closestTr';
-import getCheckboxesArray from './getCheckboxesArray';
 import hasClass from '../../../common/hasClass';
+import getCheckboxesArray from './getCheckboxesArray';
 
 export default function getCheckboxesVisible() {
   return getCheckboxesArray()

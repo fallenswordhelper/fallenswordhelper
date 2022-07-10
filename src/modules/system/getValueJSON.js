@@ -1,5 +1,5 @@
-import getValue from './getValue';
 import jsonParse from '../common/jsonParse';
+import getValue from './getValue';
 
 function reviver(key, value) {
   if (typeof value === 'string') {

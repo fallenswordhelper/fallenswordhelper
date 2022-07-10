@@ -1,14 +1,14 @@
+import getMembrList from '../../../ajax/getMembrList';
 import createDiv from '../../../common/cElement/createDiv';
 import getElementById from '../../../common/getElementById';
-import getMembrList from '../../../ajax/getMembrList';
-import { getNowSecs } from '../../../support/now';
-import getValue from '../../../system/getValue';
 import hideElement from '../../../common/hideElement';
 import insertElement from '../../../common/insertElement';
 import insertHtmlBeforeEnd from '../../../common/insertHtmlBeforeEnd';
 import keys from '../../../common/keys';
 import partial from '../../../common/partial';
 import { playerIdUrl } from '../../../support/constants';
+import { getNowSecs } from '../../../support/now';
+import getValue from '../../../system/getValue';
 import { atkStats, defStats, proc } from './assets';
 import {
   getContainerDiv,

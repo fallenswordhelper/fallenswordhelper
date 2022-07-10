@@ -1,13 +1,13 @@
 import colouredDots from '../common/colouredDots';
-import doStatTotal from './doStatTotal';
 import executeAll from '../common/executeAll';
-import getValue from '../system/getValue';
-import ifSelf from './ifSelf/ifSelf';
 import interceptSubmit from '../common/interceptSubmit';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import runDefault from '../common/runDefault';
-import shouldRender from './bio/shouldRender';
 import task from '../support/task';
+import getValue from '../system/getValue';
+import shouldRender from './bio/shouldRender';
+import doStatTotal from './doStatTotal';
+import ifSelf from './ifSelf/ifSelf';
 
 function doGuildRelationship() {
   if (getValue('showGuildRelationship')) {

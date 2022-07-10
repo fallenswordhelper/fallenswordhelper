@@ -1,11 +1,11 @@
-import displayUpgradeMsg from './displayUpgradeMsg';
-import { getNow } from '../../support/now';
-import getValue from '../../system/getValue';
+import upgradesGold from '../../ajax/upgradesGold';
 import jQueryPresent from '../../common/jQueryPresent';
+import { getNow } from '../../support/now';
+import task from '../../support/task';
+import getValue from '../../system/getValue';
+import displayUpgradeMsg from './displayUpgradeMsg';
 import notGoldUpgradesPage from './notGoldUpgradesPage';
 import parseGoldUpgrades from './parseGoldUpgrades';
-import task from '../../support/task';
-import upgradesGold from '../../ajax/upgradesGold';
 
 function asyncParse(data) {
   task(3, parseGoldUpgrades, [data]);

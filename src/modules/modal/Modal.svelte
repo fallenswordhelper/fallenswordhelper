@@ -1,8 +1,8 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+  import calf from '../support/calf';
   import ModalBackground from './ModalBackground.svelte';
   import ModalDialog from './ModalDialog.svelte';
-  import calf from '../support/calf';
-  import { createEventDispatcher } from 'svelte';
 
   export let modal;
   export let visible = true;

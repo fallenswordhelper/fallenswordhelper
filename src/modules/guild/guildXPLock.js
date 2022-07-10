@@ -1,6 +1,6 @@
-import addCommas from '../system/addCommas';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import querySelector from '../common/querySelector';
+import addCommas from '../system/addCommas';
 
 function getIntFromRegExp(theText, rxSearch) {
   const matches = theText.replace(/,/g, '').match(rxSearch);

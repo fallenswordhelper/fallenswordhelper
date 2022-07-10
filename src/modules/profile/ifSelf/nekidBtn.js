@@ -1,13 +1,13 @@
+import daUnequipItem from '../../_dataAccess/daUnequipItem';
+import sendEvent from '../../analytics/sendEvent';
 import createButton from '../../common/cElement/createButton';
 import createDiv from '../../common/cElement/createDiv';
-import daUnequipItem from '../../_dataAccess/daUnequipItem';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
 import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 let profileCombatSetDiv;

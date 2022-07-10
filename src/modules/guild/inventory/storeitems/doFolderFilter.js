@@ -1,10 +1,10 @@
-import FolderFilter from './FolderFilter.svelte';
+import sendEvent from '../../../analytics/sendEvent';
 import batch from '../../../common/batch';
 import closestTr from '../../../common/closestTr';
-import getCheckboxesArray from './getCheckboxesArray';
 import partial from '../../../common/partial';
-import sendEvent from '../../../analytics/sendEvent';
 import toggleForce from '../../../common/toggleForce';
+import FolderFilter from './FolderFilter.svelte';
+import getCheckboxesArray from './getCheckboxesArray';
 
 function startFolderFilter(inv, form) {
   return new FolderFilter({

@@ -3,10 +3,10 @@ import createDiv from '../../common/cElement/createDiv';
 import createTable from '../../common/cElement/createTable';
 import insertElement from '../../common/insertElement';
 import partial from '../../common/partial';
-import { playerIdUrl } from '../../support/constants';
 import replaceChild from '../../common/replaceChild';
-import task from '../../support/task';
 import trim from '../../common/trim';
+import { playerIdUrl } from '../../support/constants';
+import task from '../../support/task';
 
 export const advisorColumns = [
   { title: '<div class="fshBold">Member</div>' },

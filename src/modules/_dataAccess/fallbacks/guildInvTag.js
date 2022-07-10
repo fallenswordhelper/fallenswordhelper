@@ -1,5 +1,5 @@
-import htmlResult from './htmlResult';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import htmlResult from './htmlResult';
 
 export default function guildInvTag(subcmd2, invIdAry) {
   return indexAjaxData({

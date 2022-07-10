@@ -3,7 +3,6 @@ import csvSplit from '../../common/csvSplit';
 import doBuffLinks from '../../common/doBuffLinks';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getText from '../../common/getText';
-import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onlineDot from '../../common/onlineDot';
@@ -11,6 +10,7 @@ import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { months, playerIdUrl } from '../../support/constants';
 import { time, timeEnd } from '../../support/debug';
+import getValue from '../../system/getValue';
 
 const xRE = /([a-zA-Z]{3}), (\d{1,2}) ([a-zA-Z]{3}) (\d{1,2}):(\d{2}):(\d{2}) UTC/;
 

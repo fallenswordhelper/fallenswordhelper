@@ -1,14 +1,14 @@
-import clickHandler from './clickHandler';
+import injectGuild from '../../../chrome/pageSwitcher/loader/injectGuild';
 import createInput from '../../../common/cElement/createInput';
 import getElementById from '../../../common/getElementById';
 import getElementsByTagName from '../../../common/getElementsByTagName';
-import { getPcc } from '../../../support/layout';
-import injectGuild from '../../../chrome/pageSwitcher/loader/injectGuild';
 import insertElement from '../../../common/insertElement';
 import insertHtmlBeforeEnd from '../../../common/insertHtmlBeforeEnd';
-import interceptSubmit from './interceptSubmit';
 import onclick from '../../../common/onclick';
 import querySelectorArray from '../../../common/querySelectorArray';
+import { getPcc } from '../../../support/layout';
+import clickHandler from './clickHandler';
+import interceptSubmit from './interceptSubmit';
 
 function doItemTable(checkbox) {
   insertHtmlBeforeEnd(checkbox.parentNode.nextElementSibling

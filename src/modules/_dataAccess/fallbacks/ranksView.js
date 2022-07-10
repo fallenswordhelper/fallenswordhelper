@@ -1,9 +1,7 @@
-import closestTr from '../../common/closestTr';
-import createDocument from '../../system/createDocument';
-import currentGuildId from '../../common/currentGuildId';
-import { getNowSecs } from '../../support/now';
-import getTextTrim from '../../common/getTextTrim';
 import guildManage from '../../ajax/guildManage';
+import closestTr from '../../common/closestTr';
+import currentGuildId from '../../common/currentGuildId';
+import getTextTrim from '../../common/getTextTrim';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
 import uniq from '../../common/uniq';
@@ -14,6 +12,8 @@ import {
   stamRe,
   vlRe,
 } from '../../support/constants';
+import { getNowSecs } from '../../support/now';
+import createDocument from '../../system/createDocument';
 
 const guildXp = (el) => Number(getTextTrim(closestTr(el).cells[4]).replaceAll(',', ''));
 const playerId = (el) => Number(playerIDRE.exec(el.href)[1]);

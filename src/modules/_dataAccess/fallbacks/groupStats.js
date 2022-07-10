@@ -1,6 +1,6 @@
-import createDocument from '../../system/createDocument';
 import groupViewStats from '../../ajax/groupViewStats';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import createDocument from '../../system/createDocument';
 
 function parseReport(html) {
   const doc = createDocument(html);

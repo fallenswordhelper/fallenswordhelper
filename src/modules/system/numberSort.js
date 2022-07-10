@@ -1,5 +1,5 @@
-import calf from '../support/calf';
 import isUndefined from '../common/isUndefined';
+import calf from '../support/calf';
 import path from './path';
 import sortDesc from './sortDesc';
 

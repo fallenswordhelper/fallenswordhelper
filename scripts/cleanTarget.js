@@ -1,12 +1,12 @@
 'use strict';
 
-const path = require('path');
 const {
   accessSync,
   mkdirSync,
   readdirSync,
   rmSync,
 } = require('fs');
+const path = require('path');
 
 function cleanTarget(filepath) {
   let accessErr = false;

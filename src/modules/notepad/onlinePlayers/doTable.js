@@ -1,8 +1,8 @@
 import currentGuildId from '../../common/currentGuildId';
-import getValue from '../../system/getValue';
-import { guildRE } from '../../support/constants';
-import intValue from '../../system/intValue';
 import { getLowerPvpLevel, getUpperPvpLevel } from '../../common/levelHighlight';
+import { guildRE } from '../../support/constants';
+import getValue from '../../system/getValue';
+import intValue from '../../system/intValue';
 
 let highlightPlayersNearMyLvl;
 let table;

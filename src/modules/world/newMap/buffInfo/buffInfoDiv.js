@@ -1,8 +1,8 @@
-import calf from '../../../support/calf';
 import createDiv from '../../../common/cElement/createDiv';
 import getElementById from '../../../common/getElementById';
 import insertElementAfter from '../../../common/insertElementAfter';
 import toggleForce from '../../../common/toggleForce';
+import calf from '../../../support/calf';
 
 let containerDiv;
 

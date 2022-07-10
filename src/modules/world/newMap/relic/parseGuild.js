@@ -1,7 +1,7 @@
-import createDocument from '../../../system/createDocument';
 import querySelectorAll from '../../../common/querySelectorAll';
 import round from '../../../common/round';
 import setText from '../../../dom/setText';
+import createDocument from '../../../system/createDocument';
 import { getLdPercentageElement, getRelicCountElement } from './secondaryElements';
 
 let relicMultiplier = 0;

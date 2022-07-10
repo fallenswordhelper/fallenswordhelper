@@ -1,7 +1,7 @@
-import bunchOfSimple from './bunchOfSimple';
 import getValue from '../system/getValue';
-import { helpLink } from './simpleCheckbox';
+import bunchOfSimple from './bunchOfSimple';
 import isValueChecked from './isValueChecked';
+import { helpLink } from './simpleCheckbox';
 
 export default function questPrefs() {
   // Quest Preferences

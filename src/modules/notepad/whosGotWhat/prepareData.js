@@ -1,9 +1,9 @@
-import addCommas from '../../system/addCommas';
-import { getNowSecs } from '../../support/now';
 import lastActivityToDays from '../../common/lastActivityToDays';
 import partial from '../../common/partial';
 import toLowerCase from '../../common/toLowerCase';
 import trim from '../../common/trim';
+import { getNowSecs } from '../../support/now';
+import addCommas from '../../system/addCommas';
 
 function byMember(acc, curr) {
   // if (curr.item_id === 11503) { // Zombie Brew

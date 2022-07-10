@@ -4,13 +4,13 @@ import createButton from '../../common/cElement/createButton';
 import createDiv from '../../common/cElement/createDiv';
 import createTextArea from '../../common/cElement/createTextArea';
 import dialogMsg from '../../common/dialogMsg';
-import { initTable } from './trackerTable';
 import insertElement from '../../common/insertElement';
 import jsonParse from '../../common/jsonParse';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import { set } from '../../system/idb';
 import task from '../../support/task';
+import { set } from '../../system/idb';
+import { initTable } from './trackerTable';
 
 let ioText;
 let saveBtn;

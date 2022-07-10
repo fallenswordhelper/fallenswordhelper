@@ -1,5 +1,5 @@
-import querySelector from '../../common/querySelector';
 import sendEvent from '../../analytics/sendEvent';
+import querySelector from '../../common/querySelector';
 
 function sectionClosed(id) {
   return id !== -1

@@ -1,10 +1,10 @@
+import myStats from '../ajax/myStats';
 import getArrayByTagName from '../common/getArrayByTagName';
-import { getPcc } from '../support/layout';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
-import myStats from '../ajax/myStats';
 import partial from '../common/partial';
 import reduceBuffArray from '../common/reduceBuffArray';
+import { getPcc } from '../support/layout';
 
 const packRE = />(?<a>[^>(]+) \(Level (?<b>\d{1,4})/g;
 

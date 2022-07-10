@@ -1,10 +1,10 @@
-import fallback from '../../../system/fallback';
-import { getRelicMultiplier } from './parseGuild';
 import playerDataObject from '../../../common/playerDataObject';
 import reduceBuffArray from '../../../common/reduceBuffArray';
-import setText from '../../../dom/setText';
 import setTextCommas from '../../../common/setTextCommas';
+import setText from '../../../dom/setText';
 import { darkCurseMultiplier, defenderMultiplier } from '../../../support/constants';
+import fallback from '../../../system/fallback';
+import { getRelicMultiplier } from './parseGuild';
 import {
   getArmorBuffedElement,
   getArmorElement,

@@ -1,10 +1,10 @@
-import calf from '../support/calf';
+import getGuild from '../_dataAccess/export/guildMembers';
 import currentGuildId from '../common/currentGuildId';
 import fromEntries from '../common/fromEntries';
-import getGuild from '../_dataAccess/export/guildMembers';
-import { getNow } from '../support/now';
 import isObject from '../common/isObject';
 import partial from '../common/partial';
+import calf from '../support/calf';
+import { getNow } from '../support/now';
 import { get, set } from '../system/idb';
 
 function saveMembrListInForage(membrList, data) {

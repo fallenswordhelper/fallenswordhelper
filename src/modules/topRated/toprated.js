@@ -1,12 +1,12 @@
 import createInput from '../common/cElement/createInput';
-import findOnlinePlayers from './findOnlinePlayers';
 import functionPasses from '../common/functionPasses';
 import getElementsByTagName from '../common/getElementsByTagName';
-import { getPcc } from '../support/layout';
 import getTextTrim from '../common/getTextTrim';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
 import jQueryPresent from '../common/jQueryPresent';
 import onclick from '../common/onclick';
+import { getPcc } from '../support/layout';
+import findOnlinePlayers from './findOnlinePlayers';
 
 function looksLikeTopRated() {
   const theCell = getElementsByTagName('td', getPcc())[0];

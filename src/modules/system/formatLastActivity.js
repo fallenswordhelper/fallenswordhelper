@@ -1,6 +1,6 @@
+import splitTime from '../common/splitTime';
 import { getNowSecs } from '../support/now';
 import outputFormat from './outputFormat';
-import splitTime from '../common/splitTime';
 
 export default function formatLastActivity(lastLogin) {
   const timeAry = splitTime(Math.abs(getNowSecs() - lastLogin));

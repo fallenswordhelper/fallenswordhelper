@@ -1,7 +1,7 @@
 import deepClone from '../../common/deepClone';
-import { defaultOptions } from './assets';
 import fallback from '../../system/fallback';
 import getValue from '../../system/getValue';
+import { defaultOptions } from './assets';
 
 let options = {};
 let showQuickDropLinks = 0;

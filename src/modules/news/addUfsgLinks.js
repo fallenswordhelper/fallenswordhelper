@@ -1,12 +1,12 @@
 import createAnchor from '../common/cElement/createAnchor';
 import createSpan from '../common/cElement/createSpan';
 import getArrayByClassName from '../common/getArrayByClassName';
-import { getPcc } from '../support/layout';
 import getTitle from '../common/getTitle';
-import { guideUrl } from '../support/constants';
 import insertElement from '../common/insertElement';
 import insertElementBefore from '../common/insertElementBefore';
 import querySelectorArray from '../common/querySelectorArray';
+import { guideUrl } from '../support/constants';
+import { getPcc } from '../support/layout';
 
 const creatureSearchHref = (name) => `${guideUrl}creatures&search_name=${encodeURIComponent(name)}`;
 const titanRe = /(?<a> titan has been spotted in )(?<b>[^!]+)(?<c>!)/;

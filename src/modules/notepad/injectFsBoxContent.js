@@ -1,10 +1,10 @@
 import getElementById from '../common/getElementById';
-import { getPcc } from '../support/layout';
 import jQueryNotPresent from '../common/jQueryNotPresent';
-import makePageTemplate from './lists/makePageTemplate';
 import onclick from '../common/onclick';
 import setInnerHtml from '../dom/setInnerHtml';
+import { getPcc } from '../support/layout';
 import { get, set } from '../system/idb';
+import makePageTemplate from './lists/makePageTemplate';
 
 function inject(fsboxcontent) {
   setInnerHtml(fsboxcontent, getElementById('fsboxdetail'));

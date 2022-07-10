@@ -2,20 +2,20 @@ import './potReport.css';
 import createDiv from '../../../../common/cElement/createDiv';
 import deepClone from '../../../../common/deepClone';
 import eventHandler5 from '../../../../common/eventHandler5';
-import fallback from '../../../../system/fallback';
-import { getPcc } from '../../../../support/layout';
 import insertElement from '../../../../common/insertElement';
-import isChecked from '../../../../system/isChecked';
 import keys from '../../../../common/keys';
 import on from '../../../../common/on';
 import onclick from '../../../../common/onclick';
 import partial from '../../../../common/partial';
 import selfIdIs from '../../../../common/selfIdIs';
-import sortKeys from './sortKeys';
+import { getPcc } from '../../../../support/layout';
+import fallback from '../../../../system/fallback';
+import { get, set } from '../../../../system/idb';
+import isChecked from '../../../../system/isChecked';
 import testRange from '../../../../system/testRange';
 import { drawInventory, initInventory } from './drawInventory';
 import { drawMapping, initMapping } from './drawMapping';
-import { get, set } from '../../../../system/idb';
+import sortKeys from './sortKeys';
 
 const storeMap = 'fsh_potMap';
 const defaultOpts = {

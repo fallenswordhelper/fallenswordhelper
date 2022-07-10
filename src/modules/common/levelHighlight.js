@@ -1,6 +1,6 @@
 import asInt from '../chrome/calcs/asInt';
-import getValue from '../system/getValue';
 import { defCharacterVirtualLevel, defStatLevel } from '../support/constants';
+import getValue from '../system/getValue';
 
 let lvlToTest;
 

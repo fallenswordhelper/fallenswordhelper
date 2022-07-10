@@ -1,11 +1,11 @@
-import buffList from '../../support/buffObj.json';
+import sendEvent from '../../analytics/sendEvent';
 import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
-import getMsg from './getMsg';
 import getPlayerId from '../../common/getPlayerId';
 import openQuickBuffById from '../../common/openQuickBuffById';
-import sendEvent from '../../analytics/sendEvent';
 import toLowerCase from '../../common/toLowerCase';
+import buffList from '../../support/buffObj.json';
+import getMsg from './getMsg';
 
 const thisNick = (nick, buffObj) => csvSplit(buffObj.nicks).includes(toLowerCase(nick));
 

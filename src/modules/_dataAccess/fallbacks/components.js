@@ -1,10 +1,10 @@
-import all from '../../common/all';
-import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import retryAjax from '../../ajax/retryAjax';
+import all from '../../common/all';
 import querySelectorAll from '../../common/querySelectorAll';
 import querySelectorArray from '../../common/querySelectorArray';
-import retryAjax from '../../ajax/retryAjax';
 import sum from '../../common/sum';
+import createDocument from '../../system/createDocument';
 
 const componentRe = /\?item_id=(\d+)&inv_id=(\d+)&.*&vcode=([0-9a-f]+)/;
 

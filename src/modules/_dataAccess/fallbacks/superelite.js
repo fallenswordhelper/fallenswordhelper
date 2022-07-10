@@ -1,10 +1,10 @@
-import createDocument from '../../system/createDocument';
+import indexAjaxData from '../../ajax/indexAjaxData';
 import dataRows from '../../common/dataRows';
 import dateUtc from '../../common/dateUtc';
 import getTextTrim from '../../common/getTextTrim';
-import indexAjaxData from '../../ajax/indexAjaxData';
 import querySelector from '../../common/querySelector';
 import { getNow, getNowSecs } from '../../support/now';
+import createDocument from '../../system/createDocument';
 
 function convertDate(textDate) {
   const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);

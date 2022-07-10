@@ -1,7 +1,7 @@
-import addCommas from '../../system/addCommas';
 import { defPlayerGold } from '../../support/constants';
-import doSendGold from './doSendGold';
+import addCommas from '../../system/addCommas';
 import getValue from '../../system/getValue';
+import doSendGold from './doSendGold';
 import { getSendGoldOnWorld, initSendGoldOnWorld } from './sendGoldPref';
 
 let goldAmount = 0;

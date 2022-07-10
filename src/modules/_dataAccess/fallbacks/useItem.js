@@ -1,8 +1,8 @@
+import indexAjaxData from '../../ajax/indexAjaxData';
+import sendEvent from '../../analytics/sendEvent';
+import infoBoxFrom from '../../common/InfoBoxFrom';
 import calf from '../../support/calf';
 import { composingFragmentType } from '../../support/constants';
-import indexAjaxData from '../../ajax/indexAjaxData';
-import infoBoxFrom from '../../common/InfoBoxFrom';
-import sendEvent from '../../analytics/sendEvent';
 
 const ret = (info, prop) => ({ r: { [prop]: [{ n: info.match(/'(.*)'/)[1] }] }, s: true });
 const components = (info) => ret(info, 'components');

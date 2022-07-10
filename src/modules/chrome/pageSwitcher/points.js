@@ -1,6 +1,6 @@
 import getUrlParameter from '../../system/getUrlParameter';
-import parseGoldUpgrades from '../notification/parseGoldUpgrades';
 import upgrades from '../../upgrades';
+import parseGoldUpgrades from '../notification/parseGoldUpgrades';
 
 export default function points() {
   if (getUrlParameter('type') === '1') {

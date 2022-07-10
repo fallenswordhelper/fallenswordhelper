@@ -1,17 +1,17 @@
 <script>
-  import FolderButtons from '../common/FolderButtons.svelte';
-  import QuickSelectClasses from '../common/QuickSelectClasses.svelte';
-  import SelectInST from '../common/SelectInST.svelte';
-  import TradeGrid from './TradeGrid.svelte';
-  import calf from '../support/calf';
-  import closestTable from '../common/closestTable';
-  import getValue from '../system/getValue';
   import inventory from '../_dataAccess/export/inventory';
+  import sendEvent from '../analytics/sendEvent';
+  import closestTable from '../common/closestTable';
+  import FolderButtons from '../common/FolderButtons.svelte';
   import numberIsNaN from '../common/numberIsNaN';
   import partial from '../common/partial';
   import querySelectorArray from '../common/querySelectorArray';
-  import sendEvent from '../analytics/sendEvent';
+  import QuickSelectClasses from '../common/QuickSelectClasses.svelte';
+  import SelectInST from '../common/SelectInST.svelte';
   import toggleForce from '../common/toggleForce';
+  import calf from '../support/calf';
+  import getValue from '../system/getValue';
+  import TradeGrid from './TradeGrid.svelte';
 
   export let itemList = 0;
 

@@ -1,6 +1,6 @@
 import getElementsByTagName from '../common/getElementsByTagName';
-import { getPcc } from '../support/layout';
 import getText from '../common/getText';
+import { getPcc } from '../support/layout';
 
 let playerName = 0;
 

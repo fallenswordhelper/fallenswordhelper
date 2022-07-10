@@ -1,7 +1,7 @@
 <script>
+  import sendEvent from '../../../analytics/sendEvent';
   import clickThis from '../../../common/clickThis';
   import querySelectorArray from '../../../common/querySelectorArray';
-  import sendEvent from '../../../analytics/sendEvent';
 
   const BpFromGs = 'span[action="take"]';
   const BpFromPlayer = 'span[mode="0"][action="recall"]';

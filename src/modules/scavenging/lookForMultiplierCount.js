@@ -1,13 +1,13 @@
-import closestTable from '../common/closestTable';
 import createSpan from '../common/cElement/createSpan';
+import closestTable from '../common/closestTable';
 import getElementById from '../common/getElementById';
 import getText from '../common/getText';
 import insertElement from '../common/insertElement';
-import intValue from '../system/intValue';
 import numberIsNaN from '../common/numberIsNaN';
 import on from '../common/on';
 import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
+import intValue from '../system/intValue';
 
 function clearWidth(multCnt) {
   const parentTable = closestTable(multCnt);

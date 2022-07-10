@@ -1,7 +1,7 @@
-import { GMSTORAGE_PATH } from '../support/constants';
-import calf from '../support/calf';
-import defaults from '../support/dataObj.json';
 import isUndefined from '../common/isUndefined';
+import calf from '../support/calf';
+import { GMSTORAGE_PATH } from '../support/constants';
+import defaults from '../support/dataObj.json';
 
 const reviver = [
   ['S]', (value) => value.substr(2)],

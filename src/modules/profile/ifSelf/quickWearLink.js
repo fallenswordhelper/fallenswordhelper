@@ -1,12 +1,12 @@
-import { cmdUrl } from '../../support/constants';
+import sendEvent from '../../analytics/sendEvent';
+import jQueryDialog from '../../chrome/jQueryDialog/jQueryDialog';
+import quickwear from '../../chrome/pageSwitcher/loader/quickwear';
 import createSpan from '../../common/cElement/createSpan';
 import insertElement from '../../common/insertElement';
 import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
-import jQueryDialog from '../../chrome/jQueryDialog/jQueryDialog';
 import onclick from '../../common/onclick';
 import querySelector from '../../common/querySelector';
-import quickwear from '../../chrome/pageSwitcher/loader/quickwear';
-import sendEvent from '../../analytics/sendEvent';
+import { cmdUrl } from '../../support/constants';
 
 function openQwDialog() {
   sendEvent('profile', 'insertQuickWear');

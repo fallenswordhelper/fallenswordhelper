@@ -1,6 +1,6 @@
-import { getOptions } from './options';
-import intValue from '../../system/intValue';
 import { lvlTest, playerLvlTest } from '../../common/lvlTests';
+import intValue from '../../system/intValue';
+import { getOptions } from './options';
 
 let itemLvlTest = 0;
 

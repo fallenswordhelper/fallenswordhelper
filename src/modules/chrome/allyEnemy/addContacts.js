@@ -1,17 +1,17 @@
-import calf from '../../support/calf';
-import formatLastActivity from '../../system/formatLastActivity';
-import { getNowSecs } from '../../support/now';
 import partial from '../../common/partial';
-import {
-  enemyBuffCheckOn,
-  enemyQuickbuff,
-  enemySendMessage,
-} from './constants';
+import calf from '../../support/calf';
 import {
   playerIdUrl,
   secureUrl,
   tradeUrl,
 } from '../../support/constants';
+import { getNowSecs } from '../../support/now';
+import formatLastActivity from '../../system/formatLastActivity';
+import {
+  enemyBuffCheckOn,
+  enemyQuickbuff,
+  enemySendMessage,
+} from './constants';
 
 export const contactClass = [
   [(n) => n < 120, 'fshDodgerBlue', 'fshRed'],

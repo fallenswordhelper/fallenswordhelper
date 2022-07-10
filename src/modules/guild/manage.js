@@ -1,20 +1,20 @@
-import buffLinks from './buffLinks';
-import conflictInfo from './conflictInfo';
 import contains from '../common/contains';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getElementsByTagName from '../common/getElementsByTagName';
-import { getPcc } from '../support/layout';
-import getValue from '../system/getValue';
-import guildTracker from './guildTracker/guildTracker';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import partial from '../common/partial';
 import playerName from '../common/playerName';
 import setInnerHtml from '../dom/setInnerHtml';
-import stamBars from './stamBars/stamBars';
-import task from '../support/task';
 import { guildSubcmdUrl, recallUserUrl } from '../support/constants';
+import { getPcc } from '../support/layout';
+import task from '../support/task';
+import getValue from '../system/getValue';
+import buffLinks from './buffLinks';
+import conflictInfo from './conflictInfo';
+import guildTracker from './guildTracker/guildTracker';
 import { logoToggle, statToggle, structureToggle } from './panelToggle';
+import stamBars from './stamBars/stamBars';
 
 function relicControl(leftHandSideColumnTable) {
   const relic = getArrayByTagName('b', leftHandSideColumnTable)

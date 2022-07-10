@@ -1,14 +1,14 @@
 import './fastWear.css';
+import getElementById from '../../common/getElementById';
+import getText from '../../common/getText';
+import onclick from '../../common/onclick';
+import partial from '../../common/partial';
+import task from '../../support/task';
 import fastEvent from './fastEvent';
 import fastWearLinks from './fastWearLinks';
 import getBackpack from './getBackpack';
-import getElementById from '../../common/getElementById';
-import getText from '../../common/getText';
 import monkeyBp from './monkeyBp';
-import onclick from '../../common/onclick';
-import partial from '../../common/partial';
 import restyleBackpack from './restyleBackpack';
-import task from '../../support/task';
 
 function foundBackpack(theBackpack) {
   restyleBackpack();

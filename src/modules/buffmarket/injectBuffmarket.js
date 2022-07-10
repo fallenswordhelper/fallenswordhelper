@@ -1,14 +1,14 @@
 import './buffmarket.css';
-import createDocument from '../system/createDocument';
 import daBuffMarketBuy from '../_dataAccess/daBuffMarketBuy';
-import fromEntries from '../common/fromEntries';
-import { getPcc } from '../support/layout';
 import indexAjaxData from '../ajax/indexAjaxData';
+import fromEntries from '../common/fromEntries';
 import on from '../common/on';
 import onclick from '../common/onclick';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
+import { getPcc } from '../support/layout';
+import createDocument from '../system/createDocument';
 
 async function search(injector, e) {
   e.preventDefault();

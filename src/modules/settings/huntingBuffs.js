@@ -1,7 +1,7 @@
 import calf from '../support/calf';
-import { helpLink } from './simpleCheckbox';
 import isChecked from '../system/isChecked';
 import isSelected from '../system/isSelected';
+import { helpLink } from './simpleCheckbox';
 
 function huntBuff() {
   return `Hunting Buffs${helpLink(

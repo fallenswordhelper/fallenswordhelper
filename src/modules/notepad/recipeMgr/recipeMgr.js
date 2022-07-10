@@ -1,11 +1,11 @@
 import doSortParams from '../../common/doSortParams';
-import generateRecipeTable from './generateRecipeTable';
-import { get } from '../../system/idb';
-import { getPcc } from '../../support/layout';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
+import { getPcc } from '../../support/layout';
+import { get } from '../../system/idb';
 import stringSort from '../../system/stringSort';
+import generateRecipeTable from './generateRecipeTable';
 import {
   getOutput,
   getRecipebook,

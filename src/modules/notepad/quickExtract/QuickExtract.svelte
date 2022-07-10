@@ -1,18 +1,18 @@
 <script>
-  import LinkButton from '../../common/LinkButton.svelte';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
-  import ModalTitled from '../../modal/ModalTitled.svelte';
-  import SelectInST from '../../common/SelectInST.svelte';
+  import daUseItem from '../../_dataAccess/daUseItem';
+  import inventory from '../../_dataAccess/export/inventory';
+  import sendEvent from '../../analytics/sendEvent';
   import all from '../../common/all';
   import alpha from '../../common/alpha';
+  import LinkButton from '../../common/LinkButton.svelte';
+  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import SelectInST from '../../common/SelectInST.svelte';
   import confirm from '../../modal/confirm';
-  import daUseItem from '../../_dataAccess/daUseItem';
+  import ModalTitled from '../../modal/ModalTitled.svelte';
   import getValue from '../../system/getValue';
-  import inventory from '../../_dataAccess/export/inventory';
+  import setValue from '../../system/setValue';
   import processResult from './processResult';
   import rollupExtractable from './rollupExtractable';
-  import sendEvent from '../../analytics/sendEvent';
-  import setValue from '../../system/setValue';
 
   const prompt = 'Are you sure you want to extract all similar items?';
   const prefSelectST = 'selectST';

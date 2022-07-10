@@ -1,7 +1,7 @@
-import insertElement from '../../../common/insertElement';
-import setText from '../../../dom/setText';
 import textSpan from '../../../common/cElement/textSpan';
+import insertElement from '../../../common/insertElement';
 import toggleForce from '../../../common/toggleForce';
+import setText from '../../../dom/setText';
 
 let cdDiv;
 let cooldownSpan;

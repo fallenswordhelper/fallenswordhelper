@@ -1,7 +1,7 @@
-import createDocument from '../../system/createDocument';
+import indexAjaxData from '../../ajax/indexAjaxData';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getTextTrim from '../../common/getTextTrim';
-import indexAjaxData from '../../ajax/indexAjaxData';
+import createDocument from '../../system/createDocument';
 
 function formatTime(e) {
   const thisTime = e.match(/ETA: (\d+)h (\d+)m (\d+)s/);

@@ -1,14 +1,14 @@
+import getText from '../common/getText';
+import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import replaceDoubleSpace from '../common/replaceDoubleSpace';
+import toLowerCase from '../common/toLowerCase';
 import escapeHtml from '../system/escapeHtml';
+import getValue from '../system/getValue';
+import setValue from '../system/setValue';
+import shouldBeArray from '../system/shouldBeArray';
 import getGuildALink from './getGuildALink';
 import getIsOwnGuild from './getIsOwnGuild';
 import getIsSelf from './getIsSelf';
-import getText from '../common/getText';
-import getValue from '../system/getValue';
-import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
-import replaceDoubleSpace from '../common/replaceDoubleSpace';
-import setValue from '../system/setValue';
-import shouldBeArray from '../system/shouldBeArray';
-import toLowerCase from '../common/toLowerCase';
 
 const myGuildMsgs = [
   ['self', 'fshGreen', 'guildSelfMessage'],

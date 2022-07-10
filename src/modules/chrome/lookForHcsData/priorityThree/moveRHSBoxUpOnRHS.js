@@ -1,6 +1,6 @@
 import getElementById from '../../../common/getElementById';
-import { getPcr } from '../../../support/layout';
 import insertElementAfterBegin from '../../../common/insertElementAfterBegin';
+import { getPcr } from '../../../support/layout';
 
 export default function moveRHSBoxUpOnRHS(title) {
   const box = getElementById(title);

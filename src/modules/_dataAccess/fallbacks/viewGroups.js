@@ -1,9 +1,9 @@
-import closestTr from '../../common/closestTr';
-import createDocument from '../../system/createDocument';
-import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import closestTr from '../../common/closestTr';
 import querySelectorArray from '../../common/querySelectorArray';
 import trim from '../../common/trim';
+import createDocument from '../../system/createDocument';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 
 const viewGrp = (doc) => querySelectorArray('#pCC img[src$="/icon_action_view.png"]', doc);
 const getGroupId = (i) => Number(getCustomUrlParameter(i.parentElement.href, 'group_id'));

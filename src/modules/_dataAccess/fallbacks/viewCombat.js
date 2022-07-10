@@ -1,10 +1,10 @@
 import combatView from '../../ajax/combatView';
-import createDocument from '../../system/createDocument';
+import sendEvent from '../../analytics/sendEvent';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
 import querySelectorArray from '../../common/querySelectorArray';
-import sendEvent from '../../analytics/sendEvent';
+import createDocument from '../../system/createDocument';
 
 function getId(e) {
   return Number(e.getAttribute('background').match(/\/(\d+)/)?.[1]);

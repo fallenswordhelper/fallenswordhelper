@@ -1,9 +1,9 @@
 import createSpan from '../common/cElement/createSpan';
-import formatLastActivity from '../system/formatLastActivity';
 import getElementsByTagName from '../common/getElementsByTagName';
 import insertElementAfter from '../common/insertElementAfter';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
+import formatLastActivity from '../system/formatLastActivity';
 
 function getActivitySpan(myPlayer) {
   let activity = querySelector('span.fshLastActivity', myPlayer);

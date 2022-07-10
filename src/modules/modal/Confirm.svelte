@@ -1,6 +1,6 @@
 <script>
-  import Modal from './Modal.svelte';
   import { createEventDispatcher } from 'svelte';
+  import Modal from './Modal.svelte';
 
   export let msg = 'Are you sure?';
   export let visible = true;

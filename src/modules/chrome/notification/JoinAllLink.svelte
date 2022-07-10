@@ -1,9 +1,9 @@
 <script>
-  import calf from '../../support/calf';
   import daJoinAll from '../../_dataAccess/daJoinAll';
   import daViewGroups from '../../_dataAccess/daViewGroups';
-  import playerName from '../../common/playerName';
   import sendEvent from '../../analytics/sendEvent';
+  import playerName from '../../common/playerName';
+  import calf from '../../support/calf';
   import { joinUnderUrl, joinallUrl } from '../../support/constants';
 
   const smallEnough = (g) => !calf.enableMaxGroupSizeToJoin

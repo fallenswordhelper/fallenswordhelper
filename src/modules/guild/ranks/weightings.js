@@ -1,3 +1,4 @@
+import sendEvent from '../../analytics/sendEvent';
 import bitwiseAnd from '../../common/bitwiseAnd';
 import createInput from '../../common/cElement/createInput';
 import getText from '../../common/getText';
@@ -8,7 +9,6 @@ import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import roundToString from '../../common/roundToString';
-import sendEvent from '../../analytics/sendEvent';
 import sum from '../../common/sum';
 
 const privLookup = [

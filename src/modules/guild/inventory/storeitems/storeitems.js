@@ -1,12 +1,12 @@
-import CheckAll from './CheckAll.svelte';
 import arrayFrom from '../../../common/arrayFrom';
+import jQueryPresent from '../../../common/jQueryPresent';
+import getValue from '../../../system/getValue';
+import CheckAll from './CheckAll.svelte';
 import doFolderFilter from './doFolderFilter';
 import doMoveItems from './doMoveItems';
 import getCheckboxesVisible from './getCheckboxesVisible';
 import getInv from './getInv';
-import getValue from '../../../system/getValue';
 import injectStoreItems from './injectStoreItems';
-import jQueryPresent from '../../../common/jQueryPresent';
 
 async function doFolders() {
   const inv = await getInv();

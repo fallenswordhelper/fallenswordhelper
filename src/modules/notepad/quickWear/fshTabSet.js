@@ -7,8 +7,8 @@ import createUl from '../../common/cElement/createUl';
 import insertElement from '../../common/insertElement';
 import once from '../../common/once';
 import partial from '../../common/partial';
-import { publish } from '../../support/pubsub';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { publish } from '../../support/pubsub';
 
 const toggleId = (groupName, i) => groupName + String(i);
 

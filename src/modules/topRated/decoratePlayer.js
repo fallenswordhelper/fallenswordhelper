@@ -1,11 +1,11 @@
 import currentGuildId from '../common/currentGuildId';
-import { getNowSecs } from '../support/now';
-import getValue from '../system/getValue';
-import { guildRE } from '../support/constants';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import isUndefined from '../common/isUndefined';
-import onlineDot from '../common/onlineDot';
 import { getLowerPvpLevel, getUpperPvpLevel } from '../common/levelHighlight';
+import onlineDot from '../common/onlineDot';
+import { guildRE } from '../support/constants';
+import { getNowSecs } from '../support/now';
+import getValue from '../system/getValue';
 
 let highlightPlayersNearMyLvl = 0;
 let myGuildId = 0;

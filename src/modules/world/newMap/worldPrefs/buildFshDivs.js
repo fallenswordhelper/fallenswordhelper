@@ -1,19 +1,19 @@
 import createDiv from '../../../common/cElement/createDiv';
 import getElementById from '../../../common/getElementById';
-import { huntingBuffsHtml } from '../../../settings/huntingBuffs';
 import insertElement from '../../../common/insertElement';
 import insertElementBefore from '../../../common/insertElementBefore';
 import isFunction from '../../../common/isFunction';
 import on from '../../../common/on';
 import onclick from '../../../common/onclick';
+import { huntingBuffsHtml } from '../../../settings/huntingBuffs';
 import { simpleCheckboxHtml } from '../../../settings/simpleCheckbox';
 import { toggleBuffInfo } from '../buffInfo/buffInfo';
-import toggleEnabledHuntingMode from './huntingBuffs/toggleEnabledHuntingMode';
 import { toggleHidePlayerActions } from '../prepareHidePlayerActions';
+import { toggleShowTitanInfo } from '../titanStats/titanStats';
+import toggleEnabledHuntingMode from './huntingBuffs/toggleEnabledHuntingMode';
 import toggleShowCreatureInfo from './toggleShowCreatureInfo';
 import toggleShowHuntingBuffs from './toggleShowHuntingBuffs';
 import toggleShowMonsterLog from './toggleShowMonsterLog';
-import { toggleShowTitanInfo } from '../titanStats/titanStats';
 import toggleSubLvlCreature from './toggleSubLvlCreature';
 
 function buildPrefsDiv() {

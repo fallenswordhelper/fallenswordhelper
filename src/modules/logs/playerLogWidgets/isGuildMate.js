@@ -1,6 +1,6 @@
+import getMembrList from '../../ajax/getMembrList';
 import currentGuildId from '../../common/currentGuildId';
 import entries from '../../common/entries';
-import getMembrList from '../../ajax/getMembrList';
 import isObject from '../../common/isObject';
 
 let memberPrm;

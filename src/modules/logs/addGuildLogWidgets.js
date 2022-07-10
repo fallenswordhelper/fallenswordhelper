@@ -2,12 +2,12 @@ import arrayFrom from '../common/arrayFrom';
 import contains from '../common/contains';
 import dataRows from '../common/dataRows';
 import getArrayByTagName from '../common/getArrayByTagName';
-import { getPcc } from '../support/layout';
 import getPlayerId from '../common/getPlayerId';
-import getValue from '../system/getValue';
 import playerId from '../common/playerId';
-import { playerLinkSelector } from '../support/constants';
 import querySelectorArray from '../common/querySelectorArray';
+import { playerLinkSelector } from '../support/constants';
+import { getPcc } from '../support/layout';
+import getValue from '../system/getValue';
 
 const getPlyrId = (a) => getPlayerId(a.href);
 

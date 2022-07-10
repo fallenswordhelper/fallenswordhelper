@@ -1,5 +1,5 @@
-import { getOptions } from '../options';
 import querySelectorArray from '../../../common/querySelectorArray';
+import { getOptions } from '../options';
 import saveOptions from '../saveOptions';
 
 export default function getChecks(fshInv) { // jQuery

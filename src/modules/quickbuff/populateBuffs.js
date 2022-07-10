@@ -1,7 +1,7 @@
 import getElementById from '../common/getElementById';
-import outputFormat from '../system/outputFormat';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
+import outputFormat from '../system/outputFormat';
 
 function buffTimeLeft(secs) {
   const m = Math.floor(secs / 60);

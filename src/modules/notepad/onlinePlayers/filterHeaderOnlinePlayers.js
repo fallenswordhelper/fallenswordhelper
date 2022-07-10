@@ -1,10 +1,10 @@
+import { lvlTest, playerLvlTest } from '../../common/lvlTests';
+import numberIsNaN from '../../common/numberIsNaN';
+import partial from '../../common/partial';
 import fallback from '../../system/fallback';
 import getValue from '../../system/getValue';
 import intValue from '../../system/intValue';
-import numberIsNaN from '../../common/numberIsNaN';
-import partial from '../../common/partial';
 import setValue from '../../system/setValue';
-import { lvlTest, playerLvlTest } from '../../common/lvlTests';
 
 function getVal(el, context) {
   return parseInt($(el, context).val(), 10);

@@ -1,5 +1,5 @@
-import calf from '../../../../support/calf';
 import isArray from '../../../../common/isArray';
+import calf from '../../../../support/calf';
 
 let huntingBuffs = 0;
 let huntingBuffsName = '';

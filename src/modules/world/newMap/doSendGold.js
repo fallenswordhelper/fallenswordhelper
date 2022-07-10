@@ -1,9 +1,9 @@
-import { defFetchPlayerStats } from '../../support/constants';
-import { getSendGoldOnWorld } from './sendGoldPref';
-import getValue from '../../system/getValue';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import infoBoxFrom from '../../common/InfoBoxFrom';
+import { defFetchPlayerStats } from '../../support/constants';
+import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
+import { getSendGoldOnWorld } from './sendGoldPref';
 
 function doneSendGold(data) {
   const info = infoBoxFrom(data);

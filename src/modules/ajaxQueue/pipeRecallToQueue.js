@@ -1,10 +1,10 @@
-import backpack from './backpack';
-import doAction from './doAction';
 import equipItem from '../ajax/equipItem';
-import errorDialog from '../common/errorDialog';
-import partial from '../common/partial';
 import recallItem from '../ajax/recallItem';
 import useItem from '../ajax/useItem';
+import errorDialog from '../common/errorDialog';
+import partial from '../common/partial';
+import backpack from './backpack';
+import doAction from './doAction';
 
 function gotBackpack(action, data, bpData) {
   // assuming backpack is successful...

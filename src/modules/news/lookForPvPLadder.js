@@ -1,8 +1,8 @@
 import containsText from '../common/containsText';
-import { defLastLadderReset } from '../support/constants';
 import getArrayByClassName from '../common/getArrayByClassName';
-import { getPcc } from '../support/layout';
 import getText from '../common/getText';
+import { defLastLadderReset } from '../support/constants';
+import { getPcc } from '../support/layout';
 import getValue from '../system/getValue';
 import parseDateAsTimestamp from '../system/parseDateAsTimestamp';
 import setValue from '../system/setValue';

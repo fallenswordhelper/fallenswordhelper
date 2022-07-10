@@ -1,7 +1,7 @@
 import changeMinMax from '../common/changeMinMax';
 import defaults from '../support/dataObj.json';
-import { fshArenaKey } from './assets';
 import { set } from '../system/idb';
+import { fshArenaKey } from './assets';
 
 let opts = 0;
 let oldIds = 0;

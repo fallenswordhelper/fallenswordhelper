@@ -1,8 +1,8 @@
-import createDocument from '../../system/createDocument';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
 import { blockedSkillsCheckboxes, levelDefaults } from '../../support/constants';
+import createDocument from '../../system/createDocument';
 
 function getSkills(settingsPage) {
   const buffLevels = levelDefaults.map(([id, ctl]) => ({

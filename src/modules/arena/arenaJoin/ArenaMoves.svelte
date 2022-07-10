@@ -1,6 +1,6 @@
 <script>
-  import { cdn } from '../../system/system';
   import usesetup from '../../app/arena/usesetup';
+  import { cdn } from '../../system/system';
 
   export let res = 0;
 

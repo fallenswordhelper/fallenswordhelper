@@ -1,14 +1,14 @@
-import calf from '../support/calf';
 import daComposing from '../_dataAccess/daComposing';
-import displayComposeMsg from './displayComposeMsg';
-import { getNow } from '../support/now';
-import getValue from '../system/getValue';
 import jQueryPresent from '../common/jQueryPresent';
-import setValue from '../system/setValue';
+import calf from '../support/calf';
 import {
   defLastComposeCheck,
   defNeedToCompose,
 } from '../support/constants';
+import { getNow } from '../support/now';
+import getValue from '../system/getValue';
+import setValue from '../system/setValue';
+import displayComposeMsg from './displayComposeMsg';
 
 function getTime(pot) {
   return pot.time_remaining;

@@ -1,19 +1,19 @@
 import createAnchor from '../../common/cElement/createAnchor';
 import dataRows from '../../common/dataRows';
 import getElementsByTagName from '../../common/getElementsByTagName';
-import { getPcc } from '../../support/layout';
 import getText from '../../common/getText';
 import getTitle from '../../common/getTitle';
-import injectScouttowerBuffLinks from './injectScouttowerBuffLinks';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
-import killsSummary from './killsSummary';
 import querySelector from '../../common/querySelector';
-import setInnerHtml from '../../dom/setInnerHtml';
-import titanTracker from './titanTracker';
 import trimTitanName from '../../common/trimTitanName';
+import setInnerHtml from '../../dom/setInnerHtml';
 import { defTable, guideUrl } from '../../support/constants';
+import { getPcc } from '../../support/layout';
+import injectScouttowerBuffLinks from './injectScouttowerBuffLinks';
+import killsSummary from './killsSummary';
+import titanTracker from './titanTracker';
 
 function imgLink(aRow) {
   const myName = encodeURIComponent(aRow.titanName);

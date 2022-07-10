@@ -2,10 +2,10 @@ import alpha from '../common/alpha';
 import createDiv from '../common/cElement/createDiv';
 import entries from '../common/entries';
 import getElementById from '../common/getElementById';
-import { getPcc } from '../support/layout';
 import insertElement from '../common/insertElement';
 import isFunction from '../common/isFunction';
 import setInnerHtml from '../dom/setInnerHtml';
+import { getPcc } from '../support/layout';
 import setLastScav from './setLastScav';
 
 /* global sendRequest:true */

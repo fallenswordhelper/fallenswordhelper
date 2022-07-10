@@ -1,7 +1,7 @@
-import { getBountyList } from './lists';
 import { getBountyListDiv } from './createDivs';
 import injectList from './injectList';
 import listRow from './listRow';
+import { getBountyList } from './lists';
 
 let bountyListReset = 0;
 

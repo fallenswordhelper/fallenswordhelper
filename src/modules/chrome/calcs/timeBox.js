@@ -1,5 +1,5 @@
-import { getNow } from '../../support/now';
 import { months } from '../../support/constants';
+import { getNow } from '../../support/now';
 import padZ from '../../system/padZ';
 
 function formatShortDate(aDate) {

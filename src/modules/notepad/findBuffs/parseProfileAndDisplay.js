@@ -1,15 +1,15 @@
 import contains from '../../common/contains';
-import createDocument from '../../system/createDocument';
-import { defStatVl } from '../../support/constants';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import getElementById from '../../common/getElementById';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import getText from '../../common/getText';
-import intValue from '../../system/intValue';
 import onlineDot from '../../common/onlineDot';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { defStatVl } from '../../support/constants';
+import createDocument from '../../system/createDocument';
+import intValue from '../../system/intValue';
 import { updateProgress } from './bufferProgress';
 
 const sustainLevelRE = /Level<br>(\d+)%/;

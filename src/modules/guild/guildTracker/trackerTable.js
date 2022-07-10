@@ -1,8 +1,11 @@
 import './trackerTable.css';
+import {
+  act, cur, gxp, lvl, max, utc, vl,
+} from '../../chrome/lookForHcsData/priorityThree/indexConstants';
 import alpha from '../../common/alpha';
 import createDiv from '../../common/cElement/createDiv';
-import createTBody from '../../common/cElement/createTBody';
 import createTable from '../../common/cElement/createTable';
+import createTBody from '../../common/cElement/createTBody';
 import createTh from '../../common/cElement/createTh';
 import formatLocalDateTime from '../../common/formatLocalDateTime';
 import insertElement from '../../common/insertElement';
@@ -13,9 +16,6 @@ import on from '../../common/on';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
 import task from '../../support/task';
-import {
-  act, cur, gxp, lvl, max, utc, vl,
-} from '../../chrome/lookForHcsData/priorityThree/indexConstants';
 
 let actBody = 0;
 let selMember = '';

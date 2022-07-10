@@ -1,6 +1,6 @@
 import csvSplit from '../common/csvSplit';
-import firstPlayerStats from './firstPlayerStats';
 import getUrlParameter from '../system/getUrlParameter';
+import firstPlayerStats from './firstPlayerStats';
 
 let requests;
 

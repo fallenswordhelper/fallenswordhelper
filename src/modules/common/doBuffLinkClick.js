@@ -1,7 +1,7 @@
+import sendEvent from '../analytics/sendEvent';
 import getPlayerId from './getPlayerId';
 import hasClass from './hasClass';
 import openQuickBuffById from './openQuickBuffById';
-import sendEvent from '../analytics/sendEvent';
 
 const isBuffLink = (target) => hasClass('fshBl', target)
   && target.previousElementSibling;

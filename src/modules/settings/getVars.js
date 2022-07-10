@@ -1,7 +1,7 @@
-import calf from '../support/calf';
 import getCalfPrefs from '../common/getCalfPrefs';
-import getValue from '../system/getValue';
 import jsonStringify from '../common/jsonStringify';
+import calf from '../support/calf';
+import getValue from '../system/getValue';
 
 function mapCalfPref(el) { calf[el[0]] = getValue(el[1]); }
 

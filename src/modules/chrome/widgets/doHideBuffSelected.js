@@ -1,7 +1,7 @@
-import calf from '../../support/calf';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import hideElement from '../../common/hideElement';
+import calf from '../../support/calf';
 import hideNodeList from './hideNodeList';
 
 export default function doHideBuffSelected(parent, type) {

@@ -1,16 +1,16 @@
 <script>
-  import FolderButtons from '../../common/FolderButtons.svelte';
-  import ItemImg from '../../common/ItemImg.svelte';
-  import LinkButton from '../../common/LinkButton.svelte';
   import VirtualScroll from 'svelte-virtual-scroll-list';
-  import alpha from '../../common/alpha';
-  import calf from '../../support/calf';
-  import confirm from '../../modal/confirm';
   import daEquipItem from '../../_dataAccess/daEquipItem';
   import daUseItem from '../../_dataAccess/daUseItem';
-  import fromEntries from '../../common/fromEntries';
-  import getHeightGuess from './getHeightGuess';
   import sendEvent from '../../analytics/sendEvent';
+  import alpha from '../../common/alpha';
+  import FolderButtons from '../../common/FolderButtons.svelte';
+  import fromEntries from '../../common/fromEntries';
+  import ItemImg from '../../common/ItemImg.svelte';
+  import LinkButton from '../../common/LinkButton.svelte';
+  import confirm from '../../modal/confirm';
+  import calf from '../../support/calf';
+  import getHeightGuess from './getHeightGuess';
 
   const prompt = 'Are you sure you want to use/extract the item?';
   export let appInv = 0;

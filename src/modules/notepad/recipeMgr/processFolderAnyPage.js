@@ -1,12 +1,12 @@
+import retryAjax from '../../ajax/retryAjax';
 import all from '../../common/all';
-import createDocument from '../../system/createDocument';
-import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
-import processRecipe from './processRecipe';
 import querySelectorArray from '../../common/querySelectorArray';
-import retryAjax from '../../ajax/retryAjax';
+import createDocument from '../../system/createDocument';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
+import processRecipe from './processRecipe';
 
 function recipeAry(doc) {
   return querySelectorArray('#pCC a[href*="=viewrecipe&"]', doc);

@@ -1,17 +1,17 @@
-import anchorButton from './anchorButton';
-import combatLog from '../pageSwitcher/loader/combatLog';
-import getValue from '../../system/getValue';
-import injectBuffLog from '../pageSwitcher/loader/injectBuffLog';
-import injectQuickLinkManager from '../pageSwitcher/loader/injectQuickLinkManager';
-import insertAfterParent from './insertAfterParent';
 import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
-import monstorLog from '../pageSwitcher/loader/monstorLog';
-import recipeMgr from '../pageSwitcher/loader/recipeMgr';
 import {
   defSubcmd,
   notepadBlankUrl,
   profileUrl,
 } from '../../support/constants';
+import getValue from '../../system/getValue';
+import combatLog from '../pageSwitcher/loader/combatLog';
+import injectBuffLog from '../pageSwitcher/loader/injectBuffLog';
+import injectQuickLinkManager from '../pageSwitcher/loader/injectQuickLinkManager';
+import monstorLog from '../pageSwitcher/loader/monstorLog';
+import recipeMgr from '../pageSwitcher/loader/recipeMgr';
+import anchorButton from './anchorButton';
+import insertAfterParent from './insertAfterParent';
 
 function recipeManagerLink(linkConfig) {
   if (linkConfig.recipeManagerLink) {

@@ -1,8 +1,8 @@
-import BlockedSkills from './BlockedSkills.svelte';
-import getUrlParameter from '../../system/getUrlParameter';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
 import querySelector from '../../common/querySelector';
+import getUrlParameter from '../../system/getUrlParameter';
+import BlockedSkills from './BlockedSkills.svelte';
 
 let app = false;
 

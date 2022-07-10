@@ -1,5 +1,5 @@
-import { arenaFilter } from './assets';
 import defaults from '../support/dataObj.json';
+import { arenaFilter } from './assets';
 import {
   changeLvls, getOpts, hideMoves, resetLvls,
 } from './setOpts';

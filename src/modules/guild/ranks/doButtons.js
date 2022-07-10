@@ -1,11 +1,11 @@
 import daRankPosition from '../../_dataAccess/daRankPosition';
-import { getPcc } from '../../support/layout';
-import getValue from '../../system/getValue';
+import sendEvent from '../../analytics/sendEvent';
 import insertElementBefore from '../../common/insertElementBefore';
 import onclick from '../../common/onclick';
 import playerName from '../../common/playerName';
-import sendEvent from '../../analytics/sendEvent';
 import toLowerCase from '../../common/toLowerCase';
+import { getPcc } from '../../support/layout';
+import getValue from '../../system/getValue';
 
 let characterRow = 0;
 

@@ -1,13 +1,13 @@
+import sendEvent from '../../../analytics/sendEvent';
 import arrayFrom from '../../../common/arrayFrom';
-import calf from '../../../support/calf';
-import getCreatureStats from '../getCreatureStats/getCreatureStats';
 import getElementById from '../../../common/getElementById';
 import hasClass from '../../../common/hasClass';
 import hasClasses from '../../../common/hasClasses';
 import on from '../../../common/on';
 import partial from '../../../common/partial';
+import calf from '../../../support/calf';
+import getCreatureStats from '../getCreatureStats/getCreatureStats';
 import processMouseOver from './processMouseOver';
-import sendEvent from '../../../analytics/sendEvent';
 
 const creatureViewTests = ['verb', 'view', 'tip-static'];
 

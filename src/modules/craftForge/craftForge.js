@@ -1,12 +1,9 @@
 import './craftForge.css';
-import CraftForge from './CraftForge.svelte';
+import getInventoryById from '../ajax/getInventoryById';
 import batch from '../common/batch';
-import calf from '../support/calf';
+import createDiv from '../common/cElement/createDiv';
 import closestTable from '../common/closestTable';
 import closestTr from '../common/closestTr';
-import createDiv from '../common/cElement/createDiv';
-import getInventoryById from '../ajax/getInventoryById';
-import { getPcc } from '../support/layout';
 import hideElement from '../common/hideElement';
 import insertElement from '../common/insertElement';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
@@ -14,7 +11,10 @@ import jQueryPresent from '../common/jQueryPresent';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
+import calf from '../support/calf';
+import { getPcc } from '../support/layout';
 import task from '../support/task';
+import CraftForge from './CraftForge.svelte';
 
 let inv = 0;
 let itemGrid = 0;

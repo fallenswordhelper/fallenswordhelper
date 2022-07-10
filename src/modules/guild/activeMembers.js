@@ -1,11 +1,11 @@
-import addCommas from '../system/addCommas';
 import contains from '../common/contains';
 import getArrayByTagName from '../common/getArrayByTagName';
-import { getPcc } from '../support/layout';
 import getPlayers from '../common/getPlayers';
 import lastActivityMins from '../common/lastActivityMins';
 import setTipped from '../common/setTipped';
 import { lastActivityRE, stamRe } from '../support/constants';
+import { getPcc } from '../support/layout';
+import addCommas from '../system/addCommas';
 
 const ACTIVE = 0;
 const STAMINA = 1;

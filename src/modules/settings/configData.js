@@ -1,8 +1,9 @@
 import './configData.css';
-import bountyPrefs from './bountyPrefs';
-import calf from '../support/calf';
-import equipPrefs from './equipPrefs';
 import functionPasses from '../common/functionPasses';
+import calf from '../support/calf';
+import { notepadBlankUrl, playerIdUrl } from '../support/constants';
+import bountyPrefs from './bountyPrefs';
+import equipPrefs from './equipPrefs';
 import generalPrefs from './generalPrefs';
 import guildPrefs from './guildPrefs';
 import leftHandLinks from './leftHandLinks';
@@ -11,7 +12,6 @@ import otherPrefs from './otherPrefs';
 import profilePrefs from './profilePrefs';
 import questPrefs from './questPrefs';
 import worldPrefs from './worldPrefs';
-import { notepadBlankUrl, playerIdUrl } from '../support/constants';
 
 function storageDetails() {
   return '<tr><td align=center><input id="fshClearStorage" type="button" '

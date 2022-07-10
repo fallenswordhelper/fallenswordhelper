@@ -1,19 +1,19 @@
+import dynamicAlert from '../alert/dynamicAlert';
+import sendEvent from '../analytics/sendEvent';
+import jQueryDialog from '../chrome/jQueryDialog/jQueryDialog';
 import combatLog from '../chrome/pageSwitcher/loader/combatLog';
+import monstorLog from '../chrome/pageSwitcher/loader/monstorLog';
 import createBr from '../common/cElement/createBr';
 import createSpan from '../common/cElement/createSpan';
-import dynamicAlert from '../alert/dynamicAlert';
 import getElementById from '../common/getElementById';
 import insertElement from '../common/insertElement';
 import jConfirm from '../common/jConfirm';
-import jQueryDialog from '../chrome/jQueryDialog/jQueryDialog';
-import monstorLog from '../chrome/pageSwitcher/loader/monstorLog';
 import numberIsNaN from '../common/numberIsNaN';
 import onclick from '../common/onclick';
 import querySelector from '../common/querySelector';
-import saveBoxes from './saveBoxes.json';
-import sendEvent from '../analytics/sendEvent';
-import setValue from '../system/setValue';
 import toggleVisibilty from '../common/toggleVisibilty';
+import setValue from '../system/setValue';
+import saveBoxes from './saveBoxes.json';
 
 function findEl(el, name) {
   return querySelector(`.fshSettingsTable ${el}[name="${name}"]`);

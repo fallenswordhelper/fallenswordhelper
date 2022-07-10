@@ -1,6 +1,6 @@
-import createDocument from '../../system/createDocument';
-import fromEntries from '../../common/fromEntries';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import fromEntries from '../../common/fromEntries';
+import createDocument from '../../system/createDocument';
 
 const uiFlags = [
   'ui_preference_11',

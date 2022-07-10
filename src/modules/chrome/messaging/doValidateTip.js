@@ -1,7 +1,7 @@
-import fallback from '../../system/fallback';
 import getElementsByClassName from '../../common/getElementsByClassName';
-import getQuickMessageDialog from './getQuickMessageDialog';
 import setText from '../../dom/setText';
+import fallback from '../../system/fallback';
+import getQuickMessageDialog from './getQuickMessageDialog';
 
 let validateTips;
 

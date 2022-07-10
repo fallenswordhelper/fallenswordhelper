@@ -1,11 +1,11 @@
 import './compressBio.css';
+import sendEvent from '../../analytics/sendEvent';
 import createInput from '../../common/cElement/createInput';
 import createLabel from '../../common/cElement/createLabel';
 import getElementById from '../../common/getElementById';
 import insertElementBefore from '../../common/insertElementBefore';
 import on from '../../common/on';
 import partial from '../../common/partial';
-import sendEvent from '../../analytics/sendEvent';
 
 function injectToggle(bioCell) {
   const toggle = insertElementBefore(

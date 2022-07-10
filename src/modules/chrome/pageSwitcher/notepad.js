@@ -1,3 +1,4 @@
+import runDefault from '../../common/runDefault';
 import calf from '../../support/calf';
 import combatLog from './loader/combatLog';
 import injectAuctionSearch from './loader/injectAuctionSearch';
@@ -11,7 +12,6 @@ import monstorLog from './loader/monstorLog';
 import quickExtract from './loader/quickExtract';
 import quickwear from './loader/quickwear';
 import recipeMgr from './loader/recipeMgr';
-import runDefault from '../../common/runDefault';
 
 const inventory = () => { runDefault(import('../../notepad/inventory/inventory')); };
 const newGuildLog = () => { runDefault(import('../../notepad/newGuildLog/newGuildLog')); };

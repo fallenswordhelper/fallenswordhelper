@@ -1,11 +1,11 @@
 import './injectGuild.css';
-import activeMembers from './activeMembers';
-import calf from '../support/calf';
 import colouredDots from '../common/colouredDots';
+import calf from '../support/calf';
+import task from '../support/task';
+import activeMembers from './activeMembers';
 import guildXPLock from './guildXPLock';
 import injectViewGuild from './injectViewGuild';
 import manage from './manage';
-import task from '../support/task';
 
 export default function injectGuild() {
   task(3, colouredDots);

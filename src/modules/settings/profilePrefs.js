@@ -1,5 +1,5 @@
-import bunchOfSimple from './bunchOfSimple';
 import getValue from '../system/getValue';
+import bunchOfSimple from './bunchOfSimple';
 import { helpLink } from './simpleCheckbox';
 
 const part1 = [

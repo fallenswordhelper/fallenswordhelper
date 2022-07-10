@@ -1,12 +1,12 @@
+import retryAjax from '../../ajax/retryAjax';
 import all from '../../common/all';
-import createDocument from '../../system/createDocument';
-import getCustomUrlParameter from '../../system/getCustomUrlParameter';
-import getFolderImgs from './getFolderImgs';
 import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
+import createDocument from '../../system/createDocument';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
+import getFolderImgs from './getFolderImgs';
 import processFolderFirstPage from './processFolderFirstPage';
-import retryAjax from '../../ajax/retryAjax';
 
 function notUnassigned(el) {
   return getCustomUrlParameter(el.parentNode.search, 'folder_id') !== '-1';

@@ -1,10 +1,10 @@
+import querySelector from '../common/querySelector';
+import setInnerHtml from '../dom/setInnerHtml';
+import setText from '../dom/setText';
 import { defLastLadderReset } from '../support/constants';
 import { getNow } from '../support/now';
 import getValue from '../system/getValue';
 import outputFormat from '../system/outputFormat';
-import querySelector from '../common/querySelector';
-import setInnerHtml from '../dom/setInnerHtml';
-import setText from '../dom/setText';
 
 function formatLastReset(lastLadderReset) {
   let min = Math.floor((getNow() - lastLadderReset) / 60000);

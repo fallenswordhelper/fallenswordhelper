@@ -1,10 +1,10 @@
 import getElementById from '../common/getElementById';
-import getValue from '../system/getValue';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import on from '../common/on';
 import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';
 import querySelectorArray from '../common/querySelectorArray';
+import getValue from '../system/getValue';
 import setValue from '../system/setValue';
 import { quickBuffSortCheckbox, quickbuffSortStorageName } from './assets';
 
