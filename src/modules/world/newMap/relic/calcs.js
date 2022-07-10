@@ -67,12 +67,16 @@ function updateDefenderValues() {
   defRawHp += withRelicMultiplier(leadDefender.hpValue);
 }
 
+const updateElements = ([value, elementFn]) => setTextCommas(value, elementFn());
+
 function updateDefenderElements() {
-  setTextCommas(defRawAttack, getAttackElement());
-  setTextCommas(defRawDefense, getDefenseElement());
-  setTextCommas(defRawArmor, getArmorElement());
-  setTextCommas(defRawDamage, getDamageElement());
-  setTextCommas(defRawHp, getHpElement());
+  [
+    [defRawAttack, getAttackElement],
+    [defRawDefense, getDefenseElement],
+    [defRawArmor, getArmorElement],
+    [defRawDamage, getDamageElement],
+    [defRawHp, getHpElement],
+  ].forEach(updateElements);
   setText(defCloaked, getDefCloakedElement());
   defProcessed += 1;
   setText(defProcessed, getDefProcessedElement());
@@ -85,7 +89,7 @@ function updateGroupValues() {
     [groupStats.armor, getGroupArmorElement],
     [groupStats.damage, getGroupDamageElement],
     [groupStats.hp, getGroupHPElement],
-  ].forEach(([value, elementFn]) => setTextCommas(value, elementFn()));
+  ].forEach(updateElements);
 }
 
 function calcNmvEffect(buffs) {
@@ -184,15 +188,16 @@ function updateDefenderBuffedAttack(nmvEffect) {
   setTextCommas(defBuffedAttack, getAttackBuffedElement());
 }
 
-function calcDcEffect(points) {
-  return 1 - points * darkCurseMultiplier;
-}
+const calcDcEffect = (points) => 1 - points * darkCurseMultiplier;
+const calcDcValue = (buffedDefense, lvl) => Math.ceil(buffedDefense * calcDcEffect(lvl));
 
 function updateDefenderBuffedDefense(nmv, defWithConst) {
   const defBuffedDefense = defWithConst + nmv;
-  setTextCommas(defBuffedDefense, getDefenseBuffedElement());
-  setTextCommas(Math.ceil(defBuffedDefense * calcDcEffect(225)), getDc225Element());
-  setTextCommas(Math.ceil(defBuffedDefense * calcDcEffect(175)), getDc175Element());
+  [
+    [defBuffedDefense, getDefenseBuffedElement],
+    [calcDcValue(225), getDc225Element],
+    [calcDcValue(175), getDc175Element],
+  ].forEach(updateElements);
 }
 
 function updateDefenderBuffedArmor() {
