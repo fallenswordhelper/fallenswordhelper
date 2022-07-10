@@ -1,21 +1,20 @@
 import createDocument from '../../system/createDocument';
 import dataRows from '../../common/dataRows';
+import dateUtc from '../../common/dateUtc';
 import getTextTrim from '../../common/getTextTrim';
 import indexAjaxData from '../../ajax/indexAjaxData';
-import { months } from '../../support/constants';
 import querySelector from '../../common/querySelector';
 import { getNow, getNowSecs } from '../../support/now';
 
 function convertDate(textDate) {
   const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);
-  return Date.UTC(
-    Number(dateAry[2]),
-    months.indexOf(dateAry[1]),
-    Number(dateAry[0]),
-    Number(dateAry[3]),
-    Number(dateAry[4]),
-    0,
-  );
+  return dateUtc([
+    dateAry[2],
+    dateAry[1],
+    dateAry[0],
+    dateAry[3],
+    dateAry[4],
+  ]);
 }
 
 function parseDateAsOffset(textDate) {

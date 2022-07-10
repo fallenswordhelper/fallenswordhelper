@@ -119,9 +119,11 @@ function makeDataTable(fshInv) { // jQuery
 }
 
 function hideCols(table) {
-  table.column(12).visible('current_player_id' in getTheInv());
-  table.column(17).visible(isUserInv() && getShowQuickDropLinks());
-  table.column(18).visible(isUserInv() && getShowQuickSendLinks());
+  [
+    [12, 'current_player_id' in getTheInv()],
+    [17, isUserInv() && getShowQuickDropLinks()],
+    [18, isUserInv() && getShowQuickSendLinks()],
+  ].forEach(([col, bool]) => table.column(col).visible(bool));
 }
 
 export default function doTable() {
