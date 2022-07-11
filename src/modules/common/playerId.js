@@ -2,7 +2,7 @@ import getElementById from './getElementById';
 import getText from './getText';
 import regExpFirstCapture from './regExpFirstCapture';
 
-let thePlayerId;
+let thePlayerId = null;
 
 export default function playerId() {
   const holdtext = getElementById('holdtext');

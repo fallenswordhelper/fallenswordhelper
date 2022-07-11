@@ -9,9 +9,9 @@ import getMsg from './getMsg';
 import getQuickMessageDialog from './getQuickMessageDialog';
 import { getName } from './targetPlayer';
 
-let fshTemplate;
-let msgTbl;
-let showingTemplates;
+let fshTemplate = 0;
+let msgTbl = 0;
+let showingTemplates = 0;
 
 function getFshTemplate() {
   if (!fshTemplate) {

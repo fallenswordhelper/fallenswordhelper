@@ -10,8 +10,8 @@ import partial from './partial';
 import toggleForce from './toggleForce';
 
 const warehouse = [];
-let prefValue;
-let headerIndex;
+let prefValue = 0;
+let headerIndex = 0;
 
 function hideRow(el) { hideElement(el.row); }
 

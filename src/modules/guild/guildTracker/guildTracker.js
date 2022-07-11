@@ -16,10 +16,9 @@ import injectShowTracker from './injectShowTracker';
 import { makeInOut, queueRawData } from './rawData';
 import { initTable, makeTg } from './trackerTable';
 
-let trackerData;
-let tracker;
-let trDialog;
-let acttab2;
+let trackerData = 0;
+let tracker = 0;
+let trDialog = 0;
 
 function isClosed() {
   return !tracker.checked;
@@ -70,7 +69,7 @@ function makeInnerPopup() {
     innerHTML: '<input id="acttab1" class="fsh-tab-open" '
       + 'name="acttabs" checked type="radio">',
   });
-  acttab2 = createInput({
+  const acttab2 = createInput({
     className: 'fsh-tab-open',
     id: 'acttab2',
     name: 'acttabs',

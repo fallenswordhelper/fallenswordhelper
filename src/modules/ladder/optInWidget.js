@@ -5,7 +5,7 @@ import querySelector from '../common/querySelector';
 import getValue from '../system/getValue';
 import OptIn from './OptIn.svelte';
 
-let myFlags;
+let myFlags = 0;
 
 async function isOnLadder() {
   const response = await daSettingsView();

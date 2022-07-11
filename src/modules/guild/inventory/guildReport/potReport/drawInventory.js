@@ -7,7 +7,7 @@ import partial from '../../../../common/partial';
 import setInnerHtml from '../../../../dom/setInnerHtml';
 import sortKeys from './sortKeys';
 
-let inventory;
+let inventory = 0;
 
 function pivotPotObj(potOpts, potObj, acc, pot) {
   if (potOpts.myMap[pot] !== 'Ignore') {
@@ -22,14 +22,12 @@ function pivotPotObj(potOpts, potObj, acc, pot) {
 
 function perc2color(percent) {
   const perc = Math.max(Math.min(percent, 100), 0);
-  let red;
-  let green;
+  let red = 255;
+  let green = 255;
   const blue = 0;
   if (perc < 50) {
-    red = 255;
     green = Math.round(5.1 * perc);
   } else {
-    green = 255;
     red = Math.round(510 - 5.10 * perc);
   }
   const rgb = red * 0x10000 + green * 0x100 + blue;

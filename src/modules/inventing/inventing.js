@@ -17,7 +17,7 @@ import getValue from '../system/getValue';
 import setValue from '../system/setValue';
 
 const prefAjaxifyMoveRecipe = 'ajaxifyMoveRecipe';
-let ajaxifyMove;
+let ajaxifyMove = 0;
 
 function handleAjaxifyPref() {
   ajaxifyMove = !ajaxifyMove;

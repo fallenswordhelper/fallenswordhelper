@@ -12,10 +12,10 @@ import task from '../../support/task';
 import { set } from '../../system/idb';
 import { initTable } from './trackerTable';
 
-let ioText;
-let saveBtn;
-let resetBtn;
-let io;
+let ioText = 0;
+let saveBtn = 0;
+let resetBtn = 0;
+let io = 0;
 
 function drawRawData(trackerData) {
   ioText.value = trackerData;

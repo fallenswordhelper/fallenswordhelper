@@ -2,11 +2,11 @@ import getArrayByTagName from './getArrayByTagName';
 import getText from './getText';
 import regExpFirstCapture from './regExpFirstCapture';
 
-let guildId;
+let guildId = 0;
 
 function getGuildId(el) {
   const match = regExpFirstCapture(/\sguildId: (?<id>\d{1,6}),/, getText(el));
-  if (match) { guildId = Number(match); }
+  if (match) guildId = Number(match);
 }
 
 export default function currentGuildId() {

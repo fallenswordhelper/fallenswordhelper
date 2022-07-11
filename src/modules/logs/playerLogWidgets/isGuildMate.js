@@ -3,7 +3,7 @@ import currentGuildId from '../../common/currentGuildId';
 import entries from '../../common/entries';
 import isObject from '../../common/isObject';
 
-let memberPrm;
+let memberPrm = 0;
 
 async function getKeys() {
   return entries(await getMembrList(false))

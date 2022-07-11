@@ -7,8 +7,9 @@ import { defTable } from '../support/constants';
 import { getPcc } from '../support/layout';
 
 export default function compressHistory() {
-  const thisCell = getArrayByTagName(defTable, getPcc()).slice(-2, -1)[0]
-    .rows[0].cells[0];
+  const bioTable = getArrayByTagName(defTable, getPcc()).slice(-2, -1)[0];
+  if (!bioTable) return;
+  const thisCell = bioTable.rows[0].cells[0];
   const newDiv = createDiv({
     id: 'profile-bio',
     innerHTML: thisCell.innerHTML,
