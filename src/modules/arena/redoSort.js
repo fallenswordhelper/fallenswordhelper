@@ -5,8 +5,8 @@ const sortClasses = 'td.sorting, td.sorting_asc, td.sorting_desc';
 
 function calculateSortOrder(target) {
   const classes = target.attr('class');
-  const test = regExpFirstCapture(/sorting([^\s]+)/, classes);
-  if (test === '_desc') { return 'asc'; }
+  const dir = regExpFirstCapture(/sorting(?<dir>[^\s]+)/, classes);
+  if (dir === '_desc') { return 'asc'; }
   return 'desc';
 }
 

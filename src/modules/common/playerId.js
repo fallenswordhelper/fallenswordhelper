@@ -7,7 +7,7 @@ let thePlayerId;
 export default function playerId() {
   const holdtext = getElementById('holdtext');
   if (holdtext && !thePlayerId) {
-    const matches = regExpFirstCapture(/fallensword.com\/\?ref=(\d+)/, getText(holdtext));
+    const matches = regExpFirstCapture(/fallensword.com\/\?ref=(?<id>\d+)/, getText(holdtext));
     if (matches) {
       thePlayerId = Number(matches);
     }

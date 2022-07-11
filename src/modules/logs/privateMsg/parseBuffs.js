@@ -18,7 +18,7 @@ function getBuffId(nick) {
 const formatIds = (matched) => csvSplit(matched).map(getBuffId).filter((b) => b).join(';');
 
 function getIds(target) {
-  const buffs = regExpFirstCapture(/`~(.*)~`/, getMsg(target));
+  const buffs = regExpFirstCapture(/`~(?<buffs>.*)~`/, getMsg(target));
   if (buffs) {
     return formatIds(buffs);
   }

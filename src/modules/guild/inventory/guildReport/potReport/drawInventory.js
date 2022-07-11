@@ -22,18 +22,18 @@ function pivotPotObj(potOpts, potObj, acc, pot) {
 
 function perc2color(percent) {
   const perc = Math.max(Math.min(percent, 100), 0);
-  let r;
-  let g;
-  const b = 0;
+  let red;
+  let green;
+  const blue = 0;
   if (perc < 50) {
-    r = 255;
-    g = Math.round(5.1 * perc);
+    red = 255;
+    green = Math.round(5.1 * perc);
   } else {
-    g = 255;
-    r = Math.round(510 - 5.10 * perc);
+    green = 255;
+    red = Math.round(510 - 5.10 * perc);
   }
-  const h = r * 0x10000 + g * 0x100 + b;
-  const colour = (`000000${h.toString(16)}`).slice(-6);
+  const rgb = red * 0x10000 + green * 0x100 + blue;
+  const colour = (`000000${rgb.toString(16)}`).slice(-6);
   return `#${colour}`;
 }
 

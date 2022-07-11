@@ -5,7 +5,7 @@ import regExpFirstCapture from '../common/regExpFirstCapture';
 const buffSelector = '#profileRightColumn img[src*="/skills/"]';
 
 function injectLevel(i) {
-  const lvl = regExpFirstCapture(/Level: (\d+)/, i.dataset.tipped);
+  const lvl = regExpFirstCapture(/Level: (?<lvl>\d+)/, i.dataset.tipped);
   if (!lvl) return;
   let target = i.nextElementSibling;
   if (!i.nextElementSibling) {

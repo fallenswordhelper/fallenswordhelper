@@ -3,7 +3,7 @@ import regExpExec from '../../common/regExpExec';
 import toLowerCase from '../../common/toLowerCase';
 
 const numRE = /[^a-zA-Z0-9.,+\- ]/g;
-const priceRE = /([+-]?[.\d]{1,10} {0,10}k)|([+-]?[.\d]{1,10} {0,10}fsp)|([+-]?[.\d]{1,10} {0,10}stam)/;
+const priceRE = /(?<k>[+-]?[.\d]{1,10} {0,10}k)|(?<fsp>[+-]?[.\d]{1,10} {0,10}fsp)|(?<stam>[+-]?[.\d]{1,10} {0,10}stam)/;
 
 function thisLine(node) {
   return node && node.nodeName !== 'BR';

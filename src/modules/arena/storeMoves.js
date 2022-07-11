@@ -6,11 +6,11 @@ import { get, set } from '../system/idb';
 import { fshArenaKey } from './assets';
 
 function getCount(moveImg) {
-  return regExpFirstCapture(/(\d)$/, getTextTrim(closestTd(moveImg)));
+  return regExpFirstCapture(/(?<cnt>\d)$/, getTextTrim(closestTd(moveImg)));
 }
 
 function getCounts(acc, moveImg) {
-  const moveId = regExpFirstCapture(/\/(\d{1,2})\.png/, moveImg.src);
+  const moveId = regExpFirstCapture(/\/(?<id>\d{1,2})\.png/, moveImg.src);
   acc[moveId] = Number(getCount(moveImg));
   return acc;
 }

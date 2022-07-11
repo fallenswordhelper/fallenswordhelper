@@ -14,7 +14,7 @@ import { months, playerIdUrl } from '../../support/constants';
 import { time, timeEnd } from '../../support/debug';
 import getValue from '../../system/getValue';
 
-const dateRe = /([a-zA-Z]{3}), (\d{1,2}) ([a-zA-Z]{3}) (\d{1,2}):(\d{2}):(\d{2}) UTC/;
+const dateRe = /(?<day>[a-zA-Z]{3}), (?<date>\d{1,2}) (?<month>[a-zA-Z]{3}) (?<hr>\d{1,2}):(?<min>\d{2}):(?<sec>\d{2}) UTC/;
 
 function guessYear(targetMonth) {
   let curYear = new Date().getFullYear();
@@ -25,13 +25,13 @@ function guessYear(targetMonth) {
   return curYear;
 }
 
-function dateLocalFromUtc([,, day, month, hour, minute]) {
+function dateLocalFromUtc([,, date, month, hr, min]) {
   return new Date(dateUtc([
     guessYear(month),
     month,
-    day,
-    hour,
-    minute,
+    date,
+    hr,
+    min,
   ]));
 }
 

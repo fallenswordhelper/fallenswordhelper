@@ -9,7 +9,7 @@ import { defSubcmd, guideUrl } from '../../support/constants';
 
 function getItemId(el) {
   if (!el) return;
-  const match = regExpFirstCapture(/\/items\/(\d+)\.gif/, el.src);
+  const match = regExpFirstCapture(/\/items\/(?<id>\d+)\.gif/, el.src);
   if (match) return match;
 }
 

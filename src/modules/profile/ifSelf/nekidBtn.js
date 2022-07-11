@@ -20,7 +20,7 @@ function clearBox(link, json) {
 }
 
 function removeItem(link) {
-  const item = regExpFirstCapture(/inventory_id=(\d+)/, link.href);
+  const item = regExpFirstCapture(/inventory_id=(?<id>\d+)/, link.href);
   if (item) {
     daUnequipItem(item).then(partial(clearBox, link));
   }

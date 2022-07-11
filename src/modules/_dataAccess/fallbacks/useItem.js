@@ -6,7 +6,7 @@ import calf from '../../support/calf';
 import { composingFragmentType } from '../../support/constants';
 
 const ret = (info, prop) => ({
-  r: { [prop]: [{ n: regExpFirstCapture(/'(.*)'/, info) }] },
+  r: { [prop]: [{ n: regExpFirstCapture(/'(?<id>.*)'/, info) }] },
   s: true,
 });
 const components = (info) => ret(info, 'components');
@@ -21,7 +21,7 @@ function fragObj(pair) {
 }
 
 function stash(info) {
-  const fragList = regExpFirstCapture(/You gained {1,2}}(.*) Fragment\(s\)/, info);
+  const fragList = regExpFirstCapture(/You gained {1,2}}(?<fragList>.*) Fragment\(s\)/, info);
   if (fragList) {
     const frags = fragList.split(', ').map(fragObj);
     return { r: { frags }, s: true };

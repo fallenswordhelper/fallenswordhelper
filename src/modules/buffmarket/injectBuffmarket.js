@@ -27,7 +27,7 @@ function injectSearch(buffResults) {
 
 async function interceptBuy(e) {
   e.stopPropagation();
-  const packageId = regExpFirstCapture(/id=(?<id>[0-9]+)/, e.target.getAttribute('onclick'));
+  const packageId = regExpFirstCapture(/id=(?<id>\d+)/, e.target.getAttribute('onclick'));
   if (packageId) {
     const actionRow = e.target.parentNode;
     actionRow.className = 'fshActionRow';

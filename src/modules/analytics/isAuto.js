@@ -9,7 +9,7 @@ let haveRefferer = false;
 
 export default function isAuto() {
   if (!haveRefferer) {
-    const docRef = regExpFirstCapture(/^https?:\/\/([^/?#]+)(?:[/?#]|$)/i, document.referrer);
+    const docRef = regExpFirstCapture(/^https?:\/\/(?<id>[^/?#]+)(?:[/?#]|$)/i, document.referrer);
     autoRefferer = refAry.includes(docRef);
     haveRefferer = true;
   }

@@ -5,7 +5,7 @@ import regExpFirstCapture from './regExpFirstCapture';
 let guildId;
 
 function getGuildId(el) {
-  const match = regExpFirstCapture(/\sguildId: (\d{1,6}),/, getText(el));
+  const match = regExpFirstCapture(/\sguildId: (?<id>\d{1,6}),/, getText(el));
   if (match) { guildId = Number(match); }
 }
 

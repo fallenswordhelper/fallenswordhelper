@@ -5,7 +5,7 @@ import partial from '../../common/partial';
 
 function ajaxResult(componentId, html) {
   const info = infoBoxFrom(html);
-  let r = 1;
+  let r = 1; // skipcq: JS-C1002
   if (info === 'Component destroyed.') { r = 0; }
   return { r, m: info, c: componentId };
 }

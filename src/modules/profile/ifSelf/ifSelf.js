@@ -8,8 +8,8 @@ async function doFastDebuff() {
   const fastDebuff = getValue('fastDebuff');
   const disableDeactivatePrompts = getValue('disableDeactivatePrompts');
   if (fastDebuff || disableDeactivatePrompts) {
-    const m = await import('./debuff');
-    m.default(fastDebuff, disableDeactivatePrompts);
+    const module = await import('./debuff');
+    module.default(fastDebuff, disableDeactivatePrompts);
   }
 }
 

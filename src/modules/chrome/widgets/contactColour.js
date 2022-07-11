@@ -1,6 +1,6 @@
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 
-const tipRe = /Last Activity:<\/td><td>(\d+) mins/;
+const tipRe = /Last Activity:<\/td><td>(?<mins>\d+) mins/;
 
 export default function contactColour(el, obj) {
   const onMouseOver = el.dataset.tipped;

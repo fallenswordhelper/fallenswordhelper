@@ -16,7 +16,7 @@ function debuffSuccess(aLink, json) {
 function doDebuff(fastDebuff, aLink) {
   if (fastDebuff) {
     sendEvent('profile', 'doDebuff');
-    const buffId = regExpFirstCapture(/d=(\d{1,3})$/, aLink.href);
+    const buffId = regExpFirstCapture(/d=(?<id>\d{1,3})$/, aLink.href);
     daRemoveSkill(buffId).then(errorDialog).then(partial(debuffSuccess, aLink));
   } else {
     navigateTo(aLink.href);

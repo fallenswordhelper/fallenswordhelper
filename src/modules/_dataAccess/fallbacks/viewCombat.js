@@ -7,7 +7,7 @@ import querySelectorArray from '../../common/querySelectorArray';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import createDocument from '../../system/createDocument';
 
-const getId = (e) => Number(regExpFirstCapture(/\/(\d+)/, e.getAttribute('background')));
+const getId = (e) => Number(regExpFirstCapture(/\/(?<id>\d+)/, e.getAttribute('background')));
 
 function getResult(script, e) {
   const thisRe = new RegExp(`${e} = (\\d+)`);

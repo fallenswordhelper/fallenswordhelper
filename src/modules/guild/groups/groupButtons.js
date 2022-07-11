@@ -44,7 +44,7 @@ function doJoinUnderSize(joinButton) {
       style: { height: '19px', width: '19px' },
     });
     joinButton.parentNode.replaceChild(container, joinButton);
-    const groupID = regExpFirstCapture(/confirmJoin\((\d+)\)/, joinButton.href);
+    const groupID = regExpFirstCapture(/confirmJoin\((?<id>\d+)\)/, joinButton.href);
     joinGroup(groupID, container);
   }
 }

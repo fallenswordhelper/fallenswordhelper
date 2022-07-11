@@ -14,7 +14,7 @@ import createDocument from '../../system/createDocument';
 import intValue from '../../system/intValue';
 import { updateProgress } from './bufferProgress';
 
-const sustainLevelRE = /Level<br>(\d+)%/;
+const sustainLevelRE = /Level<br>(?<lvl>\d+)%/;
 
 function getBioLines(bioCellHtml, findBuffNicks) {
   const myRe = new RegExp(`^.*\\b(?:(?:${
@@ -117,7 +117,7 @@ function updateProcessed() {
 function calcLastActivity(doc) {
   const innerPcc = getElementById('pCC', doc);
   const lastActivityElement = getElementsByTagName('p', innerPcc)[0];
-  return regExpExec(/(\d{1,2}) mins, (\d{1,2}) secs/, getText(lastActivityElement));
+  return regExpExec(/(?<mins>\d{1,2}) mins, (?<secs>\d{1,2}) secs/, getText(lastActivityElement));
 }
 
 function getExtend(doc) {
