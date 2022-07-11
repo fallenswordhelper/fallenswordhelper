@@ -4,8 +4,8 @@ import insertTextBeforeEnd from '../../../common/insertTextBeforeEnd';
 import toggleForce from '../../../common/toggleForce';
 import setText from '../../../dom/setText';
 
-let dblDiv;
-let dblSpan;
+let dblDiv = 0;
+let dblSpan = 0;
 
 function initDblDiv(containerDiv) {
   // eslint-disable-next-line prefer-destructuring

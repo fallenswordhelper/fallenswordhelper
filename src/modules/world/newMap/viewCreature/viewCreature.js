@@ -23,10 +23,10 @@ import evalExtraBuffs from './evalExtraBuffs';
 import evalHTML from './evalHtml';
 import makeDoNotKillLink from './makeDoNotKillLink';
 
-let dialogViewCreature;
-let combatEvalContainer;
-let combatEvaluator;
-let groupEvaluator;
+let dialogViewCreature = 0;
+let combatEvalContainer = 0;
+let combatEvaluator = 0;
+let groupEvaluator = 0;
 
 function getDialogViewCreature() {
   if (!dialogViewCreature) {

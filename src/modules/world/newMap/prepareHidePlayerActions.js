@@ -9,7 +9,7 @@ import {
 import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
 
-let hidePlayerActions;
+let hidePlayerActions = 0;
 
 export function toggleHidePlayerActions() {
   hidePlayerActions = !hidePlayerActions;

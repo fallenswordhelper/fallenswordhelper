@@ -4,8 +4,8 @@ import insertTextBeforeEnd from '../../../common/insertTextBeforeEnd';
 import toggleForce from '../../../common/toggleForce';
 import setText from '../../../dom/setText';
 
-let caDiv;
-let caSpan;
+let caDiv = 0;
+let caSpan = 0;
 
 function initCaDiv(containerDiv) {
   // eslint-disable-next-line prefer-destructuring

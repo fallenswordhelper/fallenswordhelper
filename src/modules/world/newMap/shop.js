@@ -12,13 +12,12 @@ import { defShopPrompt } from '../../support/constants';
 import addCommas from '../../system/addCommas';
 import testQuant from '../../system/testQuant';
 
-let shoppingData;
-let dialog;
-let jDialog;
-let fshDiv;
-let numInput;
-let qbBtn;
-let resultDiv;
+let shoppingData = 0;
+let dialog = 0;
+let jDialog = 0;
+let fshDiv = 0;
+let numInput = 0;
+let resultDiv = 0;
 
 function quickBuy() {
   return fetchdata({
@@ -32,13 +31,11 @@ function quickBuy() {
 function quickDone(data) {
   const resp = data.response.response;
   const rmsg = data.response.msg;
-  let msg;
+  let msg = rmsg;
   if (resp !== 0) {
     const firstTag = rmsg.indexOf('<');
     if (firstTag !== -1) {
       msg = rmsg.substring(0, firstTag);
-    } else {
-      msg = rmsg;
     }
   } else {
     msg = `You purchased ${data.response.data.name
@@ -79,7 +76,7 @@ function injectQuickBuy() {
     type: 'number',
   });
   insertElement(fshDiv, numInput);
-  qbBtn = createButton({ textContent: 'Quick-buy' });
+  const qbBtn = createButton({ textContent: 'Quick-buy' });
   onclick(qbBtn, qBuy);
   insertElement(fshDiv, qbBtn);
   resultDiv = createDiv();

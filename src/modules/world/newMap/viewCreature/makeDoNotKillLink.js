@@ -10,9 +10,9 @@ import setValue from '../../../system/setValue';
 import afterUpdateActionList from '../doNotKill/afterUpdateActionList';
 import isOnList from '../doNotKill/isOnList';
 
-let creatureBody;
-let dnkName;
-let doNotKillBtn;
+let creatureBody = 0;
+let dnkName = 0;
+let doNotKillBtn = 0;
 
 function getCreatureBody(dialogViewCreature) {
   if (!creatureBody) {

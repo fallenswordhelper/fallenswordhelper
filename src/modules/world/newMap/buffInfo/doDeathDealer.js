@@ -5,8 +5,8 @@ import round from '../../../common/round';
 import toggleForce from '../../../common/toggleForce';
 import setText from '../../../dom/setText';
 
-let ddDiv;
-let ddSpan;
+let ddDiv = 0;
+let ddSpan = 0;
 
 function initDdDiv(containerDiv) {
   // eslint-disable-next-line prefer-destructuring

@@ -7,7 +7,7 @@ import { hasTitan, hideTitanDiv, setupTitanDiv } from './hasTitan';
 import processTitans from './processTitans';
 import { setRealm } from './realm';
 
-let timeoutId;
+let timeoutId = null;
 
 function clearTheTimeout() {
   if (timeoutId) {
