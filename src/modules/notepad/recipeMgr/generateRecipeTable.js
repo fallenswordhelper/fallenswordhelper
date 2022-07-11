@@ -4,7 +4,7 @@ import getValue from '../../system/getValue';
 import { set } from '../../system/idb';
 import shouldBeArray from '../../system/shouldBeArray';
 
-let currentPlayerId;
+let currentPlayerId = 0;
 let hideRecipes = [];
 
 function itemImg(itm) {

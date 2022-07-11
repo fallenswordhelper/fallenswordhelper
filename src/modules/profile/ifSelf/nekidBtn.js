@@ -11,7 +11,7 @@ import partial from '../../common/partial';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 
-let profileCombatSetDiv;
+let profileCombatSetDiv = 0;
 
 function clearBox(link, json) {
   if (json && json.s) {

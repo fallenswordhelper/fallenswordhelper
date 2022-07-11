@@ -1,8 +1,8 @@
 import querySelector from '../common/querySelector';
 import { guildViewUrl } from '../support/constants';
 
-let haveGuildALink;
-let guildALink;
+let haveGuildALink = 0;
+let guildALink = 0;
 
 export default function getGuildALink() {
   if (!haveGuildALink) {

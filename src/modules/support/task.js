@@ -10,7 +10,7 @@ import { getLength, pop, push } from './sch';
 
 let paused = true;
 const message = 'fshMessage';
-let messageHandler;
+let messageHandler = 0;
 
 function taskRunner() {
   if (getLength() === 0) {

@@ -65,14 +65,11 @@ function priceUnit(price) {
 
 function getBuffCost(buffNameNode) {
   const price = getPrice(buffNameNode);
-  let type;
-  let cost;
+  let type = 'unknown';
+  let cost = '1';
   if (price) {
     type = priceUnit(price);
     [cost] = regExpExec(/[+-]?[.\d]+/, price[0]);
-  } else {
-    type = 'unknown';
-    cost = '1';
   }
   buffCost.buffs[getText(buffNameNode)] = [parseFloat(cost), type];
   buffCost.count += 1;

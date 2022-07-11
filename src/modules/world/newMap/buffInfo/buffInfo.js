@@ -17,13 +17,13 @@ import impWarning from './impWarning';
 import titanKs from './titanKs';
 import { doCountdown, tpCooldown } from './tpCooldown';
 
-let dd;
-let dbl;
-let ca;
-let imp;
-let cd;
-let titanActive;
-let ks;
+let dd = 0;
+let dbl = 0;
+let ca = 0;
+let imp = 0;
+let cd = 0;
+let titanActive = 0;
+let ks = 0;
 
 function initVars() {
   dd = getBuff('Death Dealer');

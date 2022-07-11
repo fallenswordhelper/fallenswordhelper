@@ -23,7 +23,5 @@ function reviver(key, value) {
 
 export default function getValueJSON(name) {
   const resultJSON = getValue(name);
-  let result;
-  if (resultJSON) { result = jsonParse(resultJSON, reviver); }
-  return result;
+  if (resultJSON) return jsonParse(resultJSON, reviver);
 }

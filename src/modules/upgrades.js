@@ -15,8 +15,8 @@ import intValue from './system/intValue';
 import setValue from './system/setValue';
 import { server } from './system/system';
 
-let playerUpgrades;
-let currentFSP;
+let playerUpgrades = 0;
+let currentFSP = 0;
 const warehouse = {};
 
 function includesText(text, el) {
@@ -76,13 +76,12 @@ function doStamCount(type, upgrade, quantity, cell) {
   const amount = getAmount(type, upgrade);
   const cost = getCost(type, upgrade);
   // cap the value if the user goes over his current FSP
-  let extraStam;
+  let extraStam = Math.floor(currentFSP / cost) * amount;
   if (quantity * cost <= currentFSP) {
     extraStam = quantity * amount;
     // eslint-disable-next-line no-param-reassign
     cell.className = 'fshBlue';
   } else {
-    extraStam = Math.floor(currentFSP / cost) * amount;
     // eslint-disable-next-line no-param-reassign
     cell.className = 'fshRed';
   }

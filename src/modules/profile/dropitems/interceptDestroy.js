@@ -20,9 +20,9 @@ function scopedCheck(mode) {
 
 const prefAjaxifyDestroy = 'ajaxifyDestroy';
 const prefDisableDestroyPrompts = 'disableDestroyPrompts';
-let ajaxifyDestroy;
-let disableDestroyPrompts;
-let hcsConfirmDestroy;
+let ajaxifyDestroy = 0;
+let disableDestroyPrompts = 1;
+let hcsConfirmDestroy = 0;
 
 async function destroyChunk(itemsAry) {
   const json = await daDropItems(itemsAry.map((i) => i.value));

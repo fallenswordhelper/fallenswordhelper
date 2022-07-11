@@ -5,8 +5,8 @@ import { guildRE } from '../../support/constants';
 import getValue from '../../system/getValue';
 import intValue from '../../system/intValue';
 
-let highlightPlayersNearMyLvl;
-let table;
+let highlightPlayersNearMyLvl = 0;
+let table = 0;
 
 function guildNumber(html) {
   const match = regExpFirstCapture(guildRE, html);

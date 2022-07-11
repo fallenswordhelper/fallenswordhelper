@@ -3,8 +3,7 @@ import regExpFirstCapture from '../common/regExpFirstCapture';
 import { guildRE } from '../support/constants';
 import getGuildALink from './getGuildALink';
 
-let haveIsOwnGuild;
-let isOwnGuild;
+let isOwnGuild = null;
 
 function findGuildId() {
   const guildALink = getGuildALink();
@@ -15,9 +14,6 @@ function findGuildId() {
 }
 
 export default function getIsOwnGuild() {
-  if (!haveIsOwnGuild) {
-    isOwnGuild = findGuildId() === currentGuildId();
-    haveIsOwnGuild = true;
-  }
+  if (isOwnGuild === null) isOwnGuild = findGuildId() === currentGuildId();
   return isOwnGuild;
 }
