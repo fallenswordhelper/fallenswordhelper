@@ -3,7 +3,7 @@ import setText from '../../dom/setText';
 import fallback from '../../system/fallback';
 import getQuickMessageDialog from './getQuickMessageDialog';
 
-let validateTips;
+let validateTips = 0;
 
 function getValidateTips() {
   if (!validateTips) {

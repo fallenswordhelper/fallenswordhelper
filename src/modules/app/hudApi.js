@@ -3,7 +3,7 @@ import fromEntries from '../common/fromEntries';
 import isUndefined from '../common/isUndefined';
 import api from './api';
 
-let hud;
+let hud = {};
 
 const listItemToEntry = ({ k, v }) => [k, v];
 const entryToListItem = ([k, v]) => ({ k, v });

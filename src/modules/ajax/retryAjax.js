@@ -5,7 +5,7 @@ import AjaxError from './AjaxError';
 
 let paused = true;
 let queue = [];
-let globalHandler;
+let globalHandler = 0;
 
 function setOpts(options) {
   if (typeof options === 'string') {

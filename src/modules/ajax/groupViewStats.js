@@ -9,11 +9,11 @@ import {
 } from '../support/constants';
 import intValue from '../system/intValue';
 
-let attackElement;
-let defenseElement;
-let armorElement;
-let damageElement;
-let hpElement;
+let attackElement = 0;
+let defenseElement = 0;
+let armorElement = 0;
+let damageElement = 0;
+let hpElement = 0;
 
 function getElements(doc) {
   attackElement = getElementById(defStatAttack, doc);

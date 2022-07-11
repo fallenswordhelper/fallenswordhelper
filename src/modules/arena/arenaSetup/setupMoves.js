@@ -10,8 +10,8 @@ import { moveRe } from '../assets';
 import moveOptions from './moveOptions';
 
 const oldMoves = [];
-let imgNodes;
-let selectRow;
+let imgNodes = 0;
+let selectRow = 0;
 
 function doPickMove(moveId, slotId) {
   return indexAjaxData({
