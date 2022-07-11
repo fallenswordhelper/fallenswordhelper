@@ -3,17 +3,17 @@ import retryAjax from '../../ajax/retryAjax';
 import all from '../../common/all';
 import querySelectorAll from '../../common/querySelectorAll';
 import querySelectorArray from '../../common/querySelectorArray';
+import regExpGroups from '../../common/regExpGroups';
 import sum from '../../common/sum';
+import { fetchItemRe } from '../../support/constants';
 import createDocument from '../../system/createDocument';
 
-const componentRe = /\?item_id=(\d+)&inv_id=(\d+)&.*&vcode=([0-9a-f]+)/;
-
 function details(a) {
-  const pattern = a.children[0].dataset.tipped.match(componentRe);
+  const { itemId, invId, vcode } = regExpGroups(fetchItemRe, a.children[0].dataset.tipped);
   return {
-    a: Number(pattern[2]),
-    b: Number(pattern[1]),
-    v: pattern[3],
+    a: Number(invId),
+    b: Number(itemId),
+    v: vcode,
   };
 }
 

@@ -4,6 +4,7 @@ import entries from '../common/entries';
 import getElementById from '../common/getElementById';
 import insertElement from '../common/insertElement';
 import isFunction from '../common/isFunction';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import setInnerHtml from '../dom/setInnerHtml';
 import { getPcc } from '../support/layout';
 import setLastScav from './setLastScav';
@@ -38,7 +39,7 @@ function getDefeats(report) {
 }
 
 function makeHash(acc, curr) {
-  const itemName = curr.match(/>(?<name>[^<]+)</)[1];
+  const itemName = regExpFirstCapture(/>(?<name>[^<]+)</, curr);
   acc[itemName] = (acc[itemName] || 0) + 1;
   return acc;
 }

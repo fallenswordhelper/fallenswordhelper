@@ -47,7 +47,7 @@ function getRe(type, label) {
 function getValue(type, element, label) {
   if (!warehouse[type][label]) {
     const valRe = getRe(type, label);
-    const value = getText(element).match(valRe)[1];
+    const value = regExpFirstCapture(valRe, getText(element));
     warehouse[type][label] = value;
   }
   return warehouse[type][label];

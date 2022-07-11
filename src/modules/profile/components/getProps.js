@@ -1,6 +1,7 @@
-import { itemRE } from '../../support/constants';
+import regExpGroups from '../../common/regExpGroups';
+import { fetchItemRe } from '../../support/constants';
 
 export default function getProps(target) {
-  const matches = target.dataset.tipped.match(itemRE);
-  return [Number(matches[1]), Number(matches[2])];
+  const { itemId, invId } = regExpGroups(fetchItemRe, target.dataset.tipped);
+  return [Number(itemId), Number(invId)];
 }

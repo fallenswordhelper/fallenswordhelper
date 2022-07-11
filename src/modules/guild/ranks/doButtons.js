@@ -3,6 +3,7 @@ import sendEvent from '../../analytics/sendEvent';
 import insertElementBefore from '../../common/insertElementBefore';
 import onclick from '../../common/onclick';
 import playerName from '../../common/playerName';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import toLowerCase from '../../common/toLowerCase';
 import { getPcc } from '../../support/layout';
 import getValue from '../../system/getValue';
@@ -27,9 +28,11 @@ function getPxScroll(val) {
   return 22;
 }
 
+const rankIdRe = /rank_id=(?<rankId>\d+)/;
+
 function shuffleRows(evt, thisRankRow, targetRowNum) {
-  const matchRankId = evt.target.getAttribute('onclick').match(/rank_id=(?<rankId>\d+)/);
-  daRankPosition(toLowerCase(evt.target.value), matchRankId[1]);
+  const matchRankId = regExpFirstCapture(rankIdRe, evt.target.getAttribute('onclick'));
+  daRankPosition(toLowerCase(evt.target.value), matchRankId);
   const injectRow = thisRankRow.parentNode.rows[targetRowNum];
   insertElementBefore(thisRankRow, injectRow);
   const pxScroll = getPxScroll(evt.target.value);

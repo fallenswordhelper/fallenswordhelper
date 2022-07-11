@@ -9,7 +9,7 @@ import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
 import { getPcc } from '../support/layout';
 import getValue from '../system/getValue';
-import listValues from '../system/listValues';
+import listKeys from '../system/listKeys';
 import setValue from '../system/setValue';
 
 function drawBox(content, fshSettings) {
@@ -46,7 +46,7 @@ function buildSettingsObj(acc, curr) {
 
 export default function load() { // Hybrid
   if (jQueryNotPresent()) { return; }
-  const fshSettings = listValues().reduce(buildSettingsObj, {});
+  const fshSettings = listKeys().reduce(buildSettingsObj, {});
   drawBox(getPcc(), fshSettings);
   $('#HelperLoadSettings').on('click', clickHandler);
 }

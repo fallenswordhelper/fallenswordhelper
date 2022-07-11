@@ -2,14 +2,15 @@ import createStyle from '../../common/cElement/createStyle';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import insertElement from '../../common/insertElement';
 import querySelectorArray from '../../common/querySelectorArray';
+import regExpGroups from '../../common/regExpGroups';
 import { defTable, playerLinkSelector, stamRe } from '../../support/constants';
 import { getPcc } from '../../support/layout';
 
 let thisStyle = 0;
 
 function getStamPerc(a) {
-  const mo = a.dataset.tipped.match(stamRe);
-  return Math.min(Math.round((Number(mo[1]) / Number(mo[2])) * 100), 100);
+  const { stam, max } = regExpGroups(stamRe, a.dataset.tipped);
+  return Math.min(Math.round((Number(stam) / Number(max)) * 100), 100);
 }
 
 function stamBarStyle(a) {

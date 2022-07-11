@@ -1,4 +1,5 @@
 import getText from '../../common/getText';
+import regExpExec from '../../common/regExpExec';
 import toLowerCase from '../../common/toLowerCase';
 
 const numRE = /[^a-zA-Z0-9.,+\- ]/g;
@@ -9,7 +10,7 @@ function thisLine(node) {
 }
 
 function formatPrice(text) {
-  return toLowerCase(text.replace(numRE, '')).match(priceRE);
+  return regExpExec(priceRE, toLowerCase(text.replace(numRE, '')));
 }
 
 function priceAfterName(buffNameNode) {

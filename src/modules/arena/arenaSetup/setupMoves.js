@@ -4,6 +4,7 @@ import getArrayByTagName from '../../common/getArrayByTagName';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import navigateTo from '../../common/navigateTo';
 import partial from '../../common/partial';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import { arenaUrl, defTable, oldActionSpinner } from '../../support/constants';
 import { moveRe } from '../assets';
 import moveOptions from './moveOptions';
@@ -66,13 +67,7 @@ function updateButton(table) { // jQuery
   table.append(row);
 }
 
-function getMoveCode(e) {
-  const moveMatches = $(e).attr('src').match(moveRe);
-  if (moveMatches) {
-    return moveMatches[1];
-  }
-  return 'x';
-}
+const getMoveCode = (e) => regExpFirstCapture(moveRe, $(e).attr('src')) ?? 'x';
 
 function makeDropDown(row, i, e) { // jQuery
   const move = getMoveCode(e);

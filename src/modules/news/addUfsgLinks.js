@@ -5,6 +5,7 @@ import getTitle from '../common/getTitle';
 import insertElement from '../common/insertElement';
 import insertElementBefore from '../common/insertElementBefore';
 import querySelectorArray from '../common/querySelectorArray';
+import regExpExec from '../common/regExpExec';
 import { guideUrl } from '../support/constants';
 import { getPcc } from '../support/layout';
 
@@ -27,7 +28,7 @@ function titanSpotted(el) {
 }
 
 function reformatNews(el) {
-  const news = el.lastChild.nodeValue.match(titanRe); // Text Node
+  const news = regExpExec(titanRe, el.lastChild.nodeValue); // Text Node
   news[2] = makeALink(news[2]);
   return news.slice(1).join('');
 }

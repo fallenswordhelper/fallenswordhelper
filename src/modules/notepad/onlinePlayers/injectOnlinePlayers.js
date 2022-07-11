@@ -4,6 +4,7 @@ import loadDataTables from '../../common/loadDataTables';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
+import regExpGroups from '../../common/regExpGroups';
 import { getNow } from '../../support/now';
 import createDocument from '../../system/createDocument';
 import { get, set } from '../../system/idb';
@@ -61,8 +62,8 @@ function processTheRows(doc, input) {
 }
 
 function getLastPage(input) {
-  const matches = input.parent().text().match(/(?<page>\d+)/);
-  return parseInt(matches.groups.page, 10);
+  const { page } = regExpGroups(/(?<page>\d+)/, input.parent().text());
+  return parseInt(page, 10);
 }
 
 function getOtherPages(callback, input) {

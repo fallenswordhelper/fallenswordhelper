@@ -9,6 +9,7 @@ import getElementsByTagName from '../../../common/getElementsByTagName';
 import onclick from '../../../common/onclick';
 import partial from '../../../common/partial';
 import playerId from '../../../common/playerId';
+import regExpFirstCapture from '../../../common/regExpFirstCapture';
 import setInnerHtml from '../../../dom/setInnerHtml';
 import { playerIDRE } from '../../../support/constants';
 import { getPcc } from '../../../support/layout';
@@ -31,10 +32,6 @@ function replyTo(target) {
   window.openQuickMsgDialog(target.getAttribute('target_player'));
 }
 
-function targetPlayerId(href) {
-  return href.match(playerIDRE)[1];
-}
-
 function recallResult(action, theTd, data) {
   if (data.r === 1) { return; }
   if (action === 'recall') {
@@ -45,7 +42,7 @@ function recallResult(action, theTd, data) {
 }
 
 function doRecall(theTd, href, mode, action) {
-  queueRecallItem(itemId(href), targetPlayerId(href), mode, action)
+  queueRecallItem(itemId(href), regExpFirstCapture(playerIDRE, href), mode, action)
     .then(partial(recallResult, action, theTd));
 }
 
@@ -65,7 +62,7 @@ function doFastGs(theTd, href) {
 
 function doFastWear(theTd, href) {
   sendEvent('GuildReport', 'Fast Wear');
-  if (Number(targetPlayerId(href)) === playerId()) {
+  if (Number(regExpFirstCapture(playerIDRE, href)) === playerId()) {
     equipItem(itemId(href)).then(partial(wornItem, theTd));
   } else {
     doRecall(theTd, href, 0, 'wear');

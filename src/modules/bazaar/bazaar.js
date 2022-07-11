@@ -13,9 +13,10 @@ import on from '../common/on';
 import onclick from '../common/onclick';
 import outputResult from '../common/outputResult';
 import querySelector from '../common/querySelector';
+import regExpGroups from '../common/regExpGroups';
 import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
-import { itmRe } from '../support/constants';
+import { fetchItemRe } from '../support/constants';
 import { getPcc } from '../support/layout';
 import testQuant from '../system/testQuant';
 
@@ -94,11 +95,11 @@ async function buy() { // jQuery.min
 function doMiniatures(el, i) {
   const item = el.children[0];
   const { tipped } = item.dataset;
-  const itemMatch = tipped.match(itmRe);
+  const { itemId: itmId } = regExpGroups(fetchItemRe, tipped);
   bazaarTable = bazaarTable
     .replace(`@${i}@`, bazaarItem)
     .replace('@src@', item.getAttribute('src'))
-    .replace('@itemid@', itemMatch[1])
+    .replace('@itemid@', itmId)
     .replace('@tipped@', tipped);
 }
 

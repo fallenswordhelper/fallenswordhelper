@@ -6,6 +6,7 @@ import hideQTip from '../../common/hideQTip';
 import navigateTo from '../../common/navigateTo';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 function debuffSuccess(aLink, json) {
@@ -15,7 +16,7 @@ function debuffSuccess(aLink, json) {
 function doDebuff(fastDebuff, aLink) {
   if (fastDebuff) {
     sendEvent('profile', 'doDebuff');
-    const buffId = aLink.href.match(/d=(\d{1,3})$/)[1];
+    const buffId = regExpFirstCapture(/d=(\d{1,3})$/, aLink.href);
     daRemoveSkill(buffId).then(errorDialog).then(partial(debuffSuccess, aLink));
   } else {
     navigateTo(aLink.href);

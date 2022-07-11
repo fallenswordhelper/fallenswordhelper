@@ -1,14 +1,16 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getTextTrim from '../../common/getTextTrim';
+import regExpGroups from '../../common/regExpGroups';
+import { etaRe } from '../../support/constants';
 import createDocument from '../../system/createDocument';
 
 function formatTime(e) {
-  const thisTime = e.match(/ETA: (\d+)h (\d+)m (\d+)s/);
+  const { h, m, s } = regExpGroups(etaRe, e);
   return {
-    time_remaining: Number(thisTime[1]) * 60 * 60
-    + Number(thisTime[2]) * 60
-    + Number(thisTime[3]),
+    time_remaining: Number(h) * 60 * 60
+    + Number(m) * 60
+    + Number(s),
   };
 }
 

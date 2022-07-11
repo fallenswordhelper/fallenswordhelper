@@ -1,11 +1,11 @@
 import { lastActivityRE } from '../support/constants';
 import { getNowSecs } from '../support/now';
-import regExpExec from './regExpExec';
+import regExpGroups from './regExpGroups';
 
 export default function lastActivity(str) {
   const {
     d: day, h: hour, m: min, s: sec,
-  } = regExpExec(lastActivityRE, str).groups;
+  } = regExpGroups(lastActivityRE, str);
   const days = Number(day);
   const hours = Number(hour) + days * 24;
   const mins = Number(min) + hours * 60;

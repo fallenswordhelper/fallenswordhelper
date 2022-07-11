@@ -5,8 +5,8 @@ import getTextTrim from '../../common/getTextTrim';
 import lastActivity from '../../common/lastActivity';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
-import regExpExec from '../../common/regExpExec';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
+import regExpGroups from '../../common/regExpGroups';
 import uniq from '../../common/uniq';
 import {
   playerIDRE,
@@ -31,7 +31,7 @@ function fromElement(el) {
 }
 
 function fromTipped(tipped) {
-  const { stam, max } = regExpExec(stamRe, tipped).groups;
+  const { stam, max } = regExpGroups(stamRe, tipped);
   return {
     current_stamina: Number(stam),
     last_activity: lastActivity(tipped).timestamp,

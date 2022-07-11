@@ -21,9 +21,9 @@ function fragObj(pair) {
 }
 
 function stash(info) {
-  const reAry = info.match(/You gained {1,2}}(.*) Fragment\(s\)/);
-  if (reAry) {
-    const frags = reAry[1].split(', ').map(fragObj);
+  const fragList = regExpFirstCapture(/You gained {1,2}}(.*) Fragment\(s\)/, info);
+  if (fragList) {
+    const frags = fragList.split(', ').map(fragObj);
     return { r: { frags }, s: true };
   }
   sendEvent('da/useItem', 'Bad Msg', info);

@@ -6,6 +6,7 @@ import on from '../common/on';
 import onclick from '../common/onclick';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import setInnerHtml from '../dom/setInnerHtml';
 import { getPcc } from '../support/layout';
 import createDocument from '../system/createDocument';
@@ -26,7 +27,7 @@ function injectSearch(buffResults) {
 
 async function interceptBuy(e) {
   e.stopPropagation();
-  const packageId = e.target.getAttribute('onclick').match(/id=(?<id>[0-9]+)/)?.[1];
+  const packageId = regExpFirstCapture(/id=(?<id>[0-9]+)/, e.target.getAttribute('onclick'));
   if (packageId) {
     const actionRow = e.target.parentNode;
     actionRow.className = 'fshActionRow';
