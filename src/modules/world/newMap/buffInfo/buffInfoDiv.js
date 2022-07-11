@@ -4,7 +4,7 @@ import insertElementAfter from '../../../common/insertElementAfter';
 import toggleForce from '../../../common/toggleForce';
 import calf from '../../../support/calf';
 
-let containerDiv;
+let containerDiv = 0;
 
 function value(e) { return e; }
 
