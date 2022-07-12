@@ -2,6 +2,7 @@ function getPos(available, desired, offset) {
   return Math.floor(Math.max(available - desired, 0) / 2 + offset);
 }
 
+// codebeat:disable[ARITY]
 export default function fshOpen(url, title, w, _h, features) {
   let h = _h;
   if (_h === 500) { h = 1000; }
@@ -10,3 +11,4 @@ export default function fshOpen(url, title, w, _h, features) {
   window.open(url, title, `width=${w}, height=${h}, left=${left
   }, top=${top}${features}`);
 }
+// codebeat:enable[ARITY]

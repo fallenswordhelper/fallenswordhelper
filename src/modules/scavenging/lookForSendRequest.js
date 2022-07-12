@@ -21,18 +21,10 @@ function getSummary() {
   return fshSummary;
 }
 
-function getVictories(report) {
-  const victories = report.match(/victorious/g);
-  if (victories) {
-    return `Victories: ${victories.length}`;
-  }
-  return '';
-}
-
-function getDefeats(report) {
-  const defeats = report.match(/defeated/g);
-  if (defeats) {
-    return `, Defeated: ${defeats.length}`;
+function getSummaryByType(report, regex, label) {
+  const type = report.match(regex);
+  if (type) {
+    return `${label}: ${type.length}`;
   }
   return '';
 }
@@ -68,8 +60,8 @@ function multiScav() {
   const scavRes = getElementById('scavenge_results');
   if (scavRes) {
     const report = scavRes.innerHTML;
-    ret += getVictories(report);
-    ret += getDefeats(report);
+    ret += getSummaryByType(report, /victorious/g, 'Victories');
+    ret += getSummaryByType(report, /defeated/g, ', Defeats');
     ret += getGains(report);
   }
   return ret;

@@ -5,7 +5,6 @@ import insertElement from '../../common/insertElement';
 import partial from '../../common/partial';
 import replaceChild from '../../common/replaceChild';
 import trim from '../../common/trim';
-import { playerIdUrl } from '../../support/constants';
 import task from '../../support/task';
 
 export const advisorColumns = [
@@ -25,11 +24,6 @@ export const advisorColumns = [
   { title: '<div class="fshBold">Relic</div>', class: 'dt-center' },
   { title: '<div class="fshBold">XP Contrib</div>', class: 'dt-center' },
 ];
-
-export function playerName(f, membrList) {
-  if (!membrList[f]) { return f; }
-  return `<a href="${playerIdUrl}${membrList[f].id}">${f}</a>`;
-}
 
 export function playerLevel(f, membrList) {
   if (!membrList[f]) { return ''; }

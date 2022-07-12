@@ -11,14 +11,13 @@ import interceptSubmit from '../../common/interceptSubmit';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
 import partial from '../../common/partial';
+import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
 import calf from '../../support/calf';
 import { cmdUrl } from '../../support/constants';
 import { time, timeEnd } from '../../support/debug';
 import { getPcc } from '../../support/layout';
 import getValue from '../../system/getValue';
-import {
-  injectTable, playerLevel, playerName, playerRank,
-} from './helpers';
+import { injectTable, playerLevel, playerRank } from './helpers';
 import injectAdvisorWeekly from './injectAdvisorWeekly';
 
 function getTfoot(list) {
@@ -44,7 +43,7 @@ function bodyText(membrList, row) {
   foo.splice(
     0,
     1,
-    playerName(foo[0], membrList),
+    playerLinkFromMembrList(membrList, foo[0]),
     playerLevel(foo[0], membrList),
     playerRank(foo[0], membrList),
   );

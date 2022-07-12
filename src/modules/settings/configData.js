@@ -1,7 +1,8 @@
 import './configData.css';
 import functionPasses from '../common/functionPasses';
+import playerLink from '../common/playerLink';
 import calf from '../support/calf';
-import { notepadBlankUrl, playerIdUrl } from '../support/constants';
+import { notepadBlankUrl } from '../support/constants';
 import bountyPrefs from './bountyPrefs';
 import equipPrefs from './equipPrefs';
 import generalPrefs from './generalPrefs';
@@ -35,9 +36,8 @@ function linkToWebsite() {
     + 'for any suggestions, requests or bug reports</span></td></tr>';
 }
 
-function coderLink(acc, curr, ind, ary) {
-  let ret = `${acc}<a href="${playerIdUrl}${
-    curr[0]}">${curr[1]}</a>`;
+function coderLink(acc, [id, name], ind, ary) {
+  let ret = `${acc}${playerLink(id, name)}`;
   if (ind === ary.length - 2) {
     ret += ' and ';
   } else if (ind !== ary.length - 1) { ret += ', '; }

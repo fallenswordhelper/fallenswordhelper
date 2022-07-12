@@ -8,6 +8,7 @@ import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onlineDot from '../../common/onlineDot';
 import partial from '../../common/partial';
+import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
 import regExpExec from '../../common/regExpExec';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { months, playerIdUrl } from '../../support/constants';
@@ -60,11 +61,6 @@ function byMemberLevel(membrlist, a, b) {
   return memberLevel(membrlist, b) - memberLevel(membrlist, a);
 }
 
-function profileLink(membrlist, name) {
-  if (!membrlist[name]) { return name; }
-  return `<a href="${playerIdUrl}${membrlist[name].id}">${name}</a>`;
-}
-
 function groupMembers(membrlist, membersCell) {
   const listArr = csvSplit(membersCell.innerHTML);
   if (listArr.length > 1) { listArr.sort(partial(byMemberLevel, membrlist)); }
@@ -82,7 +78,7 @@ function buffLinks(creatorCell, listArr) {
 }
 
 function memberProfileLinks(membrlist, membersCell, listArr) {
-  const memberLinks = listArr.map(partial(profileLink, membrlist));
+  const memberLinks = listArr.map(partial(playerLinkFromMembrList, membrlist));
   setInnerHtml(`<span>${memberLinks.join(', ')}</span>`, membersCell);
 }
 

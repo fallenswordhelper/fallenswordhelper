@@ -6,7 +6,7 @@ import insertElement from '../../../common/insertElement';
 import insertHtmlBeforeEnd from '../../../common/insertHtmlBeforeEnd';
 import keys from '../../../common/keys';
 import partial from '../../../common/partial';
-import { playerIdUrl } from '../../../support/constants';
+import playerLink from '../../../common/playerLink';
 import { getNowSecs } from '../../../support/now';
 import getValue from '../../../system/getValue';
 import { atkStats, defStats, proc } from './assets';
@@ -95,10 +95,7 @@ function availableMembers(key) {
   return available.every(partial(condition, key));
 }
 
-function makeLinks(key) {
-  return `<a href="${playerIdUrl}${guildMemberList[key].id}">${key
-  }</a>`;
-}
+const makeLinks = (key) => playerLink(guildMemberList[key].id, key);
 
 function missingMembers(membrList) {
   guildMemberList = membrList;

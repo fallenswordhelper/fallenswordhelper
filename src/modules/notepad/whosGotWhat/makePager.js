@@ -27,15 +27,19 @@ function onSummaryChange(table) {
   return pager;
 }
 
-export default function makePager(bottom, table) {
-  const pager = onSummaryChange(table);
-  onclick(firstBtn, () => pager.selectPage(1));
-  onclick(prevBtn, () => pager.selectPreviousPage());
-  onclick(nextBtn, () => pager.selectNextPage());
+function injectControls() {
   insertElement(pagerDiv, firstBtn);
   insertElement(pagerDiv, prevBtn);
   insertElement(pagerDiv, pageBtn);
   insertElement(pagerDiv, nextBtn);
   insertElement(pagerDiv, lastBtn);
+}
+
+export default function makePager(bottom, table) {
+  const pager = onSummaryChange(table);
+  onclick(firstBtn, () => pager.selectPage(1));
+  onclick(prevBtn, () => pager.selectPreviousPage());
+  onclick(nextBtn, () => pager.selectNextPage());
+  injectControls();
   insertElement(bottom, pagerDiv);
 }
