@@ -45,17 +45,19 @@ function makeSizer(el, table) {
   });
 }
 
+const searchInput = () => createInput({
+  dataset: {
+    stSearch: 'name, rank_name',
+    stSearchFlags: 'i',
+  },
+  placeholder: 'Enter search term',
+  required: true,
+  type: 'text',
+});
+
 function makeSearch(top, table) {
   const wrapper = createDiv({ className: 'fsh-search-wrapper' });
-  const input = createInput({
-    dataset: {
-      stSearch: 'name, rank_name',
-      stSearchFlags: 'i',
-    },
-    placeholder: 'Enter search term',
-    required: true,
-    type: 'text',
-  });
+  const input = searchInput();
   const button = createButton({
     innerHTML: '&times;',
     type: 'button',

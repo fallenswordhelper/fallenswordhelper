@@ -40,6 +40,8 @@ let extraProfile = 0;
 let profilePagesToSearch = 0;
 let profilePagesToSearchProcessed = 0;
 
+function setInnerById(html, id) { setInnerHtml(html, getElementById(id)); }
+
 function gotProfile(j, html) {
   parseProfileAndDisplay(html, {
     href: j,
@@ -52,9 +54,8 @@ function getProfile(j) {
 }
 
 function findBuffsParsePlayersForBuffs() { // Legacy
-  // remove duplicates TODO
   // now need to parse player pages for buff ...
-  setInnerHtml(onlinePlayers.length, getElementById('potentialBuffers'));
+  setInnerById(onlinePlayers.length, 'potentialBuffers');
   if (onlinePlayers.length <= 0) {
     updateProgress('Done.', 'blue');
     return;
@@ -200,27 +201,35 @@ function notHeader(_el, i) { return i !== 0; }
 
 function deleteRow(buffTable) { buffTable.deleteRow(-1); }
 
-function findBuffsClearResults() { // Legacy
+function clearTable() {
   const buffTable = getElementById('buffTable');
-  arrayFrom(buffTable.rows).filter(notHeader)
-    .forEach(partial(deleteRow, buffTable));
-  setInnerHtml('', getElementById('buffNicks'));
+  arrayFrom(buffTable.rows).filter(notHeader).forEach(partial(deleteRow, buffTable));
+}
+
+function findBuffsClearResults() { // Legacy
+  clearTable();
+  setInnerById('', 'buffNicks');
   updateProgress('Idle.', 'black');
-  setInnerHtml('', getElementById('potentialBuffers'));
-  setInnerHtml('0', getElementById('buffersProcessed'));
+  setInnerById('', 'potentialBuffers');
+  setInnerById('0', 'buffersProcessed');
+}
+
+async function goFindBuffs() {
+  // get list of players to search, starting with guild>manage page
+  const responseText = await guildManage();
+  findBuffsParseGuildManagePage(responseText);
 }
 
 function findAnyStart(progMsg) { // jQuery
   if (jQueryNotPresent()) { return; }
-  setInnerHtml(findBuffNicks, getElementById('buffNicks'));
+  setInnerById(findBuffNicks, 'buffNicks');
   updateProgress(`Gathering list of ${progMsg} ...`, 'green');
   setMinLvl();
-  setInnerHtml('0', getElementById('buffersProcessed'));
+  setInnerById('0', 'buffersProcessed');
   onlinePlayers = [];
   extraProfile = getElementById('extraProfile').value;
   setValue('extraProfile', extraProfile);
-  // get list of players to search, starting with guild>manage page
-  guildManage().then(findBuffsParseGuildManagePage);
+  goFindBuffs();
 }
 
 function thisBuff(selectedBuff, el) { return selectedBuff === el.id; }

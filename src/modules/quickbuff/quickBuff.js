@@ -13,7 +13,7 @@ import getSustain from './getSustain';
 import passThruBuffs from './passThruBuffs';
 import passThruPlayers from './passThruPlayers';
 import quickActivate from './quickActivate';
-import quickbuffSort from './sortBuffs';
+import quickbuffSort from './quickbuffSort';
 
 function setupEventHandlers() {
   onclick(getElementById('helperQBheader'), quickActivate);

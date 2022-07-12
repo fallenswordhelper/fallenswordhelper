@@ -41,17 +41,20 @@ function makeFlags(fds) {
   ];
 }
 
+const buildFormData = (settingsPage) => [...settingsPage.forms].map((e) => new FormData(e));
+const getNumeric = (form, key) => parseInt(form.get(key), 10);
+
 function resultObject(settingsPage) {
-  const fds = [...settingsPage.forms].map((e) => new FormData(e));
+  const fds = buildFormData(settingsPage);
   return {
     s: true,
     r: {
       skills: getSkills(settingsPage),
       item_drop_rarity: getDrops(fds[1]),
       flags: makeFlags(fds),
-      min_group_join_level: parseInt(fds[0].get('min_group_level'), 10),
-      item_drop_discard_level: parseInt(fds[1].get('auto_discard_level'), 10),
-      player_block_type: parseInt(fds[2].get('block_level'), 10),
+      min_group_join_level: getNumeric(fds[0], 'min_group_level'),
+      item_drop_discard_level: getNumeric(fds[1], 'auto_discard_level'),
+      player_block_type: getNumeric(fds[2], 'block_level'),
     },
   };
 }

@@ -14,15 +14,15 @@ function sortBuffsHelper(parentElementId) {
   const buffs = querySelectorArray(`#${parentElementId} > p`);
   buffs.sort((a, b) => (a.children[0].dataset.name > b.children[0].dataset.name ? 1 : -1));
   const buffBlock = querySelector(`#${parentElementId}`);
-  for (let i = 0; i < buffs.length; i++) {
-    buffBlock.appendChild(buffs[i]);
+  for (const value of buffs) {
+    buffBlock.appendChild(value);
   }
 }
 
-function sortBuffsByDefaultOrder(blockId) {
-  const buffBlock = querySelector(`#${blockId}`);
-  for (let i = 0; i < defaultBuffOrder[blockId].length; i++) {
-    buffBlock.appendChild(defaultBuffOrder[blockId][i]);
+function sortBuffsByDefaultOrder(id) {
+  const buffBlock = querySelector(`#block${id}`);
+  for (const value of defaultBuffOrder[id]) {
+    buffBlock.appendChild(value);
   }
 }
 
@@ -31,8 +31,7 @@ function sortBuffs(alphabetically) {
     if (alphabetically) {
       sortBuffsHelper(`block${i}`);
     } else {
-      const blockId = `block${i}`;
-      sortBuffsByDefaultOrder(blockId);
+      sortBuffsByDefaultOrder(i);
     }
   }
 }
@@ -45,7 +44,7 @@ function onSortBuffsCheckboxChanged(event) {
 function storeDefaultBuffOrder() {
   for (let i = 1; i <= 3; i++) {
     const block = `block${i}`;
-    defaultBuffOrder[block] = querySelectorAll(`#${block} > p`);
+    defaultBuffOrder[i] = querySelectorAll(`#${block} > p`);
   }
 }
 

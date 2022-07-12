@@ -20,8 +20,11 @@ function pivotPotObj(potOpts, potObj, acc, pot) {
   return acc;
 }
 
+const checkBounds = (percent) => Math.max(Math.min(percent, 100), 0);
+const toHex = (rgb) => (`000000${rgb.toString(16)}`).slice(-6);
+
 function perc2color(percent) {
-  const perc = Math.max(Math.min(percent, 100), 0);
+  const perc = checkBounds(percent);
   let red = 255;
   let green = 255;
   const blue = 0;
@@ -31,7 +34,7 @@ function perc2color(percent) {
     red = Math.round(510 - 5.10 * perc);
   }
   const rgb = red * 0x10000 + green * 0x100 + blue;
-  const colour = (`000000${rgb.toString(16)}`).slice(-6);
+  const colour = toHex(rgb);
   return `#${colour}`;
 }
 
