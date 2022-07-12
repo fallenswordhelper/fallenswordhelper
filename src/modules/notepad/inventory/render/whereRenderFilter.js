@@ -6,7 +6,7 @@ function whereRenderGuildFilter(row) {
   return playerName(row.player_id);
 }
 
-export default function whereRenderFilter(data, type, row) {
+export default function whereRenderFilter(_data, _type, row) {
   if (row.player_id) {
     return whereRenderGuildFilter(row);
   }

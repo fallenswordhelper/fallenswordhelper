@@ -23,7 +23,7 @@ function rowFactory(aRow) {
   return aRow.dom;
 }
 
-export default function displayChange(domTable, table, displayed) {
+export default function displayChange(domTable, _table, displayed) {
   const domTBody = domTable.tBodies[0];
   const thisTBody = createTBody();
   for (const r of displayed) {

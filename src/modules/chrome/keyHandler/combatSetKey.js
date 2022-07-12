@@ -1,20 +1,15 @@
 import daViewCombatSet from '../../_dataAccess/daViewCombatSet';
 import navigateTo from '../../common/navigateTo';
-import partial from '../../common/partial';
 import { defSubcmd, profileUrl } from '../../support/constants';
 import expandMenu from './expandMenu';
 import keyHandlerEvent from './keyHandlerEvent';
 
 const jsonTests = [
-  (itemIndex, json) => json,
-  (itemIndex, json) => json.s,
-  (itemIndex, json) => json.r,
-  (itemIndex, json) => json.r.length > itemIndex,
+  (json) => json?.s,
+  (json, itemIndex) => json.r?.length > itemIndex,
 ];
 
-const funcPasses = (itemIndex, json, fn) => fn(itemIndex, json);
-
-const goodData = (itemIndex, json) => jsonTests.every(partial(funcPasses, itemIndex, json));
+const goodData = (itemIndex, json) => jsonTests.every((fn) => fn(json, itemIndex));
 
 export default async function combatSetKey(itemIndex) {
   const json = await daViewCombatSet();

@@ -8,11 +8,13 @@ import { guildRE } from '../support/constants';
 import { getNowSecs } from '../support/now';
 import getValue from '../system/getValue';
 
-let highlightPlayersNearMyLvl = 0;
+let highlightPlayersNearMyLvl = null;
 let myGuildId = 0;
 
 function getPref() {
-  highlightPlayersNearMyLvl = getValue('highlightPlayersNearMyLvl');
+  if (highlightPlayersNearMyLvl === null) {
+    highlightPlayersNearMyLvl = getValue('highlightPlayersNearMyLvl');
+  }
   return highlightPlayersNearMyLvl;
 }
 
@@ -22,11 +24,11 @@ function getMyGuildId() {
 }
 
 const highlightTests = [
-  () => highlightPlayersNearMyLvl || getPref(),
-  (guildId) => isUndefined(guildId) || guildId !== (myGuildId || getMyGuildId()),
-  (guildId, data) => data.last_login >= getNowSecs() - 604800,
-  (guildId, data) => data.virtual_level >= getLowerPvpLevel(),
-  (guildId, data) => data.virtual_level <= getUpperPvpLevel(),
+  () => getPref(),
+  (_data, guildId) => isUndefined(guildId) || guildId !== (myGuildId || getMyGuildId()),
+  (data) => data.last_login >= getNowSecs() - 604800,
+  (data) => data.virtual_level >= getLowerPvpLevel(),
+  (data) => data.virtual_level <= getUpperPvpLevel(),
 ];
 
 function getGuild(tbl) {
@@ -36,7 +38,7 @@ function getGuild(tbl) {
 }
 
 function pvpHighlight(guildId, data) {
-  return highlightTests.every((el) => el(guildId, data));
+  return highlightTests.every((el) => el(data, guildId));
 }
 
 export default function decoratePlayer(aTable, data) {

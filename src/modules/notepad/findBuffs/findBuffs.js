@@ -86,7 +86,7 @@ function includePlayer(onlinePlayerLevel) {
     && onlinePlayerLevel >= calcMinLvl();
 }
 
-function playerRow(i, e) {
+function playerRow(_i, e) {
   if (includePlayer(getOnlinePlayerLevel(e))) {
     const onlinePlayer = $(e).find('td:eq(1) a').attr('href');
     const onlinePlayerName = $(e).find('td:eq(1) a').text();
@@ -196,7 +196,7 @@ function findBuffsParseGuildManagePage(responseText) {
   findBuffsParseProfilePageStart();
 }
 
-function notHeader(el, i) { return i !== 0; }
+function notHeader(_el, i) { return i !== 0; }
 
 function deleteRow(buffTable) { buffTable.deleteRow(-1); }
 

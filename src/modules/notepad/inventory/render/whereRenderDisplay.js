@@ -24,7 +24,7 @@ function makeFolderOptions(folderId, folders) {
     .map(partial(makeOption, folderId)).join('');
 }
 
-export default function whereRenderDisplay(data, type, row) {
+export default function whereRenderDisplay(_data, _type, row) {
   if (row.player_id) {
     return whereRenderGuildDisplay(row);
   }

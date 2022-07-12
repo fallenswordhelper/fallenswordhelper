@@ -16,7 +16,7 @@ function thisFolderHref(doc) {
   return getFolderImgs(doc).find(thisInventFolder).parentNode.href;
 }
 
-function notThisPage(el, i) { return i !== 0; }
+function notThisPage(_el, i) { return i !== 0; }
 
 function pageNumber(el) { return el.value; }
 

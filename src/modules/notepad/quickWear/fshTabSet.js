@@ -12,7 +12,7 @@ import { publish } from '../../support/pubsub';
 
 const toggleId = (groupName, i) => groupName + String(i);
 
-function makeRadio(groupName, e, i) {
+function makeRadio(groupName, _e, i) {
   return createInput({
     checked: i === 0,
     id: toggleId(groupName, i),

@@ -6,7 +6,7 @@ import {
   defFetchWorldRealmDynamic,
 } from '../../support/constants';
 
-function doRepair(e, key) {
+function doRepair(_e, key) {
   if (key === 'ACT_REPAIR') {
     GameData.fetch(
       defFetchPlayerBackpackCount

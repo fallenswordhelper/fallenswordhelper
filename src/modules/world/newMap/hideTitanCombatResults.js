@@ -21,12 +21,12 @@ function removeAction(data) {
 
 function removeElement(el) { el.remove(); }
 
-function hideTitanViewCombat(e, data) {
+function hideTitanViewCombat(_e, data) {
   removeAction(data);
   querySelectorArray('.creature-4 > .quickCombat > .verbs')
     .forEach(removeElement);
 }
 
 export default function hideTitanCombatResults() {
-  $.subscribe(defPvE, hideTitanViewCombat); // TODO Pref
+  $.subscribe(defPvE, hideTitanViewCombat); // Pref
 }

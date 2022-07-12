@@ -72,12 +72,13 @@ function testTitan(e) {
   return { ...common(e), ...location(e), ...contributors(e) };
 }
 
+const titanRows = (_e, i, a) => i !== 0 && i < a.length - 1 && (i - 1) % 6 < 3;
+
 function parseReport(html) {
   const doc = createDocument(html);
   const titanTable = querySelector('table[width="500"]', doc);
   if (!titanTable) { return { s: false }; }
-  const thisRows = arrayFrom(titanTable.rows)
-    .filter((e, i, a) => i !== 0 && i < a.length - 1 && (i - 1) % 6 < 3);
+  const thisRows = arrayFrom(titanTable.rows).filter(titanRows);
   const titans = chunk(3, thisRows);
   return { r: titans.map(testTitan), s: true };
 }

@@ -19,9 +19,9 @@ import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { getPcc } from '../../support/layout';
-import theadHtml from './assets';
 import displayChange from './displayChange';
 import prepareData from './prepareData';
+import theadHtml from './theadHtml';
 
 function makeTable(el) {
   return insertElement(el, createTable({
@@ -85,8 +85,7 @@ function makeSummary(bottom, table, data) {
   });
 }
 
-function makePager(bottom, table) {
-  const pagerDiv = createDiv();
+function pagerControl(table) {
   const firstBtn = createButton({ innerHTML: '«' });
   const prevBtn = createButton({ innerHTML: '‹' });
   const pageBtn = createButton({ disabled: true, innerHTML: '1' });
@@ -109,6 +108,16 @@ function makePager(bottom, table) {
   onclick(nextBtn, () => pager.selectNextPage());
   onclick(lastBtn, () => pager.selectPage(lastPage));
 
+  return {
+    firstBtn, prevBtn, pageBtn, nextBtn, lastBtn,
+  };
+}
+
+function makePager(bottom, table) {
+  const {
+    firstBtn, prevBtn, pageBtn, nextBtn, lastBtn,
+  } = pagerControl(table);
+  const pagerDiv = createDiv();
   insertElement(pagerDiv, firstBtn);
   insertElement(pagerDiv, prevBtn);
   insertElement(pagerDiv, pageBtn);

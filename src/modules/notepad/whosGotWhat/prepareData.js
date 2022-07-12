@@ -8,7 +8,7 @@ import addCommas from '../../system/addCommas';
 function byMember(acc, curr) {
   // if (curr.item_id === 11503) { // Zombie Brew
   if (!curr.equipped) {
-  // if (curr.equipped) {
+  // if (curr.equipped) { // equipped
     acc[curr.player_id] = acc[curr.player_id] || [];
     acc[curr.player_id].push(curr);
   }

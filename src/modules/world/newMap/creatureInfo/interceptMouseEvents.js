@@ -39,7 +39,7 @@ function displayJson(api, data) {
   api.set('content.text', content);
 }
 
-function getJson(passback, event, api) { // jQuery.min
+function getJson(passback, _event, api) { // jQuery.min
   getCreatureStats(GameData.actions()[passback].data.id, passback)
     .then(partial(displayJson, api));
   return 'Loading...';

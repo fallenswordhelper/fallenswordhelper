@@ -11,7 +11,7 @@ function bpDisplayType(type, row) {
   }" mode="0" action="recall">BP</span>`;
 }
 
-export default function bpRender(where, type, row) {
+export default function bpRender(_where, type, row) {
   if (row.folder_id || row.player_id
     === getTheInv().current_player_id) { return; }
   return bpDisplayType(type, row);

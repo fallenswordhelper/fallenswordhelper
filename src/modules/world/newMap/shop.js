@@ -100,7 +100,7 @@ function initQuickBuy() {
   }
 }
 
-function worldDialogShop(e, data) {
+function worldDialogShop(_e, data) {
   shoppingData = data;
   dialog = getDialog();
   if (!dialog) { return; }

@@ -3,7 +3,7 @@ import calf from '../support/calf';
 import intValue from '../system/intValue';
 import { getOpts } from './setOpts';
 
-function hazOpts(_settings, data) {
+function hazOpts(data) {
   const min = getOpts().minLvl;
   const max = getOpts().maxLvl;
   const level = intValue(data[7]);
@@ -11,7 +11,7 @@ function hazOpts(_settings, data) {
 }
 
 function lvlFilter(_settings, data) {
-  if (getOpts()) { return hazOpts(_settings, data); }
+  if (getOpts()) { return hazOpts(data); }
   return true;
 }
 

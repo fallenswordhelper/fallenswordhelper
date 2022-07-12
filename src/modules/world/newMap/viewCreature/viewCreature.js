@@ -176,7 +176,7 @@ function isValidData(data) {
   return data.response && data.response.data;
 }
 
-function processCreature(e, data) {
+function processCreature(_e, data) {
   getDialogViewCreature();
   if (!dialogViewCreature) { return; }
   setCombatEvaluator('');

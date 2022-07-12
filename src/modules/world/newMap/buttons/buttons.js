@@ -188,14 +188,14 @@ function injectButtons() {
   }
 }
 
-function realmUpdate(e, data) {
+function realmUpdate(_e, data) {
   if (realmLvl && data.b.minlevel) {
     fixTeleport();
     setText(data.b.minlevel, realmLvl);
   }
 }
 
-function levelStats(e, data) {
+function levelStats(_e, data) {
   if (yourLvl) {
     setText(data.b, yourLvl);
   }

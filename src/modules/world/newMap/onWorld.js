@@ -8,7 +8,7 @@ function hazRealm(data) {
   return data.realm && data.realm.name;
 }
 
-function injectWorldNewMap(e, data) {
+function injectWorldNewMap(_e, data) {
   if (hazRealm(data)) {
     titanStats(data.realm);
   }

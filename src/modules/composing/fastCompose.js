@@ -56,7 +56,7 @@ function buildButton(val, templateId) {
   });
 }
 
-function buildCells(template, myRow, compSlot, i) {
+function buildCells(template, myRow, _compSlot, i) {
   if (i === 0) {
     setText(template[1], myRow.insertCell(-1));
   }
@@ -67,7 +67,7 @@ function buildCells(template, myRow, compSlot, i) {
   return myRow;
 }
 
-function buildRows(compSlots, openSlots, myTable, template) {
+function buildRows(compSlots, myTable, template) {
   compSlots.reduce(partial(buildCells, template), myTable.insertRow(-1));
   return myTable;
 }
@@ -75,7 +75,7 @@ function buildRows(compSlots, openSlots, myTable, template) {
 function buildTable(templates, compSlots, openSlots) {
   const myTable = createTable({ id: 'fshFastCompose' });
   doTableClass(myTable, openSlots);
-  return templates.reduce(partial(buildRows, compSlots, openSlots), myTable);
+  return templates.reduce(partial(buildRows, compSlots), myTable);
 }
 
 function keyValuePairs(el) { return [el.value, el.text]; }

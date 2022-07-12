@@ -90,7 +90,7 @@ export function getStats() {
   allthen(prm, doCalculations);
 }
 
-function viewRelic(e, data) {
+function viewRelic(_e, data) {
   if (badData(data)) { return; }
   relicData = data.response.data;
   if (relicData.defenders.length > 0) {

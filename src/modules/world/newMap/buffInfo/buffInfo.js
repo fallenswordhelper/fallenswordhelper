@@ -49,7 +49,7 @@ function updateBuffInfo() {
   }
 }
 
-function teleportEvent(e, data) {
+function teleportEvent(_e, data) {
   doCountdown(data.player.teleportCooldown);
 }
 

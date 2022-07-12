@@ -29,7 +29,7 @@ import {
 
 const noAlliesTests = [
   (allies, enemies) => allies.length + enemies.length,
-  (allies, enemies) => {
+  (_allies, enemies) => {
     if (!calf.enableAllyOnlineList) { return enemies.length; }
   },
   (allies) => {

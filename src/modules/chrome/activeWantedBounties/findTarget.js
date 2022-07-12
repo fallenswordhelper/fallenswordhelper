@@ -23,7 +23,7 @@ function getTarget(theCells) {
 const isWanted = [
   () => getWantedArray().includes('*'),
   (target) => getWantedArray().includes(target),
-  (target, theRow) => calf.wantedGuildMembers
+  (_target, theRow) => calf.wantedGuildMembers
     && getTextTrim(theRow.cells[6]) === '[n/a]',
 ];
 

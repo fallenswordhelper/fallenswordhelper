@@ -18,10 +18,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 20px; /* TODO Find most common values here */
-  height: 20px; /* TODO Find most common values here */
-  margin-top: -10px; /* TODO Find most common values here */
-  margin-left: -10px; /* TODO Find most common values here */
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
   border-radius: 50%;
   border: 2px solid #ccc;
   border-top-color: #07d;

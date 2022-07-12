@@ -28,7 +28,7 @@ function removeHiddenRows() {
   hiddenRows.forEach((n) => n.remove());
 }
 
-function redoHead(i, e) { // jQuery
+function redoHead(_i, e) { // jQuery
   const firstRow = $('tr', e).first();
   $('a', firstRow).contents().unwrap();
   $(e).prepend($('<thead/>').append(firstRow));

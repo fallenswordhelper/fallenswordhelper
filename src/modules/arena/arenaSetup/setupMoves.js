@@ -69,7 +69,7 @@ function updateButton(table) { // jQuery
 
 const getMoveCode = (e) => regExpFirstCapture(moveRe, $(e).attr('src')) ?? 'x';
 
-function makeDropDown(row, i, e) { // jQuery
+function makeDropDown(row, _i, e) { // jQuery
   const move = getMoveCode(e);
   oldMoves.push(move);
   const html = $(moveOptions);

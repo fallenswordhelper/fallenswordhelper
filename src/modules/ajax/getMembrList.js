@@ -33,8 +33,8 @@ function getAndCacheGuildMembers(guildId) {
 }
 
 const testList = [
-  (guildId, membrList) => membrList,
-  (guildId, membrList) => isObject(membrList),
+  (_guildId, membrList) => membrList,
+  (_guildId, membrList) => isObject(membrList),
   (guildId, membrList) => isObject(membrList[guildId]),
   (guildId, membrList) => typeof membrList[guildId].lastUpdate === 'number',
   (guildId, membrList) => membrList[guildId].lastUpdate > getNow() - 300000,

@@ -2,7 +2,7 @@ function cantSend(row) {
   return row.equipped || (row.guild_tag === -1 && row.bound);
 }
 
-export default function sendRender(data, type, row) {
+export default function sendRender(_data, type, row) {
   if (cantSend(row)) { return; }
   if (type !== 'display') { return 'Send'; }
   return '<span class="sendItem sendLink" '

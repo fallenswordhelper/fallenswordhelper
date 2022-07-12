@@ -32,7 +32,7 @@ function joinCost(theCells) {
   cell.attr('data-order', $('td', cell).first().text().replace(/[,\s]/g, ''));
 }
 
-function boolData(i, el) { // jQuery
+function boolData(_i, el) { // jQuery
   const matches = regExpFirstCapture(/(?<move>\d)\.png/, $('img', el).attr('src'));
   if (matches) { $(el).attr('data-order', matches); }
 }
@@ -66,7 +66,7 @@ function reward(theCells) { // jQuery
   cell.attr('data-order', cell.find('td').first().text().replace(/[,\s]/g, ''));
 }
 
-function prepareData(i, e) { // jQuery
+function prepareData(_i, e) { // jQuery
   const row = $(e);
   const theCells = row.children();
   checkTournamentId(row, theCells);

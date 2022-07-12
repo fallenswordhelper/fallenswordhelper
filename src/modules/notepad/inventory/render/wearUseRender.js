@@ -12,7 +12,7 @@ function guidInvNotEquipped(row) {
 const locations = [
   [
     (row) => row.player_id && row.player_id === -1,
-    (row, act) => `takeItem" action="${act.a}`,
+    (_row, act) => `takeItem" action="${act.a}`,
   ],
   [
     (row) => row.player_id && row.player_id !== getTheInv().current_player_id,
@@ -21,12 +21,12 @@ const locations = [
   ],
   [
     (row) => userInvNotEquipped(row) || guidInvNotEquipped(row),
-    (row, act) => act.c,
+    (_row, act) => act.c,
   ],
 ];
 
 function wuRender(row, act) {
-  const location = locations.find((el) => el[0](row));
+  const location = locations.find(([fn]) => fn(row));
   if (location) {
     return `<span class="fshLink ${location[1](row, act)
     }" invid="${row.inv_id}">${act.b}</span>`;

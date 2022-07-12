@@ -2,7 +2,7 @@ import jsonParse from '../common/jsonParse';
 import regExpExec from '../common/regExpExec';
 import getValue from './getValue';
 
-function reviver(key, value) {
+function reviver(_key, value) {
   if (typeof value === 'string') {
     const dateParts = regExpExec(/^(?<year>\d{4})-(?<month>\d{2})-(?<date>\d{2})T(?<hr>\d{2}):(?<min>\d{2}):(?<sec>\d{2}(?:\.\d*)?)Z$/, value);
     if (dateParts) {
