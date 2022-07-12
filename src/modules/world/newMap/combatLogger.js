@@ -7,7 +7,7 @@ const notSave = ['Breaker', 'Protection', 'Master Thief', 'Protect Gold',
   'Disarm', 'Duelist', 'Thievery', 'Master Blacksmith', 'Master Crafter',
   'Fury Caster', 'Master Inventor', 'Sustain'];
 let combatLog = [];
-let combatData;
+let combatData = 0;
 
 function storeBuffs(buff) {
   if (buff.id === 54 || buff.id === 26) {
