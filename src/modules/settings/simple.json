@@ -493,5 +493,108 @@
     "helpTitle":"Ajaxify Move Recipe",
     "helpText":"Move recipe without page redirect.",
     "network":true
+  },
+  "hideRecipes":{
+    "helpTitle":"Hide Specific Recipes",
+    "helpText":"If enabled, this hides recipes whose name matches the list (separated by commas). This works on Recipe Manager"
+  },
+  "enableMaxGroupSizeToJoin":{
+    "helpTitle":"Max Group Size to Join",
+    "helpText":"This will disable HCSs Join All functionality and will only join groups less than a set size."
+  },
+  "highlightValidTargets":{
+    "helpTitle":"Highlight Valid PvP Targets",
+    "helpText":"Enabling this option will highlight targets in OTHER guilds that are within your level range to attack for PvP or GvG."
+  },
+  "enableGuildInfoWidgets":{
+    "helpTitle":"Enable Guild Info Widgets",
+    "helpText":"Enabling this option will enable the Guild Info Widgets (coloring on the Guild Info panel)"
+  },
+  "showAlliesEnemies":{
+    "helpTitle":"Show Online Allies/Enemies",
+    "helpText":"This will show the allies/enemies online list on the left.",
+    "network":true
+  },
+  "quickLinksLocation":{
+    "helpTitle":"Quick Links Screen Location",
+    "helpText":"Determines where the quick links dialog shows on the screen. Default is top 22, left 0."
+  },
+  "hideCreateGroupButton":{
+    "helpTitle":"Hide Create Group Button",
+    "helpText":"Enabling this option will hide the Create Group button"
+  },
+  "keepLogs":{
+    "helpTitle":"Keep Combat Logs",
+    "helpText":"Save combat logs to a temporary variable. Press <u>Show logs</u> on the right to display and copy them"
+  },
+  "combatEvaluatorBias":{
+    "helpTitle":"Combat Evaluator Bias",
+    "helpText":"This changes the bias of the combat evaluator for the damage and HP evaluation. It will not change the attack bias (1.1053).<br>Conservative = 1.1053 and 1.1 (Safest)<br>Semi-Conservative = 1.1 and 1.053<br>Adventurous = 1.053 and 1 (Bleeding Edge)<br>Conservative+ = 1.1053 and 1 with the attack calculation changed to +-48 per RJEM"
+  },
+  "sendGoldonWorld":{
+    "helpTitle":"Show Gold on World Screen",
+    "helpText":"This will show a button in the gold dropdown to allow you to quickly send gold to a Friend.",
+    "title":"Show Send Gold"
+  },
+  "doNotKillList":{
+    "helpTitle":"Do Not Kill List",
+    "helpText":"List of creatures that will not be killed by quick kill. You must type the full name of each creature, separated by commas. Creature name will show up in blue color on world screen and will not be killed by keyboard entry (but can still be killed by mouseclick)."
+  },
+  "newGuildLogHistoryPages":{
+    "helpTitle":"New Guild Log History (pages)",
+    "helpText":"This is the number of pages that the new guild log screen will go back in history.",
+    "title":"New Guild Log History"
+  },
+  "defaultMessageSound":{
+    "helpTitle":"New Log Message Sound",
+    "helpText":"The .wav or .ogg file to play when you have unread log messages. This must be a .wav or .ogg file."
+  },
+  "playNewMessageSound":{
+    "helpTitle":"Play sound on unread log",
+    "helpText":"Should the above sound play when you have unread log messages?"
+  },
+  "showSpeakerOnWorld":{
+    "helpTitle":"Show speaker on world",
+    "helpText":"Should the toggle play sound speaker show on the world map?"
+  },
+  "showQuickSendLinks":{
+    "helpTitle":"Show Quick Send on Manage Backpack",
+    "helpText":"This will show a link beside each item which gives the option to quick send the item to this person",
+    "network":true,
+    "title":"Show Quick Send Item"
+  },
+  "sendClasses":{
+    "helpTitle":"Quick Select all of type in Send Screen",
+    "helpText":"This allows you to customize what quick links you would like displayed in your send item screen.<br>Use the format [&quot;name&quot;,&quot;itemid&quot;],[&quot;othername&quot;,&quot;itemid2&quot;].<br>WARNING: NO REFUNDS ON ERROR"
+  },
+  "hideQuests":{
+    "helpTitle":"Hide Specific Quests",
+    "helpText":"If enabled, this hides quests whose name matches the list (separated by commas)."
+  },
+  "buyBuffsGreeting":{
+    "helpTitle":"Buy Buffs Greeting",
+    "helpText":"This is the default text to open a message with when asking to buy buffs. You can use {playername} to insert the target players name. You can also use {buffs} to insert the list of buffs. You can use {cost} to insert the total cost of the buffs."
+  },
+  "enableActiveBountyList":{
+    "helpTitle":"Show Active Bounties",
+    "helpText":"This will show your active bounties on the left hand side",
+    "network":true
+  },
+  "enableWantedList":{
+    "helpTitle":"Show Wanted Bounties",
+    "helpText":"This will show when someone you want is on the bounty board, the list is displayed on the left hand side",
+    "network":true
+  },
+  "wantedNames":{
+    "helpTitle":"Wanted Names",
+    "helpText":"The names of the people you want to see on the bounty board separated by commas (or * for all)"
+  },
+  "showHuntingBuffs":{
+    "helpTitle":"Hunting Buffs",
+    "helpText":"Customize which buffs are designated as hunting buffs. You must type the full name of each buff, separated by commas. Use the checkbox to enable/disable them."
+  },
+  "enabledHuntingMode":{
+    "helpTitle":"Enabled Hunting Mode",
+    "helpText":"This will determine which list of buffs gets checked on the world screen."
   }
 }

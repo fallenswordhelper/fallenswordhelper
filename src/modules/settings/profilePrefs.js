@@ -1,6 +1,6 @@
 import getValue from '../system/getValue';
 import bunchOfSimple from './bunchOfSimple';
-import { helpLink } from './simpleCheckbox';
+import { justLabel } from './simpleCheckbox';
 
 const part1 = [
   'showQuickButtons',
@@ -10,16 +10,12 @@ const part1 = [
 ];
 
 function buffGreet() {
-  return `<tr><td class="fshRight">Buy Buffs Greeting${
-    helpLink(
-      'Buy Buffs Greeting',
-      'This is the default text to open a message with when asking to '
-      + 'buy buffs. You can use {playername} to insert the target players '
-      + 'name. You can also use {buffs} to insert the list of buffs. You '
-      + 'can use {cost} to insert the total cost of the buffs.',
-    )
-  }:</td><td><input name="buyBuffsGreeting" class="fshSettingsText" `
-    + `value="${getValue('buyBuffsGreeting')}"></td></tr>`;
+  return '<tr>'
+    + `<td class="fshRight">${justLabel('buyBuffsGreeting')}</td>`
+    + '<td>'
+    + `<input name="buyBuffsGreeting" class="fshSettingsText" value="${getValue('buyBuffsGreeting')}">`
+    + '</td>'
+    + '</tr>';
 }
 
 const part2 = [

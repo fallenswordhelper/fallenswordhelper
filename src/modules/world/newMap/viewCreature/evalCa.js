@@ -61,32 +61,19 @@ function needCa(combat) {
     || combat.numberOfHitsRequired !== 1;
 }
 
-function evalCaKill(combat) {
-  if (combat.lowestCALevelToStillHit > 175) {
+function fallsShort(combat, prop, type) {
+  if (combat[prop] > 203) {
     combat.extraNotes
-      += 'Even with CA175 you cannot hit this creature<br>';
-  } else if (combat.lowestCALevelToStillHit !== 0) {
-    combat.extraNotes += `You need a minimum of CA${
-      combat.lowestCALevelToStillHit
-    } to hit this creature<br>`;
-  }
-}
-
-function evalCaOneHit(combat) {
-  if (combat.lowestCALevelToStillKill > 175) {
-    combat.extraNotes
-      += 'Even with CA175 you cannot 1-hit kill this creature<br>';
-  } else if (combat.lowestCALevelToStillKill !== 0) {
-    combat.extraNotes += `You need a minimum of CA${
-      combat.lowestCALevelToStillKill
-    } to 1-hit kill this creature<br>`;
+      += `Even with CA203 you cannot ${type} this creature<br>`;
+  } else if (combat[prop] !== 0) {
+    combat.extraNotes += `You need a minimum of CA${combat[prop]} to ${type} this creature<br>`;
   }
 }
 
 function caResult(combat) {
   calcLowest(combat);
-  evalCaKill(combat);
-  evalCaOneHit(combat);
+  fallsShort(combat, 'lowestCALevelToStillHit', 'hit');
+  fallsShort(combat, 'lowestCALevelToStillKill', '1-hit kill');
 }
 
 export default function evalCA(combat) {

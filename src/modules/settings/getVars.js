@@ -7,7 +7,7 @@ function mapCalfPref(el) { calf[el[0]] = getValue(el[1]); }
 
 function mappedVars() {
   [
-    ['showBuffs', 'showHuntingBuffs'],
+    ['showHuntingBuffs', 'showHuntingBuffs'],
     ['buffs', 'huntingBuffs'],
     ['buffsName', 'huntingBuffsName'],
     ['buffs2', 'huntingBuffs2'],

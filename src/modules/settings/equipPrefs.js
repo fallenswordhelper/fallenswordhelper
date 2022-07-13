@@ -1,36 +1,30 @@
 import escapeHtml from '../system/escapeHtml';
 import getValue from '../system/getValue';
 import bunchOfSimple from './bunchOfSimple';
-import isValueChecked from './isValueChecked';
-import networkIcon from './networkIcon';
-import { helpLink, simpleCheckbox } from './simpleCheckbox';
+import {
+  justCheckbox,
+  justLabel,
+  simpleCheckbox,
+} from './simpleCheckbox';
 
 function quickSend() {
-  return `<tr><td class="fshRight">${networkIcon}Show Quick Send Item${
-    helpLink(
-      'Show Quick Send on Manage Backpack',
-      'This will show a link beside each item which gives the option to '
-      + 'quick send the item to this person',
-    )
-  }:</td><td><input name="showQuickSendLinks" type="checkbox" `
-    + `value="on"${
-      isValueChecked('showQuickSendLinks')}>`
+  return '<tr>'
+    + `<td class="fshRight">${justLabel('showQuickSendLinks')}</td>`
+    + '<td>'
+    + `${justCheckbox('showQuickSendLinks')}`
     + '&nbsp;&nbsp;Send Items To '
-    + `<input name="itemRecipient" value="${
-      getValue('itemRecipient')}">`;
+    + `<input name="itemRecipient" value="${getValue('itemRecipient')}">`
+    + '</td>'
+    + '</tr>';
 }
 
 function makeSendClasses() {
-  return `<tr><td class="fshNoWrap fshRight">Quick Select all of type in Send Screen${
-    helpLink(
-      'Quick Select all of type in Send Screen',
-      'This allows you to customize what quick links you would like '
-      + 'displayed in your send item screen.<br>Use the format '
-      + '[&quot;name&quot;,&quot;itemid&quot;],[&quot;othername&quot;,'
-      + '&quot;itemid2&quot;].<br>WARNING: NO REFUNDS ON ERROR',
-    )
-  }:</td><td><input name="sendClasses" class="fshSettingsText" value="${
-    escapeHtml(getValue('sendClasses'))}">`;
+  return '<tr>'
+    + `<td class="fshNoWrap fshRight">${justLabel('sendClasses')}</td>`
+    + '<td>'
+    + `<input name="sendClasses" class="fshSettingsText" value="${escapeHtml(getValue('sendClasses'))}">`
+    + '</td>'
+    + '</tr>';
 }
 
 export default function equipPrefs() {

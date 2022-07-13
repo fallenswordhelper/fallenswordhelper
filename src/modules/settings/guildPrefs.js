@@ -1,7 +1,10 @@
 import getValue from '../system/getValue';
 import bunchOfSimple from './bunchOfSimple';
-import isValueChecked from './isValueChecked';
-import { helpLink, simpleCheckbox } from './simpleCheckbox';
+import {
+  justCheckbox,
+  justLabel,
+  simpleCheckbox,
+} from './simpleCheckbox';
 
 function injectSettingsGuildData(guildType) {
   let title = '';
@@ -38,19 +41,13 @@ function guildNames() {
 }
 
 function pvpTargets() {
-  return `<tr><td class="fshRight">Highlight Valid PvP Targets${
-    helpLink(
-      'Highlight Valid PvP Targets',
-      'Enabling this option will highlight targets in OTHER guilds that '
-      + 'are within your level range to attack for PvP or GvG.',
-    )
-  }:</td><td>PvP: <input name="highlightPlayersNearMyLvl" `
-    + `type="checkbox" value="on"${
-      isValueChecked('highlightPlayersNearMyLvl')
-    }> GvG: <input name="highlightGvGPlayersNearMyLvl" `
-    + `type="checkbox" value="on"${
-      isValueChecked('highlightGvGPlayersNearMyLvl')
-    }></td></tr>`;
+  return '<tr>'
+    + `<td class="fshRight">${justLabel('highlightValidTargets')}:</td>`
+    + '<td>'
+    + `PvP: ${justCheckbox('highlightPlayersNearMyLvl')}`
+    + ` GvG: ${justCheckbox('highlightGvGPlayersNearMyLvl')}`
+    + '</td>'
+    + '</tr>';
 }
 
 export default function guildPrefs() {

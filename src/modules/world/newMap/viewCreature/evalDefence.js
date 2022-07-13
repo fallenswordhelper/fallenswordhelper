@@ -1,3 +1,5 @@
+import evalBuff from './evalBuff';
+
 /* eslint-disable no-param-reassign */
 function calcDef(combat) {
   if (combat.callback.groupExists) {
@@ -15,11 +17,12 @@ function evalConstitution(combat) {
 }
 
 function evalFlinch(combat) {
-  if (combat.player.flinchLevel > 0) {
-    combat.extraNotes += `Flinch Bonus Attack Reduction = ${
-      Math.floor(combat.creature.attack * combat.player.flinchLevel
-    * 0.001)}<br>`;
-  }
+  evalBuff(
+    combat,
+    combat.player.flinchLevel,
+    'Flinch Bonus Attack Reduction',
+    combat.creature.attack,
+  );
 }
 
 export default function evalDefence(combat) {

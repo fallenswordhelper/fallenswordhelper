@@ -1,8 +1,6 @@
-import createSpan from '../../../common/cElement/createSpan';
-import insertElement from '../../../common/insertElement';
 import setTextCommas from '../../../common/setTextCommas';
 import toggleForce from '../../../common/toggleForce';
-import setText from '../../../dom/setText';
+import initBuffDiv from './initBuffDiv';
 
 let ksDiv = 0;
 let killStreakSpan = 0;
@@ -10,9 +8,7 @@ let killStreakSpan = 0;
 function initKsDiv(containerDiv) {
   // eslint-disable-next-line prefer-destructuring
   ksDiv = containerDiv.children[1];
-  setText('Kill Streak: ', ksDiv);
-  killStreakSpan = createSpan();
-  insertElement(ksDiv, killStreakSpan);
+  killStreakSpan = initBuffDiv(ksDiv, '', 'Kill Streak: ', '');
 }
 
 function showKs(containerDiv, ks) {

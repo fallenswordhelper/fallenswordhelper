@@ -25,20 +25,9 @@ function getRecipeItems(recipe) {
   return '';
 }
 
-function componentImg(comp) {
-  return '<div class="rmItem"><img class="tip-dynamic" '
-    + `data-tipped="fetchitem.php?item_id=${
-      comp.id}&inv_id=-1&t=2&p=${
-      currentPlayerId}&vcode=${
-      comp.verify}" src="${
-      comp.img}" height="20px" width="20px"><p>${
-      comp.amountPresent}/${
-      comp.amountNeeded}</p></div>`;
-}
-
 function getComponents(recipe) {
   if (recipe.components) {
-    return recipe.components.map(componentImg).join('');
+    return recipe.components.map(itemImg).join('');
   }
   return '';
 }

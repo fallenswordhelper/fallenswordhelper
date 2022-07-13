@@ -1,3 +1,5 @@
+import evalBuff from './evalBuff';
+
 /* eslint-disable no-param-reassign */
 function calcArm(combat) {
   if (combat.callback.groupExists) {
@@ -14,11 +16,7 @@ function overallArmour(combat) {
 }
 
 function evalSanctuary(combat) {
-  if (combat.player.sanctuaryLevel > 0) {
-    combat.extraNotes += `Sanc Bonus Armor = ${
-      Math.floor(combat.player.armorValue
-      * combat.player.sanctuaryLevel * 0.001)}<br>`;
-  }
+  evalBuff(combat, combat.player.sanctuaryLevel, 'Sanc Bonus Armor', combat.player.armorValue);
 }
 
 function calcTerrorizeEffect(combat) {

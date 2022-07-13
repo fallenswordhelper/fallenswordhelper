@@ -33,8 +33,7 @@ export function justLabel(name) {
 }
 
 export function justCheckbox(name) {
-  return `<input id="${name}" name="${name
-  }" class="fshVMid" type="checkbox" value="on"${isValueChecked(name)}>`;
+  return `<input id="${name}" name="${name}" class="fshVTTop" type="checkbox"${isValueChecked(name)}>`;
 }
 
 export function simpleCheckboxHtml(name) {
@@ -42,6 +41,5 @@ export function simpleCheckboxHtml(name) {
 }
 
 export function simpleCheckbox(name) {
-  return `<tr><td align="right">${justLabel(name)
-  }</td><td>${justCheckbox(name)}</td></tr>`;
+  return `<tr><td class="fshRight">${justLabel(name)}</td><td>${justCheckbox(name)}</td></tr>`;
 }

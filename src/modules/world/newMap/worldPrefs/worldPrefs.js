@@ -37,7 +37,7 @@ function mappedValues() {
     ['buffsName', 'huntingBuffsName'],
     ['buffs2Name', 'huntingBuffs2Name'],
     ['buffs3Name', 'huntingBuffs3Name'],
-    ['showBuffs', 'showHuntingBuffs'],
+    ['showHuntingBuffs', 'showHuntingBuffs'],
   ].forEach(mappedValue);
 }
 

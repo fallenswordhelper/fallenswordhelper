@@ -35,7 +35,7 @@ function lookForMissingBuffs(missingBuffsDiv, data) {
 }
 
 function huntingBuffsEnabled(missingBuffsDiv, data) {
-  if (calf.showBuffs) {
+  if (calf.showHuntingBuffs) {
     lookForMissingBuffs(missingBuffsDiv, data);
   } else {
     clearBuffDiv(missingBuffsDiv);
@@ -50,7 +50,7 @@ export default function doHuntingBuffs(missingBuffsDiv) { // jQuery.min
   setCurrentBuffList();
   const buffsFn = partial(dataEventsPlayerBuffs, missingBuffsDiv);
   $.subscribe(defPlayerBuffs, buffsFn);
-  if (calf.showBuffs && window.initialGameData) { // HCS initial data
+  if (calf.showHuntingBuffs && window.initialGameData) { // HCS initial data
     buffsFn(null, { b: window.initialGameData.player.buffs });
   }
 }
