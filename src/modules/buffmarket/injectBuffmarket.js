@@ -14,7 +14,7 @@ async function search(injector, e) {
   e.preventDefault();
   setInnerHtml('<div class="fshWaiting">Loading...</div>', injector);
   const data = fromEntries(new FormData(e.target));
-  const doc = indexAjaxDoc(data);
+  const doc = await indexAjaxDoc(data);
   const newBuffResults = querySelector('#buff-results', doc).parentElement.innerHTML;
   setInnerHtml(newBuffResults, injector);
 }
