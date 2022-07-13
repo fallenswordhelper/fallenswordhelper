@@ -2,16 +2,14 @@ import {
   defRefreshActionList,
   defStairway,
 } from '../../support/constants';
-import { titanStats } from './titanStats/titanStats';
+import titanStats from './titanStats/titanStats';
 
 function hazRealm(data) {
   return data.realm && data.realm.name;
 }
 
 function injectWorldNewMap(_e, data) {
-  if (hazRealm(data)) {
-    titanStats(data.realm);
-  }
+  if (hazRealm(data)) titanStats(data.realm);
 }
 
 export default function onWorld() {

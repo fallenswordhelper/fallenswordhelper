@@ -2,7 +2,7 @@ import './newMap.css';
 import executeAll from '../../common/executeAll';
 import hideQTip from '../../common/hideQTip';
 import calf from '../../support/calf';
-import { buffInfo } from './buffInfo/buffInfo';
+import buffInfo from './buffInfo/buffInfo';
 import buttons from './buttons/buttons';
 import champAttacks from './champAttacks';
 import combatLogger from './combatLogger';

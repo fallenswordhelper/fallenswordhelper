@@ -10,4 +10,5 @@ export default function initBuffDiv(buffDiv, className, prefix, suffix) {
   const buffSpan = createSpan();
   insertElement(buffDiv, buffSpan);
   insertTextBeforeEnd(buffDiv, suffix);
+  return buffSpan;
 }

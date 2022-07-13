@@ -58,17 +58,10 @@ const selector = (targets) => targets
   .map(([rowIndex]) => `.fshHighlight tr:nth-child(${rowIndex + 1})`)
   .join(',');
 
-function pvpTargetStyle(pvpTargets) {
-  if (pvpTargets.length) {
-    const pvpStyle = `${selector(pvpTargets)} {background-color: #4671C8;}`;
-    insertElement(document.body, createStyle(pvpStyle));
-  }
-}
-
-function gvgTargetStyle(gvgTargets) {
-  if (gvgTargets.length) {
-    const gvgStyle = `${selector(gvgTargets)} {background-color: #FF9900;}`;
-    insertElement(document.body, createStyle(gvgStyle));
+function targetStyle(target, value) {
+  if (target.length) {
+    const style = `${selector(target)} {background-color: #${value};}`;
+    insertElement(document.body, createStyle(style));
   }
 }
 
@@ -84,8 +77,8 @@ function actuallyHighlight() {
   const playerLinks = getPlayerLinks();
   const pvpTargets = playerLinks.filter(([, pvpTarget]) => pvpTarget);
   const gvgTargets = playerLinks.filter(([, pvpTarget, gvgTarget]) => !pvpTarget && gvgTarget);
-  pvpTargetStyle(pvpTargets);
-  gvgTargetStyle(gvgTargets);
+  targetStyle(pvpTargets, '4671C8');
+  targetStyle(gvgTargets, 'FF9900');
   memberListStyle(pvpTargets, gvgTargets);
 }
 

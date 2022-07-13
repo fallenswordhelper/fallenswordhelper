@@ -4,6 +4,7 @@ import daGroupStats from '../../../_dataAccess/daGroupStats';
 import daViewGroups from '../../../_dataAccess/daViewGroups';
 import myStats from '../../../ajax/myStats';
 import createDiv from '../../../common/cElement/createDiv';
+import executeParam from '../../../common/executeParam';
 import getElementById from '../../../common/getElementById';
 import insertElement from '../../../common/insertElement';
 import isArray from '../../../common/isArray';
@@ -108,13 +109,18 @@ function biasVars(combat) {
 }
 
 function buffProcessing(combat) {
-  evalExtraBuffs(combat);
-  evalAttack(combat);
-  evalDamage(combat);
-  evalDefence(combat);
-  evalArmour(combat);
-  evalAnalysis(combat);
-  evalCA(combat);
+  executeParam(
+    [
+      evalExtraBuffs,
+      evalAttack,
+      evalDamage,
+      evalDefence,
+      evalArmour,
+      evalAnalysis,
+      evalCA,
+    ],
+    combat,
+  );
 }
 
 function doCombatEval(data, playerJson, groupData) {

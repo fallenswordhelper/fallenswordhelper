@@ -1,3 +1,4 @@
+import executeParam from '../../common/executeParam';
 import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
 import {
   defSubcmd,
@@ -66,11 +67,16 @@ function quickLinksLink(linkConfig) {
 }
 
 export default function characterButtons(linkConfig) {
-  recipeManagerLink(linkConfig);
-  inventoryManagerLink(linkConfig);
-  medalGuideLink(linkConfig);
-  buffLogLink(linkConfig);
-  combatLogLink(linkConfig);
-  creatureLogLink(linkConfig);
-  quickLinksLink(linkConfig);
+  executeParam(
+    [
+      recipeManagerLink,
+      inventoryManagerLink,
+      medalGuideLink,
+      buffLogLink,
+      combatLogLink,
+      creatureLogLink,
+      quickLinksLink,
+    ],
+    linkConfig,
+  );
 }

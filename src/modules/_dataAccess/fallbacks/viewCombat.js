@@ -37,25 +37,18 @@ function formatSpecial(pCC) {
   return filtered.map(gettokens);
 }
 
-function attacker(header) {
+function getPlayer(header, i) {
   return {
-    id: getId(header.rows[1].cells[0]),
-    name: getTextTrim(header.rows[0].cells[0]),
-  };
-}
-
-function defender(header) {
-  return {
-    id: getId(header.rows[1].cells[2]),
-    name: getTextTrim(header.rows[0].cells[2]),
+    id: getId(header.rows[1].cells[i]),
+    name: getTextTrim(header.rows[0].cells[i]),
   };
 }
 
 function doBase(id, pCC) {
   const header = pCC.children[0].rows[5].cells[0].children[0];
   return {
-    attacker: attacker(header),
-    defender: defender(header),
+    attacker: getPlayer(header, 0),
+    defender: getPlayer(header, 2),
     id: Number(id),
     specials: formatSpecial(pCC),
   };

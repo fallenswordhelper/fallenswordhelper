@@ -7,14 +7,12 @@ import on from '../../../common/on';
 import onclick from '../../../common/onclick';
 import { huntingBuffsHtml } from '../../../settings/huntingBuffs';
 import { simpleCheckboxHtml } from '../../../settings/simpleCheckbox';
-import { toggleBuffInfo } from '../buffInfo/buffInfo';
+import { defFetchPlayerBuffs, defFetchWorldRealmActions } from '../../../support/constants';
+import updateBuffInfo from '../buffInfo/updateBuffInfo';
 import { toggleHidePlayerActions } from '../prepareHidePlayerActions';
-import { toggleShowTitanInfo } from '../titanStats/titanStats';
+import testDynamics from '../titanStats/testDynamics';
 import toggleEnabledHuntingMode from './huntingBuffs/toggleEnabledHuntingMode';
-import toggleShowCreatureInfo from './toggleShowCreatureInfo';
-import toggleShowHuntingBuffs from './toggleShowHuntingBuffs';
-import toggleShowMonsterLog from './toggleShowMonsterLog';
-import toggleSubLvlCreature from './toggleSubLvlCreature';
+import togglePref from './togglePref';
 
 function buildPrefsDiv() {
   return createDiv({
@@ -30,12 +28,32 @@ function buildPrefsDiv() {
   });
 }
 
+function toggleShowHuntingBuffs() {
+  togglePref('showHuntingBuffs');
+  GameData.fetch(defFetchPlayerBuffs);
+}
+
+function toggleSubLvlCreature() {
+  togglePref('hideSubLvlCreature');
+  GameData.fetch(defFetchWorldRealmActions);
+}
+
+function toggleShowTitanInfo() {
+  togglePref('showTitanInfo');
+  testDynamics(GameData.realm().dynamic);
+}
+
+function toggleBuffInfo() {
+  togglePref('showBuffInfo');
+  updateBuffInfo();
+}
+
 const fshEvents = {
   hideSubLvlCreature: toggleSubLvlCreature,
   hidePlayerActions: toggleHidePlayerActions,
-  showCreatureInfo: toggleShowCreatureInfo,
+  showCreatureInfo: () => togglePref('showCreatureInfo'),
   showHuntingBuffs: toggleShowHuntingBuffs,
-  showMonsterLog: toggleShowMonsterLog,
+  showMonsterLog: () => togglePref('showMonsterLog'),
   showTitanInfo: toggleShowTitanInfo,
   showBuffInfo: toggleBuffInfo,
 };

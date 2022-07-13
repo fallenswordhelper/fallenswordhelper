@@ -25,8 +25,8 @@ import fixTeleport from './fixTeleport';
 import makeToggleBtn from './makeToggleBtn';
 
 let buttonContainer = 0;
-let realmLvl = 0;
-let yourLvl = 0;
+let lvlSpan = 0;
+const yourLvl = 0;
 let formGroup = 0;
 let quickBuff = 0;
 let realmMap = 0;
@@ -77,24 +77,17 @@ function exists(val) {
   return '?';
 }
 
-function minLvl() {
-  const topDiv = createDiv({ textContent: 'Min Lvl: ' });
-  realmLvl = textSpan(exists(GameData.realm().minlevel));
-  insertElement(topDiv, realmLvl);
-  return topDiv;
-}
-
-function yrLvl() {
-  const btmDiv = createDiv({ textContent: 'Your Lvl: ' });
-  yourLvl = textSpan(exists(GameData.player().level));
-  insertElement(btmDiv, yourLvl);
-  return btmDiv;
+function levelBox(prefix, prop) {
+  const aDiv = createDiv({ textContent: `${prefix} Lvl: ` });
+  lvlSpan = textSpan(exists(GameData.realm()[prop]));
+  insertElement(aDiv, lvlSpan);
+  return aDiv;
 }
 
 function doLevels(worldName) {
   const lvlDiv = createDiv({ className: 'fshFsty' });
-  insertElement(lvlDiv, minLvl());
-  insertElement(lvlDiv, yrLvl());
+  insertElement(lvlDiv, levelBox('Min', 'minlevel'));
+  insertElement(lvlDiv, levelBox('Your', 'level'));
   insertElement(worldName, lvlDiv);
 }
 
@@ -189,9 +182,9 @@ function injectButtons() {
 }
 
 function realmUpdate(_e, data) {
-  if (realmLvl && data.b.minlevel) {
+  if (lvlSpan && data.b.minlevel) {
     fixTeleport();
-    setText(data.b.minlevel, realmLvl);
+    setText(data.b.minlevel, lvlSpan);
   }
 }
 

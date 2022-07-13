@@ -4,13 +4,19 @@ function caIsRunning(combat) {
     && combat.numberOfHitsRequired === 1;
 }
 
+const lowest = (bns, amt, val) => Math.max(Math.ceil((bns - amt + 1) / val / 0.0025), 0);
+
 function calcLowest(combat) {
-  combat.lowestCALevelToStillHit = Math.max(Math.ceil((
-    combat.counterAttackBonusAttack - combat.hitByHowMuch + 1)
-    / combat.player.attackValue / 0.0025), 0);
-  combat.lowestCALevelToStillKill = Math.max(Math.ceil((
-    combat.counterAttackBonusDamage - combat.damageDone + 1)
-    / combat.player.damageValue / 0.0025), 0);
+  combat.lowestCALevelToStillHit = lowest(
+    combat.counterAttackBonusAttack,
+    combat.hitByHowMuch,
+    combat.player.attackValue,
+  );
+  combat.lowestCALevelToStillKill = lowest(
+    combat.counterAttackBonusDamage,
+    combat.damageDone,
+    combat.player.damageValue,
+  );
 }
 
 function stamAtLowestCa(combat) {
