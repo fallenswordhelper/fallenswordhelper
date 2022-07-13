@@ -1,17 +1,16 @@
 import getValue from '../system/getValue';
 import bunchOfSimple from './bunchOfSimple';
-import { justCheckbox, justLabel } from './simpleCheckbox';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
+import { justCheckbox } from './simpleCheckbox';
 
 export default function questPrefs() {
   // Quest Preferences
-  return '<tr><th colspan="2"><b>Quest preferences</b></th></tr>'
-    + '<tr>'
-    + `<td class="fshRight">${justLabel('hideQuests')}</td>`
-    + '<td>'
-    + `${justCheckbox('hideQuests')}`
-    + '&nbsp;'
-    + `<input name="hideQuestNames" class="fshSettingsText" value="${getValue('hideQuestNames')}">`
-    + '</td>'
-    + '</tr>'
+  return `${makeHeaderRow('Quest preferences')}`
+    + `${makeLabelRow(
+      'hideQuests',
+      `${justCheckbox('hideQuests')}&nbsp;`
+      + `<input name="hideQuestNames" class="fshSettingsText" value="${getValue('hideQuestNames')}">`,
+    )}`
     + `${bunchOfSimple(['storeLastQuestPage', 'showNextQuestSteps'])}`;
 }

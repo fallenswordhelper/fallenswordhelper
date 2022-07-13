@@ -1,6 +1,6 @@
 import aGenericFallback from './aGenericFallback';
 
-export default async function debuff(buffId) {
+export default function debuff(buffId) {
   return aGenericFallback({
     cmd: 'profile',
     subcmd: 'removeskill',

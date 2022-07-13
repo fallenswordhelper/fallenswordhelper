@@ -1,43 +1,40 @@
 import calf from '../support/calf';
 import bunchOfSimple from './bunchOfSimple';
-import { justCheckbox, justLabel } from './simpleCheckbox';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
+import { justCheckbox } from './simpleCheckbox';
 
 function showActiveBounties() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('enableActiveBountyList')}</td>`
-    + '<td>'
-    + `${justCheckbox('enableActiveBountyList')}&nbsp;`
-    + `<input name="bountyListRefreshTime" class="fshSettingsNumber" type="number" value="${calf.bountyListRefreshTime}"> seconds refresh`
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'enableActiveBountyList',
+    `${justCheckbox('enableActiveBountyList')}&nbsp;`
+      + `<input name="bountyListRefreshTime" class="fshSettingsNumber" type="number" value="${
+        calf.bountyListRefreshTime}"> seconds refresh`,
+  );
 }
 
 function showWantedBounties() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('enableWantedList')}</td>`
-    + '<td>'
-    + `${justCheckbox('enableWantedList')} Refresh time is same as Active Bounties`
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'enableWantedList',
+    `${justCheckbox('enableWantedList')} Refresh time is same as Active Bounties`,
+  );
 }
 
 function wantedNames() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('wantedNames')}</td>`
-    + '<td>'
-    + `<input name="wantedNames" class="fshSettingsText" value="${calf.wantedNames}">`
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'wantedNames',
+    `<input name="wantedNames" class="fshSettingsText" value="${calf.wantedNames}">`,
+  );
 }
 
 export default function bountyPrefs() {
   // Bounty hunting prefs
-  return `<tr><th colspan="2"><b>Bounty hunting preferences</b></th></tr>${
-    showActiveBounties()
-  }${showWantedBounties()
-  }${wantedNames()
-  }${bunchOfSimple([
-    'wantedGuildMembers',
-    'showPvPSummaryInLog',
-  ])}`;
+  return `${makeHeaderRow('Bounty hunting preferences')}${
+    showActiveBounties()}${
+    showWantedBounties()}${
+    wantedNames()}${
+    bunchOfSimple([
+      'wantedGuildMembers',
+      'showPvPSummaryInLog',
+    ])}`;
 }

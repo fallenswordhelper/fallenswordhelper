@@ -1,8 +1,10 @@
 import getValue from '../system/getValue';
 import bunchOfSimple from './bunchOfSimple';
+import makeCustomRow from './makeCustomRow';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
 import {
   justCheckbox,
-  justLabel,
   simpleCheckbox,
 } from './simpleCheckbox';
 
@@ -28,32 +30,25 @@ function injectSettingsGuildData(guildType) {
 }
 
 function guildNames() {
-  return '<tr><td colspan="2">'
-      + 'Enter guild names, separated by commas</td></tr>'
-    + `<tr><td class="fshRight">Own Guild</td><td>${
-      injectSettingsGuildData('Self')}</td></tr>`
-    + `<tr><td class="fshRight">Friendly Guilds</td><td>${
-      injectSettingsGuildData('Frnd')}</td></tr>`
-    + `<tr><td class="fshRight">Old Guilds</td><td>${
-      injectSettingsGuildData('Past')}</td></tr>`
-    + `<tr><td class="fshRight">Enemy Guilds</td><td>${
-      injectSettingsGuildData('Enmy')}</td></tr>`;
+  return '<tr><td colspan="2">Enter guild names, separated by commas</td></tr>'
+    + `${makeCustomRow('Own Guild', injectSettingsGuildData('Self'))}`
+    + `${makeCustomRow('Friendly Guilds', injectSettingsGuildData('Frnd'))}`
+    + `${makeCustomRow('Old Guilds', injectSettingsGuildData('Past'))}`
+    + `${makeCustomRow('Enemy Guilds', injectSettingsGuildData('Enmy'))}`;
 }
 
 function pvpTargets() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('highlightValidTargets')}:</td>`
-    + '<td>'
-    + `PvP: ${justCheckbox('highlightPlayersNearMyLvl')}`
-    + ` GvG: ${justCheckbox('highlightGvGPlayersNearMyLvl')}`
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'highlightValidTargets',
+    `PvP: ${justCheckbox('highlightPlayersNearMyLvl')}`
+    + ` GvG: ${justCheckbox('highlightGvGPlayersNearMyLvl')}`,
+  );
 }
 
 export default function guildPrefs() {
   // Guild Manage
-  return '<tr><th colspan="2"><b>Guild>Manage preferences'
-    + `</b></th></tr>${
+  return `${makeHeaderRow('Guild>Manage preferences')}`
+    + `${
       simpleCheckbox('showGuildRelationship')}${
       guildNames()}${
       pvpTargets()}${

@@ -1,6 +1,8 @@
 import getValue from '../system/getValue';
 import bunchOfSimple from './bunchOfSimple';
-import { justCheckbox, justLabel } from './simpleCheckbox';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
+import { justCheckbox } from './simpleCheckbox';
 
 const topBlock = [
   'moveGuildList',
@@ -34,44 +36,40 @@ const bottomBlock = [
 ];
 
 function guildInfoWidgets() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('enableGuildInfoWidgets')}</td>`
-    + '<td>'
-    + `${justCheckbox('enableGuildInfoWidgets')}`
+  return makeLabelRow(
+    'enableGuildInfoWidgets',
+    `${justCheckbox('enableGuildInfoWidgets')}`
     + `&nbsp;<label>Hide Message&gt;${justCheckbox('hideGuildInfoMessage')}</label>`
     + `&nbsp;<label>Hide Buff&gt;${justCheckbox('hideGuildInfoBuff')}</label>`
     + `&nbsp;<label>Hide ST&gt;${justCheckbox('hideGuildInfoSecureTrade')}</label>`
-    + `&nbsp;<label>Hide Trade&gt;${justCheckbox('hideGuildInfoTrade')}</label>`
-    + '</td>'
-    + '</tr>';
+    + `&nbsp;<label>Hide Trade&gt;${justCheckbox('hideGuildInfoTrade')}</label>`,
+  );
 }
 
 function onlineAlliesEnemies() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('showAlliesEnemies')}</td>`
-    + '<td>'
-    + `<label>Allies&nbsp;${justCheckbox('enableAllyOnlineList')}</label>&nbsp;&nbsp;`
+  return makeLabelRow(
+    'showAlliesEnemies',
+    `<label>Allies&nbsp;${justCheckbox('enableAllyOnlineList')}</label>&nbsp;&nbsp;`
     + `<label>Enemies&nbsp;${justCheckbox('enableEnemyOnlineList')}</label>&nbsp;&nbsp;`
     + `<input name="allyEnemyOnlineRefreshTime" class="fshSettingsNumber" type="number" value="${
-      getValue('allyEnemyOnlineRefreshTime')}"> seconds refresh`
-    + '</td>'
-    + '</tr>';
+      getValue('allyEnemyOnlineRefreshTime')}"> seconds refresh`,
+  );
 }
 
 function quickLinksLocation() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('quickLinksLocation')}</td>`
-    + '<td>'
-    + `Top: <input name="quickLinksTopPx" class="fshSettingsNumber" type="number" value="${getValue('quickLinksTopPx')}"> `
-    + `Left: <input name="quickLinksLeftPx" class="fshSettingsNumber" type="number" value="${getValue('quickLinksLeftPx')}">`
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'quickLinksLocation',
+    `Top: <input name="quickLinksTopPx" class="fshSettingsNumber" type="number" value="${
+      getValue('quickLinksTopPx')}"> `
+    + `Left: <input name="quickLinksLeftPx" class="fshSettingsNumber" type="number" value="${
+      getValue('quickLinksLeftPx')}">`,
+  );
 }
 
 export default function generalPrefs() {
   // General Prefs
-  return '<tr><th colspan="2"><b>General preferences '
-    + `(apply to most screens)</b></th></tr>${
+  return `${makeHeaderRow('General preferences (apply to most screens)')}`
+    + `${
       guildInfoWidgets()}${
       bunchOfSimple(topBlock)}${
       onlineAlliesEnemies()}${

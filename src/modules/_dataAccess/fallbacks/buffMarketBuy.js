@@ -1,6 +1,6 @@
 import aGenericFallback from './aGenericFallback';
 
-export default async function buffMarketBuy(packageId) {
+export default function buffMarketBuy(packageId) {
   return aGenericFallback({
     cmd: 'buffmarket',
     subcmd: 'buy',

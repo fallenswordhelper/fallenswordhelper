@@ -9,6 +9,7 @@ import generalPrefs from './generalPrefs';
 import guildPrefs from './guildPrefs';
 import leftHandLinks from './leftHandLinks';
 import logPrefs from './logPrefs';
+import makeHeaderRow from './makeHeaderRow';
 import otherPrefs from './otherPrefs';
 import profilePrefs from './profilePrefs';
 import questPrefs from './questPrefs';
@@ -86,17 +87,21 @@ function corePrefs() {
 }
 
 export default function ConfigData() {
-  calf.configData = '<form><table class="fshSettingsTable">'
-    + '<thead><th colspan="2"><b>Fallen Sword Helper configuration '
-      + `Settings</b></th></thead>${
-        storageDetails()}${linkToWebsite()}${corePrefs()
+  calf.configData = '<form><table class="fshSettingsTable"><tbody>'
+    + `${makeHeaderRow('Fallen Sword Helper configuration Settings')}`
+      + `${
+        storageDetails()}${
+        linkToWebsite()}${
+        corePrefs()
         // save button
-      }<tr><td colspan="2" align=center><input type="button" class=`
-      + '"custombutton" value="Save" id="Helper:SaveOptions"></td></tr>'
+      }`
+      + '<tr><td colspan="2" align=center>'
+      + '<input type="button" class="custombutton" value="Save" id="Helper:SaveOptions">'
+      + '</td></tr>'
     // Export or Load Settings
     + '<tr><td colspan="2" align=center>'
       + `<a href="${notepadBlankUrl}savesettings">`
       + `Export or Load Settings!</a></td></tr>${
         codedBy()
-      }</table></form>`;
+      }</tbody></table></form>`;
 }

@@ -4,91 +4,79 @@ import getValue from '../system/getValue';
 import isSelected from '../system/isSelected';
 import bunchOfSimple from './bunchOfSimple';
 import { huntingBuffs } from './huntingBuffs';
+import makeCustomRow from './makeCustomRow';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
 import {
   helpLink,
   justCheckbox,
-  justLabel,
   simpleCheckbox,
 } from './simpleCheckbox';
 
 function worldGroup() {
   // World Screen
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('hideCreateGroupButton')}</td>`
-    + '<td>'
-    + `${justCheckbox('hideChampionsGroup')}&nbsp;Champions&nbsp;&nbsp;`
+  return makeLabelRow(
+    'hideCreateGroupButton',
+    `${justCheckbox('hideChampionsGroup')}&nbsp;Champions&nbsp;&nbsp;`
     + `${justCheckbox('hideElitesGroup')}&nbsp;Elites&nbsp;&nbsp;`
     + `${justCheckbox('hideSEGroup')}&nbsp;Super Elite&nbsp;&nbsp;`
     + `${justCheckbox('hideTitanGroup')}&nbsp;Titan&nbsp;&nbsp;`
-    + `${justCheckbox('hideLegendaryGroup')}&nbsp;Legendary`
-    + '</td>'
-    + '</tr>';
+    + `${justCheckbox('hideLegendaryGroup')}&nbsp;Legendary`,
+  );
 }
 
 function keepCombatLogs() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('keepLogs')}</td>`
-    + '<td>'
-    + `${justCheckbox('keepLogs')}&nbsp;&nbsp;`
-    + '<input type="button" class="custombutton" value="Show Logs" id="Helper:ShowLogs">'
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'keepLogs',
+    `${justCheckbox('keepLogs')}&nbsp;&nbsp;`
+    + '<input type="button" class="custombutton" value="Show Logs" id="Helper:ShowLogs">',
+  );
 }
 
 function combatEvalBias() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('combatEvaluatorBias')}</td>`
-    + '<td>'
-    + '<select name="combatEvaluatorBias">'
+  return makeLabelRow(
+    'combatEvaluatorBias',
+    '<select name="combatEvaluatorBias">'
     + `<option value="0"${isSelected(calf.combatEvaluatorBias, 0)}>Conservative</option>`
     + `<option value="1"${isSelected(calf.combatEvaluatorBias, 1)}>Semi-Conservative</option>`
     + `<option value="2"${isSelected(calf.combatEvaluatorBias, 2)}>Adventurous</option>`
     + `<option value="3"${isSelected(calf.combatEvaluatorBias, 3)}>Conservative+</option>`
-    + '</select>'
-    + '</td>'
-    + '</tr>';
+    + '</select>',
+  );
 }
 
 function keepCreatureLog() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('showMonsterLog')}</td>`
-    + '<td>'
-    + `${justCheckbox('showMonsterLog')}&nbsp;&nbsp;`
-    + '<input type="button" class="custombutton" value="Show" id="Helper:ShowMonsterLogs">'
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'showMonsterLog',
+    `${justCheckbox('showMonsterLog')}&nbsp;&nbsp;`
+    + '<input type="button" class="custombutton" value="Show" id="Helper:ShowMonsterLogs">',
+  );
 }
 
 function showSendGold() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('sendGoldonWorld')}</td>`
-    + '<td>'
-    + `${justCheckbox('sendGoldonWorld')}&nbsp;&nbsp;`
+  return makeLabelRow(
+    'sendGoldonWorld',
+    `${justCheckbox('sendGoldonWorld')}&nbsp;&nbsp;`
     + `Send <input name="goldAmount" type="number" value="${getValue('goldAmount')}"> `
     + `gold to <input name="goldRecipient" value="${getValue('goldRecipient')}">`
-    + ` Current total: <input name="currentGoldSentTotal" type="number" value="${getValue('currentGoldSentTotal')}">`
-    + '</td>'
-    + '</tr>';
+    + ` Current total: <input name="currentGoldSentTotal" type="number" value="${getValue('currentGoldSentTotal')}">`,
+  );
 }
 
 function theDoNotKillList() {
-  return '<tr>'
-  + `<td class="fshRight">${justLabel('doNotKillList')}</td>`
-  + '<td>'
-  + `<input name="doNotKillList" class="fshSettingsText" value="${calf.doNotKillList}">`
-  + '</td>'
-  + '</tr>';
+  return makeLabelRow(
+    'doNotKillList',
+    `<input name="doNotKillList" class="fshSettingsText" value="${calf.doNotKillList}">`,
+  );
 }
 
 function huntingBuffsList(modeLabel, modeName, buffsName, buffs) {
   const help = helpLink(`${modeLabel} Hunting Buff List`, `${modeLabel} list of hunting buffs.`);
-  return '<tr>'
-    + `<td class="fshRight">${modeLabel} Hunting Buff List${help}:</td>`
-    + '<td>'
-    + `<input name="${modeName}" title="Hunting mode name" value="${modeLabel}">`
-    + `<input name="${buffsName}" value="${buffs}">`
-    + '</td>'
-    + '</tr>';
+  return makeCustomRow(
+    `${modeLabel} Hunting Buff List${help}:`,
+    `<input name="${modeName}" title="Hunting mode name" value="${modeLabel}">`
+    + `<input name="${buffsName}" value="${buffs}">`,
+  );
 }
 
 function huntingBuffsLists() {
@@ -110,8 +98,8 @@ function joinFuncs() {
 
 export default function worldPrefs() {
   // World Screen
-  return '<tr><th colspan="2"><b>'
-    + `World screen/Hunting preferences</b></th></tr>${
+  return `${makeHeaderRow('World screen/Hunting preferences')}`
+    + `${
       worldGroup()}${
       keepCombatLogs()}${
       bunchOfSimple([

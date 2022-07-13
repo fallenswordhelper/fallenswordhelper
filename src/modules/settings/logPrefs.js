@@ -1,43 +1,37 @@
 import getValue from '../system/getValue';
 import bunchOfSimple from './bunchOfSimple';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
 import {
   justCheckbox,
-  justLabel,
   simpleCheckbox,
   simpleCheckboxHtml,
 } from './simpleCheckbox';
 
 function newGuildLogHistory() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('newGuildLogHistoryPages')}</td>`
-    + '<td>'
-    + `<input name="newGuildLogHistoryPages" class="fshSettingsNumber" type="number" value="${getValue('newGuildLogHistoryPages')}">`
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'newGuildLogHistoryPages',
+    `<input name="newGuildLogHistoryPages" class="fshSettingsNumber" type="number" value="${getValue('newGuildLogHistoryPages')}">`,
+  );
 }
 
 function newLogMessageSound() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('defaultMessageSound')}</td>`
-    + '<td>'
-    + `<input name="defaultMessageSound" class="fshSettingsText" value="${getValue('defaultMessageSound')}">`
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'defaultMessageSound',
+    `<input name="defaultMessageSound" class="fshSettingsText" value="${getValue('defaultMessageSound')}">`,
+  );
 }
 
 function playSoundOnUnreadLog() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('playNewMessageSound')}</td>`
-    + '<td>'
-    + `${justCheckbox('playNewMessageSound')}`
-    + ` ${simpleCheckboxHtml('showSpeakerOnWorld')}`
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'playNewMessageSound',
+    `${justCheckbox('playNewMessageSound')} ${simpleCheckboxHtml('showSpeakerOnWorld')}`,
+  );
 }
 
 export default function logPrefs() {
   // Log screen prefs
-  return `<tr><th colspan="2"><b>Log screen preferences</b></th></tr>${
+  return `${makeHeaderRow('Log screen preferences')}${
     bunchOfSimple([
       'hideNonPlayerGuildLogMessages',
       'useNewGuildLog',

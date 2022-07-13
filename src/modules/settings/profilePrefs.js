@@ -1,6 +1,7 @@
 import getValue from '../system/getValue';
 import bunchOfSimple from './bunchOfSimple';
-import { justLabel } from './simpleCheckbox';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
 
 const part1 = [
   'showQuickButtons',
@@ -10,12 +11,10 @@ const part1 = [
 ];
 
 function buffGreet() {
-  return '<tr>'
-    + `<td class="fshRight">${justLabel('buyBuffsGreeting')}</td>`
-    + '<td>'
-    + `<input name="buyBuffsGreeting" class="fshSettingsText" value="${getValue('buyBuffsGreeting')}">`
-    + '</td>'
-    + '</tr>';
+  return makeLabelRow(
+    'buyBuffsGreeting',
+    `<input name="buyBuffsGreeting" class="fshSettingsText" value="${getValue('buyBuffsGreeting')}">`,
+  );
 }
 
 const part2 = [
@@ -37,7 +36,7 @@ const part2 = [
 
 export default function profilePrefs() {
   // profile prefs
-  return `<tr><th colspan="2"><b>Profile preferences</b></th></tr>${
+  return `${makeHeaderRow('Profile preferences')}${
     bunchOfSimple(part1)
   }${buffGreet()
   }${bunchOfSimple(part2)}`;
