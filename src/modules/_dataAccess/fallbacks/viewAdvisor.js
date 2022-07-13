@@ -1,8 +1,7 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import arrayFrom from '../../common/arrayFrom';
 import getTextTrim from '../../common/getTextTrim';
 import querySelector from '../../common/querySelector';
-import createDocument from '../../system/createDocument';
 import intValue from '../../system/intValue';
 
 const getInt = (cell) => intValue(getTextTrim(cell));
@@ -14,8 +13,7 @@ function formatData(row) {
   };
 }
 
-function parseReport(html) {
-  const doc = createDocument(html);
+function parseReport(doc) {
   const advisorTable = querySelector('#pCC table table', doc);
   const advisorRows = arrayFrom(advisorTable.rows).slice(1, -1);
   const advisorData = advisorRows.map(formatData);
@@ -23,11 +21,11 @@ function parseReport(html) {
 }
 
 // Incomplete
-export default function viewAdvisor(period) {
-  return indexAjaxData({
+export default async function viewAdvisor(period) {
+  return parseReport(await indexAjaxDoc({
     cmd: 'guild',
     subcmd: 'advisor',
     subcmd2: 'view',
     period,
-  }).then(parseReport);
+  }));
 }

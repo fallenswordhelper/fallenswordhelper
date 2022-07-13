@@ -1,10 +1,9 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import dataRows from '../../common/dataRows';
 import dateUtc from '../../common/dateUtc';
 import getTextTrim from '../../common/getTextTrim';
 import querySelector from '../../common/querySelector';
 import { getNow, getNowSecs } from '../../support/now';
-import createDocument from '../../system/createDocument';
 
 function convertDate(textDate) {
   const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);
@@ -28,8 +27,7 @@ function formatRow(row) {
   };
 }
 
-function parseReport(html) {
-  const doc = createDocument(html);
+function parseReport(doc) {
   const logTable = querySelector('#pCC table table', doc);
   if (!logTable) { return { s: false }; }
   const rows = dataRows(logTable, 4, 1);
@@ -38,6 +36,6 @@ function parseReport(html) {
 }
 
 // Incomplete
-export default function superelite() {
-  return indexAjaxData({ cmd: 'superelite' }).then(parseReport);
+export default async function superelite() {
+  return parseReport(await indexAjaxDoc({ cmd: 'superelite' }));
 }

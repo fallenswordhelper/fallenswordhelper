@@ -1,6 +1,6 @@
 import './buffmarket.css';
 import daBuffMarketBuy from '../_dataAccess/daBuffMarketBuy';
-import indexAjaxData from '../ajax/indexAjaxData';
+import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import fromEntries from '../common/fromEntries';
 import on from '../common/on';
 import onclick from '../common/onclick';
@@ -9,13 +9,12 @@ import querySelector from '../common/querySelector';
 import regExpFirstCapture from '../common/regExpFirstCapture';
 import setInnerHtml from '../dom/setInnerHtml';
 import { getPcc } from '../support/layout';
-import createDocument from '../system/createDocument';
 
 async function search(injector, e) {
   e.preventDefault();
   setInnerHtml('<div class="fshWaiting">Loading...</div>', injector);
   const data = fromEntries(new FormData(e.target));
-  const doc = createDocument(await indexAjaxData(data));
+  const doc = indexAjaxDoc(data);
   const newBuffResults = querySelector('#buff-results', doc).parentElement.innerHTML;
   setInnerHtml(newBuffResults, injector);
 }

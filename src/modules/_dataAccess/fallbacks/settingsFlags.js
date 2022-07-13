@@ -1,6 +1,6 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import fromEntries from '../../common/fromEntries';
-import createDocument from '../../system/createDocument';
 
 const uiFlags = [
   'ui_preference_11',
@@ -25,8 +25,7 @@ function updateUI(form, flags) {
 }
 
 export default async function settingsFlags(flags) {
-  const settingsHTML = await indexAjaxData({ cmd: 'settings' });
-  const settingsPage = createDocument(settingsHTML);
+  const settingsPage = await indexAjaxDoc({ cmd: 'settings' });
 
   const ladder = updateLadder(settingsPage.forms[0], flags[0]);
   const ui = updateUI(settingsPage.forms[2], flags);

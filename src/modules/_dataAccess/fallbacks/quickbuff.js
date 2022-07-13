@@ -1,8 +1,7 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import getBuffId from '../../common/getBuffId';
 import uniq from '../../common/uniq';
 import buffReportParser from '../../notepad/buffLog/buffReportParser';
-import createDocument from '../../system/createDocument';
 
 const successObject = ({ successBuff, successLevel }) => ({
   id: getBuffId(successBuff),
@@ -55,16 +54,15 @@ function getKeys(buffResult) {
   };
 }
 
-function buffFormatter(buffsParsed) {
-  return { r: buffsByPlayer(buffsParsed.map(getKeys)), s: true };
+function buffFormatter(doc) {
+  return { r: buffsByPlayer(buffReportParser(doc).map(getKeys)), s: true };
 }
 
 export default async function quickbuff(userAry, buffAry) {
-  const html = await indexAjaxData({
+  return buffFormatter(await indexAjaxDoc({
     cmd: 'quickbuff',
     subcmd: 'activate',
     targetPlayers: userAry.join(),
     skills: buffAry,
-  });
-  return buffFormatter(buffReportParser(createDocument(html)));
+  }));
 }

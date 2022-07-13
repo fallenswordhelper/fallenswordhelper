@@ -18,19 +18,7 @@ function itemImg(itm) {
       itm.amountNeeded}</p></div>`;
 }
 
-function getRecipeItems(recipe) {
-  if (recipe.items) {
-    return recipe.items.map(itemImg).join('');
-  }
-  return '';
-}
-
-function getComponents(recipe) {
-  if (recipe.components) {
-    return recipe.components.map(itemImg).join('');
-  }
-  return '';
-}
+const getIngredients = (items) => (items ? items.map(itemImg).join('') : '');
 
 function getImg(recipe) {
   if (recipe.target) {
@@ -56,8 +44,8 @@ function makeRow(recipe) {
       + '<td class="rmTd">'
         + `<a href="${recipe.link}">${recipe.name}</a>`
       + '</td>'
-      + `<td class="rmTd">${getRecipeItems(recipe)}</td>`
-      + `<td class="rmTd">${getComponents(recipe)}</td>`
+      + `<td class="rmTd">${getIngredients(recipe.items)}</td>`
+      + `<td class="rmTd">${getIngredients(recipe.components)}</td>`
       + `<td class="rmTd">${getImg(recipe)}</td>`
     + '</tr>';
 }

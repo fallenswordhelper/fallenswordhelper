@@ -1,9 +1,7 @@
 import groupViewStats from '../../ajax/groupViewStats';
-import indexAjaxData from '../../ajax/indexAjaxData';
-import createDocument from '../../system/createDocument';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 
-function parseReport(html) {
-  const doc = createDocument(html);
+function parseReport(doc) {
   const stats = groupViewStats(doc);
   return {
     r: {
@@ -19,11 +17,11 @@ function parseReport(html) {
 }
 
 // Incomplete
-export default function groupStats(groupId) {
-  return indexAjaxData({
+export default async function groupStats(groupId) {
+  return parseReport(await indexAjaxDoc({
     cmd: 'guild',
     subcmd: 'groups',
     subcmd2: 'viewstats',
     group_id: groupId,
-  }).then(parseReport);
+  }));
 }

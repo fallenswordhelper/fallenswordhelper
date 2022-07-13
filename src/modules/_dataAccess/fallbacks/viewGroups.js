@@ -1,8 +1,7 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import closestTr from '../../common/closestTr';
 import querySelectorArray from '../../common/querySelectorArray';
 import trim from '../../common/trim';
-import createDocument from '../../system/createDocument';
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 
 const viewGrp = (doc) => querySelectorArray('#pCC img[src$="/icon_action_view.png"]', doc);
@@ -14,14 +13,9 @@ const remainingMembers = (i) => toArray(memberList(i)).map((name) => ({ name }))
 const getMembers = (i) => [{ name: getLead(i) }, ...remainingMembers(i)];
 const formatGrp = (i) => ({ id: getGroupId(i), members: getMembers(i) });
 const getResults = (doc) => viewGrp(doc).map(formatGrp);
-
-function parseReport(html) {
-  const doc = createDocument(html);
-  return { r: getResults(doc), s: true };
-}
+const parseReport = (doc) => ({ r: getResults(doc), s: true });
 
 // Incomplete
 export default async function viewGroups() {
-  const html = await indexAjaxData({ cmd: 'guild', subcmd: 'groups' });
-  return parseReport(html);
+  return parseReport(await indexAjaxDoc({ cmd: 'guild', subcmd: 'groups' }));
 }

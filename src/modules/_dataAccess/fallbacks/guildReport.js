@@ -1,8 +1,7 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import getTextTrim from '../../common/getTextTrim';
 import querySelectorArray from '../../common/querySelectorArray';
 import itemId from '../../guild/inventory/guildReport/itemId';
-import createDocument from '../../system/createDocument';
 
 function details(td) {
   if (!td.children[0].href) { return { a: -1, n: '-1', t: -1 }; }
@@ -19,17 +18,16 @@ function details(td) {
   return ret;
 }
 
-function parseReport(html) {
-  const doc = createDocument(html);
+function parseReport(doc) {
   const nodeList = querySelectorArray('#pCC table table td:nth-of-type(3n)', doc);
   return { r: nodeList.map(details), s: true };
 }
 
 // Incomplete
-export default function guildReport() {
-  return indexAjaxData({
+export default async function guildReport() {
+  return parseReport(await indexAjaxDoc({
     cmd: 'guild',
     subcmd: 'inventory',
     subcmd2: 'report',
-  }).then(parseReport);
+  }));
 }

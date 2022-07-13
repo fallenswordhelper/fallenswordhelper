@@ -106,14 +106,12 @@ function deleteQuickItem(target) { // Legacy
   generateManageTable();
 }
 
+const thisItem = (i) => getElementById(`fshIn${param.fields[i]}`);
+
 function buildNewItem() { // Legacy
   const newItem = {};
   for (let i = 0; i < param.fields.length; i += 1) {
-    if (param.tags[i] === 'checkbox') {
-      newItem[param.fields[i]] = getElementById(`fshIn${param.fields[i]}`).checked;
-    } else {
-      newItem[param.fields[i]] = getElementById(`fshIn${param.fields[i]}`).value;
-    }
+    newItem[param.fields[i]] = param.tags[i] === 'checkbox' ? thisItem(i).checked : thisItem(i).value;
   }
   return newItem;
 }

@@ -1,73 +1,56 @@
-function doesGroupExist(combat) {
-  if (combat.callback.groupExists) { return 'Group '; }
-  return '';
-}
+const willIBeHit = (combat) => (combat.creatureHitByHowMuch >= 0 ? 'Yes' : 'No');
+const canIHitIt = (combat) => (combat.hitByHowMuch > 0 ? 'Yes' : 'No');
+const doesGroupExist = (combat) => (combat.callback.groupExists ? 'Group ' : '');
 
-function headerRow(combat) {
-  return `<tr><td bgcolor="#CD9E4B" colspan="4" align="center">${
-    doesGroupExist(combat)}Combat Evaluation</td></tr>`;
-}
+const dataSpan = (stuff) => `<span style="color:#333333">${stuff}</span>`;
+const basicRow = (stuff) => `<tr>${stuff}</tr>`;
+const dataCell = (element, index) => `<td${index % 2 ? '' : ' class="fshRight"'}>${element}</td>`;
+const dataRow = (stuffAry) => basicRow(stuffAry.map(dataCell).join(''));
 
-function canIHitIt(combat) {
-  if (combat.hitByHowMuch > 0) { return 'Yes'; }
-  return 'No';
-}
+const headerRow = (combat) => basicRow(`<td bgcolor="#CD9E4B" colspan="4" align="center">${
+  doesGroupExist(combat)}Combat Evaluation</td>`);
 
-function willIHitItRow(combat) {
-  return '<tr><td align="right"><span style="color:#333333">'
-    + `Will I hit it? </td><td align="left">${
-      canIHitIt(combat)}</td><td align="right"><span style="color:#333333">`
-    + `Extra Attack: </td><td align="left">( ${
-      combat.hitByHowMuch} )</td></tr>`;
-}
+const willIHitItRow = (combat) => dataRow([
+  dataSpan('Will I hit it?'),
+  canIHitIt(combat),
+  dataSpan('Extra Attack:'),
+  `( ${combat.hitByHowMuch} )`,
+]);
 
-function numberOfHitsRequiredRow(combat) {
-  return '<tr><td align="right"><span style="color:#333333">'
-    + `# Hits to kill it? </td><td align="left">${
-      combat.numberOfHitsRequired}</td><td align="right">`
-    + `<span style="color:#333333">Extra Damage: </td><td align="left">( ${
-      combat.damageDone} )</td></tr>`;
-}
+const numberOfHitsRequiredRow = (combat) => dataRow([
+  dataSpan('# Hits to kill it?'),
+  combat.numberOfHitsRequired,
+  dataSpan('Extra Damage:'),
+  `( ${combat.damageDone} )`,
+]);
 
-function willIBeHit(combat) {
-  if (combat.creatureHitByHowMuch >= 0) { return 'Yes'; }
-  return 'No';
-}
+const willIBeHitRow = (combat) => dataRow([
+  dataSpan('Will I be hit?'),
+  willIBeHit(combat),
+  dataSpan('Extra Defense:'),
+  `( ${-1 * combat.creatureHitByHowMuch} )`,
+]);
 
-function willIBeHitRow(combat) {
-  return '<tr><td align="right"><span style="color:#333333">'
-    + `Will I be hit? </td><td align="left">${
-      willIBeHit(combat)}</td><td align="right"><span style="color:#333333">`
-    + `Extra Defense: </td><td align="left">( ${
-      -1 * combat.creatureHitByHowMuch} )</td></tr>`;
-}
+const hitsToKillMeRow = (combat) => dataRow([
+  dataSpan('# Hits to kill me?'),
+  combat.numberOfCreatureHitsTillDead,
+  dataSpan('Extra Armor + HP:'),
+  `( ${-1 * combat.creatureDamageDone} )`,
+]);
 
-function hitsToKillMeRow(combat) {
-  return '<tr><td align="right"><span style="color:#333333">'
-    + `# Hits to kill me? </td><td align="left">${
-      combat.numberOfCreatureHitsTillDead}</td><td align="right">`
-    + `<span style="color:#333333">Extra Armor + HP: </td><td align="left">( ${
-      -1 * combat.creatureDamageDone} )</td></tr>`;
-}
+const numberOfHitsRow = (combat) => dataRow([
+  dataSpan('# Player Hits?'),
+  combat.playerHits,
+  dataSpan('# Creature Hits?'),
+  combat.creatureHits,
+]);
 
-function numberOfHitsRow(combat) {
-  return '<tr><td align="right"><span style="color:#333333">'
-    + `# Player Hits? </td><td align="left">${
-      combat.playerHits}</td><td align="right"><span style="color:#333333">`
-    + `# Creature Hits? </td><td align="left">${combat.creatureHits}</td></tr>`;
-}
+const fightStatusRow = (combat) => basicRow(`${
+  dataCell(dataSpan('Fight Status:'), 0)}<td colspan="3"><span>${combat.fightStatus}</span></td>`);
 
-function fightStatusRow(combat) {
-  return '<tr><td align="right"><span style="color:#333333">'
-    + `Fight Status: </span></td><td align="left" colspan="3"><span>${
-      combat.fightStatus}</span></td></tr>`;
-}
-
-function notesRow(combat) {
-  return '<tr><td align="right"><span style="color:#333333">'
-    + 'Notes: </span></td><td align="left" colspan="3">'
-    + `<span style="font-size:x-small;">${combat.extraNotes}</span></td></tr>`;
-}
+const notesRow = (combat) => basicRow(`${
+  dataCell(dataSpan('Notes:'), 0)}<td colspan="3"><span style="font-size:x-small;">${
+  combat.extraNotes}</span></td>`);
 
 export default function evalHTML(combat) {
   return `<table width="100%"><tbody>${

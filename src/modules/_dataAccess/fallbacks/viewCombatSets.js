@@ -1,15 +1,13 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import arrayFrom from '../../common/arrayFrom';
 import querySelector from '../../common/querySelector';
-import createDocument from '../../system/createDocument';
 
 const notNew = (_e, i) => i > 0;
 const setId = (o) => ({ id: Number(o.value) });
 
 // Incomplete
 export default async function viewCombatSets() {
-  const html = await indexAjaxData({ cmd: 'profile' });
-  const doc = createDocument(html);
+  const doc = await indexAjaxDoc({ cmd: 'profile' });
   const select = querySelector('select[name="combatSetId"]', doc);
   if (!select) { return { s: false }; }
   return {

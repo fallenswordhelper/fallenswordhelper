@@ -1,4 +1,4 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import arrayFrom from '../../common/arrayFrom';
 import chunk from '../../common/chunk';
 import dataRows from '../../common/dataRows';
@@ -6,7 +6,6 @@ import getTextTrim from '../../common/getTextTrim';
 import querySelector from '../../common/querySelector';
 import { months } from '../../support/constants';
 import { getNow } from '../../support/now';
-import createDocument from '../../system/createDocument';
 
 function parseDateAsTimestamp(textDate) {
   const dateAry = textDate.split(/[: /[]/);
@@ -74,8 +73,7 @@ function testTitan(e) {
 
 const titanRows = (_e, i, a) => i !== 0 && i < a.length - 1 && (i - 1) % 6 < 3;
 
-function parseReport(html) {
-  const doc = createDocument(html);
+function parseReport(doc) {
   const titanTable = querySelector('table[width="500"]', doc);
   if (!titanTable) { return { s: false }; }
   const thisRows = arrayFrom(titanTable.rows).filter(titanRows);
@@ -84,6 +82,6 @@ function parseReport(html) {
 }
 
 // Incomplete
-export default function scouttower() {
-  return indexAjaxData({ cmd: 'guild', subcmd: 'scouttower' }).then(parseReport);
+export default async function scouttower() {
+  return parseReport(await indexAjaxDoc({ cmd: 'guild', subcmd: 'scouttower' }));
 }

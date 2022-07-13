@@ -1,12 +1,12 @@
-import { darkCurseMultiplier } from '../../../support/constants';
-
 /* eslint-disable no-param-reassign */
-function calcAttack(combat) {
-  if (combat.callback.groupExists) {
-    return combat.callback.groupAttackValue;
-  }
-  return combat.player.attackValue;
-}
+import { darkCurseMultiplier } from '../../../support/constants';
+import effectiveStat from './effectiveStat';
+
+const calcAttack = (combat) => effectiveStat(
+  combat,
+  combat.callback.groupAttackValue,
+  combat.player.attackValue,
+);
 
 function calcDc(combat) {
   return Math.floor(combat.creature.defense * combat.player.darkCurseLevel

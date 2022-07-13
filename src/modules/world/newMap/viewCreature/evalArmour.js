@@ -1,12 +1,12 @@
+/* eslint-disable no-param-reassign */
+import effectiveStat from './effectiveStat';
 import evalBuff from './evalBuff';
 
-/* eslint-disable no-param-reassign */
-function calcArm(combat) {
-  if (combat.callback.groupExists) {
-    return combat.callback.groupArmorValue;
-  }
-  return combat.player.armorValue;
-}
+const calcArm = (combat) => effectiveStat(
+  combat,
+  combat.callback.groupArmorValue,
+  combat.player.armorValue,
+);
 
 function overallArmour(combat) {
   const armorVal = calcArm(combat);
