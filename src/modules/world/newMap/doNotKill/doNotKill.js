@@ -1,5 +1,5 @@
-import afterUpdateActionList from './afterUpdateActionList';
 import { defAfterUpdateActionlist } from '../../../support/constants';
+import afterUpdateActionList from './afterUpdateActionList';
 import interceptDoAction from './interceptDoAction';
 
 export default function doNotKill() {

@@ -1,40 +1,32 @@
-import bunchOfSimple from './bunchOfSimple';
 import getValue from '../system/getValue';
-import isValueChecked from './isValueChecked';
-import { helpLink, simpleCheckbox } from './simpleCheckbox';
+import bunchOfSimple from './bunchOfSimple';
+import makeLabelRow from './makeLabelRow';
+import {
+  justCheckbox,
+  simpleCheckbox,
+} from './simpleCheckbox';
 
 function recipeHiding() {
-  return `<tr><td class="fshRight">Hide Specific Recipes${
-    helpLink(
-      'Hide Specific Recipes',
-      'If enabled, this hides recipes whose name matches the list '
-      + '(separated by commas). This works on Recipe Manager',
-    )
-  }:</td><td><input name="hideRecipes" `
-    + `type="checkbox" value="on"${
-      isValueChecked('hideRecipes')}>`
-    + `&nbsp;<input name="hideRecipeNames" class="fshSettingsText" value="${
-      getValue('hideRecipeNames')}"></td></tr>`;
+  return makeLabelRow(
+    'hideRecipes',
+    `${justCheckbox('hideRecipes')}&nbsp;`
+      + `<input name="hideRecipeNames" class="fshSettingsText" value="${
+        getValue('hideRecipeNames')}">`,
+  );
 }
 
 function groupJoinSize() {
-  return `<tr><td align= "right">Max Group Size to Join${
-    helpLink(
-      'Max Group Size to Join',
-      'This will disable HCSs Join All functionality and will only join '
-      + 'groups less than a set size. ',
-    )
-  }:</td><td><input name="enableMaxGroupSizeToJoin" `
-    + `type = "checkbox" value = "on"${
-      isValueChecked('enableMaxGroupSizeToJoin')
-    }>&nbsp;&nbsp;Max Size: `
-    + `<input name="maxGroupSizeToJoin" class="fshSettingsNumber" type="number" value="${
-      getValue('maxGroupSizeToJoin')}"></td></tr>`;
+  return makeLabelRow(
+    'enableMaxGroupSizeToJoin',
+    `${justCheckbox('enableMaxGroupSizeToJoin')}&nbsp;&nbsp;Max Size: `
+      + `<input name="maxGroupSizeToJoin" class="fshSettingsNumber" type="number" value="${
+        getValue('maxGroupSizeToJoin')}">`,
+  );
 }
 
 export default function otherPrefs() {
   // Other prefs
-  return `<tr><th colspan="2"><b>Other preferences</b></th></tr>${
+  return `<tr><td class="header" colspan="2">Other preferences</td></tr>${
     simpleCheckbox('autoFillMinBidPrice')}${
     recipeHiding()}${
     bunchOfSimple([

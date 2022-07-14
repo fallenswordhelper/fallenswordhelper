@@ -1,11 +1,13 @@
 import daSuperElite from '../_dataAccess/daSuperElite';
-import { nowSecs } from '../support/now';
 import partial from '../common/partial';
+import { getNowSecs } from '../support/now';
 import { get, set } from '../system/idb';
 
-export let oldLog;
-let timeoutId;
-let intervalId;
+let oldLog = 0;
+let timeoutId = 0;
+let intervalId = 0;
+
+export const getOldLog = () => oldLog;
 
 export function disableBackgroundChecks() {
   if (timeoutId) {
@@ -56,7 +58,7 @@ export function doBackgroundCheck() {
 }
 
 function whenWasLastCheck() {
-  return nowSecs - ((oldLog && oldLog.lastUpdate) || 0);
+  return getNowSecs() - ((oldLog && oldLog.lastUpdate) || 0);
 }
 
 function setupBackgroundCheck() {

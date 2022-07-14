@@ -1,7 +1,7 @@
 'use strict';
 
-const glob = require('tiny-glob');
 const { readFileSync, writeFileSync } = require('fs');
+const glob = require('tiny-glob');
 
 function transform(file) {
   const data = readFileSync(file);

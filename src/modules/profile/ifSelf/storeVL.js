@@ -1,12 +1,12 @@
 import asInt from '../../chrome/calcs/asInt';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
-import setValue from '../../system/setValue';
 import {
   defCharacterVirtualLevel,
   defStatLevel,
   defStatVl,
 } from '../../support/constants';
+import setValue from '../../system/setValue';
 
 const sameAsLevel = (virtualLevel) => asInt(defStatLevel) === virtualLevel;
 

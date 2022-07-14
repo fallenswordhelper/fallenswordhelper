@@ -1,9 +1,9 @@
 <script>
-  import ArenaFlag from './ArenaFlag.svelte';
-  import ArenaMoves from './ArenaMoves.svelte';
+  import view from '../../app/arena/view';
   import addCommas from '../../system/addCommas';
   import getUrlParameter from '../../system/getUrlParameter';
-  import view from '../../app/arena/view';
+  import ArenaFlag from './ArenaFlag.svelte';
+  import ArenaMoves from './ArenaMoves.svelte';
 
   const pvpId = Number(getUrlParameter('pvp_id'));
   let res = 0;

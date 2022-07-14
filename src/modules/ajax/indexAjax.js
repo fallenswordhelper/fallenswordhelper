@@ -1,5 +1,5 @@
-import { indexPhp } from '../support/constants';
 import mixin from '../common/mixin';
+import { indexPhp } from '../support/constants';
 import retryAjax from './retryAjax';
 
 export default function indexAjax(options) {

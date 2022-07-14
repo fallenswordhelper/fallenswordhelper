@@ -1,6 +1,6 @@
 import addLogColoring from './addLogColoring';
-import addLogWidgets from './playerLogWidgets/addLogWidgets';
 import fixFilters from './fixFilters';
+import addLogWidgets from './playerLogWidgets/addLogWidgets';
 
 export default function playerLog() {
   addLogColoring('PlayerLog', 1, 3);

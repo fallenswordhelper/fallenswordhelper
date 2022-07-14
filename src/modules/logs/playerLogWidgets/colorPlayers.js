@@ -1,10 +1,10 @@
-import closestTr from '../../common/closestTr';
 import createStyle from '../../common/cElement/createStyle';
+import closestTr from '../../common/closestTr';
 import entries from '../../common/entries';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import { playerLinkSelector } from '../../support/constants';
 import querySelectorArray from '../../common/querySelectorArray';
+import { playerLinkSelector } from '../../support/constants';
 import relatePlayer from './relatePlayer';
 
 function doMsgHeader(logTable, privMsg) {

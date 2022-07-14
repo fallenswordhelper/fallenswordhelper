@@ -1,10 +1,11 @@
-import addCommas from '../system/addCommas';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import querySelector from '../common/querySelector';
+import regExpFirstCapture from '../common/regExpFirstCapture';
+import addCommas from '../system/addCommas';
 
 function getIntFromRegExp(theText, rxSearch) {
-  const matches = theText.replace(/,/g, '').match(rxSearch);
-  return matches ? parseInt(matches[1], 10) : 0;
+  const matches = regExpFirstCapture(rxSearch, theText.replace(/,/g, ''));
+  return matches ? parseInt(matches, 10) : 0;
 }
 
 function mightBePositive(actualXP, xpLockXP) {

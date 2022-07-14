@@ -1,8 +1,8 @@
-import ToggleButtons from './ToggleButtons.svelte';
+import { showExtraLinks, showQuickDropLinks } from './constants';
 import getCheckboxesVisible from './getCheckboxesVisible';
 import getInv from './getInv';
+import ToggleButtons from './ToggleButtons.svelte';
 import updateDomItems from './updateDomItems';
-import { showExtraLinks, showQuickDropLinks } from './constants';
 
 function makeToggleButtons(prefs) {
   const [form] = document.forms;

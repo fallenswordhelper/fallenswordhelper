@@ -1,12 +1,12 @@
-import { GMSTORAGE_PATH } from '../support/constants';
-import calf from '../support/calf';
-import defaults from '../support/dataObj.json';
 import isUndefined from '../common/isUndefined';
+import calf from '../support/calf';
+import { GMSTORAGE_PATH } from '../support/constants';
+import defaults from '../support/dataObj.json';
 
 const reviver = [
-  ['S]', (value) => value.substr(2)],
-  ['N]', (value) => parseInt(value.substr(2), 10)],
-  ['B]', (value) => value.substr(2) === 'true'],
+  ['S]', (value) => value.slice(2)],
+  ['N]', (value) => parseInt(value.slice(2), 10)],
+  ['B]', (value) => value.slice(2) === 'true'],
 ];
 
 function retrieve(value) {
@@ -24,7 +24,7 @@ function fshGetValue(name, defValue) {
 export default function getValue(name) {
   if (calf.userIsDev && isUndefined(defaults[name])) { //  No default setting available
     // eslint-disable-next-line no-console
-    console.log('No default setting available', name, defaults[name]);
+    console.log('No default setting available', name, defaults[name]); // skipcq: JS-0002
   }
   return fshGetValue(name, defaults[name]);
 }

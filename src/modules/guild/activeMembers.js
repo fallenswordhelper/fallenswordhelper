@@ -1,26 +1,21 @@
-import addCommas from '../system/addCommas';
 import contains from '../common/contains';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getPlayers from '../common/getPlayers';
-import lastActivityMins from '../common/lastActivityMins';
-import { lastActivityRE } from '../support/constants';
-import { pCC } from '../support/layout';
+import lastActivity from '../common/lastActivity';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import setTipped from '../common/setTipped';
+import { stamRe } from '../support/constants';
+import { getPcc } from '../support/layout';
+import addCommas from '../system/addCommas';
 
 const ACTIVE = 0;
 const STAMINA = 1;
 
 function countActive(acc, curr) {
-  const lastActivity = lastActivityRE.exec(curr.dataset.tipped);
-  const mins = lastActivityMins({
-    min: lastActivity[3],
-    hour: lastActivity[2],
-    day: lastActivity[1],
-  });
+  const { mins } = lastActivity(curr.dataset.tipped);
   if (mins < 44640) {
     acc[ACTIVE] += 1;
-    acc[STAMINA]
-      += Number(/Stamina:<\/td><td>(\d+)/.exec(curr.dataset.tipped)[1]);
+    acc[STAMINA] += Number(regExpFirstCapture(stamRe, curr.dataset.tipped));
   }
   return acc;
 }
@@ -30,7 +25,7 @@ function getActive(dots) {
 }
 
 export default function activeMembers() {
-  const members = getArrayByTagName('b', pCC).find(contains('Members'));
+  const members = getArrayByTagName('b', getPcc()).find(contains('Members'));
   if (members) {
     const dots = getPlayers();
     const memberStats = getActive(dots);

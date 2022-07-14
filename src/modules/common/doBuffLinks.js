@@ -1,12 +1,12 @@
-import chunk from './chunk';
+import sendEvent from '../analytics/sendEvent';
+import fshOpen from '../chrome/fshOpen';
+import { places, quickbuffUrl } from '../support/constants';
 import createButton from './cElement/createButton';
 import createLi from './cElement/createLi';
 import createUl from './cElement/createUl';
-import fshOpen from '../chrome/fshOpen';
+import chunk from './chunk';
 import insertElement from './insertElement';
 import onclick from './onclick';
-import sendEvent from '../analytics/sendEvent';
-import { places, quickbuffUrl } from '../support/constants';
 
 function getListItem(words, names) {
   const li = createLi();

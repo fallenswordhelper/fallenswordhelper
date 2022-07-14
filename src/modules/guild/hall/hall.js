@@ -1,9 +1,9 @@
 import './hall.css';
-import collapse from '../../common/collapse';
 import createDiv from '../../common/cElement/createDiv';
+import collapse from '../../common/collapse';
 import insertElement from '../../common/insertElement';
-import { pCC } from '../../support/layout';
 import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
+import { getPcc } from '../../support/layout';
 
 function testArticle(rowType) { return rowType === 1; }
 
@@ -18,7 +18,7 @@ function setupPref(prefName, injector) {
 
 export default function hall() {
   const prefName = 'collapseHallPosts';
-  const theTable = pCC.lastElementChild;
+  const theTable = getPcc().lastElementChild;
   if (theTable instanceof HTMLTableElement) {
     setupPref(prefName, theTable.previousElementSibling.previousElementSibling);
     collapse({

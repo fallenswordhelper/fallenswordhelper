@@ -1,13 +1,13 @@
 import './messaging.css';
-import doValidateTip from './doValidateTip';
-import fallback from '../../system/fallback';
-import getMsg from './getMsg';
-import getQuickMessageDialog from './getQuickMessageDialog';
 import hasClass from '../../common/hasClass';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
+import fallback from '../../system/fallback';
+import doValidateTip from './doValidateTip';
+import getMsg from './getMsg';
+import getQuickMessageDialog from './getQuickMessageDialog';
 import sendOnEnter from './sendOnEnter';
-import { setName } from './targetPlayer';
 import showMsgTemplate from './showMsgTemplate';
+import { setName } from './targetPlayer';
 
 function setMsg(msg) {
   const dialogMsg = getMsg();

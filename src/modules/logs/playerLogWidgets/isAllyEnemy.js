@@ -2,7 +2,7 @@ import myStats from '../../ajax/myStats';
 
 const justUsername = (obj) => obj.username;
 
-let allyPrm;
+let allyPrm = 0;
 
 async function getAllyEnemy() {
   const stats = await myStats(false);
@@ -12,16 +12,15 @@ async function getAllyEnemy() {
   };
 }
 
+function getPrm() {
+  if (!allyPrm) allyPrm = getAllyEnemy();
+  return allyPrm;
+}
+
 export async function isAlly(playerName) {
-  if (!allyPrm) {
-    allyPrm = getAllyEnemy();
-  }
-  return (await allyPrm)._allies.includes(playerName);
+  return (await getPrm())._allies.includes(playerName);
 }
 
 export async function isEnemy(playerName) {
-  if (!allyPrm) {
-    allyPrm = getAllyEnemy();
-  }
-  return (await allyPrm)._enemies.includes(playerName);
+  return (await getPrm())._enemies.includes(playerName);
 }

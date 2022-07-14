@@ -1,7 +1,7 @@
-import GlobalTop from './GlobalTop.svelte';
 import daGlobalContrib from '../../../_dataAccess/daGlobalContrib';
 import getElementById from '../../../common/getElementById';
 import onclick from '../../../common/onclick';
+import GlobalTop from './GlobalTop.svelte';
 
 let gt = 0;
 

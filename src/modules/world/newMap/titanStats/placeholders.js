@@ -2,15 +2,25 @@ import createSpan from '../../../common/cElement/createSpan';
 import setInnerHtml from '../../../dom/setInnerHtml';
 import setText from '../../../dom/setText';
 
-export let titanName;
-export let titanLocation;
-export let currentHp;
-export let maxHp;
-export let guildKills;
-export let currentPct;
-export let totalPct;
-export let statusText;
-export let cooldownText;
+let titanName = 0;
+let titanLocation = 0;
+let currentHp = 0;
+let maxHp = 0;
+let guildKills = 0;
+let currentPct = 0;
+let totalPct = 0;
+let statusText = 0;
+let cooldownText = 0;
+
+export const getTitanName = () => titanName;
+export const getTitanLocation = () => titanLocation;
+export const getCurrentHp = () => currentHp;
+export const getMaxHp = () => maxHp;
+export const getGuildKills = () => guildKills;
+export const getCurrentPct = () => currentPct;
+export const getTotalPct = () => totalPct;
+export const getStatusText = () => statusText;
+export const getCooldownText = () => cooldownText;
 
 function part1() {
   titanName = createSpan({ innerHTML: '&nbsp;' });

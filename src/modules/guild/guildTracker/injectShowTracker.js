@@ -1,13 +1,13 @@
 import './injectShowTracker.css';
 import createDiv from '../../common/cElement/createDiv';
-import { defEnableGuildActivityTracker } from '../../support/constants';
-import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import on from '../../common/on';
 import querySelector from '../../common/querySelector';
-import setValue from '../../system/setValue';
 import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
+import { defEnableGuildActivityTracker } from '../../support/constants';
+import getValue from '../../system/getValue';
+import setValue from '../../system/setValue';
 
 function togglePref(evt) {
   if (evt.target.id === defEnableGuildActivityTracker) {

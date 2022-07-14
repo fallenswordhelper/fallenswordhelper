@@ -1,21 +1,21 @@
 import './helperMenu.css';
-import classHandler from '../../common/classHandler';
+import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
+import classHandler from '../../common/classHandler';
 import draggable from '../../common/draggable';
-import functionLookup from './functionLookup';
 import getElementById from '../../common/getElementById';
-import getHelperMenuBlob from './getHelperMenuBlob';
 import getText from '../../common/getText';
-import getValue from '../../system/getValue';
-import gsDl from './gsDl';
 import insertElement from '../../common/insertElement';
 import isFunction from '../../common/isFunction';
-import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import jQueryPresent from '../../common/jQueryPresent';
 import once from '../../common/once';
 import onclick from '../../common/onclick';
+import getValue from '../../system/getValue';
+import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import quickExtract from '../pageSwitcher/loader/quickExtract';
-import sendEvent from '../../analytics/sendEvent';
+import functionLookup from './functionLookup';
+import getHelperMenuBlob from './getHelperMenuBlob';
+import gsDl from './gsDl';
 
 function toggleMenu(evt) {
   if (evt.target.id !== 'helperMenu') { return; }
@@ -43,7 +43,7 @@ const classEvents = [
     sendEvent('helperMenu', 'helperMenuReply');
     window.openQuickMsgDialog(target.getAttribute('target_player'));
   }],
-  ['helperDl', gsDl],
+  ['helperGsDl', gsDl],
   ['helperQuickExtract', doQuickExtract],
 ];
 

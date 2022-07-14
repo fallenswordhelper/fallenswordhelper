@@ -2,33 +2,33 @@ import daViewCombat from '../../_dataAccess/daViewCombat';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
 import getTextTrim from '../../common/getTextTrim';
-import { nowSecs } from '../../support/now';
-import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import partial from '../../common/partial';
+import { getNowSecs } from '../../support/now';
 import { get, set } from '../../system/idb';
+import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 
 const storageKey = 'fsh_pvpCombat';
 
-let combatPrm;
-let newCache;
+let combatPrm = 0;
+let newCache = 0;
 
 function currentCombatRecord(sevenDays, [key, val]) {
   return key === 'lastCheck' || (val.logTime && val.logTime > sevenDays);
 }
 
 function getRecent(internal) {
-  const sevenDays = nowSecs - 7 * 24 * 60 * 60;
+  const sevenDays = getNowSecs() - 7 * 24 * 60 * 60;
   const pairs = entries(internal);
   const filtered = pairs.filter(partial(currentCombatRecord, sevenDays));
-  const recent = { ...fromEntries(filtered), lastCheck: nowSecs };
+  const recent = { ...fromEntries(filtered), lastCheck: getNowSecs() };
   set(storageKey, recent);
   return recent;
 }
 
 async function prepareCache() {
   const internal = await get(storageKey);
-  if (!internal) { return { lastCheck: nowSecs }; }
-  const oneDay = nowSecs - 24 * 60 * 60;
+  if (!internal) { return { lastCheck: getNowSecs() }; }
+  const oneDay = getNowSecs() - 24 * 60 * 60;
   if (!internal.lastCheck || internal.lastCheck < oneDay) {
     return getRecent(internal);
   }

@@ -1,10 +1,11 @@
+import formatLocalDateTime from '../../common/formatLocalDateTime';
+import { lvlTest, playerLvlTest } from '../../common/lvlTests';
+import numberIsNaN from '../../common/numberIsNaN';
+import partial from '../../common/partial';
 import fallback from '../../system/fallback';
 import getValue from '../../system/getValue';
 import intValue from '../../system/intValue';
-import numberIsNaN from '../../common/numberIsNaN';
-import partial from '../../common/partial';
 import setValue from '../../system/setValue';
-import { lvlTest, playerLvlTest } from '../../common/lvlTests';
 
 function getVal(el, context) {
   return parseInt($(el, context).val(), 10);
@@ -31,6 +32,7 @@ export default function filterHeaderOnlinePlayers(context) { // jQuery
     + `Max lvl:<input value="${
       getValue('onlinePlayerMaxLvl')}" class="fshNumberInput" type="number" id="fshMaxLvl" /> `
     + '<input id="fshReset" type="button" value="Reset"/>'
-    + '</div><table id="fshInv" class="allow stripe hover"></table>',
+    + '</div><table id="fshInv" class="allow stripe hover"></table>'
+    + `<div>Last updated: ${formatLocalDateTime(new Date(getValue('lastOnlineCheck')))}</div>`,
   );
 }

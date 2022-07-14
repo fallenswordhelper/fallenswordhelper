@@ -1,6 +1,6 @@
-import fromEntries from '../../common/fromEntries';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import indexAjaxPost from '../../ajax/indexAjaxPost';
+import fromEntries from '../../common/fromEntries';
 import infoBoxFrom from '../../common/InfoBoxFrom';
 import { levelDefaults } from '../../support/constants';
 import settingsView from './settingsView';

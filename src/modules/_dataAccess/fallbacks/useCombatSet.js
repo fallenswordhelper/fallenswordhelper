@@ -1,5 +1,5 @@
-import htmlResult from './htmlResult';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import htmlResult from './htmlResult';
 
 // Incomplete
 export default async function useCombatSet(combatSetId) {

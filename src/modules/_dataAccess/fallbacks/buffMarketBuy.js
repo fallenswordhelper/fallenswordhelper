@@ -1,11 +1,9 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
-import infoBoxFrom from '../../common/InfoBoxFrom';
+import aGenericFallback from './aGenericFallback';
 
-export default async function buffMarketBuy(packageId) {
-  const buffHtml = await indexAjaxData({ cmd: 'buffmarket', subcmd: 'buy', id: packageId });
-  const message = infoBoxFrom(buffHtml);
-  if (message === 'Request accepted - buffs have automatically been cast.') {
-    return { s: true };
-  }
-  return { s: false, e: { message } };
+export default function buffMarketBuy(packageId) {
+  return aGenericFallback({
+    cmd: 'buffmarket',
+    subcmd: 'buy',
+    id: packageId,
+  }, 'Request accepted - buffs have automatically been cast.');
 }

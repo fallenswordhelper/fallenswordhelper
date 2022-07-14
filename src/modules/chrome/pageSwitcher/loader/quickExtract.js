@@ -1,4 +1,5 @@
-export default async function quickExtract(i) {
-  const m = await import('../../../notepad/quickExtract/quickExtract');
-  m.default(i);
+import runDefault from '../../../common/runDefault';
+
+export default function quickExtract() {
+  runDefault(import('../../../notepad/quickExtract/quickExtract'));
 }

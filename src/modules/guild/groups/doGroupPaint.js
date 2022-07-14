@@ -1,18 +1,21 @@
 import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
+import dateUtc from '../../common/dateUtc';
 import doBuffLinks from '../../common/doBuffLinks';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getText from '../../common/getText';
-import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onlineDot from '../../common/onlineDot';
 import partial from '../../common/partial';
+import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
+import regExpExec from '../../common/regExpExec';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { months, playerIdUrl } from '../../support/constants';
 import { time, timeEnd } from '../../support/debug';
+import getValue from '../../system/getValue';
 
-const xRE = /([a-zA-Z]{3}), (\d{1,2}) ([a-zA-Z]{3}) (\d{1,2}):(\d{2}):(\d{2}) UTC/;
+const dateRe = /(?<day>[a-zA-Z]{3}), (?<date>\d{1,2}) (?<month>[a-zA-Z]{3}) (?<hr>\d{1,2}):(?<min>\d{2}):(?<sec>\d{2}) UTC/;
 
 function guessYear(targetMonth) {
   let curYear = new Date().getFullYear();
@@ -23,21 +26,21 @@ function guessYear(targetMonth) {
   return curYear;
 }
 
-function dateFromUTC(x) {
-  const groupDate = new Date();
-  groupDate.setUTCDate(x[2]);
-  groupDate.setUTCMonth(months.indexOf(x[3]));
-  groupDate.setUTCFullYear(guessYear(x[3]));
-  groupDate.setUTCHours(x[4]);
-  groupDate.setUTCMinutes(x[5]);
-  return groupDate;
+function dateLocalFromUtc([,, date, month, hr, min]) {
+  return new Date(dateUtc([
+    guessYear(month),
+    month,
+    date,
+    hr,
+    min,
+  ]));
 }
 
 function groupLocalTime(row) {
   const theDateCell = row.cells[3];
-  const x = xRE.exec(getText(theDateCell));
+  const dateMatches = regExpExec(dateRe, getText(theDateCell));
   insertHtmlBeforeEnd(theDateCell, `<br><span class="fshBlue fshXSmall">Local: ${
-    dateFromUTC(x).toString().substr(0, 21)}</span>`);
+    dateLocalFromUtc(dateMatches).toString().slice(0, 21)}</span>`);
 }
 
 function creatorDotAndLink(membrlist, creatorCell) {
@@ -58,11 +61,6 @@ function byMemberLevel(membrlist, a, b) {
   return memberLevel(membrlist, b) - memberLevel(membrlist, a);
 }
 
-function profileLink(membrlist, name) {
-  if (!membrlist[name]) { return name; }
-  return `<a href="${playerIdUrl}${membrlist[name].id}">${name}</a>`;
-}
-
 function groupMembers(membrlist, membersCell) {
   const listArr = csvSplit(membersCell.innerHTML);
   if (listArr.length > 1) { listArr.sort(partial(byMemberLevel, membrlist)); }
@@ -80,7 +78,7 @@ function buffLinks(creatorCell, listArr) {
 }
 
 function memberProfileLinks(membrlist, membersCell, listArr) {
-  const memberLinks = listArr.map(partial(profileLink, membrlist));
+  const memberLinks = listArr.map(partial(playerLinkFromMembrList, membrlist));
   setInnerHtml(`<span>${memberLinks.join(', ')}</span>`, membersCell);
 }
 

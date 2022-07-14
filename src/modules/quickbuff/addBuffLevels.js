@@ -1,13 +1,13 @@
-import addStatsQuickBuff from './addStatsQuickBuff';
+import getProfile from '../ajax/getProfile';
 import createSpan from '../common/cElement/createSpan';
 import csvSplit from '../common/csvSplit';
-import getProfile from '../ajax/getProfile';
 import getText from '../common/getText';
 import insertElementAfter from '../common/insertElementAfter';
-import parseBuffLevel from './parseBuffLevel';
 import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
 import setInnerHtml from '../dom/setInnerHtml';
+import addStatsQuickBuff from './addStatsQuickBuff';
+import parseBuffLevel from './parseBuffLevel';
 
 function newPlayerSpan(el, playerSpan) {
   if (!playerSpan) {

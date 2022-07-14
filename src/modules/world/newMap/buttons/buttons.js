@@ -1,21 +1,17 @@
-import calf from '../../../support/calf';
 import createButton from '../../../common/cElement/createButton';
 import createDiv from '../../../common/cElement/createDiv';
-import fixTeleport from './fixTeleport';
+import textSpan from '../../../common/cElement/textSpan';
 import getElementById from '../../../common/getElementById';
-import getValue from '../../../system/getValue';
 import hideQTip from '../../../common/hideQTip';
 import insertElement from '../../../common/insertElement';
 import insertElementBefore from '../../../common/insertElementBefore';
-import makeToggleBtn from './makeToggleBtn';
 import on from '../../../common/on';
 import onclick from '../../../common/onclick';
 import openQuickBuffById from '../../../common/openQuickBuffById';
 import partial from '../../../common/partial';
 import playerId from '../../../common/playerId';
 import setText from '../../../dom/setText';
-import setValue from '../../../system/setValue';
-import textSpan from '../../../common/cElement/textSpan';
+import calf from '../../../support/calf';
 import {
   defPlayerLevel,
   defRealmUpdate,
@@ -23,10 +19,14 @@ import {
   guideUrl,
   worldUrl,
 } from '../../../support/constants';
+import getValue from '../../../system/getValue';
+import setValue from '../../../system/setValue';
+import fixTeleport from './fixTeleport';
+import makeToggleBtn from './makeToggleBtn';
 
 let buttonContainer = 0;
-let realmLvl = 0;
-let yourLvl = 0;
+let lvlSpan = 0;
+const yourLvl = 0;
 let formGroup = 0;
 let quickBuff = 0;
 let realmMap = 0;
@@ -77,24 +77,17 @@ function exists(val) {
   return '?';
 }
 
-function minLvl() {
-  const topDiv = createDiv({ textContent: 'Min Lvl: ' });
-  realmLvl = textSpan(exists(GameData.realm().minlevel));
-  insertElement(topDiv, realmLvl);
-  return topDiv;
-}
-
-function yrLvl() {
-  const btmDiv = createDiv({ textContent: 'Your Lvl: ' });
-  yourLvl = textSpan(exists(GameData.player().level));
-  insertElement(btmDiv, yourLvl);
-  return btmDiv;
+function levelBox(prefix, prop) {
+  const aDiv = createDiv({ textContent: `${prefix} Lvl: ` });
+  lvlSpan = textSpan(exists(GameData.realm()[prop]));
+  insertElement(aDiv, lvlSpan);
+  return aDiv;
 }
 
 function doLevels(worldName) {
   const lvlDiv = createDiv({ className: 'fshFsty' });
-  insertElement(lvlDiv, minLvl());
-  insertElement(lvlDiv, yrLvl());
+  insertElement(lvlDiv, levelBox('Min', 'minlevel'));
+  insertElement(lvlDiv, levelBox('Your', 'level'));
   insertElement(worldName, lvlDiv);
 }
 
@@ -150,23 +143,23 @@ function addButtons() {
 }
 
 const changeHdl = [
-  [(target) => target === soundCheck, toggleSound],
-  [(target) => target === huntCheck, toggleHuntMode],
+  [() => soundCheck, toggleSound],
+  [() => huntCheck, toggleHuntMode],
 ];
 
 const clickHdl = [
-  [(target) => target === formGroup, doFormGroup],
-  [(target) => target === quickBuff, openQuickBuff],
-  [(target) => target === realmMap, openRealmMap],
-  [(target) => target === ufsgMap, openUfsgMap],
+  [() => formGroup, doFormGroup],
+  [() => quickBuff, openQuickBuff],
+  [() => realmMap, openRealmMap],
+  [() => ufsgMap, openUfsgMap],
 ];
 
 function handleEvent(evtAry, evt) {
   const { target } = evt;
-  const hdl = evtAry.find(([f]) => f(target));
-  if (hdl) {
+  const [, fn] = evtAry.find(([f]) => f() === target) ?? [];
+  if (fn) {
     target.blur();
-    hdl[1](target);
+    fn(target);
   }
 }
 
@@ -188,14 +181,14 @@ function injectButtons() {
   }
 }
 
-function realmUpdate(e, data) {
-  if (realmLvl && data.b.minlevel) {
+function realmUpdate(_e, data) {
+  if (lvlSpan && data.b.minlevel) {
     fixTeleport();
-    setText(data.b.minlevel, realmLvl);
+    setText(data.b.minlevel, lvlSpan);
   }
 }
 
-function levelStats(e, data) {
+function levelStats(_e, data) {
   if (yourLvl) {
     setText(data.b, yourLvl);
   }

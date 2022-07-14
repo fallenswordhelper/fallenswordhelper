@@ -1,12 +1,12 @@
-import getCustomUrlParameter from '../../system/getCustomUrlParameter';
+import retryAjax from '../../ajax/retryAjax';
 import getElementById from '../../common/getElementById';
 import hideElement from '../../common/hideElement';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
-import retryAjax from '../../ajax/retryAjax';
+import { getPcc } from '../../support/layout';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 
-let bpc;
+let bpc = 0;
 
 function bp() {
   if (!bpc) {
@@ -61,5 +61,5 @@ function testForSection(evt) {
 }
 
 export default function ajaxifyProfileSections() {
-  onclick(pCC, testForSection);
+  onclick(getPcc(), testForSection);
 }

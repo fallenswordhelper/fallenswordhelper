@@ -1,14 +1,11 @@
-import { bountyUrl } from '../../support/constants';
-import createDiv from '../../common/cElement/createDiv';
-import createSpan from '../../common/cElement/createSpan';
-import insertElement from '../../common/insertElement';
-import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import setInnerHtml from '../../dom/setInnerHtml';
-import setValueJSON from '../../system/setValueJSON';
-import { wantedList } from './lists';
-import { wantedListDiv } from './createDivs';
+import { getWantedListDiv } from './createDivs';
+import injectList from './injectList';
+import listRow from './listRow';
+import { getWantedList } from './lists';
 
-export let wantedListReset = 0;
+let wantedListReset = 0;
+
+export const getWantedListReset = () => wantedListReset;
 
 function makeMouseOver(el) {
   return `Target Level:  ${el.lvl
@@ -20,30 +17,22 @@ function makeMouseOver(el) {
 }
 
 function acceptBtn(bounty) {
-  if (bounty.accept) {
-    return `<span class="xsGreen" onclick="${bounty.accept
-    }">[a]</span>&nbsp;`;
-  }
-  return '';
+  return bounty.accept ? `<span class="xsGreen" onclick="${bounty.accept}">[a]</span>&nbsp;` : '';
+}
+
+function wantedRow(bounty) {
+  return [
+    acceptBtn(bounty),
+    listRow(bounty, makeMouseOver),
+  ].join('');
 }
 
 export function injectWantedList() { // Legacy
-  setValueJSON('wantedList', wantedList);
-  setInnerHtml('', wantedListDiv);
-  const heading = createDiv(
-    { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">Wanted Bounties</a> ` },
-  );
-  wantedListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
-  insertElement(heading, wantedListReset);
-  insertElement(wantedListDiv, heading);
-  let output = '';
-  if (wantedList.bounty.length === 0) {
-    output += '<div class="xsOrange">[No wanted bounties]</div>';
-  } else {
-    for (const bounty of wantedList.bounty) {
-      output += `${acceptBtn(bounty)}<a class="xsKhaki tip-static" data-tipped="${
-        makeMouseOver(bounty)}" href="${bounty.link}">${bounty.target}</a><br>`;
-    }
-  }
-  insertHtmlBeforeEnd(wantedListDiv, output);
+  wantedListReset = injectList([
+    getWantedListDiv,
+    'wantedList',
+    getWantedList,
+    'Wanted',
+    wantedRow,
+  ]);
 }

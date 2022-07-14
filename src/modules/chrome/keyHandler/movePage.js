@@ -1,6 +1,6 @@
 import clickThis from '../../common/clickThis';
-import keyHandlerEvent from './keyHandlerEvent';
 import querySelector from '../../common/querySelector';
+import keyHandlerEvent from './keyHandlerEvent';
 
 export default function movePage(dir) {
   const dirButton = querySelector(`#pCC input[value="${dir}"]`);

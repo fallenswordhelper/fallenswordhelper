@@ -1,18 +1,18 @@
 import ajaxSendItems from '../../../ajax/ajaxSendItems';
+import dropItem from '../../../ajax/dropItem';
+import equipItem from '../../../ajax/equipItem';
+import moveItem from '../../../ajax/moveItem';
+import storeItems from '../../../ajax/storeItems';
+import useItem from '../../../ajax/useItem';
+import { queueRecallItem, queueTakeItem } from '../../../ajaxQueue/queue';
+import partial from '../../../common/partial';
 import allChecks from './allChecks';
 import changeLvls from './changeLvls';
 import clearChecks from './clearChecks';
 import doAction from './doAction';
-import dropItem from '../../../ajax/dropItem';
-import equipItem from '../../../ajax/equipItem';
 import getChecks from './getChecks';
-import moveItem from '../../../ajax/moveItem';
-import partial from '../../../common/partial';
 import resetChecks from './resetChecks';
 import resetLvls from './resetLvls';
-import storeItems from '../../../ajax/storeItems';
-import useItem from '../../../ajax/useItem';
-import { queueRecallItem, queueTakeItem } from '../../../ajaxQueue/queue';
 
 function setName(fshInv, e) { // jQuery
   $(fshInv).DataTable().search($(e.target).attr('set')).draw();
@@ -38,14 +38,9 @@ function recallItem(e) { // jQuery
   );
 }
 
-function wearItem(e) { // jQuery
+function wearUse(e, fn) { // jQuery
   const target = $(e.target);
-  doAction(partial(equipItem, target.attr('invid')), target);
-}
-
-function doUseItem(e) { // jQuery
-  const target = $(e.target);
-  doAction(partial(useItem, target.attr('invid')), target);
+  doAction(partial(fn, target.attr('invid')), target);
 }
 
 function doMoveItem(e) { // jQuery
@@ -58,14 +53,9 @@ function doStoreItem(e) { // jQuery
   doAction(partial(storeItems, [target.attr('invid')]), target);
 }
 
-function doDropItem(e) { // jQuery
+function dropSend(e, fn) { // jQuery
   const target = $(e.target);
-  doAction(partial(dropItem, [target.data('inv')]), target);
-}
-
-function doSendItem(e) { // jQuery
-  const target = $(e.target);
-  doAction(partial(ajaxSendItems, [target.data('inv')]), target);
+  doAction(partial(fn, [target.data('inv')]), target);
 }
 
 function elClick(fshInv, el) { // jQuery
@@ -88,10 +78,10 @@ function spanClickHandlers(fshInv) {
     ['setName', partial(setName, fshInv)],
     ['takeItem', takeItem],
     ['recallItem', recallItem],
-    ['wearItem', wearItem],
-    ['useItem', doUseItem],
-    ['dropItem', doDropItem],
-    ['sendItem', doSendItem],
+    ['wearItem', (e) => wearUse(e, equipItem)],
+    ['useItem', (e) => wearUse(e, useItem)],
+    ['dropItem', (e) => dropSend(e, dropItem)],
+    ['sendItem', (e) => dropSend(e, ajaxSendItems)],
     ['storeItem', doStoreItem],
   ].forEach(partial(spanClick, fshInv));
 }

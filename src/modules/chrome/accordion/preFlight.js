@@ -1,6 +1,6 @@
+import sendException from '../../analytics/sendException';
 import getElementById from '../../common/getElementById';
 import isObject from '../../common/isObject';
-import sendException from '../../analytics/sendException';
 
 function foundNav(myNav) {
   if (isObject(myNav)) { return true; }

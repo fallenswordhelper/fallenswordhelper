@@ -1,6 +1,6 @@
+import jsonStringify from '../common/jsonStringify';
 import dialog from './dialog';
 import indexAjaxJson from './indexAjaxJson';
-import jsonStringify from '../common/jsonStringify';
 
 export default function moveItem(invIdList, folderId) {
   return indexAjaxJson({

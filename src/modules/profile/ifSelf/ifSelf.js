@@ -1,15 +1,15 @@
 import executeAll from '../../common/executeAll';
-import getIsSelf from '../getIsSelf';
-import getValue from '../../system/getValue';
 import runDefault from '../../common/runDefault';
+import getValue from '../../system/getValue';
+import getIsSelf from '../getIsSelf';
 import storeVL from './storeVL';
 
 async function doFastDebuff() {
   const fastDebuff = getValue('fastDebuff');
   const disableDeactivatePrompts = getValue('disableDeactivatePrompts');
   if (fastDebuff || disableDeactivatePrompts) {
-    const m = await import('./debuff');
-    m.default(fastDebuff, disableDeactivatePrompts);
+    const module = await import('./debuff');
+    module.default(fastDebuff, disableDeactivatePrompts);
   }
 }
 

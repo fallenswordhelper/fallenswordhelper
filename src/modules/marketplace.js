@@ -1,13 +1,13 @@
-import addCommas from './system/addCommas';
 import closestTable from './common/closestTable';
 import getElementById from './common/getElementById';
 import on from './common/on';
-import { pCC } from './support/layout';
 import setInnerHtml from './dom/setInnerHtml';
+import { getPcc } from './support/layout';
+import addCommas from './system/addCommas';
 
-let amt;
-let prc;
-let warn;
+let amt = 0;
+let prc = 0;
+let warn = 0;
 
 function getAmount() {
   if (!amt) { amt = getElementById('amount'); }
@@ -57,5 +57,5 @@ function addMarketplaceWarning() {
 }
 
 export default function marketplace() {
-  on(pCC, 'keyup', addMarketplaceWarning);
+  on(getPcc(), 'keyup', addMarketplaceWarning);
 }

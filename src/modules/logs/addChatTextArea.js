@@ -1,15 +1,15 @@
 import './addChatTextArea.css';
 import arrayFrom from '../common/arrayFrom';
+import createTextArea from '../common/cElement/createTextArea';
 import clickThis from '../common/clickThis';
 import closestTable from '../common/closestTable';
 import contains from '../common/contains';
-import createTextArea from '../common/cElement/createTextArea';
 import getArrayByClassName from '../common/getArrayByClassName';
-import getValue from '../system/getValue';
 import insertElement from '../common/insertElement';
 import on from '../common/on';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
+import { getPcc } from '../support/layout';
+import getValue from '../system/getValue';
 
 function removeCrlf(fshTxt) {
   // eslint-disable-next-line no-param-reassign
@@ -17,7 +17,7 @@ function removeCrlf(fshTxt) {
     .replace(/\r\n|\n|\r/g, ' ')
     .replace(/'/g, '’')
     // https://stackoverflow.com/a/27449493/1274806
-    .replace(/(^|\s)(")/g, '$1“') // replace quotes that start a line or follow spaces
+    .replace(/(?<a>^|\s)(?<b>")/g, '$1“') // replace quotes that start a line or follow spaces
     .replace(/"/g, '”') // replace quotes that start a line or follow spaces
     .replace('<', '＜'); // open angle bracket - sohail94
 }
@@ -55,8 +55,8 @@ function makeTextArea() {
   return fshTxt;
 }
 
-const dont = () => !pCC
-  || getArrayByClassName('header', pCC).filter(contains('Posted\xa0By')).length !== 1
+const dont = () => !getPcc()
+  || getArrayByClassName('header', getPcc()).filter(contains('Posted\xa0By')).length !== 1
   || !getValue('enhanceChatTextEntry');
 
 export default function addChatTextArea() {

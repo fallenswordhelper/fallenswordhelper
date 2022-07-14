@@ -1,14 +1,14 @@
-import badData from '../badData';
 import calf from '../../../support/calf';
 import { cdn } from '../../../system/system';
+import badData from '../badData';
 import {
   getMyStats,
-  statArmor,
-  statAttack,
-  statDamage,
-  statDefense,
-  statHp,
-  statLevel,
+  getStatArmor,
+  getStatAttack,
+  getStatDamage,
+  getStatDefense,
+  getStatHp,
+  getStatLevel,
 } from './getMyStats';
 
 function tipHeader(creature) {
@@ -19,35 +19,61 @@ function tipHeader(creature) {
     + '<td class="header" colspan="4" class="fshCenter">Statistics</td></tr>';
 }
 
+const titleCell = (title) => `<td>${title}:&nbsp;</td>`;
+const valueCell = (value) => `<td width="40%">${value}</td>`;
+
+function genericColumns([title, value, yours, yourClass, getStatFn]) {
+  return [
+    titleCell(title),
+    valueCell(`${value} (your ${yours}:<span class="${yourClass}">${getStatFn()}</span>)`),
+  ];
+}
+
+function genericRow(incomingArray) {
+  return [
+    '<tr>',
+    ...incomingArray,
+    '</tr>',
+  ].join('');
+}
+
 function tipClassLevel(creature, myLvlClas) {
-  return `<tr><td>Class:&nbsp;</td><td width="40%">${
-    creature.creature_class}</td><td>Level:&nbsp;</td><td width="40%">${
-    creature.level} (your level:<span class="${myLvlClas}">${
-    statLevel}</span>)</td></tr>`;
+  return genericRow([
+    titleCell('Class'),
+    valueCell(creature.creature_class),
+    ...genericColumns(['Level', creature.level, 'level', myLvlClas, getStatLevel]),
+  ]);
+}
+
+function genericStatRow(first, second) {
+  return genericRow([
+    ...genericColumns(first),
+    ...genericColumns(second),
+  ]);
 }
 
 function tipAttackDefense(creature) {
-  return `<tr><td>Attack:&nbsp;</td><td width="40%">${
-    creature.attack} (your defense:<span class="fshYellow">${
-    statDefense}</span>)</td><td>Defense:&nbsp;</td><td width="40%">${
-    creature.defense} (your attack:<span class="fshYellow">${
-    statAttack}</span>)</td></tr>`;
+  return genericStatRow(
+    ['Attack', creature.attack, 'defense', 'fshYellow', getStatDefense],
+    ['Defense', creature.defense, 'attack', 'fshYellow', getStatAttack],
+  );
 }
 
 function tipArmorDamage(creature) {
-  return `<tr><td>Armor:&nbsp;</td><td width="40%">${
-    creature.armor} (your damage:<span class="fshYellow">${
-    statDamage}</span>)</td><td>Damage:&nbsp;</td><td width="40%">${
-    creature.damage} (your armor:<span class="fshYellow">${
-    statArmor}</span>)</td></tr>`;
+  return genericStatRow(
+    ['Armor', creature.armor, 'damage', 'fshYellow', getStatDamage],
+    ['Damage', creature.damage, 'armor', 'fshYellow', getStatArmor],
+  );
 }
 
 function tipHp(creature, oneHitNumber) {
-  return `<tr><td>HP:&nbsp;</td><td width="40%">${
-    creature.hp} (your HP:<span class="fshYellow">${
-    statHp}</span>)(1H: <span class="fshRed">${
-    oneHitNumber}</span>)</td><td>Gold:&nbsp;</td><td width="40%">${
-    creature.gold}</td></tr>`;
+  return genericRow([
+    titleCell('HP'),
+    valueCell(`${creature.hp} (your HP:<span class="fshYellow">${
+      getStatHp()}</span>)(1H: <span class="fshRed">${oneHitNumber}</span>)`),
+    titleCell('Gold'),
+    valueCell(creature.gold),
+  ]);
 }
 
 const tipSpacer = '<tr><td colspan="4" height="5"></td></tr><tr>'
@@ -90,7 +116,7 @@ function doMouseOver(creature) {
     * calf.generalVariable);
   let myLvlClas = 'fshYellow';
   getMyStats();
-  if (statLevel > creature.level) { myLvlClas = 'fshRed'; }
+  if (getStatLevel() > creature.level) { myLvlClas = 'fshRed'; }
   return makeMonsterTip(creature, oneHitNumber, myLvlClas);
 }
 

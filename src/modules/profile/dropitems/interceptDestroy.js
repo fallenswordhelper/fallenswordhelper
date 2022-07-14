@@ -1,18 +1,18 @@
-import chunk from '../../common/chunk';
 import daDropItems from '../../_dataAccess/daDropItems';
+import sendEvent from '../../analytics/sendEvent';
+import chunk from '../../common/chunk';
 import errorDialog from '../../common/errorDialog';
 import eventHandler5 from '../../common/eventHandler5';
-import getCheckboxesArray from '../../guild/inventory/storeitems/getCheckboxesArray';
-import getCheckedItems from './getCheckedItems';
-import getValue from '../../system/getValue';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import on from '../../common/on';
 import querySelector from '../../common/querySelector';
-import removeRow from './removeRow';
 import selfIdIs from '../../common/selfIdIs';
-import sendEvent from '../../analytics/sendEvent';
-import setValue from '../../system/setValue';
+import getCheckboxesArray from '../../guild/inventory/storeitems/getCheckboxesArray';
 import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
+import getValue from '../../system/getValue';
+import setValue from '../../system/setValue';
+import getCheckedItems from './getCheckedItems';
+import removeRow from './removeRow';
 
 function scopedCheck(mode) {
   getCheckboxesArray().forEach((ctx) => { ctx.checked = Boolean(mode); });
@@ -20,9 +20,9 @@ function scopedCheck(mode) {
 
 const prefAjaxifyDestroy = 'ajaxifyDestroy';
 const prefDisableDestroyPrompts = 'disableDestroyPrompts';
-let ajaxifyDestroy;
-let disableDestroyPrompts;
-let hcsConfirmDestroy;
+let ajaxifyDestroy = 0;
+let disableDestroyPrompts = 1;
+let hcsConfirmDestroy = 0;
 
 async function destroyChunk(itemsAry) {
   const json = await daDropItems(itemsAry.map((i) => i.value));

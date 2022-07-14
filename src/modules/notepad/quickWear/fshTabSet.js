@@ -7,12 +7,12 @@ import createUl from '../../common/cElement/createUl';
 import insertElement from '../../common/insertElement';
 import once from '../../common/once';
 import partial from '../../common/partial';
-import { publish } from '../../support/pubsub';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { publish } from '../../support/pubsub';
 
 const toggleId = (groupName, i) => groupName + String(i);
 
-function makeRadio(groupName, e, i) {
+function makeRadio(groupName, _e, i) {
   return createInput({
     checked: i === 0,
     id: toggleId(groupName, i),
@@ -47,20 +47,29 @@ function makeUl(tabs, groupName, thisDivs) {
 
 const makeDiv = () => createDiv({ className: 'ui-tabs-panel ui-corner-bottom' });
 
-export default function fshTabSet(container, tabs, groupName) {
-  const thisTabSet = createDiv({
-    className: 'fshTabSet '
-        + 'ui-tabs ui-widget-content ui-corner-all',
-  });
-  const appendToTabSet = partial(insertElement, thisTabSet);
+function appendRadios(tabs, groupName, appendToTabSet) {
   const thisRadios = tabs.map(partial(makeRadio, groupName));
   thisRadios.forEach(appendToTabSet);
-  const thisDivs = tabs.map(makeDiv);
-  publish(toggleId(groupName, 0), thisDivs[0]);
+}
+
+function appendList(tabs, groupName, thisTabSet, thisDivs) {
   const thisList = makeUl(tabs, groupName, thisDivs);
   publish(`${groupName}-header`, thisList);
   insertElement(thisTabSet, thisList);
+}
+
+function makeTabSet(tabs, groupName) {
+  const thisTabSet = createDiv({ className: 'fshTabSet ui-tabs ui-widget-content ui-corner-all' });
+  const appendToTabSet = partial(insertElement, thisTabSet);
+  appendRadios(tabs, groupName, appendToTabSet);
+  const thisDivs = tabs.map(makeDiv);
+  publish(toggleId(groupName, 0), thisDivs[0]);
+  appendList(tabs, groupName, thisTabSet, thisDivs);
   thisDivs.forEach(appendToTabSet);
+  return thisTabSet;
+}
+
+export default function fshTabSet(container, tabs, groupName) {
   setInnerHtml('', container);
-  insertElement(container, thisTabSet);
+  insertElement(container, makeTabSet(tabs, groupName));
 }

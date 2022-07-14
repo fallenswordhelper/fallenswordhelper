@@ -1,11 +1,12 @@
-import buffList from '../../support/buffObj.json';
+import sendEvent from '../../analytics/sendEvent';
 import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
-import getMsg from './getMsg';
 import getPlayerId from '../../common/getPlayerId';
 import openQuickBuffById from '../../common/openQuickBuffById';
-import sendEvent from '../../analytics/sendEvent';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import toLowerCase from '../../common/toLowerCase';
+import buffList from '../../support/buffObj.json';
+import getMsg from './getMsg';
 
 const thisNick = (nick, buffObj) => csvSplit(buffObj.nicks).includes(toLowerCase(nick));
 
@@ -17,9 +18,9 @@ function getBuffId(nick) {
 const formatIds = (matched) => csvSplit(matched).map(getBuffId).filter((b) => b).join(';');
 
 function getIds(target) {
-  const buffs = /`~(.*)~`/.exec(getMsg(target));
+  const buffs = regExpFirstCapture(/`~(?<buffs>.*)~`/, getMsg(target));
   if (buffs) {
-    return formatIds(buffs[1]);
+    return formatIds(buffs);
   }
   return '';
 }

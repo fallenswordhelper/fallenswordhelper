@@ -1,16 +1,16 @@
-import calf from './calf';
-import fallback from '../system/fallback';
+import sendException from '../analytics/sendException';
 import isArray from '../common/isArray';
 import isFunction from '../common/isFunction';
 import isUndefined from '../common/isUndefined';
 import on from '../common/on';
+import fallback from '../system/fallback';
+import calf from './calf';
 import parseError from './parseError';
-import sendException from '../analytics/sendException';
 import { getLength, pop, push } from './sch';
 
 let paused = true;
 const message = 'fshMessage';
-let messageHandler;
+let messageHandler = 0;
 
 function taskRunner() {
   if (getLength() === 0) {
@@ -61,7 +61,7 @@ function initMessageHandler() {
 function devLog(args) {
   if (args && !isArray(args)) {
     // eslint-disable-next-line no-console
-    console.log('addTask isArray(args)', isArray(args));
+    console.log('addTask isArray(args)', isArray(args)); // skipcq: JS-0002
   }
 }
 

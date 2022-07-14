@@ -1,6 +1,6 @@
 import daQuickbuff from '../_dataAccess/daQuickbuff';
-import quickbuffSuccess from '../common/quickbuffSuccess';
 import sendEvent from '../analytics/sendEvent';
+import quickbuffSuccess from '../common/quickbuffSuccess';
 import setInnerHtml from '../dom/setInnerHtml';
 
 function processResult(trigger, json) {

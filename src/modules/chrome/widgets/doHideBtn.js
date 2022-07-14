@@ -1,7 +1,7 @@
-import calf from '../../support/calf';
-import hideNodeList from './hideNodeList';
 import partial from '../../common/partial';
 import querySelectorAll from '../../common/querySelectorAll';
+import calf from '../../support/calf';
+import hideNodeList from './hideNodeList';
 
 const hideBtn = [
   [

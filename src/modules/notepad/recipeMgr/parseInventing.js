@@ -1,15 +1,18 @@
-import createDiv from '../../common/cElement/createDiv';
-import generateRecipeTable from './generateRecipeTable';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import createDiv from '../../common/cElement/createDiv';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
-import processFirstPage from './processFirstPage';
-import { set } from '../../system/idb';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { set } from '../../system/idb';
+import generateRecipeTable from './generateRecipeTable';
+import processFirstPage from './processFirstPage';
 
-export let recipebook;
-export let output;
+let recipebook = 0;
+let output = 0;
+
+export const getRecipebook = () => recipebook;
+export const getOutput = () => output;
 
 function displayStuff() {
   insertHtmlBeforeEnd(output, 'Finished parsing ... formatting ...');

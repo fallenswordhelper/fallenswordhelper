@@ -1,22 +1,22 @@
 <script>
-  import calf from '../../support/calf';
-  import { cdn } from '../../system/system';
+  import sendEvent from '../../analytics/sendEvent';
   import currentGuildId from '../../common/currentGuildId';
-  import getIsOwnGuild from '../getIsOwnGuild';
-  import getPlayerName from '../getPlayerName';
-  import getUrlParameter from '../../system/getUrlParameter';
-  import getValue from '../../system/getValue';
   import joinGroups from '../../common/joinGroups';
   import navigateTo from '../../common/navigateTo';
   import openQuickBuffById from '../../common/openQuickBuffById';
   import playerId from '../../common/playerId';
-  import sendEvent from '../../analytics/sendEvent';
+  import calf from '../../support/calf';
   import {
     auctionhouseUrl,
     guildSubcmdUrl,
     recallUserUrl,
     secureUrl,
   } from '../../support/constants';
+  import getUrlParameter from '../../system/getUrlParameter';
+  import getValue from '../../system/getValue';
+  import { cdn } from '../../system/system';
+  import getIsOwnGuild from '../getIsOwnGuild';
+  import getPlayerName from '../getPlayerName';
 
   const joinTip = calf.enableMaxGroupSizeToJoin ? ` < ${calf.maxGroupSizeToJoin} Members` : '';
   const ownGuild = getIsOwnGuild();

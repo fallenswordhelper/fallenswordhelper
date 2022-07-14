@@ -1,10 +1,10 @@
 import './mailbox.css';
-import chunk from '../common/chunk';
+import daMailboxTake from '../_dataAccess/daMailboxTake';
 import createDiv from '../common/cElement/createDiv';
 import createInput from '../common/cElement/createInput';
 import createLabel from '../common/cElement/createLabel';
 import createUl from '../common/cElement/createUl';
-import daMailboxTake from '../_dataAccess/daMailboxTake';
+import chunk from '../common/chunk';
 import entries from '../common/entries';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getElementById from '../common/getElementById';
@@ -12,15 +12,16 @@ import hasClass from '../common/hasClass';
 import insertElement from '../common/insertElement';
 import insertElementBefore from '../common/insertElementBefore';
 import isArray from '../common/isArray';
-import { itemRE } from '../support/constants';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import jsonFail from '../common/jsonFail';
 import once from '../common/once';
 import onclick from '../common/onclick';
 import outputResult from '../common/outputResult';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
+import regExpGroups from '../common/regExpGroups';
 import setInnerHtml from '../dom/setInnerHtml';
+import { fetchItemRe } from '../support/constants';
+import { getPcc } from '../support/layout';
 
 function makeQtLabel(id, text, injector) {
   const lbl = createLabel({
@@ -36,10 +37,8 @@ function makeQtLabel(id, text, injector) {
 function reduceItems(acc, curr) {
   const img = curr.children[0];
   const { tipped } = img.dataset;
-  const itemIDs = itemRE.exec(tipped);
-  if (!itemIDs) { return acc; }
-  const itemId = itemIDs[1];
-  const invId = itemIDs[2];
+  const { itemId, invId } = regExpGroups(fetchItemRe, tipped);
+  if (!itemId || !invId) return acc;
   if (acc[itemId]) {
     acc[itemId].invIds.push(invId);
   } else {
@@ -140,7 +139,7 @@ function makeQtDiv(itemList) {
   const takeResult = makeTakeResult(qt);
   insertElement(qt, createDiv());
   makeItemTable(itemList, qt, takeResult);
-  insertElement(pCC, qt);
+  insertElement(getPcc(), qt);
 }
 
 function toggleQuickTake(items, injector) {
@@ -159,10 +158,10 @@ function makeQtCheckbox(items, injector) {
 }
 
 export default function mailbox() {
-  if (jQueryNotPresent() || !pCC) { return; }
-  const items = getArrayByTagName('a', pCC);
+  if (jQueryNotPresent() || !getPcc()) { return; }
+  const items = getArrayByTagName('a', getPcc());
   if (items.length === 0) { return; } // Empty mailbox
-  const injector = pCC.lastElementChild;
+  const injector = getPcc().lastElementChild;
   makeQtCheckbox(items, injector);
   makeQtLabel('qtOff', 'Quick Take', injector);
 }

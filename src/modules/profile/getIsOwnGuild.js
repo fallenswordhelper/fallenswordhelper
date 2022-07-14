@@ -1,22 +1,19 @@
 import currentGuildId from '../common/currentGuildId';
-import getGuildALink from './getGuildALink';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import { guildRE } from '../support/constants';
+import getGuildALink from './getGuildALink';
 
-let haveIsOwnGuild;
-let isOwnGuild;
+let isOwnGuild = null;
 
 function findGuildId() {
   const guildALink = getGuildALink();
   if (guildALink) {
-    const matches = guildRE.exec(guildALink.href);
-    if (matches) { return Number(matches[1]); }
+    const id = regExpFirstCapture(guildRE, guildALink.href);
+    if (id) return Number(id);
   }
 }
 
 export default function getIsOwnGuild() {
-  if (!haveIsOwnGuild) {
-    isOwnGuild = findGuildId() === currentGuildId();
-    haveIsOwnGuild = true;
-  }
+  if (isOwnGuild === null) isOwnGuild = findGuildId() === currentGuildId();
   return isOwnGuild;
 }

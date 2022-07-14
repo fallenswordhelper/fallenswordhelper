@@ -1,18 +1,20 @@
 import contains from '../../common/contains';
-import createDocument from '../../system/createDocument';
-import { defStatVl } from '../../support/constants';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import getElementById from '../../common/getElementById';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import getText from '../../common/getText';
-import intValue from '../../system/intValue';
 import onlineDot from '../../common/onlineDot';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
+import regExpExec from '../../common/regExpExec';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { defStatVl } from '../../support/constants';
+import createDocument from '../../system/createDocument';
+import intValue from '../../system/intValue';
 import { updateProgress } from './bufferProgress';
 
-const sustainLevelRE = /Level<br>(\d+)%/;
+const sustainLevelRE = /Level<br>(?<lvl>\d+)%/;
 
 function getBioLines(bioCellHtml, findBuffNicks) {
   const myRe = new RegExp(`^.*\\b(?:(?:${
@@ -26,7 +28,7 @@ function getSustain(doc) {
   if (sustainLink) {
     const sustainText = sustainLink.parentNode.parentNode.parentNode
       .nextElementSibling.children[0].dataset.tipped;
-    return parseInt(sustainLevelRE.exec(sustainText)[1], 10) || -1;
+    return parseInt(regExpFirstCapture(sustainLevelRE, sustainText), 10) || -1;
   }
   return 0;
 }
@@ -115,7 +117,7 @@ function updateProcessed() {
 function calcLastActivity(doc) {
   const innerPcc = getElementById('pCC', doc);
   const lastActivityElement = getElementsByTagName('p', innerPcc)[0];
-  return /(\d{1,2}) mins, (\d{1,2}) secs/.exec(getText(lastActivityElement));
+  return regExpExec(/(?<mins>\d{1,2}) mins, (?<secs>\d{1,2}) secs/, getText(lastActivityElement));
 }
 
 function getExtend(doc) {

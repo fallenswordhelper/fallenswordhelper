@@ -1,13 +1,13 @@
-import calf from '../support/calf';
 import getCalfPrefs from '../common/getCalfPrefs';
-import getValue from '../system/getValue';
 import jsonStringify from '../common/jsonStringify';
+import calf from '../support/calf';
+import getValue from '../system/getValue';
 
 function mapCalfPref(el) { calf[el[0]] = getValue(el[1]); }
 
 function mappedVars() {
   [
-    ['showBuffs', 'showHuntingBuffs'],
+    ['showHuntingBuffs', 'showHuntingBuffs'],
     ['buffs', 'huntingBuffs'],
     ['buffsName', 'huntingBuffsName'],
     ['buffs2', 'huntingBuffs2'],

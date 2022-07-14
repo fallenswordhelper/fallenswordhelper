@@ -1,10 +1,10 @@
 import getElementById from '../common/getElementById';
 import jQueryNotPresent from '../common/jQueryNotPresent';
-import makePageTemplate from './lists/makePageTemplate';
 import onclick from '../common/onclick';
-import { pCC } from '../support/layout';
 import setInnerHtml from '../dom/setInnerHtml';
+import { getPcc } from '../support/layout';
 import { get, set } from '../system/idb';
+import makePageTemplate from './lists/makePageTemplate';
 
 function inject(fsboxcontent) {
   setInnerHtml(fsboxcontent, getElementById('fsboxdetail'));
@@ -17,7 +17,7 @@ function clearFsBox() {
 
 export default function injectFsBoxContent(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
-  const content = injector || pCC;
+  const content = injector || getPcc();
   setInnerHtml(makePageTemplate({
     title: 'FS Box Log',
     comment: '',

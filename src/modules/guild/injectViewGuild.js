@@ -1,22 +1,24 @@
-import compressHistory from './compressHistory';
 import createStyle from '../common/cElement/createStyle';
 import currentGuildId from '../common/currentGuildId';
 import getElementsByTagName from '../common/getElementsByTagName';
-import getUrlParameter from '../system/getUrlParameter';
-import getValue from '../system/getValue';
 import insertElement from '../common/insertElement';
-import { pCC } from '../support/layout';
-import querySelectorArray from '../common/querySelectorArray';
-import { defTable, lastActivityRE } from '../support/constants';
+import lastActivity from '../common/lastActivity';
 import {
   getLowerGvGLevel,
   getLowerPvpLevel,
   getUpperGvgLevel,
   getUpperPvpLevel,
 } from '../common/levelHighlight';
+import querySelectorArray from '../common/querySelectorArray';
+import regExpFirstCapture from '../common/regExpFirstCapture';
+import { defTable, vlRe } from '../support/constants';
+import { getPcc } from '../support/layout';
+import getUrlParameter from '../system/getUrlParameter';
+import getValue from '../system/getValue';
+import compressHistory from './compressHistory';
 
-let highlightPlayersNearMyLvl;
-let highlightGvGPlayersNearMyLvl;
+let highlightPlayersNearMyLvl = 0;
+let highlightGvGPlayersNearMyLvl = 0;
 
 function isPvpTarget(vlevel) {
   return highlightPlayersNearMyLvl
@@ -30,9 +32,9 @@ function isGvgTarget(vlevel) {
     && vlevel <= getUpperGvgLevel();
 }
 
-const getLastActivity = (a) => [a, lastActivityRE.exec(a.dataset.tipped)[1]];
+const getLastActivity = (a) => [a, lastActivity(a.dataset.tipped).days];
 const recentActivity = ([, lastActDays]) => lastActDays < 7;
-const getVLevel = ([a]) => [a, Number(/VL:.+?(\d+)/.exec(a.dataset.tipped)[1])];
+const getVLevel = ([a]) => [a, Number(regExpFirstCapture(vlRe, a.dataset.tipped))];
 const getFlags = ([a, vlevel]) => [
   a.parentNode.parentNode.rowIndex,
   isPvpTarget(vlevel),
@@ -56,23 +58,16 @@ const selector = (targets) => targets
   .map(([rowIndex]) => `.fshHighlight tr:nth-child(${rowIndex + 1})`)
   .join(',');
 
-function pvpTargetStyle(pvpTargets) {
-  if (pvpTargets.length) {
-    const pvpStyle = `${selector(pvpTargets)} {background-color: #4671C8;}`;
-    insertElement(document.body, createStyle(pvpStyle));
-  }
-}
-
-function gvgTargetStyle(gvgTargets) {
-  if (gvgTargets.length) {
-    const gvgStyle = `${selector(gvgTargets)} {background-color: #FF9900;}`;
-    insertElement(document.body, createStyle(gvgStyle));
+function targetStyle(target, value) {
+  if (target.length) {
+    const style = `${selector(target)} {background-color: #${value};}`;
+    insertElement(document.body, createStyle(style));
   }
 }
 
 function memberListStyle(pvpTargets, gvgTargets) {
   if (pvpTargets.length + gvgTargets.length) {
-    const tables = getElementsByTagName(defTable, pCC);
+    const tables = getElementsByTagName(defTable, getPcc());
     const memberList = tables[tables.length - 1];
     memberList.classList.add('fshHighlight');
   }
@@ -82,8 +77,8 @@ function actuallyHighlight() {
   const playerLinks = getPlayerLinks();
   const pvpTargets = playerLinks.filter(([, pvpTarget]) => pvpTarget);
   const gvgTargets = playerLinks.filter(([, pvpTarget, gvgTarget]) => !pvpTarget && gvgTarget);
-  pvpTargetStyle(pvpTargets);
-  gvgTargetStyle(gvgTargets);
+  targetStyle(pvpTargets, '4671C8');
+  targetStyle(gvgTargets, 'FF9900');
   memberListStyle(pvpTargets, gvgTargets);
 }
 

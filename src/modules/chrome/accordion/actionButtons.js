@@ -1,8 +1,8 @@
-import anchorButton from './anchorButton';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
+import anchorButton from './anchorButton';
 
 export default function actionButtons(linkConfig) {
   if (linkConfig.auctionSearchLink) {

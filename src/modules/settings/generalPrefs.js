@@ -1,9 +1,8 @@
-import bunchOfSimple from './bunchOfSimple';
-import calf from '../support/calf';
 import getValue from '../system/getValue';
-import { helpLink } from './simpleCheckbox';
-import isChecked from '../system/isChecked';
-import networkIcon from './networkIcon';
+import bunchOfSimple from './bunchOfSimple';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
+import { justCheckbox } from './simpleCheckbox';
 
 const topBlock = [
   'moveGuildList',
@@ -37,59 +36,40 @@ const bottomBlock = [
 ];
 
 function guildInfoWidgets() {
-  return '<tr><td class="fshRight"><label for="enableGuildInfoWidgets">'
-    + `Enable Guild Info Widgets${helpLink(
-      'Enable Guild Info Widgets',
-      'Enabling this option will enable the Guild Info Widgets (coloring on the Guild Info panel)',
-    )}:</label></td><td>`
-    + '<input id="enableGuildInfoWidgets" name="enableGuildInfoWidgets" '
-    + `type="checkbox" value="on"${isChecked(calf.enableGuildInfoWidgets)}>`
-    + '&nbsp;<label>Hide Message&gt;'
-    + `<input name="hideGuildInfoMessage" type="checkbox" value="on"${
-      isChecked(calf.hideGuildInfoMessage)}></label>`
-    + '&nbsp;<label>Hide Buff&gt;'
-    + `<input name="hideGuildInfoBuff" type="checkbox" value="on"${
-      isChecked(calf.hideGuildInfoBuff)}></label>`
-    + '&nbsp;<label>Hide ST&gt;'
-    + `<input name="hideGuildInfoSecureTrade" type="checkbox" value="on"${
-      isChecked(calf.hideGuildInfoSecureTrade)}></label>`
-    + '&nbsp;<label>Hide Trade&gt;'
-    + `<input name="hideGuildInfoTrade" type="checkbox" value="on"${
-      isChecked(calf.hideGuildInfoTrade)}></label></td></tr>`;
+  return makeLabelRow(
+    'enableGuildInfoWidgets',
+    `${justCheckbox('enableGuildInfoWidgets')}`
+    + `&nbsp;<label>Hide Message&gt;${justCheckbox('hideGuildInfoMessage')}</label>`
+    + `&nbsp;<label>Hide Buff&gt;${justCheckbox('hideGuildInfoBuff')}</label>`
+    + `&nbsp;<label>Hide ST&gt;${justCheckbox('hideGuildInfoSecureTrade')}</label>`
+    + `&nbsp;<label>Hide Trade&gt;${justCheckbox('hideGuildInfoTrade')}</label>`,
+  );
 }
 
 function onlineAlliesEnemies() {
-  return `<tr><td class="fshNoWrap fshRight">${networkIcon}Show Online Allies/Enemies${
-    helpLink(
-      'Show Online Allies/Enemies',
-      'This will show the allies/enemies online list on the right.',
-    )}:</td>`
-    + '<td><label>Allies&nbsp;'
-    + `<input name="enableAllyOnlineList" type="checkbox" value="on"${
-      isChecked(calf.enableAllyOnlineList)}></label>&nbsp;&nbsp;`
-    + '<label>Enemies&nbsp;'
-    + `<input name="enableEnemyOnlineList" type="checkbox" value="on"${
-      isChecked(calf.enableEnemyOnlineList)}></label>&nbsp;&nbsp;`
+  return makeLabelRow(
+    'showAlliesEnemies',
+    `<label>Allies&nbsp;${justCheckbox('enableAllyOnlineList')}</label>&nbsp;&nbsp;`
+    + `<label>Enemies&nbsp;${justCheckbox('enableEnemyOnlineList')}</label>&nbsp;&nbsp;`
     + `<input name="allyEnemyOnlineRefreshTime" class="fshSettingsNumber" type="number" value="${
-      getValue('allyEnemyOnlineRefreshTime')}"> seconds refresh</td></tr>`;
+      getValue('allyEnemyOnlineRefreshTime')}"> seconds refresh`,
+  );
 }
 
 function quickLinksLocation() {
-  return `<tr><td class="fshRight">Quick Links Screen Location${
-    helpLink(
-      'Quick Links Screen Location',
-      'Determines where the quick links dialog shows on the screen. Default is top 22, left 0.',
-    )}:</td>`
-    + `<td>Top: <input name="quickLinksTopPx" class="fshSettingsNumber" type="number" value="${
+  return makeLabelRow(
+    'quickLinksLocation',
+    `Top: <input name="quickLinksTopPx" class="fshSettingsNumber" type="number" value="${
       getValue('quickLinksTopPx')}"> `
     + `Left: <input name="quickLinksLeftPx" class="fshSettingsNumber" type="number" value="${
-      getValue('quickLinksLeftPx')}"></td></tr>`;
+      getValue('quickLinksLeftPx')}">`,
+  );
 }
 
 export default function generalPrefs() {
   // General Prefs
-  return '<tr><th colspan="2"><b>General preferences '
-    + `(apply to most screens)</b></th></tr>${
+  return `${makeHeaderRow('General preferences (apply to most screens)')}`
+    + `${
       guildInfoWidgets()}${
       bunchOfSimple(topBlock)}${
       onlineAlliesEnemies()}${

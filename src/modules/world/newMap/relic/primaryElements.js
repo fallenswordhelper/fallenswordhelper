@@ -5,15 +5,18 @@ import getElementById from '../../../common/getElementById';
 import insertElement from '../../../common/insertElement';
 import setInnerHtml from '../../../dom/setInnerHtml';
 
-export let containerDiv;
-export let leftDiv;
-export let fetchStatsBtn;
-export let myDefenders;
+let containerDiv = 0;
+let leftDiv = 0;
+let fetchStatsBtn = 0;
+let myDefenders = 0;
 
-function playerName(x) { return x.player_name; }
+export const getContainerDiv = () => containerDiv;
+export const getLeftDiv = () => leftDiv;
+export const getFetchStatsBtn = () => fetchStatsBtn;
+export const getMyDefenders = () => myDefenders;
 
 function defendersSetup(relicData) {
-  myDefenders = relicData.defenders.map(playerName);
+  myDefenders = relicData.defenders.map((x) => x.player_name);
 }
 
 function containerSetup() {

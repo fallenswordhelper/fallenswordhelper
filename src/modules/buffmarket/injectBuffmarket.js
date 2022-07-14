@@ -1,20 +1,20 @@
 import './buffmarket.css';
-import createDocument from '../system/createDocument';
 import daBuffMarketBuy from '../_dataAccess/daBuffMarketBuy';
+import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import fromEntries from '../common/fromEntries';
-import indexAjaxData from '../ajax/indexAjaxData';
 import on from '../common/on';
 import onclick from '../common/onclick';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import setInnerHtml from '../dom/setInnerHtml';
+import { getPcc } from '../support/layout';
 
 async function search(injector, e) {
   e.preventDefault();
   setInnerHtml('<div class="fshWaiting">Loading...</div>', injector);
   const data = fromEntries(new FormData(e.target));
-  const doc = createDocument(await indexAjaxData(data));
+  const doc = await indexAjaxDoc(data);
   const newBuffResults = querySelector('#buff-results', doc).parentElement.innerHTML;
   setInnerHtml(newBuffResults, injector);
 }
@@ -26,7 +26,7 @@ function injectSearch(buffResults) {
 
 async function interceptBuy(e) {
   e.stopPropagation();
-  const packageId = e.target.getAttribute('onclick').match(/id=([0-9]+)/)?.[1];
+  const packageId = regExpFirstCapture(/id=(?<id>\d+)/, e.target.getAttribute('onclick'));
   if (packageId) {
     const actionRow = e.target.parentNode;
     actionRow.className = 'fshActionRow';
@@ -50,5 +50,5 @@ export default function injectBuffmarket() {
   const buffResults = querySelector('#buff-results');
   if (!buffResults) { return; }
   injectSearch(buffResults);
-  onclick(pCC, interceptClick, true);
+  onclick(getPcc(), interceptClick, true);
 }

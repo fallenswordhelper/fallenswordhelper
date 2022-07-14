@@ -1,11 +1,11 @@
-import insertElement from '../../../common/insertElement';
-import setText from '../../../dom/setText';
 import textSpan from '../../../common/cElement/textSpan';
+import insertElement from '../../../common/insertElement';
 import toggleForce from '../../../common/toggleForce';
+import setText from '../../../dom/setText';
 
-let cdDiv;
-let cooldownSpan;
-let lastTp;
+let cdDiv = 0;
+let cooldownSpan = 0;
+let lastTp = 0;
 
 function initCdDiv(containerDiv, cd) {
   // eslint-disable-next-line prefer-destructuring

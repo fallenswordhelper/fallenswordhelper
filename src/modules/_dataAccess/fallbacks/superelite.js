@@ -1,23 +1,23 @@
-import createDocument from '../../system/createDocument';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import dataRows from '../../common/dataRows';
+import dateUtc from '../../common/dateUtc';
 import getTextTrim from '../../common/getTextTrim';
-import indexAjaxData from '../../ajax/indexAjaxData';
-import { months } from '../../support/constants';
 import querySelector from '../../common/querySelector';
-import { now, nowSecs } from '../../support/now';
+import { getNow, getNowSecs } from '../../support/now';
+
+function convertDate(textDate) {
+  const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);
+  return dateUtc([
+    dateAry[2],
+    dateAry[1],
+    dateAry[0],
+    dateAry[3],
+    dateAry[4],
+  ]);
+}
 
 function parseDateAsOffset(textDate) {
-  const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);
-  return Math.floor(
-    (now - Date.UTC(
-      Number(dateAry[2]),
-      months.indexOf(dateAry[1]),
-      Number(dateAry[0]),
-      Number(dateAry[3]),
-      Number(dateAry[4]),
-      0,
-    )) / 1000,
-  );
+  return Math.floor((getNow() - convertDate(textDate)) / 1000);
 }
 
 function formatRow(row) {
@@ -27,16 +27,15 @@ function formatRow(row) {
   };
 }
 
-function parseReport(html) {
-  const doc = createDocument(html);
+function parseReport(doc) {
   const logTable = querySelector('#pCC table table', doc);
   if (!logTable) { return { s: false }; }
   const rows = dataRows(logTable, 4, 1);
   const data = rows.map(formatRow);
-  return { r: data, s: true, t: `0 ${String(nowSecs)}` };
+  return { r: data, s: true, t: `0 ${String(getNowSecs())}` };
 }
 
 // Incomplete
-export default function superelite() {
-  return indexAjaxData({ cmd: 'superelite' }).then(parseReport);
+export default async function superelite() {
+  return parseReport(await indexAjaxDoc({ cmd: 'superelite' }));
 }

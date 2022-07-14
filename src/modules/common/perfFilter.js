@@ -1,16 +1,16 @@
-import clickThis from './clickThis';
+import getInventoryById from '../ajax/getInventoryById';
+import { getPcc } from '../support/layout';
 import createDiv from './cElement/createDiv';
+import clickThis from './clickThis';
 import getArrayByClassName from './getArrayByClassName';
 import getElementById from './getElementById';
-import getInventoryById from '../ajax/getInventoryById';
 import insertElement from './insertElement';
 import insertHtmlBeforeEnd from './insertHtmlBeforeEnd';
 import jQueryNotPresent from './jQueryNotPresent';
 import onclick from './onclick';
-import { pCC } from '../support/layout';
 
-let inv;
-let target;
+let inv = 0;
+let target = 0;
 
 function clickOnPerf(el) {
   const thisItem = el.id.replace(`${target}-item-`, '');
@@ -27,7 +27,7 @@ function drawFilters(data) {
   inv = data.items;
   const buttonDiv = createDiv({ className: 'fshAC' });
   insertHtmlBeforeEnd(buttonDiv, '<button class="fshBl">Perfect</button>');
-  insertElement(pCC, buttonDiv);
+  insertElement(getPcc(), buttonDiv);
   onclick(buttonDiv, selectPerf);
 }
 

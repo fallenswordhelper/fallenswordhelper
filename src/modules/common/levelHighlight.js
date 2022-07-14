@@ -1,8 +1,8 @@
 import asInt from '../chrome/calcs/asInt';
-import getValue from '../system/getValue';
 import { defCharacterVirtualLevel, defStatLevel } from '../support/constants';
+import getValue from '../system/getValue';
 
-let lvlToTest;
+let lvlToTest = 0;
 
 function getModifier(tests, levelToTest) {
   return tests.find(([test]) => test(levelToTest))?.[1](levelToTest);

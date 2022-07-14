@@ -1,9 +1,9 @@
-import { cdn } from '../../system/system';
+import sendEvent from '../../analytics/sendEvent';
 import clickThis from '../../common/clickThis';
 import on from '../../common/on';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
-import sendEvent from '../../analytics/sendEvent';
+import { cdn } from '../../system/system';
 
 const creatureTypeIndex = ['NORMAL', 'CHAMPION', 'ELITE', 'SUPER ELITE', 'TITAN', 'LEGENDARY'];
 const attackIconPrefix = `url("${cdn}ui/world/icon_action_attack_`;

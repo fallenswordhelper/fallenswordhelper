@@ -1,13 +1,12 @@
 import batch from '../../../common/batch';
-import getItems from './getItems';
 import partial from '../../../common/partial';
-import task from '../../../support/task';
 import {
   ahSearchUrl,
   defSubcmd,
   guideUrl,
   rarity,
 } from '../../../support/constants';
+import task from '../../../support/task';
 import {
   checkAllOfType,
   enableItemColoring,
@@ -15,6 +14,7 @@ import {
   showQuickDropLinks,
   showQuickSendLinks,
 } from './constants';
+import getItems from './getItems';
 
 function tally(acc, i) {
   acc[i] = (acc[i] || 0) + 1;

@@ -1,18 +1,18 @@
-import { invManFilter } from './assets';
-import { pCC } from '../../support/layout';
 import setInnerHtml from '../../dom/setInnerHtml';
-import { theInv } from './buildInv';
+import { getPcc } from '../../support/layout';
+import { invManFilter } from './assets';
+import { getTheInv } from './buildInv';
 
 export default function headers() {
-  let reportTitle;
-  if (theInv.player_id) {
+  let reportTitle = '';
+  if (getTheInv().player_id) {
     reportTitle = `<b>&nbsp;Inventory Manager</b> ${
-      theInv.items.length
+      getTheInv().items.length
     } items (green = worn, blue = backpack)`;
   } else {
     reportTitle = `<b>&nbsp;Guild Inventory Manager</b> ${
-      theInv.items.length
+      getTheInv().items.length
     } items (maroon = in BP, blue=guild store)`;
   }
-  setInnerHtml(invManFilter.replace('@@reportTitle@@', reportTitle), pCC);
+  setInnerHtml(invManFilter.replace('@@reportTitle@@', reportTitle), getPcc());
 }

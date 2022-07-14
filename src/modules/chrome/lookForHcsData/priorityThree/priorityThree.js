@@ -1,4 +1,7 @@
 import asyncPThree from '../../../common/asyncPThree';
+import getValue from '../../../system/getValue';
+import injectMenu from '../../accordion/injectMenu';
+import messaging from '../../messaging/messaging';
 import callAllies from './callAllies';
 import callAllyEnemy from './callAllyEnemy';
 import callBounties from './callBounties';
@@ -9,13 +12,9 @@ import callUpgrade from './callUpgrade';
 import expandQb from './expandQb';
 import fsBoxLog from './fsBoxLog';
 import gameStats from './gameStats';
-import getValue from '../../../system/getValue';
 import guildActivityTracker from './guildActivityTracker';
-import guildLogHref from './guildLogHref';
-import injectMenu from '../../accordion/injectMenu';
 import joinAll from './joinAll';
 import levelCalc from './levelCalc';
-import messaging from '../../messaging/messaging';
 import moveRHSBoxToLHS from './moveRHSBoxToLHS';
 import moveRHSBoxUpOnRHS from './moveRHSBoxUpOnRHS';
 import scoutTower from './scoutTower';
@@ -65,7 +64,6 @@ const p3functions = [
   fsBoxLog,
   expandQb,
   joinAll,
-  guildLogHref,
   gameStats,
   scoutTower,
   guildActivityTracker,

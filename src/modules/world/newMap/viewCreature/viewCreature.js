@@ -1,9 +1,18 @@
 /* eslint-disable no-param-reassign */
 import './viewCreature.css';
-import calf from '../../../support/calf';
-import createDiv from '../../../common/cElement/createDiv';
 import daGroupStats from '../../../_dataAccess/daGroupStats';
 import daViewGroups from '../../../_dataAccess/daViewGroups';
+import myStats from '../../../ajax/myStats';
+import createDiv from '../../../common/cElement/createDiv';
+import executeParam from '../../../common/executeParam';
+import getElementById from '../../../common/getElementById';
+import insertElement from '../../../common/insertElement';
+import isArray from '../../../common/isArray';
+import partial from '../../../common/partial';
+import playerDataObject from '../../../common/playerDataObject';
+import playerName from '../../../common/playerName';
+import setInnerHtml from '../../../dom/setInnerHtml';
+import calf from '../../../support/calf';
 import { defViewCreature } from '../../../support/constants';
 import evalAnalysis from './evalAnalysis';
 import evalArmour from './evalArmour';
@@ -13,20 +22,12 @@ import evalDamage from './evalDamage';
 import evalDefence from './evalDefence';
 import evalExtraBuffs from './evalExtraBuffs';
 import evalHTML from './evalHtml';
-import getElementById from '../../../common/getElementById';
-import insertElement from '../../../common/insertElement';
-import isArray from '../../../common/isArray';
 import makeDoNotKillLink from './makeDoNotKillLink';
-import myStats from '../../../ajax/myStats';
-import partial from '../../../common/partial';
-import playerDataObject from '../../../common/playerDataObject';
-import playerName from '../../../common/playerName';
-import setInnerHtml from '../../../dom/setInnerHtml';
 
-let dialogViewCreature;
-let combatEvalContainer;
-let combatEvaluator;
-let groupEvaluator;
+let dialogViewCreature = 0;
+let combatEvalContainer = 0;
+let combatEvaluator = 0;
+let groupEvaluator = 0;
 
 function getDialogViewCreature() {
   if (!dialogViewCreature) {
@@ -108,13 +109,18 @@ function biasVars(combat) {
 }
 
 function buffProcessing(combat) {
-  evalExtraBuffs(combat);
-  evalAttack(combat);
-  evalDamage(combat);
-  evalDefence(combat);
-  evalArmour(combat);
-  evalAnalysis(combat);
-  evalCA(combat);
+  executeParam(
+    [
+      evalExtraBuffs,
+      evalAttack,
+      evalDamage,
+      evalDefence,
+      evalArmour,
+      evalAnalysis,
+      evalCA,
+    ],
+    combat,
+  );
 }
 
 function doCombatEval(data, playerJson, groupData) {
@@ -176,7 +182,7 @@ function isValidData(data) {
   return data.response && data.response.data;
 }
 
-function processCreature(e, data) {
+function processCreature(_e, data) {
   getDialogViewCreature();
   if (!dialogViewCreature) { return; }
   setCombatEvaluator('');

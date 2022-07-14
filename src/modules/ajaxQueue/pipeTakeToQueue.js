@@ -1,8 +1,8 @@
-import doAction from './doAction';
 import equipItem from '../ajax/equipItem';
-import partial from '../common/partial';
 import takeItem from '../ajax/takeItem';
 import useItem from '../ajax/useItem';
+import partial from '../common/partial';
+import doAction from './doAction';
 
 function additionalAction(action, data) {
   if (action === 'wear') {

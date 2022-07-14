@@ -1,7 +1,7 @@
 <script>
-  import LinkButton from './LinkButton.svelte';
   import { createEventDispatcher } from 'svelte';
   import entries from './entries';
+  import LinkButton from './LinkButton.svelte';
 
   const dispatch = createEventDispatcher();
   export let folders = {};

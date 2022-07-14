@@ -1,24 +1,23 @@
-import addCommas from '../../system/addCommas';
+import fetchdata from '../../ajax/fetchdata';
 import allthen from '../../common/allthen';
 import createButton from '../../common/cElement/createButton';
 import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
-import { defShopPrompt } from '../../support/constants';
-import fetchdata from '../../ajax/fetchdata';
 import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';
 import setText from '../../dom/setText';
+import { defShopPrompt } from '../../support/constants';
+import addCommas from '../../system/addCommas';
 import testQuant from '../../system/testQuant';
 
-let shoppingData;
-let dialog;
-let jDialog;
-let fshDiv;
-let numInput;
-let qbBtn;
-let resultDiv;
+let shoppingData = 0;
+let dialog = 0;
+let jDialog = 0;
+let fshDiv = 0;
+let numInput = 0;
+let resultDiv = 0;
 
 function quickBuy() {
   return fetchdata({
@@ -32,13 +31,11 @@ function quickBuy() {
 function quickDone(data) {
   const resp = data.response.response;
   const rmsg = data.response.msg;
-  let msg;
+  let msg = rmsg;
   if (resp !== 0) {
     const firstTag = rmsg.indexOf('<');
     if (firstTag !== -1) {
       msg = rmsg.substring(0, firstTag);
-    } else {
-      msg = rmsg;
     }
   } else {
     msg = `You purchased ${data.response.data.name
@@ -79,7 +76,7 @@ function injectQuickBuy() {
     type: 'number',
   });
   insertElement(fshDiv, numInput);
-  qbBtn = createButton({ textContent: 'Quick-buy' });
+  const qbBtn = createButton({ textContent: 'Quick-buy' });
   onclick(qbBtn, qBuy);
   insertElement(fshDiv, qbBtn);
   resultDiv = createDiv();
@@ -103,7 +100,7 @@ function initQuickBuy() {
   }
 }
 
-function worldDialogShop(e, data) {
+function worldDialogShop(_e, data) {
   shoppingData = data;
   dialog = getDialog();
   if (!dialog) { return; }

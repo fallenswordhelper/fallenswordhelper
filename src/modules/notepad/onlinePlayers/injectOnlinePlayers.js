@@ -1,19 +1,21 @@
+import onlinePlayersPage from '../../ajax/onlinePlayersPage';
+import idHandler from '../../common/idHandler';
+import jQueryNotPresent from '../../common/jQueryNotPresent';
+import loadDataTables from '../../common/loadDataTables';
+import on from '../../common/on';
+import onclick from '../../common/onclick';
+import partial from '../../common/partial';
+import regExpGroups from '../../common/regExpGroups';
+import { getNow } from '../../support/now';
+import createDocument from '../../system/createDocument';
+import { get, set } from '../../system/idb';
+import setValue from '../../system/setValue';
 import buildOnlinePlayerData from './buildOnlinePlayerData';
 import changeLvl from './changeLvl';
-import createDocument from '../../system/createDocument';
 import doRefreshButton from './doRefreshButton';
 import { doTable } from './doTable';
 import filterHeaderOnlinePlayers from './filterHeaderOnlinePlayers';
-import jQueryNotPresent from '../../common/jQueryNotPresent';
-import loadDataTables from '../../common/loadDataTables';
-import { now } from '../../support/now';
-import on from '../../common/on';
-import onclick from '../../common/onclick';
-import onlinePlayersPage from '../../ajax/onlinePlayersPage';
-import partial from '../../common/partial';
 import resetEvt from './resetEvt';
-import setValue from '../../system/setValue';
-import { get, set } from '../../system/idb';
 
 let context = 0;
 let onlinePlayers = 0;
@@ -61,8 +63,8 @@ function processTheRows(doc, input) {
 }
 
 function getLastPage(input) {
-  const matches = input.parent().text().match(/(?<page>\d+)/);
-  return parseInt(matches.groups.page, 10);
+  const { page } = regExpGroups(/(?<page>\d+)/, input.parent().text());
+  return parseInt(page, 10);
 }
 
 function getOtherPages(callback, input) {
@@ -93,14 +95,14 @@ function refreshEvt() { // Bad jQuery
   onlinePages = 0;
   onlinePlayers = {};
   onlinePlayersPage(1).then(getOnlinePlayers);
-  setValue('lastOnlineCheck', now);
+  setValue('lastOnlineCheck', getNow());
   updateStatus('Parsing online players...');
 }
 
-function clickHandler(e) {
-  if (e.target.id === 'fshRefresh') { refreshEvt(); }
-  if (e.target.id === 'fshReset') { resetEvt(context); }
-}
+const idHdl = [
+  ['fshRefresh', refreshEvt],
+  ['fshReset', () => resetEvt(context)],
+];
 
 function injectOnlinePlayersNew() { // jQuery
   context.html(
@@ -108,7 +110,7 @@ function injectOnlinePlayersNew() { // jQuery
     }<div id="fshOutput"></div>`,
   );
   get('fsh_onlinePlayers').then(gotOnlinePlayers);
-  onclick(context[0], clickHandler);
+  onclick(context[0], idHandler(idHdl));
   on(context[0], 'keyup', changeLvl);
 }
 

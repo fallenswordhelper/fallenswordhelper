@@ -2,14 +2,15 @@ import createAnchor from '../common/cElement/createAnchor';
 import createSpan from '../common/cElement/createSpan';
 import getArrayByClassName from '../common/getArrayByClassName';
 import getTitle from '../common/getTitle';
-import { guideUrl } from '../support/constants';
 import insertElement from '../common/insertElement';
 import insertElementBefore from '../common/insertElementBefore';
-import { pCC } from '../support/layout';
 import querySelectorArray from '../common/querySelectorArray';
+import regExpExec from '../common/regExpExec';
+import { guideUrl } from '../support/constants';
+import { getPcc } from '../support/layout';
 
 const creatureSearchHref = (name) => `${guideUrl}creatures&search_name=${encodeURIComponent(name)}`;
-const titanRe = /( titan has been spotted in )([^!]+)(!)/;
+const titanRe = /(?<a> titan has been spotted in )(?<b>[^!]+)(?<c>!)/;
 const realmSearchHref = (name) => `${guideUrl}realms&search_name=${encodeURIComponent(name)}`;
 const makeALink = (name) => `<a href="${realmSearchHref(name)}" target="_blank">${name}</a>`;
 
@@ -27,7 +28,7 @@ function titanSpotted(el) {
 }
 
 function reformatNews(el) {
-  const news = el.lastChild.nodeValue.match(titanRe); // Text Node
+  const news = regExpExec(titanRe, el.lastChild.nodeValue); // Text Node
   news[2] = makeALink(news[2]);
   return news.slice(1).join('');
 }
@@ -47,6 +48,6 @@ function titanLink(el) {
 export default function addUfsgLinks() {
   querySelectorArray('.news_body img[src*="/creatures/"]')
     .forEach(makeUfsgLink);
-  getArrayByClassName('news_body_tavern', pCC)
+  getArrayByClassName('news_body_tavern', getPcc())
     .filter(titanSpotted).forEach(titanLink);
 }

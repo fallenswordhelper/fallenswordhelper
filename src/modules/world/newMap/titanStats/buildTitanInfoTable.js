@@ -1,32 +1,35 @@
-import addRows from './addRows';
 import createSpan from '../../../common/cElement/createSpan';
 import createTable from '../../../common/cElement/createTable';
 import insertElement from '../../../common/insertElement';
 import insertTextBeforeEnd from '../../../common/insertTextBeforeEnd';
+import partial from '../../../common/partial';
+import addRows from './addRows';
 import {
   buildAssets,
-  current,
-  kills,
-  member,
-  pctTotal,
-  status,
-  titanHp,
-  total,
-  yourGuild,
+  getCurrent,
+  getKills,
+  getMember,
+  getPctTotal,
+  getStatus,
+  getTitanHp,
+  getTotal,
+  getYourGuild,
 } from './assets';
 import {
-  cooldownText,
-  currentHp,
-  currentPct,
-  guildKills,
-  maxHp,
-  statusText,
-  titanLocation,
-  titanName,
-  totalPct,
+  getCooldownText,
+  getCurrentHp,
+  getCurrentPct,
+  getGuildKills,
+  getMaxHp,
+  getStatusText,
+  getTitanLocation,
+  getTitanName,
+  getTotalPct,
 } from './placeholders';
 
-export let titanTbl;
+let titanTbl = 0;
+
+export const getTitanTbl = () => titanTbl;
 
 export function clearMemberRows() {
   while (titanTbl.rows.length > 8) {
@@ -36,9 +39,9 @@ export function clearMemberRows() {
 
 function makeTitanHpWrapper() {
   const titanHpWrapper = createSpan();
-  insertElement(titanHpWrapper, currentHp);
+  insertElement(titanHpWrapper, getCurrentHp());
   insertTextBeforeEnd(titanHpWrapper, '/');
-  insertElement(titanHpWrapper, maxHp);
+  insertElement(titanHpWrapper, getMaxHp());
   return titanHpWrapper;
 }
 
@@ -53,14 +56,14 @@ export function buildTitanInfoTable() {
   titanTbl = createTable({ className: 'fshCenter' });
   buildAssets();
   addRows(titanTbl, [
-    [[[5, titanName, true], [1, titanLocation, true]]],
-    [[[2, titanHp, true], [4, yourGuild, true]]],
-    [[[2, makeTitanHpWrapper()], [4, guildKills]]],
-    [[[2, current, true], [4, makePctWrapper(currentPct)]], true],
-    [[[2, total, true], [4, makePctWrapper(totalPct)]], true],
-    [[[2, status, true], [4, statusText]], true],
-    [[[6, cooldownText]]],
-    [[[2, member, true], [2, kills, true],
-      [2, pctTotal, true]]],
+    [[[5, getTitanName, true], [1, getTitanLocation, true]]],
+    [[[2, getTitanHp, true], [4, getYourGuild, true]]],
+    [[[2, makeTitanHpWrapper], [4, getGuildKills]]],
+    [[[2, getCurrent, true], [4, partial(makePctWrapper, getCurrentPct())]], true],
+    [[[2, getTotal, true], [4, partial(makePctWrapper, getTotalPct())]], true],
+    [[[2, getStatus, true], [4, getStatusText]], true],
+    [[[6, getCooldownText]]],
+    [[[2, getMember, true], [2, getKills, true],
+      [2, getPctTotal, true]]],
   ]);
 }

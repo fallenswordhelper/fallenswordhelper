@@ -1,12 +1,12 @@
-import MoveItems from '../../../profile/dropitems/MoveItems.svelte';
+import daSendToFolder from '../../../_dataAccess/daSendToFolder';
+import sendEvent from '../../../analytics/sendEvent';
 import chunk from '../../../common/chunk';
 import closestTr from '../../../common/closestTr';
-import daSendToFolder from '../../../_dataAccess/daSendToFolder';
 import entries from '../../../common/entries';
 import partial from '../../../common/partial';
 import querySelectorArray from '../../../common/querySelectorArray';
-import sendEvent from '../../../analytics/sendEvent';
 import toggleForce from '../../../common/toggleForce';
+import MoveItems from '../../../profile/dropitems/MoveItems.svelte';
 
 function startMoveItems(inv, form) {
   const folders = [

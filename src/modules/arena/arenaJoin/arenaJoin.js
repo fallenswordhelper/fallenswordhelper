@@ -1,12 +1,12 @@
-import ArenaJoin from './ArenaJoin.svelte';
-import arena from '../arena';
 import getElementById from '../../common/getElementById';
 import interceptSubmit from '../../common/interceptSubmit';
-import { pCC } from '../../support/layout';
+import { getPcc } from '../../support/layout';
+import arena from '../arena';
+import ArenaJoin from './ArenaJoin.svelte';
 
 function startApp(constructor) {
   return new constructor({
-    target: pCC,
+    target: getPcc(),
   });
 }
 

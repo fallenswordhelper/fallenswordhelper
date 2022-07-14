@@ -1,10 +1,10 @@
 import equipItem from '../../ajax/equipItem';
+import useItem from '../../ajax/useItem';
+import sendEvent from '../../analytics/sendEvent';
 import hasClass from '../../common/hasClass';
 import partial from '../../common/partial';
-import sendEvent from '../../analytics/sendEvent';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
-import useItem from '../../ajax/useItem';
 
 function backpackRemove(theBackpack, invId) {
   // remove from srcData

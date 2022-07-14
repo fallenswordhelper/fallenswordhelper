@@ -1,12 +1,12 @@
 import './doQuickLinks.css';
-import calf from '../support/calf';
 import draggable from '../common/draggable';
-import escapeHtml from '../system/escapeHtml';
 import getElementById from '../common/getElementById';
+import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import calf from '../support/calf';
+import task from '../support/task';
+import escapeHtml from '../system/escapeHtml';
 import getValue from '../system/getValue';
 import getValueJSON from '../system/getValueJSON';
-import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
-import task from '../support/task';
 
 function retBool(bool, ifTrue, ifFalse) {
   if (bool) {

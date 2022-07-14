@@ -1,12 +1,12 @@
-import createDocument from '../system/createDocument';
-import indexAjaxData from './indexAjaxData';
 import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import { defenderMultiplier, mercRE } from '../support/constants';
+import indexAjaxDoc from './indexAjaxDoc';
 
 function addMercStat(mouseover, stat, i) {
   return stat
-    + Math.round(Number(mercRE[i].exec(mouseover)[1]) * defenderMultiplier);
+    + Math.round(Number(regExpFirstCapture(mercRE[i], mouseover)) * defenderMultiplier);
 }
 
 function addMercStats(acc, merc) {
@@ -27,16 +27,15 @@ function transform(mercTotal) {
   };
 }
 
-function parseMercStats(html) {
-  const doc = createDocument(html);
+function parseMercStats(doc) {
   const mercElements = querySelectorArray('#pCC img[src*="/merc/"]', doc);
   const mercTotal = addAllMercStats(mercElements);
   return transform(mercTotal);
 }
 
-export default function getMercStats() {
-  return indexAjaxData({
+export default async function getMercStats() {
+  return parseMercStats(await indexAjaxDoc({
     cmd: 'guild',
     subcmd: 'mercs',
-  }).then(parseMercStats);
+  }));
 }

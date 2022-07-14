@@ -2,17 +2,17 @@ import doBuffLink from './common/doBuffLink';
 import doBuffLinkClick from './common/doBuffLinkClick';
 import insertHtmlBeforeEnd from './common/insertHtmlBeforeEnd';
 import interceptSubmit from './common/interceptSubmit';
-import onclick from './common/onclick';
-import { pCC } from './support/layout';
-import querySelector from './common/querySelector';
-import querySelectorArray from './common/querySelectorArray';
 import {
   getLowerGvGLevel,
   getLowerPvpLevel,
   getUpperGvgLevel,
   getUpperPvpLevel,
 } from './common/levelHighlight';
+import onclick from './common/onclick';
+import querySelector from './common/querySelector';
+import querySelectorArray from './common/querySelectorArray';
 import { playerLinkSelector, searchPlayerUrl } from './support/constants';
+import { getPcc } from './support/layout';
 
 function searchUrl(min, max, guild) {
   return `${searchPlayerUrl}&search_level_min=${
@@ -40,9 +40,9 @@ function doFindPlayer() {
 }
 
 function doBuffLinks() {
-  const playerLinks = querySelectorArray(playerLinkSelector, pCC);
+  const playerLinks = querySelectorArray(playerLinkSelector, getPcc());
   playerLinks.forEach(doBuffLink);
-  onclick(pCC, doBuffLinkClick);
+  onclick(getPcc(), doBuffLinkClick);
 }
 
 export default function injectFindPlayer() {

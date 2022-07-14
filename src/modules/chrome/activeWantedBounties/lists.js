@@ -1,18 +1,25 @@
-import basicBounty from './basicBounty';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
+import { getNowSecs } from '../../support/now';
 import getValue from '../../system/getValue';
 import getValueJSON from '../../system/getValueJSON';
-import { nowSecs } from '../../support/now';
 import setValue from '../../system/setValue';
 import shouldBeArray from '../../system/shouldBeArray';
+import basicBounty from './basicBounty';
 
-export let bountyList;
-export let wantedList;
-export let activeBountyListPosted;
-let bountyListRefreshTime;
-export let bwNeedsRefresh;
-export let wantedArray;
+let bountyListRefreshTime = 0;
+
+let bountyList = {};
+let wantedList = {};
+let activeBountyListPosted = false;
+let bwNeedsRefresh = false;
+let wantedArray = [];
+
+export const getBountyList = () => bountyList;
+export const getWantedList = () => wantedList;
+export const getActiveBountyListPosted = () => activeBountyListPosted;
+export const getBwNeedsRefresh = () => bwNeedsRefresh;
+export const getWantedArray = () => wantedArray;
 
 function hasActiveBounties(activeTable) {
   return !/No bounties active/.test(activeTable.rows[1].cells[0].innerHTML);
@@ -44,32 +51,34 @@ export function getActiveBountyList(doc) { // Legacy
   bountyList = {};
   bountyList.bounty = [];
   bountyList.isRefreshed = true;
-  bountyList.lastUpdate = nowSecs;
+  bountyList.lastUpdate = getNowSecs();
   if (activeTable) { parseActiveBounty(activeTable); }
   activeBountyListPosted = true;
 }
 
-function testBountyList() {
-  return bountyList
-    && nowSecs - bountyList.lastUpdate > bountyListRefreshTime;
+function testBountyList(enableActiveList) {
+  if (enableActiveList) {
+    return bountyList && getNowSecs() - bountyList.lastUpdate > bountyListRefreshTime;
+  }
 }
 
-function testWantedList() {
-  return wantedList
-    && nowSecs - wantedList.lastUpdate > bountyListRefreshTime;
+function testWantedList(enableWantedList) {
+  if (enableWantedList) {
+    return wantedList && getNowSecs() - wantedList.lastUpdate > bountyListRefreshTime;
+  }
 }
 
-function testCacheInvalid() {
-  return testBountyList() || testWantedList();
+function testCacheInvalid(enableActiveList, enableWantedList) {
+  return testBountyList(enableActiveList) || testWantedList(enableWantedList);
 }
 
-export function invalidateCache() {
+export function invalidateCache(enableActiveList, enableWantedList) {
   bountyList = getValueJSON('bountyList');
   wantedList = getValueJSON('wantedList');
   bountyListRefreshTime = getValue('bountyListRefreshTime');
   bwNeedsRefresh = getValue('bwNeedsRefresh');
   if (bwNeedsRefresh) { return; }
-  if (testCacheInvalid()) {
+  if (testCacheInvalid(enableActiveList, enableWantedList)) {
     bwNeedsRefresh = true; // invalidate cache
   }
 }
@@ -78,7 +87,7 @@ export function doRefresh() {
   wantedList = {};
   wantedList.bounty = [];
   wantedList.isRefreshed = true;
-  wantedList.lastUpdate = nowSecs;
+  wantedList.lastUpdate = getNowSecs();
   activeBountyListPosted = false;
   wantedArray = shouldBeArray('wantedNames');
   setValue('bwNeedsRefresh', false);

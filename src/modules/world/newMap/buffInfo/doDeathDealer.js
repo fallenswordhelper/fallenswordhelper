@@ -1,20 +1,15 @@
-import createSpan from '../../../common/cElement/createSpan';
-import insertElement from '../../../common/insertElement';
-import insertTextBeforeEnd from '../../../common/insertTextBeforeEnd';
 import round from '../../../common/round';
-import setText from '../../../dom/setText';
 import toggleForce from '../../../common/toggleForce';
+import setText from '../../../dom/setText';
+import initBuffDiv from './initBuffDiv';
 
-let ddDiv;
-let ddSpan;
+let ddDiv = 0;
+let ddSpan = 0;
 
 function initDdDiv(containerDiv) {
   // eslint-disable-next-line prefer-destructuring
   ddDiv = containerDiv.children[2];
-  setText('Damage bonus: ', ddDiv);
-  ddSpan = createSpan();
-  insertElement(ddDiv, ddSpan);
-  insertTextBeforeEnd(ddDiv, '%');
+  ddSpan = initBuffDiv(ddDiv, '', 'Damage bonus: ', '%');
 }
 
 function getDdBonus(dd, killStreak) {

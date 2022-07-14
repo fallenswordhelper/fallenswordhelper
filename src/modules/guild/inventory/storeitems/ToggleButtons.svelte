@@ -1,8 +1,8 @@
 <script>
-  import LinkButtonBracketed from '../../../common/LinkButtonBracketed.svelte';
-  import calf from '../../../support/calf';
   import { createEventDispatcher } from 'svelte';
   import sendEvent from '../../../analytics/sendEvent';
+  import LinkButtonBracketed from '../../../common/LinkButtonBracketed.svelte';
+  import calf from '../../../support/calf';
   import setValue from '../../../system/setValue';
 
   const dispatch = createEventDispatcher();

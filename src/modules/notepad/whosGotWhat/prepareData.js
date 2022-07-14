@@ -1,30 +1,23 @@
-import addCommas from '../../system/addCommas';
 import lastActivityToDays from '../../common/lastActivityToDays';
-import { nowSecs } from '../../support/now';
 import partial from '../../common/partial';
 import toLowerCase from '../../common/toLowerCase';
 import trim from '../../common/trim';
+import { getNowSecs } from '../../support/now';
+import addCommas from '../../system/addCommas';
 
 function byMember(acc, curr) {
   // if (curr.item_id === 11503) { // Zombie Brew
   if (!curr.equipped) {
+  // if (curr.equipped) { // equipped
     acc[curr.player_id] = acc[curr.player_id] || [];
     acc[curr.player_id].push(curr);
   }
   return acc;
 }
 
-function addRank(rankName, thisMember) {
-  return { ...thisMember, rank_name: rankName };
-}
-
-function extractMembers(thisRank) {
-  return thisRank.members.map(partial(addRank, thisRank.name));
-}
-
-function processGuild(guild) {
-  return guild.r.flatMap(extractMembers);
-}
+const addRank = (rankName, thisMember) => ({ ...thisMember, rank_name: rankName });
+const extractMembers = (thisRank) => thisRank.members.map(partial(addRank, thisRank.name));
+const processGuild = (guild) => guild.r.flatMap(extractMembers);
 
 function decorateMembers(pots, obj, i) {
   return {
@@ -36,7 +29,7 @@ function decorateMembers(pots, obj, i) {
     gxp: addCommas(obj.guild_xp),
     gxp_reverse: 0 - obj.guild_xp,
     activity: lastActivityToDays(obj.last_activity),
-    act: obj.last_activity - nowSecs,
+    act: obj.last_activity - getNowSecs(),
     pack: (pots[obj.id] || []).length,
     pack_reverse: 0 - (pots[obj.id] || []).length,
     stam: addCommas(obj.max_stamina),

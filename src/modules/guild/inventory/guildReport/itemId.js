@@ -1,3 +1,5 @@
+import regExpFirstCapture from '../../../common/regExpFirstCapture';
+
 export default function itemId(href) {
-  return href.match(/&id=(\d+)/)[1];
+  return regExpFirstCapture(/&id=(?<id>\d+)/, href);
 }

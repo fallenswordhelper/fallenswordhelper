@@ -1,14 +1,14 @@
+import on from '../../common/on';
+import doSendGold from '../../world/newMap/doSendGold';
 import backpack from './backpack';
 import combatSetKey from './combatSetKey';
 import createGroup from './createGroup';
 import doRepair from './doRepair';
-import doSendGold from '../../world/newMap/doSendGold';
 import fastWearMgr from './fastWearMgr';
 import gotoGuild from './gotoGuild';
 import joinAllGroup from './joinAllGroup';
 import logPage from './logPage';
 import movePage from './movePage';
-import on from '../../common/on';
 import profile from './profile';
 import toWorld from './toWorld';
 

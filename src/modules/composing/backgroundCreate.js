@@ -1,12 +1,12 @@
-import { cdn } from '../system/system';
 import createPotionFromTemplate from '../ajax/createPotionFromTemplate';
-import { defNeedToCompose } from '../support/constants';
-import getRandomInt from '../system/getRandomInt';
 import partial from '../common/partial';
-import { publish } from '../support/pubsub';
 import querySelectorAll from '../common/querySelectorAll';
 import setInnerHtml from '../dom/setInnerHtml';
+import { defNeedToCompose } from '../support/constants';
+import { publish } from '../support/pubsub';
+import getRandomInt from '../system/getRandomInt';
 import setValue from '../system/setValue';
+import { cdn } from '../system/system';
 
 function randomBackgroundImage() {
   return `url(${cdn}composing/${

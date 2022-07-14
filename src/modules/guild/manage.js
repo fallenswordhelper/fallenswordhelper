@@ -1,20 +1,20 @@
-import buffLinks from './buffLinks';
-import conflictInfo from './conflictInfo';
 import contains from '../common/contains';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getElementsByTagName from '../common/getElementsByTagName';
-import getValue from '../system/getValue';
-import guildTracker from './guildTracker/guildTracker';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import playerName from '../common/playerName';
 import setInnerHtml from '../dom/setInnerHtml';
-import stamBars from './stamBars/stamBars';
-import task from '../support/task';
 import { guildSubcmdUrl, recallUserUrl } from '../support/constants';
+import { getPcc } from '../support/layout';
+import task from '../support/task';
+import getValue from '../system/getValue';
+import buffLinks from './buffLinks';
+import conflictInfo from './conflictInfo';
+import guildTracker from './guildTracker/guildTracker';
 import { logoToggle, statToggle, structureToggle } from './panelToggle';
+import stamBars from './stamBars/stamBars';
 
 function relicControl(leftHandSideColumnTable) {
   const relic = getArrayByTagName('b', leftHandSideColumnTable)
@@ -36,7 +36,7 @@ function selfRecallLink(leftHandSideColumnTable) {
 }
 
 function getLhsColTab() {
-  return pCC.lastElementChild.rows[2].cells[0].children[0];
+  return getPcc().lastElementChild.rows[2].cells[0].children[0];
 }
 
 function lhsAdd(leftHandSideColumnTable, fn) {
@@ -63,7 +63,7 @@ function ajaxStuff(leftHandSideColumnTable) {
 }
 
 export default function manage() {
-  if (!pCC) { return; }
+  if (!getPcc()) { return; }
   const leftHandSideColumnTable = getLhsColTab();
   lhsAdditions(leftHandSideColumnTable);
   if (getValue('showBuffLinks')) { task(3, buffLinks); }

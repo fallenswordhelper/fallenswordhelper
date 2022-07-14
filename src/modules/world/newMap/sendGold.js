@@ -1,10 +1,10 @@
-import addCommas from '../../system/addCommas';
 import { defPlayerGold } from '../../support/constants';
-import doSendGold from './doSendGold';
+import addCommas from '../../system/addCommas';
 import getValue from '../../system/getValue';
-import { initSendGoldOnWorld, sendGoldonWorld } from './sendGoldPref';
+import doSendGold from './doSendGold';
+import { getSendGoldOnWorld, initSendGoldOnWorld } from './sendGoldPref';
 
-let goldAmount;
+let goldAmount = 0;
 
 function statbarGoldBackground(colour) {
   $('#statbar-gold').css('background-color', colour);
@@ -42,5 +42,5 @@ function prepareSendGoldOnWorld() {
 
 export default function sendGold() { // jQuery
   initSendGoldOnWorld();
-  if (sendGoldonWorld) { prepareSendGoldOnWorld(); }
+  if (getSendGoldOnWorld()) { prepareSendGoldOnWorld(); }
 }

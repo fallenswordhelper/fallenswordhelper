@@ -1,10 +1,10 @@
-import calf from '../support/calf';
+import getGuild from '../_dataAccess/export/guildMembers';
 import currentGuildId from '../common/currentGuildId';
 import fromEntries from '../common/fromEntries';
-import getGuild from '../_dataAccess/export/guildMembers';
 import isObject from '../common/isObject';
-import { now } from '../support/now';
 import partial from '../common/partial';
+import calf from '../support/calf';
+import { getNow } from '../support/now';
 import { get, set } from '../system/idb';
 
 function saveMembrListInForage(membrList, data) {
@@ -21,7 +21,7 @@ function addMembrListToForage(membrList) {
 function membrListToHash(guildId, data) {
   if (!data) { return; }
   const memberObj = fromEntries(data.map((o) => [o.username, o]));
-  return { [guildId]: { lastUpdate: now, ...memberObj } };
+  return { [guildId]: { lastUpdate: getNow(), ...memberObj } };
 }
 
 function getGuildMembers(guildId) {
@@ -33,11 +33,11 @@ function getAndCacheGuildMembers(guildId) {
 }
 
 const testList = [
-  (guildId, membrList) => membrList,
-  (guildId, membrList) => isObject(membrList),
+  (_guildId, membrList) => membrList,
+  (_guildId, membrList) => isObject(membrList),
   (guildId, membrList) => isObject(membrList[guildId]),
   (guildId, membrList) => typeof membrList[guildId].lastUpdate === 'number',
-  (guildId, membrList) => membrList[guildId].lastUpdate > now - 300000,
+  (guildId, membrList) => membrList[guildId].lastUpdate > getNow() - 300000,
 ];
 
 function condition(guildId, membrList, e) { return e(guildId, membrList); }

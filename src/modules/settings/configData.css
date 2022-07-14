@@ -5,7 +5,10 @@
   color: #FFF380;
   font-weight: bold;
 }
-.networkIcon {display: inline-block;}
+.networkIcon {
+  display: inline-block;
+  vertical-align: middle;
+}
 .fshSettingsText {
   width: 340px;
 }

@@ -1,21 +1,21 @@
-import { defTable } from '../support/constants';
 import isObject from '../common/isObject';
+import regExpFirstCapture from '../common/regExpFirstCapture';
+import { defTable } from '../support/constants';
 import { moveRe } from './assets';
-import { oldIds, opts } from './setOpts';
+import { getOldIds, getOpts } from './setOpts';
 
 function colourNewRow(row, id) { // jQuery
-  if (oldIds && !oldIds[id]) {
+  if (!getOldIds()?.[id]) {
     row.css('background-color', '#F5F298');
     row.find('tr').css('background-color', '#F5F298');
   }
 }
 
 function checkTournamentId(row, theCells) { // jQuery
-  const matches = /#\s(\d+)/.exec(theCells.eq(0).text());
-  if ([matches, opts, opts.id].every(isObject)) {
-    // eslint-disable-next-line prefer-destructuring
-    opts.id[matches[1]] = matches[1];
-    colourNewRow(row, matches[1]);
+  const tournamentId = regExpFirstCapture(/#\s(?<id>\d+)/, theCells.eq(0).text());
+  if (tournamentId && isObject(getOpts()?.id)) {
+    getOpts().id[tournamentId] = tournamentId;
+    colourNewRow(row, tournamentId);
   }
 }
 
@@ -32,32 +32,30 @@ function joinCost(theCells) {
   cell.attr('data-order', $('td', cell).first().text().replace(/[,\s]/g, ''));
 }
 
-function boolData(i, el) { // jQuery
-  const matches = /(\d)\.png/.exec($('img', el).attr('src'));
-  if (matches) { $(el).attr('data-order', matches[1]); }
+function boolData(_i, el) { // jQuery
+  const matches = regExpFirstCapture(/(?<move>\d)\.png/, $('img', el).attr('src'));
+  if (matches) { $(el).attr('data-order', matches); }
 }
 
 function theBools(theCells) {
   theCells.slice(4, 7).each(boolData);
 }
 
-function hazMaxMoves(matches, row) { // jQuery
-  if (opts.moves[matches[1]] && opts.moves[matches[1]] === 3) {
-    row.addClass('moveMax');
-  }
+function hazMaxMoves(moveId, row) { // jQuery
+  if (getOpts()?.moves?.[moveId] === 3) row.addClass('moveMax');
 }
 
 function optsHazMoves(cell, row) { // jQuery
-  const matches = moveRe.exec($('img', cell).attr('src'));
-  if (matches) {
-    hazMaxMoves(matches, row);
-    cell.attr('data-order', matches[1]);
+  const moveId = regExpFirstCapture(moveRe, $('img', cell).attr('src'));
+  if (moveId) {
+    hazMaxMoves(moveId, row);
+    cell.attr('data-order', moveId);
   }
 }
 
 function maxMoves(theCells, row) { // jQuery
   const cell = theCells.eq(8);
-  if (opts && opts.moves) {
+  if (getOpts()?.moves) {
     optsHazMoves(cell, row);
   }
 }
@@ -68,7 +66,7 @@ function reward(theCells) { // jQuery
   cell.attr('data-order', cell.find('td').first().text().replace(/[,\s]/g, ''));
 }
 
-function prepareData(i, e) { // jQuery
+function prepareData(_i, e) { // jQuery
   const row = $(e);
   const theCells = row.children();
   checkTournamentId(row, theCells);

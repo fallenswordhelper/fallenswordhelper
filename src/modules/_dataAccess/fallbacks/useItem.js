@@ -1,10 +1,14 @@
+import indexAjaxData from '../../ajax/indexAjaxData';
+import sendEvent from '../../analytics/sendEvent';
+import infoBoxFrom from '../../common/InfoBoxFrom';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import calf from '../../support/calf';
 import { composingFragmentType } from '../../support/constants';
-import indexAjaxData from '../../ajax/indexAjaxData';
-import infoBoxFrom from '../../common/InfoBoxFrom';
-import sendEvent from '../../analytics/sendEvent';
 
-const ret = (info, prop) => ({ r: { [prop]: [{ n: info.match(/'(.*)'/)[1] }] }, s: true });
+const ret = (info, prop) => ({
+  r: { [prop]: [{ n: regExpFirstCapture(/'(?<id>.*)'/, info) }] },
+  s: true,
+});
 const components = (info) => ret(info, 'components');
 const zombie = (info) => ret(info, 'mailbox_items');
 
@@ -17,15 +21,15 @@ function fragObj(pair) {
 }
 
 function stash(info) {
-  const reAry = info.match(/You gained {1,2}}(.*) Fragment\(s\)/);
-  if (reAry) {
-    const frags = reAry[1].split(', ').map(fragObj);
+  const fragList = regExpFirstCapture(/You gained {1,2}}(?<fragList>.*) Fragment\(s\)/, info);
+  if (fragList) {
+    const frags = fragList.split(', ').map(fragObj);
     return { r: { frags }, s: true };
   }
   sendEvent('da/useItem', 'Bad Msg', info);
   if (calf.userIsDev) { //  da/useItem Bad Msg
     // eslint-disable-next-line no-console
-    console.log('da/useItem', 'Bad Msg', info);
+    console.log('da/useItem', 'Bad Msg', info); // skipcq: JS-0002
   }
 }
 
@@ -40,7 +44,7 @@ const outputLookup = [
 function devHook() {
   if (calf.userIsDev) { //  da/useItem No Info
     // eslint-disable-next-line no-console
-    console.log('da/useItem', 'No Info');
+    console.log('da/useItem', 'No Info'); // skipcq: JS-0002
   }
 }
 

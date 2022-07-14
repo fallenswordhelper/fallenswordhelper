@@ -1,7 +1,7 @@
 import getElementById from '../../common/getElementById';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import notGoldUpgradesPage from './notGoldUpgradesPage';
 import { pointsUrl } from '../../support/constants';
+import notGoldUpgradesPage from './notGoldUpgradesPage';
 
 const goldUpgradeMsg = `<li class="notification"><a href="${pointsUrl}&type=1"><span`
 + ' class="notification-icon"></span><p class="notification-content">Up'

@@ -1,7 +1,7 @@
 import closestTd from '../../common/closestTd';
+import querySelectorArray from '../../common/querySelectorArray';
 import deleteBatch from './deleteBatch';
 import getProps from './getProps';
-import querySelectorArray from '../../common/querySelectorArray';
 
 const prepare = (i) => [closestTd(i), ...getProps(i)];
 

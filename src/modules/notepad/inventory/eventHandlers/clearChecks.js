@@ -1,5 +1,5 @@
 import entries from '../../../common/entries';
-import { options } from '../options';
+import { getOptions } from '../options';
 import setChecks from '../setChecks';
 
 function gearOnly(pair) { return Number(pair[0]) >= 100; }
@@ -15,7 +15,7 @@ function clearGearOnly(checkedElements) {
 }
 
 export default function clearChecks(fshInv) { // jQuery
-  options.checkedElements = clearGearOnly(options.checkedElements);
+  getOptions().checkedElements = clearGearOnly(getOptions().checkedElements);
   setChecks();
   $(fshInv).DataTable().draw();
 }

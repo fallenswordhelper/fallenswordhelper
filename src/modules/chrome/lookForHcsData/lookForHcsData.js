@@ -1,12 +1,12 @@
-import calf from '../../support/calf';
-import gameHelpLink from './gameHelpLink';
 import getElementById from '../../common/getElementById';
+import jsonParse from '../../common/jsonParse';
+import calf from '../../support/calf';
+import task from '../../support/task';
 import getValue from '../../system/getValue';
 import injectHelperMenu from '../helperMenu/injectHelperMenu';
-import jsonParse from '../../common/jsonParse';
-import notHuntMode from './notHuntMode';
 import replaceKeyHandler from '../keyHandler/replaceKeyHandler';
-import task from '../../support/task';
+import gameHelpLink from './gameHelpLink';
+import notHuntMode from './notHuntMode';
 
 function prepareEnv() {
   if (getValue('gameHelpLink')) {

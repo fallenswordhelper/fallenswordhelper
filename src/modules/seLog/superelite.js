@@ -1,26 +1,26 @@
-import calf from '../support/calf';
-import createTBody from '../common/cElement/createTBody';
 import createTable from '../common/cElement/createTable';
+import createTBody from '../common/cElement/createTBody';
 import entries from '../common/entries';
 import formatUtcDateTime from '../common/formatUtcDateTime';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import on from '../common/on';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
-import setValue from '../system/setValue';
 import { simpleCheckboxHtml } from '../settings/simpleCheckbox';
+import calf from '../support/calf';
+import { getPcc } from '../support/layout';
+import setValue from '../system/setValue';
 import {
   disableBackgroundChecks,
   doBackgroundCheck,
   getFshSeLog,
-  oldLog,
+  getOldLog,
 } from './seLog';
 
 const enableSeTracker = 'enableSeTracker';
-let trackerCell;
+let trackerCell = 0;
 
 function addRow(trackerTable, se) {
   insertHtmlBeforeEnd(
@@ -42,7 +42,7 @@ function buildTrackerTable(seAry) {
 }
 
 function insertNewRow() {
-  const newRow = pCC.lastElementChild.insertRow(-1);
+  const newRow = getPcc().lastElementChild.insertRow(-1);
   const newCell = newRow.insertCell(-1);
   newCell.colSpan = 3;
   return newCell;
@@ -57,8 +57,8 @@ function displayTracker(seAry) {
 function valueNumeric(a, b) { return a[1] - b[1]; }
 
 function gotSeLog() {
-  if (oldLog && oldLog.se) {
-    displayTracker(entries(oldLog.se).sort(valueNumeric));
+  if (getOldLog()?.se) {
+    displayTracker(entries(getOldLog().se).sort(valueNumeric));
   }
 }
 

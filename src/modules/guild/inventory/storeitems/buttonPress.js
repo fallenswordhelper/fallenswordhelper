@@ -1,13 +1,13 @@
-import closestTr from '../../../common/closestTr';
 import daAjaxSendItemsToRecipient from '../../../_dataAccess/daAjaxSendItemsToRecipient';
 import daDropItems from '../../../_dataAccess/daDropItems';
+import sendEvent from '../../../analytics/sendEvent';
+import closestTr from '../../../common/closestTr';
 import errorDialog from '../../../common/errorDialog';
-import getCheckboxesVisible from './getCheckboxesVisible';
-import getInv from './getInv';
 import getText from '../../../common/getText';
 import hasClass from '../../../common/hasClass';
 import querySelectorArray from '../../../common/querySelectorArray';
-import sendEvent from '../../../analytics/sendEvent';
+import getCheckboxesVisible from './getCheckboxesVisible';
+import getInv from './getInv';
 
 function getInvId(e) {
   return closestTr(e.target).cells[0].children[0].value;

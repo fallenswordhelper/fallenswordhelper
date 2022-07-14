@@ -1,6 +1,7 @@
-import bunchOfSimple from './bunchOfSimple';
 import getValue from '../system/getValue';
-import { helpLink } from './simpleCheckbox';
+import bunchOfSimple from './bunchOfSimple';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
 
 const part1 = [
   'showQuickButtons',
@@ -10,16 +11,10 @@ const part1 = [
 ];
 
 function buffGreet() {
-  return `<tr><td class="fshRight">Buy Buffs Greeting${
-    helpLink(
-      'Buy Buffs Greeting',
-      'This is the default text to open a message with when asking to '
-      + 'buy buffs. You can use {playername} to insert the target players '
-      + 'name. You can also use {buffs} to insert the list of buffs. You '
-      + 'can use {cost} to insert the total cost of the buffs.',
-    )
-  }:</td><td><input name="buyBuffsGreeting" class="fshSettingsText" `
-    + `value="${getValue('buyBuffsGreeting')}"></td></tr>`;
+  return makeLabelRow(
+    'buyBuffsGreeting',
+    `<input name="buyBuffsGreeting" class="fshSettingsText" value="${getValue('buyBuffsGreeting')}">`,
+  );
 }
 
 const part2 = [
@@ -41,7 +36,7 @@ const part2 = [
 
 export default function profilePrefs() {
   // profile prefs
-  return `<tr><th colspan="2"><b>Profile preferences</b></th></tr>${
+  return `${makeHeaderRow('Profile preferences')}${
     bunchOfSimple(part1)
   }${buffGreet()
   }${bunchOfSimple(part2)}`;

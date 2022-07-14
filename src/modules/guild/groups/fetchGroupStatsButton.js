@@ -1,10 +1,10 @@
 import './fetchGroupStatsButton.css';
-import addButton from './addButton';
 import getGroupStats from '../../ajax/getGroupStats';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
+import addButton from './addButton';
 
 function parseGroupData(linkElement, obj) {
   const extraText = '<table class="fshgrpstat">'

@@ -1,12 +1,11 @@
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import arrayFrom from '../../common/arrayFrom';
 import chunk from '../../common/chunk';
-import createDocument from '../../system/createDocument';
 import dataRows from '../../common/dataRows';
 import getTextTrim from '../../common/getTextTrim';
-import indexAjaxData from '../../ajax/indexAjaxData';
-import { months } from '../../support/constants';
-import { now } from '../../support/now';
 import querySelector from '../../common/querySelector';
+import { months } from '../../support/constants';
+import { getNow } from '../../support/now';
 
 function parseDateAsTimestamp(textDate) {
   const dateAry = textDate.split(/[: /[]/);
@@ -23,7 +22,7 @@ function calcCd(e) {
   const cdText = getTextTrim(e[1]);
   if (cdText === 'No active cooldown') { return 0; }
   return Math.ceil(
-    (parseDateAsTimestamp(cdText.slice(16)) - now) / 1000,
+    (parseDateAsTimestamp(cdText.slice(16)) - getNow()) / 1000,
   );
 }
 
@@ -72,17 +71,17 @@ function testTitan(e) {
   return { ...common(e), ...location(e), ...contributors(e) };
 }
 
-function parseReport(html) {
-  const doc = createDocument(html);
+const titanRows = (_e, i, a) => i !== 0 && i < a.length - 1 && (i - 1) % 6 < 3;
+
+function parseReport(doc) {
   const titanTable = querySelector('table[width="500"]', doc);
   if (!titanTable) { return { s: false }; }
-  const thisRows = arrayFrom(titanTable.rows)
-    .filter((e, i, a) => i !== 0 && i < a.length - 1 && (i - 1) % 6 < 3);
+  const thisRows = arrayFrom(titanTable.rows).filter(titanRows);
   const titans = chunk(3, thisRows);
   return { r: titans.map(testTitan), s: true };
 }
 
 // Incomplete
-export default function scouttower() {
-  return indexAjaxData({ cmd: 'guild', subcmd: 'scouttower' }).then(parseReport);
+export default async function scouttower() {
+  return parseReport(await indexAjaxDoc({ cmd: 'guild', subcmd: 'scouttower' }));
 }

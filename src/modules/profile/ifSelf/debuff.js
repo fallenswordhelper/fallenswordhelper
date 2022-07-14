@@ -1,11 +1,12 @@
 import daRemoveSkill from '../../_dataAccess/daRemoveSkill';
+import sendEvent from '../../analytics/sendEvent';
 import errorDialog from '../../common/errorDialog';
 import getElementById from '../../common/getElementById';
 import hideQTip from '../../common/hideQTip';
 import navigateTo from '../../common/navigateTo';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import sendEvent from '../../analytics/sendEvent';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 function debuffSuccess(aLink, json) {
@@ -15,7 +16,7 @@ function debuffSuccess(aLink, json) {
 function doDebuff(fastDebuff, aLink) {
   if (fastDebuff) {
     sendEvent('profile', 'doDebuff');
-    const buffId = aLink.href.match(/=(\d{1,3})$/)[1];
+    const buffId = regExpFirstCapture(/d=(?<id>\d{1,3})$/, aLink.href);
     daRemoveSkill(buffId).then(errorDialog).then(partial(debuffSuccess, aLink));
   } else {
     navigateTo(aLink.href);

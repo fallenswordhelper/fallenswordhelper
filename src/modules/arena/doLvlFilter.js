@@ -1,17 +1,17 @@
+import { lvlTest, playerLvlTest } from '../common/lvlTests';
 import calf from '../support/calf';
 import intValue from '../system/intValue';
-import { opts } from './setOpts';
-import { lvlTest, playerLvlTest } from '../common/lvlTests';
+import { getOpts } from './setOpts';
 
-function hazOpts(_settings, data) {
-  const min = opts.minLvl;
-  const max = opts.maxLvl;
+function hazOpts(data) {
+  const min = getOpts().minLvl;
+  const max = getOpts().maxLvl;
   const level = intValue(data[7]);
   return lvlTest(playerLvlTest, level, min, max);
 }
 
 function lvlFilter(_settings, data) {
-  if (opts) { return hazOpts(_settings, data); }
+  if (getOpts()) { return hazOpts(data); }
   return true;
 }
 

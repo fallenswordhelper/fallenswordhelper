@@ -1,7 +1,7 @@
-import { cdn } from '../system/system';
 import getElementById from '../common/getElementById';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import { scouttowerUrl } from '../support/constants';
+import { cdn } from '../system/system';
 
 export default function scoutTowerLink() {
   const spoils = getElementById('minibox-spoilsofwar');

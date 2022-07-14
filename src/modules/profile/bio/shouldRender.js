@@ -1,5 +1,5 @@
-import getIsSelf from '../getIsSelf';
 import getValue from '../../system/getValue';
+import getIsSelf from '../getIsSelf';
 
 function selfRender(isSelf) {
   return isSelf && getValue('renderSelfBio');

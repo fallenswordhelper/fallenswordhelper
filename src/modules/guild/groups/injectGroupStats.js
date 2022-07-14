@@ -1,10 +1,10 @@
-import addCommas from '../../system/addCommas';
 import getMercStats from '../../ajax/getMercStats';
 import groupViewStats from '../../ajax/groupViewStats';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import setInnerHtml from '../../dom/setInnerHtml';
+import addCommas from '../../system/addCommas';
 
-let groupStats;
+let groupStats = 0;
 
 function displayStat(el, groupStat, mercStat) {
   setInnerHtml(`<span class="fshBlue">${addCommas(groupStat)}</span> ( ${

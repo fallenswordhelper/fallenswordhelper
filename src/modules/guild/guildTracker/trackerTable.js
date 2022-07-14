@@ -1,8 +1,11 @@
 import './trackerTable.css';
+import {
+  act, cur, gxp, lvl, max, utc, vl,
+} from '../../chrome/lookForHcsData/priorityThree/indexConstants';
 import alpha from '../../common/alpha';
 import createDiv from '../../common/cElement/createDiv';
-import createTBody from '../../common/cElement/createTBody';
 import createTable from '../../common/cElement/createTable';
+import createTBody from '../../common/cElement/createTBody';
 import createTh from '../../common/cElement/createTh';
 import formatLocalDateTime from '../../common/formatLocalDateTime';
 import insertElement from '../../common/insertElement';
@@ -13,33 +16,21 @@ import on from '../../common/on';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
 import task from '../../support/task';
-import {
-  act, cur, gxp, lvl, max, utc, vl,
-} from './indexConstants';
 
-let actBody;
-let selMember;
-let tgCont;
-let memberSelect;
-let myMembers;
+let actBody = 0;
+let selMember = '';
+let tgCont = 0;
+let memberSelect = 0;
+let myMembers = 0;
 
-function addOption(acc, member) {
-  return `${acc}<option value="${member}">${member}</option>`;
-}
-
-function buildOptions(ourMembers) {
-  return '<select name="member">'
-    + `<option value="- All -" selected>- All -</option>${
-      keys(ourMembers).sort(alpha).reduce(addOption, '')}</select>`;
-}
+const addOption = (acc, member) => `${acc}<option value="${member}">${member}</option>`;
+const buildOptions = (memberNames) => `<select name="member">${
+  memberNames.reduce(addOption, '')}</select>`;
+const memberFilter = (memberKey) => selMember !== memberKey;
 
 function toText(val) {
   if (isUndefined(val)) { return '#DEF'; }
   return val.toLocaleString();
-}
-
-function memberFilter(memberKey) {
-  return selMember && selMember !== '- All -' && selMember !== memberKey;
 }
 
 function aMembersActivityRows(memberKey, inside, activity) {
@@ -66,9 +57,7 @@ function selectedMember(outside, memberKey) {
     + myMembers[memberKey].reduce(partial(aMembersActivityRows, memberKey), '');
 }
 
-function memberRows() {
-  return keys(myMembers).reduce(selectedMember, '');
-}
+const memberRows = () => keys(myMembers).reduce(selectedMember, '');
 
 function drawRows() {
   if (myMembers) { setInnerHtml(memberRows(), actBody); }
@@ -88,7 +77,9 @@ function myChange(e) {
 export function initTable(theMembers) {
   if (theMembers) {
     myMembers = theMembers;
-    setInnerHtml(buildOptions(theMembers), memberSelect);
+    const memberNames = keys(theMembers).sort(alpha);
+    [selMember] = memberNames;
+    setInnerHtml(buildOptions(memberNames), memberSelect);
     queueDrawRows();
   }
 }

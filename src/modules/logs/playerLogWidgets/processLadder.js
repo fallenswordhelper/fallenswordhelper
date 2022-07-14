@@ -1,13 +1,13 @@
 import closestTr from '../../common/closestTr';
 import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
+import querySelectorArray from '../../common/querySelectorArray';
+import { defLastLadderReset, noteSelector } from '../../support/constants';
 import getValue from '../../system/getValue';
 import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
-import querySelectorArray from '../../common/querySelectorArray';
 import setValue from '../../system/setValue';
-import { defLastLadderReset, noteSelector } from '../../support/constants';
 
-let lastLadderReset;
+let lastLadderReset = 0;
 const ladderRe = /You ranked \w{3} in your PvP Band! You have gained \d x PvP Ladder Token/;
 
 function pvp(r) {

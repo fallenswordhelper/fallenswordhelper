@@ -1,15 +1,16 @@
 import currentGuildId from '../../common/currentGuildId';
-import getValue from '../../system/getValue';
-import { guildRE } from '../../support/constants';
-import intValue from '../../system/intValue';
 import { getLowerPvpLevel, getUpperPvpLevel } from '../../common/levelHighlight';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
+import { guildRE } from '../../support/constants';
+import getValue from '../../system/getValue';
+import intValue from '../../system/intValue';
 
-let highlightPlayersNearMyLvl;
-let table;
+let highlightPlayersNearMyLvl = 0;
+let table = 0;
 
 function guildNumber(html) {
-  const match = html.match(guildRE);
-  if (match) { return Number(match[1]); }
+  const match = regExpFirstCapture(guildRE, html);
+  if (match) { return Number(match); }
 }
 
 const highlightTests = [

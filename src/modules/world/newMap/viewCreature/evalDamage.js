@@ -1,17 +1,17 @@
 /* eslint-disable no-param-reassign */
-function calcHp(combat) {
-  if (combat.callback.groupExists) {
-    return combat.callback.groupHPValue;
-  }
-  return combat.player.hpValue;
-}
+import effectiveStat from './effectiveStat';
 
-function calcDmg(combat) {
-  if (combat.callback.groupExists) {
-    return combat.callback.groupDamageValue;
-  }
-  return combat.player.damageValue;
-}
+const calcHp = (combat) => effectiveStat(
+  combat,
+  combat.callback.groupHPValue,
+  combat.player.hpValue,
+);
+
+const calcDmg = (combat) => effectiveStat(
+  combat,
+  combat.callback.groupDamageValue,
+  combat.player.damageValue,
+);
 
 function evalFortitude(combat) {
   const hpValue = calcHp(combat);
@@ -39,8 +39,7 @@ export default function evalDamage(combat) {
   evalFortitude(combat);
   evalChiStrike(combat);
 
-  const damageValue = calcDmg(combat);
-  combat.overallDamageValue = damageValue
+  combat.overallDamageValue = calcDmg(combat)
     + combat.deathDealerBonusDamage + combat.counterAttackBonusDamage
     + combat.holyFlameBonusDamage + combat.chiStrikeExtraDamage;
   combat.damageDone = Math.floor(combat.overallDamageValue - (

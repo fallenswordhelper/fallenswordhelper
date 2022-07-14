@@ -1,7 +1,7 @@
-import { excludeBuff } from './assets';
-import parseBuffLevel from './parseBuffLevel';
 import querySelectorArray from '../common/querySelectorArray';
 import setTipped from '../common/setTipped';
+import { excludeBuff } from './assets';
+import parseBuffLevel from './parseBuffLevel';
 
 function addStamCost(el, nameSpan) {
   const dataTipped = nameSpan.dataset.tipped;

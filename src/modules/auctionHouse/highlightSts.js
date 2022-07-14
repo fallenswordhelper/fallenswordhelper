@@ -1,7 +1,7 @@
 import arrayFrom from '../common/arrayFrom';
 import getElementById from '../common/getElementById';
-import getInvId from './getInvId';
 import partial from '../common/partial';
+import getInvId from './getInvId';
 
 function highlightItem(inv, d) {
   const [thisItem] = d.children[0].children;

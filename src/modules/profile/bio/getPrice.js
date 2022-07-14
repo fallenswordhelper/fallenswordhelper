@@ -1,15 +1,28 @@
 import getText from '../../common/getText';
+import regExpExec from '../../common/regExpExec';
 import toLowerCase from '../../common/toLowerCase';
 
 const numRE = /[^a-zA-Z0-9.,+\- ]/g;
-const priceRE = /([+-]?[.\d]{1,10} {0,10}k)|([+-]?[.\d]{1,10} {0,10}fsp)|([+-]?[.\d]{1,10} {0,10}stam)/;
+let priceRe = 0;
+const priceTypes = [
+  '(?<k>[+-]?[.\\d]{1,10} {0,10}k)',
+  '(?<fsp>[+-]?[.\\d]{1,10} {0,10}fsp)',
+  '(?<stam>[+-]?[.\\d]{1,10} {0,10}stam)',
+];
+
+function getPriceRe() {
+  if (!priceRe) {
+    priceRe = new RegExp(priceTypes.join('|'));
+  }
+  return priceRe;
+}
 
 function thisLine(node) {
   return node && node.nodeName !== 'BR';
 }
 
 function formatPrice(text) {
-  return toLowerCase(text.replace(numRE, '')).match(priceRE);
+  return regExpExec(getPriceRe(), toLowerCase(text.replace(numRE, '')));
 }
 
 function priceAfterName(buffNameNode) {

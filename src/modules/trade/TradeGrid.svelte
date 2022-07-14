@@ -1,7 +1,7 @@
 <script>
-  import { defTable } from '../support/constants';
   import getElementsByTagName from '../common/getElementsByTagName';
   import insertElement from '../common/insertElement';
+  import { defTable } from '../support/constants';
   import task from '../support/task';
 
   export let itemList = 0;

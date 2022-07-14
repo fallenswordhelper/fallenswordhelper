@@ -1,8 +1,8 @@
+import sendException from '../analytics/sendException';
 import on from '../common/on';
 import parseError from './parseError';
-import sendException from '../analytics/sendException';
 
-let enabled;
+let enabled = 0;
 
 function handleMsgStack(type, stuff) {
   const msg = parseError(stuff);

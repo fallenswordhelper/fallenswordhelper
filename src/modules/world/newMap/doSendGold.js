@@ -1,9 +1,9 @@
-import { defFetchPlayerStats } from '../../support/constants';
-import getValue from '../../system/getValue';
 import indexAjaxData from '../../ajax/indexAjaxData';
 import infoBoxFrom from '../../common/InfoBoxFrom';
-import { sendGoldonWorld } from './sendGoldPref';
+import { defFetchPlayerStats } from '../../support/constants';
+import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
+import { getSendGoldOnWorld } from './sendGoldPref';
 
 function doneSendGold(data) {
   const info = infoBoxFrom(data);
@@ -17,7 +17,7 @@ function doneSendGold(data) {
 }
 
 export default function doSendGold() { // jQuery
-  if (!sendGoldonWorld) { return; }
+  if (!getSendGoldOnWorld()) { return; }
   indexAjaxData({
     cmd: 'trade',
     subcmd: 'sendgold',

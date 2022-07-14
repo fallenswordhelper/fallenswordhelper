@@ -1,8 +1,8 @@
-import calf from '../support/calf';
-import isAuto from './isAuto';
 import isUndefined from '../common/isUndefined';
 import loadScript from '../common/loadScript';
 import playerId from '../common/playerId';
+import calf from '../support/calf';
+import isAuto from './isAuto';
 
 const urlPatch = [
   [/&m=.*/],

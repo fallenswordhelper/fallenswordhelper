@@ -1,11 +1,13 @@
 import entries from '../../common/entries';
-import formatCost from './formatCost';
-import getBuffsToBuy from './getBuffsToBuy';
 import getElementById from '../../common/getElementById';
-import getPrice from './getPrice';
 import getText from '../../common/getText';
 import hasClass from '../../common/hasClass';
+import regExpExec from '../../common/regExpExec';
 import setInnerHtml from '../../dom/setInnerHtml';
+import bioSendEvent from './bioSendEvent';
+import formatCost from './formatCost';
+import getBuffsToBuy from './getBuffsToBuy';
+import getPrice from './getPrice';
 
 const buffCost = { count: 0, buffs: {} };
 
@@ -63,20 +65,18 @@ function priceUnit(price) {
 
 function getBuffCost(buffNameNode) {
   const price = getPrice(buffNameNode);
-  let type;
-  let cost;
+  let type = 'unknown';
+  let cost = '1';
   if (price) {
     type = priceUnit(price);
-    [cost] = price[0].match(/([+-]?[.\d]+)/);
-  } else {
-    type = 'unknown';
-    cost = '1';
+    [cost] = regExpExec(/[+-]?[.\d]+/, price[0]);
   }
   buffCost.buffs[getText(buffNameNode)] = [parseFloat(cost), type];
   buffCost.count += 1;
 }
 
 function toggleBuffsToBuy(buffNameNode) { // Legacy
+  bioSendEvent('toggleBuffsToBuy');
   const selected = hasClass('fshBlue', buffNameNode);
   buffNameNode.classList.toggle('fshBlue');
   buffNameNode.classList.toggle('fshYellow');

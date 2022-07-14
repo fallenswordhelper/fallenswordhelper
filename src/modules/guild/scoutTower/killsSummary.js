@@ -1,8 +1,8 @@
-import getKillsPct from './getKillsPct';
 import getText from '../../common/getText';
-import getTitanString from './getTitanString';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import roundToString from '../../common/roundToString';
+import getKillsPct from './getKillsPct';
+import getTitanString from './getTitanString';
 
 function summaryHtml(guildKills, currentHP, totalHP) {
   return `<br><span class="fshBlue"> (${

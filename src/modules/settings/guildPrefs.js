@@ -1,7 +1,12 @@
-import bunchOfSimple from './bunchOfSimple';
 import getValue from '../system/getValue';
-import isValueChecked from './isValueChecked';
-import { helpLink, simpleCheckbox } from './simpleCheckbox';
+import bunchOfSimple from './bunchOfSimple';
+import makeCustomRow from './makeCustomRow';
+import makeHeaderRow from './makeHeaderRow';
+import makeLabelRow from './makeLabelRow';
+import {
+  justCheckbox,
+  simpleCheckbox,
+} from './simpleCheckbox';
 
 function injectSettingsGuildData(guildType) {
   let title = '';
@@ -25,38 +30,25 @@ function injectSettingsGuildData(guildType) {
 }
 
 function guildNames() {
-  return '<tr><td colspan="2">'
-      + 'Enter guild names, separated by commas</td></tr>'
-    + `<tr><td class="fshRight">Own Guild</td><td>${
-      injectSettingsGuildData('Self')}</td></tr>`
-    + `<tr><td class="fshRight">Friendly Guilds</td><td>${
-      injectSettingsGuildData('Frnd')}</td></tr>`
-    + `<tr><td class="fshRight">Old Guilds</td><td>${
-      injectSettingsGuildData('Past')}</td></tr>`
-    + `<tr><td class="fshRight">Enemy Guilds</td><td>${
-      injectSettingsGuildData('Enmy')}</td></tr>`;
+  return '<tr><td colspan="2">Enter guild names, separated by commas</td></tr>'
+    + `${makeCustomRow('Own Guild', injectSettingsGuildData('Self'))}`
+    + `${makeCustomRow('Friendly Guilds', injectSettingsGuildData('Frnd'))}`
+    + `${makeCustomRow('Old Guilds', injectSettingsGuildData('Past'))}`
+    + `${makeCustomRow('Enemy Guilds', injectSettingsGuildData('Enmy'))}`;
 }
 
 function pvpTargets() {
-  return `<tr><td class="fshRight">Highlight Valid PvP Targets${
-    helpLink(
-      'Highlight Valid PvP Targets',
-      'Enabling this option will highlight targets in OTHER guilds that '
-      + 'are within your level range to attack for PvP or GvG.',
-    )
-  }:</td><td>PvP: <input name="highlightPlayersNearMyLvl" `
-    + `type="checkbox" value="on"${
-      isValueChecked('highlightPlayersNearMyLvl')
-    }> GvG: <input name="highlightGvGPlayersNearMyLvl" `
-    + `type="checkbox" value="on"${
-      isValueChecked('highlightGvGPlayersNearMyLvl')
-    }></td></tr>`;
+  return makeLabelRow(
+    'highlightValidTargets',
+    `PvP: ${justCheckbox('highlightPlayersNearMyLvl')}`
+    + ` GvG: ${justCheckbox('highlightGvGPlayersNearMyLvl')}`,
+  );
 }
 
 export default function guildPrefs() {
   // Guild Manage
-  return '<tr><th colspan="2"><b>Guild>Manage preferences'
-    + `</b></th></tr>${
+  return `${makeHeaderRow('Guild>Manage preferences')}`
+    + `${
       simpleCheckbox('showGuildRelationship')}${
       guildNames()}${
       pvpTargets()}${

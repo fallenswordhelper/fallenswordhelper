@@ -1,7 +1,7 @@
 import './highlightPvpProtection.css';
 import getTextTrim from '../common/getTextTrim';
-import { pointsUrl } from '../support/constants';
 import querySelector from '../common/querySelector';
+import { pointsUrl } from '../support/constants';
 
 export default function highlightPvpProtection() {
   const pvpp = querySelector(`#profileLeftColumn a[href="${pointsUrl}"]`);

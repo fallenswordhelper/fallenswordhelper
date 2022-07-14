@@ -1,16 +1,15 @@
-import addCommas from '../../system/addCommas';
-import allthen from '../../common/allthen';
-import createTFoot from '../../common/cElement/createTFoot';
 import daAdvisor from '../../_dataAccess/daAdvisor';
 import getMembrList from '../../ajax/getMembrList';
-import getValue from '../../system/getValue';
+import allthen from '../../common/allthen';
+import createTFoot from '../../common/cElement/createTFoot';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
+import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
 import setInnerHtml from '../../dom/setInnerHtml';
-import {
-  injectTable, playerLevel, playerName, playerRank,
-} from './helpers';
 import { time, timeEnd } from '../../support/debug';
+import addCommas from '../../system/addCommas';
+import getValue from '../../system/getValue';
+import { injectTable, playerLevel, playerRank } from './helpers';
 
 function returnAdvisorPage(list, e, response) {
   insertHtmlBeforeEnd(list.lastElementChild.lastElementChild, ` day ${e},`);
@@ -67,7 +66,7 @@ function makeTfoot(added) {
 function makeData(membrList, el) {
   const stats = el.stats.map(addCommas);
   return [
-    playerName(el.player.name, membrList),
+    playerLinkFromMembrList(membrList, el.player.name),
     playerLevel(el.player.name, membrList),
     playerRank(el.player.name, membrList),
   ].concat(stats);

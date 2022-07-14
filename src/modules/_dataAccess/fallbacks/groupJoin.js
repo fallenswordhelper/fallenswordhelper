@@ -1,5 +1,5 @@
-import all from '../../common/all';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import all from '../../common/all';
 
 function joinGroup(grpId) {
   return indexAjaxData({

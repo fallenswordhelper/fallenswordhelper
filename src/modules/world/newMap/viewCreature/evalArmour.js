@@ -1,10 +1,12 @@
 /* eslint-disable no-param-reassign */
-function calcArm(combat) {
-  if (combat.callback.groupExists) {
-    return combat.callback.groupArmorValue;
-  }
-  return combat.player.armorValue;
-}
+import effectiveStat from './effectiveStat';
+import evalBuff from './evalBuff';
+
+const calcArm = (combat) => effectiveStat(
+  combat,
+  combat.callback.groupArmorValue,
+  combat.player.armorValue,
+);
 
 function overallArmour(combat) {
   const armorVal = calcArm(combat);
@@ -14,11 +16,7 @@ function overallArmour(combat) {
 }
 
 function evalSanctuary(combat) {
-  if (combat.player.sanctuaryLevel > 0) {
-    combat.extraNotes += `Sanc Bonus Armor = ${
-      Math.floor(combat.player.armorValue
-      * combat.player.sanctuaryLevel * 0.001)}<br>`;
-  }
+  evalBuff(combat, combat.player.sanctuaryLevel, 'Sanc Bonus Armor', combat.player.armorValue);
 }
 
 function calcTerrorizeEffect(combat) {

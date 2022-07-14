@@ -1,15 +1,16 @@
 import closestTd from '../common/closestTd';
-import { fshArenaKey } from './assets';
 import getTextTrim from '../common/getTextTrim';
 import querySelectorArray from '../common/querySelectorArray';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 import { get, set } from '../system/idb';
+import { fshArenaKey } from './assets';
 
 function getCount(moveImg) {
-  return /(\d)$/.exec(getTextTrim(closestTd(moveImg)))[1];
+  return regExpFirstCapture(/(?<cnt>\d)$/, getTextTrim(closestTd(moveImg)));
 }
 
 function getCounts(acc, moveImg) {
-  const moveId = /\/(\d{1,2})\.png/.exec(moveImg.src)[1];
+  const moveId = regExpFirstCapture(/\/(?<id>\d{1,2})\.png/, moveImg.src);
   acc[moveId] = Number(getCount(moveImg));
   return acc;
 }

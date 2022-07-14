@@ -1,13 +1,13 @@
-import addCommas from '../../system/addCommas';
-import closestTr from '../../common/closestTr';
-import { combatSelector } from '../../support/constants';
 import createDiv from '../../common/cElement/createDiv';
-import getCombat from './getCombat';
-import getCustomUrlParameter from '../../system/getCustomUrlParameter';
+import closestTr from '../../common/closestTr';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
+import { combatSelector } from '../../support/constants';
+import addCommas from '../../system/addCommas';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
+import getCombat from './getCombat';
 
 const green = 'fshGreen';
 const red = 'fshRed';

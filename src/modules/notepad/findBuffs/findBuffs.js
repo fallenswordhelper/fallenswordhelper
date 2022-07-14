@@ -1,42 +1,46 @@
+import guildManage from '../../ajax/guildManage';
+import onlinePlayersPage from '../../ajax/onlinePlayersPage';
+import retryAjax from '../../ajax/retryAjax';
 import arrayFrom from '../../common/arrayFrom';
-import buffList from '../../support/buffObj.json';
-import calf from '../../support/calf';
-import createDocument from '../../system/createDocument';
 import csvSplit from '../../common/csvSplit';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
-import getValue from '../../system/getValue';
-import guildManage from '../../ajax/guildManage';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
+import lastActivity from '../../common/lastActivity';
 import onclick from '../../common/onclick';
-import onlinePlayersPage from '../../ajax/onlinePlayersPage';
-import { pCC } from '../../support/layout';
-import pageLayout from './pageLayout';
-import parseProfileAndDisplay from './parseProfileAndDisplay';
 import partial from '../../common/partial';
 import playerName from '../../common/playerName';
 import querySelectorArray from '../../common/querySelectorArray';
-import retryAjax from '../../ajax/retryAjax';
-import setInnerHtml from '../../dom/setInnerHtml';
-import setValue from '../../system/setValue';
-import stringSort from '../../system/stringSort';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import trim from '../../common/trim';
-import { buffCustom, otherCustom } from './assets';
-import { calcMinLvl, setMinLvl } from './minLvl';
-import { getBufferProgress, updateProgress } from './bufferProgress';
+import setInnerHtml from '../../dom/setInnerHtml';
+import buffList from '../../support/buffObj.json';
+import calf from '../../support/calf';
 import {
-  lastActivityRE,
   profileUrl,
   showPlayerUrl,
+  vlRe,
 } from '../../support/constants';
+import { getPcc } from '../../support/layout';
+import createDocument from '../../system/createDocument';
+import getValue from '../../system/getValue';
+import setValue from '../../system/setValue';
+import stringSort from '../../system/stringSort';
+import { buffCustom, otherCustom } from './assets';
+import { getBufferProgress, updateProgress } from './bufferProgress';
+import { calcMinLvl, setMinLvl } from './minLvl';
+import pageLayout from './pageLayout';
+import parseProfileAndDisplay from './parseProfileAndDisplay';
 
 let findBuffNicks = 0;
 let findBuffMinCastLevel = 0;
 let onlinePlayers = 0;
 let onlinePlayersSetting = 0;
-export let extraProfile = 0;
+let extraProfile = 0;
 let profilePagesToSearch = 0;
 let profilePagesToSearchProcessed = 0;
+
+function setInnerById(html, id) { setInnerHtml(html, getElementById(id)); }
 
 function gotProfile(j, html) {
   parseProfileAndDisplay(html, {
@@ -50,9 +54,8 @@ function getProfile(j) {
 }
 
 function findBuffsParsePlayersForBuffs() { // Legacy
-  // remove duplicates TODO
   // now need to parse player pages for buff ...
-  setInnerHtml(onlinePlayers.length, getElementById('potentialBuffers'));
+  setInnerById(onlinePlayers.length, 'potentialBuffers');
   if (onlinePlayers.length <= 0) {
     updateProgress('Done.', 'blue');
     return;
@@ -84,7 +87,7 @@ function includePlayer(onlinePlayerLevel) {
     && onlinePlayerLevel >= calcMinLvl();
 }
 
-function playerRow(i, e) {
+function playerRow(_i, e) {
   if (includePlayer(getOnlinePlayerLevel(e))) {
     const onlinePlayer = $(e).find('td:eq(1) a').attr('href');
     const onlinePlayerName = $(e).find('td:eq(1) a').text();
@@ -138,13 +141,6 @@ function findBuffsParseOnlinePlayersStart() { // Legacy
   }
 }
 
-function calcLastActMins(tipped) {
-  const lastActivity = lastActivityRE.exec(tipped);
-  const lastActivityDays = parseInt(lastActivity[1], 10);
-  const lastActivityHours = parseInt(lastActivity[2], 10) + lastActivityDays * 24;
-  return parseInt(lastActivity[3], 10) + lastActivityHours * 60;
-}
-
 function isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel) {
   return lastActivityMinutes < 5 && vlevel >= findBuffMinCastLevel
     && vlevel >= minPlayerVirtualLevel;
@@ -152,12 +148,11 @@ function isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel) {
 
 function parsePlayerLink(el) {
   const { tipped } = el.dataset;
-  const lastActivityMinutes = calcLastActMins(tipped);
+  const { mins } = lastActivity(tipped);
   // check if they are high enough level to cast the buff
-  const matches = /VL:.+?(?<vl>\d+)/.exec(tipped);
-  const vlevel = Number(matches.groups.vl);
+  const vlevel = Number(regExpFirstCapture(vlRe, tipped));
   const minPlayerVirtualLevel = calcMinLvl();
-  if (isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel)) {
+  if (isValidPlayer(mins, vlevel, minPlayerVirtualLevel)) {
     addPlayerToSearchList(el.href, getText(el));
   }
 }
@@ -202,31 +197,39 @@ function findBuffsParseGuildManagePage(responseText) {
   findBuffsParseProfilePageStart();
 }
 
-function notHeader(el, i) { return i !== 0; }
+function notHeader(_el, i) { return i !== 0; }
 
 function deleteRow(buffTable) { buffTable.deleteRow(-1); }
 
-function findBuffsClearResults() { // Legacy
+function clearTable() {
   const buffTable = getElementById('buffTable');
-  arrayFrom(buffTable.rows).filter(notHeader)
-    .forEach(partial(deleteRow, buffTable));
-  setInnerHtml('', getElementById('buffNicks'));
+  arrayFrom(buffTable.rows).filter(notHeader).forEach(partial(deleteRow, buffTable));
+}
+
+function findBuffsClearResults() { // Legacy
+  clearTable();
+  setInnerById('', 'buffNicks');
   updateProgress('Idle.', 'black');
-  setInnerHtml('', getElementById('potentialBuffers'));
-  setInnerHtml('0', getElementById('buffersProcessed'));
+  setInnerById('', 'potentialBuffers');
+  setInnerById('0', 'buffersProcessed');
+}
+
+async function goFindBuffs() {
+  // get list of players to search, starting with guild>manage page
+  const responseText = await guildManage();
+  findBuffsParseGuildManagePage(responseText);
 }
 
 function findAnyStart(progMsg) { // jQuery
   if (jQueryNotPresent()) { return; }
-  setInnerHtml(findBuffNicks, getElementById('buffNicks'));
+  setInnerById(findBuffNicks, 'buffNicks');
   updateProgress(`Gathering list of ${progMsg} ...`, 'green');
   setMinLvl();
-  setInnerHtml('0', getElementById('buffersProcessed'));
+  setInnerById('0', 'buffersProcessed');
   onlinePlayers = [];
   extraProfile = getElementById('extraProfile').value;
   setValue('extraProfile', extraProfile);
-  // get list of players to search, starting with guild>manage page
-  guildManage().then(findBuffsParseGuildManagePage);
+  goFindBuffs();
 }
 
 function thisBuff(selectedBuff, el) { return selectedBuff === el.id; }
@@ -261,7 +264,7 @@ function setupClearEvent() {
 }
 
 export function injectFindBuffs(injector) { // Legacy
-  const content = injector || pCC;
+  const content = injector || getPcc();
   calf.sortBy = 'name';
   calf.sortAsc = true;
   buffList.sort(stringSort);
@@ -273,7 +276,7 @@ export function injectFindBuffs(injector) { // Legacy
 }
 
 export function injectFindOther(injector) { // Native - Bad
-  const content = injector || pCC;
+  const content = injector || getPcc();
   getExtraProfile();
   setInnerHtml(pageLayout(otherCustom, extraProfile), content);
   getBufferProgress();

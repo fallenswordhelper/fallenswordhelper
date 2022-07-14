@@ -2,16 +2,16 @@ import { createRequire } from 'module';
 import lws from 'local-web-server';
 
 const require = createRequire(import.meta.url);
-const { port: calfPort } = require('./config.json');
-const cleanTarget = require('./cleanTarget');
-const esbuild = require('esbuild');
-const process = require('process');
-const sveltePlugin = require('esbuild-svelte');
-const { calfVer, core } = require('./getVersion');
 const {
   readFileSync,
   writeFileSync,
 } = require('fs');
+const process = require('process');
+const esbuild = require('esbuild');
+const sveltePlugin = require('esbuild-svelte');
+const cleanTarget = require('./cleanTarget');
+const { port: calfPort } = require('./config.json');
+const { calfVer, core } = require('./getVersion');
 
 const rootPath = `https://localhost:${calfPort}/`;
 const fshPath = 'dist/Releases/watch';

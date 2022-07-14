@@ -1,17 +1,17 @@
 import classHandler from '../../common/classHandler';
-import getMsg from './getMsg';
-import { getName } from './targetPlayer';
-import getQuickMessageDialog from './getQuickMessageDialog';
 import getText from '../../common/getText';
-import getValue from '../../system/getValue';
-import getValueJSON from '../../system/getValueJSON';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';
+import getValue from '../../system/getValue';
+import getValueJSON from '../../system/getValueJSON';
 import setValueJSON from '../../system/setValueJSON';
+import getMsg from './getMsg';
+import getQuickMessageDialog from './getQuickMessageDialog';
+import { getName } from './targetPlayer';
 
-let fshTemplate;
-let msgTbl;
-let showingTemplates;
+let fshTemplate = 0;
+let msgTbl = 0;
+let showingTemplates = 0;
 
 function getFshTemplate() {
   if (!fshTemplate) {

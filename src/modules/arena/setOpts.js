@@ -1,10 +1,13 @@
 import changeMinMax from '../common/changeMinMax';
 import defaults from '../support/dataObj.json';
-import { fshArenaKey } from './assets';
 import { set } from '../system/idb';
+import { fshArenaKey } from './assets';
 
-export let opts;
-export let oldIds;
+let opts = 0;
+let oldIds = 0;
+
+export const getOpts = () => opts;
+export const getOldIds = () => oldIds;
 
 export function storeOpts() {
   set(fshArenaKey, opts);

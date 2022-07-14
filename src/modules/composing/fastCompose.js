@@ -1,9 +1,9 @@
 import './fastCompose.css';
-import backgroundCreate from './backgroundCreate';
-import contains from '../common/contains';
+import sendEvent from '../analytics/sendEvent';
 import createDiv from '../common/cElement/createDiv';
 import createInput from '../common/cElement/createInput';
 import createTable from '../common/cElement/createTable';
+import contains from '../common/contains';
 import getArrayByClassName from '../common/getArrayByClassName';
 import insertElement from '../common/insertElement';
 import insertElementAfter from '../common/insertElementAfter';
@@ -11,14 +11,14 @@ import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import once from '../common/once';
 import onclick from '../common/onclick';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';
 import querySelectorArray from '../common/querySelectorArray';
-import sendEvent from '../analytics/sendEvent';
 import setText from '../dom/setText';
+import { getPcc } from '../support/layout';
 import { subscribe } from '../support/pubsub';
+import backgroundCreate from './backgroundCreate';
 
 function doTableClass(myTable, slotsLeft) {
   myTable.classList.add(`left-${slotsLeft.toString()}`);
@@ -56,7 +56,7 @@ function buildButton(val, templateId) {
   });
 }
 
-function buildCells(template, myRow, compSlot, i) {
+function buildCells(template, myRow, _compSlot, i) {
   if (i === 0) {
     setText(template[1], myRow.insertCell(-1));
   }
@@ -67,7 +67,7 @@ function buildCells(template, myRow, compSlot, i) {
   return myRow;
 }
 
-function buildRows(compSlots, openSlots, myTable, template) {
+function buildRows(compSlots, myTable, template) {
   compSlots.reduce(partial(buildCells, template), myTable.insertRow(-1));
   return myTable;
 }
@@ -75,7 +75,7 @@ function buildRows(compSlots, openSlots, myTable, template) {
 function buildTable(templates, compSlots, openSlots) {
   const myTable = createTable({ id: 'fshFastCompose' });
   doTableClass(myTable, openSlots);
-  return templates.reduce(partial(buildRows, compSlots, openSlots), myTable);
+  return templates.reduce(partial(buildRows, compSlots), myTable);
 }
 
 function keyValuePairs(el) { return [el.value, el.text]; }
@@ -85,7 +85,7 @@ function setupFastCompose(fcDiv, compSlots, openSlots) {
     .map(keyValuePairs);
   const myTable = buildTable(templates, compSlots, openSlots);
   insertElement(fcDiv, myTable);
-  onclick(pCC, handleClick);
+  onclick(getPcc(), handleClick);
   subscribe('quickcreate', partial(quickcreate, myTable));
 }
 

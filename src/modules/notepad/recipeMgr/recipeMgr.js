@@ -1,36 +1,33 @@
 import doSortParams from '../../common/doSortParams';
-import generateRecipeTable from './generateRecipeTable';
-import { get } from '../../system/idb';
+import idHandler from '../../common/idHandler';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
+import { getPcc } from '../../support/layout';
+import { get } from '../../system/idb';
 import stringSort from '../../system/stringSort';
+import generateRecipeTable from './generateRecipeTable';
 import {
+  getOutput,
+  getRecipebook,
   gotRecipeBook,
-  output,
   parseInventingStart,
-  recipebook,
 } from './parseInventing';
 
-function sortRecipeTable(evt) { // Legacy
-  doSortParams(evt.target);
-  recipebook.recipe.sort(stringSort);
-  generateRecipeTable(output, recipebook);
+function sortRecipeTable(target) { // Legacy
+  doSortParams(target);
+  getRecipebook().recipe.sort(stringSort);
+  generateRecipeTable(getOutput(), getRecipebook());
 }
 
-function rmEvtHdl(evt) {
-  if (evt.target.id === 'rfsh') {
-    parseInventingStart();
-  }
-  if (evt.target.id === 'sortName') {
-    sortRecipeTable(evt);
-  }
-}
+const rmHdl = [
+  ['rfsh', parseInventingStart],
+  ['sortName', sortRecipeTable],
+];
 
 export default function recipeMgr(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
-  const content = injector || pCC;
+  const content = injector || getPcc();
   get('fsh_recipeBook').then(partial(gotRecipeBook, content));
-  onclick(content, rmEvtHdl);
+  onclick(content, idHandler(rmHdl));
 }

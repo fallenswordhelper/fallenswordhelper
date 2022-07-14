@@ -1,8 +1,8 @@
-import badData from '../badData';
-import calf from '../../../support/calf';
-import getCreatureStats from '../getCreatureStats/getCreatureStats';
-import partial from '../../../common/partial';
 import sendEvent from '../../../analytics/sendEvent';
+import partial from '../../../common/partial';
+import calf from '../../../support/calf';
+import badData from '../badData';
+import getCreatureStats from '../getCreatureStats/getCreatureStats';
 import {
   getMonsterPrefs,
   processMonsterLog,

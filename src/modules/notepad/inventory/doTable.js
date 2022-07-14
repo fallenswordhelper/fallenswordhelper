@@ -1,24 +1,24 @@
-import bpRender from './render/bpRender';
-import { craftHash } from './assets';
-import craftRender from './render/craftRender';
 import createTable from '../../common/cElement/createTable';
+import insertElement from '../../common/insertElement';
+import { itemType } from '../../support/constants';
+import { getPcc } from '../../support/layout';
+import { craftHash } from './assets';
+import { getTheInv } from './buildInv';
+import { getShowQuickDropLinks, getShowQuickSendLinks } from './options';
+import bpRender from './render/bpRender';
+import craftRender from './render/craftRender';
 import createdRow from './render/createdRow';
 import dropRender from './render/dropRender';
 import durabilityRender from './render/durabilityRender';
 import forgeRender from './render/forgeRender';
 import gsRender from './render/gsRender';
-import insertElement from '../../common/insertElement';
-import { itemType } from '../../support/constants';
 import nameRender from './render/nameRender';
-import { pCC } from '../../support/layout';
 import sendRender from './render/sendRender';
-import { theInv } from './buildInv';
 import wearUseRender from './render/wearUseRender';
 import whereData from './render/whereData';
 import whereRender from './render/whereRender';
 import whereRenderDisplay from './render/whereRenderDisplay';
 import whereRenderFilter from './render/whereRenderFilter';
-import { showQuickDropLinks, showQuickSendLinks } from './options';
 
 const tblCols = [
   { title: 'Name', data: 'item_name', render: nameRender },
@@ -80,7 +80,7 @@ const tblCols = [
 ];
 
 function isUserInv() {
-  return 'player_id' in theInv;
+  return 'player_id' in getTheInv();
 }
 
 function tableId() {
@@ -95,7 +95,7 @@ function injectTable() {
     className: 'hover fshXSmall',
     id: tableId(),
   });
-  insertElement(pCC, fshInv);
+  insertElement(getPcc(), fshInv);
   return fshInv;
 }
 
@@ -109,7 +109,7 @@ function makeDataTable(fshInv) { // jQuery
       }],
     columns: tblCols,
     createdRow,
-    data: theInv.items,
+    data: getTheInv().items,
     deferRender: true,
     lengthMenu: [[50, 100, 150, 200, -1], [50, 100, 150, 200, 'All']],
     pageLength: 50,
@@ -119,9 +119,11 @@ function makeDataTable(fshInv) { // jQuery
 }
 
 function hideCols(table) {
-  table.column(12).visible('current_player_id' in theInv);
-  table.column(17).visible(isUserInv() && showQuickDropLinks);
-  table.column(18).visible(isUserInv() && showQuickSendLinks);
+  [
+    [12, 'current_player_id' in getTheInv()],
+    [17, isUserInv() && getShowQuickDropLinks()],
+    [18, isUserInv() && getShowQuickSendLinks()],
+  ].forEach(([col, bool]) => table.column(col).visible(bool));
 }
 
 export default function doTable() {

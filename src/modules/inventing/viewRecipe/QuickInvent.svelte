@@ -1,8 +1,8 @@
 <script>
-  import LinkButton from '../../common/LinkButton.svelte';
+  import { slide } from 'svelte/transition';
   import daDoInvent from '../../_dataAccess/daDoInvent';
   import sendEvent from '../../analytics/sendEvent';
-  import { slide } from 'svelte/transition';
+  import LinkButton from '../../common/LinkButton.svelte';
 
   export let max;
   export let recipeID;

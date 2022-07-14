@@ -1,10 +1,10 @@
 import contains from '../../common/contains';
-import { defTable } from '../../support/constants';
 import getElementsByTagName from '../../common/getElementsByTagName';
-import getValue from '../../system/getValue';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
+import { defTable } from '../../support/constants';
+import getValue from '../../system/getValue';
 
 function totalKey(isAllies) {
   if (isAllies) { return 'alliestotal'; }

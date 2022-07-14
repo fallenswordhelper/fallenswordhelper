@@ -1,35 +1,36 @@
-import addGuildLogWidgets from '../../logs/addGuildLogWidgets';
-import addLogColoring from '../../logs/addLogColoring';
 import all from '../../common/all';
-import createDocument from '../../system/createDocument';
 import createTable from '../../common/cElement/createTable';
 import eventHandler5 from '../../common/eventHandler5';
 import functionPasses from '../../common/functionPasses';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
-import getGuildLogPage from './getGuildLogPage';
 import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
-import getValue from '../../system/getValue';
 import hideElement from '../../common/hideElement';
-import hideGuildLogMsg from './hideGuildLogMsg';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
-import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import partial from '../../common/partial';
-import profiler from './profiler';
 import querySelector from '../../common/querySelector';
+import regExpExec from '../../common/regExpExec';
 import selfIdIs from '../../common/selfIdIs';
+import toggleForce from '../../common/toggleForce';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
-import toggleForce from '../../common/toggleForce';
+import addGuildLogWidgets from '../../logs/addGuildLogWidgets';
+import addLogColoring from '../../logs/addLogColoring';
+import { getPcc } from '../../support/layout';
+import createDocument from '../../system/createDocument';
+import getValue from '../../system/getValue';
+import { get, set } from '../../system/idb';
+import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import {
   defChecks, guildLogFilter, headerRow, noChecks,
 } from './assets';
-import { get, set } from '../../system/idb';
+import getGuildLogPage from './getGuildLogPage';
+import hideGuildLogMsg from './hideGuildLogMsg';
+import profiler from './profiler';
 
 let options = {};
 let fshNewGuildLog = 0;
@@ -45,8 +46,8 @@ let myTable = 0;
 
 function updatePages(pageInput) {
   currPage = Number(pageInput.value);
-  const matches = /\d+/.exec(getText(pageInput.parentNode));
-  lastPage = Number(matches[0]);
+  const [matches] = regExpExec(/\d+/, getText(pageInput.parentNode));
+  lastPage = Number(matches);
   if (currPage === 1) { maxPage = Math.min(lastPage, maxPagesToFetch); }
   setText(`Loading ${currPage} of ${maxPage}...`, fshOutput);
 }
@@ -159,7 +160,7 @@ function buildTable() {
   tmpGuildLog.forEach(buildRow);
 
   const injector = getElementById('fshInjectHere');
-  pCC.replaceChild(myTable, injector);
+  getPcc().replaceChild(myTable, injector);
   addLogColoring('myGuildLog', 1, 3);
   addGuildLogWidgets();
 }
@@ -261,14 +262,19 @@ function setMaxPage() {
   maxPage = maxPagesToFetch;
 }
 
+async function startProcessing() {
+  const firstPage = await getGuildLogPage(1);
+  processFirstPage(firstPage);
+}
+
 function gotOptions(guildLog) {
   setOpts(guildLog);
-  setInnerHtml(guildLogFilter, pCC);
+  setInnerHtml(guildLogFilter, getPcc());
   getElements();
   onclick(fshNewGuildLog, guildLogEvents());
   setChecks();
   setMaxPage();
-  getGuildLogPage(1).then(processFirstPage);
+  startProcessing();
 }
 
 export default async function newGuildLog() { // jQuery.min

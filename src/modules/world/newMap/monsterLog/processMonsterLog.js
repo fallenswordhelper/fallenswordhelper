@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
-import calf from '../../../support/calf';
 import partial from '../../../common/partial';
+import calf from '../../../support/calf';
 import { get, set } from '../../../system/idb';
 
-let monsterLog;
+let monsterLog = 0;
 
 function storeDescription(creature, logCreature) {
   logCreature.creature_class = creature.creature_class;

@@ -1,10 +1,10 @@
 import createTBody from '../../common/cElement/createTBody';
 import createTr from '../../common/cElement/createTr';
-import { playerIdUrl } from '../../support/constants';
+import playerLink from '../../common/playerLink';
 
 function rowHtml(obj) {
   return `<td>${obj.slot}</td>`
-    + `<td><a href="${playerIdUrl}${obj.id}">${obj.name}</a></td>`
+    + `<td>${playerLink(obj.id, obj.name)}</td>`
     + `<td>${obj.level}</td>`
     + `<td>${obj.rank_name}</td>`
     + `<td>${obj.gxp}</td>`
@@ -23,7 +23,7 @@ function rowFactory(aRow) {
   return aRow.dom;
 }
 
-export default function displayChange(domTable, table, displayed) {
+export default function displayChange(domTable, _table, displayed) {
   const domTBody = domTable.tBodies[0];
   const thisTBody = createTBody();
   for (const r of displayed) {

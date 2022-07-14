@@ -1,14 +1,16 @@
-import allthen from '../../common/allthen';
-import calf from '../../support/calf';
 import daGuildFetchInv from '../../_dataAccess/daGuildFetchInv';
 import daGuildReport from '../../_dataAccess/daGuildReport';
 import daLoadInventory from '../../_dataAccess/daLoadInventory';
 import getInventory from '../../ajax/getInventory';
+import allthen from '../../common/allthen';
 import isArray from '../../common/isArray';
 import partial from '../../common/partial';
+import calf from '../../support/calf';
 
-export let theInv;
 let composed = [];
+let theInv = {};
+
+export const getTheInv = () => theInv;
 
 function cacheTheInv(data) {
   theInv = data;

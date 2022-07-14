@@ -1,7 +1,7 @@
-import Trade from './Trade.svelte';
 import getElementById from '../common/getElementById';
-import oneByOne from './oneByOne';
 import task from '../support/task';
+import oneByOne from './oneByOne';
+import Trade from './Trade.svelte';
 
 function startTrade(itemList) {
   return new Trade({

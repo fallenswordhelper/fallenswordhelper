@@ -1,7 +1,7 @@
-import addCommas from '../../system/addCommas';
-import { cdn } from '../../system/system';
 import entries from '../../common/entries';
 import keys from '../../common/keys';
+import addCommas from '../../system/addCommas';
+import { cdn } from '../../system/system';
 
 function imgHtml(imageId) {
   return `<img class="tip-static" src="${cdn

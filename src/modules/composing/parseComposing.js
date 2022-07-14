@@ -1,19 +1,20 @@
-import calf from '../support/calf';
 import getArrayByClassName from '../common/getArrayByClassName';
 import getText from '../common/getText';
-import { now } from '../support/now';
-import setValue from '../system/setValue';
+import regExpGroups from '../common/regExpGroups';
+import calf from '../support/calf';
 import {
   defLastComposeCheck,
   defNeedToCompose,
+  etaRe,
 } from '../support/constants';
-
-const timeRE = /ETA:\s*(\d+)h\s*(\d+)m\s*(\d+)s/;
+import { getNow } from '../support/now';
+import setValue from '../system/setValue';
 
 function timeRemaining(el) {
-  const timeArr = timeRE.exec(getText(el));
-  if (timeArr) {
-    return (timeArr[1] * 3600 + timeArr[2] * 60 + Number(timeArr[3])) * 1000 + now;
+  const timeGroup = regExpGroups(etaRe, getText(el));
+  if (timeGroup) {
+    const { h, m, s } = timeGroup;
+    return (h * 3600 + m * 60 + Number(s)) * 1000 + getNow();
   }
   return 0;
 }

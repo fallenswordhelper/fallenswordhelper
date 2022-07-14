@@ -3,10 +3,9 @@ import createDiv from '../../common/cElement/createDiv';
 import createTable from '../../common/cElement/createTable';
 import insertElement from '../../common/insertElement';
 import partial from '../../common/partial';
-import { playerIdUrl } from '../../support/constants';
 import replaceChild from '../../common/replaceChild';
-import task from '../../support/task';
 import trim from '../../common/trim';
+import task from '../../support/task';
 
 export const advisorColumns = [
   { title: '<div class="fshBold">Member</div>' },
@@ -25,11 +24,6 @@ export const advisorColumns = [
   { title: '<div class="fshBold">Relic</div>', class: 'dt-center' },
   { title: '<div class="fshBold">XP Contrib</div>', class: 'dt-center' },
 ];
-
-export function playerName(f, membrList) {
-  if (!membrList[f]) { return f; }
-  return `<a href="${playerIdUrl}${membrList[f].id}">${f}</a>`;
-}
 
 export function playerLevel(f, membrList) {
   if (!membrList[f]) { return ''; }

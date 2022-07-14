@@ -1,11 +1,11 @@
-import getRelicList from './getRelicList';
-import getValue from '../../system/getValue';
-import { pCC } from '../../support/layout';
-import padZ from '../../system/padZ';
 import partial from '../../common/partial';
-import setInnerHtml from '../../dom/setInnerHtml';
 import splitTime from '../../common/splitTime';
+import setInnerHtml from '../../dom/setInnerHtml';
 import { defSubcmd, guideUrl, guildViewUrl } from '../../support/constants';
+import { getPcc } from '../../support/layout';
+import getValue from '../../system/getValue';
+import padZ from '../../system/padZ';
+import getRelicList from './getRelicList';
 
 function relicName(relic) {
   return `<a href="${guideUrl}relics${defSubcmd}view&relic_id=${relic.id}">`
@@ -41,8 +41,8 @@ function allAttribs(attribs) {
 
 function formatTime(time) {
   if (!time) { return ''; }
-  const t = splitTime(time);
-  return `${padZ(t[0])}d ${padZ(t[1])}h ${padZ(t[2])}m ${padZ(t[3])}s`;
+  const [day, hour, min, sec] = splitTime(time);
+  return `${padZ(day)}d ${padZ(hour)}h ${padZ(min)}m ${padZ(sec)}s`;
 }
 
 function makeRow(relic) {
@@ -53,22 +53,24 @@ function makeRow(relic) {
     + `<td>${formatTime(relic.time)}</td></tr>`;
 }
 
+const relicStyle = `#pCC .reliclist {
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+.reliclist, .reliclist th, .reliclist td {
+  border: 1px solid black;
+}
+.reliclist th, .reliclist td {
+  padding: 5px;
+}
+.reliclist th:nth-of-type(10), .reliclist td:nth-of-type(10) {
+  width: 100px;
+}`;
+
 function makeTable(thisRelicList) {
   return '<style>'
-    + `#pCC .reliclist {
-        border-collapse: collapse;
-        border-spacing: 0;
-        table-layout: fixed;
-      }
-      .reliclist, .reliclist th, .reliclist td {
-        border: 1px solid black;
-      }
-      .reliclist th, .reliclist td {
-        padding: 5px;
-      }
-      .reliclist th:nth-of-type(10), .reliclist td:nth-of-type(10) {
-        width: 100px;
-      }`
+    + `${relicStyle}`
     + '</style><table class="reliclist"><thead><tr>'
     + '<th>Level</th>'
     + '<th>Name</th>'
@@ -87,11 +89,11 @@ function makeTable(thisRelicList) {
 
 function processRelicList(thisRelicList) {
   thisRelicList.sort((a, b) => a.location.realm.min_level - b.location.realm.min_level);
-  setInnerHtml(makeTable(thisRelicList), pCC);
+  setInnerHtml(makeTable(thisRelicList), getPcc());
 }
 
 export default function reliclist() {
   if (!getValue('betaOptIn')) { return; }
-  setInnerHtml('Loading...', pCC);
+  setInnerHtml('Loading...', getPcc());
   getRelicList().then(processRelicList);
 }

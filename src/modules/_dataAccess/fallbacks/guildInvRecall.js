@@ -1,5 +1,5 @@
-import htmlResult from './htmlResult';
 import indexAjaxData from '../../ajax/indexAjaxData';
+import htmlResult from './htmlResult';
 
 export default function guildInvRecall(invId, playerId, mode) {
   return indexAjaxData({

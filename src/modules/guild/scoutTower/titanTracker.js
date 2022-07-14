@@ -1,12 +1,12 @@
-import TitanTracker from './TitanTracker.svelte';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
 import getText from '../../common/getText';
-import { now } from '../../support/now';
-import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import trimTitanName from '../../common/trimTitanName';
 import uniq from '../../common/uniq';
+import { getNow } from '../../support/now';
 import { get, set } from '../../system/idb';
+import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
+import TitanTracker from './TitanTracker.svelte';
 
 function startTracker(parentTable, theTitans, titanRows) {
   return new TitanTracker({
@@ -36,7 +36,7 @@ function remainingTitans(oldTitans, visibleTitans) {
     entries(oldTitans)
       .map(([n, o]) => [trimTitanName(n), o])
       .filter(([n]) => !visibleTitans[n])
-      .filter(([, d]) => d.coolTime > now)
+      .filter(([, d]) => d.coolTime > getNow())
       .map(([n, d]) => [n, { ...d, seen: 'no' }]),
   );
 }

@@ -1,8 +1,8 @@
 .whosGotWhat {
   border: 1px solid black;
   margin: auto;
-  table-layout: fixed
-  /* width: 588px; */
+  table-layout: fixed;
+  width: 588px;
 }
 
 .whosGotWhat tr:nth-child(odd) {background: wheat;}
@@ -15,6 +15,7 @@
   background: peru;
   background-position: right center;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .whosGotWhat th,
@@ -42,7 +43,12 @@
 .whosGotWhat th:nth-child(2),
 .whosGotWhat td:nth-child(2),
 .whosGotWhat th:nth-child(4),
-.whosGotWhat td:nth-child(4) {text-align: left;}
+.whosGotWhat td:nth-child(4) {
+  overflow: clip;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .whosGotWhat td:nth-child(1),
 .whosGotWhat th:nth-child(1) {

@@ -1,10 +1,10 @@
-import asInt from './asInt';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import intValue from '../../system/intValue';
-import timeBox from './timeBox';
 import valueText from '../../common/valueText';
+import intValue from '../../system/intValue';
+import asInt from './asInt';
+import timeBox from './timeBox';
 
 const getStamVals = (m) => valueText(getElementsByClassName('stat-name', m)).split(' / ');
 

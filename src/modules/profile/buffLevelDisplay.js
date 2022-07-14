@@ -1,12 +1,12 @@
 import insertHtmlAfterBegin from '../common/insertHtmlAfterBegin';
 import querySelectorArray from '../common/querySelectorArray';
+import regExpFirstCapture from '../common/regExpFirstCapture';
 
 const buffSelector = '#profileRightColumn img[src*="/skills/"]';
 
 function injectLevel(i) {
-  const matches = /Level: (\d+)/.exec(i.dataset.tipped);
-  if (!matches) { return; }
-  const lvl = matches[1];
+  const lvl = regExpFirstCapture(/Level: (?<lvl>\d+)/, i.dataset.tipped);
+  if (!lvl) return;
   let target = i.nextElementSibling;
   if (!i.nextElementSibling) {
     target = i.parentNode.nextElementSibling;

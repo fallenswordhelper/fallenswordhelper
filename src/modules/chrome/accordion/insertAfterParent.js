@@ -1,5 +1,5 @@
-import getElementById from '../../common/getElementById';
 import sendException from '../../analytics/sendException';
+import getElementById from '../../common/getElementById';
 
 export default function insertAfterParent(target, fn, listItem) {
   const tgt = getElementById(target);

@@ -1,7 +1,7 @@
 import getElementById from '../common/getElementById';
-import { playerLinkSelector } from '../support/constants';
 import querySelectorArray from '../common/querySelectorArray';
 import relatePlayer from '../logs/playerLogWidgets/relatePlayer';
+import { playerLinkSelector } from '../support/constants';
 
 const getPlayerLinks = () => querySelectorArray(playerLinkSelector, getElementById('resultRows'))
   .filter((a) => !a.href.endsWith('=null'));

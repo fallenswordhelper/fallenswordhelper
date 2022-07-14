@@ -7,13 +7,17 @@ import toggleForce from '../../../common/toggleForce';
 import {
   buildTitanInfoTable,
   clearMemberRows,
-  titanTbl,
+  getTitanTbl,
 } from './buildTitanInfoTable';
 import { clearTitanDiv, initVars } from './placeholders';
 
-export let titanDiv;
-export let titanId;
-export let titanLoc;
+let titanDiv = 0;
+let titanId = 0;
+let titanLoc = '';
+
+export const getTitanDiv = () => titanDiv;
+export const getTitanId = () => titanId;
+export const getTitanLoc = () => titanLoc;
 
 export function hideTitanDiv() {
   titanId = null;
@@ -41,7 +45,7 @@ export function setupTitanDiv() {
     titanDiv = createDiv({ className: 'fshActionBox titanInfo' });
     initVars();
     buildTitanInfoTable();
-    insertElement(titanDiv, titanTbl);
+    insertElement(titanDiv, getTitanTbl());
     insertElement(actCont, titanDiv);
   }
 }

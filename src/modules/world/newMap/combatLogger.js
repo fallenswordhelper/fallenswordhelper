@@ -7,7 +7,7 @@ const notSave = ['Breaker', 'Protection', 'Master Thief', 'Protect Gold',
   'Disarm', 'Duelist', 'Thievery', 'Master Blacksmith', 'Master Crafter',
   'Fury Caster', 'Master Inventor', 'Sustain'];
 let combatLog = [];
-let combatData;
+let combatData = 0;
 
 function storeBuffs(buff) {
   if (buff.id === 54 || buff.id === 26) {
@@ -34,7 +34,7 @@ function hazEnhancements(data) {
   }
 }
 
-function processCombatResponse(e, data) {
+function processCombatResponse(data) {
   combatData = {};
   combatData.combat = data.response.data;
   if (combatData.combat.inventory_id) {
@@ -51,9 +51,9 @@ function processCombatResponse(e, data) {
   set('fsh_combatLog', combatLog);
 }
 
-function combatResponse(e, data) {
+function combatResponse(_e, data) {
   // If bad response do nothing.
-  if (data.response.response === 0) { processCombatResponse(e, data); }
+  if (data.response.response === 0) { processCombatResponse(data); }
 }
 
 function gotCombatLog(data) { // jQuery.min

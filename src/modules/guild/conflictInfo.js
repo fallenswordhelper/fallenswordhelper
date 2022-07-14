@@ -1,10 +1,10 @@
 import conflicts from '../ajax/conflicts';
-import createDocument from '../system/createDocument';
 import dataRows from '../common/dataRows';
-import { guildSubcmdUrl } from '../support/constants';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
+import { guildSubcmdUrl } from '../support/constants';
+import createDocument from '../system/createDocument';
 
 function makeCell(newRow, html) {
   setInnerHtml(html, newRow.insertCell(-1));

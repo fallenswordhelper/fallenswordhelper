@@ -1,32 +1,32 @@
-import addRows from './addRows';
+import textSpan from '../../../common/cElement/textSpan';
+import partial from '../../../common/partial';
+import roundToString from '../../../common/roundToString';
+import trimTitanName from '../../../common/trimTitanName';
+import setInnerHtml from '../../../dom/setInnerHtml';
+import setText from '../../../dom/setText';
 import getKillsPct from '../../../guild/scoutTower/getKillsPct';
 import getTitanString from '../../../guild/scoutTower/getTitanString';
 import { months } from '../../../support/constants';
-import { now } from '../../../support/now';
+import { getNow } from '../../../support/now';
 import padZ from '../../../system/padZ';
-import partial from '../../../common/partial';
-import { realmName } from './realm';
-import roundToString from '../../../common/roundToString';
-import setInnerHtml from '../../../dom/setInnerHtml';
-import setText from '../../../dom/setText';
-import textSpan from '../../../common/cElement/textSpan';
-import trimTitanName from '../../../common/trimTitanName';
-import { clearMemberRows, titanTbl } from './buildTitanInfoTable';
+import addRows from './addRows';
+import { clearMemberRows, getTitanTbl } from './buildTitanInfoTable';
+import { getTitanId, getTitanLoc } from './hasTitan';
 import {
-  cooldownText,
-  currentHp,
-  currentPct,
-  guildKills,
-  maxHp,
-  statusText,
-  titanLocation,
-  titanName,
-  totalPct,
+  getCooldownText,
+  getCurrentHp,
+  getCurrentPct,
+  getGuildKills,
+  getMaxHp,
+  getStatusText,
+  getTitanLocation,
+  getTitanName,
+  getTotalPct,
 } from './placeholders';
-import { titanId, titanLoc } from './hasTitan';
+import { getRealmName } from './realm';
 
 function formatOffset(secs) {
-  const aDate = new Date(now + secs * 1000);
+  const aDate = new Date(getNow() + secs * 1000);
   return `${padZ(aDate.getHours())}:${padZ(aDate.getMinutes())} ${
     padZ(aDate.getDate())}/${months[aDate.getMonth()]}/${
     aDate.getFullYear()}`;
@@ -53,22 +53,22 @@ function statusTextHtml(ourTitan) {
   return getTitanString(ourTitan.kills, ourTitan.max_hp, ourTitan.current_hp);
 }
 
-function setAllText(ary) {
-  ary.forEach(([txt, ctx]) => { setText(txt, ctx); });
+function setAllText(ourTitan) {
+  [
+    [trimTitanName(ourTitan.creature.name), getTitanName],
+    [getTitanLoc(), getTitanLocation],
+    [ourTitan.current_hp, getCurrentHp],
+    [ourTitan.max_hp, getMaxHp],
+    [ourTitan.kills, getGuildKills],
+    [currentPctText(ourTitan), getCurrentPct],
+    [totalPctText(ourTitan), getTotalPct],
+  ].forEach(([txt, ctx]) => setText(txt, ctx()));
 }
 
 function doTopLabels(ourTitan) {
-  setAllText([
-    [trimTitanName(ourTitan.creature.name), titanName],
-    [titanLoc, titanLocation],
-    [ourTitan.current_hp, currentHp],
-    [ourTitan.max_hp, maxHp],
-    [ourTitan.kills, guildKills],
-    [currentPctText(ourTitan), currentPct],
-    [totalPctText(ourTitan), totalPct],
-  ]);
-  setInnerHtml(statusTextHtml(ourTitan), statusText);
-  setInnerHtml(getCooldownHtml(ourTitan.cooldown), cooldownText);
+  setAllText(ourTitan);
+  setInnerHtml(statusTextHtml(ourTitan), getStatusText());
+  setInnerHtml(getCooldownHtml(ourTitan.cooldown), getCooldownText());
 }
 
 function memberRow(ourTitan, member) {
@@ -83,11 +83,11 @@ function doMemberRows(ourTitan) {
   clearMemberRows();
   if (!ourTitan.contributors) { return; }
   const memberRows = ourTitan.contributors.map(partial(memberRow, ourTitan));
-  addRows(titanTbl, memberRows);
+  addRows(getTitanTbl(), memberRows);
 }
 
 function currentTitan(el) {
-  return el.realm && el.creature.base_id === titanId && el.realm === realmName;
+  return el.realm && el.creature.base_id === getTitanId() && el.realm === getRealmName();
 }
 
 export default function processTitans(r) {

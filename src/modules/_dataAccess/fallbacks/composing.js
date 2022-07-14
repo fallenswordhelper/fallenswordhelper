@@ -1,19 +1,19 @@
-import createDocument from '../../system/createDocument';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getTextTrim from '../../common/getTextTrim';
-import indexAjaxData from '../../ajax/indexAjaxData';
+import regExpGroups from '../../common/regExpGroups';
+import { etaRe } from '../../support/constants';
 
 function formatTime(e) {
-  const thisTime = e.match(/ETA: (\d+)h (\d+)m (\d+)s/);
+  const { h, m, s } = regExpGroups(etaRe, e);
   return {
-    time_remaining: Number(thisTime[1]) * 60 * 60
-    + Number(thisTime[2]) * 60
-    + Number(thisTime[3]),
+    time_remaining: Number(h) * 60 * 60
+    + Number(m) * 60
+    + Number(s),
   };
 }
 
-function parseReport(html) {
-  const doc = createDocument(html);
+function parseReport(doc) {
   const slots = getArrayByClassName('composing-potion', doc);
   if (slots.length === 0) { return { s: false }; }
   const maxPotions = slots.length;
@@ -25,6 +25,6 @@ function parseReport(html) {
 }
 
 // Incomplete
-export default function composing() {
-  return indexAjaxData({ cmd: 'composing' }).then(parseReport);
+export default async function composing() {
+  return parseReport(await indexAjaxDoc({ cmd: 'composing' }));
 }

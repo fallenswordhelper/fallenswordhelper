@@ -1,5 +1,5 @@
-import allthen from '../../common/allthen';
 import indexAjaxJson from '../../ajax/indexAjaxJson';
+import allthen from '../../common/allthen';
 
 function tempinvTake(invId) {
   return indexAjaxJson({

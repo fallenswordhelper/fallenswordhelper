@@ -1,14 +1,15 @@
 import getElementById from './getElementById';
 import getText from './getText';
+import regExpFirstCapture from './regExpFirstCapture';
 
-let thePlayerId;
+let thePlayerId = null;
 
 export default function playerId() {
   const holdtext = getElementById('holdtext');
   if (holdtext && !thePlayerId) {
-    const matches = getText(holdtext).match(/fallensword.com\/\?ref=(\d+)/);
+    const matches = regExpFirstCapture(/fallensword.com\/\?ref=(?<id>\d+)/, getText(holdtext));
     if (matches) {
-      thePlayerId = Number(matches[1]);
+      thePlayerId = Number(matches);
     }
   }
   return thePlayerId;

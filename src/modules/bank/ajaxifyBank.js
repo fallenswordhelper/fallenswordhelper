@@ -1,8 +1,8 @@
-import createDocument from '../system/createDocument';
 import indexAjaxData from '../ajax/indexAjaxData';
 import jQueryPresent from '../common/jQueryPresent';
 import partial from '../common/partial';
 import { defTable, guildSubcmdUrl } from '../support/constants';
+import createDocument from '../system/createDocument';
 
 const statbarGold = '#pH #statbar-gold';
 const statbarGoldTooltip = '#pH #statbar-gold-tooltip-general dd';

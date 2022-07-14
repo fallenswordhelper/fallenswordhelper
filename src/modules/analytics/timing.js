@@ -1,5 +1,5 @@
-import getValue from '../system/getValue';
 import { log } from '../support/debug';
+import getValue from '../system/getValue';
 import noGa from './noGa';
 
 const times = {};

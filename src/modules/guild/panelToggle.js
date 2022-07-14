@@ -1,12 +1,12 @@
 import createSpan from '../common/cElement/createSpan';
-import getValue from '../system/getValue';
 import hideElement from '../common/hideElement';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import onclick from '../common/onclick';
-import setInnerHtml from '../dom/setInnerHtml';
 import toggleVisibilty from '../common/toggleVisibilty';
 import trim from '../common/trim';
+import setInnerHtml from '../dom/setInnerHtml';
+import getValue from '../system/getValue';
 
 function makeButton(linkto) {
   return createSpan({

@@ -3,9 +3,9 @@ import getPlayerId from '../common/getPlayerId';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import onclick from '../common/onclick';
 import openQuickBuffById from '../common/openQuickBuffById';
-import { pCC } from '../support/layout';
-import { playerIdUrl } from '../support/constants';
 import querySelectorAll from '../common/querySelectorAll';
+import { playerIdUrl } from '../support/constants';
+import { getPcc } from '../support/layout';
 
 function insertBuffLink(el) {
   insertHtmlBeforeEnd(el.parentNode, ' <span class="smallLink">[b]</span>');
@@ -19,5 +19,5 @@ function openQuickBuff(evt) {
 export default function buffLinks() {
   const members = querySelectorAll(`#pCC a[href^="${playerIdUrl}"]`);
   batch([3, members, 0, insertBuffLink]);
-  onclick(pCC, openQuickBuff);
+  onclick(getPcc(), openQuickBuff);
 }

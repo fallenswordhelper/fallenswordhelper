@@ -1,19 +1,20 @@
 import './guildReport.css';
-import { cdn } from '../../../system/system';
+import equipItem from '../../../ajax/equipItem';
+import { queueRecallItem } from '../../../ajaxQueue/queue';
+import sendEvent from '../../../analytics/sendEvent';
 import classHandler from '../../../common/classHandler';
 import classPair from '../../../common/classPair';
 import closestTr from '../../../common/closestTr';
-import equipItem from '../../../ajax/equipItem';
 import getElementsByTagName from '../../../common/getElementsByTagName';
-import itemId from './itemId';
 import onclick from '../../../common/onclick';
-import { pCC } from '../../../support/layout';
 import partial from '../../../common/partial';
-import { playerIDRE } from '../../../support/constants';
 import playerId from '../../../common/playerId';
-import { queueRecallItem } from '../../../ajaxQueue/queue';
-import sendEvent from '../../../analytics/sendEvent';
+import regExpFirstCapture from '../../../common/regExpFirstCapture';
 import setInnerHtml from '../../../dom/setInnerHtml';
+import { playerIDRE } from '../../../support/constants';
+import { getPcc } from '../../../support/layout';
+import { cdn } from '../../../system/system';
+import itemId from './itemId';
 
 const spinner = '<span class="guildReportSpinner" '
   + `style="background-image: url('${cdn}ui/misc/spinner.gif');"></span>`;
@@ -31,10 +32,6 @@ function replyTo(target) {
   window.openQuickMsgDialog(target.getAttribute('target_player'));
 }
 
-function targetPlayerId(href) {
-  return href.match(playerIDRE)[1];
-}
-
 function recallResult(action, theTd, data) {
   if (data.r === 1) { return; }
   if (action === 'recall') {
@@ -45,7 +42,7 @@ function recallResult(action, theTd, data) {
 }
 
 function doRecall(theTd, href, mode, action) {
-  queueRecallItem(itemId(href), targetPlayerId(href), mode, action)
+  queueRecallItem(itemId(href), regExpFirstCapture(playerIDRE, href), mode, action)
     .then(partial(recallResult, action, theTd));
 }
 
@@ -65,7 +62,7 @@ function doFastGs(theTd, href) {
 
 function doFastWear(theTd, href) {
   sendEvent('GuildReport', 'Fast Wear');
-  if (Number(targetPlayerId(href)) === playerId()) {
+  if (Number(regExpFirstCapture(playerIDRE, href)) === playerId()) {
     equipItem(itemId(href)).then(partial(wornItem, theTd));
   } else {
     doRecall(theTd, href, 0, 'wear');
@@ -104,5 +101,5 @@ const classEvts = [
 ];
 
 export default function eventHandlers() {
-  onclick(getElementsByTagName('table', pCC)[1], classHandler(classEvts));
+  onclick(getElementsByTagName('table', getPcc())[1], classHandler(classEvts));
 }

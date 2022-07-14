@@ -1,12 +1,12 @@
-import chunk from '../../../common/chunk';
 import daTagItems from '../../../_dataAccess/daTagItems';
 import dynamicAlert from '../../../alert/dynamicAlert';
+import sendEvent from '../../../analytics/sendEvent';
+import chunk from '../../../common/chunk';
 import on from '../../../common/on';
 import partial from '../../../common/partial';
 import querySelector from '../../../common/querySelector';
 import querySelectorArray from '../../../common/querySelectorArray';
 import removeRow from '../../../profile/dropitems/removeRow';
-import sendEvent from '../../../analytics/sendEvent';
 
 const getCheckedItems = () => querySelectorArray('[name="tagIndex[]"]:checked');
 const actionType = () => querySelector('[name="subcmd2"]').value;

@@ -1,15 +1,15 @@
 import './oneByOne.css';
-import closestTr from '../common/closestTr';
+import daSendItems from '../_dataAccess/daSendItems';
+import dynamicAlert from '../alert/dynamicAlert';
+import sendEvent from '../analytics/sendEvent';
 import createButton from '../common/cElement/createButton';
 import createDiv from '../common/cElement/createDiv';
 import createSpan from '../common/cElement/createSpan';
-import daSendItems from '../_dataAccess/daSendItems';
-import dynamicAlert from '../alert/dynamicAlert';
+import closestTr from '../common/closestTr';
 import insertElementAfter from '../common/insertElementAfter';
 import onclick from '../common/onclick';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
-import sendEvent from '../analytics/sendEvent';
 
 const findItem = (s) => closestTr(s).previousElementSibling.children[0].children[0].children[0];
 const removeItem = (s) => findItem(s).remove();
@@ -53,7 +53,7 @@ const getItems = (user) => checkedItems().map((el) => [el, user, [el.value]]);
 const syncSend = (items) => items.reduce(sendThem, Promise.resolve({ s: 1 }));
 
 async function doSend(e, items) {
-  sendEvent('trade', 'oneByOne');
+  sendEvent('Trade', 'oneByOne');
   const spinner = createSpan({
     className: 'fshSpinner fshRelative',
     style: { marginLeft: '40px' },

@@ -1,12 +1,12 @@
+import jQueryNotPresent from '../../common/jQueryNotPresent';
+import partial from '../../common/partial';
+import getValue from '../../system/getValue';
 import addAttackLink from './addAttackLink';
 import addIgnoreLinks from './addIgnoreLinks';
 import addPvPSummary from './addPvPSummary';
 import changeLabels from './changeLabels';
 import colorPlayers from './colorPlayers';
 import getLastTable from './getLastTable';
-import getValue from '../../system/getValue';
-import jQueryNotPresent from '../../common/jQueryNotPresent';
-import partial from '../../common/partial';
 import processLadder from './processLadder';
 
 const conditionalArray = [

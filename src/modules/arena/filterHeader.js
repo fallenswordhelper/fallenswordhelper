@@ -1,7 +1,7 @@
-import { arenaFilter } from './assets';
 import defaults from '../support/dataObj.json';
+import { arenaFilter } from './assets';
 import {
-  changeLvls, hideMoves, opts, resetLvls,
+  changeLvls, getOpts, hideMoves, resetLvls,
 } from './setOpts';
 
 function makeTheRow() {
@@ -13,29 +13,24 @@ function makeTheRow() {
 
 function hideMovesCheckbox(aTable) { // jQuery
   const fshHideMoves = $('#fshHideMoves', aTable);
-  if (opts && 'hideMoves' in opts) {
-    fshHideMoves.prop('checked', opts.hideMoves);
-    $('.moveMax').toggle(!opts.hideMoves);
+  if (getOpts()?.hideMoves != null) { // skipcq: JS-0050
+    fshHideMoves.prop('checked', getOpts().hideMoves);
+    $('.moveMax').toggle(!getOpts().hideMoves);
   }
   fshHideMoves.on('click', hideMoves);
 }
 
-function minLvlValue(aTable) { // jQuery
-  const fshMinLvl = $('#fshMinLvl', aTable);
-  if (opts && 'minLvl' in opts) {
-    fshMinLvl.val(opts.minLvl);
-  } else {
-    fshMinLvl.val(defaults.arenaMinLvl);
-  }
+function genericUpdate(label, aTable, optProp, defProp) { // jQuery
+  const $thisControl = $(`#${label}`, aTable);
+  $thisControl.val(getOpts()?.[optProp] ?? defaults[defProp]);
 }
 
-function maxLvlValue(aTable) { // jQuery
-  const fshMaxLvl = $('#fshMaxLvl', aTable);
-  if (opts && 'maxLvl' in opts) {
-    fshMaxLvl.val(opts.maxLvl);
-  } else {
-    fshMaxLvl.val(defaults.arenaMaxLvl);
-  }
+function minLvlValue(aTable) {
+  genericUpdate('fshMinLvl', aTable, 'minLvl', 'arenaMinLvl');
+}
+
+function maxLvlValue(aTable) {
+  genericUpdate('fshMaxLvl', aTable, 'maxLvl', 'arenaMaxLvl');
 }
 
 function eventHandlers(aTable) {

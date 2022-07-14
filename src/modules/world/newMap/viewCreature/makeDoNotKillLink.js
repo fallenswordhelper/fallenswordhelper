@@ -1,18 +1,18 @@
-import afterUpdateActionList from '../doNotKill/afterUpdateActionList';
-import calf from '../../../support/calf';
 import createButton from '../../../common/cElement/createButton';
 import createDiv from '../../../common/cElement/createDiv';
 import getElementsByClassName from '../../../common/getElementsByClassName';
 import insertElement from '../../../common/insertElement';
-import isOnList from '../doNotKill/isOnList';
 import onclick from '../../../common/onclick';
-import setText from '../../../dom/setText';
-import setValue from '../../../system/setValue';
 import trim from '../../../common/trim';
+import setText from '../../../dom/setText';
+import calf from '../../../support/calf';
+import setValue from '../../../system/setValue';
+import afterUpdateActionList from '../doNotKill/afterUpdateActionList';
+import isOnList from '../doNotKill/isOnList';
 
-let creatureBody;
-let dnkName;
-let doNotKillBtn;
+let creatureBody = 0;
+let dnkName = 0;
+let doNotKillBtn = 0;
 
 function getCreatureBody(dialogViewCreature) {
   if (!creatureBody) {

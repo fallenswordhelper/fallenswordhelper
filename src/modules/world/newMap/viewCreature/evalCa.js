@@ -4,13 +4,19 @@ function caIsRunning(combat) {
     && combat.numberOfHitsRequired === 1;
 }
 
+const lowest = (bns, amt, val) => Math.max(Math.ceil((bns - amt + 1) / val / 0.0025), 0);
+
 function calcLowest(combat) {
-  combat.lowestCALevelToStillHit = Math.max(Math.ceil((
-    combat.counterAttackBonusAttack - combat.hitByHowMuch + 1)
-    / combat.player.attackValue / 0.0025), 0);
-  combat.lowestCALevelToStillKill = Math.max(Math.ceil((
-    combat.counterAttackBonusDamage - combat.damageDone + 1)
-    / combat.player.damageValue / 0.0025), 0);
+  combat.lowestCALevelToStillHit = lowest(
+    combat.counterAttackBonusAttack,
+    combat.hitByHowMuch,
+    combat.player.attackValue,
+  );
+  combat.lowestCALevelToStillKill = lowest(
+    combat.counterAttackBonusDamage,
+    combat.damageDone,
+    combat.player.damageValue,
+  );
 }
 
 function stamAtLowestCa(combat) {
@@ -61,32 +67,19 @@ function needCa(combat) {
     || combat.numberOfHitsRequired !== 1;
 }
 
-function evalCaKill(combat) {
-  if (combat.lowestCALevelToStillHit > 175) {
+function fallsShort(combat, prop, type) {
+  if (combat[prop] > 203) {
     combat.extraNotes
-      += 'Even with CA175 you cannot hit this creature<br>';
-  } else if (combat.lowestCALevelToStillHit !== 0) {
-    combat.extraNotes += `You need a minimum of CA${
-      combat.lowestCALevelToStillHit
-    } to hit this creature<br>`;
-  }
-}
-
-function evalCaOneHit(combat) {
-  if (combat.lowestCALevelToStillKill > 175) {
-    combat.extraNotes
-      += 'Even with CA175 you cannot 1-hit kill this creature<br>';
-  } else if (combat.lowestCALevelToStillKill !== 0) {
-    combat.extraNotes += `You need a minimum of CA${
-      combat.lowestCALevelToStillKill
-    } to 1-hit kill this creature<br>`;
+      += `Even with CA203 you cannot ${type} this creature<br>`;
+  } else if (combat[prop] !== 0) {
+    combat.extraNotes += `You need a minimum of CA${combat[prop]} to ${type} this creature<br>`;
   }
 }
 
 function caResult(combat) {
   calcLowest(combat);
-  evalCaKill(combat);
-  evalCaOneHit(combat);
+  fallsShort(combat, 'lowestCALevelToStillHit', 'hit');
+  fallsShort(combat, 'lowestCALevelToStillKill', '1-hit kill');
 }
 
 export default function evalCA(combat) {

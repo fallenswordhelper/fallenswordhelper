@@ -1,20 +1,20 @@
 import './bioWidgets.css';
-import bioEvtHdl from './bioEvtHdl';
-import calf from '../../support/calf';
 import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
 import getElementById from '../../common/getElementById';
-import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
-import render from './render';
 import setInnerHtml from '../../dom/setInnerHtml';
+import calf from '../../support/calf';
+import { getPcc } from '../../support/layout';
+import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
 import testQuant from '../../system/testQuant';
+import bioEvtHdl from './bioEvtHdl';
+import render from './render';
 
 let bioEditLines = 0;
 let textArea = 0;
@@ -71,7 +71,7 @@ function bioPreview() {
 function bioWords() {
   if (calf.cmd === 'profile') {
     // Add description text for the new tags
-    insertHtmlBeforeEnd(pCC, '<div>'
+    insertHtmlBeforeEnd(getPcc(), '<div>'
       + '`~This will allow FSH Script users to select buffs from your bio~`<br>'
       + 'You can use the [cmd] tag as well to determine where to put the "Ask '
       + 'For Buffs" button<br><br><blockquote><ul class="list">'
@@ -108,7 +108,7 @@ function bioHeight() {
   });
   onclick(saveLines, changeHeight);
   insertElement(bioEditLinesDiv, saveLines);
-  insertElement(pCC, bioEditLinesDiv);
+  insertElement(getPcc(), bioEditLinesDiv);
 }
 
 function updateBioCharacters() {

@@ -1,11 +1,11 @@
-import { fshBuffLog } from '../../support/constants';
 import getElementById from '../../common/getElementById';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
-import makePageTemplate from '../lists/makePageTemplate';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { fshBuffLog } from '../../support/constants';
+import { getPcc } from '../../support/layout';
 import { get, set } from '../../system/idb';
+import makePageTemplate from '../lists/makePageTemplate';
 
 function displayBuffLog(buffLog) {
   setInnerHtml(buffLog, getElementById('bufflog'));
@@ -17,7 +17,7 @@ function clearBuffLog() {
 
 export default function injectBuffLog(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
-  const content = injector || pCC;
+  const content = injector || getPcc();
   setInnerHtml(makePageTemplate({
     title: 'Buff Log',
     comment: '',

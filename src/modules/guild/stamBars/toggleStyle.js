@@ -1,15 +1,16 @@
 import createStyle from '../../common/cElement/createStyle';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import insertElement from '../../common/insertElement';
-import { pCC } from '../../support/layout';
 import querySelectorArray from '../../common/querySelectorArray';
-import { defTable, playerLinkSelector } from '../../support/constants';
+import regExpGroups from '../../common/regExpGroups';
+import { defTable, playerLinkSelector, stamRe } from '../../support/constants';
+import { getPcc } from '../../support/layout';
 
 let thisStyle = 0;
 
 function getStamPerc(a) {
-  const mo = a.dataset.tipped.match(/Stamina:<\/td><td>(?<stam>\d{1,12}) \/ (?<max>\d{1,12})<\/td>/);
-  return Math.min(Math.round((Number(mo[1]) / Number(mo[2])) * 100), 100);
+  const { stam, max } = regExpGroups(stamRe, a.dataset.tipped);
+  return Math.min(Math.round((Number(stam) / Number(max)) * 100), 100);
 }
 
 function stamBarStyle(a) {
@@ -21,7 +22,7 @@ function stamBarStyle(a) {
 }
 
 function injectStyle() {
-  const tables = getElementsByTagName(defTable, pCC);
+  const tables = getElementsByTagName(defTable, getPcc());
   const memberList = tables[tables.length - 1];
   memberList.classList.add('fshProgressBar');
   const memberLinks = querySelectorArray(playerLinkSelector, memberList);

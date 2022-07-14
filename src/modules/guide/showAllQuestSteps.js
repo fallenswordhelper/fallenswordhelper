@@ -1,6 +1,6 @@
 import getElementById from '../common/getElementById';
-import getValue from '../system/getValue';
 import querySelectorArray from '../common/querySelectorArray';
+import getValue from '../system/getValue';
 
 function showStep(e) { e.style.display = 'block'; }
 

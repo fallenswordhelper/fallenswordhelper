@@ -1,9 +1,9 @@
 import asyncPThree from '../../common/asyncPThree';
-import getCheckboxes from '../../guild/inventory/storeitems/getCheckboxes';
-import injectMoveItems from './injectMoveItems';
-import injectStoreItems from '../../guild/inventory/storeitems/injectStoreItems';
-import interceptDestroy from './interceptDestroy';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
+import getCheckboxes from '../../guild/inventory/storeitems/getCheckboxes';
+import injectStoreItems from '../../guild/inventory/storeitems/injectStoreItems';
+import injectMoveItems from './injectMoveItems';
+import interceptDestroy from './interceptDestroy';
 
 const p3Functions = [
   injectMoveItems,

@@ -1,12 +1,12 @@
 import getArrayByTagName from '../common/getArrayByTagName';
-import getValue from '../system/getValue';
 import includes from '../common/includes';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
-import { pCL } from '../support/layout';
+import { getPcl } from '../support/layout';
 import task from '../support/task';
+import getValue from '../system/getValue';
 
 function doMsgSound() {
-  const msg = getArrayByTagName('a', pCL).filter(includes('message'));
+  const msg = getArrayByTagName('a', getPcl()).filter(includes('message'));
   if (msg.length) {
     insertHtmlBeforeEnd(
       document.body,

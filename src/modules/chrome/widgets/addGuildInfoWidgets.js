@@ -1,12 +1,12 @@
-import colouring from './colouring';
-import contactColour from './contactColour';
 import contains from '../../common/contains';
-import doHideBtn from './doHideBtn';
-import doHideBuffSelected from './doHideBuffSelected';
 import getElementById from '../../common/getElementById';
-import { guildSubcmdUrl } from '../../support/constants';
 import querySelectorArray from '../../common/querySelectorArray';
 import setInnerHtml from '../../dom/setInnerHtml';
+import { guildSubcmdUrl } from '../../support/constants';
+import colouring from './colouring';
+import contactColour from './contactColour';
+import doHideBtn from './doHideBtn';
+import doHideBuffSelected from './doHideBuffSelected';
 
 function guildColour(el) {
   contactColour(el, {

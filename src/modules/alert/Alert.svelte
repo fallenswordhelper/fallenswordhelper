@@ -1,7 +1,7 @@
 <script>
-  import alert from './alert';
-  import { fly } from 'svelte/transition';
   import { onDestroy } from 'svelte';
+  import { fly } from 'svelte/transition';
+  import alert from './alert';
 
   export let ms = 3000;
   let visible = false;

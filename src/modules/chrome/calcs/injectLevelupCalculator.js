@@ -1,10 +1,10 @@
-import asInt from './asInt';
-import { defStatbarLevel } from '../../support/constants';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import timeBox from './timeBox';
 import valueText from '../../common/valueText';
+import { defStatbarLevel } from '../../support/constants';
+import asInt from './asInt';
+import timeBox from './timeBox';
 
 export default function injectLevelupCalculator() {
   const nextGain = getElementsByClassName('stat-xp-nextGain');

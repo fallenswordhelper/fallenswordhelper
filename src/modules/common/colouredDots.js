@@ -1,17 +1,13 @@
+import setInnerHtml from '../dom/setInnerHtml';
+import getValue from '../system/getValue';
 import batch from './batch';
 import getPlayers from './getPlayers';
-import getValue from '../system/getValue';
-import { lastActivityRE } from '../support/constants';
+import lastActivity from './lastActivity';
 import onlineDot from './onlineDot';
-import setInnerHtml from '../dom/setInnerHtml';
 
 function changeOnlineDot(contactLink) {
-  const lastActivity = lastActivityRE.exec(contactLink.dataset.tipped);
-  setInnerHtml(onlineDot({
-    min: lastActivity[3],
-    hour: lastActivity[2],
-    day: lastActivity[1],
-  }), contactLink.parentNode.previousElementSibling);
+  const { day, hour, min } = lastActivity(contactLink.dataset.tipped);
+  setInnerHtml(onlineDot({ min, hour, day }), contactLink.parentNode.previousElementSibling);
 }
 
 export default function colouredDots() {

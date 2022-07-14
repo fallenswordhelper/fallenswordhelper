@@ -1,6 +1,6 @@
-import { cdn } from '../../../system/system';
 import hideQTip from '../../../common/hideQTip';
 import partial from '../../../common/partial';
+import { cdn } from '../../../system/system';
 
 function removeClass(target) {
   target.closest('tr')

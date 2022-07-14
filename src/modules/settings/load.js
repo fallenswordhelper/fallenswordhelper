@@ -1,15 +1,15 @@
 import dialogMsg from '../common/dialogMsg';
 import getElementById from '../common/getElementById';
-import getValue from '../system/getValue';
 import isObject from '../common/isObject';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import jsonParse from '../common/jsonParse';
 import jsonStringify from '../common/jsonStringify';
 import keys from '../common/keys';
-import listValues from '../system/listValues';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
+import { getPcc } from '../support/layout';
+import getValue from '../system/getValue';
+import listKeys from '../system/listKeys';
 import setValue from '../system/setValue';
 
 function drawBox(content, fshSettings) {
@@ -46,7 +46,7 @@ function buildSettingsObj(acc, curr) {
 
 export default function load() { // Hybrid
   if (jQueryNotPresent()) { return; }
-  const fshSettings = listValues().reduce(buildSettingsObj, {});
-  drawBox(pCC, fshSettings);
+  const fshSettings = listKeys().reduce(buildSettingsObj, {});
+  drawBox(getPcc(), fshSettings);
   $('#HelperLoadSettings').on('click', clickHandler);
 }

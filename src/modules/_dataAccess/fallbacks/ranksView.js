@@ -1,28 +1,25 @@
+import guildManage from '../../ajax/guildManage';
 import closestTr from '../../common/closestTr';
-import createDocument from '../../system/createDocument';
 import currentGuildId from '../../common/currentGuildId';
 import getTextTrim from '../../common/getTextTrim';
-import guildManage from '../../ajax/guildManage';
-import { nowSecs } from '../../support/now';
+import lastActivity from '../../common/lastActivity';
 import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
+import regExpGroups from '../../common/regExpGroups';
 import uniq from '../../common/uniq';
-import { lastActivityRE, playerIDRE, playerLinkSelector } from '../../support/constants';
+import {
+  playerIDRE,
+  playerLinkSelector,
+  stamRe,
+  vlRe,
+} from '../../support/constants';
+import createDocument from '../../system/createDocument';
 
 const guildXp = (el) => Number(getTextTrim(closestTr(el).cells[4]).replaceAll(',', ''));
-const playerId = (el) => Number(playerIDRE.exec(el.href)[1]);
-const level = (tipped) => Number(/Level:.+?(\d+)/.exec(tipped)[1]);
+const playerId = (el) => Number(regExpFirstCapture(playerIDRE, el.href));
 const rank = (el) => getTextTrim(closestTr(el).cells[3]);
-const vl = (tipped) => Number(/VL:.+?(\d+)/.exec(tipped)[1]);
-
-function lastActivityTimestamp(tipped) {
-  const lastActivity = lastActivityRE.exec(tipped);
-  const days = Number(lastActivity[1]);
-  const hours = Number(lastActivity[2]) + days * 24;
-  const mins = Number(lastActivity[3]) + hours * 60;
-  const secs = Number(lastActivity[4]) + mins * 60;
-  return nowSecs - secs;
-}
+const vl = (tipped) => Number(regExpFirstCapture(vlRe, tipped));
 
 function fromElement(el) {
   return {
@@ -34,12 +31,12 @@ function fromElement(el) {
 }
 
 function fromTipped(tipped) {
-  const mo = tipped.match(/Stamina:<\/td><td>(\d{1,12}) \/ (\d{1,12})<\/td>/);
+  const { stam, max } = regExpGroups(stamRe, tipped);
   return {
-    current_stamina: Number(mo[1]),
-    last_activity: lastActivityTimestamp(tipped),
-    level: level(tipped),
-    max_stamina: Number(mo[2]),
+    current_stamina: Number(stam),
+    last_activity: lastActivity(tipped).timestamp,
+    level: Number(regExpFirstCapture(/Level:.+?(?<l>\d+)/, tipped)),
+    max_stamina: Number(max),
     vl: vl(tipped),
   };
 }

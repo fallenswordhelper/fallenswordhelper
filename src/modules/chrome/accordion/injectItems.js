@@ -1,9 +1,4 @@
-import actionButtons from './actionButtons';
-import adjustHeight from './adjustHeight';
-import characterButtons from './characterButtons';
 import currentGuildId from '../../common/currentGuildId';
-import getValue from '../../system/getValue';
-import insertAfterParent from './insertAfterParent';
 import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
 import insertHtmlBeforeBegin from '../../common/insertHtmlBeforeBegin';
 import {
@@ -12,6 +7,11 @@ import {
   newGuildLogUrl,
   notepadBlankUrl,
 } from '../../support/constants';
+import getValue from '../../system/getValue';
+import actionButtons from './actionButtons';
+import adjustHeight from './adjustHeight';
+import characterButtons from './characterButtons';
+import insertAfterParent from './insertAfterParent';
 
 function guildInventory(linkConfig) {
   if (linkConfig.guildInventoryLink && currentGuildId()) {

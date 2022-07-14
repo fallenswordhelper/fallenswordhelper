@@ -1,10 +1,9 @@
 import cmdExport from './cmdExport';
 
-const cache = {};
-
-export default function profile(username) {
-  if (!cache[username]) {
-    cache[username] = cmdExport({ player_username: username, subcmd: 'profile' });
-  }
-  return cache[username];
+export default function profile(username, force) {
+  return cmdExport({
+    subcmd: 'profile',
+    player_username: username,
+    ...(force && { _: Date.now() }),
+  });
 }

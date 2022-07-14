@@ -1,6 +1,6 @@
-import canRecall from './canRecall';
-import { theInv } from '../buildInv';
 import { ahSearchUrl, rarity } from '../../../support/constants';
+import { getTheInv } from '../buildInv';
+import canRecall from './canRecall';
 
 function getT(row) {
   if (row.player_id === -1) { return 4; }
@@ -19,8 +19,8 @@ function isPartOfSet(row) {
 }
 
 function nameRenderDisplay(data, row) {
-  const t = getT(row);
-  const p = player(theInv.player_id, row.player_id, theInv.guild_id);
+  const t = getT(row); // skipcq: JS-C1002
+  const p = player(getTheInv().player_id, row.player_id, getTheInv().guild_id); // skipcq: JS-C1002
 
   let bold = data;
   if (row.equipped) { bold = `<b>${data}</b>`; }

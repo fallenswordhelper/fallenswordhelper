@@ -8,34 +8,10 @@ function evalMiss(combat) {
   return ', survives a miss';
 }
 
-function canIHit(combat) {
-  return combat.numberOfHitsRequired === '-'
-    || combat.numberOfHitsRequired > combat.numberOfCreatureHitsTillDead;
-}
-
-function evalPlayerHits(combat) {
-  if (combat.numberOfCreatureHitsTillDead === '-') {
-    return combat.numberOfHitsRequired;
-  }
-  if (canIHit(combat)) {
-    return '-';
-  }
-  return combat.numberOfHitsRequired;
-}
-
-function canCreatureHit(combat) {
-  return combat.numberOfCreatureHitsTillDead === '-'
-    || combat.numberOfCreatureHitsTillDead > combat.numberOfHitsRequired;
-}
-
-function evalCreatureHits(combat) {
-  if (combat.numberOfHitsRequired === '-') {
-    return combat.numberOfCreatureHitsTillDead;
-  }
-  if (canCreatureHit(combat)) {
-    return '-';
-  }
-  return combat.numberOfCreatureHitsTillDead;
+function evalHits(hits, otherHits) {
+  if (otherHits === '-') return hits;
+  if (hits === '-' || hits > otherHits) return '-';
+  return hits;
 }
 
 const evalFightStatus = [
@@ -66,7 +42,7 @@ function getStatus(combat) {
 
 export default function evalAnalysis(combat) {
   // Analysis:
-  combat.playerHits = evalPlayerHits(combat);
-  combat.creatureHits = evalCreatureHits(combat);
+  combat.playerHits = evalHits(combat.numberOfHitsRequired, combat.numberOfCreatureHitsTillDead);
+  combat.creatureHits = evalHits(combat.numberOfCreatureHitsTillDead, combat.numberOfHitsRequired);
   combat.fightStatus = getStatus(combat);
 }

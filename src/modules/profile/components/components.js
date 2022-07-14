@@ -1,11 +1,11 @@
 import './components.css';
-import Components from './Components.svelte';
-import delType from './delType';
-import deleteAllVisible from './deleteAllVisible';
-import enableQuickDel from './enableQuickDel';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import partial from '../../common/partial';
+import Components from './Components.svelte';
+import deleteAllVisible from './deleteAllVisible';
+import delType from './delType';
+import enableQuickDel from './enableQuickDel';
 
 function getInvTable() {
   const prc = getElementById('profileRightColumn');

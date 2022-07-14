@@ -2,16 +2,16 @@ import collapse from '../common/collapse';
 import containsText from '../common/containsText';
 import getElementsByTagName from '../common/getElementsByTagName';
 import getText from '../common/getText';
-import getValue from '../system/getValue';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
-import { pCC } from '../support/layout';
-import parseDateAsTimestamp from '../system/parseDateAsTimestamp';
-import setValue from '../system/setValue';
 import { simpleCheckbox } from '../settings/simpleCheckbox';
 import { defLastLadderReset, defTable } from '../support/constants';
+import { getPcc } from '../support/layout';
+import getValue from '../system/getValue';
+import parseDateAsTimestamp from '../system/parseDateAsTimestamp';
+import setValue from '../system/setValue';
 
-let lastLadderReset;
-let trackLadderReset;
+let lastLadderReset = 0;
+let trackLadderReset = 0;
 
 function checkForPvPLadder(row) {
   if (trackLadderReset && containsText('PvP Ladder', row.children[1].children[0])) {
@@ -35,7 +35,7 @@ export default function viewArchive() {
   lastLadderReset = getValue(defLastLadderReset);
   trackLadderReset = getValue('trackLadderReset');
   const prefName = 'collapseNewsArchive';
-  const theTables = getElementsByTagName(defTable, pCC);
+  const theTables = getElementsByTagName(defTable, getPcc());
   if (theTables.length > 2) {
     setupPref(prefName, theTables[0].rows[2]);
     collapse({

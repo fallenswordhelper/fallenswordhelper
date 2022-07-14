@@ -1,21 +1,21 @@
-import { defLastLadderReset } from '../support/constants';
-import getValue from '../system/getValue';
-import { now } from '../support/now';
-import outputFormat from '../system/outputFormat';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
+import { defLastLadderReset } from '../support/constants';
+import { getNow } from '../support/now';
+import getValue from '../system/getValue';
+import outputFormat from '../system/outputFormat';
 
 function formatLastReset(lastLadderReset) {
-  let m = Math.floor((now - lastLadderReset) / 60000);
-  const h = Math.floor(m / 60);
-  m %= 60;
-  return `${outputFormat(h, ' hours, ') + m} mins`;
+  let min = Math.floor((getNow() - lastLadderReset) / 60000);
+  const hour = Math.floor(min / 60);
+  min %= 60;
+  return `${outputFormat(hour, ' hours, ') + min} mins`;
 }
 
 function formatTime() {
   const lastLadderReset = getValue(defLastLadderReset);
-  if (lastLadderReset < now - 48 * 60 * 60 * 1000) {
+  if (lastLadderReset < getNow() - 48 * 60 * 60 * 1000) {
     return '<span class="fshLink tip-static" data-tipped="FSH has not seen '
       + 'the last ladder reset.<br>You can find it in your log if you '
       + 'qualified<br>or Tavern Rumours.">???</span>';

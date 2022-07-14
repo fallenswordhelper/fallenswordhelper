@@ -1,13 +1,9 @@
-import getPlayerName from './getPlayerName';
 import playerName from '../common/playerName';
+import getPlayerName from './getPlayerName';
 
-let haveSelf;
-let isSelf;
+let isSelf = null;
 
 export default function getIsSelf() {
-  if (!haveSelf) {
-    isSelf = getPlayerName() === playerName();
-    haveSelf = true;
-  }
+  if (isSelf === null) isSelf = getPlayerName() === playerName();
   return isSelf;
 }

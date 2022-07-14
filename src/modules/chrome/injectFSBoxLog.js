@@ -1,17 +1,17 @@
+import sendEvent from '../analytics/sendEvent';
 import createSpan from '../common/cElement/createSpan';
-import { doAddIgnore } from '../support/constants';
 import getElementById from '../common/getElementById';
 import getElementsByClassName from '../common/getElementsByClassName';
 import getElementsByTagName from '../common/getElementsByTagName';
 import getText from '../common/getText';
-import injectFsBoxContent from './pageSwitcher/loader/injectFsBoxContent';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
-import jQueryDialog from './jQueryDialog/jQueryDialog';
 import jQueryPresent from '../common/jQueryPresent';
 import onclick from '../common/onclick';
-import sendEvent from '../analytics/sendEvent';
+import { doAddIgnore } from '../support/constants';
 import { get, set } from '../system/idb';
+import jQueryDialog from './jQueryDialog/jQueryDialog';
+import injectFsBoxContent from './pageSwitcher/loader/injectFsBoxContent';
 
 function getBoxList(boxList) {
   if (boxList) { return boxList; }

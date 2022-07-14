@@ -1,10 +1,10 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+  import sendEvent from '../../analytics/sendEvent';
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import playerId from '../../common/playerId';
   import { cdn } from '../../system/system';
   import { compStore } from './componentsStore';
-  import { createEventDispatcher } from 'svelte';
-  import playerId from '../../common/playerId';
-  import sendEvent from '../../analytics/sendEvent';
 
   export let itemId;
 

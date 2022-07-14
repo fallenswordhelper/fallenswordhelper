@@ -1,11 +1,11 @@
-import OptIn from './OptIn.svelte';
 import daSettingsFlags from '../_dataAccess/daSettingsFlags';
 import daSettingsView from '../_dataAccess/daSettingsView';
-import getValue from '../system/getValue';
 import isArray from '../common/isArray';
 import querySelector from '../common/querySelector';
+import getValue from '../system/getValue';
+import OptIn from './OptIn.svelte';
 
-let myFlags;
+let myFlags = 0;
 
 async function isOnLadder() {
   const response = await daSettingsView();
@@ -13,7 +13,7 @@ async function isOnLadder() {
   return myFlags?.[0];
 }
 
-async function toggleLadder(o) {
+function toggleLadder(o) {
   if (isArray(myFlags)) {
     myFlags[0] = o;
     return daSettingsFlags(myFlags);

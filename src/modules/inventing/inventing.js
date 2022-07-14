@@ -1,23 +1,23 @@
 import './inventing.css';
-import arrayFromRadioNodeList from '../common/arrayFromRadioNodeList';
-import closestTr from '../common/closestTr';
-import createSpan from '../common/cElement/createSpan';
 import daRecipeMove from '../_dataAccess/daRecipeMove';
 import dynamicAlert from '../alert/dynamicAlert';
+import sendEvent from '../analytics/sendEvent';
+import arrayFromRadioNodeList from '../common/arrayFromRadioNodeList';
+import createSpan from '../common/cElement/createSpan';
+import closestTr from '../common/closestTr';
 import eventHandler5 from '../common/eventHandler5';
-import getCustomUrlParameter from '../system/getCustomUrlParameter';
-import getValue from '../system/getValue';
 import insertElementAfter from '../common/insertElementAfter';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import on from '../common/on';
 import querySelector from '../common/querySelector';
 import selfIdIs from '../common/selfIdIs';
-import sendEvent from '../analytics/sendEvent';
-import setValue from '../system/setValue';
 import { simpleCheckboxHtml } from '../settings/simpleCheckbox';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
+import getValue from '../system/getValue';
+import setValue from '../system/setValue';
 
 const prefAjaxifyMoveRecipe = 'ajaxifyMoveRecipe';
-let ajaxifyMove;
+let ajaxifyMove = 0;
 
 function handleAjaxifyPref() {
   ajaxifyMove = !ajaxifyMove;

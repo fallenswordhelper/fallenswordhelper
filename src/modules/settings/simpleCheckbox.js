@@ -1,7 +1,7 @@
 import fallback from '../system/fallback';
 import isValueChecked from './isValueChecked';
-import mySimpleCheckboxes from './simple.json';
 import networkIcon from './networkIcon';
+import mySimpleCheckboxes from './simple.json';
 
 export function helpLink(title, text) {
   return '&nbsp;[&nbsp;<span class="fshLink tip-static" data-tipped="'
@@ -9,26 +9,31 @@ export function helpLink(title, text) {
       text}">?</span>&nbsp;]`;
 }
 
-function hasNetwork(o) {
-  if (o.network) { return networkIcon; }
+function hasNetwork(network) {
+  if (network) { return networkIcon; }
   return '';
 }
 
-const stability = (o) => (
-  o.unstable
+const stability = (unstable) => (
+  unstable
     ? '<span class="unstable" data-tooltip="Warning: Causes page instability">&#128498;</span>'
     : ''
 );
 
 export function justLabel(name) {
-  const o = mySimpleCheckboxes[name];
-  return `${hasNetwork(o)}${stability(o)}<label class="fshNoWrap" for="${name}">${
-    fallback(o.title, o.helpTitle)}${helpLink(o.helpTitle, o.helpText)}:</label>`;
+  const {
+    helpText,
+    helpTitle,
+    network,
+    title,
+    unstable,
+  } = mySimpleCheckboxes[name];
+  return `${hasNetwork(network)}${stability(unstable)}<label class="fshNoWrap" for="${name}">${
+    fallback(title, helpTitle)}${helpLink(helpTitle, helpText)}:</label>`;
 }
 
 export function justCheckbox(name) {
-  return `<input id="${name}" name="${name
-  }" class="fshVMid" type="checkbox" value="on"${isValueChecked(name)}>`;
+  return `<input id="${name}" name="${name}" class="fshVTTop" type="checkbox"${isValueChecked(name)}>`;
 }
 
 export function simpleCheckboxHtml(name) {
@@ -36,6 +41,5 @@ export function simpleCheckboxHtml(name) {
 }
 
 export function simpleCheckbox(name) {
-  return `<tr><td align="right">${justLabel(name)
-  }</td><td>${justCheckbox(name)}</td></tr>`;
+  return `<tr><td class="fshRight">${justLabel(name)}</td><td>${justCheckbox(name)}</td></tr>`;
 }

@@ -1,12 +1,11 @@
+import on from '../../common/on';
+import getValue from '../../system/getValue';
 import getMsg from './getMsg';
 import getQuickMessageDialog from './getQuickMessageDialog';
-import getValue from '../../system/getValue';
-import isUndefined from '../../common/isUndefined';
-import on from '../../common/on';
 
-let enterForSendMessage;
-let handlerEnabled;
-let sendMessage;
+let enterForSendMessage = null;
+let handlerEnabled = 0;
+let sendMessage = 0;
 
 function getSendMessage() { // jQuery
   if (!sendMessage) {
@@ -17,7 +16,7 @@ function getSendMessage() { // jQuery
 }
 
 function getEnterForSendMessage() {
-  if (isUndefined(enterForSendMessage)) {
+  if (enterForSendMessage === null) {
     enterForSendMessage = getValue('enterForSendMessage');
   }
   return enterForSendMessage;

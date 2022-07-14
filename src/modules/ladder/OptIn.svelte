@@ -1,6 +1,6 @@
 <script>
-  import isBoolean from '../common/isBoolean';
   import sendEvent from '../analytics/sendEvent';
+  import isBoolean from '../common/isBoolean';
 
   export let isOnLadder;
   export let toggleLadder;

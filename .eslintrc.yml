@@ -11,6 +11,7 @@ overrides:
     rules:
       no-label-var: off
       import/first: off
+      import/no-mutable-exports: off
       import/prefer-default-export: off
   - files:
     - "scripts/*.js"
@@ -31,6 +32,7 @@ globals:
   EventTarget: readonly
   FormData: readonly
   getComputedStyle: readonly
+  HTMLInputElement: readonly
   HTMLTableElement: readonly
   Image: readonly
   localStorage: readonly
@@ -59,12 +61,15 @@ rules:
   import/no-extraneous-dependencies:
     - error
     - packageDir: './'
-  import/no-mutable-exports: off # 98
   import/no-unresolved:
     - error
     - ignore:
       - '_CALFJS'
-  import/order: off
+  import/order:
+    - error
+    - alphabetize:
+        order: asc
+        caseInsensitive: true
   no-plusplus:
     - error
     - allowForLoopAfterthoughts: true
@@ -78,10 +83,3 @@ rules:
       - _saveState
       - _showPage
       - _skills
-  sort-imports:
-    - error
-    - memberSyntaxSortOrder:
-      - none
-      - single
-      - multiple
-      - all

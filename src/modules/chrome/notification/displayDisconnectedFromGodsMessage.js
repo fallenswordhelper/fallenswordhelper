@@ -1,12 +1,12 @@
 import './displayDisconnectedFromGodsMessage.css';
-import { cmdUrl } from '../../support/constants';
+import indexAjaxData from '../../ajax/indexAjaxData';
+import sendEvent from '../../analytics/sendEvent';
 import getElementById from '../../common/getElementById';
 import hideQTip from '../../common/hideQTip';
-import indexAjaxData from '../../ajax/indexAjaxData';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import once from '../../common/once';
+import { cmdUrl } from '../../support/constants';
 import saveTempleSettings from './saveTempleSettings';
-import sendEvent from '../../analytics/sendEvent';
 
 let helperPrayToGods = 0;
 

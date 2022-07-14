@@ -1,20 +1,20 @@
 import './lists.css';
-import defaults from '../../support/dataObj.json';
 import eventHandler5 from '../../common/eventHandler5';
 import getElementById from '../../common/getElementById';
-import getValueJSON from '../../system/getValueJSON';
 import isArray from '../../common/isArray';
-import isChecked from '../../system/isChecked';
 import jsonParse from '../../common/jsonParse';
 import jsonStringify from '../../common/jsonStringify';
-import makePageHeader from './makePageHeader';
-import makePageTemplate from './makePageTemplate';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import selfIdIs from '../../common/selfIdIs';
 import setInnerHtml from '../../dom/setInnerHtml';
+import defaults from '../../support/dataObj.json';
+import { getPcc } from '../../support/layout';
+import getValueJSON from '../../system/getValueJSON';
+import isChecked from '../../system/isChecked';
 import setValueJSON from '../../system/setValueJSON';
 import { auctionSearchBlurb, auctionSearchParams } from './assets';
+import makePageHeader from './makePageHeader';
+import makePageTemplate from './makePageTemplate';
 
 let param = 0;
 
@@ -106,14 +106,12 @@ function deleteQuickItem(target) { // Legacy
   generateManageTable();
 }
 
+const thisItem = (i) => getElementById(`fshIn${param.fields[i]}`);
+
 function buildNewItem() { // Legacy
   const newItem = {};
   for (let i = 0; i < param.fields.length; i += 1) {
-    if (param.tags[i] === 'checkbox') {
-      newItem[param.fields[i]] = getElementById(`fshIn${param.fields[i]}`).checked;
-    } else {
-      newItem[param.fields[i]] = getElementById(`fshIn${param.fields[i]}`).value;
-    }
+    newItem[param.fields[i]] = param.tags[i] === 'checkbox' ? thisItem(i).checked : thisItem(i).value;
   }
   return newItem;
 }
@@ -154,7 +152,7 @@ function setupEventHandler(content) {
 }
 
 export function injectAuctionSearch(injector) { // Legacy
-  const content = injector || pCC;
+  const content = injector || getPcc();
   setInnerHtml(makePageHeader('Trade Hub Quick Search', '', '', '')
     + auctionSearchBlurb, content);
   // global parameters for the meta function generateManageTable
@@ -164,7 +162,7 @@ export function injectAuctionSearch(injector) { // Legacy
 }
 
 export function injectQuickLinkManager(injector) { // Legacy
-  const content = injector || pCC;
+  const content = injector || getPcc();
   setInnerHtml(makePageTemplate({
     title: 'Quick Links',
     comment: '',

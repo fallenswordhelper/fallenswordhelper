@@ -1,17 +1,19 @@
 import './configData.css';
-import bountyPrefs from './bountyPrefs';
-import calf from '../support/calf';
-import equipPrefs from './equipPrefs';
 import functionPasses from '../common/functionPasses';
+import playerLink from '../common/playerLink';
+import calf from '../support/calf';
+import { notepadBlankUrl } from '../support/constants';
+import bountyPrefs from './bountyPrefs';
+import equipPrefs from './equipPrefs';
 import generalPrefs from './generalPrefs';
 import guildPrefs from './guildPrefs';
 import leftHandLinks from './leftHandLinks';
 import logPrefs from './logPrefs';
+import makeHeaderRow from './makeHeaderRow';
 import otherPrefs from './otherPrefs';
 import profilePrefs from './profilePrefs';
 import questPrefs from './questPrefs';
 import worldPrefs from './worldPrefs';
-import { notepadBlankUrl, playerIdUrl } from '../support/constants';
 
 function storageDetails() {
   return '<tr><td align=center><input id="fshClearStorage" type="button" '
@@ -35,9 +37,8 @@ function linkToWebsite() {
     + 'for any suggestions, requests or bug reports</span></td></tr>';
 }
 
-function coderLink(acc, curr, ind, ary) {
-  let ret = `${acc}<a href="${playerIdUrl}${
-    curr[0]}">${curr[1]}</a>`;
+function coderLink(acc, [id, name], ind, ary) {
+  let ret = `${acc}${playerLink(id, name)}`;
   if (ind === ary.length - 2) {
     ret += ' and ';
   } else if (ind !== ary.length - 1) { ret += ', '; }
@@ -86,17 +87,21 @@ function corePrefs() {
 }
 
 export default function ConfigData() {
-  calf.configData = '<form><table class="fshSettingsTable">'
-    + '<thead><th colspan="2"><b>Fallen Sword Helper configuration '
-      + `Settings</b></th></thead>${
-        storageDetails()}${linkToWebsite()}${corePrefs()
+  calf.configData = '<form><table class="fshSettingsTable"><tbody>'
+    + `${makeHeaderRow('Fallen Sword Helper configuration Settings')}`
+      + `${
+        storageDetails()}${
+        linkToWebsite()}${
+        corePrefs()
         // save button
-      }<tr><td colspan="2" align=center><input type="button" class=`
-      + '"custombutton" value="Save" id="Helper:SaveOptions"></td></tr>'
+      }`
+      + '<tr><td colspan="2" align=center>'
+      + '<input type="button" class="custombutton" value="Save" id="Helper:SaveOptions">'
+      + '</td></tr>'
     // Export or Load Settings
     + '<tr><td colspan="2" align=center>'
       + `<a href="${notepadBlankUrl}savesettings">`
       + `Export or Load Settings!</a></td></tr>${
         codedBy()
-      }</table></form>`;
+      }</tbody></table></form>`;
 }

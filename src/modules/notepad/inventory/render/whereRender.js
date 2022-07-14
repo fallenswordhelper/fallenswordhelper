@@ -5,7 +5,7 @@ function whereRenderUserFolder(row) {
   return row.folder_id;
 }
 
-export default function whereRender(data, type, row) {
+export default function whereRender(_data, _type, row) {
   if (row.folder_id) {
     return whereRenderUserFolder(row);
   }

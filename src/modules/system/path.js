@@ -1,6 +1,6 @@
-import fallback from './fallback';
 import isObject from '../common/isObject';
 import isUndefined from '../common/isUndefined';
+import fallback from './fallback';
 
 function getPath(obj, aPath, def) {
   let resultantObj = obj;

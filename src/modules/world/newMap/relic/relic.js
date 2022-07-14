@@ -1,16 +1,15 @@
-import all from '../../../common/all';
-import allthen from '../../../common/allthen';
-import badData from '../badData';
-import createDocument from '../../../system/createDocument';
-import { defRelicView } from '../../../support/constants';
 import getGroupStats from '../../../ajax/getGroupStats';
 import getMercStats from '../../../ajax/getMercStats';
 import getProfile from '../../../ajax/getProfile';
 import indexAjaxData from '../../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../../ajax/indexAjaxDoc';
+import all from '../../../common/all';
+import allthen from '../../../common/allthen';
 import once from '../../../common/once';
-import { parseGuild } from './parseGuild';
 import querySelector from '../../../common/querySelector';
 import setText from '../../../dom/setText';
+import { defRelicView } from '../../../support/constants';
+import badData from '../badData';
 import {
   doCalculations,
   parseDefender,
@@ -19,20 +18,14 @@ import {
   storeLeadDefender,
   storeMercStats,
 } from './calcs';
-import {
-  fetchStatsBtn,
-  myDefenders,
-  primaryElementsSetup,
-} from './primaryElements';
-import {
-  prepareSecondaryDivs,
-  processingStatus,
-} from './secondaryElements';
+import { parseGuild } from './parseGuild';
+import { getFetchStatsBtn, getMyDefenders, primaryElementsSetup } from './primaryElements';
+import { getProcessingStatus, prepareSecondaryDivs } from './secondaryElements';
 
-let relicData;
+let relicData = 0;
 
 function ajaxFailure(err) {
-  setText(err.message, processingStatus);
+  setText(err.message, getProcessingStatus());
 }
 
 function hasMerc(disband) {
@@ -49,19 +42,15 @@ function buildGroupPrm(disband) {
   return prm;
 }
 
-function parseGroups(html) {
-  const doc = createDocument(html);
+function parseGroups(doc) {
   const disband = querySelector('#pCC a[href*="confirmDisband"]', doc);
   if (!disband) { return; }
   const prm = buildGroupPrm(disband);
   return all(prm);
 }
 
-function getGroups() {
-  return indexAjaxData({
-    cmd: 'guild',
-    subcmd: 'groups',
-  }).then(parseGroups);
+async function getGroups() {
+  parseGroups(await indexAjaxDoc({ cmd: 'guild', subcmd: 'groups' }));
 }
 
 function getGuild() {
@@ -78,7 +67,7 @@ function getDefenderProfile(el, i) {
 }
 
 function getDefenders() {
-  return myDefenders.map(getDefenderProfile);
+  return getMyDefenders().map(getDefenderProfile);
 }
 
 function buildStatPrm() {
@@ -97,12 +86,12 @@ export function getStats() {
   allthen(prm, doCalculations);
 }
 
-function viewRelic(e, data) {
+function viewRelic(_e, data) {
   if (badData(data)) { return; }
   relicData = data.response.data;
   if (relicData.defenders.length > 0) {
     primaryElementsSetup(relicData);
-    once(fetchStatsBtn, 'click', getStats);
+    once(getFetchStatsBtn(), 'click', getStats);
   }
 }
 

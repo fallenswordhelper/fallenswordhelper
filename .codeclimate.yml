@@ -2,10 +2,7 @@
 version: "2"
 plugins:
   csslint:
-    enabled: true
-    checks:
-      box-sizing:
-        enabled: false
+    enabled: false
   duplication:
     enabled: true
     config:
@@ -13,8 +10,5 @@ plugins:
       - javascript:
   eslint:
     enabled: false
-    channel: "eslint-7"
-    config:
-      config: .eslintrc.yml
   fixme:
     enabled: true

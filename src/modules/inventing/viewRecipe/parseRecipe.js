@@ -1,7 +1,7 @@
-import { cdn } from '../../system/system';
 import getText from '../../common/getText';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
+import { cdn } from '../../system/system';
 
 function parseIngredientTable(table) {
   const [have, need] = getText(querySelector('tr:nth-child(2) td', table)).split('/').map((v) => parseInt(v, 10));

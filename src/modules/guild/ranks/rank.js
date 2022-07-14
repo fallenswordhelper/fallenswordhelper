@@ -1,16 +1,16 @@
+import daRanksView from '../../_dataAccess/daRanksView';
 import arrayFrom from '../../common/arrayFrom';
 import batch from '../../common/batch';
-import daRanksView from '../../_dataAccess/daRanksView';
 import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
-import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
-import weightings from './weightings';
+import { getPcc } from '../../support/layout';
 import { doButtons, setCharacterRow } from './doButtons';
+import weightings from './weightings';
 
 function findTheRows() {
-  const theRows = pCC.lastElementChild.previousElementSibling.rows
+  const theRows = getPcc().lastElementChild.previousElementSibling.rows
     ?.[7]?.children[0]?.children[0]?.rows;
   if (theRows) {
     return arrayFrom(theRows);

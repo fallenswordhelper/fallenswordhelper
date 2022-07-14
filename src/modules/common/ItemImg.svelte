@@ -15,6 +15,9 @@
 <img alt="{item.n}" class:small class="tip-dynamic" data-tipped="{tipped(item)}" src="{src(item)}">
 
 <style>
+  img {
+    vertical-align: middle;
+  }
   .small {
     height: 30px;
     width: 30px;

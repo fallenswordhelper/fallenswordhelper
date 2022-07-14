@@ -1,7 +1,7 @@
 import getElementById from '../../../common/getElementById';
 import isFunction from '../../../common/isFunction';
-import isOnList from './isOnList';
 import isUndefined from '../../../common/isUndefined';
+import isOnList from './isOnList';
 
 function creatureOnList(creatureName, passback) {
   if (isOnList(creatureName)) {

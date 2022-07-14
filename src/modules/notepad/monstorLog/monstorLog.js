@@ -1,17 +1,17 @@
-import buildHtml from './buildHtml';
-import calf from '../../support/calf';
 import doSortParams from '../../common/doSortParams';
 import getElementById from '../../common/getElementById';
 import hasClass from '../../common/hasClass';
 import jQueryPresent from '../../common/jQueryPresent';
 import keys from '../../common/keys';
-import numberSort from '../../system/numberSort';
 import onclick from '../../common/onclick';
-import { pCC } from '../../support/layout';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
-import stringSort from '../../system/stringSort';
+import calf from '../../support/calf';
+import { getPcc } from '../../support/layout';
 import { get, set } from '../../system/idb';
+import numberSort from '../../system/numberSort';
+import stringSort from '../../system/stringSort';
+import buildHtml from './buildHtml';
 
 let content = 0;
 let monsterAry = 0;
@@ -121,7 +121,7 @@ function prepAry(data) {
 }
 
 function haveJquery(injector) { // jQuery.min
-  content = injector || pCC;
+  content = injector || getPcc();
   if (!content) { return; }
   get('fsh_monsterLog').then(prepAry);
 }

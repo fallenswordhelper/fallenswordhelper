@@ -1,12 +1,12 @@
+import myStats from '../ajax/myStats';
 import getArrayByTagName from '../common/getArrayByTagName';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
-import myStats from '../ajax/myStats';
-import { pCC } from '../support/layout';
 import partial from '../common/partial';
 import reduceBuffArray from '../common/reduceBuffArray';
+import { getPcc } from '../support/layout';
 
-const packRE = />([^>(]+) \(Level (\d{1,4})/g;
+const packRE = />(?<a>[^>(]+) \(Level (?<b>\d{1,4})/g;
 
 const makeSpan = (bf) => `<br><span class="fshRed fshNoWrap">${bf[1]} ${
   bf[2]} active</span>`;
@@ -21,7 +21,7 @@ function checkForBuffs(myBuffs, el) {
 }
 
 function postWarnings(myBuffs) {
-  const packsRow = pCC.children[0].rows[9];
+  const packsRow = getPcc().children[0].rows[9];
   if (!packsRow) { return; }
   getArrayByTagName('a', packsRow.cells[0].children[0])
     .forEach(partial(checkForBuffs, myBuffs));

@@ -1,8 +1,8 @@
+import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
+import querySelectorArray from '../../common/querySelectorArray';
 import { attackplayerUrl } from '../../support/constants';
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
-import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
 import isGuildMate from './isGuildMate';
-import querySelectorArray from '../../common/querySelectorArray';
 
 const getPlayer = (t) => [t, getCustomUrlParameter(t.href, 'target_username')];
 const guildTest = async ([t, name]) => [t, name, await isGuildMate(name)];

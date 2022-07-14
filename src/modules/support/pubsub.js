@@ -3,8 +3,8 @@ Based on
 https://github.com/addyosmani/pubsubz
 */
 
-import calf from './calf';
 import partial from '../common/partial';
+import calf from './calf';
 import task from './task';
 
 const topics = {};
@@ -15,7 +15,7 @@ function execute(args, el) { task(3, el.func, [args]); }
 export function publish(topic, args) {
   if (calf.userIsDev) { //  pubsubz publish
     // eslint-disable-next-line no-console
-    console.log('publish', topic);
+    console.log('publish', topic); // skipcq: JS-0002
   }
   if (!topics[topic]) { return; }
   topics[topic].forEach(partial(execute, args));

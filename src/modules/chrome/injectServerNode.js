@@ -1,12 +1,12 @@
-import contains from '../common/contains';
 import createDiv from '../common/cElement/createDiv';
+import contains from '../common/contains';
 import getElementById from '../common/getElementById';
 import getText from '../common/getText';
 import hasClass from '../common/hasClass';
 import insertElement from '../common/insertElement';
 import querySelectorArray from '../common/querySelectorArray';
-import setInnerHtml from '../dom/setInnerHtml';
 import toggleForce from '../common/toggleForce';
+import setInnerHtml from '../dom/setInnerHtml';
 
 function doServerNode(topbannerStats, miniboxList) {
   const nodeName = getText(miniboxList.children[7]);

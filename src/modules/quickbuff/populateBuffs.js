@@ -1,19 +1,19 @@
 import getElementById from '../common/getElementById';
-import outputFormat from '../system/outputFormat';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
+import outputFormat from '../system/outputFormat';
 
 function buffTimeLeft(secs) {
-  const m = Math.floor(secs / 60);
-  const s = secs % 60;
-  let buffTimeToExpire = outputFormat(m, 'm');
-  if (m > 0 && s > 0) { buffTimeToExpire += ' '; }
-  buffTimeToExpire += outputFormat(s, 's');
+  const min = Math.floor(secs / 60);
+  const sec = secs % 60;
+  let buffTimeToExpire = outputFormat(min, 'm');
+  if (min > 0 && sec > 0) { buffTimeToExpire += ' '; }
+  buffTimeToExpire += outputFormat(sec, 's');
   return buffTimeToExpire;
 }
 
-function timeToExpire(s) {
-  const buffTimeToExpire = buffTimeLeft(s);
+function timeToExpire(secs) {
+  const buffTimeToExpire = buffTimeLeft(secs);
   return `<span class="fshLime">On</span>&nbsp;<span class="fshBuffOn">(${
     buffTimeToExpire})</span>`;
 }
@@ -28,8 +28,8 @@ function isAvailable(buff) {
 }
 
 function buffRunning(dict, buff) {
-  const s = dict[buff] || 0;
-  if (s) { return timeToExpire(s); }
+  const secs = dict[buff] || 0;
+  if (secs) { return timeToExpire(secs); }
   return isAvailable(buff);
 }
 

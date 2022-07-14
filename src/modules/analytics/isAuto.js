@@ -1,9 +1,7 @@
+import regExpFirstCapture from '../common/regExpFirstCapture';
+
 const refAry = [
-  'keeprefreshing.com',
-  'lazywebtools.co.uk',
-  'pagereboot.com',
-  'refreshthing.com',
-  'refreshthis.com',
+  'www.keeprefreshing.com',
 ];
 
 let autoRefferer = false;
@@ -11,10 +9,7 @@ let haveRefferer = false;
 
 export default function isAuto() {
   if (!haveRefferer) {
-    const referrer = document.referrer
-      .match(/^https?:\/\/([^/?#]+)(?:[/?#]|$)/i);
-    let docRef;
-    if (referrer) { [, docRef] = referrer; }
+    const docRef = regExpFirstCapture(/^https?:\/\/(?<id>[^/?#]+)(?:[/?#]|$)/i, document.referrer);
     autoRefferer = refAry.includes(docRef);
     haveRefferer = true;
   }

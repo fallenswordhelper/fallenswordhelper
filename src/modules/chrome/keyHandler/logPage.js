@@ -1,7 +1,7 @@
+import navigateTo from '../../common/navigateTo';
+import { logUrl } from '../../support/constants';
 import expandMenu from './expandMenu';
 import keyHandlerEvent from './keyHandlerEvent';
-import { logUrl } from '../../support/constants';
-import navigateTo from '../../common/navigateTo';
 
 export default function logPage() {
   keyHandlerEvent('logPage');

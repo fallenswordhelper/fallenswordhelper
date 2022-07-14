@@ -1,22 +1,17 @@
-import buffReportParser from './buffReportParser';
 import formatLocalDateTime from '../../common/formatLocalDateTime';
-import { fshBuffLog } from '../../support/constants';
 import getStamAsString from '../../common/getStamAsString';
-import getValue from '../../system/getValue';
 import partial from '../../common/partial';
+import { fshBuffLog } from '../../support/constants';
+import getValue from '../../system/getValue';
 import { get, set } from '../../system/idb';
+import buffReportParser from './buffReportParser';
 
-const success = (e) => ` ${e[0]} (${getStamAsString(e[1])
-} stamina)<br>`;
+const success = (e) => ` ${e[0]} (${getStamAsString(e[1])} stamina)<br>`;
 const reject = (e) => ` <span class="fshRed">${e[0]}</span><br>`;
 
 function logFormat(timeStamp, el) {
-  let result;
-  if (el[1]) {
-    result = success(el);
-  } else {
-    result = reject(el);
-  }
+  let result = reject(el);
+  if (el[1]) result = success(el);
   return timeStamp + result;
 }
 

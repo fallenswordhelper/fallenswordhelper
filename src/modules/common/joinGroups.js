@@ -1,6 +1,6 @@
 import calf from '../support/calf';
-import navigateTo from './navigateTo';
 import { joinUnderUrl, joinallUrl } from '../support/constants';
+import navigateTo from './navigateTo';
 
 export default function joinGroups() {
   if (!calf.enableMaxGroupSizeToJoin) {

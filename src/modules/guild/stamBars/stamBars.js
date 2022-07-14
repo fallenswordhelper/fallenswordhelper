@@ -1,12 +1,12 @@
+import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
-import getValue from '../../system/getValue';
 import insertElement from '../../common/insertElement';
 import on from '../../common/on';
-import { pCC } from '../../support/layout';
 import querySelector from '../../common/querySelector';
-import sendEvent from '../../analytics/sendEvent';
-import setValue from '../../system/setValue';
 import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
+import { getPcc } from '../../support/layout';
+import getValue from '../../system/getValue';
+import setValue from '../../system/setValue';
 import toggleStyle from './toggleStyle';
 
 const prefEnableStamBars = 'enableStamBars';
@@ -23,7 +23,7 @@ function injectPref() {
   const gs = querySelector('#pCC img.guild_openGuildStore');
   if (!gs) { return; }
   const prefContainer = insertElement(
-    pCC,
+    getPcc(),
     createDiv({
       innerHTML: simpleCheckboxHtml(prefEnableStamBars),
       style: { marginLeft: '66%' },

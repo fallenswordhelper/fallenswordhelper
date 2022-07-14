@@ -3,13 +3,14 @@ import insertElement from '../../common/insertElement';
 import insertElementBefore from '../../common/insertElementBefore';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import xPath from '../../common/xPath';
 import { defSubcmd, guideUrl } from '../../support/constants';
 
 function getItemId(el) {
-  if (!el) { return; }
-  const match = el.src.match(/\/items\/(\d+)\.gif/);
-  if (match) { return match[1]; }
+  if (!el) return;
+  const match = regExpFirstCapture(/\/items\/(?<id>\d+)\.gif/, el.src);
+  if (match) return match;
 }
 
 function guideItemHref(itemId) {

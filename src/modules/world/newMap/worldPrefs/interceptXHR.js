@@ -1,9 +1,9 @@
 import bitwiseAnd from '../../../common/bitwiseAnd';
-import calf from '../../../support/calf';
-import { defFetchWorldRealmActions } from '../../../support/constants';
 import jsonParse from '../../../common/jsonParse';
 import jsonStringify from '../../../common/jsonStringify';
 import partial from '../../../common/partial';
+import calf from '../../../support/calf';
+import { defFetchWorldRealmActions } from '../../../support/constants';
 
 function noAction(myData) {
   return !myData || !myData.actions || myData.actions.length === 0;

@@ -1,25 +1,24 @@
 import './guildTracker.css';
-import calf from '../../support/calf';
+import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
 import createUl from '../../common/cElement/createUl';
 import draggable from '../../common/draggable';
-import { get } from '../../system/idb';
-import injectShowTracker from './injectShowTracker';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jsonStringify from '../../common/jsonStringify';
 import on from '../../common/on';
 import once from '../../common/once';
 import partial from '../../common/partial';
-import sendEvent from '../../analytics/sendEvent';
-import { initTable, makeTg } from './trackerTable';
+import calf from '../../support/calf';
+import { get } from '../../system/idb';
+import injectShowTracker from './injectShowTracker';
 import { makeInOut, queueRawData } from './rawData';
+import { initTable, makeTg } from './trackerTable';
 
-let trackerData;
-let tracker;
-let trDialog;
-let acttab2;
+let trackerData = 0;
+let tracker = 0;
+let trDialog = 0;
 
 function isClosed() {
   return !tracker.checked;
@@ -70,7 +69,7 @@ function makeInnerPopup() {
     innerHTML: '<input id="acttab1" class="fsh-tab-open" '
       + 'name="acttabs" checked type="radio">',
   });
-  acttab2 = createInput({
+  const acttab2 = createInput({
     className: 'fsh-tab-open',
     id: 'acttab2',
     name: 'acttabs',
