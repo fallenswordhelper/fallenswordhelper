@@ -196,8 +196,8 @@ function updateDefenderBuffedDefense(nmv, defWithConst) {
   const defBuffedDefense = defWithConst + nmv;
   [
     [defBuffedDefense, getDefenseBuffedElement],
-    [calcDcValue(225), getDc225Element],
-    [calcDcValue(175), getDc175Element],
+    [calcDcValue(defBuffedDefense, 225), getDc225Element],
+    [calcDcValue(defBuffedDefense, 175), getDc175Element],
   ].forEach(updateElements);
 }
 
