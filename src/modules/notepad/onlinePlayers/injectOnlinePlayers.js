@@ -1,4 +1,5 @@
 import onlinePlayersPage from '../../ajax/onlinePlayersPage';
+import idHandler from '../../common/idHandler';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
 import on from '../../common/on';
@@ -98,10 +99,10 @@ function refreshEvt() { // Bad jQuery
   updateStatus('Parsing online players...');
 }
 
-function clickHandler(e) {
-  if (e.target.id === 'fshRefresh') { refreshEvt(); }
-  if (e.target.id === 'fshReset') { resetEvt(context); }
-}
+const idHdl = [
+  ['fshRefresh', refreshEvt],
+  ['fshReset', () => resetEvt(context)],
+];
 
 function injectOnlinePlayersNew() { // jQuery
   context.html(
@@ -109,7 +110,7 @@ function injectOnlinePlayersNew() { // jQuery
     }<div id="fshOutput"></div>`,
   );
   get('fsh_onlinePlayers').then(gotOnlinePlayers);
-  onclick(context[0], clickHandler);
+  onclick(context[0], idHandler(idHdl));
   on(context[0], 'keyup', changeLvl);
 }
 

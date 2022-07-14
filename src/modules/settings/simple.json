@@ -105,7 +105,8 @@
   },
   "hideNonPlayerGuildLogMessages":{
     "helpTitle":"Cleanup Guild Log",
-    "helpText":"Any log messages not related to the current player will be dimmed (e.g. recall messages from guild store)"
+    "helpText":"Any log messages not related to the current player will be dimmed (e.g. recall messages from guild store)",
+    "unstable": true
   },
   "useNewGuildLog":{
     "helpTitle":"Use New Guild Log",

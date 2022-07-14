@@ -143,23 +143,23 @@ function addButtons() {
 }
 
 const changeHdl = [
-  [(target) => target === soundCheck, toggleSound],
-  [(target) => target === huntCheck, toggleHuntMode],
+  [() => soundCheck, toggleSound],
+  [() => huntCheck, toggleHuntMode],
 ];
 
 const clickHdl = [
-  [(target) => target === formGroup, doFormGroup],
-  [(target) => target === quickBuff, openQuickBuff],
-  [(target) => target === realmMap, openRealmMap],
-  [(target) => target === ufsgMap, openUfsgMap],
+  [() => formGroup, doFormGroup],
+  [() => quickBuff, openQuickBuff],
+  [() => realmMap, openRealmMap],
+  [() => ufsgMap, openUfsgMap],
 ];
 
 function handleEvent(evtAry, evt) {
   const { target } = evt;
-  const hdl = evtAry.find(([f]) => f(target));
-  if (hdl) {
+  const [, fn] = evtAry.find(([f]) => f() === target) ?? [];
+  if (fn) {
     target.blur();
-    hdl[1](target);
+    fn(target);
   }
 }
 
