@@ -22,6 +22,7 @@ overrides:
 extends:
   - 'airbnb-base'
 globals:
+  Audio: readonly
   Blob: readonly
   clearTimeout: readonly
   console: readonly
