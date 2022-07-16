@@ -50,7 +50,7 @@ function parseGroups(doc) {
 }
 
 async function getGroups() {
-  parseGroups(await indexAjaxDoc({ cmd: 'guild', subcmd: 'groups' }));
+  return parseGroups(await indexAjaxDoc({ cmd: 'guild', subcmd: 'groups' }));
 }
 
 function getGuild() {
