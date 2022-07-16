@@ -6,7 +6,7 @@ import indexAjaxDoc from './indexAjaxDoc';
 
 function addMercStat(mouseover, stat, i) {
   return stat
-    + Math.round(Number(regExpFirstCapture(mercRE[i], mouseover)) * defenderMultiplier);
+    + Math.ceil(Number(regExpFirstCapture(mercRE[i], mouseover)) * defenderMultiplier);
 }
 
 function addMercStats(acc, merc) {
@@ -28,7 +28,7 @@ function transform(mercTotal) {
 }
 
 function parseMercStats(doc) {
-  const mercElements = querySelectorArray('#pCC img[src*="/merc/"]', doc);
+  const mercElements = querySelectorArray('#pCC img[src*="/mercs/"]', doc);
   const mercTotal = addAllMercStats(mercElements);
   return transform(mercTotal);
 }
