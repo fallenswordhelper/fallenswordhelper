@@ -250,15 +250,15 @@
 /* Relic */
 
 #dialog-relic .fshRelicLeftDiv {
-  width: 100px;
+  width: 103px;
   margin-right: 10px;
 }
 #dialog-relic .fshRelicMidDiv {
-  width: 160px;
+  width: 166px;
   margin-right: 10px;
 }
 .fshRelicRightDiv {
-  width: 160px;
+  width: 166px;
 }
 #dialog-relic .fshRelicLowDiv {
   width: 455px;
@@ -271,8 +271,8 @@
 .relicT td {font-size: x-small;}
 .relicT td, .relicT th {text-align: right;}
 .relicS td:nth-child(1) {color: brown;}
-.relicS td:nth-child(1), .relicS th:nth-child(1) {width: 112px;}
-.relicS td:nth-child(2), .relicS th:nth-child(2) {width: 46px;}
+.relicS td:nth-child(1), .relicS th:nth-child(1) {width: 116px;}
+.relicS td:nth-child(2), .relicS th:nth-child(2) {width: 48px;}
 
 /* Online Players */
 .fshImgCntr {
