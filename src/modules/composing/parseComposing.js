@@ -7,14 +7,14 @@ import {
   defNeedToCompose,
   etaRe,
 } from '../support/constants';
-import { getNow } from '../support/now';
+import { now } from '../support/now';
 import setValue from '../system/setValue';
 
 function timeRemaining(el) {
   const timeGroup = regExpGroups(etaRe, getText(el));
   if (timeGroup) {
     const { h, m, s } = timeGroup;
-    return (h * 3600 + m * 60 + Number(s)) * 1000 + getNow();
+    return (h * 3600 + m * 60 + Number(s)) * 1000 + now();
   }
   return 0;
 }

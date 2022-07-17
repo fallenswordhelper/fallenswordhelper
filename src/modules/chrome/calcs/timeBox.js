@@ -1,5 +1,5 @@
 import { months } from '../../support/constants';
-import { getNow } from '../../support/now';
+import { now } from '../../support/now';
 import padZ from '../../system/padZ';
 
 function formatShortDate(aDate) {
@@ -15,7 +15,7 @@ export default function timeBox(nextGainTime, hrsToGo) {
   const nextGain = nextGainTime.split(' ').map((p) => p.slice(0, -1));
   if (!nextGain) { return; }
   return `<dd>${formatShortDate(new Date(
-    getNow() + ((hrsToGo * 60 + Number(nextGain[0])) * 60
+    now() + ((hrsToGo * 60 + Number(nextGain[0])) * 60
     + Number(nextGain[1])) * 1000,
   ))}</dd>`;
 }

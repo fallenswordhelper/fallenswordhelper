@@ -1,13 +1,13 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import calf from '../../support/calf';
-import { getNow } from '../../support/now';
+import { now } from '../../support/now';
 import getValue from '../../system/getValue';
 import displayDisconnectedFromGodsMessage from './displayDisconnectedFromGodsMessage';
 import parseTemplePage from './parseTemplePage';
 
 function checkLastUpdate(templeAlertLastUpdate) {
-  return !templeAlertLastUpdate || getNow() > templeAlertLastUpdate;
+  return !templeAlertLastUpdate || now() > templeAlertLastUpdate;
 }
 
 function doWeNeedToParse() {

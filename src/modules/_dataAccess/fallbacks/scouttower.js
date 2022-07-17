@@ -5,7 +5,7 @@ import dataRows from '../../common/dataRows';
 import getTextTrim from '../../common/getTextTrim';
 import querySelector from '../../common/querySelector';
 import { months } from '../../support/constants';
-import { getNow } from '../../support/now';
+import { now } from '../../support/now';
 
 function parseDateAsTimestamp(textDate) {
   const dateAry = textDate.split(/[: /[]/);
@@ -22,7 +22,7 @@ function calcCd(e) {
   const cdText = getTextTrim(e[1]);
   if (cdText === 'No active cooldown') { return 0; }
   return Math.ceil(
-    (parseDateAsTimestamp(cdText.slice(16)) - getNow()) / 1000,
+    (parseDateAsTimestamp(cdText.slice(16)) - now()) / 1000,
   );
 }
 

@@ -7,7 +7,7 @@ import insertHtmlBeforeEnd from '../../../common/insertHtmlBeforeEnd';
 import keys from '../../../common/keys';
 import partial from '../../../common/partial';
 import playerLink from '../../../common/playerLink';
-import { getNowSecs } from '../../../support/now';
+import { sevenDaysAgo, twoMinutesAgo } from '../../../support/now';
 import getValue from '../../../system/getValue';
 import { atkStats, defStats, proc } from './assets';
 import {
@@ -18,8 +18,6 @@ import {
 } from './primaryElements';
 
 let guildMemberList = 0;
-let twoMinutesAgo = 0;
-let sevenDaysAgo = 0;
 
 let relicCountElement = 0;
 let ldPercentageElement = 0;
@@ -83,8 +81,8 @@ const available = [
   (key) => key !== 'lastUpdate',
   (key) => !getMyDefenders().includes(key),
   (key) => guildMemberList[key].last_login,
-  (key) => Number(guildMemberList[key].last_login) < twoMinutesAgo,
-  (key) => Number(guildMemberList[key].last_login) > sevenDaysAgo,
+  (key) => Number(guildMemberList[key].last_login) < twoMinutesAgo(),
+  (key) => Number(guildMemberList[key].last_login) > sevenDaysAgo(),
   (key) => guildMemberList[key].level < 400 || guildMemberList[key].level > 421,
   (key) => guildMemberList[key].level < 441 || guildMemberList[key].level > 450,
 ];
@@ -99,8 +97,6 @@ const makeLinks = (key) => playerLink(guildMemberList[key].id, key);
 
 function missingMembers(membrList) {
   guildMemberList = membrList;
-  twoMinutesAgo = getNowSecs() - 120;
-  sevenDaysAgo = getNowSecs() - 604800;
   const filtered = keys(guildMemberList).filter(availableMembers).map(makeLinks);
   insertHtmlBeforeEnd(
     getContainerDiv(),

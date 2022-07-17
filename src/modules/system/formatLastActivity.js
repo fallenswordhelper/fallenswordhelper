@@ -1,9 +1,9 @@
 import splitTime from '../common/splitTime';
-import { getNowSecs } from '../support/now';
+import { nowSecs } from '../support/now';
 import outputFormat from './outputFormat';
 
 export default function formatLastActivity(lastLogin) {
-  const timeAry = splitTime(Math.abs(getNowSecs() - lastLogin));
+  const timeAry = splitTime(Math.abs(nowSecs() - lastLogin));
   return `${outputFormat(timeAry[0], ' days, ')
     + outputFormat(timeAry[1], ' hours, ')
     + outputFormat(timeAry[2], ' mins, ')

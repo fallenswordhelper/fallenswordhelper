@@ -6,7 +6,7 @@ import on from '../../common/on';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import regExpGroups from '../../common/regExpGroups';
-import { getNow } from '../../support/now';
+import { now } from '../../support/now';
 import createDocument from '../../system/createDocument';
 import { get, set } from '../../system/idb';
 import setValue from '../../system/setValue';
@@ -95,7 +95,7 @@ function refreshEvt() { // Bad jQuery
   onlinePages = 0;
   onlinePlayers = {};
   onlinePlayersPage(1).then(getOnlinePlayers);
-  setValue('lastOnlineCheck', getNow());
+  setValue('lastOnlineCheck', now());
   updateStatus('Parsing online players...');
 }
 

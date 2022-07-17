@@ -3,7 +3,7 @@ import ranksView from '../../../_dataAccess/fallbacks/ranksView';
 import fromEntries from '../../../common/fromEntries';
 import lastActivityToDays from '../../../common/lastActivityToDays';
 import partial from '../../../common/partial';
-import { getNowSecs } from '../../../support/now';
+import { nowSecs, oneYearAgo } from '../../../support/now';
 import fallback from '../../../system/fallback';
 import { get, set } from '../../../system/idb';
 import {
@@ -18,7 +18,7 @@ function pushNewRecord(member) {
     member.current_stamina,
     member.level,
     member.max_stamina,
-    getNowSecs(),
+    nowSecs(),
     member.vl,
     member.guild_xp,
   ]);
@@ -63,7 +63,7 @@ function upsert(archiveRecord, member) {
     // eslint-disable-next-line no-param-reassign
     archiveRecord[act] = lastActivityToDays(member.last_activity);
     // eslint-disable-next-line no-param-reassign
-    archiveRecord[utc] = getNowSecs();
+    archiveRecord[utc] = nowSecs();
   }
 }
 
@@ -71,7 +71,7 @@ function processMemberRecord(newArchive, member) {
   initMember(member);
   const archiveMember = oldArchive.members[member.name];
   const archiveRecord = archiveMember[archiveMember.length - 1];
-  const archiveAge = getNowSecs() - archiveRecord[utc];
+  const archiveAge = nowSecs() - archiveRecord[utc];
   if (archiveAge >= 86100) {
     upsert(archiveRecord, member);
   }
@@ -84,7 +84,7 @@ function processRank(newArchive, rank) {
 }
 
 function doMerge(guild) {
-  const newArchive = { lastUpdate: getNowSecs(), members: {} };
+  const newArchive = { lastUpdate: nowSecs(), members: {} };
   guild.r.forEach(partial(processRank, newArchive));
   set('fsh_guildActivity', newArchive);
 }
@@ -96,10 +96,9 @@ function gotGuild(data) {
 }
 
 function trimActivity(members) {
-  const aYearAgo = getNowSecs() - (365 * 24 * 60 * 60);
   return fromEntries(
     entries(members)
-      .map(([name, record]) => [name, record.filter((r) => r[utc] > aYearAgo)]),
+      .map(([name, record]) => [name, record.filter((r) => r[utc] > oneYearAgo())]),
   );
 }
 
@@ -114,7 +113,7 @@ function getOld(data) {
 async function gotActivity(data) {
   oldArchive = getOld(data);
   // 5 mins - probably want to increase
-  if (getNowSecs() > fallback(oldArchive.lastUpdate, 0) + 300) {
+  if (nowSecs() > fallback(oldArchive.lastUpdate, 0) + 300) {
     const json = await ranksView();
     gotGuild(json);
   }

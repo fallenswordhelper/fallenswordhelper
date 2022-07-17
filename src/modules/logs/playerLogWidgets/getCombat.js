@@ -3,7 +3,7 @@ import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
 import getTextTrim from '../../common/getTextTrim';
 import partial from '../../common/partial';
-import { getNowSecs } from '../../support/now';
+import { nowSecs, oneDayAgo, sevenDaysAgo } from '../../support/now';
 import { get, set } from '../../system/idb';
 import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 
@@ -17,19 +17,17 @@ function currentCombatRecord(sevenDays, [key, val]) {
 }
 
 function getRecent(internal) {
-  const sevenDays = getNowSecs() - 7 * 24 * 60 * 60;
   const pairs = entries(internal);
-  const filtered = pairs.filter(partial(currentCombatRecord, sevenDays));
-  const recent = { ...fromEntries(filtered), lastCheck: getNowSecs() };
+  const filtered = pairs.filter(partial(currentCombatRecord, sevenDaysAgo()));
+  const recent = { ...fromEntries(filtered), lastCheck: nowSecs() };
   set(storageKey, recent);
   return recent;
 }
 
 async function prepareCache() {
   const internal = await get(storageKey);
-  if (!internal) { return { lastCheck: getNowSecs() }; }
-  const oneDay = getNowSecs() - 24 * 60 * 60;
-  if (!internal.lastCheck || internal.lastCheck < oneDay) {
+  if (!internal) { return { lastCheck: nowSecs() }; }
+  if (!internal.lastCheck || internal.lastCheck < oneDayAgo()) {
     return getRecent(internal);
   }
   return internal;

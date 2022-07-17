@@ -7,7 +7,7 @@ import setText from '../../../dom/setText';
 import getKillsPct from '../../../guild/scoutTower/getKillsPct';
 import getTitanString from '../../../guild/scoutTower/getTitanString';
 import { months } from '../../../support/constants';
-import { getNow } from '../../../support/now';
+import { now } from '../../../support/now';
 import padZ from '../../../system/padZ';
 import addRows from './addRows';
 import { clearMemberRows, getTitanTbl } from './buildTitanInfoTable';
@@ -26,7 +26,7 @@ import {
 import { getRealmName } from './realm';
 
 function formatOffset(secs) {
-  const aDate = new Date(getNow() + secs * 1000);
+  const aDate = new Date(now() + secs * 1000);
   return `${padZ(aDate.getHours())}:${padZ(aDate.getMinutes())} ${
     padZ(aDate.getDate())}/${months[aDate.getMonth()]}/${
     aDate.getFullYear()}`;

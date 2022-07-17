@@ -3,7 +3,7 @@ import fromEntries from '../../common/fromEntries';
 import getText from '../../common/getText';
 import trimTitanName from '../../common/trimTitanName';
 import uniq from '../../common/uniq';
-import { getNow } from '../../support/now';
+import { now } from '../../support/now';
 import { get, set } from '../../system/idb';
 import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import TitanTracker from './TitanTracker.svelte';
@@ -36,7 +36,7 @@ function remainingTitans(oldTitans, visibleTitans) {
     entries(oldTitans)
       .map(([n, o]) => [trimTitanName(n), o])
       .filter(([n]) => !visibleTitans[n])
-      .filter(([, d]) => d.coolTime > getNow())
+      .filter(([, d]) => d.coolTime > now())
       .map(([n, d]) => [n, { ...d, seen: 'no' }]),
   );
 }

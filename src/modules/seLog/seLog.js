@@ -1,6 +1,6 @@
 import daSuperElite from '../_dataAccess/daSuperElite';
 import partial from '../common/partial';
-import { getNowSecs } from '../support/now';
+import { nowSecs } from '../support/now';
 import { get, set } from '../system/idb';
 
 let oldLog = 0;
@@ -58,7 +58,7 @@ export function doBackgroundCheck() {
 }
 
 function whenWasLastCheck() {
-  return getNowSecs() - ((oldLog && oldLog.lastUpdate) || 0);
+  return nowSecs() - ((oldLog && oldLog.lastUpdate) || 0);
 }
 
 function setupBackgroundCheck() {

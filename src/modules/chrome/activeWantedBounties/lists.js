@@ -1,6 +1,6 @@
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
-import { getNowSecs } from '../../support/now';
+import { nowSecs } from '../../support/now';
 import getValue from '../../system/getValue';
 import getValueJSON from '../../system/getValueJSON';
 import setValue from '../../system/setValue';
@@ -51,20 +51,20 @@ export function getActiveBountyList(doc) { // Legacy
   bountyList = {};
   bountyList.bounty = [];
   bountyList.isRefreshed = true;
-  bountyList.lastUpdate = getNowSecs();
+  bountyList.lastUpdate = nowSecs();
   if (activeTable) { parseActiveBounty(activeTable); }
   activeBountyListPosted = true;
 }
 
 function testBountyList(enableActiveList) {
   if (enableActiveList) {
-    return bountyList && getNowSecs() - bountyList.lastUpdate > bountyListRefreshTime;
+    return bountyList && nowSecs() - bountyList.lastUpdate > bountyListRefreshTime;
   }
 }
 
 function testWantedList(enableWantedList) {
   if (enableWantedList) {
-    return wantedList && getNowSecs() - wantedList.lastUpdate > bountyListRefreshTime;
+    return wantedList && nowSecs() - wantedList.lastUpdate > bountyListRefreshTime;
   }
 }
 
@@ -87,7 +87,7 @@ export function doRefresh() {
   wantedList = {};
   wantedList.bounty = [];
   wantedList.isRefreshed = true;
-  wantedList.lastUpdate = getNowSecs();
+  wantedList.lastUpdate = nowSecs();
   activeBountyListPosted = false;
   wantedArray = shouldBeArray('wantedNames');
   setValue('bwNeedsRefresh', false);

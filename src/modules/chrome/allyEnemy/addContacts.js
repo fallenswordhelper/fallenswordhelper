@@ -5,7 +5,7 @@ import {
   secureUrl,
   tradeUrl,
 } from '../../support/constants';
-import { getNowSecs } from '../../support/now';
+import { nowSecs } from '../../support/now';
 import formatLastActivity from '../../system/formatLastActivity';
 import {
   enemyBuffCheckOn,
@@ -25,7 +25,7 @@ function allyOrEnemy(type, test) {
 }
 
 function band(lastLogin, ary) {
-  return ary[0](getNowSecs() - lastLogin);
+  return ary[0](nowSecs() - lastLogin);
 }
 
 function contactColor(lastLogin, type) {
@@ -85,7 +85,7 @@ function doTradeButton(val) {
 }
 
 function recent(val) {
-  return getNowSecs() - val.last_login < 1800;
+  return nowSecs() - val.last_login < 1800;
 }
 
 function addContact(type, val) {

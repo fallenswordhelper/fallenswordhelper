@@ -5,7 +5,7 @@ import { getLowerPvpLevel, getUpperPvpLevel } from '../common/levelHighlight';
 import onlineDot from '../common/onlineDot';
 import regExpFirstCapture from '../common/regExpFirstCapture';
 import { guildRE } from '../support/constants';
-import { getNowSecs } from '../support/now';
+import { sevenDaysAgo } from '../support/now';
 import getValue from '../system/getValue';
 
 let highlightPlayersNearMyLvl = null;
@@ -26,7 +26,7 @@ function getMyGuildId() {
 const highlightTests = [
   () => getPref(),
   (_data, guildId) => isUndefined(guildId) || guildId !== (myGuildId || getMyGuildId()),
-  (data) => data.last_login >= getNowSecs() - 604800,
+  (data) => data.last_login >= sevenDaysAgo(),
   (data) => data.virtual_level >= getLowerPvpLevel(),
   (data) => data.virtual_level <= getUpperPvpLevel(),
 ];

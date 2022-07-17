@@ -1,6 +1,6 @@
 import upgradesGold from '../../ajax/upgradesGold';
 import jQueryPresent from '../../common/jQueryPresent';
-import { getNow } from '../../support/now';
+import { now } from '../../support/now';
 import task from '../../support/task';
 import getValue from '../../system/getValue';
 import displayUpgradeMsg from './displayUpgradeMsg';
@@ -13,7 +13,7 @@ function asyncParse(data) {
 
 function checkLastUpgrade() {
   const lastUpgradeCheck = getValue('lastUpgradeCheck');
-  if (lastUpgradeCheck && getNow() < lastUpgradeCheck) { return; }
+  if (lastUpgradeCheck && now() < lastUpgradeCheck) { return; }
   upgradesGold().then(asyncParse);
 }
 

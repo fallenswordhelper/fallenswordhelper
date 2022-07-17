@@ -3,13 +3,13 @@ import getElementById from '../common/getElementById';
 import infoBox from '../common/infoBox';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
-import { getNowSecs } from '../support/now';
+import { nowSecs } from '../support/now';
 import { get, set } from '../system/idb';
 import arena from './arena';
 
 function addId(id, obj) {
   const newObj = obj || {};
-  newObj[id] = getNowSecs();
+  newObj[id] = nowSecs();
   set('fsh_arenaFull', newObj);
 }
 

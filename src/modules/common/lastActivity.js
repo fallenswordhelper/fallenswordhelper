@@ -1,5 +1,5 @@
 import { lastActivityRE } from '../support/constants';
-import { getNowSecs } from '../support/now';
+import { nowSecs } from '../support/now';
 import regExpGroups from './regExpGroups';
 
 export default function lastActivity(str) {
@@ -10,7 +10,7 @@ export default function lastActivity(str) {
   const hours = Number(hour) + days * 24;
   const mins = Number(min) + hours * 60;
   const secs = Number(sec) + mins * 60;
-  const timestamp = getNowSecs() - secs;
+  const timestamp = nowSecs() - secs;
   return {
     day,
     days,

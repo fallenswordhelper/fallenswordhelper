@@ -3,7 +3,7 @@ import dataRows from '../../common/dataRows';
 import dateUtc from '../../common/dateUtc';
 import getTextTrim from '../../common/getTextTrim';
 import querySelector from '../../common/querySelector';
-import { getNow, getNowSecs } from '../../support/now';
+import { now, nowSecs } from '../../support/now';
 
 function convertDate(textDate) {
   const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);
@@ -17,7 +17,7 @@ function convertDate(textDate) {
 }
 
 function parseDateAsOffset(textDate) {
-  return Math.floor((getNow() - convertDate(textDate)) / 1000);
+  return Math.floor((now() - convertDate(textDate)) / 1000);
 }
 
 function formatRow(row) {
@@ -32,7 +32,7 @@ function parseReport(doc) {
   if (!logTable) { return { s: false }; }
   const rows = dataRows(logTable, 4, 1);
   const data = rows.map(formatRow);
-  return { r: data, s: true, t: `0 ${String(getNowSecs())}` };
+  return { r: data, s: true, t: `0 ${String(nowSecs())}` };
 }
 
 // Incomplete
