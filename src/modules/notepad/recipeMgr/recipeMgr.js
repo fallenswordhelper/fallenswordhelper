@@ -3,7 +3,7 @@ import idHandler from '../../common/idHandler';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import { get } from '../../system/idb';
 import stringSort from '../../system/stringSort';
 import generateRecipeTable from './generateRecipeTable';
@@ -27,7 +27,7 @@ const rmHdl = [
 
 export default function recipeMgr(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
-  const content = injector || getPcc();
+  const content = injector || pcc();
   get('fsh_recipeBook').then(partial(gotRecipeBook, content));
   onclick(content, idHandler(rmHdl));
 }

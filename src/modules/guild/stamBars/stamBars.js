@@ -4,7 +4,7 @@ import insertElement from '../../common/insertElement';
 import on from '../../common/on';
 import querySelector from '../../common/querySelector';
 import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
 import toggleStyle from './toggleStyle';
@@ -23,7 +23,7 @@ function injectPref() {
   const gs = querySelector('#pCC img.guild_openGuildStore');
   if (!gs) { return; }
   const prefContainer = insertElement(
-    getPcc(),
+    pcc(),
     createDiv({
       innerHTML: simpleCheckboxHtml(prefEnableStamBars),
       style: { marginLeft: '66%' },

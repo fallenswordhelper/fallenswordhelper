@@ -15,7 +15,7 @@ import openQuickBuffById from '../../common/openQuickBuffById';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
 import calf from '../../support/calf';
-import { getPcl } from '../../support/layout';
+import { pcl } from '../../support/layout';
 import task from '../../support/task';
 import fallback from '../../system/fallback';
 import addContacts from './addContacts';
@@ -126,7 +126,7 @@ function makeDiv(data) {
   }
   wrapper += '</div></div>';
   insertHtmlBeforeEnd(fshAllyEnemy, wrapper);
-  insertElement(getPcl(), fshAllyEnemy);
+  insertElement(pcl(), fshAllyEnemy);
   onclick(fshAllyEnemy, eventHandler);
   injectAllyEnemyList(data);
 }

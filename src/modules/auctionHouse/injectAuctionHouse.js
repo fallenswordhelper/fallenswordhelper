@@ -9,7 +9,7 @@ import insertHtmlAfterBegin from '../common/insertHtmlAfterBegin';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
 import doStatTotal from '../profile/doStatTotal';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getValue from '../system/getValue';
 import { cdn } from '../system/system';
@@ -59,7 +59,7 @@ function autoFill() {
 }
 
 export default function injectAuctionHouse() {
-  if (jQueryNotPresent() || !getPcc()) { return; }
+  if (jQueryNotPresent() || !pcc()) { return; }
   makeCancelAll();
   autoFill();
   doStatTotal();

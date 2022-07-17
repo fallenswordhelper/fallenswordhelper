@@ -8,7 +8,7 @@ import getArrayByClassName from '../common/getArrayByClassName';
 import insertElement from '../common/insertElement';
 import on from '../common/on';
 import partial from '../common/partial';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 
 function removeCrlf(fshTxt) {
@@ -55,8 +55,8 @@ function makeTextArea() {
   return fshTxt;
 }
 
-const dont = () => !getPcc()
-  || getArrayByClassName('header', getPcc()).filter(contains('Posted\xa0By')).length !== 1
+const dont = () => !pcc()
+  || getArrayByClassName('header', pcc()).filter(contains('Posted\xa0By')).length !== 1
   || !getValue('enhanceChatTextEntry');
 
 export default function addChatTextArea() {

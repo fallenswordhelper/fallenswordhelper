@@ -7,7 +7,7 @@ import insertElementBefore from '../common/insertElementBefore';
 import querySelectorArray from '../common/querySelectorArray';
 import regExpExec from '../common/regExpExec';
 import { guideUrl } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 
 const creatureSearchHref = (name) => `${guideUrl}creatures&search_name=${encodeURIComponent(name)}`;
 const titanRe = /(?<a> titan has been spotted in )(?<b>[^!]+)(?<c>!)/;
@@ -48,6 +48,6 @@ function titanLink(el) {
 export default function addUfsgLinks() {
   querySelectorArray('.news_body img[src*="/creatures/"]')
     .forEach(makeUfsgLink);
-  getArrayByClassName('news_body_tavern', getPcc())
+  getArrayByClassName('news_body_tavern', pcc())
     .filter(titanSpotted).forEach(titanLink);
 }

@@ -2,7 +2,7 @@ import partial from '../../common/partial';
 import splitTime from '../../common/splitTime';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { defSubcmd, guideUrl, guildViewUrl } from '../../support/constants';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import getValue from '../../system/getValue';
 import padZ from '../../system/padZ';
 import getRelicList from './getRelicList';
@@ -89,11 +89,11 @@ function makeTable(thisRelicList) {
 
 function processRelicList(thisRelicList) {
   thisRelicList.sort((a, b) => a.location.realm.min_level - b.location.realm.min_level);
-  setInnerHtml(makeTable(thisRelicList), getPcc());
+  setInnerHtml(makeTable(thisRelicList), pcc());
 }
 
 export default function reliclist() {
   if (!getValue('betaOptIn')) { return; }
-  setInnerHtml('Loading...', getPcc());
+  setInnerHtml('Loading...', pcc());
   getRelicList().then(processRelicList);
 }

@@ -6,7 +6,7 @@ import insertElement from '../../../common/insertElement';
 import insertHtmlBeforeEnd from '../../../common/insertHtmlBeforeEnd';
 import onclick from '../../../common/onclick';
 import querySelectorArray from '../../../common/querySelectorArray';
-import { getPcc } from '../../../support/layout';
+import { pcc } from '../../../support/layout';
 import clickHandler from './clickHandler';
 import interceptSubmit from './interceptSubmit';
 
@@ -21,14 +21,14 @@ function paintTable() {
 
 function checkAllBtn() {
   const checkAll = createInput({ type: 'button', value: 'Check All' });
-  const formTags = getElementsByTagName('form', getPcc());
+  const formTags = getElementsByTagName('form', pcc());
   if (formTags.length === 1) {
     insertElement(formTags[0].previousElementSibling.cells[0], checkAll);
   }
 }
 
 function doItemTagging() {
-  onclick(getPcc(), clickHandler);
+  onclick(pcc(), clickHandler);
   paintTable();
   checkAllBtn();
   interceptSubmit();

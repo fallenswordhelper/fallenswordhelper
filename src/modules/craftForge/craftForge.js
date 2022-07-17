@@ -12,7 +12,7 @@ import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
 import calf from '../support/calf';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import task from '../support/task';
 import CraftForge from './CraftForge.svelte';
 
@@ -22,10 +22,10 @@ let prm = 0;
 let thisItemTable = 0;
 let warehouse = 0;
 
-const getAnchors = () => querySelectorArray(`a[href*="=${calf.cmd}&"]`, getPcc());
+const getAnchors = () => querySelectorArray(`a[href*="=${calf.cmd}&"]`, pcc());
 const invId = (a) => a.href.split('=')[2];
 const getInvItem = (a) => [a, inv.items[invId(a)]];
-const getItemTable = () => closestTable(querySelector('img[src*="/items/"]', getPcc()));
+const getItemTable = () => closestTable(querySelector('img[src*="/items/"]', pcc()));
 const emptyRow = () => closestTr(thisItemTable).previousElementSibling.children[0];
 const showFolder = (item, currentFolder) => currentFolder === -2
     || (currentFolder === -3 && item.equipped)
@@ -73,7 +73,7 @@ function doFilter({ detail: [currentFolder, wantsPerfect] }) {
 }
 
 export default async function craftForge() {
-  if (jQueryPresent() && getPcc()) {
+  if (jQueryPresent() && pcc()) {
     prm = getInventoryById();
     thisItemTable = getItemTable();
     const cf = startCraftForge();

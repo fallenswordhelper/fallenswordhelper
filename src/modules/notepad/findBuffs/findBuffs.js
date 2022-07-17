@@ -21,7 +21,7 @@ import {
   showPlayerUrl,
   vlRe,
 } from '../../support/constants';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import createDocument from '../../system/createDocument';
 import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
@@ -264,7 +264,7 @@ function setupClearEvent() {
 }
 
 export function injectFindBuffs(injector) { // Legacy
-  const content = injector || getPcc();
+  const content = injector || pcc();
   calf.sortBy = 'name';
   calf.sortAsc = true;
   buffList.sort(stringSort);
@@ -276,7 +276,7 @@ export function injectFindBuffs(injector) { // Legacy
 }
 
 export function injectFindOther(injector) { // Native - Bad
-  const content = injector || getPcc();
+  const content = injector || pcc();
   getExtraProfile();
   setInnerHtml(pageLayout(otherCustom, extraProfile), content);
   getBufferProgress();

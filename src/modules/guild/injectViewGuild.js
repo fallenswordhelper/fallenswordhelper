@@ -12,7 +12,7 @@ import {
 import querySelectorArray from '../common/querySelectorArray';
 import regExpFirstCapture from '../common/regExpFirstCapture';
 import { defTable, vlRe } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getUrlParameter from '../system/getUrlParameter';
 import getValue from '../system/getValue';
 import compressHistory from './compressHistory';
@@ -67,7 +67,7 @@ function targetStyle(target, value) {
 
 function memberListStyle(pvpTargets, gvgTargets) {
   if (pvpTargets.length + gvgTargets.length) {
-    const tables = getElementsByTagName(defTable, getPcc());
+    const tables = getElementsByTagName(defTable, pcc());
     const memberList = tables[tables.length - 1];
     memberList.classList.add('fshHighlight');
   }

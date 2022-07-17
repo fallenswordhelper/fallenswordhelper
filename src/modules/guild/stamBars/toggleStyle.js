@@ -4,7 +4,7 @@ import insertElement from '../../common/insertElement';
 import querySelectorArray from '../../common/querySelectorArray';
 import regExpGroups from '../../common/regExpGroups';
 import { defTable, playerLinkSelector, stamRe } from '../../support/constants';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 
 let thisStyle = 0;
 
@@ -22,7 +22,7 @@ function stamBarStyle(a) {
 }
 
 function injectStyle() {
-  const tables = getElementsByTagName(defTable, getPcc());
+  const tables = getElementsByTagName(defTable, pcc());
   const memberList = tables[tables.length - 1];
   memberList.classList.add('fshProgressBar');
   const memberLinks = querySelectorArray(playerLinkSelector, memberList);

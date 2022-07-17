@@ -4,10 +4,10 @@ import insertElement from '../common/insertElement';
 import setInnerHtml from '../dom/setInnerHtml';
 import compressBio from '../profile/bio/compressBio';
 import { defTable } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 
 export default function compressHistory() {
-  const bioTable = getArrayByTagName(defTable, getPcc()).slice(-2, -1)[0];
+  const bioTable = getArrayByTagName(defTable, pcc()).slice(-2, -1)[0];
   if (!bioTable) return;
   const thisCell = bioTable.rows[0].cells[0];
   const newDiv = createDiv({

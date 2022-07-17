@@ -1,5 +1,5 @@
 import getInventoryById from '../ajax/getInventoryById';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import createDiv from './cElement/createDiv';
 import clickThis from './clickThis';
 import getArrayByClassName from './getArrayByClassName';
@@ -27,7 +27,7 @@ function drawFilters(data) {
   inv = data.items;
   const buttonDiv = createDiv({ className: 'fshAC' });
   insertHtmlBeforeEnd(buttonDiv, '<button class="fshBl">Perfect</button>');
-  insertElement(getPcc(), buttonDiv);
+  insertElement(pcc(), buttonDiv);
   onclick(buttonDiv, selectPerf);
 }
 

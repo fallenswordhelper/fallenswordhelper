@@ -12,7 +12,7 @@ import onclick from './common/onclick';
 import querySelector from './common/querySelector';
 import querySelectorArray from './common/querySelectorArray';
 import { playerLinkSelector, searchPlayerUrl } from './support/constants';
-import { getPcc } from './support/layout';
+import { pcc } from './support/layout';
 
 function searchUrl(min, max, guild) {
   return `${searchPlayerUrl}&search_level_min=${
@@ -40,9 +40,9 @@ function doFindPlayer() {
 }
 
 function doBuffLinks() {
-  const playerLinks = querySelectorArray(playerLinkSelector, getPcc());
+  const playerLinks = querySelectorArray(playerLinkSelector, pcc());
   playerLinks.forEach(doBuffLink);
-  onclick(getPcc(), doBuffLinkClick);
+  onclick(pcc(), doBuffLinkClick);
 }
 
 export default function injectFindPlayer() {

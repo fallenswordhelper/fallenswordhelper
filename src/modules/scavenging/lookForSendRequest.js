@@ -5,7 +5,7 @@ import getElementById from '../common/getElementById';
 import insertElement from '../common/insertElement';
 import isFunction from '../common/isFunction';
 import setInnerHtml from '../dom/setInnerHtml';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import setLastScav from './setLastScav';
 
 /* global sendRequest:true */
@@ -15,7 +15,7 @@ let fshSummary = 0;
 function getSummary() {
   if (!fshSummary) {
     fshSummary = createDiv();
-    insertElement(getPcc(), fshSummary);
+    insertElement(pcc(), fshSummary);
   }
   setInnerHtml('', fshSummary);
   return fshSummary;

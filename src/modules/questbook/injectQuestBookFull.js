@@ -2,7 +2,7 @@ import getElementsByTagName from '../common/getElementsByTagName';
 import interceptSubmit from '../common/interceptSubmit';
 import partial from '../common/partial';
 import { defTable } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 import setValue from '../system/setValue';
 import injectQuestRow from './injectQuestRow';
@@ -33,7 +33,7 @@ function pageCombo(aLinks, acc, curr, i) {
 }
 
 function whereAmI() {
-  const aLinks = getElementsByTagName('a', getPcc());
+  const aLinks = getElementsByTagName('a', pcc());
   [normalLink, seasonLink, activeLink, completeLink, notStartedLink] = aLinks;
   currentPageValue = currentLocationValue.reduce(partial(pageCombo, aLinks), 0);
 }
@@ -97,7 +97,7 @@ function storeQuestPage() {
 export default function injectQuestBookFull() {
   interceptSubmit();
   storeQuestPage();
-  const questTable = getElementsByTagName(defTable, getPcc())[5];
+  const questTable = getElementsByTagName(defTable, pcc())[5];
   if (!questTable) { return; }
   injectQuestRow(questTable);
 }

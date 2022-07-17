@@ -21,7 +21,7 @@ import partial from '../common/partial';
 import regExpGroups from '../common/regExpGroups';
 import setInnerHtml from '../dom/setInnerHtml';
 import { fetchItemRe } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 
 function makeQtLabel(id, text, injector) {
   const lbl = createLabel({
@@ -139,7 +139,7 @@ function makeQtDiv(itemList) {
   const takeResult = makeTakeResult(qt);
   insertElement(qt, createDiv());
   makeItemTable(itemList, qt, takeResult);
-  insertElement(getPcc(), qt);
+  insertElement(pcc(), qt);
 }
 
 function toggleQuickTake(items, injector) {
@@ -158,10 +158,10 @@ function makeQtCheckbox(items, injector) {
 }
 
 export default function mailbox() {
-  if (jQueryNotPresent() || !getPcc()) { return; }
-  const items = getArrayByTagName('a', getPcc());
+  if (jQueryNotPresent() || !pcc()) { return; }
+  const items = getArrayByTagName('a', pcc());
   if (items.length === 0) { return; } // Empty mailbox
-  const injector = getPcc().lastElementChild;
+  const injector = pcc().lastElementChild;
   makeQtCheckbox(items, injector);
   makeQtLabel('qtOff', 'Quick Take', injector);
 }

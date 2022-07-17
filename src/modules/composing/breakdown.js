@@ -9,7 +9,7 @@ import partial from '../common/partial';
 import perfFilter from '../common/perfFilter';
 import { simpleCheckbox } from '../settings/simpleCheckbox';
 import { composingUrl, defSubcmd } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 import setValue from '../system/setValue';
 
@@ -101,7 +101,7 @@ function togglePref() {
 
 function prefBox() {
   insertHtmlBeforeEnd(
-    getPcc(),
+    pcc(),
     `<table class="fshTblCenter"><tbody>${
       simpleCheckbox(prefDisableBreakdownPrompts)}</tbody></table>`,
   );

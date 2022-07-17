@@ -9,7 +9,7 @@ import createTable from '../../common/cElement/createTable';
 import insertElement from '../../common/insertElement';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import displayChange from './displayChange';
 import makePager from './makePager';
 import makeSearch from './makeSearch';
@@ -69,7 +69,7 @@ function showMe(pCC, dataAry) {
 }
 
 export default function whosGotWhat() {
-  const pCC = getPcc();
+  const pCC = pcc();
   setInnerHtml('Loading...', pCC);
   allthen([guildStore(), ranksView()], (dataAry) => showMe(pCC, dataAry));
 }

@@ -4,7 +4,7 @@ import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import partial from '../common/partial';
 import reduceBuffArray from '../common/reduceBuffArray';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 
 const packRE = />(?<a>[^>(]+) \(Level (?<b>\d{1,4})/g;
 
@@ -21,7 +21,7 @@ function checkForBuffs(myBuffs, el) {
 }
 
 function postWarnings(myBuffs) {
-  const packsRow = getPcc().children[0].rows[9];
+  const packsRow = pcc().children[0].rows[9];
   if (!packsRow) { return; }
   getArrayByTagName('a', packsRow.cells[0].children[0])
     .forEach(partial(checkForBuffs, myBuffs));

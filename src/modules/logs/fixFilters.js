@@ -2,7 +2,7 @@ import navigateTo from '../common/navigateTo';
 import on from '../common/on';
 import onclick from '../common/onclick';
 import { indexPhp } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getUrlParameter from '../system/getUrlParameter';
 
 let thisType = '';
@@ -39,6 +39,6 @@ export default function fixFilters() {
   const pageNo = getUrlParameter('page');
   prevPage = pageNo ? `&page=${Number(pageNo) - 1}` : '';
   nextPage = pageNo ? `&page=${Number(pageNo) + 1}` : '&page=2';
-  on(getPcc(), 'submit', submitHandler);
-  onclick(getPcc(), clickHandler, true);
+  on(pcc(), 'submit', submitHandler);
+  onclick(pcc(), clickHandler, true);
 }

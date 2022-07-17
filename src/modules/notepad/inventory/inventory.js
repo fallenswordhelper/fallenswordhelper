@@ -12,7 +12,7 @@ import setInnerHtml from '../../dom/setInnerHtml';
 import calf from '../../support/calf';
 import { oldActionSpinner } from '../../support/constants';
 import { time, timeEnd } from '../../support/debug';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import task from '../../support/task';
 import getValue from '../../system/getValue';
 import { get } from '../../system/idb';
@@ -34,7 +34,7 @@ const rekey = ([, o]) => [o.id, o];
 
 function doSpinner() {
   setInnerHtml(`<span id="fshInvMan"><img src = "${
-    oldActionSpinner}">&nbsp;Getting inventory data...</span>`, getPcc());
+    oldActionSpinner}">&nbsp;Getting inventory data...</span>`, pcc());
 }
 
 function rekeyMembrList() {
@@ -84,7 +84,7 @@ function syncInvMan() {
 }
 
 export default function inventory() {
-  if (jQueryNotPresent() || !getPcc()) return;
+  if (jQueryNotPresent() || !pcc()) return;
   if (calf.subcmd === 'guildinvmgr' && !currentGuildId()) return;
   doSpinner();
   syncInvMan();

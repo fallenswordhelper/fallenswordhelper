@@ -5,7 +5,7 @@ import lastActivity from '../common/lastActivity';
 import regExpFirstCapture from '../common/regExpFirstCapture';
 import setTipped from '../common/setTipped';
 import { stamRe } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import addCommas from '../system/addCommas';
 
 const ACTIVE = 0;
@@ -25,7 +25,7 @@ function getActive(dots) {
 }
 
 export default function activeMembers() {
-  const members = getArrayByTagName('b', getPcc()).find(contains('Members'));
+  const members = getArrayByTagName('b', pcc()).find(contains('Members'));
   if (members) {
     const dots = getPlayers();
     const memberStats = getActive(dots);

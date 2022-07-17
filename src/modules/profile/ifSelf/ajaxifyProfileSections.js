@@ -3,7 +3,7 @@ import getElementById from '../../common/getElementById';
 import hideElement from '../../common/hideElement';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 
 let bpc = 0;
@@ -61,5 +61,5 @@ function testForSection(evt) {
 }
 
 export default function ajaxifyProfileSections() {
-  onclick(getPcc(), testForSection);
+  onclick(pcc(), testForSection);
 }

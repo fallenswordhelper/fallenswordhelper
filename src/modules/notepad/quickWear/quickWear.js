@@ -10,7 +10,7 @@ import onclick from '../../common/onclick';
 import selfIdIs from '../../common/selfIdIs';
 import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
 import calf from '../../support/calf';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import { subscribeOnce } from '../../support/pubsub';
 import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
@@ -56,7 +56,7 @@ function showQuickWear(content, appInv) {
 }
 
 async function hasJquery(injector) {
-  const content = injector || getPcc();
+  const content = injector || pcc();
   if (!content) { return; }
   insertHtmlBeforeEnd(content, 'Getting item list from backpack...');
   calf.disableQuickWearPrompts = getValue(defDisableQuickWearPrompts);

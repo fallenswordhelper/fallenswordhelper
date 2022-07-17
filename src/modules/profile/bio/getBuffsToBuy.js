@@ -4,12 +4,12 @@ import keys from '../../common/keys';
 import partial from '../../common/partial';
 import playerName from '../../common/playerName';
 import trim from '../../common/trim';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import getValue from '../../system/getValue';
 import bioSendEvent from './bioSendEvent';
 
 function getTargetPlayer() {
-  let targetPlayer = getElementsByTagName('h1', getPcc());
+  let targetPlayer = getElementsByTagName('h1', pcc());
   if (targetPlayer.length !== 0) {
     targetPlayer = getText(targetPlayer[0]);
   } else {

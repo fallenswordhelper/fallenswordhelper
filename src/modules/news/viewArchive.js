@@ -5,7 +5,7 @@ import getText from '../common/getText';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import { simpleCheckbox } from '../settings/simpleCheckbox';
 import { defLastLadderReset, defTable } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 import parseDateAsTimestamp from '../system/parseDateAsTimestamp';
 import setValue from '../system/setValue';
@@ -35,7 +35,7 @@ export default function viewArchive() {
   lastLadderReset = getValue(defLastLadderReset);
   trackLadderReset = getValue('trackLadderReset');
   const prefName = 'collapseNewsArchive';
-  const theTables = getElementsByTagName(defTable, getPcc());
+  const theTables = getElementsByTagName(defTable, pcc());
   if (theTables.length > 2) {
     setupPref(prefName, theTables[0].rows[2]);
     collapse({

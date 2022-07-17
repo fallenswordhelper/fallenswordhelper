@@ -1,10 +1,10 @@
 import calf from '../../../support/calf';
-import { getPcc } from '../../../support/layout';
+import { pcc } from '../../../support/layout';
 import RecallAll from './RecallAll.svelte';
 
 function initButtons() {
   return new RecallAll({
-    target: getPcc(),
+    target: pcc(),
   });
 }
 

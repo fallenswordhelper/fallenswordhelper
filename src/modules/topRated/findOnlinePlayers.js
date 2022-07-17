@@ -7,7 +7,7 @@ import getTextTrim from '../common/getTextTrim';
 import hideQTip from '../common/hideQTip';
 import querySelectorArray from '../common/querySelectorArray';
 import { playerLinkSelector } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import decoratePlayer from './decoratePlayer';
 
 const addPlayerName = (a) => [closestTable(a), getTextTrim(a)];
@@ -28,7 +28,7 @@ async function ajaxPlayer([tbl, player]) {
 }
 
 async function prepareAjax() {
-  const players = querySelectorArray(playerLinkSelector, getPcc()).map(addPlayerName);
+  const players = querySelectorArray(playerLinkSelector, pcc()).map(addPlayerName);
   await all(players.map(ajaxPlayer));
 }
 

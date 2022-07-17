@@ -7,7 +7,7 @@ import jsonStringify from '../common/jsonStringify';
 import keys from '../common/keys';
 import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 import listKeys from '../system/listKeys';
 import setValue from '../system/setValue';
@@ -47,6 +47,6 @@ function buildSettingsObj(acc, curr) {
 export default function load() { // Hybrid
   if (jQueryNotPresent()) { return; }
   const fshSettings = listKeys().reduce(buildSettingsObj, {});
-  drawBox(getPcc(), fshSettings);
+  drawBox(pcc(), fshSettings);
   $('#HelperLoadSettings').on('click', clickHandler);
 }

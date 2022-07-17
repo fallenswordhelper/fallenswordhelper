@@ -20,7 +20,7 @@ import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
 import addGuildLogWidgets from '../../logs/addGuildLogWidgets';
 import addLogColoring from '../../logs/addLogColoring';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import createDocument from '../../system/createDocument';
 import getValue from '../../system/getValue';
 import { get, set } from '../../system/idb';
@@ -160,7 +160,7 @@ function buildTable() {
   tmpGuildLog.forEach(buildRow);
 
   const injector = getElementById('fshInjectHere');
-  getPcc().replaceChild(myTable, injector);
+  pcc().replaceChild(myTable, injector);
   addLogColoring('myGuildLog', 1, 3);
   addGuildLogWidgets();
 }
@@ -269,7 +269,7 @@ async function startProcessing() {
 
 function gotOptions(guildLog) {
   setOpts(guildLog);
-  setInnerHtml(guildLogFilter, getPcc());
+  setInnerHtml(guildLogFilter, pcc());
   getElements();
   onclick(fshNewGuildLog, guildLogEvents());
   setChecks();

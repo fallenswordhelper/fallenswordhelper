@@ -12,7 +12,7 @@ import playerId from '../../../common/playerId';
 import regExpFirstCapture from '../../../common/regExpFirstCapture';
 import setInnerHtml from '../../../dom/setInnerHtml';
 import { playerIDRE } from '../../../support/constants';
-import { getPcc } from '../../../support/layout';
+import { pcc } from '../../../support/layout';
 import { cdn } from '../../../system/system';
 import itemId from './itemId';
 
@@ -101,5 +101,5 @@ const classEvts = [
 ];
 
 export default function eventHandlers() {
-  onclick(getElementsByTagName('table', getPcc())[1], classHandler(classEvts));
+  onclick(getElementsByTagName('table', pcc())[1], classHandler(classEvts));
 }

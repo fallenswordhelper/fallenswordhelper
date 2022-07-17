@@ -8,7 +8,7 @@ import onclick from '../../common/onclick';
 import selfIdIs from '../../common/selfIdIs';
 import setInnerHtml from '../../dom/setInnerHtml';
 import defaults from '../../support/dataObj.json';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import getValueJSON from '../../system/getValueJSON';
 import isChecked from '../../system/isChecked';
 import setValueJSON from '../../system/setValueJSON';
@@ -152,7 +152,7 @@ function setupEventHandler(content) {
 }
 
 export function injectAuctionSearch(injector) { // Legacy
-  const content = injector || getPcc();
+  const content = injector || pcc();
   setInnerHtml(makePageHeader('Trade Hub Quick Search', '', '', '')
     + auctionSearchBlurb, content);
   // global parameters for the meta function generateManageTable
@@ -162,7 +162,7 @@ export function injectAuctionSearch(injector) { // Legacy
 }
 
 export function injectQuickLinkManager(injector) { // Legacy
-  const content = injector || getPcc();
+  const content = injector || pcc();
   setInnerHtml(makePageTemplate({
     title: 'Quick Links',
     comment: '',

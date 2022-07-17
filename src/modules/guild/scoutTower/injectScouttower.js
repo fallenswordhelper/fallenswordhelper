@@ -10,7 +10,7 @@ import querySelector from '../../common/querySelector';
 import trimTitanName from '../../common/trimTitanName';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { defTable, guideUrl } from '../../support/constants';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import injectScouttowerBuffLinks from './injectScouttowerBuffLinks';
 import killsSummary from './killsSummary';
 import titanTracker from './titanTracker';
@@ -66,7 +66,7 @@ const makeTitanRows = (titanTables) => dataRows(titanTables[1], 4, 0).map(meta).
 
 export default function injectScouttower() {
   if (jQueryNotPresent()) return;
-  const titanTables = getElementsByTagName(defTable, getPcc());
+  const titanTables = getElementsByTagName(defTable, pcc());
   injectScouttowerBuffLinks(titanTables);
   const titanRows = makeTitanRows(titanTables);
   titanRows.forEach(decorate);

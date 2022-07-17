@@ -16,7 +16,7 @@ import querySelector from '../common/querySelector';
 import querySelectorAll from '../common/querySelectorAll';
 import querySelectorArray from '../common/querySelectorArray';
 import setText from '../dom/setText';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import { subscribe } from '../support/pubsub';
 import backgroundCreate from './backgroundCreate';
 
@@ -85,7 +85,7 @@ function setupFastCompose(fcDiv, compSlots, openSlots) {
     .map(keyValuePairs);
   const myTable = buildTable(templates, compSlots, openSlots);
   insertElement(fcDiv, myTable);
-  onclick(getPcc(), handleClick);
+  onclick(pcc(), handleClick);
   subscribe('quickcreate', partial(quickcreate, myTable));
 }
 

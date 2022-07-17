@@ -1,5 +1,5 @@
 import setInnerHtml from '../../dom/setInnerHtml';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import { invManFilter } from './assets';
 import { getTheInv } from './buildInv';
 
@@ -14,5 +14,5 @@ export default function headers() {
       getTheInv().items.length
     } items (maroon = in BP, blue=guild store)`;
   }
-  setInnerHtml(invManFilter.replace('@@reportTitle@@', reportTitle), getPcc());
+  setInnerHtml(invManFilter.replace('@@reportTitle@@', reportTitle), pcc());
 }

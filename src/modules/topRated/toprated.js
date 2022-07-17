@@ -5,11 +5,11 @@ import getTextTrim from '../common/getTextTrim';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
 import jQueryPresent from '../common/jQueryPresent';
 import onclick from '../common/onclick';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import findOnlinePlayers from './findOnlinePlayers';
 
 function looksLikeTopRated() {
-  const theCell = getElementsByTagName('td', getPcc())[0];
+  const theCell = getElementsByTagName('td', pcc())[0];
   theCell.children[0].className = 'fshTopListWrap';
   const findBtn = createInput({
     id: 'fshFindOnlinePlayers',
@@ -27,11 +27,8 @@ function looksLikeTopRated() {
 
 const topRatedTests = [
   () => jQueryPresent(),
-  () => getPcc(),
-  () => getPcc().children[0],
-  () => getPcc().children[0].rows,
-  () => getPcc().children[0].rows.length > 2,
-  () => getTextTrim(getPcc().children[0].rows[1]).startsWith('Last Updated'),
+  () => pcc()?.children?.[0]?.rows?.length > 2,
+  () => getTextTrim(pcc().children[0].rows[1]).startsWith('Last Updated'),
 ];
 
 function testforTopRated() {

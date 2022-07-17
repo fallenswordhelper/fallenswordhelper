@@ -1,26 +1,20 @@
 import getElementById from '../common/getElementById';
 
-let pCL = 0;
-let pCC = 0;
-let pCR = 0;
+let thisPcl = 0;
+let thisPcc = 0;
+let thisPcr = 0;
 
-export function getPcl() {
-  if (!pCL) {
-    pCL = getElementById('pCL');
-  }
-  return pCL;
+export function pcl() {
+  if (!thisPcl) thisPcl = getElementById('pCL');
+  return thisPcl;
 }
 
-export function getPcc() {
-  if (!pCC) {
-    pCC = getElementById('pCC');
-  }
-  return pCC;
+export function pcc() {
+  if (!thisPcc) thisPcc = getElementById('pCC');
+  return thisPcc;
 }
 
-export function getPcr() {
-  if (!pCR) {
-    pCR = getElementById('pCR');
-  }
-  return pCR;
+export function pcr() {
+  if (!thisPcr) thisPcr = getElementById('pCR');
+  return thisPcr;
 }

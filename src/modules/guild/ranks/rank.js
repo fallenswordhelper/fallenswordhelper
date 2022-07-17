@@ -5,12 +5,12 @@ import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import partial from '../../common/partial';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import { doButtons, setCharacterRow } from './doButtons';
 import weightings from './weightings';
 
 function findTheRows() {
-  const theRows = getPcc().lastElementChild.previousElementSibling.rows
+  const theRows = pcc().lastElementChild.previousElementSibling.rows
     ?.[7]?.children[0]?.children[0]?.rows;
   if (theRows) {
     return arrayFrom(theRows);

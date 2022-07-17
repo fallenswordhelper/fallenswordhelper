@@ -1,7 +1,7 @@
 import createTable from '../../common/cElement/createTable';
 import insertElement from '../../common/insertElement';
 import { itemType } from '../../support/constants';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import { craftHash } from './assets';
 import { getTheInv } from './buildInv';
 import { getShowQuickDropLinks, getShowQuickSendLinks } from './options';
@@ -95,7 +95,7 @@ function injectTable() {
     className: 'hover fshXSmall',
     id: tableId(),
   });
-  insertElement(getPcc(), fshInv);
+  insertElement(pcc(), fshInv);
   return fshInv;
 }
 

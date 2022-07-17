@@ -2,7 +2,7 @@ import './injectStoreItems.css';
 import jQueryNotPresent from '../../../common/jQueryNotPresent';
 import onclick from '../../../common/onclick';
 import doStatTotal from '../../../profile/doStatTotal';
-import { getPcc } from '../../../support/layout';
+import { pcc } from '../../../support/layout';
 import getValue from '../../../system/getValue';
 import buttonPress from './buttonPress';
 import { prefTypes } from './constants';
@@ -20,5 +20,5 @@ export default function injectStoreItems() {
   if (prefs.some((v) => v)) {
     updateDomItems(prefs);
   }
-  onclick(getPcc(), buttonPress);
+  onclick(pcc(), buttonPress);
 }

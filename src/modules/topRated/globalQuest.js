@@ -6,12 +6,12 @@ import on from '../common/on';
 import searchPlayerHref from '../common/searchPlayerHref';
 import setInnerHtml from '../dom/setInnerHtml';
 import { defTable } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 
 function globalQuestAllowBack(topTable) { // jQuery
   const [thisSelect] = getElementsByTagName('select', topTable);
   $(thisSelect).off();
-  on(getPcc(), 'change', (e) => formToUrl({ target: e.target.form }));
+  on(pcc(), 'change', (e) => formToUrl({ target: e.target.form }));
 }
 
 function playerLink(el) {
@@ -20,7 +20,7 @@ function playerLink(el) {
 }
 
 export default function globalQuest() {
-  const [, , , topTable] = getElementsByTagName(defTable, getPcc());
+  const [, , , topTable] = getElementsByTagName(defTable, pcc());
   globalQuestAllowBack(topTable);
   dataRows(topTable, 4, 1).forEach(playerLink);
 }

@@ -8,7 +8,7 @@ import on from '../../../../common/on';
 import onclick from '../../../../common/onclick';
 import partial from '../../../../common/partial';
 import selfIdIs from '../../../../common/selfIdIs';
-import { getPcc } from '../../../../support/layout';
+import { pcc } from '../../../../support/layout';
 import fallback from '../../../../system/fallback';
 import { get, set } from '../../../../system/idb';
 import isChecked from '../../../../system/isChecked';
@@ -128,7 +128,7 @@ function cellEventHandlers(potOpts, potObj, myCell) {
 }
 
 function injectCell(potOpts, potObj) {
-  const myCell = getPcc().lastElementChild.insertRow(2).insertCell(-1);
+  const myCell = pcc().lastElementChild.insertRow(2).insertCell(-1);
   cellEventHandlers(potOpts, potObj, myCell);
   return myCell;
 }
@@ -151,6 +151,6 @@ function gotMap(potObj, data) {
 }
 
 export default function potReport(potObj) {
-  if (!getPcc()) { return; }
+  if (!pcc()) { return; }
   get(storeMap).then(partial(gotMap, potObj));
 }

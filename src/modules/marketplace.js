@@ -2,7 +2,7 @@ import closestTable from './common/closestTable';
 import getElementById from './common/getElementById';
 import on from './common/on';
 import setInnerHtml from './dom/setInnerHtml';
-import { getPcc } from './support/layout';
+import { pcc } from './support/layout';
 import addCommas from './system/addCommas';
 
 let amt = 0;
@@ -57,5 +57,5 @@ function addMarketplaceWarning() {
 }
 
 export default function marketplace() {
-  on(getPcc(), 'keyup', addMarketplaceWarning);
+  on(pcc(), 'keyup', addMarketplaceWarning);
 }

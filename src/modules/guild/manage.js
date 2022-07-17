@@ -7,7 +7,7 @@ import partial from '../common/partial';
 import playerName from '../common/playerName';
 import setInnerHtml from '../dom/setInnerHtml';
 import { guildSubcmdUrl, recallUserUrl } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import task from '../support/task';
 import getValue from '../system/getValue';
 import buffLinks from './buffLinks';
@@ -36,7 +36,7 @@ function selfRecallLink(leftHandSideColumnTable) {
 }
 
 function getLhsColTab() {
-  return getPcc().lastElementChild.rows[2].cells[0].children[0];
+  return pcc().lastElementChild.rows[2].cells[0].children[0];
 }
 
 function lhsAdd(leftHandSideColumnTable, fn) {
@@ -63,7 +63,7 @@ function ajaxStuff(leftHandSideColumnTable) {
 }
 
 export default function manage() {
-  if (!getPcc()) { return; }
+  if (!pcc()) { return; }
   const leftHandSideColumnTable = getLhsColTab();
   lhsAdditions(leftHandSideColumnTable);
   if (getValue('showBuffLinks')) { task(3, buffLinks); }

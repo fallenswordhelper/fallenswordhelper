@@ -10,7 +10,7 @@ import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
 import { simpleCheckboxHtml } from '../settings/simpleCheckbox';
 import calf from '../support/calf';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import setValue from '../system/setValue';
 import {
   disableBackgroundChecks,
@@ -42,7 +42,7 @@ function buildTrackerTable(seAry) {
 }
 
 function insertNewRow() {
-  const newRow = getPcc().lastElementChild.insertRow(-1);
+  const newRow = pcc().lastElementChild.insertRow(-1);
   const newCell = newRow.insertCell(-1);
   newCell.colSpan = 3;
   return newCell;

@@ -9,7 +9,7 @@ import on from '../../common/on';
 import onclick from '../../common/onclick';
 import setInnerHtml from '../../dom/setInnerHtml';
 import calf from '../../support/calf';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
 import testQuant from '../../system/testQuant';
@@ -71,7 +71,7 @@ function bioPreview() {
 function bioWords() {
   if (calf.cmd === 'profile') {
     // Add description text for the new tags
-    insertHtmlBeforeEnd(getPcc(), '<div>'
+    insertHtmlBeforeEnd(pcc(), '<div>'
       + '`~This will allow FSH Script users to select buffs from your bio~`<br>'
       + 'You can use the [cmd] tag as well to determine where to put the "Ask '
       + 'For Buffs" button<br><br><blockquote><ul class="list">'
@@ -108,7 +108,7 @@ function bioHeight() {
   });
   onclick(saveLines, changeHeight);
   insertElement(bioEditLinesDiv, saveLines);
-  insertElement(getPcc(), bioEditLinesDiv);
+  insertElement(pcc(), bioEditLinesDiv);
 }
 
 function updateBioCharacters() {

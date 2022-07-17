@@ -7,7 +7,7 @@ import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
 import calf from '../../support/calf';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import { get, set } from '../../system/idb';
 import numberSort from '../../system/numberSort';
 import stringSort from '../../system/stringSort';
@@ -121,7 +121,7 @@ function prepAry(data) {
 }
 
 function haveJquery(injector) { // jQuery.min
-  content = injector || getPcc();
+  content = injector || pcc();
   if (!content) { return; }
   get('fsh_monsterLog').then(prepAry);
 }

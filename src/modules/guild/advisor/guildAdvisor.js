@@ -15,7 +15,7 @@ import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
 import calf from '../../support/calf';
 import { cmdUrl } from '../../support/constants';
 import { time, timeEnd } from '../../support/debug';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import getValue from '../../system/getValue';
 import { injectTable, playerLevel, playerRank } from './helpers';
 import injectAdvisorWeekly from './injectAdvisorWeekly';
@@ -56,7 +56,7 @@ function getData(list, membrList) {
 }
 
 function summaryLink() {
-  const updateInput = getElementsByClassName('custombutton', getPcc());
+  const updateInput = getElementsByClassName('custombutton', pcc());
   if (updateInput.length === 0) { return; }
   insertHtmlAfterEnd(updateInput[0], `<span> <a href="${cmdUrl
   }guild&subcmd=advisor&subcmd2=weekly">7-Day Summary</a></span>`);
@@ -86,7 +86,7 @@ function switcher(list) {
 
 export default function guildAdvisor() {
   if (jQueryNotPresent()) { return; }
-  const list = getElementsByTagName('table', getPcc())[1];
+  const list = getElementsByTagName('table', pcc())[1];
   if (!list) { return; }
   loadDataTables().then(() => switcher(list));
   interceptSubmit();

@@ -1,11 +1,11 @@
 import getArrayByTagName from '../common/getArrayByTagName';
 import includes from '../common/includes';
-import { getPcl } from '../support/layout';
+import { pcl } from '../support/layout';
 import task from '../support/task';
 import getValue from '../system/getValue';
 
 function doMsgSound() {
-  const msg = getArrayByTagName('a', getPcl()).filter(includes('message'));
+  const msg = getArrayByTagName('a', pcl()).filter(includes('message'));
   if (msg.length) {
     const sound = new Audio(getValue('defaultMessageSound'));
     sound.play();

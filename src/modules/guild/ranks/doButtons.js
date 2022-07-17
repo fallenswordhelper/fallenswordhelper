@@ -5,7 +5,7 @@ import onclick from '../../common/onclick';
 import playerName from '../../common/playerName';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import toLowerCase from '../../common/toLowerCase';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import getValue from '../../system/getValue';
 
 let characterRow = 0;
@@ -55,7 +55,7 @@ function ajaxifyRankControls(evt) {
 
 export function doButtons() {
   if (characterRow && getValue('ajaxifyRankControls')) {
-    onclick(getPcc(), ajaxifyRankControls, true);
+    onclick(pcc(), ajaxifyRankControls, true);
   }
 }
 

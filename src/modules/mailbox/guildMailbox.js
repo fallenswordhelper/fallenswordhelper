@@ -10,7 +10,7 @@ import onclick from '../common/onclick';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 
 function translateReturnInfo(data) {
   const info = infoBoxFrom(data);
@@ -42,13 +42,13 @@ function guildMailboxEvent(e) { // jQuery.min
     guildMailboxTake(anchor).then(partial(takeResult, target));
   }
   if (target.className === 'sendLink') {
-    getArrayByTagName('img', getPcc()).forEach(clickThis);
+    getArrayByTagName('img', pcc()).forEach(clickThis);
   }
 }
 
 export default function guildMailbox() {
   if (jQueryNotPresent()) { return; }
-  onclick(getPcc(), guildMailboxEvent);
+  onclick(pcc(), guildMailboxEvent);
   insertHtmlBeforeEnd(
     querySelector('#pCC td[height="25"]'),
     '<span class="sendLink">Take All</span>',

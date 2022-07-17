@@ -17,7 +17,7 @@ import regExpGroups from '../common/regExpGroups';
 import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
 import { fetchItemRe } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import testQuant from '../system/testQuant';
 
 let bazaarTable = '<table class="fshBazaar"><tr><td colspan="5">Select an item to quick-buy:'
@@ -121,9 +121,9 @@ function evtHandlers() {
 
 export default function bazaar() {
   if (jQueryNotPresent()) { return; }
-  const pbImg = getElementsByTagName('img', getPcc())[0];
+  const pbImg = getElementsByTagName('img', pcc())[0];
   pbImg.className = 'fshFloatLeft';
-  getArrayByTagName('a', getPcc()).forEach(doMiniatures);
+  getArrayByTagName('a', pcc()).forEach(doMiniatures);
   bazaarTable = bazaarTable.replace(/@\d@/g, '');
   insertHtmlBeforeEnd(pbImg.parentNode, bazaarTable);
   evtHandlers();

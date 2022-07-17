@@ -6,7 +6,7 @@ import getPlayerId from '../common/getPlayerId';
 import playerId from '../common/playerId';
 import querySelectorArray from '../common/querySelectorArray';
 import { playerLinkSelector } from '../support/constants';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 
 const getPlyrId = (a) => getPlayerId(a.href);
@@ -34,7 +34,7 @@ function processGuildWidgetRow(aRow) { // Legacy
 }
 
 function getMessageHeader() {
-  return getArrayByTagName('td', getPcc()).find(contains('Message'));
+  return getArrayByTagName('td', pcc()).find(contains('Message'));
 }
 
 function guildLogWidgetsEnabled() { // Legacy

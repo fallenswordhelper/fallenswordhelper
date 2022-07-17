@@ -7,7 +7,7 @@ import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import jQueryPresent from '../common/jQueryPresent';
 import onclick from '../common/onclick';
 import querySelectorArray from '../common/querySelectorArray';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 import backgroundCreate from './backgroundCreate';
 import fastCompose from './fastCompose';
@@ -18,7 +18,7 @@ function moveButtons() {
     const buttonDiv = getElementById('composing-error-dialog')
       .previousElementSibling;
     buttonDiv.setAttribute('style', 'text-align: right; padding: 0 38px 0 0');
-    const top = getElementsByClassName('composing-level', getPcc())[0]
+    const top = getElementsByClassName('composing-level', pcc())[0]
       .parentNode;
     insertElementBefore(buttonDiv, top);
   }
@@ -50,13 +50,13 @@ function quickCreate(evt) {
 
 function hasJQuery() {
   parseComposing();
-  querySelectorArray('input[id^=create-]:not(#create-multi)', getPcc())
+  querySelectorArray('input[id^=create-]:not(#create-multi)', pcc())
     .forEach(injectButton);
-  onclick(getPcc(), quickCreate);
+  onclick(pcc(), quickCreate);
   moveButtons();
   fastCompose();
 }
 
 export default function composing() {
-  if (jQueryPresent() && getPcc()) { hasJQuery(); }
+  if (jQueryPresent() && pcc()) { hasJQuery(); }
 }

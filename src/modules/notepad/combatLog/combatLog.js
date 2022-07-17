@@ -5,7 +5,7 @@ import jQueryNotPresent from '../../common/jQueryNotPresent';
 import jsonStringify from '../../common/jsonStringify';
 import onclick from '../../common/onclick';
 import setInnerHtml from '../../dom/setInnerHtml';
-import { getPcc } from '../../support/layout';
+import { pcc } from '../../support/layout';
 import { get, set } from '../../system/idb';
 
 let combatLogs = [];
@@ -44,5 +44,5 @@ function gotCombatLog(content, data) {
 export default async function combatLog(injector) { // jQuery.min
   if (jQueryNotPresent()) { return; }
   const data = await get('fsh_combatLog');
-  gotCombatLog(injector || getPcc(), data);
+  gotCombatLog(injector || pcc(), data);
 }

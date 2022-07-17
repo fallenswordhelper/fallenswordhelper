@@ -8,7 +8,7 @@ import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import regExpFirstCapture from '../common/regExpFirstCapture';
 import setInnerHtml from '../dom/setInnerHtml';
-import { getPcc } from '../support/layout';
+import { pcc } from '../support/layout';
 
 async function search(injector, e) {
   e.preventDefault();
@@ -50,5 +50,5 @@ export default function injectBuffmarket() {
   const buffResults = querySelector('#buff-results');
   if (!buffResults) { return; }
   injectSearch(buffResults);
-  onclick(getPcc(), interceptClick, true);
+  onclick(pcc(), interceptClick, true);
 }

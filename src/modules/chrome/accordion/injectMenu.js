@@ -2,7 +2,7 @@ import fromEntries from '../../common/fromEntries';
 import getElementById from '../../common/getElementById';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import theLinks from '../../settings/leftHandLinks.json';
-import { getPcl } from '../../support/layout';
+import { pcl } from '../../support/layout';
 import getValue from '../../system/getValue';
 import navMenu from './navMenu';
 import preFlight from './preFlight';
@@ -44,6 +44,6 @@ function doAccordion() {
 }
 
 export default function injectMenu() {
-  if (!getPcl() || jQueryNotPresent()) { return; }
+  if (!pcl() || jQueryNotPresent()) { return; }
   doAccordion();
 }
