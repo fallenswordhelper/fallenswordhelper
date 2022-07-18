@@ -61,12 +61,11 @@ function basicQt() {
   });
 }
 
-function makeTakeResult(qt) {
+function makeTakeResult() {
   const takeContainer = createDiv();
   const takeResult = createUl();
   insertElement(takeContainer, takeResult);
-  insertElement(qt, takeContainer);
-  return takeResult;
+  return { takeContainer, takeResult };
 }
 
 function makeItemBox(itemTbl, pair) {
@@ -136,9 +135,10 @@ function makeItemTable(itemList, qt, takeResult) {
 
 function makeQtDiv(itemList) {
   const qt = basicQt();
-  const takeResult = makeTakeResult(qt);
-  insertElement(qt, createDiv());
+  const { takeContainer, takeResult } = makeTakeResult(qt);
   makeItemTable(itemList, qt, takeResult);
+  insertElement(qt, createDiv());
+  insertElement(qt, takeContainer);
   insertElement(pcc(), qt);
 }
 
