@@ -105,12 +105,14 @@
     <tr>
       <td colspan="3">
         {#await buildTitanList() then}
+          <div id="titan-list">
           {#each titans as [name, flag]}
             <label>
               <input bind:checked={flag} on:change={toggleTitan} type="checkbox">
               {name}
             </label>&ensp;
           {/each}
+          </div>
           <div>
             <LinkButtonBracketed on:click={selectAll}>Select All</LinkButtonBracketed>
             <LinkButtonBracketed on:click={selectNone}>Select None</LinkButtonBracketed>
@@ -141,5 +143,12 @@
   div {
     margin-top: 4px;
     --button-margin: auto 2px;
+  }
+  #titan-list {
+    column-count: 3;
+  }
+  #titan-list > label {
+    display: block;
+    text-align: left;
   }
 </style>
