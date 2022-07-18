@@ -135,7 +135,7 @@ function makeItemTable(itemList, qt, takeResult) {
 
 function makeQtDiv(itemList) {
   const qt = basicQt();
-  const { takeContainer, takeResult } = makeTakeResult(qt);
+  const { takeContainer, takeResult } = makeTakeResult();
   makeItemTable(itemList, qt, takeResult);
   insertElement(qt, createDiv());
   insertElement(qt, takeContainer);
