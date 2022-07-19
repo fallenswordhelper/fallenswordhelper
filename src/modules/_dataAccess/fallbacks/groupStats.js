@@ -1,16 +1,16 @@
-import groupViewStats from '../../ajax/groupViewStats';
 import indexAjaxDoc from '../../ajax/indexAjaxDoc';
+import groupViewStats from '../../common/groupViewStats';
 
 function parseReport(doc) {
   const stats = groupViewStats(doc);
   return {
     r: {
       attributes: [
-        { value: stats.attack },
-        { value: stats.defense },
-        { value: stats.armor },
-        { value: stats.damage },
-        { value: stats.hp },
+        { id: 0, value: stats.attack },
+        { id: 1, value: stats.defense },
+        { id: 2, value: stats.armor },
+        { id: 4, value: stats.damage },
+        { id: 3, value: stats.hp },
       ],
     },
   };

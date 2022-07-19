@@ -15,7 +15,7 @@ import hideGroupButton from './hideGroupButton';
 import hideTitanCombatResults from './hideTitanCombatResults';
 import monsterLog from './monsterLog/monsterLog';
 import onWorld from './onWorld';
-import injectRelic from './relic/relic';
+import relic from './relic/relic';
 import repairButton from './repairButton';
 import sendGold from './sendGold';
 import shop from './shop';
@@ -42,7 +42,7 @@ const usualRoutines = [
   combatLogger,
   onWorld,
   shop,
-  injectRelic,
+  relic,
   msgCenterOffset,
   hideMapTooltip,
   buttons,

@@ -1,28 +1,29 @@
-import getMercStats from '../../ajax/getMercStats';
-import groupViewStats from '../../ajax/groupViewStats';
+import daMercsView from '../../_dataAccess/daMercsView';
+import groupViewStats from '../../common/groupViewStats';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import setInnerHtml from '../../dom/setInnerHtml';
 import addCommas from '../../system/addCommas';
-
-let groupStats = 0;
+import mercEffect from './mercEffect';
 
 function displayStat(el, groupStat, mercStat) {
   setInnerHtml(`<span class="fshBlue">${addCommas(groupStat)}</span> ( ${
     addCommas(groupStat - mercStat)} )`, el);
 }
 
-function parseMercStats(mercStats) {
-  displayStat(groupStats.attackElement, groupStats.attack, mercStats.attack);
-  displayStat(groupStats.defenseElement, groupStats.defense, mercStats.defense);
-  displayStat(groupStats.armorElement, groupStats.armor, mercStats.armor);
-  displayStat(groupStats.damageElement, groupStats.damage, mercStats.damage);
-  displayStat(groupStats.hpElement, groupStats.hp, mercStats.hp);
+function updateDom(groupStats, thisMercEffect) {
+  displayStat(groupStats.attackElement, groupStats.attack, thisMercEffect?.[0]);
+  displayStat(groupStats.defenseElement, groupStats.defense, thisMercEffect?.[1]);
+  displayStat(groupStats.armorElement, groupStats.armor, thisMercEffect?.[2]);
+  displayStat(groupStats.hpElement, groupStats.hp, thisMercEffect?.[3]);
+  displayStat(groupStats.damageElement, groupStats.damage, thisMercEffect?.[4]);
 }
 
-export default function injectGroupStats() { // jQuery
+export default async function injectGroupStats() { // jQuery
   if (jQueryNotPresent()) { return; }
-  groupStats = groupViewStats(document);
+  const groupStats = groupViewStats(document);
   if (groupStats.attackElement) {
-    getMercStats().then(parseMercStats);
+    const mercs = await daMercsView();
+    const thisMercEffect = mercEffect(mercs);
+    updateDom(groupStats, thisMercEffect);
   }
 }

@@ -1,5 +1,5 @@
 import getMembrList from '../../ajax/getMembrList';
-import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
+import insertHtmlBeforeBegin from '../../common/insertHtmlBeforeBegin';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
@@ -10,9 +10,9 @@ import groupButtons from './groupButtons';
 function displayMinGroupLevel() {
   const minGroupLevel = getValue('minGroupLevel');
   if (minGroupLevel) {
-    insertHtmlBeforeEnd(
-      querySelector('#pCC > table > tbody > tr > td > table td'),
-      `<div class="fshBlue"> Current Min Level Setting: ${minGroupLevel}</div>`,
+    insertHtmlBeforeBegin(
+      querySelector('#pCC br'),
+      `<span class="fshBlue"> Current Min Level Setting: ${minGroupLevel}</span>`,
     );
   }
 }

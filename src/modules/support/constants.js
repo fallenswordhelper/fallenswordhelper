@@ -17,14 +17,6 @@ export const places = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth',
 export const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
   'Sep', 'Oct', 'Nov', 'Dec'];
 
-export const mercRE = [
-  /<td>Attack:<\/td><td>(?<attack>\d+)<\/td>/,
-  /<td>Defense:<\/td><td>(?<defense>\d+)<\/td>/,
-  /<td>Armor:<\/td><td>(?<armor>\d+)<\/td>/,
-  /<td>Damage:<\/td><td>(?<damage>\d+)<\/td>/,
-  /<td>HP:<\/td><td>(?<hp>\d+)<\/td>/,
-];
-
 export const etaRe = /ETA:\s*(?<h>\d+)h\s*(?<m>\d+)m\s*(?<s>\d+)s/;
 export const fetchItemRe = /fetchitem.php\?item_id=(?<itemId>\d+)&inv_id=(?<invId>[-\d]+)&t=(?<t>\d+)&p=(?<p>\d+)(?:&vcode=(?<vcode>[a-z0-9]+))?/i;
 export const guildRE = /guild_id=(?<guildId>\d+)/;

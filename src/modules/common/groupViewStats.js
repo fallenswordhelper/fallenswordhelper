@@ -1,5 +1,3 @@
-import getElementById from '../common/getElementById';
-import getText from '../common/getText';
 import {
   defStatArmor,
   defStatAttack,
@@ -8,6 +6,8 @@ import {
   defStatHp,
 } from '../support/constants';
 import intValue from '../system/intValue';
+import getElementById from './getElementById';
+import getText from './getText';
 
 let attackElement = 0;
 let defenseElement = 0;
