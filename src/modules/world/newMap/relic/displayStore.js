@@ -48,22 +48,18 @@ export const defBuffedDisplay = derived(defBuffed, ($defBuffed, set) => {
   });
 });
 
+const statsDisplay = (stats) => ({
+  attack: stats?.attack ?? '',
+  defense: stats?.defense ?? '',
+  armor: stats?.armor ?? '',
+  hp: stats?.hp ?? '',
+  damage: stats?.damage ?? '',
+});
+
 export const rawGroupDisplay = derived(rawGroupStats, ($rawGroupStats, set) => {
-  set({
-    attack: $rawGroupStats?.attack ?? '',
-    defense: $rawGroupStats?.defense ?? '',
-    armor: $rawGroupStats?.armor ?? '',
-    hp: $rawGroupStats?.hp ?? '',
-    damage: $rawGroupStats?.damage ?? '',
-  });
+  set(statsDisplay($rawGroupStats));
 });
 
 export const buffResultDisplay = derived(buffResult, ($buffResult, set) => {
-  set({
-    attack: $buffResult?.attack ?? '',
-    defense: $buffResult?.defense ?? '',
-    armor: $buffResult?.armor ?? '',
-    hp: $buffResult?.hp ?? '',
-    damage: $buffResult?.damage ?? '',
-  });
+  set(statsDisplay($buffResult));
 });
