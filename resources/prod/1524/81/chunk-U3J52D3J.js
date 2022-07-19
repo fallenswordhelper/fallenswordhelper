@@ -1,0 +1,2 @@
+import{a as r}from"./chunk-LZHFM6TG.js";function c(n){return new Promise(o=>{let e=document.createElement("script");e.async=!0,e.onload=o,e.src=n,document.body.appendChild(e)})}function d(n){let o=r("link",document.body);return new Promise(e=>{let t=document.createElement("link");t.type="text/css",t.rel="stylesheet",t.onload=()=>{e()},t.href=n,o?o.before(t):document.body.append(t)})}export{c as a,d as b};
+//# sourceMappingURL=chunk-U3J52D3J.js.map
