@@ -23,7 +23,7 @@ function joined(container) {
   );
 }
 
-function joinGroup(groupID, container) { // jQuery.min
+function joinGroup(groupID, container) {
   indexAjaxData({
     cmd: 'guild',
     subcmd: 'groups',

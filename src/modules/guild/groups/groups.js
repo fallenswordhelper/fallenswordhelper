@@ -10,8 +10,9 @@ import groupButtons from './groupButtons';
 function displayMinGroupLevel() {
   const minGroupLevel = getValue('minGroupLevel');
   if (minGroupLevel) {
+    const groupTable = querySelector('#pCC table[width="650"]');
     insertHtmlBeforeBegin(
-      querySelector('#pCC br'),
+      querySelector('br', groupTable),
       `<span class="fshBlue"> Current Min Level Setting: ${minGroupLevel}</span>`,
     );
   }
@@ -28,7 +29,7 @@ function fixTable() {
   tds[4].setAttribute('width', '7%');
 }
 
-export default function groups() { // jQuery
+export default function groups() {
   if (jQueryNotPresent()) { return; }
   const joinAll = querySelector('#pCC input[value="Join All Available Groups"]');
   if (!joinAll) { return; }
