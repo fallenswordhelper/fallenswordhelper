@@ -10,16 +10,28 @@ export const hasGroup = writable(0);
 
 const myGroup = (g) => g.members[0].name === GameData.player().username;
 
+async function getGroupId() {
+  const groups = await daViewGroups();
+  return groups?.r?.find(myGroup)?.id;
+}
+
+async function getGroupStats(groupId) {
+  const group = await daGroupStats(groupId);
+  return attribsToArray(group?.r?.attributes);
+}
+
+async function statsWithoutMercs(groupStats) {
+  const mercs = await daMercsView();
+  const thisMercEffect = mercEffect(mercs);
+  return groupStats?.map((stat, i) => stat - thisMercEffect[i]);
+}
+
 async function groupStuff($hasGroup, set) {
   if (!$hasGroup) return;
   processingStatus.set(['groupStore', 'Processing attacking group stats ... ']);
-  const groups = await daViewGroups();
-  const groupId = groups?.r?.find(myGroup)?.id;
-  const group = groupId && await daGroupStats(groupId);
-  const groupStats = attribsToArray(group?.r?.attributes);
-  const mercs = groupStats && await daMercsView();
-  const thisMercEffect = mercEffect(mercs);
-  const withoutMercs = groupStats?.map((stat, i) => stat - thisMercEffect[i]);
+  const groupId = await getGroupId();
+  const groupStats = groupId && await getGroupStats(groupId);
+  const withoutMercs = groupStats && await statsWithoutMercs(groupStats);
   if (withoutMercs) {
     set({
       attack: withoutMercs[0],
