@@ -25,7 +25,6 @@ import fixTeleport from './fixTeleport';
 import makeToggleBtn from './makeToggleBtn';
 
 let buttonContainer = 0;
-// let lvlSpan = 0;
 let realmLvl = 0;
 let yourLvl = 0;
 let formGroup = 0;
@@ -75,18 +74,18 @@ function makeButtonContainer() {
 
 const exists = (val) => textSpan(val ? val.toString() : '?');
 
-function levelBox(prefix, aSpan) {
+function levelBox(lvlDiv, prefix, aSpan) {
   const aDiv = createDiv({ textContent: `${prefix} Lvl: ` });
   insertElement(aDiv, aSpan);
-  return aDiv;
+  insertElement(lvlDiv, aDiv);
 }
 
 function doLevels(worldName) {
   const lvlDiv = createDiv({ className: 'fshFsty' });
   realmLvl = exists(GameData.realm().minlevel);
-  insertElement(lvlDiv, levelBox('Min', realmLvl));
+  levelBox(lvlDiv, 'Min', realmLvl);
   yourLvl = exists(GameData.player().level);
-  insertElement(lvlDiv, levelBox('Your', yourLvl));
+  levelBox(lvlDiv, 'Your', yourLvl);
   insertElement(worldName, lvlDiv);
 }
 
