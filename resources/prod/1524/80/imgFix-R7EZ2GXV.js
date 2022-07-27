@@ -1,2 +1,0 @@
-import{a as e}from"./chunk-A6IR7G22.js";import{a as n}from"./chunk-ZUUQECWA.js";import"./chunk-YMYO7RVQ.js";import"./chunk-AJ22QQIT.js";function c(r){return r.complete&&r.naturalHeight===0}function o(r){return r.src.replace(/^http:\/\/cdn\.fallensword\.com\/skin\/gold_button\.gif$/,"https://cdn2.fallensword.com/currency/0.png").replace(/\.jpg$/,".png").replace(/^http:/,"https:").replace(/\.gif$/,".png")}function i(){let r=n("img");for(let t of r)e(t,"error",()=>{t.src=o(t)}),c(t)&&(t.src=o(t))}export{i as default};
-//# sourceMappingURL=imgFix-R7EZ2GXV.js.map

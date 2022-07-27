@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/replaceDoubleSpace.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.82","mappings":"AAAe,SAARA,EAAoCC,EAAK,CAC9C,OAAOA,EAAI,QAAQ,SAAU,GAAG,CAClC","names":["replaceDoubleSpace","str"]}

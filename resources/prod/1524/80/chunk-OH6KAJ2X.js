@@ -1,2 +1,0 @@
-import{a as s}from"./chunk-UACVLVJZ.js";import{a as g}from"./chunk-5JKG2KXO.js";import{a as e}from"./chunk-KUKFZGKL.js";import{Aa as i,Ba as u,Ca as p,Da as d,za as o}from"./chunk-I6XFTTZH.js";var a,m,n,f,l;function E(t){a=e(i,t),m=e(o,t),n=e(p,t),f=e(u,t),l=e(d,t)}function r(t){return t?s(g(t)):0}function S(t){return E(t),{attack:r(a),attackElement:a,defense:r(m),defenseElement:m,armor:r(n),armorElement:n,damage:r(f),damageElement:f,hp:r(l),hpElement:l}}export{S as a};
-//# sourceMappingURL=chunk-OH6KAJ2X.js.map

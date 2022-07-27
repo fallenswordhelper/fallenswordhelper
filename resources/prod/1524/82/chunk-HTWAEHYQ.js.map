@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/cElement/createButton.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.82","mappings":"wCAEe,SAARA,EAA8BC,EAAO,CAC1C,OAAOC,EAAS,SAAUD,CAAK,CACjC","names":["createButton","props","cElement"]}
