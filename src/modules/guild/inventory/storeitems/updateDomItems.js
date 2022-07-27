@@ -38,7 +38,7 @@ const generalButton = (className, extra, text) => ` [<button class="fshStoreItem
   className}"${extra}>${text}</button>]`;
 
 const actionButton = (color, type, label) => generalButton(
-  `${color} actionButton tooltip-multiline`,
+  `${color} actionButton tooltip-multiline fshNoWrap`,
   tooltip(type),
   `Quick ${label}`,
 );
