@@ -73,9 +73,9 @@ function doTopLabels(ourTitan) {
 
 function memberRow(ourTitan, member) {
   return [[
-    [2, textSpan(member.player.name)],
-    [2, textSpan(member.kills.toString())],
-    [2, textSpan(`${roundToString((member.kills * 100) / ourTitan.kills, 2)}%`)],
+    [2, () => textSpan(member.player.name)],
+    [2, () => textSpan(member.kills.toString())],
+    [2, () => textSpan(`${roundToString((member.kills * 100) / ourTitan.kills, 2)}%`)],
   ]];
 }
 

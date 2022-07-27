@@ -1,15 +1,14 @@
 import sendException from '../analytics/sendException';
 import on from '../common/on';
+import calf from './calf';
 import parseError from './parseError';
 
 let enabled = 0;
 
 function handleMsgStack(type, stuff) {
   const msg = parseError(stuff);
-  if (msg.includes('calfSystem')) {
-    sendException(type + msg, true);
-    return true;
-  }
+  sendException(type + msg, true);
+  return true;
 }
 
 function handleError(type, stuff) {
@@ -23,7 +22,7 @@ function logError(e) {
 }
 
 function unhandledrejection(e) {
-  if (handleError('Uncaught (in promise) ', e.reason)) {
+  if (handleError('Uncaught (in promise) ', e.reason) && !calf.userIsDev) {
     e.preventDefault();
   }
 }
