@@ -33,9 +33,13 @@ function stripExtra(acc, curr) {
   return acc.replace(curr[0], curr[1] || '');
 }
 
-function fixupUrl() {
+function getPage() {
   const origPath = window.location.pathname + window.location.search;
-  const page = urlPatch.reduce(stripExtra, origPath);
+  return urlPatch.reduce(stripExtra, origPath);
+}
+
+function fixupUrl() {
+  const page = getPage();
   ga('fshApp.set', 'screenName', page);
   ga('fsh.set', 'page', page);
 }
@@ -74,13 +78,23 @@ function analyticsSetup() {
   initSite();
 }
 
+function gtagPlayerId() {
+  const pid = playerId();
+  if (pid) gtag('config', 'G-14Y99WX8XL', { user_id: pid });
+}
+
 function gtagSetup() {
   loadScript('https://www.googletagmanager.com/gtag/js?id=G-14Y99WX8XL');
   window.dataLayer = window.dataLayer || [];
   // eslint-disable-next-line prefer-rest-params
   window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
   gtag('js', new Date());
-  gtag('config', 'G-14Y99WX8XL');
+  gtag('config', 'G-14Y99WX8XL', {
+    app_name: 'fshApp',
+    app_version: `${calf.fshVer}(${calf.calfVer})`,
+    page_location: getPage(),
+  });
+  gtagPlayerId();
 }
 
 export default function setup() {
