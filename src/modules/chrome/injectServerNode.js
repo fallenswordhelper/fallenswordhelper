@@ -5,7 +5,6 @@ import getText from '../common/getText';
 import hasClass from '../common/hasClass';
 import insertElement from '../common/insertElement';
 import querySelectorArray from '../common/querySelectorArray';
-import toggleForce from '../common/toggleForce';
 import setInnerHtml from '../dom/setInnerHtml';
 
 function doServerNode(topbannerStats, miniboxList) {
@@ -29,7 +28,7 @@ function statBoxesExist(topbannerStats, gameStats) {
   if (miniboxList.children.length === 8) {
     doServerNode(topbannerStats, miniboxList);
     doOnlinePlayers(topbannerStats, miniboxList);
-    toggleForce(gameStats.parentNode, true);
+    gameStats.parentNode.classList.add('fshInvisible');
   }
 }
 

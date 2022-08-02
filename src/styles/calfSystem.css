@@ -192,6 +192,7 @@
 .fshTblCenter {margin: 0 auto;}
 .fshRight {text-align: right;}
 .fshHide {display: none;}
+.fshInvisible {visibility: hidden;}
 .fshWearHide {display: none;}
 .fshInline {display: inline;}
 .fshBlock {display: inline-block;}
