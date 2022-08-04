@@ -31,14 +31,20 @@ function removeStatTable(tbl) {
 const removeAttr = (root, el, attr) => querySelectorArray(`${el}[${attr}]`, root)
   .forEach((l) => l.removeAttribute(attr));
 
+function cleanTable(charStats) {
+  removeAttr(charStats, 'tr', 'style');
+  removeAttr(charStats, 'td', 'width');
+  querySelector('td[colspan]', charStats)?.removeAttribute('colspan');
+}
+
+function updateCharStats(charStats) {
+  charStats.classList.add('fshCharStats');
+  cleanTable(charStats);
+  querySelectorArray(defTable, charStats).forEach(removeStatTable);
+  insertElementBefore(createStyle(statStyle), charStats);
+}
+
 export default function updateStatistics() {
   const charStats = querySelector('#profileLeftColumn table');
-  if (charStats) {
-    charStats.classList.add('fshCharStats');
-    removeAttr(charStats, 'tr', 'style');
-    removeAttr(charStats, 'td', 'width');
-    querySelector('td[colspan]', charStats)?.removeAttribute('colspan');
-    querySelectorArray(defTable, charStats).forEach(removeStatTable);
-    insertElementBefore(createStyle(statStyle), charStats);
-  }
+  if (charStats) updateCharStats(charStats);
 }
