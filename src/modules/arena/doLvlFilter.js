@@ -1,5 +1,4 @@
 import { lvlTest, playerLvlTest } from '../common/lvlTests';
-import calf from '../support/calf';
 import intValue from '../system/intValue';
 import { getOpts } from './setOpts';
 
@@ -25,7 +24,5 @@ function specFilter(_settings, _searchData, _index, rowData) {
 
 export default function doLvlFilter() {
   $.fn.dataTable.ext.search.push(lvlFilter);
-  if (calf.userIsDev) { //  specFilter
-    $.fn.dataTable.ext.search.push(specFilter);
-  }
+  $.fn.dataTable.ext.search.push(specFilter);
 }
