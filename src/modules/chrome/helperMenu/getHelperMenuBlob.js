@@ -19,14 +19,15 @@ const topSection = '<div class="helperMenuSectionHeader">Character</div><ul>'
   + '</ul><div class="helperMenuSectionHeader">Guild</div><ul>'
   + `<li><a href="${notepadBlankUrl}guildinvmgr">Guild Inventory</a></li>`
   + `<li><a href="${newGuildLogUrl}">New Guild Log</a></li>`
+  + '<li><button class="helperDevBtn helperGo" type="button">Merc Hunter</button></li>'
   + '</ul><div class="helperMenuSectionHeader">Extra</div><ul>'
-  + '<li><button class="helperDevBtn helperQuickExtract" type="button">Quick Extract</button></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">Quick Extract</button></li>'
   + '<li><span class="fshLink">Quick Wear</span></li>'
   + '<li><span class="fshLink">FS Box Log</span></li></ul>';
 
 const betaSection = '<div class="helperMenuSectionHeader">Beta Features</div><ul>'
   + `<li><a href="${notepadBlankUrl}reliclist">Relic List</a><sup class="fshRed">beta</sup></li>`
-  + '<li><button class="helperDevBtn helperGsDl" type="button">GS Export</button><sup class="fshRed">beta</sup></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">GS Export</button><sup class="fshRed">beta</sup></li>'
   + '</ul>';
 
 const bottomSection = '<div class="helperMenuSectionHeader">FSH developer quick links</div><ul>'

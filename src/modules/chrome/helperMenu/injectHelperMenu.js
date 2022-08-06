@@ -12,10 +12,8 @@ import once from '../../common/once';
 import onclick from '../../common/onclick';
 import getValue from '../../system/getValue';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
-import quickExtract from '../pageSwitcher/loader/quickExtract';
 import functionLookup from './functionLookup';
 import getHelperMenuBlob from './getHelperMenuBlob';
-import gsDl from './gsDl';
 
 function toggleMenu(evt) {
   if (evt.target.id !== 'helperMenu') { return; }
@@ -32,19 +30,22 @@ function callHelperFunction(target) {
   }
 }
 
-function doQuickExtract() {
-  sendEvent('helperMenu', 'quickExtract');
-  quickExtract();
+function callModalFunction(target) {
+  const functionPath = getText(target);
+  const fn = functionLookup[functionPath];
+  if (isFunction(fn)) {
+    sendEvent('helperMenu', functionPath);
+    fn();
+  }
 }
 
 const classEvents = [
   ['fshLink', callHelperFunction],
+  ['helperGo', callModalFunction],
   ['helperMenuReply', (target) => {
     sendEvent('helperMenu', 'helperMenuReply');
     window.openQuickMsgDialog(target.getAttribute('target_player'));
   }],
-  ['helperGsDl', gsDl],
-  ['helperQuickExtract', doQuickExtract],
 ];
 
 function showHelperMenu(evt) {
