@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/getBuff.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.83","mappings":"wCAEe,SAARA,EAAyBC,EAAU,CACxC,OAAOC,EAAS,KAAM,GAAM,EAAE,OAASD,CAAQ,CACjD","names":["getBuff","thisBuff","buffObj_default"]}

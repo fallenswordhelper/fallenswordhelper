@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/ajax/indexAjaxDoc.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.83","mappings":"2EAGA,eAAOA,EAAoCC,EAAK,CAC9C,IAAMC,EAAO,MAAMC,EAAcF,CAAG,EACpC,OAAOG,EAAeF,CAAI,CAC5B","names":["indexAjaxDoc","obj","html","indexAjaxData","createDocument"]}

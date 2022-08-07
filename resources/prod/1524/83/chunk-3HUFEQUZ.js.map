@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/dataRows.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.83","mappings":"wCAEe,SAARA,EAA0BC,EAAOC,EAAMC,EAAM,CAClD,OAAOC,EAAUH,EAAM,IAAI,EAAE,OAAO,CAACI,EAAKC,IAAMD,EAAI,SAAS,SAAWH,GAAQI,EAAIH,CAAI,CAC1F","names":["dataRows","table","cols","skip","arrayFrom","row","i"]}

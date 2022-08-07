@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/classHandler.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.83","mappings":"mHAIe,SAARA,EAA8BC,EAAQ,CAC3C,OAAOC,EAAQC,EAAaC,EAAWH,CAAM,CAC/C","names":["classHandler","evtAry","partial","handleEvent","classPair"]}
