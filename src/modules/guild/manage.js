@@ -19,7 +19,7 @@ import stamBars from './stamBars/stamBars';
 function relicControl(leftHandSideColumnTable) {
   const relic = getArrayByTagName('b', leftHandSideColumnTable)
     .filter(contains('Relics'));
-  if (relic.length !== 1) { return; }
+  if (relic.length !== 1) return;
   const thisFont = relic[0].parentNode.nextElementSibling.children[0];
   setInnerHtml(`[ <a href="${guildSubcmdUrl}reliclist">Control</a> ]&nbsp;`, thisFont);
 }
@@ -27,7 +27,7 @@ function relicControl(leftHandSideColumnTable) {
 function selfRecallLink(leftHandSideColumnTable) {
   // self recall
   const getLi = getElementsByTagName('li', leftHandSideColumnTable);
-  if (!getLi || !getLi.length) { return; }
+  if (!getLi || !getLi.length) return;
   const selfRecall = getLi[getLi.length - 1].parentNode;
   insertHtmlBeforeEnd(
     selfRecall,
@@ -36,7 +36,7 @@ function selfRecallLink(leftHandSideColumnTable) {
 }
 
 function getLhsColTab() {
-  return pcc().lastElementChild.rows[2].cells[0].children[0];
+  return pcc().lastElementChild.rows?.[2].cells[0].children[0];
 }
 
 function lhsAdd(leftHandSideColumnTable, fn) {
@@ -54,7 +54,7 @@ function lhsAdditions(leftHandSideColumnTable) {
 }
 
 function ajaxStuff(leftHandSideColumnTable) {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) return;
   // Detailed conflict information
   if (getValue('detailedConflictInfo')) {
     task(3, conflictInfo, [leftHandSideColumnTable]);
@@ -63,10 +63,11 @@ function ajaxStuff(leftHandSideColumnTable) {
 }
 
 export default function manage() {
-  if (!pcc()) { return; }
+  if (!pcc()) return;
   const leftHandSideColumnTable = getLhsColTab();
+  if (!leftHandSideColumnTable) return;
   lhsAdditions(leftHandSideColumnTable);
-  if (getValue('showBuffLinks')) { task(3, buffLinks); }
+  if (getValue('showBuffLinks')) task(3, buffLinks);
   ajaxStuff(leftHandSideColumnTable);
   stamBars();
 }

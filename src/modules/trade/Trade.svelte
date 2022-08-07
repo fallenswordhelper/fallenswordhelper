@@ -33,7 +33,7 @@
     itemTables = invIds.map(([c, table, invId]) => [c, table, getItem(inv.items, invId)]);
     itemVisibility = itemTables.map((x) => [...x, true]);
     itemTables
-      .filter(([, , itm]) => itm.is_in_st)
+      .filter(([, , itm]) => itm?.is_in_st)
       .forEach(([, tbl]) => { tbl.classList.add('isInST'); });
   }
 

@@ -16,7 +16,7 @@ import {
 } from '../../support/constants';
 import createDocument from '../../system/createDocument';
 
-const guildXp = (el) => Number(getTextTrim(closestTr(el).cells[4]).replaceAll(',', ''));
+const guildXp = (el) => Number(getTextTrim(closestTr(el)?.cells[4])?.replaceAll(',', ''));
 const playerId = (el) => Number(regExpFirstCapture(playerIDRE, el.href));
 const rank = (el) => getTextTrim(closestTr(el).cells[3]);
 const vl = (tipped) => Number(regExpFirstCapture(vlRe, tipped));

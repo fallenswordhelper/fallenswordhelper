@@ -12,8 +12,6 @@ async function getKeys() {
 }
 
 export default async function isGuildMate(playerName) {
-  if (currentGuildId() && !memberPrm) {
-    memberPrm = getKeys();
-  }
-  return (await memberPrm).includes(playerName);
+  if (currentGuildId() && !memberPrm) memberPrm = getKeys();
+  return (await memberPrm)?.includes(playerName);
 }

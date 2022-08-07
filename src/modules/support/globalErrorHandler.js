@@ -1,6 +1,5 @@
 import sendException from '../analytics/sendException';
 import on from '../common/on';
-import calf from './calf';
 import parseError from './parseError';
 
 let enabled = 0;
@@ -8,13 +7,10 @@ let enabled = 0;
 function handleMsgStack(type, stuff) {
   const msg = parseError(stuff);
   sendException(type + msg, true);
-  return true;
 }
 
 function handleError(type, stuff) {
-  if (stuff) {
-    return handleMsgStack(type, stuff);
-  }
+  if (stuff) handleMsgStack(type, stuff);
 }
 
 function logError(e) {
@@ -22,9 +18,7 @@ function logError(e) {
 }
 
 function unhandledrejection(e) {
-  if (handleError('Uncaught (in promise) ', e.reason) && !calf.userIsDev) {
-    e.preventDefault();
-  }
+  handleError('Uncaught (in promise) ', e.reason);
 }
 
 export default function globalErrorHandler() {
