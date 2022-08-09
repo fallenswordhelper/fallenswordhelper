@@ -11,11 +11,11 @@ async function getMyProfile(force) {
   return data;
 }
 
-const isStale = (data) => now() - calf.allyEnemyOnlineRefreshTime > data?.lastUpdate;
+const isRecent = (data) => now() - calf.allyEnemyOnlineRefreshTime < data?.lastUpdate;
 
 function getProfileFromForage(data) {
-  if (isStale(data)) return getMyProfile();
-  return data;
+  if (isRecent) return data;
+  return getMyProfile();
 }
 
 export default async function myStats(force) {
