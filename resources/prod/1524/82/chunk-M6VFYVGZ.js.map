@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/InfoBoxFrom.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.82","mappings":"gFAGe,SAARA,EAA6BC,EAAc,CAChD,IAAMC,EAAMC,EAAeF,CAAY,EACvC,OAAOG,EAAQF,CAAG,CACpB","names":["infoBoxFrom","documentText","doc","createDocument","infoBox"]}

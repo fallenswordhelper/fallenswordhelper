@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/app/api.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.84","mappings":"wCAEe,SAARA,EAAqBC,EAAMC,EAAS,CACzC,OAAOC,EAAU,CACf,IAAK,UACL,KAAM,CAAE,QAAS,EAAG,EAAG,EAAG,GAAGF,CAAK,EAClC,SAAU,OACV,GAAGC,CACL,CAAC,CACH","names":["api","data","options","retryAjax"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/chrome/calcs/asInt.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.84","mappings":"wHAIe,SAARA,EAAuBC,EAAW,CACvC,OAAOC,EAASC,EAAUC,EAAuBH,CAAS,CAAC,CAAC,CAC9D","names":["asInt","className","intValue","valueText","getElementsByClassName"]}

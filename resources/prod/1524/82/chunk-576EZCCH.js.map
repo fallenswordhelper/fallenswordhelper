@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/app/guild/reliclist.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.82","mappings":"wCAEe,SAARA,EAA2BC,EAASC,EAAQC,EAAO,CACxD,IAAMC,EAAO,CACX,OAAQ,YACR,GAAGH,GAAW,CAAE,SAAUA,CAAQ,EAClC,OAAAC,EACA,MAAAC,CACF,EAEA,OAAOE,EAAMD,CAAI,CACnB","names":["reliclist","guildId","offset","limit","data","guild"]}

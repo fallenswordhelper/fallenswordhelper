@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/onclick.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.84","mappings":"wCAEe,SAARA,EAAyBC,EAAQC,EAAUC,EAAS,CACzDC,EAAGH,EAAQ,QAASC,EAAUC,CAAO,CACvC","names":["onclick","target","listener","options","on"]}
