@@ -23,9 +23,9 @@ function getPrm() {
 }
 
 export async function isAlly(playerName) {
-  return (await getPrm())?._allies?.includes(playerName);
+  return (await getPrm())._allies?.includes(playerName);
 }
 
 export async function isEnemy(playerName) {
-  return (await getPrm())?._enemies?.includes(playerName);
+  return (await getPrm())._enemies?.includes(playerName);
 }

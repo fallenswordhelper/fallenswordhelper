@@ -14,7 +14,7 @@ async function getMyProfile(force) {
 const isRecent = (data) => now() - calf.allyEnemyOnlineRefreshTime < data?.lastUpdate;
 
 function getProfileFromForage(data) {
-  if (isRecent) return data;
+  if (isRecent(data)) return data;
   return getMyProfile();
 }
 
