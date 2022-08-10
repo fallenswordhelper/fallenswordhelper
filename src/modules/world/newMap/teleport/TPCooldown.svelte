@@ -6,6 +6,10 @@ let countdown = 0;
 let t0 = 0;
 let timer = false;
 
+function now() {
+  return Math.floor(Date.now() / 1000);
+}
+
 function checkCountdown() {
   if (countdown > 0) return;
   clearInterval(timer);
@@ -15,18 +19,16 @@ function checkCountdown() {
 
 function updateCountdown() {
   const cooldown = GameData.player().teleportCooldown;
-  const tf = Math.floor(Date.now() / 1000);
-  countdown = cooldown - tf + t0;
+  countdown = cooldown - now() + t0;
   checkCountdown();
 }
 
 function startTimer(event, data) {
-  t0 = GameData.time();
+  t0 = now();
   updateCountdown();
   if (timer || data.response.response !== 0) return;
   timer = setInterval(() => {
-    countdown -= 1;
-    checkCountdown();
+    updateCountdown();
   }, 1000);
 }
 
