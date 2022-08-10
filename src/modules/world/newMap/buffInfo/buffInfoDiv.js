@@ -18,8 +18,7 @@ function drawBuffInfo() {
   } else {
     containerDiv = createDiv({
       className: 'fshActionBox',
-      innerHTML: '<div></div><div></div><div></div>'
-        + '<div></div><div></div><div></div>',
+      innerHTML: '<div></div><div></div><div></div><div></div><div></div>',
     });
     const actCont = getElementById('actionContainer');
     insertElementAfter(containerDiv, actCont.children[2]);
