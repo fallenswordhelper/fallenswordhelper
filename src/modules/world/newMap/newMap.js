@@ -19,6 +19,7 @@ import relic from './relic/relic';
 import repairButton from './repairButton';
 import sendGold from './sendGold';
 import shop from './shop';
+import teleport from './teleport/teleport';
 import viewCreature from './viewCreature/viewCreature';
 import worldPrefs from './worldPrefs/worldPrefs';
 
@@ -51,6 +52,7 @@ const usualRoutines = [
   interceptMouseEvents,
   champAttacks,
   globalTop,
+  teleport,
 ];
 
 export default function newMap() {

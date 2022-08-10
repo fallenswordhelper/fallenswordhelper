@@ -8,7 +8,6 @@ import getCooldown from './getCooldown';
 import impIconColour from './impIconColour';
 import impWarning from './impWarning';
 import titanKs from './titanKs';
-import { tpCooldown } from './tpCooldown';
 
 let dd = 0;
 let dbl = 0;
@@ -38,6 +37,5 @@ export default function updateBuffInfo() {
     doDeathDealer(containerDiv, dd, ks);
     doCa(containerDiv, ca);
     doDbl(containerDiv, dbl);
-    tpCooldown(containerDiv, cd);
   }
 }
