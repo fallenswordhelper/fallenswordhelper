@@ -9,7 +9,7 @@ import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 
 const storageKey = 'fsh_pvpCombat';
 
-let combatPrm = 0;
+let combatPrm = null;
 let newCache = 0;
 
 function currentCombatRecord(sevenDays, [key, val]) {

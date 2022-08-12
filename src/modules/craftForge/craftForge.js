@@ -18,7 +18,7 @@ import CraftForge from './CraftForge.svelte';
 
 let inv = 0;
 let itemGrid = 0;
-let prm = 0;
+let prm = null;
 let thisItemTable = 0;
 let warehouse = 0;
 

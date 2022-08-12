@@ -5,7 +5,7 @@ import getTextTrim from '../../../common/getTextTrim';
 import getCheckboxesArray from './getCheckboxesArray';
 import getInv from './getInv';
 
-let itemsprm = 0;
+let itemsprm = null;
 
 function updateName(checkboxes, item) {
   if (item.item_id !== 13699) return item.item_name;
