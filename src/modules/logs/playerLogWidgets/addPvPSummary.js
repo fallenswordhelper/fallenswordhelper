@@ -8,43 +8,31 @@ import getCombat from './getCombat';
 
 const green = 'fshGreen';
 const red = 'fshRed';
-
 const getId = (a) => a.href.split('=').at(-1);
 const getCombats = async ([cl, r, msgHtml]) => [r, msgHtml, await getCombat(r, getId(cl))];
+const goodCombats = ([, , json]) => json && json.s;
+const filterSpecial = (el) => [18, 21, 31].includes(el.id);
+const specialSpan = (text) => `<span class="fshRed fshBold">${text}.</span>`;
 
 function parseCombatWinner(msgHtml) {
   const victory = msgHtml.includes('You were victorious over');
-  if (victory) {
-    return [green, `You were <span class="${green}">victorious</span> over `];
-  }
+  if (victory) return [green, `You were <span class="${green}">victorious</span> over `];
   const defeat = msgHtml.includes('You were defeated by');
-  if (defeat) {
-    return [red, `You were <span class="${red}">defeated</span> by `];
-  }
+  if (defeat) return [red, `You were <span class="${red}">defeated</span> by `];
   return ['', null]; // unresolved combat
 }
 
-function result(stat, desc, color) {
-  if (stat !== 0) {
-    return `${desc}:<span class="${color}">${addCommas(stat)}</span> `;
+function highlightSpecial(el) {
+  if (el.id === 18) return specialSpan(`${el.params[0]} leeched the buff '${el.params[1]}'`);
+  if (el.id === 21) {
+    return specialSpan(`${el.params[0]} was mesmerized by Spell Breaker, losing the '${
+      el.params[1]}' buff`);
   }
-  return '';
+  return specialSpan(`${el.params[0]} activated Fist Fight`);
 }
 
-const filterSpecial = (el) => [18, 21, 31].includes(el.id);
-
-function highlightSpecial(el) {
-  if (el.id === 18) {
-    return `<span class="fshRed fshBold">${
-      el.params[0]} leeched the buff '${
-      el.params[1]}'.</span>`;
-  }
-  if (el.id === 21) {
-    return `<span class="fshRed fshBold">${
-      el.params[0]} was mesmerized by Spell Breaker, losing the '${
-      el.params[1]}' buff.</span>`;
-  }
-  return `<span class="fshRed fshBold">${el.params[0]} activated Fist Fight.</span>`;
+function result(stat, desc, color) {
+  return stat !== 0 ? `${desc}:<span class="${color}">${addCommas(stat)}</span> ` : '';
 }
 
 function parseCombat(combat, color) {
@@ -77,8 +65,6 @@ function parseCombats(combatLinks) {
     .map(([cl, r]) => [cl, r, r.cells[2].innerHTML])
     .map(getCombats);
 }
-
-const goodCombats = ([, , json]) => json && json.s;
 
 export default async function addPvPSummary(logTable) {
   const combatLinks = querySelectorArray('a[href*="&combat_id="]', logTable);
