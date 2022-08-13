@@ -2,20 +2,15 @@ import createDiv from '../../common/cElement/createDiv';
 import closestTr from '../../common/closestTr';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
-import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
-import { combatSelector } from '../../support/constants';
 import addCommas from '../../system/addCommas';
-import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 import getCombat from './getCombat';
 
 const green = 'fshGreen';
 const red = 'fshRed';
 
-const isPvp = ([, r]) => querySelector(combatSelector, r);
-const getCombats = async ([cl, r, msgHtml]) => [
-  r, msgHtml, await getCombat(r, getCustomUrlParameter(cl.href, 'combat_id')),
-];
+const getId = (a) => a.href.split('=').at(-1);
+const getCombats = async ([cl, r, msgHtml]) => [r, msgHtml, await getCombat(r, getId(cl))];
 
 function parseCombatWinner(msgHtml) {
   const victory = msgHtml.includes('You were victorious over');
@@ -36,16 +31,20 @@ function result(stat, desc, color) {
   return '';
 }
 
-const filterSpecial = (el) => [18, 21].includes(el.id);
+const filterSpecial = (el) => [18, 21, 31].includes(el.id);
 
 function highlightSpecial(el) {
   if (el.id === 18) {
     return `<span class="fshRed fshBold">${
-      el.params[0]} leeched the buff '${el.params[1]}'.</span>`;
+      el.params[0]} leeched the buff '${
+      el.params[1]}'.</span>`;
   }
-  return `<span class="fshRed fshBold">${
-    el.params[0]} was mesmerized by Spell Breaker, losing the '${
-    el.params[1]}' buff.</span>`;
+  if (el.id === 21) {
+    return `<span class="fshRed fshBold">${
+      el.params[0]} was mesmerized by Spell Breaker, losing the '${
+      el.params[1]}' buff.</span>`;
+  }
+  return `<span class="fshRed fshBold">${el.params[0]} activated Fist Fight.</span>`;
 }
 
 function parseCombat(combat, color) {
@@ -63,17 +62,18 @@ function parseCombat(combat, color) {
 function updateTd([r, msgHtml, json]) {
   const [color, pre] = parseCombatWinner(msgHtml);
   if (pre) {
-    const summaryDiv = parseCombat(json.r.combat, color);
     r.cells[2].firstChild.remove();
     insertHtmlAfterBegin(r.cells[2], pre);
+  }
+  const summaryDiv = parseCombat(json.r.combat, color);
+  if (summaryDiv) {
     insertElement(r.cells[2], createDiv({ innerHTML: summaryDiv }));
   }
 }
 
-function notGuild(combatLinks) {
+function parseCombats(combatLinks) {
   return combatLinks
     .map((cl) => [cl, closestTr(cl)])
-    .filter(isPvp)
     .map(([cl, r]) => [cl, r, r.cells[2].innerHTML])
     .map(getCombats);
 }
@@ -83,6 +83,6 @@ const goodCombats = ([, , json]) => json && json.s;
 export default async function addPvPSummary(logTable) {
   const combatLinks = querySelectorArray('a[href*="&combat_id="]', logTable);
   if (combatLinks.length === 0) { return; }
-  const combats = await Promise.all(notGuild(combatLinks));
+  const combats = await Promise.all(parseCombats(combatLinks));
   combats.filter(goodCombats).forEach(updateTd);
 }
