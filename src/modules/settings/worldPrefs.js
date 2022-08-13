@@ -57,9 +57,10 @@ function showSendGold() {
   return makeLabelRow(
     'sendGoldonWorld',
     `${justCheckbox('sendGoldonWorld')}&nbsp;&nbsp;`
-    + `Send <input name="goldAmount" type="number" value="${getValue('goldAmount')}"> `
+    + `Send <input name="goldAmount" type="number" value="${getValue('goldAmount')}" min="0"> `
     + `gold to <input name="goldRecipient" value="${getValue('goldRecipient')}">`
-    + ` Current total: <input name="currentGoldSentTotal" type="number" value="${getValue('currentGoldSentTotal')}">`,
+    + ` Current total: <input name="currentGoldSentTotal" type="number" value="${
+      getValue('currentGoldSentTotal')}" min="0">`,
   );
 }
 

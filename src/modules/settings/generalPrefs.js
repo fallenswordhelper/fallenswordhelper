@@ -52,7 +52,7 @@ function onlineAlliesEnemies() {
     `<label>Allies&nbsp;${justCheckbox('enableAllyOnlineList')}</label>&nbsp;&nbsp;`
     + `<label>Enemies&nbsp;${justCheckbox('enableEnemyOnlineList')}</label>&nbsp;&nbsp;`
     + `<input name="allyEnemyOnlineRefreshTime" class="fshSettingsNumber" type="number" value="${
-      getValue('allyEnemyOnlineRefreshTime')}"> seconds refresh`,
+      getValue('allyEnemyOnlineRefreshTime')}" min="0"> seconds refresh`,
   );
 }
 
@@ -60,9 +60,9 @@ function quickLinksLocation() {
   return makeLabelRow(
     'quickLinksLocation',
     `Top: <input name="quickLinksTopPx" class="fshSettingsNumber" type="number" value="${
-      getValue('quickLinksTopPx')}"> `
+      getValue('quickLinksTopPx')}" min="0"> `
     + `Left: <input name="quickLinksLeftPx" class="fshSettingsNumber" type="number" value="${
-      getValue('quickLinksLeftPx')}">`,
+      getValue('quickLinksLeftPx')}" min="0">`,
   );
 }
 

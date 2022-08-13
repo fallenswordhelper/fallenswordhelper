@@ -28,9 +28,9 @@ export default function filterHeaderOnlinePlayers(context) { // jQuery
   $.fn.dataTable.ext.search.push(partial(dataTableSearch, context));
   $('#fshOutput', context).html(
     `<div align=right>Min lvl:<input value="${
-      getValue('onlinePlayerMinLvl')}" class="fshNumberInput" type="number" id="fshMinLvl" /> `
+      getValue('onlinePlayerMinLvl')}" class="fshNumberInput" type="number" id="fshMinLvl" min="0"> `
     + `Max lvl:<input value="${
-      getValue('onlinePlayerMaxLvl')}" class="fshNumberInput" type="number" id="fshMaxLvl" /> `
+      getValue('onlinePlayerMaxLvl')}" class="fshNumberInput" type="number" id="fshMaxLvl" min="0"> `
     + '<input id="fshReset" type="button" value="Reset"/>'
     + '</div><table id="fshInv" class="allow stripe hover"></table>'
     + `<div>Last updated: ${formatLocalDateTime(new Date(getValue('lastOnlineCheck')))}</div>`,

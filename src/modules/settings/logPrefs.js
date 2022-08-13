@@ -11,7 +11,8 @@ import {
 function newGuildLogHistory() {
   return makeLabelRow(
     'newGuildLogHistoryPages',
-    `<input name="newGuildLogHistoryPages" class="fshSettingsNumber" type="number" value="${getValue('newGuildLogHistoryPages')}">`,
+    `<input name="newGuildLogHistoryPages" class="fshSettingsNumber" type="number" value="${
+      getValue('newGuildLogHistoryPages')}" min="0">`,
   );
 }
 

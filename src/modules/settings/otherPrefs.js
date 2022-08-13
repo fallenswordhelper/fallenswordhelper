@@ -20,7 +20,7 @@ function groupJoinSize() {
     'enableMaxGroupSizeToJoin',
     `${justCheckbox('enableMaxGroupSizeToJoin')}&nbsp;&nbsp;Max Size: `
       + `<input name="maxGroupSizeToJoin" class="fshSettingsNumber" type="number" value="${
-        getValue('maxGroupSizeToJoin')}">`,
+        getValue('maxGroupSizeToJoin')}" min="0">`,
   );
 }
 

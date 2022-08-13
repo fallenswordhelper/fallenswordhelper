@@ -9,7 +9,7 @@ function showActiveBounties() {
     'enableActiveBountyList',
     `${justCheckbox('enableActiveBountyList')}&nbsp;`
       + `<input name="bountyListRefreshTime" class="fshSettingsNumber" type="number" value="${
-        calf.bountyListRefreshTime}"> seconds refresh`,
+        calf.bountyListRefreshTime}" min="0"> seconds refresh`,
   );
 }
 
