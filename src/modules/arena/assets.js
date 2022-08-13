@@ -17,4 +17,4 @@ export const arenaFilter = '<table width="100%"><tbody><tr><td>'
   + '<input id="fshReset" class="custombutton" type="button" '
   + 'value="Reset"></span></td></tr></tbody></table>';
 export const fshArenaKey = 'fsh_arena';
-export const moveRe = /\/arena\/(\d+)\.png/;
+export const moveRe = /\/arena\/(?<move>\d+)\.png/;
