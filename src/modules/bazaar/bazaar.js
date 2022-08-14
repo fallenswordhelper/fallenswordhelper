@@ -94,6 +94,7 @@ async function buy() { // jQuery.min
 
 function doMiniatures(el, i) {
   const item = el.children[0];
+  if (!item) return;
   const { tipped } = item.dataset;
   const { itemId: itmId } = regExpGroups(fetchItemRe, tipped);
   bazaarTable = bazaarTable

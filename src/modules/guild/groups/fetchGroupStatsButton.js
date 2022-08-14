@@ -17,9 +17,11 @@ function parseGroupData(attribs) {
 async function thisLink(aLink) {
   const groupId = aLink.href.split('=').at(-1);
   const json = await daGroupStats(groupId);
-  const attribs = attribsToArray(json.r.attributes);
-  const expiresLocation = aLink.parentNode.parentNode.previousElementSibling;
-  insertHtmlBeforeEnd(expiresLocation, parseGroupData(attribs));
+  if (json?.r?.attributes) {
+    const attribs = attribsToArray(json.r.attributes);
+    const expiresLocation = aLink.parentNode.parentNode.previousElementSibling;
+    insertHtmlBeforeEnd(expiresLocation, parseGroupData(attribs));
+  }
 }
 
 function fetchGroupData(evt) {
