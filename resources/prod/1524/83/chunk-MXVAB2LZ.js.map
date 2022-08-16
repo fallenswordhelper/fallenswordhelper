@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/loadDataTables.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.83","mappings":"uFAIA,IAAMA,EAAK,iEAEI,SAARC,GAAkC,CACvC,OAAOC,EAAI,CAACC,EAAWH,CAAE,EAAGI,EAAQ,0FAAoB,CAAC,CAAC,CAC5D","names":["dt","loadDataTables","all","loadScript","loadCss"]}

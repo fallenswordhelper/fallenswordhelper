@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/closestTable.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.85","mappings":"iFAGe,SAARA,EAA8BC,EAAI,CACvC,OAAOC,EAAQC,EAAUF,CAAE,CAC7B","names":["closestTable","el","closest","defTable"]}

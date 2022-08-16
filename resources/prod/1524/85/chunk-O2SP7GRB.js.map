@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/on.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.85","mappings":"AAAe,SAARA,EAAoBC,EAAQC,EAAMC,EAAUC,EAAS,CACtDH,aAAkB,aACpBA,EAAO,iBAAiBC,EAAMC,EAAUC,CAAO,CAEnD","names":["on","target","type","listener","options"]}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/closest.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.83","mappings":"AAAe,SAARA,EAAyBC,EAAUC,EAAI,CAC5C,GAAIA,aAAc,QAChB,OAAOA,EAAG,QAAQD,CAAQ,CAE9B","names":["closest","selector","el"]}

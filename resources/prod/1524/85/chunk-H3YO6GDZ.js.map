@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/joinGroups.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.85","mappings":"+HAIe,SAARA,GAA8B,CAC9BC,EAAK,yBAGRC,EAAWC,CAAY,EAFvBD,EAAWE,CAAU,CAIzB","names":["joinGroups","calf_default","navigateTo","joinUnderUrl","joinallUrl"]}

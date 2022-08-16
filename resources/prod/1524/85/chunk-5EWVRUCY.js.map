@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/analytics/sendEvent.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.85","mappings":"wCAEe,SAARA,EAA2BC,EAAeC,EAAaC,EAAY,CACpEC,EAAK,GACT,GAAG,cAAe,QAASH,EAAeC,EAAaC,CAAU,CACnE","names":["sendEvent","eventCategory","eventAction","eventLabel","noGa"]}
