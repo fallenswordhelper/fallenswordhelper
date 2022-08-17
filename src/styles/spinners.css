@@ -1,49 +1,41 @@
 /* https://stephanwagner.me/only-css-loading-spinner */
 /* Requires position: relative, absolute or fixed */
-@-webkit-keyframes fshSpinner {
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
 @keyframes fshSpinner {
   to {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
 .fshSpinner:before {
-  content: '';
+  animation: fshSpinner .6s linear infinite;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  border-top-color: #07d;
   box-sizing: border-box;
+  content: '';
+  height: 20px;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
   position: absolute;
   top: 50%;
-  left: 50%;
   width: 20px;
-  height: 20px;
-  margin-top: -10px;
-  margin-left: -10px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  border-top-color: #07d;
-  -webkit-animation: fshSpinner .6s linear infinite;
-  animation: fshSpinner .6s linear infinite;
 }
 .fshSpinner64:before {
-  width: 64px;
-  height: 64px;
-  margin-top: -32px;
-  margin-left: -32px;
   border-width: 4px;
+  height: 64px;
+  margin-left: -32px;
+  margin-top: -32px;
+  width: 64px;
 }
 .fshSpinner12:before {
-  width: 12px;
   height: 12px;
-  margin-top: -6px;
   margin-left: -6px;
+  margin-top: -6px;
+  width: 12px;
 }
 .fshSpin12:before {
-  width: 12px;
   height: 12px;
+  width: 12px;
 }
 .fshComposingSpinner:before {
   top: 75%;

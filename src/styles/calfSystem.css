@@ -68,17 +68,6 @@
   align-self: center;
 }
 
-/* Guild Add/Remove Tags */
-.guildTagSpinner {
-  width: 14px;
-  height: 14px;
-  display: inline-block;
-  vertical-align: middle;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-
 /* Top Lists */
 #fshFindOnlinePlayers {
   width: 120px;

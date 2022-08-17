@@ -1,0 +1,80 @@
+/* Guild Add/Remove Tags */
+.guildTagSpinner {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.add-remove-tags {
+  table-layout: fixed;
+  width: 480px;
+}
+
+.add-remove-tags td.header:nth-of-type(1) {
+  width: 32px;
+}
+
+.add-remove-tags td.header:nth-of-type(2) {
+  width: 48px;
+}
+
+.add-remove-tags td.header:nth-of-type(3) {
+  width: 230px;
+}
+
+.add-remove-tags td.header:nth-of-type(4) {
+  width: 160px;
+}
+
+.tag-all-custom {
+  font-family: inherit;
+  font-size: inherit;
+  margin-left: 4px;
+}
+
+.btn-div {
+  font-size: 11px;
+}
+
+.tag-all-btn, .tag-add-btn, .tag-bp-btn, .tag-remove-btn {
+  background: transparent;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  font-family : inherit;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-decoration: underline;
+  user-select: text;
+}
+
+.tag-all, .tag-add, .tag-bp, .tag-remove {
+  color: green;
+  display: inline-block;
+  height: 12px;
+  position: relative;
+  text-align: center;
+  vertical-align: bottom;
+}
+
+.tag-all, .tag-all-btn {
+  width: 48px;
+}
+
+.tag-add, .tag-add-btn {
+  width: 46px;
+}
+
+.tag-bp, .tag-bp-btn {
+  width: 42px;
+}
+
+.tag-remove, .tag-remove-btn {
+  width: 68px;
+}
