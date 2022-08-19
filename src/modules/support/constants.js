@@ -151,6 +151,7 @@ export const itemType = ['Helmet', 'Armor', 'Gloves', 'Boots', 'Weapon',
 
 export const oldActionSpinner = `${cdn}ui/world/action_spinner.gif`;
 
+export const combatSelector = '.fa-swords';
 export const noteSelector = '.fa-envelope';
 export const playerLinkSelector = 'a[href*="&player_id="]';
 

@@ -2,12 +2,15 @@ import createDiv from '../../common/cElement/createDiv';
 import closestTr from '../../common/closestTr';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
+import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
+import { combatSelector } from '../../support/constants';
 import addCommas from '../../system/addCommas';
 import getCombat from './getCombat';
 
 const green = 'fshGreen';
 const red = 'fshRed';
+const isPvp = ([, r]) => querySelector(combatSelector, r);
 const getId = (a) => a.href.split('=').at(-1);
 const getCombats = async ([cl, r, msgHtml]) => [r, msgHtml, await getCombat(r, getId(cl))];
 const goodCombats = ([, , json]) => json && json.s;
@@ -59,9 +62,10 @@ function updateTd([r, msgHtml, json]) {
   }
 }
 
-function parseCombats(combatLinks) {
+function notGroups(combatLinks) {
   return combatLinks
     .map((cl) => [cl, closestTr(cl)])
+    .filter(isPvp)
     .map(([cl, r]) => [cl, r, r.cells[2].innerHTML])
     .map(getCombats);
 }
@@ -69,6 +73,6 @@ function parseCombats(combatLinks) {
 export default async function addPvPSummary(logTable) {
   const combatLinks = querySelectorArray('a[href*="&combat_id="]', logTable);
   if (combatLinks.length === 0) { return; }
-  const combats = await Promise.all(parseCombats(combatLinks));
+  const combats = await Promise.all(notGroups(combatLinks));
   combats.filter(goodCombats).forEach(updateTd);
 }
