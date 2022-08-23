@@ -1,10 +1,9 @@
-import partial from './partial';
-
-function genericFilter(removeBy, seen, item) {
-  const myItem = removeBy ? item[removeBy] : item;
-  if (!seen.has(myItem)) return seen.add(myItem);
-}
+import arrayFrom from './arrayFrom';
 
 export default function uniq(arr, removeBy) {
-  return arr.filter(partial(genericFilter, removeBy, new Set()));
+  if (removeBy) {
+    const seen = new Set();
+    return arr.filter((item) => (!seen.has(item[removeBy]) ? seen.add(item[removeBy]) : 0));
+  }
+  return arrayFrom(new Set(arr));
 }
