@@ -62,11 +62,12 @@ const active = (o) => ({
   ...o,
   active: !o.hp.includes('-'),
 });
-const makeTitanRows = (titanTables) => dataRows(titanTables[1], 4, 0).map(meta).map(active);
+const makeTitanRows = (titanTables) => dataRows(titanTables[1], 4, 0)?.map(meta).map(active);
 
 export default function injectScouttower() {
   if (jQueryNotPresent()) return;
   const titanTables = getElementsByTagName(defTable, pcc());
+  if (!titanTables?.length) return;
   injectScouttowerBuffLinks(titanTables);
   const titanRows = makeTitanRows(titanTables);
   titanRows.forEach(decorate);

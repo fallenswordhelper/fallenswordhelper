@@ -74,8 +74,9 @@ function doFilter({ detail: [currentFolder, wantsPerfect] }) {
 
 export default async function craftForge() {
   if (jQueryPresent() && pcc()) {
-    prm = getInventoryById();
     thisItemTable = getItemTable();
+    if (!thisItemTable) return;
+    prm = getInventoryById();
     const cf = startCraftForge();
     cf.$on('doFilter', doFilter);
     inv = await prm;
