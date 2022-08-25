@@ -109,5 +109,6 @@ export default function worldPrefs() {
         'showCreatureInfo',
       ])}${
       joinFuncs()}${
-      simpleCheckbox('huntingMode')}`;
+      simpleCheckbox('huntingMode')}${
+      simpleCheckbox('messageStack')}`;
 }

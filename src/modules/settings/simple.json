@@ -103,6 +103,10 @@
     "helpTitle":"Enable Hunting Mode",
     "helpText":"This disable menu and some visual features to speed up the calf."
   },
+  "messageStack":{
+     "helpTitle":"Stack repeating world messages",
+     "helpText":"Messages on the world screen that have the same text will combine into a single stack, saving some screen space."
+  },
   "hideNonPlayerGuildLogMessages":{
     "helpTitle":"Cleanup Guild Log",
     "helpText":"Any log messages not related to the current player will be dimmed (e.g. recall messages from guild store)",

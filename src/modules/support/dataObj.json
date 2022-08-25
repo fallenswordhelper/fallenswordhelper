@@ -80,6 +80,7 @@
   "minGroupLevel":1,
   "combatEvaluatorBias":0,
   "huntingMode":false,
+  "messageStack":false,
   "enabledHuntingMode":"1",
   "hideRelicOffline":false,
   "enterForSendMessage":false,
