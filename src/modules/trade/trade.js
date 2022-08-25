@@ -1,19 +1,15 @@
 import getElementById from '../common/getElementById';
+import calf from '../support/calf';
+import { pcc } from '../support/layout';
 import task from '../support/task';
 import oneByOne from './oneByOne';
 import Trade from './Trade.svelte';
 
-function startTrade(itemList) {
-  return new Trade({
-    anchor: itemList,
-    props: { itemList },
-    target: itemList.parentNode,
-  });
-}
+const startTrade = () => new Trade({ target: pcc() });
 
 export default function trade() {
-  const itemList = getElementById('item-list');
-  if (!itemList) { return; }
-  startTrade(itemList);
-  task(3, oneByOne);
+  const tradeItems = getElementById('trade-items');
+  if (!tradeItems) return;
+  if (calf.userIsDev) task(3, oneByOne);
+  startTrade();
 }

@@ -15,18 +15,17 @@
   import rollupExtractable from './rollupExtractable';
 
   const prompt = 'Are you sure you want to extract all similar items?';
-  const prefSelectST = 'selectST';
   const prefSelectMain = 'selectMain';
   const prefDisablePrompts = 'disableQuickExtractPrompts';
 
   export let visible = true;
-  let prm;
-  let playerId;
-  let selectST = getValue(prefSelectST);
+  let prm = null;
+  let playerId = null;
+  let selectST = null;
   let selectMain = getValue(prefSelectMain);
   let disablePrompts = getValue(prefDisablePrompts);
-  let extractable;
-  let toExtract;
+  let extractable = null;
+  let toExtract = null;
   let results = [];
 
   const isExtractable = (item) => item.item_name === 'Zombie Coffin'

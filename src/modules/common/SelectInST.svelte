@@ -6,7 +6,8 @@
   const dispatch = createEventDispatcher();
   const prefSelectST = 'selectST';
 
-  export let inSt = getValue(prefSelectST);
+  export let inSt = null;
+  inSt = getValue(prefSelectST);
 
   function toggleSelectST() {
     setValue(prefSelectST, inSt);

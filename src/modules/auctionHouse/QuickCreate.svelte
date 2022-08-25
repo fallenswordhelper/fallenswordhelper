@@ -1,36 +1,10 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import LinkButton from '../common/LinkButton.svelte';
-  import QuickSelectClasses from '../common/QuickSelectClasses.svelte';
-  import SelectInST from '../common/SelectInST.svelte';
-  import getValue from '../system/getValue';
-
-  const dispatch = createEventDispatcher();
-  let howMany = 'all';
-  let inSt = getValue('selectST');
-
-  function doSelect(e) {
-    dispatch('select', [e.detail, howMany, inSt]);
-  }
-
-  function doPerf() {
-    dispatch('perf', [howMany, inSt]);
-  }
+import sendEvent from '../analytics/sendEvent';
+import QuickSelectClasses from '../common/QuickSelectClasses.svelte';
 </script>
 
-<div>
-  <QuickSelectClasses bind:howMany on:select={doSelect}/>
-</div>
-<div>
-  <SelectInST bind:inSt on:toggle/>
-</div>
-<div>
-  <LinkButton --button-color="blue" on:click={doPerf}>Perfect</LinkButton>
-</div>
-
-<style>
-  div {
-    margin: 10px auto 10px auto;
-    text-align: center;
-  }
-</style>
+<QuickSelectClasses
+  on:perf={() => sendEvent('ahQuickCreate', 'doPerf')}
+  on:select={(e) => sendEvent('ahQuickCreate', 'doSelect', e.detail)}
+  on:toggle={() => sendEvent('ahQuickCreate', 'toggleSelectST')}
+/>

@@ -2,22 +2,15 @@
   import { createEventDispatcher } from 'svelte';
   import sendEvent from '../analytics/sendEvent';
   import FolderButtons from '../common/FolderButtons.svelte';
-  import calf from '../support/calf';
 
   let currentFolder = -2;
   const dispatch = createEventDispatcher();
   export let prm = 0;
-  let wantsPerfect = false;
 
   function doFilter(e) {
-    sendEvent('craftForge', 'doFilter');
+    sendEvent('crafting', 'doFilter');
     currentFolder = Number(e.detail);
-    dispatch('doFilter', [currentFolder, wantsPerfect]);
-  }
-
-  function perfChange() {
-    sendEvent('craftForge', 'perfChange');
-    dispatch('doFilter', [currentFolder, wantsPerfect]);
+    dispatch('doFilter', currentFolder);
   }
 </script>
 
@@ -25,14 +18,6 @@
   <div class="buttonContainer">
     <FolderButtons folders={inv.folders} needsWorn=1 on:filter={doFilter}/>
   </div>
-  {#if calf.cmd === 'hellforge'}
-    <div>
-      <label>
-        Perfect
-        <input bind:checked={wantsPerfect} on:change={perfChange} type="checkbox">
-      </label>
-    </div>
-  {/if}
 {/await}
 
 <style>
@@ -43,8 +28,5 @@
     --button-color: black;
     --button-margin: auto 3px;
     padding: 2px 0;
-  }
-  label, input {
-    vertical-align: middle;
   }
 </style>
