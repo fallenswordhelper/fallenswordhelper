@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/logs/guildLog.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.86","mappings":"o3CAGe,SAARA,GAA4B,CACjCC,EAAe,WAAY,EAAG,CAAC,EAC/BC,EAAmB,CACrB","names":["guildLog","addLogColoring","addGuildLogWidgets"]}
