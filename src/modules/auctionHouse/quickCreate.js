@@ -4,7 +4,7 @@ import QuickCreate from './QuickCreate.svelte';
 
 const injectQuickCreate = () => new QuickCreate({ target: pcc() });
 
-export default async function quickCreate() {
+export default function quickCreate() {
   const auctionItems = getElementById('auction-items');
   if (auctionItems) injectQuickCreate();
 }

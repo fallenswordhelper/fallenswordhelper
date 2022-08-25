@@ -23,7 +23,6 @@ import scavenging from './scavenging';
 import toprated from './toprated';
 import trade from './trade';
 
-// const craftForge = () => { runDefault(import('../../craftForge/craftForge')); };
 const crafting = () => { runDefault(import('../../crafting/crafting')); };
 const hellforge = () => { runDefault(import('../../hellforge')); };
 const injectBank = () => { runDefault(import('../../bank/injectBank')); };
