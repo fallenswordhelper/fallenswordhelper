@@ -1,4 +1,5 @@
 <script>
+import { tick } from 'svelte';
 import isUndefined from '../../../common/isUndefined';
 import Message from './Message.svelte';
 
@@ -7,21 +8,24 @@ import Message from './Message.svelte';
 let messages = [];
 const mc = window.$('#messageCenter').data().hcsWorldMessageCenter;
 
-function removeMessage(e) {
+async function removeMessage(e) {
   messages = messages.filter((m) => m.e !== e.detail);
+  await tick();
+  mc._reposition();
 }
 
 function updateMessages() {
   messages = messages;
 }
 
-function displayMessage(e, t, i = 3000) {
+async function displayMessage(e, t, i = 3000) {
   const oldMessage = messages.find((m) => m.e === e);
   if (isUndefined(oldMessage)) {
     messages = [...messages, { e, t, i }];
   } else {
     oldMessage.ref.addCall(i);
   }
+  await tick();
   mc._reposition();
 }
 
