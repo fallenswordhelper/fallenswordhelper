@@ -8,9 +8,8 @@ import Message from './Message.svelte';
 let messages = [];
 const mc = window.$('#messageCenter').data().hcsWorldMessageCenter;
 
-async function removeMessage(e) {
+function removeMessage(e) {
   messages = messages.filter((m) => m.e !== e.detail);
-  await tick();
   mc._reposition();
 }
 
@@ -23,7 +22,7 @@ async function displayMessage(e, t, i = 3000) {
   if (isUndefined(oldMessage)) {
     messages = [...messages, { e, t, i }];
   } else {
-    oldMessage.ref.addCall(i);
+    oldMessage.ref.addCountdown(i);
   }
   await tick();
   mc._reposition();

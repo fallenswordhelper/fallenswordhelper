@@ -7,36 +7,32 @@ const dispatch = createEventDispatcher();
 export let e;
 export let t;
 export let i;
-let c = 1;
+let c = 0;
 let p;
 const timers = [];
 
-function dispatchRemove() {
+function destroy() {
   timers.forEach((id) => clearInterval(id));
   c = 0;
-  p.classList.add('fade');
+  p.style.opacity = 0;
   p.addEventListener('transitionend', () => { dispatch('remove', e); }, false);
 }
 
-function startCountdown(duration = 3000) {
+export function addCountdown(duration = 3000) {
+  c += 1;
   timers.push(setTimeout(() => {
     c -= 1;
     if (c > 0) {
       dispatch('update', c);
     } else {
-      dispatchRemove();
+      destroy();
     }
   }, duration));
 }
 
-export function addCall(newI = 3000) {
-  c += 1;
-  startCountdown(newI);
-}
-
-startCountdown(i);
+addCountdown(i);
 </script>
-<p class="fsh-message {t}" bind:this={p} on:click={dispatchRemove}>
+<p class="fsh-message {t}" bind:this={p} on:click={destroy}>
     {@html e}
     {#if c > 1}
     <div class="count" in:scale out:scale>x{c}</div>
@@ -65,5 +61,4 @@ startCountdown(i);
     border-radius: 4px;
     transition: opacity 0.6s;
 }
-.fade { opacity: 0; }
 </style>
