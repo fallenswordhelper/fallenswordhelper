@@ -13,6 +13,7 @@ import fixDebuff from './fixDebuff';
 import globalTop from './globalTop/globalTop';
 import hideGroupButton from './hideGroupButton';
 import hideTitanCombatResults from './hideTitanCombatResults';
+import messageQueue from './messageQueue/messageQueue';
 import monsterLog from './monsterLog/monsterLog';
 import onWorld from './onWorld';
 import relic from './relic/relic';
@@ -53,6 +54,7 @@ const usualRoutines = [
   champAttacks,
   globalTop,
   teleport,
+  messageQueue,
 ];
 
 export default function newMap() {
