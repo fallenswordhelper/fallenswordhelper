@@ -8,6 +8,7 @@ import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
 import injectQuickLinkManager from '../pageSwitcher/loader/injectQuickLinkManager';
 import mercs from '../pageSwitcher/loader/mercs';
 import monstorLog from '../pageSwitcher/loader/monstorLog';
+import potReport from '../pageSwitcher/loader/potReport';
 import quickExtract from '../pageSwitcher/loader/quickExtract';
 import quickwear from '../pageSwitcher/loader/quickwear';
 import recipeMgr from '../pageSwitcher/loader/recipeMgr';
@@ -28,4 +29,5 @@ export default {
   'Quick Extract': quickExtract,
   'GS Export': gsDl,
   'Merc Hunter': mercs,
+  'Pot Report': potReport,
 };

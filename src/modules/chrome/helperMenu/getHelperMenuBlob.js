@@ -20,6 +20,7 @@ const topSection = '<div class="helperMenuSectionHeader">Character</div><ul>'
   + `<li><a href="${notepadBlankUrl}guildinvmgr">Guild Inventory</a></li>`
   + `<li><a href="${newGuildLogUrl}">New Guild Log</a></li>`
   + '<li><button class="helperDevBtn helperGo" type="button">Merc Hunter</button></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">Pot Report</button></li>'
   + '</ul><div class="helperMenuSectionHeader">Extra</div><ul>'
   + '<li><button class="helperDevBtn helperGo" type="button">Quick Extract</button></li>'
   + '<li><span class="fshLink">Quick Wear</span></li>'
