@@ -26,8 +26,8 @@ function repos() {
 
 async function displayMessage(msg, type, time = 3000) {
   const id = getId();
-  messages = [...messages, { msg, type, id }];
-  setTimeout(() => { messages = messages.filter(({ id: exp }) => exp !== id); }, time);
+  messages = [...messages, { msg, type, expire: id }];
+  setTimeout(() => { messages = messages.filter(({ expire }) => expire !== id); }, time);
   await tick();
   repos();
 }
