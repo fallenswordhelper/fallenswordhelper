@@ -52,13 +52,22 @@ function listOfCoders(ary) {
 function codedBy() {
   return '<tr><td colspan="2" align=center>'
     + `<span class="fshXXSmall">Fallen Sword Helper was coded by ${
-      listOfCoders([['1393340', 'Coccinella'], ['1599987', 'yuuzhan'],
-        ['1963510', 'PointyHair'], ['1346893', 'Tangtop'],
-        ['2536682', 'dkwizard'], ['1570854', 'jesiegel'],
-        ['2156859', 'ByteBoy'], ['2169401', 'McBush']])
+      listOfCoders([
+        ['1393340', 'Coccinella'],
+        ['1963510', 'PointyHair'],
+        ['1674838', 'Lusterless'],
+        ['1599987', 'yuuzhan'],
+        ['1346893', 'Tangtop'],
+        ['2536682', 'dkwizard'],
+        ['1570854', 'jesiegel'],
+        ['2156859', 'ByteBoy'],
+        ['2169401', 'McBush'],
+      ])
     }, with valuable contributions by ${
-      listOfCoders([['524660', 'Nabalac'], ['37905', 'Ananasii'],
-        ['1674838', 'Lusterless']])
+      listOfCoders([
+        ['524660', 'Nabalac'],
+        ['37905', 'Ananasii'],
+      ])
     }</span></td></tr>`;
 }
 
