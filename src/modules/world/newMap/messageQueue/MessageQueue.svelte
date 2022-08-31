@@ -1,12 +1,12 @@
 <script>
 import { tick } from 'svelte';
-import { fade } from 'svelte/transition';
+import { fade, scale } from 'svelte/transition';
 import uniq from '../../../common/uniq';
 
 const iframe = document.body.appendChild(document.createElement('iframe'));
 window.requestAnimationFrame = iframe.contentWindow.requestAnimationFrame;
 window.cancelAnimationFrame = iframe.contentWindow.cancelAnimationFrame;
-iframe.remove();
+iframe.hidden = true;
 
 let messages = [];
 const mc = window.$('#messageCenter').data().hcsWorldMessageCenter;
@@ -32,13 +32,11 @@ async function displayMessage(msg, type, time = 3000) {
   repos();
 }
 
-function getMsgs(msgs) {
-  return uniq(msgs, 'msg').map(({ msg, type }) => ({
-    msg,
-    type,
-    count: msgs.filter(({ msg: thisMsg }) => thisMsg === msg).length,
-  }));
-}
+const getMsgs = (msgs) => uniq(msgs, 'msg').map(({ msg, type }) => ({
+  msg,
+  type,
+  count: msgs.filter(({ msg: thisMsg }) => thisMsg === msg).length,
+}));
 
 function destroy(deleteMsg) {
   messages = messages.filter(({ msg }) => msg !== deleteMsg);
@@ -51,7 +49,7 @@ mc._displayMessage = displayMessage; // eslint-disable-line no-underscore-dangle
   <p class="fsh-message {type}" out:fade on:outroend={repos} on:click={() => destroy(msg)}>
     {msg}
     {#if count > 1}
-      <div class="count">x{count}</div>
+      <div class="count" transition:scale>x{count}</div>
     {/if}
   </p>
 {/each}
