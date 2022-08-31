@@ -54,11 +54,7 @@ const usualRoutines = [
   champAttacks,
   globalTop,
   teleport,
-<<<<<<< HEAD
-  messageStack,
-=======
   messageQueue,
->>>>>>> fc188435e8019fdbdf7ee59a9274cd4b439bb9d8
 ];
 
 export default function newMap() {
