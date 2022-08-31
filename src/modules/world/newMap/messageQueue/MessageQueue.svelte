@@ -46,12 +46,12 @@ mc._displayMessage = displayMessage; // eslint-disable-line no-underscore-dangle
 </script>
 
 {#each getMsgs(messages) as { msg, type, count } (msg)}
-  <p class="fsh-message {type}" out:fade on:outroend={repos} on:click={() => destroy(msg)}>
+  <div class="fsh-message {type}" out:fade on:outroend={repos} on:click={() => destroy(msg)}>
     {msg}
     {#if count > 1}
       <div class="count" transition:scale>x{count}</div>
     {/if}
-  </p>
+  </div>
 {/each}
 
 <style>
