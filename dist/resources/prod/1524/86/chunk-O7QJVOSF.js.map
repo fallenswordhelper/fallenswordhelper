@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/getArrayByTagName.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.86","mappings":"gFAGe,SAARA,EAAmCC,EAASC,EAAS,CAC1D,OAAOC,EAAUC,EAAqBH,EAASC,CAAO,CAAC,CACzD","names":["getArrayByTagName","tagName","element","arrayFrom","getElementsByTagName"]}

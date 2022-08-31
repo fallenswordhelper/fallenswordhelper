@@ -33,6 +33,8 @@ const betaSection = '<div class="helperMenuSectionHeader">Beta Features</div><ul
 const bottomSection = '<div class="helperMenuSectionHeader">FSH developer quick links</div><ul>'
   + '<li><span class="helperMenuReply" target_player="PointyHair">PM</span> '
   + `<a href="${playerIdUrl}1963510">PointyHair</a></li>`
+  + '<li><span class="helperMenuReply" target_player="Lusterless">PM</span> '
+  + `<a href="${playerIdUrl}1674838">Lusterless</a></li>`
   + '</ul>';
 
 const devSection = '<div class="helperMenuSectionHeader">Dev links</div>';

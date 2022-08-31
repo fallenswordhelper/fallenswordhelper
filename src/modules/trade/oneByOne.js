@@ -73,8 +73,7 @@ function onBtnClick(e) {
 export default function oneByOne() {
   const sendItemBtn = querySelector('form[name="sendItemForm"] input[value="Send"]');
   const myBtn = createButton({
-    className: 'fshBl',
-    id: 'oneByOneBtn',
+    className: 'fshBl oneByOneBtn',
     textContent: 'OneByOne',
     type: 'button',
   });

@@ -23,7 +23,8 @@ import scavenging from './scavenging';
 import toprated from './toprated';
 import trade from './trade';
 
-const craftForge = () => { runDefault(import('../../craftForge/craftForge')); };
+const crafting = () => { runDefault(import('../../crafting/crafting')); };
+const hellforge = () => { runDefault(import('../../hellforge')); };
 const injectBank = () => { runDefault(import('../../bank/injectBank')); };
 const injectBuffmarket = () => { runDefault(import('../../buffmarket/injectBuffmarket')); };
 const injectFindPlayer = () => { runDefault(import('../../injectFindPlayer')); };
@@ -59,10 +60,10 @@ export default {
   buffmarket: { '-': { '-': injectBuffmarket } },
   combat: { attackplayer: { '-': injectProfile } },
   composing,
-  crafting: { '-': { '-': craftForge } },
+  crafting: { '-': { '-': crafting } },
   findplayer: { '-': { '-': injectFindPlayer } },
   guild,
-  hellforge: { '-': { '-': craftForge } },
+  hellforge: { '-': { '-': hellforge } },
   inventing,
   log: { '-': { '-': playerLog } },
   marketplace: { createreq: { '-': marketplace } },
