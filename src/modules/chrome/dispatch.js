@@ -12,8 +12,11 @@ import task from '../support/task';
 import getUrlParameter from '../system/getUrlParameter';
 import doQuickLinks from './doQuickLinks';
 import isMessageSound from './isMessageSound';
+import jqueryEventTracker from './jqueryEventTracker';
 import lookForHcsData from './lookForHcsData/lookForHcsData';
 import pageSwitcher from './pageSwitcher/pageSwitcher';
+
+jqueryEventTracker();
 
 let cmd = 0;
 let subcmd = 0;

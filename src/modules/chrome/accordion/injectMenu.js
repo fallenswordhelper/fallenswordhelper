@@ -34,8 +34,8 @@ function getLinkConfig(theNav, myNav) {
   }
 }
 
-function doAccordion() {
-  const [theNav, myNav] = preFlight();
+async function doAccordion() {
+  const { theNav, myNav } = await preFlight();
   if (theNav && myNav) {
     updateLinks();
     getLinkConfig(theNav, myNav);
