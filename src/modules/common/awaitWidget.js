@@ -1,16 +1,19 @@
 import toLowerCase from './toLowerCase';
 
 const thisWidget = (el, widget) => $(el).data(`hcs${widget}`);
+const onCreate = (el, widget, resolve) => () => { resolve(thisWidget(el, widget)); };
 
-export default function awaitWidget(el, widget) {
-  return new Promise((resolve) => {
+function widgetPromise(el, widget) {
+  return (resolve) => {
     const preWidget = thisWidget(el, widget);
     if (preWidget) {
       resolve(preWidget);
     } else {
-      $(el).on(`${toLowerCase(widget)}create`, () => {
-        resolve(thisWidget(el, widget));
-      });
+      $(el).on(`${toLowerCase(widget)}create`, onCreate(el, widget, resolve));
     }
-  });
+  };
+}
+
+export default function awaitWidget(el, widget) {
+  return new Promise(widgetPromise(el, widget));
 }
