@@ -1,6 +1,6 @@
 <script>
 import { tick } from 'svelte';
-import { fade, scale } from 'svelte/transition';
+import { fade } from 'svelte/transition';
 import uniq from '../../../common/uniq';
 
 const iframe = document.body.appendChild(document.createElement('iframe'));
@@ -49,12 +49,16 @@ mc._displayMessage = displayMessage; // eslint-disable-line no-underscore-dangle
   <div class="fsh-message {type}" out:fade on:outroend={repos} on:click={() => destroy(msg)}>
     {msg}
     {#if count > 1}
-      <div class="count" transition:scale>x{count}</div>
+      <div class="count">x{count}</div>
     {/if}
   </div>
 {/each}
 
 <style>
+@keyframes scale {
+    0% { transform: scale(0, 0) }
+    100% { transform: scale(1,1) }
+}
 .fsh-message {
   background-color: rgba(0,0,0,.9);
   border-radius: 4px;
@@ -77,5 +81,8 @@ mc._displayMessage = displayMessage; // eslint-disable-line no-underscore-dangle
   font-size: smaller;
   color: black;
   text-shadow: none;
+  animation-duration: 0.2s;
+  animation-name: scale;
+  animation-fill-mode: backwards;
 }
 </style>
