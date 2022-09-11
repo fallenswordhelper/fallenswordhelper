@@ -597,5 +597,11 @@
   "enabledHuntingMode":{
     "helpTitle":"Enabled Hunting Mode",
     "helpText":"This will determine which list of buffs gets checked on the world screen."
+  },
+  "groupCombatItems":{
+    "helpTitle":"Group Combat Items",
+    "helpText":"This will show looted items, if any, under groups combats in the guild log",
+    "network":true,
+    "unstable": true
   }
 }

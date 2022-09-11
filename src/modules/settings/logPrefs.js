@@ -4,7 +4,6 @@ import makeHeaderRow from './makeHeaderRow';
 import makeLabelRow from './makeLabelRow';
 import {
   justCheckbox,
-  simpleCheckbox,
   simpleCheckboxHtml,
 } from './simpleCheckbox';
 
@@ -38,7 +37,10 @@ export default function logPrefs() {
       'useNewGuildLog',
     ])
   }${newGuildLogHistory()
-  }${simpleCheckbox('enableLogColoring')
+  }${bunchOfSimple([
+    'groupCombatItems',
+    'enableLogColoring',
+  ])
   }${newLogMessageSound()
   }${playSoundOnUnreadLog()
   }${bunchOfSimple([

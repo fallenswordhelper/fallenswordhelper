@@ -242,5 +242,6 @@
   "selectST": false,
   "selectMain": true,
   "disableQuickExtractPrompts": false,
-  "qbSortBuffsAlphabetically": false
+  "qbSortBuffsAlphabetically": false,
+  "groupCombatItems": false
 }

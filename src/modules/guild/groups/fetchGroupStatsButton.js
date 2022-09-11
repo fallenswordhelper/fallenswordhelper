@@ -2,6 +2,7 @@ import './fetchGroupStatsButton.css';
 import daGroupStats from '../../_dataAccess/daGroupStats';
 import sendEvent from '../../analytics/sendEvent';
 import attribsToArray from '../../common/attribsToArray';
+import getId from '../../common/getId';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';
 import querySelectorArray from '../../common/querySelectorArray';
@@ -15,7 +16,7 @@ function parseGroupData(attribs) {
 }
 
 async function thisLink(aLink) {
-  const groupId = aLink.href.split('=').at(-1);
+  const groupId = getId(aLink);
   const json = await daGroupStats(groupId);
   if (json?.r?.attributes) {
     const attribs = attribsToArray(json.r.attributes);
