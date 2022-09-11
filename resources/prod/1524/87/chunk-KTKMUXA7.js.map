@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/system/getCustomUrlParameter.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.87","mappings":"AAAe,SAARA,EAAuCC,EAAUC,EAAQ,CAC9D,OAAQ,IAAI,gBAAgBD,CAAQ,EAAG,IAAIC,CAAM,CACnD","names":["getCustomUrlParameter","sPageURL","sParam"]}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/querySelectorArray.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.85","mappings":"gFAGe,SAARA,EAAoCC,EAAUC,EAAO,CAC1D,OAAOC,EAAUC,EAAiBH,EAAUC,CAAK,CAAC,CACpD","names":["querySelectorArray","selector","scope","arrayFrom","querySelectorAll"]}
