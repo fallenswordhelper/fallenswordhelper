@@ -3,17 +3,24 @@ import closestTr from '../common/closestTr';
 import getId from '../common/getId';
 import getText from '../common/getText';
 import insertElement from '../common/insertElement';
+import playerLink from '../common/playerLink';
 import querySelectorArray from '../common/querySelectorArray';
 import getValue from '../system/getValue';
 import getCombat from './playerLogWidgets/getCombat';
 
-const tmp = (i) => `Group looted the item '<span class="fshGreen">${i}</span>'`;
+function decorate(row, leader, itemName) {
+  insertElement(row.cells[2], createDiv({
+    innerHTML: `${
+      playerLink(leader.id, leader.name)}'s group looted the item '<span class="fshGreen">${
+      itemName}</span>'`,
+  }));
+}
 
 async function addItem(a) {
   const row = closestTr(a);
   const json = await getCombat(row, getId(a));
   const itemName = json.r.combat.items?.[0].n;
-  if (itemName) insertElement(row.cells[2], createDiv({ innerHTML: tmp(itemName) }));
+  if (itemName) decorate(row, json.r.combat.attacker.group.players[0], itemName);
 }
 
 export default function guildGroupCombat() {
