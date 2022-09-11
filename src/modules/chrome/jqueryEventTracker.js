@@ -14,7 +14,7 @@ function logJqueryEvent() {
 }
 
 export default function jqueryEventTracker() {
-  const test = 1;
+  const test = 0;
   // eslint-disable-next-line no-undef
   if (defineUserIsDev && test) logJqueryEvent();
 }
