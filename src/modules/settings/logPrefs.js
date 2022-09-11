@@ -29,6 +29,18 @@ function playSoundOnUnreadLog() {
   );
 }
 
+const bottomPart = [
+  'enableChatParsing',
+  'keepBuffLog',
+  'addAttackLinkToLog',
+  'colorPlayerNames',
+  'addIgnoreLink',
+  'changeButtonLabels',
+  'privateMsgButtons',
+  'enhanceChatTextEntry',
+  'wrapGuildChat',
+];
+
 export default function logPrefs() {
   // Log screen prefs
   return `${makeHeaderRow('Log screen preferences')}${
@@ -43,15 +55,5 @@ export default function logPrefs() {
   ])
   }${newLogMessageSound()
   }${playSoundOnUnreadLog()
-  }${bunchOfSimple([
-    'enableChatParsing',
-    'keepBuffLog',
-    'addAttackLinkToLog',
-    'colorPlayerNames',
-    'addIgnoreLink',
-    'changeButtonLabels',
-    'privateMsgButtons',
-    'enhanceChatTextEntry',
-    'wrapGuildChat',
-  ])}`;
+  }${bunchOfSimple(bottomPart)}`;
 }
