@@ -37,7 +37,7 @@ const selectType = [
   [(selectId) => selectId === -1, () => true],
   [(selectId) => selectId === -2, (_selectId, [, itm]) => itm.type === 12],
   [(selectId) => selectId === -3, (_selectId, [, itm]) => itm.guild_tag >= 0],
-  [(selectId) => selectId === -99, (_selectId, [, itm]) => itm.craft === 'Perfect'],
+  [(selectId) => selectId === -99, (_selectId, [, itm]) => itm?.craft === 'Perfect'],
   [() => true, (selectId, [, itm]) => selectId === itm.item_id],
 ];
 
