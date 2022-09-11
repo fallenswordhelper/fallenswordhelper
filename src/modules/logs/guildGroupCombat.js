@@ -16,7 +16,7 @@ async function addItem(a) {
   if (itemName) insertElement(row.cells[2], createDiv({ innerHTML: tmp(itemName) }));
 }
 
-export default async function guildGroupCombat() {
+export default function guildGroupCombat() {
   if (!getValue('groupCombatItems')) return;
   const combatLinks = querySelectorArray('a[href*="&combat_id="]');
   const victorious = combatLinks.filter((a) => getText(a.previousSibling).includes('victorious'));
