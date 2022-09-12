@@ -107,16 +107,18 @@ function prefBox() {
   );
 }
 
-function setupHandlers() {
-  onclick(getElementById('breakdown-selected-items').parentNode, breakEvt, true);
+function setupHandlers(bsi) {
+  onclick(bsi.parentNode, breakEvt, true);
   onclick(getElementById('composing-items'), itemClick);
   onclick(getElementById(prefDisableBreakdownPrompts), togglePref);
 }
 
 export default function breakdown() {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) return;
+  const bsi = getElementById('breakdown-selected-items');
+  if (!bsi) return;
   perfFilter('composing');
   disableBreakdownPrompts = getValue(prefDisableBreakdownPrompts);
   prefBox();
-  setupHandlers();
+  setupHandlers(bsi);
 }

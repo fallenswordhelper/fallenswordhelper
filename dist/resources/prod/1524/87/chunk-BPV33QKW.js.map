@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/cElement/createTable.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.87","mappings":"iFAGe,SAARA,EAA6BC,EAAO,CACzC,OAAOC,EAASC,EAAUF,CAAK,CACjC","names":["createTable","props","cElement","defTable"]}

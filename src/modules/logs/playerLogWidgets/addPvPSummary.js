@@ -1,5 +1,6 @@
 import createDiv from '../../common/cElement/createDiv';
 import closestTr from '../../common/closestTr';
+import getId from '../../common/getId';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import querySelector from '../../common/querySelector';
@@ -11,7 +12,6 @@ import getCombat from './getCombat';
 const green = 'fshGreen';
 const red = 'fshRed';
 const isPvp = ([, r]) => querySelector(combatSelector, r);
-const getId = (a) => a.href.split('=').at(-1);
 const getCombats = async ([cl, r, msgHtml]) => [r, msgHtml, await getCombat(r, getId(cl))];
 const goodCombats = ([, , json]) => json && json.s;
 const filterSpecial = (el) => [18, 21, 31].includes(el.id);

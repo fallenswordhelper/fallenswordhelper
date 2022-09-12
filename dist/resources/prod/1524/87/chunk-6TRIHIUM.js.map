@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/insertHtmlAfterBegin.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.87","mappings":"wCAEe,SAARA,EAAsCC,EAAQC,EAAM,CACzDC,EAAWF,EAAQ,aAAcC,CAAI,CACvC","names":["insertHtmlAfterBegin","parent","html","insertHtml"]}

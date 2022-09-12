@@ -10,7 +10,6 @@ import makeLabelRow from './makeLabelRow';
 import {
   helpLink,
   justCheckbox,
-  simpleCheckbox,
 } from './simpleCheckbox';
 
 function worldGroup() {
@@ -109,5 +108,8 @@ export default function worldPrefs() {
         'showCreatureInfo',
       ])}${
       joinFuncs()}${
-      simpleCheckbox('huntingMode')}`;
+      bunchOfSimple([
+        'huntingMode',
+        'messageStack',
+      ])}`;
 }

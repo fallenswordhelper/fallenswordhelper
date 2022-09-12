@@ -4,7 +4,6 @@ import makeHeaderRow from './makeHeaderRow';
 import makeLabelRow from './makeLabelRow';
 import {
   justCheckbox,
-  simpleCheckbox,
   simpleCheckboxHtml,
 } from './simpleCheckbox';
 
@@ -30,6 +29,18 @@ function playSoundOnUnreadLog() {
   );
 }
 
+const bottomPart = [
+  'enableChatParsing',
+  'keepBuffLog',
+  'addAttackLinkToLog',
+  'colorPlayerNames',
+  'addIgnoreLink',
+  'changeButtonLabels',
+  'privateMsgButtons',
+  'enhanceChatTextEntry',
+  'wrapGuildChat',
+];
+
 export default function logPrefs() {
   // Log screen prefs
   return `${makeHeaderRow('Log screen preferences')}${
@@ -38,18 +49,11 @@ export default function logPrefs() {
       'useNewGuildLog',
     ])
   }${newGuildLogHistory()
-  }${simpleCheckbox('enableLogColoring')
+  }${bunchOfSimple([
+    'groupCombatItems',
+    'enableLogColoring',
+  ])
   }${newLogMessageSound()
   }${playSoundOnUnreadLog()
-  }${bunchOfSimple([
-    'enableChatParsing',
-    'keepBuffLog',
-    'addAttackLinkToLog',
-    'colorPlayerNames',
-    'addIgnoreLink',
-    'changeButtonLabels',
-    'privateMsgButtons',
-    'enhanceChatTextEntry',
-    'wrapGuildChat',
-  ])}`;
+  }${bunchOfSimple(bottomPart)}`;
 }
