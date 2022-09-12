@@ -1,4 +1,5 @@
 import closestTable from '../common/closestTable';
+import getId from '../common/getId';
 import querySelectorArray from '../common/querySelectorArray';
 import intValue from '../system/intValue';
 import Bazaar from './Bazaar.svelte';
@@ -19,7 +20,7 @@ export default function bazaar() {
     .parentElement
     .parentElement;
   const potions = origPots.map((p) => ({
-    id: p.href.substr(Number(p.href.search(/\d+$/))),
+    id: Number(getId(p)),
     img: p.firstChild.src,
     fetch: p.firstChild.dataset.tipped,
     price: intValue(closestTable(p).parentNode
