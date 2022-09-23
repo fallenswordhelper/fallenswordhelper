@@ -1,7 +1,7 @@
 import calf from '../../../support/calf';
 
-let checkboxes;
-let haveCheckboxes;
+let checkboxes = 0;
+let haveCheckboxes = 0;
 
 export default function getCheckboxes() {
   if (!haveCheckboxes) {
