@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/lastActivityToDays.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.88","mappings":"wCAEe,SAARA,EAAoCC,EAAc,CACvD,OAAO,KAAK,MAAM,KAAK,IAAI,EAAGC,EAAQ,EAAID,CAAY,EAAI,KAAK,CACjE","names":["lastActivityToDays","lastActivity","nowSecs"]}

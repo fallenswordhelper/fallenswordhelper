@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/insertTextBeforeEnd.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.86","mappings":"wCAEe,SAARA,EAAqCC,EAAQC,EAAM,CACxDC,EAAoBF,EAAQC,CAAI,CAClC","names":["insertTextBeforeEnd","parent","text","insertHtmlBeforeEnd"]}

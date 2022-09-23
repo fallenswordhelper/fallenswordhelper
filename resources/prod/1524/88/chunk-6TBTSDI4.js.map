@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/insertHtmlAfterEnd.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.88","mappings":"wCAEe,SAARA,EAAoCC,EAAQC,EAAM,CACvDC,EAAWF,EAAQ,WAAYC,CAAI,CACrC","names":["insertHtmlAfterEnd","parent","html","insertHtml"]}

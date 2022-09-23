@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/closestTd.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.88","mappings":"iFAGe,SAARA,EAA2BC,EAAI,CACpC,OAAOC,EAAQC,EAAOF,CAAE,CAC1B","names":["closestTd","el","closest","defTd"]}
