@@ -2,6 +2,7 @@ import indexAjaxData from '../ajax/indexAjaxData';
 import allthen from '../common/allthen';
 import createSpan from '../common/cElement/createSpan';
 import clickThis from '../common/clickThis';
+import closestTr from '../common/closestTr';
 import getArrayByClassName from '../common/getArrayByClassName';
 import getElementById from '../common/getElementById';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
@@ -38,13 +39,12 @@ function cancelAllAH() {
 }
 
 function makeCancelAll() {
-  const fill = getElementById('fill');
-  if (!fill) { return; }
+  const spacer = closestTr(getElementById('fill'))?.nextElementSibling?.children?.[0];
+  if (!spacer) return;
   const cancelAllSpan = createSpan({
     className: 'smallLink',
     textContent: 'Cancel All',
   });
-  const [spacer] = fill.parentNode.parentNode.nextElementSibling.children;
   spacer.classList.add('fshCenter');
   insertHtmlAfterBegin(spacer, ']');
   insertElementAfterBegin(spacer, cancelAllSpan);
