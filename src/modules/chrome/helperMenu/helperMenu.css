@@ -39,7 +39,7 @@
   position: absolute;
   text-align: center;
   text-decoration: underline;
-  top: 0;
+  /* top: 0; */
   white-space: nowrap;
   z-index: 75;
 }

@@ -2,6 +2,7 @@ import './doQuickLinks.css';
 import draggable from '../common/draggable';
 import getElementById from '../common/getElementById';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import querySelector from '../common/querySelector';
 import calf from '../support/calf';
 import task from '../support/task';
 import escapeHtml from '../system/escapeHtml';
@@ -40,9 +41,9 @@ function makeQuickLinks(quickLinks) {
   return quickLinks.map(linkHtml).join('');
 }
 
-function haveLinks(quickLinks) {
+function haveLinks(top, quickLinks) {
   const draggableQuickLinks = getValue('draggableQuickLinks');
-  const html = `<div style="top:${getValue('quickLinksTopPx')}px; left:${
+  const html = `<div style="top:${Number(getValue('quickLinksTopPx')) + top}px; left:${
     getValue('quickLinksLeftPx')}px;" id="fshQuickLinks" `
     + `class="fshQuickLinks fshInnerBg${
       retOption('keepHelperMenuOnScreen', ' fshFixed', '')
@@ -52,14 +53,15 @@ function haveLinks(quickLinks) {
   isDraggable(draggableQuickLinks);
 }
 
-function haveNode() {
+function haveNode(node) {
+  const { top } = node.getBoundingClientRect();
   const quickLinks = getValueJSON('quickLinks') || [];
-  if (quickLinks.length > 0) { haveLinks(quickLinks); }
+  if (quickLinks.length > 0) haveLinks(top, quickLinks);
 }
 
 function injectQuickLinks() {
-  const node = getElementById('statbar-container');
-  if (node) { haveNode(); }
+  const node = querySelector('.mainbody');
+  if (node) haveNode(node);
 }
 
 export default function doQuickLinks() {
