@@ -31,6 +31,7 @@ export default function getCreatureStats(id, passback) {
   }
   return fetchdata({
     a: 1,
+    d: 0,
     id,
     passback,
   }).then(cacheResult);
