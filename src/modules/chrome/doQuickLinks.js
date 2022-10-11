@@ -41,9 +41,9 @@ function makeQuickLinks(quickLinks) {
   return quickLinks.map(linkHtml).join('');
 }
 
-function haveLinks(top, quickLinks) {
+function haveLinks(offset, quickLinks) {
   const draggableQuickLinks = getValue('draggableQuickLinks');
-  const html = `<div style="top:${Number(getValue('quickLinksTopPx')) + top}px; left:${
+  const html = `<div style="top:${Number(getValue('quickLinksTopPx')) + offset}px; left:${
     getValue('quickLinksLeftPx')}px;" id="fshQuickLinks" `
     + `class="fshQuickLinks fshInnerBg${
       retOption('keepHelperMenuOnScreen', ' fshFixed', '')
@@ -54,9 +54,10 @@ function haveLinks(top, quickLinks) {
 }
 
 function haveNode(node) {
-  const { top } = node.getBoundingClientRect();
+  const { top: mainBodyTop } = node.getBoundingClientRect();
+  const { top } = document.body.getBoundingClientRect();
   const quickLinks = getValueJSON('quickLinks') || [];
-  if (quickLinks.length > 0) haveLinks(top, quickLinks);
+  if (quickLinks.length > 0) haveLinks(mainBodyTop - top, quickLinks);
 }
 
 function injectQuickLinks() {
