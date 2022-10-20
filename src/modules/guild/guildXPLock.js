@@ -1,7 +1,6 @@
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import querySelector from '../common/querySelector';
 import regExpFirstCapture from '../common/regExpFirstCapture';
-import calf from '../support/calf';
 import addCommas from '../system/addCommas';
 
 function getIntFromRegExp(theText, rxSearch) {
@@ -26,7 +25,6 @@ function injectLock(xpLock) {
 }
 
 export default function guildXPLock() {
-  if (!calf.userIsDev) return; // guildXPLock
   const xpLock = querySelector('#pCC a[data-tipped^="<b>Guild XP</b>"]');
   if (xpLock) { injectLock(xpLock); }
 }
