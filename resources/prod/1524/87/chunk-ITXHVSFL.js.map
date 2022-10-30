@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/toggleForce.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.87","mappings":"AAAe,SAARA,EAA6BC,EAAIC,EAAO,CACzCD,aAAc,SAChBA,EAAG,UAAU,OAAO,UAAWC,CAAK,CAExC","names":["toggleForce","el","force"]}

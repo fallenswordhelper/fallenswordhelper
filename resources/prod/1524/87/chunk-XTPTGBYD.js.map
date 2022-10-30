@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/_dataAccess/$dataAccess.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.87","mappings":"AAAe,SAARA,EAA6BC,EAAOC,KAAeC,EAAM,CAK9D,OAAOF,EAAM,GAAGE,CAAI,CACtB","names":["$dataAccess","appFn","fallbackFn","args"]}

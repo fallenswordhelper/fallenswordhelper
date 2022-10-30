@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/app/guild/guild.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.89","mappings":"wCAEe,SAARA,EAAuBC,EAAM,CAClC,OAAOC,EAAO,CAAE,IAAK,QAAS,GAAGD,CAAK,CAAC,CACzC","names":["guild","data","getApp"]}

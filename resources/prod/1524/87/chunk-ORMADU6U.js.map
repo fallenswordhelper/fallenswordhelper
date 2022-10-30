@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/execute.js","src/modules/common/executeAll.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.87","mappings":"AAAe,SAARA,EAAyBC,EAAI,CAClCA,EAAG,CACL,CCAe,SAARC,EAA4BC,EAAK,CACtCA,EAAI,QAAQC,CAAO,CACrB","names":["execute","fn","executeAll","ary","execute"]}

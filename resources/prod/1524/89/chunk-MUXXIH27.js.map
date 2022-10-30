@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/questbook/guideButtons.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.89","mappings":"wCAGe,SAARA,EAA8BC,EAASC,EAAW,CACvD,MAAO,gCACSC,gCACYF,mLAIxBC,EAAU,QAAQ,KAAM,GAAG,gGAGjC","names":["guideButtons","questID","questName","guideUrl"]}

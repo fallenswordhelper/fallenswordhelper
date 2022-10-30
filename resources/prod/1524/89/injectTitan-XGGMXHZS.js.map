@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/injectTitan.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.89","mappings":"gLAIe,SAARA,GAA+B,CACpCC,EACEC,EAAI,EAAE,SAAS,GAAG,KAAK,GAAG,MAAM,GAChC,6CAA6CC,4BAC/C,CACF","names":["injectTitan","insertHtmlBeforeEnd","pcc","scouttowerUrl"]}
