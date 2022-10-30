@@ -13,22 +13,23 @@ function startApp(potions, target) {
   });
 }
 
+const preparePotions = (p) => ({
+  id: Number(getId(p)),
+  img: p.children[0].src,
+  fetch: p.firstChild.dataset.tipped,
+  price: intValue(getTextTrim(
+    querySelector('img[src*="/currency/"]', closestTable(p).parentElement)
+      .parentElement
+      .previousElementSibling,
+  )),
+  count: 1,
+  promise: Promise.resolve(),
+});
+
 export default function bazaar() {
   const origPots = querySelectorArray('a[href*="cmd=buyitem"]');
+  if (!origPots.length) return;
   const potTable = closestTable(closestTable(origPots[0]).parentElement);
-  const potions = origPots.map((p) => ({
-    id: Number(getId(p)),
-    img: p.children[0].src,
-    fetch: p.firstChild.dataset.tipped,
-    price: intValue(getTextTrim(
-      querySelector('img[src*="/currency/"]', closestTable(p).parentElement)
-        .parentElement
-        .previousElementSibling,
-    )),
-    count: 1,
-    promise: Promise.resolve(),
-  }));
-
-  startApp(potions, potTable);
+  startApp(origPots.map(preparePotions), potTable);
   potTable.remove();
 }

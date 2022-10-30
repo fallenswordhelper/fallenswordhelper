@@ -9,7 +9,6 @@ import combatLogger from './combatLogger';
 import interceptMouseEvents from './creatureInfo/interceptMouseEvents';
 import doMonsterColors from './doMonsterColors';
 import doNotKill from './doNotKill/doNotKill';
-import fixDebuff from './fixDebuff';
 import globalTop from './globalTop/globalTop';
 import hideGroupButton from './hideGroupButton';
 import hideTitanCombatResults from './hideTitanCombatResults';
@@ -49,7 +48,6 @@ const usualRoutines = [
   hideMapTooltip,
   buttons,
   buffInfo,
-  fixDebuff,
   interceptMouseEvents,
   champAttacks,
   globalTop,

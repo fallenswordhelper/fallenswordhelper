@@ -176,6 +176,7 @@
 .fshCrystal {color: #6633ff;}
 .fshEpic {color: #009933;}
 
+.fsh-va-text-bottom {vertical-align: text-bottom;}
 .fshVTTop {vertical-align: text-top;}
 .fshCenter {text-align: center;}
 .fshTblCenter {margin: 0 auto;}
