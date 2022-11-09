@@ -1,2 +1,0 @@
-import{a as f}from"./chunk-E5TMKJMS.js";import{a as o}from"./chunk-VPJYHXX4.js";import{a as e}from"./chunk-5QU22RJP.js";import{L as n,h as l}from"./chunk-4JMWSEZ5.js";var d=0,m=0;function i(){return d||(m=o(`#pCC a[href^="${n}"]`),d=!0),m}var r=null;function p(){let t=i();if(t){let u=e(l,t.href);if(u)return Number(u)}}function g(){return r===null&&(r=p()===f()),r}export{i as a,g as b};
-//# sourceMappingURL=chunk-5QSPNSCN.js.map

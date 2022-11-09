@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/bank/injectBank.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.91","mappings":"ujBAEe,SAARA,GAA8B,CACnCC,EAAY,CACV,aAAc,UACd,SAAU,OACV,QAAS,GACT,QAAS,EACT,OAAQ,EACR,KAAM,CACJ,IAAK,OACL,OAAQ,aACV,EACA,aAAc,EAChB,CAAC,CACH","names":["injectBank","ajaxifyBank"]}

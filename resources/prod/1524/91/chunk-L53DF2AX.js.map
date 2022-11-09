@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/idHandler.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.91","mappings":"wCAEA,IAAMA,EAAS,CAACC,EAAQ,CAACC,CAAE,IAAMD,EAAO,KAAOC,EAEhC,SAARC,EAA2BC,EAAQ,CACxC,OAAQ,GAAMC,EAAYL,EAAQI,EAAQ,CAAC,CAC7C","names":["idTest","target","id","idHandler","evtAry","handleEvent"]}
