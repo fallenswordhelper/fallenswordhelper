@@ -70,6 +70,8 @@ export default function injectScouttower() {
   if (!titanTables?.length) return;
   injectScouttowerBuffLinks(titanTables);
   const titanRows = makeTitanRows(titanTables);
-  titanRows.forEach(decorate);
-  titanTracker(titanTables, titanRows);
+  if (titanRows) {
+    titanRows.forEach(decorate);
+    titanTracker(titanTables, titanRows);
+  }
 }

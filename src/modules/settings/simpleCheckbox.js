@@ -16,7 +16,7 @@ function hasNetwork(network) {
 
 const stability = (unstable) => (
   unstable
-    ? '<span class="unstable" data-tooltip="Warning: Causes page instability">&#128498;</span>'
+    ? '<span class="unstable" data-tooltip="Warning: Causes page instability"></span>'
     : ''
 );
 

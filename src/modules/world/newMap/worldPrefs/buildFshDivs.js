@@ -67,6 +67,8 @@ function prefsClickEvent(e) {
 }
 
 export default function buildFshDivs() {
+  const tempWorldButtons = getElementById('worldContainerBelow')?.children[0];
+  if (!tempWorldButtons) return;
   const fshDiv = createDiv({ className: 'fshCenter fshFten' });
   const prefsDiv = buildPrefsDiv();
   onclick(prefsDiv, prefsClickEvent);
@@ -74,7 +76,6 @@ export default function buildFshDivs() {
   insertElement(fshDiv, prefsDiv);
   const missingBuffsDiv = createDiv();
   insertElement(fshDiv, missingBuffsDiv);
-  const tempWorldButtons = getElementById('worldContainerBelow').children[0];
   insertElementBefore(fshDiv, tempWorldButtons);
   return missingBuffsDiv;
 }
