@@ -310,7 +310,8 @@
   },
   "trackLadderReset":{
     "helpTitle":"Track Ladder Reset",
-    "helpText":"This tracks ladder resets from logs and news articles."
+    "helpText":"This tracks ladder resets from logs and news articles.",
+    "unstable": true
   },
   "addUfsgLinks":{
     "helpTitle":"Add UFSG Links to News",
@@ -480,7 +481,8 @@
   "optInOnLadderPage":{
     "helpTitle":"Opt in on Ladder Page",
     "helpText":"This adds Opt in to the Ladder page.",
-    "network":true
+    "network":true,
+    "unstable": true
   },
   "betaOptIn":{
     "helpTitle":"FSH Beta Opt-In",
