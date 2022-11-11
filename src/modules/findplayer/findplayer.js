@@ -33,14 +33,15 @@ function makeLink(min, max, guild, textContent) {
   return thisLink;
 }
 
+const pnpLink = () => makeLink(getLowerPvpLevel(), getUpperPvpLevel(), '-1', 'Get PvP targets');
+const gngLink = () => makeLink(getLowerGvGLevel(), getUpperGvgLevel(), '1', 'Get GvG targets');
+
 function doShortcuts(findPlayerButton) {
   const parent = closestForm(findPlayerButton);
   parent.classList.add('fshRelative');
   const containerDiv = createDiv({ className: 'fsh-findplayer-div' });
-  const pvpLink = makeLink(getLowerPvpLevel(), getUpperPvpLevel(), '-1', 'Get PvP targets');
-  const gvgLink = makeLink(getLowerGvGLevel(), getUpperGvgLevel(), '1', 'Get GvG targets');
-  insertElement(containerDiv, pvpLink);
-  insertElement(containerDiv, gvgLink);
+  insertElement(containerDiv, pnpLink());
+  insertElement(containerDiv, gngLink());
   insertElement(parent, containerDiv);
 }
 
