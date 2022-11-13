@@ -1,72 +1,65 @@
 import './doQuickLinks.css';
+import sendEvent from '../analytics/sendEvent';
+import createAnchor from '../common/cElement/createAnchor';
+import createDiv from '../common/cElement/createDiv';
+import createLi from '../common/cElement/createLi';
+import createUl from '../common/cElement/createUl';
 import draggable from '../common/draggable';
-import getElementById from '../common/getElementById';
-import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import insertElement from '../common/insertElement';
+import onclick from '../common/onclick';
 import querySelector from '../common/querySelector';
 import calf from '../support/calf';
 import task from '../support/task';
-import escapeHtml from '../system/escapeHtml';
 import getValue from '../system/getValue';
 import getValueJSON from '../system/getValueJSON';
 
-function retBool(bool, ifTrue, ifFalse) {
-  if (bool) {
-    return ifTrue;
+const createQuicklinksDiv = (offset) => createDiv({
+  className: 'fshQuickLinks fshInnerBg',
+  style: {
+    left: `${getValue('quickLinksLeftPx')}px`,
+    top: `${Number(getValue('quickLinksTopPx')) + offset}px`,
+  },
+});
+
+const valid = (link) => ('newWindow' in link) && link.url && link.name;
+
+function createLink(link) {
+  const anchor = createAnchor({
+    href: link.url,
+    ...(link.newWindow && { target: 'new' }),
+    text: link.name,
+  });
+  onclick(anchor, () => sendEvent('chrome', 'quick link', link.name));
+  return anchor;
+}
+
+function addLinks(quickLinks, div) {
+  const ul = insertElement(div, createUl());
+  quickLinks.filter(valid).forEach((link) => {
+    insertElement(insertElement(ul, createLi()), createLink(link));
+  });
+}
+
+function newLinks(offset, quickLinks) {
+  const div = createQuicklinksDiv(offset);
+  div.classList.toggle('fshFixed', getValue('keepHelperMenuOnScreen'));
+  if (getValue('draggableQuickLinks')) {
+    div.classList.add('fshMove');
+    draggable(div);
   }
-  return ifFalse;
-}
-
-function retOption(option, ifTrue, ifFalse) {
-  return retBool(getValue(option), ifTrue, ifFalse);
-}
-
-function isDraggable(draggableQuickLinks) {
-  if (draggableQuickLinks) {
-    draggable(getElementById('fshQuickLinks'));
-  }
-}
-
-function invalid(link) {
-  return !('newWindow' in link) || !link.url || !link.name;
-}
-
-function linkHtml(link) {
-  if (invalid(link)) { return ''; }
-  const newWindow = retBool(link.newWindow, ' target="new"', '');
-  return `<li><a href="${escapeHtml(link.url)}"${
-    newWindow}>${link.name}</a></li>`;
-}
-
-function makeQuickLinks(quickLinks) {
-  return quickLinks.map(linkHtml).join('');
-}
-
-function haveLinks(offset, quickLinks) {
-  const draggableQuickLinks = getValue('draggableQuickLinks');
-  const html = `<div style="top:${Number(getValue('quickLinksTopPx')) + offset}px; left:${
-    getValue('quickLinksLeftPx')}px;" id="fshQuickLinks" `
-    + `class="fshQuickLinks fshInnerBg${
-      retOption('keepHelperMenuOnScreen', ' fshFixed', '')
-    }${retBool(draggableQuickLinks, ' fshMove', '')}">${
-      makeQuickLinks(quickLinks)}</div>`;
-  insertHtmlBeforeEnd(document.body, html);
-  isDraggable(draggableQuickLinks);
-}
-
-function haveNode(node) {
-  const { top: mainBodyTop } = node.getBoundingClientRect();
-  const { top } = document.body.getBoundingClientRect();
-  const quickLinks = getValueJSON('quickLinks') || [];
-  if (quickLinks.length > 0) haveLinks(mainBodyTop - top, quickLinks);
+  addLinks(quickLinks, div);
+  insertElement(document.body, div);
 }
 
 function injectQuickLinks() {
-  const node = querySelector('.mainbody');
-  if (node) haveNode(node);
+  const mainbody = querySelector('.mainbody');
+  if (!mainbody) return;
+  const { top: mainBodyTop } = mainbody.getBoundingClientRect();
+  const { top } = document.body.getBoundingClientRect();
+  const quickLinks = getValueJSON('quickLinks') || [];
+  if (quickLinks.length) newLinks(mainBodyTop - top, quickLinks);
 }
 
 export default function doQuickLinks() {
-  if (!calf.huntingMode) {
-    task(3, injectQuickLinks);
-  }
+  if (!calf.huntingMode) task(3, injectQuickLinks);
 }
