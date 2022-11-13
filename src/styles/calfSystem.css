@@ -328,6 +328,9 @@ button::-moz-focus-inner {
   padding: 0;
 }
 .fshBl.fshBls {font-size: 84%;}
+.fsh-bli {
+  font-size: inherit;
+}
 
 /* Create Auction Craft Buttons */
 .fshAC {
