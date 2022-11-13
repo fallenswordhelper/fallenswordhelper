@@ -1,17 +1,17 @@
 import './doQuickLinks.css';
-import sendEvent from '../analytics/sendEvent';
-import createAnchor from '../common/cElement/createAnchor';
-import createDiv from '../common/cElement/createDiv';
-import createLi from '../common/cElement/createLi';
-import createUl from '../common/cElement/createUl';
-import draggable from '../common/draggable';
-import insertElement from '../common/insertElement';
-import onclick from '../common/onclick';
-import querySelector from '../common/querySelector';
-import calf from '../support/calf';
-import task from '../support/task';
-import getValue from '../system/getValue';
-import getValueJSON from '../system/getValueJSON';
+import sendEvent from '../../analytics/sendEvent';
+import createAnchor from '../../common/cElement/createAnchor';
+import createDiv from '../../common/cElement/createDiv';
+import createLi from '../../common/cElement/createLi';
+import createUl from '../../common/cElement/createUl';
+import draggable from '../../common/draggable';
+import insertElement from '../../common/insertElement';
+import onclick from '../../common/onclick';
+import querySelector from '../../common/querySelector';
+import calf from '../../support/calf';
+import task from '../../support/task';
+import getValue from '../../system/getValue';
+import getValueJSON from '../../system/getValueJSON';
 
 const createQuicklinksDiv = (offset) => createDiv({
   className: 'fshQuickLinks fshInnerBg',
