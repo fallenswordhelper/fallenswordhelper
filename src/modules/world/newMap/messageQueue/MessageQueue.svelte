@@ -1,6 +1,5 @@
 <script>
 import { tick } from 'svelte';
-import { fade } from 'svelte/transition';
 import uniq from '../../../common/uniq';
 
 const iframe = document.body.appendChild(document.createElement('iframe'));
@@ -40,13 +39,14 @@ const getMsgs = (msgs) => uniq(msgs, 'msg').map(({ msg, type }) => ({
 
 function destroy(deleteMsg) {
   messages = messages.filter(({ msg }) => msg !== deleteMsg);
+  repos();
 }
 
 mc._displayMessage = displayMessage; // eslint-disable-line no-underscore-dangle
 </script>
 
 {#each getMsgs(messages) as { msg, type, count } (msg)}
-  <div class="fsh-message {type}" out:fade on:outroend={repos} on:click={() => destroy(msg)}>
+  <div class="fsh-message {type}" on:click={() => destroy(msg)}>
     {msg}
     {#if count > 1}
       <div class="count">x{count}</div>
