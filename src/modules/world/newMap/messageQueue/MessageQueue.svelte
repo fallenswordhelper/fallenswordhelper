@@ -46,6 +46,7 @@ mc._displayMessage = displayMessage; // eslint-disable-line no-underscore-dangle
 </script>
 
 {#each getMsgs(messages) as { msg, type, count } (msg)}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="fsh-message {type}" on:click={() => destroy(msg)}>
     {msg}
     {#if count > 1}

@@ -1,11 +1,13 @@
+import './weightings.css';
 import sendEvent from '../../analytics/sendEvent';
 import bitwiseAnd from '../../common/bitwiseAnd';
-import createInput from '../../common/cElement/createInput';
+import createButton from '../../common/cElement/createButton';
+import createSpan from '../../common/cElement/createSpan';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import onclick from '../../common/onclick';
+import once from '../../common/once';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import roundToString from '../../common/roundToString';
@@ -51,21 +53,21 @@ function fetchRankData(theRows, memberRanks) {
 }
 
 function injectWeightButton(theRows, memberRanks, addNewRank) {
-  const weightButton = createInput({
-    className: 'custombutton',
+  const container = createSpan({ className: 'fsh-weightings', innerHTML: '[ ' });
+  const weightButton = createButton({
+    className: 'fshBl fsh-bli',
+    textContent: 'Get Rank Weightings',
     type: 'button',
-    value: 'Get Rank Weightings',
   });
-  onclick(weightButton, partial(fetchRankData, theRows, memberRanks));
+  once(weightButton, partial(fetchRankData, theRows, memberRanks));
+  insertElement(container, weightButton);
+  insertHtmlBeforeEnd(container, ' ]');
   const theTd = addNewRank.parentNode.parentNode;
-  insertHtmlBeforeEnd(theTd, '&nbsp;');
-  insertElement(theTd, weightButton);
+  insertElement(theTd, container);
 }
 
 export default function weightings(theRows, memberRanks) {
   // gather rank info button
   const addNewRank = querySelector('#pCC a[href*="=ranks&subcmd2=add"]');
-  if (addNewRank) {
-    injectWeightButton(theRows, memberRanks, addNewRank);
-  }
+  if (addNewRank) injectWeightButton(theRows, memberRanks, addNewRank);
 }

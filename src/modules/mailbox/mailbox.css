@@ -1,3 +1,7 @@
+#qtOn, #qtOff {
+  position: absolute;
+}
+
 .fshTakeGrid {
   display: grid;
   gap: 2px;

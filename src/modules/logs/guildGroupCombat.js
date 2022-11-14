@@ -19,7 +19,7 @@ function decorate(row, leader, itemName) {
 async function addItem(a) {
   const row = closestTr(a);
   const json = await getCombat(row, getId(a));
-  const itemName = json.r.combat.items?.[0].n;
+  const itemName = json?.r?.combat?.items?.[0]?.n;
   if (itemName) decorate(row, json.r.combat.attacker.group.players[0], itemName);
 }
 

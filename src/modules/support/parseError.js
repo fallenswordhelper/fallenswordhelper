@@ -1,3 +1,5 @@
+import jsonStringify from '../common/jsonStringify';
+
 function parseStack(e) {
   const concatStack = e.stack.replace(/\n +/g, '|');
   if (e.stack.includes(e.message)) {
@@ -14,5 +16,6 @@ function isError(e) {
 
 export default function parseError(e) {
   if (e instanceof Error) { return isError(e); }
+  if (typeof e === 'object') { return jsonStringify(e); }
   return String(e);
 }

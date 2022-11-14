@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/infoBox.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.91","mappings":"wCAEe,SAARA,EAAyBC,EAAO,CACrC,IAAMC,EAAUC,EAAe,WAAYF,CAAK,EAChD,GAAIC,EAAS,CACX,IAAME,EAAYF,EAAQ,UAC1B,OAAIE,EACKA,EAAU,QAAQ,QAAS,EAAE,EAE/B,EACT,CACF","names":["infoBox","scope","infoMsg","getElementById","infoMatch"]}

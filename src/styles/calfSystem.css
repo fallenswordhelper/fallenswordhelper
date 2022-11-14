@@ -176,6 +176,7 @@
 .fshCrystal {color: #6633ff;}
 .fshEpic {color: #009933;}
 
+.fsh-va-text-bottom {vertical-align: text-bottom;}
 .fshVTTop {vertical-align: text-top;}
 .fshCenter {text-align: center;}
 .fshTblCenter {margin: 0 auto;}
@@ -327,6 +328,9 @@ button::-moz-focus-inner {
   padding: 0;
 }
 .fshBl.fshBls {font-size: 84%;}
+.fsh-bli {
+  font-size: inherit;
+}
 
 /* Create Auction Craft Buttons */
 .fshAC {

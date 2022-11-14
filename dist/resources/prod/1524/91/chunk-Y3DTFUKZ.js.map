@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/system/outputFormat.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.91","mappings":"AAAe,SAARA,EAA8BC,EAAOC,EAAQ,CAClD,OAAID,IAAU,EAAY,GACnB,OAAOA,CAAK,EAAIC,CACzB","names":["outputFormat","value","suffix"]}

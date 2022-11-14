@@ -16,7 +16,7 @@ function startTracker(parentTable, theTitans, titanRows) {
   });
 }
 
-const getCoolTime = (cooldown) => (cooldown.includes('until')
+const getCoolTime = (cooldown) => (cooldown?.includes('until')
   ? parseDateAsTimestamp(cooldown.replace('Cooldown until: ', ''))
   : 0);
 

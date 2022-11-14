@@ -16,7 +16,7 @@ function hasNetwork(network) {
 
 const stability = (unstable) => (
   unstable
-    ? '<span class="unstable" data-tooltip="Warning: Causes page instability">&#128498;</span>'
+    ? '<span class="unstable" data-tooltip="Warning: Causes page instability"></span>'
     : ''
 );
 
@@ -33,7 +33,7 @@ export function justLabel(name) {
 }
 
 export function justCheckbox(name) {
-  return `<input id="${name}" name="${name}" class="fshVTTop" type="checkbox"${isValueChecked(name)}>`;
+  return `<input id="${name}" name="${name}" class="fsh-va-text-bottom" type="checkbox"${isValueChecked(name)}>`;
 }
 
 export function simpleCheckboxHtml(name) {

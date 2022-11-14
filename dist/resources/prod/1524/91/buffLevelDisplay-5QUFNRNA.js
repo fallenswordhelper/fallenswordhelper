@@ -1,0 +1,2 @@
+import{a as i}from"./chunk-ATNZ3FCR.js";import"./chunk-4X6UL4LD.js";import{a as n}from"./chunk-IS4DNI73.js";import"./chunk-QTCHKF65.js";import"./chunk-B5FNPBUP.js";import{a as l}from"./chunk-MS5TR5HI.js";import"./chunk-SC26BEBT.js";var f='#profileRightColumn img[src*="/skills/"]';function o(e){let t=l(/Level: (?<lvl>\d+)/,e.dataset.tipped);if(!t)return;let r=e.nextElementSibling;e.nextElementSibling||(r=e.parentNode.nextElementSibling),i(r,`<b>(${t})</b><br>`)}function m(){n(f).forEach(o)}export{m as default};
+//# sourceMappingURL=buffLevelDisplay-5QUFNRNA.js.map
