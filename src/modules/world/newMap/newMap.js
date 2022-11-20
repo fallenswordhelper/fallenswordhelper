@@ -17,6 +17,7 @@ import monsterLog from './monsterLog/monsterLog';
 import onWorld from './onWorld';
 import relic from './relic/relic';
 import repairButton from './repairButton';
+import replaceFootprints from './replaceFootprints';
 import sendGold from './sendGold';
 import shop from './shop';
 import teleport from './teleport/teleport';
@@ -53,6 +54,7 @@ const usualRoutines = [
   globalTop,
   teleport,
   messageQueue,
+  replaceFootprints,
 ];
 
 export default function newMap() {
