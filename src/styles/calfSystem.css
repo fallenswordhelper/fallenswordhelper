@@ -3,40 +3,6 @@
   pointer-events: none;
 }
 
-#fshWorldPrefs img {vertical-align: text-bottom;}
-.cR .fshFten {margin: 0.5em 0;}
-
-/* Scout Tower Titan Tracker & Super Elite Log */
-.fshTTracker {
-  width: 500px;
-  margin: auto;
-}
-.fshCooldown {
-  color: #640000;
-}
-
-/* New Map */
-/* #missingBuffs {
-  text-align: center;
-  margin: 0 0 4px 0;
-} */
-#fshWorldButtonContainer {
-  float: left;
-  height: 25.6px;
-  display: flex;
-  align-items: center;
-}
-#fshWorldButtonContainer > div:first-child {
-  margin-right: 0.25em;
-}
-
-.fshToggle {display: flex;}
-.fshToggle input {display: none;}
-.fshToggle input ~ label:nth-child(2) {display: none;}
-.fshToggle input ~ label:nth-child(3) {display: block;}
-.fshToggle input:checked ~ label:nth-child(2) {display: block;}
-.fshToggle input:checked ~ label:nth-child(3) {display: none;}
-
 .fshCurveContainer .fshCurveEle {
   background-position: center center;
   border: solid 1px #4f3717;
@@ -45,22 +11,18 @@
   margin-left: 0.25em;
 }
 
-.fshCurveBtn {
-  height: 17px;
-  padding: 0;
-  width: 17px;
-}
-
 .fshCurveLbl {
   height: 15px;
   width: 15px;
 }
 
-.fshFsty div {font-size: 70%}
-.fshFten div {font-size: 11px;}
-.fshFten select {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  font-size: 11px;
+/* Scout Tower Titan Tracker & Super Elite Log */
+.fshTTracker {
+  width: 500px;
+  margin: auto;
+}
+.fshCooldown {
+  color: #640000;
 }
 
 /* Advisor */

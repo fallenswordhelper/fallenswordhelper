@@ -1,0 +1,23 @@
+.fshToggle {
+  display: flex;
+}
+
+.fshToggle input {
+  display: none;
+}
+
+.fshToggle input ~ label:nth-child(2) {
+  display: none;
+}
+
+.fshToggle input ~ label:nth-child(3) {
+  display: block;
+}
+
+.fshToggle input:checked ~ label:nth-child(2) {
+  display: block;
+}
+
+.fshToggle input:checked ~ label:nth-child(3) {
+  display: none;
+}

@@ -1,3 +1,4 @@
+import './buttons.css';
 import createButton from '../../../common/cElement/createButton';
 import createDiv from '../../../common/cElement/createDiv';
 import textSpan from '../../../common/cElement/textSpan';
