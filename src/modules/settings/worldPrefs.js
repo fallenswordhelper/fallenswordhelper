@@ -15,7 +15,11 @@ import {
 function footprintColor() {
   return makeLabelRow(
     'footprintColor',
-    `<input name="footprintColor" type="color" value="${getValue('footprintColor')}">`,
+    '<input name="footprintColor" style="height: 1.5em; width: 2em; margin-right: 4px; '
+    + 'vertical-align: middle" id="footprintColor" type="color" '
+    + `value="${getValue('footprintColor')}">`
+    + '<button type="button" class="custombutton" '
+    + 'onclick="document.getElementById(\'footprintColor\').value=\'#ee9252\'">Reset</button>',
   );
 }
 
