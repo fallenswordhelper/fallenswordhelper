@@ -12,6 +12,13 @@ import {
   justCheckbox,
 } from './simpleCheckbox';
 
+function footprintColor() {
+  return makeLabelRow(
+    'footprintColor',
+    `<input name="footprintColor" type="color" value="${getValue('footprintColor')}">`,
+  );
+}
+
 function worldGroup() {
   // World Screen
   return makeLabelRow(
@@ -111,5 +118,6 @@ export default function worldPrefs() {
       bunchOfSimple([
         'huntingMode',
         'messageStack',
-      ])}`;
+      ])}${
+      footprintColor()}`;
 }

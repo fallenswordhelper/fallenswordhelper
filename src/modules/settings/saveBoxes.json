@@ -156,5 +156,6 @@
   "optInOnLadderPage",
   "betaOptIn",
   "showBuffLinks",
-  "groupCombatItems"
+  "groupCombatItems",
+  "footprintColor"
 ]

@@ -1,3 +1,5 @@
+import getValue from '../../system/getValue';
+
 function drawCircle(
   context,
   cropX,
@@ -11,7 +13,7 @@ function drawCircle(
 ) {
   context.beginPath();
   context.arc(x + width / 2, y + height / 2, width / 6, 0, 2 * Math.PI, false);
-  context.fillStyle = '#ee9252';
+  context.fillStyle = this.color;
   context.fill();
   context.lineWidth = 1;
   context.strokeStyle = 'black';
@@ -20,5 +22,7 @@ function drawCircle(
 }
 
 export default function replaceFootprints() {
-  GameController.Realm.footprintTexture.Draw = drawCircle;
+  const texture = GameController.Realm.footprintTexture;
+  texture.color = getValue('footprintColor');
+  texture.Draw = drawCircle;
 }
