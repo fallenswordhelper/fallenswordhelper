@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/getTextTrim.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.92","mappings":"wHAIe,SAARA,EAA6BC,EAAM,CACxC,IAAMC,EAAOC,EAAQF,CAAI,EACzB,GAAIG,EAASF,CAAI,EACf,OAAOG,EAAKH,CAAI,CAEpB","names":["getTextTrim","node","text","getText","isString","trim"]}

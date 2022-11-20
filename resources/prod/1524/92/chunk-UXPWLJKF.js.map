@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/system/shouldBeArray.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.92","mappings":"gFAGe,SAARA,EAA+BC,EAAM,CAC1C,IAAMC,EAASC,EAASF,CAAI,EAC5B,OAAIC,EAAiBE,EAASF,CAAM,EAC7B,CAAC,CACV","names":["shouldBeArray","pref","stored","getValue","csvSplit"]}

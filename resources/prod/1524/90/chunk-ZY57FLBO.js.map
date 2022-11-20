@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/profile/doStatTotal.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.90","mappings":"gFAGe,SAARA,GAA+B,CAChCC,EAAS,oBAAoB,GAC/BC,EAAW,OAAO,wCAAoC,CAE1D","names":["doStatTotal","getValue","runDefault"]}

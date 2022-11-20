@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/_dataAccess/fallbacks/htmlResult.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.90","mappings":"wCAEe,SAARA,EAA4BC,EAAM,CACvC,IAAMC,EAAOC,EAAYF,CAAI,EAC7B,OAAIC,EAAK,SAAS,cAAc,EACvB,CAAE,EAAG,EAAK,EAEZ,CAAE,EAAG,CAAE,QAASA,CAAK,EAAG,EAAG,EAAM,CAC1C","names":["htmlResult","data","info","infoBoxFrom"]}

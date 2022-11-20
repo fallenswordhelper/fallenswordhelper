@@ -1,7 +1,0 @@
-import{a as l}from"./chunk-SPLHCWWX.js";import{a as m}from"./chunk-YM7LMH37.js";import"./chunk-XOOBRZTW.js";import{a as f}from"./chunk-MJQR7DVR.js";import{a}from"./chunk-4DD6XIWS.js";import{a as d}from"./chunk-73375NDG.js";import{a as n}from"./chunk-QCGEDCXW.js";import{a as r}from"./chunk-Z6NEFCOZ.js";import"./chunk-NPK42VJ3.js";import"./chunk-NCJHTPUM.js";import"./chunk-VH2S7CSB.js";import"./chunk-3LPJKV5E.js";import"./chunk-R2ELQJ5E.js";import{a as s}from"./chunk-E34NE2SS.js";import"./chunk-LFPNA5UZ.js";import"./chunk-IGXYBCKR.js";import"./chunk-LHP5V3M7.js";import{va as i}from"./chunk-SHG4I62I.js";var c=`.profile-stat-bonus { font-size: x-small; }
-.fshCharStats { table-layout: fixed; }
-.fshCharStats td:first-of-type { width: 22%; }
-.fshCharStats td:nth-of-type(2) { width: 25%; }
-.fshCharStats td:nth-of-type(3) { width: 18%; }
-.fshCharStats td:nth-of-type(4) { width: 35%; }`;function u(t){let e=f(t);return e?` <div class="profile-stat-bonus">${e}</div>`:""}function y(t){let[e,o]=n("td",t);d(`<span id="${e.id}">${a(e.innerHTML.replace(/&nbsp;/g," "))}</span>${u(o)}`,t.parentNode)}var p=(t,e,o)=>s(`${e}[${o}]`,t).forEach(h=>h.removeAttribute(o));function b(t){p(t,"tr","style"),p(t,"td","width"),r("td[colspan]",t)?.removeAttribute("colspan")}function S(t){t.classList.add("fshCharStats"),b(t),s(i,t).forEach(y),m(l(c),t)}function C(){let t=r("#profileLeftColumn table");t&&S(t)}export{C as default};
-//# sourceMappingURL=updateStatistics-GRGAL5ZW.js.map

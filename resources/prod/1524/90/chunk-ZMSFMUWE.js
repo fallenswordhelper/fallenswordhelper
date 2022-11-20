@@ -1,2 +1,0 @@
-import{a as e}from"./chunk-T7TJAXFJ.js";import{b as r}from"./chunk-5BQ45OC2.js";function o(t){r()||(ga("fshApp.set","screenName",t),ga("fshApp.send","screenview"),gtag("config","G-14Y99WX8XL",{screen_name:t}))}function n(){e(import("./viewRecipe-VKE2B6V2.js"))}function f(){e(import("./news-D2SZ5CVJ.js"))}function i(){e(import("./injectQuestBookFull-YZVLHKSD.js"))}export{o as a,n as b,f as c,i as d};
-//# sourceMappingURL=chunk-ZMSFMUWE.js.map
