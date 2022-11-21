@@ -1,10 +1,10 @@
 <script>
 // eslint-disable a11y-label-has-associated-control
 import sendEvent from '../analytics/sendEvent';
-import getElementById from '../common/getElementById';
 import jQueryDialog from '../chrome/jQueryDialog/jQueryDialog';
 import combatLog from '../chrome/pageSwitcher/loader/combatLog';
 import monstorLog from '../chrome/pageSwitcher/loader/monstorLog';
+import getElementById from '../common/getElementById';
 import getValue from '../system/getValue';
 import FieldInput from './FieldInput.svelte';
 import FieldSelect from './FieldSelect.svelte';
@@ -31,7 +31,6 @@ function getHuntingModeOptions() {
 function resetFootprintColor() {
   getElementById('footprintColor').value = '#ee9252';
 }
-
 </script>
 <!-- eslint-disable a11y-label-has-associated-control -->
 <tr>
@@ -174,7 +173,7 @@ function resetFootprintColor() {
     field="footprintColor"
     label="Footprint color"
     tooltip="<span class='fshHelpTitle'>Change footprint color</span><br><br>Alters the color of footprints left on the world map.">
-  <input id="footprintColor" name="footprintColor" type="color" value={getValue("footprintColor")}>
+  <input id="footprintColor" name="footprintColor" type="color" value={getValue('footprintColor')}>
   <button type="button" class="custombutton" on:click={resetFootprintColor}>Reset</button>
 </SettingRow>
 <style>
