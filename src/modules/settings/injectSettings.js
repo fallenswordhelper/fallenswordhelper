@@ -1,4 +1,5 @@
 import getElementById from '../common/getElementById';
+import once from '../common/once';
 import injectBlockedSkills from './blockedSkills/injectBlockedSkills';
 import Settings from './Settings.svelte';
 
@@ -16,7 +17,11 @@ export default function injectSettings() { // jQuery
   addTab(settingsTabs);
   const tabsInstance = settingsTabs.tabs('instance');
   if (tabsInstance) {
-    startApp(getElementById('fshSettings'));
+    once(
+      getElementById('ui-id-9'),
+      'click',
+      () => startApp(getElementById('fshSettings')),
+    );
   }
   injectBlockedSkills();
 }
