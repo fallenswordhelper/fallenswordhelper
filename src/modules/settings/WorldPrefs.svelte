@@ -1,6 +1,7 @@
 <script>
 // eslint-disable a11y-label-has-associated-control
 import sendEvent from '../analytics/sendEvent';
+import getElementById from '../common/getElementById';
 import jQueryDialog from '../chrome/jQueryDialog/jQueryDialog';
 import combatLog from '../chrome/pageSwitcher/loader/combatLog';
 import monstorLog from '../chrome/pageSwitcher/loader/monstorLog';
@@ -26,6 +27,11 @@ function getHuntingModeOptions() {
     { value: '3', text: getValue('huntingBuffs3Name') },
   ];
 }
+
+function resetFootprintColor() {
+  getElementById('footprintColor').value = '#ee9252';
+}
+
 </script>
 <!-- eslint-disable a11y-label-has-associated-control -->
 <tr>
@@ -164,3 +170,18 @@ function getHuntingModeOptions() {
     label="Stack repeating world messages"
     tooltip="<span class='fshHelpTitle'>Stack repeating world messages</span><br><br>Messages on the world screen that have the same text will combine into a single stack, saving some screen space.">
 </SettingRow>
+<SettingRow
+    field="footprintColor"
+    label="Footprint color"
+    tooltip="<span class='fshHelpTitle'>Change footprint color</span><br><br>Alters the color of footprints left on the world map.">
+  <input id="footprintColor" name="footprintColor" type="color" value={getValue("footprintColor")}>
+  <button type="button" class="custombutton" on:click={resetFootprintColor}>Reset</button>
+</SettingRow>
+<style>
+input[type=color] {
+  height: 1.5em;
+  width: 2em;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+</style>

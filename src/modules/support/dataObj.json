@@ -244,5 +244,6 @@
   "selectMain": true,
   "disableQuickExtractPrompts": false,
   "qbSortBuffsAlphabetically": false,
-  "groupCombatItems": false
+  "groupCombatItems": false,
+  "footprintColor": "#ee9252"
 }

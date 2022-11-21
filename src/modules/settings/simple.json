@@ -609,5 +609,9 @@
     "helpText":"This will show looted items, if any, under groups combats in the guild log",
     "network":true,
     "unstable": true
+  },
+  "footprintColor": {
+    "helpTitle":"Footprint Color",
+    "helpText":"This will change the color of footprints on the world map"
   }
 }
