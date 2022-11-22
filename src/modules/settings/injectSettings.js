@@ -1,3 +1,4 @@
+import './configData.css';
 import getElementById from '../common/getElementById';
 import once from '../common/once';
 import injectBlockedSkills from './blockedSkills/injectBlockedSkills';
