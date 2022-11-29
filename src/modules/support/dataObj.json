@@ -34,7 +34,6 @@
   "goldRecipient":"",
   "goldAmount":"",
   "sendGoldonWorld":false,
-  "hideQuests":false,
   "hideQuestNames":"",
   "hideRecipes":false,
   "hideRecipeNames":"",
@@ -245,5 +244,6 @@
   "disableQuickExtractPrompts": false,
   "qbSortBuffsAlphabetically": false,
   "groupCombatItems": false,
-  "footprintColor": "#ee9252"
+  "footprintColor": "#ee9252",
+  "newQuestBook": false
 }

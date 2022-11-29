@@ -6,6 +6,7 @@ import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 import setValue from '../system/setValue';
 import injectQuestRow from './injectQuestRow';
+import QuestBook from './QuestBook.svelte';
 
 let normalLink = 0;
 let seasonLink = 0;
@@ -94,10 +95,17 @@ function storeQuestPage() {
   }
 }
 
+const startApp = () => new QuestBook({ target: pcc() });
+
 export default function injectQuestBookFull() {
   interceptSubmit();
   storeQuestPage();
   const questTable = getElementsByTagName(defTable, pcc())[5];
   if (!questTable) { return; }
-  injectQuestRow(questTable);
+  if (getPref('newQuestBook')) {
+    startApp();
+    pcc().firstElementChild.remove();
+  } else {
+    injectQuestRow(questTable);
+  }
 }

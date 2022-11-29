@@ -610,8 +610,12 @@
     "network":true,
     "unstable": true
   },
-  "footprintColor": {
+  "footprintColor":{
     "helpTitle":"Footprint Color",
     "helpText":"This will change the color of footprints on the world map"
+  },
+  "newQuestBook":{
+      "helpTitle":"New QuestBook",
+      "helpText":"This will replace the quest book with an ajaxified version"
   }
 }

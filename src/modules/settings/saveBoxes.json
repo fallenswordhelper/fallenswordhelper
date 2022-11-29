@@ -44,8 +44,6 @@
   "moveOnlineAlliesList",
   "moveFSBox",
   "moveDailyQuest",
-  "hideQuests",
-  "hideQuestNames",
   "hideRecipes",
   "hideRecipeNames",
   "doNotKillList",
@@ -157,5 +155,6 @@
   "betaOptIn",
   "showBuffLinks",
   "groupCombatItems",
-  "footprintColor"
+  "footprintColor",
+  "newQuestBook"
 ]
