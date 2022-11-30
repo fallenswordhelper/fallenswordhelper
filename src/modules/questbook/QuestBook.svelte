@@ -10,17 +10,20 @@ export let status = 'active';
 
 // Split is for backwards compatability
 let hiddenQuests = getValue('hideQuestNames').split(',');
+function updateHiddenQuests() {
+  setValue('hideQuestNames', hiddenQuests.join(','));
+}
 function hideQuest(quest) {
   hiddenQuests = [...hiddenQuests, quest.name];
-  setValue('hideQuestNames', hiddenQuests.join(','));
+  updateHiddenQuests();
 }
 function unHideQuest(quest) {
   hiddenQuests = hiddenQuests.filter((i) => i !== quest.name);
-  setValue('hideQuestNames', hiddenQuests.join(','));
+  updateHiddenQuests();
 }
 
 const pageLength = 22;
-let page = 0;
+let pageNumber = 1;
 let query = '';
 let realm = '';
 let minLvl = 0;
@@ -30,43 +33,37 @@ let questBook = [];
 async function loadQuestBook() {
   const response = await daQuestBook();
   questBook = response.r.map((i) => {
-    i.realm_name = i.realm.name; // eslint-disable-line no-param-reassign
-    i.progress = [i.current_stage, i.max_stage]; // eslint-disable-line no-param-reassign
-    return i;
+    const quest = { ...i, realm_name: i.realm.name };
+    return quest;
   });
 }
 
-let progress;
-$: {
-  const seasonalQuests = questBook.filter((i) => i.seasonal === seasonal);
-  const complete = (i) => i.current_stage === i.max_stage;
-  progress = seasonalQuests.filter(complete).length / seasonalQuests.length;
+function includes(string, queryString) {
+  return string.toUpperCase().includes(queryString.toUpperCase());
 }
 
-let questPage = [];
-let pages = 0;
-$: {
-  const hidden = (q) => hiddenQuests.includes(q.name);
-  questPage = questBook.filter((i) => i.seasonal === seasonal
-    && i.min_level >= minLvl && i.min_level <= maxLvl
-    && i.realm_name.toUpperCase().includes(realm.toUpperCase())
-    && i.name.toUpperCase().includes(query.toUpperCase()));
-  if (status === 'hidden') {
-    questPage = questPage.filter(hidden);
-  } else {
-    questPage = questPage.filter((i) => !hidden(i));
-    if (status === 'active') {
-      questPage = questPage.filter((i) => i.current_stage > 0 && i.max_stage > i.current_stage);
-    } else if (status === 'notStarted') {
-      questPage = questPage.filter((i) => i.current_stage === 0);
-    } else if (status === 'completed') {
-      questPage = questPage.filter((i) => i.current_stage === i.max_stage);
-    }
-  }
-  pages = Math.max(1, Math.ceil(questPage.length / pageLength));
-  page = Math.min(page, pages - 1);
-  questPage = questPage.slice(page * pageLength, (page + 1) * pageLength);
+function inputFilters(questName, realmName, minLevel, maxLevel) {
+  return (i) => i.min_level >= minLevel && i.min_level <= maxLevel
+    && includes(i.realm_name, realmName)
+    && includes(i.name, questName);
 }
+
+const statusFilters = {
+  active: (i) => i.current_stage > 0 && i.max_stage > i.current_stage,
+  notStarted: (i) => i.current_stage === 0,
+  completed: (i) => i.current_stage === i.max_stage,
+  hidden: (i) => hiddenQuests.includes(i.name),
+};
+
+$: seasonalQuests = questBook.filter((i) => i.seasonal === seasonal);
+$: progress = seasonalQuests.filter(statusFilters.completed).length / seasonalQuests.length;
+$: queryQuests = seasonalQuests
+  .filter(statusFilters[status])
+  .filter((i) => hiddenQuests.includes(i.name) === (status === 'hidden'))
+  .filter(inputFilters(query, realm, minLvl, maxLvl));
+$: pages = Math.max(1, Math.ceil(queryQuests.length / pageLength));
+$: pageNumber = Math.min(pageNumber, pages - 1);
+$: questPage = queryQuests.slice(pageNumber * pageLength, (pageNumber + 1) * pageLength);
 
 let lastSort = '';
 function sortQuests(feature) {
@@ -79,7 +76,7 @@ function sortQuests(feature) {
   lastSort = feature;
 }
 </script>
-<div id="fsh-quest-container">
+<div id="fshQuestContainer">
 {#await loadQuestBook()}
 Loading...
 {:then}
@@ -104,13 +101,14 @@ Loading...
     </label>
   ]</p>
   Total {seasonal ? 'Seasonal' : 'Normal'} Quest Progress:<br>
-  <div id="quest-progress">
+  <div id="fshQuestProgress">
     <img
         src="{cdn}ui/misc/progress_purple.png"
         style="width: {100 * progress}%"
         height="10"
         class="tip-static"
-        data-tipped="Quests Completed:<br>complete / total" >
+        alt="Progress"
+        data-tipped="Quests Completed:<br>{seasonalQuests.filter(statusFilters.completed).length} / {seasonalQuests.length}" >
   </div>
   <p style="text-align: center;">
     &lsqb;
@@ -139,6 +137,7 @@ Loading...
           <input type="text" placeholder="Search quest name" bind:value={query}>
         </td>
         <td>
+          Min lvl - Max lvl<br>
           <input type="number" placeholder="Min lvl" bind:value={minLvl}> -
           <input type="number" placeholder="Max lvl" bind:value={maxLvl}>
         </td>
@@ -183,16 +182,26 @@ Loading...
         <td>
           <a
               href="{guideUrl}quests&subcmd=view&quest_id={quest.id}"
-              class="fshTempleOne"
               data-tooltip="Search for this quest on the Ultimate Fallen Sword Guide"
               target="_blank"
-              rel="noreferrer"></a>
+              rel="noreferrer">
+            <img 
+                src="{cdn}temple/1.png"
+                alt="UFSG"
+                width="16"
+                hieght="16">
+          </a>
           <a
               href="https://wiki.fallensword.com/index.php?title={quest.name.replace(/ /g, '_')}"
-              class="fshWiki"
-              data-tooltip="Search for this quest on the Wiki"
               target="_blank"
-              rel="noreferrer"></a>
+              data-tooltip="Search for this quest on the Wiki"
+              rel="noreferrer">
+            <img
+              src="{cdn}ui/misc/wiki.png"
+              alt="Wiki"
+              width="16"
+              height="16">
+          </a>
         </td>
         <td>
           {#if status === 'hidden'}
@@ -207,8 +216,8 @@ Loading...
   </table>
   {#if pages > 1}
   <p>Page {#each Array(pages) as _, i (i)}
-    <label class="asLink" class:active="{i === page}">
-      <input type="radio" bind:group={page} value={i} name="page">
+    <label class="asLink" class:active="{i === pageNumber}">
+      <input type="radio" bind:group={pageNumber} value={i} name="page">
       {i + 1}
     </label>&nbsp;
     {/each}
@@ -217,28 +226,31 @@ Loading...
 {/await}
 </div>
 <style>
-#fsh-quest-container {
+#fshQuestContainer {
   width: 640px;
   min-height: 700px;
 }
-#fsh-quest-container h1 { font-weight: bold; }
-#fsh-quest-container .active {
+#fshQuestContainer h1 { font-weight: bold; }
+#fshQuestContainer .active {
   color: #f00;
   text-decoration: none;
   cursor: default;
 }
-#fsh-quest-container table thead tr th {
+#fshQuestContainer table thead tr {
+  vertical-align: bottom;
+}
+#fshQuestContainer table thead tr th {
   background: rgb(205,158,75);
   padding: 0px 4px;
 }
-#fsh-quest-container table td:nth-child(2),
-#fsh-quest-container table td:nth-child(4),
-#fsh-quest-container table td:nth-child(5),
-#fsh-quest-container table td:nth-child(6),
-#fsh-quest-container table th:nth-child(2),
-#fsh-quest-container table th:nth-child(4),
-#fsh-quest-container table th:nth-child(5),
-#fsh-quest-container table th:nth-child(6) {
+#fshQuestContainer table td:nth-child(2),
+#fshQuestContainer table td:nth-child(4),
+#fshQuestContainer table td:nth-child(5),
+#fshQuestContainer table td:nth-child(6),
+#fshQuestContainer table th:nth-child(2),
+#fshQuestContainer table th:nth-child(4),
+#fshQuestContainer table th:nth-child(5),
+#fshQuestContainer table th:nth-child(6) {
   text-align: center;
 }
 .fshPercentbar {
@@ -263,19 +275,17 @@ Loading...
 .fshStage.incomplete {
   background: #c5a869;
 }
-#fsh-quest-container table td:nth-child(5) a{
-  height: 17.4px;
-  width: 17.4px;
-  background-size: contain;
+#fshQuestContainer table td:nth-child(5) img{
   border: solid 1px #4f3717;
   border-radius: 2px;
 }
-#fsh-quest-container {
+#fshQuestContainer {
   text-align: center;
 }
-#fsh-quest-container table {
- text-align: left;
- width: 100%;
+#fshQuestContainer table {
+  text-align: left;
+  width: 100%;
+  border-spacing: 0;
 }
 
 .asLink {
@@ -290,7 +300,7 @@ Loading...
 .asLink input {
   display: none;
 }
-#quest-progress {
+#fshQuestProgress {
   width: 300px;
   display: inline-block;
   border: 1px solid black;
