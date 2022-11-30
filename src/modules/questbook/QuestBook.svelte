@@ -111,24 +111,24 @@ Loading...
         data-tipped="Quests Completed:<br>{seasonalQuests.filter(statusFilters.completed).length} / {seasonalQuests.length}" >
   </div>
   <p style="text-align: center;">
-    &lsqb;
+    [
     <label class="asLink" class:active="{status === 'active'}">
       <input type="radio" bind:group={status} value={'active'}>
       Active
-    </label> &vert;
+    </label> |
     <label class="asLink" class:active="{status === 'completed'}">
       <input type="radio" bind:group={status} value={'completed'}>
       Complete
-    </label> &vert;
+    </label> |
     <label class="asLink" class:active="{status === 'notStarted'}">
       <input type="radio" bind:group={status} value={'notStarted'}>
       Not Started
-    </label> &vert;
+    </label> |
     <label class="asLink" class:active="{status === 'hidden'}">
       <input type="radio" bind:group={status} value={'hidden'}>
       Hidden
     </label>
-    &rsqb;
+    ]
   </p>
   <table>
     <thead>
@@ -146,10 +146,10 @@ Loading...
         </td>
       </tr>
       <tr>
-        <th width="20%" on:click={() => sortQuests('name')} class="pointer">Quest Name</th>
-        <th width="20%" on:click={() => sortQuests('min_level')} class="pointer">Level</th>
-        <th width="25%" on:click={() => sortQuests('realm_name')} class="pointer">Starting Realm</th>
-        <th width="10%" on:click={() => sortQuests('current_stage')} class="pointer">Status</th>
+        <th width="20%" on:click={() => sortQuests('name')} class="fshPointer">Quest Name</th>
+        <th width="20%" on:click={() => sortQuests('min_level')} class="fshPointer">Level</th>
+        <th width="25%" on:click={() => sortQuests('realm_name')} class="fshPointer">Starting Realm</th>
+        <th width="10%" on:click={() => sortQuests('current_stage')} class="fshPointer">Status</th>
         <th width="10%">Guides</th>
         <th width="10%">Hide</th>
       </tr>
@@ -308,7 +308,7 @@ Loading...
   padding-right: 2px;
   text-align: left;
 }
-.pointer {
+.fshPointer {
   cursor: pointer;
 }
 input[type="number"] { width: 40%; }
