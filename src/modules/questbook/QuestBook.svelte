@@ -186,7 +186,7 @@ Loading...
               target="_blank"
               rel="noreferrer">
             <img 
-                src="{cdn}temple/1.png"
+                src="https://fallensword.com/favicon.ico"
                 alt="UFSG"
                 width="16"
                 hieght="16">
