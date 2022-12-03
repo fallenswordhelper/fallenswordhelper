@@ -4,5 +4,4 @@ import viewQuests from './fallbacks/viewQuests';
 
 export default function daQuestBook() {
   return $dataAccess(view, viewQuests);
-  // return $dataAccess(viewQuests, view);
 }
