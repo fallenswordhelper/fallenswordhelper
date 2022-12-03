@@ -1,5 +1,6 @@
 <script>
 import daQuestBook from '../_dataAccess/daQuestBook';
+import alpha from '../common/alpha';
 import { guideUrl } from '../support/constants';
 import getValue from '../system/getValue';
 import setValue from '../system/setValue';
@@ -67,11 +68,9 @@ $: questPage = queryQuests.slice(pageNumber * pageLength, (pageNumber + 1) * pag
 
 let lastSort = '';
 function sortQuests(feature) {
-  if (lastSort === feature) {
-    questBook.reverse();
-  } else {
-    questBook.sort((a, b) => a[feature] > b[feature]);
-  }
+  if (lastSort === feature) questBook.reverse();
+  else if (typeof questBook[0][feature] === 'string') questBook.sort((a, b) => alpha(a[feature], b[feature]));
+  else questBook.sort((a, b) => a[feature] - b[feature]);
   questBook = questBook;
   lastSort = feature;
 }
