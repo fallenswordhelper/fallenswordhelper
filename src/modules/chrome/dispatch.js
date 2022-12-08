@@ -113,7 +113,9 @@ async function runCore(cssPrm) {
 }
 
 function badEnv() {
-  return !('showPicker' in HTMLInputElement.prototype) || !navigator.cookieEnabled;
+  return !('showPicker' in HTMLInputElement.prototype)
+    || !navigator.cookieEnabled
+    || window !== window.parent;
 }
 
 function setVer(fshVer, gmInfo) {
