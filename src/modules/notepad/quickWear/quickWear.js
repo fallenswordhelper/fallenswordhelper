@@ -1,5 +1,6 @@
 import './quickWear.css';
 import backpack from '../../ajaxQueue/backpack';
+import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
 import eventHandler5 from '../../common/eventHandler5';
 import insertElement from '../../common/insertElement';
@@ -21,6 +22,7 @@ import fshTabSet from './fshTabSet';
 const defDisableQuickWearPrompts = 'disableQuickWearPrompts';
 
 function togglePref() {
+  sendEvent('QuickWear', 'Toggle Prompts');
   calf.disableQuickWearPrompts = !calf.disableQuickWearPrompts;
   setValue(defDisableQuickWearPrompts, calf.disableQuickWearPrompts);
 }
@@ -56,8 +58,9 @@ function showQuickWear(content, appInv) {
 }
 
 async function hasJquery(injector) {
+  if (injector) $(injector).on('dialogclose', () => sendEvent('QuickWear', 'Close'));
   const content = injector || pcc();
-  if (!content) { return; }
+  if (!content) return;
   insertHtmlBeforeEnd(content, 'Getting item list from backpack...');
   calf.disableQuickWearPrompts = getValue(defDisableQuickWearPrompts);
   const appInv = await backpack();
