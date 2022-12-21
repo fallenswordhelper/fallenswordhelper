@@ -8,40 +8,75 @@ import SettingRow from './SettingRow.svelte';
 <SettingRow
     network
     field="showExtraLinks"
-    label="Show Extra Links"
-    tooltip="<span class='fshHelpTitle'>Show Extra Links</span><br><br>If checked, this will add AH and UFSG links to equipment screens." />
+    label="Show Extra Links">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show Extra Links</span><br><br>
+    Adds AH and UFSG links to equipment screens.
+  </div>
+</SettingRow>
 <SettingRow
     network
     field="enableItemColoring"
-    label="Enable Item Coloring"
-    tooltip="<span class='fshHelpTitle'>Enable Item Coloring</span><br><br>This colors the item text based on the rarity of the item." />
+    label="Enable Item Coloring">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Enable Item Coloring</span><br><br>
+    Colors the item text based on the rarity of the item.
+  </div>
+</SettingRow>
 <SettingRow
     network
     field="checkAllOfType"
-    label="Check All of Type"
-    tooltip="<span class='fshHelpTitle'>Check All of Type</span><br><br>This adds a button to select all of the same items." />
+    label="Check All of Type">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Check All of Type</span><br><br>
+    Adds a button to select all of the same items.
+  </div>
+</SettingRow>
 <SettingRow
     network
     field="enableFolderFilter"
-    label="Enable Folder Filter"
-    tooltip="<span class='fshHelpTitle'>Enable Folder Filter</span><br><br>This adds folder filtering to the Store Items page, including moving tagged items between folders" />
+    label="Enable Folder Filter">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Enable Folder Filter</span><br><br>
+    Adds folder filtering to the Store Items page,
+    including moving tagged items between folders
+  </div>
+</SettingRow>
 <SettingRow
     network
     field="showQuickSendLinks"
-    label="Show Quick Send Item"
-    tooltip="<span class='fshHelpTitle'>Show Quick Send on Manage Backpack</span><br><br>This will show a link beside each item which gives the option to quick send the item to this person">
-  <FieldInput field="showQuickSendLinks" />
-  <label>
-    Send Items To
-    <FieldInput field="itemRecipient" type="text" style="width: 190px"/>
+    label="Show Quick Send Item">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show Quick Send on Manage Backpack</span><br><br>
+    Shows a link beside each item which gives the option to quick send the item
+    to this person
+  </div>
+  <div slot="input">
+    <FieldInput field="showQuickSendLinks" />
+    <label>
+      Send Items To
+      <FieldInput field="itemRecipient" type="text" style="width: 190px"/>
+  </div>
 </SettingRow>
 <SettingRow
     network
     field="showQuickDropLinks"
-    label="Show Quick Drop Item"
-    tooltip="<span class='fshHelpTitle'>Show Quick Drop Item</span><br><br>This will show a link beside each item which gives the option to drop the item. WARNING: NO REFUNDS ON ERROR" />
+    label="Show Quick Drop Item">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show Quick Drop Item</span><br><br>
+    Shows a link beside each item which gives the option to drop the item.
+    WARNING: NO REFUNDS ON ERROR
+  </div>
+</SettingRow>
 <SettingRow
     field="sendClasses"
     label="Quick Select all of type in Send Screen"
-    type="text"
-    tooltip="<span class='fshHelpTitle'>Quick Select all of type in Send Screen</span><br><br>This allows you to customize what quick links you would like displayed in your send item screen.<br>Use the format [&quot;name&quot;,&quot;itemid&quot;],[&quot;othername&quot;,&quot;itemid2&quot;].<br>WARNING: NO REFUNDS ON ERROR" />
+    type="text">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Quick Select all of type in Send Screen</span><br><br>
+    Allows you to customize what quick links you would like displayed in your send item
+    screen.<br>
+    Use the format ["name","itemid"],["othername","itemid2"].<br>
+    WARNING: NO REFUNDS ON ERROR"
+  </div>
+</SettingRow>

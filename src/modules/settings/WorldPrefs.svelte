@@ -38,120 +38,187 @@ function resetFootprintColor() {
 </tr>
 <SettingRow
     field="hideCreateGroupButton"
-    label="Hide Create Group Button"
-    tooltip="<span class='fshHelpTitle'>Hide Create Group Button</span><br><br>Enabling this option will hide the Create Group button">
-  <label>
-    <FieldInput field="hideChampionsGroup" />
-    Champions
-  </label>
-  <label>
-    <FieldInput field="hideElitesGroup" />
-    Elite
-  </label>
-  <label>
-    <FieldInput field="hideSEGroup" />
-    Super Elite
-  </label>
-  <label>
-    <FieldInput field="hideTitanGroup" />
-    Titan
-  </label>
-  <label>
-    <FieldInput field="hideLegendaryGroup" />
-    Legendary
-  </label>
+    label="Hide Create Group Button">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Hide Create Group Button</span><br><br>
+    Hides the Create Group button
+  </div>
+  <div slot="input">
+    <label>
+      <FieldInput field="hideChampionsGroup" />
+      Champions
+    </label>
+    <label>
+      <FieldInput field="hideElitesGroup" />
+      Elite
+    </label>
+    <label>
+      <FieldInput field="hideSEGroup" />
+      Super Elite
+    </label>
+    <label>
+      <FieldInput field="hideTitanGroup" />
+      Titan
+    </label>
+    <label>
+      <FieldInput field="hideLegendaryGroup" />
+      Legendary
+    </label>
+  </div>
 </SettingRow>
 <SettingRow
     field="keepLogs"
-    label="Keep Combat Logs"
-    tooltip="<span class='fshHelpTitle'>Keep Combat Logs</span><br><br>Save combat logs to a temporary variable. Press <u>Show logs</u> on the right to display and copy them">
+    label="Keep Combat Logs">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Keep Combat Logs</span><br><br>
+    Save combat logs to a temporary variable. Press <u>Show logs</u>
+    on the right to display and copy them
+  </div>
+  <div slot="input">
     <FieldInput field="keepLogs" />
     <input type="button" class="custombutton" value="Show Logs" on:click={showLogs}>
+  </div>
 </SettingRow>
 <SettingRow
     field="showCombatLog"
-    label="Show Combat Log"
-    tooltip="<span class='fshHelpTitle'>Show Combat Log</span><br><br>This will show the combat log for each automatic battle below the monster list.">
+    label="Show Combat Log">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show Combat Log</span><br><br>
+    Show the combat log for each automatic battle below the monster list.
+  </div>
 </SettingRow>
 <SettingRow
     field="enableCreatureColoring"
-    label="Color Special Creatures"
-    tooltip="<span class='fshHelpTitle'>Color Special Creatures</span><br><br>Creatures will be colored according to their rarity. Champions will be colored green, Elites yellow and Super Elites red.">
+    label="Color Special Creatures">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Color Special Creatures</span><br><br>
+    Creatures will be colored according to their rarity.
+    Champions will be colored green, Elites yellow and Super Elites red.
+  </div>
 </SettingRow>
 <SettingRow
     network
     field="showCreatureInfo"
-    label="Show Creature Info"
-    tooltip="<span class='fshHelpTitle'>Show Creature Info</span><br><br>This will show the information from the view creature link when you mouseover the link.">
+    label="Show Creature Info">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show Creature Info</span><br><br>
+    Shows information from the view creature link when you mouseover monsters.
+  </div>
 </SettingRow>
 <SettingRow
     field="combatEvaluatorBias"
-    label="Combat Evaluator Bias"
-    tooltip="<span class='fshHelpTitle'>Combat Evaluator Bias</span><br><br>This changes the bias of the combat evaluator for the damage and HP evaluation. It will not change the attack bias (1.1053).<br>Conservative = 1.1053 and 1.1 (Safest)<br>Semi-Conservative = 1.1 and 1.053<br>Adventurous = 1.053 and 1 (Bleeding Edge)<br>Conservative+ = 1.1053 and 1 with the attack calculation changed to +-48 per RJEM">
-  <FieldSelect
-      field="combatEvaluatorBias"
-      options={[
-        { value: '0', text: 'Conservative' },
-        { value: '1', text: 'Semi-Conservative' },
-        { value: '2', text: 'Adventurous' },
-        { value: '3', text: 'Conservative+' },
-      ]} />
+    label="Combat Evaluator Bias">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Combat Evaluator Bias</span><br><br>
+    Changes the bias of the combat evaluator for the damage and HP evaluation.
+    It will not change the attack bias (1.1053).<br>
+    Conservative = 1.1053 and 1.1 (Safest)<br>
+    Semi-Conservative = 1.1 and 1.053<br>
+    Adventurous = 1.053 and 1 (Bleeding Edge)<br>
+    Conservative+ = 1.1053 and 1 with the attack calculation changed to +-48 per RJEM
+  </div>
+  <div slot="input">
+    <FieldSelect
+        field="combatEvaluatorBias"
+        options={[
+          { value: '0', text: 'Conservative' },
+          { value: '1', text: 'Semi-Conservative' },
+          { value: '2', text: 'Adventurous' },
+          { value: '3', text: 'Conservative+' },
+        ]} />
+  </div>
 </SettingRow>
 <SettingRow
     network
     field="showMonsterLog"
-    label="Keep Creature Log"
-    tooltip="<span class='fshHelpTitle'>Keep Creature Log</span><br><br>This will show the creature log for each creature you see when you travel.">
-  <FieldInput field="showMonsterLog" />
-  <input type="button" class="custombutton" value="Show" on:click={showMonsterLogs}>
+    label="Keep Creature Log">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Keep Creature Log</span><br><br>
+    Shows the creature log for each creature you see when you travel.
+  </div>
+  <div slot="input">
+    <FieldInput field="showMonsterLog" />
+    <input type="button" class="custombutton" value="Show" on:click={showMonsterLogs}>
+  </div>
 </SettingRow>
 <SettingRow
     field="sendGoldonWorld"
-    label="Show Send Gold"
-    tooltip="<span class='fshHelpTitle'>Show Gold on World Screen</span><br><br>This will show a button in the gold dropdown to allow you to quickly send gold to a Friend.">
-  <FieldInput field="sendGoldonWorld" />
-  <label>
-    Send
-    <FieldInput field="goldAmount" type="number" min="0" width="4" />
-  </label>
-  <label>
-    gold to
-    <FieldInput field="goldRecipient" type="text" style="width: 60px"/>
-  </label>
-  <label>
-    Current total:
-    <FieldInput field="currentGoldSentTotal" type="number" min="0" width="4" />
-  </label>
+    label="Show Send Gold">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show Gold on World Screen</span><br><br>
+    Creates a button in the gold dropdown to allow you to quickly send gold to a friend.
+  </div>
+  <div slot="input">
+    <FieldInput field="sendGoldonWorld" />
+    <label>
+      Send
+      <FieldInput field="goldAmount" type="number" min="0" width="4" />
+    </label>
+    <label>
+      gold to
+      <FieldInput field="goldRecipient" type="text" style="width: 60px"/>
+    </label>
+    <label>
+      Current total:
+      <FieldInput field="currentGoldSentTotal" type="number" min="0" width="4" />
+    </label>
+  </div>
 </SettingRow>
 <SettingRow
     field="doNotKillList"
     label="Do Not Kill List"
-    type="text"
-    tooltip="<span class='fshHelpTitle'>Do Not Kill List</span><br><br>List of creatures that will not be killed by quick kill. You must type the full name of each creature, separated by commas. Creature name will show up in blue color on world screen and will not be killed by keyboard entry (but can still be killed by mouseclick)." />
+    type="text">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Do Not Kill List</span><br><br>
+    List of creatures that will not be killed by quick kill.
+    You must type the full name of each creature, separated by commas.
+    Creature name will show up in blue color on world screen and will not be killed by
+    keyboard entry (but can still be killed by mouseclick).
+  </div>
+</SettingRow>
 <SettingRow
     field="showHuntingBuffs"
-    label="Hunting Buffs"
-    tooltip="<span class='fshHelpTitle'>Hunting Buffs</span><br><br>Customize which buffs are designated as hunting buffs. You must type the full name of each buff, separated by commas. Use the checkbox to enable/disable them.">
+    label="Hunting Buffs">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Hunting Buffs</span><br><br>
+    Customize which buffs are designated as hunting buffs. You must type the full name of
+    each buff, separated by commas. Use the checkbox to enable/disable them.
+  </div>
 </SettingRow>
 <SettingRow
     field="enabledHuntingMode"
-    label="Enabled Hunting Mode"
-    tooltip="<span class='fshHelpTitle'>Enabled Hunting Mode</span><br><br>This will determine which list of buffs gets checked on the world screen.">
-  <FieldSelect
-      field="enableHuntingMode"
-      options={getHuntingModeOptions()} />
+    label="Enabled Hunting Mode">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Enabled Hunting Mode</span><br><br>
+    Determines which list of buffs gets checked on the world screen.
+  </div>
+  <div slot="input">
+    <FieldSelect
+        field="enableHuntingMode"
+        options={getHuntingModeOptions()} />
+  </div>
 </SettingRow>
 <SettingRow
-    label="default Hunting Buff List"
-    tooltip="<span class='fshHelpTitle'>default Hunting Buff List</span><br><br>default list of hunting buffs.">
-  <FieldInput field="huntingBuffsName" title="Hunting mode name" type="text" />
-  <FieldInput field="huntingBuffs" type="text" />
+    label="default Hunting Buff List">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>default Hunting Buff List</span><br><br>
+    Default list of hunting buffs.
+  </div>
+  <div slot="input">
+    <FieldInput field="huntingBuffsName" title="Hunting mode name" type="text" />
+    <FieldInput field="huntingBuffs" type="text" />
+  </div>
 </SettingRow>
 <SettingRow
-    label="PvP Hunting Buff List"
-    tooltip="<span class='fshHelpTitle'>PvP Hunting Buff List</span><br><br>PvP list of hunting buffs.">
-  <FieldInput field="huntingBuffs2Name" title="Hunting mode name" type="text" />
-  <FieldInput field="huntingBuffs2" type="text" />
+    label="PvP Hunting Buff List">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>PvP Hunting Buff List</span><br><br>
+    PvP list of hunting buffs.
+  </div>
+  <div slot="input">
+    <FieldInput field="huntingBuffs2Name" title="Hunting mode name" type="text" />
+    <FieldInput field="huntingBuffs2" type="text" />
+  </div>
 </SettingRow>
 <SettingRow
     label="SE Hunting Buff List"
@@ -161,20 +228,32 @@ function resetFootprintColor() {
 </SettingRow>
 <SettingRow
     field="huntingMode"
-    label="Enable Hunting Mode"
-    tooltip="<span class='fshHelpTitle'>Enable Hunting Mode</span><br><br>This disable menu and some visual features to speed up the calf.">
+    label="Enable Hunting Mode">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Enable Hunting Mode</span><br><br>
+    Disables menu and some visual features to speed up FSH.
+  </div>
 </SettingRow>
 <SettingRow
     field="messageStack"
-    label="Stack repeating world messages"
-    tooltip="<span class='fshHelpTitle'>Stack repeating world messages</span><br><br>Messages on the world screen that have the same text will combine into a single stack, saving some screen space.">
+    label="Stack repeating world messages">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Stack repeating world messages</span><br><br>
+    Messages on the world screen that have the same text will combine into a single stack,
+    saving some screen space.
+  </div>
 </SettingRow>
 <SettingRow
     field="footprintColor"
-    label="Footprint color"
-    tooltip="<span class='fshHelpTitle'>Change footprint color</span><br><br>Alters the color of footprints left on the world map.">
-  <input id="footprintColor" name="footprintColor" type="color" value={getValue('footprintColor')}>
-  <button type="button" class="custombutton" on:click={resetFootprintColor}>Reset</button>
+    label="Footprint color">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Change footprint color</span><br><br>
+    Alters the color of footprints left on the world map.
+  </div>
+  <div slot="input">
+    <input id="footprintColor" name="footprintColor" type="color" value={getValue('footprintColor')}>
+    <button type="button" class="custombutton" on:click={resetFootprintColor}>Reset</button>
+  </div>
 </SettingRow>
 <style>
 input[type=color] {

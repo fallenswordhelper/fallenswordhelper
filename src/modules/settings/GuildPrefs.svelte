@@ -12,14 +12,20 @@ let enemyMessage = false;
 <SettingRow
     unstable
     field="showGuildRelationship"
-    label="Show Guild Relationship"
-    tooltip="<span class='fshHelpTitle'>Show Guild Relationship</span><br><br>This show the guild relationship in players' profiles." />
+    label="Show Guild Relationship">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show Guild Relationship</span><br><br>
+    This shows the guild relationship in players' profiles.
+  </div>
+</SettingRow>
 <tr><td></td><td>Enter guild names, separated by commas</td></tr>
 <SettingRow
     field="guildFrnd"
     label="Friendly Guilds">
-  <FieldInput field="guildFrnd" class="fshSettingsText" type="text" />
-  <span class="fshPoint" id="toggleShowGuildFrndMessage" on:click={() => { friendMessage = !friendMessage; } }>»</span>
+  <div slot="input">
+    <FieldInput field="guildFrnd" class="fshSettingsText" type="text" />
+    <span class="fshPoint" id="toggleShowGuildFrndMessage" on:click={() => { friendMessage = !friendMessage; } }>»</span>
+  </div>
 </SettingRow>
 <SettingRow
     field="guildFrndMessage"
@@ -29,9 +35,10 @@ let enemyMessage = false;
 <SettingRow
     field="guildPast"
     label="Old Guilds">
-  <FieldInput field="guildPast" class="fshSettingsText" type="text" />
-  <span class="fshPoint" id="toggleShowGuildPastMessage" on:click={() => { oldMessage = !oldMessage; } }>»</span>
-  <div id="showGuildPastMessage" class="fshHide">
+  <div slot="input">
+    <FieldInput field="guildPast" class="fshSettingsText" type="text" />
+    <span class="fshPoint" id="toggleShowGuildPastMessage" on:click={() => { oldMessage = !oldMessage; } }>»</span>
+    <div id="showGuildPastMessage" class="fshHide"></div>
   </div>
 </SettingRow>
 <SettingRow
@@ -42,8 +49,10 @@ let enemyMessage = false;
 <SettingRow
     field="guildEnmy"
     label="Enemy Guilds">
-  <FieldInput field="guildEnmy" type="text" class="fshSettingsText" />
-  <span class="fshPoint" id="toggleShowGuildEnmyMessage" data-linkto="showGuildEnmyMessage" on:click={() => { enemyMessage = !enemyMessage; }}>»</span>
+  <div slot="input">
+    <FieldInput field="guildEnmy" type="text" class="fshSettingsText" />
+    <span class="fshPoint" id="toggleShowGuildEnmyMessage" data-linkto="showGuildEnmyMessage" on:click={() => { enemyMessage = !enemyMessage; }}>»</span>
+  </div>
 </SettingRow>
 <SettingRow
     field="guildEnmyMessage"
@@ -52,35 +61,65 @@ let enemyMessage = false;
     class="{enemyMessage ? '' : 'fshHide'}" />
 <SettingRow
     field="highlightValidTargets"
-    label="Highlight Valid PvP Targets"
-    tooltip="<span class='fshHelpTitle'>Highlight Valid PvP Targets</span><br><br>Enabling this option will highlight targets in OTHER guilds that are within your level range to attack for PvP or GvG.">
-  <label>
-    <FieldInput field="highlightPlayersNearMyLvl" />
-    PvP
-  </label>
-  <label>
-    <FieldInput field="highlightGvGPlayersNearMyLvl" />
-    GvG
-  </label>
+    label="Highlight Valid PvP Targets">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Highlight Valid PvP Targets</span><br><br>
+    Highlights targets in OTHER guilds that are within your level range to attack
+    for PvP or GvG.
+  </div>
+  <div slot="input">
+    <label>
+      <FieldInput field="highlightPlayersNearMyLvl" />
+      PvP
+    </label>
+    <label>
+      <FieldInput field="highlightGvGPlayersNearMyLvl" />
+      GvG
+    </label>
+  </div>
 </SettingRow>
 <SettingRow
     field="showAdmin"
-    label="Show rank controls"
-    tooltip="<span class='fshHelpTitle'>Show rank controls</span><br><br>Show ranking controls for guild management in member profile page - this works for guild founders only" />
+    label="Show rank controls">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show rank controls</span><br><br>
+    Show ranking controls for guild management in member profile page
+    - this works for guild founders only
+  </div>
+</SettingRow>
 <SettingRow
     field="ajaxifyRankControls"
-    label="AJAXify rank controls"
-    tooltip="<span class='fshHelpTitle'>AJAXify rank controls</span><br><br>Enables guild founders with ranking rights to change rank positions without a screen refresh." />
+    label="AJAXify rank controls">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>AJAXify rank controls</span><br><br>
+    Enables guild founders with ranking rights to change rank positions
+    without a screen refresh.
+  </div>
+</SettingRow>
 <SettingRow
     network
     field="detailedConflictInfo"
-    label="Show Conflict Details"
-    tooltip="<span class='fshHelpTitle'>Show Conflict Details</span><br><br>Inserts detailed conflict information onto your guild's manage page. Currently displays the target guild as well as the current score." />
+    label="Show Conflict Details">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show Conflict Details</span><br><br>
+    Inserts detailed conflict information onto your guild's manage page.
+    Currently displays the target guild as well as the current score.
+  </div>
+</SettingRow>
 <SettingRow
     field="enableHistoryCompressor"
-    label="Guild History Compressor"
-    tooltip="<span class='fshHelpTitle'>Guild History Compressor</span><br><br>This will compress long guild histories and provide a link to expand the compressed section." />
+    label="Guild History Compressor">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Guild History Compressor</span><br><br>
+    Compresses long guild histories and provides a link to expand
+    the compressed section.
+  </div>
+</SettingRow>
 <SettingRow
     field="showBuffLinks"
-    label="Show Buff Links"
-    tooltip="<span class='fshHelpTitle'>Show Buff Links</span><br><br>This shows buffs links after guild members names" />
+    label="Show Buff Links">
+  <div slot="tooltip">
+    <span class='fshHelpTitle'>Show Buff Links</span><br><br>
+    Shows buffs links after guild members names
+  </div>
+</SettingRow>

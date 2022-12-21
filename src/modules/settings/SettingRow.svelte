@@ -5,7 +5,6 @@ export let field;
 export let unstable = false;
 export let network = false;
 export let label;
-export let tooltip = false;
 export let type = 'checkbox';
 </script>
 <tr {...$$restProps}>
@@ -18,13 +17,18 @@ export let type = 'checkbox';
     {/if}
     <label for={field}>
       {label}
-      {#if (tooltip)}
-      [ <span class="fshLink tip-static" data-tipped={tooltip}>?</span> ]:
+      {#if $$slots.tooltip}
+      [ <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+        <slot name="tooltip"></slot>
+        </div>
+        </div> ]:
       {/if}
     </label>
   </td>
   <td>
-    <slot>
+    <slot name="input">
       <FieldInput field={field} type={type} />
     </slot>
   </td>
@@ -34,4 +38,39 @@ export let type = 'checkbox';
     text-align: right;
     vertical-align: text-top;
   }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 </style>
