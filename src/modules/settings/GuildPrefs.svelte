@@ -27,10 +27,11 @@ let enemyMessage = false;
   </div>
 </SettingRow>
 <SettingRow
-    field="guildFrndMessage"
-    type="text"
-    label="Label"
-    class="{friendMessage ? '' : 'fshHide'}" />
+  field="guildFrndMessage"
+  type="text"
+  label="Label"
+  class="{friendMessage ? '' : 'fshHide'}"
+/>
 <SettingRow
     field="guildPast"
     label="Old Guilds">
@@ -41,10 +42,11 @@ let enemyMessage = false;
   </div>
 </SettingRow>
 <SettingRow
-    field="guildPastMessage"
-    label="Label"
-    type="text"
-    class="{oldMessage ? '' : 'fshHide'}" />
+  field="guildPastMessage"
+  label="Label"
+  type="text"
+  class="{oldMessage ? '' : 'fshHide'}"
+/>
 <SettingRow
     field="guildEnmy"
     label="Enemy Guilds">
@@ -54,10 +56,11 @@ let enemyMessage = false;
   </div>
 </SettingRow>
 <SettingRow
-    field="guildEnmyMessage"
-    label="Label"
-    type="text"
-    class="{enemyMessage ? '' : 'fshHide'}" />
+  field="guildEnmyMessage"
+  label="Label"
+  type="text"
+  class="{enemyMessage ? '' : 'fshHide'}"
+/>
 <SettingRow
     field="highlightValidTargets"
     label="Highlight Valid PvP Targets">

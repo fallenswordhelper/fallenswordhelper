@@ -19,10 +19,14 @@ if (type === 'checkbox' || type === 'radio') {
     id={field}
     {...props} >
 <style>
+input[type=checkbox] {
+  vertical-align: middle;
+}
 input[type=text] {
   width: 80%;
 }
 input[type=number] {
+  vertical-align: middle;
   width: 40px;
 }
 </style>

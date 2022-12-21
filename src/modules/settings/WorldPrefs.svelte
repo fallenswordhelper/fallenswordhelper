@@ -1,5 +1,4 @@
 <script>
-// eslint-disable a11y-label-has-associated-control
 import sendEvent from '../analytics/sendEvent';
 import jQueryDialog from '../chrome/jQueryDialog/jQueryDialog';
 import combatLog from '../chrome/pageSwitcher/loader/combatLog';
@@ -32,7 +31,6 @@ function resetFootprintColor() {
   getElementById('footprintColor').value = '#ee9252';
 }
 </script>
-<!-- eslint-disable a11y-label-has-associated-control -->
 <tr>
   <td class="header" colspan="2">World screen/Hunting preferences</td>
 </tr>

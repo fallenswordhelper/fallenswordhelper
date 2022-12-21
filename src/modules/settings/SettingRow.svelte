@@ -43,7 +43,10 @@ export let type = 'checkbox';
 <style>
   td:first-child {
     text-align: right;
-    vertical-align: text-top;
+    vertical-align: middle;
+  }
+  td > span {
+    vertical-align: middle;
   }
 .tooltip {
   position: relative;
