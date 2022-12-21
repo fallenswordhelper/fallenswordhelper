@@ -59,8 +59,8 @@ function extraButtons(linkConfig) {
 function adjustHeight(theNav, myNav) {
   // first the closed saved variables
   // eslint-disable-next-line no-param-reassign
-  myNav.heights = querySelectorArray('#nav > li')
-    .map((li) => (querySelectorArray('li', li).length * 22) || null); // skipcq: JS-0083
+  myNav.heights = querySelectorArray('#nav > li') // skipcq: JS-0083
+    .map((li) => (querySelectorArray('li', li).length * 22) || null);
   const index = Number(myNav.state);
   if (index && index > -1 && index < theNav.children.length) {
     // and now the open one

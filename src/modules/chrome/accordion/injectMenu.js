@@ -30,8 +30,8 @@ function updateLinks() {
 async function getLinkConfig(theNav, myNav) {
   const linkConfig = theLinks.map((c) => [c, getValue(c)]);
   if (linkConfig.some(([, b]) => b)) {
-    const m = await import('./injectItems');
-    m.default(theNav, myNav, fromEntries(linkConfig));
+    const module = await import('./injectItems');
+    module.default(theNav, myNav, fromEntries(linkConfig));
   }
 }
 
