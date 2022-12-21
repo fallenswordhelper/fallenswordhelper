@@ -3,7 +3,8 @@ os: linux
 dist: focal
 language: node_js
 node_js:
-  - "node"
+  # - "node"
+  - "19.2.0"
 script: npm run build
 
 # Don't build tags

@@ -59,7 +59,7 @@ function injectWeightButton(theRows, memberRanks, addNewRank) {
     textContent: 'Get Rank Weightings',
     type: 'button',
   });
-  once(weightButton, partial(fetchRankData, theRows, memberRanks));
+  once(weightButton, 'click', partial(fetchRankData, theRows, memberRanks));
   insertElement(container, weightButton);
   insertHtmlBeforeEnd(container, ' ]');
   const theTd = addNewRank.parentNode.parentNode;

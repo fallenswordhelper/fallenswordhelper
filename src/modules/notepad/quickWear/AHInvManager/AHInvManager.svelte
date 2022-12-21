@@ -35,7 +35,7 @@
 
   const notThere = ({ searchname }) => !itemCount.some(({ n }) => n === searchname);
 
-  const others = ({ n }) => !foundItems.some(({ searchname }) => searchname === n);
+  const others = ({ n }) => !foundItems.some(({ data: { searchname } }) => searchname === n);
   const otherItems = itemCount.filter(others).map(({ n, count }, index) => ({
     component: ListItem,
     data: {
