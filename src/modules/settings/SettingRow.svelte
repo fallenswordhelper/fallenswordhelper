@@ -53,7 +53,7 @@ export let type = 'checkbox';
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 300px;
   background-color: black;
   color: #fff;
   text-align: left;
@@ -63,7 +63,7 @@ export let type = 'checkbox';
   z-index: 1;
   bottom: 150%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -154px;
 }
 
 .tooltip .tooltiptext::after {

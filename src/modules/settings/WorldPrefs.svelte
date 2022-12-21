@@ -10,8 +10,6 @@ import FieldInput from './FieldInput.svelte';
 import FieldSelect from './FieldSelect.svelte';
 import SettingRow from './SettingRow.svelte';
 
-console.log(getValue('combatEvaluatorBias'));
-
 function showLogs() {
   sendEvent('settingsPage', 'combatLog');
   jQueryDialog(combatLog);
@@ -111,7 +109,7 @@ function resetFootprintColor() {
     Conservative = 1.1053 and 1.1 (Safest)<br>
     Semi-Conservative = 1.1 and 1.053<br>
     Adventurous = 1.053 and 1 (Bleeding Edge)<br>
-    Conservative+ = 1.1053 and 1 with the attack calculation changed to +-48 per RJEM
+    Conservative+ = 1.1053 and 1 with the attack calculation changed to &plusmn;48 per RJEM
   </div>
   <div slot="input">
     <FieldSelect
