@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import fallback from '../system/fallback';
 import setValue from '../system/setValue';
 import arrayFrom from './arrayFrom';
@@ -16,6 +17,7 @@ let headerIndex = 0;
 function hideRow(el) { hideElement(el.row); }
 
 function collapseArt(article) {
+  sendEvent('collapse', 'collapseArt');
   article.rows.forEach(hideRow);
   // eslint-disable-next-line no-param-reassign
   article.open = false;
@@ -28,6 +30,7 @@ function collapseAll() { warehouse.forEach(needsCollapse); }
 function show(el) { toggleForce(el.row, false); }
 
 function expandArt(article) {
+  sendEvent('collapse', 'expandArt');
   article.rows.forEach(show);
   // eslint-disable-next-line no-param-reassign
   article.open = true;
@@ -111,6 +114,7 @@ function toggleHeaderClass() {
 }
 
 function togglePref(prefName) {
+  sendEvent('collapse', 'togglePref', prefName);
   prefValue = !prefValue;
   setValue(prefName, prefValue);
   if (prefValue) { collapseAll(); } else { expandAll(); }
