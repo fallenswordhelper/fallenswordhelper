@@ -14,7 +14,6 @@ let enemyMessage = false;
     field="showGuildRelationship"
     label="Show Guild Relationship">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Guild Relationship</span><br><br>
     This shows the guild relationship in players' profiles.
   </div>
 </SettingRow>
@@ -63,7 +62,6 @@ let enemyMessage = false;
     field="highlightValidTargets"
     label="Highlight Valid PvP Targets">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Highlight Valid PvP Targets</span><br><br>
     Highlights targets in OTHER guilds that are within your level range to attack
     for PvP or GvG.
   </div>
@@ -82,7 +80,6 @@ let enemyMessage = false;
     field="showAdmin"
     label="Show rank controls">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show rank controls</span><br><br>
     Show ranking controls for guild management in member profile page
     - this works for guild founders only
   </div>
@@ -91,7 +88,6 @@ let enemyMessage = false;
     field="ajaxifyRankControls"
     label="AJAXify rank controls">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>AJAXify rank controls</span><br><br>
     Enables guild founders with ranking rights to change rank positions
     without a screen refresh.
   </div>
@@ -101,7 +97,6 @@ let enemyMessage = false;
     field="detailedConflictInfo"
     label="Show Conflict Details">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Conflict Details</span><br><br>
     Inserts detailed conflict information onto your guild's manage page.
     Currently displays the target guild as well as the current score.
   </div>
@@ -110,7 +105,6 @@ let enemyMessage = false;
     field="enableHistoryCompressor"
     label="Guild History Compressor">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Guild History Compressor</span><br><br>
     Compresses long guild histories and provides a link to expand
     the compressed section.
   </div>
@@ -119,7 +113,6 @@ let enemyMessage = false;
     field="showBuffLinks"
     label="Show Buff Links">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Buff Links</span><br><br>
     Shows buffs links after guild members names
   </div>
 </SettingRow>

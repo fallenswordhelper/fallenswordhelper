@@ -10,6 +10,8 @@ import FieldInput from './FieldInput.svelte';
 import FieldSelect from './FieldSelect.svelte';
 import SettingRow from './SettingRow.svelte';
 
+console.log(getValue('combatEvaluatorBias'));
+
 function showLogs() {
   sendEvent('settingsPage', 'combatLog');
   jQueryDialog(combatLog);
@@ -40,7 +42,6 @@ function resetFootprintColor() {
     field="hideCreateGroupButton"
     label="Hide Create Group Button">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Hide Create Group Button</span><br><br>
     Hides the Create Group button
   </div>
   <div slot="input">
@@ -70,7 +71,6 @@ function resetFootprintColor() {
     field="keepLogs"
     label="Keep Combat Logs">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Keep Combat Logs</span><br><br>
     Save combat logs to a temporary variable. Press <u>Show logs</u>
     on the right to display and copy them
   </div>
@@ -83,7 +83,6 @@ function resetFootprintColor() {
     field="showCombatLog"
     label="Show Combat Log">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Combat Log</span><br><br>
     Show the combat log for each automatic battle below the monster list.
   </div>
 </SettingRow>
@@ -91,7 +90,6 @@ function resetFootprintColor() {
     field="enableCreatureColoring"
     label="Color Special Creatures">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Color Special Creatures</span><br><br>
     Creatures will be colored according to their rarity.
     Champions will be colored green, Elites yellow and Super Elites red.
   </div>
@@ -101,7 +99,6 @@ function resetFootprintColor() {
     field="showCreatureInfo"
     label="Show Creature Info">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Creature Info</span><br><br>
     Shows information from the view creature link when you mouseover monsters.
   </div>
 </SettingRow>
@@ -109,7 +106,6 @@ function resetFootprintColor() {
     field="combatEvaluatorBias"
     label="Combat Evaluator Bias">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Combat Evaluator Bias</span><br><br>
     Changes the bias of the combat evaluator for the damage and HP evaluation.
     It will not change the attack bias (1.1053).<br>
     Conservative = 1.1053 and 1.1 (Safest)<br>
@@ -121,10 +117,10 @@ function resetFootprintColor() {
     <FieldSelect
         field="combatEvaluatorBias"
         options={[
-          { value: '0', text: 'Conservative' },
-          { value: '1', text: 'Semi-Conservative' },
-          { value: '2', text: 'Adventurous' },
-          { value: '3', text: 'Conservative+' },
+          { value: 0, text: 'Conservative' },
+          { value: 1, text: 'Semi-Conservative' },
+          { value: 2, text: 'Adventurous' },
+          { value: 3, text: 'Conservative+' },
         ]} />
   </div>
 </SettingRow>
@@ -133,7 +129,6 @@ function resetFootprintColor() {
     field="showMonsterLog"
     label="Keep Creature Log">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Keep Creature Log</span><br><br>
     Shows the creature log for each creature you see when you travel.
   </div>
   <div slot="input">
@@ -145,7 +140,6 @@ function resetFootprintColor() {
     field="sendGoldonWorld"
     label="Show Send Gold">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Gold on World Screen</span><br><br>
     Creates a button in the gold dropdown to allow you to quickly send gold to a friend.
   </div>
   <div slot="input">
@@ -169,7 +163,6 @@ function resetFootprintColor() {
     label="Do Not Kill List"
     type="text">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Do Not Kill List</span><br><br>
     List of creatures that will not be killed by quick kill.
     You must type the full name of each creature, separated by commas.
     Creature name will show up in blue color on world screen and will not be killed by
@@ -180,7 +173,6 @@ function resetFootprintColor() {
     field="showHuntingBuffs"
     label="Hunting Buffs">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Hunting Buffs</span><br><br>
     Customize which buffs are designated as hunting buffs. You must type the full name of
     each buff, separated by commas. Use the checkbox to enable/disable them.
   </div>
@@ -189,7 +181,6 @@ function resetFootprintColor() {
     field="enabledHuntingMode"
     label="Enabled Hunting Mode">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Enabled Hunting Mode</span><br><br>
     Determines which list of buffs gets checked on the world screen.
   </div>
   <div slot="input">
@@ -201,7 +192,6 @@ function resetFootprintColor() {
 <SettingRow
     label="default Hunting Buff List">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>default Hunting Buff List</span><br><br>
     Default list of hunting buffs.
   </div>
   <div slot="input">
@@ -212,7 +202,6 @@ function resetFootprintColor() {
 <SettingRow
     label="PvP Hunting Buff List">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>PvP Hunting Buff List</span><br><br>
     PvP list of hunting buffs.
   </div>
   <div slot="input">
@@ -221,16 +210,17 @@ function resetFootprintColor() {
   </div>
 </SettingRow>
 <SettingRow
-    label="SE Hunting Buff List"
-    tooltip="<span class='fshHelpTitle'>SE Hunting Buff List</span><br><br>SE list of hunting buffs.">
-  <FieldInput field="huntingBuffs3Name" title="Hunting mode name" type="text" />
-  <FieldInput field="huntingBuffs3" type="text" />
+    label="SE Hunting Buff List">
+  <div slot="tooltip">SE list of hunting buffs.</div>
+  <div slot="input">
+    <FieldInput field="huntingBuffs3Name" title="Hunting mode name" type="text" />
+    <FieldInput field="huntingBuffs3" type="text" />
+  </div>
 </SettingRow>
 <SettingRow
     field="huntingMode"
     label="Enable Hunting Mode">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Enable Hunting Mode</span><br><br>
     Disables menu and some visual features to speed up FSH.
   </div>
 </SettingRow>
@@ -238,7 +228,6 @@ function resetFootprintColor() {
     field="messageStack"
     label="Stack repeating world messages">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Stack repeating world messages</span><br><br>
     Messages on the world screen that have the same text will combine into a single stack,
     saving some screen space.
   </div>
@@ -247,7 +236,6 @@ function resetFootprintColor() {
     field="footprintColor"
     label="Footprint color">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Change footprint color</span><br><br>
     Alters the color of footprints left on the world map.
   </div>
   <div slot="input">

@@ -10,7 +10,6 @@ import SettingRow from './SettingRow.svelte';
     field="showExtraLinks"
     label="Show Extra Links">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Extra Links</span><br><br>
     Adds AH and UFSG links to equipment screens.
   </div>
 </SettingRow>
@@ -19,7 +18,6 @@ import SettingRow from './SettingRow.svelte';
     field="enableItemColoring"
     label="Enable Item Coloring">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Enable Item Coloring</span><br><br>
     Colors the item text based on the rarity of the item.
   </div>
 </SettingRow>
@@ -28,7 +26,6 @@ import SettingRow from './SettingRow.svelte';
     field="checkAllOfType"
     label="Check All of Type">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Check All of Type</span><br><br>
     Adds a button to select all of the same items.
   </div>
 </SettingRow>
@@ -37,7 +34,6 @@ import SettingRow from './SettingRow.svelte';
     field="enableFolderFilter"
     label="Enable Folder Filter">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Enable Folder Filter</span><br><br>
     Adds folder filtering to the Store Items page,
     including moving tagged items between folders
   </div>
@@ -47,7 +43,6 @@ import SettingRow from './SettingRow.svelte';
     field="showQuickSendLinks"
     label="Show Quick Send Item">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Quick Send on Manage Backpack</span><br><br>
     Shows a link beside each item which gives the option to quick send the item
     to this person
   </div>
@@ -63,7 +58,6 @@ import SettingRow from './SettingRow.svelte';
     field="showQuickDropLinks"
     label="Show Quick Drop Item">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Quick Drop Item</span><br><br>
     Shows a link beside each item which gives the option to drop the item.
     WARNING: NO REFUNDS ON ERROR
   </div>
@@ -73,7 +67,6 @@ import SettingRow from './SettingRow.svelte';
     label="Quick Select all of type in Send Screen"
     type="text">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Quick Select all of type in Send Screen</span><br><br>
     Allows you to customize what quick links you would like displayed in your send item
     screen.<br>
     Use the format ["name","itemid"],["othername","itemid2"].<br>

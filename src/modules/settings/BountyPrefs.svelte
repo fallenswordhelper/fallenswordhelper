@@ -10,7 +10,6 @@ import SettingRow from './SettingRow.svelte';
     field="enableActiveBountyList"
     label="Show Active Bounties">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Active Bounties</span><br><br>
     Shows your active bounties on the left hand side
   </div>
   <div slot="input">
@@ -23,7 +22,6 @@ import SettingRow from './SettingRow.svelte';
     field="enableWantedList"
     label="Show Wanted Bounties">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Wanted Bounties</span><br><br>
     Shows when someone you want is on the bounty board.
     The list is displayed on the left hand side
   </div>
@@ -36,7 +34,6 @@ import SettingRow from './SettingRow.svelte';
     label="Wanted Names"
     type="text">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Wanted Names</span><br><br>
     The names of the people you want to see on the bounty board separated by commas (or * for all)
   </div>
 </SettingRow>
@@ -44,7 +41,6 @@ import SettingRow from './SettingRow.svelte';
     field="wantedGuildMembers"
     label="Show Guild Members">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show Guild Members</span><br><br>
     Shows guild members in the wanted bounty list.
   </div>
 </SettingRow>
@@ -53,7 +49,6 @@ import SettingRow from './SettingRow.svelte';
     field="showPvPSummaryInLog"
     label="Show PvP Summary in Log">
   <div slot="tooltip">
-    <span class='fshHelpTitle'>Show PvP Summary in Log</span><br><br>
     Shows a summary of the PvP results in the log.
   </div>
 </SettingRow>

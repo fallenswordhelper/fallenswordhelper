@@ -1,5 +1,6 @@
 <script>
 import FieldInput from './FieldInput.svelte';
+import networkIcon from './networkIcon';
 
 export let field;
 export let unstable = false;
@@ -10,10 +11,15 @@ export let type = 'checkbox';
 <tr {...$$restProps}>
   <td>
     {#if (unstable)}
-    <span class="unstable" data-tooltip="Warning: Causes page instability"></span>
+    <div class="tooltip">
+      <span class="unstable"></span>
+      <div class="tooltiptext">
+        Warning: Causes page instability
+      </div>
+    </div>
     {/if}
     {#if (network)}
-    <span data-tooltip="This function retrieves data from the network. Disable this to increase speed"><img class="networkIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAB3RJTUUH1QgGDTMWk1twEwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAARnQU1BAACxjwv8YQUAAAC8SURBVHjahVPBEcQgCEQnHdmTqUlr0qe16I8cufOiCGZnGCcIy4LEICJwmGgWJ3o0IOCQEqVg9Y4U3CoCHQhvxuPUZEiA3XYkxyI1/6S6R6rke8AlJbkV7u95lleXq3yrdyUjLGxwnifmnHEXY3fJIQSIMcKOZCLgMltrr+1ZWgxp8wi1VrEqxfeFWloYq4wKtOHeBNqeawqmeOnNvfdYSvkbfaeUxP0w/G+k6WsT/xCBc25SuxDsnownEy4u5BHudpMFegAAAABJRU5ErkJggg==" width="16" height="16" alt="Uses data"></span>
+    {@html networkIcon}
     {/if}
     <label for={field}>
       {label}
@@ -21,6 +27,7 @@ export let type = 'checkbox';
       [ <div class="tooltip">
         ?
         <div class="tooltiptext">
+        <span class="tooltiptitle">{label}</span><br><br>
         <slot name="tooltip"></slot>
         </div>
         </div> ]:
@@ -72,5 +79,16 @@ export let type = 'checkbox';
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+.tooltiptitle {
+  color: #FFF380;
+  font-weight: bold;
+}
+.unstable {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xml:space='preserve' viewBox='0 0 27.793 27.793'%3E%3Cpath d='M20.972 0 5.076 15.803h5.896L6.44 27.793l16.276-15.804h-5.897z'/%3E%3C/svg%3E");
+  background-size: contain;
+  display: inline-block;
+  height: 11px;
+  width: 11px;
 }
 </style>
