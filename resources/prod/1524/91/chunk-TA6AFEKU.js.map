@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/getElementById.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.91","mappings":"AAAe,SAARA,EAAgCC,EAAIC,EAAK,CAC9C,OAAIA,EAAcA,EAAI,eAAeD,CAAE,EAChC,SAAS,eAAeA,CAAE,CACnC","names":["getElementById","id","doc"]}

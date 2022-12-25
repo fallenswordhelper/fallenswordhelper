@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/getCalfPrefs.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.91","mappings":"gFAGe,SAARA,EAA8BC,EAAM,CAAEC,EAAKD,GAAQE,EAASF,CAAI,CAAG","names":["getCalfPrefs","pref","calf_default","getValue"]}
