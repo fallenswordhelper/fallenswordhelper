@@ -8,6 +8,7 @@ export let network = false;
 export let label;
 export let type = 'checkbox';
 </script>
+
 <tr {...$$restProps}>
   <td>
     {#if (unstable)}
@@ -40,53 +41,58 @@ export let type = 'checkbox';
     </slot>
   </td>
 </tr>
+
 <style>
   td:first-child {
     text-align: right;
     vertical-align: middle;
   }
+
   td > span {
     vertical-align: middle;
   }
+
 .tooltip {
-  position: relative;
-  display: inline-block;
   border-bottom: 1px dotted black;
+  display: inline-block;
+  position: relative;
 }
 
 .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 300px;
   background-color: black;
-  color: #fff;
-  text-align: left;
   border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
   bottom: 150%;
+  color: #fff;
   left: 50%;
   margin-left: -154px;
+  padding: 5px;
+  position: absolute;
+  text-align: left;
+  visibility: hidden;
+  width: 300px;
+  z-index: 1;
 }
 
 .tooltip .tooltiptext::after {
+  border-color: black transparent transparent transparent;
+  border-style: solid;
+  border-width: 5px;
   content: "";
-  position: absolute;
-  top: 100%;
   left: 50%;
   margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: black transparent transparent transparent;
+  position: absolute;
+  top: 100%;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
 .tooltiptitle {
   color: #FFF380;
   font-weight: bold;
 }
+
 .unstable {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xml:space='preserve' viewBox='0 0 27.793 27.793'%3E%3Cpath d='M20.972 0 5.076 15.803h5.896L6.44 27.793l16.276-15.804h-5.897z'/%3E%3C/svg%3E");
   background-size: contain;
