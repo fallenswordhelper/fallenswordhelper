@@ -32,8 +32,14 @@ function listOfCoders(ary) {
 }
 
 async function saveSettings() {
-  const fields = querySelectorArray('#fsh-settings tbody input, #fsh-settings tbody select');
-  fields.forEach((i) => setValue(i.name, i.type === 'checkbox' ? i.checked : i.value));
+  const fields = querySelectorArray('#fsh-settings tbody input[name], #fsh-settings tbody select[name]');
+  fields.forEach((i) => {
+    if (i.name === 'combatEvaluatorBias') {
+      setValue(i.name, Number(i.value));
+    } else {
+      setValue(i.name, i.type === 'checkbox' ? i.checked : i.value);
+    }
+  });
   dynamicAlert('FS Helper Settings Saved');
 }
 </script>

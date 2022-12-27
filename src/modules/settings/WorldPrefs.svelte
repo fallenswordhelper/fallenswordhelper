@@ -101,11 +101,12 @@ function resetFootprintColor() {
     <FieldSelect
         field="combatEvaluatorBias"
         options={[
-          { value: 0, text: 'Conservative' },
-          { value: 1, text: 'Semi-Conservative' },
-          { value: 2, text: 'Adventurous' },
-          { value: 3, text: 'Conservative+' },
-        ]} />
+        { value: '0', text: 'Conservative' },
+        { value: '1', text: 'Semi-Conservative' },
+        { value: '2', text: 'Adventurous' },
+        { value: '3', text: 'Conservative+' },
+      ]}
+    />
   </div>
 </SettingRow>
 <SettingRow network field="showMonsterLog" label="Keep Creature Log"><!-- duplicated -->

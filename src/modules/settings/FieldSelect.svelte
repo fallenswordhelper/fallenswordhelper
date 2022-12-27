@@ -3,10 +3,10 @@ import getValue from '../system/getValue';
 
 export let field;
 export let options;
-
-let value = getValue(field);
+const value = getValue(field);
 </script>
-<select {...$$restProps} name={field} id={field} bind:value={value}>
+
+<select {...$$restProps} id={field} name={field} value={value.toString()}>
   {#each options as opt}
   <option value={opt.value}>
     {opt.text}
