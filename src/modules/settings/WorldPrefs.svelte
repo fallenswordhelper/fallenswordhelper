@@ -9,6 +9,10 @@ import FieldInput from './FieldInput.svelte';
 import FieldSelect from './FieldSelect.svelte';
 import SettingRow from './SettingRow.svelte';
 
+const huntingBuffsName = getValue('huntingBuffsName');
+const huntingBuffs2Name = getValue('huntingBuffs2Name');
+const huntingBuffs3Name = getValue('huntingBuffs3Name');
+
 function showLogs() {
   sendEvent('settingsPage', 'combatLog');
   jQueryDialog(combatLog);
@@ -17,14 +21,6 @@ function showLogs() {
 function showMonsterLogs() {
   sendEvent('settingsPage', 'injectMonsterLog');
   jQueryDialog(monstorLog);
-}
-
-function getHuntingModeOptions() {
-  return [
-    { value: '1', text: getValue('huntingBuffsName') },
-    { value: '2', text: getValue('huntingBuffs2Name') },
-    { value: '3', text: getValue('huntingBuffs3Name') },
-  ];
 }
 
 function resetFootprintColor() {
@@ -99,8 +95,8 @@ function resetFootprintColor() {
   </div>
   <div slot="input">
     <FieldSelect
-        field="combatEvaluatorBias"
-        options={[
+      field="combatEvaluatorBias"
+      options={[
         { value: '0', text: 'Conservative' },
         { value: '1', text: 'Semi-Conservative' },
         { value: '2', text: 'Adventurous' },
@@ -157,32 +153,38 @@ function resetFootprintColor() {
     Determines which list of buffs gets checked on the world screen.
   </div>
   <div slot="input">
-    <FieldSelect field="enabledHuntingMode" options={getHuntingModeOptions()} />
+    <FieldSelect
+      field="enabledHuntingMode"
+      options={[
+        { value: '1', text: huntingBuffsName },
+        { value: '2', text: huntingBuffs2Name },
+        { value: '3', text: huntingBuffs3Name },
+      ]}
+    />
   </div>
 </SettingRow>
-<SettingRow
-    label="default Hunting Buff List">
+<SettingRow label="{huntingBuffsName} Hunting Buff List">
   <div slot="tooltip">
-    Default list of hunting buffs.
+    {huntingBuffsName} list of hunting buffs.
   </div>
   <div slot="input">
     <FieldInput field="huntingBuffsName" title="Hunting mode name" type="text" />
     <FieldInput field="huntingBuffs" type="text" />
   </div>
 </SettingRow>
-<SettingRow
-    label="PvP Hunting Buff List">
+<SettingRow label="{huntingBuffs2Name} Hunting Buff List">
   <div slot="tooltip">
-    PvP list of hunting buffs.
+    {huntingBuffs2Name} list of hunting buffs.
   </div>
   <div slot="input">
     <FieldInput field="huntingBuffs2Name" title="Hunting mode name" type="text" />
     <FieldInput field="huntingBuffs2" type="text" />
   </div>
 </SettingRow>
-<SettingRow
-    label="SE Hunting Buff List">
-  <div slot="tooltip">SE list of hunting buffs.</div>
+<SettingRow label="{huntingBuffs3Name} Hunting Buff List">
+  <div slot="tooltip">
+    {huntingBuffs3Name} list of hunting buffs.
+  </div>
   <div slot="input">
     <FieldInput field="huntingBuffs3Name" title="Hunting mode name" type="text" />
     <FieldInput field="huntingBuffs3" type="text" />
