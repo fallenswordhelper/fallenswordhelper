@@ -34,9 +34,10 @@ import SettingRow from './SettingRow.svelte';
   </div>
   <div slot="input">
     <FieldInput field="showQuickSendLinks" />
-    <label>
+    <label for="itemRecipient">
       Send Items To
       <FieldInput field="itemRecipient" type="text" style="width: 190px"/>
+    </label>
   </div>
 </SettingRow>
 <SettingRow network field="showQuickDropLinks" label="Show Quick Drop Item">

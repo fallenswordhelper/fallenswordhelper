@@ -40,23 +40,23 @@ function resetFootprintColor() {
     Hides the Create Group button
   </div>
   <div slot="input">
-    <label>
+    <label for="hideChampionsGroup">
       <FieldInput field="hideChampionsGroup" />
       Champions
     </label>
-    <label>
+    <label for="hideElitesGroup">
       <FieldInput field="hideElitesGroup" />
       Elite
     </label>
-    <label>
+    <label for="hideSEGroup">
       <FieldInput field="hideSEGroup" />
       Super Elite
     </label>
-    <label>
+    <label for="hideTitanGroup">
       <FieldInput field="hideTitanGroup" />
       Titan
     </label>
-    <label>
+    <label for="hideLegendaryGroup">
       <FieldInput field="hideLegendaryGroup" />
       Legendary
     </label>
@@ -123,15 +123,15 @@ function resetFootprintColor() {
   </div>
   <div slot="input">
     <FieldInput field="sendGoldonWorld" />
-    <label>
+    <label for="goldAmount">
       Send
       <FieldInput field="goldAmount" type="number" min="0" width="4" />
     </label>
-    <label>
+    <label for="goldRecipient">
       gold to
       <FieldInput field="goldRecipient" type="text" style="width: 60px"/>
     </label>
-    <label>
+    <label for="currentGoldSentTotal">
       Current total:
       <FieldInput field="currentGoldSentTotal" type="number" min="0" width="4" />
     </label>

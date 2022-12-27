@@ -78,11 +78,11 @@ let enemyMessage = false;
     for PvP or GvG.
   </div>
   <div slot="input">
-    <label>
+    <label for="highlightPlayersNearMyLvl">
       <FieldInput field="highlightPlayersNearMyLvl" />
       PvP
     </label>
-    <label>
+    <label for="highlightGvGPlayersNearMyLvl">
       <FieldInput field="highlightGvGPlayersNearMyLvl" />
       GvG
     </label>

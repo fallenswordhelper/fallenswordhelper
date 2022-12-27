@@ -13,10 +13,22 @@ import SettingRow from './SettingRow.svelte';
   </div>
   <div slot="input">
     <FieldInput field="enableGuildInfoWidgets" />
-    <label>Hide Message&gt;<FieldInput field="hideGuildInfoMessage" /></label>
-    <label>Hide Buff&gt;<FieldInput field="hideGuildInfoBuff" /></label>
-    <label>Hide ST&gt;<FieldInput field="hideGuildInfoSecureTrade" /></label>
-    <label>Hide Trade&gt;<FieldInput field="hideGuildInfoTrade" /></label>
+    <label for="hideGuildInfoMessage">
+      Hide Message&gt;
+      <FieldInput field="hideGuildInfoMessage" />
+    </label>
+    <label for="hideGuildInfoBuff">
+      Hide Buff&gt;
+      <FieldInput field="hideGuildInfoBuff" />
+    </label>
+    <label for="hideGuildInfoSecureTrade">
+      Hide ST&gt;
+      <FieldInput field="hideGuildInfoSecureTrade" />
+    </label>
+    <label for="hideGuildInfoTrade">
+      Hide Trade&gt;
+      <FieldInput field="hideGuildInfoTrade" />
+    </label>
   </div>
 </SettingRow>
 <SettingRow unstable label="Move Guild Info List" field="moveGuildList">
@@ -34,16 +46,22 @@ import SettingRow from './SettingRow.svelte';
     This will show the allies/enemies online list on the left.
   </div>
   <div slot="input">
-    <label>
-      <FieldInput field="enableAllyOnlineList" />
+    <label for="enableAllyOnlineList">
       Allies
+      <FieldInput field="enableAllyOnlineList" />
     </label>
-    <label>
-      <FieldInput field="enableEnemyOnlineList" />
+    <label for="enableEnemyOnlineList">
       Enemies
+      <FieldInput field="enableEnemyOnlineList" />
     </label>
-    <label>
-      <FieldInput field="allyEnemyOnlineRefreshTime" type="number" value="300" min="0" class="fshSettingsNumber fsh-va-text-bottom" />
+    <label for="allyEnemyOnlineRefreshTime">
+      <FieldInput
+        class="fshSettingsNumber fsh-va-text-bottom"
+        field="allyEnemyOnlineRefreshTime"
+        min="0"
+        type="number"
+        value="300"
+      />
       seconds refresh
     </label>
   </div>
@@ -125,11 +143,11 @@ import SettingRow from './SettingRow.svelte';
     Determines where the quick links dialog shows on the screen. Default is top 22, left 0.
   </div>
   <div slot="input">
-    <label>
+    <label for="quickLinksTopPx">
       Top:
       <FieldInput field="quickLinksTopPx" type="number" value="22" min="0" />
     </label>
-    <label>
+    <label for="quickLinksLeftPx">
       Left:
       <FieldInput field="quickLinksLeftPx" type="number" value="0" min="0" />
     </label>
