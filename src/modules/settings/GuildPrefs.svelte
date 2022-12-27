@@ -15,6 +15,11 @@ let enemyMessage = false;
     This shows the guild relationship in players' profiles.
   </div>
 </SettingRow>
+<SettingRow
+  field="guildSelfMessage"
+  label="Own Guild Message"
+  type="text"
+/>
 <tr><td></td><td>Enter guild names, separated by commas</td></tr>
 <SettingRow field="guildFrnd" label="Friendly Guilds">
   <div slot="input">
@@ -29,10 +34,10 @@ let enemyMessage = false;
   </div>
 </SettingRow>
 <SettingRow
-  field="guildFrndMessage"
-  type="text"
-  label="Label"
   class="{friendMessage ? '' : 'fshHide'}"
+  field="guildFrndMessage"
+  label="Friendly Guild Message"
+  type="text"
 />
 <SettingRow field="guildPast" label="Old Guilds">
   <div slot="input">
@@ -48,10 +53,10 @@ let enemyMessage = false;
   </div>
 </SettingRow>
 <SettingRow
-  field="guildPastMessage"
-  label="Label"
-  type="text"
   class="{oldMessage ? '' : 'fshHide'}"
+  field="guildPastMessage"
+  label="Old Guild Message"
+  type="text"
 />
 <SettingRow field="guildEnmy" label="Enemy Guilds">
   <div slot="input">
@@ -67,10 +72,10 @@ let enemyMessage = false;
   </div>
 </SettingRow>
 <SettingRow
-  field="guildEnmyMessage"
-  label="Label"
-  type="text"
   class="{enemyMessage ? '' : 'fshHide'}"
+  field="guildEnmyMessage"
+  label="Enemy Guild Message"
+  type="text"
 />
 <SettingRow field="highlightValidTargets" label="Highlight Valid PvP Targets">
   <div slot="tooltip">
