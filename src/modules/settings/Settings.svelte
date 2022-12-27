@@ -1,5 +1,6 @@
 <script>
 import dynamicAlert from '../alert/dynamicAlert';
+import jsonStringify from '../common/jsonStringify';
 import playerLink from '../common/playerLink';
 import querySelectorArray from '../common/querySelectorArray';
 import calf from '../support/calf';
@@ -17,6 +18,7 @@ import ProfilePrefs from './ProfilePrefs.svelte';
 import QuestPrefs from './QuestPrefs.svelte';
 import WorldPrefs from './WorldPrefs.svelte';
 
+const storage = ((jsonStringify(localStorage).length / (5 * 1024 * 1024)) * 100).toFixed(2);
 let saving = Promise.resolve();
 
 function coderLink(acc, [id, name], ind, ary) {
@@ -61,8 +63,8 @@ async function saveSettings() {
       <td align=center>
           <span style="font-size:x-small">
             (Current version: {calf.fshVer}({calf.calfVer}))
-            (Storage Used: {calf.storage}%
-            Remaining: {(100 - calf.storage).toFixed(2)}%)
+          (Storage Used: {storage}%
+          Remaining: {(100 - storage).toFixed(2)}%)
           </span>
       </td>
     </tr>
