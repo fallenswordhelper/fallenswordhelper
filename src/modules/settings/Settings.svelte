@@ -37,6 +37,7 @@ async function saveSettings() {
   dynamicAlert('FS Helper Settings Saved');
 }
 </script>
+
 <table style="width: 100%" id="fsh-settings">
   <thead>
     <tr>
@@ -65,7 +66,8 @@ async function saveSettings() {
           Visit the
           <a
               href="https://github.com/fallenswordhelper/fallenswordhelper"
-              target="_blank" rel="noreferrer">
+            target="_blank" rel="noreferrer"
+          >
             Fallen Sword Helper web site
           </a>
           for any suggestions, requests or bug reports.
@@ -99,7 +101,9 @@ async function saveSettings() {
   </a>
 </div>
 <p class="fshCenter">
-  <span class="fshXXSmall">Fallen Sword Helper was coded by {@html
+  <span class="fshXXSmall">
+    Fallen Sword Helper was coded by
+    {@html
       listOfCoders([
         ['1393340', 'Coccinella'],
         ['1963510', 'PointyHair'],
@@ -111,7 +115,9 @@ async function saveSettings() {
         ['2156859', 'ByteBoy'],
         ['2169401', 'McBush'],
       ])
-    }, with valuable contributions by {@html
+    }
+    , with valuable contributions by
+    {@html
       listOfCoders([
         ['524660', 'Nabalac'],
         ['37905', 'Ananasii'],

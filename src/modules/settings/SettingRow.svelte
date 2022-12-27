@@ -25,13 +25,15 @@ export let type = 'checkbox';
     <label for={field}>
       {label}
       {#if $$slots.tooltip}
-      [ <div class="tooltip">
+        [
+        <div class="tooltip">
         ?
         <div class="tooltiptext">
         <span class="tooltiptitle">{label}</span><br><br>
         <slot name="tooltip"></slot>
         </div>
-        </div> ]:
+        </div>
+        ]:
       {/if}
     </label>
   </td>
