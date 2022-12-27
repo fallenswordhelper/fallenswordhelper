@@ -12,12 +12,15 @@ if (type === 'checkbox' || type === 'radio') {
   props.value = getValue(field);
 }
 </script>
+
 <input 
-    {...$$restProps}
-    type={type}
-    name={field}
-    id={field}
-    {...props} >
+  {...$$restProps}
+  type={type}
+  name={field}
+  id={field}
+  {...props}
+>
+
 <style>
 input[type=checkbox] {
   vertical-align: middle;
