@@ -1,3 +1,4 @@
+import './simpleCheckbox.css';
 import fallback from '../system/fallback';
 import isValueChecked from './isValueChecked';
 import networkIcon from './networkIcon';
