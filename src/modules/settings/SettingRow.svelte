@@ -12,26 +12,21 @@ export let type = 'checkbox';
 <tr {...$$restProps}>
   <td>
     {#if (unstable)}
-    <div class="tooltip">
-      <span class="unstable"></span>
-      <div class="tooltiptext">
-        Warning: Causes page instability
-      </div>
-    </div>
+      <span class="unstable" data-tooltip="Warning: Causes page instability"></span>
     {/if}
     {#if (network)}
-    {@html networkIcon}
+      {@html networkIcon}
     {/if}
     <label for={field}>
       {label}
       {#if $$slots.tooltip}
         [
         <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-        <span class="tooltiptitle">{label}</span><br><br>
-        <slot name="tooltip"></slot>
-        </div>
+          ?
+          <div class="tooltiptext">
+            <span class="tooltiptitle">{label}</span><br><br>
+            <slot name="tooltip"></slot>
+          </div>
         </div>
         ]:
       {/if}
@@ -45,14 +40,14 @@ export let type = 'checkbox';
 </tr>
 
 <style>
-  td:first-child {
-    text-align: right;
-    vertical-align: middle;
-  }
+td:first-child {
+  text-align: right;
+  vertical-align: middle;
+}
 
-  td > span {
-    vertical-align: middle;
-  }
+td > span {
+  vertical-align: text-top;
+}
 
 .tooltip {
   border-bottom: 1px dotted black;
@@ -98,6 +93,7 @@ export let type = 'checkbox';
 .unstable {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xml:space='preserve' viewBox='0 0 27.793 27.793'%3E%3Cpath d='M20.972 0 5.076 15.803h5.896L6.44 27.793l16.276-15.804h-5.897z'/%3E%3C/svg%3E");
   background-size: contain;
+  border-bottom: 1px dotted black;
   display: inline-block;
   height: 11px;
   width: 11px;
