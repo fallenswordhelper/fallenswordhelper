@@ -69,7 +69,7 @@ function resetFootprintColor() {
   </div>
   <div slot="input">
     <FieldInput field="keepLogs" />
-    <input type="button" class="custombutton" value="Show Logs" on:click={showLogs}>
+    <button class="custombutton" on:click={showLogs} type="button">Show Logs</button>
   </div>
 </SettingRow>
 <SettingRow field="showCombatLog" label="Show Combat Log">
@@ -115,7 +115,7 @@ function resetFootprintColor() {
   </div>
   <div slot="input">
     <FieldInput field="showMonsterLog" />
-    <input type="button" class="custombutton" value="Show" on:click={showMonsterLogs}>
+    <button class="custombutton" on:click={showMonsterLogs} type="button">Show</button>
   </div>
 </SettingRow>
 <SettingRow field="sendGoldonWorld" label="Show Send Gold">
@@ -210,7 +210,7 @@ function resetFootprintColor() {
       type="color"
       value={getValue('footprintColor')}
     >
-    <button type="button" class="custombutton" on:click={resetFootprintColor}>Reset</button>
+    <button class="custombutton" on:click={resetFootprintColor} type="button">Reset</button>
   </div>
 </SettingRow>
 

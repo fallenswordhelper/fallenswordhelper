@@ -53,19 +53,21 @@ async function saveSettings() {
     </tr>
     <tr>
       <td align=center>
-        <input
-            id="fshClearStorage"
-            type="button"
-            class="awesome magenta tip-static"
-            value="Clear Storage"
-            data-tipped="<span class=\'fshHelpTitle\'>Clear Storage</span><br><br>This will clear all localStorage related to fallensword.com<br>It will reset all your Helper settings to defaults<br>Use it if your storage has overflowed or become corrupt">
+        <button
+          class="awesome custombutton magenta tip-static"
+          data-tipped="<span class='fshHelpTitle'>Clear Storage</span><br><br>This will clear all localStorage related to fallensword.com<br>It will reset all your Helper settings to defaults<br>Use it if your storage has overflowed or become corrupt"
+          id="fshClearStorage"
+          type="button"
+        >
+          Clear Storage
+        </button>
       </td>
       <td align=center>
-          <span style="font-size:x-small">
-            (Current version: {calf.fshVer}({calf.calfVer}))
+        <span style="font-size:x-small">
+          (Current version: {calf.fshVer}({calf.calfVer}))
           (Storage Used: {storage}%
           Remaining: {(100 - storage).toFixed(2)}%)
-          </span>
+        </span>
       </td>
     </tr>
     <tr>
@@ -73,7 +75,7 @@ async function saveSettings() {
         <span style="font-weight:bold;">
           Visit the
           <a
-              href="https://github.com/fallenswordhelper/fallenswordhelper"
+            href="https://github.com/fallenswordhelper/fallenswordhelper"
             target="_blank" rel="noreferrer"
           >
             Fallen Sword Helper web site
@@ -98,9 +100,15 @@ async function saveSettings() {
 </table>
 <div class="fshCenter">
   {#await saving}
-  <span class="fshSpinner fshSpinner12"></span>
+    <span class="fshSpinner fshSpinner12"></span>
   {:then}
-  <input type="button" class="custombutton" value="Save" on:click={() => { saving = saveSettings(); }}>
+    <button
+      class="custombutton"
+      on:click={() => { saving = saveSettings(); }}
+      type="button"
+    >
+      Save
+    </button>
   {/await}
 </div>
 <div class="fshCenter">
