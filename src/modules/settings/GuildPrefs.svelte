@@ -29,7 +29,7 @@ let enemyMessage = false;
       id="toggleShowGuildFrndMessage"
       on:click={() => { friendMessage = !friendMessage; }}
     >
-      »
+      &raquo;
     </span>
   </div>
 </SettingRow>
@@ -47,7 +47,7 @@ let enemyMessage = false;
       id="toggleShowGuildPastMessage"
       on:click={() => { oldMessage = !oldMessage; } }
     >
-      »
+      &raquo;
     </span>
     <div id="showGuildPastMessage" class="fshHide"></div>
   </div>
@@ -67,7 +67,7 @@ let enemyMessage = false;
       data-linkto="showGuildEnmyMessage"
       on:click={() => { enemyMessage = !enemyMessage; }}
     >
-      »
+      &raquo;
     </span>
   </div>
 </SettingRow>
