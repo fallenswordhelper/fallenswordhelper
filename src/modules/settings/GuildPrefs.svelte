@@ -28,6 +28,7 @@ let enemyMessage = false;
       class="fshPoint"
       id="toggleShowGuildFrndMessage"
       on:click={() => { friendMessage = !friendMessage; }}
+      on:keyup={() => { friendMessage = !friendMessage; }}
     >
       &raquo;
     </span>
@@ -46,6 +47,7 @@ let enemyMessage = false;
       class="fshPoint"
       id="toggleShowGuildPastMessage"
       on:click={() => { oldMessage = !oldMessage; } }
+      on:keyup={() => { oldMessage = !oldMessage; } }
     >
       &raquo;
     </span>
@@ -66,6 +68,7 @@ let enemyMessage = false;
       id="toggleShowGuildEnmyMessage"
       data-linkto="showGuildEnmyMessage"
       on:click={() => { enemyMessage = !enemyMessage; }}
+      on:keyup={() => { enemyMessage = !enemyMessage; }}
     >
       &raquo;
     </span>
