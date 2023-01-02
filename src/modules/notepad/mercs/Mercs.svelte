@@ -5,9 +5,11 @@ import decline from '../../app/guild/mercs/decline';
 import disband from '../../app/guild/mercs/disband';
 import search from '../../app/guild/mercs/search';
 import view from '../../app/guild/mercs/view';
+import ToolTip from '../../common/ToolTip.svelte';
 import ModalTitled from '../../modal/ModalTitled.svelte';
 import { nowSecs } from '../../support/now';
 import addCommas from '../../system/addCommas';
+import { cdn } from '../../system/system';
 
 const creatureType = ['Normal', 'Champion', 'Elite', 'Super Elite', 'Titan', 'Legendary'];
 const creatureClass = ['Human', 'Vermin', 'Undead', 'Dragon', 'Greenskin', 'Demon', 'Golem',
@@ -155,26 +157,26 @@ init();
           {#each active as { attributes, class: className, id, level, name, type, hours, mins }}
             <div class="active-merc">
               <div><b>{name}</b></div>
-              <div>
+              <ToolTip>
                 <img
+                  slot="tooltip"
                   alt="alt"
-                  class="tip-static"
-                  data-tipped="<div style=&quot;column-gap: 2px; display: grid; grid-template-columns: repeat(2, 1fr);&quot;>
-                      <div>Name:</div><div>{name}</div>
-                      <div>Level:</div><div>{level}</div>
-                      <div>Classification:</div><div>{creatureClass[className]}</div>
-                      <div>Type:</div><div>{creatureType[type]}</div>
-                      <div>Attack:</div><div>{attributes[0].value}</div>
-                      <div>Defense:</div><div>{attributes[1].value}</div>
-                      <div>Armor:</div><div>{attributes[2].value}</div>
-                      <div>HP:</div><div>{attributes[3].value}</div>
-                      <div>Damage:</div><div>{attributes[4].value}</div>
-                    </div>"
                   height="125"
-                  src="https://cdn2.fallensword.com/mercs/{id}.png"
+                  src="{cdn}mercs/{id}.png"
                   width="125"
-                >
-              </div>
+                  class="tip-static">
+                <div slot="tooltiptext" style="column-gap: 2px; display: grid; grid-template-columns: repeat(2, 1fr)">
+                  <div>Name:</div><div>{name}</div>
+                  <div>Level:</div><div>{level}</div>
+                  <div>Classification:</div><div>{creatureClass[className]}</div>
+                  <div>Type:</div><div>{creatureType[type]}</div>
+                  <div>Attack:</div><div>{attributes[0].value}</div>
+                  <div>Defense:</div><div>{attributes[1].value}</div>
+                  <div>Armor:</div><div>{attributes[2].value}</div>
+                  <div>HP:</div><div>{attributes[3].value}</div>
+                  <div>Damage:</div><div>{attributes[4].value}</div>
+                </div>
+              </ToolTip>
               <div>Time Remaining</div>
               <div><b>{hours}</b> hour(s) <b>{mins}</b> min(s)</div>
               <div class="disband">

@@ -3,6 +3,7 @@ import dynamicAlert from '../alert/dynamicAlert';
 import jsonStringify from '../common/jsonStringify';
 import playerLink from '../common/playerLink';
 import querySelectorArray from '../common/querySelectorArray';
+import ToolTip from '../common/ToolTip.svelte';
 import calf from '../support/calf';
 import { notepadBlankUrl } from '../support/constants';
 import setValue from '../system/setValue';
@@ -53,14 +54,22 @@ async function saveSettings() {
     </tr>
     <tr>
       <td align=center>
-        <button
-          class="awesome custombutton magenta tip-static"
-          data-tipped="<span class='fshHelpTitle'>Clear Storage</span><br><br>This will clear all localStorage related to fallensword.com<br>It will reset all your Helper settings to defaults<br>Use it if your storage has overflowed or become corrupt"
-          id="fshClearStorage"
-          type="button"
-        >
-          Clear Storage
-        </button>
+        <ToolTip>
+          <button
+            slot="tooltip"
+            class="awesome custombutton magenta tip-static"
+            id="fshClearStorage"
+            type="button"
+          >
+            Clear Storage
+          </button>
+          <div slot="tooltiptext">
+            <span class='fshHelpTitle'>Clear Storage</span><br><br>
+            This will clear all localStorage related to fallensword.com<br>
+            It will reset all your Helper settings to defaults<br>
+            Use it if your storage has overflowed or become corrupt"
+          </div>
+        </ToolTip>
       </td>
       <td align=center>
         <span style="font-size:x-small">
