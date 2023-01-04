@@ -83,16 +83,14 @@ function doAjax(bankSettings, mode, amount) {
     .then(partial(transResponse, bankSettings));
 }
 
-function bankDeposit(bankSettings, e) { // jQuery
-  e.preventDefault();
-  const amount = querySelector(depositAmount).value;
-  doAjax(bankSettings, 'deposit', amount);
+function getAmount(mode) {
+  const query = mode === 'deposit' ? depositAmount : withdrawAmount;
+  return querySelector(query).value;
 }
 
-function bankWithdrawal(bankSettings, e) { // jQuery
+function handleBankAction(bankSettings, mode, e) {
   e.preventDefault();
-  const amount = querySelector(withdrawAmount).value;
-  doAjax(bankSettings, 'withdraw', amount);
+  doAjax(bankSettings, mode, getAmount(mode));
 }
 
 function linkToGuildBank(bankSettings) {
@@ -106,8 +104,8 @@ function linkToGuildBank(bankSettings) {
 
 function captureButtons(bankSettings, depo, withdraw) {
   disableDepo(bankSettings.depoPos);
-  onclick(depo, partial(bankDeposit, bankSettings));
-  onclick(withdraw, partial(bankWithdrawal, bankSettings));
+  onclick(depo, partial(handleBankAction, bankSettings, 'deposit'));
+  onclick(withdraw, partial(handleBankAction, bankSettings, 'withdraw'));
 }
 
 function appLink(bankSettings) {
