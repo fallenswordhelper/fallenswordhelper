@@ -1,5 +1,5 @@
 <script>
-import ToolTip from '../common/ToolTip.svelte';
+import '../tooltip/tooltip.css';
 import FieldInput from './FieldInput.svelte';
 import networkIcon from './networkIcon';
 
@@ -21,13 +21,13 @@ export let type = 'checkbox';
     <label for={field}>
       {label}
       {#if $$slots.tooltip}
-        [ <ToolTip>
-          <span slot="tooltip">?</span>
-          <div slot="tooltiptext">
+        [ <div class="fshTooltip">
+          ?
+          <div class="fshTooltipContent">
             <span class="tooltiptitle">{label}</span><br><br>
             <slot name="tooltip"></slot>
           </div>
-        </ToolTip> ]:
+        </div> ]:
       {/if}
     </label>
   </td>

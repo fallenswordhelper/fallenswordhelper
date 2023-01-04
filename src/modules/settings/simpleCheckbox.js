@@ -1,13 +1,16 @@
 import './simpleCheckbox.css';
 import fallback from '../system/fallback';
+import tooltip from '../tooltip/tooltip';
 import isValueChecked from './isValueChecked';
 import networkIcon from './networkIcon';
 import mySimpleCheckboxes from './simple.json';
 
 export function helpLink(title, text) {
-  return '&nbsp;[&nbsp;<span class="fshLink tip-static" data-tipped="'
-    + `<span class='fshHelpTitle'>${title}</span><br><br>${
-      text}">?</span>&nbsp;]`;
+  return tooltip(
+    '?',
+    text,
+    title,
+  ).outerHTML;
 }
 
 function hasNetwork(network) {
@@ -30,7 +33,7 @@ export function justLabel(name) {
     unstable,
   } = mySimpleCheckboxes[name];
   return `${hasNetwork(network)}${stability(unstable)}<label class="fshNoWrap" for="${name}">${
-    fallback(title, helpTitle)}${helpLink(helpTitle, helpText)}:</label>`;
+    fallback(title, helpTitle)} [ ${helpLink(helpTitle, helpText)} ]:</label>`;
 }
 
 export function justCheckbox(name) {

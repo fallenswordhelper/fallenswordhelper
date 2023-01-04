@@ -1,21 +1,10 @@
-<script>
-export let tooltip;
-export let tooltiptext;
-</script>
-<div class="tooltip" {...$$restProps}>
-  <slot name="tooltip">{@html tooltip}</slot>
-  <div class="tooltiptext">
-    <slot name="tooltiptext">{@html tooltiptext}</slot>
-  </div>
-</div>
-<style>
-.tooltip {
+.fshTooltip {
   border-bottom: 1px dotted black;
   display: inline-block;
   position: relative;
 }
 
-.tooltip .tooltiptext {
+.fshTooltip .fshTooltipContent {
   background-color: black;
   border-radius: 6px;
   bottom: 150%;
@@ -28,9 +17,10 @@ export let tooltiptext;
   visibility: hidden;
   width: 300px;
   z-index: 1;
+  white-space: normal;
 }
 
-.tooltip .tooltiptext::after {
+.fshTooltip .fshTooltipContent::after {
   border-color: black transparent transparent transparent;
   border-style: solid;
   border-width: 5px;
@@ -41,7 +31,11 @@ export let tooltiptext;
   top: 100%;
 }
 
-.tooltip:hover .tooltiptext {
+.fshTooltip:hover .fshTooltipContent {
   visibility: visible;
 }
-</style>
+
+.fshTooltiptitle {
+  color: #FFF380;
+  font-weight: bold;
+}
