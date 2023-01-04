@@ -1,4 +1,5 @@
 import './fshTabSet.css';
+import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
 import createLabel from '../../common/cElement/createLabel';
@@ -6,6 +7,7 @@ import createLi from '../../common/cElement/createLi';
 import createUl from '../../common/cElement/createUl';
 import insertElement from '../../common/insertElement';
 import once from '../../common/once';
+import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { publish } from '../../support/pubsub';
@@ -27,11 +29,8 @@ function makeListItem(groupName, thisDivs, e, i) {
     htmlFor: toggleId(groupName, i),
     innerHTML: e,
   }));
-  if (i !== 0) {
-    once(thisLi, 'click', () => {
-      publish(toggleId(groupName, i), thisDivs[i]);
-    });
-  }
+  if (i !== 0) once(thisLi, 'click', () => publish(toggleId(groupName, i), thisDivs[i]));
+  onclick(thisLi, () => sendEvent('QuickWear', toggleId(groupName, i)));
   return thisLi;
 }
 

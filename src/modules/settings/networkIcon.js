@@ -1,3 +1,5 @@
+import './networkIcon.css';
+
 const networkIcon = '<span data-tooltip="This function retrieves '
   + 'data from the network. Disable this to increase speed">'
   + '<img class="networkIcon" src="data:image/png;base64,'

@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import fallback from '../system/fallback';
 import setValue from '../system/setValue';
 import arrayFrom from './arrayFrom';
@@ -16,9 +17,10 @@ let headerIndex = 0;
 function hideRow(el) { hideElement(el.row); }
 
 function collapseArt(article) {
+  sendEvent('collapse', 'collapseArt');
   article.rows.forEach(hideRow);
   // eslint-disable-next-line no-param-reassign
-  article.open = false;
+  article.open = false; // skipcq: JS-0083
 }
 
 function needsCollapse(article) { if (article.open) { collapseArt(article); } }
@@ -28,9 +30,10 @@ function collapseAll() { warehouse.forEach(needsCollapse); }
 function show(el) { toggleForce(el.row, false); }
 
 function expandArt(article) {
+  sendEvent('collapse', 'expandArt');
   article.rows.forEach(show);
   // eslint-disable-next-line no-param-reassign
-  article.open = true;
+  article.open = true; // skipcq: JS-0083
 }
 
 function needsExpand(article) { if (!article.open) { expandArt(article); } }
@@ -70,10 +73,10 @@ function collapseDuringAnalysis(row, thisArticle) {
   if (prefValue) {
     hideElement(row);
     // eslint-disable-next-line no-param-reassign
-    thisArticle.open = false;
+    thisArticle.open = false; // skipcq: JS-0083
   } else {
     // eslint-disable-next-line no-param-reassign
-    thisArticle.open = true;
+    thisArticle.open = true; // skipcq: JS-0083
   }
 }
 
@@ -82,15 +85,15 @@ function hasExtraFn(extraFn, row) { if (isFunction(extraFn)) { extraFn(row); } }
 function testRowType(row, rowType, thisArticle, param) {
   if (rowType === 0) {
     // eslint-disable-next-line no-param-reassign
-    thisArticle.header = row;
+    thisArticle.header = row; // skipcq: JS-0083
     makeHeaderClickable(row);
     hasExtraFn(param.extraFn, row);
   }
   if (param.articleTest(rowType)) {
     // eslint-disable-next-line no-param-reassign
-    thisArticle.rows[rowType] = fallback(thisArticle[rowType], {});
+    thisArticle.rows[rowType] = fallback(thisArticle[rowType], {}); // skipcq: JS-0083
     // eslint-disable-next-line no-param-reassign
-    thisArticle.rows[rowType].row = row;
+    thisArticle.rows[rowType].row = row; // skipcq: JS-0083
     collapseDuringAnalysis(row, thisArticle);
   }
 }
@@ -111,6 +114,7 @@ function toggleHeaderClass() {
 }
 
 function togglePref(prefName) {
+  sendEvent('collapse', 'togglePref', prefName);
   prefValue = !prefValue;
   setValue(prefName, prefValue);
   if (prefValue) { collapseAll(); } else { expandAll(); }

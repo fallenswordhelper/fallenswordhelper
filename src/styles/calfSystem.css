@@ -413,13 +413,6 @@ button::-moz-focus-inner {
 
 /* End of Find Buffs & Other */
 
-/* ClearFix */
-.nav-link:after, .nav-level-1:after, .nav-level-2:after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
 /* Stop resizable textareas */
 textarea {resize: none;}
 

@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/common/reduceBuffArray.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.92","mappings":"AAAA,SAASA,EAAKC,EAAKC,EAAM,CACvB,OAAAD,EAAIC,EAAK,MAAQ,OAAOA,EAAK,KAAK,EAC3BD,CACT,CAEe,SAARE,EAAiCC,EAAS,CAC/C,OAAOA,EAAQ,OAAOJ,EAAM,CAAC,CAAC,CAChC","names":["pair","acc","curr","reduceBuffArray","buffAry"]}

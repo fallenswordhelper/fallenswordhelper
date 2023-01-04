@@ -1,4 +1,5 @@
 <script>
+  import sendEvent from '../../../analytics/sendEvent';
   import { ahSearchUrl } from '../../../support/constants';
 
   export let data = {};
@@ -8,7 +9,10 @@
   <div>{data.searchname}</div>
   <div>
     {#if data.nickname}
-      <a href="{ahSearchUrl}{data.searchname}">{data.nickname}</a>
+      <a
+        href="{ahSearchUrl}{data.searchname}"
+        on:click={() => sendEvent('QuickWear', 'Nick Name', data.searchname)}
+      >{data.nickname}</a>
     {/if}
   </div>
   <div>{data.count}</div>

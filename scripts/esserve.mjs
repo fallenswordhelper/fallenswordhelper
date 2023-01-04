@@ -34,7 +34,7 @@ esbuild.serve({
     defineDataTablesPath: `"${rootPath}src/styles/dataTables.css"`,
     defineCalfPath: `"${rootPath}${calfPath}/calfSystem.css"`,
     defineCalfVer: `"${calfVer}"`,
-    defineUserIsDev: true,
+    defineUserIsDev: 'true',
   },
   entryPoints: ['src/calfSystem.js'],
   format: 'esm',

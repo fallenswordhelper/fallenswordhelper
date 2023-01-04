@@ -1,0 +1,2 @@
+var t=0,e=0,o=0,n=0,i=0,r=0,u=0;function s(){return t||(t=Date.now()),t}function c(){return e||(e=s()-5*60*1e3),e}function g(){return o||(o=s()-2*24*60*60*1e3),o}function f(){return n||(n=Math.floor(s()/1e3)),n}function A(){return i||(i=f()-120),i}function a(){return r||(r=f()-24*60*60),r}function w(){return u||(u=f()-7*24*60*60),u}export{s as a,c as b,g as c,f as d,A as e,a as f,w as g};
+//# sourceMappingURL=chunk-WFI3HTBS.js.map

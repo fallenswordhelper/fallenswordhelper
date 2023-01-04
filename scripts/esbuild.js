@@ -43,7 +43,7 @@ esbuild.build({
     defineCalfPath: `"${github}${calfPath}/calfSystem.min.css"`,
     defineDataTablesPath: `"${github}${calfPath}/dataTables.css"`,
     defineCalfVer: `"${calfVer}"`,
-    defineUserIsDev: false,
+    defineUserIsDev: 'false',
   },
   entryPoints: ['src/calfSystem.js'],
   entryNames: '[name].min',

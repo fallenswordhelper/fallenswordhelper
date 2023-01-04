@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/profile/dropitems/removeRow.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.92","mappings":"wCAEe,SAARA,EAA2BC,EAAG,CACnC,IAAMC,EAAKC,EAAUF,CAAC,EACtB,GAAI,CAACC,EAAI,OACT,IAAME,EAAUF,EAAG,mBACf,CAACE,IACLA,EAAQ,OAAO,EACfF,EAAG,OAAO,EACZ","names":["removeRow","c","tr","closestTr","nextRow"]}

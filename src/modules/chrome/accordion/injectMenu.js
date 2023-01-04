@@ -1,3 +1,4 @@
+import './accordion.css';
 import fromEntries from '../../common/fromEntries';
 import getElementById from '../../common/getElementById';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
@@ -26,11 +27,11 @@ function updateLinks() {
   updateScavLink();
 }
 
-function getLinkConfig(theNav, myNav) {
+async function getLinkConfig(theNav, myNav) {
   const linkConfig = theLinks.map((c) => [c, getValue(c)]);
   if (linkConfig.some(([, b]) => b)) {
-    import('./injectItems')
-      .then((m) => m.default(theNav, myNav, fromEntries(linkConfig)));
+    const module = await import('./injectItems');
+    module.default(theNav, myNav, fromEntries(linkConfig));
   }
 }
 
