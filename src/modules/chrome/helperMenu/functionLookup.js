@@ -5,6 +5,7 @@ import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
 import injectFsBoxContent from '../pageSwitcher/loader/injectFsBoxContent';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
+import injectQuestbook from '../pageSwitcher/loader/injectQuestbook';
 import injectQuickLinkManager from '../pageSwitcher/loader/injectQuickLinkManager';
 import mercs from '../pageSwitcher/loader/mercs';
 import monstorLog from '../pageSwitcher/loader/monstorLog';
@@ -28,4 +29,5 @@ export default {
   'Quick Extract': quickExtract,
   'GS Export': gsDl,
   'Merc Hunter': mercs,
+  Questbook: injectQuestbook,
 };

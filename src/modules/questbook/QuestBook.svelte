@@ -1,6 +1,7 @@
 <script>
 import daQuestBook from '../_dataAccess/daQuestBook';
 import alpha from '../common/alpha';
+import ModalTitled from '../modal/ModalTitled.svelte';
 import { guideUrl } from '../support/constants';
 import getValue from '../system/getValue';
 import setValue from '../system/setValue';
@@ -75,6 +76,7 @@ function sortQuests(feature) {
   lastSort = feature;
 }
 </script>
+<ModalTitled title="Questbook">
 <div id="fshQuestContainer">
 {#await loadQuestBook()}
 Loading...
@@ -101,13 +103,18 @@ Loading...
   ]</p>
   Total {seasonal ? 'Seasonal' : 'Normal'} Quest Progress:<br>
   <div id="fshQuestProgress">
-    <img
-        src="{cdn}ui/misc/progress_purple.png"
-        style="width: {100 * progress}%"
-        height="10"
-        class="tip-static"
-        alt="Progress"
-        data-tipped="Quests Completed:<br>{seasonalQuests.filter(statusFilters.completed).length} / {seasonalQuests.length}" >
+    <div class="tooltip" style="width: 100%">
+      <img
+          src="{cdn}ui/misc/progress_purple.png"
+          style="width: {100 * progress}%"
+          height="10"
+          class="tip-static"
+          alt="Progress">
+      <div class="tooltiptext" style="text-align: center">
+        <span class="tooltiptitle">Quests Completed</span><br><br>
+        {seasonalQuests.filter(statusFilters.completed).length} / {seasonalQuests.length}
+      </div>
+    </div>
   </div>
   <p style="text-align: center;">
     [
@@ -179,28 +186,36 @@ Loading...
           </div>
         </td>
         <td>
-          <a
-              href="{guideUrl}quests&subcmd=view&quest_id={quest.id}"
-              data-tooltip="Search for this quest on the Ultimate Fallen Sword Guide"
-              target="_blank"
-              rel="noreferrer">
-            <img 
-                src="https://fallensword.com/favicon.ico"
-                alt="UFSG"
+          <div class="tooltip">
+            <a
+                href="{guideUrl}quests&subcmd=view&quest_id={quest.id}"
+                target="_blank"
+                rel="noreferrer">
+              <img 
+                  src="https://fallensword.com/favicon.ico"
+                  alt="UFSG"
+                  width="16"
+                  hieght="16">
+            </a>
+            <div class="tooltiptext">
+              Search for this quest on the Ultimate Fallen Sword Guide
+            </div>
+          </div>
+          <div class="tooltip">
+            <a
+                href="https://wiki.fallensword.com/index.php?title={quest.name.replace(/ /g, '_')}"
+                target="_blank"
+                rel="noreferrer">
+              <img
+                src="{cdn}ui/misc/wiki.png"
+                alt="Wiki"
                 width="16"
-                hieght="16">
-          </a>
-          <a
-              href="https://wiki.fallensword.com/index.php?title={quest.name.replace(/ /g, '_')}"
-              target="_blank"
-              data-tooltip="Search for this quest on the Wiki"
-              rel="noreferrer">
-            <img
-              src="{cdn}ui/misc/wiki.png"
-              alt="Wiki"
-              width="16"
-              height="16">
-          </a>
+                height="16">
+            </a>
+            <div class="tooltiptext">
+              Search for this quest on the Wiki
+            </div>
+          </div>
         </td>
         <td>
           {#if status === 'hidden'}
@@ -224,6 +239,7 @@ Loading...
   {/if}
 {/await}
 </div>
+</ModalTitled>
 <style>
 #fshQuestContainer {
   width: 640px;
@@ -311,4 +327,45 @@ Loading...
   cursor: pointer;
 }
 input[type="number"] { width: 40%; }
+
+.tooltip {
+  display: inline-block;
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  background-color: black;
+  border-radius: 6px;
+  bottom: 150%;
+  color: #fff;
+  left: 50%;
+  margin-left: -79px;
+  padding: 5px;
+  position: absolute;
+  text-align: left;
+  visibility: hidden;
+  width: 150px;
+  z-index: 1;
+}
+
+.tooltip .tooltiptext::after {
+  border-color: black transparent transparent transparent;
+  border-style: solid;
+  border-width: 5px;
+  content: "";
+  left: 50%;
+  margin-left: -5px;
+  position: absolute;
+  top: 100%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltiptitle {
+  color: #FFF380;
+  font-weight: bold;
+}
+
 </style>

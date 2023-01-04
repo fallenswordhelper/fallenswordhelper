@@ -5,7 +5,7 @@ import querySelector from '../common/querySelector';
 import xPath from '../common/xPath';
 import updateBuffLog from '../notepad/buffLog/updateBuffLog';
 import calf from '../support/calf';
-import injectQuestBookFull from './pageSwitcher/loader/injectQuestBookFull';
+import injectQuestbook from './pageSwitcher/loader/injectQuestbook';
 import news from './pageSwitcher/loader/news';
 import viewRecipe from './pageSwitcher/loader/viewRecipe';
 
@@ -27,8 +27,8 @@ const unknown = [
   [
     () => xPath('//td[.="Quest Name"]'),
     () => {
-      screenview('unknown.questBook.injectQuestBookFull');
-      injectQuestBookFull();
+      screenview('unknown.questBook.injectQuestbook');
+      injectQuestbook();
     },
   ],
   [
