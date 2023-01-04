@@ -78,9 +78,9 @@ function transResponse(bankSettings, response) { // jQuery
   }
 }
 
-function doAjax(bankSettings, mode, amount) {
-  indexAjaxData({ ...bankSettings.data, mode, amount })
-    .then(partial(transResponse, bankSettings));
+async function doAjax(bankSettings, mode, amount) {
+  const response = await indexAjaxData({ ...bankSettings.data, mode, amount });
+  transResponse(bankSettings, response);
 }
 
 function getAmount(mode) {
