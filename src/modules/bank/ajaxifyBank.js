@@ -1,4 +1,4 @@
-import indexAjaxData from '../ajax/indexAjaxData';
+import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import createDiv from '../common/cElement/createDiv';
 import closestTable from '../common/closestTable';
 import getElementById from '../common/getElementById';
@@ -7,26 +7,20 @@ import onclick from '../common/onclick';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
-import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
 import { guildSubcmdUrl } from '../support/constants';
 import { pcc } from '../support/layout';
-import createDocument from '../system/createDocument';
 
 const withdrawAmount = '#pCC #withdraw_amount';
 const depositAmount = '#pCC #deposit_amount';
 const inputDepo = '#pCC input[value="Deposit"]';
-
-function pccB(doc = document) {
-  return querySelectorArray('#pCC b', doc);
-}
 
 function doInfoBox(infoBox) {
   const target = getElementById('info-msg');
   if (target) {
     closestTable(target).replaceWith(infoBox);
   } else {
-    pcc().prepend(closestTable(infoBox));
+    pcc().prepend(infoBox);
   }
 }
 
@@ -37,55 +31,40 @@ function updateNodeArray(query, doc) {
   });
 }
 
-function doStatBarGold(doc) {
-  updateNodeArray('#statbar-gold', doc);
-  updateNodeArray('#statbar-gold-tooltip dd', doc);
-}
-
-function doBoldText(doc) {
-  updateNodeArray('#pCC b', doc);
-}
-
 function disableDepo(depoPos) {
-  if (getText(pccB()[depoPos]) === '0') {
+  const remainingDepos = getText(querySelectorArray('#pCC b')[depoPos]);
+  if (remainingDepos === '0') {
     querySelector(inputDepo).disabled = true;
   }
 }
 
-function updateDepoAmount(o, doc) {
-  const depo = querySelector(depositAmount);
-  if (o.data.amount !== '1') {
-    depo.value = querySelector(depositAmount, doc).value;
-  } else {
-    depo.value = 1;
+function getAmount(mode, doc = document) {
+  const query = mode === 'deposit' ? depositAmount : withdrawAmount;
+  return querySelector(query, doc).value;
+}
+
+function updateDepoAmount(doc) {
+  const oldDepo = Number(getAmount('deposit'));
+  const newDepo = Number(getAmount('deposit', doc));
+  if (newDepo < oldDepo) {
+    querySelector(depositAmount).value = newDepo;
   }
 }
 
-function replaceValues(bankSettings, doc, infoBox) {
+function updateValues(bankSettings, doc, infoBox) {
   doInfoBox(infoBox);
-  doStatBarGold(doc);
-  doBoldText(doc);
-  disableDepo(bankSettings.depoPos);
-  updateDepoAmount(bankSettings, doc);
+  updateDepoAmount(doc);
   querySelector(withdrawAmount).value = bankSettings.initWithdraw;
-}
-
-function transResponse(bankSettings, response) { // jQuery
-  const doc = createDocument(response);
-  const infoMsg = getElementById('info-msg', doc);
-  if (infoMsg) {
-    replaceValues(bankSettings, doc, closestTable(infoMsg));
-  }
+  updateNodeArray('#statbar-gold, #statbar-gold-tooltip dd, #pCC b', doc);
+  disableDepo(bankSettings.depoPos);
 }
 
 async function doAjax(bankSettings, mode, amount) {
-  const response = await indexAjaxData({ ...bankSettings.data, mode, amount });
-  transResponse(bankSettings, response);
-}
-
-function getAmount(mode) {
-  const query = mode === 'deposit' ? depositAmount : withdrawAmount;
-  return querySelector(query).value;
+  const doc = await indexAjaxDoc({ ...bankSettings.data, mode, amount });
+  const infoMsg = getElementById('info-msg', doc);
+  if (infoMsg) {
+    updateValues(bankSettings, doc, closestTable(infoMsg));
+  }
 }
 
 function handleBankAction(bankSettings, mode, e) {
@@ -95,10 +74,10 @@ function handleBankAction(bankSettings, mode, e) {
 
 function linkToGuildBank(bankSettings) {
   if (bankSettings.appLink) {
-    const div = createDiv();
-    setInnerHtml(`<div class="fshCenter"><a href="${
-      guildSubcmdUrl}bank">Go to Guild Bank</a></div>`, div);
-    pcc().append(div);
+    pcc().append(createDiv({
+      classList: 'fshCenter',
+      innerHTML: `<a href="${guildSubcmdUrl}bank">Go to Guild Bank</a>`,
+    }));
   }
 }
 
@@ -111,9 +90,8 @@ function captureButtons(bankSettings, depo, withdraw) {
 function appLink(bankSettings) {
   linkToGuildBank(bankSettings);
   const depo = querySelector(inputDepo);
-  if (!depo) { return; }
   const withdraw = querySelector('#pCC input[value="Withdraw"]');
-  if (withdraw) {
+  if (withdraw && depo) {
     captureButtons(bankSettings, depo, withdraw);
   }
 }
