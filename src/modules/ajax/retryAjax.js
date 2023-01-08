@@ -1,6 +1,5 @@
 import sendException from '../analytics/sendException';
 import on from '../common/on';
-import partial from '../common/partial';
 import AjaxError from './AjaxError';
 
 function setOpts(options) {
@@ -10,12 +9,8 @@ function setOpts(options) {
   return options;
 }
 
-function clearXhr(xhr) {
-  xhr.abort();
-}
-
 function beforeSend(xhr) {
-  on(window, 'beforeunload', partial(clearXhr, xhr));
+  on(window, 'beforeunload', () => xhr.abort());
 }
 
 const ignoreStatus = [0, 503, 504];
@@ -30,9 +25,7 @@ const ignoreResponse = [
 function ignore(ajaxErr) {
   return ignoreStatus.includes(ajaxErr.jqXhr.status)
     || ignoreTextStatus.includes(ajaxErr.jqTextStatus)
-    || ignoreResponse.some(
-      (substring) => ajaxErr.jqXhr.responseText.includes(substring),
-    );
+    || ignoreResponse.some((substring) => ajaxErr.jqXhr.responseText.includes(substring));
 }
 
 function handleFailure(options, jqXhr) {
@@ -51,16 +44,12 @@ async function refillTokens() {
   if (tokens < refillAmount - $.active && performance.now() - lastRefill >= interval) {
     tokens = refillAmount - $.active;
     lastRefill = performance.now();
-  } else {
-    await delay(100);
-  }
+  } else await delay(100);
 }
 
 async function limiter() {
-  while (tokens < 1) {
-    // eslint-disable-next-line no-await-in-loop
-    await refillTokens();
-  }
+  // eslint-disable-next-line no-await-in-loop
+  while (tokens < 1) await refillTokens();
   tokens -= 1;
 }
 
