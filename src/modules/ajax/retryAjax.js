@@ -1,7 +1,6 @@
 import sendException from '../analytics/sendException';
 import on from '../common/on';
 import partial from '../common/partial';
-import calf from '../support/calf';
 import AjaxError from './AjaxError';
 
 function setOpts(options) {
@@ -38,7 +37,7 @@ function ignore(ajaxErr) {
 
 function handleFailure(options, jqXhr) {
   const ajaxErr = new AjaxError([options, jqXhr, jqXhr.textStatus, jqXhr.errorThrown]);
-  if (calf.userIsDev || !ignore(ajaxErr)) sendException(ajaxErr.toString(), false);
+  if (!ignore(ajaxErr)) sendException(ajaxErr.toString(), false);
 }
 
 const interval = 900;
