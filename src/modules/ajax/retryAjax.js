@@ -1,11 +1,8 @@
 import sendException from '../analytics/sendException';
 import on from '../common/on';
 import partial from '../common/partial';
+import calf from '../support/calf';
 import AjaxError from './AjaxError';
-
-let paused = true;
-let queue = [];
-let globalHandler = 0;
 
 function setOpts(options) {
   if (typeof options === 'string') {
@@ -16,7 +13,6 @@ function setOpts(options) {
 
 function clearXhr(xhr) {
   xhr.abort();
-  queue = [];
 }
 
 function beforeSend(xhr) {
@@ -40,62 +36,54 @@ function ignore(ajaxErr) {
     );
 }
 
-function handleFailure(resolve, ajaxErr) {
-  if (!ignore(ajaxErr)) {
-    sendException(ajaxErr.toString(), false);
-    resolve(null);
+function handleFailure(options, jqXhr) {
+  const ajaxErr = new AjaxError([options, jqXhr, jqXhr.textStatus, jqXhr.errorThrown]);
+  if (calf.userIsDev || !ignore(ajaxErr)) sendException(ajaxErr.toString(), false);
+}
+
+const interval = 900;
+let lastRefill = 0;
+const refillAmount = 5;
+let tokens = 0;
+
+const delay = (ms) => new Promise((r) => { setTimeout(r, ms); });
+
+async function refillTokens() {
+  if (tokens < refillAmount - $.active && performance.now() - lastRefill >= interval) {
+    tokens = refillAmount - $.active;
+    lastRefill = performance.now();
+  } else {
+    await delay(100);
   }
 }
 
-function failFilter([fn, opt, retries, resolve, reject]) {
-  return function ajaxFail(jqXhr, textStatus, errorThrown) { // Closure
-    if (retries > 0 && jqXhr.status === 503) {
-      setTimeout(fn, 100, opt, retries - 1, resolve, reject);
-    } else {
-      handleFailure(resolve, new AjaxError([opt, jqXhr, textStatus, errorThrown]));
-    }
-  };
+async function limiter() {
+  while (tokens < 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await refillTokens();
+  }
+  tokens -= 1;
 }
 
-function doAjax(options, retries, resolve, reject) {
+function getAjax(options) { // jQuery
   const opt = setOpts(options);
   opt.beforeSend = beforeSend;
-  return $.ajax(opt).then(resolve)
-    .catch(failFilter([doAjax, opt, retries, resolve, reject]));
+  return $.ajax(opt).fail((jqXHR, textStatus, errorThrown) => {
+    // eslint-disable-next-line no-param-reassign
+    jqXHR.textStatus = textStatus;
+    // eslint-disable-next-line no-param-reassign
+    jqXHR.errorThrown = errorThrown;
+  });
 }
 
-function attemptTask(runner) {
-  if ($.active < 5) {
-    const opts = queue.shift();
-    doAjax(...opts);
-    runner();
+export default async function retryAjax(options, retries = 10) {
+  await limiter();
+  let result = null;
+  try {
+    result = await getAjax(options);
+  } catch (jqXhr) {
+    if (retries && jqXhr.status === 503) return retryAjax(options, retries - 1);
+    handleFailure(options, jqXhr);
   }
-}
-
-function taskRunner() {
-  if (queue.length === 0) {
-    paused = true;
-  } else {
-    paused = false;
-    attemptTask(taskRunner);
-  }
-}
-
-function initGlobalHandler() {
-  if (!globalHandler) {
-    $(document).ajaxComplete(taskRunner);
-    globalHandler = true;
-  }
-}
-
-function add(options, retries, resolve, reject) {
-  queue.push([options, retries, resolve, reject]);
-  if (paused) { taskRunner(); }
-}
-
-export default function retryAjax(options) {
-  initGlobalHandler();
-  if (options) {
-    return new Promise((resolve, reject) => { add(options, 10, resolve, reject); });
-  }
+  return result;
 }
