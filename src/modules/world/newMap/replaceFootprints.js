@@ -24,7 +24,8 @@ function drawCircle(
 // codebeat:enable[ARITY]
 
 export default function replaceFootprints() {
-  const texture = GameController.Realm.footprintTexture;
-  texture.color = getValue('footprintColor');
-  texture.Draw = drawCircle;
+  GameController.Realm.footprintTexture = {
+    color: getValue('footprintColor'),
+    Draw: drawCircle,
+  };
 }
