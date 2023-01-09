@@ -1,4 +1,5 @@
 import indexAjaxDoc from '../ajax/indexAjaxDoc';
+import sendEvent from '../analytics/sendEvent';
 import createDiv from '../common/cElement/createDiv';
 import closestTable from '../common/closestTable';
 import getElementById from '../common/getElementById';
@@ -69,6 +70,7 @@ async function doAjax(bankSettings, mode, amount) {
 
 function handleBankAction(bankSettings, mode, e) {
   e.preventDefault();
+  sendEvent('bank', mode);
   doAjax(bankSettings, mode, getAmount(mode));
 }
 
