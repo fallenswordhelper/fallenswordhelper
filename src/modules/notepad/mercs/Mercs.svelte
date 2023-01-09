@@ -1,11 +1,11 @@
 <script>
+import '../../tooltip/tooltip.css';
 import sendEvent from '../../analytics/sendEvent';
 import accept from '../../app/guild/mercs/accept';
 import decline from '../../app/guild/mercs/decline';
 import disband from '../../app/guild/mercs/disband';
 import search from '../../app/guild/mercs/search';
 import view from '../../app/guild/mercs/view';
-import ToolTip from '../../common/ToolTip.svelte';
 import ModalTitled from '../../modal/ModalTitled.svelte';
 import { nowSecs } from '../../support/now';
 import addCommas from '../../system/addCommas';
@@ -157,15 +157,14 @@ init();
           {#each active as { attributes, class: className, id, level, name, type, hours, mins }}
             <div class="active-merc">
               <div><b>{name}</b></div>
-              <ToolTip>
+              <div class="fshTooltip">
                 <img
-                  slot="tooltip"
                   alt="alt"
                   height="125"
                   src="{cdn}mercs/{id}.png"
                   width="125"
                   class="tip-static">
-                <div slot="tooltiptext" style="column-gap: 2px; display: grid; grid-template-columns: repeat(2, 1fr)">
+                <div class="fshTooltipContent" style="column-gap: 2px; display: grid; grid-template-columns: repeat(2, 1fr)">
                   <div>Name:</div><div>{name}</div>
                   <div>Level:</div><div>{level}</div>
                   <div>Classification:</div><div>{creatureClass[className]}</div>
@@ -176,7 +175,7 @@ init();
                   <div>HP:</div><div>{attributes[3].value}</div>
                   <div>Damage:</div><div>{attributes[4].value}</div>
                 </div>
-              </ToolTip>
+              </div>
               <div>Time Remaining</div>
               <div><b>{hours}</b> hour(s) <b>{mins}</b> min(s)</div>
               <div class="disband">
