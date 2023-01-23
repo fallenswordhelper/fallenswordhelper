@@ -53,6 +53,7 @@ function getTitanName(aRow) {
 }
 
 const meta = (tr) => ({
+  guildKills: Number(getText(tr.cells[3])),
   hp: getText(tr.cells[2]),
   titanName: trimTitanName(getTitanName(tr)),
   tr,
@@ -61,8 +62,16 @@ const meta = (tr) => ({
 const active = (o) => ({
   ...o,
   active: !o.hp.includes('-'),
+  titanHp: o.hp.split('/').map(Number),
 });
-const makeTitanRows = (titanTables) => dataRows(titanTables[1], 4, 0)?.map(meta).map(active);
+const secure = (o) => ({
+  ...o,
+  securable: o.active && Math.ceil(o.titanHp[1] / 2 + 1) - o.guildKills <= o.titanHp[0],
+});
+const makeTitanRows = (titanTables) => dataRows(titanTables[1], 4, 0)
+  ?.map(meta)
+  .map(active)
+  .map(secure);
 
 export default function injectScouttower() {
   if (jQueryNotPresent()) return;
@@ -70,6 +79,8 @@ export default function injectScouttower() {
   if (!titanTables?.length) return;
   injectScouttowerBuffLinks(titanTables);
   const titanRows = makeTitanRows(titanTables);
-  titanRows.forEach(decorate);
-  titanTracker(titanTables, titanRows);
+  if (titanRows) {
+    titanRows.forEach(decorate);
+    titanTracker(titanTables, titanRows);
+  }
 }

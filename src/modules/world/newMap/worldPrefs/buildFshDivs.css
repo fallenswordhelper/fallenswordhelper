@@ -1,0 +1,16 @@
+#fshWorldPrefs img {
+  vertical-align: text-bottom;
+}
+
+.cR .fshFten {
+  margin: 0.5em 0;
+}
+
+.fshFten div {
+  font-size: 11px;
+}
+
+.fshFten select {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+}

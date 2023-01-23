@@ -10,10 +10,13 @@ import calf from '../support/calf';
 import globalErrorHandler from '../support/globalErrorHandler';
 import task from '../support/task';
 import getUrlParameter from '../system/getUrlParameter';
-import doQuickLinks from './doQuickLinks';
 import isMessageSound from './isMessageSound';
+import jqueryEventTracker from './jqueryEventTracker';
 import lookForHcsData from './lookForHcsData/lookForHcsData';
 import pageSwitcher from './pageSwitcher/pageSwitcher';
+import doQuickLinks from './quicklinks/doQuickLinks';
+
+jqueryEventTracker();
 
 let cmd = 0;
 let subcmd = 0;
@@ -110,7 +113,9 @@ async function runCore(cssPrm) {
 }
 
 function badEnv() {
-  return !('showPicker' in HTMLInputElement.prototype) || !navigator.cookieEnabled;
+  return !('showPicker' in HTMLInputElement.prototype)
+    || !navigator.cookieEnabled
+    || window !== window.parent;
 }
 
 function setVer(fshVer, gmInfo) {

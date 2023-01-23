@@ -54,7 +54,6 @@ globals:
   ga: readonly
   GameController: readonly
   GameData: readonly
-  Modernizr: readonly
   RadioNodeList: readonly
   gtag: readonly
 rules:

@@ -7,7 +7,6 @@ import contains from '../common/contains';
 import getArrayByClassName from '../common/getArrayByClassName';
 import insertElement from '../common/insertElement';
 import insertElementAfter from '../common/insertElementAfter';
-import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import once from '../common/once';
 import onclick from '../common/onclick';
@@ -103,9 +102,10 @@ function drawList(fcDiv) {
 
 export default function fastCompose() {
   const buttonDiv = querySelector('#pCC div.centered');
-  insertHtmlAfterEnd(
-    buttonDiv.children[1],
-    ' | <label for="fast-compose"><span class="sendLink">Fast Compose</span></label>',
+  insertHtmlBeforeEnd(
+    buttonDiv,
+    '<span class="fsh-fast-compose">[ <label for="fast-compose">'
+      + '<span class="sendLink">Fast Compose</span></label> ]</span>',
   );
   const fcDiv = createDiv({ className: 'centered' });
   insertElementAfter(fcDiv, buttonDiv);

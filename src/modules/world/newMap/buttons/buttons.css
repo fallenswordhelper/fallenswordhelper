@@ -1,0 +1,20 @@
+#fshWorldButtonContainer {
+  float: left;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+#fshWorldButtonContainer > div:first-child {
+  margin-right: 0.25em;
+}
+
+.fshCurveBtn {
+  height: 17px;
+  padding: 0;
+  width: 17px;
+}
+
+.fshFsty div {
+  font-size: 70%
+}

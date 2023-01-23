@@ -9,14 +9,15 @@ import combatLogger from './combatLogger';
 import interceptMouseEvents from './creatureInfo/interceptMouseEvents';
 import doMonsterColors from './doMonsterColors';
 import doNotKill from './doNotKill/doNotKill';
-import fixDebuff from './fixDebuff';
 import globalTop from './globalTop/globalTop';
 import hideGroupButton from './hideGroupButton';
 import hideTitanCombatResults from './hideTitanCombatResults';
+import messageQueue from './messageQueue/messageQueue';
 import monsterLog from './monsterLog/monsterLog';
 import onWorld from './onWorld';
 import relic from './relic/relic';
 import repairButton from './repairButton';
+import replaceFootprints from './replaceFootprints';
 import sendGold from './sendGold';
 import shop from './shop';
 import teleport from './teleport/teleport';
@@ -48,11 +49,12 @@ const usualRoutines = [
   hideMapTooltip,
   buttons,
   buffInfo,
-  fixDebuff,
   interceptMouseEvents,
   champAttacks,
   globalTop,
   teleport,
+  messageQueue,
+  replaceFootprints,
 ];
 
 export default function newMap() {

@@ -86,14 +86,18 @@ function waitForLog() {
   doBackgroundCheck().finally(gotSeLog);
 }
 
-export default function superelite() {
-  if (jQueryNotPresent()) { return; }
+function injectPref() {
   let newCell = insertNewRow();
   newCell.height = 20;
   newCell = insertNewRow();
   newCell.className = 'fshCenter';
   setInnerHtml(simpleCheckboxHtml(enableSeTracker), newCell);
   on(newCell, 'change', togglePref);
+}
+
+export default function superelite() {
+  if (jQueryNotPresent() || !pcc()) { return; }
+  injectPref();
   if (calf.enableSeTracker) {
     getFshSeLog().then(waitForLog);
   }

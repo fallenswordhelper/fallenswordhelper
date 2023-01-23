@@ -80,6 +80,7 @@
   "minGroupLevel":1,
   "combatEvaluatorBias":0,
   "huntingMode":false,
+  "messageStack":false,
   "enabledHuntingMode":"1",
   "hideRelicOffline":false,
   "enterForSendMessage":false,
@@ -242,5 +243,7 @@
   "selectST": false,
   "selectMain": true,
   "disableQuickExtractPrompts": false,
-  "qbSortBuffsAlphabetically": false
+  "qbSortBuffsAlphabetically": false,
+  "groupCombatItems": false,
+  "footprintColor": "#ee9252"
 }

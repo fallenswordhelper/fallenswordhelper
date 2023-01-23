@@ -3,13 +3,14 @@ import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
 import classHandler from '../../common/classHandler';
 import draggable from '../../common/draggable';
-import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
+import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import isFunction from '../../common/isFunction';
 import jQueryPresent from '../../common/jQueryPresent';
 import once from '../../common/once';
 import onclick from '../../common/onclick';
+import querySelector from '../../common/querySelector';
 import getValue from '../../system/getValue';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import functionLookup from './functionLookup';
@@ -60,7 +61,7 @@ function showHelperMenu(evt) {
   onclick(helperMenuDiv, classHandler(classEvents));
 }
 
-function haveNode() {
+function haveNode(node) {
   const helperMenu = createDiv({
     id: 'helperMenu',
     className: 'helperMenu',
@@ -74,11 +75,11 @@ function haveNode() {
     helperMenu.classList.add('helperMenuMove');
     draggable(helperMenu);
   }
-  insertElement(document.body, helperMenu);
+  insertElementAfterBegin(node, helperMenu);
 }
 
 export default function injectHelperMenu() {
   // don't put all the menu code here (but call if clicked) to minimize lag
-  const node = getElementById('statbar-container');
-  if (node) { haveNode(); }
+  const node = querySelector('.mainbody');
+  if (node) haveNode(node);
 }

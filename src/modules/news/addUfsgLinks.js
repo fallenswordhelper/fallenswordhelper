@@ -15,8 +15,10 @@ const realmSearchHref = (name) => `${guideUrl}realms&search_name=${encodeURIComp
 const makeALink = (name) => `<a href="${realmSearchHref(name)}" target="_blank">${name}</a>`;
 
 function makeUfsgLink(img) {
+  const title = getTitle(img);
+  if (!title) return;
   const myLink = createAnchor({
-    href: creatureSearchHref(getTitle(img).split('(')[0].trim()),
+    href: creatureSearchHref(title.split('(')[0].trim()),
     target: '_blank',
   });
   insertElementBefore(myLink, img);

@@ -4,7 +4,7 @@ import isString from '../common/isString';
 import { GMSTORAGE_PATH } from '../support/constants';
 
 function storItem(name, type, value) {
-  if (Modernizr && Modernizr.localstorage) {
+  if (window.Modernizr && window.Modernizr.localstorage) {
     window.localStorage.setItem(GMSTORAGE_PATH + name, type + value);
   }
 }
@@ -22,7 +22,5 @@ const cold = [
 
 export default function setValue(name, value) {
   const storType = cold.find((pair) => pair[0](value));
-  if (storType) {
-    storType[1](name, value);
-  }
+  if (storType) storType[1](name, value);
 }

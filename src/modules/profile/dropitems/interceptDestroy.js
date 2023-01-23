@@ -69,8 +69,7 @@ const changePref = () => eventHandler5([
   [selfIdIs(prefDisableDestroyPrompts), handleDestroyPref],
 ]);
 
-function injectPrefs() {
-  const submitBtn = querySelector('input[type="submit"]');
+function injectPrefs(submitBtn) {
   insertHtmlBeforeEnd(
     submitBtn.parentNode,
     `&nbsp;&nbsp;${simpleCheckboxHtml(prefAjaxifyDestroy)}&nbsp;&nbsp;${
@@ -80,7 +79,9 @@ function injectPrefs() {
 }
 
 export default function interceptDestroy() {
-  injectPrefs();
+  const submitBtn = querySelector('input[type="submit"]');
+  if (!submitBtn) return;
+  injectPrefs(submitBtn);
   initDestroyPrompt();
   ajaxifyDestroy = getValue(prefAjaxifyDestroy);
   on(document.forms[0], 'submit', submitHandler);

@@ -20,6 +20,7 @@ import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
 import addGuildLogWidgets from '../../logs/addGuildLogWidgets';
 import addLogColoring from '../../logs/addLogColoring';
+import guildGroupCombat from '../../logs/guildGroupCombat';
 import { pcc } from '../../support/layout';
 import createDocument from '../../system/createDocument';
 import getValue from '../../system/getValue';
@@ -163,6 +164,7 @@ function buildTable() {
   pcc().replaceChild(myTable, injector);
   addLogColoring('myGuildLog', 1, 3);
   addGuildLogWidgets();
+  guildGroupCombat();
 }
 
 function doChecked(el) {

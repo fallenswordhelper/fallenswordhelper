@@ -32,6 +32,7 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class:visible on:click|self>
   <slot></slot>
 </div>

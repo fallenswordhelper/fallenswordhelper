@@ -1,31 +1,27 @@
-import jQueryNotPresent from '../common/jQueryNotPresent';
-import querySelector from '../common/querySelector';
-import calf from '../support/calf';
-import setValue from '../system/setValue';
+import getElementById from '../common/getElementById';
+import once from '../common/once';
 import injectBlockedSkills from './blockedSkills/injectBlockedSkills';
-import setupConfigData from './configData';
-import createEventListeners from './createEventListeners';
-import getVars from './getVars';
+import Settings from './Settings.svelte';
 
 function addTab(tabs) { // jQuery
   tabs.find('.ui-tabs-nav')
     .append('<li><a href="#fshSettings">FSH</a></li>');
-  tabs.append(`<div id="fshSettings"><p>${calf.configData}</p></div>`);
+  tabs.append('<div id="fshSettings"></div>');
   tabs.tabs('refresh');
 }
 
-function doFshSettings(settingsTabs) {
-  getVars();
-  setupConfigData();
-  addTab(settingsTabs);
-  createEventListeners();
-  setValue('minGroupLevel', querySelector('input[name="min_group_level"]').value);
-}
+const startApp = (target) => new Settings({ target });
 
 export default function injectSettings() { // jQuery
-  if (jQueryNotPresent()) { return; }
   const settingsTabs = $('#settingsTabs');
+  addTab(settingsTabs);
   const tabsInstance = settingsTabs.tabs('instance');
-  if (tabsInstance) { doFshSettings(settingsTabs); }
+  if (tabsInstance) {
+    once(
+      getElementById('ui-id-9'),
+      'click',
+      () => startApp(getElementById('fshSettings')),
+    );
+  }
   injectBlockedSkills();
 }

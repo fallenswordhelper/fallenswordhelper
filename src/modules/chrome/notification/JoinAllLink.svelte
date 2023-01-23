@@ -54,6 +54,7 @@
         <p class="notification-content" style="line-height: 32px;">Joined.</p>
       {/await}
     {:else}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <p class="notification-content" style="{groupStyleText}" on:click|once={handleClick}>Join all attack groups{groupJoinText}.</p>
     {/if}
   </a>

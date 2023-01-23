@@ -16,39 +16,55 @@
   const prefName = 'fsh_titanFilter';
   let current = true;
   let history = true;
+  let securable = false;
   let titans = [];
 
   const byName = ([a], [b]) => alpha(a, b);
   const getPrefs = () => get(prefName);
-  const setPrefs = () => set(prefName, { current, history, titans });
+  const setPrefs = () => set(prefName, {
+    current,
+    history,
+    securable,
+    titans,
+  });
   const titanPref = ({ titanName }) => titans.find(([n]) => n === titanName)[1];
   const mergePrefs = () => entries({
     ...fromEntries(entries(theTitans).map(([n]) => [n, true])),
     ...fromEntries(titans.map(([n, o]) => [trimTitanName(n), o])),
   }).sort(byName);
+  const isCurrent = (ctx) => ctx.active && current;
+  const isHistory = (ctx) => !ctx.active && history;
+  const isSecurable = (ctx) => ctx.securable || !securable;
 
   function testVis(ctx) {
-    return !(((ctx.active && current) || (!ctx.active && history)) && titanPref(ctx));
+    return (isCurrent(ctx) || isHistory(ctx)) && titanPref(ctx) && isSecurable(ctx);
   }
 
-  function hideRow([ctx, hide]) {
+  function updateVis([ctx, newVis]) {
     const allRows = arrayFrom(closestTable(ctx.tr).rows);
     const thisIndex = ctx.tr.rowIndex;
     const targets = allRows.slice(thisIndex, thisIndex + 6);
-    targets.forEach((r) => toggleForce(r, hide));
-    ctx.visible = !hide;
+    targets.forEach((r) => toggleForce(r, !newVis));
+    ctx.visible = newVis;
   }
 
   function doVisibility() {
     titanRows
       .map((ctx) => [ctx, testVis(ctx)])
-      .filter(([ctx, hide]) => ctx.visible === hide)
-      .forEach(hideRow);
+      .filter(([ctx, newVis]) => ctx.visible !== newVis)
+      .forEach(updateVis);
   }
 
   async function buildTitanList() {
     const oldOptions = await getPrefs();
-    if (oldOptions) ({ current, history, titans } = oldOptions);
+    if (oldOptions) {
+      ({
+        current,
+        history,
+        securable,
+        titans,
+      } = oldOptions);
+    }
     titans = mergePrefs();
     doVisibility();
   }
@@ -65,6 +81,11 @@
 
   function toggleHistory() {
     sendEvent('TitanFilter', 'toggleHistory');
+    toggleVisibility();
+  }
+
+  function toggleSecurable() {
+    sendEvent('TitanFilter', 'toggleSecurable');
     toggleVisibility();
   }
 
@@ -98,6 +119,10 @@
         <label>
           <input bind:checked={history} on:change={toggleHistory} type="checkbox">
           History
+        </label>
+        <label>
+          <input bind:checked={securable} on:change={toggleSecurable} type="checkbox">
+          Securable
         </label>
       </td>
     </tr>

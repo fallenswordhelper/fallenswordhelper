@@ -38,6 +38,7 @@
 </script>
 
 {#if visible}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div role="alert" on:click="{() => { visible = false; }}" transition:fly="{{
     delay: 250, duration: 300, x: 0, y: -100, opacity: 0.5,
   }}" style:transform>
