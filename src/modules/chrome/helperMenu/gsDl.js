@@ -55,5 +55,5 @@ function downloadCsv(csv) {
 export default async function gsDl() {
   if (!currentGuildId()) return;
   const json = await guildStore();
-  downloadCsv(`${header}${toCsv(json)}`);
+  downloadCsv(`${header}${toCsv(json)}\n`);
 }
