@@ -1,0 +1,2 @@
+import{a as n}from"./chunk-5U7DCVQ4.js";import{a as e}from"./chunk-3K2T5RZS.js";import{a as i}from"./chunk-GPS2RLNW.js";import{a as f}from"./chunk-TV6FJZ73.js";import{a as t}from"./chunk-HXA7GMHU.js";function r(o){f(o.parentNode,' <button class="fshBl fshBls">[b]</button>')}var l=o=>i("fshBl",o)&&o.previousElementSibling;function m(o){l(o.target)&&(t("common","doBuffLinkClick"),e(n(o.target.previousElementSibling.href)))}export{r as a,m as b};
+//# sourceMappingURL=chunk-XJHHDBDD.js.map
