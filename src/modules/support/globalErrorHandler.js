@@ -4,9 +4,14 @@ import parseError from './parseError';
 
 let enabled = 0;
 
+function canSend(stuff) {
+  if (stuff.message === 'error loading dynamically imported module') return false;
+  return true;
+}
+
 function handleMsgStack(type, stuff) {
   const msg = parseError(stuff);
-  sendException(type + msg, true);
+  if (canSend(stuff)) sendException(type + msg, true);
 }
 
 function handleError(type, stuff) {
