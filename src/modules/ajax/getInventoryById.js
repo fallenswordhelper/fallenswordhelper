@@ -13,5 +13,6 @@ function rekeyInventory(data) {
 
 export default async function getInventoryById() {
   const inv = await getInventory();
-  return rekeyInventory(inv);
+  if (inv?.items) return rekeyInventory(inv);
+  return inv;
 }

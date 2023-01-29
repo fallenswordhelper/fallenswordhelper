@@ -7,7 +7,7 @@ import backpack from './backpack';
 import doAction from './doAction';
 
 function gotBackpack(action, data, bpData) {
-  // assuming backpack is successful...
+  if (!bpData) return;
   const lastBackpackItem = bpData.items[bpData.items.length - 1].a;
   if (action === 'wear') {
     return doAction(equipItem, lastBackpackItem, data);

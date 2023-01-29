@@ -20,13 +20,15 @@
 
   async function getCombatSet() {
     const [ms, cs] = await all([daLoadInventory(), daViewCombatSet()]);
-    equipment = ms.r.equipment;
-    const wornSet = cs.r.find(equippedSet);
-    selected = wornSet?.id ?? -1;
-    combatSets = [
-      ...(!wornSet ? [{ id: -1, name: 'Primary', items: equipment }] : []),
-      ...cs.r,
-    ];
+    if (ms?.r && cs?.r) {
+      equipment = ms.r.equipment;
+      const wornSet = cs.r.find(equippedSet);
+      selected = wornSet?.id ?? -1;
+      combatSets = [
+        ...(!wornSet ? [{ id: -1, name: 'Primary', items: equipment }] : []),
+        ...cs.r,
+      ];
+    }
   }
 
   const getStatCells = (doc) => querySelectorArray('table[width="300"] b', doc)
