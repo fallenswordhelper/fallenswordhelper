@@ -1,0 +1,2 @@
+import{a as r}from"./chunk-SRVOPMOR.js";import{a as e}from"./chunk-NBYXTQFH.js";import{a as i}from"./chunk-XVTH24AL.js";import{a as l}from"./chunk-ACOFHTYC.js";import{a as o}from"./chunk-RVP3BZF7.js";function a(n){let t=o("content");t?l("",t):(t=e({id:"content",style:{display:"none"}}),i(document.body,t)),$(t).dialog({width:640,modal:!0,position:{my:"top",at:"top",offset:"0 60",collision:"none"},resizable:!1}),r("ui-dialog-titlebar-close").forEach(m=>m.blur()),n(t)}export{a};
+//# sourceMappingURL=chunk-5AHQOVSB.js.map
