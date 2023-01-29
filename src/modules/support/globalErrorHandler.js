@@ -4,10 +4,7 @@ import parseError from './parseError';
 
 let enabled = 0;
 
-function canSend(stuff) {
-  if (stuff.message === 'error loading dynamically imported module') return false;
-  return true;
-}
+const canSend = (stuff) => stuff.message !== 'error loading dynamically imported module';
 
 function handleMsgStack(type, stuff) {
   const msg = parseError(stuff);
