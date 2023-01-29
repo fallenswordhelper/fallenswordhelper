@@ -1,3 +1,4 @@
+import awaitWidget from '../common/awaitWidget';
 import getElementById from '../common/getElementById';
 import once from '../common/once';
 import injectBlockedSkills from './blockedSkills/injectBlockedSkills';
@@ -12,8 +13,10 @@ function addTab(tabs) { // jQuery
 
 const startApp = (target) => new Settings({ target });
 
-export default function injectSettings() { // jQuery
-  const settingsTabs = $('#settingsTabs');
+export default async function injectSettings() { // jQuery
+  const tabs = getElementById('settingsTabs');
+  await awaitWidget(tabs, 'Tabs', 'ui');
+  const settingsTabs = $(tabs);
   addTab(settingsTabs);
   const tabsInstance = settingsTabs.tabs('instance');
   if (tabsInstance) {

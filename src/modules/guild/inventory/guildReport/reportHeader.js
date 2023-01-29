@@ -15,7 +15,7 @@ function memberHeader(oldhtml) {
 
 function updateMemberHeader(el) {
   const oldhtml = getText(el);
-  if (calf.membrList[oldhtml]) {
+  if (calf.membrList?.[oldhtml]) {
     setInnerHtml(memberHeader(oldhtml), el);
   }
   setInnerHtml(

@@ -38,7 +38,7 @@ function parseComposingApp(result) {
 }
 
 function checkAppResponse(json) {
-  if (json.s) { parseComposingApp(json.r); }
+  if (json?.s) parseComposingApp(json.r);
 }
 
 function checkLastCompose() { // jQuery.min

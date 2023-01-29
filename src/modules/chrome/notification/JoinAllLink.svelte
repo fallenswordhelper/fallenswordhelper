@@ -32,7 +32,7 @@
 
   async function doJoinAll() {
     const json = await daViewGroups();
-    if (json.s) {
+    if (json?.s) {
       await processGroups(json);
     }
   }
