@@ -1,7 +1,5 @@
 import './newMap.css';
-import awaitWidget from '../../common/awaitWidget';
 import executeAll from '../../common/executeAll';
-import getElementById from '../../common/getElementById';
 import hideQTip from '../../common/hideQTip';
 import calf from '../../support/calf';
 import buffInfo from './buffInfo/buffInfo';
@@ -59,8 +57,7 @@ const usualRoutines = [
   replaceFootprints,
 ];
 
-export default async function newMap() {
-  await awaitWidget(getElementById('mapCanvas'), 'Derp');
+export default function newMap() {
   executeAll(usualRoutines);
   if (calf.userIsDev) { //  hide titan combat results, global top 100
     hideTitanCombatResults();
