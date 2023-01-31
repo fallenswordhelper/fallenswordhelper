@@ -1,10 +1,9 @@
 import sendEvent from '../analytics/sendEvent';
 import view from '../app/arena/view';
-import allthen from '../common/allthen';
+import all from '../common/all';
 import interceptSubmit from '../common/interceptSubmit';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import loadDataTables from '../common/loadDataTables';
-import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
 import { time, timeEnd } from '../support/debug';
 import getValue from '../system/getValue';
@@ -65,16 +64,16 @@ function process(tabs, values) {
   }
 }
 
-function prepare(tabs) {
-  allthen(
+async function prepare(tabs) {
+  const values = await all(
     [
       get(fshArenaKey),
       get('fsh_arenaFull'),
       view().catch(() => ({})),
       loadDataTables(),
     ],
-    partial(process, tabs),
   );
+  process(tabs, values);
 }
 
 export default function arena() { // jQuery

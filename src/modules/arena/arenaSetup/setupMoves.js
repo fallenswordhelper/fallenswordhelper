@@ -1,5 +1,5 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
-import allthen from '../../common/allthen';
+import all from '../../common/all';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import navigateTo from '../../common/navigateTo';
@@ -47,15 +47,17 @@ function pageRefresh() {
   navigateTo(`${arenaUrl}setup`);
 }
 
-function changeMoves(newMoves) {
+async function changeMoves(newMoves) {
   const prm = newMoves.map(newMove);
-  allthen(prm, pageRefresh);
+  await all(prm);
+  pageRefresh();
 }
 
-function updateMoves() { // jQuery
+async function updateMoves() { // jQuery
   const newMoves = getAllMoves();
   const prm = newMoves.map(resetMove);
-  allthen(prm, partial(changeMoves, newMoves));
+  await all(prm);
+  changeMoves(newMoves);
 }
 
 function updateButton(table) { // jQuery
