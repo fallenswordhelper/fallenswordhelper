@@ -1,33 +1,22 @@
-import { createRequire } from 'module';
+import { dirname, relative, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import esbuild from 'esbuild';
+import sveltePlugin from 'esbuild-svelte';
 import lws from 'local-web-server';
+import buildFsh from './buildFsh.mjs';
+import { port as calfPort } from './config.mjs';
+import { calfVer, core } from './getVersion.mjs';
 
-const require = createRequire(import.meta.url);
-const {
-  readFileSync,
-  writeFileSync,
-} = require('fs');
-const process = require('process');
-const esbuild = require('esbuild');
-const sveltePlugin = require('esbuild-svelte');
-const cleanTarget = require('./cleanTarget');
-const { port: calfPort } = require('./config.json');
-const { calfVer, core } = require('./getVersion');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const pathToFile = (file) => relative(process.cwd(), `${root}/${file}`);
 
 const rootPath = `https://localhost:${calfPort}/`;
 const fshPath = 'dist/Releases/watch';
 const calfPath = `dist/resources/watch/${core}`;
 
-cleanTarget(`${fshPath}`);
+buildFsh(fshPath, `${core}a`, `${rootPath}${fshPath}`, `${rootPath}${calfPath}`);
 
-const fsh = readFileSync('src/fallenswordhelper.user.js', 'utf8')
-  .replaceAll('_VER', `${core}a`)
-  .replace('_DLURL', `${rootPath}${fshPath}/fallenswordhelper.user.js`)
-  .replace('_CALFJS', `${rootPath}${calfPath}/calfSystem.js`);
-writeFileSync(`${fshPath}/fallenswordhelper.user.js`, fsh);
-
-esbuild.serve({
-  servedir: process.cwd(),
-}, {
+const ctx = await esbuild.context({
   bundle: true,
   chunkNames: `${calfVer}/[name]-[hash]`,
   define: {
@@ -36,27 +25,27 @@ esbuild.serve({
     defineCalfVer: `"${calfVer}"`,
     defineUserIsDev: 'true',
   },
-  entryPoints: ['src/calfSystem.js'],
+  entryPoints: [pathToFile('src/calfSystem.js')],
   format: 'esm',
-  outdir: `${calfPath}`,
+  outdir: pathToFile(calfPath),
   plugins: [sveltePlugin()],
   sourcemap: true,
   sourcesContent: false,
   splitting: true,
-}).then(({ host, port }) => {
-  console.log(`esbuild listening on http://${host}:${port}`);
-  lws.create({
-    cert: 'cert.pem',
-    corsCredentials: true,
-    http2: true,
-    key: 'key.pem',
-    port: Number(calfPort),
-    rewrite: [{
-      from: '/(.*)',
-      to: `http://${host}:${port}/$1`,
-    }],
-    stack: ['scripts/mw-private-network.js', 'lws-cors', 'lws-rewrite'],
-  }).then((ws) => {
-    console.log(`lws listening on port ${ws.config.port}`);
-  });
+  write: false,
 });
+
+const { host, port } = await ctx.serve({ servedir: root });
+
+console.log(`esbuild listening on http://${host}:${port}`);
+
+const ws = await lws.create({
+  corsCredentials: true,
+  rewrite: [{
+    from: '/(.*)',
+    to: `http://${host}:${port}/$1`,
+  }],
+  stack: [pathToFile('scripts/mw-private-network.js'), 'lws-cors', 'lws-rewrite'],
+});
+
+console.log(`lws listening on port ${ws.config.port}`);

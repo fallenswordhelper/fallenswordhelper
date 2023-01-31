@@ -1,6 +1,6 @@
 ---
 parserOptions:
-  ecmaVersion: 2020
+  ecmaVersion: latest
   sourceType: module
 plugins:
   - 'svelte3'
@@ -19,6 +19,15 @@ overrides:
     rules:
       strict: "off"
       no-console: "off"
+  - files:
+    - "scripts/*.mjs"
+    rules:
+      import/extensions:
+        - error
+        - ignorePackages
+        - js: never
+          mjs: always
+          jsx: never
 extends:
   - 'airbnb-base'
 globals:
