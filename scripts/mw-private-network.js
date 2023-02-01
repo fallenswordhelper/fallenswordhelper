@@ -10,4 +10,4 @@ class PrivateNetwork {
   }
 }
 
-module.exports = PrivateNetwork;
+export default PrivateNetwork;

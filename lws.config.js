@@ -1,9 +1,17 @@
-const { relative } = require('node:path');
-const { port } = require('./scripts/config.json');
+import { port } from './scripts/config.js';
+import { pathToFile } from './scripts/utils.js';
 
-module.exports = {
-  port,
+export default {
+  cert: pathToFile('cert.pem'),
+  corsCredentials: true,
   http2: true,
-  key: relative(process.cwd(), `${__dirname}/key.pem`),
-  cert: relative(process.cwd(), `${__dirname}/cert.pem`),
+  key: pathToFile('key.pem'),
+  port,
+  stack: [
+    pathToFile('scripts/mw-private-network.js'),
+    'lws-cors',
+    'lws-rewrite',
+    'lws-static',
+    'lws-index',
+  ],
 };

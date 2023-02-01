@@ -15,19 +15,19 @@ overrides:
       import/prefer-default-export: off
   - files:
     - "scripts/*.js"
-    - "scripts/*.mjs"
-    rules:
-      strict: "off"
-      no-console: "off"
-  - files:
-    - "scripts/*.mjs"
     rules:
       import/extensions:
         - error
         - ignorePackages
-        - js: never
-          mjs: always
-          jsx: never
+        - js: always
+      no-console: off
+  - files:
+    - "lws.config.js"
+    rules:
+      import/extensions:
+        - error
+        - ignorePackages
+        - js: always
 extends:
   - 'airbnb-base'
 globals:
