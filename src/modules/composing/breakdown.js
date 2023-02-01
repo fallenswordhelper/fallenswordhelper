@@ -63,8 +63,9 @@ function handleResponse(response) {
   }
 }
 
-function breakItems() { // jQuery.min
-  doBreakdown(selectedList).then(handleResponse);
+async function breakItems() {
+  const response = await doBreakdown(selectedList);
+  handleResponse(response);
 }
 
 function validBreakEvent(evt) {
