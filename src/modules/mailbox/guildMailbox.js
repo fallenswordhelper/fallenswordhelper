@@ -7,7 +7,6 @@ import infoBoxFrom from '../common/InfoBoxFrom';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
-import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
 import { pcc } from '../support/layout';
