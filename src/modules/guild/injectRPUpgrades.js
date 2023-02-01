@@ -34,7 +34,8 @@ function parseProfile(data) {
   }
 }
 
-export default function injectRPUpgrades() { // jQuery.min
+export default async function injectRPUpgrades() { // jQuery.min
   if (jQueryNotPresent()) { return; }
-  myStats(true).then(parseProfile);
+  const data = await myStats(true);
+  parseProfile(data);
 }

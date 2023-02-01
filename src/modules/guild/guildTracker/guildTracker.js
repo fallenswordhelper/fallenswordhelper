@@ -117,9 +117,10 @@ function gotActivity(data) {
   }
 }
 
-function openDialog() {
+async function openDialog() {
   sendEvent('guildTracker', 'openDialog');
-  get('fsh_guildActivity').then(gotActivity);
+  const data = await get('fsh_guildActivity');
+  gotActivity(data);
   calf.dialogIsClosed = isClosed;
   addOverlay();
   makePopup();
