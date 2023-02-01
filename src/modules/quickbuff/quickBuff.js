@@ -20,11 +20,12 @@ function setupEventHandlers() {
   onclick(getElementById('players'), addBuffLevels);
 }
 
-export default function quickBuff() { // jQuery.min
+export default async function quickBuff() { // jQuery.min
   if (jQueryNotPresent()) { return; }
   const quickbuffDiv = getElementById('quickbuff');
   if (!quickbuffDiv) { return; }
-  getProfile(window.self).then(getSustain);
+  const responseText = await getProfile(window.self);
+  getSustain(responseText);
   insertHtmlAfterEnd(quickbuffDiv.children[0], quickBuffHeader);
   executeAll([
     doLabels,
