@@ -21,8 +21,10 @@ function translateReturnInfo(data) {
   return returnInfo;
 }
 
-function guildMailboxTake(href) {
-  return retryAjax(href).then(translateReturnInfo).then(dialog);
+async function guildMailboxTake(href) {
+  const data = await retryAjax(href);
+  const returnInfo = translateReturnInfo(data);
+  dialog(returnInfo);
 }
 
 function takeResult(target, data) {
@@ -34,12 +36,13 @@ function takeResult(target, data) {
   }
 }
 
-function guildMailboxEvent(e) { // jQuery.min
+async function guildMailboxEvent(e) {
   const { target } = e;
   if (target.tagName === 'IMG') {
     e.preventDefault();
     const anchor = target.parentNode.href;
-    guildMailboxTake(anchor).then(partial(takeResult, target));
+    const data = await guildMailboxTake(anchor);
+    takeResult(target, data);
   }
   if (target.className === 'sendLink') {
     getArrayByTagName('img', pcc()).forEach(clickThis);
