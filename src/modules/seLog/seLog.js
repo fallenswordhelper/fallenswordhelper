@@ -47,8 +47,9 @@ function gotSe(data) {
   if (dataLooksOk(data)) { processSeData(data); }
 }
 
-function getSeLog() { // jQuery.min
-  return daSuperElite().then(gotSe);
+async function getSeLog() {
+  const data = await daSuperElite();
+  gotSe(data);
 }
 
 export function doBackgroundCheck() {
@@ -74,10 +75,12 @@ function gotLog(data) {
   if (data) { oldLog = data; }
 }
 
-export function getFshSeLog() { // jQuery.min
-  return get('fsh_seLog').then(gotLog);
+export async function getFshSeLog() {
+  const data = await get('fsh_seLog');
+  gotLog(data);
 }
 
-export function seLog() { // jQuery.min
-  getFshSeLog().then(setupBackgroundCheck);
+export async function seLog() {
+  await getFshSeLog();
+  setupBackgroundCheck();
 }
