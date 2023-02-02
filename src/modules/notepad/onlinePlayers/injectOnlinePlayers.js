@@ -1,4 +1,5 @@
 import onlinePlayersPage from '../../ajax/onlinePlayersPage';
+import all from '../../common/all';
 import idHandler from '../../common/idHandler';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
@@ -69,9 +70,11 @@ function getLastPage(input) {
 
 function getOtherPages(callback, input) {
   lastPage = getLastPage(input);
-  for (let i = 2; i <= lastPage; i += 1) {
-    onlinePlayersPage(i).then(callback);
-  }
+  const prm = Array(lastPage - 1).fill(1).map(async (e, i) => {
+    const data = await onlinePlayersPage(i + 2);
+    callback(data);
+  });
+  return all(prm);
 }
 
 function updateStatus(text) {
@@ -90,11 +93,12 @@ function getOnlinePlayers(data) { // Bad jQuery
   checkLastPage();
 }
 
-function refreshEvt() { // Bad jQuery
+async function refreshEvt() { // Bad jQuery
   $('#fshRefresh', context).hide();
   onlinePages = 0;
   onlinePlayers = {};
-  onlinePlayersPage(1).then(getOnlinePlayers);
+  const data = await onlinePlayersPage(1);
+  getOnlinePlayers(data);
   setValue('lastOnlineCheck', now());
   updateStatus('Parsing online players...');
 }
@@ -104,18 +108,20 @@ const idHdl = [
   ['fshReset', () => resetEvt(context)],
 ];
 
-function injectOnlinePlayersNew() { // jQuery
+async function injectOnlinePlayersNew() { // jQuery
   context.html(
     `<span><b>Online Players</b></span>${doRefreshButton()
     }<div id="fshOutput"></div>`,
   );
-  get('fsh_onlinePlayers').then(gotOnlinePlayers);
+  const data = await get('fsh_onlinePlayers');
+  gotOnlinePlayers(data);
   onclick(context[0], idHandler(idHdl));
   on(context[0], 'keyup', changeLvl);
 }
 
-export default function injectOnlinePlayers(content) { // jQuery
+export default async function injectOnlinePlayers(content) { // jQuery
   if (jQueryNotPresent()) { return; }
   context = content ? $(content) : $('#pCC');
-  loadDataTables().then(injectOnlinePlayersNew);
+  await loadDataTables();
+  injectOnlinePlayersNew();
 }
