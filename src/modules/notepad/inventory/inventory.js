@@ -1,6 +1,5 @@
 import './inventory.css';
 import getMembrList from '../../ajax/getMembrList';
-import allthen from '../../common/allthen';
 import currentGuildId from '../../common/currentGuildId';
 import entries from '../../common/entries';
 import executeAll from '../../common/executeAll';
@@ -76,11 +75,16 @@ function asyncCall() {
   task(3, getInvMan);
 }
 
-function syncInvMan() {
-  const prm = [loadDataTables(), buildInv()];
-  if (calf.subcmd === 'guildinvmgr') prm.push(getMembrList(false).then(rekeyMembrList));
-  prm.push(get(`fsh_${calf.subcmd}`).then(extendOptions));
-  allthen(prm, asyncCall);
+async function syncInvMan() {
+  await loadDataTables();
+  await buildInv();
+  if (calf.subcmd === 'guildinvmgr') {
+    await getMembrList(false);
+    rekeyMembrList();
+  }
+  const data = await get(`fsh_${calf.subcmd}`);
+  extendOptions(data);
+  asyncCall();
 }
 
 export default function inventory() {

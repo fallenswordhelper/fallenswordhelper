@@ -186,9 +186,10 @@ function gotOtherPages() {
   buildTable();
 }
 
-function processFirstPage(data) {
+async function processFirstPage(data) {
   processPage(data);
-  getOtherPages().then(gotOtherPages);
+  await getOtherPages();
+  gotOtherPages();
 }
 
 function toggle(item, hide, r) {
@@ -230,14 +231,15 @@ function selectNone() {
   tmpGuildLog.forEach(doHide);
 }
 
-function refresh() {
+async function refresh() {
   options.log = false;
   storeOptions();
   setText('Loading Page 1 ...', fshOutput);
   tmpGuildLog = [];
   completeReload = true;
   setInnerHtml('', getElementById('fshInjectHere'));
-  getGuildLogPage(1).then(processFirstPage);
+  const data = await getGuildLogPage(1);
+  processFirstPage(data);
 }
 
 function guildLogEvents() {
