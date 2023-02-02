@@ -9,7 +9,6 @@ function cacheResult(json) {
   if (!badData(json)) {
     creatureCache.push(json);
   }
-  return json;
 }
 
 function thisMob(id, el) {
@@ -24,15 +23,17 @@ function fromCache(cached) {
   }));
 }
 
-export default function getCreatureStats(id, passback) {
+export default async function getCreatureStats(id, passback) {
   const cached = creatureCache.find(partial(thisMob, id));
   if (cached) {
     return fromCache(cached);
   }
-  return fetchdata({
+  const json = await fetchdata({
     a: 1,
     d: 0,
     id,
     passback,
-  }).then(cacheResult);
+  });
+  cacheResult(json);
+  return json;
 }

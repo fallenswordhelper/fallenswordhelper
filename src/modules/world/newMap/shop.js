@@ -1,5 +1,5 @@
 import fetchdata from '../../ajax/fetchdata';
-import allthen from '../../common/allthen';
+import all from '../../common/all';
 import createButton from '../../common/cElement/createButton';
 import createDiv from '../../common/cElement/createDiv';
 import createInput from '../../common/cElement/createInput';
@@ -19,16 +19,13 @@ let fshDiv = 0;
 let numInput = 0;
 let resultDiv = 0;
 
-function quickBuy() {
-  return fetchdata({
+async function quickBuy() {
+  const data = await fetchdata({
     a: 14,
     d: 0,
     id: shoppingData.id,
     item_id: shoppingData.itemId,
   });
-}
-
-function quickDone(data) {
   const resp = data.response.response;
   const rmsg = data.response.msg;
   let msg = rmsg;
@@ -52,14 +49,12 @@ function normalBuy() {
   jDialog.close();
 }
 
-function qBuy() {
+async function qBuy() {
   const theValue = testQuant(numInput.value);
   if (!theValue) { return; }
-  const prm = [];
-  for (let i = 1; i < theValue; i += 1) {
-    prm.push(quickBuy().then(quickDone));
-  }
-  allthen(prm, normalBuy);
+
+  await all(Array(theValue - 1).fill(1).map(quickBuy));
+  normalBuy();
 }
 
 function injectQuickBuy() {
