@@ -5,7 +5,7 @@
   "scripts": {
     "prebuild": "npm run test",
     "build": "npm run esbuild",
-    "postbuild": "npm run sourcemapPathTransform",
+    "cleandev": "node scripts/cleandev.js",
     "esbuild": "node scripts/esbuild.js",
     "esdev": "node scripts/esdev.js",
     "eslint": "eslint . --cache",
@@ -14,9 +14,8 @@
     "patch": "npm --no-git-tag-version version patch",
     "prepare": "husky install",
     "silence": "npm config set loglevel silent",
-    "sourcemapPathTransform": "node scripts/sourcemapPathTransform.js",
     "test": "npm run eslint",
-    "watch": "node scripts/esserve.mjs",
+    "watch": "node scripts/esserve.js",
     "ws": "ws"
   },
   "repository": {
@@ -40,9 +39,9 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-svelte3": "^4.0.0",
+    "fast-glob": "^3.2.12",
     "husky": "^8.0.3",
-    "local-web-server": "^5.2.1",
-    "tiny-glob": "^0.2.9"
+    "local-web-server": "^5.2.1"
   },
   "dependencies": {
     "css-tooltip": "^0.3.4",
@@ -51,5 +50,6 @@
     "smart-table-vanilla": "^0.2.0",
     "svelte": "^3.55.1",
     "svelte-virtual-scroll-list": "^1.1.0"
-  }
+  },
+  "type": "module"
 }

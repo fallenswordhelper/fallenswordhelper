@@ -1,6 +1,6 @@
 ---
 parserOptions:
-  ecmaVersion: 2020
+  ecmaVersion: latest
   sourceType: module
 plugins:
   - 'svelte3'
@@ -15,10 +15,19 @@ overrides:
       import/prefer-default-export: off
   - files:
     - "scripts/*.js"
-    - "scripts/*.mjs"
     rules:
-      strict: "off"
-      no-console: "off"
+      import/extensions:
+        - error
+        - ignorePackages
+        - js: always
+      no-console: off
+  - files:
+    - "lws.config.js"
+    rules:
+      import/extensions:
+        - error
+        - ignorePackages
+        - js: always
 extends:
   - 'airbnb-base'
 globals:
