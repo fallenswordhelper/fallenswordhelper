@@ -1,7 +1,6 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
-import allthen from '../../common/allthen';
+import all from '../../common/all';
 import infoBoxFrom from '../../common/InfoBoxFrom';
-import partial from '../../common/partial';
 
 function ajaxResult(componentId, html) {
   const info = infoBoxFrom(html);
@@ -10,12 +9,13 @@ function ajaxResult(componentId, html) {
   return { r, m: info, c: componentId };
 }
 
-function destroyComponent(componentId) {
-  return indexAjaxData({
+async function destroyComponent(componentId) {
+  const html = await indexAjaxData({
     cmd: 'profile',
     subcmd: 'destroycomponent',
     component_id: componentId,
-  }).then(partial(ajaxResult, componentId));
+  });
+  return ajaxResult(componentId, html);
 }
 
 function formatResults(resultAry) {
@@ -30,6 +30,7 @@ function formatResults(resultAry) {
   return { e: { message: resultAry[0].m }, s: false };
 }
 
-export default function dropComponent(componentIdAry) {
-  return allthen(componentIdAry.map(destroyComponent), formatResults);
+export default async function dropComponent(componentIdAry) {
+  const resultAry = await all(componentIdAry.map(destroyComponent));
+  return formatResults(resultAry);
 }

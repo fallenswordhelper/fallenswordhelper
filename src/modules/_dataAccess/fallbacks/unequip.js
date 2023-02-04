@@ -7,10 +7,11 @@ function formatResults(html) {
   return { e: { message: info }, s: false };
 }
 
-export default function unequip(item) {
-  return indexAjaxData({
+export default async function unequip(item) {
+  const data = await indexAjaxData({
     cmd: 'profile',
     subcmd: 'unequipitem',
     inventory_id: item,
-  }).then(formatResults);
+  });
+  return formatResults(data);
 }
