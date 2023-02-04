@@ -26,10 +26,11 @@ function storeFSBox(_boxList) {
   set('fsh_fsboxcontent', boxList);
 }
 
-function storeMsg(nodediv) {
+async function storeMsg(nodediv) {
   let playerName = getElementsByTagName('a', nodediv);
   if (playerName.length === 0) { return; }
-  get('fsh_fsboxcontent').then(storeFSBox);
+  const boxList = await get('fsh_fsboxcontent');
+  storeFSBox(boxList);
   playerName = getText(playerName[0]);
   insertHtmlBeforeEnd(
     nodediv,

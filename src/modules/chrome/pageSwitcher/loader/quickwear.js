@@ -1,3 +1,4 @@
-export default function quickwear(i) {
-  import('../../../notepad/quickWear/quickWear').then((m) => m.default(i));
+export default async function quickwear(i) {
+  const m = await import('../../../notepad/quickWear/quickWear');
+  m.default(i);
 }
