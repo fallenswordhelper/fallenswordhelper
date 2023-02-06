@@ -1,5 +1,6 @@
 import './inventory.css';
 import getMembrList from '../../ajax/getMembrList';
+import all from '../../common/all';
 import currentGuildId from '../../common/currentGuildId';
 import entries from '../../common/entries';
 import executeAll from '../../common/executeAll';
@@ -14,7 +15,6 @@ import { time, timeEnd } from '../../support/debug';
 import { pcc } from '../../support/layout';
 import task from '../../support/task';
 import getValue from '../../system/getValue';
-import { get } from '../../system/idb';
 import { buildInv } from './buildInv';
 import clearButton from './clearButton';
 import decorate from './decorate';
@@ -36,7 +36,8 @@ function doSpinner() {
     oldActionSpinner}">&nbsp;Getting inventory data...</span>`, pcc());
 }
 
-function rekeyMembrList() {
+async function rekeyMembrList() {
+  await getMembrList(false);
   // Rekey membrList from names to id's
   calf.membrList = fromEntries(entries(calf.membrList).filter(notLastUpdate).map(rekey));
 }
@@ -76,14 +77,10 @@ function asyncCall() {
 }
 
 async function syncInvMan() {
-  await loadDataTables();
-  await buildInv();
-  if (calf.subcmd === 'guildinvmgr') {
-    await getMembrList(false);
-    rekeyMembrList();
-  }
-  const data = await get(`fsh_${calf.subcmd}`);
-  extendOptions(data);
+  const prm = [loadDataTables(), buildInv()];
+  if (calf.subcmd === 'guildinvmgr') prm.push(rekeyMembrList());
+  prm.push(extendOptions());
+  await all(prm);
   asyncCall();
 }
 
