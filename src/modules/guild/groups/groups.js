@@ -30,12 +30,12 @@ function fixTable() {
 }
 
 export default async function groups() {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) return;
   const joinAll = querySelector('#pCC input[value="Join All Available Groups"]');
-  if (!joinAll) { return; }
-  const membrList = await getMembrList(false);
-  doGroupPaint(membrList);
+  if (!joinAll) return;
+  const membrList = getMembrList(false);
   displayMinGroupLevel();
   groupButtons(joinAll);
   fixTable();
+  doGroupPaint(await membrList);
 }

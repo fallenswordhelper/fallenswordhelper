@@ -119,11 +119,11 @@ function gotActivity(data) {
 
 async function openDialog() {
   sendEvent('guildTracker', 'openDialog');
-  const data = await get('fsh_guildActivity');
-  gotActivity(data);
+  const data = get('fsh_guildActivity');
   calf.dialogIsClosed = isClosed;
   addOverlay();
   makePopup();
+  gotActivity(await data);
 }
 
 function injectTracker() {

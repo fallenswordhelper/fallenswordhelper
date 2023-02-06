@@ -28,14 +28,14 @@ function storeFSBox(_boxList) {
 
 async function storeMsg(nodediv) {
   let playerName = getElementsByTagName('a', nodediv);
-  if (playerName.length === 0) { return; }
-  const boxList = await get('fsh_fsboxcontent');
-  storeFSBox(boxList);
+  if (!playerName.length) return;
   playerName = getText(playerName[0]);
   insertHtmlBeforeEnd(
     nodediv,
     `<span class="fshPaleVioletRed">[ <a href="${doAddIgnore}${playerName}">Ignore</a> ]</span> `,
   );
+  const boxList = await get('fsh_fsboxcontent');
+  storeFSBox(boxList);
 }
 
 function openDialog() {
