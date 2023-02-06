@@ -11,7 +11,7 @@ function backpackRemove(theBackpack, invId) {
   if (i !== -1) { theBackpack.srcData.splice(i, 1); }
 }
 
-function actionResult(theBackpack, result, target, invId, data) {
+function actionResult([theBackpack, result, target, invId, data]) {
   if (data.r !== 0) {
     target.remove();
     return;
@@ -29,7 +29,7 @@ async function fastAction(theBackpack, evt, action, result) {
   target.blur();
   target.className = 'fastAction fshBl fshSpinner fshSpinner12';
   const data = await action(invId);
-  actionResult(theBackpack, result, target, invId, data);
+  actionResult([theBackpack, result, target, invId, data]);
 }
 
 export default function fastEvent(theBackpack, evt) {
