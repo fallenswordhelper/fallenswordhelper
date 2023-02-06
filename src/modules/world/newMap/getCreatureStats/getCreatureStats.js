@@ -6,14 +6,10 @@ import badData from '../badData';
 const creatureCache = [];
 
 function cacheResult(json) {
-  if (!badData(json)) {
-    creatureCache.push(json);
-  }
+  if (!badData(json)) creatureCache.push(json);
 }
 
-function thisMob(id, el) {
-  return id === Number(el.response.data.id);
-}
+const thisMob = (id, el) => id === Number(el.response.data.id);
 
 function nextTick(resolve, cached) { resolve(cached); }
 
@@ -25,9 +21,7 @@ function fromCache(cached) {
 
 export default async function getCreatureStats(id, passback) {
   const cached = creatureCache.find(partial(thisMob, id));
-  if (cached) {
-    return fromCache(cached);
-  }
+  if (cached) return fromCache(cached);
   const json = await fetchdata({
     a: 1,
     d: 0,

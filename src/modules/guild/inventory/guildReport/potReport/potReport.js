@@ -150,7 +150,8 @@ function gotMap(potObj, data) {
   buildPanels(potOpts, potObj);
 }
 
-export default function potReport(potObj) {
-  if (!pcc()) { return; }
-  get(storeMap).then(partial(gotMap, potObj));
+export default async function potReport(potObj) {
+  if (!pcc()) return;
+  const json = await get(storeMap);
+  gotMap(potObj, json);
 }
