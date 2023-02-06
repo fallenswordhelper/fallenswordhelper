@@ -55,38 +55,37 @@ function prepareLayout() {
   ]);
 }
 
-function doInventory() {
+function doInventory(reset) {
   prepareLayout();
   const fshInv = doTable();
   eventHandlers(fshInv);
-  // eslint-disable-next-line no-use-before-define
-  $('#fshRefresh').on('click', inventory);
+  $('#fshRefresh').on('click', reset);
   clearButton(fshInv);
   recallAll();
 }
 
-function getInvMan() {
+function getInvMan(reset) {
   const betaOptIn = getValue('betaOptIn');
   if (betaOptIn) time('inventory.getInvMan'); // Timing output
-  doInventory();
+  doInventory(reset);
   if (betaOptIn) timeEnd('inventory.getInvMan'); // Timing output
 }
 
-function asyncCall() {
-  task(3, getInvMan);
+function asyncCall(reset) {
+  task(3, getInvMan, [reset]);
 }
 
-async function syncInvMan() {
+async function syncInvMan(reset) {
   const prm = [loadDataTables(), buildInv()];
   if (calf.subcmd === 'guildinvmgr') prm.push(rekeyMembrList());
   prm.push(extendOptions());
   await all(prm);
-  asyncCall();
+  asyncCall(reset);
 }
 
 export default function inventory() {
   if (jQueryNotPresent() || !pcc()) return;
   if (calf.subcmd === 'guildinvmgr' && !currentGuildId()) return;
   doSpinner();
-  syncInvMan();
+  syncInvMan(inventory);
 }
