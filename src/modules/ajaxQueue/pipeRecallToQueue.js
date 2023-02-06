@@ -26,7 +26,9 @@ async function recallItemStatus(action, data) {
   return data;
 }
 
-export default async function pipeRecallToQueue(invId, playerId, mode, action) {
+export default async function pipeRecallToQueue([invId, playerId, mode, action, prm]) {
+  // You have to chain them because they could be modifying the backpack
+  await prm;
   const json = await recallItem(invId, playerId, mode);
   errorDialog(json);
   return recallItemStatus(action, json);

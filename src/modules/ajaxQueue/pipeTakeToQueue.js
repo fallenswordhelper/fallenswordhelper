@@ -21,7 +21,9 @@ function takeItemStatus(action, data) {
   return data;
 }
 
-export default async function pipeTakeToQueue(invId, action) {
+export default async function pipeTakeToQueue(invId, action, prm) {
+  // You have to chain them because they could be modifying the backpack
+  await prm;
   const json = await takeItem(invId);
   return takeItemStatus(action, json);
 }
