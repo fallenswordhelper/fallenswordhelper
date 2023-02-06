@@ -1,4 +1,4 @@
 export default async function injectFindOther(i) {
-  const m = await import('../../../notepad/findBuffs/findBuffs');
-  m.injectFindOther(i);
+  const module = await import('../../../notepad/findBuffs/findBuffs');
+  module.injectFindOther(i);
 }

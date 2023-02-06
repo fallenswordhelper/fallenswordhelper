@@ -3,7 +3,7 @@ import calf from '../../../support/calf';
 
 export default async function seTracker() {
   if (jQueryPresent() && calf.enableSeTracker && calf.cmd !== 'superelite') {
-    const m = await import('../../../seLog/seLog');
-    m.seLog();
+    const module = await import('../../../seLog/seLog');
+    module.seLog();
   }
 }
