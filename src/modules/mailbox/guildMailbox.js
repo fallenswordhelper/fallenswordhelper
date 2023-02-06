@@ -23,7 +23,7 @@ function translateReturnInfo(data) {
 async function guildMailboxTake(href) {
   const data = await retryAjax(href);
   const returnInfo = translateReturnInfo(data);
-  dialog(returnInfo);
+  return dialog(returnInfo);
 }
 
 function takeResult(target, data) {
