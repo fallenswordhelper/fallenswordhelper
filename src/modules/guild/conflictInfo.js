@@ -60,7 +60,7 @@ function gotConflictInfo(callback, responseText) { // Legacy
   }
 }
 
-export default async function conflictInfo(leftHandSideColumnTable) { // jQuery.min
+export default async function conflictInfo(leftHandSideColumnTable) {
   const [statCtrl] = leftHandSideColumnTable.rows[6].cells[0].children;
   if (statCtrl) {
     const responseText = await conflicts(1);

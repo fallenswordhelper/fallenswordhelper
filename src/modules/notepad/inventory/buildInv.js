@@ -24,9 +24,8 @@ async function doInventory() {
 const composedPot = (el) => el.t === 15;
 
 function getComposedFromBp(data) {
-  if (!isArray(data?.r?.inventories)) { return; }
-  composed = Array.prototype.concat.apply([], data.r.inventories.map((el) => el.items))
-    .filter(composedPot);
+  if (!isArray(data?.r?.inventories)) return;
+  composed = data?.r?.inventories.flatMap((el) => el.items).filter(composedPot);
 }
 
 async function doComposedFromBp() {
@@ -35,7 +34,7 @@ async function doComposedFromBp() {
 }
 
 function getComposedFromGs(data) {
-  if (!isArray(data.r)) { return; }
+  if (!isArray(data.r)) return;
   composed = composed.concat(data.r.filter(composedPot));
 }
 

@@ -64,9 +64,9 @@ function makeBuffArray(player) {
 export default async function addBuffLevels(evt) {
   const player = evt.target;
   if (player.tagName !== 'H1') { return; }
-  const data = await getProfile(getText(player));
-  addStatsQuickBuff(data);
+  const data = getProfile(getText(player));
   const playerData = makeBuffArray(player);
   querySelectorArray('#buff-outer input[name]')
     .forEach(partial(hazBuff, playerData));
+  addStatsQuickBuff(await data);
 }

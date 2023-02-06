@@ -16,7 +16,7 @@ function returnAdvisorPage(list, e, response) {
   return response.r;
 }
 
-async function getAdvisorPage(list, e) { // jQuery.min
+async function getAdvisorPage(list, e) {
   const response = await daAdvisor(e);
   return returnAdvisorPage(list, e, response);
 }
@@ -91,7 +91,7 @@ async function injectAdvisor(list) {
   addAdvisorPages(list, args);
 }
 
-export default function injectAdvisorWeekly(list) { // jQuery
+export default function injectAdvisorWeekly(list) {
   const betaOptIn = getValue('betaOptIn');
   if (betaOptIn) { //  Timing output
     time('guildAdvisor.injectAdvisorWeekly');

@@ -9,6 +9,5 @@ export default async function takeItem(invId) {
     guildstore_id: invId,
     ajax: 1,
   });
-  dialog(response);
-  return response;
+  return dialog(response);
 }

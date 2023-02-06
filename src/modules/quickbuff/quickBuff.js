@@ -20,12 +20,11 @@ function setupEventHandlers() {
   onclick(getElementById('players'), addBuffLevels);
 }
 
-export default async function quickBuff() { // jQuery.min
-  if (jQueryNotPresent()) { return; }
+export default async function quickBuff() {
+  if (jQueryNotPresent()) return;
   const quickbuffDiv = getElementById('quickbuff');
-  if (!quickbuffDiv) { return; }
-  const responseText = await getProfile(window.self);
-  getSustain(responseText);
+  if (!quickbuffDiv) return;
+  const responseText = getProfile(window.self);
   insertHtmlAfterEnd(quickbuffDiv.children[0], quickBuffHeader);
   executeAll([
     doLabels,
@@ -35,4 +34,5 @@ export default async function quickBuff() { // jQuery.min
     firstPlayerStats,
     quickbuffSort,
   ]);
+  getSustain(await responseText);
 }

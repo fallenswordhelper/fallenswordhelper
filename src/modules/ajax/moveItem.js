@@ -10,6 +10,5 @@ export default async function moveItem(invIdList, folderId) {
     folder_id: folderId,
     ajax: 1,
   });
-  dialog(response);
-  return response;
+  return dialog(response);
 }

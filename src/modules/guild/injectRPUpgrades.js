@@ -34,7 +34,7 @@ function parseProfile(data) {
   }
 }
 
-export default async function injectRPUpgrades() { // jQuery.min
+export default async function injectRPUpgrades() {
   if (jQueryNotPresent()) { return; }
   const data = await myStats(true);
   parseProfile(data);

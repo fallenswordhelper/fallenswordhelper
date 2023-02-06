@@ -97,10 +97,10 @@ async function refreshEvt() { // Bad jQuery
   $('#fshRefresh', context).hide();
   onlinePages = 0;
   onlinePlayers = {};
-  const data = await onlinePlayersPage(1);
-  getOnlinePlayers(data);
+  const prm = onlinePlayersPage(1);
   setValue('lastOnlineCheck', now());
   updateStatus('Parsing online players...');
+  getOnlinePlayers(await prm);
 }
 
 const idHdl = [
