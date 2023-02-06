@@ -14,6 +14,7 @@ import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import regExpExec from '../../common/regExpExec';
+import remainingPages from '../../common/remainingPages';
 import selfIdIs from '../../common/selfIdIs';
 import toggleForce from '../../common/toggleForce';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -102,10 +103,7 @@ function useCache(e) { tmpGuildLog.push([0].concat(e)); }
 function getOtherPages() {
   let prm = [];
   if (completeReload) {
-    prm = Array(maxPage - 1).fill(1).map(async (_v, i) => {
-      const log = await getGuildLogPage(i + 2);
-      processPage(log);
-    });
+    prm = remainingPages(maxPage, getGuildLogPage).map(async (log) => processPage(await log));
   } else {
     options.log.forEach(useCache);
   }

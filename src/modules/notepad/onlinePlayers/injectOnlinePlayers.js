@@ -7,6 +7,7 @@ import on from '../../common/on';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import regExpGroups from '../../common/regExpGroups';
+import remainingPages from '../../common/remainingPages';
 import { now } from '../../support/now';
 import createDocument from '../../system/createDocument';
 import { get, set } from '../../system/idb';
@@ -23,7 +24,7 @@ let onlinePlayers = 0;
 let onlinePages = 0;
 let lastPage = 0;
 
-function gotOnlinePlayers(value) { // jQuery
+function gotOnlinePlayers(value) {
   onlinePlayers = value || {};
   filterHeaderOnlinePlayers(context);
   doTable(context, buildOnlinePlayerData(onlinePlayers));
@@ -70,10 +71,7 @@ function getLastPage(input) {
 
 function getOtherPages(callback, input) {
   lastPage = getLastPage(input);
-  const prm = Array(lastPage - 1).fill(1).map(async (e, i) => {
-    const data = await onlinePlayersPage(i + 2);
-    callback(data);
-  });
+  const prm = remainingPages(lastPage, onlinePlayersPage).map(async (data) => callback(await data));
   return all(prm);
 }
 
@@ -120,7 +118,7 @@ async function injectOnlinePlayersNew() { // jQuery
 }
 
 export default async function injectOnlinePlayers(content) { // jQuery
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) return;
   context = content ? $(content) : $('#pCC');
   await loadDataTables();
   injectOnlinePlayersNew();

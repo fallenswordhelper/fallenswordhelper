@@ -7,6 +7,7 @@ import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';
+import remainingPages from '../../common/remainingPages';
 import setText from '../../dom/setText';
 import { defShopPrompt } from '../../support/constants';
 import addCommas from '../../system/addCommas';
@@ -35,8 +36,8 @@ async function quickBuy() {
       msg = rmsg.substring(0, firstTag);
     }
   } else {
-    msg = `You purchased ${data.response.data.name
-    } for ${addCommas(data.response.data.cost)} gold.`;
+    msg = `You purchased ${data.response.data.name} for ${
+      addCommas(data.response.data.cost)} gold.`;
   }
   insertHtmlBeforeEnd(resultDiv, `${msg}<br>`);
 }
@@ -51,9 +52,8 @@ function normalBuy() {
 
 async function qBuy() {
   const theValue = testQuant(numInput.value);
-  if (!theValue) { return; }
-
-  await all(Array(theValue - 1).fill(1).map(quickBuy));
+  if (!theValue) return;
+  await all(remainingPages(theValue, quickBuy));
   normalBuy();
 }
 
