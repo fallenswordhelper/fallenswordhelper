@@ -14,6 +14,7 @@ import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import regExpExec from '../../common/regExpExec';
+import remainingPages from '../../common/remainingPages';
 import selfIdIs from '../../common/selfIdIs';
 import toggleForce from '../../common/toggleForce';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -49,7 +50,7 @@ function updatePages(pageInput) {
   currPage = Number(pageInput.value);
   const [matches] = regExpExec(/\d+/, getText(pageInput.parentNode));
   lastPage = Number(matches);
-  if (currPage === 1) { maxPage = Math.min(lastPage, maxPagesToFetch); }
+  if (currPage === 1) maxPage = Math.min(lastPage, maxPagesToFetch);
   setText(`Loading ${currPage} of ${maxPage}...`, fshOutput);
 }
 
@@ -89,7 +90,7 @@ function getTableList(tableList) {
 
 function parseTable() {
   const tableList = getElementsByClassName('width_full', doc);
-  if (tableList.length === 1) { getTableList(tableList); }
+  if (tableList.length === 1) getTableList(tableList);
 }
 
 function processPage(data) {
@@ -100,11 +101,9 @@ function processPage(data) {
 function useCache(e) { tmpGuildLog.push([0].concat(e)); }
 
 function getOtherPages() {
-  const prm = [];
+  let prm = [];
   if (completeReload) {
-    for (let i = 2; i <= maxPage; i += 1) {
-      prm.push(getGuildLogPage(i).then(processPage));
-    }
+    prm = remainingPages(maxPage, getGuildLogPage).map(async (log) => processPage(await log));
   } else {
     options.log.forEach(useCache);
   }
@@ -113,9 +112,9 @@ function getOtherPages() {
 
 function storeOptions() { set('fsh_guildLog', options); }
 
-function notThisMinute(nowUtc, ary) { return ary[1] !== nowUtc; }
+const notThisMinute = (nowUtc, ary) => ary[1] !== nowUtc;
 
-function cacheValues(ary) { return ary.slice(1, 5); }
+const cacheValues = (ary) => ary.slice(1, 5);
 
 function updateOptionsLog() {
   // Don't cache current minute as it may be incomplete
@@ -134,7 +133,7 @@ function makeCell(row, html) {
 function dataRow(r) {
   const myRow = myTable.insertRow(-1);
   r.push(myRow);
-  if (!options.checks[r[4]]) { myRow.className = 'fshHide'; }
+  if (!options.checks[r[4]]) myRow.className = 'fshHide';
   makeCell(myRow, '<i class="fas fa-user-friends" style="color: rgb(122,95,46);"></i>');
   makeCell(myRow, `<nobr>${r[2]}</nobr>`);
   makeCell(myRow, r[3]);
@@ -143,7 +142,7 @@ function dataRow(r) {
 function separatorRow(r) {
   const sepRow = myTable.insertRow(-1);
   r.push(sepRow);
-  if (!options.checks[r[4]]) { sepRow.className = 'fshHide'; }
+  if (!options.checks[r[4]]) sepRow.className = 'fshHide';
   const sep = sepRow.insertCell(-1);
   sep.className = 'divider';
   sep.colSpan = 3;
@@ -167,9 +166,8 @@ function buildTable() {
   guildGroupCombat();
 }
 
-function doChecked(el) {
-  // eslint-disable-next-line no-param-reassign
-  el.checked = options.checks[el.getAttribute('item')];
+function doChecked(ctx) {
+  ctx.checked = options.checks[ctx.getAttribute('item')];
 }
 
 function setChecks() {
@@ -177,7 +175,7 @@ function setChecks() {
   storeOptions();
 }
 
-function byFirstElement(a, b) { return a[0] - b[0]; }
+const byFirstElement = (a, b) => a[0] - b[0];
 
 function gotOtherPages() {
   if (completeReload) { tmpGuildLog.sort(byFirstElement); }
@@ -186,13 +184,14 @@ function gotOtherPages() {
   buildTable();
 }
 
-function processFirstPage(data) {
+async function processFirstPage(data) {
   processPage(data);
-  getOtherPages().then(gotOtherPages);
+  await getOtherPages();
+  gotOtherPages();
 }
 
 function toggle(item, hide, r) {
-  if (r[4] !== item) { return; }
+  if (r[4] !== item) return;
   toggleForce(r[5], hide);
   toggleForce(r[6], hide);
 }
@@ -205,7 +204,7 @@ function toggleItem(target) {
 }
 
 function removeHide(el) {
-  if (el && el.classList) { el.classList.remove('fshHide'); }
+  if (el && el.classList) el.classList.remove('fshHide');
 }
 
 function show(r) {
@@ -230,14 +229,15 @@ function selectNone() {
   tmpGuildLog.forEach(doHide);
 }
 
-function refresh() {
+async function refresh() {
   options.log = false;
   storeOptions();
   setText('Loading Page 1 ...', fshOutput);
   tmpGuildLog = [];
   completeReload = true;
   setInnerHtml('', getElementById('fshInjectHere'));
-  getGuildLogPage(1).then(processFirstPage);
+  const data = await getGuildLogPage(1);
+  processFirstPage(data);
 }
 
 function guildLogEvents() {
@@ -279,8 +279,8 @@ function gotOptions(guildLog) {
   startProcessing();
 }
 
-export default async function newGuildLog() { // jQuery.min
-  if (jQueryNotPresent()) { return; }
+export default async function newGuildLog() {
+  if (jQueryNotPresent()) return;
   const logPrm = get('fsh_guildLog');
   hideGuildLogMsg();
   gotOptions(await logPrm);

@@ -15,7 +15,7 @@ function clearFsBox() {
   window.location.reload();
 }
 
-export default function injectFsBoxContent(injector) { // jQuery.min
+export default async function injectFsBoxContent(injector) {
   if (jQueryNotPresent()) { return; }
   const content = injector || pcc();
   setInnerHtml(makePageTemplate({
@@ -25,6 +25,7 @@ export default function injectFsBoxContent(injector) { // jQuery.min
     button: 'Clear',
     divId: 'fsboxdetail',
   }), content);
-  get('fsh_fsboxcontent').then(inject);
   onclick(getElementById('fsboxclear'), clearFsBox, true);
+  const txt = await get('fsh_fsboxcontent');
+  inject(txt);
 }

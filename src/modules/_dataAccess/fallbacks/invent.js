@@ -9,10 +9,11 @@ function formatResult(html) {
   return { e: { message: info }, s: false };
 }
 
-export default function invent(recipe) {
-  return indexAjaxData({
+export default async function invent(recipe) {
+  const html = await indexAjaxData({
     cmd: 'inventing',
     subcmd: 'doinvent',
     recipe_id: recipe,
-  }).then(formatResult);
+  });
+  return formatResult(html);
 }

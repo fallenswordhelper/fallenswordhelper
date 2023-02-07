@@ -120,12 +120,13 @@ function prepAry(data) {
   drawMobs();
 }
 
-function haveJquery(injector) { // jQuery.min
+async function haveJquery(injector) {
   content = injector || pcc();
-  if (!content) { return; }
-  get('fsh_monsterLog').then(prepAry);
+  if (!content) return;
+  const data = await get('fsh_monsterLog');
+  prepAry(data);
 }
 
 export default function monstorLog(injector) {
-  if (jQueryPresent()) { haveJquery(injector); }
+  if (jQueryPresent()) haveJquery(injector);
 }

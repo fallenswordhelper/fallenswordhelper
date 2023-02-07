@@ -14,6 +14,7 @@ function formatResponse(json) {
   return { r: { inventories: itemsByFolder }, s: true };
 }
 
-export default function fetchinv() {
-  return backpack().then(formatResponse);
+export default async function fetchinv() {
+  const json = await backpack();
+  return formatResponse(json);
 }

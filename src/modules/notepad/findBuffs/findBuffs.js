@@ -49,8 +49,9 @@ function gotProfile(j, html) {
   });
 }
 
-function getProfile(j) {
-  retryAjax(j).then(partial(gotProfile, j));
+async function getProfile(j) {
+  const html = await retryAjax(j);
+  gotProfile(j, html);
 }
 
 function findBuffsParsePlayersForBuffs() { // Legacy
@@ -110,10 +111,11 @@ function playerRows(doc) {
     + '(td>a[href*="cmd=profile&player_id="])').each(playerRow);
 }
 
-function nextPage(curPage, maxPage, callback) {
+async function nextPage(curPage, maxPage, callback) {
   const newPage = calcNextPage(curPage, maxPage);
   updateProgress(`Parsing online page ${curPage} ...`);
-  onlinePlayersPage(newPage).then(callback);
+  const html = await onlinePlayersPage(newPage);
+  callback(html);
 }
 
 function findBuffsParseOnlinePlayers(responseText) { // Legacy
@@ -131,11 +133,12 @@ function findBuffsParseOnlinePlayers(responseText) { // Legacy
   }
 }
 
-function findBuffsParseOnlinePlayersStart() { // Legacy
+async function findBuffsParseOnlinePlayersStart() { // Legacy
   // if option enabled then parse online players
   onlinePlayersSetting = parseInt(getElementById('onlinePlayers').value, 10);
   if (onlinePlayersSetting !== 0) {
-    onlinePlayersPage(1).then(findBuffsParseOnlinePlayers);
+    const html = await onlinePlayersPage(1);
+    findBuffsParseOnlinePlayers(html);
   } else {
     findBuffsParsePlayersForBuffs();
   }
@@ -171,7 +174,10 @@ function findBuffsParseProfilePage(responseText) {
 
 function addExtraProfile(el) { profilePagesToSearch.push(showPlayerUrl + el); }
 
-function getAlliesEnemies(el) { retryAjax(el).then(findBuffsParseProfilePage); }
+async function getAlliesEnemies(el) {
+  const html = await retryAjax(el);
+  findBuffsParseProfilePage(html);
+}
 
 function findBuffsParseProfilePageStart() { // Legacy
   // if option enabled then parse profiles

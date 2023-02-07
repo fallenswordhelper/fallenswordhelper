@@ -11,10 +11,11 @@ function asyncParse(data) {
   task(3, parseGoldUpgrades, [data]);
 }
 
-function checkLastUpgrade() {
+async function checkLastUpgrade() {
   const lastUpgradeCheck = getValue('lastUpgradeCheck');
   if (lastUpgradeCheck && now() < lastUpgradeCheck) { return; }
-  upgradesGold().then(asyncParse);
+  const data = await upgradesGold();
+  asyncParse(data);
 }
 
 function notUpgradesPage() {

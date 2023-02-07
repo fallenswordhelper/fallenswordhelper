@@ -41,10 +41,11 @@ function checkAppResponse(json) {
   if (json?.s) parseComposingApp(json.r);
 }
 
-function checkLastCompose() { // jQuery.min
+async function checkLastCompose() {
   const lastComposeCheck = getValue(defLastComposeCheck);
   if (lastComposeCheck && now() < lastComposeCheck) { return; }
-  daComposing().then(checkAppResponse);
+  const json = await daComposing();
+  checkAppResponse(json);
 }
 
 function composeAlert() {

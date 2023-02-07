@@ -2,7 +2,6 @@ import doSortParams from '../../common/doSortParams';
 import idHandler from '../../common/idHandler';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
-import partial from '../../common/partial';
 import { pcc } from '../../support/layout';
 import { get } from '../../system/idb';
 import stringSort from '../../system/stringSort';
@@ -25,9 +24,10 @@ const rmHdl = [
   ['sortName', sortRecipeTable],
 ];
 
-export default function recipeMgr(injector) { // jQuery.min
+export default async function recipeMgr(injector) {
   if (jQueryNotPresent()) { return; }
   const content = injector || pcc();
-  get('fsh_recipeBook').then(partial(gotRecipeBook, content));
+  const book = await get('fsh_recipeBook');
+  gotRecipeBook(content, book);
   onclick(content, idHandler(rmHdl));
 }

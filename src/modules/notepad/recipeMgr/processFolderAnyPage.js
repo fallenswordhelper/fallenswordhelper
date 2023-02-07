@@ -21,11 +21,11 @@ function makeRecipe(el) {
   };
 }
 
-function getRecipe(output, recipebook, el) {
+async function getRecipe(output, recipebook, el) {
   insertHtmlBeforeEnd(output, `Found blueprint "${getText(el)}".<br>`);
   const recipe = makeRecipe(el);
-  return retryAjax(el.href)
-    .then(partial(processRecipe, output, recipebook, recipe));
+  const html = await retryAjax(el.href);
+  processRecipe(output, recipebook, recipe, html);
 }
 
 export default function processFolderAnyPage(output, recipebook, html) { // jQuery.min

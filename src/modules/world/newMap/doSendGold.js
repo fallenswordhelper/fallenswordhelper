@@ -16,13 +16,14 @@ function doneSendGold(data) {
   }
 }
 
-export default function doSendGold() { // jQuery
+export default async function doSendGold() { // jQuery
   if (!getSendGoldOnWorld()) { return; }
-  indexAjaxData({
+  const data = await indexAjaxData({
     cmd: 'trade',
     subcmd: 'sendgold',
     xc: window.ajaxXC,
     target_username: $('#HelperSendTo').html(),
     gold_amount: $('#HelperSendAmt').html().replace(/[^\d]/g, ''),
-  }).then(doneSendGold);
+  });
+  doneSendGold(data);
 }

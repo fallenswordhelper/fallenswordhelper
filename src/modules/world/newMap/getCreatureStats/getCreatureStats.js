@@ -6,15 +6,10 @@ import badData from '../badData';
 const creatureCache = [];
 
 function cacheResult(json) {
-  if (!badData(json)) {
-    creatureCache.push(json);
-  }
-  return json;
+  if (!badData(json)) creatureCache.push(json);
 }
 
-function thisMob(id, el) {
-  return id === Number(el.response.data.id);
-}
+const thisMob = (id, el) => id === Number(el.response.data.id);
 
 function nextTick(resolve, cached) { resolve(cached); }
 
@@ -24,15 +19,15 @@ function fromCache(cached) {
   }));
 }
 
-export default function getCreatureStats(id, passback) {
+export default async function getCreatureStats(id, passback) {
   const cached = creatureCache.find(partial(thisMob, id));
-  if (cached) {
-    return fromCache(cached);
-  }
-  return fetchdata({
+  if (cached) return fromCache(cached);
+  const json = await fetchdata({
     a: 1,
     d: 0,
     id,
     passback,
-  }).then(cacheResult);
+  });
+  cacheResult(json);
+  return json;
 }

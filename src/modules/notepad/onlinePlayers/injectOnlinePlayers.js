@@ -1,4 +1,5 @@
 import onlinePlayersPage from '../../ajax/onlinePlayersPage';
+import all from '../../common/all';
 import idHandler from '../../common/idHandler';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
@@ -6,6 +7,7 @@ import on from '../../common/on';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import regExpGroups from '../../common/regExpGroups';
+import remainingPages from '../../common/remainingPages';
 import { now } from '../../support/now';
 import createDocument from '../../system/createDocument';
 import { get, set } from '../../system/idb';
@@ -22,7 +24,7 @@ let onlinePlayers = 0;
 let onlinePages = 0;
 let lastPage = 0;
 
-function gotOnlinePlayers(value) { // jQuery
+function gotOnlinePlayers(value) {
   onlinePlayers = value || {};
   filterHeaderOnlinePlayers(context);
   doTable(context, buildOnlinePlayerData(onlinePlayers));
@@ -69,9 +71,8 @@ function getLastPage(input) {
 
 function getOtherPages(callback, input) {
   lastPage = getLastPage(input);
-  for (let i = 2; i <= lastPage; i += 1) {
-    onlinePlayersPage(i).then(callback);
-  }
+  const prm = remainingPages(lastPage, onlinePlayersPage).map(async (data) => callback(await data));
+  return all(prm);
 }
 
 function updateStatus(text) {
@@ -90,13 +91,14 @@ function getOnlinePlayers(data) { // Bad jQuery
   checkLastPage();
 }
 
-function refreshEvt() { // Bad jQuery
+async function refreshEvt() { // Bad jQuery
   $('#fshRefresh', context).hide();
   onlinePages = 0;
   onlinePlayers = {};
-  onlinePlayersPage(1).then(getOnlinePlayers);
+  const prm = onlinePlayersPage(1);
   setValue('lastOnlineCheck', now());
   updateStatus('Parsing online players...');
+  getOnlinePlayers(await prm);
 }
 
 const idHdl = [
@@ -104,18 +106,20 @@ const idHdl = [
   ['fshReset', () => resetEvt(context)],
 ];
 
-function injectOnlinePlayersNew() { // jQuery
+async function injectOnlinePlayersNew() { // jQuery
   context.html(
     `<span><b>Online Players</b></span>${doRefreshButton()
     }<div id="fshOutput"></div>`,
   );
-  get('fsh_onlinePlayers').then(gotOnlinePlayers);
+  const data = await get('fsh_onlinePlayers');
+  gotOnlinePlayers(data);
   onclick(context[0], idHandler(idHdl));
   on(context[0], 'keyup', changeLvl);
 }
 
-export default function injectOnlinePlayers(content) { // jQuery
-  if (jQueryNotPresent()) { return; }
+export default async function injectOnlinePlayers(content) { // jQuery
+  if (jQueryNotPresent()) return;
   context = content ? $(content) : $('#pCC');
-  loadDataTables().then(injectOnlinePlayersNew);
+  await loadDataTables();
+  injectOnlinePlayersNew();
 }

@@ -85,6 +85,7 @@ function initLog(data) {
   monsterLog = data || {};
 }
 
-export function getMonsterPrefs() {
-  get('fsh_monsterLog').then(initLog);
+export async function getMonsterPrefs() {
+  const data = await get('fsh_monsterLog');
+  initLog(data);
 }

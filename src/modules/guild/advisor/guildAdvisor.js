@@ -76,18 +76,20 @@ function injectAdvisorDaily(list, membrList) {
   }
 }
 
-function switcher(list) {
+async function switcher(list) {
   if (calf.subcmd2 === 'weekly') {
     injectAdvisorWeekly(list);
   } else {
-    getMembrList(false).then(partial(injectAdvisorDaily, list));
+    const membrList = await getMembrList(false);
+    injectAdvisorDaily(list, membrList);
   }
 }
 
-export default function guildAdvisor() {
+export default async function guildAdvisor() {
   if (jQueryNotPresent()) { return; }
   const list = getElementsByTagName('table', pcc())[1];
   if (!list) { return; }
-  loadDataTables().then(() => switcher(list));
   interceptSubmit();
+  await loadDataTables();
+  switcher(list);
 }

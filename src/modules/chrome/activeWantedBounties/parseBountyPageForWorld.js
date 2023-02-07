@@ -29,13 +29,14 @@ function hazActiveBountyList(doc) {
   }
 }
 
-export default function parseBountyPageForWorld(details) {
+export default async function parseBountyPageForWorld(details) {
   const doc = createDocument(details);
   hazActiveBountyList(doc);
   if (calf.enableWantedList) {
     getWantedBountyList(doc);
     if (curPage < maxPage) {
-      bountyPage(curPage + 1).then(parseBountyPageForWorld);
+      const bountyList = await bountyPage(curPage + 1);
+      parseBountyPageForWorld(bountyList);
     } else {
       injectWantedList();
     }
