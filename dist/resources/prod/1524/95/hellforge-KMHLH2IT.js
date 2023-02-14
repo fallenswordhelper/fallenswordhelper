@@ -1,5 +1,0 @@
-import{a as n}from"./chunk-WKC6YNIN.js";import{a as r}from"./chunk-SIHGQP4D.js";import"./chunk-F65VVICY.js";import"./chunk-EB645W7R.js";import{a as i}from"./chunk-XVTH24AL.js";import"./chunk-5AWGL262.js";import{b as o}from"./chunk-FJXTYPNU.js";import{a as e}from"./chunk-RVP3BZF7.js";import"./chunk-HNXEOKKJ.js";import"./chunk-WLWXTJVR.js";import"./chunk-YYW2XVVC.js";import"./chunk-LGXHSUMA.js";import"./chunk-232WRRJZ.js";import"./chunk-OQC4RYIZ.js";import"./chunk-WGISVX7D.js";import"./chunk-PC7TOLHT.js";import"./chunk-NVWIQHSW.js";import"./chunk-AVWEVNGS.js";import"./chunk-6C22U5JX.js";import"./chunk-VSTJBSW7.js";import"./chunk-3DLQUZR2.js";import"./chunk-BUBKPU26.js";import"./chunk-4P22QABU.js";var f=({craft:t})=>t==="Perfect",l=({forge:t})=>t!==5,m=({inv_id:t})=>`div[id$="-highlight-${t}"] {
-  background-color: rgba(255, 255, 0, 0.3);
-}`,c=t=>n(t.filter(f).filter(l).map(m).join(`
-`));async function s(){let t=await r();t?.items&&i(o(),c(t.items))}function g(){e("hellforge-items")&&s()}export{g as default};
-//# sourceMappingURL=hellforge-KMHLH2IT.js.map
