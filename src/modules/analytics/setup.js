@@ -78,23 +78,13 @@ function analyticsSetup() {
   initSite();
 }
 
-function gtagPlayerId() {
-  const pid = playerId();
-  if (pid) gtag('config', 'G-14Y99WX8XL', { user_id: pid });
-}
-
 function gtagSetup() {
   loadScript('https://www.googletagmanager.com/gtag/js?id=G-14Y99WX8XL');
   window.dataLayer = window.dataLayer || [];
   // eslint-disable-next-line prefer-rest-params
   window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
   gtag('js', new Date());
-  gtag('config', 'G-14Y99WX8XL', {
-    app_name: 'fshApp',
-    app_version: `${calf.fshVer}(${calf.calfVer})`,
-    page_location: getPage(),
-  });
-  gtagPlayerId();
+  gtag('config', 'G-14Y99WX8XL');
 }
 
 export default function setup() {
