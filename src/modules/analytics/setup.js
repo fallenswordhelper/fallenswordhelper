@@ -86,7 +86,7 @@ function gtagSetup() {
     window.dataLayer.push(arguments); // skipcq: JS-0244
   };
   gtag('js', new Date());
-  gtag('config', 'G-14Y99WX8XL');
+  gtag('config', 'G-14Y99WX8XL', { send_page_view: false });
 }
 
 export default function setup() {
