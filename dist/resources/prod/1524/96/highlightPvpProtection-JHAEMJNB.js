@@ -1,2 +1,0 @@
-import{a as e}from"./chunk-S2OM6JJX.js";import"./chunk-X6TTU562.js";import{a as r}from"./chunk-DTVBVYDR.js";import"./chunk-NWPELAGL.js";import"./chunk-PG53AESD.js";import{F as o}from"./chunk-7FWLR7VA.js";function i(){let t=r(`#profileLeftColumn a[href="${o}"]`);t&&e(t.parentNode.nextSibling)!=="N/A"&&t.parentNode.parentNode.classList.add("fshPvpWarn")}export{i as default};
-//# sourceMappingURL=highlightPvpProtection-JHAEMJNB.js.map
