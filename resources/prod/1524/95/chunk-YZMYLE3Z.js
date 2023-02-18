@@ -1,2 +1,0 @@
-import{a as m}from"./chunk-RG4CE2ZN.js";import{a as i}from"./chunk-FYU6LCOJ.js";import{a as t}from"./chunk-KNMTH5FI.js";import{a as o}from"./chunk-EB645W7R.js";function n(e){return o({cmd:"profile",subcmd:"equipitem",inventory_id:e,ajax:1}).then(i)}function r(e){return e&&{...e,r:e.s?0:1}}function u(e){return t(e).then(m).then(r)}export{n as a,r as b,u as c};
-//# sourceMappingURL=chunk-YZMYLE3Z.js.map
