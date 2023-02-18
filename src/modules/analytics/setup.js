@@ -86,7 +86,13 @@ function gtagSetup() {
     window.dataLayer.push(arguments); // skipcq: JS-0244
   };
   gtag('js', new Date());
-  gtag('config', 'G-14Y99WX8XL', { send_page_view: false });
+  const pid = playerId();
+  gtag('config', 'G-14Y99WX8XL', {
+    app_name: 'fshApp',
+    app_version: `${calf.fshVer}(${calf.calfVer})`,
+    send_page_view: false,
+    ...(pid && { user_id: pid }),
+  });
 }
 
 export default function setup() {
