@@ -22,7 +22,6 @@ function ignore(ajaxErr) {
 
 const substrings = [
   'dynamically imported module',
-  'play() failed',
   'world.min.js',
 ];
 
