@@ -8,7 +8,7 @@ import getValue from '../system/getValue';
 async function msgSound() {
   const sound = new Audio(getValue('defaultMessageSound'));
   try {
-    sound.play();
+    await sound.play();
   } catch (err) {
     dynamicAlert('Message Sound Not Allowed');
   }
