@@ -20,11 +20,17 @@ function ignore(ajaxErr) {
     || ignoreResponse.some((substring) => ajaxErr.jqXhr.responseText.includes(substring));
 }
 
-const canSend = (stuff) => !stuff.message.includes('dynamically imported module');
+const substrings = [
+  'dynamically imported module',
+  'play() failed',
+  'world.min.js',
+];
+
+const canSend = (msg) => !substrings.some((ss) => msg.includes(ss));
 
 function handleMsgStack(type, stuff) {
   const msg = parseError(stuff);
-  if (canSend(stuff)) sendException(type + msg, true);
+  if (canSend(msg)) sendException(type + msg, true);
 }
 
 function handleError(type, stuff) {
