@@ -42,9 +42,11 @@ async function makeMouseOver(target, listItem) {
   sendEvent('NewMap', 'CreatureInfo');
   target.classList.add('fshTip');
   const tooltip = setQTip(target, 'Loading...');
+  const api = tooltip.qtip('api');
+  if (!api) return;
   const passback = getIndex(listItem);
   const creatureStats = await getCreatureStats(GameData.actions()[passback].data.id, passback);
-  displayJson(tooltip.qtip('api'), creatureStats);
+  displayJson(api, creatureStats);
 }
 
 function isViewCreature(target, listItem) {
