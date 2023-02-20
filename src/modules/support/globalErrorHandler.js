@@ -21,7 +21,11 @@ function ignore(ajaxErr) {
 }
 
 const substrings = [
+  'attackplayer.min.js',
   'dynamically imported module',
+  'fs.min.js',
+  'index.php?cmd=auctionhouse&subcmd=quickcreate',
+  'layerClick',
   'world.min.js',
 ];
 
