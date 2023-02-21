@@ -433,3 +433,47 @@ textarea {resize: none;}
   height: 420px;
   width: 600px;
 }
+
+/* tooltips */
+.fshTooltip {
+  border-bottom: 1px dotted black;
+  display: inline-block;
+  position: relative;
+}
+
+.fshTooltip .fshTooltipContent {
+  background-color: black;
+  border-radius: 6px;
+  bottom: 150%;
+  color: #fff;
+  left: 50%;
+  margin-left: -75px;
+  padding: 5px;
+  position: absolute;
+  text-align: left;
+  visibility: hidden;
+  width: max-content;
+  max-width: 400px;
+  z-index: 1;
+  white-space: normal;
+}
+
+.fshTooltip .fshTooltipContent::after {
+  border-color: black transparent transparent transparent;
+  border-style: solid;
+  border-width: 5px;
+  content: "";
+  left: 75px;
+  margin-left: -5px;
+  position: absolute;
+  top: 100%;
+}
+
+.fshTooltip:hover .fshTooltipContent {
+  visibility: visible;
+}
+
+.fshTooltiptitle {
+  color: #FFF380;
+  font-weight: bold;
+}

@@ -1,5 +1,4 @@
 <script>
-import '../tooltip/tooltip.css';
 import dynamicAlert from '../alert/dynamicAlert';
 import jsonStringify from '../common/jsonStringify';
 import playerLink from '../common/playerLink';

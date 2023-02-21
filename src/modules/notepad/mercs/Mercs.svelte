@@ -1,5 +1,4 @@
 <script>
-import '../../tooltip/tooltip.css';
 import sendEvent from '../../analytics/sendEvent';
 import accept from '../../app/guild/mercs/accept';
 import decline from '../../app/guild/mercs/decline';

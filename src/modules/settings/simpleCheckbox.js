@@ -1,16 +1,11 @@
 import './simpleCheckbox.css';
 import fallback from '../system/fallback';
-import tooltip from '../tooltip/tooltip';
 import isValueChecked from './isValueChecked';
 import networkIcon from './networkIcon';
 import mySimpleCheckboxes from './simple.json';
 
 export function helpLink(title, text) {
-  return tooltip(
-    '?',
-    text,
-    title,
-  ).outerHTML;
+  return `<div class="fshTooltip">?<div class="fshTooltipContent"><span class='fshHelpTitle'>${title}</span><br><br>${text}</div></div>`;
 }
 
 function hasNetwork(network) {

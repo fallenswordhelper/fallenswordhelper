@@ -1,5 +1,4 @@
 <script>
-import '../tooltip/tooltip.css';
 import FieldInput from './FieldInput.svelte';
 import networkIcon from './networkIcon';
 
