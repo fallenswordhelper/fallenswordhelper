@@ -1,6 +1,6 @@
 import daAdvisor from '../../_dataAccess/daAdvisor';
 import getMembrList from '../../ajax/getMembrList';
-import allthen from '../../common/allthen';
+import all from '../../common/all';
 import createTFoot from '../../common/cElement/createTFoot';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
@@ -16,8 +16,9 @@ function returnAdvisorPage(list, e, response) {
   return response.r;
 }
 
-function getAdvisorPage(list, e) { // jQuery.min
-  return daAdvisor(e).then(partial(returnAdvisorPage, list, e));
+async function getAdvisorPage(list, e) {
+  const response = await daAdvisor(e);
+  return returnAdvisorPage(list, e, response);
 }
 
 function addElements(ary, v, i) {
@@ -77,7 +78,7 @@ function addAdvisorPages(list, [membrList, ...args]) {
   injectTable(list, makeTfoot(added), added.map(partial(makeData, membrList)));
 }
 
-function injectAdvisor(list) {
+async function injectAdvisor(list) {
   setInnerHtml('<span class="fshCurveContainer fshFlex">'
     + '<span class="fshCurveEle fshCurveLbl fshOldSpinner"></span>'
     + '<span class="fshSpinnerMsg">&nbsp;Retrieving daily data ...</span>'
@@ -86,10 +87,11 @@ function injectAdvisor(list) {
   const prm = [getMembrList(false)]
     .concat([1, 2, 3, 4, 5, 6, 7, 8].map(partial(getAdvisorPage, list)));
 
-  allthen(prm, partial(addAdvisorPages, list));
+  const args = await all(prm);
+  addAdvisorPages(list, args);
 }
 
-export default function injectAdvisorWeekly(list) { // jQuery
+export default function injectAdvisorWeekly(list) {
   const betaOptIn = getValue('betaOptIn');
   if (betaOptIn) { //  Timing output
     time('guildAdvisor.injectAdvisorWeekly');

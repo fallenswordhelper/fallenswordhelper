@@ -95,10 +95,11 @@ function injectPref() {
   on(newCell, 'change', togglePref);
 }
 
-export default function superelite() {
+export default async function superelite() {
   if (jQueryNotPresent() || !pcc()) { return; }
   injectPref();
   if (calf.enableSeTracker) {
-    getFshSeLog().then(waitForLog);
+    await getFshSeLog();
+    waitForLog();
   }
 }

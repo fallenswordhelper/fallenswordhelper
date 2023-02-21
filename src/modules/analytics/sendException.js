@@ -11,8 +11,4 @@ export default function sendException(desc, fatal) {
     exDescription: desc,
     exFatal: fatal,
   });
-  gtag('event', 'exception', {
-    description: desc,
-    fatal,
-  });
 }

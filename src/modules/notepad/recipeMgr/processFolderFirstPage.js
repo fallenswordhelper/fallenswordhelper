@@ -28,9 +28,9 @@ function otherPages(doc) {
     .filter(notThisPage).map(pageNumber);
 }
 
-function getPage(thisFolder, bindFolderAnyPage, i) {
-  return retryAjax(`${thisFolder}&page=${i}`)
-    .then(bindFolderAnyPage);
+async function getPage(thisFolder, bindFolderAnyPage, i) {
+  const html = await retryAjax(`${thisFolder}&page=${i}`);
+  return bindFolderAnyPage(html);
 }
 
 function ajaxOtherPages(doc, thisFolder, bindFolderAnyPage) {

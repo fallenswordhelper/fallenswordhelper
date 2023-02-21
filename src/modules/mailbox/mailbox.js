@@ -109,8 +109,9 @@ function doneTake(takeResult, json) {
   if (isArray(json.r)) { takeSuccess(takeResult, json); }
 }
 
-function doTakeItem(takeResult, el) {
-  daMailboxTake(el).then(partial(doneTake, takeResult));
+async function doTakeItem(takeResult, el) {
+  const json = await daMailboxTake(el);
+  doneTake(takeResult, json);
 }
 
 function takeSimilar(itemList, takeResult, target) { // jQuery.min

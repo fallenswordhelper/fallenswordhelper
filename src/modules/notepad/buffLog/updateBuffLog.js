@@ -22,7 +22,8 @@ function buffResult(buffLog) {
   set(fshBuffLog, buffsAttempted.reverse().join('') + buffLog);
 }
 
-export default function updateBuffLog() {
-  if (!getValue('keepBuffLog')) { return; }
-  get(fshBuffLog).then(buffResult);
+export default async function updateBuffLog() {
+  if (!getValue('keepBuffLog')) return;
+  const json = await get(fshBuffLog);
+  buffResult(json);
 }

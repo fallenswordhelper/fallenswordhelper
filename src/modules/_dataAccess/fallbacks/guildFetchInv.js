@@ -15,9 +15,10 @@ function formatResponse(json) {
   return { r: json.map(updateType), s: true };
 }
 
-export default function guildFetchInv() {
-  return indexAjaxJson({
+export default async function guildFetchInv() {
+  const json = await indexAjaxJson({
     cmd: 'guild',
     subcmd: 'fetchinv',
-  }).then(formatResponse);
+  });
+  return formatResponse(json);
 }

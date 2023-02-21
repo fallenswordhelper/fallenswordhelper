@@ -9,7 +9,7 @@ let myFlags = 0;
 
 async function isOnLadder() {
   const response = await daSettingsView();
-  myFlags = response.r?.flags;
+  myFlags = response?.r?.flags;
   return myFlags?.[0];
 }
 

@@ -1,6 +1,5 @@
 import daScoutTower from '../../../_dataAccess/daScoutTower';
 import isArray from '../../../common/isArray';
-import partial from '../../../common/partial';
 import calf from '../../../support/calf';
 import { hasTitan, hideTitanDiv, setupTitanDiv } from './hasTitan';
 import processTitans from './processTitans';
@@ -27,8 +26,9 @@ function processScoutTower(ast, data) {
   }
 }
 
-function ajaxScoutTower() {
-  daScoutTower().then(partial(processScoutTower, ajaxScoutTower));
+async function ajaxScoutTower() {
+  const data = await daScoutTower();
+  processScoutTower(ajaxScoutTower, data);
 }
 
 export default function testDynamics(dynamic) {

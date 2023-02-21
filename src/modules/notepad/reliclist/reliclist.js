@@ -92,8 +92,9 @@ function processRelicList(thisRelicList) {
   setInnerHtml(makeTable(thisRelicList), pcc());
 }
 
-export default function reliclist() {
+export default async function reliclist() {
   if (!getValue('betaOptIn')) { return; }
   setInnerHtml('Loading...', pcc());
-  getRelicList().then(processRelicList);
+  const relics = await getRelicList();
+  processRelicList(relics);
 }

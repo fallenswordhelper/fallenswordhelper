@@ -1,5 +1,5 @@
 import indexAjaxData from '../ajax/indexAjaxData';
-import allthen from '../common/allthen';
+import all from '../common/all';
 import createSpan from '../common/cElement/createSpan';
 import clickThis from '../common/clickThis';
 import closestTr from '../common/closestTr';
@@ -31,11 +31,11 @@ function doCancel(ctx) {
   });
 }
 
-function cancelAllAH() {
+async function cancelAllAH() {
   const cancelButtons = getArrayByClassName('auctionCancel', getElementById('resultRows'));
   if (cancelButtons.length === 0) { return; }
-  const prm = cancelButtons.map(doCancel);
-  allthen(prm, doRefresh);
+  await all(cancelButtons.map(doCancel));
+  doRefresh();
 }
 
 function makeCancelAll() {

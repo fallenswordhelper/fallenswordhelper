@@ -7,7 +7,6 @@ import dialogMsg from '../../common/dialogMsg';
 import insertElement from '../../common/insertElement';
 import jsonParse from '../../common/jsonParse';
 import onclick from '../../common/onclick';
-import partial from '../../common/partial';
 import task from '../../support/task';
 import { set } from '../../system/idb';
 import { initTable } from './trackerTable';
@@ -38,11 +37,14 @@ function successMsg(newData) {
   initTable(newData.members);
 }
 
-function doSave() {
+async function doSave() {
   const newData = jsonParse(ioText.value);
-  set('fsh_guildActivity', newData)
-    .then(partial(successMsg, newData))
-    .catch(dialogMsg);
+  try {
+    await set('fsh_guildActivity', newData);
+    successMsg(newData);
+  } catch (e) {
+    dialogMsg(e);
+  }
 }
 
 function customButton(text, fn) {

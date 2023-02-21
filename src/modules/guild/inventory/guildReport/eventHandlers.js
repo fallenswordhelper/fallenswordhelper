@@ -41,9 +41,14 @@ function recallResult(action, theTd, data) {
   }
 }
 
-function doRecall(theTd, href, mode, action) {
-  queueRecallItem(itemId(href), regExpFirstCapture(playerIDRE, href), mode, action)
-    .then(partial(recallResult, action, theTd));
+async function doRecall(theTd, href, mode, action) {
+  const data = await queueRecallItem(
+    itemId(href),
+    regExpFirstCapture(playerIDRE, href),
+    mode,
+    action,
+  );
+  recallResult(action, theTd, data);
 }
 
 function recallTo(theTd, href, mode) {
@@ -60,10 +65,11 @@ function doFastGs(theTd, href) {
   recallTo(theTd, href, 1);
 }
 
-function doFastWear(theTd, href) {
+async function doFastWear(theTd, href) {
   sendEvent('GuildReport', 'Fast Wear');
   if (Number(regExpFirstCapture(playerIDRE, href)) === playerId()) {
-    equipItem(itemId(href)).then(partial(wornItem, theTd));
+    await equipItem(itemId(href));
+    wornItem(theTd);
   } else {
     doRecall(theTd, href, 0, 'wear');
   }

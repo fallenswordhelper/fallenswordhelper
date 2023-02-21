@@ -1,7 +1,6 @@
 import equipItem from '../ajax/equipItem';
 import takeItem from '../ajax/takeItem';
 import useItem from '../ajax/useItem';
-import partial from '../common/partial';
 import doAction from './doAction';
 
 function additionalAction(action, data) {
@@ -22,6 +21,9 @@ function takeItemStatus(action, data) {
   return data;
 }
 
-export default function pipeTakeToQueue(invId, action) {
-  return takeItem(invId).then(partial(takeItemStatus, action));
+export default async function pipeTakeToQueue(invId, action, prm) {
+  // You have to chain them because they could be modifying the backpack
+  await prm;
+  const json = await takeItem(invId);
+  return takeItemStatus(action, json);
 }

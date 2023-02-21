@@ -2,12 +2,11 @@ import equipItem from '../ajax/equipItem';
 import recallItem from '../ajax/recallItem';
 import useItem from '../ajax/useItem';
 import errorDialog from '../common/errorDialog';
-import partial from '../common/partial';
 import backpack from './backpack';
 import doAction from './doAction';
 
 function gotBackpack(action, data, bpData) {
-  // assuming backpack is successful...
+  if (!bpData) return;
   const lastBackpackItem = bpData.items[bpData.items.length - 1].a;
   if (action === 'wear') {
     return doAction(equipItem, lastBackpackItem, data);
@@ -19,14 +18,18 @@ function gotBackpack(action, data, bpData) {
   }
 }
 
-function recallItemStatus(action, data) {
+async function recallItemStatus(action, data) {
   if (data.r === 0 && action !== 'recall') {
-    return backpack().then(partial(gotBackpack, action, data));
+    const json = await backpack();
+    gotBackpack(action, data, json);
   }
   return data;
 }
 
-export default function pipeRecallToQueue(invId, playerId, mode, action) {
-  return recallItem(invId, playerId, mode).then(errorDialog)
-    .then(partial(recallItemStatus, action));
+export default async function pipeRecallToQueue([invId, playerId, mode, action, prm]) {
+  // You have to chain them because they could be modifying the backpack
+  await prm;
+  const json = await recallItem(invId, playerId, mode);
+  errorDialog(json);
+  return recallItemStatus(action, json);
 }

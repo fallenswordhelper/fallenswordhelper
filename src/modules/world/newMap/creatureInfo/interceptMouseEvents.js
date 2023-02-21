@@ -4,7 +4,6 @@ import getElementById from '../../../common/getElementById';
 import hasClass from '../../../common/hasClass';
 import hasClasses from '../../../common/hasClasses';
 import on from '../../../common/on';
-import partial from '../../../common/partial';
 import calf from '../../../support/calf';
 import getCreatureStats from '../getCreatureStats/getCreatureStats';
 import processMouseOver from './processMouseOver';
@@ -12,7 +11,7 @@ import processMouseOver from './processMouseOver';
 const creatureViewTests = ['verb', 'view', 'tip-static'];
 
 function setQTip(monster, qtipText) { // jQuery
-  $(monster).qtip({
+  return $(monster).qtip({
     overwrite: true,
     show: {
       event: 'mouseover',
@@ -39,17 +38,15 @@ function displayJson(api, data) {
   api.set('content.text', content);
 }
 
-function getJson(passback, _event, api) { // jQuery.min
-  getCreatureStats(GameData.actions()[passback].data.id, passback)
-    .then(partial(displayJson, api));
-  return 'Loading...';
-}
-
-function makeMouseOver(target, listItem) {
+async function makeMouseOver(target, listItem) {
   sendEvent('NewMap', 'CreatureInfo');
-  const passback = getIndex(listItem);
   target.classList.add('fshTip');
-  setQTip(target, partial(getJson, passback));
+  const tooltip = setQTip(target, 'Loading...');
+  const api = tooltip.qtip('api');
+  if (!api) return;
+  const passback = getIndex(listItem);
+  const creatureStats = await getCreatureStats(GameData.actions()[passback].data.id, passback);
+  displayJson(api, creatureStats);
 }
 
 function isViewCreature(target, listItem) {
@@ -58,12 +55,10 @@ function isViewCreature(target, listItem) {
 }
 
 function moEvt(evt) {
-  if (!calf.showCreatureInfo) { return; }
+  if (!calf.showCreatureInfo) return;
   const { target } = evt;
   const listItem = target.parentNode.parentNode.parentNode;
-  if (isViewCreature(target, listItem)) {
-    makeMouseOver(target, listItem);
-  }
+  if (isViewCreature(target, listItem)) makeMouseOver(target, listItem);
 }
 
 export default function interceptMouseEvents() {

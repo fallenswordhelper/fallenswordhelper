@@ -1,7 +1,6 @@
 import sendEvent from '../analytics/sendEvent';
 import getElementById from '../common/getElementById';
 import infoBox from '../common/infoBox';
-import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import { nowSecs } from '../support/now';
 import { get, set } from '../system/idb';
@@ -21,12 +20,13 @@ function yourGuild(thisInfo) {
   return thisInfo && thisInfo.includes('your guild');
 }
 
-function evalMsg() {
+async function evalMsg() {
   const thisInfo = infoBox();
   if (maxMoves(thisInfo)) { return; }
   if (yourGuild(thisInfo)) {
     const thisId = querySelector('#pCC input[name="pvp_id"]').value;
-    get('fsh_arenaFull').then(partial(addId, thisId));
+    const obj = await get('fsh_arenaFull');
+    addId(thisId, obj);
   } else {
     sendEvent('arena', 'doJoin', thisInfo);
   }

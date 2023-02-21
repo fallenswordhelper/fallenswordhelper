@@ -1,8 +1,10 @@
 import { entries } from 'idb-keyval';
 import ranksView from '../../../_dataAccess/fallbacks/ranksView';
 import fromEntries from '../../../common/fromEntries';
+import isNumber from '../../../common/isNumber';
 import lastActivityToDays from '../../../common/lastActivityToDays';
 import partial from '../../../common/partial';
+import values from '../../../common/values';
 import { nowSecs, oneYearAgo } from '../../../support/now';
 import fallback from '../../../system/fallback';
 import { get, set } from '../../../system/idb';
@@ -83,10 +85,12 @@ function processRank(newArchive, rank) {
   rank.members.forEach(partial(processMemberRecord, newArchive));
 }
 
+const nmbrs = (ary) => ary.length === 7 && ary.every((v) => isNumber(v));
+
 function doMerge(guild) {
   const newArchive = { lastUpdate: nowSecs(), members: {} };
   guild.r.forEach(partial(processRank, newArchive));
-  set('fsh_guildActivity', newArchive);
+  if (values(newArchive.members).flat().every(nmbrs)) set('fsh_guildActivity', newArchive);
 }
 
 function gotGuild(data) {

@@ -23,9 +23,10 @@ function seenBefore(e) {
   processedMonsters.push(e.data);
 }
 
-function loopActions(e, i) { // jQuery.min
+async function loopActions(e, i) {
   if (e.type !== 6 || seenBefore(e)) { return; }
-  getCreatureStats(e.data.id, i).then(processMonster);
+  const data = await getCreatureStats(e.data.id, i);
+  processMonster(data);
 }
 
 function initMonsterLog() {

@@ -67,9 +67,10 @@ function injectAllyEnemyList(data) {
   hazAllies(allies, enemies);
 }
 
-function resetList() {
+async function resetList() {
   sendAllyEvent('resetList');
-  myStats(true).then(injectAllyEnemyList);
+  const data = await myStats(true);
+  injectAllyEnemyList(data);
 }
 
 function toggleBuffSelected(target) {
@@ -137,7 +138,8 @@ function nextTick(data) {
   }
 }
 
-export default function allyEnemy() {
+export default async function allyEnemy() {
   if (jQueryNotPresent()) { return; }
-  myStats(false).then(nextTick);
+  const data = await myStats(false);
+  nextTick(data);
 }
