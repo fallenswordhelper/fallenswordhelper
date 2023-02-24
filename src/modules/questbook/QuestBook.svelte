@@ -75,8 +75,14 @@ function sortQuests(feature) {
   questBook = questBook;
   lastSort = feature;
 }
+
+let visible = true;
+function close() {
+  visible = false;
+}
+
 </script>
-<ModalTitled title="Questbook">
+<ModalTitled { visible } title="Questbook" on:close={close}>
 <div id="fshQuestContainer">
 {#await loadQuestBook()}
 Loading...
@@ -186,7 +192,6 @@ Loading...
           </div>
         </td>
         <td>
-          <div class="tooltip">
             <a
                 href="{guideUrl}quests&subcmd=view&quest_id={quest.id}"
                 target="_blank"
@@ -195,13 +200,9 @@ Loading...
                   src="https://fallensword.com/favicon.ico"
                   alt="UFSG"
                   width="16"
-                  hieght="16">
+                  hieght="16"
+                  data-tipped="Search for this quest on the Ultimate Fallen Sword Guide">
             </a>
-            <div class="tooltiptext">
-              Search for this quest on the Ultimate Fallen Sword Guide
-            </div>
-          </div>
-          <div class="tooltip">
             <a
                 href="https://wiki.fallensword.com/index.php?title={quest.name.replace(/ /g, '_')}"
                 target="_blank"
@@ -210,12 +211,9 @@ Loading...
                 src="{cdn}ui/misc/wiki.png"
                 alt="Wiki"
                 width="16"
-                height="16">
+                height="16"
+                data-tipped="Search for this quest on the Wiki">
             </a>
-            <div class="tooltiptext">
-              Search for this quest on the Wiki
-            </div>
-          </div>
         </td>
         <td>
           {#if status === 'hidden'}
@@ -366,6 +364,9 @@ input[type="number"] { width: 40%; }
 .tooltiptitle {
   color: #FFF380;
   font-weight: bold;
+}
+table img {
+  display: inline;
 }
 
 </style>
