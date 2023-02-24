@@ -80,7 +80,6 @@ let visible = true;
 function close() {
   visible = false;
 }
-
 </script>
 <ModalTitled { visible } title="Questbook" on:close={close}>
 <div id="fshQuestContainer">
