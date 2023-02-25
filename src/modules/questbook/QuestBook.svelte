@@ -9,6 +9,7 @@ import { cdn } from '../system/system';
 
 export let seasonal = false;
 export let status = 'active';
+export let visible = true;
 
 // Split is for backwards compatability
 let hiddenQuests = getValue('hideQuestNames').split(',');
@@ -24,8 +25,6 @@ function unHideQuest(quest) {
   updateHiddenQuests();
 }
 
-const pageLength = 22;
-let pageNumber = 1;
 let query = '';
 let realm = '';
 let minLvl = 0;
@@ -63,9 +62,6 @@ $: queryQuests = seasonalQuests
   .filter(statusFilters[status])
   .filter((i) => hiddenQuests.includes(i.name) === (status === 'hidden'))
   .filter(inputFilters(query, realm, minLvl, maxLvl));
-$: pages = Math.max(1, Math.ceil(queryQuests.length / pageLength));
-$: pageNumber = Math.min(pageNumber, pages - 1);
-$: questPage = queryQuests.slice(pageNumber * pageLength, (pageNumber + 1) * pageLength);
 
 let lastSort = '';
 function sortQuests(feature) {
@@ -76,7 +72,6 @@ function sortQuests(feature) {
   lastSort = feature;
 }
 
-let visible = true;
 function close() {
   visible = false;
 }
@@ -108,18 +103,13 @@ Loading...
   ]</p>
   Total {seasonal ? 'Seasonal' : 'Normal'} Quest Progress:<br>
   <div id="fshQuestProgress">
-    <div class="tooltip" style="width: 100%">
-      <img
-          src="{cdn}ui/misc/progress_purple.png"
-          style="width: {100 * progress}%"
-          height="10"
-          class="tip-static"
-          alt="Progress">
-      <div class="tooltiptext" style="text-align: center">
-        <span class="tooltiptitle">Quests Completed</span><br><br>
-        {seasonalQuests.filter(statusFilters.completed).length} / {seasonalQuests.length}
-      </div>
-    </div>
+    <img
+        src="{cdn}ui/misc/progress_purple.png"
+        style="width: {100 * progress}%"
+        height="10"
+        class="tip-static"
+        alt="Progress"
+        data-tipped="<span class='tooltiptitle'>Quests Completed</span><br><br>{seasonalQuests.filter(statusFilters.completed).length} / {seasonalQuests.length}">
   </div>
   <p style="text-align: center;">
     [
@@ -166,7 +156,7 @@ Loading...
       </tr>
     </thead>
     <tbody>
-    {#each questPage as quest}
+    {#each queryQuests as quest}
       <tr>
         <td>
           <a href="https://fallensword.com/index.php?cmd=questbook&subcmd=viewquest&quest_id={quest.id}">
@@ -200,6 +190,7 @@ Loading...
                   alt="UFSG"
                   width="16"
                   hieght="16"
+                  class="tip-static"
                   data-tipped="Search for this quest on the Ultimate Fallen Sword Guide">
             </a>
             <a
@@ -211,6 +202,7 @@ Loading...
                 alt="Wiki"
                 width="16"
                 height="16"
+                class="tip-static"
                 data-tipped="Search for this quest on the Wiki">
             </a>
         </td>
@@ -225,15 +217,6 @@ Loading...
     {/each}
     </tbody>
   </table>
-  {#if pages > 1}
-  <p>Page {#each Array(pages) as _, i (i)}
-    <label class="asLink" class:active="{i === pageNumber}">
-      <input type="radio" bind:group={pageNumber} value={i} name="page">
-      {i + 1}
-    </label>&nbsp;
-    {/each}
-  </p>
-  {/if}
 {/await}
 </div>
 </ModalTitled>
@@ -325,45 +308,6 @@ Loading...
 }
 input[type="number"] { width: 40%; }
 
-.tooltip {
-  display: inline-block;
-  position: relative;
-}
-
-.tooltip .tooltiptext {
-  background-color: black;
-  border-radius: 6px;
-  bottom: 150%;
-  color: #fff;
-  left: 50%;
-  margin-left: -79px;
-  padding: 5px;
-  position: absolute;
-  text-align: left;
-  visibility: hidden;
-  width: 150px;
-  z-index: 1;
-}
-
-.tooltip .tooltiptext::after {
-  border-color: black transparent transparent transparent;
-  border-style: solid;
-  border-width: 5px;
-  content: "";
-  left: 50%;
-  margin-left: -5px;
-  position: absolute;
-  top: 100%;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-
-.tooltiptitle {
-  color: #FFF380;
-  font-weight: bold;
-}
 table img {
   display: inline;
 }
