@@ -1,10 +1,10 @@
 import runDefault from '../../common/runDefault';
-import injectQuestBookFull from '../../questbook/injectQuestBookFull';
+import injectQuestbookFull from '../../questbook/injectQuestbookFull';
 
 const injectQuestTracker = () => { runDefault(import('../../questbook/injectQuestTracker')); };
 
 export default {
-  '-': { '-': injectQuestBookFull },
-  atoz: { '-': injectQuestBookFull },
+  '-': { '-': injectQuestbookFull },
+  atoz: { '-': injectQuestbookFull },
   viewquest: { '-': injectQuestTracker },
 };

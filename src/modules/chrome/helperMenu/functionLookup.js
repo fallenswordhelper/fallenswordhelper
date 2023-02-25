@@ -29,5 +29,5 @@ export default {
   'Quick Extract': quickExtract,
   'GS Export': gsDl,
   'Merc Hunter': mercs,
-  Questbook: injectQuestbook,
+  'Quest Book': injectQuestbook,
 };

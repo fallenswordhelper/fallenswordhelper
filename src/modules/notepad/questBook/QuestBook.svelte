@@ -1,11 +1,11 @@
 <script>
-import daQuestBook from '../_dataAccess/daQuestBook';
-import alpha from '../common/alpha';
-import ModalTitled from '../modal/ModalTitled.svelte';
-import { guideUrl } from '../support/constants';
-import getValue from '../system/getValue';
-import setValue from '../system/setValue';
-import { cdn } from '../system/system';
+import daQuestBook from '../../_dataAccess/daQuestBook';
+import alpha from '../../common/alpha';
+import ModalTitled from '../../modal/ModalTitled.svelte';
+import { guideUrl } from '../../support/constants';
+import getValue from '../../system/getValue';
+import setValue from '../../system/setValue';
+import { cdn } from '../../system/system';
 
 export let seasonal = false;
 export let status = 'active';
