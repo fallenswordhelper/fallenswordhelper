@@ -2,7 +2,7 @@ import daGuildFetchInv from '../../_dataAccess/daGuildFetchInv';
 import daGuildReport from '../../_dataAccess/daGuildReport';
 import daLoadInventory from '../../_dataAccess/daLoadInventory';
 import getInventory from '../../ajax/getInventory';
-import allthen from '../../common/allthen';
+import all from '../../common/all';
 import isArray from '../../common/isArray';
 import partial from '../../common/partial';
 import calf from '../../support/calf';
@@ -16,33 +16,36 @@ function cacheTheInv(data) {
   theInv = data;
 }
 
-function doInventory() {
-  return getInventory().then(cacheTheInv);
+async function doInventory() {
+  const data = await getInventory();
+  cacheTheInv(data);
 }
 
 const composedPot = (el) => el.t === 15;
 
 function getComposedFromBp(data) {
-  if (!isArray(data?.r?.inventories)) { return; }
-  composed = Array.prototype.concat.apply([], data.r.inventories.map((el) => el.items))
-    .filter(composedPot);
+  if (!isArray(data?.r?.inventories)) return;
+  composed = data?.r?.inventories.flatMap((el) => el.items).filter(composedPot);
 }
 
-function doComposedFromBp() {
-  return daLoadInventory().then(getComposedFromBp);
+async function doComposedFromBp() {
+  const data = await daLoadInventory();
+  getComposedFromBp(data);
 }
 
 function getComposedFromGs(data) {
-  if (!isArray(data.r)) { return; }
+  if (!isArray(data.r)) return;
   composed = composed.concat(data.r.filter(composedPot));
 }
 
-function doGs() {
-  return daGuildFetchInv().then(getComposedFromGs);
+async function doGs() {
+  const data = await daGuildFetchInv();
+  getComposedFromGs(data);
 }
 
-function doReport() {
-  return daGuildReport().then(getComposedFromGs);
+async function doReport() {
+  const data = await daGuildReport();
+  getComposedFromGs(data);
 }
 
 function thisPot(invId, pot) { return pot.a === invId; }
@@ -59,7 +62,7 @@ function gotSomeStuff() {
   theInv.items.forEach(addComposedName);
 }
 
-export function buildInv() {
+export async function buildInv() {
   const prm = [doInventory()];
   if (calf.subcmd === 'invmanagernew') {
     prm.push(doComposedFromBp());
@@ -68,5 +71,6 @@ export function buildInv() {
     prm.push(doGs());
     prm.push(doReport());
   }
-  return allthen(prm, gotSomeStuff);
+  await all(prm);
+  gotSomeStuff();
 }

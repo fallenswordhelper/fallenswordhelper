@@ -7,7 +7,6 @@ import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
 import insertTextBeforeEnd from '../../common/insertTextBeforeEnd';
 import onclick from '../../common/onclick';
-import partial from '../../common/partial';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 
@@ -19,10 +18,11 @@ function clearBox(link, json) {
   }
 }
 
-function removeItem(link) {
+async function removeItem(link) {
   const item = regExpFirstCapture(/inventory_id=(?<id>\d+)/, link.href);
   if (item) {
-    daUnequipItem(item).then(partial(clearBox, link));
+    const json = await daUnequipItem(item);
+    clearBox(link, json);
   }
 }
 

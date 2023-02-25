@@ -21,9 +21,10 @@ function refreshBuffs(json) {
   }
 }
 
-function recastClick() {
+async function recastClick() {
   if (getBuff('Summon Shield Imp')) { return; }
-  daQuickbuff([playerName()], [55]).then(refreshBuffs);
+  const json = await daQuickbuff([playerName()], [55]);
+  refreshBuffs(json);
 }
 
 function getImpsRemaining(imp) {

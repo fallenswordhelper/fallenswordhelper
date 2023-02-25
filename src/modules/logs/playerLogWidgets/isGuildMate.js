@@ -6,7 +6,9 @@ import isObject from '../../common/isObject';
 let memberPrm = null;
 
 async function getKeys() {
-  return entries(await getMembrList(false))
+  const json = await getMembrList(false);
+  if (!json) return;
+  return entries(json)
     .filter(([, value]) => isObject(value))
     .map(([key]) => key);
 }

@@ -117,12 +117,13 @@ function gotActivity(data) {
   }
 }
 
-function openDialog() {
+async function openDialog() {
   sendEvent('guildTracker', 'openDialog');
-  get('fsh_guildActivity').then(gotActivity);
+  const data = get('fsh_guildActivity');
   calf.dialogIsClosed = isClosed;
   addOverlay();
   makePopup();
+  gotActivity(await data);
 }
 
 function injectTracker() {

@@ -10,9 +10,10 @@ function checkLastUpdate(templeAlertLastUpdate) {
   return !templeAlertLastUpdate || now() > templeAlertLastUpdate;
 }
 
-function doWeNeedToParse() {
+async function doWeNeedToParse() {
   if (checkLastUpdate(getValue('lastTempleCheck'))) {
-    indexAjaxData({ cmd: 'temple' }).then(parseTemplePage);
+    const data = await indexAjaxData({ cmd: 'temple' });
+    parseTemplePage(data);
   } else if (getValue('needToPray')) {
     displayDisconnectedFromGodsMessage();
   }

@@ -14,8 +14,8 @@ const styleSheet = (items) => createStyle(
 );
 
 async function highlightPerf() {
-  const { items } = await inventory();
-  insertElement(pcc(), styleSheet(items));
+  const json = await inventory();
+  if (json?.items) insertElement(pcc(), styleSheet(json.items));
 }
 
 export default function hellforge() {

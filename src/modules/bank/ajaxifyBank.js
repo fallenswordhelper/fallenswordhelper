@@ -1,137 +1,106 @@
-import indexAjaxData from '../ajax/indexAjaxData';
-import jQueryPresent from '../common/jQueryPresent';
+import indexAjaxDoc from '../ajax/indexAjaxDoc';
+import sendEvent from '../analytics/sendEvent';
+import createDiv from '../common/cElement/createDiv';
+import closestTable from '../common/closestTable';
+import getElementById from '../common/getElementById';
+import getText from '../common/getText';
+import onclick from '../common/onclick';
 import partial from '../common/partial';
-import { defTable, guildSubcmdUrl } from '../support/constants';
-import createDocument from '../system/createDocument';
+import querySelector from '../common/querySelector';
+import querySelectorArray from '../common/querySelectorArray';
+import setText from '../dom/setText';
+import { guildSubcmdUrl } from '../support/constants';
+import { pcc } from '../support/layout';
 
-const statbarGold = '#pH #statbar-gold';
-const statbarGoldTooltip = '#pH #statbar-gold-tooltip-general dd';
-const pccB = '#pCC b';
-const infoMsg = '#pCC #info-msg';
 const withdrawAmount = '#pCC #withdraw_amount';
 const depositAmount = '#pCC #deposit_amount';
-const disabled = 'disabled';
 const inputDepo = '#pCC input[value="Deposit"]';
 
-function doInfoBox(infoBox) { // jQuery
-  const target = $(infoMsg);
-  if (target.length === 0) {
-    $('#pCC').prepend(infoBox.closest(defTable));
+function doInfoBox(infoBox) {
+  const target = getElementById('info-msg');
+  if (target) {
+    closestTable(target).replaceWith(infoBox);
   } else {
-    target.closest(defTable).replaceWith(infoBox.closest(defTable));
+    pcc().prepend(infoBox);
   }
 }
 
-function eachGoldValue(doc, index) {
-  return $(statbarGoldTooltip, doc).eq(index).text();
+function updateNodeArray(query, doc) {
+  const newDoc = querySelectorArray(query, doc);
+  querySelectorArray(query).forEach((e, i) => {
+    setText(getText(newDoc[i]), e);
+  });
 }
 
-function doStatBarGold(doc) {
-  $(statbarGold).text($(statbarGold, doc).text());
-  $(statbarGoldTooltip).text(partial(eachGoldValue, doc));
-}
-
-function newStats(doc, balPos, index) {
-  return $(pccB, doc).slice(balPos).eq(index).text();
-}
-
-function doBoldText(doc, balPos) {
-  $(pccB).slice(balPos).text(partial(newStats, doc, balPos));
-}
-
-function disableDepo(depoPos) { // jQuery
-  if ($(pccB).eq(depoPos).text() === '0') {
-    $(inputDepo).prop(disabled, true);
+function disableDepo(depoPos) {
+  const remainingDepos = getText(querySelectorArray('#pCC b')[depoPos]);
+  if (remainingDepos === '0') {
+    querySelector(inputDepo).disabled = true;
   }
 }
 
-function updateDepoAmount(o, doc) { // jQuery
-  if (o.data.amount !== '1') {
-    $(depositAmount).val($(depositAmount, doc).val());
-  } else {
-    $(depositAmount).val('1');
+function getAmount(mode, doc = document) {
+  const query = mode === 'deposit' ? depositAmount : withdrawAmount;
+  return querySelector(query, doc).value;
+}
+
+function updateDepoAmount(doc) {
+  const oldDepo = Number(getAmount('deposit'));
+  const newDepo = Number(getAmount('deposit', doc));
+  if (newDepo < oldDepo) {
+    querySelector(depositAmount).value = newDepo;
   }
 }
 
-function replaceValues(bankSettings, doc, infoBox) {
+function updateValues(bankSettings, doc, infoBox) {
   doInfoBox(infoBox);
-  doStatBarGold(doc);
-  doBoldText(doc, bankSettings.balPos);
+  updateDepoAmount(doc);
+  querySelector(withdrawAmount).value = bankSettings.initWithdraw;
+  updateNodeArray('#statbar-gold, #statbar-gold-tooltip dd, #pCC b', doc);
   disableDepo(bankSettings.depoPos);
-  updateDepoAmount(bankSettings, doc);
-  $(withdrawAmount).val(bankSettings.initWithdraw);
 }
 
-function transResponse(bankSettings, response) { // jQuery
-  const doc = createDocument(response);
-  const infoBox = $(infoMsg, doc);
-  if (infoBox.length === 0) { return; }
-  replaceValues(bankSettings, doc, infoBox);
+async function doAjax(bankSettings, mode, amount) {
+  const doc = await indexAjaxDoc({ ...bankSettings.data, mode, amount });
+  const infoMsg = getElementById('info-msg', doc);
+  if (infoMsg) {
+    updateValues(bankSettings, doc, closestTable(infoMsg));
+  }
 }
 
-function invalidAmount(o, amount) { // jQuery
-  return $(pccB).eq(o.depoPos).text() === '0'
-    || !$.isNumeric(amount) || amount < 1;
-}
-
-function doAjax(bankSettings) {
-  indexAjaxData(bankSettings.data).then(partial(transResponse, bankSettings));
-}
-
-function bankDeposit(bankSettings, e) { // jQuery
+function handleBankAction(bankSettings, mode, e) {
   e.preventDefault();
-  const amount = $(depositAmount).val();
-  if (invalidAmount(bankSettings, amount)) { return; }
-  // eslint-disable-next-line no-param-reassign
-  bankSettings.data.mode = 'deposit';
-  // eslint-disable-next-line no-param-reassign
-  bankSettings.data.amount = amount;
-  doAjax(bankSettings);
+  sendEvent('bank', mode);
+  doAjax(bankSettings, mode, getAmount(mode));
 }
 
-function bankWithdrawal(bankSettings, e) { // jQuery
-  e.preventDefault();
-  const amount = $(withdrawAmount).val();
-  if (!$.isNumeric(amount) || amount < 1) { return; }
-  // eslint-disable-next-line no-param-reassign
-  bankSettings.data.mode = 'withdraw';
-  // eslint-disable-next-line no-param-reassign
-  bankSettings.data.amount = amount;
-  doAjax(bankSettings);
-}
-
-function linkToGuildBank(bankSettings) { // jQuery
+function linkToGuildBank(bankSettings) {
   if (bankSettings.appLink) {
-    $('#pCC').append(`<div class="fshCenter"><a href="${
-      guildSubcmdUrl}bank">Go to Guild Bank</a></div>`);
+    pcc().append(createDiv({
+      classList: 'fshCenter',
+      innerHTML: `<a href="${guildSubcmdUrl}bank">Go to Guild Bank</a>`,
+    }));
   }
 }
 
-function captureButtons(bankSettings, depo, withdraw) { // jQuery
-  if ($(pccB).eq(bankSettings.depoPos).text() === '0') { // Check Deposits Available
-    depo.prop(disabled, true);
-  } else {
-    depo.on('click', partial(bankDeposit, bankSettings));
-  }
-  withdraw.on('click', partial(bankWithdrawal, bankSettings));
+function captureButtons(bankSettings, depo, withdraw) {
+  disableDepo(bankSettings.depoPos);
+  onclick(depo, partial(handleBankAction, bankSettings, 'deposit'));
+  onclick(withdraw, partial(handleBankAction, bankSettings, 'withdraw'));
 }
 
-function appLink(bankSettings) { // jQuery
+function appLink(bankSettings) {
   linkToGuildBank(bankSettings);
-  const depo = $(inputDepo);
-  if (depo.length !== 1) { return; }
-  const withdraw = $('#pCC input[value="Withdraw"]');
-  if (withdraw.length !== 1) { return; }
-  captureButtons(bankSettings, depo, withdraw);
-}
-
-function hasJquery(bankSettings) { // jQuery
-  const bank = $(bankSettings.headSelector);
-  if (bank.length !== 0 && bank.eq(0).text() === bankSettings.headText) {
-    appLink(bankSettings);
+  const depo = querySelector(inputDepo);
+  const withdraw = querySelector('#pCC input[value="Withdraw"]');
+  if (withdraw && depo) {
+    captureButtons(bankSettings, depo, withdraw);
   }
 }
 
 export default function ajaxifyBank(bankSettings) {
-  if (jQueryPresent()) { hasJquery(bankSettings); }
+  const bank = querySelector(bankSettings.headSelector);
+  if (bank && getText(bank) === bankSettings.headText) {
+    appLink(bankSettings);
+  }
 }

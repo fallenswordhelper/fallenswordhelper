@@ -1,4 +1,4 @@
 export default async function injectFsBoxContent(i) {
-  const m = await import('../../../notepad/injectFsBoxContent');
-  m.default(i);
+  const module = await import('../../../notepad/injectFsBoxContent');
+  module.default(i);
 }

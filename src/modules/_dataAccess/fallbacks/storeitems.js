@@ -1,11 +1,12 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
 import htmlResult from './htmlResult';
 
-export default function storeitems(invIdAry) {
-  return indexAjaxData({
+export default async function storeitems(invIdAry) {
+  const data = await indexAjaxData({
     cmd: 'guild',
     subcmd: 'inventory',
     subcmd2: 'dostoreitems',
     storeIndex: invIdAry,
-  }).then(htmlResult);
+  });
+  return htmlResult(data);
 }

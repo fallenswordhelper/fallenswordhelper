@@ -1,5 +1,4 @@
 import createPotionFromTemplate from '../ajax/createPotionFromTemplate';
-import partial from '../common/partial';
 import querySelectorAll from '../common/querySelectorAll';
 import setInnerHtml from '../dom/setInnerHtml';
 import { defNeedToCompose } from '../support/constants';
@@ -52,8 +51,9 @@ function potionDone(temp, data) {
   }
 }
 
-function createPotion(temp) { // jQuery.min
-  createPotionFromTemplate(temp.value).then(partial(potionDone, temp));
+async function createPotion(temp) {
+  const data = await createPotionFromTemplate(temp.value);
+  potionDone(temp, data);
 }
 
 export default function backgroundCreate(target, temp) {

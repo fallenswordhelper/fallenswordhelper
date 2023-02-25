@@ -24,8 +24,9 @@ function noQuests(output, el) {
   return !hasQuest;
 }
 
-function doAjax(bindFolderFirstPage, el) {
-  return retryAjax(el.parentNode.href).then(bindFolderFirstPage);
+async function doAjax(bindFolderFirstPage, el) {
+  const html = await retryAjax(el.parentNode.href);
+  return bindFolderFirstPage(html);
 }
 
 function buildPrm(output, html, bindFolderFirstPage) {

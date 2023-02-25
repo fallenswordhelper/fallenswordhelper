@@ -38,11 +38,12 @@ function needsRefresh() {
   return refreshConditions.some(functionPasses);
 }
 
-function retrieveBountyInfo(enableActiveList, enableWantedList) {
+async function retrieveBountyInfo(enableActiveList, enableWantedList) {
   invalidateCache(enableActiveList, enableWantedList);
   if (needsRefresh()) {
     doRefresh();
-    bountyPage(1).then(parseBountyPageForWorld);
+    const page = await bountyPage(1);
+    parseBountyPageForWorld(page);
   } else {
     notRefreshed(enableActiveList, enableWantedList);
   }

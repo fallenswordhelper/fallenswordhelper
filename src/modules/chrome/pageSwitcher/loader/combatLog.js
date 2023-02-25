@@ -1,4 +1,4 @@
 export default async function combatLog(i) {
-  const m = await import('../../../notepad/combatLog/combatLog');
-  m.default(i);
+  const module = await import('../../../notepad/combatLog/combatLog');
+  module.default(i);
 }

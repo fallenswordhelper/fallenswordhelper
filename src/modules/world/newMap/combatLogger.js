@@ -61,8 +61,9 @@ function gotCombatLog(data) { // jQuery.min
   $.subscribe(defPvE, combatResponse);
 }
 
-export default function combatLogger() { // jQuery.min
+export default async function combatLogger() {
   if (getValue('keepLogs')) {
-    get('fsh_combatLog').then(gotCombatLog);
+    const data = await get('fsh_combatLog');
+    gotCombatLog(data);
   }
 }

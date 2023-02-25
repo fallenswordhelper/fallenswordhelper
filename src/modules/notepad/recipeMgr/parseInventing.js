@@ -2,7 +2,6 @@ import indexAjaxData from '../../ajax/indexAjaxData';
 import createDiv from '../../common/cElement/createDiv';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { set } from '../../system/idb';
 import generateRecipeTable from './generateRecipeTable';
@@ -20,13 +19,13 @@ function displayStuff() {
   generateRecipeTable(output, recipebook);
 }
 
-export function parseInventingStart() { // jQuery.min
+export async function parseInventingStart() { // jQuery.min
   recipebook = {};
   recipebook.recipe = [];
   setInnerHtml('<br>Parsing inventing screen ...<br>', output);
-  indexAjaxData({ cmd: 'inventing' })
-    .then(partial(processFirstPage, output, recipebook))
-    .then(displayStuff);
+  const html = await indexAjaxData({ cmd: 'inventing' });
+  processFirstPage(output, recipebook, html);
+  displayStuff();
 }
 
 export function gotRecipeBook(content, data) {

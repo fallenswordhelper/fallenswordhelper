@@ -1,3 +1,4 @@
-export default function doAction(fn, item, data) {
-  return fn(item).then(() => data);
+export default async function doAction(fn, item, data) {
+  await fn(item);
+  return data;
 }

@@ -13,11 +13,13 @@ function debuffSuccess(aLink, json) {
   if (json && json.s) { setInnerHtml('', aLink.parentNode); }
 }
 
-function doDebuff(fastDebuff, aLink) {
+async function doDebuff(fastDebuff, aLink) {
   if (fastDebuff) {
     sendEvent('profile', 'doDebuff');
     const buffId = regExpFirstCapture(/d=(?<id>\d{1,3})$/, aLink.href);
-    daRemoveSkill(buffId).then(errorDialog).then(partial(debuffSuccess, aLink));
+    const json = await daRemoveSkill(buffId);
+    errorDialog(json);
+    debuffSuccess(aLink, json);
   } else {
     navigateTo(aLink.href);
   }

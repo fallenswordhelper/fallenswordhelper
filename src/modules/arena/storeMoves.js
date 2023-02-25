@@ -22,6 +22,7 @@ function gotMoves(_arena) {
   set(fshArenaKey, arena);
 }
 
-export default function storeMoves() {
-  get(fshArenaKey).then(gotMoves);
+export default async function storeMoves() {
+  const arena = await get(fshArenaKey);
+  gotMoves(arena);
 }

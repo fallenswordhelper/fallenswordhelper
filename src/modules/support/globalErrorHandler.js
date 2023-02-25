@@ -1,12 +1,39 @@
+import AjaxError from '../ajax/AjaxError';
 import sendException from '../analytics/sendException';
 import on from '../common/on';
 import parseError from './parseError';
 
 let enabled = 0;
 
+const ignoreStatus = [0, 503, 504];
+const ignoreTextStatus = ['abort'];
+const ignoreResponse = [
+  'We have encountered an issue with a server connection',
+  'We\'re performing maintenance on the game',
+  'the team have been notified and will get it fixed soon',
+  'uUDRezBqFM4',
+];
+
+function ignore(ajaxErr) {
+  return ignoreStatus.includes(ajaxErr.jqXhr.status)
+    || ignoreTextStatus.includes(ajaxErr.jqTextStatus)
+    || ignoreResponse.some((substring) => ajaxErr.jqXhr.responseText.includes(substring));
+}
+
+const substrings = [
+  'attackplayer.min.js',
+  'dynamically imported module',
+  'fs.min.js',
+  'index.php?cmd=auctionhouse&subcmd=quickcreate',
+  'layerClick',
+  'world.min.js',
+];
+
+const canSend = (msg) => !substrings.some((ss) => msg.includes(ss));
+
 function handleMsgStack(type, stuff) {
   const msg = parseError(stuff);
-  sendException(type + msg, true);
+  if (canSend(msg)) sendException(type + msg, true);
 }
 
 function handleError(type, stuff) {
@@ -18,7 +45,9 @@ function logError(e) {
 }
 
 function unhandledrejection(e) {
-  handleError('Uncaught (in promise) ', e.reason);
+  if (!(e.reason instanceof AjaxError) || !ignore(e.reason)) {
+    handleError('Uncaught (in promise) ', e.reason);
+  }
 }
 
 export default function globalErrorHandler() {

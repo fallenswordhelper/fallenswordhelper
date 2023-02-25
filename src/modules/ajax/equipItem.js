@@ -1,11 +1,12 @@
 import dialog from './dialog';
 import indexAjaxJson from './indexAjaxJson';
 
-export default function equipItem(backpackInvId) {
-  return indexAjaxJson({
+export default async function equipItem(backpackInvId) {
+  const data = await indexAjaxJson({
     cmd: 'profile',
     subcmd: 'equipitem',
     inventory_id: backpackInvId,
     ajax: 1,
-  }).then(dialog);
+  });
+  return dialog(data);
 }

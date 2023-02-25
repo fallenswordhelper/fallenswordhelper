@@ -1,12 +1,13 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
 import htmlResult from './htmlResult';
 
-export default function senditems(user, invIdAry) {
-  return indexAjaxData({
+export default async function senditems(user, invIdAry) {
+  const data = await indexAjaxData({
     cmd: 'trade',
     subcmd: 'senditems',
     xc: window.ajaxXC,
     target_username: user,
     sendItemList: invIdAry,
-  }).then(htmlResult);
+  });
+  return htmlResult(data);
 }

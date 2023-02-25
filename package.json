@@ -1,22 +1,23 @@
 {
   "name": "fallenswordhelper",
-  "version": "15.24.93",
+  "version": "15.24.99",
   "description": "Fallen Sword Helper is a Greasemonkey script meant to enhance the experience of playing Fallen Sword, by removing repetitive tasks, presenting more information at a glance, enhancing the social aspect of the game and creating shortcuts to common tasks.",
   "scripts": {
     "prebuild": "npm run test",
     "build": "npm run esbuild",
-    "postbuild": "npm run sourcemapPathTransform",
+    "cleandev": "node scripts/cleandev.js",
     "esbuild": "node scripts/esbuild.js",
     "esdev": "node scripts/esdev.js",
     "eslint": "eslint . --cache",
     "fix": "eslint . --cache --fix",
-    "minor": "npm --no-git-tag-version version minor",
-    "patch": "npm --no-git-tag-version version patch",
+    "minor": "npm version minor -m \"Build %s\" --tag-version-prefix=\"\"",
+    "patch": "npm version patch -m \"Build %s\" --tag-version-prefix=\"\"",
     "prepare": "husky install",
     "silence": "npm config set loglevel silent",
-    "sourcemapPathTransform": "node scripts/sourcemapPathTransform.js",
     "test": "npm run eslint",
-    "watch": "node scripts/esserve.mjs",
+    "version": "npm run build && git add -A",
+    "postversion": "git push && git push --tags",
+    "watch": "node scripts/esserve.js",
     "ws": "ws"
   },
   "repository": {
@@ -34,22 +35,23 @@
   },
   "homepage": "https://fallenswordhelper.github.io/fallenswordhelper",
   "devDependencies": {
-    "esbuild": "^0.16.10",
+    "esbuild": "^0.17.9",
     "esbuild-svelte": "^0.7.3",
-    "eslint": "^8.30.0",
+    "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-svelte3": "^4.0.0",
-    "husky": "^8.0.2",
-    "local-web-server": "^5.2.1",
-    "tiny-glob": "^0.2.9"
+    "fast-glob": "^3.2.12",
+    "husky": "^8.0.3",
+    "local-web-server": "^5.3.0"
   },
   "dependencies": {
     "css-tooltip": "^0.3.4",
     "idb-keyval": "^6.2.0",
     "smart-table-core": "^3.0.7",
     "smart-table-vanilla": "^0.2.0",
-    "svelte": "^3.55.0",
+    "svelte": "^3.55.1",
     "svelte-virtual-scroll-list": "^1.1.0"
-  }
+  },
+  "type": "module"
 }

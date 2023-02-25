@@ -45,7 +45,7 @@ function groupLocalTime(row) {
 
 function creatorDotAndLink(membrlist, creatorCell) {
   const creator = getText(creatorCell.children[0]);
-  if (membrlist[creator]) {
+  if (membrlist?.[creator]) {
     return `${onlineDot({ last_login: membrlist[creator].last_login })}&nbsp;<a href="${
       playerIdUrl}${membrlist[creator].id}"><b>${creator}</b></a> [${membrlist[creator].level}]`;
   }

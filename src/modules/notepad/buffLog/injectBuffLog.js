@@ -11,12 +11,13 @@ function displayBuffLog(buffLog) {
   setInnerHtml(buffLog, getElementById('bufflog'));
 }
 
-function clearBuffLog() {
-  set(fshBuffLog, '').then(displayBuffLog);
+async function clearBuffLog() {
+  await set(fshBuffLog, '');
+  displayBuffLog();
 }
 
-export default function injectBuffLog(injector) { // jQuery.min
-  if (jQueryNotPresent()) { return; }
+export default async function injectBuffLog(injector) {
+  if (jQueryNotPresent()) return;
   const content = injector || pcc();
   setInnerHtml(makePageTemplate({
     title: 'Buff Log',
@@ -26,5 +27,6 @@ export default function injectBuffLog(injector) { // jQuery.min
     divId: 'bufflog',
   }), content);
   onclick(getElementById('clearBuffs'), clearBuffLog);
-  get(fshBuffLog).then(displayBuffLog);
+  const json = await get(fshBuffLog);
+  displayBuffLog(json);
 }

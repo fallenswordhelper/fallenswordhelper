@@ -1,4 +1,4 @@
 export default async function injectBuffLog(i) {
-  const m = await import('../../../notepad/buffLog/injectBuffLog');
-  m.default(i);
+  const module = await import('../../../notepad/buffLog/injectBuffLog');
+  module.default(i);
 }
