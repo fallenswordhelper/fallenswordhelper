@@ -77,9 +77,10 @@ function close() {
 }
 </script>
 <ModalTitled { visible } title="Questbook" on:close={close}>
-<div id="fshQuestContainer">
 {#await loadQuestBook()}
+<div id="fshQuestContainer">
 Loading...
+</div>
 {:then}
   <h1>Quest Book</h1>
   <p>[
@@ -101,7 +102,7 @@ Loading...
       Seasonal
     </label>
   ]</p>
-  Total {seasonal ? 'Seasonal' : 'Normal'} Quest Progress:<br>
+  <p>Total {seasonal ? 'Seasonal' : 'Normal'} Quest Progress:</p>
   <div id="fshQuestProgress">
     <img
         src="{cdn}ui/misc/progress_purple.png"
@@ -111,7 +112,7 @@ Loading...
         alt="Progress"
         data-tipped="<span class='tooltiptitle'>Quests Completed</span><br><br>{seasonalQuests.filter(statusFilters.completed).length} / {seasonalQuests.length}">
   </div>
-  <p style="text-align: center;">
+  <p>
     [
     <label class="asLink" class:active="{status === 'active'}">
       <input type="radio" bind:group={status} value={'active'}>
@@ -218,34 +219,33 @@ Loading...
     </tbody>
   </table>
 {/await}
-</div>
 </ModalTitled>
 <style>
 #fshQuestContainer {
-  width: 640px;
-  min-height: 700px;
+  min-width: 120px;
 }
-#fshQuestContainer h1 { font-weight: bold; }
-#fshQuestContainer .active {
+h1 { font-weight: bold; }
+.active {
   color: #f00;
   text-decoration: none;
   cursor: default;
 }
-#fshQuestContainer table thead tr {
+table thead tr {
   vertical-align: bottom;
 }
-#fshQuestContainer table thead tr th {
+table thead tr th {
   background: rgb(205,158,75);
   padding: 0px 4px;
 }
-#fshQuestContainer table td:nth-child(2),
-#fshQuestContainer table td:nth-child(4),
-#fshQuestContainer table td:nth-child(5),
-#fshQuestContainer table td:nth-child(6),
-#fshQuestContainer table th:nth-child(2),
-#fshQuestContainer table th:nth-child(4),
-#fshQuestContainer table th:nth-child(5),
-#fshQuestContainer table th:nth-child(6) {
+table td:nth-child(2),
+table td:nth-child(4),
+table td:nth-child(5),
+table td:nth-child(6),
+table th:nth-child(2),
+table th:nth-child(4),
+table th:nth-child(5),
+table th:nth-child(6),
+p {
   text-align: center;
 }
 .fshPercentbar {
@@ -270,16 +270,12 @@ Loading...
 .fshStage.incomplete {
   background: #c5a869;
 }
-#fshQuestContainer table td:nth-child(5) img{
+table td:nth-child(5) img{
   border: solid 1px #4f3717;
   border-radius: 2px;
 }
-#fshQuestContainer {
-  text-align: center;
-}
-#fshQuestContainer table {
+table {
   text-align: left;
-  width: 100%;
   border-spacing: 0;
 }
 
@@ -297,7 +293,8 @@ Loading...
 }
 #fshQuestProgress {
   width: 300px;
-  display: inline-block;
+  display: block;
+  margin: 0px auto;
   border: 1px solid black;
   padding-left: 2px;
   padding-right: 2px;
