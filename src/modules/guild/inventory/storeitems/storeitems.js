@@ -23,7 +23,7 @@ function doCheckAll() {
 
 function addCheckAll() {
   const elements = document.forms[0]?.elements;
-  if (!elements.length) return;
+  if (!elements?.length) return;
   const [submitButton] = arrayFrom(elements).filter((e) => e.type === 'submit');
   const checkAll = new CheckAll({
     anchor: submitButton,
