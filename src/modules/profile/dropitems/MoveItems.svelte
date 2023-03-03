@@ -22,3 +22,10 @@
     <button class="custombutton" on:click={doMove} type="button">Move</button>
   </td>
 </tr>
+
+<style>
+  button {
+    font-family: inherit;
+    font-size: inherit;
+  }
+</style>
