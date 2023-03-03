@@ -24,8 +24,12 @@ const substrings = [
   'attackplayer.min.js',
   'dynamically imported module',
   'fs.min.js',
+  'hcsBar',
   'index.php?cmd=auctionhouse&subcmd=quickcreate',
+  'index.php?cmd=composing&subcmd=breakdown',
   'layerClick',
+  'loadTradeItems',
+  'play method is not allowed',
   'world.min.js',
 ];
 
