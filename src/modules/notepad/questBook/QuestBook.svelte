@@ -77,10 +77,9 @@ function close() {
 }
 </script>
 <ModalTitled { visible } title="Questbook" on:close={close}>
-{#await loadQuestBook()}
 <div id="fshQuestContainer">
+{#await loadQuestBook()}
 Loading...
-</div>
 {:then}
   <h1>Quest Book</h1>
   <p>[
@@ -219,10 +218,12 @@ Loading...
     </tbody>
   </table>
 {/await}
+</div>
 </ModalTitled>
 <style>
 #fshQuestContainer {
   min-width: 120px;
+  font-size: 12px;
 }
 h1 { font-weight: bold; }
 .active {
@@ -277,6 +278,9 @@ table td:nth-child(5) img{
 table {
   text-align: left;
   border-spacing: 0;
+}
+table td {
+  padding-bottom: 0.5em;
 }
 
 .asLink {

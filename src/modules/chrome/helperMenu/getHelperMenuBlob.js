@@ -9,6 +9,7 @@ const topSection = '<div class="helperMenuSectionHeader">Character</div><ul>'
   + '<li><span class="fshLink">Buff Log</span></li>'
   + '<li><span class="fshLink">Combat Log</span></li>'
   + '<li><span class="fshLink">Creature Log</span></li>'
+  + '<li><span class="helperGo">Quest Book</span></li>'
   + '<li><span class="fshLink">Recipe Manager</span></li>'
   + '<li><span class="fshLink">Quick Links</span></li>'
   + `<li><a href="${notepadBlankUrl}invmanagernew">Inventory Manager</a></li>`
