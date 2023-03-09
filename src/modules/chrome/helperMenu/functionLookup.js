@@ -1,3 +1,4 @@
+import injectQuestBook from '../../notepad/questBook/injectQuestBook';
 import combatLog from '../pageSwitcher/loader/combatLog';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectBuffLog from '../pageSwitcher/loader/injectBuffLog';
@@ -28,4 +29,5 @@ export default {
   'Quick Extract': quickExtract,
   'GS Export': gsDl,
   'Merc Hunter': mercs,
+  'Quest Book': injectQuestBook,
 };
