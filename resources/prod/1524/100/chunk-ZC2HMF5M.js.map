@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/common/remainingPages.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.100","mappings":"AAAe,SAARA,EAAgCC,EAAQC,EAAI,CACjD,OAAO,MAAMD,EAAS,CAAC,EAAE,KAAK,CAAC,EAAE,IAAI,CAACE,EAAIC,IAAMF,EAAGE,EAAI,CAAC,CAAC,CAC3D","names":["remainingPages","number","fn","_e","i"]}
