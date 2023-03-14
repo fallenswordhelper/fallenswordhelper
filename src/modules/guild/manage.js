@@ -36,7 +36,7 @@ function selfRecallLink(leftHandSideColumnTable) {
 }
 
 function getLhsColTab() {
-  return pcc().lastElementChild.rows?.[2].cells[0].children[0];
+  return pcc().lastElementChild.rows?.[2]?.cells[0].children[0];
 }
 
 function lhsAdd(leftHandSideColumnTable, fn) {
