@@ -2,9 +2,9 @@ import './accordion.css';
 import fromEntries from '../../common/fromEntries';
 import getElementById from '../../common/getElementById';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
-import theLinks from '../../settings/leftHandLinks.json';
 import { pcl } from '../../support/layout';
 import getValue from '../../system/getValue';
+import theLinks from './leftHandLinks.json';
 import navMenu from './navMenu';
 import preFlight from './preFlight';
 

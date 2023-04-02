@@ -1,10 +1,10 @@
-import calf from '../support/calf';
-import isSelected from '../system/isSelected';
 import {
   justCheckbox,
   justLabel,
   simpleCheckboxHtml,
-} from './simpleCheckbox';
+} from '../../../settings/simpleCheckbox';
+import calf from '../../../support/calf';
+import isSelected from '../../../system/isSelected';
 
 const defShowHuntingBuffs = 'showHuntingBuffs';
 

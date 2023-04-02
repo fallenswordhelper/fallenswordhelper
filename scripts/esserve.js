@@ -31,6 +31,7 @@ const ctx = await esbuild.context({
   },
   entryPoints: [pathToFile('src/calfSystem.js')],
   format: 'esm',
+  loader: { '.html': 'text' },
   outdir: pathToFile(calfPath),
   plugins: [sveltePlugin()],
   sourcemap: true,
