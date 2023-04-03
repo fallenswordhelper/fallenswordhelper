@@ -22,9 +22,12 @@ function addTab(tabs) { // jQuery
   tabs.tabs('refresh');
 }
 
-function versionAndStorage() {
+function doVersion() {
   setText(calf.fshVer, getElementById('fsh-ver'));
   setText(calf.calfVer, getElementById('calf-ver'));
+}
+
+function doStorage() {
   const storage = ((jsonStringify(localStorage).length / (5 * 1024 * 1024)) * 100).toFixed(2);
   setText(storage, getElementById('calf-used'));
   setText((100 - storage).toFixed(2), getElementById('calf-remain'));
@@ -50,14 +53,13 @@ function loadSettings() {
 
 function paintSettings() {
   setInnerHtml(settingsHtml, getElementById('fshSettings'));
-  versionAndStorage();
+  doVersion();
+  doStorage();
   loadSettings();
   createEventListeners();
 }
 
-export default async function injectSettings() { // jQuery
-  const tabs = getElementById('settingsTabs');
-  await awaitWidget(tabs, 'Tabs', 'ui');
+function fshSettings(tabs) { // jQuery
   const settingsTabs = $(tabs);
   addTab(settingsTabs);
   const tabsInstance = settingsTabs.tabs('instance');
@@ -68,6 +70,12 @@ export default async function injectSettings() { // jQuery
       paintSettings,
     );
   }
+}
+
+export default async function injectSettings() {
+  const tabs = getElementById('settingsTabs');
+  await awaitWidget(tabs, 'Tabs', 'ui');
+  fshSettings(tabs);
   injectBlockedSkills();
   setValue('minGroupLevel', querySelector('input[name="min_group_level"]').value);
 }
