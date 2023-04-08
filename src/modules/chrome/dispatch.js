@@ -113,7 +113,7 @@ async function runCore(cssPrm) {
 }
 
 function badEnv() {
-  return !('showPicker' in HTMLInputElement.prototype)
+  return !('containerName' in CSSContainerRule.prototype)
     || !navigator.cookieEnabled
     || window !== window.parent;
 }
