@@ -1,0 +1,355 @@
+<div class="innerColumnHeader colspan2">World screen/Hunting preferences</div>
+<div class="fshRight">
+  <label for="hideCreateGroupButton">
+    Hide Create Group Button [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Hide Create Group Button</span><br><br>
+        <div>Hides the Create Group button</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <label for="hideChampionsGroup">
+      <input type="checkbox" name="hideChampionsGroup" id="hideChampionsGroup" value="true">
+      Champions
+    </label>
+    <label for="hideElitesGroup">
+      <input type="checkbox" name="hideElitesGroup" id="hideElitesGroup" value="true">
+      Elite
+    </label>
+    <label for="hideSEGroup">
+      <input type="checkbox" name="hideSEGroup" id="hideSEGroup" value="true">
+      Super Elite
+    </label>
+    <label for="hideTitanGroup">
+      <input type="checkbox" name="hideTitanGroup" id="hideTitanGroup" value="true">
+      Titan
+    </label>
+    <label for="hideLegendaryGroup">
+      <input type="checkbox" name="hideLegendaryGroup" id="hideLegendaryGroup" value="true">
+      Legendary
+    </label>
+  </div>
+</div>
+<div class="fshRight">
+  <label for="keepLogs">
+    Keep Combat Logs [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Keep Combat Logs</span><br><br>
+        <div>
+          Save combat logs to a temporary variable. Press <u>Show logs</u>
+          on the right to display and copy them
+        </div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <input type="checkbox" name="keepLogs" id="keepLogs" value="true">
+    <button class="custombutton" id="fsh-settings-show-combat-log" type="button">
+      Show Logs
+    </button>
+  </div>
+</div>
+<div class="fshRight">
+  <label for="enableCreatureColoring">
+    Color Special Creatures [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Color Special Creatures</span><br><br>
+        <div>Creatures will be colored according to their rarity.
+          Champions will be colored green, Elites yellow and Super Elites red.</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <input type="checkbox" name="enableCreatureColoring" id="enableCreatureColoring" value="true">
+</div>
+<div class="fshRight">
+  <span class="network"></span>
+  <label for="showCreatureInfo">
+    Show Creature Info [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Show Creature Info</span><br><br>
+        <div>Shows information from the view creature link when you mouseover monsters.</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <input type="checkbox" name="showCreatureInfo" id="showCreatureInfo" value="true">
+</div>
+<div class="fshRight">
+  <label for="combatEvaluatorBias">
+    Combat Evaluator Bias [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Combat Evaluator Bias</span><br><br>
+        <div>
+          Changes the bias of the combat evaluator for the damage and HP evaluation.
+          It will not change the attack bias (1.1053).<br>
+          Conservative = 1.1053 and 1.1 (Safest)<br>
+          Semi-Conservative = 1.1 and 1.053<br>
+          Adventurous = 1.053 and 1 (Bleeding Edge)<br>
+          Conservative+ = 1.1053 and 1 with the attack calculation changed to ±48 per RJEM
+        </div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <select id="combatEvaluatorBias" name="combatEvaluatorBias">
+      <option value="0">Conservative</option>
+      <option value="1">Semi-Conservative</option>
+      <option value="2">Adventurous</option>
+      <option value="3">Conservative+</option>
+    </select>
+  </div>
+</div>
+<div class="fshRight">
+  <span class="network"></span>
+  <label for="showMonsterLog">
+    Keep Creature Log [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Keep Creature Log</span><br><br>
+        <div>Shows the creature log for each creature you see when you travel.</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <input type="checkbox" name="showMonsterLog" id="showMonsterLog" value="true">
+    <button class="custombutton" id="fsh-settings-show-monster-log" type="button">
+      Show
+    </button>
+  </div>
+</div>
+<div class="fshRight">
+  <label for="sendGoldonWorld">
+    Show Send Gold [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Show Send Gold</span><br><br>
+        <div>
+          Creates a button in the gold dropdown to allow you to quickly send gold to a friend.
+        </div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <input type="checkbox" name="sendGoldonWorld" id="sendGoldonWorld" value="true">
+    <label for="goldAmount">
+      Send
+      <input min="0" type="number" name="goldAmount" id="goldAmount">
+    </label>
+    <label for="goldRecipient">
+      gold to
+      <input style="width: 60px;" type="text" name="goldRecipient" id="goldRecipient">
+    </label>
+    <label for="currentGoldSentTotal">
+      Current total:
+      <input min="0" type="number" name="currentGoldSentTotal" id="currentGoldSentTotal">
+    </label>
+  </div>
+</div>
+<div class="fshRight">
+  <label for="doNotKillList">
+    Do Not Kill List [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Do Not Kill List</span><br><br>
+        <div>
+          List of creatures that will not be killed by quick kill.
+          You must type the full name of each creature, separated by commas.
+          Creature name will show up in blue color on world screen and will not be killed by
+          keyboard entry (but can still be killed by mouseclick).
+        </div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <input type="text" name="doNotKillList" id="doNotKillList">
+</div>
+<div class="fshRight">
+  <label for="showHuntingBuffs">
+    Hunting Buffs [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Hunting Buffs</span><br><br>
+        <div>
+          Customize which buffs are designated as hunting buffs. You must type the full name
+          of each buff, separated by commas. Use the checkbox to enable/disable them.
+        </div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <input type="checkbox" name="showHuntingBuffs" id="showHuntingBuffs" value="true">
+</div>
+<div class="fshRight">
+  <label for="enabledHuntingMode">
+    Active Hunting Buff List [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Active Hunting Buff List</span><br><br>
+        <div>Determines which list of buffs gets checked on the world screen.</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <select id="enabledHuntingMode" name="enabledHuntingMode">
+      <option value="1"></option>
+      <option value="2"></option>
+      <option value="3"></option>
+    </select>
+  </div>
+</div>
+<div class="fshRight">
+  <label>
+    <span class="fsh-buff1"></span> Hunting Buff List [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle"><span class="fsh-buff1"></span> Hunting Buff List</span><br><br>
+        <div><span class="fsh-buff1"></span> list of hunting buffs.</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <input title="Hunting mode name" type="text" name="huntingBuffsName" id="huntingBuffsName">
+    <input type="text" name="huntingBuffs" id="huntingBuffs">
+  </div>
+</div>
+<div class="fshRight">
+  <label>
+    <span class="fsh-buff2"></span> Hunting Buff List [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle"><span class="fsh-buff2"></span> Hunting Buff List</span><br><br>
+        <div><span class="fsh-buff2"></span> list of hunting buffs.</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <input title="Hunting mode name" type="text" name="huntingBuffs2Name" id="huntingBuffs2Name">
+    <input type="text" name="huntingBuffs2" id="huntingBuffs2">
+  </div>
+</div>
+<div class="fshRight">
+  <label>
+    <span class="fsh-buff3"></span> Hunting Buff List [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle"><span class="fsh-buff3"></span> Hunting Buff List</span><br><br>
+        <div><span class="fsh-buff3"></span> list of hunting buffs.</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <input title="Hunting mode name" type="text" name="huntingBuffs3Name" id="huntingBuffs3Name">
+    <input type="text" name="huntingBuffs3" id="huntingBuffs3">
+  </div>
+</div>
+<div class="fshRight">
+  <label for="huntingMode">
+    Enable Hunt Mode [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Enable Hunt Mode</span><br><br>
+        <div>Disables menu and some visual features to speed up FSH.</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <input type="checkbox" name="huntingMode" id="huntingMode" value="true">
+</div>
+<div class="fshRight">
+  <label for="messageStack">
+    Stack repeating world messages [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Stack repeating world messages</span><br><br>
+        <div>
+          Messages on the world screen that have the same text will combine into a single
+          stack, saving some screen space.
+        </div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <input type="checkbox" name="messageStack" id="messageStack" value="true">
+</div>
+<div class="fshRight">
+  <label for="footprintColor">
+    Footprint color [
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Footprint color</span><br><br>
+        <div>Alters the color of footprints left on the world map.</div>
+      </div>
+    </div>
+    ]:
+  </label>
+</div>
+<div>
+  <div>
+    <input id="footprintColor" name="footprintColor" type="color">
+    <button class="custombutton" id="fsh-settings-footprint-reset" type="button">
+      Reset
+    </button>
+  </div>
+</div>

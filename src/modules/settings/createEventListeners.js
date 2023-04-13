@@ -57,10 +57,9 @@ function resetFootprintColor() {
 
 function toggle(target) {
   sendEvent('settingsPage', 'toggle');
-  const anItemId = target.dataset.linkto;
-  const anItem = getElementById(anItemId);
-  if (!anItem) return;
-  anItem.classList.toggle('fshHide');
+  const label = target.parentElement.nextElementSibling;
+  label.classList.toggle('fshHide');
+  label.nextElementSibling.classList.toggle('fshHide');
 }
 
 const eventArray = [

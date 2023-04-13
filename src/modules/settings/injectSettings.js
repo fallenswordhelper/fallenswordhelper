@@ -1,4 +1,3 @@
-import './settings.css';
 import awaitWidget from '../common/awaitWidget';
 import getArrayByClassName from '../common/getArrayByClassName';
 import getElementById from '../common/getElementById';
@@ -6,14 +5,13 @@ import jsonStringify from '../common/jsonStringify';
 import once from '../common/once';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
-import setInnerHtml from '../dom/setInnerHtml';
 import setText from '../dom/setText';
 import calf from '../support/calf';
 import getValue from '../system/getValue';
 import setValue from '../system/setValue';
 import injectBlockedSkills from './blockedSkills/injectBlockedSkills';
 import createEventListeners from './createEventListeners';
-import settingsHtml from './settings.html';
+import injectHtml from './injectHtml/injectHtml';
 
 function addTab(tabs) { // jQuery
   tabs.find('.ui-tabs-nav')
@@ -52,7 +50,7 @@ function loadSettings() {
 }
 
 function paintSettings() {
-  setInnerHtml(settingsHtml, getElementById('fshSettings'));
+  injectHtml();
   doVersion();
   doStorage();
   loadSettings();
