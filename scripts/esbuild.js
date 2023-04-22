@@ -3,7 +3,7 @@ import esbuild from 'esbuild';
 import sveltePlugin from 'esbuild-svelte';
 import { github } from './config.js';
 import { calfVer, core, version } from './getVersion.js';
-import htmlPlugin from './htmlPlugin.js';
+import liquidPlugin from './liquidPlugin.js';
 import {
   buildFsh,
   dataTablesCss,
@@ -45,7 +45,7 @@ await esbuild.build({
   legalComments: 'none',
   minify: true,
   outdir: pathToFile(`${dist}${calfPath}`),
-  plugins: [htmlPlugin, sveltePlugin()],
+  plugins: [liquidPlugin, sveltePlugin()],
   sourceRoot: `https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/${version}`,
   sourcemap: true,
   sourcesContent: false,

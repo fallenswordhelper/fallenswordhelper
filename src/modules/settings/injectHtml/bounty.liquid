@@ -1,0 +1,133 @@
+<tr>
+  <td class="header" colspan="2">Bounty hunting preferences</td>
+</tr>
+<tr>
+  <td>
+    <span class="network"></span>
+    <label for="enableActiveBountyList">
+      Show Active Bounties [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Show Active Bounties</span><br><br>
+          <div>Shows your active bounties on the left hand side</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <div>
+      <input
+        type="checkbox"
+        name="enableActiveBountyList"
+        id="enableActiveBountyList"
+        value="true">
+      <input
+        min="0"
+        max="999"
+        type="number"
+        name="bountyListRefreshTime"
+        id="bountyListRefreshTime">
+      seconds refresh
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>
+    <span class="network"></span>
+    <label for="enableWantedList">
+      Show Wanted Bounties [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Show Wanted Bounties</span><br><br>
+          <div>
+            Shows when someone you want is on the bounty board.
+            The list is displayed on the left hand side
+          </div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <div>
+      <input
+        type="checkbox"
+        name="enableWantedList"
+        id="enableWantedList"
+        value="true">
+      Refresh time is same as Active Bounties
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="wantedNames">
+      Wanted Names [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Wanted Names</span><br><br>
+          <div>
+            The names of the people you want to see on the bounty board separated by commas
+            (or * for all)
+          </div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="text"
+      name="wantedNames"
+      id="wantedNames">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="wantedGuildMembers">
+      Show Guild Members [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Show Guild Members</span><br><br>
+          <div>Shows guild members in the wanted bounty list.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="wantedGuildMembers"
+      id="wantedGuildMembers"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <span class="network"></span>
+    <label for="showPvPSummaryInLog">
+      Show PvP Summary in Log [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Show PvP Summary in Log</span><br><br>
+          <div>Shows a summary of the PvP results in the log.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="showPvPSummaryInLog"
+      id="showPvPSummaryInLog"
+      value="true">
+  </td>
+</tr>

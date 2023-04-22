@@ -1,0 +1,377 @@
+<tr>
+  <td class="header" colspan="2">Log screen preferences</td>
+</tr>
+<tr>
+  <td>
+    <span class="unstable"></span>
+    <label for="hideNonPlayerGuildLogMessages">
+      Cleanup Guild Log [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Cleanup Guild Log</span><br><br>
+          <div>
+            Any log messages not related to the current player will be dimmed
+            (e.g. recall messages from guild store)
+          </div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="hideNonPlayerGuildLogMessages"
+      id="hideNonPlayerGuildLogMessages"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="useNewGuildLog">
+      Use New Guild Log [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Use New Guild Log</span><br><br>
+          <div>Replaces the standard guild log with the helper version of the guild log.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="useNewGuildLog"
+      id="useNewGuildLog"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="newGuildLogHistoryPages">
+      New Guild Log History [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">New Guild Log History</span><br><br>
+          <div>The number of pages that the new guild log screen will go back in history.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      min="1"
+      max="999"
+      type="number"
+      name="newGuildLogHistoryPages"
+      id="newGuildLogHistoryPages">
+  </td>
+</tr>
+<tr>
+  <td>
+    <span class="unstable"></span>
+    <span class="network"></span>
+    <label for="groupCombatItems">
+      Group Combat Items [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Group Combat Items</span><br><br>
+          <div>Show looted items, if any, under groups combats in the guild log</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="groupCombatItems"
+      id="groupCombatItems"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="enableLogColoring">
+      Enable Log Coloring [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Enable Log Coloring</span><br><br>
+          <div>
+            Four logs will be colored: Guild Chat, Guild Log, Player Log and Messages.<br>
+            It will show any new messages in yellow and anything older than 20 minutes in brown.
+          </div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="enableLogColoring"
+      id="enableLogColoring"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="defaultMessageSound">
+      New Log Message Sound [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">New Log Message Sound</span><br><br>
+          <div>
+            The .wav or .ogg file to play when you have unread log messages.
+            This must be a .wav or .ogg file.
+          </div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="text"
+      name="defaultMessageSound"
+      id="defaultMessageSound">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="playNewMessageSound">
+      Play sound on unread log [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Play sound on unread log</span><br><br>
+          <div>Plays the above sound when you have unread log messages.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="playNewMessageSound"
+      id="playNewMessageSound"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="showSpeakerOnWorld">
+      Show speaker on world [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Show speaker on world</span><br><br>
+          <div>Show toggle play sound speaker on the world.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="showSpeakerOnWorld"
+      id="showSpeakerOnWorld"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="enableChatParsing">
+      Enable Chat Parsing [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Enable Chat Parsing</span><br><br>
+          <div>
+            Character log will be parsed for chat messages and shows the chat message on the
+            screen if you reply to that message.
+          </div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="enableChatParsing"
+      id="enableChatParsing"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <span class="network"></span>
+    <label for="addAttackLinkToLog">
+      Add attack link to log [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Add attack link to log</span><br><br>
+          <div>If checked, this will add an Attack link to each message in your log.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="addAttackLinkToLog"
+      id="addAttackLinkToLog"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <span class="network"></span>
+    <label for="colorPlayerNames">
+      Color Player Names [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Color Player Names</span><br><br>
+          <div>
+            Colors players' names in the log. Green for guild mates, Blue for allies, red for
+            enemies.
+          </div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="colorPlayerNames"
+      id="colorPlayerNames"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="addIgnoreLink">
+      Add Ignore Link [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Add Ignore Link</span><br><br>
+          <div>Adds an ignore link to chat messages.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="addIgnoreLink"
+      id="addIgnoreLink"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="changeButtonLabels">
+      Change Button Labels [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Change Button Labels</span><br><br>
+          <div>Changes Send button to be Trade and Trade button to be ST.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="changeButtonLabels"
+      id="changeButtonLabels"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <label for="privateMsgButtons">
+      Private Message Buttons [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Private Message Buttons</span><br><br>
+          <div>Adds Buff, Send, and Trade buttons to private messages.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="privateMsgButtons"
+      id="privateMsgButtons"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <span class="unstable"></span>
+    <label for="enhanceChatTextEntry">
+      Enhance Chat Text Entry [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Enhance Chat Text Entry</span><br><br>
+          <div>Enhances the entry field for entering chat text on the guild chat page.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="enhanceChatTextEntry"
+      id="enhanceChatTextEntry"
+      value="true">
+  </td>
+</tr>
+<tr>
+  <td>
+    <span class="unstable"></span>
+    <label for="wrapGuildChat">
+      Wrap Guild Chat [
+      <div class="tooltip">
+        ?
+        <div class="tooltiptext">
+          <span class="tooltiptitle">Wrap Guild Chat</span><br><br>
+          <div>Forces word wrap in guild chat.</div>
+        </div>
+      </div>
+      ]:
+    </label>
+  </td>
+  <td>
+    <input
+      type="checkbox"
+      name="wrapGuildChat"
+      id="wrapGuildChat"
+      value="true">
+  </td>
+</tr>

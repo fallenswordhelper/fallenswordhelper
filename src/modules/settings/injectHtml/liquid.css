@@ -1,19 +1,19 @@
 .fsh-settings {
-  column-gap: 2px;
-  display: grid;
-  grid-template-columns: 40% 60%;
-  row-gap: 2px;
-}
-
-.fsh-settings .colspan2 {
-  grid-column-end: span 2;
+  table-layout: fixed;
   width: 100%;
 }
 
-.fsh-settings .fsh-storage {
-  font-size: x-small;
-  padding: 4px 0;
-  text-align: center;
+.fsh-settings th:first-of-type {
+  width: 40%;
+}
+
+.fsh-settings th:nth-of-type(2) {
+  width: 60%;
+}
+
+.fsh-settings td:first-of-type:not([colspan="2"], .fshCenter) {
+  text-align: right;
+  vertical-align: middle;
 }
 
 .fsh-settings .tooltip {
@@ -146,7 +146,7 @@
   vertical-align: middle;
 }
 
-.fsh-settings .fsh-toggle {
+.fsh-toggle {
   background-color: transparent;
   border-style: none;
   color: inherit;
