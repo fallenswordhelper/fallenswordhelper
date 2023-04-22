@@ -1,186 +1,51 @@
 <tr>
   <td class="header" colspan="2">Equipment screen preferences</td>
 </tr>
+{% render 'settingsRow'
+ field: 'showExtraLinks'
+ label: 'Show Extra Links'
+ network: true
+ tooltipText: 'Adds AH and UFSG links to equipment screens.' %}
+{% render 'settingsRow'
+ field: 'enableItemColoring'
+ label: 'Enable Item Coloring'
+ network: true
+ tooltipText: 'Colors the item text based on the rarity of the item.' %}
+{% render 'settingsRow'
+ field: 'checkAllOfType'
+ label: 'Check All of Type'
+ network: true
+ tooltipText: 'Adds a button to select all of the same items.' %}
+{% render 'settingsRow'
+ field: 'enableFolderFilter'
+ label: 'Enable Folder Filter'
+ network: true
+ tooltipText: 'Adds folder filtering to the Store Items page, including moving tagged items between
+ folders' %}
 <tr>
+  {% render 'settingsRowLabel'
+   field: 'showQuickSendLinks'
+   label: 'Show Quick Send Item'
+   tooltipText: 'Shows a link beside each item which gives the option to quick send the item to
+   this person' %}
   <td>
-    <span class="network"></span>
-    <label for="showExtraLinks">
-      Show Extra Links [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Show Extra Links</span><br><br>
-          <div>Adds AH and UFSG links to equipment screens.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="showExtraLinks"
-      id="showExtraLinks"
-      value="true">
+    {% render 'settingsControl' field: 'showQuickSendLinks' %}
+    {% render 'settingsLabelledControl'
+     field: 'itemRecipient'
+     textBefore: 'Send Items To'
+     type: 'text' %}
   </td>
 </tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label for="enableItemColoring">
-      Enable Item Coloring [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Enable Item Coloring</span><br><br>
-          <div>Colors the item text based on the rarity of the item.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="enableItemColoring"
-      id="enableItemColoring"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label for="checkAllOfType">
-      Check All of Type [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Check All of Type</span><br><br>
-          <div>Adds a button to select all of the same items.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="checkAllOfType"
-      id="checkAllOfType"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label for="enableFolderFilter">
-      Enable Folder Filter [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Enable Folder Filter</span><br><br>
-          <div>
-            Adds folder filtering to the Store Items page,
-            including moving tagged items between folders
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="enableFolderFilter"
-      id="enableFolderFilter"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label for="showQuickSendLinks">
-      Show Quick Send Item [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Show Quick Send Item</span><br><br>
-          <div>
-            Shows a link beside each item which gives the option to quick send the item
-            to this person
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <div>
-      <input
-        type="checkbox"
-        name="showQuickSendLinks"
-        id="showQuickSendLinks"
-        value="true">
-      <label for="itemRecipient">
-        Send Items To
-        <input
-          style="width: 190px;"
-          type="text"
-          name="itemRecipient"
-          id="itemRecipient">
-      </label>
-    </div>
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label for="showQuickDropLinks">
-      Show Quick Drop Item [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Show Quick Drop Item</span><br><br>
-          <div>
-            Shows a link beside each item which gives the option to drop the item.
-            WARNING: NO REFUNDS ON ERROR
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="showQuickDropLinks"
-      id="showQuickDropLinks"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="sendClasses">
-      Quick Select all of type in Send Screen [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Quick Select all of type in Send Screen</span><br><br>
-          <div>
-            Allows you to customize what quick links you would like displayed in your send item
-            screen.<br>
-            Use the format ["name","itemid"],["othername","itemid2"].<br>
-            WARNING: NO REFUNDS ON ERROR"
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="text"
-      name="sendClasses"
-      id="sendClasses">
-  </td>
-</tr>
+{% render 'settingsRow'
+ field: 'showQuickDropLinks'
+ label: 'Show Quick Drop Item'
+ network: true
+ tooltipText: 'Shows a link beside each item which gives the option to drop the item.
+ WARNING: NO REFUNDS ON ERROR' %}
+{% render 'settingsRow'
+ field: 'sendClasses'
+ label: 'Quick Select all of type in Send Screen'
+ tooltipText: 'Allows you to customize what quick links you would like displayed in your send
+ item screen.<br>Use the format ["name","itemid"],["othername","itemid2"].<br>
+ WARNING: NO REFUNDS ON ERROR'
+ type: 'text' %}

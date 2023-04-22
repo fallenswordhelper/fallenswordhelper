@@ -2,79 +2,22 @@
   <td class="header" colspan="2">Quest preferences</td>
 </tr>
 <tr>
+  {% render 'settingsRowLabel'
+   field: 'hideQuests'
+   label: 'Hide Specific Quests'
+   tooltipText: 'Hides quests whose name matches the list (separated by commas).' %}
   <td>
-    <label for="hideQuests">
-      Hide Specific Quests [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Hide Specific Quests</span><br><br>
-          <div>Hides quests whose name matches the list (separated by commas).</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <div>
-      <input
-        type="checkbox"
-        name="hideQuests"
-        id="hideQuests"
-        value="true">
-      <input
-        class="fshSettingsText"
-        type="text"
-        name="hideQuestNames"
-        id="hideQuestNames">
-    </div>
+    {% render 'settingsControl' field: 'hideQuests' %}
+    {% render 'settingsControl' field: 'hideQuestNames' type: 'text' %}
   </td>
 </tr>
-<tr>
-  <td>
-    <label for="storeLastQuestPage">
-      Store Last Quest Page [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Store Last Quest Page</span><br><br>
-          <div>
-            Stores the page and sort order of each of the three quest book sections
-            for next time you visit.<br>If you need to reset the links, turn this option off,
-            click on the link you wish to reset and then turn this option back on again.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="storeLastQuestPage"
-      id="storeLastQuestPage"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="showNextQuestSteps">
-      Show Next Quest Steps [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Show Next Quest Steps</span><br><br>
-          <div>Shows all quest steps in the UFSG.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="showNextQuestSteps"
-      id="showNextQuestSteps"
-      value="true">
-  </td>
-</tr>
+{% render 'settingsRow'
+ field: 'storeLastQuestPage'
+ label: 'Store Last Quest Page'
+ tooltipText: 'Stores the page and sort order of each of the three quest book sections for next
+ time you visit.<br>If you need to reset the links, turn this option off, click on the link you
+ wish to reset and then turn this option back on again.' %}
+{% render 'settingsRow'
+ field: 'showNextQuestSteps'
+ label: 'Show Next Quest Steps'
+ tooltipText: 'Shows all quest steps in the UFSG.' %}

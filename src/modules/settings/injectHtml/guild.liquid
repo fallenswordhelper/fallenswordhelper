@@ -1,40 +1,15 @@
 <tr>
   <td class="header" colspan="2">Guild &gt; Manage preferences</td>
 </tr>
-<tr>
-  <td>
-    <span class="unstable"></span>
-    <label for="showGuildRelationship">
-      Show Guild Relationship [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Show Guild Relationship</span><br><br>
-          <div>This shows the guild relationship in players' profiles.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="showGuildRelationship"
-      id="showGuildRelationship"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="guildSelfMessage">Own Guild Message</label>
-  </td>
-  <td>
-    <input
-      type="text"
-      name="guildSelfMessage"
-      id="guildSelfMessage">
-  </td>
-</tr>
+{% render 'settingsRow'
+ field: 'showGuildRelationship'
+ label: 'Show Guild Relationship'
+ tooltipText: "This shows the guild relationship in players' profiles."
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'guildSelfMessage'
+ label: 'Own Guild Message'
+ type: 'text' %}
 <tr>
   <td></td>
   <td>
@@ -42,241 +17,89 @@
   </td>
 </tr>
 <tr>
+  {% render 'settingsRowLabel'
+   field: 'guildFrnd'
+   label: 'Friendly Guilds' %}
   <td>
-    <label for="guildFrnd">Friendly Guilds</label>
-  </td>
-  <td>
-    <div>
-      <input
-        class="fshSettingsText"
-        type="text"
-        name="guildFrnd"
-        id="guildFrnd">
-      <button class="fsh-toggle" data-linkto="show-friendly-guild-message">»</button>
-    </div>
+    {% render 'settingsControl'
+     field: 'guildFrnd'
+     type: 'text' %}
+    <button class="fsh-toggle" type="button">»</button>
   </td>
 </tr>
-<tr class="fshHide" id="show-friendly-guild-message">
-  <td>
-    <label for="guildFrndMessage">Friendly Guild Message</label>
-  </td>
-  <td>
-    <input
-      type="text"
-      name="guildFrndMessage"
-      id="guildFrndMessage">
-  </td>
-</tr>
+{% render 'settingsRow'
+ className: 'fshHide'
+ field: 'guildFrndMessage'
+ label: 'Friendly Guild Message'
+ type: 'text' %}
 <tr>
+  {% render 'settingsRowLabel'
+   field: 'guildPast'
+   label: 'Old Guilds' %}
   <td>
-    <label for="guildPast">Old Guilds</label>
-  </td>
-  <td>
-    <div>
-      <input
-        class="fshSettingsText"
-        type="text"
-        name="guildPast"
-        id="guildPast">
-      <button class="fsh-toggle" data-linkto="show-old-guild-message">»</button>
-    </div>
+    {% render 'settingsControl'
+     field: 'guildPast'
+     type: 'text' %}
+    <button class="fsh-toggle" type="button">»</button>
   </td>
 </tr>
-<tr class="fshHide" id="show-old-guild-message">
-  <td>
-    <label for="guildPastMessage">Old Guild Message</label>
-  </td>
-  <td>
-    <input
-      type="text"
-      name="guildPastMessage"
-      id="guildPastMessage">
-  </td>
-</tr>
+{% render 'settingsRow'
+ className: 'fshHide'
+ field: 'guildPastMessage'
+ label: 'Old Guild Message'
+ type: 'text' %}
 <tr>
+  {% render 'settingsRowLabel'
+   field: 'guildEnmy'
+   label: 'Enemy Guilds' %}
   <td>
-    <label for="guildEnmy">Enemy Guilds</label>
-  </td>
-  <td>
-    <div>
-      <input
-        class="fshSettingsText"
-        type="text"
-        name="guildEnmy"
-        id="guildEnmy">
-      <button class="fsh-toggle" data-linkto="show-guild-enemy-message">»</button>
-    </div>
+    {% render 'settingsControl'
+     field: 'guildEnmy'
+     type: 'text' %}
+    <button class="fsh-toggle" type="button">»</button>
   </td>
 </tr>
-<tr class="fshHide" id="show-guild-enemy-message">
-  <td>
-    <label for="guildEnmyMessage">Enemy Guild Message</label>
-  </td>
-  <td>
-    <input
-      type="text"
-      name="guildEnmyMessage"
-      id="guildEnmyMessage">
-  </td>
-</tr>
+{% render 'settingsRow'
+ className: 'fshHide'
+ field: 'guildEnmyMessage'
+ label: 'Enemy Guild Message'
+ type: 'text' %}
 <tr>
+  {% render 'settingsRowLabel'
+   label: 'Highlight Valid PvP Targets'
+   tooltipText: 'Highlights targets in OTHER guilds that are within your level range to attack
+   for PvP or GvG.' %}
   <td>
-    <label for="highlightValidTargets">
-      Highlight Valid PvP Targets [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Highlight Valid PvP Targets</span><br><br>
-          <div>
-            Highlights targets in OTHER guilds that are within your level range to attack
-            for PvP or GvG.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <div>
-      <label for="highlightPlayersNearMyLvl">
-        <input
-          type="checkbox"
-          name="highlightPlayersNearMyLvl"
-          id="highlightPlayersNearMyLvl"
-          value="true">
-        PvP
-      </label>
-      <label for="highlightGvGPlayersNearMyLvl">
-        <input
-          type="checkbox"
-          name="highlightGvGPlayersNearMyLvl"
-          id="highlightGvGPlayersNearMyLvl"
-          value="true">
-        GvG
-      </label>
-    </div>
+    {% render 'settingsLabelledControl'
+     field: 'highlightPlayersNearMyLvl'
+     textAfter: 'PvP' %}
+    {% render 'settingsLabelledControl'
+     field: 'highlightGvGPlayersNearMyLvl'
+     textAfter: 'GvG' %}
   </td>
 </tr>
-<tr>
-  <td>
-    <label for="showAdmin">
-      Show rank controls [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Show rank controls</span><br><br>
-          <div>
-            Show ranking controls for guild management in member profile page
-            - this works for guild founders only
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="showAdmin"
-      id="showAdmin"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="ajaxifyRankControls">
-      AJAXify rank controls [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">AJAXify rank controls</span><br><br>
-          <div>
-            Enables guild founders with ranking rights to change rank positions
-            without a screen refresh.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="ajaxifyRankControls"
-      id="ajaxifyRankControls"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label for="detailedConflictInfo">
-      Show Conflict Details [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Show Conflict Details</span><br><br>
-          <div>
-            Inserts detailed conflict information onto your guild's manage page.
-            Currently displays the target guild as well as the current score.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="detailedConflictInfo"
-      id="detailedConflictInfo"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="enableHistoryCompressor">
-      Guild History Compressor [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Guild History Compressor</span><br><br>
-          <div>
-            Compresses long guild histories and provides a link to expand
-            the compressed section.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="enableHistoryCompressor"
-      id="enableHistoryCompressor"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="showBuffLinks">
-      Show Buff Links [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Show Buff Links</span><br><br>
-          <div>Shows buffs links after guild members names</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="showBuffLinks"
-      id="showBuffLinks"
-      value="true">
-  </td>
-</tr>
+{% render 'settingsRow'
+ field: 'showAdmin'
+ label: 'Show rank controls'
+ tooltipText: 'Show ranking controls for guild management in member profile page -
+ this works for guild founders only' %}
+{% render 'settingsRow'
+ field: 'ajaxifyRankControls'
+ label: 'AJAXify rank controls'
+ tooltipText: 'Enables guild founders with ranking rights to change rank positions without a
+ screen refresh.' %}
+{% render 'settingsRow'
+ field: 'detailedConflictInfo'
+ label: 'Show Conflict Details'
+ network: true
+ tooltipText: "Inserts detailed conflict information onto your guild's manage page.
+ Currently displays the target guild as well as the current score." %}
+{% render 'settingsRow'
+ field: 'enableHistoryCompressor'
+ label: 'Guild History Compressor'
+ tooltipText: 'Compresses long guild histories and provides a link to expand the compressed
+ section.' %}
+{% render 'settingsRow'
+ field: 'showBuffLinks'
+ label: 'Show Buff Links'
+ tooltipText: 'Shows buffs links after guild members names' %}

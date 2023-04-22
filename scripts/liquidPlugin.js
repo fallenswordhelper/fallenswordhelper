@@ -6,7 +6,7 @@ const liquidPlugin = {
   name: 'liquid',
   setup(build) {
     build.onLoad({ filter: /\.liquid$/ }, async (args) => {
-      const engine = new Liquid({ root: dirname(args.path) });
+      const engine = new Liquid({ extname: '.liquid', root: dirname(args.path) });
       const source = await engine.renderFile(basename(args.path));
       const result = await minify(source, {
         collapseWhitespace: true,

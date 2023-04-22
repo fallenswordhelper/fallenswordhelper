@@ -3,6 +3,7 @@ import sendEvent from '../analytics/sendEvent';
 import jQueryDialog from '../chrome/jQueryDialog/jQueryDialog';
 import combatLog from '../chrome/pageSwitcher/loader/combatLog';
 import monstorLog from '../chrome/pageSwitcher/loader/monstorLog';
+import closestTr from '../common/closestTr';
 import eventHandler5 from '../common/eventHandler5';
 import getElementById from '../common/getElementById';
 import hasClass from '../common/hasClass';
@@ -57,9 +58,8 @@ function resetFootprintColor() {
 
 function toggle(target) {
   sendEvent('settingsPage', 'toggle');
-  const label = target.parentElement.nextElementSibling;
+  const label = closestTr(target).nextElementSibling;
   label.classList.toggle('fshHide');
-  label.nextElementSibling.classList.toggle('fshHide');
 }
 
 const eventArray = [

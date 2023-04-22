@@ -153,3 +153,11 @@
   cursor: pointer;
   padding: 0;
 }
+
+#goldRecipient {
+  width: 60px;
+}
+
+#itemRecipient {
+  width: 190px;
+}

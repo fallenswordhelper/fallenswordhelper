@@ -2,706 +2,174 @@
   <td class="header" colspan="2">General preferences (apply to most screens)</td>
 </tr>
 <tr>
+  {% render 'settingsRowLabel'
+   field: 'enableGuildInfoWidgets'
+   label: 'Enable Guild Info Widgets'
+   tooltipText: 'Enabling this option will enable the Guild Info Widgets
+   (coloring on the Guild Info panel)' %}
   <td>
-    <label for="enableGuildInfoWidgets">
-      Enable Guild Info Widgets [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Enable Guild Info Widgets</span><br><br>
-          <div>
-            Enabling this option will enable the Guild Info Widgets (coloring on the Guild Info panel)
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <div>
-      <input
-        type="checkbox"
-        name="enableGuildInfoWidgets"
-        id="enableGuildInfoWidgets"
-        value="true">
-      <label for="hideGuildInfoMessage">
-        Hide Message&gt;
-        <input
-          type="checkbox"
-          name="hideGuildInfoMessage"
-          id="hideGuildInfoMessage"
-          value="true">
-      </label>
-      <label for="hideGuildInfoBuff">
-        Hide Buff&gt;
-        <input
-          type="checkbox"
-          name="hideGuildInfoBuff"
-          id="hideGuildInfoBuff"
-          value="true">
-      </label>
-      <label for="hideGuildInfoSecureTrade">
-        Hide ST&gt;
-        <input
-          type="checkbox"
-          name="hideGuildInfoSecureTrade"
-          id="hideGuildInfoSecureTrade"
-          value="true">
-      </label>
-      <label for="hideGuildInfoTrade">
-        Hide Trade&gt;
-        <input
-          type="checkbox"
-          name="hideGuildInfoTrade"
-          id="hideGuildInfoTrade"
-          value="true">
-      </label>
-    </div>
+    {% render 'settingsControl' field: 'enableGuildInfoWidgets' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideGuildInfoMessage'
+     textBefore: 'Hide Message&gt;' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideGuildInfoBuff'
+     textBefore: 'Hide Buff&gt;' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideGuildInfoSecureTrade'
+     textBefore: 'Hide ST&gt;' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideGuildInfoTrade'
+     textBefore: 'Hide Trade&gt;' %}
   </td>
 </tr>
+{% render 'settingsRow'
+ field: 'moveGuildList'
+ label: 'Move Guild Info List'
+ tooltipText: 'This will Move the Guild Info List higher on the bar on the right'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'moveOnlineAlliesList'
+ label: 'Move Online Allies List'
+ tooltipText: 'This will Move the Online Allies List higher on the bar on the right'
+ unstable: true %}
 <tr>
+  {% render 'settingsRowLabel'
+   label: 'Show Online Allies/Enemies'
+   network: true
+   tooltipText: 'This will show the allies/enemies online list on the left.' %}
   <td>
-    <span class="unstable"></span>
-    <label for="moveGuildList">
-      Move Guild Info List [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Move Guild Info List</span><br><br>
-          <div>This will Move the Guild Info List higher on the bar on the right</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="moveGuildList"
-      id="moveGuildList"
-      value="true">
+    {% render 'settingsLabelledControl'
+     field: 'enableAllyOnlineList'
+     textBefore: 'Allies' %}
+    {% render 'settingsLabelledControl'
+     field: 'enableEnemyOnlineList'
+     textBefore: 'Enemies' %}
+    {% render 'settingsLabelledControl'
+     field: 'allyEnemyOnlineRefreshTime'
+     textAfter: 'seconds refresh'
+     type: 'number' %}
   </td>
 </tr>
+{% render 'settingsRow'
+ field: 'enableOnlineAlliesWidgets'
+ label: 'Enable Online Allies Widgets'
+ tooltipText: 'Enabling this option will enable the Allies List Widgets
+ (coloring on the Allies List panel)' %}
+{% render 'settingsRow'
+ field: 'moveDailyQuest'
+ label: 'Move Daily Quest'
+ tooltipText: 'This will move the Daily Quest to the left, under the menu, for better visibility.'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'moveXmasBox'
+ label: 'Move Christmas Offer'
+ tooltipText: 'This will move the Christmas Offer to the left, under the menu,
+ for better visibility.'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'moveFSBox'
+ label: 'Move FS box'
+ tooltipText: 'This will move the FS box to the left, under the menu, for better visibility
+ (unless it is already hidden.)'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'fsboxlog'
+ label: 'Enable FS Box Log'
+ tooltipText: 'This enables the functionality to keep a log of recent seen FS Box message.'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'gameHelpLink'
+ label: '"Game Help" Settings Link'
+ tooltipText: 'This turns the Game Help text in the lower right box into a link to this settings
+ page.' %}
+{% render 'settingsRow'
+ field: 'enableTempleAlert'
+ label: 'Enable Temple Alert'
+ network: true
+ tooltipText: 'Puts an alert on the LHS if you have not prayed at the temple today.' %}
+{% render 'settingsRow'
+ field: 'enableUpgradeAlert'
+ label: 'Enable Gold Upgrade Alert'
+ network: true
+ tooltipText: 'Puts an alert on the LHS if you have not upgraded your stamina with gold today.' %}
+{% render 'settingsRow'
+ field: 'enableComposingAlert'
+ label: 'Enable Composing Alert'
+ network: true
+ tooltipText: 'Puts an alert on the LHS if you have composing slots available.' %}
+{% render 'settingsRow'
+ field: 'enhanceOnlineDots'
+ label: 'Enhance Online Dots'
+ tooltipText: 'Enhances the green/grey dots by player names to show online/offline status.' %}
+{% render 'settingsRow'
+ field: 'hideBuffSelected'
+ label: 'Hide Buff Selected'
+ tooltipText: 'Hides the buff selected functionality in the online allies and guild info section.'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'hideHelperMenu'
+ label: 'Hide Helper Menu'
+ tooltipText: 'Hides the helper menu from top left.' %}
+{% render 'settingsRow'
+ field: 'keepHelperMenuOnScreen'
+ label: 'Keep Helper Menu On Screen'
+ tooltipText: 'Keeps helper menu on screen as you scroll (helper menu must be enabled to work).
+ Also works with quick links.' %}
+{% render 'settingsRow'
+ field: 'draggableHelperMenu'
+ label: 'Draggable Helper Menu'
+ tooltipText: 'Allows the helper menu to be dragged around the screen.' %}
 <tr>
+  {% render 'settingsRowLabel'
+   label: 'Quick Links Screen Location'
+   tooltipText: 'Determines where the quick links dialog shows on the screen.
+   Default is top 22, left 0.' %}
   <td>
-    <span class="unstable"></span>
-    <label for="moveOnlineAlliesList">
-      Move Online Allies List [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Move Online Allies List</span><br><br>
-          <div>This will Move the Online Allies List higher on the bar on the right</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="moveOnlineAlliesList"
-      id="moveOnlineAlliesList"
-      value="true">
+    {% render 'settingsLabelledControl'
+     field: 'quickLinksTopPx'
+     textBefore: 'Top:'
+     type: 'number' %}
+    {% render 'settingsLabelledControl'
+     field: 'quickLinksLeftPx'
+     textBefore: 'Left:'
+     type: 'number' %}
   </td>
 </tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label>
-      Show Online Allies/Enemies [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Show Online Allies/Enemies</span><br><br>
-          <div>This will show the allies/enemies online list on the left.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <div>
-      <label for="enableAllyOnlineList">
-        Allies
-        <input
-          type="checkbox"
-          name="enableAllyOnlineList"
-          id="enableAllyOnlineList"
-          value="true">
-      </label>
-      <label for="enableEnemyOnlineList">
-        Enemies
-        <input
-          type="checkbox"
-          name="enableEnemyOnlineList"
-          id="enableEnemyOnlineList"
-          value="true">
-      </label>
-      <label for="allyEnemyOnlineRefreshTime">
-        <input
-          class="fshSettingsNumber fsh-va-text-bottom"
-          min="0"
-          type="number"
-          name="allyEnemyOnlineRefreshTime"
-          id="allyEnemyOnlineRefreshTime">
-        seconds refresh
-      </label>
-    </div>
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="enableOnlineAlliesWidgets">
-      Enable Online Allies Widgets [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Enable Online Allies Widgets</span><br><br>
-          <div>
-            Enabling this option will enable the Allies List Widgets
-            (coloring on the Allies List panel)
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="enableOnlineAlliesWidgets"
-      id="enableOnlineAlliesWidgets"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="unstable"></span>
-    <label for="moveDailyQuest">
-      Move Daily Quest [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Move Daily Quest</span><br><br>
-          <div>
-            This will move the Daily Quest to the left, under the menu, for better visibility.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="moveDailyQuest"
-      id="moveDailyQuest"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="unstable"></span>
-    <label for="moveXmasBox">
-      Move Christmas Offer [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Move Christmas Offer</span><br><br>
-          <div>
-            This will move the Christmas Offer to the left,
-            under the menu, for better visibility.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="moveXmasBox"
-      id="moveXmasBox"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="unstable"></span>
-    <label for="moveFSBox">
-      Move FS box [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Move FS box</span><br><br>
-          <div>
-            This will move the FS box to the left, under the menu, for better visibility
-            (unless it is already hidden.)
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="moveFSBox"
-      id="moveFSBox"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="unstable"></span>
-    <label for="fsboxlog">
-      Enable FS Box Log [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Enable FS Box Log</span><br><br>
-          <div>This enables the functionality to keep a log of recent seen FS Box message.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="fsboxlog"
-      id="fsboxlog"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="gameHelpLink">
-      "Game Help" Settings Link [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">"Game Help" Settings Link</span><br><br>
-          <div>
-            This turns the Game Help text in the lower
-            right box into a link to this settings page.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="gameHelpLink"
-      id="gameHelpLink"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label for="enableTempleAlert">
-      Enable Temple Alert [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Enable Temple Alert</span><br><br>
-          <div>Puts an alert on the LHS if you have not prayed at the temple today.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="enableTempleAlert"
-      id="enableTempleAlert"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label for="enableUpgradeAlert">
-      Enable Gold Upgrade Alert [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Enable Gold Upgrade Alert</span><br><br>
-          <div>Puts an alert on the LHS if you have not upgraded your stamina with gold today.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="enableUpgradeAlert"
-      id="enableUpgradeAlert"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="network"></span>
-    <label for="enableComposingAlert">
-      Enable Composing Alert [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Enable Composing Alert</span><br><br>
-          <div>Puts an alert on the LHS if you have composing slots available.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="enableComposingAlert"
-      id="enableComposingAlert"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="enhanceOnlineDots">
-      Enhance Online Dots [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Enhance Online Dots</span><br><br>
-          <div>Enhances the green/grey dots by player names to show online/offline status.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="enhanceOnlineDots"
-      id="enhanceOnlineDots"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <span class="unstable"></span>
-    <label for="hideBuffSelected">
-      Hide Buff Selected [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Hide Buff Selected</span><br><br>
-          <div>
-            Hides the buff selected functionality in the online allies and guild info section.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="hideBuffSelected"
-      id="hideBuffSelected"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="hideHelperMenu">
-      Hide Helper Menu [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Hide Helper Menu</span><br><br>
-          <div>Hides the helper menu from top left.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="hideHelperMenu"
-      id="hideHelperMenu"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="keepHelperMenuOnScreen">
-      Keep Helper Menu On Screen [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Keep Helper Menu On Screen</span><br><br>
-          <div>
-            Keeps helper menu on screen as you scroll (helper menu must be enabled to work).
-            Also works with quick links.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="keepHelperMenuOnScreen"
-      id="keepHelperMenuOnScreen"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="draggableHelperMenu">
-      Draggable Helper Menu [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Draggable Helper Menu</span><br><br>
-          <div>If enabled, allows the helper menu to be dragged around the screen.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="draggableHelperMenu"
-      id="draggableHelperMenu"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="quickLinksLocation">
-      Quick Links Screen Location [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Quick Links Screen Location</span><br><br>
-          <div>
-            Determines where the quick links dialog shows on the screen.
-            Default is top 22, left 0.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <div>
-      <label for="quickLinksTopPx">
-        Top:
-        <input
-          min="0"
-          type="number"
-          name="quickLinksTopPx"
-          id="quickLinksTopPx">
-      </label>
-      <label for="quickLinksLeftPx">
-        Left:
-        <input
-          min="0"
-          type="number"
-          name="quickLinksLeftPx"
-          id="quickLinksLeftPx">
-      </label>
-    </div>
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="draggableQuickLinks">
-      Draggable Quick Links [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Draggable Quick Links</span><br><br>
-          <div>If enabled, allows the quick link box to be dragged around the screen.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="draggableQuickLinks"
-      id="draggableQuickLinks"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="expandMenuOnKeyPress">
-      Expand Menu on Key Press [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Expand Menu on Key Press</span><br><br>
-          <div>If enabled, expands the left hand menu when you use hotkeys.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="expandMenuOnKeyPress"
-      id="expandMenuOnKeyPress"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="statBarLinks">
-      Statbar links [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Statbar links</span><br><br>
-          <div>This changes the statbar links to allow middle button clicks.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="statBarLinks"
-      id="statBarLinks"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="staminaCalculator">
-      Stamina Calculator [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Stamina Calculator</span><br><br>
-          <div>This displays when you will reach max stamina thru stamina gain.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="staminaCalculator"
-      id="staminaCalculator"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="levelUpCalculator">
-      Level Up Calculator [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Level Up Calculator</span><br><br>
-          <div>This displays when you will reach your next level thru XP gain.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="levelUpCalculator"
-      id="levelUpCalculator"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="resizeQuickBuff">
-      Resize Quick Buff Window [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Resize Quick Buff Window</span><br><br>
-          <div>This makes the quick buff window a bit bigger.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="resizeQuickBuff"
-      id="resizeQuickBuff"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="addServerNode">
-      Add Server Node to Top Stats [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Add Server Node to Top Stats</span><br><br>
-          <div>
-            This adds clickable online players and server node to top stats<br>
-            if you have the options 'Show Game Stats At Top' enabled,<br>
-            'Hide Games Stats' disabled and<br>
-            'Game Stats Summary Only' disabled.<br>
-            It also hides the Game Stats box.
-          </div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="addServerNode"
-      id="addServerNode"
-      value="true">
-  </td>
-</tr>
-<tr>
-  <td>
-    <label for="addScoutTowerLink">
-      Add Scout Tower Link [
-      <div class="tooltip">
-        ?
-        <div class="tooltiptext">
-          <span class="tooltiptitle">Add Scout Tower Link</span><br><br>
-          <div>This adds a Scout Tower link to the Spoils of War info box.</div>
-        </div>
-      </div>
-      ]:
-    </label>
-  </td>
-  <td>
-    <input
-      type="checkbox"
-      name="addScoutTowerLink"
-      id="addScoutTowerLink"
-      value="true">
-  </td>
-</tr>
+{% render 'settingsRow'
+ field: 'draggableQuickLinks'
+ label: 'Draggable Quick Links'
+ tooltipText: 'Allows the quick link box to be dragged around the screen.' %}
+{% render 'settingsRow'
+ field: 'expandMenuOnKeyPress'
+ label: 'Expand Menu on Key Press'
+ tooltipText: 'Expands the left hand menu when you use hotkeys.' %}
+{% render 'settingsRow'
+ field: 'statBarLinks'
+ label: 'Statbar links'
+ tooltipText: 'This changes the statbar links to allow middle button clicks.' %}
+{% render 'settingsRow'
+ field: 'staminaCalculator'
+ label: 'Stamina Calculator'
+ tooltipText: 'This displays when you will reach max stamina thru stamina gain.' %}
+{% render 'settingsRow'
+ field: 'levelUpCalculator'
+ label: 'Level Up Calculator'
+ tooltipText: 'This displays when you will reach your next level thru XP gain.' %}
+{% render 'settingsRow'
+ field: 'resizeQuickBuff'
+ label: 'Resize Quick Buff Window'
+ tooltipText: 'This makes the quick buff window a bit bigger.' %}
+{% render 'settingsRow'
+ field: 'addServerNode'
+ label: 'Add Server Node to Top Stats'
+ tooltipText: "This adds clickable online players and server<br>
+ node to top stats if you have the options:<br>
+ 'Show Game Stats At Top' enabled,<br>
+ 'Hide Games Stats' disabled and<br>
+ 'Game Stats Summary Only' disabled.<br>
+ It also hides the Game Stats box." %}
+{% render 'settingsRow'
+ field: 'addScoutTowerLink'
+ label: 'Add Scout Tower Link'
+ tooltipText: 'This adds a Scout Tower link to the Spoils of War info box.' %}

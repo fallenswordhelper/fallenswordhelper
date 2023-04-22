@@ -33,6 +33,7 @@ function doStorage() {
 
 function injectHuntBuffNames() {
   const huntingBuffsSelect = getElementById('enabledHuntingMode');
+  if (!huntingBuffsSelect) return;
   ['huntingBuffsName', 'huntingBuffs2Name', 'huntingBuffs3Name'].forEach((pref, i) => {
     const prefVal = getValue(pref);
     huntingBuffsSelect.options[i].text = prefVal;
