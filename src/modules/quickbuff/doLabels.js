@@ -1,3 +1,4 @@
+import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import querySelectorArray from '../common/querySelectorArray';
 import setTipped from '../common/setTipped';
 import { excludeBuff } from './assets';
@@ -7,6 +8,7 @@ function addStamCost(el, nameSpan) {
   const dataTipped = nameSpan.dataset.tipped;
   const { cost } = el.previousElementSibling.dataset;
   setTipped(dataTipped.replace('</center>', `<br>Stamina Cost: ${cost}$&`), nameSpan);
+  insertHtmlBeforeEnd(el.parentNode, `<span></span> <span class="fshDodgerBlue tooltip-bottom-right" data-tooltip="Stamina Cost">${cost}</span>`);
 }
 
 function canBeDimmed(el, nameSpan) {
