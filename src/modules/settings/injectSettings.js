@@ -14,10 +14,12 @@ import createEventListeners from './createEventListeners';
 import injectHtml from './injectHtml/injectHtml';
 
 function addTab(tabs) { // jQuery
-  tabs.find('.ui-tabs-nav')
+  const settingsTabs = $(tabs);
+  settingsTabs.find('.ui-tabs-nav')
     .append('<li><a href="#fshSettings">FSH</a></li>');
-  tabs.append('<div id="fshSettings"></div>');
-  tabs.tabs('refresh');
+  settingsTabs.append('<div id="fshSettings"></div>');
+  settingsTabs.tabs('refresh');
+  return settingsTabs.tabs('instance');
 }
 
 function doVersion() {
@@ -58,10 +60,8 @@ function paintSettings() {
   createEventListeners();
 }
 
-function fshSettings(tabs) { // jQuery
-  const settingsTabs = $(tabs);
-  addTab(settingsTabs);
-  const tabsInstance = settingsTabs.tabs('instance');
+function fshSettings(tabs) {
+  const tabsInstance = addTab(tabs);
   if (tabsInstance) {
     once(
       getElementById('ui-id-9'),
