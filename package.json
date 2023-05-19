@@ -35,9 +35,9 @@
   },
   "homepage": "https://fallenswordhelper.github.io/fallenswordhelper",
   "devDependencies": {
-    "esbuild": "^0.17.11",
+    "esbuild": "^0.17.19",
     "esbuild-svelte": "^0.7.3",
-    "eslint": "^8.36.0",
+    "eslint": "^8.40.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-svelte3": "^4.0.0",
@@ -49,10 +49,10 @@
   },
   "dependencies": {
     "css-tooltip": "^0.3.4",
-    "idb-keyval": "^6.2.0",
+    "idb-keyval": "^6.2.1",
     "smart-table-core": "^3.0.7",
     "smart-table-vanilla": "^0.2.0",
-    "svelte": "^3.56.0",
+    "svelte": "^3.59.1",
     "svelte-virtual-scroll-list": "^1.1.0"
   },
   "type": "module"
