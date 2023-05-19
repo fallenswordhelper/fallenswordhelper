@@ -42,7 +42,9 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-svelte3": "^4.0.0",
     "fast-glob": "^3.2.12",
+    "html-minifier-terser": "^7.1.0",
     "husky": "^8.0.3",
+    "liquidjs": "^10.7.0",
     "local-web-server": "^5.3.0"
   },
   "dependencies": {
