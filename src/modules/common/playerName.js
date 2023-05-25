@@ -1,13 +1,15 @@
 import getElementById from './getElementById';
 import getText from './getText';
 
-let thisPlayerName;
+let thisPlayerName = null;
 
 export default function playerName() {
   if (!thisPlayerName) {
     const statBarCharacter = getElementById('statbar-character');
-    if (statBarCharacter) {
-      thisPlayerName = getText(statBarCharacter);
+    const statBarChar = statBarCharacter && getText(statBarCharacter);
+    const winSelfChar = typeof window.self === 'string' && window.self;
+    if (statBarChar || winSelfChar) {
+      thisPlayerName = statBarChar || winSelfChar;
     }
   }
   return thisPlayerName;
