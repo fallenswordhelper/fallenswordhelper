@@ -1,13 +1,13 @@
-import daComposing from '../_dataAccess/daComposing';
-import jQueryPresent from '../common/jQueryPresent';
-import calf from '../support/calf';
+import daComposing from '../../_dataAccess/daComposing';
+import jQueryPresent from '../../common/jQueryPresent';
+import calf from '../../support/calf';
 import {
   defLastComposeCheck,
   defNeedToCompose,
-} from '../support/constants';
-import { now } from '../support/now';
-import getValue from '../system/getValue';
-import setValue from '../system/setValue';
+} from '../../support/constants';
+import { now } from '../../support/now';
+import getValue from '../../system/getValue';
+import setValue from '../../system/setValue';
 import displayComposeMsg from './displayComposeMsg';
 
 function getTime(pot) {
