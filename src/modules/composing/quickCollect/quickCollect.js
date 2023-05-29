@@ -33,7 +33,7 @@ function injectResult(container, className, text) {
 function handleResult(container, ret) {
   container.classList.remove('fshSpinner');
   if (ret.s) injectResult(container, 'fshGreen', 'Collected');
-  else injectResult(container, 'fshRed', 'Error');
+  else injectResult(container, 'fshRed', 'Error noop');
 }
 
 async function doQuickCollect(target) {
