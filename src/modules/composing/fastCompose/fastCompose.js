@@ -67,7 +67,7 @@ function buildCells(template, myRow, _compSlot, i) {
 }
 
 function buildRows(compSlots, myTable, template) {
-  compSlots.reduce(partial(buildCells, template), myTable.insertRow(-1));
+  compSlots.forEach(partial(buildCells, template, myTable.insertRow(-1)));
   return myTable;
 }
 

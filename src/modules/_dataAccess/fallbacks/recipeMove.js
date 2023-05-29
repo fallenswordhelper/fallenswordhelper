@@ -1,6 +1,6 @@
 import aGenericFallback from './aGenericFallback';
 
-export default async function recipeMove(folderId, recipeAry) {
+export default function recipeMove(folderId, recipeAry) {
   return aGenericFallback({
     cmd: 'inventing',
     subcmd: 'domoverecipes',
