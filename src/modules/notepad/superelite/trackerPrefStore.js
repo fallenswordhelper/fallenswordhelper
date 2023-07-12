@@ -18,9 +18,11 @@ const getDelay = (data) => Math.max(
 
 async function updateSeLog() {
   const data = await daSuperElite();
-  fshSeLog = mergeSeData(fshSeLog, data);
-  idbset('fsh_seLog', fshSeLog);
-  seLogStore.set(fshSeLog);
+  if (data) {
+    fshSeLog = mergeSeData(fshSeLog, data);
+    idbset('fsh_seLog', fshSeLog);
+    seLogStore.set(fshSeLog);
+  }
 }
 
 async function backgroundPoll() {
