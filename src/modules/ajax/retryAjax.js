@@ -42,6 +42,12 @@ function getAjax(options) { // jQuery
   });
 }
 
+function mightThrow(options, jqXhr) {
+  if (jqXhr.status !== 0) {
+    throw new AjaxError([options, jqXhr, jqXhr.textStatus, jqXhr.errorThrown]);
+  }
+}
+
 export default async function retryAjax(options, retries = 10) {
   await limiter();
   let result = null;
@@ -49,9 +55,7 @@ export default async function retryAjax(options, retries = 10) {
     result = await getAjax(options);
   } catch (jqXhr) {
     if (retries && jqXhr.status >= 500) return retryAjax(options, retries - 1);
-    if (jqXhr.status !== 0) {
-      throw new AjaxError([options, jqXhr, jqXhr.textStatus, jqXhr.errorThrown]);
-    }
+    mightThrow(options, jqXhr);
   }
   return result;
 }
