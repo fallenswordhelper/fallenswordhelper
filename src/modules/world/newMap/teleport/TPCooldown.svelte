@@ -1,14 +1,11 @@
 <script>
 import { defTeleport } from '../../../support/constants';
+import { realtimeSecs } from '../../../support/now';
 
 export let tpButton;
 let countdown = 0;
 let t0 = 0;
 let timer = false;
-
-function now() {
-  return Math.floor(Date.now() / 1000);
-}
 
 function checkCountdown() {
   if (countdown > 0) return;
@@ -19,12 +16,12 @@ function checkCountdown() {
 
 function updateCountdown() {
   const cooldown = GameData.player().teleportCooldown;
-  countdown = cooldown - now() + t0;
+  countdown = cooldown - realtimeSecs() + t0;
   checkCountdown();
 }
 
 function startTimer(event, data) {
-  t0 = now();
+  t0 = realtimeSecs();
   updateCountdown();
   if (timer || data.response.response !== 0) return;
   timer = setInterval(() => {

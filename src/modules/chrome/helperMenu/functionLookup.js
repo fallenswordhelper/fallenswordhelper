@@ -11,6 +11,7 @@ import monstorLog from '../pageSwitcher/loader/monstorLog';
 import quickExtract from '../pageSwitcher/loader/quickExtract';
 import quickwear from '../pageSwitcher/loader/quickwear';
 import recipeMgr from '../pageSwitcher/loader/recipeMgr';
+import superelite from '../pageSwitcher/loader/superelite';
 import gsDl from './gsDl';
 
 export default {
@@ -28,4 +29,5 @@ export default {
   'Quick Extract': quickExtract,
   'GS Export': gsDl,
   'Merc Hunter': mercs,
+  'SE Tracker': superelite,
 };
