@@ -5,12 +5,10 @@ import classHandler from '../../common/classHandler';
 import draggable from '../../common/draggable';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
-import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import isFunction from '../../common/isFunction';
 import jQueryPresent from '../../common/jQueryPresent';
 import once from '../../common/once';
 import onclick from '../../common/onclick';
-import querySelector from '../../common/querySelector';
 import getValue from '../../system/getValue';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import functionLookup from './functionLookup';
@@ -61,7 +59,8 @@ function showHelperMenu(evt) {
   onclick(helperMenuDiv, classHandler(classEvents));
 }
 
-function haveNode(node) {
+export default function injectHelperMenu() {
+  // don't put all the menu code here (but call if clicked) to minimize lag
   const helperMenu = createDiv({
     id: 'helperMenu',
     className: 'helperMenu',
@@ -75,11 +74,5 @@ function haveNode(node) {
     helperMenu.classList.add('helperMenuMove');
     draggable(helperMenu);
   }
-  insertElementAfterBegin(node, helperMenu);
-}
-
-export default function injectHelperMenu() {
-  // don't put all the menu code here (but call if clicked) to minimize lag
-  const node = querySelector('.mainbody');
-  if (node) haveNode(node);
+  insertElement(document.body, helperMenu);
 }

@@ -24,7 +24,8 @@ const topSection = '<div class="helperMenuSectionHeader">Character</div><ul>'
   + '</ul><div class="helperMenuSectionHeader">Extra</div><ul>'
   + '<li><button class="helperDevBtn helperGo" type="button">Quick Extract</button></li>'
   + '<li><span class="fshLink">Quick Wear</span></li>'
-  + '<li><span class="fshLink">FS Box Log</span></li></ul>';
+  + '<li><span class="fshLink">FS Box Log</span></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">SE Tracker</button></li></ul>';
 
 const betaSection = '<div class="helperMenuSectionHeader">Beta Features</div><ul>'
   + `<li><a href="${notepadBlankUrl}reliclist">Relic List</a><sup class="fshRed">beta</sup></li>`

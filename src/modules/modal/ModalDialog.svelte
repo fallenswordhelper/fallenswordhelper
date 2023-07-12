@@ -69,6 +69,7 @@
     border-radius: 4px;
     box-shadow: 0 0 10px #000;
     color: #383838;
+    font-size: 13px;
     left: 50%;
     max-height: calc(100vh - 4em);
     overflow: auto;
