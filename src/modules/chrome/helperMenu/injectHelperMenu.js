@@ -9,6 +9,7 @@ import isFunction from '../../common/isFunction';
 import jQueryPresent from '../../common/jQueryPresent';
 import once from '../../common/once';
 import onclick from '../../common/onclick';
+import querySelector from '../../common/querySelector';
 import getValue from '../../system/getValue';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import functionLookup from './functionLookup';
@@ -60,6 +61,8 @@ function showHelperMenu(evt) {
 }
 
 export default function injectHelperMenu() {
+  const mainbody = querySelector('.mainbody');
+  if (!mainbody) return;
   // don't put all the menu code here (but call if clicked) to minimize lag
   const helperMenu = createDiv({
     id: 'helperMenu',
