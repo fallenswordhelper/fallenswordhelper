@@ -7,6 +7,7 @@ import createUl from '../../common/cElement/createUl';
 import draggable from '../../common/draggable';
 import insertElement from '../../common/insertElement';
 import onclick from '../../common/onclick';
+import querySelector from '../../common/querySelector';
 import calf from '../../support/calf';
 import task from '../../support/task';
 import getValue from '../../system/getValue';
@@ -51,6 +52,8 @@ function newLinks(quickLinks) {
 }
 
 function injectQuickLinks() {
+  const mainbody = querySelector('.mainbody');
+  if (!mainbody) return;
   const quickLinks = getValueJSON('quickLinks') || [];
   if (quickLinks.length) newLinks(quickLinks);
 }
