@@ -10,6 +10,7 @@ import querySelector from '../common/querySelector';
 import calf from '../support/calf';
 import globalErrorHandler from '../support/globalErrorHandler';
 import task from '../support/task';
+import fallback from '../system/fallback';
 import getUrlParameter from '../system/getUrlParameter';
 import isMessageSound from './isMessageSound';
 import jqueryEventTracker from './jqueryEventTracker';
@@ -27,7 +28,7 @@ let coreFunction = 0;
 let functionPath = 0;
 
 function getParam(param) {
-  return getUrlParameter(param) ?? '-';
+  return fallback(getUrlParameter(param), '-');
 }
 
 function newSelector(selector) {
