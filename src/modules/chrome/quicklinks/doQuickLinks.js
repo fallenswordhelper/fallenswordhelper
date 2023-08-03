@@ -14,7 +14,7 @@ import getValue from '../../system/getValue';
 import getValueJSON from '../../system/getValueJSON';
 
 const createQuicklinksDiv = () => createDiv({
-  className: 'fshQuickLinks fshInnerBg',
+  className: 'fshQuickLinks',
   style: {
     left: `${getValue('quickLinksLeftPx')}px`,
     top: `${getValue('quickLinksTopPx')}px`,

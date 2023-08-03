@@ -1,3 +1,4 @@
+import isNull from '../common/isNull';
 import isUndefined from '../common/isUndefined';
 import calf from '../support/calf';
 import { GMSTORAGE_PATH } from '../support/constants';
@@ -17,7 +18,7 @@ function retrieve(value) {
 
 function fshGetValue(name, defValue) {
   const value = window.localStorage.getItem(GMSTORAGE_PATH + name);
-  if (value === null || isUndefined(value)) { return defValue; }
+  if (isNull(value) || isUndefined(value)) { return defValue; }
   return retrieve(value);
 }
 

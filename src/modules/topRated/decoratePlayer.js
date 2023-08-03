@@ -1,5 +1,6 @@
 import currentGuildId from '../common/currentGuildId';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import isNull from '../common/isNull';
 import isUndefined from '../common/isUndefined';
 import { getLowerPvpLevel, getUpperPvpLevel } from '../common/levelHighlight';
 import onlineDot from '../common/onlineDot';
@@ -12,7 +13,7 @@ let highlightPlayersNearMyLvl = null;
 let myGuildId = 0;
 
 function getPref() {
-  if (highlightPlayersNearMyLvl === null) {
+  if (isNull(highlightPlayersNearMyLvl)) {
     highlightPlayersNearMyLvl = getValue('highlightPlayersNearMyLvl');
   }
   return highlightPlayersNearMyLvl;

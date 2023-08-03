@@ -1,0 +1,30 @@
+.fsh-tracker {
+  position: absolute;
+  right: 0;
+  top: 8px;
+}
+.fsh-tracker button {
+  background-color: #d6af6a;
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+  border-left-color: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  border-right-color: rgba(255, 255, 255, 0.4);
+  border-style: solid;
+  border-top-color: rgba(255, 255, 255, 0.6);
+  border-width: 1px;
+  box-shadow: 0 0 3px rgb(0,0,0);
+  color: #201703;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  margin-bottom: 2px;
+  margin-right: 2px;
+  padding: 1px 10px;
+  position: relative;
+}
+.fsh-tracker button:hover {
+  background-color: #f5e0ae;
+}
+.fsh-tracker button:active {
+  top: 1px;
+}

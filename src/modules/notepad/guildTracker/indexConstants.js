@@ -5,3 +5,4 @@ export const max = 3;
 export const utc = 4;
 export const vl = 5;
 export const gxp = 6;
+export const fshGuildActivity = 'fsh_guildActivity';

@@ -106,7 +106,8 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={close} title="Quick Extract">
+<ModalTitled { visible } on:close={close}>
+  <svelte:fragment slot="title">Quick Extract</svelte:fragment>
   <div>
     Select which type of plants you wish to extract all of. Only select extractable resources.
     <br>

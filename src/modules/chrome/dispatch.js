@@ -1,3 +1,4 @@
+import isAuto from '../analytics/isAuto';
 import screenview from '../analytics/screenview';
 import setup from '../analytics/setup';
 import { end, start } from '../analytics/timing';
@@ -26,12 +27,12 @@ let coreFunction = 0;
 let functionPath = 0;
 
 function getParam(param) {
-  return getUrlParameter(param) || '-';
+  return getUrlParameter(param) ?? '-';
 }
 
 function newSelector(selector) {
   const testCmd = querySelector(selector);
-  return (testCmd && testCmd.value) || '-';
+  return testCmd?.value ?? '-';
 }
 
 function isValid() {
@@ -112,11 +113,14 @@ async function runCore(cssPrm) {
   end('JS Perf', 'FSH.runCore');
 }
 
-function badEnv() {
-  return !('containerName' in CSSContainerRule.prototype)
-    || !navigator.cookieEnabled
-    || window !== window.parent;
-}
+const envTests = [
+  () => !('containerName' in CSSContainerRule.prototype),
+  () => !navigator.cookieEnabled,
+  () => window !== window.parent,
+  isAuto,
+];
+
+const badEnv = () => envTests.some((fn) => fn());
 
 function setVer(fshVer, gmInfo) {
   calf.gmInfo = jsonParse(decodeURIComponent(gmInfo));

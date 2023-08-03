@@ -1,4 +1,5 @@
 import combatLog from '../pageSwitcher/loader/combatLog';
+import guildTracker from '../pageSwitcher/loader/guildTracker';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectBuffLog from '../pageSwitcher/loader/injectBuffLog';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
@@ -30,4 +31,5 @@ export default {
   'GS Export': gsDl,
   'Merc Hunter': mercs,
   'SE Tracker': superelite,
+  'Guild Tracker': guildTracker,
 };

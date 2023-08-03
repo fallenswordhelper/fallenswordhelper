@@ -19,6 +19,8 @@
   let previouslyFocused;
   let prevOnTop;
 
+  const liveTab = (n) => n.tabIndex >= 0 && n.offsetWidth > 0 && n.offsetHeight > 0 && !n.disabled;
+
   function handleKeydown(e) {
     if (!visible) { return; }
 
@@ -28,7 +30,7 @@
     }
 
     if (e.key === 'Tab') {
-      const tabbable = querySelectorArray('*', modal).filter((n) => n.tabIndex >= 0);
+      const tabbable = querySelectorArray('*', modal).filter(liveTab);
 
       let index = tabbable.indexOf(document.activeElement);
       if (index === -1 && e.shiftKey) index = 0;
@@ -60,7 +62,7 @@
 <svelte:window on:keydown={handleKeydown}/>
 
 <div class="ui-dialog" class:modalVisible role="dialog" aria-modal="true" bind:this={modal}>
-  <slot></slot>
+  <slot />
 </div>
 
 <style>
@@ -75,7 +77,7 @@
     overflow: auto;
     position: absolute;
     top: 32px;
-    transform: translateX(-100vw);
+    transform: translateX(-1000vw);
   }
 
   .modalVisible {
