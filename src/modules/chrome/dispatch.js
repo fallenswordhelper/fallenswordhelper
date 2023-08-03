@@ -27,12 +27,12 @@ let coreFunction = 0;
 let functionPath = 0;
 
 function getParam(param) {
-  return getUrlParameter(param) ?? '-';
+  return getUrlParameter(param) || '-'; // skipcq: JS-W1043
 }
 
 function newSelector(selector) {
   const testCmd = querySelector(selector);
-  return testCmd?.value ?? '-';
+  return testCmd?.value || '-'; // skipcq: JS-W1043
 }
 
 function isValid() {
