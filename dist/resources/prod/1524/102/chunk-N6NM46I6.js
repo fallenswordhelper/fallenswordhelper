@@ -1,2 +1,0 @@
-import{a as n}from"./chunk-UH2R3CLD.js";import{a as i}from"./chunk-KV7KVJON.js";import{a}from"./chunk-6346UB6L.js";import{a as o}from"./chunk-4LUQSMNM.js";async function m(r){let t=await o({cmd:"profile",subcmd:"equipitem",inventory_id:r,ajax:1});return i(t)}function e(r){return r&&{...r,r:r.s?0:1}}async function u(r){let t=await a(r);return n(t),e(t)}export{m as a,e as b,u as c};
-//# sourceMappingURL=chunk-N6NM46I6.js.map

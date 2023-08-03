@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/modules/profile/getIsSelf.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.103","mappings":"wHAIA,IAAIA,EAAS,KAEE,SAARC,GAA6B,CAClC,OAAIC,EAAOF,CAAM,IAAGA,EAASG,EAAc,IAAMC,EAAW,GACrDJ,CACT","names":["isSelf","getIsSelf","isNull","getPlayerName","playerName"]}
