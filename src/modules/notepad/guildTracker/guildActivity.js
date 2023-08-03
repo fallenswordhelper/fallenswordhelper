@@ -76,22 +76,23 @@ const merge = (archiveOldObj, archiveToKeepObj, currentNewObj) => ({
   ),
 });
 
-function noChange(archiveClean) {
-  if (!archiveClean) return;
-  set(fshGuildActivity, { lastUpdate: nowSecs(), members: fromEntries(archiveClean) });
-}
+const mergeWrapper = (archiveClean, archiveLatestObj, currentNewObj) => merge(
+  fromEntries(archiveClean.map(oldRecords(archiveLatestObj))),
+  fromEntries(entries(archiveLatestObj).filter(toKeep(currentNewObj)).map(toEntry)),
+  currentNewObj,
+);
 
 function makeChange(currentNew, archiveClean, archiveLatestObj) {
   if (!currentNew || !archiveClean || !archiveLatestObj) return;
-  const currentNewObj = fromEntries(currentNew.map(toEntry));
   set(
     fshGuildActivity,
-    merge(
-      fromEntries(archiveClean.map(oldRecords(archiveLatestObj))),
-      fromEntries(entries(archiveLatestObj).filter(toKeep(currentNewObj)).map(toEntry)),
-      currentNewObj,
-    ),
+    mergeWrapper(archiveClean, archiveLatestObj, fromEntries(currentNew.map(toEntry))),
   );
+}
+
+function noChange(archiveClean) {
+  if (!archiveClean) return;
+  set(fshGuildActivity, { lastUpdate: nowSecs(), members: fromEntries(archiveClean) });
 }
 
 function doMerge(archive, ranks) {
@@ -104,7 +105,7 @@ function doMerge(archive, ranks) {
 
 async function getRanks(archive) {
   const ranks = await ranksView();
-  if (ranks?.s) doMerge(archive, ranks);
+  if (ranks.s) doMerge(archive, ranks);
 }
 
 const moreThanFiveMins = (archive) => nowSecs() > fallback(archive.lastUpdate, 0) + 300;

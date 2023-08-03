@@ -55,6 +55,12 @@ const addDate = ([name, ...rec]) => [
   Math.trunc(rec[utc] / (60 * 60 * 24)),
   ...rec,
 ];
+const insertDate = (guildActivity, fileActivity) => guildActivity
+  .concat(fileActivity)
+  .filter(noNull)
+  .filter(noNaN)
+  .sort(byUtc)
+  .map(addDate);
 const fakeKey = ([name, date]) => `${name}|${date}`;
 const splitKey = (str) => str.split('|');
 const dateNum = ([name, dateStr]) => [name, Number(dateStr)];
@@ -63,18 +69,12 @@ const oneRec = (withDate) => ([name, date]) => withDate.find(thisDate(name, date
 const removeDate = ([name,, ...rec]) => [name, ...rec];
 
 function combineActivity(guildActivity, fileActivity) {
-  const withDate = guildActivity
-    .concat(fileActivity)
-    .filter(noNull)
-    .filter(noNaN)
-    .sort(byUtc)
-    .map(addDate);
-  const base = uniq(withDate.map(fakeKey))
+  const withDate = insertDate(guildActivity, fileActivity);
+  return uniq(withDate.map(fakeKey))
     .map(splitKey)
     .map(dateNum)
     .map(oneRec(withDate))
     .map(removeDate);
-  return base;
 }
 
 const getName = ([name]) => name;
@@ -98,8 +98,12 @@ export default async function fileImport(file, overwrite) {
   ]);
   const guildFlatActivity = overwrite ? [] : flatten(raw);
   const [fileUpdate, fileActivity] = processFile(fileContent);
-  const lastUpdate = raw.lastUpdate ?? fileUpdate ?? 0;
   const combined = combineActivity(guildFlatActivity, fileActivity);
-  const result = { lastUpdate, members: buildMembers(combined) };
-  set(fshGuildActivity, result);
+  set(
+    fshGuildActivity,
+    {
+      lastUpdate: raw.lastUpdate ?? fileUpdate ?? 0,
+      members: buildMembers(combined),
+    },
+  );
 }

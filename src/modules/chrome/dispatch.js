@@ -2,7 +2,6 @@ import isAuto from '../analytics/isAuto';
 import screenview from '../analytics/screenview';
 import setup from '../analytics/setup';
 import { end, start } from '../analytics/timing';
-import execute from '../common/execute';
 import isFunction from '../common/isFunction';
 import isObject from '../common/isObject';
 import jsonParse from '../common/jsonParse';
@@ -28,12 +27,12 @@ let coreFunction = 0;
 let functionPath = 0;
 
 function getParam(param) {
-  return getUrlParameter(param) || '-';
+  return getUrlParameter(param) ?? '-';
 }
 
 function newSelector(selector) {
   const testCmd = querySelector(selector);
-  return (testCmd && testCmd.value) || '-';
+  return testCmd?.value ?? '-';
 }
 
 function isValid() {
@@ -121,7 +120,7 @@ const envTests = [
   isAuto,
 ];
 
-const badEnv = () => envTests.some(execute);
+const badEnv = () => envTests.some((fn) => fn());
 
 function setVer(fshVer, gmInfo) {
   calf.gmInfo = jsonParse(decodeURIComponent(gmInfo));
