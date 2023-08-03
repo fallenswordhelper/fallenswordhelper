@@ -1,2 +1,0 @@
-import{a as n}from"./chunk-3Y43VOBF.js";import{a}from"./chunk-S6W3GI6A.js";import{a as m}from"./chunk-HQEIAMRY.js";function s(t,e){return m({cmd:"trade",subcmd:"senditems",xc:window.ajaxXC,target_username:t,items:e})}async function d(t,e){let r=await a({cmd:"trade",subcmd:"senditems",xc:window.ajaxXC,target_username:t,sendItemList:e});return n(r)}export{s as a,d as b};
-//# sourceMappingURL=chunk-KKEXUDZS.js.map
