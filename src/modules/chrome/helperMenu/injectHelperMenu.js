@@ -51,7 +51,7 @@ const classEvents = [
 function showHelperMenu(evt) {
   const helperMenu = evt.target;
   const helperMenuDiv = createDiv({
-    className: 'helperMenuDiv fshInnerBg',
+    className: 'helperMenuDiv',
     id: 'helperMenuDiv',
     innerHTML: getHelperMenuBlob(),
   });

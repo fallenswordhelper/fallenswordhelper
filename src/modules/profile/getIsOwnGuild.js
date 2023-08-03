@@ -1,4 +1,5 @@
 import currentGuildId from '../common/currentGuildId';
+import isNull from '../common/isNull';
 import regExpFirstCapture from '../common/regExpFirstCapture';
 import { guildRE } from '../support/constants';
 import getGuildALink from './getGuildALink';
@@ -14,6 +15,6 @@ function findGuildId() {
 }
 
 export default function getIsOwnGuild() {
-  if (isOwnGuild === null) isOwnGuild = findGuildId() === currentGuildId();
+  if (isNull(isOwnGuild)) isOwnGuild = findGuildId() === currentGuildId();
   return isOwnGuild;
 }

@@ -1,6 +1,8 @@
+import isAuto from '../analytics/isAuto';
 import screenview from '../analytics/screenview';
 import setup from '../analytics/setup';
 import { end, start } from '../analytics/timing';
+import execute from '../common/execute';
 import isFunction from '../common/isFunction';
 import isObject from '../common/isObject';
 import jsonParse from '../common/jsonParse';
@@ -112,11 +114,14 @@ async function runCore(cssPrm) {
   end('JS Perf', 'FSH.runCore');
 }
 
-function badEnv() {
-  return !('containerName' in CSSContainerRule.prototype)
-    || !navigator.cookieEnabled
-    || window !== window.parent;
-}
+const envTests = [
+  () => !('containerName' in CSSContainerRule.prototype),
+  () => !navigator.cookieEnabled,
+  () => window !== window.parent,
+  isAuto,
+];
+
+const badEnv = () => envTests.some(execute);
 
 function setVer(fshVer, gmInfo) {
   calf.gmInfo = jsonParse(decodeURIComponent(gmInfo));

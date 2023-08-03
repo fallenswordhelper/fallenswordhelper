@@ -94,7 +94,8 @@ async function init() {
 init();
 </script>
 
-<ModalTitled { visible } on:close={close} title="Merc Hunter">
+<ModalTitled { visible } on:close={close}>
+  <svelte:fragment slot="title">Merc Hunter</svelte:fragment>
   <div class="merc-hunter">
     <div class="top-div">(<b>{available}</b> available for hire)</div>
     <div class="button-div">

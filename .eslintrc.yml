@@ -41,6 +41,7 @@ globals:
   DOMParser: readonly
   Element: readonly
   EventTarget: readonly
+  FileReader: readonly
   FormData: readonly
   getComputedStyle: readonly
   HTMLTableElement: readonly

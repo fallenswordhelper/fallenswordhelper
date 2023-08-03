@@ -34,7 +34,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class:visible on:click|self>
-  <slot></slot>
+  <slot />
 </div>
 
 <style>
@@ -45,7 +45,8 @@
   }
 
   div {
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.6);
+    color-scheme: dark;
     height: 100%;
     left: 0;
     position: fixed;

@@ -65,6 +65,7 @@ export default async function ranksView() {
   const html = await guildManage();
   const doc = createDocument(html);
   const docPcc = doc.getElementById('pCC');
+  if (!docPcc) return { e: { code: 0, message: 'Failure' }, s: false };
   const players = querySelectorArray(playerLinkSelector, docPcc).map(parsePlayerLink);
   const ranks = uniq(players, 'rank').map(partial(getRanks, players));
   return { r: ranks, s: true };

@@ -14,7 +14,7 @@ import trackerTableStore from './trackerTableStore';
       <div><div class="innerColumnHeader">Creature</div></div>
       <div><div class="innerColumnHeader">Last Kill</div></div>
       <div><div class="innerColumnHeader">Location</div></div>
-      {#each $trackerTableStore as entry}
+      {#each $trackerTableStore as entry (entry[0])}
         <EachRow {entry} />
       {/each}
     {/if}
