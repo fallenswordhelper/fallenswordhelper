@@ -1,0 +1,31 @@
+.fsh-fsbox {
+  font-size: 10px;
+  position: absolute;
+  user-select: none;
+  top: 0;
+}
+.fsh-fsbox button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  margin: 0;
+  padding: 0;
+  text-decoration: underline;
+  user-select: none;
+}
+.fs-box-log {
+  color: yellow;
+  margin-right: 2px;
+  right: 0;
+}
+.fs-box-ignore {
+  color: palevioletred;
+  left: 0;
+  margin-left: 2px;
+}
+#minibox-fsbox .fs-box-ignore a {
+  color: palevioletred;
+}

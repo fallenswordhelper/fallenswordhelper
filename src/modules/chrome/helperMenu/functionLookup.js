@@ -1,10 +1,10 @@
 import combatLog from '../pageSwitcher/loader/combatLog';
+import fsboxlog from '../pageSwitcher/loader/fsboxlog';
 import guildTracker from '../pageSwitcher/loader/guildTracker';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectBuffLog from '../pageSwitcher/loader/injectBuffLog';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
-import injectFsBoxContent from '../pageSwitcher/loader/injectFsBoxContent';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
 import injectQuickLinkManager from '../pageSwitcher/loader/injectQuickLinkManager';
 import mercs from '../pageSwitcher/loader/mercs';
@@ -26,7 +26,7 @@ export default {
   'Online Players': injectOnlinePlayers,
   'AH Quick Search': injectAuctionSearch,
   'Quick Wear': quickwear,
-  'FS Box Log': injectFsBoxContent,
+  'FS Box Log': fsboxlog,
   'Quick Extract': quickExtract,
   'GS Export': gsDl,
   'Merc Hunter': mercs,
