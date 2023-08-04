@@ -1,11 +1,11 @@
 import runDefault from '../../common/runDefault';
 import calf from '../../support/calf';
 import combatLog from './loader/combatLog';
+import fsboxlog from './loader/fsboxlog';
 import injectAuctionSearch from './loader/injectAuctionSearch';
 import injectBuffLog from './loader/injectBuffLog';
 import injectFindBuffs from './loader/injectFindBuffs';
 import injectFindOther from './loader/injectFindOther';
-import injectFsBoxContent from './loader/injectFsBoxContent';
 import injectOnlinePlayers from './loader/injectOnlinePlayers';
 import injectQuickLinkManager from './loader/injectQuickLinkManager';
 import monstorLog from './loader/monstorLog';
@@ -33,7 +33,7 @@ const notepad = {
   monsterlog: { '-': monstorLog },
   quickextract: { '-': quickExtract },
   quickwear: { '-': quickwear },
-  fsboxcontent: { '-': injectFsBoxContent },
+  fsboxcontent: { '-': fsboxlog },
   bufflogcontent: { '-': injectBuffLog },
   newguildlog: { '-': newGuildLog }, // active
   findbuffs: { '-': injectFindBuffs },

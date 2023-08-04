@@ -35,7 +35,7 @@ const guild = '<div class="helperMenuSectionHeader">Guild</div><ul>'
 const extra = '<div class="helperMenuSectionHeader">Extra</div><ul>'
   + '<li><button class="helperDevBtn helperGo" type="button">Quick Extract</button></li>'
   + '<li><span class="fshLink">Quick Wear</span></li>'
-  + '<li><span class="fshLink">FS Box Log</span></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">FS Box Log</button></li>'
   + '<li><button class="helperDevBtn helperGo" type="button">SE Tracker</button></li>'
   + '</ul>';
 

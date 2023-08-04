@@ -26,8 +26,7 @@ import trackerTableStore from './trackerTableStore';
   min-height: 140px;
   overflow-x: hidden;
   padding-left: 8px;
-  padding-right: 20px;
-}
+ }
 .top {
   padding-bottom: 8px;
   padding-top: 4px;

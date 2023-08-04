@@ -44,5 +44,6 @@
     margin-top: 0.3em;
     max-height: calc(100vh - 6.3em);
     overflow: auto;
+    scrollbar-gutter: stable;
   }
 </style>
