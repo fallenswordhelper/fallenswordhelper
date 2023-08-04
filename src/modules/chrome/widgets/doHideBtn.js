@@ -1,7 +1,7 @@
-import partial from '../../common/partial';
+import arrayFrom from '../../common/arrayFrom';
+import hideElement from '../../common/hideElement';
 import querySelectorAll from '../../common/querySelectorAll';
 import calf from '../../support/calf';
-import hideNodeList from './hideNodeList';
 
 const hideBtn = [
   [
@@ -26,12 +26,12 @@ const hideBtn = [
   ],
 ];
 
-function hideType(context, selector, el) {
-  if (calf[el[0]]) {
-    hideNodeList(querySelectorAll(el[selector], context));
-  }
+function hideNodeList(nodeList) {
+  arrayFrom(nodeList).forEach(hideElement);
 }
 
 export default function doHideBtn(context, selector) {
-  hideBtn.forEach(partial(hideType, context, selector));
+  hideBtn.forEach((el) => {
+    if (calf[el[0]]) hideNodeList(querySelectorAll(el[selector], context));
+  });
 }
