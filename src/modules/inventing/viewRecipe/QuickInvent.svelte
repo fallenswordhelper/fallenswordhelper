@@ -58,13 +58,23 @@
   <input class="custombutton" type="submit" value="Quick Invent" style="margin-left: 8px;"/>
   <div>
     {#if errorMessage}
-    <div style="border: 2px solid #FFF; margin: 10px auto; width: 80%; background: #D3CFC1" transition:slide|local>
+    <div
+      style="border: 2px solid #FFF; margin: 10px auto; width: 80%; background: #D3CFC1"
+      transition:slide|local
+    >
       <div style="background: #8E8668; color: #FFF; font-size: smaller">INFORMATION</div>
       <div>{errorMessage}</div>
     </div>
     {/if}
-    <div class="composing-progress" style="margin: 0px auto; font-weight: bold; color: #fff; left: 0px;">
-      <div class="composing-progress-bar" style="background-position: right top; width: {progress}%; transition: width 0.4s ease-out; position: absolute; top: 0px">
+    <div
+      class="composing-progress"
+      style="margin: 0px auto; font-weight: bold; color: #fff; left: 0px;"
+    >
+      <div
+        class="composing-progress-bar"
+        style="background-position: right top; width: {progress}%; transition: width 0.4s ease-out;
+          position: absolute; top: 0px"
+      >
       </div>
       <p style="position: relative;">{successes + failures} / {amountToInvent}</p>
     </div>

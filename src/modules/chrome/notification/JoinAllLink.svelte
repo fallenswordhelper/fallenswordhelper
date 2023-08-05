@@ -55,8 +55,10 @@
       {/await}
     {:else}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <p class="notification-content" style="{groupStyleText}" on:click|once={handleClick}>Join all attack groups{groupJoinText}.</p>
+      <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+      <p class="notification-content" style="{groupStyleText}" on:click|once={handleClick}>
+        Join all attack groups{groupJoinText}.
+      </p>
     {/if}
   </a>
 </li>
-

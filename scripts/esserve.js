@@ -24,6 +24,7 @@ await buildFsh(
 const ctx = await esbuild.context({
   bundle: true,
   chunkNames: `${calfVer}/[name]-[hash]`,
+  conditions: ['svelte'],
   define: {
     defineDataTablesPath: `"${rootPath}src/styles/dataTables.css"`,
     defineCalfPath: `"${rootPath}${calfPath}/calfSystem.css"`,

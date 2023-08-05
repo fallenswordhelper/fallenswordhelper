@@ -2,19 +2,18 @@
 parserOptions:
   ecmaVersion: latest
   sourceType: module
-plugins:
-  - 'svelte3'
+  extraFileExtensions:
+    - .svelte
 overrides:
   - files:
     - '*.svelte'
-    processor: 'svelte3/svelte3'
     rules:
       no-label-var: off
       import/first: off
       import/no-mutable-exports: off
       import/prefer-default-export: off
   - files:
-    - "scripts/*.js"
+    - 'scripts/*.js'
     rules:
       import/extensions:
         - error
@@ -22,7 +21,7 @@ overrides:
         - js: always
       no-console: off
   - files:
-    - "lws.config.js"
+    - 'lws.config.js'
     rules:
       import/extensions:
         - error
@@ -30,6 +29,7 @@ overrides:
         - js: always
 extends:
   - 'airbnb-base'
+  - 'plugin:svelte/base'
 globals:
   Audio: readonly
   Blob: readonly
@@ -75,6 +75,9 @@ rules:
     - error
     - ignore:
       - '_CALFJS'
+      - 'svelte/store'
+      - 'svelte/transition'
+      - 'svelte-virtual-scroll-list'
   import/order:
     - error
     - alphabetize:
@@ -93,3 +96,6 @@ rules:
       - _saveState
       - _showPage
       - _skills
+settings:
+  import/parsers:
+    'espree': [ .js ]

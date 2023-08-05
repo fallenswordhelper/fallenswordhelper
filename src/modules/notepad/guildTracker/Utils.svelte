@@ -14,6 +14,8 @@
   let selected = '';
   let disabled = 1;
 
+  $: dateAsTimestamp = purgedate && Date.parse(purgedate) / 1000;
+
   function exportJson() {
     sendEvent('Utils', 'exportJson');
     downloadFile(jsonStringify, 'application/json');
@@ -61,8 +63,6 @@
   }
 
   init();
-
-  $: dateAsTimestamp = purgedate && Date.parse(purgedate) / 1000;
 </script>
 
 <div>

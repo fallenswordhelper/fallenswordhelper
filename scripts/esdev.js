@@ -32,6 +32,7 @@ performance.mark('esbuild-start');
 await esbuild.build({
   bundle: true,
   chunkNames: `${calfVer}/[name]-[hash]`,
+  conditions: ['svelte'],
   define: {
     defineCalfPath: `"${rootPath}${calfPath}/calfSystem.min.css"`,
     defineDataTablesPath: `"${rootPath}${calfPath}/dataTables.css"`,

@@ -26,7 +26,7 @@
 
 {#await getComponents()}
   <div class="compSumSpin"><span class="fshSpinner fshSpinner12"></span></div>
-{:then {rollup, maxComp}}
+{:then { rollup, maxComp }}
   <div>
     <table class="fshTblCenter">
       <thead><tr><th colspan="3">Component Summary</th></tr></thead>
