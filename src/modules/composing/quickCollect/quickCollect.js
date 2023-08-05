@@ -1,5 +1,6 @@
 import './quickCollect.css';
 import daComposingCollect from '../../_dataAccess/daComposingCollect';
+import sendEvent from '../../analytics/sendEvent';
 import getText from '../../common/getText';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import onclick from '../../common/onclick';
@@ -37,6 +38,7 @@ function handleResult(container, ret) {
 }
 
 async function doQuickCollect(target) {
+  sendEvent('composing', 'quickCollect');
   const container = target.parentNode;
   const pid = target.value;
   prepareCollect(container);
