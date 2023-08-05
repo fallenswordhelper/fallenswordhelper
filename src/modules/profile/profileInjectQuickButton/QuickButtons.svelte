@@ -59,20 +59,6 @@
   }
 </script>
 
-<style>
-  button {
-    background-color: transparent;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    height: 17px;
-    margin: auto 2px;
-    width: 17px;
-    user-select: none;
-  }
-</style>
-
 <div>
   <button class="fshQuickBuff" on:click={quickbuff} type="button" data-tooltip="Buff {
     playername}">&nbsp;</button>
@@ -91,3 +77,25 @@
       rank} type="button" data-tooltip="Rank {playername}">&nbsp;</button>
   {/if}
 </div>
+
+<style>
+  div {
+    display: grid;
+    grid-template-columns: 1fr;
+    position: absolute;
+    right: 20px;
+    row-gap: 8px;
+    top: 36px;
+  }
+  button {
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 17px;
+    margin: auto 2px;
+    width: 17px;
+    user-select: none;
+  }
+</style>
