@@ -60,22 +60,22 @@
 </script>
 
 <div>
-  <button class="fshQuickBuff" on:click={quickbuff} type="button" data-tooltip="Buff {
-    playername}">&nbsp;</button>
-  <button class="fshJoin" on:click={join} type="button" data-tooltip="Join All Groups{
-    joinTip}">&nbsp;</button>
-  <button class="fshGold" on:click={auctions} type="button" data-tooltip="Go to {
-    playername}'s auctions">&nbsp;</button>
+  <button class="fshQuickBuff" on:click={ quickbuff } type="button" data-tooltip="Buff {
+    playername }">&nbsp;</button>
+  <button class="fshJoin" on:click={ join } type="button" data-tooltip="Join All Groups{
+    joinTip }">&nbsp;</button>
+  <button class="fshGold" on:click={ auctions } type="button" data-tooltip="Go to {
+    playername }'s auctions">&nbsp;</button>
   <button class="fshTempleTwo" on:click={
-    sTrade} type="button" data-tooltip="Create Secure Trade to {playername}">&nbsp;</button>
-  {#if ownGuild}
+    sTrade } type="button" data-tooltip="Create Secure Trade to { playername }">&nbsp;</button>
+  { #if ownGuild }
     <button class="fshTempleThree" on:click={
-      recall} type="button" data-tooltip="Recall items from {playername}">&nbsp;</button>
-  {/if}
-  {#if ownGuild && getValue('showAdmin')}
-    <button style="background-image: url('{cdn}guilds/{currentGuildId()}_mini.png');" on:click={
-      rank} type="button" data-tooltip="Rank {playername}">&nbsp;</button>
-  {/if}
+      recall } type="button" data-tooltip="Recall items from { playername }">&nbsp;</button>
+  { /if }
+  { #if ownGuild && getValue('showAdmin') }
+    <button style="background-image: url('{ cdn }guilds/{ currentGuildId() }_mini.png');" on:click={
+      rank } type="button" data-tooltip="Rank { playername }">&nbsp;</button>
+  { /if }
 </div>
 
 <style>

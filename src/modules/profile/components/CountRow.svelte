@@ -31,18 +31,18 @@
   }
 </style>
 
-{#if item.get('del').length}
+{ #if item.get('del').length }
   <tr>
     <td>
-      <img src={imgSrc(item)} class="tip-dynamic" data-tipped={tipped(item)} alt="component">
+      <img src={ imgSrc(item) } class="tip-dynamic" data-tipped={ tipped(item) } alt="component">
     </td>
-    <td>{item.get('del').length}</td>
-    {#if item.get('delPending')}
+    <td>{ item.get('del').length }</td>
+    { #if item.get('delPending') }
       <td class="compSumSpin"><span class="fshSpinner fshSpinner12"></span></td>
-    {:else}
-      <td><LinkButtonBracketed on:click|once={delType}>Del</LinkButtonBracketed></td>
-    {/if}
+    { :else }
+      <td><LinkButtonBracketed on:click|once={ delType }>Del</LinkButtonBracketed></td>
+    { /if }
   </tr>
-{:else}
+{ :else }
   <tr><td class="compDel" colspan="3">Deleted</td></tr>
-{/if}
+{ /if }

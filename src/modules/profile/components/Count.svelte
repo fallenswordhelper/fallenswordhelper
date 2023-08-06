@@ -24,25 +24,25 @@
   }
 </script>
 
-{#await getComponents()}
+{ #await getComponents() }
   <div class="compSumSpin"><span class="fshSpinner fshSpinner12"></span></div>
-{:then { rollup, maxComp }}
+{ :then { rollup, maxComp } }
   <div>
     <table class="fshTblCenter">
       <thead><tr><th colspan="3">Component Summary</th></tr></thead>
       <tbody>
-        {#each rollup as itemId}
-          <CountRow {itemId} on:delType/>
-        {/each}
+        { #each rollup as itemId }
+          <CountRow { itemId } on:delType/>
+        { /each }
       </tbody>
       <tfoot>
         <tr>
           <td>Total:</td>
-          <td colspan="2">{$total} / {maxComp}</td>
+          <td colspan="2">{ $total } / { maxComp }</td>
         </tr>
       </tfoot>
     </table>
   </div>
-{:catch error}
-  <p style="color: red">{error.message}</p>
-{/await}
+{ :catch error }
+  <p style="color: red">{ error.message }</p>
+{ /await }

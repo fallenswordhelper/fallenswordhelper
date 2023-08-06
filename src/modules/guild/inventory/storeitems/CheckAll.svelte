@@ -17,4 +17,4 @@
   }
 </style>
 
-<button class="custombutton" on:click={doCheckAll} type="button">Check All</button>&nbsp;
+<button class="custombutton" on:click={ doCheckAll } type="button">Check All</button>&nbsp;

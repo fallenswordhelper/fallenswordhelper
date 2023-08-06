@@ -1,7 +1,7 @@
 <script>
-import EachRow from './EachRow.svelte';
-import TrackerPref from './TrackerPref.svelte';
-import trackerTableStore from './trackerTableStore';
+  import EachRow from './EachRow.svelte';
+  import TrackerPref from './TrackerPref.svelte';
+  import trackerTableStore from './trackerTableStore';
 </script>
 
 <div class="container">
@@ -9,15 +9,15 @@ import trackerTableStore from './trackerTableStore';
     <TrackerPref/>
   </div>
   <div class="tracker-table">
-    {#if $trackerTableStore}
+    { #if $trackerTableStore }
       <div><div class="innerColumnHeader">&nbsp;</div></div>
       <div><div class="innerColumnHeader">Creature</div></div>
       <div><div class="innerColumnHeader">Last Kill</div></div>
       <div><div class="innerColumnHeader">Location</div></div>
-      {#each $trackerTableStore as entry (entry[0])}
-        <EachRow {entry} />
-      {/each}
-    {/if}
+      { #each $trackerTableStore as entry (entry[0]) }
+        <EachRow { entry } />
+      { /each }
+    { /if }
   </div>
 </div>
 

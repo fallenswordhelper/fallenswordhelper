@@ -59,9 +59,9 @@
   }
 </script>
 
-<svelte:window on:keydown={handleKeydown}/>
+<svelte:window on:keydown={ handleKeydown }/>
 
-<div class="ui-dialog" class:modalVisible role="dialog" aria-modal="true" bind:this={modal}>
+<div class="ui-dialog" class:modalVisible role="dialog" aria-modal="true" bind:this={ modal }>
   <slot />
 </div>
 

@@ -18,10 +18,7 @@ const searchInput = () => createInput({
 export default function makeSearch(top, table) {
   const wrapper = createDiv({ className: 'fsh-search-wrapper' });
   const input = searchInput();
-  const button = createButton({
-    innerHTML: '&times;',
-    type: 'button',
-  });
+  const button = createButton({ innerHTML: '&times;' });
   const directive = searchDirective({ table });
   onclick(button, () => {
     input.value = '';

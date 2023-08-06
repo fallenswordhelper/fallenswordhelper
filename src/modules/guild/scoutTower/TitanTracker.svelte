@@ -8,7 +8,7 @@
 
 <tr>
   <td colspan="3">
-    <Cooldown {theTitans}/>
-    <TitanFilter {theTitans} {titanRows}/>
+    <Cooldown { theTitans }/>
+    <TitanFilter { theTitans } { titanRows }/>
   </td>
 </tr>

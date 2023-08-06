@@ -1,38 +1,42 @@
 <script>
-import { slide } from 'svelte/transition';
-import sendEvent from '../../analytics/sendEvent';
-import formatUtcTimestamp from '../../common/formatUtcTimestamp';
+  import { slide } from 'svelte/transition';
+  import sendEvent from '../../analytics/sendEvent';
+  import formatUtcTimestamp from '../../common/formatUtcTimestamp';
 
-export let entry;
-let isOpen = false;
+  export let entry;
+  let isOpen = false;
 
-const toggle = () => {
-  sendEvent('SE Tracker', 'Expand Row');
-  isOpen = !isOpen;
-};
+  const toggle = () => {
+    sendEvent('SE Tracker', 'Expand Row');
+    isOpen = !isOpen;
+  };
 </script>
 
 <div class="expando">
-  {#if entry[3].length}
-    <button on:click={toggle} aria-expanded={isOpen} type="button">
-      {@html isOpen ? '&or;' : '&gt;' }
+  { #if entry[3].length }
+    <button on:click={ toggle } aria-expanded={ isOpen } type="button">
+      { #if isOpen }
+        &or;
+      { :else }
+        &gt;
+      { /if }
     </button>
-  {/if}
+  { /if }
 </div>
 <div>{ entry[0].replaceAll('_', ' ') }</div>
-<div class="last-kill">{ formatUtcTimestamp(entry[1])}</div>
+<div class="last-kill">{ formatUtcTimestamp(entry[1]) }</div>
 <div>{ entry[2] }</div>
 
-{#if isOpen}
-  <div class="wide" transition:slide={{ duration: 300 }}>
-    {#each entry[3] as [val, loc]}
+{ #if isOpen }
+  <div class="wide" transition:slide={ { duration: 300 } }>
+    { #each entry[3] as [val, loc] }
       <div> </div>
       <div> </div>
       <div class="last-kill">{ formatUtcTimestamp(val) }</div>
       <div>{ loc }</div>
-    {/each}
+    { /each }
   </div>
-{/if}
+{ /if }
 
 <style>
 .expando {

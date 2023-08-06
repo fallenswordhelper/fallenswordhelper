@@ -66,35 +66,35 @@
 </script>
 
 <div>
-  <button on:click={exportJson}>Export JSON</button><br><br>
-  <button on:click={exportCsv}>Export CSV</button><br><br><br>
-  <input accept=".csv, .json, .txt" bind:this={fileInput} on:change={importFile} type="file">
-  <button on:click={importButton}>Import</button>
+  <button on:click={ exportJson } type="button">Export JSON</button><br><br>
+  <button on:click={ exportCsv } type="button">Export CSV</button><br><br><br>
+  <input accept=".csv, .json, .txt" bind:this={ fileInput } on:change={ importFile } type="file">
+  <button on:click={ importButton } type="button">Import</button>
   <label>
     <input
-      bind:checked={overwrite}
+      bind:checked={ overwrite }
       on:change={ () => { sendEvent('Utils', 'overwriteToggle'); } }
       type="checkbox"
     >
     Overwrite
   </label>
   (Warning: This can take a while on large files)<br><br><br>
-  <button disabled={!purgedate} on:click={datePurge}>Purge</button>
+  <button disabled={ !purgedate } on:click={ datePurge } type="button">Purge</button>
   data before
   <input
-    bind:value={purgedate}
+    bind:value={ purgedate }
     on:change={ () => { sendEvent('Utils', 'purgeDateChange'); } }
     type="date"
   ><br><br>
-  <button on:click={userPurge} {disabled}>Purge</button>
+  <button on:click={ userPurge } { disabled } type="button">Purge</button>
   username
   <select
     bind:value={ selected }
     on:change={ () => { sendEvent('Utils', 'handleChange'); } }
-    {disabled}
+    { disabled }
   >
     { #each missing as user }
-      <option value="{user}">{ user }</option>
+      <option value="{ user }">{ user }</option>
     { /each }
   </select>
 </div>

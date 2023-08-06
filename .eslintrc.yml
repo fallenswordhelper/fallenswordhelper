@@ -15,6 +15,18 @@ overrides:
           - 'svelte/transition'
           - 'svelte-virtual-scroll-list'
       import/prefer-default-export: off
+      svelte/button-has-type:
+        - error
+      svelte/indent:
+        - error
+      svelte/mustache-spacing:
+        - error
+        - textExpressions: always
+          attributesAndProps: always
+          directiveExpressions: always
+          tags:
+            openingBrace: always
+            closingBrace: always
   - files:
     - 'scripts/*.js'
     rules:
@@ -35,7 +47,7 @@ overrides:
         - js: always
 extends:
   - 'airbnb-base'
-  - 'plugin:svelte/base'
+  - 'plugin:svelte/recommended'
 globals:
   Audio: readonly
   Blob: readonly

@@ -49,15 +49,15 @@
 </script>
 
 <div class="folderButtons">
-  <FolderButtons {folders} on:filter={doFilter}/>
+  <FolderButtons { folders } on:filter={ doFilter }/>
 </div>
 <div class="vs">
   <VirtualScroll
-    data={items}
+    data={ items }
     key="a"
-    keeps="{Math.floor(getHeightGuess() / 22)}"
+    keeps="{ Math.floor(getHeightGuess() / 22) }"
     estimateSize="30"
-    let:data={item}
+    let:data={ item }
   >
     <div class="headGrid" slot="header">
       <div class="headOne">Actions</div>
@@ -65,34 +65,34 @@
     </div>
     <div class="grid">
       <div class="actionButtons">
-        {#if item.used}
-          <span class="itemUsed">{item.used}</span>
-        {:else}
+        { #if item.used }
+          <span class="itemUsed">{ item.used }</span>
+        { :else }
           <span class="equippable">
-            {#if item.equip}
+            { #if item.equip }
               <span class="fshSpinner fshSpin12"></span>
-            {:else}
-              <LinkButton disabled={!item.eq} on:click={() => doWear(item.a)}>Wear</LinkButton>
-            {/if}
+            { :else }
+              <LinkButton disabled={ !item.eq } on:click={ () => doWear(item.a) }>Wear</LinkButton>
+            { /if }
           </span>
           |
           <span class="usable">
-            {#if item.use}
+            { #if item.use }
               <span class="fshSpinner fshSpin12"></span>
-            {:else}
+            { :else }
               <LinkButton
-                disabled={item.eq || !(item.u && !item.c)}
-                on:click={() => doUse(item.a)}
+                disabled={ item.eq || !(item.u && !item.c) }
+                on:click={ () => doUse(item.a) }
               >Use/Ext</LinkButton>
-            {/if}
+            { /if }
           </span>
-        {/if}
+        { /if }
       </div>
       <div>
-        <ItemImg {item} small=1 t=0/>
+        <ItemImg { item } small=1 t=0/>
       </div>
       <div>
-        {item.n}
+        { item.n }
       </div>
     </div>
   </VirtualScroll>

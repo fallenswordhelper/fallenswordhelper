@@ -43,14 +43,14 @@
 </script>
 
 <div class="main">
-  { #await init() then}
+  { #await init() then }
     <div class="grid head">
       <div>Date</div>
       <div>
         Member
         <select bind:value={ selected } on:change={ handleChange }>
           { #each members as member }
-            <option value="{member}">{ member }</option>
+            <option value="{ member }">{ member }</option>
           { /each }
         </select>
       </div>

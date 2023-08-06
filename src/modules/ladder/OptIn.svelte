@@ -29,25 +29,25 @@
       PvP Ladder Opt-in:
     </span>
   </td>
-  {#await init()}
+  { #await init() }
     <td>
       <div>
         <span class="fshSpinner fshSpinner12"></span>
       </div>
     </td>
-  {:then}
-    {#if isBoolean(opt)}
+  { :then}
+    { #if isBoolean(opt) }
       <td>
-        {#await togglePromise}
+        { #await togglePromise }
           <div>
             <span class="fshSpinner fshSpinner12"></span>
           </div>
-        {:then}
-          <input type="checkbox" bind:checked={opt} on:click="{toggle}">
-        {/await}
+        { :then}
+          <input type="checkbox" bind:checked={ opt } on:click="{ toggle }">
+        { /await }
       </td>
-    {/if}
-  {/await}
+    { /if }
+  { /await }
 </tr>
 
 <style>
