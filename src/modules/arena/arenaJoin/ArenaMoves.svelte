@@ -27,7 +27,7 @@
 
 <div class="ams">
   <select bind:value={selected} on:change={handleChange}>
-    {#each sets as {id, name}}
+    {#each sets as { id, name }}
       <option value="{id}">{name}</option>
     {/each}
   </select>

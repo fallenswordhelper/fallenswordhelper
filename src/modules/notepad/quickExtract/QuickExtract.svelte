@@ -140,7 +140,9 @@
           </td>
         </tr>
         {#await prm then}
-          {#each toExtract as { count, delPending, item_name: name, style, tip }, index}
+          {#each toExtract as {
+            count, delPending, item_name: name, style, tip,
+          }, index}
             <tr>
               <td class:delPending>
                 {#if count}

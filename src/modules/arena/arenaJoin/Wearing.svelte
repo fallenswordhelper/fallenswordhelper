@@ -51,7 +51,7 @@
       <div class="flex">
         Inventory
         <select bind:value={selected} on:change={handleChange}>
-          {#each combatSets as {id, name}}
+          {#each combatSets as { id, name }}
             <option value="{id}">{name}</option>
           {/each}
         </select>

@@ -22,7 +22,12 @@
 
 <tr>
   <td>
-    <span data-tooltip="Ticking this box opts you in to the PVP Ladder, unticking it will remove you from the PVP Ladder.">PvP Ladder Opt-in:</span>
+    <span
+      data-tooltip="Ticking this box opts you in to the PVP Ladder,
+        unticking it will remove you from the PVP Ladder."
+    >
+      PvP Ladder Opt-in:
+    </span>
   </td>
   {#await init()}
     <td>
@@ -30,7 +35,7 @@
         <span class="fshSpinner fshSpinner12"></span>
       </div>
     </td>
-  {:then result}
+  {:then}
     {#if isBoolean(opt)}
       <td>
         {#await togglePromise}

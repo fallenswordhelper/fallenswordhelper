@@ -63,7 +63,9 @@ onDestroy(() => {
         Assumptions
       </div>
       <div class="assume">
-        Above calculations include Constitution, Fortitude, Nightmare Visage, Chi Strike, Sanctuary, Terrorize and Flinch bonus calculations (in that order) on both the defending group and attacking group.
+        Above calculations include Constitution, Fortitude, Nightmare Visage, Chi Strike, Sanctuary,
+        Terrorize and Flinch bonus calculations (in that order) on both the defending group and
+        attacking group.
       </div>
     {/if}
   </div>

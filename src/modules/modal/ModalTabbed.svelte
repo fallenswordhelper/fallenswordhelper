@@ -70,7 +70,7 @@ button {
   padding: 2px 4px 3px;
 }
 button:hover {
-	color: #381f00;
+  color: #381f00;
 }
 .active button {
   color: #381f00;

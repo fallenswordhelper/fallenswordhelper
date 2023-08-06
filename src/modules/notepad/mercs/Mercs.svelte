@@ -100,11 +100,17 @@ init();
     <div class="top-div">(<b>{available}</b> available for hire)</div>
     <div class="button-div">
       {#if !haveOffer}
-        <button class="custombutton" disabled={doingSomething} on:click={getOffer} type="button">Send Expedition ({cost}g)</button>
+        <button class="custombutton" disabled={doingSomething} on:click={getOffer} type="button">
+          Send Expedition ({cost}g)
+        </button>
       {:else}
-        <button class="custombutton" disabled={doingSomething} on:click={doAccept} type="button">Accept Offer</button>
+        <button class="custombutton" disabled={doingSomething} on:click={doAccept} type="button">
+          Accept Offer
+        </button>
         &nbsp;
-        <button class="custombutton" disabled={doingSomething} on:click={doDecline} type="button">Decline Offer</button>
+        <button class="custombutton" disabled={doingSomething} on:click={doDecline} type="button">
+          Decline Offer
+        </button>
       {/if}
     </div>
     <div class="result-div">
@@ -126,8 +132,10 @@ init();
                 <b>{addCommas(haveOffer.gold)}</b>
                 <img alt="Gold" class="gold" src="https://cdn2.fallensword.com/currency/0.png">
               </div>
-              <div>Hire Time:</div><div><b>{haveOffer.hire_time / 3600}</b> hour(s)</div>
-              <div>Offer Time Left:</div><div><b>{haveOffer.hours}</b> hour(s) <b>{haveOffer.mins}</b> min(s)</div>
+              <div>Hire Time:</div>
+              <div><b>{haveOffer.hire_time / 3600}</b> hour(s)</div>
+              <div>Offer Time Left:</div>
+              <div><b>{haveOffer.hours}</b> hour(s) <b>{haveOffer.mins}</b> min(s)</div>
             </div>
           </div>
           <div class="attribs">
@@ -153,14 +161,17 @@ init();
     <div class="lower-div">
       <div class="active">
         {#if active.length}
-          {#each active as { attributes, class: className, id, level, name, type, hours, mins }}
+          {#each active as {
+            attributes, class: className, id, level, name, type, hours, mins,
+          }}
             <div class="active-merc">
               <div><b>{name}</b></div>
               <div>
                 <img
                   alt="alt"
                   class="tip-static"
-                  data-tipped="<div style=&quot;column-gap: 2px; display: grid; grid-template-columns: repeat(2, 1fr);&quot;>
+                  data-tipped="<div style=&quot;column-gap: 2px; display: grid;
+                      grid-template-columns: repeat(2, 1fr);&quot;>
                       <div>Name:</div><div>{name}</div>
                       <div>Level:</div><div>{level}</div>
                       <div>Classification:</div><div>{creatureClass[className]}</div>

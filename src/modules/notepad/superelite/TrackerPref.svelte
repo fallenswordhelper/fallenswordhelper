@@ -3,13 +3,19 @@ import sendEvent from '../../analytics/sendEvent';
 import setValue from '../../system/setValue';
 import trackerPrefStore from './trackerPrefStore';
 
+const net64 = 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAB3RJTUUH1'
+  + 'QgGDTMWk1twEwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAARnQU1BAACxjwv8YQUAAAC8SURBVHjahVPBEcQgCEQnHdmTqUl'
+  + 'r0qe16I8cufOiCGZnGCcIy4LEICJwmGgWJ3o0IOCQEqVg9Y4U3CoCHQhvxuPUZEiA3XYkxyI1/6S6R6rke8AlJbkV7u95l'
+  + 'leXq3yrdyUjLGxwnifmnHEXY3fJIQSIMcKOZCLgMltrr+1ZWgxp8wi1VrEqxfeFWloYq4wKtOHeBNqeawqmeOnNvfdYSvk'
+  + 'bfaeUxP0w/G+k6WsT/xCBc25SuxDsnownEy4u5BHudpMFegAAAABJRU5ErkJggg==")';
+
 function toggle(evt) {
   sendEvent('SE Tracker', 'Toggle Pref');
   setValue('enableSeTracker', evt.target.checked);
 }
 </script>
 
-<span class="network"></span>
+<span class="network" style:background-image={ net64 }></span>
 <label>
   Enable SE Tracker
   [&thinsp;<div class="tooltip">
@@ -19,7 +25,8 @@ function toggle(evt) {
       <div>
         If enabled, will track the last time each SE was killed.<br>
         This is DIFFERENT from the usual FSH network activity.<br>
-        When this is enabled, if you have ANY game page open in a browser tab it will scan the SE Log every 10 minutes.<br>
+        When this is enabled, if you have ANY game page open in a browser tab it will scan the SE
+        Log every 10 minutes.<br>
         You do not need auto-refresh for this to work.
       </div>
     </div>
@@ -77,7 +84,6 @@ function toggle(evt) {
 }
 
 .network {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAB3RJTUUH1QgGDTMWk1twEwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAARnQU1BAACxjwv8YQUAAAC8SURBVHjahVPBEcQgCEQnHdmTqUlr0qe16I8cufOiCGZnGCcIy4LEICJwmGgWJ3o0IOCQEqVg9Y4U3CoCHQhvxuPUZEiA3XYkxyI1/6S6R6rke8AlJbkV7u95lleXq3yrdyUjLGxwnifmnHEXY3fJIQSIMcKOZCLgMltrr+1ZWgxp8wi1VrEqxfeFWloYq4wKtOHeBNqeawqmeOnNvfdYSvkbfaeUxP0w/G+k6WsT/xCBc25SuxDsnownEy4u5BHudpMFegAAAABJRU5ErkJggg==");
   height: 13px;
   width: 13px;
 }

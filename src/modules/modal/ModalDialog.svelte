@@ -2,7 +2,7 @@
 <!-- uses bits of https://svelte.dev/repl/514f1335749a4eae9d34ad74dc277f20 -->
 
 <script context="module">
-	let onTop;
+  let onTop;
 </script>
 
 <script>
