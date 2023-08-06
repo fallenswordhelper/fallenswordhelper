@@ -8,9 +8,12 @@ overrides:
   - files:
     - '*.svelte'
     rules:
-      no-label-var: off
-      import/first: off
       import/no-mutable-exports: off
+      import/no-unresolved:
+        - error
+        - ignore:
+          - 'svelte/transition'
+          - 'svelte-virtual-scroll-list'
       import/prefer-default-export: off
   - files:
     - 'scripts/*.js'
@@ -19,6 +22,9 @@ overrides:
         - error
         - ignorePackages
         - js: always
+      import/no-extraneous-dependencies:
+        - error
+        - packageDir: './'
       no-console: off
   - files:
     - 'lws.config.js'
@@ -68,16 +74,11 @@ globals:
   gtag: readonly
 rules:
   consistent-return: off # 74
-  import/no-extraneous-dependencies:
-    - error
-    - packageDir: './'
   import/no-unresolved:
     - error
     - ignore:
       - '_CALFJS'
       - 'svelte/store'
-      - 'svelte/transition'
-      - 'svelte-virtual-scroll-list'
   import/order:
     - error
     - alphabetize:
