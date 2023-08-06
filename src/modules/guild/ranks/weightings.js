@@ -41,9 +41,10 @@ function parseRankData(memberRanks, row) {
   const rankName = getText(rankCell.firstChild); // Text Node
   const thisRank = memberRanks.find((r) => r && r.name === rankName);
   if (thisRank) {
+    console.log('thisRank', thisRank);
     insertHtmlAfterBegin(rankCell, `<span class="fshBlue">(${
       calcPermWeight(thisRank.permissions)
-    }) Tax:(${thisRank.tax || 0}%)</span> `);
+    }) Tax:(${thisRank.tax ?? 0}%)</span> `);
   }
 }
 
