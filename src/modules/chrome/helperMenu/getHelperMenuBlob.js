@@ -10,7 +10,7 @@ const devSection = '<div class="helperMenuSectionHeader">Dev links</div>'
   + '<ul></ul>';
 
 const character = '<div class="helperMenuSectionHeader">Character</div><ul>'
-  + '<li><span class="fshLink">Buff Log</span></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">Buff Log</button></li>'
   + '<li><span class="fshLink">Combat Log</span></li>'
   + '<li><span class="fshLink">Creature Log</span></li>'
   + '<li><span class="fshLink">Recipe Manager</span></li>'

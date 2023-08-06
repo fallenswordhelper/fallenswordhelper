@@ -1,8 +1,8 @@
+import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
 import fsboxlog from '../pageSwitcher/loader/fsboxlog';
 import guildTracker from '../pageSwitcher/loader/guildTracker';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
-import injectBuffLog from '../pageSwitcher/loader/injectBuffLog';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
@@ -16,7 +16,7 @@ import superelite from '../pageSwitcher/loader/superelite';
 import gsDl from './gsDl';
 
 export default {
-  'Buff Log': injectBuffLog,
+  'Buff Log': buffLog,
   'Combat Log': combatLog,
   'Creature Log': monstorLog,
   'Recipe Manager': recipeMgr,
