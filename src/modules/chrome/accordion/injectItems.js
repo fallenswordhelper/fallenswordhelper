@@ -8,9 +8,9 @@ import {
   profileUrl,
 } from '../../support/constants';
 import getValue from '../../system/getValue';
+import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
-import injectBuffLog from '../pageSwitcher/loader/injectBuffLog';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
@@ -27,7 +27,7 @@ const buttons = [
   [(linkConfig) => linkConfig.medalGuideLink,
     '1', 'Medal Guide', `${profileUrl}${defSubcmd}medalguide`, 'nav-character-log'],
   [(linkConfig) => linkConfig.buffLogLink && getValue('keepBuffLog'),
-    '1', 'Buff Log', injectBuffLog, 'nav-character-log'],
+    '1', 'Buff Log', buffLog, 'nav-character-log'],
   [(linkConfig) => linkConfig.combatLogLink && getValue('keepLogs'),
     '1', 'Combat Logs', combatLog, 'nav-character-notepad'],
   [(linkConfig) => linkConfig.creatureLogLink && getValue('showMonsterLog'),
@@ -56,11 +56,13 @@ function extraButtons(linkConfig) {
   });
 }
 
+// zero maps to null
+const subItems = (li) => (querySelectorArray('li', li).length * 22) || null; // skipcq: JS-W1043
+
 function adjustHeight(theNav, myNav) {
   // first the closed saved variables
   // eslint-disable-next-line no-param-reassign
-  myNav.heights = querySelectorArray('#nav > li') // skipcq: JS-0083
-    .map((li) => (querySelectorArray('li', li).length * 22) || null);
+  myNav.heights = querySelectorArray('#nav > li').map(subItems); // skipcq: JS-0083
   const index = Number(myNav.state);
   if (index && index > -1 && index < theNav.children.length) {
     // and now the open one

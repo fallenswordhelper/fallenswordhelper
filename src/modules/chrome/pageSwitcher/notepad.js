@@ -1,9 +1,9 @@
 import runDefault from '../../common/runDefault';
 import calf from '../../support/calf';
+import buffLog from './loader/buffLog';
 import combatLog from './loader/combatLog';
 import fsboxlog from './loader/fsboxlog';
 import injectAuctionSearch from './loader/injectAuctionSearch';
-import injectBuffLog from './loader/injectBuffLog';
 import injectFindBuffs from './loader/injectFindBuffs';
 import injectFindOther from './loader/injectFindOther';
 import injectOnlinePlayers from './loader/injectOnlinePlayers';
@@ -34,7 +34,7 @@ const notepad = {
   quickextract: { '-': quickExtract },
   quickwear: { '-': quickwear },
   fsboxcontent: { '-': fsboxlog },
-  bufflogcontent: { '-': injectBuffLog },
+  bufflogcontent: { '-': buffLog },
   newguildlog: { '-': newGuildLog }, // active
   findbuffs: { '-': injectFindBuffs },
   findother: { '-': injectFindOther },
