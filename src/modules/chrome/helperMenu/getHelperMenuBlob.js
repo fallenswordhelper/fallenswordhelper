@@ -7,11 +7,12 @@ import getValue from '../../system/getValue';
 const leadIn = '<div class="helperMenuColumn">';
 
 const devSection = '<div class="helperMenuSectionHeader">Dev links</div>'
-  + '<ul></ul>';
+  + '<ul>'
+  + '</ul>';
 
 const character = '<div class="helperMenuSectionHeader">Character</div><ul>'
   + '<li><button class="helperDevBtn helperGo" type="button">Buff Log</button></li>'
-  + '<li><span class="fshLink">Combat Log</span></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">Combat Log</button></li>'
   + '<li><span class="fshLink">Creature Log</span></li>'
   + '<li><span class="fshLink">Recipe Manager</span></li>'
   + '<li><span class="fshLink">Quick Links</span></li>'
