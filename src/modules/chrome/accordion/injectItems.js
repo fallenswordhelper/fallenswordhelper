@@ -56,11 +56,13 @@ function extraButtons(linkConfig) {
   });
 }
 
+// zero maps to null
+const subItems = (li) => (querySelectorArray('li', li).length * 22) || null; // skipcq: JS-W1043
+
 function adjustHeight(theNav, myNav) {
   // first the closed saved variables
   // eslint-disable-next-line no-param-reassign
-  myNav.heights = querySelectorArray('#nav > li') // skipcq: JS-0083
-    .map((li) => (querySelectorArray('li', li).length * 22) || null);
+  myNav.heights = querySelectorArray('#nav > li').map(subItems); // skipcq: JS-0083
   const index = Number(myNav.state);
   if (index && index > -1 && index < theNav.children.length) {
     // and now the open one
