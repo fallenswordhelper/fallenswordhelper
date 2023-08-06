@@ -43,7 +43,7 @@ function saveConfig() {
 
 function showLogs() {
   sendEvent('settingsPage', 'combatLog');
-  jQueryDialog(combatLog);
+  combatLog();
 }
 
 function showMonsterLogs() {
