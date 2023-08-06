@@ -4,6 +4,6 @@ import CombatLog from './CombatLog.svelte';
 const props = { visible: true };
 let thisModal = 0;
 
-export default function newCombatLog() {
+export default function combatLog() {
   thisModal = instantiate(props, thisModal, CombatLog);
 }
