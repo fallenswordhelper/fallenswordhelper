@@ -30,10 +30,7 @@ function wrapper(subclass, element) {
 }
 
 function injectLogButton(node) {
-  const logBtn = createButton({
-    textContent: 'Log',
-    type: 'button',
-  });
+  const logBtn = createButton({ textContent: 'Log' });
   onclick(logBtn, openLog);
   insertElement(node, wrapper('fs-box-log', logBtn));
 }

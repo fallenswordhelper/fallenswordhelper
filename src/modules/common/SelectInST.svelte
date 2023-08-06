@@ -16,7 +16,7 @@
 </script>
 
 <label>
-  <input bind:checked={inSt} on:change={toggleSelectST} type="checkbox">
+  <input bind:checked={ inSt } on:change={ toggleSelectST } type="checkbox">
   Select items in ST
 </label>
 

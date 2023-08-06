@@ -37,15 +37,15 @@
   onDestroy(() => clearTimeout(timeout)); // make sure we clean-up the timeout
 </script>
 
-{#if visible}
+{ #if visible }
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-  <div role="alert" on:click="{() => { visible = false; }}" transition:fly="{{
+  <div role="alert" on:click="{ () => { visible = false; } }" transition:fly="{ {
     delay: 250, duration: 300, x: 0, y: -100, opacity: 0.5,
-  }}" style:transform>
+  } }" style:transform>
     <p>{ $alert }</p>
   </div>
-{/if}
+{ /if }
 
 <style>
 div {

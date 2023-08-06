@@ -1,15 +1,15 @@
 <script>
-import sendEvent from '../analytics/sendEvent';
-import superelite from '../chrome/pageSwitcher/loader/superelite';
+  import sendEvent from '../analytics/sendEvent';
+  import superelite from '../chrome/pageSwitcher/loader/superelite';
 
-function open() {
-  sendEvent('superelite', 'moved');
-  superelite();
-}
+  function open() {
+    sendEvent('superelite', 'moved');
+    superelite();
+  }
 </script>
 
 <div>
-  <button on:click={open} type="button">SE Tracker</button> moved to Helper Menu
+  <button on:click={ open } type="button">SE Tracker</button> moved to Helper Menu
 </div>
 
 <style>

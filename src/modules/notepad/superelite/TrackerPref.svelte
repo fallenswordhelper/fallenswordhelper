@@ -1,18 +1,18 @@
 <script>
-import sendEvent from '../../analytics/sendEvent';
-import setValue from '../../system/setValue';
-import trackerPrefStore from './trackerPrefStore';
+  import sendEvent from '../../analytics/sendEvent';
+  import setValue from '../../system/setValue';
+  import trackerPrefStore from './trackerPrefStore';
 
-const net64 = 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAB3RJTUUH1'
-  + 'QgGDTMWk1twEwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAARnQU1BAACxjwv8YQUAAAC8SURBVHjahVPBEcQgCEQnHdmTqUl'
-  + 'r0qe16I8cufOiCGZnGCcIy4LEICJwmGgWJ3o0IOCQEqVg9Y4U3CoCHQhvxuPUZEiA3XYkxyI1/6S6R6rke8AlJbkV7u95l'
-  + 'leXq3yrdyUjLGxwnifmnHEXY3fJIQSIMcKOZCLgMltrr+1ZWgxp8wi1VrEqxfeFWloYq4wKtOHeBNqeawqmeOnNvfdYSvk'
-  + 'bfaeUxP0w/G+k6WsT/xCBc25SuxDsnownEy4u5BHudpMFegAAAABJRU5ErkJggg==")';
+  const net64 = 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAB3RJTUUH1'
+    + 'QgGDTMWk1twEwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAARnQU1BAACxjwv8YQUAAAC8SURBVHjahVPBEcQgCEQnHdmTqUl'
+    + 'r0qe16I8cufOiCGZnGCcIy4LEICJwmGgWJ3o0IOCQEqVg9Y4U3CoCHQhvxuPUZEiA3XYkxyI1/6S6R6rke8AlJbkV7u95l'
+    + 'leXq3yrdyUjLGxwnifmnHEXY3fJIQSIMcKOZCLgMltrr+1ZWgxp8wi1VrEqxfeFWloYq4wKtOHeBNqeawqmeOnNvfdYSvk'
+    + 'bfaeUxP0w/G+k6WsT/xCBc25SuxDsnownEy4u5BHudpMFegAAAABJRU5ErkJggg==")';
 
-function toggle(evt) {
-  sendEvent('SE Tracker', 'Toggle Pref');
-  setValue('enableSeTracker', evt.target.checked);
-}
+  function toggle(evt) {
+    sendEvent('SE Tracker', 'Toggle Pref');
+    setValue('enableSeTracker', evt.target.checked);
+  }
 </script>
 
 <span class="network" style:background-image={ net64 }></span>
@@ -31,7 +31,7 @@ function toggle(evt) {
       </div>
     </div>
   </div>&thinsp;]:
-  <input bind:checked={$trackerPrefStore} on:click={toggle} type="checkbox">
+  <input bind:checked={ $trackerPrefStore } on:click={ toggle } type="checkbox">
 </label>
 
 <style>

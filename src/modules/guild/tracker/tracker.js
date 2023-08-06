@@ -33,10 +33,7 @@ export default function tracker() {
     innerHTML: `${simpleCheckboxHtml(defEnableGuildActivityTracker)}&nbsp;`,
   });
   on(myDiv, 'change', togglePref);
-  const myBtn = createButton({
-    textContent: 'Show',
-    type: 'button',
-  });
+  const myBtn = createButton({ textContent: 'Show' });
   onclick(myBtn, showTracker);
   insertElement(myDiv, myBtn);
   insertElement(td, myDiv);

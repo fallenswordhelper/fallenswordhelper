@@ -12,7 +12,13 @@
   const tipped = (i) => `fetchitem.php?item_id=${i.b}&inv_id=${i.a}&t=${t}&p=${playerId()}`;
 </script>
 
-<img alt="{item.n}" class:small class="tip-dynamic" data-tipped="{tipped(item)}" src="{src(item)}">
+<img
+  alt="{ item.n }"
+  class:small
+  class="tip-dynamic"
+  data-tipped="{ tipped(item) }"
+  src="{ src(item) }"
+>
 
 <style>
   img {

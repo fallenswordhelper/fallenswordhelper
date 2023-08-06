@@ -15,7 +15,7 @@
 </script>
 
 <Modal { visible } on:close bind:modal>
-  <div class="modal-title" bind:this={header}>
+  <div class="modal-title" bind:this={ header }>
     <slot name="title" />
     <ModalCloseButton on:close />
   </div>

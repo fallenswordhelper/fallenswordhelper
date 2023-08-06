@@ -57,7 +57,6 @@ function injectWeightButton(theRows, memberRanks, addNewRank) {
   const weightButton = createButton({
     className: 'fshBl fsh-bli',
     textContent: 'Get Rank Weightings',
-    type: 'button',
   });
   once(weightButton, 'click', partial(fetchRankData, theRows, memberRanks));
   insertElement(container, weightButton);

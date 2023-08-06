@@ -23,8 +23,8 @@
 
 <div>
   <span>Recall all visible to:</span>
-  <button class="custombutton" on:click={toBp} type="button">BP</button>
-  <button class="custombutton" on:click={toGs} type="button">GS</button>
+  <button class="custombutton" on:click={ toBp } type="button">BP</button>
+  <button class="custombutton" on:click={ toGs } type="button">GS</button>
 </div>
 
 <style>

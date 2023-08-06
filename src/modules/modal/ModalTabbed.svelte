@@ -1,11 +1,11 @@
 <script>
-import ModalTitled from './ModalTitled.svelte';
+  import ModalTitled from './ModalTitled.svelte';
 
-export let activeTabValue = 0;
-export let tabs = [];
-export let visible = true;
+  export let activeTabValue = 0;
+  export let tabs = [];
+  export let visible = true;
 
-const handleClick = (tabIndex) => () => { activeTabValue = tabIndex; };
+  const handleClick = (tabIndex) => () => { activeTabValue = tabIndex; };
 </script>
 
 <ModalTitled { visible } on:close>

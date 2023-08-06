@@ -8,13 +8,13 @@
 </script>
 
 <div>
-  <div class="top">{title}</div>
+  <div class="top">{ title }</div>
   <div class="bottom">
-    {#if typeof flag === 'boolean'}
-      <img alt="Flag" src="{cdn}ui/arena/specials_{boolToString(flag)}.png">
-    {:else}
-      {flag}
-    {/if}
+    { #if typeof flag === 'boolean' }
+      <img alt="Flag" src="{ cdn }ui/arena/specials_{ boolToString(flag) }.png">
+    { :else }
+      { flag }
+    { /if }
   </div>
 </div>
 
