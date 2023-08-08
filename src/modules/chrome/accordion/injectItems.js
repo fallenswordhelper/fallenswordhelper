@@ -10,12 +10,12 @@ import {
 import getValue from '../../system/getValue';
 import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
+import creatureLog from '../pageSwitcher/loader/creatureLog';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
 import injectQuickLinkManager from '../pageSwitcher/loader/injectQuickLinkManager';
-import monstorLog from '../pageSwitcher/loader/monstorLog';
 import recipeMgr from '../pageSwitcher/loader/recipeMgr';
 import anchorButton from './anchorButton';
 
@@ -31,7 +31,7 @@ const buttons = [
   [(linkConfig) => linkConfig.combatLogLink && getValue('keepLogs'),
     '1', 'Combat Logs', combatLog, 'nav-character-notepad'],
   [(linkConfig) => linkConfig.creatureLogLink && getValue('showMonsterLog'),
-    '1', 'Creature Logs', monstorLog, 'nav-character-notepad'],
+    '1', 'Creature Logs', creatureLog, 'nav-character-notepad'],
   [(linkConfig) => linkConfig.quickLinksLink,
     '1', 'Quick Links', injectQuickLinkManager, 'nav-character-notepad'],
   [(linkConfig) => linkConfig.auctionSearchLink,
