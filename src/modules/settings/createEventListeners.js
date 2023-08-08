@@ -1,8 +1,7 @@
 import dynamicAlert from '../alert/dynamicAlert';
 import sendEvent from '../analytics/sendEvent';
-import jQueryDialog from '../chrome/jQueryDialog/jQueryDialog';
 import combatLog from '../chrome/pageSwitcher/loader/combatLog';
-import monstorLog from '../chrome/pageSwitcher/loader/monstorLog';
+import creatureLog from '../chrome/pageSwitcher/loader/creatureLog';
 import closestTr from '../common/closestTr';
 import eventHandler5 from '../common/eventHandler5';
 import getElementById from '../common/getElementById';
@@ -48,7 +47,7 @@ function showLogs() {
 
 function showMonsterLogs() {
   sendEvent('settingsPage', 'injectMonsterLog');
-  jQueryDialog(monstorLog);
+  creatureLog();
 }
 
 function resetFootprintColor() {

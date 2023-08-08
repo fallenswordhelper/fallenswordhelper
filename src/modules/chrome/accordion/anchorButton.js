@@ -12,7 +12,7 @@ import jQueryDialog from '../jQueryDialog/jQueryDialog';
 
 function openDialog(text, fn) {
   sendEvent('accordion', text);
-  if (['Buff Log', 'Combat Logs'].includes(text)) fn();
+  if (['Buff Log', 'Combat Logs', 'Creature Logs'].includes(text)) fn();
   else jQueryDialog(fn);
 }
 

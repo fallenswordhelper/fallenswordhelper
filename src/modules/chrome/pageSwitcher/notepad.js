@@ -2,13 +2,13 @@ import runDefault from '../../common/runDefault';
 import calf from '../../support/calf';
 import buffLog from './loader/buffLog';
 import combatLog from './loader/combatLog';
+import creatureLog from './loader/creatureLog';
 import fsboxlog from './loader/fsboxlog';
 import injectAuctionSearch from './loader/injectAuctionSearch';
 import injectFindBuffs from './loader/injectFindBuffs';
 import injectFindOther from './loader/injectFindOther';
 import injectOnlinePlayers from './loader/injectOnlinePlayers';
 import injectQuickLinkManager from './loader/injectQuickLinkManager';
-import monstorLog from './loader/monstorLog';
 import quickExtract from './loader/quickExtract';
 import quickwear from './loader/quickwear';
 import recipeMgr from './loader/recipeMgr';
@@ -30,7 +30,7 @@ const notepad = {
   auctionsearch: { '-': injectAuctionSearch },
   onlineplayers: { '-': injectOnlinePlayers },
   quicklinkmanager: { '-': injectQuickLinkManager },
-  monsterlog: { '-': monstorLog },
+  monsterlog: { '-': creatureLog },
   quickextract: { '-': quickExtract },
   quickwear: { '-': quickwear },
   fsboxcontent: { '-': fsboxlog },
