@@ -15,7 +15,7 @@ const character = '<div class="helperMenuSectionHeader">Character</div><ul>'
   + '<li><button class="helperDevBtn helperGo" type="button">Combat Log</button></li>'
   + '<li><button class="helperDevBtn helperGo" type="button">Creature Log</button></li>'
   + '<li><span class="fshLink">Recipe Manager</span></li>'
-  + '<li><span class="fshLink">Quick Links</span></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">Quick Links</button></li>'
   + `<li><a href="${notepadBlankUrl}invmanagernew">Inventory Manager</a></li>`
   + '</ul>';
 

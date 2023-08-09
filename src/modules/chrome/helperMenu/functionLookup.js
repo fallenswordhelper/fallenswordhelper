@@ -7,9 +7,9 @@ import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
-import injectQuickLinkManager from '../pageSwitcher/loader/injectQuickLinkManager';
 import mercs from '../pageSwitcher/loader/mercs';
 import quickExtract from '../pageSwitcher/loader/quickExtract';
+import quickLinksManager from '../pageSwitcher/loader/quickLinksManager';
 import quickwear from '../pageSwitcher/loader/quickwear';
 import recipeMgr from '../pageSwitcher/loader/recipeMgr';
 import superelite from '../pageSwitcher/loader/superelite';
@@ -20,7 +20,7 @@ export default {
   'Combat Log': combatLog,
   'Creature Log': creatureLog,
   'Recipe Manager': recipeMgr,
-  'Quick Links': injectQuickLinkManager,
+  'Quick Links': quickLinksManager,
   'Find Buffs': injectFindBuffs,
   'Find Other': injectFindOther,
   'Online Players': injectOnlinePlayers,

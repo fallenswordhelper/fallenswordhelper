@@ -15,7 +15,7 @@ import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
-import injectQuickLinkManager from '../pageSwitcher/loader/injectQuickLinkManager';
+import quickLinksManager from '../pageSwitcher/loader/quickLinksManager';
 import recipeMgr from '../pageSwitcher/loader/recipeMgr';
 import anchorButton from './anchorButton';
 
@@ -33,7 +33,7 @@ const buttons = [
   [(linkConfig) => linkConfig.creatureLogLink && getValue('showMonsterLog'),
     '1', 'Creature Logs', creatureLog, 'nav-character-notepad'],
   [(linkConfig) => linkConfig.quickLinksLink,
-    '1', 'Quick Links', injectQuickLinkManager, 'nav-character-notepad'],
+    '1', 'Quick Links', quickLinksManager, 'nav-character-notepad'],
   [(linkConfig) => linkConfig.auctionSearchLink,
     '2', 'AH Quick Search', injectAuctionSearch, 'nav-actions-trade-auctionhouse'],
   [(linkConfig) => linkConfig.onlinePlayersLink,
