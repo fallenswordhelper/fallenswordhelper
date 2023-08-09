@@ -9,12 +9,10 @@ import selfIdIs from '../../common/selfIdIs';
 import setInnerHtml from '../../dom/setInnerHtml';
 import defaults from '../../support/dataObj.json';
 import { pcc } from '../../support/layout';
-import getValueJSON from '../../system/getValueJSON';
 import isChecked from '../../system/isChecked';
 import setValueJSON from '../../system/setValueJSON';
 import { auctionSearchBlurb, auctionSearchParams } from './assets';
 import makePageHeader from './makePageHeader';
-import makePageTemplate from './makePageTemplate';
 
 let param = 0;
 
@@ -151,36 +149,12 @@ function setupEventHandler(content) {
   onclick(content, eventHandler5(listEvents()));
 }
 
-export function injectAuctionSearch(injector) { // Legacy
+export default function injectAuctionSearch(injector) { // Legacy
   const content = injector || pcc();
   setInnerHtml(makePageHeader('Trade Hub Quick Search', '', '', '')
     + auctionSearchBlurb, content);
   // global parameters for the meta function generateManageTable
   param = auctionSearchParams();
-  generateManageTable();
-  setupEventHandler(content);
-}
-
-export function injectQuickLinkManager(injector) { // Legacy
-  const content = injector || pcc();
-  setInnerHtml(makePageTemplate({
-    title: 'Quick Links',
-    comment: '',
-    spanId: '',
-    button: '',
-    divId: 'qla',
-  }), content);
-
-  // global parameters for the meta function generateManageTable
-  param = {
-    id: 'qla',
-    headers: ['Name', 'URL',
-      'New [<span class="fshLink" data-tooltip="Open page in a new window">?</span>]'],
-    fields: ['name', 'url', 'newWindow'],
-    tags: ['text', 'text', 'checkbox'],
-    currentItems: getValueJSON('quickLinks') || [],
-    gmname: 'quickLinks',
-  };
   generateManageTable();
   setupEventHandler(content);
 }

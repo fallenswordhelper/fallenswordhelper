@@ -8,8 +8,8 @@ import injectAuctionSearch from './loader/injectAuctionSearch';
 import injectFindBuffs from './loader/injectFindBuffs';
 import injectFindOther from './loader/injectFindOther';
 import injectOnlinePlayers from './loader/injectOnlinePlayers';
-import injectQuickLinkManager from './loader/injectQuickLinkManager';
 import quickExtract from './loader/quickExtract';
+import quickLinksManager from './loader/quickLinksManager';
 import quickwear from './loader/quickwear';
 import recipeMgr from './loader/recipeMgr';
 
@@ -29,7 +29,7 @@ const notepad = {
   recipemanager: { '-': recipeMgr },
   auctionsearch: { '-': injectAuctionSearch },
   onlineplayers: { '-': injectOnlinePlayers },
-  quicklinkmanager: { '-': injectQuickLinkManager },
+  quicklinkmanager: { '-': quickLinksManager },
   monsterlog: { '-': creatureLog },
   quickextract: { '-': quickExtract },
   quickwear: { '-': quickwear },

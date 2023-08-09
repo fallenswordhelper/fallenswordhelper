@@ -115,6 +115,7 @@ async function runCore(cssPrm) {
 
 const envTests = [
   () => !('containerName' in CSSContainerRule.prototype),
+  () => !('toSpliced' in Array.prototype),
   () => !navigator.cookieEnabled,
   () => window !== window.parent,
   isAuto,
