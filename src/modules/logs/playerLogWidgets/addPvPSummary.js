@@ -14,7 +14,7 @@ const green = 'fshGreen';
 const red = 'fshRed';
 const isPvp = ([, r]) => querySelector(playerLinkSelector, r);
 const getCombats = async ([cl, r, msgHtml]) => [r, msgHtml, await getCombat(r, getId(cl))];
-const goodCombats = ([, , json]) => json && json.s;
+const goodCombats = ([, , json]) => json?.s;
 const filterSpecial = (el) => [18, 21, 31].includes(el.id);
 const specialSpan = (text) => `<span class="fshRed fshBold">${text}.</span>`;
 

@@ -1,14 +1,11 @@
 import getElementById from '../common/getElementById';
-import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
 
-function thisName(name, enhancement) {
-  return enhancement.name === name;
-}
+const thisName = (name) => (enhancement) => enhancement.name === name;
 
 function thisEnhancementLevel(enhancements, name) {
-  const thisEnhancement = enhancements.find(partial(thisName, name));
-  return (thisEnhancement && thisEnhancement.value) || 0;
+  const thisEnhancement = enhancements.find(thisName(name));
+  return thisEnhancement?.value ?? 0;
 }
 
 function getEnhancement(enhancements, name, inject) {

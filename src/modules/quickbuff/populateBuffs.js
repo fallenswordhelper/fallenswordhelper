@@ -28,7 +28,7 @@ function isAvailable(buff) {
 }
 
 function buffRunning(dict, buff) {
-  const secs = dict[buff] || 0;
+  const secs = dict[buff] ?? 0;
   if (secs) { return timeToExpire(secs); }
   return isAvailable(buff);
 }

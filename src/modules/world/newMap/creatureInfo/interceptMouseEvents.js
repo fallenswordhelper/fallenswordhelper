@@ -39,15 +39,18 @@ function displayJson(api, data) {
   api.set('content.text', content);
 }
 
+async function updateQTip(listItem, api) {
+  const passback = getIndex(listItem);
+  const creatureStats = await getCreatureStats(GameData.actions()[passback].data.id, passback);
+  if (!badData(creatureStats)) displayJson(api, creatureStats);
+}
+
 async function makeMouseOver(target, listItem) {
   sendEvent('NewMap', 'CreatureInfo');
   target.classList.add('fshTip');
   const tooltip = setQTip(target, 'Loading...');
   const api = tooltip.qtip('api');
-  if (!api) return;
-  const passback = getIndex(listItem);
-  const creatureStats = await getCreatureStats(GameData.actions()[passback].data.id, passback);
-  if (!badData(creatureStats)) displayJson(api, creatureStats);
+  if (api) updateQTip(listItem, api);
 }
 
 function isViewCreature(target, listItem) {

@@ -204,7 +204,7 @@ function toggleItem(target) {
 }
 
 function removeHide(el) {
-  if (el && el.classList) el.classList.remove('fshHide');
+  el?.classList?.remove('fshHide');
 }
 
 function show(r) {

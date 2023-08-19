@@ -9,8 +9,7 @@ import padZ from '../../system/padZ';
 import getRelicList from './getRelicList';
 
 function relicName(relic) {
-  return `<a href="${guideUrl}relics${defSubcmd}view&relic_id=${relic.id}">`
-    + `${relic.name}</a>`;
+  return `<a href="${guideUrl}relics${defSubcmd}view&relic_id=${relic.id}">${relic.name}</a>`;
 }
 
 function guildName(relicGuild) {
@@ -20,15 +19,12 @@ function guildName(relicGuild) {
   return '';
 }
 
-function attrib(id, att) { return att.id === id; }
-
-function stamGain(relic) {
-  return relic.attributes && relic.attributes.find(partial(attrib, 6));
-}
+const attrib = (id) => (att) => att.id === id;
+const stamGain = (relic) => relic?.attributes?.find(attrib(6));
 
 function makeAttrib(attribs, id) {
   if (attribs) {
-    const thisAttrib = attribs.find(partial(attrib, id));
+    const thisAttrib = attribs.find(attrib(id));
     if (thisAttrib) {
       return thisAttrib.value;
     }

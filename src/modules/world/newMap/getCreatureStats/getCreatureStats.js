@@ -25,8 +25,7 @@ export default async function getCreatureStats(id, passback) {
   const json = await fetchdata({
     a: 1,
     d: 0,
-    // id,
-    id: 0,
+    id,
     passback,
   });
   cacheResult(json);

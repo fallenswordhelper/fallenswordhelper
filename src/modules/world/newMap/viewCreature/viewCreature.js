@@ -179,16 +179,12 @@ function processPlayer(data, playerJson) {
   doCombatEval(data, playerJson, { groupExists: false });
 }
 
-function isValidData(data) {
-  return data.response && data.response.data;
-}
-
 async function processCreature(_e, data) {
   getDialogViewCreature();
   if (!dialogViewCreature) { return; }
   setCombatEvaluator('');
   setGroupEvalalutor('');
-  if (isValidData(data)) {
+  if (data?.response?.data) {
     makeDoNotKillLink(data.response.data.name, dialogViewCreature);
     const json = await myStats(true);
     if (json) processPlayer(data, json);
