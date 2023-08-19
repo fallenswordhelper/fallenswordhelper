@@ -1,13 +1,15 @@
+import all from '../../common/all';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
 import isNull from '../../common/isNull';
 import jsonParse from '../../common/jsonParse';
 import numberIsNaN from '../../common/numberIsNaN';
 import uniq from '../../common/uniq';
-import { get, set } from '../../system/idb';
+import { set } from '../../system/idb';
 import {
   act, cur, fshGuildActivity, gxp, lvl, max, utc, vl,
 } from './indexConstants';
+import { getActivity } from './utils';
 
 const flattenMember = ([name, ary]) => ary.map((rec) => [name, ...rec]);
 
@@ -92,8 +94,8 @@ function buildMembers(combined) {
 }
 
 export default async function fileImport(file, overwrite) {
-  const [raw, fileContent] = await Promise.all([
-    get(fshGuildActivity),
+  const [raw, fileContent] = await all([
+    getActivity(),
     file.text(),
   ]);
   const guildFlatActivity = overwrite ? [] : flatten(raw);

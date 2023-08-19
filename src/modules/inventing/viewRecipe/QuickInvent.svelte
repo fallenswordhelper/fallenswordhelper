@@ -33,7 +33,7 @@
       const prevData = await prev;
       if (!prevData || prevData.s === true) {
         const data = await daDoInvent(recipe);
-        if (data.s === false) errorMessage = data.e.message;
+        if (!data?.s) errorMessage = data?.e?.message ?? 'Server Error';
         else if (data.r.success_count > 0) successes += 1;
         else failures += 1;
         progress = 100 * ((successes + failures) / amountToInvent);

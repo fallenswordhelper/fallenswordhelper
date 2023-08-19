@@ -7,10 +7,11 @@ import lastActivityToDays from '../../common/lastActivityToDays';
 import numberIsNaN from '../../common/numberIsNaN';
 import { nowSecs } from '../../support/now';
 import fallback from '../../system/fallback';
-import { get, set } from '../../system/idb';
+import { set } from '../../system/idb';
 import {
   cur, fshGuildActivity, gxp, lvl, max, utc, vl,
 } from './indexConstants';
+import { getActivity } from './utils';
 
 const toActivityRecord = (member) => [
   member.name,
@@ -115,6 +116,6 @@ function checkLastUpdate(archive) {
 }
 
 export default async function guildActivity() {
-  const archive = await get(fshGuildActivity);
-  checkLastUpdate(archive ?? { lastUpdate: 0, members: {} });
+  const archive = await getActivity();
+  checkLastUpdate(archive);
 }

@@ -16,6 +16,7 @@ function getActivitySpan(myPlayer) {
 }
 
 export default function addStatsQuickBuff(data) {
+  if (!data) return;
   const myPlayer = querySelector(`div.player[data-username="${
     data.username}"]`);
   const activity = getActivitySpan(myPlayer);

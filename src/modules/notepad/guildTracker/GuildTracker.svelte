@@ -10,10 +10,10 @@
   import isNull from '../../common/isNull';
   import isUndefined from '../../common/isUndefined';
   import keys from '../../common/keys';
-  import { get } from '../../system/idb';
   import {
-    act, cur, fshGuildActivity, gxp, lvl, max, utc, vl,
+    act, cur, gxp, lvl, max, utc, vl,
   } from './indexConstants';
+  import { getActivity } from './utils';
 
   let activity = {};
   let members = [];
@@ -24,7 +24,7 @@
   );
 
   async function init() {
-    const raw = await get(fshGuildActivity);
+    const raw = await getActivity();
     activity = revSort(raw.members);
     members = keys(activity).sort(alpha);
     if (context) selected = context; else [selected] = members;
@@ -63,7 +63,7 @@
       <div>GXP</div>
     </div>
     <div class="grid items">
-      { #each activity[selected] as stuff }
+      { #each activity?.[selected] ?? [] as stuff }
         <div>{ formatUtcDateTime(new Date(stuff[utc] * 1000)) }</div>
         <div>{ selected }</div>
         <div>{ toText(stuff[lvl]) }</div>

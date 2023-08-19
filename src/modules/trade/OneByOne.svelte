@@ -33,11 +33,11 @@
 
   async function sendThem(targetPlayer, prm, item) {
     const data = await prm;
-    if (data.s) {
+    if (data?.s) {
       click(item);
       item.replaceWith(spinner);
       const json = await daSendItems(targetPlayer, [id(item)]);
-      handleJson(item, json);
+      if (json) handleJson(item, json);
       return json;
     }
     return data;
@@ -60,8 +60,10 @@
     sendEvent('Trade', 'oneByOne');
     disabled = 1;
     const finalResult = await seqSend(items);
-    handleFinalResult(finalResult);
-    disabled = 0;
+    if (finalResult) {
+      handleFinalResult(finalResult);
+      disabled = 0;
+    }
   }
 </script>
 

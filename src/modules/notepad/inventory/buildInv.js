@@ -34,7 +34,7 @@ async function doComposedFromBp() {
 }
 
 function getComposedFromGs(data) {
-  if (!isArray(data.r)) return;
+  if (!isArray(data?.r)) return;
   composed = composed.concat(data.r.filter(composedPot));
 }
 

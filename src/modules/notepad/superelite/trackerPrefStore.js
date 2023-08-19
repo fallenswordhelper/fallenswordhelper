@@ -9,16 +9,19 @@ import seLogStore from './seLogStore';
 
 let bgRunning = false;
 let fshSeLog = {};
+let lastAttempt = 0;
 let trackerPref = false;
 
 const getDelay = (data) => Math.max(
   0,
   600 - (realtimeSecs() - (data?.lastUpdate ?? 0)),
+  600 - (realtimeSecs() - lastAttempt),
 );
 
 async function updateSeLog() {
+  lastAttempt = realtimeSecs();
   const data = await daSuperElite();
-  if (data) {
+  if (data?.s) {
     fshSeLog = mergeSeData(fshSeLog, data);
     idbset('fsh_seLog', fshSeLog);
     seLogStore.set(fshSeLog);

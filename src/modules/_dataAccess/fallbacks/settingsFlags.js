@@ -1,5 +1,6 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
 import indexAjaxDoc from '../../ajax/indexAjaxDoc';
+import all from '../../common/all';
 import fromEntries from '../../common/fromEntries';
 
 const uiFlags = [
@@ -30,6 +31,6 @@ export default async function settingsFlags(flags) {
   const ladder = updateLadder(settingsPage.forms[0], flags[0]);
   const ui = updateUI(settingsPage.forms[2], flags);
 
-  await Promise.all([ladder, ui].map((f) => indexAjaxData(f)));
+  await all([ladder, ui].map((f) => indexAjaxData(f)));
   return { s: true };
 }

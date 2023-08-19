@@ -3,10 +3,11 @@ import recallItem from '../ajax/recallItem';
 import useItem from '../ajax/useItem';
 import errorDialog from '../common/errorDialog';
 import backpack from './backpack';
+import backpackOk from './backpackOk';
 import doAction from './doAction';
 
 function gotBackpack(action, data, bpData) {
-  if (!bpData) return;
+  if (!backpackOk(bpData)) return;
   const lastBackpackItem = bpData.items[bpData.items.length - 1].a;
   if (action === 'wear') {
     return doAction(equipItem, lastBackpackItem, data);
@@ -31,5 +32,5 @@ export default async function pipeRecallToQueue([invId, playerId, mode, action, 
   await prm;
   const json = await recallItem(invId, playerId, mode);
   errorDialog(json);
-  return recallItemStatus(action, json);
+  if (json) return recallItemStatus(action, json);
 }
