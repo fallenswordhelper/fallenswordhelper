@@ -19,6 +19,7 @@ function getEnhancement(enhancements, name, inject) {
 }
 
 export default function populateEnhancements(responseText) {
+  if (!responseText?._enhancements) return;
   const enh = responseText._enhancements;
   getEnhancement(enh, 'Sustain', getElementById('fshSus'));
   getEnhancement(enh, 'Fury Caster', getElementById('fshFur'));

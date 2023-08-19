@@ -1,3 +1,4 @@
+import all from '../../common/all';
 import createDiv from '../../common/cElement/createDiv';
 import closestTr from '../../common/closestTr';
 import getId from '../../common/getId';
@@ -73,6 +74,6 @@ function notGroups(combatLinks) {
 export default async function addPvPSummary(logTable) {
   const combatLinks = querySelectorArray('a[href*="&combat_id="]', logTable);
   if (combatLinks.length === 0) { return; }
-  const combats = await Promise.all(notGroups(combatLinks));
+  const combats = await all(notGroups(combatLinks));
   combats.filter(goodCombats).forEach(updateTd);
 }

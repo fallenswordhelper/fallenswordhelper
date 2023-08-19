@@ -1,4 +1,5 @@
 import guildMembers from '../../_dataAccess/export/guildMembers';
+import all from '../../common/all';
 import alpha from '../../common/alpha';
 import currentGuildId from '../../common/currentGuildId';
 import download from '../../common/download';
@@ -11,6 +12,11 @@ import padZ from '../../system/padZ';
 import {
   act, cur, fshGuildActivity, gxp, lvl, max, utc, vl,
 } from './indexConstants';
+
+export async function getActivity() {
+  const raw = await get(fshGuildActivity);
+  return raw ?? { lastUpdate: 0, members: {} };
+}
 
 const formatTimestamp = (timestamp) => formatUtcDateTime(new Date(timestamp * 1000));
 
@@ -57,7 +63,7 @@ function filedate() {
 }
 
 export async function downloadFile(translate, type) {
-  const raw = await get(fshGuildActivity);
+  const raw = await getActivity();
   if (!raw.lastUpdate || !raw.members) return;
   const data = translate(raw);
   const blob = new Blob([data], { type });
@@ -66,7 +72,7 @@ export async function downloadFile(translate, type) {
 }
 
 export async function purgeByUser(selected) {
-  const raw = await get(fshGuildActivity);
+  const raw = await getActivity();
   const lessActivity = {
     lastUpdate: raw.lastUpdate,
     members: fromEntries(
@@ -77,7 +83,7 @@ export async function purgeByUser(selected) {
 }
 
 export async function purgeByDate(dateAsTimestamp) {
-  const raw = await get(fshGuildActivity);
+  const raw = await getActivity();
   const lessActivity = {
     lastUpdate: raw.lastUpdate,
     members: fromEntries(
@@ -93,8 +99,8 @@ export async function purgeByDate(dateAsTimestamp) {
 const notFound = (currentMembers) => (user) => !currentMembers.find((name) => name === user);
 
 export async function retired() {
-  const [raw, memberlist] = await Promise.all([
-    get(fshGuildActivity),
+  const [raw, memberlist] = await all([
+    getActivity(),
     guildMembers(currentGuildId()),
   ]);
   const currentMembers = memberlist.map(({ username }) => username);

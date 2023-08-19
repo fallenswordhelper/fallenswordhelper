@@ -13,7 +13,7 @@ function thisInventFolder(el) {
 }
 
 function thisFolderHref(doc) {
-  return getFolderImgs(doc).find(thisInventFolder).parentNode.href;
+  return getFolderImgs(doc).find(thisInventFolder)?.parentNode?.href;
 }
 
 function notThisPage(_el, i) { return i !== 0; }
@@ -39,7 +39,9 @@ function ajaxOtherPages(doc, thisFolder, bindFolderAnyPage) {
 
 export default function processFolderFirstPage(output, recipebook, html) { // jQuery.min
   const doc = createDocument(html);
+  if (!doc) return;
   const thisFolder = thisFolderHref(doc);
+  if (!thisFolder) return;
   const bindFolderAnyPage = partial(processFolderAnyPage, output, recipebook);
   const prm = ajaxOtherPages(doc, thisFolder, bindFolderAnyPage);
   prm.push(bindFolderAnyPage(html));

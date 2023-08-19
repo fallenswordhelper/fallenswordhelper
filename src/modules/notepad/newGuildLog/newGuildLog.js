@@ -181,7 +181,7 @@ function gotOtherPages() {
   if (completeReload) { tmpGuildLog.sort(byFirstElement); }
   setText('Loading complete.', fshOutput);
   updateOptionsLog();
-  buildTable();
+  if (pcc()) buildTable();
 }
 
 async function processFirstPage(data) {

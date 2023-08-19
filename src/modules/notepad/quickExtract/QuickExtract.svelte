@@ -80,11 +80,11 @@
   let lastMsg;
 
   function success(json) {
-    if (!json.s && lastMsg !== json.e.message) {
-      lastMsg = json.e.message;
-      results = [...results, json.e.message];
+    if (!json?.s && lastMsg !== json?.e?.message) {
+      lastMsg = json?.e?.message;
+      results = [...results, json?.e?.message];
     }
-    return json.s;
+    return json?.s;
   }
 
   async function ajaxExtract(invId) {

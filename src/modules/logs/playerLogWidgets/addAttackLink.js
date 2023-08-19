@@ -1,3 +1,4 @@
+import all from '../../common/all';
 import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
 import querySelectorArray from '../../common/querySelectorArray';
 import { attackplayerUrl } from '../../support/constants';
@@ -17,6 +18,6 @@ export default async function addAttackLink(logTable, privMsg) {
   const trade = querySelectorArray('a[href*="=createsecure&"]', logTable);
   if (!trade.length) { return; }
   const withPlayer = trade.map(getPlayer);
-  const guildMate = await Promise.all(withPlayer.map(guildTest));
+  const guildMate = await all(withPlayer.map(guildTest));
   guildMate.filter(([, , gm]) => !gm).forEach((player) => addAttack(privMsg, player));
 }

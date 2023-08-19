@@ -13,13 +13,13 @@ import setValue from '../../system/setValue';
 
 function togglePref(evt) {
   if (evt.target.id === defEnableGuildActivityTracker) {
-    sendEvent('guildTracker', 'togglePref');
+    sendEvent('Guild Tracker', 'togglePref');
     setValue(defEnableGuildActivityTracker, evt.target.checked);
   }
 }
 
 function showTracker() {
-  sendEvent('guildTracker', 'showTracker');
+  sendEvent('Guild Tracker', 'showTracker');
   guildTracker();
 }
 

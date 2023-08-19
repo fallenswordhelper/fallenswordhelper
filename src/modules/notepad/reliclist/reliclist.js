@@ -1,3 +1,4 @@
+import isArray from '../../common/isArray';
 import partial from '../../common/partial';
 import splitTime from '../../common/splitTime';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -93,8 +94,8 @@ function processRelicList(thisRelicList) {
 }
 
 export default async function reliclist() {
-  if (!getValue('betaOptIn')) { return; }
+  if (!getValue('betaOptIn')) return;
   setInnerHtml('Loading...', pcc());
   const relics = await getRelicList();
-  processRelicList(relics);
+  if (isArray(relics)) processRelicList(relics);
 }

@@ -30,7 +30,7 @@
 
   function getItemList() {
     const sendClasses = getValue('sendClasses');
-    return arrayfromList(sendClasses) || arrayfromList(defaults.sendClasses);
+    return arrayfromList(sendClasses) ?? arrayfromList(defaults.sendClasses);
   }
 
   const selectType = [
@@ -98,24 +98,26 @@
 </script>
 
 { #await getInv() then }
-  <div>
-    Select:
-    <LinkButton on:click={ () => doSelect('-1') }>All Items</LinkButton>
-    <LinkButton on:click={ () => doSelect('-2') }>All Resources</LinkButton>
-    { #if wantsTagged }
-      <LinkButton on:click={ () => doSelect('-3') }>Guild Tagged</LinkButton>
-    { /if }
-    { #each getItemList() as [name, id] }
-      <LinkButton on:click={ () => doSelect(id) }>{ name }</LinkButton>
-    { /each }
-    How many:<input bind:value={ howMany } class="custominput" type="text">
-  </div>
-  <div use:highlightSts>
-    <SelectInST bind:inSt on:toggle/>
-  </div>
-  <div>
-    <LinkButton --button-color="blue" on:click={ doPerf }>Perfect</LinkButton>
-  </div>
+  { #if inv?.items }
+    <div>
+      Select:
+      <LinkButton on:click={ () => doSelect('-1') }>All Items</LinkButton>
+      <LinkButton on:click={ () => doSelect('-2') }>All Resources</LinkButton>
+      { #if wantsTagged }
+        <LinkButton on:click={ () => doSelect('-3') }>Guild Tagged</LinkButton>
+      { /if }
+      { #each getItemList() as [name, id] }
+        <LinkButton on:click={ () => doSelect(id) }>{ name }</LinkButton>
+      { /each }
+      How many:<input bind:value={ howMany } class="custominput" type="text">
+    </div>
+    <div use:highlightSts>
+      <SelectInST bind:inSt on:toggle/>
+    </div>
+    <div>
+      <LinkButton --button-color="blue" on:click={ doPerf }>Perfect</LinkButton>
+    </div>
+  { /if }
 { /await }
 
 <style>

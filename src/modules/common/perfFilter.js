@@ -35,5 +35,5 @@ export default async function perfFilter(loc) {
   if (jQueryNotPresent()) return;
   target = loc;
   const json = await getInventoryById();
-  drawFilters(json);
+  if (json?.items) drawFilters(json);
 }

@@ -191,7 +191,7 @@ async function processCreature(_e, data) {
   if (isValidData(data)) {
     makeDoNotKillLink(data.response.data.name, dialogViewCreature);
     const json = await myStats(true);
-    processPlayer(data, json);
+    if (json) processPlayer(data, json);
   }
 }
 

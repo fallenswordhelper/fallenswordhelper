@@ -43,6 +43,7 @@ function makeDictionary(acc, curr) {
 }
 
 export default function populateBuffs(responseText) {
+  if (!responseText?._skills) return;
   const skl = responseText._skills.reduce(makeDictionary, {});
   getBuff(skl, 'Guild Buffer', getElementById('fshGB'));
   getBuff(skl, 'Buff Master', getElementById('fshBM'));

@@ -7,7 +7,7 @@
   export let visible = true;
 
   function close() {
-    sendEvent('Guild Tracker', 'close');
+    sendEvent('Quick Links Manager', 'close');
     visible = false;
   }
 
