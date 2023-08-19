@@ -45,7 +45,7 @@ async function updateQTip(listItem, api) {
   if (!badData(creatureStats)) displayJson(api, creatureStats);
 }
 
-async function makeMouseOver(target, listItem) {
+function makeMouseOver(target, listItem) {
   sendEvent('NewMap', 'CreatureInfo');
   target.classList.add('fshTip');
   const tooltip = setQTip(target, 'Loading...');
