@@ -1,6 +1,7 @@
 import getGuild from '../_dataAccess/export/guildMembers';
 import currentGuildId from '../common/currentGuildId';
 import fromEntries from '../common/fromEntries';
+import isArray from '../common/isArray';
 import isObject from '../common/isObject';
 import partial from '../common/partial';
 import calf from '../support/calf';
@@ -19,7 +20,7 @@ async function addMembrListToForage(membrList) {
 }
 
 function membrListToHash(guildId, data) {
-  if (!data) { return; }
+  if (!isArray(data)) return;
   const memberObj = fromEntries(data.map((o) => [o.username, o]));
   return { [guildId]: { lastUpdate: now(), ...memberObj } };
 }
