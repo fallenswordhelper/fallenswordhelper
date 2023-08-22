@@ -9,7 +9,9 @@ let allyPrm = null;
 async function getAllyEnemy() {
   const stats = await myStats(false);
   if (!stats) return {};
-  if (!stats._allies || !stats._enemies) sendException(`myStats returned ${jsonStringify(stats)}`);
+  if (!stats._allies || !stats._enemies) {
+    sendException(`myStats returned ${jsonStringify(stats)}`, false);
+  }
   return {
     ...(stats?._allies && { _allies: stats._allies.map(justUsername) }),
     ...(stats?._enemies && { _enemies: stats._enemies.map(justUsername) }),
