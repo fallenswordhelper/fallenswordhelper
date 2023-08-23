@@ -30,7 +30,7 @@
   const real = ([pid, pnm, qot]) => pid && isString(pnm) && isString(qot);
 
   async function init() {
-    const txt = await get('fsh_fsboxcontent');
+    const txt = await get('fsh_fsboxcontent') ?? '';
     records = txt.split('<br>').map(breakUp).filter(real);
   }
 

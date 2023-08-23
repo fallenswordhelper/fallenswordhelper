@@ -18,7 +18,7 @@ export default function basicBounty(theCells) {
     lvl: getText(targetData.nextSibling).replace(/[[|\]]/g, ''), // Text Node
     reward: getText(theCells[2]),
     rewardType: rewardType(theCells),
-    posted: getText(theCells[3]),
-    xpLoss: getText(theCells[4]),
+    xpLoss: getText(theCells[3]),
+    posted: getText(theCells[4]),
   };
 }

@@ -25,7 +25,7 @@ export async function parseInventingStart() { // jQuery.min
   setInnerHtml('<br>Parsing inventing screen ...<br>', output);
   const html = await indexAjaxData({ cmd: 'inventing' });
   if (!html) return;
-  processFirstPage(output, recipebook, html);
+  await processFirstPage(output, recipebook, html);
   displayStuff();
 }
 
