@@ -20,7 +20,7 @@
   }
 
   async function init() {
-    log = await get('fsh_combatLog');
+    log = await get('fsh_combatLog') ?? [];
   }
 
   async function clearStorage() {

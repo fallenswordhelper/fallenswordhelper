@@ -13,7 +13,7 @@
   }
 
   async function init() {
-    const txt = await get(fshBuffLog);
+    const txt = await get(fshBuffLog) ?? '';
     records = txt.split('<br>').map((log) => [log.slice(0, 19), log.slice(20)]);
   }
 
