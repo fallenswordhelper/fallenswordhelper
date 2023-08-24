@@ -1,3 +1,4 @@
+import { end, start } from '../../analytics/timing';
 import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
 import dateUtc from '../../common/dateUtc';
@@ -12,8 +13,6 @@ import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
 import regExpExec from '../../common/regExpExec';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { months, playerIdUrl } from '../../support/constants';
-import { time, timeEnd } from '../../support/debug';
-import getValue from '../../system/getValue';
 
 const dateRe = /(?<day>[a-zA-Z]{3}), (?<date>\d{1,2}) (?<month>[a-zA-Z]{3}) (?<hr>\d{1,2}):(?<min>\d{2}):(?<sec>\d{2}) UTC/;
 const memberLevel = (membrlist, member) => membrlist?.[member]?.level ?? 0;
@@ -81,10 +80,9 @@ function doGroupRow(membrlist, row) {
 }
 
 export default function doGroupPaint(membrlist) {
-  const betaOptIn = getValue('betaOptIn');
-  if (betaOptIn) time('groups.doGroupPaint');//  Timing output
+  start('JS Perf', 'doGroupPaint');
   getArrayByClassName('group-action-container')
     .map((c) => closestTr(c))
     .forEach(partial(doGroupRow, membrlist));
-  if (betaOptIn) timeEnd('groups.doGroupPaint'); //  Timing output
+  end('JS Perf', 'doGroupPaint');
 }
