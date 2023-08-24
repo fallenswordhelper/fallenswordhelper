@@ -1,12 +1,11 @@
 import sendEvent from '../analytics/sendEvent';
+import { end, start } from '../analytics/timing';
 import view from '../app/arena/view';
 import all from '../common/all';
 import interceptSubmit from '../common/interceptSubmit';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import loadDataTables from '../common/loadDataTables';
 import querySelectorArray from '../common/querySelectorArray';
-import { time, timeEnd } from '../support/debug';
-import getValue from '../system/getValue';
 import { get } from '../system/idb';
 import arenaFull from './arenaFull';
 import { fshArenaKey, tableOpts } from './assets';
@@ -52,16 +51,11 @@ function arenaDataTable(tabs, [arenaOpts, obj, json]) { // jQuery
 }
 
 function process(tabs, values) {
-  const betaOptIn = getValue('betaOptIn');
-  if (betaOptIn) { //  Timing output
-    time('arena.process');
-  }
+  start('JS Perf', 'arena.process');
   removeHiddenRows();
   arenaDataTable(tabs, values);
   interceptSubmit();
-  if (betaOptIn) { //  Timing output
-    timeEnd('arena.process');
-  }
+  end('JS Perf', 'arena.process');
 }
 
 async function prepare(tabs) {

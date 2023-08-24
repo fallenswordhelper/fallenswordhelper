@@ -1,6 +1,7 @@
 import awaitWidget from '../common/awaitWidget';
 import getArrayByClassName from '../common/getArrayByClassName';
 import getElementById from '../common/getElementById';
+import jQueryNotPresent from '../common/jQueryNotPresent';
 import jsonStringify from '../common/jsonStringify';
 import once from '../common/once';
 import querySelector from '../common/querySelector';
@@ -13,7 +14,7 @@ import injectBlockedSkills from './blockedSkills/injectBlockedSkills';
 import createEventListeners from './createEventListeners';
 import injectHtml from './injectHtml/injectHtml';
 
-function addTab(tabs) { // jQuery
+function addTab(tabs) {
   const settingsTabs = $(tabs);
   settingsTabs.find('.ui-tabs-nav')
     .append('<li><a href="#fshSettings">FSH</a></li>');
@@ -62,17 +63,12 @@ function paintSettings() {
 
 function fshSettings(tabs) {
   const tabsInstance = addTab(tabs);
-  if (tabsInstance) {
-    once(
-      getElementById('ui-id-9'),
-      'click',
-      paintSettings,
-    );
-  }
+  if (tabsInstance) once(getElementById('ui-id-9'), 'click', paintSettings);
 }
 
 export default async function injectSettings() {
   const tabs = getElementById('settingsTabs');
+  if (jQueryNotPresent() || !tabs) return;
   await awaitWidget(tabs, 'Tabs', 'ui');
   fshSettings(tabs);
   injectBlockedSkills();
