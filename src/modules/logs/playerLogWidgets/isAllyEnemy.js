@@ -14,8 +14,8 @@ async function getAllyEnemy() {
     sendException(`myStats returned ${jsonStringify(stats)}`, false);
   }
   return {
-    ...(stats?._allies && { _allies: stats._allies.map(justUsername) }),
-    ...(stats?._enemies && { _enemies: stats._enemies.map(justUsername) }),
+    ...(stats._allies && { _allies: stats._allies.map(justUsername) }),
+    ...(stats._enemies && { _enemies: stats._enemies.map(justUsername) }),
   };
 }
 
