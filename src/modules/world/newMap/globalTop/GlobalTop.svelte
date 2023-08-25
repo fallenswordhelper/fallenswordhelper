@@ -1,4 +1,5 @@
 <script>
+  import isArray from '../../../common/isArray';
   import { guildViewUrl, showPlayerUrl } from '../../../support/constants';
   import { cdn } from '../../../system/system';
 
@@ -21,28 +22,32 @@
 { #await promise }
   Loading...
 { :then { r: list } }
-  <table id="world-event-contrib-table">
-    <tr>
-      <td class="header"></td>
-      <td class="header"></td>
-      <td class="header">Username</td>
-      <td class="header">Kills</td>
-    </tr>
-    { #each list as { player, value }, i }
+  { #if isArray(list) }
+    <table id="world-event-contrib-table">
       <tr>
-        <td>{ i + 1 }</td>
-        <td>
-          { #if player.guild_id }
-            <a href="{ guildViewUrl }{ player.guild_id }">
-              <img src="{ cdn }guilds/{ player.guild_id }_mini.png" alt="guild logo">
-            </a>
-          { /if }
-        </td>
-        <td><a href="{ showPlayerUrl }{ player.name }">{ player.name }</a></td>
-        <td>{ value }</td>
+        <td class="header"></td>
+        <td class="header"></td>
+        <td class="header">Username</td>
+        <td class="header">Kills</td>
       </tr>
-    { /each }
-  </table>
+      { #each list as { player, value }, i }
+        <tr>
+          <td>{ i + 1 }</td>
+          <td>
+            { #if player.guild_id }
+              <a href="{ guildViewUrl }{ player.guild_id }">
+                <img src="{ cdn }guilds/{ player.guild_id }_mini.png" alt="guild logo">
+              </a>
+            { /if }
+          </td>
+          <td><a href="{ showPlayerUrl }{ player.name }">{ player.name }</a></td>
+          <td>{ value }</td>
+        </tr>
+      { /each }
+    </table>
+  { :else }
+    Server Error
+  { /if }
 { :catch error }
   <p style="color: red">{ error.message }</p>
 { /await }
