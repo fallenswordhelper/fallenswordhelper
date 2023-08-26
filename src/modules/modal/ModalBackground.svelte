@@ -51,7 +51,7 @@
     left: 0;
     position: fixed;
     top: 0;
-    transform: translateX(-100vw);
+    transform: translateX(-1000vw);
     width: 100%;
     z-index: 200;
   }

@@ -253,22 +253,6 @@
   font-weight: bold;
 }
 
-/* Recipe Manager */
-
-.rmTh {background-color: #ddd;}
-.rmTh th {text-align: center;}
-.rmTr {
-  vertical-align: middle;
-  text-align: center;
-}
-.rmTd {border-bottom: 1px solid #CD9E4B;}
-.rmTd img {margin: 0 auto;}
-.rmItem {
-  display: inline-block;
-  margin: 0 3px;
-}
-.rmItem p {margin: 0;}
-
 /* New World Shop Multi Buy */
 .fshClear {clear: both;}
 
