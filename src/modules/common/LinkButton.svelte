@@ -17,7 +17,7 @@
     margin: var(--button-margin, 0);
     padding: 0;
     text-decoration: underline;
-    user-select: text;
+    user-select: none;
     width: var(--button-width, auto);
   }
   button:disabled {
