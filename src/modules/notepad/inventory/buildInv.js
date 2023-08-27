@@ -59,7 +59,7 @@ function addComposedName(item) {
 }
 
 function gotSomeStuff() {
-  theInv.items.forEach(addComposedName);
+  if (isArray(theInv?.items)) theInv.items.forEach(addComposedName);
 }
 
 export async function buildInv() {
