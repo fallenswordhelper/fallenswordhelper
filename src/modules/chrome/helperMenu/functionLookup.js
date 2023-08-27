@@ -12,6 +12,7 @@ import quickExtract from '../pageSwitcher/loader/quickExtract';
 import quickLinksManager from '../pageSwitcher/loader/quickLinksManager';
 import quickwear from '../pageSwitcher/loader/quickwear';
 import recipeMgr from '../pageSwitcher/loader/recipeMgr';
+import reliclist from '../pageSwitcher/loader/reliclist';
 import superelite from '../pageSwitcher/loader/superelite';
 import gsDl from './gsDl';
 
@@ -32,4 +33,5 @@ export default {
   'Merc Hunter': mercs,
   'SE Tracker': superelite,
   'Guild Tracker': guildTracker,
+  'Relic List': reliclist,
 };

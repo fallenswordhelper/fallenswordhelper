@@ -41,7 +41,7 @@ const extra = '<div class="helperMenuSectionHeader">Extra</div><ul>'
   + '</ul>';
 
 const betaSection = '<div class="helperMenuSectionHeader">Beta Features</div><ul>'
-  + `<li><a href="${notepadBlankUrl}reliclist">Relic List</a><sup class="fshRed">beta</sup></li>`
+  + '<li><button class="helperDevBtn helperGo" type="button">Relic List</button><sup class="fshRed">beta</sup></li>'
   + '<li><button class="helperDevBtn helperGo" type="button">GS Export</button><sup class="fshRed">beta</sup></li>'
   + '</ul>';
 

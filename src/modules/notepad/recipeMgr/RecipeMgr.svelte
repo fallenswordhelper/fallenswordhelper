@@ -278,13 +278,10 @@
     grid-template-columns: 45px 210px 160px 160px 45px;
     row-gap: 2px;
   }
-  .recipes > div:nth-child(n + 6) {
+  .recipes > div:nth-child(n + 6):not(:nth-last-child(-n + 5)) {
     border-bottom-color: #CD9E4B;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-  }
-  .recipes > div:nth-last-child(-n + 5) {
-    border-bottom-style: none;
   }
   .innerColumnHeader {
     width: auto;

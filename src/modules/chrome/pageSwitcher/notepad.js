@@ -12,11 +12,11 @@ import quickExtract from './loader/quickExtract';
 import quickLinksManager from './loader/quickLinksManager';
 import quickwear from './loader/quickwear';
 import recipeMgr from './loader/recipeMgr';
+import reliclist from './loader/reliclist';
 
 const inventory = () => { runDefault(import('../../notepad/inventory/inventory')); };
 const newGuildLog = () => { runDefault(import('../../notepad/newGuildLog/newGuildLog')); };
 const load = () => { runDefault(import('../../settings/load')); };
-const reliclist = () => { runDefault(import('../../notepad/reliclist/reliclist')); };
 const whosGotWhat = () => {
   if (!calf.userIsDev) { return; } // whosGotWhat
   runDefault(import('../../notepad/whosGotWhat/whosGotWhat'));
