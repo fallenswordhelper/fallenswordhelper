@@ -1,6 +1,7 @@
 <script>
   import guildMembers from '../../../_dataAccess/export/guildMembers';
   import alpha from '../../../common/alpha';
+  import isArray from '../../../common/isArray';
   import { playerIdUrl } from '../../../support/constants';
   import { sevenDaysAgo, twoMinutesAgo } from '../../../support/now';
   import { guildId } from './relicStore';
@@ -22,7 +23,7 @@
 
   async function getMissingMembers(myGuildId) {
     const memberlist = await guildMembers(myGuildId);
-    missingMembers = memberlist.filter(notBusy).sort(byName);
+    if (isArray(memberlist)) missingMembers = memberlist.filter(notBusy).sort(byName);
   }
 
   guildId.subscribe((val) => { getMissingMembers(val); });
