@@ -6,10 +6,6 @@ import getValue from '../../system/getValue';
 
 const leadIn = '<div class="helperMenuColumn">';
 
-const devSection = '<div class="helperMenuSectionHeader">Dev links</div>'
-  + '<ul>'
-  + '</ul>';
-
 const character = '<div class="helperMenuSectionHeader">Character</div><ul>'
   + '<li><button class="helperDevBtn helperGo" type="button">Buff Log</button></li>'
   + '<li><button class="helperDevBtn helperGo" type="button">Combat Log</button></li>'
@@ -50,6 +46,11 @@ const bottomSection = '<div class="helperMenuSectionHeader">FSH developer quick 
   + `${playerLink(1963510, 'PointyHair')}</li>`
   + '<li><span class="helperMenuReply" target_player="Lusterless">PM</span> '
   + `${playerLink(1674838, 'Lusterless')}</li>`
+  + '</ul>';
+
+const devSection = '<div class="helperMenuSectionHeader">Dev links</div>'
+  + '<ul>'
+  + '<li><button class="helperDevBtn helperGo" type="button">Combat Set Manager</button><sup class="fshRed">beta</sup></li>'
   + '</ul>';
 
 const leadOut = '</div>';
