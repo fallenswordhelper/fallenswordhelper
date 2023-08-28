@@ -52,6 +52,7 @@ const bottomSection = '<div class="helperMenuSectionHeader">FSH developer quick 
 const devSection = '<div class="helperMenuSectionHeader">Dev links</div>'
   + '<ul>'
   + '<li><button class="helperDevBtn helperGo" type="button">Combat Set Manager</button><sup class="fshRed">beta</sup></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">Quest Book</button></li>'
   + '</ul>';
 
 const leadOut = '</div>';
