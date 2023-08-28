@@ -86,8 +86,8 @@
   { visible }
   on:close={ () => sendPrEvent('close') }
   on:close={ () => { visible = false; } }
-  title="Pot Report"
 >
+  <svelte:fragment slot="title">Pot Report</svelte:fragment>
   <div class="pot-report">
     { #await init() }
       Loading...
@@ -164,10 +164,10 @@
                 <div>
                   <input
                     bind:checked={ ignore }
-                    data-tooltip="Ignore"
                     on:change={ () => sendPrEvent('ignore') }
                     on:change={ doMapping }
                     on:click={ (e) => e.target.blur() }
+                    title="Ignore"
                     type="checkbox"
                   >
                 </div>
@@ -223,6 +223,7 @@
 
 <style>
   .pot-report {
+    color-scheme: light;
     display: flex;
     flex-wrap: wrap;
     font-size: 12px;
