@@ -8,6 +8,7 @@ import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
 import mercs from '../pageSwitcher/loader/mercs';
+import potReport from '../pageSwitcher/loader/potReport';
 import quickExtract from '../pageSwitcher/loader/quickExtract';
 import quickLinksManager from '../pageSwitcher/loader/quickLinksManager';
 import quickwear from '../pageSwitcher/loader/quickwear';
@@ -36,4 +37,5 @@ export default {
   'Guild Tracker': guildTracker,
   'Relic List': reliclist,
   'Combat Set Manager': setmgr,
+  'Pot Report': potReport,
 };

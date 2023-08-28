@@ -26,6 +26,7 @@ const guild = '<div class="helperMenuSectionHeader">Guild</div><ul>'
   + `<li><a href="${notepadBlankUrl}guildinvmgr">Guild Inventory</a></li>`
   + `<li><a href="${newGuildLogUrl}">New Guild Log</a></li>`
   + '<li><button class="helperDevBtn helperGo" type="button">Merc Hunter</button></li>'
+  + '<li><button class="helperDevBtn helperGo" type="button">Pot Report</button></li>'
   + '<li><button class="helperDevBtn helperGo" type="button">Guild Tracker</button></li>'
   + '</ul>';
 

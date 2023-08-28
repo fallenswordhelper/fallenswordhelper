@@ -159,4 +159,7 @@
   input.invalid {
     box-shadow: 0 0 5px 1px red;
   }
+  .items > div {
+    word-break: break-all;
+  }
 </style>
