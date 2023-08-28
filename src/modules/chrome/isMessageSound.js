@@ -1,19 +1,24 @@
+import dynamicAlert from '../alert/dynamicAlert';
 import getArrayByTagName from '../common/getArrayByTagName';
 import includes from '../common/includes';
 import { pcl } from '../support/layout';
 import task from '../support/task';
 import getValue from '../system/getValue';
 
-function doMsgSound() {
-  const msg = getArrayByTagName('a', pcl()).filter(includes('message'));
-  if (msg.length) {
-    const sound = new Audio(getValue('defaultMessageSound'));
-    sound.play();
+async function msgSound() {
+  const sound = new Audio(getValue('defaultMessageSound'));
+  try {
+    await sound.play();
+  } catch (err) {
+    dynamicAlert('Message Sound Not Allowed');
   }
 }
 
+function doMsgSound() {
+  const msg = getArrayByTagName('a', pcl()).filter(includes('message'));
+  if (msg.length) msgSound();
+}
+
 export default function isMessageSound() {
-  if (getValue('playNewMessageSound')) {
-    task(3, doMsgSound);
-  }
+  if (getValue('playNewMessageSound')) task(3, doMsgSound);
 }

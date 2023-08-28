@@ -1,18 +1,17 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
-import infoBoxFrom from '../../common/InfoBoxFrom';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
+import infoBox from '../../common/infoBox';
 
-function formatResult(html) {
-  const info = infoBoxFrom(html);
-  if (info.includes('successfully')) {
-    return { r: { item: {} }, s: true };
-  }
+function formatResult(doc) {
+  const info = infoBox(doc);
+  if (info.includes('successfully')) return { r: { item: {} }, s: true };
   return { e: { message: info }, s: false };
 }
 
-export default function invent(recipe) {
-  return indexAjaxData({
+export default async function invent(recipe) {
+  const doc = await indexAjaxDoc({
     cmd: 'inventing',
     subcmd: 'doinvent',
     recipe_id: recipe,
-  }).then(formatResult);
+  });
+  return formatResult(doc);
 }

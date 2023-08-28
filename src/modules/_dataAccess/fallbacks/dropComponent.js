@@ -1,21 +1,19 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
-import allthen from '../../common/allthen';
-import infoBoxFrom from '../../common/InfoBoxFrom';
-import partial from '../../common/partial';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
+import all from '../../common/all';
+import infoBox from '../../common/infoBox';
 
-function ajaxResult(componentId, html) {
-  const info = infoBoxFrom(html);
-  let r = 1; // skipcq: JS-C1002
-  if (info === 'Component destroyed.') { r = 0; }
-  return { r, m: info, c: componentId };
+function ajaxResult(componentId, doc) {
+  const info = infoBox(doc);
+  return { r: info === 'Component destroyed.' ? 0 : 1, m: info, c: componentId };
 }
 
-function destroyComponent(componentId) {
-  return indexAjaxData({
+async function destroyComponent(componentId) {
+  const doc = await indexAjaxDoc({
     cmd: 'profile',
     subcmd: 'destroycomponent',
     component_id: componentId,
-  }).then(partial(ajaxResult, componentId));
+  });
+  return ajaxResult(componentId, doc);
 }
 
 function formatResults(resultAry) {
@@ -30,6 +28,7 @@ function formatResults(resultAry) {
   return { e: { message: resultAry[0].m }, s: false };
 }
 
-export default function dropComponent(componentIdAry) {
-  return allthen(componentIdAry.map(destroyComponent), formatResults);
+export default async function dropComponent(componentIdAry) {
+  const resultAry = await all(componentIdAry.map(destroyComponent));
+  return formatResults(resultAry);
 }

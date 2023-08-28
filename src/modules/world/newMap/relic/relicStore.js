@@ -9,6 +9,10 @@ async function getRelicStuff($guildId, set) {
   if (!$guildId) return;
   processingStatus.set(['relicStore', 'Processing defending guild relics ... ']);
   const relics = await reliclist($guildId);
+  if (!relics) {
+    processingStatus.set(['relicStore', 'AJAX Error']);
+    return;
+  }
   const noOfRelics = relics.r.relics.length;
   const relicMultiplier = noOfRelics === 1 ? 1.5 : round(1 - noOfRelics / 10, 2);
   const leadDefenderBonus = `${String(relicMultiplier * 100)}%`;

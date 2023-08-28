@@ -1,10 +1,11 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
 
-export default function moveRank(direction, rankId) {
-  return indexAjaxData({
+export default async function moveRank(direction, rankId) {
+  await indexAjaxData({
     cmd: 'guild',
     subcmd: 'ranks',
     subcmd2: direction,
     rank_id: rankId,
-  }).then(() => ({ s: true }));
+  });
+  return { s: true };
 }

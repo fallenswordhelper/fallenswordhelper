@@ -1,6 +1,7 @@
 import './simpleCheckbox.css';
 import fallback from '../system/fallback';
-import isValueChecked from './isValueChecked';
+import getValue from '../system/getValue';
+import isChecked from '../system/isChecked';
 import networkIcon from './networkIcon';
 import mySimpleCheckboxes from './simple.json';
 
@@ -31,6 +32,10 @@ export function justLabel(name) {
   } = mySimpleCheckboxes[name];
   return `${hasNetwork(network)}${stability(unstable)}<label class="fshNoWrap" for="${name}">${
     fallback(title, helpTitle)}${helpLink(helpTitle, helpText)}:</label>`;
+}
+
+function isValueChecked(pref) {
+  return isChecked(getValue(pref));
 }
 
 export function justCheckbox(name) {

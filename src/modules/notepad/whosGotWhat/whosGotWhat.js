@@ -3,7 +3,7 @@ import { smartTable } from 'smart-table-core';
 import { table as tableComponentFactory } from 'smart-table-vanilla';
 import guildStore from '../../_dataAccess/export/guildStore';
 import ranksView from '../../_dataAccess/fallbacks/ranksView';
-import allthen from '../../common/allthen';
+import all from '../../common/all';
 import createDiv from '../../common/cElement/createDiv';
 import createTable from '../../common/cElement/createTable';
 import insertElement from '../../common/insertElement';
@@ -68,8 +68,11 @@ function showMe(pCC, dataAry) {
   initTable(el, table, domTable);
 }
 
-export default function whosGotWhat() {
+const checkData = ([store, ranks]) => store?.guild_id && ranks?.s;
+
+export default async function whosGotWhat() {
   const pCC = pcc();
   setInnerHtml('Loading...', pCC);
-  allthen([guildStore(), ranksView()], (dataAry) => showMe(pCC, dataAry));
+  const dataAry = await all([guildStore(), ranksView()]);
+  if (checkData(dataAry)) showMe(pCC, dataAry);
 }

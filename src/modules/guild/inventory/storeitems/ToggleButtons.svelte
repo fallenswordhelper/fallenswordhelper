@@ -31,8 +31,14 @@
   }
 </script>
 
-<LinkButtonBracketed --button-width="11.8em" on:click={toggleShowExtraLinks}>{label(showExtraLinks)} AH and UFSG Links</LinkButtonBracketed>&nbsp;
-<LinkButtonBracketed --button-width="10.6em" on:click={toggleShowQuickDropLinks}>{label(showQuickDropLinks)} Quick Drop links</LinkButtonBracketed>&nbsp;
-{#if calf.subcmd2 === 'storeitems'}
-  <LinkButtonBracketed --button-width="10.8em" on:click={selectLocked}>Select All Guild Locked</LinkButtonBracketed>
-{/if}
+<LinkButtonBracketed --button-width="11.8em" on:click={ toggleShowExtraLinks }>
+  { label(showExtraLinks) } AH and UFSG Links
+</LinkButtonBracketed>&nbsp;
+<LinkButtonBracketed --button-width="10.6em" on:click={ toggleShowQuickDropLinks }>
+  { label(showQuickDropLinks) } Quick Drop links
+</LinkButtonBracketed>&nbsp;
+{ #if calf.subcmd2 === 'storeitems' }
+  <LinkButtonBracketed --button-width="10.8em" on:click={ selectLocked }>
+    Select All Guild Locked
+  </LinkButtonBracketed>
+{ /if }

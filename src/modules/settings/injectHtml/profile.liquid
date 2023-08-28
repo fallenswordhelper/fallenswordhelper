@@ -1,0 +1,88 @@
+<tr>
+  <td class="header" colspan="2">Profile preferences</td>
+</tr>
+{% render 'settingsRow'
+ field: 'showQuickButtons'
+ label: 'Show Quick Buttons'
+ tooltipText: "Shows quick access buttons under the avatar in players' profiles." %}
+{% render 'settingsRow'
+ field: 'renderSelfBio'
+ label: 'Render self bio'
+ tooltipText: 'Render your own profile with the FSH special bio tags.'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'renderOtherBios'
+ label: "Render other players' bios"
+ tooltipText: "Render players' profiles with the FSH special bio tags."
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'enableBioCompressor'
+ label: 'Enable Bio Compressor'
+ tooltipText: 'Compress long bios and provide a link to expand the compressed section.'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'buyBuffsGreeting'
+ label: 'Buy Buffs Greeting'
+ tooltipText: 'This is the default text to open a message with when asking to buy buffs.
+ You can use playername to insert the target players name.
+ You can also use buffs to insert the list of buffs.
+ You can use cost to insert the total cost of the buffs.'
+ type: 'text' %}
+{% render 'settingsRow'
+ field: 'showStatBonusTotal'
+ label: 'Show Stat Bonus Total'
+ tooltipText: 'Shows total item stats when you mouseover an item on the profile screen.' %}
+{% render 'settingsRow'
+ field: 'ajaxifyProfileSections'
+ label: 'Ajaxify Profile Sections'
+ tooltipText: 'Collapse and expand profile sections without a page reload.' %}
+{% render 'settingsRow'
+ field: 'statisticsWrap'
+ label: 'Statistics Wrap'
+ tooltipText: "Fixes the wrapping of the statistics section."
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'quickWearLink'
+ label: 'Quick Wear Link'
+ tooltipText: 'Adds a quick wear link to the inventory section header.' %}
+{% render 'settingsRow'
+ field: 'nekidButton'
+ label: 'Nekid Button'
+ tooltipText: 'Adds Nekid button below worn items.' %}
+{% render 'settingsRow'
+ field: 'selectAllLink'
+ label: 'Select All Link'
+ tooltipText: 'Adds a select all link to the backpack section header.' %}
+{% render 'settingsRow'
+ field: 'enableQuickDrink'
+ label: 'Enable Quick Drink/Wear'
+ tooltipText: 'Enables the quick drink/wear functionality on the profile page.' %}
+{% render 'settingsRow'
+ field: 'componentWidgets'
+ label: 'Component Widgets'
+ tooltipText: 'Adds quick delete, counts and quick extract buttons to the components section.' %}
+{% render 'settingsRow'
+ field: 'fastDebuff'
+ label: 'Fast Debuff'
+ tooltipText: 'Debuff without a page reload.' %}
+{% render 'settingsRow'
+ field: 'disableDeactivatePrompts'
+ label: 'Disable Deactivate Prompts'
+ tooltipText: 'Disables the prompts for deactivating buffs on the profile page.' %}
+{% render 'settingsRow'
+ field: 'injectBuffGuide'
+ label: 'Inject Buff Guide'
+ tooltipText: 'Estimates the stat movement for barricade, entrench and nightmare visage.
+ These calculations are NOT cumulative and are intended only as a guide.' %}
+{% render 'settingsRow'
+ field: 'showBuffLevel'
+ label: 'Show Buff Level'
+ tooltipText: "Shows level underneath buffs in players' profiles." %}
+{% render 'settingsRow'
+ field: 'countAllyEnemy'
+ label: 'Count Ally Enemy'
+ tooltipText: 'Shows a count of the number of allies and enemies.' %}
+{% render 'settingsRow'
+ field: 'highlightPvpProtection'
+ label: 'Highlight Pvp Protection'
+ tooltipText: 'Put a red box around PvP Protection.' %}

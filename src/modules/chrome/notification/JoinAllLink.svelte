@@ -32,7 +32,7 @@
 
   async function doJoinAll() {
     const json = await daViewGroups();
-    if (json.s) {
+    if (json?.s) {
       await processGroups(json);
     }
   }
@@ -45,18 +45,20 @@
 </script>
 
 <li class="notification">
-  <a href="{groupJoinUrl}">
+  <a href="{ groupJoinUrl }">
     <span class="notification-icon"></span>
-    {#if joining}
-      {#await doJoinAll()}
+    { #if joining }
+      { #await doJoinAll() }
         <span class="notification-content fshSpinner fshRelative"></span>'
-      {:then}
+      { :then}
         <p class="notification-content" style="line-height: 32px;">Joined.</p>
-      {/await}
-    {:else}
+      { /await }
+    { :else }
       <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <p class="notification-content" style="{groupStyleText}" on:click|once={handleClick}>Join all attack groups{groupJoinText}.</p>
-    {/if}
+      <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+      <p class="notification-content" style="{ groupStyleText }" on:click|once={ handleClick }>
+        Join all attack groups{ groupJoinText }.
+      </p>
+    { /if }
   </a>
 </li>
-

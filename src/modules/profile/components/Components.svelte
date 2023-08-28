@@ -33,16 +33,26 @@
 </script>
 
 <div class="fshCenter">
-  {#if !quickDelete}
-    <div><LinkButtonBracketed on:click|once={enableQuickDel}>Enable Quick Del</LinkButtonBracketed></div>
-  {/if}
-  {#if !rollup}
-    <div><LinkButtonBracketed on:click|once={countComponents}>Count Components</LinkButtonBracketed></div>
-  {:else}
+  { #if !quickDelete }
+    <div>
+      <LinkButtonBracketed on:click|once={ enableQuickDel }>Enable Quick Del</LinkButtonBracketed>
+    </div>
+  { /if }
+  { #if !rollup }
+    <div>
+      <LinkButtonBracketed on:click|once={ countComponents }>Count Components</LinkButtonBracketed>
+    </div>
+  { :else }
     <Count on:delType/>
-  {/if}
-  <div><LinkButtonBracketed on:click={insertQuickExtract}>Quick Extract</LinkButtonBracketed></div>
-  {#if quickDelete}
-    <div><LinkButtonBracketed --button-color="red" on:click|once={deleteAllVisible}>Delete All Visible</LinkButtonBracketed></div>
-  {/if}
+  { /if }
+  <div>
+    <LinkButtonBracketed on:click={ insertQuickExtract }>Quick Extract</LinkButtonBracketed>
+  </div>
+  { #if quickDelete }
+    <div>
+      <LinkButtonBracketed --button-color="red" on:click|once={ deleteAllVisible }>
+        Delete All Visible
+      </LinkButtonBracketed>
+    </div>
+  { /if }
 </div>

@@ -22,7 +22,7 @@ function clearButtons(td) {
 }
 
 function killRow(target, data) { // jQuery
-  if (data.r === 1) { return; }
+  if (data.r === 1) return;
   const tr = target.closest('tr');
   const td = $('td', tr);
   clearButtons(td);
@@ -30,13 +30,13 @@ function killRow(target, data) { // jQuery
 }
 
 function anotherSpinner(target) { // jQuery
-  target.empty().append(`<img src="${cdn
-  }ui/misc/spinner.gif" width="11" height="11">`);
+  target.empty().append(`<img src="${cdn}ui/misc/spinner.gif" width="11" height="11">`);
 }
 
-export default function doAction(fn, target) { // jQuery
+export default async function doAction(fn, target) { // jQuery
   hideQTip(target);
   removeClass(target);
-  fn().then(partial(killRow, target));
   anotherSpinner(target);
+  const json = await fn();
+  if (json) killRow(target, json);
 }

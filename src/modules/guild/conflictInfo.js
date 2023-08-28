@@ -43,8 +43,9 @@ function getMaxPage(page) {
   return Number(page.nextSibling.textContent.split('\xa0')[2]);
 }
 
-function getNextPage(curPage, fn, callback) {
-  conflicts(curPage + 1).then(partial(fn, callback));
+async function getNextPage(curPage, fn, callback) {
+  const args = await conflicts(curPage + 1);
+  fn(callback, args);
 }
 
 function gotConflictInfo(callback, responseText) { // Legacy
@@ -59,9 +60,10 @@ function gotConflictInfo(callback, responseText) { // Legacy
   }
 }
 
-export default function conflictInfo(leftHandSideColumnTable) { // jQuery.min
+export default async function conflictInfo(leftHandSideColumnTable) {
   const [statCtrl] = leftHandSideColumnTable.rows[6].cells[0].children;
   if (statCtrl) {
-    conflicts(1).then(partial(gotConflictInfo, { node: statCtrl }));
+    const responseText = await conflicts(1);
+    gotConflictInfo({ node: statCtrl }, responseText);
   }
 }

@@ -1,33 +1,9 @@
-import doSortParams from '../../common/doSortParams';
-import idHandler from '../../common/idHandler';
-import jQueryNotPresent from '../../common/jQueryNotPresent';
-import onclick from '../../common/onclick';
-import partial from '../../common/partial';
-import { pcc } from '../../support/layout';
-import { get } from '../../system/idb';
-import stringSort from '../../system/stringSort';
-import generateRecipeTable from './generateRecipeTable';
-import {
-  getOutput,
-  getRecipebook,
-  gotRecipeBook,
-  parseInventingStart,
-} from './parseInventing';
+import instantiate from '../../modal/instantiate';
+import RecipeMgr from './RecipeMgr.svelte';
 
-function sortRecipeTable(target) { // Legacy
-  doSortParams(target);
-  getRecipebook().recipe.sort(stringSort);
-  generateRecipeTable(getOutput(), getRecipebook());
-}
+const props = { visible: true };
+let thisModal = 0;
 
-const rmHdl = [
-  ['rfsh', parseInventingStart],
-  ['sortName', sortRecipeTable],
-];
-
-export default function recipeMgr(injector) { // jQuery.min
-  if (jQueryNotPresent()) { return; }
-  const content = injector || pcc();
-  get('fsh_recipeBook').then(partial(gotRecipeBook, content));
-  onclick(content, idHandler(rmHdl));
+export default function recipeMgr() {
+  thisModal = instantiate(props, thisModal, RecipeMgr);
 }

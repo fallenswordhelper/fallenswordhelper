@@ -5,6 +5,7 @@ function formatResults(json) {
   return { e: { message: json.m }, s: false };
 }
 
-export default function gsTake(invId) {
-  return takeItem(invId).then(formatResults);
+export default async function gsTake(invId) {
+  const json = await takeItem(invId);
+  return formatResults(json);
 }

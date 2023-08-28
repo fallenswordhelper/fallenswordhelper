@@ -3,5 +3,5 @@ import indexAjaxData from './indexAjaxData';
 
 export default async function indexAjaxDoc(obj) {
   const html = await indexAjaxData(obj);
-  return createDocument(html);
+  if (html) return createDocument(html);
 }

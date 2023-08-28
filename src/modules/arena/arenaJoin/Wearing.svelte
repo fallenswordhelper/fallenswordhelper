@@ -20,13 +20,15 @@
 
   async function getCombatSet() {
     const [ms, cs] = await all([daLoadInventory(), daViewCombatSet()]);
-    equipment = ms.r.equipment;
-    const wornSet = cs.r.find(equippedSet);
-    selected = wornSet?.id ?? -1;
-    combatSets = [
-      ...(!wornSet ? [{ id: -1, name: 'Primary', items: equipment }] : []),
-      ...cs.r,
-    ];
+    if (ms?.r && cs?.r) {
+      equipment = ms.r.equipment;
+      const wornSet = cs.r.find(equippedSet);
+      selected = wornSet?.id ?? -1;
+      combatSets = [
+        ...(!wornSet ? [{ id: -1, name: 'Primary', items: equipment }] : []),
+        ...cs.r,
+      ];
+    }
   }
 
   const getStatCells = (doc) => querySelectorArray('table[width="300"] b', doc)
@@ -43,21 +45,21 @@
   }
 </script>
 
-{#await getCombatSet() then}
+{ #await getCombatSet() then }
   <div>
     <div class="innerColumnHeader">
       <div class="flex">
         Inventory
-        <select bind:value={selected} on:change={handleChange}>
-          {#each combatSets as {id, name}}
-            <option value="{id}">{name}</option>
-          {/each}
+        <select bind:value={ selected } on:change={ handleChange }>
+          { #each combatSets as { id, name } }
+            <option value="{ id }">{ name }</option>
+          { /each }
         </select>
       </div>
     </div>
-    <WearingGrid {equipment}/>
+    <WearingGrid { equipment }/>
   </div>
-{/await}
+{ /await }
 
 <style>
   .innerColumnHeader {

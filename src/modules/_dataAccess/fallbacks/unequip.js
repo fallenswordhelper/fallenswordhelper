@@ -1,16 +1,17 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
-import infoBoxFrom from '../../common/InfoBoxFrom';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
+import infoBox from '../../common/infoBox';
 
-function formatResults(html) {
-  const info = infoBoxFrom(html);
-  if (!info) { return { s: true }; }
+function formatResults(doc) {
+  const info = infoBox(doc);
+  if (!info) return { s: true };
   return { e: { message: info }, s: false };
 }
 
-export default function unequip(item) {
-  return indexAjaxData({
+export default async function unequip(item) {
+  const doc = await indexAjaxDoc({
     cmd: 'profile',
     subcmd: 'unequipitem',
     inventory_id: item,
-  }).then(formatResults);
+  });
+  return formatResults(doc);
 }

@@ -1,11 +1,11 @@
 import './quickWear.css';
 import backpack from '../../ajaxQueue/backpack';
+import backpackOk from '../../ajaxQueue/backpackOk';
 import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
 import eventHandler5 from '../../common/eventHandler5';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
-import isArray from '../../common/isArray';
 import jQueryPresent from '../../common/jQueryPresent';
 import onclick from '../../common/onclick';
 import selfIdIs from '../../common/selfIdIs';
@@ -49,12 +49,8 @@ function buildQuickWear(content, appInv) {
   onclick(content, eventHandler5(evts5()));
 }
 
-const goodData = (appInv) => isArray(appInv.folders) && isArray(appInv.items);
-
 function showQuickWear(content, appInv) {
-  if (goodData(appInv)) {
-    buildQuickWear(content, appInv);
-  }
+  if (backpackOk(appInv)) buildQuickWear(content, appInv);
 }
 
 async function hasJquery(injector) {

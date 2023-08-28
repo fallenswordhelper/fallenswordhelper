@@ -1,6 +1,7 @@
 import getBuff from './common/getBuff';
 import querySelectorArray from './common/querySelectorArray';
 import toLowerCase from './common/toLowerCase';
+import stdout from './support/stdout';
 import getCustomUrlParameter from './system/getCustomUrlParameter';
 
 const levels = [1, 25, 75, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1400,
@@ -57,6 +58,5 @@ export default function skills() {
     .map(getLabels)
     .map(doConcat)
     .join('\n');
-  // eslint-disable-next-line no-console
-  console.log(as); // skipcq: JS-0002
+  stdout(as);
 }

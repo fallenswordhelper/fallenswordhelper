@@ -1,27 +1,76 @@
+import awaitWidget from '../common/awaitWidget';
+import getArrayByClassName from '../common/getArrayByClassName';
 import getElementById from '../common/getElementById';
+import jQueryNotPresent from '../common/jQueryNotPresent';
+import jsonStringify from '../common/jsonStringify';
 import once from '../common/once';
+import querySelector from '../common/querySelector';
+import querySelectorArray from '../common/querySelectorArray';
+import setText from '../dom/setText';
+import calf from '../support/calf';
+import getValue from '../system/getValue';
+import setValue from '../system/setValue';
 import injectBlockedSkills from './blockedSkills/injectBlockedSkills';
-import Settings from './Settings.svelte';
+import createEventListeners from './createEventListeners';
+import injectHtml from './injectHtml/injectHtml';
 
-function addTab(tabs) { // jQuery
-  tabs.find('.ui-tabs-nav')
+function addTab(tabs) {
+  const settingsTabs = $(tabs);
+  settingsTabs.find('.ui-tabs-nav')
     .append('<li><a href="#fshSettings">FSH</a></li>');
-  tabs.append('<div id="fshSettings"></div>');
-  tabs.tabs('refresh');
+  settingsTabs.append('<div id="fshSettings"></div>');
+  settingsTabs.tabs('refresh');
+  return settingsTabs.tabs('instance');
 }
 
-const startApp = (target) => new Settings({ target });
+function doVersion() {
+  setText(calf.fshVer, getElementById('fsh-ver'));
+  setText(calf.calfVer, getElementById('calf-ver'));
+}
 
-export default function injectSettings() { // jQuery
-  const settingsTabs = $('#settingsTabs');
-  addTab(settingsTabs);
-  const tabsInstance = settingsTabs.tabs('instance');
-  if (tabsInstance) {
-    once(
-      getElementById('ui-id-9'),
-      'click',
-      () => startApp(getElementById('fshSettings')),
-    );
-  }
+function doStorage() {
+  const storage = ((jsonStringify(localStorage).length / (5 * 1024 * 1024)) * 100).toFixed(2);
+  setText(storage, getElementById('calf-used'));
+  setText((100 - storage).toFixed(2), getElementById('calf-remain'));
+}
+
+function injectHuntBuffNames() {
+  const huntingBuffsSelect = getElementById('enabledHuntingMode');
+  if (!huntingBuffsSelect) return;
+  ['huntingBuffsName', 'huntingBuffs2Name', 'huntingBuffs3Name'].forEach((pref, i) => {
+    const prefVal = getValue(pref);
+    huntingBuffsSelect.options[i].text = prefVal;
+    getArrayByClassName(`fsh-buff${i + 1}`).forEach((s) => setText(prefVal, s));
+  });
+}
+
+function loadSettings() {
+  injectHuntBuffNames();
+  const fields = querySelectorArray('.fsh-settings input[name], .fsh-settings select[name]');
+  fields.forEach((ctx) => {
+    if (ctx.type === 'checkbox') ctx.checked = getValue(ctx.name);
+    else ctx.value = getValue(ctx.name);
+  });
+}
+
+function paintSettings() {
+  injectHtml();
+  doVersion();
+  doStorage();
+  loadSettings();
+  createEventListeners();
+}
+
+function fshSettings(tabs) {
+  const tabsInstance = addTab(tabs);
+  if (tabsInstance) once(getElementById('ui-id-9'), 'click', paintSettings);
+}
+
+export default async function injectSettings() {
+  const tabs = getElementById('settingsTabs');
+  if (jQueryNotPresent() || !tabs) return;
+  await awaitWidget(tabs, 'Tabs', 'ui');
+  fshSettings(tabs);
   injectBlockedSkills();
+  setValue('minGroupLevel', querySelector('input[name="min_group_level"]').value);
 }

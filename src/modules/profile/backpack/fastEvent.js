@@ -2,7 +2,6 @@ import equipItem from '../../ajax/equipItem';
 import useItem from '../../ajax/useItem';
 import sendEvent from '../../analytics/sendEvent';
 import hasClass from '../../common/hasClass';
-import partial from '../../common/partial';
 import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
 
@@ -12,7 +11,7 @@ function backpackRemove(theBackpack, invId) {
   if (i !== -1) { theBackpack.srcData.splice(i, 1); }
 }
 
-function actionResult([theBackpack, result, target, invId], data) {
+function actionResult([theBackpack, result, target, invId, data]) {
   if (data.r !== 0) {
     target.remove();
     return;
@@ -22,16 +21,15 @@ function actionResult([theBackpack, result, target, invId], data) {
   setInnerHtml(`<span class="fastWorn">${result}</span>`, target.parentNode);
 }
 
-function fastAction(theBackpack, evt, action, result) {
+async function fastAction(theBackpack, evt, action, result) {
   sendEvent('profile', `fastAction - ${result}`);
   const { target } = evt;
   const invId = target.parentNode.parentNode.children[0].dataset.inv;
   setText('', target);
   target.blur();
   target.className = 'fastAction fshBl fshSpinner fshSpinner12';
-  action(invId).then(
-    partial(actionResult, [theBackpack, result, target, invId]),
-  );
+  const data = await action(invId);
+  if (data) actionResult([theBackpack, result, target, invId, data]);
 }
 
 export default function fastEvent(theBackpack, evt) {

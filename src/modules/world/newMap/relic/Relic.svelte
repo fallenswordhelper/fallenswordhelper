@@ -1,58 +1,58 @@
 <script>
-import { onDestroy } from 'svelte';
+  import { onDestroy } from 'svelte';
 
-import sendEvent from '../../../analytics/sendEvent';
-import BuffLinks from '../../../common/BuffLinks.svelte';
-import { buffs } from './buffStore';
-import { defenders } from './defendersStore';
-import {
-  buffResultDisplay,
-  defBuffedDisplay,
-  ldcloak,
-  processed,
-  rawDefDisplay,
-  rawGroupDisplay,
-  relicDisplay,
-} from './displayStore';
-import { hasGroup } from './groupStore';
-import Missing from './Missing.svelte';
-import { guildId } from './relicStore';
-import { trackStatus } from './statusStore';
+  import sendEvent from '../../../analytics/sendEvent';
+  import BuffLinks from '../../../common/BuffLinks.svelte';
+  import { buffs } from './buffStore';
+  import { defenders } from './defendersStore';
+  import {
+    buffResultDisplay,
+    defBuffedDisplay,
+    ldcloak,
+    processed,
+    rawDefDisplay,
+    rawGroupDisplay,
+    relicDisplay,
+  } from './displayStore';
+  import { hasGroup } from './groupStore';
+  import Missing from './Missing.svelte';
+  import { guildId } from './relicStore';
+  import { trackStatus } from './statusStore';
 
-export let relicData = {};
-const members = relicData.defenders.map((x) => x.player_name);
-let showStats = false;
+  export let relicData = {};
+  const members = relicData.defenders.map((x) => x.player_name);
+  let showStats = false;
 
-function buffBatch(e) { sendEvent('relic', e.detail); }
+  function buffBatch(e) { sendEvent('relic', e.detail); }
 
-function fetchStats() {
-  sendEvent('relic', 'fetchStats');
-  showStats = true;
-  guildId.set(relicData.controlled_by.guild_id);
-  defenders.set(members);
-  hasGroup.set(GameData.player().hasGroup);
-  buffs.set(GameData.player().buffs);
-}
+  function fetchStats() {
+    sendEvent('relic', 'fetchStats');
+    showStats = true;
+    guildId.set(relicData.controlled_by.guild_id);
+    defenders.set(members);
+    hasGroup.set(GameData.player().hasGroup);
+    buffs.set(GameData.player().buffs);
+  }
 
-onDestroy(() => {
-  showStats = false;
-  guildId.set(0);
-  defenders.set([]);
-  hasGroup.set(0);
-  buffs.set([]);
-});
+  onDestroy(() => {
+    showStats = false;
+    guildId.set(0);
+    defenders.set([]);
+    hasGroup.set(0);
+    buffs.set([]);
+  });
 </script>
 
 <div class="body">
   <div class="left">
-    {#if relicData.is_owner}
+    { #if relicData.is_owner }
       <div class="buff-links">
-        <BuffLinks {members} on:buffBatch={ buffBatch }/>
+        <BuffLinks { members } on:buffBatch={ buffBatch }/>
       </div>
-    {/if}
-    {#if !showStats}
+    { /if }
+    { #if !showStats }
       <button class="custombutton" on:click={ fetchStats } type="button">Fetch Stats</button>
-    {:else}
+    { :else }
       <div class="b-top">
         Processing
       </div>
@@ -63,11 +63,13 @@ onDestroy(() => {
         Assumptions
       </div>
       <div class="assume">
-        Above calculations include Constitution, Fortitude, Nightmare Visage, Chi Strike, Sanctuary, Terrorize and Flinch bonus calculations (in that order) on both the defending group and attacking group.
+        Above calculations include Constitution, Fortitude, Nightmare Visage, Chi Strike, Sanctuary,
+        Terrorize and Flinch bonus calculations (in that order) on both the defending group and
+        attacking group.
       </div>
-    {/if}
+    { /if }
   </div>
-  {#if showStats}
+  { #if showStats }
     <div class="middle">
       <div class="b-top">Defending Guild Stats</div>
       <div class="stat-grid">
@@ -113,9 +115,9 @@ onDestroy(() => {
       </div>
     </div>
     <div class="bottom b-top">
-      <Missing {members}/>
+      <Missing { members }/>
     </div>
-  {/if}
+  { /if }
 </div>
 
 <style>

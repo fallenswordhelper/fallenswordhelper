@@ -36,7 +36,7 @@ const playerLog = () => { runDefault(import('../../logs/playerLog')); };
 const points = () => { runDefault(import('./points')); };
 const privateMsg = () => { runDefault(import('../../logs/privateMsg/privateMsg')); };
 const quickBuff = () => { runDefault(import('../../quickbuff/quickBuff')); };
-const superelite = () => { runDefault(import('../../seLog/superelite')); };
+const superelite = () => { runDefault(import('../../superelite/superelite')); };
 
 const skills = () => {
   if (!calf.userIsDev) { return; } // skills

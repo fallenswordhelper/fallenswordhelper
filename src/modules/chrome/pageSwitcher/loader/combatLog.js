@@ -1,4 +1,5 @@
-export default async function combatLog(i) {
-  const m = await import('../../../notepad/combatLog/combatLog');
-  m.default(i);
+import runDefault from '../../../common/runDefault';
+
+export default function combatLog() {
+  runDefault(import('../../../notepad/combatLog/combatLog'));
 }

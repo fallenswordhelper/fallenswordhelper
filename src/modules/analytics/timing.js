@@ -1,5 +1,3 @@
-import { log } from '../support/debug';
-import getValue from '../system/getValue';
 import noGa from './noGa';
 
 const times = {};
@@ -14,12 +12,9 @@ function sendTiming(category, variable, label) {
   if (myTime > 10) {
     ga('fshApp.send', 'timing', category, variable, Math.round(myTime), label);
   }
-  if (getValue('betaOptIn')) { //  Timing output
-    log(variable, `${myTime}ms`);
-  }
 }
 
 export function end(category, variable, label) {
-  if (noGa()) { return; }
+  if (noGa()) return;
   sendTiming(category, variable, label);
 }

@@ -3,9 +3,11 @@ os: linux
 dist: focal
 language: node_js
 node_js:
-  # - "node"
-  - "19.2.0"
-script: npm run build
+  - "node"
+  # - "19.2.0"
+script:
+  - npm run test
+  - npm run build
 
 # Don't build tags
 if: tag IS NOT present

@@ -43,7 +43,7 @@ function parseRankData(memberRanks, row) {
   if (thisRank) {
     insertHtmlAfterBegin(rankCell, `<span class="fshBlue">(${
       calcPermWeight(thisRank.permissions)
-    }) Tax:(${thisRank.tax || 0}%)</span> `);
+    }) Tax:(${thisRank.tax ?? 0}%)</span> `);
   }
 }
 
@@ -57,7 +57,6 @@ function injectWeightButton(theRows, memberRanks, addNewRank) {
   const weightButton = createButton({
     className: 'fshBl fsh-bli',
     textContent: 'Get Rank Weightings',
-    type: 'button',
   });
   once(weightButton, 'click', partial(fetchRankData, theRows, memberRanks));
   insertElement(container, weightButton);

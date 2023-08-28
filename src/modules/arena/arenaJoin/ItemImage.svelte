@@ -7,10 +7,10 @@
   export { className as class };
 </script>
 
-<div class="{className}">
-  {#if item}
-    <ItemImg {item} t=1/>
-  {/if}
+<div class="{ className }">
+  { #if item }
+    <ItemImg { item } t=1/>
+  { /if }
 </div>
 
 <style>

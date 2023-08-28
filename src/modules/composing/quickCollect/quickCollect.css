@@ -1,0 +1,9 @@
+.fsh-quick-collect {
+  display: inline-block;
+  text-align: center;
+  width: 72px;
+}
+
+.fsh-quick-collect:before {
+  left: 47%;
+}

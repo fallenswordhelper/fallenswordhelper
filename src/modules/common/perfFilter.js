@@ -31,8 +31,9 @@ function drawFilters(data) {
   onclick(buttonDiv, selectPerf);
 }
 
-export default function perfFilter(loc) { // jQuery.min
-  if (jQueryNotPresent()) { return; }
+export default async function perfFilter(loc) {
+  if (jQueryNotPresent()) return;
   target = loc;
-  getInventoryById().then(drawFilters);
+  const json = await getInventoryById();
+  if (json?.items) drawFilters(json);
 }

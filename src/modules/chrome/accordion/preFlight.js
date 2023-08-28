@@ -25,7 +25,7 @@ function noProblems(hcsNav) {
 
 export default async function preFlight() {
   const theNav = getElementById('nav');
-  const myNav = await awaitWidget(theNav, 'Nav');
+  const myNav = await awaitWidget(theNav, 'Nav', 'hcs');
   if (noProblems(myNav)) return { theNav, myNav };
   return {};
 }

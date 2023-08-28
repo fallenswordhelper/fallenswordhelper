@@ -1,6 +1,7 @@
 import './inventory.css';
 import getMembrList from '../../ajax/getMembrList';
-import allthen from '../../common/allthen';
+import { end, start } from '../../analytics/timing';
+import all from '../../common/all';
 import currentGuildId from '../../common/currentGuildId';
 import entries from '../../common/entries';
 import executeAll from '../../common/executeAll';
@@ -11,11 +12,8 @@ import notLastUpdate from '../../common/notLastUpdate';
 import setInnerHtml from '../../dom/setInnerHtml';
 import calf from '../../support/calf';
 import { oldActionSpinner } from '../../support/constants';
-import { time, timeEnd } from '../../support/debug';
 import { pcc } from '../../support/layout';
 import task from '../../support/task';
-import getValue from '../../system/getValue';
-import { get } from '../../system/idb';
 import { buildInv } from './buildInv';
 import clearButton from './clearButton';
 import decorate from './decorate';
@@ -37,7 +35,8 @@ function doSpinner() {
     oldActionSpinner}">&nbsp;Getting inventory data...</span>`, pcc());
 }
 
-function rekeyMembrList() {
+async function rekeyMembrList() {
+  await getMembrList(false);
   // Rekey membrList from names to id's
   calf.membrList = fromEntries(entries(calf.membrList).filter(notLastUpdate).map(rekey));
 }
@@ -55,37 +54,36 @@ function prepareLayout() {
   ]);
 }
 
-function doInventory() {
+function doInventory(reset) {
   prepareLayout();
   const fshInv = doTable();
   eventHandlers(fshInv);
-  // eslint-disable-next-line no-use-before-define
-  $('#fshRefresh').on('click', inventory);
+  $('#fshRefresh').on('click', reset);
   clearButton(fshInv);
   recallAll();
 }
 
-function getInvMan() {
-  const betaOptIn = getValue('betaOptIn');
-  if (betaOptIn) time('inventory.getInvMan'); // Timing output
-  doInventory();
-  if (betaOptIn) timeEnd('inventory.getInvMan'); // Timing output
+function getInvMan(reset) {
+  start('JS Perf', 'getInvMan');
+  doInventory(reset);
+  end('JS Perf', 'getInvMan');
 }
 
-function asyncCall() {
-  task(3, getInvMan);
+function asyncCall(reset) {
+  task(3, getInvMan, [reset]);
 }
 
-function syncInvMan() {
+async function syncInvMan(reset) {
   const prm = [loadDataTables(), buildInv()];
-  if (calf.subcmd === 'guildinvmgr') prm.push(getMembrList(false).then(rekeyMembrList));
-  prm.push(get(`fsh_${calf.subcmd}`).then(extendOptions));
-  allthen(prm, asyncCall);
+  if (calf.subcmd === 'guildinvmgr') prm.push(rekeyMembrList());
+  prm.push(extendOptions());
+  await all(prm);
+  asyncCall(reset);
 }
 
 export default function inventory() {
   if (jQueryNotPresent() || !pcc()) return;
   if (calf.subcmd === 'guildinvmgr' && !currentGuildId()) return;
   doSpinner();
-  syncInvMan();
+  syncInvMan(inventory);
 }

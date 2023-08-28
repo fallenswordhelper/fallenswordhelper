@@ -1,10 +1,11 @@
+import jsonParse from '../common/jsonParse';
 import rnd from '../system/rnd';
 import indexAjax from './indexAjax';
 
-export default function createPotionFromTemplate(tempId) {
-  return indexAjax({
+export default async function createPotionFromTemplate(tempId) {
+  const unsafe = await indexAjax({
     cache: false,
-    dataType: 'json',
+    dataType: 'text',
     data: {
       cmd: 'composing',
       subcmd: 'createajax',
@@ -12,4 +13,5 @@ export default function createPotionFromTemplate(tempId) {
       fshrnd: rnd(),
     },
   });
+  return jsonParse(unsafe) ?? { error: 'Server Error' };
 }

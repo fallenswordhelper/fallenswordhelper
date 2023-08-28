@@ -60,13 +60,13 @@
 
 <div class="vs">
   <VirtualScroll
-    data={theStuff}
+    data={ theStuff }
     key="id"
-    keeps="{Math.floor(getHeightGuess() / 10)}"
+    keeps="{ Math.floor(getHeightGuess() / 10) }"
     estimateSize="14"
-    let:data={item}
+    let:data={ item }
   >
-    <svelte:component this={item.component} data={item.data}/>
+    <svelte:component this={ item.component } data={ item.data }/>
   </VirtualScroll>
 </div>
 

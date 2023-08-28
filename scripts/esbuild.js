@@ -1,64 +1,59 @@
-'use strict';
-
-const {
-  copyFileSync,
-  readFileSync,
-  writeFileSync,
-} = require('fs');
-const { performance, PerformanceObserver } = require('perf_hooks');
-const esbuild = require('esbuild');
-const sveltePlugin = require('esbuild-svelte');
-const cleanTarget = require('./cleanTarget');
-const { github } = require('./config.json');
-const { calfVer, core, version } = require('./getVersion');
-const perfLogger = require('./perfLogger');
+import { PerformanceObserver, performance } from 'node:perf_hooks';
+import esbuild from 'esbuild';
+import sveltePlugin from 'esbuild-svelte';
+import { github } from './config.js';
+import { calfVer, core, version } from './getVersion.js';
+import liquidPlugin from './liquidPlugin.js';
+import {
+  buildFsh,
+  dataTablesCss,
+  pathToFile,
+  perfLogger,
+  sourcemapPathTransform,
+} from './utils.js';
 
 const perfObserver = new PerformanceObserver(perfLogger);
 perfObserver.observe({ entryTypes: ['measure'], buffer: true });
-
-performance.mark('example-start');
 
 const dist = 'dist/';
 const fshPath = 'Releases/Current';
 const calfPath = `resources/prod/${core}`;
 
-cleanTarget(`${dist}${fshPath}`);
+await buildFsh(
+  `${dist}${fshPath}`,
+  `${core}`,
+  `${github}${fshPath}`,
+  `${github}${calfPath}/calfSystem.min.js`,
+);
 
-const fsh = readFileSync('src/fallenswordhelper.user.js', 'utf8')
-  .replaceAll('_VER', `${core}`)
-  .replace('_DLURL', `${github}${fshPath}/fallenswordhelper.user.js`)
-  .replace('_CALFJS', `${github}${calfPath}/calfSystem.min.js`);
-writeFileSync(`${dist}${fshPath}/fallenswordhelper.user.js`, fsh);
-
-cleanTarget(`${dist}${calfPath}`);
-
-copyFileSync('src/styles/dataTables.css', `${dist}${calfPath}/dataTables.css`);
+await dataTablesCss(`${dist}${calfPath}`);
 
 performance.mark('esbuild-start');
 
-esbuild.build({
+await esbuild.build({
   bundle: true,
   chunkNames: `${calfVer}/[name]-[hash]`,
+  conditions: ['svelte'],
   define: {
     defineCalfPath: `"${github}${calfPath}/calfSystem.min.css"`,
     defineDataTablesPath: `"${github}${calfPath}/dataTables.css"`,
     defineCalfVer: `"${calfVer}"`,
     defineUserIsDev: 'false',
   },
-  entryPoints: ['src/calfSystem.js'],
+  entryPoints: [pathToFile('src/calfSystem.js')],
   entryNames: '[name].min',
   format: 'esm',
   legalComments: 'none',
   minify: true,
-  outdir: `${dist}${calfPath}`,
-  plugins: [sveltePlugin()],
+  outdir: pathToFile(`${dist}${calfPath}`),
+  plugins: [liquidPlugin, sveltePlugin()],
   sourceRoot: `https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/${version}`,
   sourcemap: true,
   sourcesContent: false,
   splitting: true,
-}).then(() => {
-  performance.mark('esbuild-end');
-  performance.mark('example-end');
-  performance.measure('esbuild', 'esbuild-start', 'esbuild-end');
-  performance.measure('example', 'example-start', 'example-end');
 });
+
+performance.mark('esbuild-end');
+performance.measure('esbuild', 'esbuild-start', 'esbuild-end');
+
+await sourcemapPathTransform();

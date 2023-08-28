@@ -5,6 +5,7 @@ import querySelector from '../common/querySelector';
 import xPath from '../common/xPath';
 import updateBuffLog from '../notepad/buffLog/updateBuffLog';
 import calf from '../support/calf';
+import stdout from '../support/stdout';
 import injectQuestBookFull from './pageSwitcher/loader/injectQuestBookFull';
 import news from './pageSwitcher/loader/news';
 import viewRecipe from './pageSwitcher/loader/viewRecipe';
@@ -40,17 +41,14 @@ const unknown = [
   ],
   [
     () => calf.userIsDev, // unknownPage
-    // eslint-disable-next-line no-console
-    () => { console.log('Fell through!'); }, // skipcq: JS-0002
+    () => { stdout('Fell through!'); },
   ],
 ];
 
 export default function unknownPage() { // Legacy
-  if (jQueryNotPresent()) { return; }
-  if (calf.userIsDev) { // unknownPage
-    // eslint-disable-next-line no-console
-    console.log('unknownPage'); // skipcq: JS-0002
-  }
+  if (jQueryNotPresent()) return;
+  const show = 0;
+  if (calf.userIsDev && show) stdout('unknownPage'); // unknownPage
   const known = unknown.find((el) => el[0]());
-  if (known) { known[1](); }
+  if (known) known[1]();
 }

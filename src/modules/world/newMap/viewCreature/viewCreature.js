@@ -8,7 +8,6 @@ import executeParam from '../../../common/executeParam';
 import getElementById from '../../../common/getElementById';
 import insertElement from '../../../common/insertElement';
 import isArray from '../../../common/isArray';
-import partial from '../../../common/partial';
 import playerDataObject from '../../../common/playerDataObject';
 import playerName from '../../../common/playerName';
 import setInnerHtml from '../../../dom/setInnerHtml';
@@ -162,15 +161,17 @@ function processGroupStats(data, playerJson, groupJson) {
   });
 }
 
-function getGroupStats(data, playerJson, groupId) {
+async function getGroupStats(data, playerJson, groupId) {
   if (groupId) {
-    daGroupStats(groupId).then(partial(processGroupStats, data, playerJson));
+    const groupJson = await daGroupStats(groupId);
+    processGroupStats(data, playerJson, groupJson);
   }
 }
 
-function processGroup(data, playerJson) {
-  daViewGroups().then(getGroupId)
-    .then(partial(getGroupStats, data, playerJson));
+async function processGroup(data, playerJson) {
+  const json = await daViewGroups();
+  const groupId = getGroupId(json);
+  getGroupStats(data, playerJson, groupId);
 }
 
 function processPlayer(data, playerJson) {
@@ -178,18 +179,15 @@ function processPlayer(data, playerJson) {
   doCombatEval(data, playerJson, { groupExists: false });
 }
 
-function isValidData(data) {
-  return data.response && data.response.data;
-}
-
-function processCreature(_e, data) {
+async function processCreature(_e, data) {
   getDialogViewCreature();
   if (!dialogViewCreature) { return; }
   setCombatEvaluator('');
   setGroupEvalalutor('');
-  if (isValidData(data)) {
+  if (data?.response?.data) {
     makeDoNotKillLink(data.response.data.name, dialogViewCreature);
-    myStats(true).then(partial(processPlayer, data));
+    const json = await myStats(true);
+    if (json) processPlayer(data, json);
   }
 }
 

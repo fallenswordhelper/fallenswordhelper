@@ -6,8 +6,9 @@ import { get, set } from '../system/idb';
 
 async function getMyProfile(force) {
   const json = await profile(playerName(), force);
-  const data = json ? { ...json, lastUpdate: now() } : json;
-  set('fsh_selfProfile', data);
+  const isOk = json?.username === playerName();
+  const data = isOk ? { ...json, lastUpdate: now() } : json;
+  if (isOk) set('fsh_selfProfile', data);
   return data;
 }
 

@@ -5,12 +5,12 @@ import insertElement from '../../../common/insertElement';
 import isFunction from '../../../common/isFunction';
 import on from '../../../common/on';
 import onclick from '../../../common/onclick';
-import { huntingBuffsHtml } from '../../../settings/huntingBuffs';
 import { simpleCheckboxHtml } from '../../../settings/simpleCheckbox';
 import { defFetchPlayerBuffs, defFetchWorldRealmActions } from '../../../support/constants';
 import updateBuffInfo from '../buffInfo/updateBuffInfo';
 import { toggleHidePlayerActions } from '../prepareHidePlayerActions';
 import testDynamics from '../titanStats/testDynamics';
+import { huntingBuffsHtml } from './huntingBuffs';
 import toggleEnabledHuntingMode from './huntingBuffs/toggleEnabledHuntingMode';
 import togglePref from './togglePref';
 

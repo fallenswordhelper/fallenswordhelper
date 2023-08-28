@@ -1,5 +1,7 @@
 import getValue from '../../system/getValue';
 
+let patched = false;
+
 // codebeat:disable[ARITY]
 function drawCircle(
   context,
@@ -23,8 +25,23 @@ function drawCircle(
 }
 // codebeat:enable[ARITY]
 
+function patchFootprints() {
+  if (!patched) {
+    const texture = GameController.Realm.footprintTexture;
+    texture.color = getValue('footprintColor');
+    texture.Draw = drawCircle;
+    patched = true;
+  }
+}
+
+function canihazfootprints() {
+  if (GameController?.Realm?.footprintTexture) {
+    patchFootprints();
+    $.unsubscribe('fixed.realm', canihazfootprints);
+  }
+}
+
 export default function replaceFootprints() {
-  const texture = GameController.Realm.footprintTexture;
-  texture.color = getValue('footprintColor');
-  texture.Draw = drawCircle;
+  if (GameController?.Realm?.footprintTexture) patchFootprints();
+  else $.subscribe('fixed.realm', canihazfootprints);
 }

@@ -29,12 +29,14 @@ function fixTable() {
   tds[4].setAttribute('width', '7%');
 }
 
-export default function groups() {
-  if (jQueryNotPresent()) { return; }
+export default async function groups() {
+  if (jQueryNotPresent()) return;
   const joinAll = querySelector('#pCC input[value="Join All Available Groups"]');
-  if (!joinAll) { return; }
-  getMembrList(false).then(doGroupPaint);
+  if (!joinAll) return;
+  const membrListPrm = getMembrList(false);
   displayMinGroupLevel();
   groupButtons(joinAll);
   fixTable();
+  const membrList = await membrListPrm;
+  if (membrList) doGroupPaint(membrList);
 }

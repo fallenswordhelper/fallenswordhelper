@@ -113,15 +113,15 @@
     <tr>
       <td colspan="3">
         <label>
-          <input bind:checked={current} on:change={toggleCurrent} type="checkbox">
+          <input bind:checked={ current } on:change={ toggleCurrent } type="checkbox">
           Current
         </label>
         <label>
-          <input bind:checked={history} on:change={toggleHistory} type="checkbox">
+          <input bind:checked={ history } on:change={ toggleHistory } type="checkbox">
           History
         </label>
         <label>
-          <input bind:checked={securable} on:change={toggleSecurable} type="checkbox">
+          <input bind:checked={ securable } on:change={ toggleSecurable } type="checkbox">
           Securable
         </label>
       </td>
@@ -129,20 +129,20 @@
     <tr><td class="header" colspan="3"/></tr>
     <tr>
       <td colspan="3">
-        {#await buildTitanList() then}
+        { #await buildTitanList() then }
           <div id="titan-list">
-          {#each titans as [name, flag]}
-            <label>
-              <input bind:checked={flag} on:change={toggleTitan} type="checkbox">
-              {name}
-            </label>&ensp;
-          {/each}
+            { #each titans as [name, flag] }
+              <label>
+                <input bind:checked={ flag } on:change={ toggleTitan } type="checkbox">
+                { name }
+              </label>&ensp;
+            { /each }
           </div>
           <div>
-            <LinkButtonBracketed on:click={selectAll}>Select All</LinkButtonBracketed>
-            <LinkButtonBracketed on:click={selectNone}>Select None</LinkButtonBracketed>
+            <LinkButtonBracketed on:click={ selectAll }>Select All</LinkButtonBracketed>
+            <LinkButtonBracketed on:click={ selectNone }>Select None</LinkButtonBracketed>
           </div>
-        {/await}
+        { /await }
       </td>
     </tr>
     <tr><td class="header" colspan="3"/></tr>

@@ -1,6 +1,7 @@
 import isUndefined from '../common/isUndefined';
 import loadScript from '../common/loadScript';
 import playerId from '../common/playerId';
+import playerName from '../common/playerName';
 import calf from '../support/calf';
 import isAuto from './isAuto';
 
@@ -70,7 +71,7 @@ function analyticsSetup() {
     window.ga = window.ga || function gafn() {
       ga.q = ga.q || [];
       // eslint-disable-next-line prefer-rest-params
-      ga.q.push(arguments);
+      ga.q.push(arguments); // skipcq: JS-0244
     };
     ga.l = Number(new Date());
   }
@@ -78,23 +79,21 @@ function analyticsSetup() {
   initSite();
 }
 
-function gtagPlayerId() {
-  const pid = playerId();
-  if (pid) gtag('config', 'G-14Y99WX8XL', { user_id: pid });
-}
-
 function gtagSetup() {
   loadScript('https://www.googletagmanager.com/gtag/js?id=G-14Y99WX8XL');
   window.dataLayer = window.dataLayer || [];
-  // eslint-disable-next-line prefer-rest-params
-  window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+  window.gtag = window.gtag || function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer.push(arguments); // skipcq: JS-0244
+  };
   gtag('js', new Date());
+  const pid = playerName();
   gtag('config', 'G-14Y99WX8XL', {
     app_name: 'fshApp',
     app_version: `${calf.fshVer}(${calf.calfVer})`,
-    page_location: getPage(),
+    send_page_view: false,
+    ...(pid && { user_id: pid }),
   });
-  gtagPlayerId();
 }
 
 export default function setup() {

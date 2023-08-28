@@ -34,10 +34,11 @@ async function interceptBuy(e) {
     actionRow.className = 'fshActionRow';
     setInnerHtml('<div class="fshSpin"><span class="fshSpinner"></span></div>', actionRow);
     const response = await daBuffMarketBuy(packageId);
-    if (response.s) {
+    if (response?.s) {
       setInnerHtml('<span class="fshBuffSuccess">Buffs have been applied</span>', actionRow);
     } else {
-      setInnerHtml(`<span class="fshBuffFail">${response.e.message}</span>`, actionRow);
+      const msg = response?.e?.message ?? 'Failed';
+      setInnerHtml(`<span class="fshBuffFail">${msg}</span>`, actionRow);
     }
   }
 }

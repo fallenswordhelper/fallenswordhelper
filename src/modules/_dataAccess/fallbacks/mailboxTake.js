@@ -1,5 +1,5 @@
 import indexAjaxJson from '../../ajax/indexAjaxJson';
-import allthen from '../../common/allthen';
+import all from '../../common/all';
 
 function tempinvTake(invId) {
   return indexAjaxJson({
@@ -22,6 +22,7 @@ function formatResults(resultAry) {
   return { e: { message: resultAry[0].m }, s: false };
 }
 
-export default function mailboxTake(invIdAry) {
-  return allthen(invIdAry.map(tempinvTake), formatResults);
+export default async function mailboxTake(invIdAry) {
+  const resultAry = await all(invIdAry.map(tempinvTake));
+  return formatResults(resultAry);
 }

@@ -5,7 +5,6 @@ import csvSplit from '../../common/csvSplit';
 import getText from '../../common/getText';
 import hideElement from '../../common/hideElement';
 import onclick from '../../common/onclick';
-import partial from '../../common/partial';
 import querySelectorArray from '../../common/querySelectorArray';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -23,13 +22,14 @@ function joined(container) {
   );
 }
 
-function joinGroup(groupID, container) {
-  indexAjaxData({
+async function joinGroup(groupID, container) {
+  await indexAjaxData({
     cmd: 'guild',
     subcmd: 'groups',
     subcmd2: 'join',
     group_id: groupID,
-  }).then(partial(joined, container));
+  });
+  joined(container);
 }
 
 function doJoinUnderSize(joinButton) {

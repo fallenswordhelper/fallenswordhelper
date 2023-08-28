@@ -1,4 +1,5 @@
-export default async function recipeMgr(i) {
-  const m = await import('../../../notepad/recipeMgr/recipeMgr');
-  m.default(i);
+import runDefault from '../../../common/runDefault';
+
+export default function recipeMgr() {
+  runDefault(import('../../../notepad/recipeMgr/recipeMgr'));
 }
