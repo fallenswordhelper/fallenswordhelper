@@ -1,3 +1,4 @@
+import isAuto from '../analytics/isAuto';
 import screenview from '../analytics/screenview';
 import setup from '../analytics/setup';
 import { end, start } from '../analytics/timing';
@@ -8,6 +9,7 @@ import loadCss from '../common/loadCss';
 import querySelector from '../common/querySelector';
 import calf from '../support/calf';
 import globalErrorHandler from '../support/globalErrorHandler';
+import stdout from '../support/stdout';
 import task from '../support/task';
 import getUrlParameter from '../system/getUrlParameter';
 import isMessageSound from './isMessageSound';
@@ -26,12 +28,12 @@ let coreFunction = 0;
 let functionPath = 0;
 
 function getParam(param) {
-  return getUrlParameter(param) || '-';
+  return getUrlParameter(param) || '-'; // skipcq: JS-W1043
 }
 
 function newSelector(selector) {
   const testCmd = querySelector(selector);
-  return (testCmd && testCmd.value) || '-';
+  return testCmd?.value || '-'; // skipcq: JS-W1043
 }
 
 function isValid() {
@@ -41,9 +43,7 @@ function isValid() {
 }
 
 function testCoreFunction() {
-  if (isValid()) {
-    return pageSwitcher[cmd][subcmd][subcmd2];
-  }
+  if (isValid()) return pageSwitcher[cmd][subcmd][subcmd2];
 }
 
 function getParamsFromUrl() {
@@ -66,31 +66,22 @@ function setCalfParams() {
 }
 
 function getCoreFunction() {
-  if (document.location.search !== '') {
-    getParamsFromUrl();
-  } else {
-    getParamsFromPage();
-  }
+  if (document.location.search !== '') getParamsFromUrl();
+  else getParamsFromPage();
   setCalfParams();
   functionPath = `${cmd}/${subcmd}/${subcmd2}${type}`;
   coreFunction = testCoreFunction();
 }
 
 function devHooks() {
-  /* eslint-disable no-console */
-  console.log('functionPath', functionPath); // skipcq: JS-0002
-  if (!coreFunction) {
-    console.log('No Core Function.'); // skipcq: JS-0002
-  } else if (!isFunction(coreFunction)) {
-    console.log('Not Core Function.'); // skipcq: JS-0002
-  }
-  /* eslint-enable no-console */
+  const showPath = 0;
+  if (showPath) stdout('functionPath', functionPath);
+  if (!coreFunction) stdout('No Core Function.');
+  else if (!isFunction(coreFunction)) stdout('Not Core Function.');
 }
 
 function asyncDispatcher() {
-  if (calf.userIsDev) { //  asyncDispatcher messages
-    devHooks();
-  }
+  if (calf.userIsDev) devHooks(); //  asyncDispatcher messages
   if (isFunction(coreFunction)) {
     screenview(functionPath);
     start('JS Perf', functionPath);
@@ -112,19 +103,20 @@ async function runCore(cssPrm) {
   end('JS Perf', 'FSH.runCore');
 }
 
-function badEnv() {
-  return !('containerName' in CSSContainerRule.prototype)
-    || !navigator.cookieEnabled
-    || window !== window.parent;
-}
+const envTests = [
+  () => !('containerName' in CSSContainerRule.prototype),
+  () => !('toSpliced' in Array.prototype),
+  () => !navigator.cookieEnabled,
+  () => window !== window.parent,
+  isAuto,
+];
+
+const badEnv = () => envTests.some((fn) => fn());
 
 function setVer(fshVer, gmInfo) {
   calf.gmInfo = jsonParse(decodeURIComponent(gmInfo));
-  if (calf.gmInfo) {
-    calf.fshVer = fshVer;
-  } else {
-    calf.fshVer = `${fshVer}_native`;
-  }
+  if (calf.gmInfo) calf.fshVer = fshVer;
+  else calf.fshVer = `${fshVer}_native`;
   calf.calfVer = defineCalfVer; // eslint-disable-line no-undef
 }
 

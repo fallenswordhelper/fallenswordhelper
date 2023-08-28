@@ -1,3 +1,4 @@
+import all from '../common/all';
 import getElementById from '../common/getElementById';
 import querySelectorArray from '../common/querySelectorArray';
 import relatePlayer from '../logs/playerLogWidgets/relatePlayer';
@@ -5,7 +6,7 @@ import { playerLinkSelector } from '../support/constants';
 
 const getPlayerLinks = () => querySelectorArray(playerLinkSelector, getElementById('resultRows'))
   .filter((a) => !a.href.endsWith('=null'));
-const getPlayerTags = async (playerLinks) => (await Promise.all(playerLinks.map(relatePlayer)))
+const getPlayerTags = async (playerLinks) => (await all(playerLinks.map(relatePlayer)))
   .filter(([, type]) => type);
 const lookup = {
   guild: 'fshGreen',

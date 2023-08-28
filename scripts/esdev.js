@@ -3,6 +3,7 @@ import esbuild from 'esbuild';
 import sveltePlugin from 'esbuild-svelte';
 import { port as calfPort } from './config.js';
 import { calfVer, core } from './getVersion.js';
+import liquidPlugin from './liquidPlugin.js';
 import {
   buildFsh,
   dataTablesCss,
@@ -31,6 +32,7 @@ performance.mark('esbuild-start');
 await esbuild.build({
   bundle: true,
   chunkNames: `${calfVer}/[name]-[hash]`,
+  conditions: ['svelte'],
   define: {
     defineCalfPath: `"${rootPath}${calfPath}/calfSystem.min.css"`,
     defineDataTablesPath: `"${rootPath}${calfPath}/dataTables.css"`,
@@ -43,7 +45,7 @@ await esbuild.build({
   legalComments: 'none',
   minify: true,
   outdir: pathToFile(calfPath),
-  plugins: [sveltePlugin()],
+  plugins: [liquidPlugin, sveltePlugin()],
   sourcemap: true,
   sourcesContent: false,
   splitting: true,

@@ -6,10 +6,10 @@
 </script>
 
 <div>
-  Items {data} from
+  Items { data } from
   <a
-    href="{auctionSearchUrl}"
-    on:click={() => sendEvent('QuickWear', 'AH Quick Search', data)}
+    href="{ auctionSearchUrl }"
+    on:click={ () => sendEvent('QuickWear', 'AH Quick Search', data) }
   >AH Quick Search</a>
   found in your inventory
 </div>

@@ -3,6 +3,6 @@ import getValue from '../../../system/getValue';
 
 export default function fsBoxLog() {
   if (getValue('fsboxlog')) {
-    runDefault(import('../../injectFSBoxLog'));
+    runDefault(import('../../fsbox/fsbox'));
   }
 }

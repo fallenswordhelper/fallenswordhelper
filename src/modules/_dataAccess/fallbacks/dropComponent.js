@@ -1,21 +1,19 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import all from '../../common/all';
-import infoBoxFrom from '../../common/InfoBoxFrom';
+import infoBox from '../../common/infoBox';
 
-function ajaxResult(componentId, html) {
-  const info = infoBoxFrom(html);
-  let r = 1; // skipcq: JS-C1002
-  if (info === 'Component destroyed.') { r = 0; }
-  return { r, m: info, c: componentId };
+function ajaxResult(componentId, doc) {
+  const info = infoBox(doc);
+  return { r: info === 'Component destroyed.' ? 0 : 1, m: info, c: componentId };
 }
 
 async function destroyComponent(componentId) {
-  const html = await indexAjaxData({
+  const doc = await indexAjaxDoc({
     cmd: 'profile',
     subcmd: 'destroycomponent',
     component_id: componentId,
   });
-  return ajaxResult(componentId, html);
+  return ajaxResult(componentId, doc);
 }
 
 function formatResults(resultAry) {

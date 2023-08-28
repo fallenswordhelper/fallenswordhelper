@@ -1,3 +1,4 @@
+import isNull from '../../common/isNull';
 import on from '../../common/on';
 import getValue from '../../system/getValue';
 import getMsg from './getMsg';
@@ -16,7 +17,7 @@ function getSendMessage() { // jQuery
 }
 
 function getEnterForSendMessage() {
-  if (enterForSendMessage === null) {
+  if (isNull(enterForSendMessage)) {
     enterForSendMessage = getValue('enterForSendMessage');
   }
   return enterForSendMessage;

@@ -5,6 +5,7 @@ https://github.com/addyosmani/pubsubz
 
 import partial from '../common/partial';
 import calf from './calf';
+import stdout from './stdout';
 import task from './task';
 
 const topics = {};
@@ -13,11 +14,8 @@ let subUid = -1;
 function execute(args, el) { task(3, el.func, [args]); }
 
 export function publish(topic, args) {
-  if (calf.userIsDev) { //  pubsubz publish
-    // eslint-disable-next-line no-console
-    console.log('publish', topic); // skipcq: JS-0002
-  }
-  if (!topics[topic]) { return; }
+  if (calf.userIsDev) stdout('publish', topic); //  pubsubz publish
+  if (!topics[topic]) return;
   topics[topic].forEach(partial(execute, args));
   return true; // probably not needed
 }
@@ -31,9 +29,7 @@ export function subscribe(topic, func) {
 }
 
 export function subscribeOnce(topic, func) {
-  if (topics[topic]) {
-    return topics[topic][0].token;
-  }
+  if (topics[topic]) return topics[topic][0].token;
   return subscribe(topic, func);
 }
 

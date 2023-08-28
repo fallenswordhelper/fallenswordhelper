@@ -7,13 +7,11 @@ let thisOneDayAgo = 0;
 let thisSecsSevenDaysAgo = 0;
 let thisYearAgo = 0;
 
-export function getNow() {
-  if (!thisNow) thisNow = Date.now();
-  return thisNow;
-}
+export const realtime = () => Date.now();
+export const realtimeSecs = () => Math.floor(realtime() / 1000);
 
 export function now() {
-  if (!thisNow) thisNow = Date.now();
+  if (!thisNow) thisNow = realtime();
   return thisNow;
 }
 

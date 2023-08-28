@@ -1,0 +1,2 @@
+import{a as d}from"./chunk-LBMN7XL3.js";import{a as f}from"./chunk-FMA2QB7F.js";import{a as e}from"./chunk-PJWDCLVE.js";import{a as l}from"./chunk-R7J7NY4A.js";import{L as n,h as o}from"./chunk-5ELKH2XV.js";var m=0,p=0;function i(){return m||(p=f(`#pCC a[href^="${n}"]`),m=!0),p}var r=null;function g(){let t=i();if(t){let u=e(o,t.href);if(u)return Number(u)}}function c(){return l(r)&&(r=g()===d()),r}export{i as a,c as b};
+//# sourceMappingURL=chunk-BEJIBJWN.js.map

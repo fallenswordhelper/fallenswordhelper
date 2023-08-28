@@ -1,0 +1,45 @@
+<tr>
+  <td class="header" colspan="2">Bounty hunting preferences</td>
+</tr>
+<tr>
+  {% render 'settingsRowLabel'
+   field: 'enableActiveBountyList'
+   label: 'Show Active Bounties'
+   network: true
+   tooltipText: 'Shows your active bounties on the left hand side' %}
+  <td>
+    {% render 'settingsControl' field: 'enableActiveBountyList' %}
+    {% render 'settingsLabelledControl'
+     field: 'bountyListRefreshTime'
+     max: '999'
+     textAfter: 'seconds refresh'
+     type: 'number' %}
+  </td>
+</tr>
+<tr>
+  {% render 'settingsRowLabel'
+   field: 'enableWantedList'
+   label: 'Show Wanted Bounties'
+   network: true
+   tooltipText: 'Shows when someone you want is on the bounty board.
+   The list is displayed on the left hand side' %}
+  <td>
+    {% render 'settingsControl' field: 'enableWantedList' %}
+    Refresh time is same as Active Bounties
+  </td>
+</tr>
+{% render 'settingsRow'
+ field: 'wantedNames'
+ label: 'Wanted Names'
+ tooltipText: 'The names of the people you want to see on the bounty board separated by commas
+ (or * for all)'
+ type: 'text' %}
+{% render 'settingsRow'
+ field: 'wantedGuildMembers'
+ label: 'Show Guild Members'
+ tooltipText: 'Shows guild members in the wanted bounty list.' %}
+{% render 'settingsRow'
+ field: 'showPvPSummaryInLog'
+ label: 'Show PvP Summary in Log'
+ network: true
+ tooltipText: 'Shows a summary of the PvP results in the log.' %}

@@ -1,2 +1,0 @@
-import{a as e}from"./chunk-QGMSNVNO.js";import{b as o}from"./chunk-VXJUTFBI.js";import"./chunk-6CCTYJXE.js";import{a as r}from"./chunk-M5HK4G4Q.js";import"./chunk-CSUKS4GS.js";import"./chunk-TGZ7LJUR.js";import"./chunk-X5GPKOZG.js";import"./chunk-BSKKCHEC.js";function n(t){t.style.display="block"}function s(){if(!o("showNextQuestSteps"))return;let t=e("next_stage_button");t&&(r('div[id^="stage"]').forEach(n),t.style.display="none")}export{s as default};
-//# sourceMappingURL=showAllQuestSteps-FO6NQJNP.js.map

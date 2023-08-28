@@ -12,6 +12,7 @@ export default function profileInjectQuickButton() {
   const avyImg = querySelector(
     '#profileLeftColumn img[src*="/avatars/"][width="200"]',
   );
-  if (!avyImg) { return; }
+  if (!avyImg) return;
+  avyImg.parentNode.classList.add('fshRelative');
   startApp(avyImg.nextElementSibling, avyImg.parentNode);
 }

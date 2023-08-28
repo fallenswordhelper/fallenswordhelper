@@ -1,14 +1,13 @@
 import daAdvisor from '../../_dataAccess/daAdvisor';
 import getMembrList from '../../ajax/getMembrList';
+import { end, start } from '../../analytics/timing';
 import all from '../../common/all';
 import createTFoot from '../../common/cElement/createTFoot';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import partial from '../../common/partial';
 import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
 import setInnerHtml from '../../dom/setInnerHtml';
-import { time, timeEnd } from '../../support/debug';
 import addCommas from '../../system/addCommas';
-import getValue from '../../system/getValue';
 import { injectTable, playerLevel, playerRank } from './helpers';
 
 function returnAdvisorPage(list, e, response) {
@@ -92,12 +91,7 @@ async function injectAdvisor(list) {
 }
 
 export default function injectAdvisorWeekly(list) {
-  const betaOptIn = getValue('betaOptIn');
-  if (betaOptIn) { //  Timing output
-    time('guildAdvisor.injectAdvisorWeekly');
-  }
+  start('JS Perf', 'injectAdvisorWeekly');
   injectAdvisor(list);
-  if (betaOptIn) { //  Timing output
-    timeEnd('guildAdvisor.injectAdvisorWeekly');
-  }
+  end('JS Perf', 'injectAdvisorWeekly');
 }

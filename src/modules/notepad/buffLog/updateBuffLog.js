@@ -24,6 +24,6 @@ function buffResult(buffLog) {
 
 export default async function updateBuffLog() {
   if (!getValue('keepBuffLog')) return;
-  const json = await get(fshBuffLog);
+  const json = await get(fshBuffLog) ?? '';
   buffResult(json);
 }

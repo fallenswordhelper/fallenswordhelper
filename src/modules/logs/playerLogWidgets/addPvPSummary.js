@@ -1,3 +1,4 @@
+import all from '../../common/all';
 import createDiv from '../../common/cElement/createDiv';
 import closestTr from '../../common/closestTr';
 import getId from '../../common/getId';
@@ -13,7 +14,7 @@ const green = 'fshGreen';
 const red = 'fshRed';
 const isPvp = ([, r]) => querySelector(playerLinkSelector, r);
 const getCombats = async ([cl, r, msgHtml]) => [r, msgHtml, await getCombat(r, getId(cl))];
-const goodCombats = ([, , json]) => json && json.s;
+const goodCombats = ([, , json]) => json?.s;
 const filterSpecial = (el) => [18, 21, 31].includes(el.id);
 const specialSpan = (text) => `<span class="fshRed fshBold">${text}.</span>`;
 
@@ -73,6 +74,6 @@ function notGroups(combatLinks) {
 export default async function addPvPSummary(logTable) {
   const combatLinks = querySelectorArray('a[href*="&combat_id="]', logTable);
   if (combatLinks.length === 0) { return; }
-  const combats = await Promise.all(notGroups(combatLinks));
+  const combats = await all(notGroups(combatLinks));
   combats.filter(goodCombats).forEach(updateTd);
 }

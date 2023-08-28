@@ -1,4 +1,5 @@
 import getMembrList from '../../ajax/getMembrList';
+import { end, start } from '../../analytics/timing';
 import arrayFrom from '../../common/arrayFrom';
 import createTFoot from '../../common/cElement/createTFoot';
 import getElementsByClassName from '../../common/getElementsByClassName';
@@ -14,9 +15,7 @@ import partial from '../../common/partial';
 import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
 import calf from '../../support/calf';
 import { cmdUrl } from '../../support/constants';
-import { time, timeEnd } from '../../support/debug';
 import { pcc } from '../../support/layout';
-import getValue from '../../system/getValue';
 import { injectTable, playerLevel, playerRank } from './helpers';
 import injectAdvisorWeekly from './injectAdvisorWeekly';
 
@@ -63,17 +62,12 @@ function summaryLink() {
 }
 
 function injectAdvisorDaily(list, membrList) {
-  const betaOptIn = getValue('betaOptIn');
-  if (betaOptIn) { //  Timing output
-    time('guildAdvisor.injectAdvisorDaily');
-  }
+  start('JS Perf', 'injectAdvisorDaily');
   const data = getData(list, membrList);
   const tfoot = getTfoot(list);
   injectTable(list, tfoot, data);
   summaryLink();
-  if (betaOptIn) { //  Timing output
-    timeEnd('guildAdvisor.injectAdvisorDaily');
-  }
+  end('JS Perf', 'injectAdvisorDaily');
 }
 
 async function switcher(list) {
