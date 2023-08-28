@@ -77,7 +77,8 @@
   }
 </script>
 
-<ModalTitled { visible } title="Questbook" on:close={ close }>
+<ModalTitled { visible } on:close={ close }>
+  <svelte:fragment slot="title">Quest Book</svelte:fragment>
   <div id="fshQuestContainer">
     { #await loadQuestBook() }
       Loading...
@@ -110,7 +111,7 @@
           height="10"
           class="tip-static"
           alt="Progress"
-          data-tipped="<span class='tooltiptitle'>Quests Completed</span><br><br>{
+          data-tipped="<span class='fshHelpTitle'>Quests Completed</span><br>{
             seasonalQuests.filter(statusFilters.completed).length } / { seasonalQuests.length }"
         >
       </div>
@@ -232,7 +233,7 @@
 
 <style>
   #fshQuestContainer {
-    min-width: 120px;
+    min-width: 620px;
     font-size: 12px;
   }
   h1 { font-weight: bold; }
@@ -292,7 +293,6 @@
   table td {
     padding-bottom: 0.5em;
   }
-
   .asLink {
     border: none;
     background: none;
@@ -318,7 +318,6 @@
     cursor: pointer;
   }
   input[type="number"] { width: 40%; }
-
   table img {
     display: inline;
   }
