@@ -78,7 +78,7 @@
   text-decoration: underline;
   color: red;
 }
-.fshLink, .helperGo {
+.fshLink {
   cursor: pointer;
   text-decoration: underline;
 }

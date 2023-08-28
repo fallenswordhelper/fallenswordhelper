@@ -1,4 +1,3 @@
-import injectQuestBook from '../../notepad/questBook/injectQuestBook';
 import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
 import creatureLog from '../pageSwitcher/loader/creatureLog';
@@ -10,6 +9,7 @@ import injectFindOther from '../pageSwitcher/loader/injectFindOther';
 import injectOnlinePlayers from '../pageSwitcher/loader/injectOnlinePlayers';
 import mercs from '../pageSwitcher/loader/mercs';
 import potReport from '../pageSwitcher/loader/potReport';
+import questbook from '../pageSwitcher/loader/questbook';
 import quickExtract from '../pageSwitcher/loader/quickExtract';
 import quickLinksManager from '../pageSwitcher/loader/quickLinksManager';
 import quickwear from '../pageSwitcher/loader/quickwear';
@@ -39,5 +39,5 @@ export default {
   'Relic List': reliclist,
   'Combat Set Manager': setmgr,
   'Pot Report': potReport,
-  'Quest Book': injectQuestBook,
+  'Quest Book': questbook,
 };

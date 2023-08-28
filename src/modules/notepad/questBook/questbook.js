@@ -2,7 +2,7 @@ import QuestBook from './QuestBook.svelte';
 
 let qb;
 
-export default function injectQuestBook() {
+export default function questbook() {
   if (qb) {
     qb.$set({ visible: true });
   } else {
