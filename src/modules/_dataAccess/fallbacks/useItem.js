@@ -1,9 +1,10 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import sendEvent from '../../analytics/sendEvent';
-import infoBoxFrom from '../../common/InfoBoxFrom';
+import infoBox from '../../common/infoBox';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import calf from '../../support/calf';
 import { composingFragmentType } from '../../support/constants';
+import stdout from '../../support/stdout';
 
 const ret = (info, prop) => ({
   r: { [prop]: [{ n: regExpFirstCapture(/'(?<id>.*)'/, info) }] },
@@ -27,10 +28,7 @@ function stash(info) {
     return { r: { frags }, s: true };
   }
   sendEvent('da/useItem', 'Bad Msg', info);
-  if (calf.userIsDev) { //  da/useItem Bad Msg
-    // eslint-disable-next-line no-console
-    console.log('da/useItem', 'Bad Msg', info); // skipcq: JS-0002
-  }
+  if (calf.userIsDev) stdout('da/useItem', 'Bad Msg', info); //  da/useItem Bad Msg
 }
 
 const outputLookup = [
@@ -42,17 +40,14 @@ const outputLookup = [
 ];
 
 function devHook() {
-  if (calf.userIsDev) { //  da/useItem No Info
-    // eslint-disable-next-line no-console
-    console.log('da/useItem', 'No Info'); // skipcq: JS-0002
-  }
+  if (calf.userIsDev) stdout('da/useItem', 'No Info'); //  da/useItem No Info
 }
 
-function formatResults(html) {
-  const info = infoBoxFrom(html);
+function formatResults(doc) {
+  const info = infoBox(doc);
   if (info) {
     const thisResult = outputLookup.find((e) => info.startsWith(e[0]));
-    if (thisResult) { return thisResult[1](info); }
+    if (thisResult) return thisResult[1](info);
   } else {
     sendEvent('da/useItem', 'No Info');
     devHook();
@@ -62,10 +57,10 @@ function formatResults(html) {
 }
 
 export default async function useItem(backpackInvId) {
-  const html = await indexAjaxData({
+  const doc = await indexAjaxDoc({
     cmd: 'profile',
     subcmd: 'useitem',
     inventory_id: backpackInvId,
   });
-  return formatResults(html);
+  return formatResults(doc);
 }

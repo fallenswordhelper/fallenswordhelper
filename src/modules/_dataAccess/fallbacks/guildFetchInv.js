@@ -1,4 +1,5 @@
 import indexAjaxJson from '../../ajax/indexAjaxJson';
+import isArray from '../../common/isArray';
 
 function updateType(item) {
   const updates = {
@@ -12,7 +13,8 @@ function updateType(item) {
 }
 
 function formatResponse(json) {
-  return { r: json.map(updateType), s: true };
+  if (isArray(json)) return { r: json.map(updateType), s: true };
+  return { e: { code: 0, message: 'Server Error' }, s: false };
 }
 
 export default async function guildFetchInv() {

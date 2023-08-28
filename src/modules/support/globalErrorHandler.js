@@ -27,8 +27,8 @@ const substrings = [
   'hcsBar',
   'index.php?cmd=auctionhouse&subcmd=quickcreate',
   'index.php?cmd=composing&subcmd=breakdown',
+  'index.php?cmd=trade&target_player=',
   'layerClick',
-  'loadTradeItems',
   'play method is not allowed',
   'world.min.js',
 ];

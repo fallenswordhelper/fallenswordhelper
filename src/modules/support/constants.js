@@ -70,6 +70,7 @@ export const attackplayerUrl = `${cmdUrl}attackplayer${defTargetUsername}`;
 export const updateArchiveUrl = `${cmdUrl}${defSubcmd}viewupdatearchive`;
 export const archiveUrl = `${cmdUrl}${defSubcmd}viewarchive`;
 export const bountyUrl = `${cmdUrl}bounty`;
+export const viewRecipeUrl = `${cmdUrl}inventing${defSubcmd}viewrecipe&recipe_id=`;
 
 export const guideUrl = `https://guide.fallensword.com/${cmdUrl}`;
 

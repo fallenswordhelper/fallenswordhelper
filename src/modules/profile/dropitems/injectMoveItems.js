@@ -26,9 +26,7 @@ function startApp(folders, flrRow) {
 
 async function moveList(folderId, list) {
   const json = await daSendToFolder(folderId, list.map((c) => c.value));
-  if (json.s) {
-    list.forEach(removeRow);
-  }
+  if (json?.s) list.forEach(removeRow);
 }
 
 function moveItemsToFolder(e) {

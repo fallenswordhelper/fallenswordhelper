@@ -24,7 +24,7 @@ function displaySpinner(target) {
 
 async function ajaxPlayer([tbl, player]) {
   const thisPlayer = await getProfile(player);
-  decoratePlayer(tbl, thisPlayer);
+  if (thisPlayer) decoratePlayer(tbl, thisPlayer);
 }
 
 async function prepareAjax() {

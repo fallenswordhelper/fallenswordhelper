@@ -13,11 +13,11 @@ import task from '../../support/task';
 import getValue from '../../system/getValue';
 import getValueJSON from '../../system/getValueJSON';
 
-const createQuicklinksDiv = (offset) => createDiv({
-  className: 'fshQuickLinks fshInnerBg',
+const createQuicklinksDiv = () => createDiv({
+  className: 'fshQuickLinks',
   style: {
     left: `${getValue('quickLinksLeftPx')}px`,
-    top: `${Number(getValue('quickLinksTopPx')) + offset}px`,
+    top: `${getValue('quickLinksTopPx')}px`,
   },
 });
 
@@ -40,8 +40,8 @@ function addLinks(quickLinks, div) {
   });
 }
 
-function newLinks(offset, quickLinks) {
-  const div = createQuicklinksDiv(offset);
+function newLinks(quickLinks) {
+  const div = createQuicklinksDiv();
   div.classList.toggle('fshFixed', getValue('keepHelperMenuOnScreen'));
   if (getValue('draggableQuickLinks')) {
     div.classList.add('fshMove');
@@ -54,10 +54,8 @@ function newLinks(offset, quickLinks) {
 function injectQuickLinks() {
   const mainbody = querySelector('.mainbody');
   if (!mainbody) return;
-  const { top: mainBodyTop } = mainbody.getBoundingClientRect();
-  const { top } = document.body.getBoundingClientRect();
   const quickLinks = getValueJSON('quickLinks') || [];
-  if (quickLinks.length) newLinks(mainBodyTop - top, quickLinks);
+  if (quickLinks.length) newLinks(quickLinks);
 }
 
 export default function doQuickLinks() {

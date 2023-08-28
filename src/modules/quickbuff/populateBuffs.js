@@ -28,7 +28,7 @@ function isAvailable(buff) {
 }
 
 function buffRunning(dict, buff) {
-  const secs = dict[buff] || 0;
+  const secs = dict[buff] ?? 0;
   if (secs) { return timeToExpire(secs); }
   return isAvailable(buff);
 }
@@ -43,6 +43,7 @@ function makeDictionary(acc, curr) {
 }
 
 export default function populateBuffs(responseText) {
+  if (!responseText?._skills) return;
   const skl = responseText._skills.reduce(makeDictionary, {});
   getBuff(skl, 'Guild Buffer', getElementById('fshGB'));
   getBuff(skl, 'Buff Master', getElementById('fshBM'));

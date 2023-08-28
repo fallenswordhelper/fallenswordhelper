@@ -3,6 +3,7 @@ import sveltePlugin from 'esbuild-svelte';
 import lws from 'local-web-server';
 import { port as calfPort } from './config.js';
 import { calfVer, core } from './getVersion.js';
+import liquidPlugin from './liquidPlugin.js';
 import {
   buildFsh,
   pathToFile,
@@ -23,6 +24,7 @@ await buildFsh(
 const ctx = await esbuild.context({
   bundle: true,
   chunkNames: `${calfVer}/[name]-[hash]`,
+  conditions: ['svelte'],
   define: {
     defineDataTablesPath: `"${rootPath}src/styles/dataTables.css"`,
     defineCalfPath: `"${rootPath}${calfPath}/calfSystem.css"`,
@@ -32,7 +34,7 @@ const ctx = await esbuild.context({
   entryPoints: [pathToFile('src/calfSystem.js')],
   format: 'esm',
   outdir: pathToFile(calfPath),
-  plugins: [sveltePlugin()],
+  plugins: [liquidPlugin, sveltePlugin()],
   sourcemap: true,
   sourcesContent: false,
   splitting: true,

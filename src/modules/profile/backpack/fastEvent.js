@@ -29,7 +29,7 @@ async function fastAction(theBackpack, evt, action, result) {
   target.blur();
   target.className = 'fastAction fshBl fshSpinner fshSpinner12';
   const data = await action(invId);
-  actionResult([theBackpack, result, target, invId, data]);
+  if (data) actionResult([theBackpack, result, target, invId, data]);
 }
 
 export default function fastEvent(theBackpack, evt) {

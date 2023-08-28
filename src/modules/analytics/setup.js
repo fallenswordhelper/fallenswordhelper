@@ -1,6 +1,7 @@
 import isUndefined from '../common/isUndefined';
 import loadScript from '../common/loadScript';
 import playerId from '../common/playerId';
+import playerName from '../common/playerName';
 import calf from '../support/calf';
 import isAuto from './isAuto';
 
@@ -86,7 +87,7 @@ function gtagSetup() {
     window.dataLayer.push(arguments); // skipcq: JS-0244
   };
   gtag('js', new Date());
-  const pid = playerId();
+  const pid = playerName();
   gtag('config', 'G-14Y99WX8XL', {
     app_name: 'fshApp',
     app_version: `${calf.fshVer}(${calf.calfVer})`,

@@ -10,6 +10,7 @@
   text-align: center;
 }
 .helperMenuDiv {
+  background-color: #e6c270;
   border:3px solid #ccbb77;
   border-radius: 5px;
   color: black;
@@ -34,11 +35,13 @@
 .helperMenu {
   color: yellow;
   cursor: pointer;
+  font-size: 13px;
   font-weight: bold;
   left: 0;
   position: absolute;
   text-align: center;
   text-decoration: underline;
+  top: 0;
   white-space: nowrap;
   z-index: 75;
 }

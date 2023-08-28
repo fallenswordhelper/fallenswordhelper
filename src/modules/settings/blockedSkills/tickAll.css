@@ -1,0 +1,10 @@
+.tick-all {
+  background-color: transparent;
+  border-style: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  text-decoration: underline;
+}

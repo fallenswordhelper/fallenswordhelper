@@ -1,3 +1,4 @@
+import delay from '../common/delay';
 import on from '../common/on';
 import AjaxError from './AjaxError';
 
@@ -16,8 +17,6 @@ const interval = 900;
 let lastRefill = 0;
 const refillAmount = 5;
 let tokens = 0;
-
-const delay = (ms) => new Promise((r) => { setTimeout(r, ms); });
 
 async function refillTokens() {
   if (tokens < refillAmount - $.active && performance.now() - lastRefill >= interval) {
@@ -43,14 +42,20 @@ function getAjax(options) { // jQuery
   });
 }
 
+function mightThrow(options, jqXhr) {
+  if (jqXhr.status !== 0) {
+    throw new AjaxError([options, jqXhr, jqXhr.textStatus, jqXhr.errorThrown]);
+  }
+}
+
 export default async function retryAjax(options, retries = 10) {
   await limiter();
   let result = null;
   try {
     result = await getAjax(options);
   } catch (jqXhr) {
-    if (retries && jqXhr.status === 503) return retryAjax(options, retries - 1);
-    throw new AjaxError([options, jqXhr, jqXhr.textStatus, jqXhr.errorThrown]);
+    if (retries && jqXhr.status >= 500) return retryAjax(options, retries - 1);
+    mightThrow(options, jqXhr);
   }
   return result;
 }

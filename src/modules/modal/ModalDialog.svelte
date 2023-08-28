@@ -2,7 +2,7 @@
 <!-- uses bits of https://svelte.dev/repl/514f1335749a4eae9d34ad74dc277f20 -->
 
 <script context="module">
-	let onTop;
+  let onTop;
 </script>
 
 <script>
@@ -19,6 +19,8 @@
   let previouslyFocused;
   let prevOnTop;
 
+  const liveTab = (n) => n.tabIndex >= 0 && n.offsetWidth > 0 && n.offsetHeight > 0 && !n.disabled;
+
   function handleKeydown(e) {
     if (!visible) { return; }
 
@@ -28,7 +30,7 @@
     }
 
     if (e.key === 'Tab') {
-      const tabbable = querySelectorArray('*', modal).filter((n) => n.tabIndex >= 0);
+      const tabbable = querySelectorArray('*', modal).filter(liveTab);
 
       let index = tabbable.indexOf(document.activeElement);
       if (index === -1 && e.shiftKey) index = 0;
@@ -57,10 +59,10 @@
   }
 </script>
 
-<svelte:window on:keydown={handleKeydown}/>
+<svelte:window on:keydown={ handleKeydown }/>
 
-<div class="ui-dialog" class:modalVisible role="dialog" aria-modal="true" bind:this={modal}>
-  <slot></slot>
+<div class="ui-dialog" class:modalVisible role="dialog" aria-modal="true" bind:this={ modal }>
+  <slot />
 </div>
 
 <style>
@@ -69,12 +71,13 @@
     border-radius: 4px;
     box-shadow: 0 0 10px #000;
     color: #383838;
+    font-size: 13px;
     left: 50%;
     max-height: calc(100vh - 4em);
     overflow: auto;
     position: absolute;
     top: 32px;
-    transform: translateX(-100vw);
+    transform: translateX(-1000vw);
   }
 
   .modalVisible {

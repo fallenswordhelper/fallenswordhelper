@@ -14,6 +14,6 @@
 
 <tr class="fshCenter">
   <td colspan="3">
-    <FolderButtons folders={inv.folders} on:filter/>
+    <FolderButtons folders={ inv.folders } on:filter/>
   </td>
 </tr>

@@ -1,5 +1,6 @@
 import './inventory.css';
 import getMembrList from '../../ajax/getMembrList';
+import { end, start } from '../../analytics/timing';
 import all from '../../common/all';
 import currentGuildId from '../../common/currentGuildId';
 import entries from '../../common/entries';
@@ -11,10 +12,8 @@ import notLastUpdate from '../../common/notLastUpdate';
 import setInnerHtml from '../../dom/setInnerHtml';
 import calf from '../../support/calf';
 import { oldActionSpinner } from '../../support/constants';
-import { time, timeEnd } from '../../support/debug';
 import { pcc } from '../../support/layout';
 import task from '../../support/task';
-import getValue from '../../system/getValue';
 import { buildInv } from './buildInv';
 import clearButton from './clearButton';
 import decorate from './decorate';
@@ -65,10 +64,9 @@ function doInventory(reset) {
 }
 
 function getInvMan(reset) {
-  const betaOptIn = getValue('betaOptIn');
-  if (betaOptIn) time('inventory.getInvMan'); // Timing output
+  start('JS Perf', 'getInvMan');
   doInventory(reset);
-  if (betaOptIn) timeEnd('inventory.getInvMan'); // Timing output
+  end('JS Perf', 'getInvMan');
 }
 
 function asyncCall(reset) {

@@ -50,7 +50,6 @@ function makeDnkBtn() {
   doNotKillBtn = createButton({
     className: 'fshBl',
     textContent: doNotKillText(),
-    type: 'button',
   });
   const btnContainer = createDiv({
     className: 'description',

@@ -7,6 +7,7 @@ import fallback from '../system/fallback';
 import calf from './calf';
 import parseError from './parseError';
 import { getLength, pop, push } from './sch';
+import stdout from './stdout';
 
 let paused = true;
 const message = 'fshMessage';
@@ -59,16 +60,11 @@ function initMessageHandler() {
 }
 
 function devLog(args) {
-  if (args && !isArray(args)) {
-    // eslint-disable-next-line no-console
-    console.log('addTask isArray(args)', isArray(args)); // skipcq: JS-0002
-  }
+  if (args && !isArray(args)) stdout('addTask isArray(args)', isArray(args));
 }
 
 export default function task(priority, fn, args, scope) {
-  if (calf.userIsDev) { //  Not sending args as Array
-    devLog(args);
-  }
+  if (calf.userIsDev) devLog(args); //  Not sending args as Array
   if (isFunction(fn)) {
     initMessageHandler();
     const scopeGuard = fallback(scope, window);

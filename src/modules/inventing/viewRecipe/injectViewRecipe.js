@@ -1,6 +1,7 @@
 import createAnchor from '../../common/cElement/createAnchor';
 import insertElement from '../../common/insertElement';
 import insertElementBefore from '../../common/insertElementBefore';
+import interceptSubmit from '../../common/interceptSubmit';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
@@ -52,4 +53,6 @@ function makeIngredientLinks() {
 export default function injectViewRecipe() {
   makeNameLink();
   makeIngredientLinks();
+  const hcsForm = querySelector('#pCC input[value="Invent"]')?.form;
+  if (hcsForm) interceptSubmit(hcsForm);
 }

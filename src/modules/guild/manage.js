@@ -12,9 +12,9 @@ import task from '../support/task';
 import getValue from '../system/getValue';
 import buffLinks from './buffLinks';
 import conflictInfo from './conflictInfo';
-import guildTracker from './guildTracker/guildTracker';
 import { logoToggle, statToggle, structureToggle } from './panelToggle';
 import stamBars from './stamBars/stamBars';
+import tracker from './tracker/tracker';
 
 function relicControl(leftHandSideColumnTable) {
   const relic = getArrayByTagName('b', leftHandSideColumnTable)
@@ -36,7 +36,7 @@ function selfRecallLink(leftHandSideColumnTable) {
 }
 
 function getLhsColTab() {
-  return pcc().lastElementChild.rows?.[2].cells[0].children[0];
+  return pcc().lastElementChild.rows?.[2]?.cells[0].children[0];
 }
 
 function lhsAdd(leftHandSideColumnTable, fn) {
@@ -59,7 +59,7 @@ function ajaxStuff(leftHandSideColumnTable) {
   if (getValue('detailedConflictInfo')) {
     task(3, conflictInfo, [leftHandSideColumnTable]);
   }
-  task(4, guildTracker);
+  task(4, tracker);
 }
 
 export default function manage() {

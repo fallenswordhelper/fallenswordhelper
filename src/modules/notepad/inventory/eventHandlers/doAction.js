@@ -38,5 +38,5 @@ export default async function doAction(fn, target) { // jQuery
   removeClass(target);
   anotherSpinner(target);
   const json = await fn();
-  killRow(target, json);
+  if (json) killRow(target, json);
 }

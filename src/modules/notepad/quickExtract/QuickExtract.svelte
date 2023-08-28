@@ -80,11 +80,11 @@
   let lastMsg;
 
   function success(json) {
-    if (!json.s && lastMsg !== json.e.message) {
-      lastMsg = json.e.message;
-      results = [...results, json.e.message];
+    if (!json?.s && lastMsg !== json?.e?.message) {
+      lastMsg = json?.e?.message;
+      results = [...results, json?.e?.message];
     }
-    return json.s;
+    return json?.s;
   }
 
   async function ajaxExtract(invId) {
@@ -106,20 +106,21 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={close} title="Quick Extract">
+<ModalTitled { visible } on:close={ close }>
+  <svelte:fragment slot="title">Quick Extract</svelte:fragment>
   <div>
     Select which type of plants you wish to extract all of. Only select extractable resources.
     <br>
-    <SelectInST bind:inSt={selectST} on:toggle={toggleSelectST} />&nbsp;
+    <SelectInST bind:inSt={ selectST } on:toggle={ toggleSelectST } />&nbsp;
     <label>
-      <input bind:checked={selectMain} on:change={toggleSelectMain} type="checkbox">
+      <input bind:checked={ selectMain } on:change={ toggleSelectMain } type="checkbox">
       Main Folder Only
     </label>&nbsp;
     <label>
-      <input bind:checked={disablePrompts} on:change={togglePrompts} type="checkbox">
+      <input bind:checked={ disablePrompts } on:change={ togglePrompts } type="checkbox">
       Disable Prompts
     </label>&nbsp;
-    <LinkButtonBracketed on:click={refresh}>Refresh</LinkButtonBracketed>
+    <LinkButtonBracketed on:click={ refresh }>Refresh</LinkButtonBracketed>
     <br>
     <table>
       <thead>
@@ -132,33 +133,43 @@
         <tr>
           <td colspan="3">
             <ol>
-              {#each results as result}
-                <li>{@html result}</li>
-              {/each}
+              { #each results as result }
+                <li>
+                  { #if result.startsWith('<') }
+                    <span class="fshRed">
+                      { result.slice(1) }
+                    </span>
+                  { :else }
+                    { result }
+                  { /if }
+                </li>
+              { /each }
             </ol>
           </td>
         </tr>
-        {#await prm then}
-          {#each toExtract as { count, delPending, item_name: name, style, tip }, index}
+        { #await prm then }
+          { #each toExtract as {
+            count, delPending, item_name: name, style, tip,
+          }, index }
             <tr>
               <td class:delPending>
-                {#if count}
-                  {#if delPending}
+                { #if count }
+                  { #if delPending }
                     <span class="fshSpinner fshSpinner12"></span>
-                  {:else}
-                    <LinkButton on:click={() => extractEvt(index)}>Extract {count}</LinkButton>
-                  {/if}
-                {:else}
+                  { :else }
+                    <LinkButton on:click={ () => extractEvt(index) }>Extract { count }</LinkButton>
+                  { /if }
+                { :else }
                   Done
-                {/if}
+                { /if }
               </td>
               <td class="imgCol">
-                <span class="imgSpan tip-dynamic" data-tipped={tip} style={style}></span>
+                <span class="imgSpan tip-dynamic" data-tipped={ tip } style={ style }></span>
               </td>
-              <td>{name}</td>
+              <td>{ name }</td>
             </tr>
-          {/each}
-        {/await}
+          { /each }
+        { /await }
       </tbody>
     </table>
   </div>

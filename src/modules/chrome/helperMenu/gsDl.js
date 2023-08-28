@@ -1,8 +1,6 @@
 import guildStore from '../../_dataAccess/export/guildStore';
-import createAnchor from '../../common/cElement/createAnchor';
-import clickThis from '../../common/clickThis';
 import currentGuildId from '../../common/currentGuildId';
-import insertElement from '../../common/insertElement';
+import download from '../../common/download';
 
 const header = 'item_id,inv_id,item_name,rarity,type,durability,max_durability,guild_tag,'
   + 'in_guide,player_id,equipped,craft,forge,attack,defense,armor,hp,damage,stamina,min_level,'
@@ -38,22 +36,10 @@ const fields = (item) => [
 ].join(',');
 
 const toCsv = (json) => json.items.map(fields).join('\n');
-
-function downloadCsv(csv) {
-  const href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-  const a = createAnchor({ // skipcq: JS-C1002
-    download: 'gs_export.csv',
-    href,
-    style: { display: 'none' },
-  });
-  insertElement(document.body, a);
-  clickThis(a);
-  document.body.removeChild(a);
-  setTimeout(() => { URL.revokeObjectURL(href); }, 0);
-}
+const csvBlob = (csv) => new Blob([csv], { type: 'text/csv' });
 
 export default async function gsDl() {
   if (!currentGuildId()) return;
   const json = await guildStore();
-  downloadCsv(`${header}${toCsv(json)}\n`);
+  download(csvBlob(`${header}${toCsv(json)}\n`), 'gs_export.csv');
 }

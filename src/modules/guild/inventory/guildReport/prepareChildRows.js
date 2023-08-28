@@ -1,39 +1,61 @@
+import sendEvent from '../../../analytics/sendEvent';
+import potReport from '../../../chrome/pageSwitcher/loader/potReport';
 import batch from '../../../common/batch';
+import createButton from '../../../common/cElement/createButton';
+import createSpan from '../../../common/cElement/createSpan';
 import insertElement from '../../../common/insertElement';
-import partial from '../../../common/partial';
+import insertElementAfterBegin from '../../../common/insertElementAfterBegin';
+import onclick from '../../../common/onclick';
 import querySelectorAll from '../../../common/querySelectorAll';
+import { pcc } from '../../../support/layout';
 import makeFastRecall from './makeFastRecall';
-import potReport from './potReport/potReport';
 
-let nodeArray = 0;
-let nodeList = 0;
-let potObj = 0;
+let nodeList = null;
+let nodeArray = [];
 
 function doPaintChild(inject, localCounter) {
   const el = nodeList[localCounter];
   insertElement(el, inject);
 }
 
-function addPotObj(item) {
-  if (item.endsWith(' (Potion)')) {
-    const itemName = item.slice(0, -9);
-    potObj[itemName] = (potObj[itemName] || 0) + 1;
+function doSpan(el) {
+  nodeArray.push(makeFastRecall(el));
+}
+
+function makeBtn() {
+  const btn = createButton({
+    className: 'fshBl pot-report-button',
+    textContent: 'Pot Report',
+  });
+  onclick(btn, () => {
+    sendEvent('GuildReport', 'Pot Report Moved');
+    potReport();
+  });
+  return btn;
+}
+
+function potReportNote() {
+  const top = pcc().children?.[0]?.rows?.[0]?.cells?.[0];
+  if (top) {
+    top.classList.add('fshRelative');
+    const btn = makeBtn();
+    const spn = createSpan({
+      className: 'pot-report-moved',
+      textContent: ' moved to Helper Menu',
+    });
+    insertElementAfterBegin(spn, btn);
+    insertElement(top, spn);
   }
 }
 
-function doSpan(el) {
-  nodeArray.push(makeFastRecall(el));
-  addPotObj(el.previousElementSibling.innerHTML);
-}
-
 function finishSpan() {
-  batch([3, nodeArray, 0, doPaintChild, partial(potReport, potObj)]);
+  batch([3, nodeArray, 0, doPaintChild, potReportNote]);
 }
 
 export default function prepareChildRows() {
+  if (!pcc()) { return; }
   nodeList = querySelectorAll('#pCC table table '
     + 'tr:not(.fshHide) td:nth-of-type(3n)');
-  potObj = {};
   nodeArray = [];
   batch([3, nodeList, 0, doSpan, finishSpan]);
 }

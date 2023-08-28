@@ -1,3 +1,4 @@
+import all from '../../common/all';
 import createStyle from '../../common/cElement/createStyle';
 import closestTr from '../../common/closestTr';
 import entries from '../../common/entries';
@@ -62,6 +63,6 @@ function playerStyling(logTable, playerTags, privMsg) {
 export default async function colorPlayers(logTable, privMsg) {
   const playerLinks = querySelectorArray(playerLinkSelector, logTable);
   if (!playerLinks.length) { return; }
-  const playerTags = await Promise.all(playerLinks.map(playerType));
+  const playerTags = await all(playerLinks.map(playerType));
   playerStyling(logTable, playerTags, privMsg);
 }
