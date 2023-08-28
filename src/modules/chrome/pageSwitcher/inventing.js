@@ -5,5 +5,6 @@ function inventing() { runDefault(import('../../inventing/inventing')); }
 
 export default {
   '-': { '-': inventing },
+  doinvent: { '-': viewRecipe },
   viewrecipe: { '-': viewRecipe },
 };

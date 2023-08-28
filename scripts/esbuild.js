@@ -3,6 +3,7 @@ import esbuild from 'esbuild';
 import sveltePlugin from 'esbuild-svelte';
 import { github } from './config.js';
 import { calfVer, core, version } from './getVersion.js';
+import liquidPlugin from './liquidPlugin.js';
 import {
   buildFsh,
   dataTablesCss,
@@ -32,6 +33,7 @@ performance.mark('esbuild-start');
 await esbuild.build({
   bundle: true,
   chunkNames: `${calfVer}/[name]-[hash]`,
+  conditions: ['svelte'],
   define: {
     defineCalfPath: `"${github}${calfPath}/calfSystem.min.css"`,
     defineDataTablesPath: `"${github}${calfPath}/dataTables.css"`,
@@ -44,7 +46,7 @@ await esbuild.build({
   legalComments: 'none',
   minify: true,
   outdir: pathToFile(`${dist}${calfPath}`),
-  plugins: [sveltePlugin()],
+  plugins: [liquidPlugin, sveltePlugin()],
   sourceRoot: `https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/${version}`,
   sourcemap: true,
   sourcesContent: false,

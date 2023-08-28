@@ -1,5 +1,6 @@
-import closestTable from './common/closestTable';
+import createDiv from './common/cElement/createDiv';
 import getElementById from './common/getElementById';
+import insertElement from './common/insertElement';
 import on from './common/on';
 import setInnerHtml from './dom/setInnerHtml';
 import { pcc } from './support/layout';
@@ -10,22 +11,19 @@ let prc = 0;
 let warn = 0;
 
 function getAmount() {
-  if (!amt) { amt = getElementById('amount'); }
+  if (!amt) amt = getElementById('amount');
   return amt;
 }
 
 function getPrice() {
-  if (!prc) { prc = getElementById('price'); }
+  if (!prc) prc = getElementById('price');
   return prc;
 }
 
 function getWarning() {
   if (!warn) {
-    const requestTable = closestTable(getAmount());
-    const newRow = requestTable.insertRow(2);
-    warn = newRow.insertCell(0);
-    warn.colSpan = '2';
-    warn.className = 'fshCenter';
+    warn = createDiv({ className: 'fshBlue fshCenter' });
+    insertElement(pcc(), warn);
   }
   return warn;
 }
@@ -37,22 +35,21 @@ function totalPrice(amount, sellPrice) {
 
 function marketplaceWarning(sellPrice) {
   const amount = getAmount().value;
-  setInnerHtml(`<span class="fshBlue">You are offering to buy <b>${
+  setInnerHtml(`You are offering to buy <b>${
     amount}</b> FSP for >> <b>${addCommas(sellPrice)}</b> (Total: ${
-    addCommas(totalPrice(amount, sellPrice))})</span>`, getWarning());
+    addCommas(totalPrice(amount, sellPrice))})`, getWarning());
 }
 
 function clearWarning() {
-  if (warn && warn.innerHTML !== '') { setInnerHtml('', warn); }
+  if (warn?.innerHTML !== '') setInnerHtml('', warn);
 }
 
 function addMarketplaceWarning() {
   const price = getPrice();
   if (price) {
     const sellPrice = price.value;
-    if (sellPrice.search(/^\d+$/) !== -1) {
-      marketplaceWarning(sellPrice);
-    } else { clearWarning(); }
+    if (sellPrice.search(/^\d+$/) !== -1) marketplaceWarning(sellPrice);
+    else clearWarning();
   }
 }
 

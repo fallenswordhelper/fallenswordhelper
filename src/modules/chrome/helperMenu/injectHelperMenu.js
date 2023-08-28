@@ -5,7 +5,6 @@ import classHandler from '../../common/classHandler';
 import draggable from '../../common/draggable';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
-import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import isFunction from '../../common/isFunction';
 import jQueryPresent from '../../common/jQueryPresent';
 import once from '../../common/once';
@@ -52,7 +51,7 @@ const classEvents = [
 function showHelperMenu(evt) {
   const helperMenu = evt.target;
   const helperMenuDiv = createDiv({
-    className: 'helperMenuDiv fshInnerBg',
+    className: 'helperMenuDiv',
     id: 'helperMenuDiv',
     innerHTML: getHelperMenuBlob(),
   });
@@ -61,7 +60,10 @@ function showHelperMenu(evt) {
   onclick(helperMenuDiv, classHandler(classEvents));
 }
 
-function haveNode(node) {
+export default function injectHelperMenu() {
+  const mainbody = querySelector('.mainbody');
+  if (!mainbody) return;
+  // don't put all the menu code here (but call if clicked) to minimize lag
   const helperMenu = createDiv({
     id: 'helperMenu',
     className: 'helperMenu',
@@ -75,11 +77,5 @@ function haveNode(node) {
     helperMenu.classList.add('helperMenuMove');
     draggable(helperMenu);
   }
-  insertElementAfterBegin(node, helperMenu);
-}
-
-export default function injectHelperMenu() {
-  // don't put all the menu code here (but call if clicked) to minimize lag
-  const node = querySelector('.mainbody');
-  if (node) haveNode(node);
+  insertElement(document.body, helperMenu);
 }

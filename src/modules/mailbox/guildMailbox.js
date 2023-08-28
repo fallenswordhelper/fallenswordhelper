@@ -43,13 +43,11 @@ async function guildMailboxEvent(e) {
     const data = await guildMailboxTake(anchor);
     takeResult(target, data);
   }
-  if (target.className === 'sendLink') {
-    getArrayByTagName('img', pcc()).forEach(clickThis);
-  }
+  if (target.className === 'sendLink') getArrayByTagName('img', pcc()).forEach(clickThis);
 }
 
 export default function guildMailbox() {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) return;
   onclick(pcc(), guildMailboxEvent);
   insertHtmlBeforeEnd(
     querySelector('#pCC td[height="25"]'),

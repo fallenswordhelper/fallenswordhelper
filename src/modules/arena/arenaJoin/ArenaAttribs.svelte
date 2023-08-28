@@ -20,26 +20,26 @@
   }
 </script>
 
-{#await getArenaView() then}
+{ #await getArenaView() then }
   <div class="ajf">
-    <ArenaFlag title="Players" flag="{thisArena.players.length} / {thisArena.max_players}" />
-    <ArenaFlag title="Specials" flag={thisArena.specials} />
-    <ArenaFlag title="Hell Forge" flag={thisArena.hellforge} />
-    <ArenaFlag title="Epic" flag={thisArena.epic} />
-    <ArenaFlag title="Max Equip Level" flag={addCommas(thisArena.equip_level)} />
+    <ArenaFlag title="Players" flag="{ thisArena.players.length } / { thisArena.max_players }" />
+    <ArenaFlag title="Specials" flag={ thisArena.specials } />
+    <ArenaFlag title="Hell Forge" flag={ thisArena.hellforge } />
+    <ArenaFlag title="Epic" flag={ thisArena.epic } />
+    <ArenaFlag title="Max Equip Level" flag={ addCommas(thisArena.equip_level) } />
   </div>
-  {#if thisArena.specials}
+  { #if thisArena.specials }
     <div class="ajf">
-      <ArenaMoves {res}/>
+      <ArenaMoves { res }/>
     </div>
-  {/if}
-{:catch error}
+  { /if }
+{ :catch error }
   <div class="ajf">
     <div>
-      <p>{error.message}</p>
+      <p>{ error.message }</p>
     </div>
   </div>
-{/await}
+{ /await }
 
 <style>
   .ajf {

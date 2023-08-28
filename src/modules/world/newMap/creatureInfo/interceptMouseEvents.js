@@ -5,6 +5,7 @@ import hasClass from '../../../common/hasClass';
 import hasClasses from '../../../common/hasClasses';
 import on from '../../../common/on';
 import calf from '../../../support/calf';
+import badData from '../badData';
 import getCreatureStats from '../getCreatureStats/getCreatureStats';
 import processMouseOver from './processMouseOver';
 
@@ -38,15 +39,18 @@ function displayJson(api, data) {
   api.set('content.text', content);
 }
 
-async function makeMouseOver(target, listItem) {
+async function updateQTip(listItem, api) {
+  const passback = getIndex(listItem);
+  const creatureStats = await getCreatureStats(GameData.actions()[passback].data.id, passback);
+  if (!badData(creatureStats)) displayJson(api, creatureStats);
+}
+
+function makeMouseOver(target, listItem) {
   sendEvent('NewMap', 'CreatureInfo');
   target.classList.add('fshTip');
   const tooltip = setQTip(target, 'Loading...');
   const api = tooltip.qtip('api');
-  if (!api) return;
-  const passback = getIndex(listItem);
-  const creatureStats = await getCreatureStats(GameData.actions()[passback].data.id, passback);
-  displayJson(api, creatureStats);
+  if (api) updateQTip(listItem, api);
 }
 
 function isViewCreature(target, listItem) {

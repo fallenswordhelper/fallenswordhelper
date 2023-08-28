@@ -68,9 +68,11 @@ function showMe(pCC, dataAry) {
   initTable(el, table, domTable);
 }
 
+const checkData = ([store, ranks]) => store?.guild_id && ranks?.s;
+
 export default async function whosGotWhat() {
   const pCC = pcc();
   setInnerHtml('Loading...', pCC);
   const dataAry = await all([guildStore(), ranksView()]);
-  showMe(pCC, dataAry);
+  if (checkData(dataAry)) showMe(pCC, dataAry);
 }

@@ -32,25 +32,26 @@
   }
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
 <div class:visible on:click|self>
-  <slot></slot>
+  <slot />
 </div>
 
 <style>
   :global(body.noscroll) {
-    position: fixed; 
+    position: fixed;
     overflow-y: scroll;
     width: 100%;
   }
 
   div {
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.6);
+    color-scheme: dark;
     height: 100%;
     left: 0;
     position: fixed;
     top: 0;
-    transform: translateX(-100vw);
+    transform: translateX(-1000vw);
     width: 100%;
     z-index: 200;
   }

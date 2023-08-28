@@ -2,27 +2,44 @@
 parserOptions:
   ecmaVersion: latest
   sourceType: module
-plugins:
-  - 'svelte3'
+  extraFileExtensions:
+    - .svelte
 overrides:
   - files:
     - '*.svelte'
-    processor: 'svelte3/svelte3'
     rules:
-      no-label-var: off
-      import/first: off
       import/no-mutable-exports: off
+      import/no-unresolved:
+        - error
+        - ignore:
+          - 'svelte/transition'
+          - 'svelte-virtual-scroll-list'
       import/prefer-default-export: off
+      svelte/button-has-type:
+        - error
+      svelte/indent:
+        - error
+      svelte/mustache-spacing:
+        - error
+        - textExpressions: always
+          attributesAndProps: always
+          directiveExpressions: always
+          tags:
+            openingBrace: always
+            closingBrace: always
   - files:
-    - "scripts/*.js"
+    - 'scripts/*.js'
     rules:
       import/extensions:
         - error
         - ignorePackages
         - js: always
+      import/no-extraneous-dependencies:
+        - error
+        - packageDir: './'
       no-console: off
   - files:
-    - "lws.config.js"
+    - 'lws.config.js'
     rules:
       import/extensions:
         - error
@@ -30,19 +47,21 @@ overrides:
         - js: always
 extends:
   - 'airbnb-base'
+  - 'plugin:svelte/recommended'
 globals:
   Audio: readonly
   Blob: readonly
   clearTimeout: readonly
   console: readonly
+  CSSContainerRule: readonly
   document: readonly
   Document: readonly
   DOMParser: readonly
   Element: readonly
   EventTarget: readonly
+  FileReader: readonly
   FormData: readonly
   getComputedStyle: readonly
-  HTMLInputElement: readonly
   HTMLTableElement: readonly
   Image: readonly
   localStorage: readonly
@@ -67,13 +86,11 @@ globals:
   gtag: readonly
 rules:
   consistent-return: off # 74
-  import/no-extraneous-dependencies:
-    - error
-    - packageDir: './'
   import/no-unresolved:
     - error
     - ignore:
       - '_CALFJS'
+      - 'svelte/store'
   import/order:
     - error
     - alphabetize:
@@ -92,3 +109,6 @@ rules:
       - _saveState
       - _showPage
       - _skills
+settings:
+  import/parsers:
+    'espree': [ .js ]

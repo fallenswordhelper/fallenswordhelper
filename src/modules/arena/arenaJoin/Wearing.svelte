@@ -45,21 +45,21 @@
   }
 </script>
 
-{#await getCombatSet() then}
+{ #await getCombatSet() then }
   <div>
     <div class="innerColumnHeader">
       <div class="flex">
         Inventory
-        <select bind:value={selected} on:change={handleChange}>
-          {#each combatSets as {id, name}}
-            <option value="{id}">{name}</option>
-          {/each}
+        <select bind:value={ selected } on:change={ handleChange }>
+          { #each combatSets as { id, name } }
+            <option value="{ id }">{ name }</option>
+          { /each }
         </select>
       </div>
     </div>
-    <WearingGrid {equipment}/>
+    <WearingGrid { equipment }/>
   </div>
-{/await}
+{ /await }
 
 <style>
   .innerColumnHeader {

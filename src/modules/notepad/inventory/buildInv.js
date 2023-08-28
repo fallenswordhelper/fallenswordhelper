@@ -34,7 +34,7 @@ async function doComposedFromBp() {
 }
 
 function getComposedFromGs(data) {
-  if (!isArray(data.r)) return;
+  if (!isArray(data?.r)) return;
   composed = composed.concat(data.r.filter(composedPot));
 }
 
@@ -59,7 +59,7 @@ function addComposedName(item) {
 }
 
 function gotSomeStuff() {
-  theInv.items.forEach(addComposedName);
+  if (isArray(theInv?.items)) theInv.items.forEach(addComposedName);
 }
 
 export async function buildInv() {

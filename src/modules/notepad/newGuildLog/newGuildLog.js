@@ -181,7 +181,7 @@ function gotOtherPages() {
   if (completeReload) { tmpGuildLog.sort(byFirstElement); }
   setText('Loading complete.', fshOutput);
   updateOptionsLog();
-  buildTable();
+  if (pcc()) buildTable();
 }
 
 async function processFirstPage(data) {
@@ -204,7 +204,7 @@ function toggleItem(target) {
 }
 
 function removeHide(el) {
-  if (el && el.classList) el.classList.remove('fshHide');
+  el?.classList?.remove('fshHide');
 }
 
 function show(r) {

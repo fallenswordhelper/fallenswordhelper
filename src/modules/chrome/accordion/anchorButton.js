@@ -12,7 +12,14 @@ import jQueryDialog from '../jQueryDialog/jQueryDialog';
 
 function openDialog(text, fn) {
   sendEvent('accordion', text);
-  jQueryDialog(fn);
+  if ([
+    'Buff Log',
+    'Combat Logs',
+    'Creature Logs',
+    'Quick Links',
+    'Recipe Manager',
+  ].includes(text)) fn();
+  else jQueryDialog(fn);
 }
 
 function insertAfterParent(target, listItem) {

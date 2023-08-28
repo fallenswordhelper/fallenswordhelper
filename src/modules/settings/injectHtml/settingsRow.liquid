@@ -1,0 +1,14 @@
+<tr {% if className %}class="{{className}}"{% endif %}>
+  {% render 'settingsRowLabel'
+   field: field
+   label: label
+   network: network
+   tooltipText: tooltipText
+   unstable: unstable %}
+  <td>
+    {% render 'settingsControl'
+     field: field
+     max: max
+     type: type %}
+  </td>
+</tr>

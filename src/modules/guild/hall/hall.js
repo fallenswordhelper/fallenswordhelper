@@ -5,6 +5,7 @@ import setupPref from './setupPref';
 const testArticle = (rowType) => rowType === 1;
 
 export default function hall() {
+  if (!pcc()) return;
   const prefName = 'collapseHallPosts';
   const theTable = pcc().lastElementChild;
   if (theTable instanceof HTMLTableElement) {

@@ -1,3 +1,4 @@
+import all from '../../common/all';
 import getTextTrim from '../../common/getTextTrim';
 import { isAlly, isEnemy } from './isAllyEnemy';
 import isGuildMate from './isGuildMate';
@@ -5,7 +6,7 @@ import isGuildMate from './isGuildMate';
 export default async function relatePlayer(a) {
   let type = '';
   const playerName = getTextTrim(a);
-  const [guildMate, ally, enemy] = await Promise.all([
+  const [guildMate, ally, enemy] = await all([
     isGuildMate(playerName),
     isAlly(playerName),
     isEnemy(playerName),

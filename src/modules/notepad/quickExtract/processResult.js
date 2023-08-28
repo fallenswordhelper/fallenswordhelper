@@ -21,7 +21,7 @@ const resultType = [
   ],
   [
     () => 1,
-    () => '<span class="fshRed">You failed to extract any components from resource(s).</span>',
+    () => '<You failed to extract any components from resource(s).',
   ],
 ];
 
