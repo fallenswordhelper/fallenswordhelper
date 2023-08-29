@@ -125,7 +125,7 @@
   "arenaMaxLvl":9999,
   "showMonsterLog":false,
   "lastTempleCheck":0,
-  "needToPray":false,
+  "needToPray":true,
   "lastChatCheck":"0",
   "lastGuildLogCheck":"0",
   "lastOutBoxCheck":"0",

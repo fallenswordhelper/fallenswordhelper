@@ -1,22 +1,18 @@
+import indexAjaxDoc from '../../ajax/indexAjaxDoc';
+import getTextTrim from '../../common/getTextTrim';
 import querySelector from '../../common/querySelector';
 import calf from '../../support/calf';
-import createDocument from '../../system/createDocument';
 import displayDisconnectedFromGodsMessage
   from './displayDisconnectedFromGodsMessage';
 import saveTempleSettings from './saveTempleSettings';
 
-function templeAlertEnabled(responseText) {
-  let doc = document;
-  if (calf.cmd !== 'temple') doc = createDocument(responseText);
-  const checkNeedToPray = querySelector('input[value="Pray to Osverin"]', doc);
-  let needToPray = false;
-  if (checkNeedToPray) {
-    displayDisconnectedFromGodsMessage();
-    needToPray = true;
-  }
+export default async function parseTemplePage() {
+  if (!calf.enableTempleAlert) return;
+  const doc = calf.cmd === 'temple' ? document : await indexAjaxDoc({ cmd: 'temple' });
+  if (!doc) return;
+  const thisPcc = querySelector('#pCC', doc);
+  if (!thisPcc) return;
+  const needToPray = getTextTrim(thisPcc) !== 'You are currently praying at the temple.';
+  if (needToPray) displayDisconnectedFromGodsMessage();
   saveTempleSettings(needToPray);
-}
-
-export default function parseTemplePage(responseText) {
-  if (calf.enableTempleAlert) { templeAlertEnabled(responseText); }
 }
