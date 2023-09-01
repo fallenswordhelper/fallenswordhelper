@@ -3,7 +3,7 @@
   "version": "15.24.105",
   "description": "Fallen Sword Helper is a Greasemonkey script meant to enhance the experience of playing Fallen Sword, by removing repetitive tasks, presenting more information at a glance, enhancing the social aspect of the game and creating shortcuts to common tasks.",
   "scripts": {
-    "build": "npm run esbuild",
+    "build": "npm run rollup",
     "cleandev": "node scripts/cleandev.js",
     "esbuild": "node scripts/esbuild.js",
     "esdev": "node scripts/esdev.js",
@@ -12,6 +12,8 @@
     "minor": "npm version minor -m \"Build %s\" --tag-version-prefix=\"\"",
     "patch": "npm version patch -m \"Build %s\" --tag-version-prefix=\"\"",
     "prepare": "husky install",
+    "rollup": "rollup -c scripts/rollup.config.js",
+    "rollup-dev": "rollup -c scripts/rollup.dev.config.js",
     "silence": "npm config set loglevel silent",
     "test": "npm run eslint",
     "preversion": "npm run test",
@@ -35,6 +37,11 @@
   },
   "homepage": "https://fallenswordhelper.github.io/fallenswordhelper",
   "devDependencies": {
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-terser": "^0.4.3",
+    "csso": "^5.0.5",
     "esbuild": "^0.19.2",
     "esbuild-svelte": "^0.7.4",
     "eslint": "^8.47.0",
@@ -45,7 +52,11 @@
     "html-minifier-terser": "^7.2.0",
     "husky": "^8.0.3",
     "liquidjs": "^10.9.1",
-    "local-web-server": "^5.3.0"
+    "local-web-server": "^5.3.0",
+    "rollup": "^3.28.1",
+    "rollup-plugin-css-only": "^4.3.0",
+    "rollup-plugin-svelte": "^7.1.6",
+    "rollup-pluginutils": "^2.8.2"
   },
   "dependencies": {
     "css-tooltip": "^0.3.4",

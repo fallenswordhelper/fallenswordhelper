@@ -1,18 +1,10 @@
-import { basename, dirname } from 'node:path';
-import { minify } from 'html-minifier-terser';
-import { Liquid } from 'liquidjs';
+import liquidRender from './liquidRender.js';
 
 const liquidPlugin = {
   name: 'liquid',
   setup(build) {
     build.onLoad({ filter: /\.liquid$/ }, async (args) => {
-      const engine = new Liquid({ extname: '.liquid', root: dirname(args.path) });
-      const source = await engine.renderFile(basename(args.path));
-      const result = await minify(source, {
-        collapseWhitespace: true,
-        removeAttributeQuotes: true,
-        removeComments: true,
-      });
+      const result = await liquidRender(args.path);
       return {
         contents: result,
         loader: 'text',
