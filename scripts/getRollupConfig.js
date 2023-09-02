@@ -22,6 +22,7 @@ export default async function getRollupConfig(env) {
   const fshPath = `Releases/${fshTarget}`;
   const rootPath = env === 'Prod' ? `${github}` : `https://localhost:${port}/dist/`;
   const ver = env === 'dev' ? `${core}a` : `${core}`;
+  const userIsDev = env === 'Prod' ? 'false' : 'true';
 
   await buildFsh(
     `dist/${fshPath}`,
@@ -53,7 +54,7 @@ export default async function getRollupConfig(env) {
           defineCalfPath: `"${rootPath}${calfPath}/calfSystem.min.css"`,
           defineDataTablesPath: `"${rootPath}${calfPath}/dataTables.css"`,
           defineCalfVer: `"${calfVer}"`,
-          defineUserIsDev: 'true',
+          defineUserIsDev: userIsDev,
         },
       }),
       css({
