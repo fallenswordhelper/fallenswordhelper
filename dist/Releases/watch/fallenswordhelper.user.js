@@ -20,13 +20,13 @@
 // No warranty expressed or implied. Use at your own risk.
 
 // EVERYTHING MUST BE IN main()
-function fshMain(gmInfo) {
-  import('https://localhost:9966/dist/resources/watch/1524/calfSystem.js')
-    .then((m) => m.default('1524a', gmInfo));
-} // end of var main
+async function fshMain(gmInfo) {
+  const module = await import('https://localhost:9966/dist/resources/watch/1524/calfSystem.js');
+  module.default('1524a', gmInfo);
+}
+// end of var main
 
 const script = document.createElement('script');
-script.textContent = `(${fshMain.toString()})`
-  + `("${encodeURIComponent(JSON.stringify(GM_info))}");`;
+script.textContent = `(${fshMain.toString()})("${encodeURIComponent(JSON.stringify(GM_info))}");`;
 document.body.appendChild(script);
 document.body.removeChild(script);
