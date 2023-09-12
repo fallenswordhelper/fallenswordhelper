@@ -5,7 +5,6 @@ import parseTemplePage from '../notification/parseTemplePage';
 import arena from './arena';
 import auctionhouse from './auctionhouse';
 import composing from './composing';
-import creatures from './creatures';
 import guild from './guild/guild';
 import inventing from './inventing';
 import items from './items';
@@ -44,13 +43,13 @@ const skills = () => {
 };
 
 export default {
-  creatures, // UFSG
+  creatures: { '-': { '-': ufsgAllowBack } }, // UFSG
   items, // UFSG
-  masterrealms: creatures, // UFSG
+  masterrealms: { '-': { '-': ufsgAllowBack } }, // UFSG
   quests, // UFSG
   realms: { '-': { '-': ufsgAllowBack } }, // UFSG
   relics: { '-': { '-': ufsgAllowBack } }, // UFSG
-  shops: creatures, // UFSG
+  shops: { '-': { '-': ufsgAllowBack } }, // UFSG
   '-': noCmd,
   arena,
   auctionhouse,
