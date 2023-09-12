@@ -96,7 +96,7 @@ const inventoryMap = ({ id, items }) => items.map((o) => ({ ...o, folder_id: id 
 const basicItem = (o) => ({
   craft: o.cr ? craftType[o.cf] : '',
   durability: o.cd,
-  equipped: o.equipped,
+  equipped: o.equipped ?? false,
   ...(o.folder_id && { folder_id: o.folder_id }),
   forge: o.hf ?? 0,
   guild_tag: o.tg ?? -1,
@@ -133,7 +133,7 @@ export async function buildInv() {
     prm.push(doReport());
   }
   await all(prm);
-  const test = 1;
+  const test = 0;
   if (!test && !inventoryFailure) gotSomeStuff();
   else fixInventory();
 }
