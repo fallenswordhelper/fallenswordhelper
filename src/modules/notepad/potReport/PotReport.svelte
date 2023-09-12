@@ -5,6 +5,7 @@
   import all from '../../common/all';
   import alpha from '../../common/alpha';
   import deepClone from '../../common/deepClone';
+  import isArray from '../../common/isArray';
   import uniq from '../../common/uniq';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import { get, set } from '../../system/idb';
@@ -76,6 +77,7 @@
   async function init() {
     getOptions();
     const json = await all([daGuildFetchInv(), daGuildReport()]);
+    if (!isArray(json[0]?.r) || !isArray(json[1]?.r)) throw new Error('Server Error');
     const pots = listPots(json);
     options.potMap = buildMap(pots);
     doMapping();
@@ -217,6 +219,8 @@
           </div>
         { /if }
       </div>
+    { :catch error }
+      <p style="color: red">{ error.message }</p>
     { /await }
   </div>
 </ModalTitled>
