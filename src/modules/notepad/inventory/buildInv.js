@@ -34,32 +34,28 @@ async function doInventory() {
 
 const composedPot = (el) => el.t === 15;
 
-function getComposedFromBp(data) {
+async function doComposedFromBp() {
+  const data = await daLoadInventory();
   if (!isArray(data?.r?.inventories)) return;
   backpack = data.r;
   composed = data.r.inventories.flatMap((el) => el.items).filter(composedPot);
 }
 
-async function doComposedFromBp() {
-  const data = await daLoadInventory();
-  getComposedFromBp(data);
-}
-
-function getComposedFromGs(data) {
+async function getComposedFromGs(fn) {
+  const data = await fn();
   if (!isArray(data?.r)) return;
   composed = composed.concat(data.r.filter(composedPot));
+  return data.r;
 }
 
 async function doGs() {
-  const data = await daGuildFetchInv();
-  if (isArray(data?.r)) guildStore = data.r;
-  getComposedFromGs(data);
+  const data = await getComposedFromGs(daGuildFetchInv);
+  if (data) guildStore = data;
 }
 
 async function doReport() {
-  const data = await daGuildReport();
-  if (isArray(data?.r)) guildReport = data.r;
-  getComposedFromGs(data);
+  const data = await getComposedFromGs(daGuildReport);
+  if (data) guildReport = data;
 }
 
 function thisPot(invId, pot) { return pot.a === invId; }
@@ -110,19 +106,29 @@ const basicItem = (o) => ({
   type: o.t,
 });
 
+function fixGuild() {
+  theInv.items = guildReport
+    .concat(guildStore.map(gsMap))
+    .map(basicItem);
+}
+
+function fixInv() {
+  theInv.folders = fromEntries(backpack.inventories.map(folderMap));
+  theInv.items = backpack.equipment.map(equipmentMap)
+    .concat(backpack.inventories.flatMap(inventoryMap))
+    .map(basicItem);
+}
+
 function fixInventory() {
   fakeInv();
-  if (guildReport.length || guildStore.length) {
-    theInv.items = guildReport
-      .concat(guildStore.map(gsMap))
-      .map(basicItem);
-  }
-  if (isArray(backpack.inventories)) {
-    theInv.folders = fromEntries(backpack.inventories.map(folderMap));
-    theInv.items = backpack.equipment.map(equipmentMap)
-      .concat(backpack.inventories.flatMap(inventoryMap))
-      .map(basicItem);
-  }
+  if (guildReport.length || guildStore.length) fixGuild();
+  if (isArray(backpack.inventories)) fixInv();
+}
+
+function goFix() {
+  const test = 0;
+  if (!test && !inventoryFailure) gotSomeStuff();
+  else fixInventory();
 }
 
 export async function buildInv() {
@@ -133,7 +139,5 @@ export async function buildInv() {
     prm.push(doReport());
   }
   await all(prm);
-  const test = 0;
-  if (!test && !inventoryFailure) gotSomeStuff();
-  else fixInventory();
+  goFix();
 }
