@@ -1,6 +1,6 @@
 <script>
   import daComponents from '../../_dataAccess/daComponents';
-  import inventory from '../../_dataAccess/export/inventory';
+  import daLoadInventory from '../../_dataAccess/daLoadInventory';
   import indexAjaxDoc from '../../ajax/indexAjaxDoc';
   import sendEvent from '../../analytics/sendEvent';
   import all from '../../common/all';
@@ -101,9 +101,9 @@
 
   async function getInv() {
     addToProgressLog(['Updating inventory.']);
-    const invJson = await inventory();
-    if (isArray(invJson.items)) {
-      const invById = invJson.items.map(({ item_id: iid }) => iid);
+    const invJson = await daLoadInventory();
+    if (invJson?.s) {
+      const invById = invJson.r.inventories.flatMap(({ items }) => items).map(({ b }) => b);
       invTally = buildObj(invById);
     } else addToProgressLog('No inventory.');
   }
@@ -264,6 +264,8 @@
         { /each }
       </div>
     { /if }
+  { :catch error }
+    <p style="color: red">{ error.message }</p>
   { /await }
 </ModalTitled>
 

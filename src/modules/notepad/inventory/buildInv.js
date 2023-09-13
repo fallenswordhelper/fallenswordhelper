@@ -1,10 +1,12 @@
 import daGuildFetchInv from '../../_dataAccess/daGuildFetchInv';
 import daGuildReport from '../../_dataAccess/daGuildReport';
 import daLoadInventory from '../../_dataAccess/daLoadInventory';
+import basicItem from '../../_dataAccess/export/basicItem';
+import enumFolders from '../../_dataAccess/export/enumFolders';
+import flattenItems from '../../_dataAccess/export/flattenItems';
 import getInventory from '../../ajax/getInventory';
 import all from '../../common/all';
 import currentGuildId from '../../common/currentGuildId';
-import fromEntries from '../../common/fromEntries';
 import isArray from '../../common/isArray';
 import partial from '../../common/partial';
 import playerId from '../../common/playerId';
@@ -83,28 +85,8 @@ function fakeInv() {
   };
 }
 
-const craftType = ['Perfect', 'Excellent', 'Very Good', 'Good', 'Average', 'Poor', 'Uncrafted'];
 const equipmentMap = (o) => ({ ...o, equipped: true, folder_id: -2 });
-const folderMap = ({ id, name }) => [id, name];
 const gsMap = (o) => ({ ...o, player: { id: -1 } });
-const inventoryMap = ({ id, items }) => items.map((o) => ({ ...o, folder_id: id }));
-
-const basicItem = (o) => ({
-  craft: o.cr ? craftType[o.cf] : '',
-  durability: o.cd,
-  equipped: o.equipped ?? false,
-  ...(o.folder_id && { folder_id: o.folder_id }),
-  forge: o.hf ?? 0,
-  guild_tag: o.tg ?? -1,
-  inv_id: o.a,
-  item_id: o.b,
-  item_name: o.n,
-  max_durability: o.md,
-  ...(o.player?.id && { player_id: o.player.id }),
-  rarity: o.r,
-  stats: { min_level: o.l, set_name: '' },
-  type: o.t,
-});
 
 function fixGuild() {
   theInv.items = guildReport
@@ -113,9 +95,9 @@ function fixGuild() {
 }
 
 function fixInv() {
-  theInv.folders = fromEntries(backpack.inventories.map(folderMap));
+  theInv.folders = enumFolders(backpack);
   theInv.items = backpack.equipment.map(equipmentMap)
-    .concat(backpack.inventories.flatMap(inventoryMap))
+    .concat(flattenItems(backpack))
     .map(basicItem);
 }
 
