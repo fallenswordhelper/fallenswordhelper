@@ -1,4 +1,5 @@
 import daLoadInventory from '../_dataAccess/daLoadInventory';
+import flattenItems from '../_dataAccess/export/flattenItems';
 import { pcc } from '../support/layout';
 import createDiv from './cElement/createDiv';
 import clickThis from './clickThis';
@@ -35,8 +36,7 @@ export default async function perfFilter(loc) {
   target = loc;
   const data = await daLoadInventory();
   if (!data?.s) return;
-  inv = fromEntries(data.r.inventories
-    .flatMap(({ items }) => items)
+  inv = fromEntries(flattenItems(data.r)
     .filter(({ cf }) => cf === 0)
     .map(({ a }) => [a, 1]));
   drawFilters();

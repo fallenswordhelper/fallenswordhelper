@@ -1,4 +1,5 @@
 import daLoadInventory from './_dataAccess/daLoadInventory';
+import flattenItems from './_dataAccess/export/flattenItems';
 import createStyle from './common/cElement/createStyle';
 import getElementById from './common/getElementById';
 import insertElement from './common/insertElement';
@@ -11,8 +12,7 @@ const itemStyle = ({ a }) => `div[id$="-highlight-${a}"] {
 async function highlightPerf() {
   const data = await daLoadInventory();
   if (!data?.s) return;
-  const invItems = data.r.inventories
-    .flatMap(({ items }) => items)
+  const invItems = flattenItems(data.r)
     .filter(({ hf }) => hf !== 5)
     .filter(({ cf }) => cf === 0)
     .map(itemStyle)
