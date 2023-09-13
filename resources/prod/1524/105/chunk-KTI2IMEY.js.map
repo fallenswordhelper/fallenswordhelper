@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/modules/ajax/indexAjaxJson.js"],"sourceRoot":"https://rawcdn.githack.com/fallenswordhelper/fallenswordhelper/15.24.105","mappings":"gFAGA,eAAOA,EAAqCC,EAAM,CAChD,IAAMC,EAAS,MAAMC,EAAU,CAAE,KAAAF,EAAM,SAAU,MAAO,CAAC,EACzD,OAAOG,EAAUF,CAAM,GAAK,CAAE,EAAG,EAAG,EAAG,cAAe,CACxD","names":["indexAjaxJson","data","unsafe","indexAjax","jsonParse"]}

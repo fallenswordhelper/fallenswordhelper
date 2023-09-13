@@ -1,2 +1,0 @@
-var t=0,e=0,o=0,n=0,i=0,r=0,s=0;var c=()=>Date.now(),a=()=>Math.floor(c()/1e3);function u(){return t||(t=c()),t}function g(){return e||(e=u()-5*60*1e3),e}function l(){return o||(o=u()-2*24*60*60*1e3),o}function f(){return n||(n=Math.floor(u()/1e3)),n}function A(){return i||(i=f()-120),i}function h(){return r||(r=f()-24*60*60),r}function p(){return s||(s=f()-7*24*60*60),s}export{c as a,a as b,u as c,g as d,l as e,f,A as g,h,p as i};
-//# sourceMappingURL=chunk-FR27OJE5.js.map
