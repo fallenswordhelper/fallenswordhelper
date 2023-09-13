@@ -118,6 +118,8 @@
       <LinkButton --button-color="blue" on:click={ doPerf }>Perfect</LinkButton>
     </div>
   { /if }
+{ :catch error }
+  <p style="color: red">{ error.message }</p>
 { /await }
 
 <style>

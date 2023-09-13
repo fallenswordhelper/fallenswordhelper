@@ -73,6 +73,11 @@ const checkData = ([store, ranks]) => store?.guild_id && ranks?.s;
 export default async function whosGotWhat() {
   const pCC = pcc();
   setInnerHtml('Loading...', pCC);
-  const dataAry = await all([guildStore(), ranksView()]);
+  let dataAry = [];
+  try {
+    dataAry = await all([guildStore(), ranksView()]);
+  } catch (error) {
+    setInnerHtml(error.message, pCC);
+  }
   if (checkData(dataAry)) showMe(pCC, dataAry);
 }

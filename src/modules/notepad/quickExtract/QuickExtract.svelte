@@ -169,6 +169,8 @@
               <td>{ name }</td>
             </tr>
           { /each }
+        { :catch error }
+          <p style="color: red">{ error.message }</p>
         { /await }
       </tbody>
     </table>
