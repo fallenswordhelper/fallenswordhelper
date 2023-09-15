@@ -22,9 +22,6 @@ function nameRenderDisplay(data, row) {
   const t = getT(row); // skipcq: JS-C1002
   const p = player(getTheInv().player_id, row.player_id, getTheInv().guild_id); // skipcq: JS-C1002
 
-  let bold = data;
-  if (row.equipped) { bold = `<b>${data}</b>`; }
-
   let setName = '';
   if (isPartOfSet(row)) {
     setName = ` (<span class="fshLink setName" set="${row.stats.set_name
@@ -36,7 +33,7 @@ function nameRenderDisplay(data, row) {
     rarity[row.rarity].clas}" `
     + `data-tipped="fetchitem.php?item_id=${row.item_id
     }&inv_id=${row.inv_id}&t=${t}&p=${p}">${
-      bold}</a>${setName}`;
+      data}</a>${setName}`;
 }
 
 export default function nameRender(data, type, row) {
