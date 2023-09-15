@@ -1,3 +1,4 @@
+import sendException from '../../analytics/sendException';
 import getTextTrim from '../../common/getTextTrim';
 import querySelectorArray from '../../common/querySelectorArray';
 import regExpExec from '../../common/regExpExec';
@@ -18,10 +19,12 @@ function getTransform() {
 }
 
 function meta(report) {
-  return regExpExec(getTransform(), report);
+  const buffParts = regExpExec(getTransform(), report);
+  if (!buffParts) sendException(`unmatched buffReportParser - ${report}`);
+  return buffParts;
 }
 
 export default function buffReportParser(scope) {
   return querySelectorArray('#quickbuff-report font:not(font *)', scope)
-    .map(getTextTrim).map(meta);
+    .map(getTextTrim).map(meta).filter((i) => i);
 }
