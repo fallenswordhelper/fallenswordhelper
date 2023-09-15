@@ -16,4 +16,5 @@ function getRowColor(data) {
 export default function createdRow(row, data) {
   const colour = getRowColor(data);
   row.classList.add(colour);
+  if (data.equipped) row.classList.add('fshBold');
 }
