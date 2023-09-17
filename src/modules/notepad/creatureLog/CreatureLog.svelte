@@ -2,6 +2,7 @@
   import sendEvent from '../../analytics/sendEvent';
   import alpha from '../../common/alpha';
   import entries from '../../common/entries';
+  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import confirm from '../../modal/confirm';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import addCommas from '../../system/addCommas';
@@ -77,7 +78,9 @@
   <svelte:fragment slot="title">Creature Log</svelte:fragment>
   <div class="title">
     <span class="bold">Entity Information</span>
-    <div>[ <button on:click={ clearStorage } type="button">Clear</button> ]</div>
+    <LinkButtonBracketed --button-color="white" --button-width="2.8em" on:click={ clearStorage }>
+      Clear
+    </LinkButtonBracketed>
   </div>
   <div class="grid headings">
     <div><button class="sortable" on:click={ sortEntity } type="button">Entity</button></div>

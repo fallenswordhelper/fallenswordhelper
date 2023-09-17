@@ -15,12 +15,17 @@
     font-size: var(--button-size, 12px);
     font-family: Helvetica, Arial, sans-serif;
     margin: var(--button-margin, 0);
+    opacity: 1;
     padding: 0;
     text-decoration: underline;
+    transition: opacity 200ms;
     user-select: none;
     width: var(--button-width, auto);
   }
   button:disabled {
     color: grey;
+  }
+  button:hover {
+    opacity: 0.8;
   }
 </style>
