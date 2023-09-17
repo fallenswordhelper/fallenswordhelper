@@ -12,7 +12,6 @@ const processedMonsters = [];
 
 function processMonster(data) {
   if (badData(data)) { return; }
-  sendEvent('NewMap', 'MonsterLog');
   processMonsterLog(data.response.data);
 }
 
@@ -32,6 +31,7 @@ async function loopActions(e, i) {
 function initMonsterLog() {
   if (calf.showMonsterLog) {
     GameData.actions().forEach(loopActions);
+    sendEvent('NewMap', 'MonsterLog');
   }
 }
 
