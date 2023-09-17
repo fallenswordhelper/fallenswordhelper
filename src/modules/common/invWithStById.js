@@ -1,5 +1,5 @@
-import fromEntries from '../common/fromEntries';
-import getInventory from './getInventory';
+import fromEntries from './fromEntries';
+import invWithSt from './invWithSt';
 
 function rekeyInventory(data) {
   return {
@@ -7,12 +7,11 @@ function rekeyInventory(data) {
       ...fromEntries(data.items.map((i) => [i.inv_id, i])),
       ...(data.items.filter((i) => i.is_in_st).length && { fshHasST: true }),
     },
-    folders: data.folders,
   };
 }
 
-export default async function getInventoryById() {
-  const inv = await getInventory();
+export default async function invWithStById() {
+  const inv = await invWithSt();
   if (inv?.items) return rekeyInventory(inv);
   return inv;
 }

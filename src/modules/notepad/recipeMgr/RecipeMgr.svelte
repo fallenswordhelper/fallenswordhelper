@@ -1,6 +1,7 @@
 <script>
   import daComponents from '../../_dataAccess/daComponents';
   import daLoadInventory from '../../_dataAccess/daLoadInventory';
+  import flattenItems from '../../_dataAccess/export/flattenItems';
   import indexAjaxDoc from '../../ajax/indexAjaxDoc';
   import sendEvent from '../../analytics/sendEvent';
   import all from '../../common/all';
@@ -103,7 +104,7 @@
     addToProgressLog(['Updating inventory.']);
     const invJson = await daLoadInventory();
     if (invJson?.s) {
-      const invById = invJson.r.inventories.flatMap(({ items }) => items).map(({ b }) => b);
+      const invById = flattenItems(invJson.r).map(({ b }) => b);
       invTally = buildObj(invById);
     } else addToProgressLog('No inventory.');
   }

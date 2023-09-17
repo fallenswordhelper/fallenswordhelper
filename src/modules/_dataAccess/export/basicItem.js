@@ -3,7 +3,7 @@ const craftType = ['Perfect', 'Excellent', 'Very Good', 'Good', 'Average', 'Poor
 const top = (o) => ({
   bound: o.bn ?? false,
   craft: o.cr ? craftType[o.cf] : '',
-  durability: o.cd,
+  ...(o.cd && { durability: o.cd }),
   equipped: o.equipped ?? false,
   ...(o.folder_id && { folder_id: o.folder_id }),
   forge: o.hf ?? 0,
@@ -14,7 +14,7 @@ const top = (o) => ({
 const bottom = (o) => ({
   item_id: o.b,
   item_name: o.n,
-  max_durability: o.md,
+  ...(o.md && { max_durability: o.md }),
   ...(o.player?.id && { player_id: o.player.id }),
   rarity: o.r,
   stats: { min_level: o.l, set_name: '' },
