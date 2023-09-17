@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import getInventoryById from '../ajax/getInventoryById';
   import calf from '../support/calf';
   import defaults from '../support/dataObj.json';
   import getValue from '../system/getValue';
@@ -9,6 +8,7 @@
   import clickThis from './clickThis';
   import entries from './entries';
   import insertElement from './insertElement';
+  import invWithStById from './invWithStById';
   import LinkButton from './LinkButton.svelte';
   import numberIsNaN from './numberIsNaN';
   import partial from './partial';
@@ -25,7 +25,7 @@
   howMany = 'all';
 
   async function getInv() {
-    inv = await getInventoryById();
+    inv = await invWithStById();
   }
 
   function getItemList() {
@@ -117,6 +117,8 @@
     <div>
       <LinkButton --button-color="blue" on:click={ doPerf }>Perfect</LinkButton>
     </div>
+  { :else }
+    <p style="color: red">Server Error</p>
   { /if }
 { :catch error }
   <p style="color: red">{ error.message }</p>

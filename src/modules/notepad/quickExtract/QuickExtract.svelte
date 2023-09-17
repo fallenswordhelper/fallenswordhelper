@@ -1,9 +1,10 @@
 <script>
   import daUseItem from '../../_dataAccess/daUseItem';
-  import inventory from '../../_dataAccess/export/inventory';
   import sendEvent from '../../analytics/sendEvent';
   import all from '../../common/all';
   import alpha from '../../common/alpha';
+  import invWithSt from '../../common/invWithSt';
+  import isArray from '../../common/isArray';
   import LinkButton from '../../common/LinkButton.svelte';
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import SelectInST from '../../common/SelectInST.svelte';
@@ -40,7 +41,10 @@
   }
 
   function updateExtract() {
-    toExtract = rollupExtractable(playerId, extractable.filter(inST).filter(inMain));
+    toExtract = isArray(extractable) && rollupExtractable(
+      playerId,
+      extractable.filter(inST).filter(inMain),
+    );
   }
 
   function toggleSelectST() {
@@ -60,9 +64,9 @@
   }
 
   async function getInv() {
-    const inv = await inventory();
-    playerId = inv.player_id;
-    extractable = inv.items.filter(isExtractable).sort(byName);
+    const inv = await invWithSt();
+    playerId = inv?.player_id;
+    extractable = inv?.items?.filter(isExtractable).sort(byName);
     updateExtract();
   }
 
@@ -179,6 +183,7 @@
 
 <style>
   div {
+    color-scheme: light;
     padding: 2px;
     width: 640px;
   }

@@ -40,7 +40,7 @@ async function doComposedFromBp() {
   const data = await daLoadInventory();
   if (!isArray(data?.r?.inventories)) return;
   backpack = data.r;
-  composed = data.r.inventories.flatMap((el) => el.items).filter(composedPot);
+  composed = flattenItems(data.r).filter(composedPot);
 }
 
 async function getComposedFromGs(fn) {
