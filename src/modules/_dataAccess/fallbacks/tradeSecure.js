@@ -2,7 +2,6 @@ import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import all from '../../common/all';
 import closestTable from '../../common/closestTable';
 import contains from '../../common/contains';
-import dateUtc from '../../common/dateUtc';
 import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
 import querySelector from '../../common/querySelector';
@@ -11,23 +10,14 @@ import regExpGroups from '../../common/regExpGroups';
 import { fetchItemRe } from '../../support/constants';
 import { realtime } from '../../support/now';
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
+import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 
 const err = () => ({ e: { code: 0, message: 'Server Error' }, s: false });
 const playerLink = (t) => t.previousElementSibling.children[0];
 const timeBox = (a) => a.parentNode.previousElementSibling;
 
-function convertDate(textDate) {
-  const dateAry = textDate.split(/[: /]/);
-  return dateUtc([
-    dateAry[4],
-    dateAry[3],
-    dateAry[2],
-    dateAry[0],
-    dateAry[1],
-  ]);
-}
-
-const parseDateAsOffset = (textDate) => Math.floor((realtime() - convertDate(textDate)) / 1000);
+const parseDateAsOffset = (textDate) => Math
+  .floor((realtime() - parseDateAsTimestamp(textDate)) / 1000);
 
 const basicProps = ([a, timeEL, playerEl]) => ({
   id: Number(getCustomUrlParameter(a.href, 'secure_id')),
@@ -83,14 +73,14 @@ async function parseOutgoing(outgoing) {
   return { s: true, r: { sent } };
 }
 
-async function parseDoc(doc) {
+function parseDoc(doc) {
   const heads = querySelectorArray('b', doc);
   const outgoing = closestTable(heads.find(contains('Outgoing Trades (Your offers)')));
   if (!outgoing) return err();
   return parseOutgoing(outgoing);
 }
 
-async function parseReport(doc) {
+function parseReport(doc) {
   if (!doc) return err();
   return parseDoc(doc);
 }
