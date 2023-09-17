@@ -17,7 +17,7 @@ const playerLink = (t) => t.previousElementSibling.children[0];
 const timeBox = (a) => a.parentNode.previousElementSibling;
 
 function convertDate(textDate) {
-  const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);
+  const dateAry = textDate.split(/[: /]/);
   return dateUtc([
     dateAry[4],
     dateAry[3],
@@ -49,13 +49,10 @@ function getItems(img) {
   };
 }
 
-async function getDetails(o) {
-  const itemDoc = await indexAjaxDoc({ cmd: 'trade', subcmd: 'viewsecure', secure_id: o.id });
-  if (!itemDoc) return;
-  const aTable = querySelector('#pCC table[width="300"]', itemDoc);
+function itemDetail(o, aTable) {
   const gold = getNumber(aTable, 3);
   const points = getNumber(aTable, 4);
-  const items = querySelectorArray('img', aTable)?.map(getItems);
+  const items = querySelectorArray('img', aTable).map(getItems);
   const reqGold = getNumber(aTable, 7);
   const reqPoints = getNumber(aTable, 8);
   return {
@@ -68,11 +65,15 @@ async function getDetails(o) {
   };
 }
 
-async function parseReport(doc) {
-  if (!doc) return err();
-  const outgoing = closestTable(querySelectorArray('b', doc)
-    ?.find(contains('Outgoing Trades (Your offers)')));
-  if (!outgoing) return err();
+async function getDetails(o) {
+  const itemDoc = await indexAjaxDoc({ cmd: 'trade', subcmd: 'viewsecure', secure_id: o.id });
+  if (!itemDoc) return;
+  const aTable = querySelector('#pCC table[width="300"]', itemDoc);
+  if (!aTable) return;
+  return itemDetail(o, aTable);
+}
+
+async function parseOutgoing(outgoing) {
   const sent = await all(querySelectorArray('a[href*="&secure_id="]', outgoing)
     .map((a) => [a, timeBox(a)])
     .map(([a, timeEl]) => [a, timeEl, playerLink(timeEl)])
@@ -80,6 +81,18 @@ async function parseReport(doc) {
     .map(getDetails));
   if (sent.some((o) => !o)) return err();
   return { s: true, r: { sent } };
+}
+
+async function parseDoc(doc) {
+  const heads = querySelectorArray('b', doc);
+  const outgoing = closestTable(heads.find(contains('Outgoing Trades (Your offers)')));
+  if (!outgoing) return err();
+  return parseOutgoing(outgoing);
+}
+
+async function parseReport(doc) {
+  if (!doc) return err();
+  return parseDoc(doc);
 }
 
 // Incomplete

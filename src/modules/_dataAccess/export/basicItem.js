@@ -8,10 +8,10 @@ const top = (o) => ({
   ...(o.folder_id && { folder_id: o.folder_id }),
   forge: o.hf ?? 0,
   guild_tag: o.tg ?? -1,
-  inv_id: o.a,
 });
 
 const bottom = (o) => ({
+  inv_id: o.a,
   item_id: o.b,
   item_name: o.n,
   ...(o.md && { max_durability: o.md }),
