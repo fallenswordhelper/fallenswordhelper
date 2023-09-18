@@ -54,7 +54,7 @@ export default async function retryAjax(options, retries = 10) {
   try {
     result = await getAjax(options);
   } catch (jqXhr) {
-    if (retries && jqXhr.status >= 500) return retryAjax(options, retries - 1);
+    if (retries && jqXhr.status > 500) return retryAjax(options, retries - 1);
     mightThrow(options, jqXhr);
   }
   return result;
