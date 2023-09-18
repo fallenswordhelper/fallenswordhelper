@@ -4,122 +4,101 @@ import daLoadInventory from '../../_dataAccess/daLoadInventory';
 import basicItem from '../../_dataAccess/export/basicItem';
 import enumFolders from '../../_dataAccess/export/enumFolders';
 import flattenItems from '../../_dataAccess/export/flattenItems';
-import getInventory from '../../ajax/getInventory';
+import guildStore from '../../_dataAccess/export/guildStore';
+import inventory from '../../_dataAccess/export/inventory';
 import all from '../../common/all';
 import currentGuildId from '../../common/currentGuildId';
-import isArray from '../../common/isArray';
-import partial from '../../common/partial';
+import delay from '../../common/delay';
 import playerId from '../../common/playerId';
 import calf from '../../support/calf';
+import { injectError } from './injectError';
 
-let backpack = {};
-let composed = [];
-let guildStore = [];
-let guildReport = [];
-let inventoryFailure = false;
-let theInv = {};
+let theInv = 0;
 
 export const getTheInv = () => theInv;
 
-function cacheTheInv(data) {
-  theInv = data;
-}
-
-async function doInventory() {
+async function doInventory(fn) {
+  const test = 1;
+  if (test) {
+    injectError({ message: 'DEMO Failure' });
+    await delay(250);
+    return;
+  }
   try {
-    const data = await getInventory();
-    if (data) cacheTheInv(data);
+    const data = await fn();
+    return data;
   } catch (error) {
-    if (error.jqXhr.status === 500) inventoryFailure = true;
+    if (error.jqXhr.status !== 500) throw error;
+    injectError(error);
   }
 }
 
-const composedPot = (el) => el.t === 15;
-
-async function doComposedFromBp() {
-  const data = await daLoadInventory();
-  if (!isArray(data?.r?.inventories)) return;
-  backpack = data.r;
-  composed = flattenItems(data.r).filter(composedPot);
-}
-
-async function getComposedFromGs(fn) {
-  const data = await fn();
-  if (!isArray(data?.r)) return;
-  composed = composed.concat(data.r.filter(composedPot));
-  return data.r;
-}
-
-async function doGs() {
-  const data = await getComposedFromGs(daGuildFetchInv);
-  if (data) guildStore = data;
-}
-
-async function doReport() {
-  const data = await getComposedFromGs(daGuildReport);
-  if (data) guildReport = data;
-}
-
-function thisPot(invId, pot) { return pot.a === invId; }
-
-function addComposedName(item) {
-  if (item.type === 15) {
-    const cp = composed.find(partial(thisPot, item.inv_id));
-    // eslint-disable-next-line no-param-reassign
-    if (cp) { item.item_name = cp.n; }
-  }
-}
-
-function gotSomeStuff() {
-  if (isArray(theInv?.items)) theInv.items.forEach(addComposedName);
-}
-
-function fakeInv() {
-  theInv = {
-    ...(calf.subcmd === 'guildinvmgr' && {
-      current_player_id: playerId(),
-      guild_id: currentGuildId(),
+const injectStats = (anInventory) => function updateStats(o) {
+  const lookup = anInventory?.find(({ inv_id: invId }) => invId === o.inv_id);
+  return {
+    ...o,
+    ...(lookup?.stats && {
+      stats: {
+        ...o.stats,
+        armor: lookup.stats.armor,
+        attack: lookup.stats.attack,
+        damage: lookup.stats.damage,
+        defense: lookup.stats.defense,
+        hp: lookup.stats.hp,
+        set_name: lookup.stats.set_name ?? '',
+      },
     }),
-    items: [],
-    ...(calf.subcmd === 'invmanagernew' && { player_id: playerId() }),
+  };
+};
+
+const buildItemArray = (invItems, combined) => combined.map(basicItem).map(injectStats(invItems));
+const equipmentMap = (o) => ({ ...o, equipped: true, folder_id: -2 });
+
+async function doInvMgr() {
+  const [pInv, pBackpack] = await all([
+    doInventory(inventory),
+    daLoadInventory(),
+  ]);
+  const invItems = pInv?.items ?? [];
+  const thisBackpack = pBackpack?.r ?? {};
+  const equipment = thisBackpack?.equipment?.map(equipmentMap) ?? [];
+  const combined = equipment.concat(flattenItems(thisBackpack));
+  return {
+    folders: enumFolders(thisBackpack),
+    items: buildItemArray(invItems, combined),
+    player_id: playerId(),
   };
 }
 
-const equipmentMap = (o) => ({ ...o, equipped: true, folder_id: -2 });
 const gsMap = (o) => ({ ...o, player: { id: -1 } });
 
-function fixGuild() {
-  theInv.items = guildReport
-    .concat(guildStore.map(gsMap))
-    .map(basicItem);
-}
-
-function fixInv() {
-  theInv.folders = enumFolders(backpack);
-  theInv.items = backpack.equipment.map(equipmentMap)
-    .concat(flattenItems(backpack))
-    .map(basicItem);
-}
-
-function fixInventory() {
-  fakeInv();
-  if (guildReport.length || guildStore.length) fixGuild();
-  if (isArray(backpack.inventories)) fixInv();
-}
-
-function goFix() {
-  const test = 0;
-  if (!test && !inventoryFailure) gotSomeStuff();
-  else fixInventory();
+async function doGuildInv() {
+  const [ginv, gReport, gStore] = await all([
+    doInventory(guildStore),
+    daGuildReport(),
+    daGuildFetchInv(),
+  ]);
+  const invItems = ginv?.items ?? [];
+  const reportItems = gReport?.r ?? [];
+  const storeItems = gStore?.r ?? [];
+  const combined = reportItems.concat(storeItems.map(gsMap));
+  return {
+    current_player_id: playerId(),
+    items: buildItemArray(invItems, combined),
+    guild_id: currentGuildId(),
+  };
 }
 
 export async function buildInv() {
-  const prm = [doInventory()];
-  if (calf.subcmd === 'invmanagernew') prm.push(doComposedFromBp());
-  if (calf.subcmd === 'guildinvmgr') {
-    prm.push(doGs());
-    prm.push(doReport());
+  if (calf.subcmd === 'invmanagernew') {
+    // set the inv here
+    const data = await doInvMgr();
+    // console.log('data', data);
+    theInv = data;
+  } else if (calf.subcmd === 'guildinvmgr') {
+    // set the inv here
+    const data = await doGuildInv();
+    // console.log('data', data);
+    theInv = data;
   }
-  await all(prm);
-  goFix();
 }

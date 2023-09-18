@@ -14,7 +14,7 @@ import calf from '../../support/calf';
 import { oldActionSpinner } from '../../support/constants';
 import { pcc } from '../../support/layout';
 import task from '../../support/task';
-import { buildInv } from './buildInv';
+import { buildInv, getTheInv } from './buildInv';
 import clearButton from './clearButton';
 import decorate from './decorate';
 import doTable from './doTable';
@@ -78,6 +78,7 @@ async function syncInvMan(reset) {
   if (calf.subcmd === 'guildinvmgr') prm.push(rekeyMembrList());
   prm.push(extendOptions());
   await all(prm);
+  if (!getTheInv()) return;
   asyncCall(reset);
 }
 
