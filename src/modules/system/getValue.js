@@ -1,6 +1,5 @@
 import isNull from '../common/isNull';
 import isUndefined from '../common/isUndefined';
-import calf from '../support/calf';
 import { GMSTORAGE_PATH } from '../support/constants';
 import defaults from '../support/dataObj.json';
 import stdout from '../support/stdout';
@@ -24,7 +23,7 @@ function fshGetValue(name, defValue) {
 }
 
 export default function getValue(name) {
-  if (calf.userIsDev && isUndefined(defaults[name])) { //  No default setting available
+  if (defineUserIsDev && isUndefined(defaults[name])) { //  No default setting available
     stdout('No default setting available', name, defaults[name]);
   }
   return fshGetValue(name, defaults[name]);

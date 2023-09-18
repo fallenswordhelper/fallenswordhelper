@@ -1,5 +1,4 @@
 import runDefault from '../../common/runDefault';
-import calf from '../../support/calf';
 import buffLog from './loader/buffLog';
 import combatLog from './loader/combatLog';
 import creatureLog from './loader/creatureLog';
@@ -18,7 +17,7 @@ const inventory = () => { runDefault(import('../../notepad/inventory/inventory')
 const newGuildLog = () => { runDefault(import('../../notepad/newGuildLog/newGuildLog')); };
 const load = () => { runDefault(import('../../settings/load')); };
 const whosGotWhat = () => {
-  if (!calf.userIsDev) { return; } // whosGotWhat
+  if (!defineUserIsDev) { return; } // whosGotWhat
   runDefault(import('../../notepad/whosGotWhat/whosGotWhat'));
 };
 

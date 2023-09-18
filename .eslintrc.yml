@@ -84,6 +84,10 @@ globals:
   GameData: readonly
   RadioNodeList: readonly
   gtag: readonly
+  defineCalfPath: readonly
+  defineCalfVer: readonly
+  defineDataTablesPath: readonly
+  defineUserIsDev: readonly
 rules:
   consistent-return: off # 74
   import/no-unresolved:

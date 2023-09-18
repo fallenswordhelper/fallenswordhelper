@@ -18,8 +18,8 @@ let theInv = 0;
 export const getTheInv = () => theInv;
 
 async function doInventory(fn) {
-  const test = 1;
-  if (test) {
+  const dev = 0;
+  if (defineUserIsDev && dev) {
     injectError({ message: 'DEMO Failure' });
     await delay(250);
     return;

@@ -1,5 +1,4 @@
 import runDefault from '../../common/runDefault';
-import calf from '../../support/calf';
 import injectWorld from '../../world/injectWorld';
 import parseTemplePage from '../notification/parseTemplePage';
 import arena from './arena';
@@ -38,7 +37,7 @@ const quickBuff = () => { runDefault(import('../../quickbuff/quickBuff')); };
 const superelite = () => { runDefault(import('../../superelite/superelite')); };
 
 const skills = () => {
-  if (!calf.userIsDev) { return; } // skills
+  if (!defineUserIsDev) { return; } // skills
   runDefault(import('../../skills'));
 };
 

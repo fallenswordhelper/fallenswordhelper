@@ -1,7 +1,6 @@
 import './newMap.css';
 import executeAll from '../../common/executeAll';
 import hideQTip from '../../common/hideQTip';
-import calf from '../../support/calf';
 import buffInfo from './buffInfo/buffInfo';
 import buttons from './buttons/buttons';
 import champAttacks from './champAttacks';
@@ -59,7 +58,7 @@ const usualRoutines = [
 
 export default function newMap() {
   executeAll(usualRoutines);
-  if (calf.userIsDev) { //  hide titan combat results, global top 100
+  if (defineUserIsDev) { //  hide titan combat results, global top 100
     hideTitanCombatResults();
   }
 }

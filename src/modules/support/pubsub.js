@@ -4,7 +4,6 @@ https://github.com/addyosmani/pubsubz
 */
 
 import partial from '../common/partial';
-import calf from './calf';
 import stdout from './stdout';
 import task from './task';
 
@@ -14,7 +13,7 @@ let subUid = -1;
 function execute(args, el) { task(3, el.func, [args]); }
 
 export function publish(topic, args) {
-  if (calf.userIsDev) stdout('publish', topic); //  pubsubz publish
+  if (defineUserIsDev) stdout('publish', topic); //  pubsubz publish
   if (!topics[topic]) return;
   topics[topic].forEach(partial(execute, args));
   return true; // probably not needed

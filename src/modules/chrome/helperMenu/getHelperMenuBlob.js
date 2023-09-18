@@ -1,6 +1,5 @@
 import currentGuildId from '../../common/currentGuildId';
 import playerLink from '../../common/playerLink';
-import calf from '../../support/calf';
 import { newGuildLogUrl, notepadBlankUrl } from '../../support/constants';
 import getValue from '../../system/getValue';
 
@@ -65,6 +64,6 @@ export default function getHelperMenuBlob() {
     + `${extra}`
     + `${getValue('betaOptIn') ? betaSection : ''}`
     + `${bottomSection}`
-    + `${calf.userIsDev ? devSection : ''}`
+    + `${defineUserIsDev ? devSection : ''}`
     + `${leadOut}`;
 }
