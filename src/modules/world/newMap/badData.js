@@ -1,3 +1,3 @@
 export default function badData(data) {
-  return !data || !data.response || !data.response.data;
+  return !data?.response?.data;
 }

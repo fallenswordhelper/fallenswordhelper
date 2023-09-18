@@ -149,7 +149,7 @@ function getGroupId(json) {
 }
 
 function processGroupStats(data, playerJson, groupJson) {
-  if (!groupJson.r || !groupJson.r.attributes) { return; }
+  if (!groupJson.r?.attributes) { return; }
   const attr = groupJson.r.attributes;
   doCombatEval(data, playerJson, {
     groupExists: true,

@@ -44,7 +44,7 @@ function endAction(e, success) {
 async function actionHandler(e, fn, success) {
   startAction(e.target);
   const json = await fn([getInvId(e)]);
-  if (json && json.s) {
+  if (json?.s) {
     endAction(e, success);
   } else {
     errorDialog(json);

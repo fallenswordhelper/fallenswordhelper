@@ -24,7 +24,7 @@ function reduceStatTable(acc, curr, index) {
 }
 
 function getVal(prop, obj) {
-  if (obj[prop] && obj[prop].value) {
+  if (obj[prop]?.value) {
     return obj[prop].value;
   }
   return 0;

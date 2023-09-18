@@ -23,7 +23,7 @@ function listPlayers(myGuild, p) {
 }
 
 function grey(el) {
-  if (el && el.classList) { el.classList.add('fshGray'); }
+  if (el?.classList) { el.classList.add('fshGray'); }
 }
 
 const validMoves = (json, arena) => arena.reward_type === 1 && json.r.moves;
@@ -72,7 +72,7 @@ function getMeta(json) {
 }
 
 export default function participants(json) {
-  if (!json || !json.s || !isObject(json.r)) { return; }
+  if (!json?.s || !isObject(json.r)) { return; }
   const withMeta = getMeta(json);
   withMeta.forEach(partial(decorate, currentGuildId()));
   withMeta.forEach(partial(testMoves, json));

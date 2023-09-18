@@ -29,8 +29,7 @@ function testSetId(data) {
 
 export function setFilter() { // jQuery
   $.fn.dataTable.ext.search.push(
-    (_settings, _row, _index, data) => !getOptions().checkedElements
-        || !getOptions().checkedElements['-1']
+    (_settings, _row, _index, data) => !getOptions().checkedElements?.['-1']
         || testSetId(data),
   );
 }

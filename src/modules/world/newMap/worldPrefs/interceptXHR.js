@@ -5,10 +5,6 @@ import partial from '../../../common/partial';
 import calf from '../../../support/calf';
 import { defFetchWorldRealmActions } from '../../../support/constants';
 
-function noAction(myData) {
-  return !myData || !myData.actions || myData.actions.length === 0;
-}
-
 function subLvlMobs(realmLevel, el) {
   if (el.type === 6) {
     return el.data.creature_type !== 0 || el.data.level >= realmLevel;
@@ -17,12 +13,12 @@ function subLvlMobs(realmLevel, el) {
 }
 
 function getLvlToTest(myData) {
-  return (myData.realm && myData.realm.minlevel) || GameData.realm().minlevel;
+  return (myData.realm?.minlevel) || GameData.realm().minlevel;
 }
 
 function xhrDataFilter(data) {
   const myData = jsonParse(data);
-  if (noAction(myData)) { return data; }
+  if (!myData?.actions?.length) { return data; }
   myData.actions = myData.actions.filter(
     partial(subLvlMobs, getLvlToTest(myData)),
   );
@@ -30,8 +26,7 @@ function xhrDataFilter(data) {
 }
 
 function isActionList(originalOptions) {
-  return originalOptions.data
-    && originalOptions.data.d
+  return originalOptions.data?.d
     && bitwiseAnd(originalOptions.data.d, defFetchWorldRealmActions);
 }
 
