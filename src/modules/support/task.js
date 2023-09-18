@@ -4,7 +4,6 @@ import isFunction from '../common/isFunction';
 import isUndefined from '../common/isUndefined';
 import on from '../common/on';
 import fallback from '../system/fallback';
-import calf from './calf';
 import parseError from './parseError';
 import { getLength, pop, push } from './sch';
 import stdout from './stdout';
@@ -64,7 +63,7 @@ function devLog(args) {
 }
 
 export default function task(priority, fn, args, scope) {
-  if (calf.userIsDev) devLog(args); //  Not sending args as Array
+  if (defineUserIsDev) devLog(args); //  Not sending args as Array
   if (isFunction(fn)) {
     initMessageHandler();
     const scopeGuard = fallback(scope, window);

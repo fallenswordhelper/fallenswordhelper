@@ -1,7 +1,6 @@
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import querySelectorArray from '../common/querySelectorArray';
 import setTipped from '../common/setTipped';
-import calf from '../support/calf';
 import { excludeBuff } from './assets';
 import parseBuffLevel from './parseBuffLevel';
 
@@ -9,7 +8,7 @@ function addStamCost(el, nameSpan) {
   const dataTipped = nameSpan.dataset.tipped;
   const { cost } = el.previousElementSibling.dataset;
   setTipped(dataTipped.replace('</center>', `<br>Stamina Cost: ${cost}$&`), nameSpan);
-  if (calf.userIsDev) {
+  if (defineUserIsDev) {
     insertHtmlBeforeEnd(el.parentNode, '<span></span> <span class="fshDodgerBlue '
      + `tooltip-bottom-right" data-tooltip="Stamina Cost">${cost}</span>`);
   }

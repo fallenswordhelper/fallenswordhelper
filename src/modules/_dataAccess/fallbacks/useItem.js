@@ -2,7 +2,6 @@ import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import sendEvent from '../../analytics/sendEvent';
 import infoBox from '../../common/infoBox';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
-import calf from '../../support/calf';
 import { composingFragmentType } from '../../support/constants';
 import stdout from '../../support/stdout';
 
@@ -28,7 +27,7 @@ function stash(info) {
     return { r: { frags }, s: true };
   }
   sendEvent('da/useItem', 'Bad Msg', info);
-  if (calf.userIsDev) stdout('da/useItem', 'Bad Msg', info); //  da/useItem Bad Msg
+  if (defineUserIsDev) stdout('da/useItem', 'Bad Msg', info); //  da/useItem Bad Msg
 }
 
 const outputLookup = [
@@ -40,7 +39,7 @@ const outputLookup = [
 ];
 
 function devHook() {
-  if (calf.userIsDev) stdout('da/useItem', 'No Info'); //  da/useItem No Info
+  if (defineUserIsDev) stdout('da/useItem', 'No Info'); //  da/useItem No Info
 }
 
 function formatResults(doc) {

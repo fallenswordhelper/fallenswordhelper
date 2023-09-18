@@ -4,7 +4,6 @@ import jQueryNotPresent from '../common/jQueryNotPresent';
 import querySelector from '../common/querySelector';
 import xPath from '../common/xPath';
 import updateBuffLog from '../notepad/buffLog/updateBuffLog';
-import calf from '../support/calf';
 import stdout from '../support/stdout';
 import injectQuestBookFull from './pageSwitcher/loader/injectQuestBookFull';
 import news from './pageSwitcher/loader/news';
@@ -40,7 +39,7 @@ const unknown = [
     },
   ],
   [
-    () => calf.userIsDev, // unknownPage
+    () => defineUserIsDev, // unknownPage
     () => { stdout('Fell through!'); },
   ],
 ];
@@ -48,7 +47,7 @@ const unknown = [
 export default function unknownPage() { // Legacy
   if (jQueryNotPresent()) return;
   const show = 0;
-  if (calf.userIsDev && show) stdout('unknownPage'); // unknownPage
+  if (defineUserIsDev && show) stdout('unknownPage'); // unknownPage
   const known = unknown.find((el) => el[0]());
   if (known) known[1]();
 }
