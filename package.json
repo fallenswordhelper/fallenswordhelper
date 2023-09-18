@@ -42,7 +42,7 @@
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.3",
     "csso": "^5.0.5",
-    "esbuild": "^0.19.2",
+    "esbuild": "^0.19.3",
     "esbuild-svelte": "^0.8.0",
     "eslint": "^8.49.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -53,7 +53,7 @@
     "husky": "^8.0.3",
     "liquidjs": "^10.9.2",
     "local-web-server": "^5.3.0",
-    "rollup": "^3.29.1",
+    "rollup": "^3.29.2",
     "rollup-plugin-css-only": "^4.3.0",
     "rollup-plugin-svelte": "^7.1.6",
     "rollup-pluginutils": "^2.8.2"
