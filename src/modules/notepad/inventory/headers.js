@@ -12,10 +12,13 @@ const makeTitle = () => (getTheInv().player_id
   : `<b>&nbsp;Guild Inventory Manager</b> ${
     getTheInv().items.length} items (maroon = in BP, blue=guild store)`);
 
-export default function headers() {
-  if (!isArray(getTheInv().items)) return;
+function injectHeaders() {
   const reportTitle = makeTitle();
   setInnerHtml('', pcc());
   if (getInvFail()) injectError();
   insertHtmlBeforeEnd(pcc(), invManFilter.replace('@@reportTitle@@', reportTitle));
+}
+
+export default function headers() {
+  if (isArray(getTheInv().items)) injectHeaders();
 }
