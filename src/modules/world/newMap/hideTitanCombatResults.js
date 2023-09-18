@@ -6,8 +6,7 @@ import {
 } from '../../support/constants';
 
 function didNotExist(data) {
-  return data.response && data.response.msg
-    && data.response.msg.startsWith('Creature did not exist at that location');
+  return data.response?.msg?.startsWith('Creature did not exist at that location');
 }
 
 function removeAction(data) {

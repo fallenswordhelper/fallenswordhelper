@@ -27,7 +27,7 @@ function relicControl(leftHandSideColumnTable) {
 function selfRecallLink(leftHandSideColumnTable) {
   // self recall
   const getLi = getElementsByTagName('li', leftHandSideColumnTable);
-  if (!getLi || !getLi.length) return;
+  if (!getLi?.length) return;
   const selfRecall = getLi[getLi.length - 1].parentNode;
   insertHtmlBeforeEnd(
     selfRecall,

@@ -10,7 +10,7 @@ import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 function debuffSuccess(aLink, json) {
-  if (json && json.s) { setInnerHtml('', aLink.parentNode); }
+  if (json?.s) { setInnerHtml('', aLink.parentNode); }
 }
 
 async function doDebuff(fastDebuff, aLink) {

@@ -13,7 +13,7 @@ import playerId from '../../common/playerId';
 import calf from '../../support/calf';
 import { injectError } from './injectError';
 
-let theInv = 0;
+let theInv = {};
 
 export const getTheInv = () => theInv;
 

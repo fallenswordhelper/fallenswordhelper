@@ -78,7 +78,7 @@ async function syncInvMan(reset) {
   if (calf.subcmd === 'guildinvmgr') prm.push(rekeyMembrList());
   prm.push(extendOptions());
   await all(prm);
-  if (!getTheInv()) return;
+  if (!Object.getOwnPropertyNames(getTheInv()).length) return;
   asyncCall(reset);
 }
 

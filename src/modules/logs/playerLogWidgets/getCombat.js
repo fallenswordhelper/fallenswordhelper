@@ -35,7 +35,7 @@ async function prepareCache() {
 
 async function newCombat(r, combatId, combatCache) {
   const thisCombat = await daViewCombat(combatId);
-  if (!thisCombat || !thisCombat.s) { return; }
+  if (!thisCombat?.s) { return; }
   if (!newCache) {
     newCache = { ...combatCache };
   }
@@ -52,7 +52,7 @@ export default async function getCombat(r, combatId) {
     combatPrm = prepareCache();
   }
   const combatCache = await combatPrm;
-  if (combatCache[combatId] && combatCache[combatId].logTime) {
+  if (combatCache[combatId]?.logTime) {
     return combatCache[combatId];
   }
   return newCombat(r, combatId, combatCache);

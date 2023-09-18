@@ -13,7 +13,7 @@ function clearTheTimeout() {
   }
 }
 
-const goodData = (data) => data && data.s && isArray(data.r);
+const goodData = (data) => data?.s && isArray(data.r);
 const titanToShow = (dynamic) => calf.showTitanInfo && isArray(dynamic) && dynamic.some(hasTitan);
 
 function processScoutTower(ast, data) {

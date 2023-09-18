@@ -22,14 +22,14 @@ function prepareEnv() {
 
 function findHcsData() {
   const hcsHtml = getElementById('html');
-  if (hcsHtml && hcsHtml.dataset) {
+  if (hcsHtml?.dataset) {
     return hcsHtml.dataset.hcs;
   }
 }
 
 function lookForUi(hcsData) {
   const thisJson = jsonParse(hcsData);
-  if (thisJson && thisJson['new-ui']) {
+  if (thisJson?.['new-ui']) {
     prepareEnv();
   }
 }

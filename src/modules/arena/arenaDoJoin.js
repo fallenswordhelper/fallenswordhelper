@@ -13,11 +13,11 @@ function addId(id, obj) {
 }
 
 function maxMoves(thisInfo) {
-  return thisInfo && thisInfo.includes('combat move');
+  return thisInfo?.includes('combat move');
 }
 
 function yourGuild(thisInfo) {
-  return thisInfo && thisInfo.includes('your guild');
+  return thisInfo?.includes('your guild');
 }
 
 async function evalMsg() {
