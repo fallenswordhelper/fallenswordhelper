@@ -73,12 +73,14 @@ function asyncCall(reset) {
   task(3, getInvMan, [reset]);
 }
 
+const invHasProps = () => Object.getOwnPropertyNames(getTheInv()).length;
+
 async function syncInvMan(reset) {
   const prm = [loadDataTables(), buildInv()];
   if (calf.subcmd === 'guildinvmgr') prm.push(rekeyMembrList());
   prm.push(extendOptions());
   await all(prm);
-  if (!Object.getOwnPropertyNames(getTheInv()).length) return;
+  if (!invHasProps()) return;
   asyncCall(reset);
 }
 
