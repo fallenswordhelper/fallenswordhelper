@@ -53,6 +53,11 @@ const injectStats = (anInventory) => function updateStats(o) {
 
 const buildItemArray = (invItems, combined) => combined.map(basicItem).map(injectStats(invItems));
 const equipmentMap = (o) => ({ ...o, equipped: true, folder_id: -2 });
+const playerInv = (thisBackpack, invItems, combined) => ({
+  folders: enumFolders(thisBackpack),
+  items: buildItemArray(invItems, combined),
+  player_id: playerId(),
+});
 
 async function doInvMgr() {
   const [pInv, pBackpack] = await all([
@@ -61,16 +66,17 @@ async function doInvMgr() {
   ]);
   const invItems = pInv?.items ?? [];
   const thisBackpack = pBackpack?.r ?? {};
-  const equipment = thisBackpack?.equipment?.map(equipmentMap) ?? [];
+  const equipment = thisBackpack.equipment?.map(equipmentMap) ?? [];
   const combined = equipment.concat(flattenItems(thisBackpack));
-  return {
-    folders: enumFolders(thisBackpack),
-    items: buildItemArray(invItems, combined),
-    player_id: playerId(),
-  };
+  return playerInv(thisBackpack, invItems, combined);
 }
 
 const gsMap = (o) => ({ ...o, player: { id: -1 } });
+const guildInv = (invItems, combined) => ({
+  current_player_id: playerId(),
+  items: buildItemArray(invItems, combined),
+  guild_id: currentGuildId(),
+});
 
 async function doGuildInv() {
   const [ginv, gReport, gStore] = await all([
@@ -82,23 +88,17 @@ async function doGuildInv() {
   const reportItems = gReport?.r ?? [];
   const storeItems = gStore?.r ?? [];
   const combined = reportItems.concat(storeItems.map(gsMap));
-  return {
-    current_player_id: playerId(),
-    items: buildItemArray(invItems, combined),
-    guild_id: currentGuildId(),
-  };
+  return guildInv(invItems, combined);
 }
 
 export async function buildInv() {
   if (calf.subcmd === 'invmanagernew') {
     // set the inv here
     const data = await doInvMgr();
-    // console.log('data', data);
     theInv = data;
   } else if (calf.subcmd === 'guildinvmgr') {
     // set the inv here
     const data = await doGuildInv();
-    // console.log('data', data);
     theInv = data;
   }
 }

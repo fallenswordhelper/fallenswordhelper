@@ -5,10 +5,10 @@ const top = (o) => ({
   craft: o.cr ? craftType[o.cf] : '',
   ...((o.cd ?? null) !== null && { durability: o.cd }),
   equipped: o.equipped ?? false,
-  ...(o.folder_id && { folder_id: o.folder_id }),
 });
 
 const bottom = (o) => ({
+  ...(o.folder_id && { folder_id: o.folder_id }),
   forge: o.hf ?? 0,
   guild_tag: o.tg ?? -1,
   inv_id: o.a,
