@@ -44,13 +44,16 @@ export function updateAttr(items) {
   };
 }
 
+const getCache = async () => await get(`fsh_${calf.subcmd}_cache`) ?? [];
+const setCache = (data) => set(`fsh_${calf.subcmd}_cache`, data);
+
 const other = (newItemsAry) => (cacheItem) => newItemsAry
   .every((newItem) => newItem.inv_id !== cacheItem.inv_id);
 
 async function tryCache(items) {
-  const cache = await get(`fsh_${calf.subcmd}_cache`) ?? [];
+  const cache = await getCache();
   const untouched = cache.filter(other(items));
-  await set(`fsh_${calf.subcmd}_cache`, untouched.concat(items));
+  await setCache(untouched.concat(items));
 }
 
 export async function itemDetails(ary, pFn, tConst) {
@@ -69,17 +72,24 @@ export async function itemDetails(ary, pFn, tConst) {
 
 const keep = (rowdata) => (cacheItem) => rowdata
   .some((rowItem) => cacheItem.inv_id === rowItem.inv_id);
+const getClean = (rows, cache) => cache.filter(keep(arrayFrom(rows.data())));
+
+async function getCleanCache(rows) {
+  const cache = await getCache();
+  const cleanCache = getClean(rows, cache);
+  await setCache(cleanCache);
+  return cleanCache;
+}
+
+async function updateRows(api) {
+  const rows = api.rows(equipable);
+  const cleanCache = await getCleanCache(rows);
+  // eslint-disable-next-line array-callback-return
+  rows.every(updateAttr(cleanCache)); // skipcq: JS-D008
+}
 
 export async function init(fshInv) {
   const api = new DataTable(fshInv);
-  const rows = api.rows(equipable);
-  const cache = await get(`fsh_${calf.subcmd}_cache`) ?? [];
-
-  const rowdata = arrayFrom(rows.data());
-  const cleanCache = cache.filter(keep(rowdata));
-  await set(`fsh_${calf.subcmd}_cache`, cleanCache);
-
-  // eslint-disable-next-line array-callback-return
-  rows.every(updateAttr(cleanCache));
+  await updateRows(api);
   api.draw();
 }
