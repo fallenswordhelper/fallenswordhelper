@@ -22,9 +22,9 @@ import eventHandlers from './eventHandlers/eventHandlers';
 import {
   lvlFilter, rarityFilter, setFilter, typeFilter,
 } from './filters';
+import footer from './footer/footer';
 import headers from './headers';
 import { extendOptions } from './options';
-import recallAll from './recallAll/recallAll';
 import setChecks from './setChecks';
 import setLvls from './setLvls';
 
@@ -60,7 +60,7 @@ function doInventory(reset) {
   eventHandlers(fshInv);
   $('#fshRefresh').on('click', reset);
   clearButton(fshInv);
-  recallAll();
+  footer(fshInv);
 }
 
 function getInvMan(reset) {

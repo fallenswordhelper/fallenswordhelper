@@ -88,6 +88,7 @@ globals:
   defineCalfVer: readonly
   defineDataTablesPath: readonly
   defineUserIsDev: readonly
+  DataTable: readonly
 rules:
   consistent-return: off # 74
   import/no-unresolved:

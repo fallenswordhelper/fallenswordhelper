@@ -1,6 +1,8 @@
 import partial from '../../common/partial';
+import { invEvent } from './eventHandlers/telemetry';
 
 function clearSearch(fshInv, input) {
+  invEvent('clearSearch');
   input.val('');
   $(fshInv).DataTable().search('').draw();
 }

@@ -11,6 +11,7 @@ import currentGuildId from '../../common/currentGuildId';
 import delay from '../../common/delay';
 import playerId from '../../common/playerId';
 import calf from '../../support/calf';
+import { pcc } from '../../support/layout';
 import { injectError } from './injectError';
 
 let theInv = {};
@@ -20,7 +21,7 @@ export const getTheInv = () => theInv;
 async function doInventory(fn) {
   const dev = 0;
   if (defineUserIsDev && dev) {
-    injectError({ message: 'DEMO Failure' });
+    injectError(pcc(), { message: 'DEMO Failure' });
     await delay(250);
     return;
   }
@@ -29,7 +30,7 @@ async function doInventory(fn) {
     return data;
   } catch (error) {
     if (error.jqXhr.status !== 500) throw error;
-    injectError(error);
+    injectError(pcc(), error);
   }
 }
 
@@ -93,11 +94,9 @@ async function doGuildInv() {
 
 export async function buildInv() {
   if (calf.subcmd === 'invmanagernew') {
-    // set the inv here
     const data = await doInvMgr();
     theInv = data;
   } else if (calf.subcmd === 'guildinvmgr') {
-    // set the inv here
     const data = await doGuildInv();
     theInv = data;
   }

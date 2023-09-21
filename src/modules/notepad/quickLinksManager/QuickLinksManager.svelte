@@ -130,6 +130,7 @@
     border-bottom: 1px dotted black;
     display: inline-block;
     position: relative;
+    word-spacing: normal;
   }
   .buttons {
     color: blue;
