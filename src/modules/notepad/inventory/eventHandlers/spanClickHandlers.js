@@ -38,25 +38,25 @@ function genericEventAction(fn, someData, thisEvent, target) {
   doAction(partial(fn, someData), target);
 }
 
-function doStoreItem(target) {
+function doStoreItem(target) { // jQuery
   genericEventAction(storeItems, [target.attr('invid')], 'doStoreItem', target);
 }
 
-function useWear(fn, thisEvent, target) {
+function useWear(fn, thisEvent, target) { // jQuery
   genericEventAction(fn, target.attr('invid'), thisEvent, target);
 }
 
 const doUseItem = (target) => useWear(useItem, 'doUseItem', target);
 const doWearItem = (target) => useWear(equipItem, 'doWearItem', target);
 
-function dropSend(fn, thisEvent, target) {
+function dropSend(fn, thisEvent, target) { // jQuery
   genericEventAction(fn, [target.data('inv')], thisEvent, target);
 }
 
 const doDropItem = (target) => dropSend(dropItem, 'doDropItem', target);
 const doSendItem = (target) => dropSend(ajaxSendItems, 'doSendItem', target);
 
-const genericHandler = (fn) => (e) => fn($(e.target));
+const genericHandler = (fn) => (e) => fn($(e.target)); // jQuery
 
 function spanClick(fshInv, [className, fn]) { // jQuery
   $(fshInv).on('click', `span.${className}`, genericHandler(fn));
