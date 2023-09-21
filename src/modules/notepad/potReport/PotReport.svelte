@@ -19,49 +19,73 @@
     potMap: [],
     minpoint: 20,
     maxpoint: 30,
+    backpack: true,
+    guildstore: true,
   };
+  const backpackLoc = 1;
+  const guildStoreLoc = 2;
 
   export let visible = true;
+
   let options = null;
   let inventoryRender = false;
   let mappingRender = false;
   let thresholdRender = false;
   let countPots = [];
+  let currentInventory = [];
+  let renderMap = [];
 
-  const sendPrEvent = (type) => sendEvent('pot-report', type);
-  const storeOptions = () => set(storageKey, options);
-  const result = ({ r }) => r;
   const composed = ({ t }) => t === 15;
-  const theName = ({ n }) => n;
-  const listPots = (json) => json.flatMap(result).filter(composed).map(theName).sort(alpha);
-  const buildMap = (pots) => uniq(pots).map((n) => ({
-    name: n,
-    mapped: options?.potMap?.find(({ name }) => name === n)?.mapped || n,
-    ignore: options?.potMap?.find(({ name }) => name === n)?.ignore ?? false,
-    waiting: true,
-    count: pots.filter((name) => name === n).length,
-  }));
+  const countBg = (count) => perc2color(count, options.minpoint, options.maxpoint);
   const ignored = ({ ignore }) => !ignore;
-  const sum = (prev, { count }) => prev + count;
+  const nameSearch = (n) => ({ name }) => name === n;
+  const nameSort = (a, b) => alpha(a.n, b.n);
+  const result = ({ r }) => r;
+  const sendPrEvent = (type) => sendEvent('pot-report', type);
+  const setLocation = ({ player, n }) => ({ loc: player ? backpackLoc : guildStoreLoc, n });
+  const storeOptions = () => set(storageKey, options);
 
-  function rollup() {
+  const buildCurrentInventory = (json) => json
+    .flatMap(result)
+    .filter(composed)
+    .map(setLocation)
+    .sort(nameSort);
+  const countFromInv = (inv) => ({ mapped }) => ({
+    name: mapped,
+    count: inv.filter(({ mapped: invMap }) => invMap === mapped).length,
+  });
+  const byMap = (mappedPots) => ({ n }) => mappedPots.some(nameSearch(n));
+  const addMapping = (mappedPots) => ({ loc, n }) => ({
+    loc,
+    mapped: mappedPots.find(nameSearch(n)).mapped,
+    n,
+  });
+  const buildInv = (mappedPots) => currentInventory
+    .filter(byMap(mappedPots))
+    .filter(({ loc }) => options.backpack || loc !== backpackLoc)
+    .filter(({ loc }) => options.guildstore || loc !== guildStoreLoc)
+    .map(addMapping(mappedPots));
+  const buildMapping = (pots) => uniq(pots, 'n').map(({ n }) => ({
+    name: n,
+    mapped: options?.potMap?.find(nameSearch(n))?.mapped || n,
+    ignore: options?.potMap?.find(nameSearch(n))?.ignore ?? false,
+  }));
+
+  function buildCount() {
     const mappedPots = options.potMap.filter(ignored);
-    return uniq(mappedPots, 'mapped').map(({ mapped }) => ({
-      name: mapped,
-      count: mappedPots.filter(({ mapped: mp }) => mp === mapped).reduce(sum, 0),
-    }));
-  }
-
-  async function getOptions() {
-    options = await get(storageKey) || deepClone(defaultOpts);
-    inventoryRender = options.inventory;
-    mappingRender = options.mapping;
-    thresholdRender = options.thresholds;
+    const inv = buildInv(mappedPots);
+    return uniq(mappedPots, 'mapped').map(countFromInv(inv));
   }
 
   function doMapping() {
     storeOptions();
-    countPots = rollup();
+    countPots = buildCount();
+    renderMap = options.potMap.map((o) => ({ ...o, waiting: true }));
+  }
+
+  function mappingChange() {
+    options.potMap = renderMap.map(({ ignore, mapped, name }) => ({ ignore, mapped, name }));
+    doMapping();
   }
 
   function ignoreAll() {
@@ -74,12 +98,21 @@
     doMapping();
   }
 
+  async function getOptions() {
+    options = await get(storageKey) || deepClone(defaultOpts);
+    inventoryRender = options.inventory;
+    mappingRender = options.mapping;
+    thresholdRender = options.thresholds;
+    options.backpack = options.backpack ?? defaultOpts.backpack;
+    options.guildstore = options.guildstore ?? defaultOpts.guildstore;
+  }
+
   async function init() {
     getOptions();
     const json = await all([daGuildFetchInv(), daGuildReport()]);
     if (!isArray(json[0]?.r) || !isArray(json[1]?.r)) throw new Error('Server Error');
-    const pots = listPots(json);
-    options.potMap = buildMap(pots);
+    currentInventory = buildCurrentInventory(json);
+    options.potMap = buildMapping(currentInventory);
     doMapping();
   }
 </script>
@@ -90,134 +123,156 @@
   on:close={ () => { visible = false; } }
 >
   <svelte:fragment slot="title">Pot Report</svelte:fragment>
-  <div class="pot-report">
+  <div class="main">
     { #await init() }
       Loading...
     { :then}
-      <input
-        bind:checked={ options.inventory }
-        class="tab-ctrl"
-        id="pr-inv"
-        on:change={ () => sendPrEvent('inventory') }
-        on:change={ storeOptions }
-        on:click|once={ () => { inventoryRender = true; } }
-        type="checkbox"
-      >
-      <label for="pr-inv">Composed Potion Inventory</label>
-      <input
-        bind:checked={ options.mapping }
-        class="tab-ctrl"
-        id="pr-map"
-        on:change={ () => sendPrEvent('mapping') }
-        on:change={ storeOptions }
-        on:click|once={ () => { mappingRender = true; } }
-        type="checkbox"
-      >
-      <label for="pr-map">Mapping</label>
-      <input
-        bind:checked={ options.thresholds }
-        class="tab-ctrl"
-        id="pr-levels"
-        on:change={ () => sendPrEvent('thresholds') }
-        on:change={ storeOptions }
-        on:click|once={ () => { thresholdRender = true; } }
-        type="checkbox"
-      >
-      <label for="pr-levels">Thresholds</label>
-      <div class="panels">
-        { #if inventoryRender }
-          <div class="inventory">
-            <div class="inventory-grid-container">
-              { #each countPots as { name, count } }
-                <div>{ name }</div>
-                <div
-                  style:background-color={ perc2color(count, options.minpoint, options.maxpoint) }
-                >
-                  { count }
-                </div>
-              { /each }
-            </div>
-          </div>
-        { /if }
-        { #if mappingRender }
-          <div class="mapping">
-            <div class="mapping-grid-container">
-              { #each options.potMap as {
-                name, mapped, ignore, waiting,
-              } }
-                <div>{ name }</div>
-                <div>
-                  <select
-                    bind:value={ mapped }
-                    { name }
-                    on:change={ () => sendPrEvent('mapped') }
-                    on:change={ doMapping }
-                    on:mousedown|once={ () => { waiting = false; } }
-                  >
-                    { #if waiting }
-                      <option>{ mapped }</option>
-                    { :else }
-                      { #each options.potMap as { name: innerName } }
-                        <option selected={ mapped === innerName }>{ innerName }</option>
-                      { /each }
-                    { /if }
-                  </select>
-                </div>
-                <div>
-                  <input
-                    bind:checked={ ignore }
-                    on:change={ () => sendPrEvent('ignore') }
-                    on:change={ doMapping }
-                    on:click={ (e) => e.target.blur() }
-                    title="Ignore"
-                    type="checkbox"
-                  >
-                </div>
-              { /each }
-              <div></div>
-              <div>
-                <button
-                  class="custombutton"
-                  on:click={ () => sendPrEvent('ignore-all') }
-                  on:click={ ignoreAll }
-                  type="button"
-                >
-                  Ignore All
-                </button>
-                <button
-                  class="custombutton"
-                  on:click={ () => sendPrEvent('reset') }
-                  on:click={ doReset }
-                  type="button"
-                >
-                  Reset
-                </button>
+      <div class="filters">
+        <label>
+          <input
+            bind:checked={ options.backpack }
+            on:change={ () => sendPrEvent('backpack') }
+            on:change={ storeOptions }
+            on:change={ doMapping }
+            type="checkbox"
+          >
+          Member Backpacks
+        </label>
+        <label>
+          <input
+            bind:checked={ options.guildstore }
+            on:change={ () => sendPrEvent('guildstore') }
+            on:change={ storeOptions }
+            on:change={ doMapping }
+            type="checkbox"
+          >
+          Guild Store
+        </label>
+      </div>
+      <div class="pot-report">
+        <input
+          bind:checked={ options.inventory }
+          class="tab-ctrl"
+          id="pr-inv"
+          on:change={ () => sendPrEvent('inventory') }
+          on:change={ storeOptions }
+          on:click|once={ () => { inventoryRender = true; } }
+          type="checkbox"
+        >
+        <label for="pr-inv">Composed Potion Inventory</label>
+        <input
+          bind:checked={ options.mapping }
+          class="tab-ctrl"
+          id="pr-map"
+          on:change={ () => sendPrEvent('mapping') }
+          on:change={ storeOptions }
+          on:click|once={ () => { mappingRender = true; } }
+          type="checkbox"
+        >
+        <label for="pr-map">Mapping</label>
+        <input
+          bind:checked={ options.thresholds }
+          class="tab-ctrl"
+          id="pr-levels"
+          on:change={ () => sendPrEvent('thresholds') }
+          on:change={ storeOptions }
+          on:click|once={ () => { thresholdRender = true; } }
+          type="checkbox"
+        >
+        <label for="pr-levels">Thresholds</label>
+        <div class="panels">
+          { #if inventoryRender }
+            <div class="inventory">
+              <div class="inventory-grid-container">
+                { #each countPots as { name, count } }
+                  <div>{ name }</div>
+                  <div style:background-color={ countBg(count) }>
+                    { count }
+                  </div>
+                { /each }
               </div>
             </div>
-          </div>
-        { /if }
-        { #if thresholdRender }
-          <div class="thresholds">
-            Min:
-            <input
-              bind:value={ options.minpoint }
-              max="999"
-              min="0"
-              on:input={ () => sendPrEvent('minpoint') }
-              on:input={ storeOptions }
-              type="number"
-            >
-            Max:
-            <input
-              bind:value={ options.maxpoint }
-              max="999"
-              min="0"
-              on:input={ () => sendPrEvent('maxpoint') }
-              on:input={ storeOptions }
-              type="number"
-            >
-          </div>
-        { /if }
+          { /if }
+          { #if mappingRender }
+            <div class="mapping">
+              <div class="mapping-grid-container">
+                { #each renderMap as {
+                  name, mapped, ignore, waiting,
+                } }
+                  <div>{ name }</div>
+                  <div>
+                    <select
+                      bind:value={ mapped }
+                      { name }
+                      on:change={ () => sendPrEvent('mapped') }
+                      on:change={ mappingChange }
+                      on:mousedown|once={ () => { waiting = false; } }
+                    >
+                      { #if waiting }
+                        <option>{ mapped }</option>
+                      { :else }
+                        { #each renderMap as { name: innerName } }
+                          <option selected={ mapped === innerName }>{ innerName }</option>
+                        { /each }
+                      { /if }
+                    </select>
+                  </div>
+                  <div>
+                    <input
+                      bind:checked={ ignore }
+                      on:change={ () => sendPrEvent('ignore') }
+                      on:change={ mappingChange }
+                      on:click={ (e) => e.target.blur() }
+                      title="Ignore"
+                      type="checkbox"
+                    >
+                  </div>
+                { /each }
+                <div></div>
+                <div>
+                  <button
+                    class="custombutton"
+                    on:click={ () => sendPrEvent('ignore-all') }
+                    on:click={ ignoreAll }
+                    type="button"
+                  >
+                    Ignore All
+                  </button>
+                  <button
+                    class="custombutton"
+                    on:click={ () => sendPrEvent('reset') }
+                    on:click={ doReset }
+                    type="button"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          { /if }
+          { #if thresholdRender }
+            <div class="thresholds">
+              Min:
+              <input
+                bind:value={ options.minpoint }
+                max="999"
+                min="0"
+                on:input={ () => sendPrEvent('minpoint') }
+                on:input={ storeOptions }
+                type="number"
+              >
+              Max:
+              <input
+                bind:value={ options.maxpoint }
+                max="999"
+                min="0"
+                on:input={ () => sendPrEvent('maxpoint') }
+                on:input={ storeOptions }
+                type="number"
+              >
+            </div>
+          { /if }
+        </div>
       </div>
     { :catch error }
       <p style="color: red">{ error.message }</p>
@@ -226,21 +281,30 @@
 </ModalTitled>
 
 <style>
-  .pot-report {
+  .main {
     color-scheme: light;
-    display: flex;
-    flex-wrap: wrap;
     font-size: 12px;
-    justify-content: center;
     max-height: calc(100vh - 100px);
-    row-gap: 10px;
     text-align: center;
     width: 640px;
+  }
+  .filters {
+    padding: 10px;
+  }
+  .filters label {
+    display: inline-block;
+    width: 150px;
+  }
+  .pot-report {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 10px;
   }
   .tab-ctrl {
     display: none;
   }
-  label {
+  .pot-report label {
     background: #fece2f;
     color: #4c3000;
     margin-right: -1px;
@@ -250,7 +314,7 @@
     background: #ffa614;
     color: #381f00;
   }
-  label:hover {
+  .pot-report label:hover {
     background: #f0be00;
     color: #381f00;
     cursor: pointer;
@@ -287,6 +351,11 @@
     height: 18px;
     line-height: 18px;
   }
+  .inventory-grid-container div:nth-child(even) {
+    min-width: 16px;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
   .inventory-grid-container div:nth-child(odd),
   .mapping-grid-container div:nth-child(3n - 2) {
     max-width: 192px;
@@ -297,6 +366,10 @@
   }
   .mapping-grid-container input {
     vertical-align: text-top;
+  }
+  button {
+    font-family: inherit;
+    font-size: inherit;
   }
   .thresholds input {
     display: block;
