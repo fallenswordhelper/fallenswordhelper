@@ -22,7 +22,7 @@ function gsDisplayType(type, row, fn) {
 }
 
 function canStore(row) {
-  return row.folder_id && !row.bound; // && !row.equipped;
+  return row.folder_id && !row.bound;
 }
 
 export default function gsRender(_data, type, row) {

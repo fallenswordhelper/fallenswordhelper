@@ -1,6 +1,7 @@
 import entries from '../../../common/entries';
 import { getOptions } from '../options';
 import setChecks from '../setChecks';
+import { headerEvent } from './telemetry';
 
 function gearOnly(pair) { return Number(pair[0]) >= 100; }
 
@@ -15,6 +16,7 @@ function clearGearOnly(checkedElements) {
 }
 
 export default function clearChecks(fshInv) { // jQuery
+  headerEvent('Select None');
   getOptions().checkedElements = clearGearOnly(getOptions().checkedElements);
   setChecks();
   $(fshInv).DataTable().draw();
