@@ -15,10 +15,15 @@ import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import functionLookup from './functionLookup';
 import getHelperMenuBlob from './getHelperMenuBlob';
 
+let helperMenuDiv = 0;
+
+function closeMenu() {
+  helperMenuDiv.classList.remove('helperMenuShow');
+}
+
 function toggleMenu(evt) {
-  if (evt.target.id !== 'helperMenu') { return; }
-  const menu = evt.target.children[0];
-  menu.classList.toggle('helperMenuShow');
+  if (evt.target.id !== 'helperMenu') return;
+  helperMenuDiv.classList.toggle('helperMenuShow');
 }
 
 function callHelperFunction(target) {
@@ -27,6 +32,7 @@ function callHelperFunction(target) {
   if (jQueryPresent() && isFunction(fn)) {
     sendEvent('helperMenu', functionPath);
     jQueryDialog(fn);
+    closeMenu();
   }
 }
 
@@ -36,21 +42,25 @@ function callModalFunction(target) {
   if (isFunction(fn)) {
     sendEvent('helperMenu', functionPath);
     fn();
+    closeMenu();
   }
+}
+
+function doMsg(target) {
+  sendEvent('helperMenu', 'helperMenuReply');
+  window.openQuickMsgDialog(target.getAttribute('target_player'));
+  closeMenu();
 }
 
 const classEvents = [
   ['fshLink', callHelperFunction],
   ['helperGo', callModalFunction],
-  ['helperMenuReply', (target) => {
-    sendEvent('helperMenu', 'helperMenuReply');
-    window.openQuickMsgDialog(target.getAttribute('target_player'));
-  }],
+  ['helperMenuReply', doMsg],
 ];
 
 function showHelperMenu(evt) {
   const helperMenu = evt.target;
-  const helperMenuDiv = createDiv({
+  helperMenuDiv = createDiv({
     className: 'helperMenuDiv',
     id: 'helperMenuDiv',
     innerHTML: getHelperMenuBlob(),
