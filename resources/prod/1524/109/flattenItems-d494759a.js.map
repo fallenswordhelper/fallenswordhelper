@@ -1,1 +1,0 @@
-{"version":3,"file":"flattenItems-d494759a.js","sources":["src/modules/_dataAccess/export/flattenItems.js"],"sourcesContent":null,"names":["inventoryMap","id","items","map","o","folder_id","flattenItems","backpack","inventories","flatMap"],"mappings":"AAAA,MAAMA,EAAe,EAAGC,KAAIC,WAAYA,EAAMC,KAAKC,IAAC,IAAWA,EAAGC,UAAWJ;AAE9D,SAASK,EAAaC,GACnC,OAAOA,EAASC,YAAYC,QAAQT,EACtC"}

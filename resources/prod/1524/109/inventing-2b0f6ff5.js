@@ -1,3 +1,0 @@
-import{a as n}from"./calfSystem-2f15e074.js"
-function t(t){return n({cmd:"inventing",...t})}export{t as i}
-//# sourceMappingURL=inventing-2b0f6ff5.js.map
