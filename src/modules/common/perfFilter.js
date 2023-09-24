@@ -1,5 +1,6 @@
 import daLoadInventory from '../_dataAccess/daLoadInventory';
 import flattenItems from '../_dataAccess/export/flattenItems';
+import sendEvent from '../analytics/sendEvent';
 import { pcc } from '../support/layout';
 import createDiv from './cElement/createDiv';
 import clickThis from './clickThis';
@@ -10,6 +11,7 @@ import insertElement from './insertElement';
 import insertHtmlBeforeEnd from './insertHtmlBeforeEnd';
 import jQueryNotPresent from './jQueryNotPresent';
 import onclick from './onclick';
+import partial from './partial';
 
 let inv = 0;
 let target = 0;
@@ -19,16 +21,17 @@ function clickOnPerf(el) {
   if (inv[thisItem]) clickThis(el);
 }
 
-function selectPerf() {
+function selectPerf(loc) {
+  sendEvent('perfFilter', loc);
   const items = getArrayByClassName('selectable-item', getElementById(`${target}-items`));
   items.forEach(clickOnPerf);
 }
 
-function drawFilters() {
+function drawFilters(loc) {
   const buttonDiv = createDiv({ className: 'fshAC' });
   insertHtmlBeforeEnd(buttonDiv, '<button class="fshBl">Perfect</button>');
   insertElement(pcc(), buttonDiv);
-  onclick(buttonDiv, selectPerf);
+  onclick(buttonDiv, partial(selectPerf, loc));
 }
 
 export default async function perfFilter(loc) {
@@ -39,5 +42,5 @@ export default async function perfFilter(loc) {
   inv = fromEntries(flattenItems(data.r)
     .filter(({ cf }) => cf === 0)
     .map(({ a }) => [a, 1]));
-  drawFilters();
+  drawFilters(loc);
 }

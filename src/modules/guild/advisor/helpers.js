@@ -1,7 +1,10 @@
 import './advisor.css';
+import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
 import createTable from '../../common/cElement/createTable';
+import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
+import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import replaceChild from '../../common/replaceChild';
 import trim from '../../common/trim';
@@ -54,8 +57,26 @@ function doTable(tbl, data, callback) { // jQuery
   });
 }
 
-function switcheroo(div, targetElement) {
-  task(3, partial(replaceChild, div, targetElement));
+const advisorEvent = (type) => sendEvent('advisor', type);
+const advisorEventHdl = (type) => () => { sendEvent('advisor', type); };
+
+function chromeHandlers(fshInv) { // jQuery
+  $(`#${fshInv.id}_length select`).on('change', advisorEventHdl('dataTables_length'));
+  $(`#${fshInv.id}_filter input`).on('keyup', advisorEventHdl('dataTables_filter'));
+  // something is preventing jQuery bubbling
+  onclick(getElementById(`${fshInv.id}_paginate`), (e) => {
+    if (e.target.classList.contains('paginate_button')) advisorEvent('paginate_button');
+  });
+}
+
+function doSwitch(targetElement, div, tbl) {
+  replaceChild(div, targetElement);
+  chromeHandlers(tbl);
+}
+
+function switcheroo(targetElement, div, tbl) {
+  // task(3, partial(replaceChild, div, targetElement));
+  task(3, doSwitch, [targetElement, div, tbl]);
 }
 
 export function injectTable(targetElement, tfoot, data) {
@@ -63,6 +84,6 @@ export function injectTable(targetElement, tfoot, data) {
   const tbl = createTable({ className: 'fshDataTable fshXSmall hover' });
   insertElement(div, tbl);
   insertElement(tbl, tfoot);
-  task(3, doTable, [tbl, data, partial(switcheroo, div, targetElement)]);
+  task(3, doTable, [tbl, data, partial(switcheroo, targetElement, div, tbl)]);
   return div;
 }

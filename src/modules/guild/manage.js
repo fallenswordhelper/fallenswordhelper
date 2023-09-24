@@ -1,8 +1,11 @@
+import sendEvent from '../analytics/sendEvent';
 import contains from '../common/contains';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getElementsByTagName from '../common/getElementsByTagName';
+import getText from '../common/getText';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
+import onclick from '../common/onclick';
 import partial from '../common/partial';
 import playerName from '../common/playerName';
 import setInnerHtml from '../dom/setInnerHtml';
@@ -22,6 +25,9 @@ function relicControl(leftHandSideColumnTable) {
   if (relic.length !== 1) return;
   const thisFont = relic[0].parentNode.nextElementSibling.children[0];
   setInnerHtml(`[ <a href="${guildSubcmdUrl}reliclist">Control</a> ]&nbsp;`, thisFont);
+  onclick(thisFont, (e) => {
+    if (e.target.tagName === 'A') sendEvent('guildManage', 'relic control');
+  });
 }
 
 function selfRecallLink(leftHandSideColumnTable) {
@@ -31,8 +37,11 @@ function selfRecallLink(leftHandSideColumnTable) {
   const selfRecall = getLi[getLi.length - 1].parentNode;
   insertHtmlBeforeEnd(
     selfRecall,
-    `<li><a href="${recallUserUrl}${playerName()}" data-tooltip="Self Recall">Self Recall</a></li>`,
+    `<li><a href="${recallUserUrl}${playerName()}">Self Recall</a></li>`,
   );
+  onclick(selfRecall, (e) => {
+    if (getText(e.target) === 'Self Recall') sendEvent('guildManage', 'Self Recall');
+  });
 }
 
 function getLhsColTab() {

@@ -16,8 +16,8 @@ let headerIndex = 0;
 
 function hideRow(el) { hideElement(el.row); }
 
-function collapseArt(article) {
-  sendEvent('collapse', 'collapseArt');
+function collapseArt(prefName, article) {
+  sendEvent('collapse', 'collapseArt', prefName);
   article.rows.forEach(hideRow);
   // eslint-disable-next-line no-param-reassign
   article.open = false; // skipcq: JS-0083
@@ -29,8 +29,8 @@ function collapseAll() { warehouse.forEach(needsCollapse); }
 
 function show(el) { toggleForce(el.row, false); }
 
-function expandArt(article) {
-  sendEvent('collapse', 'expandArt');
+function expandArt(prefName, article) {
+  sendEvent('collapse', 'expandArt', prefName);
   article.rows.forEach(show);
   // eslint-disable-next-line no-param-reassign
   article.open = true; // skipcq: JS-0083
@@ -50,20 +50,20 @@ function closestTr(el) {
   return closestTr(el.parentNode);
 }
 
-function evtEnabled(evt) {
+function evtEnabled(prefName, evt) {
   const myRow = closestTr(evt.target);
   if (!myRow) { return; }
   const articleNo = myRow.rowIndex / headerIndex;
   const article = warehouse[articleNo];
   if (article.open === false) {
     collapseAll();
-    expandArt(article);
+    expandArt(prefName, article);
   } else {
-    collapseArt(article);
+    collapseArt(prefName, article);
   }
 }
 
-function evtHdl(evt) { if (prefValue) { evtEnabled(evt); } }
+function evtHdl(prefName, evt) { if (prefValue) { evtEnabled(prefName, evt); } }
 
 function makeHeaderClickable(row) {
   if (prefValue) { row.classList.add('fshPoint'); }
@@ -131,5 +131,5 @@ export default function collapse(param) {
   headerIndex = param.headInd;
   setupPref(param.prefName);
   arrayFrom(param.theTable.rows).forEach(partial(doTagging, param));
-  onclick(param.theTable, evtHdl);
+  onclick(param.theTable, partial(evtHdl, param.prefName));
 }

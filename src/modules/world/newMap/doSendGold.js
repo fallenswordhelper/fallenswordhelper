@@ -1,4 +1,5 @@
 import indexAjaxDoc from '../../ajax/indexAjaxDoc';
+import sendEvent from '../../analytics/sendEvent';
 import infoBox from '../../common/infoBox';
 import { defFetchPlayerStats } from '../../support/constants';
 import getValue from '../../system/getValue';
@@ -18,6 +19,7 @@ function doneSendGold(doc) {
 
 export default async function doSendGold() { // jQuery
   if (!getSendGoldOnWorld()) return;
+  sendEvent('NewMap', 'doSendGold');
   const doc = await indexAjaxDoc({
     cmd: 'trade',
     subcmd: 'sendgold',

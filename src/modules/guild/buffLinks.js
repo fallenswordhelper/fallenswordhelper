@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import batch from '../common/batch';
 import getPlayerId from '../common/getPlayerId';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
@@ -13,6 +14,7 @@ function insertBuffLink(el) {
 
 function openQuickBuff(evt) {
   if (evt.target.className !== 'smallLink') { return; }
+  sendEvent('guild', 'buffLinks');
   openQuickBuffById(getPlayerId(evt.target.previousElementSibling.href));
 }
 

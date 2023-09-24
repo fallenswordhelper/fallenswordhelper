@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import alpha from '../common/alpha';
 import createDiv from '../common/cElement/createDiv';
 import entries from '../common/entries';
@@ -56,6 +57,7 @@ function getGains(report) {
 }
 
 function multiScav() {
+  sendEvent('scavenging', 'multiScav');
   let ret = '';
   const scavRes = getElementById('scavenge_results');
   if (scavRes) {

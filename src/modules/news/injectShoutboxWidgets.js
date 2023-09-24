@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import getElementById from '../common/getElementById';
 import on from '../common/on';
 import partial from '../common/partial';
@@ -7,6 +8,7 @@ let textArea;
 let shoutboxPreview;
 
 function updateShoutboxPreview(maxcharacters) {
+  sendEvent('Shoutbox Preview', maxcharacters === 150 ? 'shoutbox' : 'fsbox');
   let textContent = textArea.value;
   let chars = textContent.length;
   if (chars > maxcharacters) {

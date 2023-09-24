@@ -1,5 +1,6 @@
 import dialog from '../ajax/dialog';
 import retryAjax from '../ajax/retryAjax';
+import sendEvent from '../analytics/sendEvent';
 import clickThis from '../common/clickThis';
 import closestTable from '../common/closestTable';
 import getArrayByTagName from '../common/getArrayByTagName';
@@ -39,6 +40,7 @@ async function guildMailboxEvent(e) {
   const { target } = e;
   if (target.tagName === 'IMG') {
     e.preventDefault();
+    sendEvent('guildMailbox', 'Take Item');
     const anchor = target.parentNode.href;
     const data = await guildMailboxTake(anchor);
     takeResult(target, data);

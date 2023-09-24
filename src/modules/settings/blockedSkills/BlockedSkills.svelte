@@ -1,4 +1,5 @@
 <script>
+  import sendEvent from '../../analytics/sendEvent';
   import getValueJSON from '../../system/getValueJSON';
   import setValueJSON from '../../system/setValueJSON';
   import {
@@ -60,12 +61,14 @@
       return;
     }
 
+    sendEvent('settingsBlockedSkills', 'applyList');
     clearCheckedSkills();
     skillList.skills.forEach(checkSkill);
     submitChanges();
   }
 
   function deleteList() {
+    sendEvent('settingsBlockedSkills', 'deleteList');
     clearMessages();
     blockedSkillLists = blockedSkillLists.filter((l) => l.name !== listName);
     storeBlockedSkillsLists();
@@ -85,6 +88,7 @@
       return;
     }
 
+    sendEvent('settingsBlockedSkills', 'createList');
     blockedSkillLists = [...blockedSkillLists, newList];
     listName = newList.name;
     newListName = '';
@@ -108,6 +112,7 @@
       return;
     }
 
+    sendEvent('settingsBlockedSkills', 'updateList');
     const index = blockedSkillLists.findIndex((l) => l.name === listName);
     blockedSkillLists[index] = skillList;
     storeBlockedSkillsLists();

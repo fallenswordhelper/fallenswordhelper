@@ -1,3 +1,4 @@
+import sendEvent from '../../analytics/sendEvent';
 import isNull from '../../common/isNull';
 import on from '../../common/on';
 import getValue from '../../system/getValue';
@@ -25,6 +26,7 @@ function getEnterForSendMessage() {
 
 function keypress(evt) {
   if (evt.key === 'Enter' && !evt.shiftKey) {
+    sendEvent('messaging', 'sendOnEnter');
     evt.preventDefault();
     getSendMessage()();
   }

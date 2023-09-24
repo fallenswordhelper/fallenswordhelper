@@ -1,5 +1,8 @@
+import sendEvent from '../../analytics/sendEvent';
 import all from '../../common/all';
+import getText from '../../common/getText';
 import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
+import onclick from '../../common/onclick';
 import querySelectorArray from '../../common/querySelectorArray';
 import { attackplayerUrl } from '../../support/constants';
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
@@ -12,6 +15,10 @@ const pmClass = (privMsg) => (privMsg ? ' class="pmAttackUrl"' : '');
 function addAttack(privMsg, [t, playerName]) {
   insertHtmlAfterEnd(t, ` | <a${pmClass(privMsg)} href="${
     attackplayerUrl}${playerName}">Attack</a>`);
+  if (privMsg) return;
+  onclick(t.parentNode, (e) => {
+    if (getText(e.target) === 'Attack') sendEvent('playerLogWidgets', 'Attack');
+  });
 }
 
 export default async function addAttackLink(logTable, privMsg) {

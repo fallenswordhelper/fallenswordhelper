@@ -1,4 +1,6 @@
+import sendEvent from '../../analytics/sendEvent';
 import { end, start } from '../../analytics/timing';
+import closestTable from '../../common/closestTable';
 import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
 import dateUtc from '../../common/dateUtc';
@@ -7,9 +9,11 @@ import getArrayByClassName from '../../common/getArrayByClassName';
 import getText from '../../common/getText';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
+import onclick from '../../common/onclick';
 import onlineDot from '../../common/onlineDot';
 import partial from '../../common/partial';
 import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
+import querySelector from '../../common/querySelector';
 import regExpExec from '../../common/regExpExec';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { months, playerIdUrl } from '../../support/constants';
@@ -79,10 +83,16 @@ function doGroupRow(membrlist, row) {
   groupLocalTime(row);
 }
 
+function clickHdl(e) {
+  if (e.target.tagName === 'A') sendEvent('groups', 'member click');
+  if (e.target.tagName === 'B') sendEvent('groups', 'leader click');
+}
+
 export default function doGroupPaint(membrlist) {
   start('JS Perf', 'doGroupPaint');
   getArrayByClassName('group-action-container')
     .map((c) => closestTr(c))
     .forEach(partial(doGroupRow, membrlist));
+  onclick(closestTable(querySelector('.group-action-container')), clickHdl);
   end('JS Perf', 'doGroupPaint');
 }

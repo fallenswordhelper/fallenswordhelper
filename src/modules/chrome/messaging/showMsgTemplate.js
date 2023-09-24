@@ -1,3 +1,4 @@
+import sendEvent from '../../analytics/sendEvent';
 import classHandler from '../../common/classHandler';
 import getText from '../../common/getText';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
@@ -49,11 +50,13 @@ function addTemplateRow(index, text) {
 }
 
 function insertTemplate(target) {
+  sendEvent('messaging', 'insertTemplate');
   getMsg().value += `${getText(target)
     .replace(/\{playername\}/g, getName())}`;
 }
 
 function deleteTemplate(target) {
+  sendEvent('messaging', 'deleteTemplate');
   const myRow = target.parentNode.parentNode.rowIndex;
   msgTbl.deleteRow(myRow);
   fshTemplate.splice(myRow - 2, 1);
@@ -61,6 +64,7 @@ function deleteTemplate(target) {
 }
 
 function addNewTemplate(target) {
+  sendEvent('messaging', 'addNewTemplate');
   const templateInput = target.parentNode.nextElementSibling.children[0];
   const templateValue = templateInput.value;
   if (templateValue !== '') {

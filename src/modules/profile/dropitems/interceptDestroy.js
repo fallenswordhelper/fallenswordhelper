@@ -54,11 +54,13 @@ function initDestroyPrompt() {
 }
 
 function handleAjaxifyPref() {
+  sendEvent('dropitems', 'handleAjaxifyPref');
   ajaxifyDestroy = !ajaxifyDestroy;
   setValue(prefAjaxifyDestroy, ajaxifyDestroy);
 }
 
 function handleDestroyPref() {
+  sendEvent('dropitems', 'handleDestroyPref');
   disableDestroyPrompts = !disableDestroyPrompts;
   setValue(prefDisableDestroyPrompts, disableDestroyPrompts);
   setDestroyPrompt();

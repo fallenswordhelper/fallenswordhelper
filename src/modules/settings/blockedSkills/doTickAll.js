@@ -1,3 +1,4 @@
+import sendEvent from '../../analytics/sendEvent';
 import './tickAll.css';
 import createButton from '../../common/cElement/createButton';
 import getElementById from '../../common/getElementById';
@@ -11,6 +12,7 @@ import { blockedSkillsCheckboxes } from '../../support/constants';
 const tickAllBuffs = 'Tick all buffs';
 
 function toggleTickAllBuffs(e) {
+  sendEvent('settingsBlockedSkills', 'doTickAll');
   const tckTxt = getText(e.target) === tickAllBuffs;
   querySelectorAll(blockedSkillsCheckboxes).forEach((ctx) => { ctx.checked = tckTxt; });
   if (tckTxt) setText('Untick all buffs', e.target);

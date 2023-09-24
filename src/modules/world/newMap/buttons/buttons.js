@@ -1,4 +1,5 @@
 import './buttons.css';
+import sendEvent from '../../../analytics/sendEvent';
 import createButton from '../../../common/cElement/createButton';
 import createDiv from '../../../common/cElement/createDiv';
 import textSpan from '../../../common/cElement/textSpan';
@@ -36,19 +37,23 @@ let soundCheck = 0;
 let huntCheck = 0;
 
 function doFormGroup(target) {
+  sendEvent('NewMap', 'doFormGroup');
   hideQTip(target);
   GameData.doAction(12, 401, {}, 0);
 }
 
 function openQuickBuff() {
+  sendEvent('NewMap', 'openQuickBuff');
   openQuickBuffById(playerId());
 }
 
 function openRealmMap() {
+  sendEvent('NewMap', 'openRealmMap');
   window.open(`${worldUrl + defSubcmd}map`, 'fsMap');
 }
 
 function openUfsgMap() {
+  sendEvent('NewMap', 'openUfsgMap');
   const gameRealm = GameData.realm();
   window.open(
     `${guideUrl}realms${defSubcmd}view&realm_id=${gameRealm.id}`,
@@ -57,11 +62,13 @@ function openUfsgMap() {
 }
 
 function toggleSound() {
+  sendEvent('NewMap', 'toggleSound');
   // Doesn't actually work in New World...
   setValue('playNewMessageSound', !getValue('playNewMessageSound'));
 }
 
 function toggleHuntMode() {
+  sendEvent('NewMap', 'toggleHuntMode');
   calf.huntingMode = !calf.huntingMode;
   setValue('huntingMode', calf.huntingMode);
 }

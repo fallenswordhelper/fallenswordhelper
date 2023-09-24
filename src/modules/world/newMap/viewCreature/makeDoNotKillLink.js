@@ -1,3 +1,4 @@
+import sendEvent from '../../../analytics/sendEvent';
 import createButton from '../../../common/cElement/createButton';
 import createDiv from '../../../common/cElement/createDiv';
 import getElementsByClassName from '../../../common/getElementsByClassName';
@@ -35,6 +36,7 @@ function updateText() {
 }
 
 function addRemoveCreature() {
+  sendEvent('NewMap', 'doNotKillLink');
   const index = calf.doNotKillList.indexOf(dnkName);
   if (index === -1) {
     calf.doNotKillList.push(dnkName);

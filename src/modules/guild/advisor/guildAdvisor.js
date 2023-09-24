@@ -1,16 +1,18 @@
 import getMembrList from '../../ajax/getMembrList';
+import sendEvent from '../../analytics/sendEvent';
 import { end, start } from '../../analytics/timing';
 import arrayFrom from '../../common/arrayFrom';
+import createAnchor from '../../common/cElement/createAnchor';
 import createTFoot from '../../common/cElement/createTFoot';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import getText from '../../common/getText';
 import getTextTrim from '../../common/getTextTrim';
 import insertElement from '../../common/insertElement';
-import insertHtmlAfterEnd from '../../common/insertHtmlAfterEnd';
 import interceptSubmit from '../../common/interceptSubmit';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import loadDataTables from '../../common/loadDataTables';
+import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
 import calf from '../../support/calf';
@@ -56,9 +58,16 @@ function getData(list, membrList) {
 
 function summaryLink() {
   const updateInput = getElementsByClassName('custombutton', pcc());
-  if (updateInput.length === 0) { return; }
-  insertHtmlAfterEnd(updateInput[0], `<span> <a href="${cmdUrl
-  }guild&subcmd=advisor&subcmd2=weekly">7-Day Summary</a></span>`);
+  if (!updateInput.length) return;
+  const td = updateInput[0].parentNode;
+  td.classList.add('fshRelative');
+  const anchor = createAnchor({
+    className: 'summary-link',
+    href: `${cmdUrl}guild&subcmd=advisor&subcmd2=weekly`,
+    textContent: '7-Day Summary',
+  });
+  onclick(anchor, () => sendEvent('advisor', 'summary'));
+  insertElement(td, anchor);
 }
 
 function injectAdvisorDaily(list, membrList) {

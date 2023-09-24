@@ -1,5 +1,6 @@
 import './activeWantedBounties.css';
 import bountyPage from '../../ajax/bountyPage';
+import sendEvent from '../../analytics/sendEvent';
 import functionPasses from '../../common/functionPasses';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
@@ -51,10 +52,12 @@ async function retrieveBountyInfo(enableActiveList, enableWantedList) {
 
 function resetList(e) {
   if (e.target === getBountyListReset()) {
+    sendEvent('activeWantedBounties', 'getBountyListReset');
     setValueJSON('bountyList', null);
     retrieveBountyInfo(calf.enableActiveBountyList, calf.enableWantedList);
   }
   if (e.target === getWantedListReset()) {
+    sendEvent('activeWantedBounties', 'getWantedListReset');
     setValueJSON('wantedList', null);
     retrieveBountyInfo(calf.enableActiveBountyList, calf.enableWantedList);
   }

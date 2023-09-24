@@ -1,4 +1,5 @@
 import getProfile from '../ajax/getProfile';
+import sendEvent from '../analytics/sendEvent';
 import createSpan from '../common/cElement/createSpan';
 import csvSplit from '../common/csvSplit';
 import getText from '../common/getText';
@@ -64,6 +65,7 @@ function makeBuffArray(player) {
 export default async function addBuffLevels(evt) {
   const player = evt.target;
   if (player.tagName !== 'H1') { return; }
+  sendEvent('quickbuff', 'addBuffLevels');
   const data = getProfile(getText(player));
   const playerData = makeBuffArray(player);
   querySelectorArray('#buff-outer input[name]')

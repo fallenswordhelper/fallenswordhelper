@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import awaitWidget from '../common/awaitWidget';
 import getArrayByClassName from '../common/getArrayByClassName';
 import getElementById from '../common/getElementById';
@@ -54,6 +55,7 @@ function loadSettings() {
 }
 
 function paintSettings() {
+  sendEvent('settingsPage', 'paintSettings');
   injectHtml();
   doVersion();
   doStorage();

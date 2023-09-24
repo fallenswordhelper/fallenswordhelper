@@ -1,12 +1,14 @@
 <script>
   import daBazaarBuy from '../_dataAccess/daBazaarBuy';
   import dynamicAlert from '../alert/dynamicAlert';
+  import sendEvent from '../analytics/sendEvent';
   import addCommas from '../system/addCommas';
   import { cdn } from '../system/system';
 
   export let potions = [];
 
   async function buyButton(potion) {
+    sendEvent('bazaar', 'buyButton');
     // eslint-disable-next-line no-param-reassign
     potion.promise = daBazaarBuy(potion.id, potion.count);
     const response = await potion.promise;

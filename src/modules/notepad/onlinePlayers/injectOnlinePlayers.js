@@ -1,4 +1,6 @@
+import './onlinePlayers.css';
 import onlinePlayersPage from '../../ajax/onlinePlayersPage';
+import sendEvent from '../../analytics/sendEvent';
 import all from '../../common/all';
 import idHandler from '../../common/idHandler';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
@@ -92,6 +94,7 @@ function getOnlinePlayers(data) { // Bad jQuery
 }
 
 async function refreshEvt() { // Bad jQuery
+  sendEvent('OnlinePlayers', 'refreshEvt');
   $('#fshRefresh', context).hide();
   onlinePages = 0;
   onlinePlayers = {};

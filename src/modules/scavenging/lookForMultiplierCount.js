@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import createSpan from '../common/cElement/createSpan';
 import closestTable from '../common/closestTable';
 import getElementById from '../common/getElementById';
@@ -27,6 +28,7 @@ function updateMaxTimes(maxTimes, statbarGold, scoutGold) {
 }
 
 function redrawMaxTimes(maxTimes, statbarGold, gold) {
+  sendEvent('scavenging', 'redrawMaxTimes');
   setInnerHtml('', maxTimes);
   const scoutGold = Number(gold.value);
   if (!numberIsNaN(scoutGold) && scoutGold !== 0) {

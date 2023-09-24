@@ -1,3 +1,4 @@
+import sendEvent from './analytics/sendEvent';
 import createDiv from './common/cElement/createDiv';
 import getElementById from './common/getElementById';
 import insertElement from './common/insertElement';
@@ -45,6 +46,7 @@ function clearWarning() {
 }
 
 function addMarketplaceWarning() {
+  sendEvent('marketplace', 'addMarketplaceWarning');
   const price = getPrice();
   if (price) {
     const sellPrice = price.value;

@@ -1,5 +1,6 @@
 import './mailbox.css';
 import daMailboxTake from '../_dataAccess/daMailboxTake';
+import sendEvent from '../analytics/sendEvent';
 import createDiv from '../common/cElement/createDiv';
 import createInput from '../common/cElement/createInput';
 import createLabel from '../common/cElement/createLabel';
@@ -114,7 +115,8 @@ async function doTakeItem(takeResult, el) {
   doneTake(takeResult, json);
 }
 
-function takeSimilar(itemList, takeResult, target) { // jQuery.min
+function takeSimilar(itemList, takeResult, target) {
+  sendEvent('mailbox', 'takeSimilar');
   const type = target.dataset.id;
   const { invIds } = itemList[type];
   setInnerHtml(`taking all ${invIds.length} items`, target.parentNode);
@@ -144,6 +146,7 @@ function makeQtDiv(itemList) {
 }
 
 function toggleQuickTake(items, injector) {
+  sendEvent('mailbox', 'toggleQuickTake');
   makeQtLabel('qtOn', 'Mailbox', injector);
   const itemList = items.reduce(reduceItems, {});
   makeQtDiv(itemList);

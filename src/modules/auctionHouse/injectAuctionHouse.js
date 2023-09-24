@@ -1,4 +1,5 @@
 import indexAjaxData from '../ajax/indexAjaxData';
+import sendEvent from '../analytics/sendEvent';
 import all from '../common/all';
 import createSpan from '../common/cElement/createSpan';
 import clickThis from '../common/clickThis';
@@ -32,6 +33,7 @@ function doCancel(ctx) {
 }
 
 async function cancelAllAH() {
+  sendEvent('AH', 'cancelAllAH');
   const cancelButtons = getArrayByClassName('auctionCancel', getElementById('resultRows'));
   if (cancelButtons.length === 0) { return; }
   await all(cancelButtons.map(doCancel));

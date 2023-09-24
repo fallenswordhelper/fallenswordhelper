@@ -1,4 +1,5 @@
 import './addChatTextArea.css';
+import sendEvent from '../analytics/sendEvent';
 import arrayFrom from '../common/arrayFrom';
 import createTextArea from '../common/cElement/createTextArea';
 import clickThis from '../common/clickThis';
@@ -12,6 +13,7 @@ import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 
 function removeCrlf(fshTxt) {
+  sendEvent('guildChat', 'removeCrlf');
   // eslint-disable-next-line no-param-reassign
   fshTxt.value = fshTxt.value
     .replace(/\r\n|\n|\r/g, ' ')
@@ -40,6 +42,7 @@ function rearrangeTable(elements) {
 function keypress(sendBtn, evt) {
   if (evt.key === 'Enter' && !evt.shiftKey) {
     evt.preventDefault();
+    sendEvent('guildChat', 'Enter sends message');
     clickThis(sendBtn);
   }
 }

@@ -1,3 +1,4 @@
+import sendEvent from '../../analytics/sendEvent';
 import all from '../../common/all';
 import createTable from '../../common/cElement/createTable';
 import eventHandler5 from '../../common/eventHandler5';
@@ -197,6 +198,7 @@ function toggle(item, hide, r) {
 }
 
 function toggleItem(target) {
+  sendEvent('newGuildLog', 'toggleItem');
   const item = Number(target.getAttribute('item'));
   options.checks[item] = !options.checks[item];
   storeOptions();
@@ -213,6 +215,7 @@ function show(r) {
 }
 
 function selectAll() {
+  sendEvent('newGuildLog', 'selectAll');
   options.checks = defChecks.slice(0);
   setChecks();
   tmpGuildLog.forEach(show);
@@ -224,12 +227,14 @@ function doHide(r) {
 }
 
 function selectNone() {
+  sendEvent('newGuildLog', 'selectNone');
   options.checks = noChecks.slice(0);
   setChecks();
   tmpGuildLog.forEach(doHide);
 }
 
 async function refresh() {
+  sendEvent('newGuildLog', 'refresh');
   options.log = false;
   storeOptions();
   setText('Loading Page 1 ...', fshOutput);

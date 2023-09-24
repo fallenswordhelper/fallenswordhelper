@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import createInput from '../common/cElement/createInput';
 import getText from '../common/getText';
 import insertElementAfter from '../common/insertElementAfter';
@@ -7,7 +8,6 @@ import insertHtmlBeforeBegin from '../common/insertHtmlBeforeBegin';
 import interceptSubmit from '../common/interceptSubmit';
 import navigateTo from '../common/navigateTo';
 import onclick from '../common/onclick';
-import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import { arenaUrl } from '../support/constants';
 
@@ -15,8 +15,10 @@ function gotoPage(pageId) {
   navigateTo(`${arenaUrl}completed&page=${pageId}`);
 }
 
-const lastPage = () => getText(querySelector('#pCC input[value="Go"]')
-  .parentNode.previousElementSibling).replace(/\D/g, '');
+function gotoFirstPage() {
+  sendEvent('arena completed', 'gotoFirstPage');
+  gotoPage(1);
+}
 
 function injectStartButton() {
   const prevButton = querySelector('#pCC input[value="<"]');
@@ -24,11 +26,17 @@ function injectStartButton() {
     const startButton = createInput({ type: 'button', value: '<<' });
     insertElementBefore(startButton, prevButton);
     insertHtmlAfterEnd(startButton, '&nbsp;');
-    onclick(startButton, partial(gotoPage, 1));
+    onclick(startButton, gotoFirstPage);
   }
 }
 
-function gotoLastPage() { gotoPage(lastPage()); }
+const lastPage = () => getText(querySelector('#pCC input[value="Go"]')
+  .parentNode.previousElementSibling).replace(/\D/g, '');
+
+function gotoLastPage() {
+  sendEvent('arena completed', 'gotoLastPage');
+  gotoPage(lastPage());
+}
 
 function injectFinishButton() {
   const nextButton = querySelector('#pCC input[value=">"]');

@@ -2,6 +2,24 @@
   color: #333;
   width: 100%;
 }
+
 .fshInvFilter th {
   background-color: #cd9e4b;
+}
+
+.text-input-wrapper {
+  border: 1px solid;
+  padding: 1px 6px 1px 1px;
+  display: inline-block;
+  background: white;
+}
+
+.text-input-wrapper input {
+  border: none;
+}
+
+.text-input-wrapper span {
+  cursor: pointer;
+  color: blue;
+  font-weight: bold;
 }

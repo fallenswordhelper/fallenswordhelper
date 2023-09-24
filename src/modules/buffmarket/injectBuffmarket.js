@@ -1,6 +1,7 @@
 import './buffmarket.css';
 import daBuffMarketBuy from '../_dataAccess/daBuffMarketBuy';
 import indexAjaxDoc from '../ajax/indexAjaxDoc';
+import sendEvent from '../analytics/sendEvent';
 import fromEntries from '../common/fromEntries';
 import on from '../common/on';
 import onclick from '../common/onclick';
@@ -11,6 +12,7 @@ import setInnerHtml from '../dom/setInnerHtml';
 import { pcc } from '../support/layout';
 
 async function search(injector, e) {
+  sendEvent('buffmarket', 'search');
   e.preventDefault();
   setInnerHtml('<div class="fshWaiting">Loading...</div>', injector);
   const data = fromEntries(new FormData(e.target));
@@ -27,6 +29,7 @@ function injectSearch(buffResults) {
 }
 
 async function interceptBuy(e) {
+  sendEvent('buffmarket', 'interceptBuy');
   e.stopPropagation();
   const packageId = regExpFirstCapture(/id=(?<id>\d+)/, e.target.getAttribute('onclick'));
   if (packageId) {
