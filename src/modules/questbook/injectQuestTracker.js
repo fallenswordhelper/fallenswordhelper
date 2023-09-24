@@ -15,11 +15,15 @@ function updateBackHref() {
   }
 }
 
+const getQuestName = (injectHere) => getText(getElementsByTagName('font', injectHere)[1])
+  .replace(/"/g, '');
+
 function injectGuideButtons() {
   const injectHere = getElementsByTagName('td', pcc())[0];
-  const questName = getText(getElementsByTagName('font', injectHere)[1])
-    .replace(/"/g, '');
-  insertHtmlBeforeEnd(injectHere, guideButtons(getUrlParameter('quest_id'), questName));
+  insertHtmlBeforeEnd(injectHere, guideButtons(
+    getUrlParameter('quest_id'),
+    getQuestName(injectHere),
+  ));
   onclick(injectHere, questEvent('Quest Tracker'));
 }
 

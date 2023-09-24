@@ -60,9 +60,12 @@ function anchorHdl(e) {
   else onlinePlayersEvent('player click');
 }
 
-function chromeHandlers() { // jQuery
+function tableHandlers() {
   $('#fshInv').on('click', 'a', anchorHdl);
   $('#fshInv').on('click', '.sorting', onlinePlayersEventHdl('sorting'));
+}
+
+function chromeHandlers() { // jQuery
   $('#fshInv_length select').on('change', onlinePlayersEventHdl('dataTables_length'));
   $('#fshInv_filter input').on('keyup', onlinePlayersEventHdl('dataTables_filter'));
   // something is preventing jQuery bubbling
@@ -74,6 +77,7 @@ function chromeHandlers() { // jQuery
 export function doTable(context, onlineData) {
   highlightPlayersNearMyLvl = getValue('highlightPlayersNearMyLvl');
   table = $('#fshInv', context).DataTable(tableOpts(onlineData));
+  tableHandlers();
   chromeHandlers();
 }
 
