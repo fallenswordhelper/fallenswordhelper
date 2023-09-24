@@ -43,7 +43,7 @@ const impStyles = [
 ];
 
 function getImpWarningStyle(impsRem) {
-  return impStyles[impsRem] || 'fshGreen';
+  return impStyles[impsRem] ?? 'fshGreen';
 }
 
 function initImpDiv(containerDiv) {
