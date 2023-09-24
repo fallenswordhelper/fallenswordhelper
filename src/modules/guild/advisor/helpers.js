@@ -75,7 +75,6 @@ function doSwitch(targetElement, div, tbl) {
 }
 
 function switcheroo(targetElement, div, tbl) {
-  // task(3, partial(replaceChild, div, targetElement));
   task(3, doSwitch, [targetElement, div, tbl]);
 }
 
