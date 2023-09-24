@@ -23,9 +23,9 @@ function collapseArt(prefName, article) {
   article.open = false; // skipcq: JS-0083
 }
 
-function needsCollapse(article) { if (article.open) { collapseArt(article); } }
-
-function collapseAll() { warehouse.forEach(needsCollapse); }
+function collapseAll(prefName) {
+  warehouse.forEach((article) => { if (article.open) { collapseArt(prefName, article); } });
+}
 
 function show(el) { toggleForce(el.row, false); }
 
@@ -36,9 +36,9 @@ function expandArt(prefName, article) {
   article.open = true; // skipcq: JS-0083
 }
 
-function needsExpand(article) { if (!article.open) { expandArt(article); } }
-
-function expandAll() { warehouse.forEach(needsExpand); }
+function expandAll(prefName) {
+  warehouse.forEach((article) => { if (!article.open) { expandArt(prefName, article); } });
+}
 
 function isHeader(el) { if (el.rowIndex % headerIndex === 0) { return el; } }
 
@@ -56,7 +56,7 @@ function evtEnabled(prefName, evt) {
   const articleNo = myRow.rowIndex / headerIndex;
   const article = warehouse[articleNo];
   if (article.open === false) {
-    collapseAll();
+    collapseAll(prefName);
     expandArt(prefName, article);
   } else {
     collapseArt(prefName, article);
@@ -117,7 +117,7 @@ function togglePref(prefName) {
   sendEvent('collapse', 'togglePref', prefName);
   prefValue = !prefValue;
   setValue(prefName, prefValue);
-  if (prefValue) { collapseAll(); } else { expandAll(); }
+  if (prefValue) collapseAll(prefName); else expandAll(prefName);
   toggleHeaderClass();
 }
 
