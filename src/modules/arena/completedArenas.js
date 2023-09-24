@@ -23,10 +23,7 @@ function gotoFirstPage() {
 const getTarget = (inputValue) => querySelector(`#pCC input[value="${inputValue}"]`);
 const newButton = (newValue) => createInput({ type: 'button', value: newValue });
 
-function injectStartButton() {
-  const prevButton = getTarget('<');
-  if (!prevButton) return;
-  const startButton = newButton('<<');
+function injectStartButton(startButton, prevButton) {
   insertElementBefore(startButton, prevButton);
   insertHtmlAfterEnd(startButton, '&nbsp;');
   onclick(startButton, gotoFirstPage);
@@ -40,17 +37,21 @@ function gotoLastPage() {
   gotoPage(lastPage());
 }
 
-function injectFinishButton() {
-  const nextButton = getTarget('>');
-  if (!nextButton) return;
-  const finishButton = newButton('>>');
+function injectFinishButton(finishButton, nextButton) {
   insertElementAfter(finishButton, nextButton);
   insertHtmlBeforeBegin(finishButton, '&nbsp;');
   onclick(finishButton, gotoLastPage);
 }
 
+function genericButton(inputValue, newValue, callback) {
+  const targetButton = getTarget(inputValue);
+  if (!targetButton) return;
+  const extraButton = newButton(newValue);
+  callback(extraButton, targetButton);
+}
+
 export default function completedArenas() {
-  injectStartButton();
-  injectFinishButton();
+  genericButton('<', '<<', injectStartButton);
+  genericButton('>', '>>', injectFinishButton);
   interceptSubmit();
 }
