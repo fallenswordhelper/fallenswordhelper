@@ -39,28 +39,26 @@ function needsRefresh() {
   return refreshConditions.some(functionPasses);
 }
 
-async function retrieveBountyInfo(enableActiveList, enableWantedList) {
-  invalidateCache(enableActiveList, enableWantedList);
+async function retrieveBountyInfo() {
+  invalidateCache(calf.enableActiveBountyList, calf.enableWantedList);
   if (needsRefresh()) {
     doRefresh();
     const page = await bountyPage(1);
     parseBountyPageForWorld(page);
   } else {
-    notRefreshed(enableActiveList, enableWantedList);
+    notRefreshed(calf.enableActiveBountyList, calf.enableWantedList);
   }
 }
 
+function doReset(eventAction, listName) {
+  sendEvent('activeWantedBounties', eventAction);
+  setValueJSON(listName, null);
+  retrieveBountyInfo();
+}
+
 function resetList(e) {
-  if (e.target === getBountyListReset()) {
-    sendEvent('activeWantedBounties', 'getBountyListReset');
-    setValueJSON('bountyList', null);
-    retrieveBountyInfo(calf.enableActiveBountyList, calf.enableWantedList);
-  }
-  if (e.target === getWantedListReset()) {
-    sendEvent('activeWantedBounties', 'getWantedListReset');
-    setValueJSON('wantedList', null);
-    retrieveBountyInfo(calf.enableActiveBountyList, calf.enableWantedList);
-  }
+  if (e.target === getBountyListReset()) doReset('getBountyListReset', 'bountyList');
+  if (e.target === getWantedListReset()) doReset('getWantedListReset', 'wantedList');
 }
 
 function doHandlers() {
@@ -72,5 +70,5 @@ export default function activeWantedBounties() {
   if (jQueryNotPresent()) { return; }
   createDivs();
   doHandlers();
-  retrieveBountyInfo(calf.enableActiveBountyList, calf.enableWantedList);
+  retrieveBountyInfo();
 }

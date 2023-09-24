@@ -64,11 +64,8 @@ function parsePage(data) {
 function seenRowBefore(timestamp, myMsg) {
   return [
     () => currPage === 1,
-    () => options.log,
-    () => options.log[0],
-    () => options.log[0][0],
-    () => timestamp === options.log[0][0],
-    () => myMsg === options.log[0][2],
+    () => timestamp === options?.log?.[0]?.[0],
+    () => myMsg === options?.log?.[0]?.[2],
   ].every(functionPasses);
 }
 
@@ -214,11 +211,15 @@ function show(r) {
   removeHide(r[6]);
 }
 
-function selectAll() {
-  sendEvent('newGuildLog', 'selectAll');
-  options.checks = defChecks.slice(0);
+function selectSome(eventAction, sourceChecks, doFn) {
+  sendEvent('newGuildLog', eventAction);
+  options.checks = sourceChecks.slice(0);
   setChecks();
-  tmpGuildLog.forEach(show);
+  tmpGuildLog.forEach(doFn);
+}
+
+function selectAll() {
+  selectSome('selectAll', defChecks, show);
 }
 
 function doHide(r) {
@@ -227,10 +228,7 @@ function doHide(r) {
 }
 
 function selectNone() {
-  sendEvent('newGuildLog', 'selectNone');
-  options.checks = noChecks.slice(0);
-  setChecks();
-  tmpGuildLog.forEach(doHide);
+  selectSome('selectNone', noChecks, doHide);
 }
 
 async function refresh() {

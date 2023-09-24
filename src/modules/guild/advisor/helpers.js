@@ -2,12 +2,11 @@ import './advisor.css';
 import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
 import createTable from '../../common/cElement/createTable';
-import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
-import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import replaceChild from '../../common/replaceChild';
 import trim from '../../common/trim';
+import chromeHandlers from '../../notepad/inventory/eventHandlers/chromeHandlers';
 import task from '../../support/task';
 
 export const advisorColumns = [
@@ -60,18 +59,9 @@ function doTable(tbl, data, callback) { // jQuery
 const advisorEvent = (type) => sendEvent('advisor', type);
 const advisorEventHdl = (type) => () => { sendEvent('advisor', type); };
 
-function chromeHandlers(fshInv) { // jQuery
-  $(`#${fshInv.id}_length select`).on('change', advisorEventHdl('dataTables_length'));
-  $(`#${fshInv.id}_filter input`).on('keyup', advisorEventHdl('dataTables_filter'));
-  // something is preventing jQuery bubbling
-  onclick(getElementById(`${fshInv.id}_paginate`), (e) => {
-    if (e.target.classList.contains('paginate_button')) advisorEvent('paginate_button');
-  });
-}
-
 function doSwitch(targetElement, div, tbl) {
   replaceChild(div, targetElement);
-  chromeHandlers(tbl);
+  chromeHandlers(tbl, advisorEventHdl, advisorEvent);
 }
 
 function switcheroo(targetElement, div, tbl) {

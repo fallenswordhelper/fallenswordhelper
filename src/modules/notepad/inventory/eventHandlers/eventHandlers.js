@@ -1,9 +1,8 @@
 import moveItem from '../../../ajax/moveItem';
-import getElementById from '../../../common/getElementById';
-import onclick from '../../../common/onclick';
 import partial from '../../../common/partial';
 import allChecks from './allChecks';
 import changeLvls from './changeLvls';
+import chromeHandlers from './chromeHandlers';
 import clearChecks from './clearChecks';
 import getChecks from './getChecks';
 import resetChecks from './resetChecks';
@@ -49,18 +48,9 @@ function setupClickHandlers(fshInv) { // jQuery
   classClickHandlers(fshInv);
 }
 
-function chromeHandlers(fshInv) { // jQuery
-  $(`#${fshInv.id}_length select`).on('change', classClick('dataTables_length'));
-  $(`#${fshInv.id}_filter input`).on('keyup', classClick('dataTables_filter'));
-  // something is preventing jQuery bubbling
-  onclick(getElementById(`${fshInv.id}_paginate`), (e) => {
-    if (e.target.classList.contains('paginate_button')) invEvent('paginate_button');
-  });
-}
-
 export default function eventHandlers(fshInv) { // jQuery
   $('#fshMinLvl, #fshMaxLvl').on('keyup', partial(changeLvls, fshInv));
   $(fshInv).on('change', 'select.fshMoveItem', doMoveItem);
   setupClickHandlers(fshInv);
-  chromeHandlers(fshInv);
+  chromeHandlers(fshInv, classClick, invEvent);
 }

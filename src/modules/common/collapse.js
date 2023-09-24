@@ -14,13 +14,17 @@ const warehouse = [];
 let prefValue = 0;
 let headerIndex = 0;
 
+function showHideArt(article, rowFn, isOpen) {
+  article.rows.forEach(rowFn);
+  // eslint-disable-next-line no-param-reassign
+  article.open = isOpen; // skipcq: JS-0083
+}
+
 function hideRow(el) { hideElement(el.row); }
 
 function collapseArt(prefName, article) {
   sendEvent('collapse', 'collapseArt', prefName);
-  article.rows.forEach(hideRow);
-  // eslint-disable-next-line no-param-reassign
-  article.open = false; // skipcq: JS-0083
+  showHideArt(article, hideRow, false);
 }
 
 function collapseAll(prefName) {
@@ -31,9 +35,7 @@ function show(el) { toggleForce(el.row, false); }
 
 function expandArt(prefName, article) {
   sendEvent('collapse', 'expandArt', prefName);
-  article.rows.forEach(show);
-  // eslint-disable-next-line no-param-reassign
-  article.open = true; // skipcq: JS-0083
+  showHideArt(article, show, true);
 }
 
 function expandAll(prefName) {
