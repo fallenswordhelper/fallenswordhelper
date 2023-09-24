@@ -224,34 +224,9 @@
 .relicS td:nth-child(1), .relicS th:nth-child(1) {width: 116px;}
 .relicS td:nth-child(2), .relicS th:nth-child(2) {width: 48px;}
 
-/* Online Players */
-.fshImgCntr {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .lvlHighlight {background-color: #4671C8;}
-.lvlGvGHighlight {background-color: #FF9900;}
-
-#fshInv_filter input {width: 200px}
 
 .fshNumberInput {width: 4em;}
-
-.text-input-wrapper {
-  border: 1px solid;
-  padding: 1px 6px 1px 1px;
-  display: inline-block;
-  background: white;
-}
-.text-input-wrapper input {
-  border: none;
-}
-.text-input-wrapper span {
-  cursor: pointer;
-  color: blue;
-  font-weight: bold;
-}
 
 /* New World Shop Multi Buy */
 .fshClear {clear: both;}

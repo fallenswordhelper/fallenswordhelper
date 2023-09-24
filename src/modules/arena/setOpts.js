@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import changeMinMax from '../common/changeMinMax';
 import defaults from '../support/dataObj.json';
 import { set } from '../system/idb';
@@ -25,10 +26,12 @@ function redrawTable() {
 }
 
 export function changeLvls() { // jQuery
+  sendEvent('arena', 'changeLvls');
   changeMinMax(newOpts, redrawTable);
 }
 
 export function resetLvls() { // jQuery
+  sendEvent('arena', 'resetLvls');
   newOpts(defaults.arenaMinLvl, defaults.arenaMaxLvl);
   $('#fshMinLvl').val(opts.minLvl);
   $('#fshMaxLvl').val(opts.maxLvl);
@@ -36,6 +39,7 @@ export function resetLvls() { // jQuery
 }
 
 export function hideMoves(evt) { // jQuery
+  sendEvent('arena', 'hideMoves');
   opts = opts || {};
   opts.hideMoves = evt.target.checked;
   storeOpts();

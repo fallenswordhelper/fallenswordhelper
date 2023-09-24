@@ -60,7 +60,7 @@ function showChampAttack(toggle) {
 function tryAttack(creature) {
   const attack = getAttack(creature);
   if (attack) {
-    sendEvent('world', 'ChampionAttack');
+    sendEvent('NewMap', 'ChampionAttack');
     clickThis(attack);
   }
 }

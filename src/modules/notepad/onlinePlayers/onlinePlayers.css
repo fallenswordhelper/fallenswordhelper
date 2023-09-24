@@ -1,0 +1,7 @@
+.fshImgCntr {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#fshInv_filter input {width: 200px}

@@ -1,9 +1,11 @@
+import sendEvent from '../../analytics/sendEvent';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
 
 function setMaxVal() {
+  sendEvent('composingCreate', 'setMaxVal');
   getElementById('composing-skill-level-input').value = getText(getElementById('composing-skill-level-max'));
 }
 

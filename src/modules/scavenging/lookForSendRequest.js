@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import alpha from '../common/alpha';
 import createDiv from '../common/cElement/createDiv';
 import entries from '../common/entries';
@@ -31,7 +32,7 @@ function getSummaryByType(report, regex, label) {
 
 function makeHash(acc, curr) {
   const itemName = curr.split('>')[1].split('<')[0];
-  acc[itemName] = (acc[itemName] || 0) + 1;
+  acc[itemName] = (acc[itemName] ?? 0) + 1;
   return acc;
 }
 
@@ -56,6 +57,7 @@ function getGains(report) {
 }
 
 function multiScav() {
+  sendEvent('scavenging', 'multiScav');
   let ret = '';
   const scavRes = getElementById('scavenge_results');
   if (scavRes) {

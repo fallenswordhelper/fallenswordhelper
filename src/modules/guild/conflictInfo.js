@@ -1,5 +1,7 @@
 import conflicts from '../ajax/conflicts';
+import sendEvent from '../analytics/sendEvent';
 import dataRows from '../common/dataRows';
+import onclick from '../common/onclick';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
@@ -14,11 +16,15 @@ function buildRow(insertHere, html1, html2) {
   const newRow = insertHere.insertRow(insertHere.rows.length - 2);
   makeCell(newRow, html1);
   makeCell(newRow, html2);
+  return newRow;
 }
 
 function conflictHeader(insertHere) {
-  buildRow(insertHere, `<a href="${guildSubcmdUrl
-  }conflicts">Active Conflicts</a>`, 'Score');
+  const hRow = buildRow(insertHere, `<a href="${
+    guildSubcmdUrl}conflicts">Active Conflicts</a>`, 'Score');
+  onclick(hRow, (e) => {
+    if (e.target.tagName === 'A') sendEvent('guildManage', 'conflictHeader');
+  });
 }
 
 function conflictRow(insertHere, aRow) {

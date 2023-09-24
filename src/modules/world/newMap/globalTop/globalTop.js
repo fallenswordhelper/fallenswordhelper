@@ -1,4 +1,5 @@
 import daGlobalContrib from '../../../_dataAccess/daGlobalContrib';
+import sendEvent from '../../../analytics/sendEvent';
 import getElementById from '../../../common/getElementById';
 import onclick from '../../../common/onclick';
 import GlobalTop from './GlobalTop.svelte';
@@ -19,6 +20,7 @@ function startApp(target) {
 }
 
 function show() {
+  sendEvent('NewMap', 'GlobalTop');
   const worldEventContrib = getElementById('world-event-contrib');
   startApp(worldEventContrib);
   $(worldEventContrib).dialog({

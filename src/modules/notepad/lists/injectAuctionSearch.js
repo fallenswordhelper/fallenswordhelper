@@ -1,4 +1,5 @@
 import './lists.css';
+import sendEvent from '../../analytics/sendEvent';
 import eventHandler5 from '../../common/eventHandler5';
 import getElementById from '../../common/getElementById';
 import isArray from '../../common/isArray';
@@ -99,6 +100,7 @@ function generateManageTable() { // Legacy
 }
 
 function deleteQuickItem(target) { // Legacy
+  sendEvent('injectAuctionSearch', 'deleteQuickItem');
   const itemId = target.getAttribute('data-itemId');
   param.currentItems.splice(itemId, 1);
   generateManageTable();
@@ -115,6 +117,7 @@ function buildNewItem() { // Legacy
 }
 
 function addQuickItem() { // Legacy
+  sendEvent('injectAuctionSearch', 'addQuickItem');
   const isArrayOnly = param.fields.length === 0;
   const newItem = isArrayOnly ? getElementById('fshIn0').value : buildNewItem();
   param.currentItems.push(newItem);
@@ -122,6 +125,7 @@ function addQuickItem() { // Legacy
 }
 
 function saveRawEditor() { // Legacy
+  sendEvent('injectAuctionSearch', 'saveRawEditor');
   const userInput = jsonParse(getElementById('fshEd').value);
   if (isArray(userInput)) {
     param.currentItems = userInput;
@@ -130,6 +134,7 @@ function saveRawEditor() { // Legacy
 }
 
 function resetRawEditor() { // Legacy
+  sendEvent('injectAuctionSearch', 'resetRawEditor');
   if (param.id === 'fshAso') {
     param.currentItems = jsonParse(defaults.quickSearchList);
   } else { param.currentItems = []; }

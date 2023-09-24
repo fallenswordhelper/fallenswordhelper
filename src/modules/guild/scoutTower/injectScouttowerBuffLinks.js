@@ -1,3 +1,4 @@
+import sendEvent from '../../analytics/sendEvent';
 import arrayFrom from '../../common/arrayFrom';
 import containsText from '../../common/containsText';
 import dataRows from '../../common/dataRows';
@@ -9,6 +10,7 @@ import openQuickBuffById from '../../common/openQuickBuffById';
 
 function buffIndividual(target) {
   if (target.previousElementSibling) {
+    sendEvent('scout tower', 'buffIndividual');
     openQuickBuffById(getPlayerId(target.previousElementSibling.href));
   }
 }
@@ -18,6 +20,7 @@ const memberId = (el) => getPlayerId(el.cells[0].children[0].href);
 function buffAll(target) {
   const titanTable = target.parentNode.parentNode.parentNode.parentNode;
   const shortList = dataRows(titanTable, 3, 0).map(memberId).join();
+  sendEvent('scout tower', 'buffAll');
   openQuickBuffById(shortList);
 }
 

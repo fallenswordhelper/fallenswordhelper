@@ -1,3 +1,4 @@
+import sendEvent from '../../analytics/sendEvent';
 import getArrayByClassName from '../../common/getArrayByClassName';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
@@ -12,6 +13,7 @@ import setValue from '../../system/setValue';
 let hidePlayerActions = 0;
 
 export function toggleHidePlayerActions() {
+  sendEvent('NewMap', 'toggleHidePlayerActions');
   hidePlayerActions = !hidePlayerActions;
   setValue('hidePlayerActions', hidePlayerActions);
   GameData.fetch(defFetchWorldRealmActions);

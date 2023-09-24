@@ -1,4 +1,5 @@
 import fetchdata from '../../ajax/fetchdata';
+import sendEvent from '../../analytics/sendEvent';
 import all from '../../common/all';
 import createButton from '../../common/cElement/createButton';
 import createDiv from '../../common/cElement/createDiv';
@@ -53,6 +54,7 @@ function normalBuy() {
 async function qBuy() {
   const theValue = testQuant(numInput.value);
   if (!theValue) return;
+  sendEvent('NewMap', 'quickBuy');
   await all(remainingPages(theValue, quickBuy));
   normalBuy();
 }

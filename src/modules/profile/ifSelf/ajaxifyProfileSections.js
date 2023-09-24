@@ -1,8 +1,8 @@
 import retryAjax from '../../ajax/retryAjax';
+import sendEvent from '../../analytics/sendEvent';
 import getElementById from '../../common/getElementById';
 import hideElement from '../../common/hideElement';
 import onclick from '../../common/onclick';
-import partial from '../../common/partial';
 import { pcc } from '../../support/layout';
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 
@@ -13,18 +13,6 @@ function bp() {
     bpc = getElementById('backpackContainer');
   }
   return bpc;
-}
-
-const elementTests = [
-  (target) => target.tagName === 'A',
-  (target) => Boolean(target.href),
-  (target) => target.href.includes('togglesection'),
-];
-
-function condition(target, fn) { return fn(target); }
-
-function isSectionToggle(target) {
-  return elementTests.every(partial(condition, target));
 }
 
 function oldStyleDiv(target) {
@@ -43,6 +31,7 @@ function toggleTarget(target) {
 }
 
 function toggleSection(target) {
+  sendEvent('ajaxifyProfileSections', 'toggleSection');
   const sectionId = Number(getCustomUrlParameter(target.search, 'section_id'));
   if (sectionId === 5) {
     toggleTarget(bp());
@@ -53,7 +42,7 @@ function toggleSection(target) {
 
 function testForSection(evt) {
   const { target } = evt;
-  if (isSectionToggle(target)) {
+  if (target.href?.includes('togglesection')) {
     toggleSection(target);
     retryAjax(target.href);
     evt.preventDefault();

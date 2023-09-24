@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import dataRows from '../common/dataRows';
 import formToUrl from '../common/formToUrl';
 import getElementsByTagName from '../common/getElementsByTagName';
@@ -8,10 +9,15 @@ import setInnerHtml from '../dom/setInnerHtml';
 import { defTable } from '../support/constants';
 import { pcc } from '../support/layout';
 
+function changePage(e) {
+  sendEvent('toprated', 'globalQuestAllowBack');
+  formToUrl({ target: e.target.form });
+}
+
 function globalQuestAllowBack(topTable) { // jQuery
   const [thisSelect] = getElementsByTagName('select', topTable);
   $(thisSelect).off();
-  on(pcc(), 'change', (e) => formToUrl({ target: e.target.form }));
+  on(pcc(), 'change', changePage);
 }
 
 function playerLink(el) {

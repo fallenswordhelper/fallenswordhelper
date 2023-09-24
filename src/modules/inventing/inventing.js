@@ -20,6 +20,7 @@ const prefAjaxifyMoveRecipe = 'ajaxifyMoveRecipe';
 let ajaxifyMove = 0;
 
 function handleAjaxifyPref() {
+  sendEvent('inventing', 'toggle ajaxify pref');
   ajaxifyMove = !ajaxifyMove;
   setValue(prefAjaxifyMoveRecipe, ajaxifyMove);
 }

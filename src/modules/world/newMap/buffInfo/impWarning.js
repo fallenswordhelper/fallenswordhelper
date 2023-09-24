@@ -1,5 +1,6 @@
 import './impWarning.css';
 import daQuickbuff from '../../../_dataAccess/daQuickbuff';
+import sendEvent from '../../../analytics/sendEvent';
 import createButton from '../../../common/cElement/createButton';
 import createSpan from '../../../common/cElement/createSpan';
 import insertElement from '../../../common/insertElement';
@@ -22,6 +23,7 @@ function refreshBuffs(json) {
 }
 
 async function recastClick() {
+  sendEvent('NewMap', 'recastClick');
   if (getBuff('Summon Shield Imp')) { return; }
   const json = await daQuickbuff([playerName()], [55]);
   refreshBuffs(json);
@@ -41,7 +43,7 @@ const impStyles = [
 ];
 
 function getImpWarningStyle(impsRem) {
-  return impStyles[impsRem] || 'fshGreen';
+  return impStyles[impsRem] ?? 'fshGreen';
 }
 
 function initImpDiv(containerDiv) {

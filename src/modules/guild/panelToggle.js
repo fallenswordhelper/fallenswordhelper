@@ -1,12 +1,15 @@
+import sendEvent from '../analytics/sendEvent';
 import createSpan from '../common/cElement/createSpan';
+import getElementById from '../common/getElementById';
+import hasClass from '../common/hasClass';
 import hideElement from '../common/hideElement';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
 import onclick from '../common/onclick';
-import toggleVisibilty from '../common/toggleVisibilty';
 import trim from '../common/trim';
 import setInnerHtml from '../dom/setInnerHtml';
 import getValue from '../system/getValue';
+import setValue from '../system/setValue';
 
 function makeButton(linkto) {
   return createSpan({
@@ -21,6 +24,20 @@ function wrapper(btn) {
   insertElement(wrap, btn);
   insertHtmlBeforeEnd(wrap, '&nbsp;]');
   return wrap;
+}
+
+function toggleVisibilty(evt) {
+  const anItemId = evt.target.dataset.linkto;
+  sendEvent('guildManage', 'toggleVisibilty', anItemId);
+  const anItem = getElementById(anItemId);
+  if (!anItem) return;
+  const currentVisibility = hasClass('fshHide', anItem);
+  anItem.classList.toggle('fshHide');
+  if (currentVisibility) {
+    setValue(anItemId, '');
+  } else {
+    setValue(anItemId, 'ON');
+  }
 }
 
 function thisToggle(inject, panel, linkto) {

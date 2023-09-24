@@ -1,7 +1,9 @@
+import sendEvent from '../../analytics/sendEvent';
+import createAnchor from '../../common/cElement/createAnchor';
 import contains from '../../common/contains';
 import getElementById from '../../common/getElementById';
+import onclick from '../../common/onclick';
 import querySelectorArray from '../../common/querySelectorArray';
-import setInnerHtml from '../../dom/setInnerHtml';
 import { guildSubcmdUrl } from '../../support/constants';
 import colouring from './colouring';
 import contactColour from './contactColour';
@@ -17,7 +19,9 @@ function guildColour(el) {
 }
 
 function makeLink(el) {
-  setInnerHtml(`<a href="${guildSubcmdUrl}chat">Chat</a>`, el);
+  const anchor = createAnchor({ href: `${guildSubcmdUrl}chat`, textContent: 'Chat' });
+  onclick(anchor, () => { sendEvent('widgets', 'guild chat'); });
+  el.replaceChild(anchor, el.firstChild);
 }
 
 function updateChatLink() {

@@ -2,3 +2,8 @@ table.fshDataTable {
   border: 1px solid black;
   width: 650px;
 }
+.summary-link {
+  position: absolute;
+  right: 132px;
+  top: 4px;
+}

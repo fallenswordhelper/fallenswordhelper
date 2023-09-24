@@ -1,6 +1,7 @@
 import guildManage from '../../ajax/guildManage';
 import onlinePlayersPage from '../../ajax/onlinePlayersPage';
 import retryAjax from '../../ajax/retryAjax';
+import sendEvent from '../../analytics/sendEvent';
 import arrayFrom from '../../common/arrayFrom';
 import csvSplit from '../../common/csvSplit';
 import getElementById from '../../common/getElementById';
@@ -213,6 +214,7 @@ function clearTable() {
 }
 
 function findBuffsClearResults() { // Legacy
+  sendEvent('find buffs', 'clear results');
   clearTable();
   setInnerById('', 'buffNicks');
   updateProgress('Idle.', 'black');
@@ -241,6 +243,7 @@ function findAnyStart(progMsg) { // jQuery
 function thisBuff(selectedBuff, el) { return selectedBuff === el.id; }
 
 function findBuffsStart() { // Legacy
+  sendEvent('find buffs', 'findBuffsStart');
   const selectedBuff = parseInt($('#selectedBuff').val(), 10);
   const findThisBuff = buffList.find(partial(thisBuff, selectedBuff));
   findBuffNicks = findThisBuff.nicks;
@@ -249,6 +252,7 @@ function findBuffsStart() { // Legacy
 }
 
 function findOtherStart() { // Legacy
+  sendEvent('find buffs', 'findOtherStart');
   const textToSearchFor = $('#textToSearchFor').val().split(',').map(trim)
     .join(',');
   setValue('textToSearchFor', textToSearchFor);

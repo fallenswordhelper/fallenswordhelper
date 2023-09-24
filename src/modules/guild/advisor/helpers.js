@@ -1,10 +1,12 @@
 import './advisor.css';
+import sendEvent from '../../analytics/sendEvent';
 import createDiv from '../../common/cElement/createDiv';
 import createTable from '../../common/cElement/createTable';
 import insertElement from '../../common/insertElement';
 import partial from '../../common/partial';
 import replaceChild from '../../common/replaceChild';
 import trim from '../../common/trim';
+import chromeHandlers from '../../notepad/inventory/eventHandlers/chromeHandlers';
 import task from '../../support/task';
 
 export const advisorColumns = [
@@ -54,8 +56,16 @@ function doTable(tbl, data, callback) { // jQuery
   });
 }
 
-function switcheroo(div, targetElement) {
-  task(3, partial(replaceChild, div, targetElement));
+const advisorEvent = (type) => sendEvent('advisor', type);
+const advisorEventHdl = (type) => () => { sendEvent('advisor', type); };
+
+function doSwitch(targetElement, div, tbl) {
+  replaceChild(div, targetElement);
+  chromeHandlers(tbl, advisorEventHdl, advisorEvent);
+}
+
+function switcheroo(targetElement, div, tbl) {
+  task(3, doSwitch, [targetElement, div, tbl]);
 }
 
 export function injectTable(targetElement, tfoot, data) {
@@ -63,6 +73,6 @@ export function injectTable(targetElement, tfoot, data) {
   const tbl = createTable({ className: 'fshDataTable fshXSmall hover' });
   insertElement(div, tbl);
   insertElement(tbl, tfoot);
-  task(3, doTable, [tbl, data, partial(switcheroo, div, targetElement)]);
+  task(3, doTable, [tbl, data, partial(switcheroo, targetElement, div, tbl)]);
   return div;
 }

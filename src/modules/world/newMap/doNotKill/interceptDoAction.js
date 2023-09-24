@@ -1,3 +1,4 @@
+import sendEvent from '../../../analytics/sendEvent';
 import getElementById from '../../../common/getElementById';
 import isFunction from '../../../common/isFunction';
 import isUndefined from '../../../common/isUndefined';
@@ -21,6 +22,7 @@ function weShouldBlock(passback) {
 
 function interceptCreatureCombat(oldDoAction) {
   return function c(action, fetch, data, attempts) {
+    sendEvent('NewMap', 'interceptCreatureCombat');
     if (weShouldBlock(data.passback)) { return; }
     // Call standard action
     oldDoAction(action, fetch, data, attempts);

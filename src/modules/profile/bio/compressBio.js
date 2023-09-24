@@ -5,13 +5,14 @@ import createLabel from '../../common/cElement/createLabel';
 import getElementById from '../../common/getElementById';
 import insertElementBefore from '../../common/insertElementBefore';
 import on from '../../common/on';
+import calf from '../../support/calf';
 
 function injectToggle(bioCell) {
   const toggle = insertElementBefore(
     createInput({ id: 'fshCompressToggle', type: 'checkbox' }),
     bioCell,
   );
-  on(toggle, 'change', () => sendEvent('bio', 'toggle'));
+  on(toggle, 'change', () => sendEvent('bio', 'toggle', calf.cmd));
 }
 
 function doCompression(bioCell) {

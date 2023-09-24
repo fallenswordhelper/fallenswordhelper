@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import regExpFirstCapture from '../common/regExpFirstCapture';
 import { defTable } from '../support/constants';
 
@@ -20,6 +21,7 @@ function sortDataTable(target, myCol, sortOrder) { // jQuery
 }
 
 function sortHandler(evt) { // jQuery
+  sendEvent('arena', 'sortHandler');
   const target = $(evt.target).closest('td');
   const sortOrder = calculateSortOrder(target);
   sortDataTable(target, target.index(), sortOrder);

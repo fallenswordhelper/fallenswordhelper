@@ -1,3 +1,4 @@
+import sendEvent from '../../analytics/sendEvent';
 import all from '../../common/all';
 import createTable from '../../common/cElement/createTable';
 import eventHandler5 from '../../common/eventHandler5';
@@ -63,11 +64,8 @@ function parsePage(data) {
 function seenRowBefore(timestamp, myMsg) {
   return [
     () => currPage === 1,
-    () => options.log,
-    () => options.log[0],
-    () => options.log[0][0],
-    () => timestamp === options.log[0][0],
-    () => myMsg === options.log[0][2],
+    () => timestamp === options?.log?.[0]?.[0],
+    () => myMsg === options?.log?.[0]?.[2],
   ].every(functionPasses);
 }
 
@@ -197,6 +195,7 @@ function toggle(item, hide, r) {
 }
 
 function toggleItem(target) {
+  sendEvent('newGuildLog', 'toggleItem');
   const item = Number(target.getAttribute('item'));
   options.checks[item] = !options.checks[item];
   storeOptions();
@@ -212,10 +211,15 @@ function show(r) {
   removeHide(r[6]);
 }
 
-function selectAll() {
-  options.checks = defChecks.slice(0);
+function selectSome(eventAction, sourceChecks, doFn) {
+  sendEvent('newGuildLog', eventAction);
+  options.checks = sourceChecks.slice(0);
   setChecks();
-  tmpGuildLog.forEach(show);
+  tmpGuildLog.forEach(doFn);
+}
+
+function selectAll() {
+  selectSome('selectAll', defChecks, show);
 }
 
 function doHide(r) {
@@ -224,12 +228,11 @@ function doHide(r) {
 }
 
 function selectNone() {
-  options.checks = noChecks.slice(0);
-  setChecks();
-  tmpGuildLog.forEach(doHide);
+  selectSome('selectNone', noChecks, doHide);
 }
 
 async function refresh() {
+  sendEvent('newGuildLog', 'refresh');
   options.log = false;
   storeOptions();
   setText('Loading Page 1 ...', fshOutput);

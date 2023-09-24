@@ -1,5 +1,8 @@
+import sendEvent from '../../analytics/sendEvent';
 import currentGuildId from '../../common/currentGuildId';
+import getElementById from '../../common/getElementById';
 import { getLowerPvpLevel, getUpperPvpLevel } from '../../common/levelHighlight';
+import onclick from '../../common/onclick';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import { guildRE } from '../../support/constants';
 import getValue from '../../system/getValue';
@@ -49,9 +52,33 @@ function tableOpts(onlineData) {
   };
 }
 
+const onlinePlayersEvent = (type) => sendEvent('OnlinePlayers', type);
+const onlinePlayersEventHdl = (type) => () => { sendEvent('OnlinePlayers', type); };
+
+function anchorHdl(e) {
+  if (e.currentTarget.children[0]?.tagName === 'IMG') onlinePlayersEvent('guild click');
+  else onlinePlayersEvent('player click');
+}
+
+function tableHandlers() {
+  $('#fshInv').on('click', 'a', anchorHdl);
+  $('#fshInv').on('click', '.sorting', onlinePlayersEventHdl('sorting'));
+}
+
+function chromeHandlers() { // jQuery
+  $('#fshInv_length select').on('change', onlinePlayersEventHdl('dataTables_length'));
+  $('#fshInv_filter input').on('keyup', onlinePlayersEventHdl('dataTables_filter'));
+  // something is preventing jQuery bubbling
+  onclick(getElementById('fshInv_paginate'), (e) => {
+    if (e.target.classList.contains('paginate_button')) onlinePlayersEvent('paginate_button');
+  });
+}
+
 export function doTable(context, onlineData) {
   highlightPlayersNearMyLvl = getValue('highlightPlayersNearMyLvl');
   table = $('#fshInv', context).DataTable(tableOpts(onlineData));
+  tableHandlers();
+  chromeHandlers();
 }
 
 export function tableDraw() {

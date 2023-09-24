@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import getElementById from '../common/getElementById';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import on from '../common/on';
@@ -37,6 +38,7 @@ function sortBuffs(alphabetically) {
 }
 
 function onSortBuffsCheckboxChanged(event) {
+  sendEvent('quickbuff', 'sortBuffs');
   setValue(quickbuffSortStorageName, event.target.checked);
   sortBuffs(event.target.checked);
 }

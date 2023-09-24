@@ -1,3 +1,4 @@
+import sendEvent from '../../analytics/sendEvent';
 import createAnchor from '../../common/cElement/createAnchor';
 import dataRows from '../../common/dataRows';
 import getElementsByTagName from '../../common/getElementsByTagName';
@@ -6,6 +7,7 @@ import getTitle from '../../common/getTitle';
 import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
+import onclick from '../../common/onclick';
 import querySelector from '../../common/querySelector';
 import trimTitanName from '../../common/trimTitanName';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -22,8 +24,13 @@ function imgLink(aRow) {
     href: `${guideUrl}creatures&search_name=${myName}`,
     target: '_blank',
   });
+  onclick(myLink, () => { sendEvent('scoutTower', 'guideLink'); });
   insertElement(myLink, myImg);
   insertElement(aRow.tr.cells[0], myLink);
+}
+
+function realmLinkClick(e) {
+  if (e.target.tagName === 'A') sendEvent('scoutTower', 'realmLink');
 }
 
 function realmLink(aRow) {
@@ -31,6 +38,7 @@ function realmLink(aRow) {
   const realmName = getText(realmCell);
   setInnerHtml(`<a href="${guideUrl}realms&search_name=${
     realmName}" target="_blank">${realmName}</a>`, realmCell);
+  onclick(realmCell, realmLinkClick);
 }
 
 function addTitanName(aRow) {

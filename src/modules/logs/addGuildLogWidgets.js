@@ -1,3 +1,4 @@
+import sendEvent from '../analytics/sendEvent';
 import arrayFrom from '../common/arrayFrom';
 import closestTable from '../common/closestTable';
 import contains from '../common/contains';
@@ -6,6 +7,7 @@ import getArrayByTagName from '../common/getArrayByTagName';
 import getPlayerId from '../common/getPlayerId';
 import getText from '../common/getText';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
+import onclick from '../common/onclick';
 import playerId from '../common/playerId';
 import querySelectorArray from '../common/querySelectorArray';
 import { guildSubcmdUrl, playerLinkSelector } from '../support/constants';
@@ -28,6 +30,10 @@ function joinReq(cell) {
   insertHtmlBeforeEnd(cell, ` [ <a href="${guildSubcmdUrl}recruit&subcmd2=acceptjoin&id=${
     joinId}">Accept</a> | <a href="${guildSubcmdUrl}recruit&subcmd2=denyjoin&id=${
     joinId}">Deny</a> ]`);
+  onclick(cell, (e) => {
+    if (getText(e.target) === 'Accept') sendEvent('addGuildLogWidgets', 'Accept');
+    if (getText(e.target) === 'Deny') sendEvent('addGuildLogWidgets', 'Deny');
+  });
 }
 
 function findPlayers(aRow) {

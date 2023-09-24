@@ -1,3 +1,4 @@
+import sendEvent from './analytics/sendEvent';
 import createSpan from './common/cElement/createSpan';
 import getElementById from './common/getElementById';
 import getText from './common/getText';
@@ -89,6 +90,7 @@ function doStamCount(type, upgrade, quantity, cell) {
 }
 
 function updateStamCount(type, upgrade, evt) {
+  sendEvent('upgrades', 'updateStamCount');
   const { target } = evt;
   const quantity = Number(target.value);
   const cell = getCell(type, upgrade);

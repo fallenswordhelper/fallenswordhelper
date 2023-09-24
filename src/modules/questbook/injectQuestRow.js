@@ -1,6 +1,7 @@
 import dataRows from '../common/dataRows';
 import getTextTrim from '../common/getTextTrim';
 import hideElement from '../common/hideElement';
+import onclick from '../common/onclick';
 import partial from '../common/partial';
 import replaceDoubleSpace from '../common/replaceDoubleSpace';
 import setInnerHtml from '../dom/setInnerHtml';
@@ -8,6 +9,7 @@ import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getValue from '../system/getValue';
 import shouldBeArray from '../system/shouldBeArray';
 import guideButtons from './guideButtons';
+import questEvent from './questEvent';
 
 function isHideQuests() {
   if (getValue('hideQuests')) {
@@ -37,4 +39,5 @@ function decorate(questsToHide, aRow) {
 export default function injectQuestRow(questTable) {
   const questsToHide = isHideQuests();
   dataRows(questTable, 5, 0).forEach(partial(decorate, questsToHide));
+  onclick(questTable, questEvent('Quest Book'));
 }

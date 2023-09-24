@@ -1,4 +1,5 @@
 import doBreakdown from '../../ajax/doBreakdown';
+import sendEvent from '../../analytics/sendEvent';
 import getElementById from '../../common/getElementById';
 import hasClass from '../../common/hasClass';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
@@ -70,6 +71,7 @@ async function breakItems() {
 
 function validBreakEvent(evt) {
   evt.stopPropagation();
+  sendEvent('breakdown', 'validBreakEvent');
   if (selectedList.length === 0) {
     showComposingMessage('Error: No items selected.', 'rgb(164, 28, 28)');
     return;
@@ -86,6 +88,7 @@ function breakEvt(evt) {
 
 function itemClick(evt) {
   if (!hasClass('selectable-item', evt.target)) { return; }
+  sendEvent('breakdown', 'itemClick');
   const myItem = evt.target.id.replace('composing-item-', '');
   const itemPos = selectedList.indexOf(myItem);
   if (itemPos === -1) {
@@ -96,6 +99,7 @@ function itemClick(evt) {
 }
 
 function togglePref() {
+  sendEvent('breakdown', 'togglePref');
   disableBreakdownPrompts = !disableBreakdownPrompts;
   setValue(prefDisableBreakdownPrompts, disableBreakdownPrompts);
 }

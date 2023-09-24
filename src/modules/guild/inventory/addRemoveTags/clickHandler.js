@@ -1,5 +1,6 @@
 import daGsTake from '../../../_dataAccess/daGsTake';
 import daTagItems from '../../../_dataAccess/daTagItems';
+import sendEvent from '../../../analytics/sendEvent';
 import createSpan from '../../../common/cElement/createSpan';
 import classHandler from '../../../common/classHandler';
 import clickThis from '../../../common/clickThis';
@@ -17,10 +18,12 @@ const getCb = (ctx) => querySelector('input', closestTr(ctx));
 const getInvId = (ctx) => closest('div', ctx).dataset.invId;
 
 function doCheckAll() {
+  sendEvent('addRemoveTags', 'doCheckAll');
   querySelectorArray('#pCC input[name="tagIndex[]"]').forEach(clickThis);
 }
 
 function checkType(taggable, ctx) {
+  sendEvent('addRemoveTags', 'checkType');
   const thisInvId = getInvId(ctx);
   const [, , itemId, itemName] = taggable.find(([, invId]) => invId === thisInvId);
   taggable
@@ -48,6 +51,7 @@ function makeSpinner(suffix, ctx) {
 }
 
 async function doAction(suffix, fn, success, ctx) {
+  sendEvent('addRemoveTags', suffix);
   const invId = getInvId(ctx);
   getCb(ctx)?.remove();
   const spinner = makeSpinner(suffix, ctx);
