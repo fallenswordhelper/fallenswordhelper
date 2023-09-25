@@ -1,7 +1,7 @@
 import './whosGotWhat.css';
 import { smartTable } from 'smart-table-core';
 import { table as tableComponentFactory } from 'smart-table-vanilla';
-import guildStore from '../../_dataAccess/export/guildStore';
+import daGuildReport from '../../_dataAccess/daGuildReport';
 import ranksView from '../../_dataAccess/fallbacks/ranksView';
 import all from '../../common/all';
 import createDiv from '../../common/cElement/createDiv';
@@ -68,14 +68,14 @@ function showMe(pCC, dataAry) {
   initTable(el, table, domTable);
 }
 
-const checkData = ([store, ranks]) => store?.guild_id && ranks?.s;
+const checkData = ([store, ranks]) => store?.s && ranks?.s;
 
 export default async function whosGotWhat() {
   const pCC = pcc();
   setInnerHtml('Loading...', pCC);
   let dataAry = [];
   try {
-    dataAry = await all([guildStore(), ranksView()]);
+    dataAry = await all([daGuildReport(), ranksView()]);
   } catch (error) {
     setInnerHtml(error.message, pCC);
   }

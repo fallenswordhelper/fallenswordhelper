@@ -1,44 +1,38 @@
+import fromEntries from '../../common/fromEntries';
 import lastActivityToDays from '../../common/lastActivityToDays';
-import partial from '../../common/partial';
 import toLowerCase from '../../common/toLowerCase';
 import trim from '../../common/trim';
+import uniq from '../../common/uniq';
 import { nowSecs } from '../../support/now';
 import addCommas from '../../system/addCommas';
 
-function byMember(acc, curr) {
-  // if (curr.item_id === 11503) { // Zombie Brew
-  if (!curr.equipped) {
-  // if (curr.equipped) { // equipped
-    acc[curr.player_id] = acc[curr.player_id] || [];
-    acc[curr.player_id].push(curr);
-  }
-  return acc;
-}
-
-const addRank = (rankName, thisMember) => ({ ...thisMember, rank_name: rankName });
-const extractMembers = (thisRank) => thisRank.members.map(partial(addRank, thisRank.name));
+const notEquipped = ({ equipped }) => !equipped;
+const playerId = ({ player: { id } }) => id;
+const addRank = (rankName) => (thisMember) => ({ ...thisMember, rank_name: rankName });
+const extractMembers = (thisRank) => thisRank.members.map(addRank(thisRank.name));
 const processGuild = (guild) => guild.r.flatMap(extractMembers);
-
-function decorateMembers(pots, obj, i) {
-  return {
-    ...obj,
-    slot: i + 1,
-    name_lower: toLowerCase(obj.name),
-    lvl_reverse: 0 - obj.level,
-    rank_lower: toLowerCase(trim(obj.rank_name)),
-    gxp: addCommas(obj.guild_xp),
-    gxp_reverse: 0 - obj.guild_xp,
-    activity: lastActivityToDays(obj.last_activity),
-    act: obj.last_activity - nowSecs(),
-    pack: (pots[obj.id] || []).length,
-    pack_reverse: 0 - (pots[obj.id] || []).length,
-    stam: addCommas(obj.max_stamina),
-    stam_reverse: 0 - obj.max_stamina,
-  };
-}
+const decorateMembers = (pots) => (member, index) => ({
+  ...member,
+  slot: index + 1,
+  name_lower: toLowerCase(member.name),
+  lvl_reverse: 0 - member.level,
+  rank_lower: toLowerCase(trim(member.rank_name)),
+  gxp: addCommas(member.guild_xp),
+  gxp_reverse: 0 - member.guild_xp,
+  activity: lastActivityToDays(member.last_activity),
+  act: member.last_activity - nowSecs(),
+  pack: pots[member.id] ?? 0,
+  pack_reverse: 0 - (pots[member.id] ?? 0),
+  stam: addCommas(member.max_stamina),
+  stam_reverse: 0 - member.max_stamina,
+});
 
 export default function prepareData([json, guild]) {
-  const pots = json.items.reduce(byMember, {});
+  const inv = json.r.filter(notEquipped).map(playerId);
+  const perPlayer = fromEntries(uniq(inv).map((id) => [
+    id,
+    inv.filter((i) => i === id).length,
+  ]));
   const members = processGuild(guild);
-  return members.map(partial(decorateMembers, pots));
+  return members.map(decorateMembers(perPlayer));
 }
