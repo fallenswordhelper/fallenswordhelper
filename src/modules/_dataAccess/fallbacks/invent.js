@@ -13,5 +13,6 @@ export default async function invent(recipe) {
     subcmd: 'doinvent',
     recipe_id: recipe,
   });
+  if (!doc) return { s: false };
   return formatResult(doc);
 }

@@ -74,6 +74,7 @@ function testTitan(e) {
 const titanRows = (_e, i, a) => i !== 0 && i < a.length - 1 && (i - 1) % 6 < 3;
 
 function parseReport(doc) {
+  if (!doc) return { s: false };
   const titanTable = querySelector('table[width="500"]', doc);
   if (!titanTable) { return { s: false }; }
   const thisRows = arrayFrom(titanTable.rows).filter(titanRows);

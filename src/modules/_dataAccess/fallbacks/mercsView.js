@@ -18,6 +18,7 @@ function toData(i) {
 }
 
 function parseMercStats(doc) {
+  if (!doc) return { s: false };
   const mercElements = querySelectorArray('#pCC img[src*="/mercs/"]', doc);
   const mercs = mercElements.map(toData);
   return { r: { mercs }, s: true };

@@ -62,6 +62,7 @@ function updateValues(bankSettings, doc, infoBox) {
 
 async function doAjax(bankSettings, mode, amount) {
   const doc = await indexAjaxDoc({ ...bankSettings.data, mode, amount });
+  if (!doc) return;
   const infoMsg = getElementById('info-msg', doc);
   if (infoMsg) {
     updateValues(bankSettings, doc, closestTable(infoMsg));

@@ -8,6 +8,7 @@ const setId = (o) => ({ id: Number(o.value) });
 // Incomplete
 export default async function viewCombatSets() {
   const doc = await indexAjaxDoc({ cmd: 'profile' });
+  if (!doc) return { s: false };
   const select = querySelector('select[name="combatSetId"]', doc);
   if (!select) { return { s: false }; }
   return {

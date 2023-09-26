@@ -61,5 +61,6 @@ export default async function useItem(backpackInvId) {
     subcmd: 'useitem',
     inventory_id: backpackInvId,
   });
+  if (!doc) return { s: false };
   return formatResults(doc);
 }

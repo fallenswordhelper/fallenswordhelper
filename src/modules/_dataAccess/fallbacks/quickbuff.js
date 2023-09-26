@@ -55,6 +55,7 @@ function getKeys(buffResult) {
 }
 
 function buffFormatter(doc) {
+  if (!doc) return { s: false };
   return { r: buffsByPlayer(buffReportParser(doc).map(getKeys)), s: true };
 }
 

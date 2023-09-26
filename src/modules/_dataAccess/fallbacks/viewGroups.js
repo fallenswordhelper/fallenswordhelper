@@ -13,7 +13,11 @@ const remainingMembers = (i) => toArray(memberList(i)).map((name) => ({ name }))
 const getMembers = (i) => [{ name: getLead(i) }, ...remainingMembers(i)];
 const formatGrp = (i) => ({ id: getGroupId(i), members: getMembers(i) });
 const getResults = (doc) => viewGrp(doc).map(formatGrp);
-const parseReport = (doc) => ({ r: getResults(doc), s: true });
+
+function parseReport(doc) {
+  if (doc) return { r: getResults(doc), s: true };
+  return { s: false };
+}
 
 // Incomplete
 export default async function viewGroups() {

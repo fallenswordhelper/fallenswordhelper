@@ -13,5 +13,6 @@ export default async function unequip(item) {
     subcmd: 'unequipitem',
     inventory_id: item,
   });
+  if (!doc) return { s: false };
   return formatResults(doc);
 }

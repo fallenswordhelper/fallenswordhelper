@@ -27,6 +27,7 @@ function updateUI(form, flags) {
 
 export default async function settingsFlags(flags) {
   const settingsPage = await indexAjaxDoc({ cmd: 'settings' });
+  if (!settingsPage) return { s: false };
 
   const ladder = updateLadder(settingsPage.forms[0], flags[0]);
   const ui = updateUI(settingsPage.forms[2], flags);

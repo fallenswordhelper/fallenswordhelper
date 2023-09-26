@@ -13,6 +13,7 @@ async function destroyComponent(componentId) {
     subcmd: 'destroycomponent',
     component_id: componentId,
   });
+  if (!doc) return { s: false };
   return ajaxResult(componentId, doc);
 }
 

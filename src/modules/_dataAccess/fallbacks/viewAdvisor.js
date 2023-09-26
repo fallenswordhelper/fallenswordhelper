@@ -14,6 +14,7 @@ function formatData(row) {
 }
 
 function parseReport(doc) {
+  if (!doc) return { s: false };
   const advisorTable = querySelector('#pCC table table', doc);
   const advisorRows = arrayFrom(advisorTable.rows).slice(1, -1);
   const advisorData = advisorRows.map(formatData);
