@@ -7,6 +7,7 @@
   import all from '../../common/all';
   import alpha from '../../common/alpha';
   import arrayFrom from '../../common/arrayFrom';
+  import csvSplit from '../../common/csvSplit';
   import fromEntries from '../../common/fromEntries';
   import getTextTrim from '../../common/getTextTrim';
   import isArray from '../../common/isArray';
@@ -17,6 +18,7 @@
   import uniq from '../../common/uniq';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import { viewRecipeUrl } from '../../support/constants';
+  import getValue from '../../system/getValue';
   import { get, set } from '../../system/idb';
   import { cdn } from '../../system/system';
 
@@ -37,38 +39,7 @@
     visible = false;
   }
 
-  const hasQuest = (n) => toLowerCase(n).includes('quest');
-  const withQuest = ([, n]) => hasQuest(n);
-  const withoutQuest = ([, n]) => !hasQuest(n);
-  const skipped = (folders) => folders.filter(withQuest)
-    .map(([, n]) => `Skipping folder "${n}" as it has the word "quest" in folder name.`);
-  const found = (toCheck) => toCheck.map(([, name]) => `Found blueprint "${name}".`);
   const getPage = (fid = -1, page = 0) => indexAjaxDoc({ cmd: 'inventing', folder_id: fid, page });
-  const eachPage = ([fid, pages]) => pages.map((page) => [fid, page]);
-  const getOtherPage = ([fid, page]) => getPage(fid, page);
-  const toFolderHref = ([div, name]) => [div.previousElementSibling.children[0].href, name];
-  const getOptions = ([fid, doc]) => [
-    fid,
-    arrayFrom(doc?.querySelector('#pCC select[name="page"]').options)
-      .slice(1)
-      .map((opt) => opt.value),
-  ];
-  const folderHasOtherPages = ([, pages]) => pages.length;
-  const findRecipes = (doc) => arrayFrom(doc?.querySelectorAll('#pCC a[href*="&recipe_id="]'));
-  const recipeValues = (a) => [
-    a.href.split('=').at(-1),
-    getTextTrim(a),
-    a.parentNode.previousElementSibling.children[0].src.split('/').at(-1),
-  ];
-  const itemInfo = (doc, bgGif) => querySelectorArray(`#pCC td[background*="${bgGif}"]`, doc)
-    .map((bg) => [
-      bg.children[0].children[0].dataset.tipped.split(/[?&=]/),
-      bg.parentNode.nextElementSibling,
-    ]).map(([parts, tr]) => [
-      parts[2],
-      parts[10],
-      ...tr ? [Number(getTextTrim(tr).split('/')[1])] : [],
-    ]);
   const nameSort = ([, a], [, b]) => sortDirection * alpha(a, b);
 
   function sortByName() {
@@ -80,6 +51,16 @@
   function addToProgressLog(ary) {
     progressLog = ary.concat(progressLog);
   }
+
+  const itemInfo = (doc, bgGif) => querySelectorArray(`#pCC td[background*="${bgGif}"]`, doc)
+    .map((bg) => [
+      bg.children[0].children[0].dataset.tipped.split(/[?&=]/),
+      bg.parentNode.nextElementSibling,
+    ]).map(([parts, tr]) => [
+      parts[2],
+      parts[10],
+      ...tr ? [Number(getTextTrim(tr).split('/')[1])] : [],
+    ]);
 
   async function getParts([id, n, image]) {
     const doc = await indexAjaxDoc({ cmd: 'inventing', subcmd: 'viewrecipe', recipe_id: id });
@@ -136,11 +117,38 @@
     return [fid, doc];
   }
 
+  const findRecipes = (doc) => arrayFrom(doc?.querySelectorAll('#pCC a[href*="&recipe_id="]'));
+  const recipeValues = (a) => [
+    a.href.split('=').at(-1),
+    getTextTrim(a),
+    a.parentNode.previousElementSibling.children[0].src.split('/').at(-1),
+  ];
+
+  const shouldHide = (rName) => (hName) => hName === rName;
+  const isHidden = (hideNames, rName) => hideNames.some(shouldHide(rName));
+  const hidden = (hideNames) => ([, rName]) => isHidden(hideNames, rName);
+  const notHidden = (hideNames) => ([, rName]) => !isHidden(hideNames, rName);
+  const hiding = (toHide) => toHide.map(([, name]) => `Skipping blueprint "${name}" as it is hidden.`);
+  const found = (toCheck) => toCheck.map(([, name]) => `Found blueprint "${name}".`);
+
   function parseFolders(folders) {
-    const toCheck = folders.flatMap(findRecipes).map(recipeValues);
+    const hideNames = csvSplit(getValue('hideRecipeNames'));
+    const foundRecipes = folders.flatMap(findRecipes).map(recipeValues);
+    addToProgressLog(hiding(foundRecipes.filter(hidden(hideNames))));
+    const toCheck = foundRecipes.filter(notHidden(hideNames));
     addToProgressLog(found(toCheck));
     parseRecipes(toCheck);
   }
+
+  const getOptions = ([fid, doc]) => [
+    fid,
+    arrayFrom(doc?.querySelector('#pCC select[name="page"]').options)
+      .slice(1)
+      .map((opt) => opt.value),
+  ];
+  const folderHasOtherPages = ([, pages]) => pages.length;
+  const eachPage = ([fid, pages]) => pages.map((page) => [fid, page]);
+  const getOtherPage = ([fid, page]) => getPage(fid, page);
 
   async function eachFolder(prmAry) {
     const firstPages = await all(prmAry);
@@ -152,6 +160,13 @@
     const otherDocs = await all(otherPages);
     parseFolders(firstPages.map(([, doc]) => doc).concat(otherDocs));
   }
+
+  const hasQuest = (n) => toLowerCase(n).includes('quest');
+  const withQuest = ([, n]) => hasQuest(n);
+  const skipped = (folders) => folders.filter(withQuest)
+    .map(([, n]) => `Skipping folder "${n}" as it has the word "quest" in folder name.`);
+  const withoutQuest = ([, n]) => !hasQuest(n);
+  const toFolderHref = ([div, name]) => [div.previousElementSibling.children[0].href, name];
 
   function parseUnassigned(unassigned) {
     addToProgressLog(['Parsing folder "Unassigned"...']);
