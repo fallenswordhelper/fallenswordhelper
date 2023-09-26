@@ -13,6 +13,8 @@
   import isArray from '../../common/isArray';
   import LinkButton from '../../common/LinkButton.svelte';
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import querySelector from '../../common/querySelector';
+  import querySelectorAll from '../../common/querySelectorAll';
   import querySelectorArray from '../../common/querySelectorArray';
   import toLowerCase from '../../common/toLowerCase';
   import uniq from '../../common/uniq';
@@ -117,13 +119,13 @@
     return [fid, doc];
   }
 
-  const findRecipes = (doc) => arrayFrom(doc?.querySelectorAll('#pCC a[href*="&recipe_id="]'));
+  const validFolderResponse = (doc) => doc;
+  const findRecipes = (doc) => arrayFrom(querySelectorAll('#pCC a[href*="&recipe_id="]', doc));
   const recipeValues = (a) => [
     a.href.split('=').at(-1),
     getTextTrim(a),
     a.parentNode.previousElementSibling.children[0].src.split('/').at(-1),
   ];
-
   const shouldHide = (rName) => (hName) => hName === rName;
   const isHidden = (hideNames, rName) => hideNames.some(shouldHide(rName));
   const hidden = (hideNames) => ([, rName]) => isHidden(hideNames, rName);
@@ -133,16 +135,17 @@
 
   function parseFolders(folders) {
     const hideNames = csvSplit(getValue('hideRecipeNames'));
-    const foundRecipes = folders.flatMap(findRecipes).map(recipeValues);
+    const foundRecipes = folders.filter(validFolderResponse).flatMap(findRecipes).map(recipeValues);
     addToProgressLog(hiding(foundRecipes.filter(hidden(hideNames))));
     const toCheck = foundRecipes.filter(notHidden(hideNames));
     addToProgressLog(found(toCheck));
     parseRecipes(toCheck);
   }
 
+  const validPageResponse = ([, doc]) => doc;
   const getOptions = ([fid, doc]) => [
     fid,
-    arrayFrom(doc?.querySelector('#pCC select[name="page"]').options)
+    arrayFrom(querySelector('#pCC select[name="page"]', doc).options)
       .slice(1)
       .map((opt) => opt.value),
   ];
@@ -153,6 +156,7 @@
   async function eachFolder(prmAry) {
     const firstPages = await all(prmAry);
     const otherPages = firstPages
+      .filter(validPageResponse)
       .map(getOptions)
       .filter(folderHasOtherPages)
       .flatMap(eachPage)
