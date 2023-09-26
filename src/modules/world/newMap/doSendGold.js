@@ -27,5 +27,5 @@ export default async function doSendGold() { // jQuery
     target_username: $('#HelperSendTo').html(),
     gold_amount: $('#HelperSendAmt').html().replace(/[^\d]/g, ''),
   });
-  doneSendGold(doc);
+  if (doc) doneSendGold(doc);
 }

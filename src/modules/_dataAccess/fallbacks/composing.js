@@ -14,6 +14,7 @@ function formatTime(e) {
 }
 
 function parseReport(doc) {
+  if (!doc) return { s: false };
   const slots = getArrayByClassName('composing-potion', doc);
   if (slots.length === 0) { return { s: false }; }
   const maxPotions = slots.length;

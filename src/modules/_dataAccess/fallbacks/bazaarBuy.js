@@ -8,6 +8,7 @@ export default async function bazaarBuy(item, quantity) {
     item_id: item,
     quantity,
   });
+  if (!doc) return { s: false };
   const info = infoBox(doc);
   if (info === 'You purchased the item!') return { r: Array(quantity), s: true };
   return { e: { message: info }, s: false };

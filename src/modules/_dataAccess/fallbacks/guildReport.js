@@ -19,6 +19,7 @@ function details(td) {
 }
 
 function parseReport(doc) {
+  if (!doc) return { s: false };
   const nodeList = querySelectorArray('#pCC table table td:nth-of-type(3n)', doc);
   return { r: nodeList.map(details), s: true };
 }

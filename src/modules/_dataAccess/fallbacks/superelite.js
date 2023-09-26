@@ -28,6 +28,7 @@ function formatRow(row) {
 }
 
 function parseReport(doc) {
+  if (!doc) return { s: false };
   const logTable = querySelector('#pCC table table', doc);
   if (!logTable) { return { s: false }; }
   const rows = dataRows(logTable, 4, 1);

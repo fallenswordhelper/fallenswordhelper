@@ -42,9 +42,10 @@ function getQuestProps(type, doc) {
 
 async function getQuests([type, mode]) {
   const doc = await getQuestbookPage(type, mode, 0);
+  if (!doc) return { s: false };
   const pages = getOptionValues(doc);
   const docs = await all([doc, ...pages.slice(1).map(partial(getQuestbookPage, type, mode))]);
-  return docs.map((dc) => getQuestProps(type, dc));
+  return docs.filter((dc) => dc).map((dc) => getQuestProps(type, dc));
 }
 
 // incomplete

@@ -2,6 +2,7 @@ import indexAjaxDoc from '../../ajax/indexAjaxDoc';
 import groupViewStats from '../../common/groupViewStats';
 
 function parseReport(doc) {
+  if (!doc) return { s: false };
   const stats = groupViewStats(doc);
   return {
     r: {
