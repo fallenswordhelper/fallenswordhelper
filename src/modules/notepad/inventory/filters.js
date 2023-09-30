@@ -24,7 +24,7 @@ export function typeFilter() { // jQuery
 
 function testSetId(data) {
   return getOptions().checkedElements['-1']
-    && data.stats && data.stats.set_id !== -1;
+    && data.stats && data.stats.set_name !== '';
 }
 
 export function setFilter() { // jQuery
