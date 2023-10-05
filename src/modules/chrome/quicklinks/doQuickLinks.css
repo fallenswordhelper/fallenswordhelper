@@ -5,6 +5,7 @@
   box-sizing: content-box;
   color: black;
   font-size: 12px;
+  overflow-x: hidden;
   position: absolute;
   text-align: left;
   white-space: nowrap;
