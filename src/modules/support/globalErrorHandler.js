@@ -31,6 +31,7 @@ const substrings = [
   'layerClick',
   'play method is not allowed',
   'world.min.js',
+  'openuserjs.org',
 ];
 
 const canSend = (msg) => !substrings.some((ss) => msg.includes(ss));
