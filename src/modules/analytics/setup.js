@@ -31,7 +31,7 @@ const urlPatch = [
 ];
 
 function stripExtra(acc, curr) {
-  return acc.replace(curr[0], curr[1] || '');
+  return acc.replace(curr[0], curr[1] ?? '');
 }
 
 function getPage() {
@@ -97,6 +97,7 @@ function gtagSetup() {
 }
 
 export default function setup() {
-  analyticsSetup();
+  const enabled = false;
+  if (enabled) analyticsSetup();
   gtagSetup();
 }
