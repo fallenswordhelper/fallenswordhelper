@@ -97,6 +97,7 @@ function gtagSetup() {
 }
 
 export default function setup() {
-  analyticsSetup();
+  const enabled = false;
+  if (enabled) analyticsSetup();
   gtagSetup();
 }
