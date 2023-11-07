@@ -1,0 +1,1 @@
+{"version":3,"file":"instantiate-zhKnqr-J.js","sources":["src/modules/modal/instantiate.js"],"sourcesContent":null,"names":["instantiate","props","thisModal","constructor","$set","target","document","body"],"mappings":"AAAe,SAASA,EAAYC,EAAOC,EAAWC,GACpD,OAAID,GACFA,EAAUE,KAAKH,GAIVC,GAFE,IAAIC,EAAY,CAAEF,QAAOI,OAAQC,SAASC,MAGrD"}
