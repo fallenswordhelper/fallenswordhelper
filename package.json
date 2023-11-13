@@ -59,6 +59,7 @@
     "rollup-pluginutils": "^2.8.2"
   },
   "dependencies": {
+    "@honeybadger-io/js": "^6.5.3",
     "css-tooltip": "^0.3.4",
     "idb-keyval": "^6.2.1",
     "smart-table-core": "^3.0.7",
