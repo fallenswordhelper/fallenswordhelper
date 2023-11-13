@@ -1,4 +1,5 @@
 import { writeFile } from 'node:fs/promises';
+import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
@@ -47,7 +48,8 @@ export default async function getRollupConfig(env) {
     },
     plugins: [
       svelte({ emitCss: true }),
-      resolve(),
+      commonjs(),
+      resolve({ browser: true }),
       replace({
         preventAssignment: true,
         values: {
