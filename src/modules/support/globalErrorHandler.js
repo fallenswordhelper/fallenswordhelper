@@ -3,7 +3,7 @@ import sendException from '../analytics/sendException';
 import on from '../common/on';
 import parseError from './parseError';
 
-let enabled = 0;
+let enabled = 1;
 
 const ignoreStatus = [0, 503, 504];
 const ignoreTextStatus = ['abort'];
