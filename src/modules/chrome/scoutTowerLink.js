@@ -11,7 +11,7 @@ function scoutLink() {
   const sl = createAnchor({
     dataset: { tooltip: 'View Scout Report' },
     href: scouttowerUrl,
-    innerHTML: `<img id="fshScoutTower" src="${cdn}/structures/27.png">`,
+    innerHTML: `<img id="fshScoutTower" src="${cdn}structures/27.png">`,
   });
   onclick(sl, () => sendEvent('chrome', 'scout tower link'));
   return sl;
