@@ -6,11 +6,11 @@ import isObject from '../../common/isObject';
 const problems = [
   [
     (hcsNav) => !isObject(hcsNav),
-    () => sendException('$(\'#nav\').data(\'hcsNav\') is not an object', false),
+    () => sendException('$(\'#nav\').data(\'hcsNav\') is not an object'),
   ],
   [
     (hcsNav) => !('heights' in hcsNav),
-    () => sendException('$(\'#nav\').data(\'hcsNav\').heights does not exist', false),
+    () => sendException('$(\'#nav\').data(\'hcsNav\').heights does not exist'),
   ],
 ];
 

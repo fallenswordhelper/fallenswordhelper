@@ -1,10 +1,9 @@
+import Honeybadger from '@honeybadger-io/js';
 import { get as idbGet, set as idbSet } from 'idb-keyval';
-import sendException from '../analytics/sendException';
-import parseError from '../support/parseError';
 
 const processError = (e) => {
   if (e && e.name !== 'NotFoundError') {
-    sendException(parseError(e), false);
+    Honeybadger.notify(e);
   }
 };
 

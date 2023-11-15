@@ -38,7 +38,7 @@ const canSend = (msg) => !substrings.some((ss) => msg.includes(ss));
 
 function handleMsgStack(type, stuff) {
   const msg = parseError(stuff);
-  if (canSend(msg)) sendException(type + msg, true);
+  if (canSend(msg)) sendException(type + msg);
 }
 
 function handleError(type, stuff) {
