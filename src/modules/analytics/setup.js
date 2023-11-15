@@ -100,8 +100,8 @@ function gtagSetup() {
 function hbSetup() {
   Honeybadger.configure({
     apiKey: 'hbp_qQyOzugJoUNgE5xn8tHwTjvFuTXcB91ThqhP',
-    environment: 'production',
-    revision: '15.24.114',
+    environment: defineEnvironment,
+    revision: defineVersion,
   });
   const pid = playerName();
   if (pid) {

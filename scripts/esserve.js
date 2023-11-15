@@ -2,7 +2,7 @@ import esbuild from 'esbuild';
 import sveltePlugin from 'esbuild-svelte';
 import lws from 'local-web-server';
 import { port as calfPort } from './config.js';
-import { calfVer, core } from './getVersion.js';
+import { calfVer, core, version } from './getVersion.js';
 import liquidPlugin from './liquidPlugin.js';
 import {
   buildFsh,
@@ -26,10 +26,12 @@ const ctx = await esbuild.context({
   chunkNames: `${calfVer}/[name]-[hash]`,
   conditions: ['svelte'],
   define: {
-    defineDataTablesPath: `"${rootPath}src/styles/dataTables.css"`,
     defineCalfPath: `"${rootPath}${calfPath}/calfSystem.css"`,
     defineCalfVer: `"${calfVer}"`,
+    defineDataTablesPath: `"${rootPath}src/styles/dataTables.css"`,
+    defineEnvironment: '"development"',
     defineUserIsDev: 'true',
+    defineVersion: `"${version}"`,
   },
   entryPoints: [pathToFile('src/calfSystem.js')],
   format: 'esm',

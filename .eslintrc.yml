@@ -12,6 +12,7 @@ overrides:
       import/no-unresolved:
         - error
         - ignore:
+          - 'svelte/store'
           - 'svelte/transition'
           - 'svelte-virtual-scroll-list'
       import/prefer-default-export: off
@@ -87,7 +88,9 @@ globals:
   defineCalfPath: readonly
   defineCalfVer: readonly
   defineDataTablesPath: readonly
+  defineEnvironment: readonly
   defineUserIsDev: readonly
+  defineVersion: readonly
   DataTable: readonly
 rules:
   consistent-return: off # 74
