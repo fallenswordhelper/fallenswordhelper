@@ -8,7 +8,7 @@ import { minify } from 'csso';
 import css from 'rollup-plugin-css-only';
 import svelte from 'rollup-plugin-svelte';
 import { github, port } from './config.js';
-import { calfVer, core } from './getVersion.js';
+import { calfVer, core, version } from './getVersion.js';
 import liquid from './rollup-plugin-liquid.js';
 import {
   buildFsh,
@@ -54,9 +54,11 @@ export default async function getRollupConfig(env) {
         preventAssignment: true,
         values: {
           defineCalfPath: `"${rootPath}${calfPath}/calfSystem.min.css"`,
-          defineDataTablesPath: `"${rootPath}${calfPath}/dataTables.css"`,
           defineCalfVer: `"${calfVer}"`,
+          defineDataTablesPath: `"${rootPath}${calfPath}/dataTables.css"`,
+          defineEnvironment: env === 'Prod' ? '"production"' : '"development"',
           defineUserIsDev: userIsDev,
+          defineVersion: `"${version}"`,
         },
       }),
       css({
