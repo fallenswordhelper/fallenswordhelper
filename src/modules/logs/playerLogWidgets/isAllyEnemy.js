@@ -11,7 +11,7 @@ async function getAllyEnemy() {
   const stats = await myStats(false);
   if (stats?.username !== playerName()) return {};
   if (!stats._allies || !stats._enemies) {
-    sendException(`myStats returned ${jsonStringify(stats)}`, false);
+    sendException(`myStats returned ${jsonStringify(stats)}`);
   }
   return {
     ...(stats._allies && { _allies: stats._allies.map(justUsername) }),

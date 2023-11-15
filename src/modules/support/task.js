@@ -1,10 +1,10 @@
+import Honeybadger from '@honeybadger-io/js';
 import sendException from '../analytics/sendException';
 import isArray from '../common/isArray';
 import isFunction from '../common/isFunction';
 import isUndefined from '../common/isUndefined';
 import on from '../common/on';
 import fallback from '../system/fallback';
-import parseError from './parseError';
 import { getLength, pop, push } from './sch';
 import stdout from './stdout';
 
@@ -23,7 +23,7 @@ function taskRunner() {
 
 function popError(fn) {
   if (!isUndefined(fn)) {
-    sendException(`pop() was not a function (${typeof fn})`, false);
+    sendException(`pop() was not a function (${typeof fn})`);
   }
 }
 
@@ -38,7 +38,7 @@ function asyncTask() {
   try {
     testPop();
   } catch (e) {
-    sendException(parseError(e), false);
+    Honeybadger.notify(e);
   } finally {
     taskRunner();
   }

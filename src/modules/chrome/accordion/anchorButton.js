@@ -27,7 +27,7 @@ function insertAfterParent(target, listItem) {
   if (tgt instanceof Node) {
     const parent = tgt.parentNode;
     insertElementAfter(listItem, parent);
-  } else { sendException(`#${target} is not a Node`, false); }
+  } else { sendException(`#${target} is not a Node`); }
 }
 
 export default function anchorButton(navLvl, text, fn, target) {
