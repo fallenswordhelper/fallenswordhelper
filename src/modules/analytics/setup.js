@@ -112,7 +112,7 @@ function hbSetup() {
 export default function setup() {
   const analyticsEnabled = false;
   if (analyticsEnabled) analyticsSetup();
-  const ga4Enabled = false;
+  const ga4Enabled = true;
   if (ga4Enabled) gtagSetup();
   const hbEnabled = true;
   if (hbEnabled) hbSetup();
