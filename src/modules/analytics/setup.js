@@ -1,4 +1,3 @@
-import Honeybadger from '@honeybadger-io/js';
 import isUndefined from '../common/isUndefined';
 import loadScript from '../common/loadScript';
 import playerId from '../common/playerId';
@@ -97,23 +96,9 @@ function gtagSetup() {
   });
 }
 
-function hbSetup() {
-  Honeybadger.configure({
-    apiKey: 'hbp_qQyOzugJoUNgE5xn8tHwTjvFuTXcB91ThqhP',
-    environment: defineEnvironment,
-    revision: defineVersion,
-  });
-  const pid = playerName();
-  if (pid) {
-    Honeybadger.setContext({ user_id: pid });
-  }
-}
-
 export default function setup() {
   const analyticsEnabled = false;
   if (analyticsEnabled) analyticsSetup();
   const ga4Enabled = true;
   if (ga4Enabled) gtagSetup();
-  const hbEnabled = true;
-  if (hbEnabled) hbSetup();
 }

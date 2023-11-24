@@ -7,8 +7,8 @@ import isObject from '../common/isObject';
 import jsonParse from '../common/jsonParse';
 import loadCss from '../common/loadCss';
 import querySelector from '../common/querySelector';
+import exceptions from '../exceptions/exceptions';
 import calf from '../support/calf';
-import globalErrorHandler from '../support/globalErrorHandler';
 import stdout from '../support/stdout';
 import task from '../support/task';
 import getUrlParameter from '../system/getUrlParameter';
@@ -125,7 +125,7 @@ export default function dispatch(fshVer, gmInfo) {
   start('JS Perf', 'FSH.dispatch');
   if (badEnv()) { return; }
   const cssPrm = loadCss(defineCalfPath);
-  globalErrorHandler();
+  exceptions();
   setVer(fshVer, gmInfo);
   setup();
   runCore(cssPrm);

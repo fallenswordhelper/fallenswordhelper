@@ -1,7 +1,7 @@
-import sendException from '../../analytics/sendException';
 import getTextTrim from '../../common/getTextTrim';
 import querySelectorArray from '../../common/querySelectorArray';
 import regExpExec from '../../common/regExpExec';
+import sendException from '../../exceptions/sendException';
 
 let transform = 0;
 

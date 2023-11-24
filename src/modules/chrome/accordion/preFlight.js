@@ -1,7 +1,7 @@
-import sendException from '../../analytics/sendException';
 import awaitWidget from '../../common/awaitWidget';
 import getElementById from '../../common/getElementById';
 import isObject from '../../common/isObject';
+import sendException from '../../exceptions/sendException';
 
 const problems = [
   [
