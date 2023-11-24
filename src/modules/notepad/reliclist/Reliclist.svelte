@@ -35,7 +35,7 @@
   const timeSort = (a, b) => sortDirection * (a.time - b.time);
   const getAttrNum = (relic, id) => getAttr(relic, id)?.value ?? 0;
   const attrSort = (id) => (a, b) => sortDirection * (getAttrNum(a, id) - getAttrNum(b, id));
-  const guildSort = (a, b) => sortDirection * alpha(a.guild.name, b.guild.name);
+  const guildSort = (a, b) => sortDirection * alpha(a.guild?.name ?? '', b.guild?.name ?? '');
   const nameSort = (a, b) => sortDirection * alpha(a.name, b.name);
   const level = (relic) => relic.location.realm.min_level;
   const levelSort = (a, b) => sortDirection * (level(a) - level(b));
