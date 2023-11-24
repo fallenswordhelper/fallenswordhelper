@@ -144,7 +144,7 @@ function myGroup(el) {
 
 function getGroupId(json) {
   if (isArray(json.r)) {
-    return json.r.find(myGroup).id;
+    return json.r.find(myGroup)?.id;
   }
 }
 

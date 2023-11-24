@@ -10,7 +10,7 @@ import injectStoreItems from './injectStoreItems';
 
 async function doFolders() {
   const inv = await getInv();
-  if (!inv.folders) { return; }
+  if (!inv?.folders) { return; }
   const [form] = document.forms;
   doFolderFilter(inv, form);
   doMoveItems(inv, form);
