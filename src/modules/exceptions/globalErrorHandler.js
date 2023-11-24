@@ -1,7 +1,7 @@
 import AjaxError from '../ajax/AjaxError';
 import on from '../common/on';
-import sendException from '../exceptions/sendException';
 import parseError from './parseError';
+import sendException from './sendException';
 
 let enabled = 1;
 

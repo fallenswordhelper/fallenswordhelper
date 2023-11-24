@@ -96,7 +96,7 @@ function gtagSetup() {
   });
 }
 
-export default function setup() {
+export default function analytics() {
   const analyticsEnabled = false;
   if (analyticsEnabled) analyticsSetup();
   const ga4Enabled = true;

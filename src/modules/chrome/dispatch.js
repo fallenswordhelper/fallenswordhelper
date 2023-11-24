@@ -1,6 +1,6 @@
+import analytics from '../analytics/analytics';
 import isAuto from '../analytics/isAuto';
 import screenview from '../analytics/screenview';
-import setup from '../analytics/setup';
 import { end, start } from '../analytics/timing';
 import isFunction from '../common/isFunction';
 import isObject from '../common/isObject';
@@ -127,7 +127,7 @@ export default function dispatch(fshVer, gmInfo) {
   const cssPrm = loadCss(defineCalfPath);
   exceptions();
   setVer(fshVer, gmInfo);
-  setup();
+  analytics();
   runCore(cssPrm);
   end('JS Perf', 'FSH.dispatch');
 }
