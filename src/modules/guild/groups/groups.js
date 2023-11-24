@@ -1,4 +1,5 @@
 import getMembrList from '../../ajax/getMembrList';
+import currentGuildId from '../../common/currentGuildId';
 import insertHtmlBeforeBegin from '../../common/insertHtmlBeforeBegin';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import querySelector from '../../common/querySelector';
@@ -30,7 +31,7 @@ function fixTable() {
 }
 
 export default async function groups() {
-  if (jQueryNotPresent()) return;
+  if (!currentGuildId() || jQueryNotPresent()) return;
   const joinAll = querySelector('#pCC input[value="Join All Available Groups"]');
   if (!joinAll) return;
   const membrListPrm = getMembrList(false);
