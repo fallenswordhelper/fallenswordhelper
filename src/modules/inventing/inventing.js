@@ -91,6 +91,7 @@ function submitHandler(e) {
 
 export default function inventing() {
   const moveBtn = querySelector('input[value="Move Recipes"]');
+  if (!moveBtn) return;
   injectPrefs(moveBtn);
   ajaxifyMove = getValue(prefAjaxifyMoveRecipe);
   on(moveBtn.form, 'submit', submitHandler);
