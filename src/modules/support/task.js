@@ -1,9 +1,9 @@
 import Honeybadger from '@honeybadger-io/js';
-import sendException from '../analytics/sendException';
 import isArray from '../common/isArray';
 import isFunction from '../common/isFunction';
 import isUndefined from '../common/isUndefined';
 import on from '../common/on';
+import sendException from '../exceptions/sendException';
 import fallback from '../system/fallback';
 import { getLength, pop, push } from './sch';
 import stdout from './stdout';

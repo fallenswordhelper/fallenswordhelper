@@ -1,5 +1,4 @@
 import sendEvent from '../../analytics/sendEvent';
-import sendException from '../../analytics/sendException';
 import createAnchor from '../../common/cElement/createAnchor';
 import createLi from '../../common/cElement/createLi';
 import getElementById from '../../common/getElementById';
@@ -8,6 +7,7 @@ import insertElementAfter from '../../common/insertElementAfter';
 import isFunction from '../../common/isFunction';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
+import sendException from '../../exceptions/sendException';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 
 function openDialog(text, fn) {

@@ -1,7 +1,7 @@
 import myStats from '../../ajax/myStats';
-import sendException from '../../analytics/sendException';
 import jsonStringify from '../../common/jsonStringify';
 import playerName from '../../common/playerName';
+import sendException from '../../exceptions/sendException';
 
 const justUsername = (obj) => obj.username;
 
