@@ -5,6 +5,7 @@ import insertElementBefore from '../common/insertElementBefore';
 import jQueryPresent from '../common/jQueryPresent';
 import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
+import costing from './costing';
 import fastCompose from './fastCompose/fastCompose';
 import parseComposing from './parseComposing';
 import quickCollect from './quickCollect/quickCollect';
@@ -24,6 +25,7 @@ function hasJQuery() {
   moveButtons();
   fastCompose();
   quickCollect();
+  costing();
 }
 
 export default function composing() {

@@ -5,3 +5,9 @@
   position: relative;
   width: 6.5em;
 }
+
+.template-cost {
+  left: 112px;
+  position: absolute;
+  top: 28px;
+}
