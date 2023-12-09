@@ -19,20 +19,33 @@ const setupCosts = (templates) => templates.map(({
   id,
 }));
 
-function injectCostNode(select, cost) {
-  insertHtmlBeforeEnd(
-    select.parentNode,
-    `<div class="fshBlue template-cost">Cost: ${addCommas(cost)}</div>`,
-  );
-}
+const scenarios = [
+  [
+    (thisCost, existingCostDiv) => !thisCost && !existingCostDiv,
+    () => 0,
+  ],
+  [
+    (thisCost, existingCostDiv) => !thisCost && existingCostDiv,
+    (select, thisCost, existingCostDiv) => existingCostDiv.remove(),
+  ],
+  [
+    (thisCost, existingCostDiv) => thisCost && existingCostDiv,
+    (select, thisCost, existingCostDiv) => setText(`Cost: ${addCommas(thisCost)}`, existingCostDiv),
+  ],
+  [
+    (thisCost, existingCostDiv) => thisCost && !existingCostDiv,
+    (select, thisCost) => insertHtmlBeforeEnd(
+      select.parentNode,
+      `<div class="fshBlue template-cost">Cost: ${addCommas(thisCost)}</div>`,
+    ),
+  ],
+];
 
 function injectCost(select) {
   const thisCost = costs.find(({ id }) => id === Number(select.value))?.cost;
   const existingCostDiv = querySelector('.template-cost', select.parentNode);
-  if (!thisCost && !existingCostDiv) return;
-  if (!thisCost && existingCostDiv) existingCostDiv.remove();
-  else if (thisCost && existingCostDiv) setText(`Cost: ${addCommas(thisCost)}`, existingCostDiv);
-  else if (thisCost && !existingCostDiv) injectCostNode(select, thisCost);
+  const scenario = scenarios.find(([fn]) => fn(thisCost, existingCostDiv));
+  if (scenario) scenario[1](select, thisCost, existingCostDiv);
 }
 
 function changeTemplate(e) {
