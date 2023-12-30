@@ -39,28 +39,7 @@ const fields = (item) => [
 
 const toCsv = (items) => items.map(fields).join('\n');
 const csvBlob = (csv) => new Blob([csv], { type: 'text/csv' });
-
-const thisItem = (rowdata) => ({ inv_id: invId }) => invId === rowdata.inv_id;
 const getAttr = (lookup, i) => lookup.attributes.find(({ id }) => id === i)?.value ?? 0;
-const updStats = (lookup, stats) => ({
-  ...stats,
-  armor: getAttr(lookup, 2),
-  attack: getAttr(lookup, 0),
-  damage: getAttr(lookup, 4),
-  defense: getAttr(lookup, 1),
-  hp: getAttr(lookup, 3),
-  set_name: lookup.set_name ?? '',
-});
-
-export function updateAttr(items) {
-  return function upd() {
-    const rowdata = this.data();
-    const lookup = items.find(thisItem(rowdata));
-    if (!lookup?.attributes) return;
-    rowdata.stats = updStats(lookup, rowdata.stats);
-    this.invalidate();
-  };
-}
 
 const addCachedStats = (cache) => (item) => {
   const lookup = cache.find(({ inv_id: invId }) => invId === item.inv_id);
@@ -88,12 +67,7 @@ const addCachedStats = (cache) => (item) => {
 export default async function gsDl() {
   if (!currentGuildId()) return;
   const json = await guildStore();
-  // console.log('json', json);
   const cache = await get('fsh_guildinvmgr_cache') ?? [];
-  // console.log('cache', cache);
   const updatedItems = json.items.map(addCachedStats(cache));
-  // console.log('test', updatedItems);
-  // console.log('toCsv', `${header}${toCsv(updatedItems)}\n`);
-  // console.log('csvBlob', csvBlob(`${header}${toCsv(updatedItems)}\n`));
   download(csvBlob(`${header}${toCsv(updatedItems)}\n`), 'gs_export.csv');
 }
