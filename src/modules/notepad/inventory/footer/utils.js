@@ -13,7 +13,7 @@ const itemPlayer = ({ player_id: pid }) => pid;
 const inStore = ({ player_id: id }) => id === -1;
 const byChunk = ([ary, pFn, tConst]) => chunk(20, ary).map((aChunk) => [aChunk, pFn, tConst]);
 const thisItem = (rowdata) => ({ inv_id: invId }) => invId === rowdata.inv_id;
-const getAttr = (lookup, i) => lookup.attributes.find(({ id }) => id === i)?.value ?? 0;
+export const getAttr = (lookup, i) => lookup.attributes.find(({ id }) => id === i)?.value ?? 0;
 const updStats = (lookup, stats) => ({
   ...stats,
   armor: getAttr(lookup, 2),
@@ -24,7 +24,7 @@ const updStats = (lookup, stats) => ({
   set_name: lookup.set_name ?? '',
 });
 
-export const equipable = (_idx, { type }) => type < 9;
+export const equipable = (_idx, { forge }) => forge;
 export const justItems = (o) => (o?.s ? o.r.items : []);
 
 export const getChunks = (dataAry) => [
