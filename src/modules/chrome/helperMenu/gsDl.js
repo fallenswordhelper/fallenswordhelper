@@ -1,6 +1,7 @@
 import guildStore from '../../_dataAccess/export/guildStore';
 import currentGuildId from '../../common/currentGuildId';
 import download from '../../common/download';
+import { getAttr } from '../../notepad/inventory/footer/utils';
 import { get } from '../../system/idb';
 
 const header = 'item_id,inv_id,item_name,rarity,type,durability,max_durability,guild_tag,'
@@ -39,7 +40,6 @@ const fields = (item) => [
 
 const toCsv = (items) => items.map(fields).join('\n');
 const csvBlob = (csv) => new Blob([csv], { type: 'text/csv' });
-const getAttr = (lookup, i) => lookup.attributes.find(({ id }) => id === i)?.value ?? 0;
 
 const addCachedStats = (cache) => (item) => {
   const lookup = cache.find(({ inv_id: invId }) => invId === item.inv_id);
