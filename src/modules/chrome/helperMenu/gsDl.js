@@ -1,10 +1,11 @@
 import guildStore from '../../_dataAccess/export/guildStore';
 import currentGuildId from '../../common/currentGuildId';
 import download from '../../common/download';
+import { get } from '../../system/idb';
 
 const header = 'item_id,inv_id,item_name,rarity,type,durability,max_durability,guild_tag,'
   + 'in_guide,player_id,equipped,craft,forge,attack,defense,armor,hp,damage,stamina,min_level,'
-  + 'set_name\n';
+  + 'set_name,cached\n';
 const mainFields = (item) => [
   item.item_id,
   item.inv_id,
@@ -33,13 +34,66 @@ const statFields = (stats) => [
 const fields = (item) => [
   ...mainFields(item),
   ...statFields(item.stats),
+  item.cached,
 ].join(',');
 
-const toCsv = (json) => json.items.map(fields).join('\n');
+const toCsv = (items) => items.map(fields).join('\n');
 const csvBlob = (csv) => new Blob([csv], { type: 'text/csv' });
+
+const thisItem = (rowdata) => ({ inv_id: invId }) => invId === rowdata.inv_id;
+const getAttr = (lookup, i) => lookup.attributes.find(({ id }) => id === i)?.value ?? 0;
+const updStats = (lookup, stats) => ({
+  ...stats,
+  armor: getAttr(lookup, 2),
+  attack: getAttr(lookup, 0),
+  damage: getAttr(lookup, 4),
+  defense: getAttr(lookup, 1),
+  hp: getAttr(lookup, 3),
+  set_name: lookup.set_name ?? '',
+});
+
+export function updateAttr(items) {
+  return function upd() {
+    const rowdata = this.data();
+    const lookup = items.find(thisItem(rowdata));
+    if (!lookup?.attributes) return;
+    rowdata.stats = updStats(lookup, rowdata.stats);
+    this.invalidate();
+  };
+}
+
+const addCachedStats = (cache) => (item) => {
+  const lookup = cache.find(({ inv_id: invId }) => invId === item.inv_id);
+  if (!lookup?.attributes) {
+    return {
+      ...item,
+      cached: false,
+    };
+  }
+  return {
+    ...item,
+    stats: {
+      ...item.stats,
+      armor: getAttr(lookup, 2),
+      attack: getAttr(lookup, 0),
+      damage: getAttr(lookup, 4),
+      defense: getAttr(lookup, 1),
+      hp: getAttr(lookup, 3),
+      set_name: lookup.set_name ?? '',
+    },
+    cached: true,
+  };
+};
 
 export default async function gsDl() {
   if (!currentGuildId()) return;
   const json = await guildStore();
-  download(csvBlob(`${header}${toCsv(json)}\n`), 'gs_export.csv');
+  // console.log('json', json);
+  const cache = await get('fsh_guildinvmgr_cache') ?? [];
+  // console.log('cache', cache);
+  const updatedItems = json.items.map(addCachedStats(cache));
+  // console.log('test', updatedItems);
+  // console.log('toCsv', `${header}${toCsv(updatedItems)}\n`);
+  // console.log('csvBlob', csvBlob(`${header}${toCsv(updatedItems)}\n`));
+  download(csvBlob(`${header}${toCsv(updatedItems)}\n`), 'gs_export.csv');
 }

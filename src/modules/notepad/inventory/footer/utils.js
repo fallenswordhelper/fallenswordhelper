@@ -24,7 +24,7 @@ const updStats = (lookup, stats) => ({
   set_name: lookup.set_name ?? '',
 });
 
-export const equipable = (_idx, { type }) => type < 9;
+export const equipable = (_idx, { forge }) => forge;
 export const justItems = (o) => (o?.s ? o.r.items : []);
 
 export const getChunks = (dataAry) => [
