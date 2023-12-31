@@ -1,4 +1,4 @@
-import indexAjaxData from '../../ajax/indexAjaxData';
+import daSetCombatMove from '../../_dataAccess/daSetCombatMove';
 import all from '../../common/all';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
@@ -14,12 +14,7 @@ let imgNodes = 0;
 let selectRow = 0;
 
 function doPickMove(moveId, slotId) {
-  return indexAjaxData({
-    cmd: 'arena',
-    subcmd: 'dopickmove',
-    move_id: moveId,
-    slot_id: slotId,
-  });
+  return daSetCombatMove(moveId, slotId);
 }
 
 function value(el) { return el.value; }
