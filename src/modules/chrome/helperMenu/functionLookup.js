@@ -1,6 +1,3 @@
-import sendEvent from '../../analytics/sendEvent';
-import isFunction from '../../common/isFunction';
-import jQueryPresent from '../../common/jQueryPresent';
 import { newGuildLogUrl, notepadBlankUrl } from '../../support/constants';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import buffLog from '../pageSwitcher/loader/buffLog';
@@ -24,17 +21,8 @@ import setmgr from '../pageSwitcher/loader/setmgr';
 import superelite from '../pageSwitcher/loader/superelite';
 import gsDl from './gsDl';
 
-function callModalFunction(name, fn) {
-  if (isFunction(fn)) {
-    sendEvent('helperMenu', name);
-    fn();
-  }
-}
-
-function callHelperFunction(name, fn) {
-  if (jQueryPresent()) {
-    callModalFunction(name, () => jQueryDialog(fn));
-  }
+function convertToModal(fn) {
+  return () => jQueryDialog(fn);
 }
 
 export default [
@@ -42,22 +30,22 @@ export default [
     section: 'Character',
     menu: [
       {
-        label: 'Buff Log', type: 'button', f: buffLog, caller: callModalFunction,
+        label: 'Buff Log', fn: buffLog,
       },
       {
-        label: 'Combat Log', type: 'button', f: combatLog, caller: callModalFunction,
+        label: 'Combat Log', fn: combatLog,
       },
       {
-        label: 'Creature Log', type: 'button', f: creatureLog, caller: callModalFunction,
+        label: 'Creature Log', fn: creatureLog,
       },
       {
-        label: 'Recipe Manager', type: 'button', f: recipeMgr, caller: callModalFunction,
+        label: 'Recipe Manager', fn: recipeMgr,
       },
       {
-        label: 'Quick Links', type: 'button', f: quickLinksManager, caller: callModalFunction,
+        label: 'Quick Links', fn: quickLinksManager,
       },
       {
-        label: 'Inventory Manager', type: 'link', href: `${notepadBlankUrl}invmanagernew`,
+        label: 'Inventory Manager', hrefn: `${notepadBlankUrl}invmanagernew`,
       },
     ],
   },
@@ -65,35 +53,35 @@ export default [
     section: 'Actions',
     menu: [
       {
-        label: 'Find Buffs', type: 'button', f: injectFindOther, caller: callHelperFunction,
+        label: 'Find Buffs', fn: convertToModal(injectFindOther),
       },
       {
-        label: 'Find Other', type: 'button', f: injectFindBuffs, caller: callHelperFunction,
+        label: 'Find Other', fn: convertToModal(injectFindBuffs),
       },
       {
-        label: 'Online Players', type: 'button', f: injectOnlinePlayers, caller: callHelperFunction,
+        label: 'Online Players', fn: convertToModal(injectOnlinePlayers),
       },
       {
-        label: 'AH Quick Search', type: 'button', f: injectAuctionSearch, caller: callHelperFunction,
+        label: 'AH Quick Search', fn: convertToModal(injectAuctionSearch),
       },
     ],
   },
   {
     section: 'Guild',
     menu: [
-      { label: 'Guild Inventory', type: 'link', href: `${notepadBlankUrl}guildinvmgr` },
-      { label: 'New Guild Log', type: 'link', href: `${newGuildLogUrl}` },
+      { label: 'Guild Inventory', hrefn: `${notepadBlankUrl}guildinvmgr` },
+      { label: 'New Guild Log', hrefn: `${newGuildLogUrl}` },
       {
-        label: 'Buff Log', type: 'button', f: buffLog, caller: callModalFunction,
+        label: 'Buff Log', fn: buffLog,
       },
       {
-        label: 'Merc Hunter', type: 'button', f: mercs, caller: callModalFunction,
+        label: 'Merc Hunter', fn: mercs,
       },
       {
-        label: 'Pot Report', type: 'button', f: potReport, caller: callModalFunction,
+        label: 'Pot Report', fn: potReport,
       },
       {
-        label: 'Guild Tracker', type: 'button', f: guildTracker, caller: callModalFunction,
+        label: 'Guild Tracker', fn: guildTracker,
       },
     ],
   },
@@ -101,16 +89,16 @@ export default [
     section: 'Extra',
     menu: [
       {
-        label: 'Quick Extract', type: 'button', f: quickExtract, caller: callModalFunction,
+        label: 'Quick Extract', fn: quickExtract,
       },
       {
-        label: 'Quick Wear', type: 'button', f: quickwear, caller: callHelperFunction,
+        label: 'Quick Wear', fn: convertToModal(quickwear),
       },
       {
-        label: 'FS Box Log', type: 'button', f: fsboxlog, caller: callModalFunction,
+        label: 'FS Box Log', fn: fsboxlog,
       },
       {
-        label: 'SE Tracker', type: 'button', f: superelite, caller: callModalFunction,
+        label: 'SE Tracker', fn: superelite,
       },
     ],
   },
@@ -118,10 +106,10 @@ export default [
     section: 'Beta Features',
     menu: [
       {
-        label: 'Relic List', type: 'button', f: reliclist, caller: callModalFunction, beta: true,
+        label: 'Relic List', fn: reliclist, beta: true,
       },
       {
-        label: 'GS Export', type: 'button', f: gsDl, caller: callHelperFunction, beta: true,
+        label: 'GS Export', fn: convertToModal(gsDl), beta: true,
       },
     ],
   },
@@ -129,10 +117,21 @@ export default [
     section: 'Dev Links',
     menu: [
       {
-        label: 'Combat Set Manager', type: 'button', f: setmgr, caller: callModalFunction, beta: true,
+        label: 'Combat Set Manager', fn: setmgr, beta: true,
       },
       {
-        label: 'Quest Book', type: 'button', f: questbook, caller: callModalFunction,
+        label: 'Quest Book', fn: questbook,
+      },
+    ],
+  },
+  {
+    section: 'FSH developer quick links',
+    menu: [
+      {
+        playerId: 1963510, playerName: 'PointyHair',
+      },
+      {
+        playerId: 1674838, playerName: 'Lusterless',
       },
     ],
   },

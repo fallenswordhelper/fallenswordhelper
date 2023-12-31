@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte';
+  import sendEvent from '../../analytics/sendEvent';
   import draggable from '../../common/draggable';
+  import isFunction from '../../common/isFunction';
   import querySelector from '../../common/querySelector';
   import { playerIdUrl } from '../../support/constants';
   import getValue from '../../system/getValue';
@@ -17,6 +19,13 @@
   function toggle() {
     showMenu = !showMenu;
   }
+
+  function callModalFunction(name, fn) {
+    if (isFunction(fn)) {
+      sendEvent('helperMenu', name);
+      fn();
+    }
+  }
 </script>
 <div id="helperMenu"
   class="helperMenu"
@@ -28,31 +37,28 @@
       <h2>{ menuSection.section }</h2>
       <ul>{ #each menuSection.menu as menuItem }
         <li>
-          { #if menuItem.type === 'button' }
-            <button type="button" on:click={ () => menuItem.caller(menuItem.label, menuItem.f) }>
+          { #if menuItem.fn }
+            <button type="button" on:click={ () => callModalFunction(menuItem.label, menuItem.fn) }>
               { menuItem.label }
             </button>
-          { :else if menuItem.type === 'link' }
-            <a href={ menuItem.href }>{ menuItem.label }</a>
+          { :else if menuItem.href }
+            <a href={ menuItem.href } on:click={ () => sendEvent('helperMenu', menuItem.label) }>
+              { menuItem.label }
+            </a>
+          { :else if menuItem.playerName }
+            <button
+              type="button"
+              class="helperDevBtn"
+              onclick="openQuickMsgDialog('{ menuItem.playerName }');">
+              PM
+            </button>
+            <a href="{ playerIdUrl }menuItem.playerId">{ menuItem.playerName }</a>
           { /if }
-          { #if Object.prototype.hasOwnProperty.call(menuItem, 'beta') && menuItem.beta }<sup class="fshRed">beta</sup>{ /if }
+          { #if menuItem.beta }<sup class="fshRed">beta</sup>{ /if }
         </li>
       { /each }
       </ul>
     { /each }
-    <h2>FSH developer quick links</h2>
-    <ul>
-      <li>
-        <button type="button" class="helperDevBtn" onclick="openQuickMsgDialog('Lusterless');">
-          PM
-        </button>
-        <a href="{ playerIdUrl }1963510">PointyHair</a></li>
-      <li>
-        <button type="button" class="helperDevBtn" onclick="openQuickMsgDialog('Lusterless');">
-          PM
-        </button>
-        <a href="{ playerIdUrl }1674838">Lusterless</a></li>
-    </ul>
   </div>
 </div>
 <style>
