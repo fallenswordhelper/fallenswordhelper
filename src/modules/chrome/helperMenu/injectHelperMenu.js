@@ -1,4 +1,3 @@
-import './helperMenu.css';
 import querySelector from '../../common/querySelector';
 import HelperMenu from './HelperMenu.svelte';
 
