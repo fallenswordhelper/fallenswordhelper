@@ -4,6 +4,7 @@
   import draggable from '../../common/draggable';
   import isFunction from '../../common/isFunction';
   import querySelector from '../../common/querySelector';
+  import Modal from '../../modal/Modal.svelte';
   import { playerIdUrl } from '../../support/constants';
   import getValue from '../../system/getValue';
   import functionLookup from './functionLookup';
@@ -20,19 +21,28 @@
     showMenu = !showMenu;
   }
 
+  function sendHelperEvent(name) {
+    sendEvent('helperMenu', name);
+  }
+
   function callModalFunction(name, fn) {
     if (isFunction(fn)) {
-      sendEvent('helperMenu', name);
+      sendHelperEvent(name);
       fn();
+      toggle();
     }
   }
 </script>
-<div id="helperMenu"
-  class="helperMenu"
+<button
   class:helperMenuFixed={ isFixed }
-  class:helperMenuMove={ isDraggable }>
-  <button type="button" id="toggle" on:click={ toggle }>Helper Menu</button>
-  <div id="helperMenuDiv" class="helperMenuDiv" class:helperMenuShow={ showMenu }>
+  class:helperMenuMove={ isDraggable }
+  type="button"
+  id="toggle"
+  on:click={ toggle }>
+  Helper Menu
+</button>
+<Modal visible={ showMenu } on:close={ toggle }>
+  <div id="helperMenu">
     { #each functionLookup as menuSection }
       <h2>{ menuSection.section }</h2>
       <ul>{ #each menuSection.menu as menuItem }
@@ -42,13 +52,14 @@
               { menuItem.label }
             </button>
           { :else if menuItem.href }
-            <a href={ menuItem.href } on:click={ () => sendEvent('helperMenu', menuItem.label) }>
+            <a href={ menuItem.href } on:click={ () => sendHelperEvent(menuItem.label) }>
               { menuItem.label }
             </a>
           { :else if menuItem.playerName }
             <button
               type="button"
               class="helperDevBtn"
+              on:click={ () => { toggle(); sendHelperEvent('sendMsg'); } }
               onclick="openQuickMsgDialog('{ menuItem.playerName }');">
               PM
             </button>
@@ -60,54 +71,42 @@
       </ul>
     { /each }
   </div>
-</div>
+</Modal>
 <style>
-.helperMenu {
-  cursor: pointer;
-  left: 0;
-  position: absolute;
-  top: 0;
-  text-align: center;
-  z-index: 75;
-  white-space: nowrap;
-}
 #toggle {
-  color: yellow;
-  font-size: 13px;
-  font-weight: bold;
-  text-decoration: underline;
-  text-align: center;
   background: none;
   border: none;
+  color: yellow;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: underline;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 75;
 }
-.helperMenuDiv {
+#toggle.helperMenuFixed { position: fixed; }
+#toggle.helperMenuMove  { cursor: move; }
+#helperMenu {
   background-color: #e6c270;
-  border:3px solid #ccbb77;
+  border: 3px solid #ccbb77;
   border-radius: 5px;
   color: black;
   cursor: default;
   font-size: 12px;
-  opacity: 0;
-  position: absolute;
   text-align: center;
   text-decoration: none;
-  transition: opacity 100ms linear, visibility 0s linear 100ms;
-  visibility: hidden;
 }
-.helperMenuShow {
-  opacity: 1;
-  transition: opacity 100ms linear, visibility 0s linear;
-  visibility: visible;
-}
-.helperMenuFixed { position: fixed; }
-.helperMenuMove #toggle { cursor: move; }
-h2 {
+#helperMenu h2 {
   background: #e0e0e0;
   font: bold 13px Arial, Helvetica, sans-serif;
   margin: 4px 0 2px 0;
   text-align: center;
 }
-.helperMenuDiv button, .helperMenuDiv a {
+#helperMenu button, #helperMenu a {
   font-family: Helvetica, Arial;
   background: transparent;
   border: none;
@@ -118,5 +117,6 @@ h2 {
   padding: 0;
   text-decoration: underline;
   user-select: text;
+  color: black;
 }
 </style>
