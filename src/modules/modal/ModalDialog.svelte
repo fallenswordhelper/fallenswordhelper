@@ -12,6 +12,10 @@
   export let modal;
   export let visible = true;
 
+  export let center = true;
+  export let left = '50%';
+  export let top = '32px';
+
   const dispatch = createEventDispatcher();
   const close = () => dispatch('close');
 
@@ -61,7 +65,13 @@
 
 <svelte:window on:keydown={ handleKeydown }/>
 
-<div class="ui-dialog" class:modalVisible role="dialog" aria-modal="true" bind:this={ modal }>
+<div
+  class="ui-dialog"
+  class:modalVisible
+  role="dialog"
+  aria-modal="true"
+  style="--left: { left }; --top: { top }; --center: { center ? '-50%' : '0%' }"
+  bind:this={ modal }>
   <slot />
 </div>
 
@@ -72,15 +82,15 @@
     box-shadow: 0 0 10px #000;
     color: #383838;
     font-size: 13px;
-    left: 50%;
+    left: var(--left);
     max-height: calc(100vh - 4em);
     overflow: auto;
     position: absolute;
-    top: 32px;
+    top: var(--top);
     transform: translateX(-1000vw);
   }
 
   .modalVisible {
-    transform: translate(-50%);
+    transform: translate(var(--center));
   }
 </style>

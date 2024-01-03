@@ -45,7 +45,7 @@ export default [
         label: 'Quick Links', fn: quickLinksManager,
       },
       {
-        label: 'Inventory Manager', hrefn: `${notepadBlankUrl}invmanagernew`,
+        label: 'Inventory Manager', href: `${notepadBlankUrl}invmanagernew`,
       },
     ],
   },
@@ -69,8 +69,8 @@ export default [
   {
     section: 'Guild',
     menu: [
-      { label: 'Guild Inventory', hrefn: `${notepadBlankUrl}guildinvmgr` },
-      { label: 'New Guild Log', hrefn: `${newGuildLogUrl}` },
+      { label: 'Guild Inventory', href: `${notepadBlankUrl}guildinvmgr` },
+      { label: 'New Guild Log', href: `${newGuildLogUrl}` },
       {
         label: 'Buff Log', fn: buffLog,
       },

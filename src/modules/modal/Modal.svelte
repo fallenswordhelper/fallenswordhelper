@@ -7,6 +7,10 @@
   export let modal;
   export let visible = true;
 
+  export let center = true;
+  export let left = '50%';
+  export let top = '32px';
+
   const dispatch = createEventDispatcher();
   const close = () => dispatch('close');
 
@@ -35,7 +39,7 @@
 </script>
 
 <ModalBackground { visible } on:click={ close }>
-  <ModalDialog { visible } on:close bind:modal>
+  <ModalDialog { visible } { center } { left } { top } on:close bind:modal>
     <slot />
   </ModalDialog>
 </ModalBackground>

@@ -11,13 +11,21 @@
 
   const isFixed = getValue('keepHelperMenuOnScreen');
   const isDraggable = getValue('draggableHelperMenu');
+  let helperPosition = { left: '0px', top: '16px' };
 
   onMount(() => {
-    if (isDraggable) draggable(querySelector('#helperMenu'));
+    if (isDraggable) draggable(querySelector('#toggle'));
   });
+
+  function updateOffset() {
+    const css = querySelector('#toggle').style.transform;
+    const matrix = css.substring(7, css.length - 1).split(', ');
+    helperPosition = { left: `${matrix[4]}px`, top: `${Number(matrix[5]) + 16}px` };
+  }
 
   let showMenu = false;
   function toggle() {
+    updateOffset();
     showMenu = !showMenu;
   }
 
@@ -41,7 +49,12 @@
   on:click={ toggle }>
   Helper Menu
 </button>
-<Modal visible={ showMenu } on:close={ toggle }>
+<Modal
+  visible={ showMenu }
+  on:close={ toggle }
+  left={ helperPosition.left }
+  center={ false }
+  top={ helperPosition.top }>
   <div id="helperMenu">
     { #each functionLookup as menuSection }
       <h2>{ menuSection.section }</h2>
