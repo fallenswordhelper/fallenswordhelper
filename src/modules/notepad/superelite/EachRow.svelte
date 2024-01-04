@@ -49,6 +49,7 @@ button {
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
+  line-height: 1;
   padding: 0;
 }
 .last-kill {
