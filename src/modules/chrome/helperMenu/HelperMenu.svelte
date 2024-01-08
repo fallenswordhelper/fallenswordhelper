@@ -40,6 +40,13 @@
       toggle();
     }
   }
+
+  function message(playerName) {
+    toggle();
+    sendHelperEvent('sendMsg');
+    // eslint-disable-next-line no-undef
+    openQuickMsgDialog(playerName);
+  }
 </script>
 <button
   class:helperMenuFixed={ isFixed }
@@ -72,8 +79,7 @@
             <button
               type="button"
               class="helperDevBtn"
-              on:click={ () => { toggle(); sendHelperEvent('sendMsg'); } }
-              onclick="openQuickMsgDialog('{ menuItem.playerName }');">
+              on:click={ () => message(menuItem.playerName) }>
               PM
             </button>
             <a href="{ playerIdUrl }menuItem.playerId">{ menuItem.playerName }</a>
