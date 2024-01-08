@@ -10,5 +10,5 @@ function startApp(props, target) {
 
 export default function injectHelperMenu() {
   const target = querySelector('.mainbody');
-  startApp({}, target);
+  if (target) startApp({}, target);
 }
