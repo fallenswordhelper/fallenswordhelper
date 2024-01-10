@@ -69,10 +69,13 @@ export default [
   {
     section: 'Guild',
     menu: [
-      { label: 'Guild Inventory', href: `${notepadBlankUrl}guildinvmgr` },
-      { label: 'New Guild Log', href: `${newGuildLogUrl}` },
       {
-        label: 'Buff Log', fn: buffLog,
+        label: 'Guild Inventory',
+        href: `${notepadBlankUrl}guildinvmgr`,
+      },
+      {
+        label: 'New Guild Log',
+        href: `${newGuildLogUrl}`,
       },
       {
         label: 'Merc Hunter', fn: mercs,
