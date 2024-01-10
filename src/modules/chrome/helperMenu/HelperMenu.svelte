@@ -85,7 +85,7 @@
 #helperMenu {
   position: absolute;
   left: 0;
-  top: 20px;
+  top: 0;
   z-index: 75;
 }
 #helperMenu.helperMenuFixed { position: fixed; }
@@ -97,9 +97,6 @@
   text-align: center;
   text-decoration: underline;
   white-space: nowrap;
-  position: absolute;
-  top: -19px;
-  left: 0px;
   background: none;
   border: none;
 }
