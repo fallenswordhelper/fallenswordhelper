@@ -1,4 +1,4 @@
-import equipItem from '../../ajax/equipItem';
+import daEquipItem from '../../_dataAccess/daEquipItem';
 import useItem from '../../ajax/useItem';
 import sendEvent from '../../analytics/sendEvent';
 import hasClass from '../../common/hasClass';
@@ -34,7 +34,7 @@ async function fastAction(theBackpack, evt, action, result) {
 
 export default function fastEvent(theBackpack, evt) {
   if (hasClass('fastWear', evt.target)) {
-    fastAction(theBackpack, evt, equipItem, 'Worn');
+    fastAction(theBackpack, evt, daEquipItem, 'Worn');
   }
   if (hasClass('fastUse', evt.target)) {
     fastAction(theBackpack, evt, useItem, 'Used');

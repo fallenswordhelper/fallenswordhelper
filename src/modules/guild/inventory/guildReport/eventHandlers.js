@@ -1,5 +1,5 @@
 import './guildReport.css';
-import equipItem from '../../../ajax/equipItem';
+import daEquipItem from '../../../_dataAccess/daEquipItem';
 import { queueRecallItem } from '../../../ajaxQueue/queue';
 import sendEvent from '../../../analytics/sendEvent';
 import classHandler from '../../../common/classHandler';
@@ -68,7 +68,7 @@ function doFastGs(theTd, href) {
 async function doFastWear(theTd, href) {
   sendEvent('GuildReport', 'Fast Wear');
   if (Number(regExpFirstCapture(playerIDRE, href)) === playerId()) {
-    await equipItem(itemId(href));
+    await daEquipItem(itemId(href));
     wornItem(theTd);
   } else {
     doRecall(theTd, href, 0, 'wear');
