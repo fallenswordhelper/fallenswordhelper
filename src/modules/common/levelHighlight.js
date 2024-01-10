@@ -55,33 +55,41 @@ export function getUpperPvpLevel() {
   return calcUpperPvpLevel(calcLvlToTest());
 }
 
-const lowerGvgCalcs = [
-  [(levelToTest) => levelToTest > 700 + 100, () => 100],
-  [(levelToTest) => levelToTest > 700 + 50, (levelToTest) => levelToTest - 701],
-  [(levelToTest) => levelToTest > 300 + 50, () => 50],
-  [(levelToTest) => levelToTest > 300 + 25, (levelToTest) => levelToTest - 301],
-  [(levelToTest) => levelToTest > 49 + 25, () => 25],
-  [(levelToTest) => levelToTest > 49, (levelToTest) => levelToTest - 50],
-];
-
-function calcLowerGvgLevel(levelToTest) {
-  return levelToTest - getModifier(lowerGvgCalcs, levelToTest);
+function getGvgRange(levelToTest) {
+  if (levelToTest >= 700) {
+    return 100 + Math.floor((levelToTest - 1) / 1000) * 25;
+  }
+  if (levelToTest > 300) {
+    return 50;
+  }
+  return 25;
 }
-
-export function getLowerGvGLevel() {
-  return calcLowerGvgLevel(calcLvlToTest());
-}
-
-const upperGvgCalcs = [
-  [(levelToTest) => levelToTest > 700, () => 100],
-  [(levelToTest) => levelToTest > 300, () => 50],
-  [(levelToTest) => levelToTest > 49, () => 25],
-];
 
 function calcUpperGvgLevel(levelToTest) {
-  return levelToTest + getModifier(upperGvgCalcs, levelToTest);
+  return levelToTest + getGvgRange(levelToTest);
+}
+
+const lowerGvgMins = [700, 301, 50, 0];
+
+function calcLowerGvgMin(levelToTest) {
+  if (levelToTest > 1000) {
+    return Math.floor((levelToTest - 1) / 1000) * 1000 + 1;
+  }
+  return lowerGvgMins.find((i) => levelToTest > i);
+}
+
+function calcLowerGvgLevel(levelToTest) {
+  const range = getGvgRange(levelToTest);
+  return Math.max(
+    levelToTest - range,
+    calcLowerGvgMin(levelToTest),
+  );
 }
 
 export function getUpperGvgLevel() {
   return calcUpperGvgLevel(calcLvlToTest());
+}
+
+export function getLowerGvGLevel() {
+  return calcLowerGvgLevel(calcLvlToTest());
 }
