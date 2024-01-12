@@ -1,3 +1,5 @@
+import { newGuildLogUrl, notepadBlankUrl } from '../../support/constants';
+import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
 import creatureLog from '../pageSwitcher/loader/creatureLog';
@@ -19,25 +21,121 @@ import setmgr from '../pageSwitcher/loader/setmgr';
 import superelite from '../pageSwitcher/loader/superelite';
 import gsDl from './gsDl';
 
-export default {
-  'Buff Log': buffLog,
-  'Combat Log': combatLog,
-  'Creature Log': creatureLog,
-  'Recipe Manager': recipeMgr,
-  'Quick Links': quickLinksManager,
-  'Find Buffs': injectFindBuffs,
-  'Find Other': injectFindOther,
-  'Online Players': injectOnlinePlayers,
-  'AH Quick Search': injectAuctionSearch,
-  'Quick Wear': quickwear,
-  'FS Box Log': fsboxlog,
-  'Quick Extract': quickExtract,
-  'GS Export': gsDl,
-  'Merc Hunter': mercs,
-  'SE Tracker': superelite,
-  'Guild Tracker': guildTracker,
-  'Relic List': reliclist,
-  'Combat Set Manager': setmgr,
-  'Pot Report': potReport,
-  'Quest Book': questbook,
-};
+function convertToModal(fn) {
+  return () => jQueryDialog(fn);
+}
+
+export default [
+  {
+    section: 'Character',
+    menu: [
+      {
+        label: 'Buff Log', fn: buffLog,
+      },
+      {
+        label: 'Combat Log', fn: combatLog,
+      },
+      {
+        label: 'Creature Log', fn: creatureLog,
+      },
+      {
+        label: 'Recipe Manager', fn: recipeMgr,
+      },
+      {
+        label: 'Quick Links', fn: quickLinksManager,
+      },
+      {
+        label: 'Inventory Manager', href: `${notepadBlankUrl}invmanagernew`,
+      },
+    ],
+  },
+  {
+    section: 'Actions',
+    menu: [
+      {
+        label: 'Find Buffs', fn: convertToModal(injectFindOther),
+      },
+      {
+        label: 'Find Other', fn: convertToModal(injectFindBuffs),
+      },
+      {
+        label: 'Online Players', fn: convertToModal(injectOnlinePlayers),
+      },
+      {
+        label: 'AH Quick Search', fn: convertToModal(injectAuctionSearch),
+      },
+    ],
+  },
+  {
+    section: 'Guild',
+    menu: [
+      {
+        label: 'Guild Inventory',
+        href: `${notepadBlankUrl}guildinvmgr`,
+      },
+      {
+        label: 'New Guild Log',
+        href: `${newGuildLogUrl}`,
+      },
+      {
+        label: 'Merc Hunter', fn: mercs,
+      },
+      {
+        label: 'Pot Report', fn: potReport,
+      },
+      {
+        label: 'Guild Tracker', fn: guildTracker,
+      },
+    ],
+  },
+  {
+    section: 'Extra',
+    menu: [
+      {
+        label: 'Quick Extract', fn: quickExtract,
+      },
+      {
+        label: 'Quick Wear', fn: convertToModal(quickwear),
+      },
+      {
+        label: 'FS Box Log', fn: fsboxlog,
+      },
+      {
+        label: 'SE Tracker', fn: superelite,
+      },
+    ],
+  },
+  {
+    section: 'Beta Features',
+    menu: [
+      {
+        label: 'Relic List', fn: reliclist, beta: true,
+      },
+      {
+        label: 'GS Export', fn: convertToModal(gsDl), beta: true,
+      },
+    ],
+  },
+  {
+    section: 'Dev Links',
+    menu: [
+      {
+        label: 'Combat Set Manager', fn: setmgr, beta: true,
+      },
+      {
+        label: 'Quest Book', fn: questbook,
+      },
+    ],
+  },
+  {
+    section: 'FSH developer quick links',
+    menu: [
+      {
+        playerId: 1963510, playerName: 'PointyHair',
+      },
+      {
+        playerId: 1674838, playerName: 'Lusterless',
+      },
+    ],
+  },
+];
