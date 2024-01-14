@@ -112,7 +112,7 @@ export default [
         label: 'Relic List', fn: reliclist, beta: true,
       },
       {
-        label: 'GS Export', fn: convertToModal(gsDl), beta: true,
+        label: 'GS Export', fn: gsDl, beta: true,
       },
     ],
   },
