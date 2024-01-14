@@ -72,15 +72,24 @@ function calcUpperGvgLevel(levelToTest) {
   return levelToTest + getGvgRange(levelToTest);
 }
 
+const lowerGvgMins = [700, 301, 50];
+function calcLowerGvgMin(levelToTest) {
+  if (levelToTest > 1000) {
+    return Math.floor((levelToTest - 1) / 1000) * 1000 + 1;
+  }
+  return lowerGvgMins.find((i) => levelToTest >= i);
+}
+
 function calcLowerGvgLevel(levelToTest) {
   if (levelToTest < 50) {
     return 0;
   }
   const playerRange = getGvgRange(levelToTest);
-  return Math.max(
-    levelToTest - getGvgRange(levelToTest - playerRange),
-    50,
-  );
+  const bandMin = calcLowerGvgMin(levelToTest);
+  if (levelToTest - playerRange < bandMin) {
+    return Math.max(Math.min(bandMin, levelToTest - getGvgRange(levelToTest - playerRange)), 50);
+  }
+  return Math.max(levelToTest - playerRange, 50);
 }
 
 export function getUpperGvgLevel() {
