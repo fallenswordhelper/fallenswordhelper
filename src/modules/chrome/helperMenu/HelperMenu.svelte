@@ -25,7 +25,7 @@
     sendEvent('helperMenu', name);
   }
 
-  function callModalFunction(name, fn) {
+  function callMenuFunction(name, fn) {
     if (isFunction(fn)) {
       sendHelperEvent(name);
       toggle();
@@ -57,7 +57,7 @@
             { #if menuItem.fn }
               <button
                 type="button"
-                on:click={ () => callModalFunction(menuItem.label, menuItem.fn) }>
+                on:click={ () => callMenuFunction(menuItem.label, menuItem.fn) }>
                 { menuItem.label }
               </button>
             { :else if menuItem.href }
