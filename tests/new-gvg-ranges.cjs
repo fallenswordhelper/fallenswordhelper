@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 function getGvgRange(levelToTest) {
-  if (levelToTest >= 700) {
+  if (levelToTest > 700) {
     return 100 + Math.floor((levelToTest - 1) / 1000) * 25;
   }
   if (levelToTest > 300) {
@@ -17,7 +17,7 @@ function calcUpperGvgLevel(levelToTest) {
   return levelToTest + getGvgRange(levelToTest);
 }
 
-const lowerGvgMins = [700, 301, 50];
+const lowerGvgMins = [701, 301, 50];
 function calcLowerGvgMin(levelToTest) {
   if (levelToTest > 1000) {
     return Math.floor((levelToTest - 1) / 1000) * 1000 + 1;
