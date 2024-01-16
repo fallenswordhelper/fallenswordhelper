@@ -2,25 +2,37 @@
   import VirtualScroll from 'svelte-virtual-scroll-list';
   import daEquipItem from '../../_dataAccess/daEquipItem';
   import daUseItem from '../../_dataAccess/daUseItem';
+  import backpack from '../../ajaxQueue/backpack';
   import sendEvent from '../../analytics/sendEvent';
   import alpha from '../../common/alpha';
   import FolderButtons from '../../common/FolderButtons.svelte';
   import fromEntries from '../../common/fromEntries';
   import getHeightGuess from '../../common/getHeightGuess';
+  import isArray from '../../common/isArray';
   import ItemImg from '../../common/ItemImg.svelte';
   import LinkButton from '../../common/LinkButton.svelte';
   import confirm from '../../modal/confirm';
   import calf from '../../support/calf';
+  import invStore from './invStore';
 
   const prompt = 'Are you sure you want to use/extract the item?';
-  export let appInv = 0;
+  let appInv = {};
+  let folders = {};
+  let items = [];
 
+  const byName = (a, b) => alpha(a.n, b.n);
+  const byFolder = (folderId) => (item) => folderId === -2 || item.f === folderId;
+  const goodData = (inv) => isArray(inv.folders) && isArray(inv.items);
   const main = ({ a }) => a !== -1;
   const names = ({ a, n }) => [a, n];
-  const folders = fromEntries(appInv.folders.filter(main).map(names));
-  const byName = (a, b) => alpha(a.n, b.n);
-  let items = appInv.items.sort(byName);
-  const byFolder = (folderId) => (item) => folderId === -2 || item.f === folderId;
+
+  async function init() {
+    appInv = await backpack();
+    if (!goodData(appInv)) throw new Error('Bad backpack data');
+    invStore.set(appInv);
+    folders = fromEntries(appInv.folders.filter(main).map(names));
+    items = appInv.items.sort(byName);
+  }
 
   function doFilter(e) {
     sendEvent('QuickWear', 'doFilter');
@@ -48,57 +60,66 @@
   }
 </script>
 
-<div class="folderButtons">
-  <FolderButtons { folders } on:filter={ doFilter }/>
-</div>
-<div class="vs">
-  <VirtualScroll
-    data={ items }
-    key="a"
-    keeps="{ Math.floor(getHeightGuess() / 22) }"
-    estimateSize="30"
-    let:data={ item }
-  >
-    <div class="headGrid" slot="header">
+<div class="wrapper">
+  { #await init() then }
+    <div class="folderButtons">
+      <FolderButtons { folders } on:filter={ doFilter }/>
+    </div>
+    <div class="headGrid">
       <div class="headOne">Actions</div>
       <div>Items</div>
     </div>
-    <div class="grid">
-      <div class="actionButtons">
-        { #if item.used }
-          <span class="itemUsed">{ item.used }</span>
-        { :else }
-          <span class="equippable">
-            { #if item.equip }
-              <span class="fshSpinner fshSpin12"></span>
+    <div class="vs">
+      <VirtualScroll
+        data={ items }
+        key="a"
+        keeps="{ Math.floor(getHeightGuess() / 22) }"
+        estimateSize="30"
+        let:data={ item }
+      >
+        <div class="grid">
+          <div class="actionButtons">
+            { #if item.used }
+              <span class="itemUsed">{ item.used }</span>
             { :else }
-              <LinkButton disabled={ !item.eq } on:click={ () => doWear(item.a) }>Wear</LinkButton>
+              <span class="equippable">
+                { #if item.equip }
+                  <span class="fshSpinner fshSpin12"></span>
+                { :else }
+                  <LinkButton disabled={ !item.eq } on:click={ () => doWear(item.a) }>
+                    Wear
+                  </LinkButton>
+                { /if }
+              </span>
+              |
+              <span class="usable">
+                { #if item.use }
+                  <span class="fshSpinner fshSpin12"></span>
+                { :else }
+                  <LinkButton
+                    disabled={ item.eq || !(item.u && !item.c) }
+                    on:click={ () => doUse(item.a) }
+                  >Use/Ext</LinkButton>
+                { /if }
+              </span>
             { /if }
-          </span>
-          |
-          <span class="usable">
-            { #if item.use }
-              <span class="fshSpinner fshSpin12"></span>
-            { :else }
-              <LinkButton
-                disabled={ item.eq || !(item.u && !item.c) }
-                on:click={ () => doUse(item.a) }
-              >Use/Ext</LinkButton>
-            { /if }
-          </span>
-        { /if }
-      </div>
-      <div>
-        <ItemImg { item } small=1 t=0/>
-      </div>
-      <div>
-        { item.n }
-      </div>
+          </div>
+          <div>
+            <ItemImg { item } small=1 t=0/>
+          </div>
+          <div>
+            { item.n }
+          </div>
+        </div>
+      </VirtualScroll>
     </div>
-  </VirtualScroll>
+  { /await }
 </div>
 
 <style>
+  .wrapper {
+    width: 552px;
+  }
   .vs {
     height: calc(100vh - 220px);
   }

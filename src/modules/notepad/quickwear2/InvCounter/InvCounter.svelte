@@ -1,16 +1,18 @@
 <script>
+  import { get } from 'svelte/store';
   import VirtualScroll from 'svelte-virtual-scroll-list';
   import alpha from '../../../common/alpha';
   import getHeightGuess from '../../../common/getHeightGuess';
   import uniq from '../../../common/uniq';
   import getValueJSON from '../../../system/getValueJSON';
+  import invStore from '../invStore';
   import Caption from './Caption.svelte';
   import Header from './Header.svelte';
   import Hr from './Hr.svelte';
   import ListItem from './ListItem.svelte';
   import NotFound from './NotFound.svelte';
 
-  export let itemList = 0;
+  const itemList = get(invStore);
 
   const itemCount = uniq(itemList.items, 'n').map(({ n }) => ({
     n,
@@ -58,21 +60,26 @@
   ];
 </script>
 
-<div class="vs">
-  <VirtualScroll
-    data={ theStuff }
-    key="id"
-    keeps="{ Math.floor(getHeightGuess() / 10) }"
-    estimateSize="14"
-    let:data={ item }
-  >
-    <svelte:component this={ item.component } data={ item.data }/>
-  </VirtualScroll>
+<div class="wrapper">
+  <div class="vs">
+    <VirtualScroll
+      data={ theStuff }
+      key="id"
+      keeps="{ Math.floor(getHeightGuess() / 10) }"
+      estimateSize="14"
+      let:data={ item }
+    >
+      <svelte:component this={ item.component } data={ item.data }/>
+    </VirtualScroll>
+  </div>
 </div>
 
 <style>
+  .wrapper {
+    width: 552px;
+  }
   .vs {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 185px);
     overflow-y: auto;
   }
 </style>

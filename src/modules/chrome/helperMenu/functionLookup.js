@@ -15,6 +15,7 @@ import questbook from '../pageSwitcher/loader/questbook';
 import quickExtract from '../pageSwitcher/loader/quickExtract';
 import quickLinksManager from '../pageSwitcher/loader/quickLinksManager';
 import quickwear from '../pageSwitcher/loader/quickwear';
+import quickwear2 from '../pageSwitcher/loader/quickwear2';
 import recipeMgr from '../pageSwitcher/loader/recipeMgr';
 import reliclist from '../pageSwitcher/loader/reliclist';
 import setmgr from '../pageSwitcher/loader/setmgr';
@@ -124,6 +125,9 @@ export default [
       },
       {
         label: 'Quest Book', fn: questbook,
+      },
+      {
+        label: 'New Quick Wear', fn: quickwear2,
       },
     ],
   },

@@ -35,7 +35,7 @@
     color: #494437;
     cursor: move;
     font-weight: bold;
-    height: 20px;
+    min-height: 20px;
     padding-left: 8px;
     padding-top: 4px;
     position: relative;
