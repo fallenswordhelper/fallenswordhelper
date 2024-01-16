@@ -8,6 +8,7 @@
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import { nowSecs } from '../../support/now';
   import addCommas from '../../system/addCommas';
+  import { cdn } from '../../system/system';
 
   const creatureType = ['Normal', 'Champion', 'Elite', 'Super Elite', 'Titan', 'Legendary'];
   const creatureClass = ['Human', 'Vermin', 'Undead', 'Dragon', 'Greenskin', 'Demon', 'Golem',
@@ -137,7 +138,7 @@
               <img
                 alt="alt"
                 height="125"
-                src="https://cdn2.fallensword.com/mercs/{ haveOffer.id }.png"
+                src="{ cdn }mercs/{ haveOffer.id }.png"
                 width="125"
               >
             </div>
@@ -145,7 +146,7 @@
               <div>Hire Price:</div>
               <div>
                 <b>{ addCommas(haveOffer.gold) }</b>
-                <img alt="Gold" class="gold" src="https://cdn2.fallensword.com/currency/0.png">
+                <img alt="Gold" class="gold" src="{ cdn }currency/0.png">
               </div>
               <div>Hire Time:</div>
               <div><b>{ haveOffer.hire_time / 3600 }</b> hour(s)</div>
@@ -198,7 +199,7 @@
                       <div>Damage:</div><div>{ attributes[4].value }</div>
                       </div>"
                   height="125"
-                  src="https://cdn2.fallensword.com/mercs/{ id }.png"
+                  src="{ cdn }mercs/{ id }.png"
                   width="125"
                 >
               </div>
