@@ -22,7 +22,7 @@ export const otherCustom = {
   header: 'Other',
   what: 'text',
   control() {
-    const textToSearchFor = getValue('textToSearchFor') || '';
+    const textToSearchFor = getValue('textToSearchFor') || ''; // skipcq: JS-W1043
     return '<input style="width:140px;" class="custominput" '
       + `id="textToSearchFor" type="text" title="Text to search for" value="${
         textToSearchFor}">`;

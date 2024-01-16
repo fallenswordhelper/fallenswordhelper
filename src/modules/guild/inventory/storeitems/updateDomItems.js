@@ -17,7 +17,7 @@ import {
 import getItems from './getItems';
 
 function tally(acc, i) {
-  acc[i] = (acc[i] || 0) + 1;
+  acc[i] = (acc[i] || 0) + 1; // skipcq: JS-W1043
   return acc;
 }
 

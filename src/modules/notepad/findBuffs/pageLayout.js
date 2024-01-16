@@ -36,7 +36,7 @@ function searchAlly(o, extraProfile) {
     + '<td><input id="alliesEnemies" type="checkbox" checked>'
     + '<input class="extraProfile" class="custominput" id="extraProfile" '
     + `type="text" title="Extra profiles to search" value="${
-      extraProfile || ''}"></td></tr>`;
+      extraProfile || ''}"></td></tr>`; // skipcq: JS-W1043
 }
 
 function onlineList(o) {
