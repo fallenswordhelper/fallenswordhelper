@@ -7,7 +7,7 @@
   export let visible = true;
 
   const handleClick = (label, tabIndex) => () => {
-    sendEvent('ModalTabbed', label);
+    sendEvent('ModalTabbedPersist', label);
     activeTabValue = tabIndex;
   };
 </script>
@@ -30,6 +30,7 @@
 <style>
 ul {
   display: flex;
+  max-width: 95%;
 }
 li {
   background-color: #fed447;
