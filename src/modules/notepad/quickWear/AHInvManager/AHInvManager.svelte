@@ -1,9 +1,9 @@
 <script>
   import VirtualScroll from 'svelte-virtual-scroll-list';
   import alpha from '../../../common/alpha';
+  import getHeightGuess from '../../../common/getHeightGuess';
   import uniq from '../../../common/uniq';
   import getValueJSON from '../../../system/getValueJSON';
-  import getHeightGuess from '../getHeightGuess';
   import Caption from './Caption.svelte';
   import Header from './Header.svelte';
   import Hr from './Hr.svelte';

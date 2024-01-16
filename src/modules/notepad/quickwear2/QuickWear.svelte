@@ -7,12 +7,12 @@
   import alpha from '../../common/alpha';
   import FolderButtons from '../../common/FolderButtons.svelte';
   import fromEntries from '../../common/fromEntries';
+  import getHeightGuess from '../../common/getHeightGuess';
   import isArray from '../../common/isArray';
   import ItemImg from '../../common/ItemImg.svelte';
   import LinkButton from '../../common/LinkButton.svelte';
   import confirm from '../../modal/confirm';
   import calf from '../../support/calf';
-  import getHeightGuess from './InvCounter/getHeightGuess';
   import invStore from './invStore';
 
   const prompt = 'Are you sure you want to use/extract the item?';

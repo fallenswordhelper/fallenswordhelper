@@ -2,11 +2,11 @@
   import { get } from 'svelte/store';
   import VirtualScroll from 'svelte-virtual-scroll-list';
   import alpha from '../../../common/alpha';
+  import getHeightGuess from '../../../common/getHeightGuess';
   import uniq from '../../../common/uniq';
   import getValueJSON from '../../../system/getValueJSON';
   import invStore from '../invStore';
   import Caption from './Caption.svelte';
-  import getHeightGuess from './getHeightGuess';
   import Header from './Header.svelte';
   import Hr from './Hr.svelte';
   import ListItem from './ListItem.svelte';
