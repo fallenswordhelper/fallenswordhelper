@@ -1,6 +1,6 @@
+import daAjaxSendItemsToRecipient from '../../../_dataAccess/daAjaxSendItemsToRecipient';
 import daDropItems from '../../../_dataAccess/daDropItems';
 import daEquipItem from '../../../_dataAccess/daEquipItem';
-import ajaxSendItems from '../../../ajax/ajaxSendItems';
 import storeItems from '../../../ajax/storeItems';
 import useItem from '../../../ajax/useItem';
 import { queueRecallItem, queueTakeItem } from '../../../ajaxQueue/queue';
@@ -54,7 +54,7 @@ function dropSend(fn, thisEvent, target) { // jQuery
 }
 
 const doDropItem = (target) => dropSend(daDropItems, 'doDropItem', target);
-const doSendItem = (target) => dropSend(ajaxSendItems, 'doSendItem', target);
+const doSendItem = (target) => dropSend(daAjaxSendItemsToRecipient, 'doSendItem', target);
 
 const genericHandler = (fn) => (e) => fn($(e.target)); // jQuery
 
