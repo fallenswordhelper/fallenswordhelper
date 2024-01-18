@@ -1,6 +1,6 @@
 import runDefault from '../../common/runDefault';
 import injectWorld from '../../world/injectWorld';
-import parseTemplePage from '../notification/parseTemplePage';
+import checkTemple from '../notification/checkTemple';
 import arena from './arena';
 import auctionhouse from './auctionhouse';
 import composing from './composing';
@@ -77,7 +77,7 @@ export default {
   skills: { '-': { '-': skills } },
   superelite: { '-': { '-': superelite } },
   tempinv: { '-': { '-': injectMailbox } },
-  temple: { '-': { '-': parseTemplePage } },
+  temple: { '-': { '-': checkTemple } },
   titan: { '-': { '-': injectTitan } },
   toprated,
   trade,
