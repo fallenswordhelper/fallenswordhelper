@@ -46,7 +46,7 @@
   <span id="notification-icon-guild-group" class="notification-icon"></span>
   { #if joining }
     { #await doJoinAll() }
-      <span class="notification-content fshSpinner fshRelative"></span>
+      <span class="notification-content fshSpinner"></span>
     { :then}
       <p class="notification-content" style="line-height: 32px;">Joined.</p>
     { /await }
