@@ -46,27 +46,35 @@
   <span id="notification-icon-guild-group" class="notification-icon"></span>
   { #if joining }
     { #await doJoinAll() }
-      <span class="notification-content fshSpinner fshRelative"></span>
+      <span class="notification-content fshSpinner fix-classic-theme"></span>
     { :then}
       <p class="notification-content" style="line-height: 32px;">Joined.</p>
     { /await }
   { :else }
-    <button
-      class="notification-content"
-      on:click|once={ handleClick }
-      type="button"
-    >
-      Join all attack groups{ groupJoinText }.
-    </button>
+    <p class="notification-content">
+      <button
+        on:click|once={ handleClick }
+        type="button"
+      >
+        Join all attack groups{ groupJoinText }.
+      </button>
+    </p>
   { /if }
 </a>
 
 <style>
+  .fix-classic-theme {
+    position: relative;
+    left: 0;
+  }
   button {
+    background-color: transparent;
     border: none;
-    box-sizing: content-box;
+    color: inherit;
     cursor: pointer;
     font-family: inherit;
     font-size: inherit;
+    height: 38px;
+    padding: 0;
   }
 </style>
