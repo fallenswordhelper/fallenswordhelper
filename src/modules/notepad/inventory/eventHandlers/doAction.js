@@ -39,10 +39,11 @@ export default async function doAction(fn, target) { // jQuery
   removeClass(target);
   anotherSpinner(target);
   const json = await fn();
-  if (json && json.s) killRow(target, json);
-  else if (json.s === false) {
+  if (!json) {
+    dynamicAlert('Something went wrong.');
+  } else if (json.s === false) {
     dynamicAlert(json.e.message);
   } else {
-    dynamicAlert('Something went wrong.');
+    killRow(target, json);
   }
 }
