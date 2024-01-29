@@ -16,11 +16,9 @@
 
   let groupJoinUrl = joinallUrl;
   let groupJoinText = '';
-  let groupStyleText = 'height: 24px; padding: 6px 2px 10px;';
   if (calf.enableMaxGroupSizeToJoin) {
     groupJoinUrl = joinUnderUrl;
     groupJoinText = ` less than size ${calf.maxGroupSizeToJoin}`;
-    groupStyleText = 'height: 35px; padding: 3px 2px 2px;';
   }
 
   async function processGroups(json) {
@@ -44,21 +42,39 @@
   }
 </script>
 
-<li class="notification">
-  <a href="{ groupJoinUrl }">
-    <span class="notification-icon"></span>
-    { #if joining }
-      { #await doJoinAll() }
-        <span class="notification-content fshSpinner fshRelative"></span>'
-      { :then}
-        <p class="notification-content" style="line-height: 32px;">Joined.</p>
-      { /await }
-    { :else }
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-      <p class="notification-content" style="{ groupStyleText }" on:click|once={ handleClick }>
+<a href={ groupJoinUrl }>
+  <span id="notification-icon-guild-group" class="notification-icon"></span>
+  { #if joining }
+    { #await doJoinAll() }
+      <span class="notification-content fshSpinner fix-classic-theme"></span>
+    { :then}
+      <p class="notification-content" style="line-height: 32px;">Joined.</p>
+    { /await }
+  { :else }
+    <p class="notification-content">
+      <button
+        on:click|once={ handleClick }
+        type="button"
+      >
         Join all attack groups{ groupJoinText }.
-      </p>
-    { /if }
-  </a>
-</li>
+      </button>
+    </p>
+  { /if }
+</a>
+
+<style>
+  .fix-classic-theme {
+    position: relative;
+    left: 0;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    height: 38px;
+    padding: 0;
+  }
+</style>

@@ -1,14 +1,15 @@
 import getElementById from '../../common/getElementById';
+import setInnerHtml from '../../dom/setInnerHtml';
 import JoinAllLink from './JoinAllLink.svelte';
 
 function mountApp(newGroup) {
+  setInnerHtml('', newGroup);
   return new JoinAllLink({
-    anchor: newGroup.nextElementSibling,
-    target: newGroup.parentNode,
+    target: newGroup,
   });
 }
 
 export default function injectJoinAllLink() {
   const newGroup = getElementById('notification-guild-group');
-  if (newGroup) { mountApp(newGroup); }
+  if (newGroup) mountApp(newGroup);
 }
