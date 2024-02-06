@@ -54,10 +54,10 @@ export default [
     section: 'Actions',
     menu: [
       {
-        label: 'Find Buffs', fn: convertToModal(injectFindOther),
+        label: 'Find Buffs', fn: convertToModal(injectFindBuffs),
       },
       {
-        label: 'Find Other', fn: convertToModal(injectFindBuffs),
+        label: 'Find Other', fn: convertToModal(injectFindOther),
       },
       {
         label: 'Online Players', fn: convertToModal(injectOnlinePlayers),
