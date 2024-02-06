@@ -83,22 +83,23 @@
 </div>
 <style>
 #helperMenu {
-  position: absolute;
   left: 0;
+  position: absolute;
   top: 0;
   z-index: 75;
 }
 #helperMenu.helperMenuFixed { position: fixed; }
 #toggle {
+  background: none;
+  border: none;
   color: yellow;
   cursor: pointer;
+  font-family: inherit;
   font-size: 13px;
   font-weight: bold;
   text-align: center;
   text-decoration: underline;
   white-space: nowrap;
-  background: none;
-  border: none;
 }
 #toggle.helperMenuMove  { cursor: move; }
 #modal {
@@ -113,21 +114,27 @@
 }
 #modal h2 {
   background: #e0e0e0;
-  font: bold 13px Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
   margin: 4px 0 2px 0;
   text-align: center;
 }
 #modal button, #modal a {
-  font-family: Helvetica, Arial;
   background: transparent;
   border: none;
+  color: black;
   cursor: pointer;
+  font-family: inherit;
   font-size: 12px;
   font-weight: bold;
   margin: 0;
+  opacity: 1;
   padding: 0;
   text-decoration: underline;
+  transition: opacity 100ms;
   user-select: text;
-  color: black;
+}
+#modal button:hover, #modal a:hover {
+  opacity: 0.8;
 }
 </style>
