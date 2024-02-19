@@ -18,14 +18,12 @@ function guildColour(el) {
   });
 }
 
-function makeLink(el) {
-  const anchor = createAnchor({ href: `${guildSubcmdUrl}chat`, textContent: 'Chat' });
-  onclick(anchor, () => { sendEvent('widgets', 'guild chat'); });
-  el.replaceChild(anchor, el.firstChild);
-}
-
-function updateChatLink() {
-  querySelectorArray('#pCR h4').filter(contains('Chat')).forEach(makeLink);
+function makeLink(hNo, word, page) {
+  querySelectorArray(`#pCR h${hNo}`).filter(contains(word)).forEach((el) => {
+    const anchor = createAnchor({ href: `${guildSubcmdUrl}${page}`, textContent: word });
+    onclick(anchor, () => { sendEvent('widgets', `guild ${page}`); });
+    el.replaceChild(anchor, el.firstChild);
+  });
 }
 
 export default function addGuildInfoWidgets() {
@@ -36,5 +34,6 @@ export default function addGuildInfoWidgets() {
   doHideBuffSelected(guildMembrList, 'guild');
   // add coloring for offline time
   colouring(guildMembrList, guildColour);
-  updateChatLink();
+  makeLink(4, 'Chat', 'chat');
+  makeLink(3, 'Guild', 'manage');
 }
