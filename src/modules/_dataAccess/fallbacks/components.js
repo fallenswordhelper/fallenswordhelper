@@ -28,9 +28,7 @@ function remainder(profileHtml) {
 }
 
 function fakeHud(asDocs) {
-  const p = Array(57); // skipcq: JS-C1002
-  p[56] = { k: 56, v: asDocs.map(componentSlots).reduce(sum, 0) };
-  return { p };
+  return { p: [{ k: 56, v: asDocs.map(componentSlots).reduce(sum, 0) }] };
 }
 
 const returnJson = (asDocs) => ({
