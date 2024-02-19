@@ -20,7 +20,7 @@
   async function getComponents() {
     const components = await getAsyncData(daComponents);
     const rollup = rollupComponents(components.r);
-    return { rollup, maxComp: components.h?.p[56]?.v };
+    return { rollup, maxComp: components.h?.p.find(({ k }) => k === 56)?.v };
   }
 </script>
 
@@ -29,18 +29,18 @@
 { :then { rollup, maxComp } }
   <div>
     <table class="fshTblCenter">
-      <thead><tr><th colspan="3">Component Summary</th></tr></thead>
+      <thead>
+        <tr><th colspan="3">Component Summary</th></tr>
+        <tr>
+          <th>Total:</th>
+          <th colspan="2">{ $total } / { maxComp }</th>
+        </tr>
+      </thead>
       <tbody>
         { #each rollup as itemId }
           <CountRow { itemId } on:delType/>
         { /each }
       </tbody>
-      <tfoot>
-        <tr>
-          <td>Total:</td>
-          <td colspan="2">{ $total } / { maxComp }</td>
-        </tr>
-      </tfoot>
     </table>
   </div>
 { :catch error }
