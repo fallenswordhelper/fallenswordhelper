@@ -63,6 +63,7 @@ globals:
   FileReader: readonly
   FormData: readonly
   getComputedStyle: readonly
+  HTMLSelectElement: readonly
   HTMLTableElement: readonly
   Image: readonly
   localStorage: readonly
