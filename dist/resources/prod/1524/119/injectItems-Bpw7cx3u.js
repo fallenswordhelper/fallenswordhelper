@@ -1,0 +1,11 @@
+import{cq as a,n,i as e,b1 as i,o as t,c as s,s as o,dk as r,g as c,bW as d,k as l,dl as u,dm as g,dc as f,aL as L,ai as h,dn as v,ac as k,ad as p,dp as m,dq as y,dr as $,ds as b,dt as N,bP as M,du as G,ap as w}from"./calfSystem-Bit7wh4p.js"
+import{i as B}from"./insertElementAfter-ClbOKY3i.js"
+function C(a,n){o("accordion",a),["Buff Log","Combat Logs","Creature Logs","Quick Links","Recipe Manager"].includes(a)?n():r(n)}function P(r,l,u,g){const f=a({className:`nav-level-${r}`}),L=n({className:"nav-link fshPoint",textContent:l})
+e(f,L),function(a,n){const e=c(a)
+if(e instanceof Node){const a=e.parentNode
+B(n,a)}else d(`#${a} is not a Node`)}(g,f),i(u)?t(L,s(C,l,u)):(L.href=u,t(L,(()=>o("accordion",l))))}const x=[[a=>a.recipeManagerLink,"1","Recipe Manager",u,"nav-character-log"],[a=>a.inventoryManagerLink,"1","Inventory Manager",`${g}invmanagernew`,"nav-character-log"],[a=>a.medalGuideLink,"1","Medal Guide",`${f}${L}medalguide`,"nav-character-log"],[a=>a.buffLogLink&&h("keepBuffLog"),"1","Buff Log",v,"nav-character-log"],[a=>a.combatLogLink&&h("keepLogs"),"1","Combat Logs",k,"nav-character-notepad"],[a=>a.creatureLogLink&&h("showMonsterLog"),"1","Creature Logs",p,"nav-character-notepad"],[a=>a.quickLinksLink,"1","Quick Links",m,"nav-character-notepad"],[a=>a.auctionSearchLink,"2","AH Quick Search",y,"nav-actions-trade-auctionhouse"],[a=>a.onlinePlayersLink,"2","Online Players",$,"nav-actions-interaction-findplayer"],[a=>a.findOtherLink,"2","Find Other",b,"nav-actions-interaction-findplayer"],[a=>a.findBuffsLink,"2","Find Buffs",N,"nav-actions-interaction-findplayer"],[a=>a.guildInventoryLink&&M(),"2","Guild Inventory",`${g}guildinvmgr`,"nav-guild-storehouse-inventory"],[a=>a.newGuildLogLink&&M()&&!h("useNewGuildLog"),"2","New Guild Log",G,"nav-guild-ledger-advisor"],[a=>a.topRatedLink,"2","Top 250 Players",`${w}toprated${L}xp`,"nav-toprated-players-level"]]
+const q=a=>22*l("li",a).length||null
+function I(a,n,e){!function(a){x.forEach((([n,e,i,t,s])=>{n(a)&&P(e,i,t,s)}))}(e),function(a,n){n.heights=l("#nav > li").map(q)
+const e=Number(n.state)
+e&&e>-1&&e<a.children.length&&(a.children[n.state].children[1].style.height=`${n.heights[n.state]}px`)}(a,n)}export{I as default}
+//# sourceMappingURL=injectItems-Bpw7cx3u.js.map
