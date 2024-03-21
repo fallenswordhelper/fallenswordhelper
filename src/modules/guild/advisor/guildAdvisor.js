@@ -84,6 +84,7 @@ async function switcher(list) {
     injectAdvisorWeekly(list);
   } else {
     const membrList = await getMembrList(false);
+    if (!membrList) return;
     injectAdvisorDaily(list, membrList);
   }
 }

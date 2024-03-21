@@ -127,6 +127,7 @@ function saveUpgradeValue(upgrade, key) {
 export default function upgrades() {
   playerUpgrades = querySelectorArray('#pCC > table:last-of-type > tbody > '
     + 'tr:nth-child(even) > td:first-child');
+  if (playerUpgrades.length < 1) return;
   saveUpgradeValue('+1 Max Allies', 'alliestotal');
   saveUpgradeValue('+1 Max Enemies', 'enemiestotal');
   injectPoints();

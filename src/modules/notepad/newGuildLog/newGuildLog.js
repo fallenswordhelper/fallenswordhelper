@@ -158,6 +158,7 @@ function buildTable() {
   tmpGuildLog.forEach(buildRow);
 
   const injector = getElementById('fshInjectHere');
+  if (!injector) return;
   pcc().replaceChild(myTable, injector);
   addLogColoring('myGuildLog', 1, 3);
   addGuildLogWidgets();
@@ -179,7 +180,7 @@ function gotOtherPages() {
   if (completeReload) { tmpGuildLog.sort(byFirstElement); }
   setText('Loading complete.', fshOutput);
   updateOptionsLog();
-  if (pcc()) buildTable();
+  buildTable();
 }
 
 async function processFirstPage(data) {
@@ -283,7 +284,7 @@ function gotOptions(guildLog) {
 }
 
 export default async function newGuildLog() {
-  if (jQueryNotPresent()) return;
+  if (jQueryNotPresent() || !pcc()) return;
   const logPrm = get('fsh_guildLog');
   hideGuildLogMsg();
   gotOptions(await logPrm);
