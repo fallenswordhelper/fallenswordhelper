@@ -1,11 +1,9 @@
 import daViewCombat from '../../_dataAccess/daViewCombat';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
-import getTextTrim from '../../common/getTextTrim';
 import partial from '../../common/partial';
 import { nowSecs, oneDayAgo, sevenDaysAgo } from '../../support/now';
 import { get, set } from '../../system/idb';
-import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 
 const storageKey = 'fsh_pvpCombat';
 
@@ -33,7 +31,7 @@ async function prepareCache() {
   return internal;
 }
 
-async function newCombat(r, combatId, combatCache) {
+async function newCombat(logTime, combatId, combatCache) {
   const thisCombat = await daViewCombat(combatId);
   if (!thisCombat?.s) { return; }
   if (!newCache) {
@@ -41,13 +39,13 @@ async function newCombat(r, combatId, combatCache) {
   }
   newCache[combatId] = {
     ...thisCombat,
-    logTime: parseDateAsTimestamp(getTextTrim(r.cells[1])) / 1000,
+    logTime,
   };
   set(storageKey, newCache);
   return thisCombat;
 }
 
-export default async function getCombat(r, combatId) {
+export default async function getCombat(logTime, combatId) {
   if (!combatPrm) {
     combatPrm = prepareCache();
   }
@@ -55,5 +53,5 @@ export default async function getCombat(r, combatId) {
   if (combatCache[combatId]?.logTime) {
     return combatCache[combatId];
   }
-  return newCombat(r, combatId, combatCache);
+  return newCombat(logTime, combatId, combatCache);
 }

@@ -4,6 +4,7 @@ import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
 import creatureLog from '../pageSwitcher/loader/creatureLog';
 import fsboxlog from '../pageSwitcher/loader/fsboxlog';
+import guildLog from '../pageSwitcher/loader/guildLog';
 import guildTracker from '../pageSwitcher/loader/guildTracker';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
@@ -128,6 +129,9 @@ export default [
       },
       {
         label: 'New Quick Wear', fn: quickwear2,
+      },
+      {
+        label: 'Guild Log', fn: guildLog,
       },
     ],
   },

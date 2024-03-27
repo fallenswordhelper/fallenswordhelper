@@ -65,7 +65,7 @@ div {
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 div p {
   color: #fff;

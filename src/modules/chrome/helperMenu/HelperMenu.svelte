@@ -86,7 +86,7 @@
   left: 0;
   position: absolute;
   top: 0;
-  z-index: 75;
+  z-index: 40;
 }
 #helperMenu.helperMenuFixed { position: fixed; }
 #toggle {
