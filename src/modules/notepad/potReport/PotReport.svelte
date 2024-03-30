@@ -206,7 +206,7 @@
                       { name }
                       on:change={ () => sendPrEvent('mapped') }
                       on:change={ mappingChange }
-                      on:mousedown|once={ () => { waiting = false; } }
+                      on:mousedown={ () => { waiting = false; } }
                     >
                       { #if waiting }
                         <option>{ mapped }</option>
