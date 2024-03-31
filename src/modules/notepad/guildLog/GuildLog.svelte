@@ -269,7 +269,7 @@
                   { chunk }
                 { /if }
               { /each }
-              { #if logEntry.type === 17 }
+              { #if logEntry.type === 17 && logEntry.msg.attachments.length }
                 &nbsp;&nbsp;[
                 <a href="{ cmdUrl }combat&subcmd=view&combat_id={
                   logEntry.msg.attachments[0].data
