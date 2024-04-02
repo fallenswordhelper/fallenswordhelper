@@ -1,7 +1,6 @@
 import daViewCombat from '../../_dataAccess/daViewCombat';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
-import partial from '../../common/partial';
 import { nowSecs, oneDayAgo, sevenDaysAgo } from '../../support/now';
 import { get, set } from '../../system/idb';
 
@@ -10,13 +9,11 @@ const storageKey = 'fsh_pvpCombat';
 let combatPrm = null;
 let newCache = 0;
 
-function currentCombatRecord(sevenDays, [key, val]) {
-  return key === 'lastCheck' || (val.logTime && val.logTime > sevenDays);
-}
+const testRecent = (sevenDays) => ([key, val]) => key === 'lastCheck' || val?.logTime > sevenDays;
 
 function getRecent(internal) {
   const pairs = entries(internal);
-  const filtered = pairs.filter(partial(currentCombatRecord, sevenDaysAgo()));
+  const filtered = pairs.filter(testRecent(sevenDaysAgo()));
   const recent = { ...fromEntries(filtered), lastCheck: nowSecs() };
   set(storageKey, recent);
   return recent;
@@ -24,19 +21,15 @@ function getRecent(internal) {
 
 async function prepareCache() {
   const internal = await get(storageKey);
-  if (!internal) { return { lastCheck: nowSecs() }; }
-  if (!internal.lastCheck || internal.lastCheck < oneDayAgo()) {
-    return getRecent(internal);
-  }
-  return internal;
+  if (!internal) newCache = { lastCheck: nowSecs() };
+  else if ((internal?.lastCheck ?? 0) < oneDayAgo()) newCache = getRecent(internal);
+  else newCache = internal;
+  return newCache;
 }
 
-async function newCombat(logTime, combatId, combatCache) {
+async function newCombat(logTime, combatId) {
   const thisCombat = await daViewCombat(combatId);
-  if (!thisCombat?.s) { return; }
-  if (!newCache) {
-    newCache = { ...combatCache };
-  }
+  if (!thisCombat?.s) return;
   newCache[combatId] = {
     ...thisCombat,
     logTime,
@@ -50,8 +43,6 @@ export default async function getCombat(logTime, combatId) {
     combatPrm = prepareCache();
   }
   const combatCache = await combatPrm;
-  if (combatCache[combatId]?.logTime) {
-    return combatCache[combatId];
-  }
-  return newCombat(logTime, combatId, combatCache);
+  if (combatCache[combatId]?.logTime) return combatCache[combatId];
+  return newCombat(logTime, combatId);
 }
