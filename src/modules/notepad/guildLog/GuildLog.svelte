@@ -2,7 +2,6 @@
   import VirtualList from 'svelte-virtual-list-ce';
   import sendEvent from '../../analytics/sendEvent';
   import log from '../../app/guild/log';
-  import querySelectorArray from '../../common/querySelectorArray';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import getValue from '../../system/getValue';
   import setValue from '../../system/setValue';
@@ -12,8 +11,8 @@
 
   export let visible = true;
 
+  let checks = Array(11).fill(true);
   let displayLog = [];
-  let filters = null;
   let enableLogColoring = null;
   let groupCombatItems = null;
   let hideNonPlayerGuildLogMessages = null;
@@ -31,18 +30,17 @@
     visible = false;
   }
 
-  const reverse = (a, b) => b.time - a.time;
+  const addIndex = (obj, index) => ({ ...obj, index });
   const decorate = (obj) => ({
     ...obj,
     fshType: profiler(obj.msg.text),
     new: enableLogColoring && obj.time > lastCheckUtc,
     old: enableLogColoring && (nowUtc - obj.time) / 60 > 20 && obj.time <= lastCheckUtc,
   });
-  const addIndex = (obj, index) => ({ ...obj, index });
+  const reverse = (a, b) => b.time - a.time;
 
   function updateDisplayLog() {
-    const test = querySelectorArray(':checked', filters).map(({ value }) => Number(value));
-    displayLog = liveLog.filter(({ fshType }) => test.includes(fshType)).map(addIndex);
+    displayLog = liveLog.filter(({ fshType }) => checks[fshType]).map(addIndex);
     if (!displayLog.length) displayLog = [{ index: 0, msg: { text: '' } }];
   }
 
@@ -51,19 +49,14 @@
     updateDisplayLog();
   }
 
-  function updateFilters(to) {
-    querySelectorArray('[type="checkbox"]', filters).forEach((ctx) => { ctx.checked = to; });
-    updateDisplayLog();
-  }
-
   function selectAll() {
     logEvent('selectAll');
-    updateFilters(true);
+    updateDisplayLog();
   }
 
   function selectNone() {
     logEvent('selectNone');
-    updateFilters(false);
+    updateDisplayLog();
   }
 
   async function getGuildLog(logId = -1, direction = 1, acc = []) {
@@ -105,7 +98,7 @@
   <svelte:fragment slot="title">Guild Log</svelte:fragment>
   <div class="content">
     <FilterHeader
-      bind:filters
+      bind:checks
       on:cbChange={ cbChange }
       on:refresh={ refresh }
       on:selectAll={ selectAll }

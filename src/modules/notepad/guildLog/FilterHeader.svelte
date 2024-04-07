@@ -1,97 +1,116 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import { get, set } from '../../system/idb';
 
   const dispatch = createEventDispatcher();
-  export let filters = null;
+  export let checks = Array(11).fill(true);
+
+  function storeChecks() {
+    set('fsh_LogChecks', checks);
+  }
 
   function cbChange() {
+    storeChecks();
     dispatch('cbChange');
   }
 
+  function updateChecks(to) {
+    checks = checks.map(() => to);
+    storeChecks();
+  }
+
   function selectAll() {
+    updateChecks(true);
     dispatch('selectAll');
   }
 
   function selectNone() {
+    updateChecks(false);
     dispatch('selectNone');
   }
 
   function refresh() {
     dispatch('refresh');
   }
+
+  async function init() {
+    checks = await get('fsh_LogChecks');
+  }
+
+  init();
 </script>
 
 <div class="filter-header">
-  <div bind:this={ filters } class="filters">
+  <div class="filters">
     <div class="front">
       <span>Filters:</span>
     </div>
     <div>
       <label>
         Potions:
-        <input checked on:change={ cbChange } type="checkbox" value=1>
+        <input bind:checked={ checks[1] } on:change={ cbChange } type="checkbox" value=1>
       </label>
     </div>
     <div>
       <label>
         Store/Recalls:
-        <input checked on:change={ cbChange } type="checkbox" value=2>
+        <input bind:checked={ checks[2] } on:change={ cbChange } type="checkbox" value=2>
       </label>
     </div>
     <div>
       <label>
         Relics:
-        <input checked on:change={ cbChange } type="checkbox" value=4>
+        <input bind:checked={ checks[4] } on:change={ cbChange } type="checkbox" value=4>
       </label>
     </div>
     <div>
       <label>
         Mercenaries:
-        <input checked on:change={ cbChange } type="checkbox" value=5>
+        <input bind:checked={ checks[5] } on:change={ cbChange } type="checkbox" value=5>
       </label>
     </div>
     <div>
       <label>
         Group Combats:
-        <input checked on:change={ cbChange } type="checkbox" value=6>
+        <input bind:checked={ checks[6] } on:change={ cbChange } type="checkbox" value=6>
       </label>
     </div>
     <div></div>
     <div>
       <label>
         Donations:
-        <input checked on:change={ cbChange } type="checkbox" value=7>
+        <input bind:checked={ checks[7] } on:change={ cbChange } type="checkbox" value=7>
       </label>
     </div>
     <div>
       <label>
         Rankings:
-        <input checked on:change={ cbChange } type="checkbox" value=8>
+        <input bind:checked={ checks[8] } on:change={ cbChange } type="checkbox" value=8>
       </label>
     </div>
     <div>
       <label>
         GvGs:
-        <input checked on:change={ cbChange } type="checkbox" value=9>
+        <input bind:checked={ checks[9] } on:change={ cbChange } type="checkbox" value=9>
       </label>
     </div>
     <div>
       <label>
         Tag/UnTags:
-        <input checked on:change={ cbChange } type="checkbox" value=3>
+        <input bind:checked={ checks[3] } on:change={ cbChange } type="checkbox" value=3>
       </label>
     </div>
     <div>
       <label>
         Titans:
-        <input checked on:change={ cbChange } type="checkbox" value=10>
+        <input bind:checked={ checks[10] } on:change={ cbChange } type="checkbox" value=10>
       </label>
     </div>
     <div>
       <label>
         Other:
-        <input checked on:change={ cbChange } type="checkbox" value=0>
+        <input bind:checked={ checks[0] } on:change={ cbChange } type="checkbox" value=0>
       </label>
     </div>
   </div>
