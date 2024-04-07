@@ -28,12 +28,12 @@ import createDocument from '../../system/createDocument';
 import getValue from '../../system/getValue';
 import { get, set } from '../../system/idb';
 import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
+import profiler from '../guildLog/profiler';
 import {
   defChecks, guildLogFilter, headerRow, noChecks,
 } from './assets';
 import getGuildLogPage from './getGuildLogPage';
 import hideGuildLogMsg from './hideGuildLogMsg';
-import profiler from './profiler';
 
 let options = {};
 let fshNewGuildLog = 0;

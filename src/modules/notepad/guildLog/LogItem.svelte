@@ -18,7 +18,6 @@
 
   export let groupCombatItems = null;
   export let hideNonPlayerGuildLogMessages = null;
-  export let index = null;
   export let logEntry = null;
 
   function logEvent(type) {
@@ -56,13 +55,17 @@
 <div
   class="row-container"
   class:not-self={ hideNonPlayerGuildLogMessages && notSelf(logEntry) }
-  class:separator={ index }
+  class:separator={ logEntry.index }
 >
   <div class:old={ logEntry.old } class:new={ logEntry.new }>
-    <i class="fas fa-envelope" aria-hidden="true"></i>
+    { #if logEntry.time }
+      <i class="fas fa-envelope" aria-hidden="true"></i>
+    { /if }
   </div>
   <div class:old={ logEntry.old } class:new={ logEntry.new }>
-    { formatUtcTimestamp(logEntry.time) }
+    { #if logEntry.time }
+      { formatUtcTimestamp(logEntry.time) }
+    { /if }
   </div>
   <div class:old={ logEntry.old } class:new={ logEntry.new }>
     { #each logEntry.msg.text
@@ -110,19 +113,21 @@
         { /await }
       { /if }
     { /if }
-    { #each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data } }
-      <span class="action-buttons">
-        [
-        <LinkButton on:click={ () => reply(data) }>Reply</LinkButton>
-        |
-        <LinkButton on:click={ () => buff(data) }>Buff</LinkButton>
-        |
-        <LinkButton on:click={ () => send(data) }>Send</LinkButton>
-        |
-        <LinkButton on:click={ () => trade(data) }>Trade</LinkButton>
-        ]
-      </span>
-    { /each }
+    { #if logEntry.msg?.attachments?.length }
+      { #each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data } }
+        <span class="action-buttons">
+          [
+          <LinkButton on:click={ () => reply(data) }>Reply</LinkButton>
+          |
+          <LinkButton on:click={ () => buff(data) }>Buff</LinkButton>
+          |
+          <LinkButton on:click={ () => send(data) }>Send</LinkButton>
+          |
+          <LinkButton on:click={ () => trade(data) }>Trade</LinkButton>
+          ]
+        </span>
+      { /each }
+    { /if }
   </div>
 </div>
 

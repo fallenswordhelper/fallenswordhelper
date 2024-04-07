@@ -1,8 +1,7 @@
 <script>
-  import VirtualScroll from 'svelte-virtual-scroll-list';
+  import VirtualList from 'svelte-virtual-list-ce';
   import sendEvent from '../../analytics/sendEvent';
   import log from '../../app/guild/log';
-  import getHeightGuess from '../../common/getHeightGuess';
   import querySelectorArray from '../../common/querySelectorArray';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import getValue from '../../system/getValue';
@@ -33,17 +32,18 @@
   }
 
   const reverse = (a, b) => b.time - a.time;
-  const keeps = () => Math.floor(getHeightGuess() / 12);
   const decorate = (obj) => ({
     ...obj,
     fshType: profiler(obj.msg.text),
     new: enableLogColoring && obj.time > lastCheckUtc,
     old: enableLogColoring && (nowUtc - obj.time) / 60 > 20 && obj.time <= lastCheckUtc,
   });
+  const addIndex = (obj, index) => ({ ...obj, index });
 
   function updateDisplayLog() {
     const test = querySelectorArray(':checked', filters).map(({ value }) => Number(value));
-    displayLog = liveLog.filter(({ fshType }) => test.includes(fshType)).toSpliced(0, 0);
+    displayLog = liveLog.filter(({ fshType }) => test.includes(fshType)).map(addIndex);
+    if (!displayLog.length) displayLog = [{ index: 0, msg: { text: '' } }];
   }
 
   function cbChange() {
@@ -127,16 +127,9 @@
       Loading...
     { :then}
       <div class="vs">
-        <VirtualScroll
-          data={ displayLog }
-          estimateSize="17"
-          key="id"
-          keeps="{ keeps() }"
-          let:data={ logEntry }
-          let:index
-        >
-          <LogItem { groupCombatItems } { hideNonPlayerGuildLogMessages } { index } { logEntry } />
-        </VirtualScroll>
+        <VirtualList items={ displayLog } let:item={ logEntry }>
+          <LogItem { groupCombatItems } { hideNonPlayerGuildLogMessages } { logEntry } />
+        </VirtualList>
       </div>
     { :catch error }
       { error }
