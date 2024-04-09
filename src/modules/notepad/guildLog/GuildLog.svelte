@@ -1,8 +1,9 @@
 <script>
   import VirtualList from 'svelte-virtual-list-ce';
+  import daGuildLog from '../../_dataAccess/daGuildLog';
   import sendEvent from '../../analytics/sendEvent';
-  import log from '../../app/guild/log';
   import ModalTitled from '../../modal/ModalTitled.svelte';
+  import { subscribeOnce } from '../../support/pubsub';
   import getValue from '../../system/getValue';
   import setValue from '../../system/setValue';
   import FilterHeader from './FilterHeader.svelte';
@@ -12,6 +13,7 @@
   export let visible = true;
 
   let checks = Array(11).fill(true);
+  let chunkNo = 0;
   let displayLog = [];
   let enableLogColoring = null;
   let groupCombatItems = null;
@@ -19,6 +21,7 @@
   let lastCheckUtc = null;
   let liveLog = [];
   let prm = null;
+  let progressLog = [];
   let nowUtc = null;
 
   function logEvent(type) {
@@ -59,27 +62,44 @@
     updateDisplayLog();
   }
 
-  async function getGuildLog(logId = -1, direction = 1, acc = []) {
-    const limit = 1000;
-    const thisChunk = await log(logId, direction, limit);
-    if (!thisChunk?.s) return;
-    const newAcc = acc.concat(thisChunk.r.logs);
-    if (thisChunk.r.logs.length !== limit) {
-      return newAcc;
-    }
-    return getGuildLog(thisChunk.r.logs[0].id, 0, newAcc);
-  }
-
-  async function init() {
+  function initVars() {
+    progressLog = ['Loading...'];
     liveLog = [];
     displayLog = [];
-    enableLogColoring = getValue('enableLogColoring');
-    groupCombatItems = getValue('groupCombatItems');
-    hideNonPlayerGuildLogMessages = getValue('hideNonPlayerGuildLogMessages');
     nowUtc = new Date().setUTCSeconds(0, 0) / 1000;
     lastCheckUtc = getValue('lastModalGuildLogCheck') ?? nowUtc;
     setValue('lastModalGuildLogCheck', nowUtc);
-    const builtLogs = await getGuildLog();
+  }
+
+  function getPrefs() {
+    enableLogColoring = getValue('enableLogColoring');
+    groupCombatItems = getValue('groupCombatItems');
+    hideNonPlayerGuildLogMessages = getValue('hideNonPlayerGuildLogMessages');
+  }
+
+  function addToProgressLog(string) {
+    progressLog = progressLog.concat(string);
+  }
+
+  function progress(status) {
+    if (status) {
+      addToProgressLog(status);
+      return;
+    }
+    chunkNo += 1;
+    addToProgressLog(`chunk ${chunkNo}`);
+  }
+
+  function initProgress() {
+    chunkNo = 0;
+    subscribeOnce('guildLog-progress', progress);
+  }
+
+  async function init() {
+    initVars();
+    getPrefs();
+    initProgress();
+    const builtLogs = await daGuildLog();
     if (!builtLogs) return;
     liveLog = builtLogs.toSorted(reverse).map(decorate);
     updateDisplayLog();
@@ -117,7 +137,10 @@
       </div>
     </div>
     { #await prm }
-      Loading...
+      { #each progressLog as txt, index (index) }
+        { txt }
+        <br>
+      { /each }
     { :then}
       <div class="vs">
         <VirtualList items={ displayLog } let:item={ logEntry }>
