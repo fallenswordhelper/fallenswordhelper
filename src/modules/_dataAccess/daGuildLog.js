@@ -58,7 +58,7 @@ function toObject([anchor]) {
     return {
       data: {
         id: playerId,
-        name: regExpFirstCapture(/>([^<]*)</, anchor),
+        name: regExpFirstCapture(/>([^<]+)<\//, anchor),
       },
       type: 0,
     };
@@ -68,7 +68,7 @@ function toObject([anchor]) {
     return {
       data: {
         id: guildId,
-        name: regExpFirstCapture(/>([^<]*)</, anchor),
+        name: regExpFirstCapture(/>([^<]+)<\//, anchor),
       },
       type: 1,
     };
