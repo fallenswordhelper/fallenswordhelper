@@ -9,7 +9,6 @@
   import getCombat from '../../logs/playerLogWidgets/getCombat';
   import {
     cmdUrl,
-    guildSubcmdUrl,
     guildViewUrl,
     playerIdUrl,
     secureUrl,
@@ -50,16 +49,6 @@
   function trade(data) {
     logEvent('trade');
     navigateTo(`${secureUrl}${data.name}`);
-  }
-
-  function accept(id) {
-    logEvent('accept');
-    navigateTo(`${guildSubcmdUrl}recruit&subcmd2=acceptjoin&id=${id}`);
-  }
-
-  function deny(id) {
-    logEvent('deny');
-    navigateTo(`${guildSubcmdUrl}recruit&subcmd2=denyjoin&id=${id}`);
   }
 </script>
 
@@ -138,17 +127,6 @@
           ]
         </span>
       { /each }
-    { /if }
-    { #if logEntry.msg.text.includes('requested') }
-      <span class="action-buttons">
-        [
-        <LinkButton on:click={ () => accept(logEntry.msg.attachments[0].data.id) }>
-          Accept
-        </LinkButton>
-        |
-        <LinkButton on:click={ () => deny(logEntry.msg.attachments[0].data.id) }>Deny</LinkButton>
-        ]
-      </span>
     { /if }
   </div>
 </div>
