@@ -58,7 +58,7 @@ function toObject([anchor]) {
     return {
       data: {
         id: playerId,
-        name: regExpFirstCapture(/>([^<]+)<\//, anchor),
+        name: regExpFirstCapture(/>([^<]+?)</, anchor),
       },
       type: 0,
     };
@@ -68,7 +68,7 @@ function toObject([anchor]) {
     return {
       data: {
         id: guildId,
-        name: regExpFirstCapture(/>([^<]+)<\//, anchor),
+        name: regExpFirstCapture(/>([^<]+?)</, anchor),
       },
       type: 1,
     };
@@ -115,7 +115,7 @@ async function getGuildLog(logId = -1, direction = 1, acc = []) {
 }
 
 export default function daGuildLog() {
-  const test = 0;
+  const test = 1;
   if (test) return fallback();
   return $dataAccess(getGuildLog, fallback);
 }
