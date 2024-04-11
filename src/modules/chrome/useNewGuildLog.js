@@ -6,7 +6,7 @@ import guildLog from './pageSwitcher/loader/guildLog';
 
 function handleClick(e) {
   const anchor = closest('a', e.target);
-  if (anchor?.href === guildLogUrl) {
+  if (anchor?.getAttribute('href') === guildLogUrl) {
     sendEvent('useNewGuildLog', 'Alter Href');
     e.preventDefault();
     guildLog();
