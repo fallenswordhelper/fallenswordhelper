@@ -1,4 +1,4 @@
-import { newGuildLogUrl, notepadBlankUrl } from '../../support/constants';
+import { notepadBlankUrl } from '../../support/constants';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
@@ -76,8 +76,7 @@ export default [
         href: `${notepadBlankUrl}guildinvmgr`,
       },
       {
-        label: 'New Guild Log',
-        href: `${newGuildLogUrl}`,
+        label: 'New Guild Log', fn: guildLog,
       },
       {
         label: 'Merc Hunter', fn: mercs,
@@ -129,9 +128,6 @@ export default [
       },
       {
         label: 'New Quick Wear', fn: quickwear2,
-      },
-      {
-        label: 'Guild Log', fn: guildLog,
       },
     ],
   },

@@ -18,6 +18,7 @@ function openDialog(text, fn) {
     'Creature Logs',
     'Quick Links',
     'Recipe Manager',
+    'New Guild Log',
   ].includes(text)) fn();
   else jQueryDialog(fn);
 }
