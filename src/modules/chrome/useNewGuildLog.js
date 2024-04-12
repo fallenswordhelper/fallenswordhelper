@@ -1,5 +1,7 @@
 import sendEvent from '../analytics/sendEvent';
 import closest from '../common/closest';
+import getElementById from '../common/getElementById';
+import hideElement from '../common/hideElement';
 import on from '../common/on';
 import { guildLogUrl } from '../support/constants';
 import guildLog from './pageSwitcher/loader/guildLog';
@@ -10,6 +12,7 @@ function handleClick(e) {
     sendEvent('useNewGuildLog', 'Alter Href');
     e.preventDefault();
     guildLog();
+    hideElement(getElementById('notification-guild-log'));
   }
 }
 
