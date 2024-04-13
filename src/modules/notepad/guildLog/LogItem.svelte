@@ -31,14 +31,19 @@
     return players?.length && !players.filter(({ data: { id } }) => id === playerId()).length;
   }
 
-  function reply(data) {
-    logEvent('reply');
-    window.openQuickMsgDialog(data.name);
-  }
-
   function buff(data) {
     logEvent('buff');
     openQuickBuffById(data.id);
+  }
+
+  function combat(data) {
+    logEvent('combat');
+    navigateTo(`${cmdUrl}combat&subcmd=view&combat_id=${data}`);
+  }
+
+  function reply(data) {
+    logEvent('reply');
+    window.openQuickMsgDialog(data.name);
   }
 
   function send(data) {
@@ -83,8 +88,7 @@
             <img
               src="{ cdn }guilds/{ logEntry.msg.attachments[chunk].data.id }_mini.png"
               alt={ logEntry.msg.attachments[chunk].data.name }
-            />
-            { logEntry.msg.attachments[chunk].data.name }
+            />{ logEntry.msg.attachments[chunk].data.name }
           </a>
           ]
         { /if }
@@ -92,27 +96,6 @@
         { chunk }
       { /if }
     { /each }
-    { #if logEntry.type === 17 && logEntry.msg.attachments.length }
-      &nbsp;&nbsp;[
-      <a
-        href="{ cmdUrl }combat&subcmd=view&combat_id={ logEntry.msg.attachments[0].data }"
-      >
-        View Combat
-      </a>
-      ]
-      { #if groupCombatItems && logEntry.msg.text.includes('victorious') }
-        { #await getCombat(logEntry.time, logEntry.msg.attachments[0].data) then json }
-          { #if json?.r?.combat?.items?.[0]?.n }
-            <div>
-              <a href="{ playerIdUrl }{ json.r.combat.attacker.group.players[0].id }">
-                { json.r.combat.attacker.group.players[0].name }</a>'s
-              group looted the item
-              '<span class="fshGreen">{ json?.r?.combat?.items?.[0]?.n }</span>'
-            </div>
-          { /if }
-        { /await }
-      { /if }
-    { /if }
     { #if logEntry.msg?.attachments?.length }
       { #each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data } }
         <span class="action-buttons">
@@ -127,6 +110,25 @@
           ]
         </span>
       { /each }
+      { #each logEntry.msg.attachments.filter(({ type }) => type === 11) as { data } }
+        <span class="action-buttons">
+          [
+          <LinkButton on:click={ () => combat(data) }>View Combat</LinkButton>
+          ]
+        </span>
+      { /each }
+      { #if logEntry.type === 17 && groupCombatItems && logEntry.msg.text.includes('victorious') }
+        { #await getCombat(logEntry.time, logEntry.msg.attachments[0].data) then json }
+          { #if json?.r?.combat?.items?.[0]?.n }
+            <div>
+              <a href="{ playerIdUrl }{ json.r.combat.attacker.group.players[0].id }">
+                { json.r.combat.attacker.group.players[0].name }</a>'s
+              group looted the item
+              '<span class="fshGreen">{ json?.r?.combat?.items?.[0]?.n }</span>'
+            </div>
+          { /if }
+        { /await }
+      { /if }
     { /if }
   </div>
 </div>
