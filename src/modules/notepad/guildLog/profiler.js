@@ -25,7 +25,7 @@ const lookup = [
     /has revoked .+'s invite to the guild/, 'has been rejected from joining the guild'],
   [/resulted in .* with a final score of/,
     'resulted in a draw. Your GvG rating ',
-    'has just initiated a conflict with the guild',
+    'has just initiated a conflict with',
     'has initiated a conflict with your guild',
     'is participating in the conflict against'],
   ['Titan Reward item',
