@@ -22,7 +22,7 @@ const lookup = [
     'has officially joined the guild', 'has been kicked from the guild by',
     'has left the guild', 'has been assigned the rank',
     'has added/updated a rank entitled', 'has been stripped of their rank by',
-    /has revoked .+'s invite to the guild/],
+    /has revoked .+'s invite to the guild/, 'has been rejected from joining the guild'],
   [/resulted in .* with a final score of/,
     'resulted in a draw. Your GvG rating ',
     'has just initiated a conflict with the guild',

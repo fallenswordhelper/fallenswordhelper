@@ -35,8 +35,6 @@ export const cmdUrl = `${indexPhp}${defCmd}`;
 export const defSubcmd = '&subcmd=';
 const defTargetUsername = '&target_username=';
 const notepadBlank = `${defCmd}notepad&blank=1${defSubcmd}`;
-export const newGuildLogLoc = `${notepadBlank}newguildlog`;
-export const newGuildLogUrl = `${indexPhp}${newGuildLogLoc}`;
 export const auctionhouseUrl = `${cmdUrl}auctionhouse`;
 export const ahSearchUrl = `${auctionhouseUrl}&search=`;
 export const logUrl = `${cmdUrl}log`;

@@ -3,7 +3,6 @@ import querySelectorArray from '../../common/querySelectorArray';
 import {
   cmdUrl,
   defSubcmd,
-  newGuildLogUrl,
   notepadBlankUrl,
   profileUrl,
 } from '../../support/constants';
@@ -11,6 +10,7 @@ import getValue from '../../system/getValue';
 import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
 import creatureLog from '../pageSwitcher/loader/creatureLog';
+import guildLog from '../pageSwitcher/loader/guildLog';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
 import injectFindOther from '../pageSwitcher/loader/injectFindOther';
@@ -45,7 +45,7 @@ const buttons = [
   [(linkConfig) => linkConfig.guildInventoryLink && currentGuildId(),
     '2', 'Guild Inventory', `${notepadBlankUrl}guildinvmgr`, 'nav-guild-storehouse-inventory'],
   [(linkConfig) => linkConfig.newGuildLogLink && currentGuildId() && !getValue('useNewGuildLog'),
-    '2', 'New Guild Log', newGuildLogUrl, 'nav-guild-ledger-advisor'],
+    '2', 'New Guild Log', guildLog, 'nav-guild-ledger-advisor'],
   [(linkConfig) => linkConfig.topRatedLink,
     '2', 'Top 250 Players', `${cmdUrl}toprated${defSubcmd}xp`, 'nav-toprated-players-level'],
 ];

@@ -7,6 +7,7 @@ import playerLink from '../common/playerLink';
 import querySelectorArray from '../common/querySelectorArray';
 import getValue from '../system/getValue';
 import getCombat from './playerLogWidgets/getCombat';
+import getLogTime from './playerLogWidgets/getLogTime';
 
 function decorate(row, leader, itemName) {
   insertElement(row.cells[2], createDiv({
@@ -18,7 +19,7 @@ function decorate(row, leader, itemName) {
 
 async function addItem(a) {
   const row = closestTr(a);
-  const json = await getCombat(row, getId(a));
+  const json = await getCombat(getLogTime(row), getId(a));
   const itemName = json?.r?.combat?.items?.[0]?.n;
   if (itemName) decorate(row, json.r.combat.attacker.group.players[0], itemName);
 }
