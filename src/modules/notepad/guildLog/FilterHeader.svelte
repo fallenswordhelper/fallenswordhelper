@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import LinkButton from '../../common/LinkButton.svelte';
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import { get, set } from '../../system/idb';
 
@@ -13,6 +14,10 @@
   function cbChange() {
     storeChecks();
     dispatch('cbChange');
+  }
+
+  function oldGuildLog() {
+    dispatch('oldGuildLog');
   }
 
   function updateChecks(to) {
@@ -76,7 +81,9 @@
         <input bind:checked={ checks[6] } on:change={ cbChange } type="checkbox" value=6>
       </label>
     </div>
-    <div></div>
+    <div>
+      <LinkButton --button-color="blue" on:click={ oldGuildLog }>Old Guild Log</LinkButton>
+    </div>
     <div>
       <label>
         Donations:
