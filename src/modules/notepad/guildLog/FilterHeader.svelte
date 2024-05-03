@@ -35,7 +35,7 @@
   }
 
   async function init() {
-    checks = await get('fsh_LogChecks');
+    checks = (await get('fsh_LogChecks')) ?? Array(11).fill(true);
   }
 
   init();
