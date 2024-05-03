@@ -2,7 +2,9 @@
   import VirtualList from 'svelte-virtual-list-ce';
   import daGuildLog from '../../_dataAccess/daGuildLog';
   import sendEvent from '../../analytics/sendEvent';
+  import navigateTo from '../../common/navigateTo';
   import ModalTitled from '../../modal/ModalTitled.svelte';
+  import { guildLogUrl } from '../../support/constants';
   import { subscribeOnce } from '../../support/pubsub';
   import getValue from '../../system/getValue';
   import setValue from '../../system/setValue';
@@ -60,6 +62,11 @@
   function selectNone() {
     logEvent('selectNone');
     updateDisplayLog();
+  }
+
+  function oldGuildLog() {
+    logEvent('oldGuildLog');
+    navigateTo(guildLogUrl);
   }
 
   function initVars() {
@@ -120,6 +127,7 @@
     <FilterHeader
       bind:checks
       on:cbChange={ cbChange }
+      on:oldGuildLog={ oldGuildLog }
       on:refresh={ refresh }
       on:selectAll={ selectAll }
       on:selectNone={ selectNone }
