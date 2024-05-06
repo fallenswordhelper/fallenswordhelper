@@ -17,7 +17,7 @@
     margin: var(--button-margin, 0);
     opacity: 1;
     padding: 0;
-    text-decoration: underline;
+    text-decoration: var(--button-deco, underline);
     transition: opacity 200ms;
     user-select: none;
     width: var(--button-width, auto);
