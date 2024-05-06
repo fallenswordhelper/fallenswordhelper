@@ -24,6 +24,7 @@
   }
   button:disabled {
     color: grey;
+    cursor: default;
   }
   button:hover {
     opacity: 0.8;
