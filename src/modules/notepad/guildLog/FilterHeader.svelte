@@ -140,6 +140,7 @@
           <input bind:value={ searchValue } type="text">
           <LinkButton
             --button-deco="none"
+            disabled={ !searchValue }
             on:click={ clearSearch }
           >&times;</LinkButton>
         </span>

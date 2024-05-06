@@ -80,7 +80,6 @@
   function clearSearch() {
     logEvent('clearSearch');
     searchValue = '';
-    updateDisplayLog();
   }
 
   function initVars() {
@@ -134,9 +133,7 @@
     refresh();
   }
 
-  $: if (searchValue) {
-    updateDisplayLog();
-  }
+  $: updateDisplayLog(searchValue);
 </script>
 
 <ModalTitled { visible } on:close={ close }>
