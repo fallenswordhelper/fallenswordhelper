@@ -25,6 +25,7 @@
   let prm = null;
   let progressLog = [];
   let nowUtc = null;
+  let searchValue = '';
 
   function logEvent(type) {
     sendEvent('Guild Log', type);
@@ -36,16 +37,23 @@
   }
 
   const addIndex = (obj, index) => ({ ...obj, index });
+  const replacer = ({ msg }) => msg.text
+    .replace(/<link=a(\d)><\/link>/g, (match, p1) => msg.attachments[p1].data.name);
   const decorate = (obj) => ({
     ...obj,
     fshType: profiler(obj.msg.text),
     new: enableLogColoring && obj.time > lastCheckUtc,
     old: enableLogColoring && (nowUtc - obj.time) / 60 > 20 && obj.time <= lastCheckUtc,
+    searchable: replacer(obj).toLowerCase(),
   });
   const reverse = (a, b) => b.time - a.time;
 
   function updateDisplayLog() {
-    displayLog = liveLog.filter(({ fshType }) => checks[fshType]).map(addIndex);
+    displayLog = liveLog
+      .filter(({ fshType }) => checks[fshType])
+      .filter(({ searchable }) => searchValue === ''
+        || searchable.includes(searchValue.toLowerCase()))
+      .map(addIndex);
     if (!displayLog.length) displayLog = [{ index: 0, msg: { text: '' } }];
   }
 
@@ -67,6 +75,12 @@
   function oldGuildLog() {
     logEvent('oldGuildLog');
     navigateTo(guildLogUrl);
+  }
+
+  function clearSearch() {
+    logEvent('clearSearch');
+    searchValue = '';
+    updateDisplayLog();
   }
 
   function initVars() {
@@ -119,6 +133,10 @@
   $: if (visible) {
     refresh();
   }
+
+  $: if (searchValue) {
+    updateDisplayLog();
+  }
 </script>
 
 <ModalTitled { visible } on:close={ close }>
@@ -126,7 +144,9 @@
   <div class="content">
     <FilterHeader
       bind:checks
+      bind:searchValue
       on:cbChange={ cbChange }
+      on:clearSearch={ clearSearch }
       on:oldGuildLog={ oldGuildLog }
       on:refresh={ refresh }
       on:selectAll={ selectAll }
@@ -163,7 +183,6 @@
 
 <style>
   .content {
-    --button-color: #383838;
     font-size: 12px;
     width: 800px;
   }
@@ -174,6 +193,7 @@
     color: white;
   }
   .vs {
+    --button-color: #383838;
     height: calc(100vh - 180px);
   }
   .row-container {

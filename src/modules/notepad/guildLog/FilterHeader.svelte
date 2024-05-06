@@ -6,6 +6,7 @@
 
   const dispatch = createEventDispatcher();
   export let checks = Array(11).fill(true);
+  export let searchValue = '';
 
   function storeChecks() {
     set('fsh_LogChecks', checks);
@@ -37,6 +38,10 @@
 
   function refresh() {
     dispatch('refresh');
+  }
+
+  function clearSearch() {
+    dispatch('clearSearch');
   }
 
   async function init() {
@@ -82,7 +87,7 @@
       </label>
     </div>
     <div>
-      <LinkButton --button-color="blue" on:click={ oldGuildLog }>Old Guild Log</LinkButton>
+      <LinkButton on:click={ oldGuildLog }>Old Guild Log</LinkButton>
     </div>
     <div>
       <label>
@@ -121,22 +126,37 @@
       </label>
     </div>
   </div>
-  <div class="buttons">
-    <div><LinkButtonBracketed on:click={ selectAll }>Select All</LinkButtonBracketed></div>
-    <div><LinkButtonBracketed on:click={ selectNone }>Select None</LinkButtonBracketed></div>
-    <div><LinkButtonBracketed on:click={ refresh }>Refresh</LinkButtonBracketed></div>
+  <div class="button-row">
+    <div></div>
+    <div class="buttons">
+      <div><LinkButtonBracketed on:click={ selectAll }>Select All</LinkButtonBracketed></div>
+      <div><LinkButtonBracketed on:click={ selectNone }>Select None</LinkButtonBracketed></div>
+      <div><LinkButtonBracketed on:click={ refresh }>Refresh</LinkButtonBracketed></div>
+    </div>
+    <div class="search-box">
+      <label>
+        Search:
+        <span class="search-wrapper">
+          <input bind:value={ searchValue } type="text">
+          <LinkButton
+            --button-deco="none"
+            on:click={ clearSearch }
+          >&times;</LinkButton>
+        </span>
+      </label>
+    </div>
   </div>
 </div>
 
 <style>
   .filter-header {
+    color-scheme: light;
     margin-bottom: 4px;
     margin-left: 20px;
     margin-right: 20px;
   }
   .filters {
     align-items: center;
-    color-scheme: light;
     display: grid;
     gap: 2px;
     grid-template-columns: 48px repeat(6, 1fr);
@@ -147,10 +167,27 @@
     grid-column: 1;
     grid-row: 1 / 3;
   }
+  .button-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 8px;
+  }
   .buttons {
+    --button-color: #383838;
     display: flex;
     gap: 12px;
     justify-content: center;
-    margin-top: 8px;
+  }
+  .search-box {
+    text-align: right;
+  }
+  .search-wrapper {
+    background-color: white;
+    border: 1px solid #383838;
+    border-radius: 4px;
+    padding-right: 4px;
+  }
+  input[type="text"] {
+    border: none;
   }
 </style>
