@@ -79,5 +79,10 @@
         "helpTitle":"Show Titan Info",
         "helpText":"This will show titan info in the action list.",
         "network":true
+    },
+    "compactRanks":{
+        "helpTitle":"Compact Ranks",
+        "helpText":"This reduces ranks to a single line with overflow hidden.",
+        "unstable":true
     }
 }
