@@ -78,6 +78,7 @@ function interceptSendRequest(oldSendRequest) {
 }
 
 export default function lookForSendRequest() {
+  if (!sendRequest) return;
   const oldSendRequest = sendRequest;
   if (isFunction(oldSendRequest)) {
     sendRequest = interceptSendRequest(oldSendRequest);
