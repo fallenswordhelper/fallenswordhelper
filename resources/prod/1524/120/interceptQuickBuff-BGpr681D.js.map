@@ -1,1 +1,0 @@
-{"version":3,"file":"interceptQuickBuff-BGpr681D.js","sources":["src/modules/chrome/interceptQuickBuff.js"],"sourcesContent":null,"names":["interceptQuickBuff","window","openWindow","url","title","w","_h","features","sendEvent","fshOpen"],"mappings":";;AAGe,SAASA,IAEtBC,OAAOC,WAAa,SAAeC,EAAKC,EAAOC,EAAGC,EAAIC,GACpDC,EAAU,SAAU,sBACpBC,EAAQN,EAAKC,EAAOC,EAAGC,EAAIC,EAC/B,CAEA"}
