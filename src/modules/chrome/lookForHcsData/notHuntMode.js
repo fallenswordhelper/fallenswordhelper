@@ -2,6 +2,7 @@ import getCalfPrefs from '../../common/getCalfPrefs';
 import calf from '../../support/calf';
 import getValue from '../../system/getValue';
 import useNewGuildLog from '../useNewGuildLog';
+import isHuntMode from './isHuntMode';
 import priorityThree from './priorityThree/priorityThree';
 
 const calfPrefs = [
@@ -33,7 +34,7 @@ function getEnvVars() {
 }
 
 export default function notHuntMode() {
-  if (calf.huntingMode) { return; }
+  if (isHuntMode()) return;
   getEnvVars();
   if (calf.useNewGuildLog) useNewGuildLog();
   priorityThree();
