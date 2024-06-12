@@ -1,5 +1,5 @@
 import './displayDisconnectedFromGodsMessage.css';
-import indexAjaxData from '../../ajax/indexAjaxData';
+import daPray from '../../_dataAccess/daPray';
 import sendEvent from '../../analytics/sendEvent';
 import getElementById from '../../common/getElementById';
 import hideQTip from '../../common/hideQTip';
@@ -33,7 +33,7 @@ async function prayToGods(e) {
   if (!myGod) { return; }
   sendEvent('notification', 'prayToGods');
   hideQTip(e.target);
-  await indexAjaxData({ cmd: 'temple', subcmd: 'pray', type: myGod });
+  await daPray(myGod);
   helperPrayToGods.outerHTML = havePrayedMsg;
   saveTempleSettings(false);
 }

@@ -1,4 +1,4 @@
-import indexAjaxData from '../ajax/indexAjaxData';
+import daCancelAuction from '../_dataAccess/daCancelAuction';
 import sendEvent from '../analytics/sendEvent';
 import all from '../common/all';
 import createSpan from '../common/cElement/createSpan';
@@ -25,11 +25,7 @@ function doCancel(ctx) {
   const [itemImage] = ctx.parentNode.parentNode.children[0].children;
   ctx.outerHTML = `<img src="${
     cdn}ui/misc/spinner.gif" width="14" height="14">`;
-  return indexAjaxData({
-    cmd: 'auctionhouse',
-    subcmd: 'cancel',
-    auction_id: getCustomUrlParameter(itemImage.dataset.tipped, 'inv_id'),
-  });
+  return daCancelAuction(getCustomUrlParameter(itemImage.dataset.tipped, 'inv_id'));
 }
 
 async function cancelAllAH() {

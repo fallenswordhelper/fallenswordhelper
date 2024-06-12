@@ -1,6 +1,6 @@
-import ajaxSendItems from '../../../ajax/ajaxSendItems';
-import dropItem from '../../../ajax/dropItem';
-import equipItem from '../../../ajax/equipItem';
+import daAjaxSendItemsToRecipient from '../../../_dataAccess/daAjaxSendItemsToRecipient';
+import daDropItems from '../../../_dataAccess/daDropItems';
+import daEquipItem from '../../../_dataAccess/daEquipItem';
 import storeItems from '../../../ajax/storeItems';
 import useItem from '../../../ajax/useItem';
 import { queueRecallItem, queueTakeItem } from '../../../ajaxQueue/queue';
@@ -47,14 +47,14 @@ function useWear(fn, thisEvent, target) { // jQuery
 }
 
 const doUseItem = (target) => useWear(useItem, 'doUseItem', target);
-const doWearItem = (target) => useWear(equipItem, 'doWearItem', target);
+const doWearItem = (target) => useWear(daEquipItem, 'doWearItem', target);
 
 function dropSend(fn, thisEvent, target) { // jQuery
   genericEventAction(fn, [target.data('inv')], thisEvent, target);
 }
 
-const doDropItem = (target) => dropSend(dropItem, 'doDropItem', target);
-const doSendItem = (target) => dropSend(ajaxSendItems, 'doSendItem', target);
+const doDropItem = (target) => dropSend(daDropItems, 'doDropItem', target);
+const doSendItem = (target) => dropSend(daAjaxSendItemsToRecipient, 'doSendItem', target);
 
 const genericHandler = (fn) => (e) => fn($(e.target)); // jQuery
 
