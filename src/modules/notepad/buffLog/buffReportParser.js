@@ -9,6 +9,7 @@ const outcomes = [
   'Skill ([\\w ]*) level (\\d*) was activated on \'(\\w*)\'',
   'The skill ([\\w ]*) of (current or higher level is currently active) on \'(\\w*)\'',
   'Player \'(\\w*)\' (has set their preferences to block the skill) \'([\\w ]*)\' from being cast on them.',
+  'Player \'\\w*\' could not be found to buff.',
 ];
 
 function getTransform() {
