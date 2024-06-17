@@ -13,10 +13,9 @@ import setValue from '../../system/setValue';
 
 const prefCompactRanks = 'compactRanks';
 let enableCompactRanks = 0;
+let memberList = 0;
 
 function toggleClass() {
-  const tables = getElementsByTagName(defTable, pcc());
-  const memberList = tables[tables.length - 1];
   memberList.classList.toggle('compact-ranks', enableCompactRanks);
 }
 
@@ -28,8 +27,6 @@ function changePref() {
 }
 
 function injectPref() {
-  const tables = getElementsByTagName(defTable, pcc());
-  const memberList = tables[tables.length - 1];
   const prefContainer = insertElement(
     closestTable(memberList.parentNode).parentNode,
     createDiv({
@@ -42,6 +39,9 @@ function injectPref() {
 
 export default function compactRanks() {
   if (!pcc()) return;
+  const tables = getElementsByTagName(defTable, pcc());
+  memberList = tables[tables.length - 1];
+  if (!memberList) return;
   injectPref();
   enableCompactRanks = getValue(prefCompactRanks);
   if (enableCompactRanks) toggleClass();
