@@ -36,6 +36,7 @@ function doSpinner() {
 
 async function rekeyMembrList() {
   await getMembrList(false);
+  if (!calf.membrList) return;
   // Rekey membrList from names to id's
   calf.membrList = fromEntries(entries(calf.membrList).filter(notLastUpdate).map(rekey));
 }
