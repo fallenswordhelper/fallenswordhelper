@@ -4,6 +4,7 @@ import { end, start } from '../../analytics/timing';
 import all from '../../common/all';
 import createTFoot from '../../common/cElement/createTFoot';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
+import isArray from '../../common/isArray';
 import partial from '../../common/partial';
 import playerLinkFromMembrList from '../../common/playerLinkFromMembrList';
 import setInnerHtml from '../../dom/setInnerHtml';
@@ -73,6 +74,7 @@ function makeData(membrList, el) {
 }
 
 function addAdvisorPages(list, [membrList, ...args]) {
+  if (!args.every((ary) => isArray(ary))) return;
   const added = addUpStats(args);
   injectTable(list, makeTfoot(added), added.map(partial(makeData, membrList)));
 }
