@@ -1,6 +1,5 @@
 import daAdvisor from '../../_dataAccess/daAdvisor';
 import getMembrList from '../../ajax/getMembrList';
-import { end, start } from '../../analytics/timing';
 import all from '../../common/all';
 import createTFoot from '../../common/cElement/createTFoot';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
@@ -93,7 +92,5 @@ async function injectAdvisor(list) {
 }
 
 export default function injectAdvisorWeekly(list) {
-  start('JS Perf', 'injectAdvisorWeekly');
   injectAdvisor(list);
-  end('JS Perf', 'injectAdvisorWeekly');
 }

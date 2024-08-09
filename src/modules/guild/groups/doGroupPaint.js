@@ -1,5 +1,4 @@
 import sendEvent from '../../analytics/sendEvent';
-import { end, start } from '../../analytics/timing';
 import closestTable from '../../common/closestTable';
 import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
@@ -90,10 +89,8 @@ function clickHdl(e) {
 }
 
 export default function doGroupPaint(membrlist) {
-  start('JS Perf', 'doGroupPaint');
   getArrayByClassName('group-action-container')
     .map((c) => closestTr(c))
     .forEach(partial(doGroupRow, membrlist));
   onclick(closestTable(querySelector('.group-action-container')), clickHdl);
-  end('JS Perf', 'doGroupPaint');
 }
