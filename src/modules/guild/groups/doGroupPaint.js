@@ -43,6 +43,7 @@ function dateLocalFromUtc([,, date, month, hr, min]) {
 function groupLocalTime(row) {
   const theDateCell = row.cells[3];
   const dateMatches = regExpExec(dateRe, getText(theDateCell));
+  if (!dateMatches) return;
   insertHtmlBeforeEnd(theDateCell, `<br><span class="fshBlue fshXSmall">Local: ${
     dateLocalFromUtc(dateMatches).toString().slice(0, 21)}</span>`);
 }
