@@ -1,6 +1,5 @@
 import getMembrList from '../../ajax/getMembrList';
 import sendEvent from '../../analytics/sendEvent';
-import { end, start } from '../../analytics/timing';
 import arrayFrom from '../../common/arrayFrom';
 import createAnchor from '../../common/cElement/createAnchor';
 import createTFoot from '../../common/cElement/createTFoot';
@@ -71,12 +70,10 @@ function summaryLink() {
 }
 
 function injectAdvisorDaily(list, membrList) {
-  start('JS Perf', 'injectAdvisorDaily');
   const data = getData(list, membrList);
   const tfoot = getTfoot(list);
   injectTable(list, tfoot, data);
   summaryLink();
-  end('JS Perf', 'injectAdvisorDaily');
 }
 
 async function switcher(list) {

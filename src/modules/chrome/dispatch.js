@@ -1,7 +1,6 @@
 import analytics from '../analytics/analytics';
 import isAuto from '../analytics/isAuto';
 import screenview from '../analytics/screenview';
-import { end, start } from '../analytics/timing';
 import isFunction from '../common/isFunction';
 import isObject from '../common/isObject';
 import jsonParse from '../common/jsonParse';
@@ -84,14 +83,11 @@ function asyncDispatcher() {
   if (defineUserIsDev) devHooks(); //  asyncDispatcher messages
   if (isFunction(coreFunction)) {
     screenview(functionPath);
-    start('JS Perf', functionPath);
     coreFunction();
-    end('JS Perf', functionPath);
   }
 }
 
 async function runCore(cssPrm) {
-  start('JS Perf', 'FSH.runCore');
   getCoreFunction();
   await cssPrm;
   lookForHcsData();
@@ -100,7 +96,6 @@ async function runCore(cssPrm) {
   /* This must be at the end in order not to
   screw up other findNode calls (Issue 351) */
   doQuickLinks();
-  end('JS Perf', 'FSH.runCore');
 }
 
 const envTests = [
@@ -121,12 +116,10 @@ function setVer(fshVer, gmInfo) {
 
 // main event dispatcher
 export default function dispatch(fshVer, gmInfo) {
-  start('JS Perf', 'FSH.dispatch');
   if (badEnv()) { return; }
   const cssPrm = loadCss(defineCalfPath);
   exceptions();
   setVer(fshVer, gmInfo);
   analytics();
   runCore(cssPrm);
-  end('JS Perf', 'FSH.dispatch');
 }

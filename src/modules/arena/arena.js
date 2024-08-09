@@ -1,5 +1,4 @@
 import sendEvent from '../analytics/sendEvent';
-import { end, start } from '../analytics/timing';
 import view from '../app/arena/view';
 import all from '../common/all';
 import interceptSubmit from '../common/interceptSubmit';
@@ -51,11 +50,9 @@ function arenaDataTable(tabs, [arenaOpts, obj, json]) { // jQuery
 }
 
 function process(tabs, values) {
-  start('JS Perf', 'arena.process');
   removeHiddenRows();
   arenaDataTable(tabs, values);
   interceptSubmit();
-  end('JS Perf', 'arena.process');
 }
 
 async function prepare(tabs) {

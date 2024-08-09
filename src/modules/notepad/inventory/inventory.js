@@ -1,6 +1,5 @@
 import './inventory.css';
 import getMembrList from '../../ajax/getMembrList';
-import { end, start } from '../../analytics/timing';
 import all from '../../common/all';
 import currentGuildId from '../../common/currentGuildId';
 import entries from '../../common/entries';
@@ -64,9 +63,7 @@ function doInventory(reset) {
 }
 
 function getInvMan(reset) {
-  start('JS Perf', 'getInvMan');
   doInventory(reset);
-  end('JS Perf', 'getInvMan');
 }
 
 function asyncCall(reset) {
