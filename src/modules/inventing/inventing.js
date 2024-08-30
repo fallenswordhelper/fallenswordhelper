@@ -43,6 +43,7 @@ function addSpinner(i) {
 
 function removeRow(i) {
   const tr = closestTr(i);
+  if (!tr) return;
   tr.nextElementSibling.remove();
   tr.remove();
 }
