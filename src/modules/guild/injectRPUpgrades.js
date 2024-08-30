@@ -28,7 +28,7 @@ function postWarnings(myBuffs) {
 }
 
 function parseProfile(data) {
-  if (data._skills?.length !== 0) {
+  if (data._skills?.length) {
     const myBuffs = reduceBuffArray(data._skills);
     postWarnings(myBuffs);
   }
