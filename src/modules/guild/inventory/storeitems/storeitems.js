@@ -1,5 +1,5 @@
 import arrayFrom from '../../../common/arrayFrom';
-import jQueryPresent from '../../../common/jQueryPresent';
+import jQueryNotPresent from '../../../common/jQueryNotPresent';
 import getValue from '../../../system/getValue';
 import CheckAll from './CheckAll.svelte';
 import doFolderFilter from './doFolderFilter';
@@ -8,10 +8,10 @@ import getCheckboxesVisible from './getCheckboxesVisible';
 import getInv from './getInv';
 import injectStoreItems from './injectStoreItems';
 
-async function doFolders() {
+async function doFolders(form) {
+  if (!getValue('enableFolderFilter')) return;
   const inv = await getInv();
-  if (!inv?.folders) { return; }
-  const [form] = document.forms;
+  if (!inv?.folders) return;
   doFolderFilter(inv, form);
   doMoveItems(inv, form);
 }
@@ -21,8 +21,8 @@ function doCheckAll() {
     .forEach((ctx) => { ctx.checked = !ctx.disabled && !ctx.checked; });
 }
 
-function addCheckAll() {
-  const elements = document.forms[0]?.elements;
+function addCheckAll(form) {
+  const { elements } = form;
   if (!elements?.length) return;
   const [submitButton] = arrayFrom(elements).filter((e) => e.type === 'submit');
   if (!submitButton) return;
@@ -34,7 +34,10 @@ function addCheckAll() {
 }
 
 export default function storeitems() {
-  if (jQueryPresent() && getValue('enableFolderFilter')) { doFolders(); }
-  addCheckAll();
+  if (jQueryNotPresent()) return;
+  const [form] = document.forms;
+  if (!form) return;
+  doFolders(form);
+  addCheckAll(form);
   injectStoreItems();
 }
