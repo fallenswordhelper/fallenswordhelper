@@ -9,7 +9,7 @@ async function getRelicStuff($guildId, set) {
   if (!$guildId) return;
   processingStatus.set(['relicStore', 'Processing defending guild relics ... ']);
   const relics = await reliclist($guildId);
-  if (!relics) {
+  if (!relics?.r?.relics) {
     processingStatus.set(['relicStore', 'AJAX Error']);
     return;
   }
