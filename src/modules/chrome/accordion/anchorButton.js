@@ -7,7 +7,6 @@ import insertElementAfter from '../../common/insertElementAfter';
 import isFunction from '../../common/isFunction';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import sendException from '../../exceptions/sendException';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 
 function openDialog(text, fn) {
@@ -23,22 +22,16 @@ function openDialog(text, fn) {
   else jQueryDialog(fn);
 }
 
-function insertAfterParent(target, listItem) {
-  const tgt = getElementById(target);
-  if (tgt instanceof Node) {
-    const parent = tgt.parentNode;
-    insertElementAfter(listItem, parent);
-  } else { sendException(`#${target} is not a Node`); }
-}
-
 export default function anchorButton(navLvl, text, fn, target) {
+  const tgt = getElementById(target);
+  if (!(tgt instanceof Node)) return;
   const li = createLi({ className: `nav-level-${navLvl}` });
   const al = createAnchor({
     className: 'nav-link fshPoint',
     textContent: text,
   });
   insertElement(li, al);
-  insertAfterParent(target, li);
+  insertElementAfter(li, tgt.parentNode);
   if (isFunction(fn)) {
     onclick(al, partial(openDialog, text, fn));
   } else {
