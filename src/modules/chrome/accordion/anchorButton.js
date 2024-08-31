@@ -9,22 +9,25 @@ import onclick from '../../common/onclick';
 import partial from '../../common/partial';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 
+const modals = [
+  'Buff Log',
+  'Combat Logs',
+  'Creature Logs',
+  'Quick Links',
+  'Recipe Manager',
+  'New Guild Log',
+];
+
 function openDialog(text, fn) {
   sendEvent('accordion', text);
-  if ([
-    'Buff Log',
-    'Combat Logs',
-    'Creature Logs',
-    'Quick Links',
-    'Recipe Manager',
-    'New Guild Log',
-  ].includes(text)) fn();
-  else jQueryDialog(fn);
+  if (modals.includes(text)) {
+    fn();
+  } else {
+    jQueryDialog(fn);
+  }
 }
 
-export default function anchorButton(navLvl, text, fn, target) {
-  const tgt = getElementById(target);
-  if (!(tgt instanceof Node)) return;
+function buildAnchor(navLvl, text, tgt) {
   const li = createLi({ className: `nav-level-${navLvl}` });
   const al = createAnchor({
     className: 'nav-link fshPoint',
@@ -32,10 +35,20 @@ export default function anchorButton(navLvl, text, fn, target) {
   });
   insertElement(li, al);
   insertElementAfter(li, tgt.parentNode);
+  return al;
+}
+
+function injectAnchor(navLvl, text, fn, tgt) {
+  const al = buildAnchor(navLvl, text, tgt);
   if (isFunction(fn)) {
     onclick(al, partial(openDialog, text, fn));
   } else {
     al.href = fn;
     onclick(al, () => sendEvent('accordion', text));
   }
+}
+
+export default function anchorButton(navLvl, text, fn, target) {
+  const tgt = getElementById(target);
+  if (tgt instanceof Node) injectAnchor(navLvl, text, fn, tgt);
 }
