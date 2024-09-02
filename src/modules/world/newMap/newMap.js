@@ -8,6 +8,7 @@ import combatLogger from './combatLogger';
 import interceptMouseEvents from './creatureInfo/interceptMouseEvents';
 import doMonsterColors from './doMonsterColors';
 import doNotKill from './doNotKill/doNotKill';
+import fixRafInWorld from './fixRafInWorld';
 import globalTop from './globalTop/globalTop';
 import hideGroupButton from './hideGroupButton';
 import hideTitanCombatResults from './hideTitanCombatResults';
@@ -32,6 +33,7 @@ function hideMapTooltip() {
 }
 
 const usualRoutines = [
+  fixRafInWorld,
   worldPrefs,
   sendGold,
   viewCreature,
