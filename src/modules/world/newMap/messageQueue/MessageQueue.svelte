@@ -2,11 +2,6 @@
   import { tick } from 'svelte';
   import uniq from '../../../common/uniq';
 
-  const iframe = document.body.appendChild(document.createElement('iframe'));
-  window.requestAnimationFrame = iframe.contentWindow.requestAnimationFrame;
-  window.cancelAnimationFrame = iframe.contentWindow.cancelAnimationFrame;
-  iframe.hidden = true;
-
   let messages = [];
   const mc = window.$('#messageCenter').data().hcsWorldMessageCenter;
 
