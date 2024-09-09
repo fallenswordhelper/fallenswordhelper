@@ -2,11 +2,15 @@ import ph from 'posthog-js';
 import playerName from '../common/playerName';
 import stdout from '../support/stdout';
 
-export default function posthog() {
+function checkForQuickBuff() {
   if (typeof window.self === 'string') {
     playerName();
     window.self = window;
   }
+}
+
+export default function posthog() {
+  checkForQuickBuff();
   const phTest = false;
   if (defineUserIsDev && !phTest) return;
   try {
