@@ -43,7 +43,7 @@ function getAjax(options) { // jQuery
 }
 
 function mightThrow(options, jqXhr) {
-  if ([0, 500, 503].includes(jqXhr.status)) {
+  if (![0, 500, 503].includes(jqXhr.status)) {
     throw new AjaxError([options, jqXhr, jqXhr.textStatus, jqXhr.errorThrown]);
   }
 }
