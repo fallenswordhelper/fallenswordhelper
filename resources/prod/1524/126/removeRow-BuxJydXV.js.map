@@ -1,0 +1,1 @@
+{"version":3,"file":"removeRow-BuxJydXV.js","sources":["src/modules/profile/dropitems/removeRow.js"],"sourcesContent":null,"names":["removeRow","c","tr","closestTr","nextRow","nextElementSibling","remove"],"mappings":";AAEe,SAASA,EAAUC,GAChC,MAAMC,EAAKC,EAAUF;AACrB,IAAKC,EAAI;AACT,MAAME,EAAUF,EAAGG;AACdD,IACLA,EAAQE,SACRJ,EAAGI,SACL"}
