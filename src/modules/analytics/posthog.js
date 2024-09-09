@@ -1,7 +1,14 @@
 import ph from 'posthog-js';
+import playerName from '../common/playerName';
+import stdout from '../support/stdout';
 
 export default function posthog() {
-  if (defineUserIsDev) return;
+  if (typeof window.self === 'string') {
+    playerName();
+    window.self = window;
+  }
+  const phTest = false;
+  if (defineUserIsDev && !phTest) return;
   try {
     ph.init(
       'phc_rlYc31x7Pvbc1XzLuePdrHh1JIFq4ClkniLjoqs0V1N',
@@ -12,6 +19,6 @@ export default function posthog() {
       },
     );
   } catch (error) {
-    // ignore bad init
+    if (defineUserIsDev && !phTest) stdout(error);
   }
 }

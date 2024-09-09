@@ -1,5 +1,6 @@
 import daQuickbuff from '../_dataAccess/daQuickbuff';
 import sendEvent from '../analytics/sendEvent';
+import playerName from '../common/playerName';
 import quickbuffSuccess from '../common/quickbuffSuccess';
 import setInnerHtml from '../dom/setInnerHtml';
 
@@ -15,6 +16,6 @@ export default async function quickActivate(evt) { // jQuery.min
   const trigger = evt.target;
   if (trigger.className !== 'quickbuffActivate') { return; }
   sendEvent('quickbuff', 'quickActivate');
-  const json = await daQuickbuff([window.self], [trigger.dataset.buffid]);
+  const json = await daQuickbuff([playerName()], [trigger.dataset.buffid]);
   processResult(trigger, json);
 }

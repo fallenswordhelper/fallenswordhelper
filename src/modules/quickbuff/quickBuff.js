@@ -5,6 +5,7 @@ import getElementById from '../common/getElementById';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
+import playerName from '../common/playerName';
 import addBuffLevels from './addBuffLevels';
 import { quickBuffHeader } from './assets';
 import doLabels from './doLabels';
@@ -24,7 +25,7 @@ export default async function quickBuff() {
   if (jQueryNotPresent()) return;
   const quickbuffDiv = getElementById('quickbuff');
   if (!quickbuffDiv) return;
-  const responseText = getProfile(window.self);
+  const responseText = getProfile(playerName());
   insertHtmlAfterEnd(quickbuffDiv.children[0], quickBuffHeader);
   executeAll([
     doLabels,
