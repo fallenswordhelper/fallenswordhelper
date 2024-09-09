@@ -1,5 +1,6 @@
 import analytics from '../analytics/analytics';
 import isAuto from '../analytics/isAuto';
+import posthog from '../analytics/posthog';
 import screenview from '../analytics/screenview';
 import isFunction from '../common/isFunction';
 import isObject from '../common/isObject';
@@ -121,5 +122,6 @@ export default function dispatch(fshVer, gmInfo) {
   exceptions();
   setVer(fshVer, gmInfo);
   analytics();
+  posthog();
   runCore(cssPrm);
 }
