@@ -7,6 +7,7 @@ function initPostHog(phTest) {
     ph.init(
       'phc_rlYc31x7Pvbc1XzLuePdrHh1JIFq4ClkniLjoqs0V1N',
       {
+        advanced_disable_decide: 'true',
         api_host: 'https://us.i.posthog.com',
         person_profiles: 'identified_only',
         persistence: 'localStorage',
