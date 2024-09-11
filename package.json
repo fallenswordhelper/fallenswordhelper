@@ -63,7 +63,7 @@
     "@honeybadger-io/js": "^6.10.0",
     "css-tooltip": "^0.3.4",
     "idb-keyval": "^6.2.1",
-    "posthog-js": "^1.161.0",
+    "posthog-js": "^1.161.3",
     "smart-table-core": "^3.0.7",
     "smart-table-vanilla": "^0.2.0",
     "svelte": "^4.2.19",
