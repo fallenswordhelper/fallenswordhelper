@@ -6,6 +6,7 @@ import isOnList from './isOnList';
 
 function creatureOnList(creatureName, passback) {
   if (isOnList(creatureName)) {
+    sendEvent('NewMap', 'creatureOnList');
     getElementById('actionList').children[passback].children[0].children[1]
       .classList.remove('loading');
     return true;
@@ -22,7 +23,6 @@ function weShouldBlock(passback) {
 
 function interceptCreatureCombat(oldDoAction) {
   return function c(action, fetch, data, attempts) {
-    sendEvent('NewMap', 'interceptCreatureCombat');
     if (weShouldBlock(data.passback)) { return; }
     // Call standard action
     oldDoAction(action, fetch, data, attempts);
