@@ -2,7 +2,7 @@ import ph from 'posthog-js';
 import playerName from '../common/playerName';
 import stdout from '../support/stdout';
 
-const phTest = true;
+const phTest = false;
 
 export function phEvent(event, props) {
   if (defineUserIsDev) stdout('phEvent', event, props);
