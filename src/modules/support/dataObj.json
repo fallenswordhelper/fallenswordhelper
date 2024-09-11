@@ -246,5 +246,6 @@
   "qbSortBuffsAlphabetically": false,
   "groupCombatItems": false,
   "footprintColor": "#ee9252",
-  "compactRanks": false
+  "compactRanks": false,
+  "lastModalGuildLogCheck": 0
 }
