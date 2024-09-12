@@ -1,7 +1,5 @@
-import noGa from './noGa';
+import { phEvent } from './posthog';
 
 export default function screenview(funcName) {
-  if (noGa()) { return; }
-  ga('fshApp.set', 'screenName', funcName);
-  ga('fshApp.send', 'screenview');
+  phEvent(`screenview__${funcName}`);
 }
