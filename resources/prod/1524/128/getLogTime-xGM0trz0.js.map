@@ -1,1 +1,0 @@
-{"version":3,"file":"getLogTime-xGM0trz0.js","sources":["src/modules/logs/playerLogWidgets/getLogTime.js"],"sourcesContent":null,"names":["getLogTime","row","parseDateAsTimestamp","getTextTrim","cells"],"mappings":";;AAGe,SAASA,EAAWC,GACjC,OAAOC,EAAqBC,EAAYF,EAAIG,MAAM,KAAO,GAC3D"}

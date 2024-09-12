@@ -1,1 +1,0 @@
-{"version":3,"file":"remainingPages-BzskAxSU.js","sources":["src/modules/common/remainingPages.js"],"sourcesContent":null,"names":["remainingPages","number","fn","Array","fill","map","_e","i"],"mappings":"AAAe,SAASA,EAAeC,EAAQC,GAC7C,OAAOC,MAAMF,EAAS,GAAGG,KAAK,GAAGC,KAAI,CAACC,EAAIC,IAAML,EAAGK,EAAI,IACzD"}
