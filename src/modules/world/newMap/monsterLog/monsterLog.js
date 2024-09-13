@@ -28,10 +28,15 @@ async function loopActions(e, i) {
   processMonster(data);
 }
 
+let signalSent = false;
+
 function initMonsterLog() {
   if (calf.showMonsterLog) {
     GameData.actions().forEach(loopActions);
-    sendEvent('NewMap', 'MonsterLog');
+    if (!signalSent) {
+      sendEvent('NewMap', 'MonsterLog');
+      signalSent = true;
+    }
   }
 }
 
