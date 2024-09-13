@@ -23,7 +23,7 @@ function fshGetValue(name, defValue) {
 }
 
 export default function getValue(name) {
-  if (defineUserIsDev && isUndefined(defaults[name])) { //  No default setting available
+  if (defineUserIsDev && !name.startsWith('screenview__') && isUndefined(defaults[name])) {
     stdout('No default setting available', name, defaults[name]);
   }
   return fshGetValue(name, defaults[name]);

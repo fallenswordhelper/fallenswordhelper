@@ -5,7 +5,8 @@ import stdout from '../support/stdout';
 const phTest = false;
 
 export function phEvent(event, props) {
-  if (defineUserIsDev) stdout('phEvent', event, props);
+  const showEvent = 0;
+  if (defineUserIsDev && showEvent) stdout('phEvent', event, props);
   if (!defineUserIsDev || phTest) ph.capture(event, props);
 }
 
