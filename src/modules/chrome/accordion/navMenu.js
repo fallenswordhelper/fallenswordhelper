@@ -7,14 +7,9 @@ function sectionClosed(id) {
       .offsetHeight === 0;
 }
 
-let signalSent = false;
-
 function validateId(id) {
   if (sectionClosed(id)) {
-    if (!signalSent) {
-      sendEvent('accordion', 'collapse');
-      signalSent = true;
-    }
+    sendEvent('accordion', 'collapse');
     return -1;
   }
   return id;

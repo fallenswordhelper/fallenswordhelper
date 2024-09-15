@@ -4,14 +4,9 @@ import isFunction from '../../../common/isFunction';
 import isUndefined from '../../../common/isUndefined';
 import isOnList from './isOnList';
 
-let signalSent = false;
-
 function creatureOnList(creatureName, passback) {
   if (isOnList(creatureName)) {
-    if (!signalSent) {
-      sendEvent('NewMap', 'creatureOnList');
-      signalSent = true;
-    }
+    sendEvent('NewMap', 'creatureOnList');
     getElementById('actionList').children[passback].children[0].children[1]
       .classList.remove('loading');
     return true;

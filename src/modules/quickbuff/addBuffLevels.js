@@ -62,15 +62,10 @@ function makeBuffArray(player) {
   return csvSplit(getText(player.parentNode.lastElementChild)).map(shred);
 }
 
-let signalSent = false;
-
 export default async function addBuffLevels(evt) {
   const player = evt.target;
   if (player.tagName !== 'H1') { return; }
-  if (!signalSent) {
-    sendEvent('quickbuff', 'addBuffLevels');
-    signalSent = true;
-  }
+  sendEvent('quickbuff', 'addBuffLevels');
   const data = getProfile(getText(player));
   const playerData = makeBuffArray(player);
   querySelectorArray('#buff-outer input[name]')

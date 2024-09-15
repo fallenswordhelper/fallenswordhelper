@@ -69,22 +69,9 @@ async function doAjax(bankSettings, mode, amount) {
   }
 }
 
-let signalDepo = false;
-let signalWithdraw = false;
-
-function sendSignal(mode) {
-  if (mode === 'deposit' && !signalDepo) {
-    sendEvent('bank', 'deposit');
-    signalDepo = true;
-  } else if (mode === 'withdraw' && !signalWithdraw) {
-    sendEvent('bank', 'withdraw');
-    signalWithdraw = true;
-  }
-}
-
 function handleBankAction(bankSettings, mode, e) {
   e.preventDefault();
-  sendSignal(mode);
+  sendEvent('bank', mode);
   doAjax(bankSettings, mode, getAmount(mode));
 }
 

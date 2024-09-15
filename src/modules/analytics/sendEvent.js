@@ -16,10 +16,22 @@ function buildProps(eventLabel) {
   return null;
 }
 
+const seen = {};
+
+function buildKey(eventType, eventLabel) {
+  let key = eventType;
+  if (eventLabel) key += `__${spaceToUnderscore(eventLabel)}`;
+  return key;
+}
+
 export default function sendEvent(eventCategory, eventAction, eventLabel) {
   if (!eventCategory) {
     if (defineUserIsDev) stdout('sendEvent', eventCategory, eventAction, eventLabel);
     return;
   }
-  phEvent(buildEvent(eventCategory, eventAction), buildProps(eventLabel));
+  const eventType = buildEvent(eventCategory, eventAction);
+  const eventKey = buildKey(eventType, eventLabel);
+  if (seen[eventKey]) return;
+  seen[eventKey] = true;
+  phEvent(eventType, buildProps(eventLabel));
 }
