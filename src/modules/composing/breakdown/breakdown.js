@@ -86,14 +86,9 @@ function breakEvt(evt) {
   }
 }
 
-let signalSent = false;
-
 function itemClick(evt) {
   if (!hasClass('selectable-item', evt.target)) { return; }
-  if (!signalSent) {
-    sendEvent('breakdown', 'itemClick');
-    signalSent = true;
-  }
+  sendEvent('breakdown', 'itemClick');
   const myItem = evt.target.id.replace('composing-item-', '');
   const itemPos = selectedList.indexOf(myItem);
   if (itemPos === -1) {

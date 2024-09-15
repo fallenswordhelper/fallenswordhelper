@@ -45,13 +45,8 @@ function clearWarning() {
   if (warn?.innerHTML !== '') setInnerHtml('', warn);
 }
 
-let signalSent = false;
-
 function addMarketplaceWarning() {
-  if (!signalSent) {
-    sendEvent('marketplace', 'addMarketplaceWarning');
-    signalSent = true;
-  }
+  sendEvent('marketplace', 'addMarketplaceWarning');
   const price = getPrice();
   if (price) {
     const sellPrice = price.value;
