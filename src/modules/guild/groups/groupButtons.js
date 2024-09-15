@@ -49,9 +49,13 @@ function doJoinUnderSize(joinButton) {
   }
 }
 
+function getGroups() {
+  querySelectorArray('#pCC a[href*="confirmJoin"]').forEach(doJoinUnderSize);
+}
+
 function joinAllGroupsUnderSize() {
   sendEvent('groups', 'joinAllGroupsUnderSize');
-  querySelectorArray('#pCC a[href*="confirmJoin"]').forEach(doJoinUnderSize);
+  getGroups();
 }
 
 function joinUnderButton(buttonRow) {
@@ -68,7 +72,5 @@ export default function groupButtons(joinAll) {
 
   fetchGroupStatsButton(buttonRow);
 
-  if (calf.subcmd2 === defJoinallgroupsundersize) {
-    joinAllGroupsUnderSize();
-  }
+  if (calf.subcmd2 === defJoinallgroupsundersize) getGroups();
 }
