@@ -86,9 +86,14 @@ function breakEvt(evt) {
   }
 }
 
+let signalSent = false;
+
 function itemClick(evt) {
   if (!hasClass('selectable-item', evt.target)) { return; }
-  sendEvent('breakdown', 'itemClick');
+  if (!signalSent) {
+    sendEvent('breakdown', 'itemClick');
+    signalSent = true;
+  }
   const myItem = evt.target.id.replace('composing-item-', '');
   const itemPos = selectedList.indexOf(myItem);
   if (itemPos === -1) {
