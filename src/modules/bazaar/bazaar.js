@@ -1,8 +1,10 @@
 import closestTable from '../common/closestTable';
 import getId from '../common/getId';
 import getTextTrim from '../common/getTextTrim';
+import jQueryNotPresent from '../common/jQueryNotPresent';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
+import { pcc } from '../support/layout';
 import intValue from '../system/intValue';
 import Bazaar from './Bazaar.svelte';
 
@@ -27,7 +29,8 @@ const preparePotions = (p) => ({
 });
 
 export default function bazaar() {
-  const origPots = querySelectorArray('a[href*="cmd=buyitem"]');
+  if (!pcc() || jQueryNotPresent()) return;
+  const origPots = querySelectorArray('a[href*="&subcmd=buyitem&"][onclick]', pcc());
   if (!origPots.length) return;
   const potTable = closestTable(closestTable(origPots[0]).parentElement);
   startApp(origPots.map(preparePotions), potTable);
