@@ -28,6 +28,7 @@ function getReset(listDiv, list, adjective, rowMap) {
 export default function injectList([getDivFn, pref, getListFn, adjective, rowMap]) {
   const listDiv = getDivFn();
   const list = getListFn();
+  if (!list) return;
   setValueJSON(pref, list);
   setInnerHtml('', listDiv);
   return getReset(listDiv, list, adjective, rowMap);
