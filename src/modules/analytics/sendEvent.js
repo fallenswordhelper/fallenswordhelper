@@ -1,8 +1,8 @@
 import stdout from '../support/stdout';
 import { phEvent } from './posthog';
 
-function spaceToUnderscore(str) {
-  return str.replaceAll(' ', '_');
+function spaceToUnderscore(maybeStr) {
+  return String(maybeStr).replaceAll(' ', '_');
 }
 
 function buildEvent(eventCategory, eventAction) {
