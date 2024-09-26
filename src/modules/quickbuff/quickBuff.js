@@ -7,7 +7,7 @@ import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
 import playerName from '../common/playerName';
 import stdout from '../support/stdout';
-import addBuffLevels from './addBuffLevels';
+import { addBuffLevels } from './addBuffLevels';
 import { quickBuffHeader } from './assets';
 import doLabels from './doLabels';
 import firstPlayerStats from './firstPlayerStats';

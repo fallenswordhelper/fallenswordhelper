@@ -62,13 +62,17 @@ function makeBuffArray(player) {
   return csvSplit(getText(player.parentNode.lastElementChild)).map(shred);
 }
 
-export default async function addBuffLevels(evt) {
-  const player = evt.target;
-  if (player.tagName !== 'H1') { return; }
-  sendEvent('quickbuff', 'addBuffLevels');
+export async function doBuffLevels(player) {
   const data = getProfile(getText(player));
   const playerData = makeBuffArray(player);
   querySelectorArray('#buff-outer input[name]')
     .forEach(partial(hazBuff, playerData));
   addStatsQuickBuff(await data);
+}
+
+export function addBuffLevels(evt) {
+  const player = evt.target;
+  if (player.tagName !== 'H1') { return; }
+  sendEvent('quickbuff', 'addBuffLevels');
+  doBuffLevels(player);
 }
