@@ -27,17 +27,13 @@ const buffEffect = derived(
       $rawGroupStats.defense,
       $buffObj.Constitution,
     );
-    const fortitudeBonusHP = calcFortitudeBonusHp(
-      defWithConst,
-      $buffObj.Fortitude,
-    );
-    const hpWithFortitude = $rawGroupStats.hp + fortitudeBonusHP;
-    const chiStrikeBonusDamage = calcChiStrikeBonusDamage(
-      hpWithFortitude,
-      $buffObj['Chi Strike'],
-    );
+    const hpWithFortitude =
+      $rawGroupStats.hp +
+      calcFortitudeBonusHp(defWithConst, $buffObj.Fortitude);
     set({
-      dmgWithChiStrike: $rawGroupStats.damage + chiStrikeBonusDamage,
+      dmgWithChiStrike:
+        $rawGroupStats.damage +
+        calcChiStrikeBonusDamage(hpWithFortitude, $buffObj['Chi Strike']),
       defWithConst,
       hpWithFortitude,
       nmv: calcNmvEffect($rawGroupStats.attack, $buffObj['Nightmare Visage']),

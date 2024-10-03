@@ -21,8 +21,8 @@ function hasUrl(j) {
   return param.url && param.url[j] !== '';
 }
 
+// Legacy
 function detailRow(j, itemField) {
-  // Legacy
   if (param.tags[j] === 'checkbox') {
     return `<input type="checkbox"${isChecked(itemField)} disabled>`;
   }
@@ -35,8 +35,8 @@ function detailRow(j, itemField) {
   return itemField;
 }
 
+// Legacy
 function itemRow(item) {
-  // Legacy
   let result = '';
   for (let j = 0; j < param.fields.length; j += 1) {
     result += '<td class="fshCenter">';
@@ -74,8 +74,8 @@ function itemRows(acc, item, i, currentItems) {
   return acc + result;
 }
 
+// Legacy
 function doInputs() {
-  // Legacy
   let result = '<tr>';
   for (let i = 0; i < param.tags.length; i += 1) {
     result += `<td align=center><input type="${
@@ -85,27 +85,30 @@ function doInputs() {
   return result;
 }
 
+const ahTableStart =
+  '<table cellspacing="2" cellpadding="2" ' +
+  'class="fshLists" width="100%"><tr class="fshOr">';
+const rawTableStart =
+  '<td><span class="HelperTextLink" id="fshAdd">[Add]</span></td>' +
+  '</tr></table><table width="100%"><tr><td class="fshCenter">' +
+  '<textarea id="fshEd" class="fshEd">';
+const rawTableEnd =
+  '</textarea></td></tr><tr><td class="fshCenter">' +
+  '<input id="fshSave" type="button" value="Save" class="custombutton">&nbsp;' +
+  '<input id="fshReset" type="button" value="Reset" class="custombutton">' +
+  '</td></tr></tbody></table>';
+
+// Legacy
 function generateManageTable() {
-  // Legacy
   let result =
-    '<table cellspacing="2" cellpadding="2" class="fshLists" ' +
-    'width="100%"><tr class="fshOr">';
-  result += param.headers.reduce(headersToHtml, '');
-  result += '<th>Action</th></tr>';
-  result += param.currentItems.reduce(itemRows, '');
-  result += doInputs();
-  result +=
-    '<td><span class="HelperTextLink" id="fshAdd">' +
-    '[Add]</span></td></tr></table>' +
-    '<table width="100%"><tr><td class="fshCenter">' +
-    `<textarea id="fshEd" class="fshEd">${jsonStringify(
-      param.currentItems,
-    )}</textarea></td></tr>` +
-    '<tr><td class="fshCenter"><input id="fshSave" ' +
-    'type="button" value="Save" class="custombutton">' +
-    '&nbsp;<input id="fshReset" type="button" value="Reset" ' +
-    'class="custombutton"></td></tr>' +
-    '</tbody></table>';
+    ahTableStart +
+    param.headers.reduce(headersToHtml, '') +
+    '<th>Action</th></tr>' +
+    param.currentItems.reduce(itemRows, '') +
+    doInputs() +
+    rawTableStart +
+    jsonStringify(param.currentItems) +
+    rawTableEnd;
   const target = getElementById(param.id);
   if (target) {
     setInnerHtml(result, getElementById(param.id));
@@ -113,8 +116,8 @@ function generateManageTable() {
   }
 }
 
+// Legacy
 function deleteQuickItem(target) {
-  // Legacy
   sendEvent('injectAuctionSearch', 'deleteQuickItem');
   const itemId = target.getAttribute('data-itemId');
   param.currentItems.splice(itemId, 1);
@@ -123,8 +126,8 @@ function deleteQuickItem(target) {
 
 const thisItem = (i) => getElementById(`fshIn${param.fields[i]}`);
 
+// Legacy
 function buildNewItem() {
-  // Legacy
   const newItem = {};
   for (let i = 0; i < param.fields.length; i += 1) {
     newItem[param.fields[i]] =
@@ -133,8 +136,8 @@ function buildNewItem() {
   return newItem;
 }
 
+// Legacy
 function addQuickItem() {
-  // Legacy
   sendEvent('injectAuctionSearch', 'addQuickItem');
   const isArrayOnly = param.fields.length === 0;
   const newItem = isArrayOnly ? getElementById('fshIn0').value : buildNewItem();
@@ -142,8 +145,8 @@ function addQuickItem() {
   generateManageTable();
 }
 
+// Legacy
 function saveRawEditor() {
-  // Legacy
   sendEvent('injectAuctionSearch', 'saveRawEditor');
   const userInput = jsonParse(getElementById('fshEd').value);
   if (isArray(userInput)) {
@@ -152,8 +155,8 @@ function saveRawEditor() {
   }
 }
 
+// Legacy
 function resetRawEditor() {
-  // Legacy
   sendEvent('injectAuctionSearch', 'resetRawEditor');
   if (param.id === 'fshAso') {
     param.currentItems = jsonParse(defaults.quickSearchList);
@@ -176,8 +179,8 @@ function setupEventHandler(content) {
   onclick(content, eventHandler5(listEvents()));
 }
 
+// Legacy
 export default function injectAuctionSearch(injector) {
-  // Legacy
   const content = injector || pcc();
   setInnerHtml(
     makePageHeader('Trade Hub Quick Search', '', '', '') + auctionSearchBlurb,
