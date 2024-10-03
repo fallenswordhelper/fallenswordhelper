@@ -19,10 +19,13 @@
   let previouslyFocused;
   let prevOnTop;
 
-  const liveTab = (n) => n.tabIndex >= 0 && n.offsetWidth > 0 && n.offsetHeight > 0 && !n.disabled;
+  const liveTab = (n) =>
+    n.tabIndex >= 0 && n.offsetWidth > 0 && n.offsetHeight > 0 && !n.disabled;
 
   function handleKeydown(e) {
-    if (!visible) { return; }
+    if (!visible) {
+      return;
+    }
 
     if (e.key === 'Escape' && onTop === modal) {
       close();
@@ -59,9 +62,15 @@
   }
 </script>
 
-<svelte:window on:keydown={ handleKeydown }/>
+<svelte:window on:keydown={handleKeydown} />
 
-<div class="ui-dialog" class:modalVisible role="dialog" aria-modal="true" bind:this={ modal }>
+<div
+  class="ui-dialog"
+  class:modalVisible
+  role="dialog"
+  aria-modal="true"
+  bind:this={modal}
+>
   <slot />
 </div>
 

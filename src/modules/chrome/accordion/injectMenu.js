@@ -45,6 +45,8 @@ async function doAccordion() {
 }
 
 export default function injectMenu() {
-  if (!pcl() || jQueryNotPresent()) { return; }
+  if (!pcl() || jQueryNotPresent()) {
+    return;
+  }
   doAccordion();
 }

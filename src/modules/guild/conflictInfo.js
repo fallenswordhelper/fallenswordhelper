@@ -20,26 +20,38 @@ function buildRow(insertHere, html1, html2) {
 }
 
 function conflictHeader(insertHere) {
-  const hRow = buildRow(insertHere, `<a href="${
-    guildSubcmdUrl}conflicts">Active Conflicts</a>`, 'Score');
+  const hRow = buildRow(
+    insertHere,
+    `<a href="${guildSubcmdUrl}conflicts">Active Conflicts</a>`,
+    'Score',
+  );
   onclick(hRow, (e) => {
     if (e.target.tagName === 'A') sendEvent('guildManage', 'conflictHeader');
   });
 }
 
 function conflictRow(insertHere, aRow) {
-  buildRow(insertHere, aRow.cells[0].innerHTML, `<b>${aRow.cells[6].innerHTML}</b>`);
+  buildRow(
+    insertHere,
+    aRow.cells[0].innerHTML,
+    `<b>${aRow.cells[6].innerHTML}</b>`,
+  );
 }
 
-function hazConflict(conflictTable, curPage, insertHere) { // Legacy
+function hazConflict(conflictTable, curPage, insertHere) {
+  // Legacy
   if (curPage === 1) {
     conflictHeader(insertHere);
   }
   dataRows(conflictTable, 7, 0).forEach(partial(conflictRow, insertHere));
 }
 
-function activeConflicts(doc, curPage, insertHere) { // Legacy
-  const conflictTable = querySelector('#pCC > table > tbody > tr > td > table', doc);
+function activeConflicts(doc, curPage, insertHere) {
+  // Legacy
+  const conflictTable = querySelector(
+    '#pCC > table > tbody > tr > td > table',
+    doc,
+  );
   if (conflictTable && conflictTable.rows.length > 3) {
     hazConflict(conflictTable, curPage, insertHere);
   }
@@ -54,10 +66,13 @@ async function getNextPage(curPage, fn, callback) {
   fn(callback, args);
 }
 
-function gotConflictInfo(callback, responseText) { // Legacy
+function gotConflictInfo(callback, responseText) {
+  // Legacy
   const doc = createDocument(responseText);
   const page = querySelector('#pCC input[name="page"]', doc);
-  if (!page) { return; }
+  if (!page) {
+    return;
+  }
   const curPage = Number(page.value);
   const maxPage = getMaxPage(page);
   activeConflicts(doc, curPage, callback.node);

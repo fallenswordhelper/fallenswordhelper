@@ -39,7 +39,9 @@
     api.draw();
   }
 
-  const statsEvent = (type) => { sendEvent('Inventory', 'Update Stats', type); };
+  const statsEvent = (type) => {
+    sendEvent('Inventory', 'Update Stats', type);
+  };
 
   async function updThisPage() {
     statsEvent('On page');
@@ -59,11 +61,12 @@
 
   init(fshInv);
 
-  const explain = 'This allows you to update the stats of items. It is useful in cases where stats '
-    + 'are missing or if you want accurate stats for forged items. It can be slow for large data '
-    + 'sets. The results are cached and will be used automatically next time you visit this page. '
-    + 'You will need to update again if these stats become stale. For example, if you forged or '
-    + 'crafted an item, or if a guild store item has moved.';
+  const explain =
+    'This allows you to update the stats of items. It is useful in cases where stats ' +
+    'are missing or if you want accurate stats for forged items. It can be slow for large data ' +
+    'sets. The results are cached and will be used automatically next time you visit this page. ' +
+    'You will need to update again if these stats become stale. For example, if you forged or ' +
+    'crafted an item, or if a guild store item has moved.';
 </script>
 
 <div class="main">
@@ -72,23 +75,27 @@
     <div class="wrapper">
       [
       <div class="tooltip">
-        <span class="tooltip-multiline" data-tooltip={ explain }>?</span>
+        <span class="tooltip-multiline" data-tooltip={explain}>?</span>
       </div>
       ]
     </div>
   </div>
   <div class="btnbox">
-    <button class="custombutton" on:click={ updThisPage } type="button">On page</button>
-    <button class="custombutton" on:click={ updAll } type="button">All</button>
+    <button class="custombutton" on:click={updThisPage} type="button"
+      >On page</button
+    >
+    <button class="custombutton" on:click={updAll} type="button">All</button>
   </div>
   <div class="btnbox">
-    <button class="custombutton" on:click={ clearCache } type="button">Clear cache</button>
+    <button class="custombutton" on:click={clearCache} type="button"
+      >Clear cache</button
+    >
   </div>
   <div class="chunkbox">
-    { #if chunksNeeded }
-      <div>Chunks needed: <span>{ chunksNeeded || '' }</span></div>
-      <div>Chunks received: <span>{ chunksReceived || '' }</span></div>
-    { /if }
+    {#if chunksNeeded}
+      <div>Chunks needed: <span>{chunksNeeded || ''}</span></div>
+      <div>Chunks received: <span>{chunksReceived || ''}</span></div>
+    {/if}
   </div>
 </div>
 

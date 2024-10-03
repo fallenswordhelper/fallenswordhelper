@@ -12,12 +12,9 @@
 
   (function init() {
     currentSet = res.current_set;
-    sets = [
-      ...(!res.sets.some(findSet) ? [currentSet] : []),
-      ...res.sets,
-    ];
+    sets = [...(!res.sets.some(findSet) ? [currentSet] : []), ...res.sets];
     selected = sets.find(findSet).id;
-  }());
+  })();
 
   async function handleChange() {
     await usesetup(selected);
@@ -26,16 +23,16 @@
 </script>
 
 <div class="ams">
-  <select bind:value={ selected } on:change={ handleChange }>
-    { #each sets as { id, name } }
-      <option value="{ id }">{ name }</option>
-    { /each }
+  <select bind:value={selected} on:change={handleChange}>
+    {#each sets as { id, name }}
+      <option value={id}>{name}</option>
+    {/each}
   </select>
 </div>
 <div class="amf">
-  { #each currentSet.slots as move }
-    <img alt="Move" src="{ cdn }arena/{ move ? move - 1 : 'x' }.png">
-  { /each }
+  {#each currentSet.slots as move}
+    <img alt="Move" src="{cdn}arena/{move ? move - 1 : 'x'}.png" />
+  {/each}
 </div>
 
 <style>

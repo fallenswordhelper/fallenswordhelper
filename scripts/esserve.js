@@ -4,11 +4,7 @@ import lws from 'local-web-server';
 import { port as calfPort } from './config.js';
 import { calfVer, core, version } from './getVersion.js';
 import liquidPlugin from './liquidPlugin.js';
-import {
-  buildFsh,
-  pathToFile,
-  root,
-} from './utils.js';
+import { buildFsh, pathToFile, root } from './utils.js';
 
 const rootPath = `https://localhost:${calfPort}/`;
 const fshPath = 'dist/Releases/watch';
@@ -48,10 +44,12 @@ const { host, port } = await ctx.serve({ servedir: root });
 console.log(`esbuild listening on http://${host}:${port}`);
 
 const ws = await lws.create({
-  rewrite: [{
-    from: '/(.*)',
-    to: `http://${host}:${port}/$1`,
-  }],
+  rewrite: [
+    {
+      from: '/(.*)',
+      to: `http://${host}:${port}/$1`,
+    },
+  ],
 });
 
 console.log(`lws listening on port ${ws.config.port}`);

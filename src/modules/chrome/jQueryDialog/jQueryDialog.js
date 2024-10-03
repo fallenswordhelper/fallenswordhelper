@@ -5,7 +5,8 @@ import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
 import setInnerHtml from '../../dom/setInnerHtml';
 
-export default function jQueryDialog(fn) { // jQuery
+export default function jQueryDialog(fn) {
+  // jQuery
   let content = getElementById('content');
   if (content) {
     setInnerHtml('', content);
@@ -20,7 +21,10 @@ export default function jQueryDialog(fn) { // jQuery
     width: 640,
     modal: true,
     position: {
-      my: 'top', at: 'top', offset: '0 60', collision: 'none',
+      my: 'top',
+      at: 'top',
+      offset: '0 60',
+      collision: 'none',
     },
     resizable: false,
   });

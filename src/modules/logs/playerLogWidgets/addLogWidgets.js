@@ -29,7 +29,11 @@ function foundLogTable(logTable, privMsg) {
 }
 
 export default function addLogWidgets(privMsg) {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) {
+    return;
+  }
   const logTable = getLastTable();
-  if (logTable) { foundLogTable(logTable, privMsg); }
+  if (logTable) {
+    foundLogTable(logTable, privMsg);
+  }
 }

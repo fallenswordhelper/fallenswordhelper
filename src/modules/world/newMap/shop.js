@@ -37,17 +37,23 @@ async function quickBuy() {
       msg = rmsg.substring(0, firstTag);
     }
   } else {
-    msg = `You purchased ${data.response.data.name} for ${
-      addCommas(data.response.data.cost)} gold.`;
+    msg = `You purchased ${data.response.data.name} for ${addCommas(
+      data.response.data.cost,
+    )} gold.`;
   }
   insertHtmlBeforeEnd(resultDiv, `${msg}<br>`);
 }
 
 function normalBuy() {
-  GameData.doAction(14, 3, {
-    id: shoppingData.id,
-    item_id: shoppingData.itemId,
-  }, 0);
+  GameData.doAction(
+    14,
+    3,
+    {
+      id: shoppingData.id,
+      item_id: shoppingData.itemId,
+    },
+    0,
+  );
   jDialog.close();
 }
 
@@ -85,7 +91,8 @@ function getDialog() {
   return dialog || getElementById('shopDialogConfirm');
 }
 
-function getJDialog() { // jQuery
+function getJDialog() {
+  // jQuery
   return jDialog || $(dialog).data('hcsWorldDialogShopConfirm');
 }
 
@@ -100,9 +107,13 @@ function initQuickBuy() {
 function worldDialogShop(_e, data) {
   shoppingData = data;
   dialog = getDialog();
-  if (!dialog) { return; }
+  if (!dialog) {
+    return;
+  }
   jDialog = getJDialog();
-  if (jDialog) { initQuickBuy(); }
+  if (jDialog) {
+    initQuickBuy();
+  }
 }
 
 export default function shop() {

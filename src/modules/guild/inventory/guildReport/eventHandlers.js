@@ -16,12 +16,15 @@ import { pcc } from '../../../support/layout';
 import { cdn } from '../../../system/system';
 import itemId from './itemId';
 
-const spinner = '<span class="guildReportSpinner" '
-  + `style="background-image: url('${cdn}ui/misc/spinner.gif');"></span>`;
+const spinner =
+  '<span class="guildReportSpinner" ' +
+  `style="background-image: url('${cdn}ui/misc/spinner.gif');"></span>`;
 
 function recalled(theTd) {
-  setInnerHtml('<span class="fastWorn">You successfully recalled the item'
-    + '</span>', theTd);
+  setInnerHtml(
+    '<span class="fastWorn">You successfully recalled the item</span>',
+    theTd,
+  );
 }
 
 function wornItem(theTd) {
@@ -33,7 +36,9 @@ function replyTo(target) {
 }
 
 function recallResult(action, theTd, data) {
-  if (data.r === 1) { return; }
+  if (data.r === 1) {
+    return;
+  }
   if (action === 'recall') {
     recalled(theTd);
   } else {
@@ -83,9 +88,13 @@ const subClass = [
 
 function doFastRecall(target) {
   const theTd = target.parentNode.parentNode;
-  if (!theTd) { return; }
+  if (!theTd) {
+    return;
+  }
   const [{ href }] = theTd.children;
-  if (!href) { return; }
+  if (!href) {
+    return;
+  }
   subClass.find(partial(classPair, target))[1](theTd, href);
   setInnerHtml(spinner, theTd);
 }

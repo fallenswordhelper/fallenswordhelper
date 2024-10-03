@@ -38,8 +38,17 @@ function addStuff(acc, curr) {
 function reorgStats(el) {
   return {
     player: el.player,
-    stats: [el.stats[6], el.stats[7], el.stats[6] + el.stats[7], el.stats[1],
-      el.stats[2], el.stats[3], el.stats[4], el.stats[8], el.stats[5]],
+    stats: [
+      el.stats[6],
+      el.stats[7],
+      el.stats[6] + el.stats[7],
+      el.stats[1],
+      el.stats[2],
+      el.stats[3],
+      el.stats[4],
+      el.stats[8],
+      el.stats[5],
+    ],
   };
 }
 
@@ -58,8 +67,10 @@ function footerStats(acc, curr) {
 function makeTfoot(added) {
   const stats = added.slice(1).reduce(makeTotal, added[0].stats).map(addCommas);
   return createTFoot({
-    innerHTML: `<tr><td class="fshRight" colspan="3">Total: </td>${
-      stats.reduce(footerStats, '')}</tr>`,
+    innerHTML: `<tr><td class="fshRight" colspan="3">Total: </td>${stats.reduce(
+      footerStats,
+      '',
+    )}</tr>`,
   });
 }
 
@@ -79,13 +90,17 @@ function addAdvisorPages(list, [membrList, ...args]) {
 }
 
 async function injectAdvisor(list) {
-  setInnerHtml('<span class="fshCurveContainer fshFlex">'
-    + '<span class="fshCurveEle fshCurveLbl fshOldSpinner"></span>'
-    + '<span class="fshSpinnerMsg">&nbsp;Retrieving daily data ...</span>'
-    + '</span>', list);
+  setInnerHtml(
+    '<span class="fshCurveContainer fshFlex">' +
+      '<span class="fshCurveEle fshCurveLbl fshOldSpinner"></span>' +
+      '<span class="fshSpinnerMsg">&nbsp;Retrieving daily data ...</span>' +
+      '</span>',
+    list,
+  );
 
-  const prm = [getMembrList(false)]
-    .concat([1, 2, 3, 4, 5, 6, 7, 8].map(partial(getAdvisorPage, list)));
+  const prm = [getMembrList(false)].concat(
+    [1, 2, 3, 4, 5, 6, 7, 8].map(partial(getAdvisorPage, list)),
+  );
 
   const args = await all(prm);
   addAdvisorPages(list, args);

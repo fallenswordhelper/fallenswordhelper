@@ -1,1 +1,3 @@
-export default function isBoolean(e) { return typeof e === 'boolean'; }
+export default function isBoolean(e) {
+  return typeof e === 'boolean';
+}

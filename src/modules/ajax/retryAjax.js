@@ -19,7 +19,10 @@ const refillAmount = 5;
 let tokens = 0;
 
 async function refillTokens() {
-  if (tokens < refillAmount - $.active && performance.now() - lastRefill >= interval) {
+  if (
+    tokens < refillAmount - $.active &&
+    performance.now() - lastRefill >= interval
+  ) {
     tokens = refillAmount - $.active;
     lastRefill = performance.now();
   } else await delay(100);
@@ -31,7 +34,8 @@ async function limiter() {
   tokens -= 1;
 }
 
-function getAjax(options) { // jQuery
+function getAjax(options) {
+  // jQuery
   const opt = setOpts(options);
   opt.beforeSend = beforeSend;
   return $.ajax(opt).fail((jqXHR, textStatus, errorThrown) => {

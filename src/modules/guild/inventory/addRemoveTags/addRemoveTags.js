@@ -14,9 +14,11 @@ import clickHandler from './clickHandler';
 import interceptSubmit from './interceptSubmit';
 
 const isAdd = () => calf.subcmd2 === 'addtags';
-const getItemId = (cb) => querySelector('img', closestTr(cb)).src.split('/').at(-1).split('.')[0];
+const getItemId = (cb) =>
+  querySelector('img', closestTr(cb)).src.split('/').at(-1).split('.')[0];
 const getItemName = (cb) => getTextTrim(closestTr(cb).cells[2]);
-const btn = (className, text) => `<button class="${className}" type="button">${text}</button>`;
+const btn = (className, text) =>
+  `<button class="${className}" type="button">${text}</button>`;
 const toClass = (text) => toLowerCase(text).split(' ').at(-1);
 const btnClass = (text) => `tag-${toClass(text)}-btn`;
 const tagbtn = (text) => `[${btn(btnClass(text), text)}]`;
@@ -24,8 +26,10 @@ const checkAll = (count) => (count > 1 ? `${tagbtn('Check All')}&nbsp;` : '');
 const action = () => (isAdd() ? 'Add' : 'Remove');
 const actBtn = () => tagbtn(`Fast ${action()}`);
 const bpBtn = () => tagbtn('Fast BP');
-const btnDiv = (invId, html) => `<div class="btn-div" data-inv-id="${invId}">${html}</div>`;
-const render = (id, count) => btnDiv(id, `&nbsp;${checkAll(count)}${actBtn()}&nbsp;${bpBtn()}`);
+const btnDiv = (invId, html) =>
+  `<div class="btn-div" data-inv-id="${invId}">${html}</div>`;
+const render = (id, count) =>
+  btnDiv(id, `&nbsp;${checkAll(count)}${actBtn()}&nbsp;${bpBtn()}`);
 
 function doItemTable([cb, invId, , , count]) {
   const target = closestTr(cb).cells[2];
@@ -33,18 +37,14 @@ function doItemTable([cb, invId, , , count]) {
 }
 
 function getExtra(cb) {
-  return [
-    cb,
-    cb.value,
-    getItemId(cb),
-    getItemName(cb),
-  ];
+  return [cb, cb.value, getItemId(cb), getItemName(cb)];
 }
 
 function getCounts(extra) {
   return extra.map((ary) => [
     ...ary,
-    extra.filter(([, , cid, cname]) => cid === ary[2] && cname === ary[3]).length,
+    extra.filter(([, , cid, cname]) => cid === ary[2] && cname === ary[3])
+      .length,
   ]);
 }
 
@@ -57,7 +57,10 @@ function getTaggable() {
 function checkAllBtn(subBtn) {
   let target = subBtn.parentNode;
   if (isAdd()) target = closestTr(subBtn).insertCell(-1);
-  insertHtmlBeforeEnd(target, btn('tag-all-custom custombutton', 'Check&nbsp;All'));
+  insertHtmlBeforeEnd(
+    target,
+    btn('tag-all-custom custombutton', 'Check&nbsp;All'),
+  );
 }
 
 function fixupTable(subBtn) {

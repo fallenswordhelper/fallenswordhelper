@@ -7,12 +7,7 @@ import {
   rm,
   writeFile,
 } from 'node:fs/promises';
-import {
-  dirname,
-  join,
-  relative,
-  resolve,
-} from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import fastGlob from 'fast-glob';
 
@@ -38,23 +33,30 @@ export async function cleanTarget(filepath) {
   if (accessErr) await mkdir(fileUrl, { recursive: true });
 
   const files = await readdir(fileUrl);
-  await Promise.all(files.map((filename) => rm(
-    relativeFileUrl(join(filepath, filename)),
-    { recursive: true },
-  )));
+  await Promise.all(
+    files.map((filename) =>
+      rm(relativeFileUrl(join(filepath, filename)), { recursive: true }),
+    ),
+  );
 }
 
 export async function buildFsh(fshPath, ver, dlPath, calfPath) {
   await cleanTarget(`../${fshPath}`);
 
-  const src = await readFile(relativeFileUrl('../src/fallenswordhelper.user.js'), 'utf8');
+  const src = await readFile(
+    relativeFileUrl('../src/fallenswordhelper.user.js'),
+    'utf8',
+  );
 
   const fsh = src
     .replaceAll('_VER', ver)
     .replace('_DLURL', `${dlPath}/fallenswordhelper.user.js`)
     .replace('_CALFJS', `${calfPath}`);
 
-  await writeFile(relativeFileUrl(`../${fshPath}/fallenswordhelper.user.js`), fsh);
+  await writeFile(
+    relativeFileUrl(`../${fshPath}/fallenswordhelper.user.js`),
+    fsh,
+  );
 }
 
 export async function dataTablesCss(calfPath) {

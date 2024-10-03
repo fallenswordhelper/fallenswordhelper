@@ -44,25 +44,24 @@ function seenPlayer(player, thePage) {
 }
 
 function playerRecord(thePage, index, tds) {
-  return [
-    tds.eq(0).html(),
-    tds.eq(1).html(),
-    tds.eq(2).text(),
-    thePage,
-    index,
-  ];
+  return [tds.eq(0).html(), tds.eq(1).html(), tds.eq(2).text(), thePage, index];
 }
 
 function buildElements(thePage, index, element) {
   const tds = $('td', $(element));
   const player = tds.eq(1).text();
-  if (seenPlayer(player, thePage)) { return; }
+  if (seenPlayer(player, thePage)) {
+    return;
+  }
   onlinePlayers[player] = playerRecord(thePage, index, tds);
 }
 
 function processTheRows(doc, input) {
   const thePage = input.attr('value');
-  const theRows = $('#pCC img[src$="/world/icon_action_view.png', doc).parent().parent().parent();
+  const theRows = $('#pCC img[src$="/world/icon_action_view.png', doc)
+    .parent()
+    .parent()
+    .parent();
   theRows.each(partial(buildElements, thePage));
 }
 
@@ -73,7 +72,9 @@ function getLastPage(input) {
 
 function getOtherPages(callback, input) {
   lastPage = getLastPage(input);
-  const prm = remainingPages(lastPage, onlinePlayersPage).map(async (data) => callback(await data));
+  const prm = remainingPages(lastPage, onlinePlayersPage).map(async (data) =>
+    callback(await data),
+  );
   return all(prm);
 }
 
@@ -81,7 +82,8 @@ function updateStatus(text) {
   $('#fshOutput', context).append(text);
 }
 
-function getOnlinePlayers(data) { // Bad jQuery
+function getOnlinePlayers(data) {
+  // Bad jQuery
   updateStatus(` ${onlinePages + 1}`);
   const doc = createDocument(data);
   const input = $('#pCC input.custominput', doc).first();
@@ -93,7 +95,8 @@ function getOnlinePlayers(data) { // Bad jQuery
   checkLastPage();
 }
 
-async function refreshEvt() { // Bad jQuery
+async function refreshEvt() {
+  // Bad jQuery
   sendEvent('OnlinePlayers', 'refreshEvt');
   $('#fshRefresh', context).hide();
   onlinePages = 0;
@@ -109,10 +112,10 @@ const idHdl = [
   ['fshReset', () => resetEvt(context)],
 ];
 
-async function injectOnlinePlayersNew() { // jQuery
+async function injectOnlinePlayersNew() {
+  // jQuery
   context.html(
-    `<span><b>Online Players</b></span>${doRefreshButton()
-    }<div id="fshOutput"></div>`,
+    `<span><b>Online Players</b></span>${doRefreshButton()}<div id="fshOutput"></div>`,
   );
   const data = await get('fsh_onlinePlayers');
   gotOnlinePlayers(data);
@@ -120,7 +123,8 @@ async function injectOnlinePlayersNew() { // jQuery
   on(context[0], 'keyup', changeLvl);
 }
 
-export default async function injectOnlinePlayers(content) { // jQuery
+export default async function injectOnlinePlayers(content) {
+  // jQuery
   if (jQueryNotPresent()) return;
   context = content ? $(content) : $('#pCC');
   await loadDataTables();

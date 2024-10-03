@@ -20,7 +20,9 @@ function showHideArt(article, rowFn, isOpen) {
   article.open = isOpen; // skipcq: JS-0083
 }
 
-function hideRow(el) { hideElement(el.row); }
+function hideRow(el) {
+  hideElement(el.row);
+}
 
 function collapseArt(prefName, article) {
   sendEvent('collapse', 'collapseArt', prefName);
@@ -28,10 +30,16 @@ function collapseArt(prefName, article) {
 }
 
 function collapseAll(prefName) {
-  warehouse.forEach((article) => { if (article.open) { collapseArt(prefName, article); } });
+  warehouse.forEach((article) => {
+    if (article.open) {
+      collapseArt(prefName, article);
+    }
+  });
 }
 
-function show(el) { toggleForce(el.row, false); }
+function show(el) {
+  toggleForce(el.row, false);
+}
 
 function expandArt(prefName, article) {
   sendEvent('collapse', 'expandArt', prefName);
@@ -39,22 +47,34 @@ function expandArt(prefName, article) {
 }
 
 function expandAll(prefName) {
-  warehouse.forEach((article) => { if (!article.open) { expandArt(prefName, article); } });
+  warehouse.forEach((article) => {
+    if (!article.open) {
+      expandArt(prefName, article);
+    }
+  });
 }
 
-function isHeader(el) { if (el.rowIndex % headerIndex === 0) { return el; } }
+function isHeader(el) {
+  if (el.rowIndex % headerIndex === 0) {
+    return el;
+  }
+}
 
 function closestTr(el) {
   if (el.tagName === 'TR') {
     return isHeader(el);
   }
-  if (el.tagName === 'TABLE') { return; }
+  if (el.tagName === 'TABLE') {
+    return;
+  }
   return closestTr(el.parentNode);
 }
 
 function evtEnabled(prefName, evt) {
   const myRow = closestTr(evt.target);
-  if (!myRow) { return; }
+  if (!myRow) {
+    return;
+  }
   const articleNo = myRow.rowIndex / headerIndex;
   const article = warehouse[articleNo];
   if (article.open === false) {
@@ -65,10 +85,16 @@ function evtEnabled(prefName, evt) {
   }
 }
 
-function evtHdl(prefName, evt) { if (prefValue) { evtEnabled(prefName, evt); } }
+function evtHdl(prefName, evt) {
+  if (prefValue) {
+    evtEnabled(prefName, evt);
+  }
+}
 
 function makeHeaderClickable(row) {
-  if (prefValue) { row.classList.add('fshPoint'); }
+  if (prefValue) {
+    row.classList.add('fshPoint');
+  }
 }
 
 function collapseDuringAnalysis(row, thisArticle) {
@@ -82,7 +108,11 @@ function collapseDuringAnalysis(row, thisArticle) {
   }
 }
 
-function hasExtraFn(extraFn, row) { if (isFunction(extraFn)) { extraFn(row); } }
+function hasExtraFn(extraFn, row) {
+  if (isFunction(extraFn)) {
+    extraFn(row);
+  }
+}
 
 function testRowType(row, rowType, thisArticle, param) {
   if (rowType === 0) {
@@ -109,7 +139,9 @@ function doTagging(param, row) {
   testRowType(row, rowType, thisArticle, param);
 }
 
-function togglePointer(article) { article.header.classList.toggle('fshPoint'); }
+function togglePointer(article) {
+  article.header.classList.toggle('fshPoint');
+}
 
 function toggleHeaderClass() {
   warehouse.forEach(togglePointer);
@@ -119,7 +151,8 @@ function togglePref(prefName) {
   sendEvent('collapse', 'togglePref', prefName);
   prefValue = !prefValue;
   setValue(prefName, prefValue);
-  if (prefValue) collapseAll(prefName); else expandAll(prefName);
+  if (prefValue) collapseAll(prefName);
+  else expandAll(prefName);
   toggleHeaderClass();
 }
 

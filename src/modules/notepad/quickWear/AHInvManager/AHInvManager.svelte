@@ -18,24 +18,30 @@
   }));
 
   const quickSearchList = getValueJSON('quickSearchList') || [];
-  const quickSL = uniq(quickSearchList, 'searchname')
-    .sort((a, b) => alpha(a.searchname, b.searchname));
+  const quickSL = uniq(quickSearchList, 'searchname').sort((a, b) =>
+    alpha(a.searchname, b.searchname),
+  );
 
-  const hasItem = ({ searchname }) => itemCount.some(({ n }) => n === searchname);
-  const foundItems = quickSL.filter(hasItem).map(({ nickname, searchname }, index) => ({
-    component: ListItem,
-    data: {
-      count: itemCount.find(({ n }) => n === searchname).count,
-      nickname,
-      odd: index % 2,
-      searchname,
-    },
-    id: index + 3,
-  }));
+  const hasItem = ({ searchname }) =>
+    itemCount.some(({ n }) => n === searchname);
+  const foundItems = quickSL
+    .filter(hasItem)
+    .map(({ nickname, searchname }, index) => ({
+      component: ListItem,
+      data: {
+        count: itemCount.find(({ n }) => n === searchname).count,
+        nickname,
+        odd: index % 2,
+        searchname,
+      },
+      id: index + 3,
+    }));
 
-  const notThere = ({ searchname }) => !itemCount.some(({ n }) => n === searchname);
+  const notThere = ({ searchname }) =>
+    !itemCount.some(({ n }) => n === searchname);
 
-  const others = ({ n }) => !foundItems.some(({ data: { searchname } }) => searchname === n);
+  const others = ({ n }) =>
+    !foundItems.some(({ data: { searchname } }) => searchname === n);
   const otherItems = itemCount.filter(others).map(({ n, count }, index) => ({
     component: ListItem,
     data: {
@@ -51,7 +57,11 @@
     { component: Header, id: 2 },
     ...foundItems,
     { component: Hr, id: foundItems.length + 3 },
-    { component: NotFound, data: quickSL.filter(notThere), id: foundItems.length + 4 },
+    {
+      component: NotFound,
+      data: quickSL.filter(notThere),
+      id: foundItems.length + 4,
+    },
     { component: Hr, id: foundItems.length + 5 },
     { component: Caption, data: 'NOT', id: foundItems.length + 6 },
     ...otherItems,
@@ -60,13 +70,13 @@
 
 <div class="vs">
   <VirtualScroll
-    data={ theStuff }
+    data={theStuff}
     key="id"
-    keeps="{ Math.floor(getHeightGuess() / 10) }"
+    keeps={Math.floor(getHeightGuess() / 10)}
     estimateSize="14"
-    let:data={ item }
+    let:data={item}
   >
-    <svelte:component this={ item.component } data={ item.data }/>
+    <svelte:component this={item.component} data={item.data} />
   </VirtualScroll>
 </div>
 

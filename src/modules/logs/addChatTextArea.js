@@ -24,7 +24,9 @@ function removeCrlf(fshTxt) {
     .replace('<', '＜'); // open angle bracket - sohail94
 }
 
-const formAttr = (el) => { el.setAttribute('form', 'dochat'); };
+const formAttr = (el) => {
+  el.setAttribute('form', 'dochat');
+};
 
 function setDoChat(theForm) {
   // eslint-disable-next-line no-param-reassign
@@ -58,12 +60,16 @@ function makeTextArea() {
   return fshTxt;
 }
 
-const dont = () => !pcc()
-  || getArrayByClassName('header', pcc()).filter(contains('Posted\xa0By')).length !== 1
-  || !getValue('enhanceChatTextEntry');
+const dont = () =>
+  !pcc() ||
+  getArrayByClassName('header', pcc()).filter(contains('Posted\xa0By'))
+    .length !== 1 ||
+  !getValue('enhanceChatTextEntry');
 
 export default function addChatTextArea() {
-  if (dont()) { return; }
+  if (dont()) {
+    return;
+  }
   const theForm = document.forms[0];
   setDoChat(theForm);
   rearrangeTable(theForm.elements);

@@ -45,7 +45,7 @@ function injectIgnoreButton(node, playerLink) {
 }
 
 async function storeMessage(node) {
-  const boxList = await get('fsh_fsboxcontent') ?? '';
+  const boxList = (await get('fsh_fsboxcontent')) ?? '';
   const msg = trim(querySelector('.message', node).innerHTML);
   if (boxList.includes(msg)) return;
   const newBoxList = `<br>${msg}${boxList}`;

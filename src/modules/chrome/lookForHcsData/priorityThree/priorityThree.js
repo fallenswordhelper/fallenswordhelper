@@ -23,23 +23,33 @@ import staminaCalc from './staminaCalc';
 import statbar from './statbar';
 
 function doMoveGuildList() {
-  if (getValue('moveGuildList')) { moveRHSBoxUpOnRHS('minibox-guild'); }
+  if (getValue('moveGuildList')) {
+    moveRHSBoxUpOnRHS('minibox-guild');
+  }
 }
 
 function doMoveAllyList() {
-  if (getValue('moveOnlineAlliesList')) { moveRHSBoxUpOnRHS('minibox-allies'); }
+  if (getValue('moveOnlineAlliesList')) {
+    moveRHSBoxUpOnRHS('minibox-allies');
+  }
 }
 
 function doMoveFsBox() {
-  if (getValue('moveFSBox')) { moveRHSBoxToLHS('minibox-fsbox'); }
+  if (getValue('moveFSBox')) {
+    moveRHSBoxToLHS('minibox-fsbox');
+  }
 }
 
 function doMoveDailyQuest() {
-  if (getValue('moveDailyQuest')) { moveRHSBoxToLHS('minibox-daily-quest'); }
+  if (getValue('moveDailyQuest')) {
+    moveRHSBoxToLHS('minibox-daily-quest');
+  }
 }
 
 function doMoveXmas() {
-  if (getValue('moveXmasBox')) { moveRHSBoxToLHS('minibox-xmas'); }
+  if (getValue('moveXmasBox')) {
+    moveRHSBoxToLHS('minibox-xmas');
+  }
 }
 
 // move boxes in opposite order that you want them to appear.

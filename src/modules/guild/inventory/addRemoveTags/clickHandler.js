@@ -25,7 +25,9 @@ function doCheckAll() {
 function checkType(taggable, ctx) {
   sendEvent('addRemoveTags', 'checkType');
   const thisInvId = getInvId(ctx);
-  const [, , itemId, itemName] = taggable.find(([, invId]) => invId === thisInvId);
+  const [, , itemId, itemName] = taggable.find(
+    ([, invId]) => invId === thisInvId,
+  );
   taggable
     .filter(([, , id, name]) => id === itemId && name === itemName)
     .filter(([cb]) => document.body.contains(cb))
@@ -44,7 +46,9 @@ function killButtons(btnDiv) {
 }
 
 function makeSpinner(suffix, ctx) {
-  const spinner = createSpan({ className: `tag-${suffix} fshSpinner fshSpinner12` });
+  const spinner = createSpan({
+    className: `tag-${suffix} fshSpinner fshSpinner12`,
+  });
   ctx.replaceWith(spinner);
   killButtons(closest('div', spinner));
   return spinner;

@@ -17,20 +17,25 @@ async function doCheckAll(evt) {
   const { items } = await getInv();
   sendEvent('storeitems', 'Check All of Type');
   getCheckboxesVisible()
-    .filter((cb) => items[cb.value] && items[cb.value].item_id === items[getInvId(evt)].item_id)
-    .forEach((e) => { e.checked = !e.disabled && !e.checked; });
+    .filter(
+      (cb) =>
+        items[cb.value] &&
+        items[cb.value].item_id === items[getInvId(evt)].item_id,
+    )
+    .forEach((e) => {
+      e.checked = !e.disabled && !e.checked;
+    });
 }
 
 function startAction(target) {
   const thisRow = closestTr(target);
   thisRow.cells[0].children[0].disabled = true;
-  querySelectorArray('.actionButton', thisRow)
-    .forEach((e) => {
-      e.disabled = true;
-      e.textContent = '';
-      e.removeAttribute('data-tooltip');
-      e.classList.add('inProgress');
-    });
+  querySelectorArray('.actionButton', thisRow).forEach((e) => {
+    e.disabled = true;
+    e.textContent = '';
+    e.removeAttribute('data-tooltip');
+    e.classList.add('inProgress');
+  });
   target.blur();
   target.classList.add('fshSpinner', 'fshSpinner12');
 }
@@ -53,21 +58,34 @@ async function actionHandler(e, fn, success) {
 
 const handler = [
   ['Check All', doCheckAll],
-  ['Quick Send', (e) => {
-    sendEvent('storeitems', 'Quick Send');
-    actionHandler(e, daAjaxSendItemsToRecipient, 'Sent');
-  }],
-  ['Quick Drop', (e) => {
-    sendEvent('storeitems', 'Quick Drop');
-    actionHandler(e, daDropItems, 'Dropped');
-  }],
+  [
+    'Quick Send',
+    (e) => {
+      sendEvent('storeitems', 'Quick Send');
+      actionHandler(e, daAjaxSendItemsToRecipient, 'Sent');
+    },
+  ],
+  [
+    'Quick Drop',
+    (e) => {
+      sendEvent('storeitems', 'Quick Drop');
+      actionHandler(e, daDropItems, 'Dropped');
+    },
+  ],
 ];
 
 export default function buttonPress(e) {
-  if (e.target.tagName === 'A' && ['AH', 'UFSG'].includes(e.target.textContent)) {
+  if (
+    e.target.tagName === 'A' &&
+    ['AH', 'UFSG'].includes(e.target.textContent)
+  ) {
     sendEvent('storeitems', e.target.textContent);
   }
-  if (e.target.tagName !== 'BUTTON' || hasClass('custombutton', e.target)) { return; }
+  if (e.target.tagName !== 'BUTTON' || hasClass('custombutton', e.target)) {
+    return;
+  }
   const thisHandler = handler.find(([label]) => label === getText(e.target));
-  if (thisHandler) { thisHandler[1](e); }
+  if (thisHandler) {
+    thisHandler[1](e);
+  }
 }

@@ -4,7 +4,11 @@ import infoBox from '../../common/infoBox';
 
 function ajaxResult(componentId, doc) {
   const info = infoBox(doc);
-  return { r: info === 'Component destroyed.' ? 0 : 1, m: info, c: componentId };
+  return {
+    r: info === 'Component destroyed.' ? 0 : 1,
+    m: info,
+    c: componentId,
+  };
 }
 
 async function destroyComponent(componentId) {

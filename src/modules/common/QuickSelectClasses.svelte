@@ -37,7 +37,10 @@
     [(selectId) => selectId === -1, () => true],
     [(selectId) => selectId === -2, (_selectId, [, itm]) => itm.type === 12],
     [(selectId) => selectId === -3, (_selectId, [, itm]) => itm.guild_tag >= 0],
-    [(selectId) => selectId === -99, (_selectId, [, itm]) => itm?.craft === 'Perfect'],
+    [
+      (selectId) => selectId === -99,
+      (_selectId, [, itm]) => itm?.craft === 'Perfect',
+    ],
     [() => true, (selectId, [, itm]) => selectId === itm.item_id],
   ];
 
@@ -58,7 +61,8 @@
   function doSelection(id, items) {
     const selectId = Number(id);
     const [, filterFn] = selectType.find(([s]) => s(selectId));
-    items.map(getItemObj)
+    items
+      .map(getItemObj)
       .filter(partial(filterFn, selectId))
       .filter(stFilter)
       .slice(0, getHowMany())
@@ -86,10 +90,12 @@
 
   const isInSt = ([, obj]) => obj.is_in_st;
   const itemStyle = ([, obj]) => `div[id$="-highlight-${
-    obj.inv_id}"]:not([class$="-create-selected"]) {
+    obj.inv_id
+  }"]:not([class$="-create-selected"]) {
     background-color: rgba(255, 0, 0, 0.3);
   }`;
-  const styleSheet = () => createStyle(entries(inv.items).filter(isInSt).map(itemStyle).join('\n'));
+  const styleSheet = () =>
+    createStyle(entries(inv.items).filter(isInSt).map(itemStyle).join('\n'));
 
   function highlightSts(node) {
     if (!inv.items.fshHasST) return;
@@ -97,32 +103,32 @@
   }
 </script>
 
-{ #await getInv() then }
-  { #if inv?.items }
+{#await getInv() then}
+  {#if inv?.items}
     <div>
       Select:
-      <LinkButton on:click={ () => doSelect('-1') }>All Items</LinkButton>
-      <LinkButton on:click={ () => doSelect('-2') }>All Resources</LinkButton>
-      { #if wantsTagged }
-        <LinkButton on:click={ () => doSelect('-3') }>Guild Tagged</LinkButton>
-      { /if }
-      { #each getItemList() as [name, id] }
-        <LinkButton on:click={ () => doSelect(id) }>{ name }</LinkButton>
-      { /each }
-      How many:<input bind:value={ howMany } class="custominput" type="text">
+      <LinkButton on:click={() => doSelect('-1')}>All Items</LinkButton>
+      <LinkButton on:click={() => doSelect('-2')}>All Resources</LinkButton>
+      {#if wantsTagged}
+        <LinkButton on:click={() => doSelect('-3')}>Guild Tagged</LinkButton>
+      {/if}
+      {#each getItemList() as [name, id]}
+        <LinkButton on:click={() => doSelect(id)}>{name}</LinkButton>
+      {/each}
+      How many:<input bind:value={howMany} class="custominput" type="text" />
     </div>
     <div use:highlightSts>
-      <SelectInST bind:inSt on:toggle/>
+      <SelectInST bind:inSt on:toggle />
     </div>
     <div>
-      <LinkButton --button-color="blue" on:click={ doPerf }>Perfect</LinkButton>
+      <LinkButton --button-color="blue" on:click={doPerf}>Perfect</LinkButton>
     </div>
-  { :else }
+  {:else}
     <p style="color: red">Server Error</p>
-  { /if }
-{ :catch error }
-  <p style="color: red">{ error.message }</p>
-{ /await }
+  {/if}
+{:catch error}
+  <p style="color: red">{error.message}</p>
+{/await}
 
 <style>
   div {

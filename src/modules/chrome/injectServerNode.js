@@ -33,8 +33,8 @@ function statBoxesExist(topbannerStats, gameStats) {
 }
 
 function validStatBoxes(topbannerStats, gameStats) {
-  const hidden = topbannerStats
-    && hasClass('topbanner-stats-hidden', topbannerStats);
+  const hidden =
+    topbannerStats && hasClass('topbanner-stats-hidden', topbannerStats);
   return !hidden && gameStats;
 }
 

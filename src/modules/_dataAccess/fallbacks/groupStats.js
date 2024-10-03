@@ -19,10 +19,12 @@ function parseReport(doc) {
 
 // Incomplete
 export default async function groupStats(groupId) {
-  return parseReport(await indexAjaxDoc({
-    cmd: 'guild',
-    subcmd: 'groups',
-    subcmd2: 'viewstats',
-    group_id: groupId,
-  }));
+  return parseReport(
+    await indexAjaxDoc({
+      cmd: 'guild',
+      subcmd: 'groups',
+      subcmd2: 'viewstats',
+      group_id: groupId,
+    }),
+  );
 }

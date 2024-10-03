@@ -5,10 +5,13 @@ import getKillsPct from './getKillsPct';
 import getTitanString from './getTitanString';
 
 function summaryHtml(guildKills, currentHP, totalHP) {
-  return `<br><span class="fshBlue"> (${
-    roundToString(getKillsPct(totalHP - currentHP, guildKills), 2)
-  }% Current <br>${roundToString((guildKills * 100) / totalHP, 2)
-  }% Total<br>${getTitanString(guildKills, totalHP, currentHP)})`;
+  return `<br><span class="fshBlue"> (${roundToString(
+    getKillsPct(totalHP - currentHP, guildKills),
+    2,
+  )}% Current <br>${roundToString(
+    (guildKills * 100) / totalHP,
+    2,
+  )}% Total<br>${getTitanString(guildKills, totalHP, currentHP)})`;
 }
 
 function injectSummary(aRow) {
@@ -24,6 +27,8 @@ function injectSummary(aRow) {
 }
 
 export default function killsSummary(aRow) {
-  if (!aRow.active) { return; }
+  if (!aRow.active) {
+    return;
+  }
   injectSummary(aRow);
 }

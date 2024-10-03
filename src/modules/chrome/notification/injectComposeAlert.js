@@ -1,10 +1,7 @@
 import daComposing from '../../_dataAccess/daComposing';
 import jQueryPresent from '../../common/jQueryPresent';
 import calf from '../../support/calf';
-import {
-  defLastComposeCheck,
-  defNeedToCompose,
-} from '../../support/constants';
+import { defLastComposeCheck, defNeedToCompose } from '../../support/constants';
 import { now } from '../../support/now';
 import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
@@ -32,7 +29,9 @@ function potsBrewing(potions) {
 const hUDLocalPlayerTypeMaxComposingPotions = 52;
 
 function parseComposingApp(json) {
-  const maxPotions = json.h.p.find(({ k }) => k === hUDLocalPlayerTypeMaxComposingPotions)?.v;
+  const maxPotions = json.h.p.find(
+    ({ k }) => k === hUDLocalPlayerTypeMaxComposingPotions,
+  )?.v;
   if (json.r.potions.length !== maxPotions) {
     displayAlert();
   } else {

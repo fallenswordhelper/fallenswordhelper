@@ -15,7 +15,9 @@ function func(withPvpId, acc, [key, value]) {
 }
 
 export default function arenaFull(obj) {
-  if (!isObject(obj)) { return; }
+  if (!isObject(obj)) {
+    return;
+  }
   const theButtons = querySelectorArray(
     '#arenaTypeTabs tr:not([style="display: none;"]) input[type="submit"]',
   );

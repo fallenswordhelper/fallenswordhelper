@@ -14,6 +14,10 @@ export default function injectGuild() {
   task(3, activeMembers);
   task(3, compactRanks);
 
-  if (['-', 'manage'].includes(calf.subcmd)) { manage(); }
-  if (calf.subcmd === 'view') { injectViewGuild(); }
+  if (['-', 'manage'].includes(calf.subcmd)) {
+    manage();
+  }
+  if (calf.subcmd === 'view') {
+    injectViewGuild();
+  }
 }

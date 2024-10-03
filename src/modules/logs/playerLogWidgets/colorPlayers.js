@@ -11,17 +11,20 @@ import relatePlayer from './relatePlayer';
 function doMsgHeader(logTable, privMsg) {
   const [, , messageHeader] = logTable.rows[0].cells;
   if (messageHeader && !privMsg) {
-    insertHtmlBeforeEnd(messageHeader, '&nbsp;&nbsp;'
-      + '<span class="fshWhite">(Guild mates show up in '
-      + '<span class="fshGreen">green</span>)</span>');
+    insertHtmlBeforeEnd(
+      messageHeader,
+      '&nbsp;&nbsp;' +
+        '<span class="fshWhite">(Guild mates show up in ' +
+        '<span class="fshGreen">green</span>)</span>',
+    );
   }
 }
 
 async function playerType(a) {
   const [, type] = await relatePlayer(a);
   return [
-    `.fshPlayerColoring tr:nth-of-type(${closestTr(a).rowIndex + 1})`
-      + ' td:nth-of-type(3) > a:first-of-type',
+    `.fshPlayerColoring tr:nth-of-type(${closestTr(a).rowIndex + 1})` +
+      ' td:nth-of-type(3) > a:first-of-type',
     type,
   ];
 }
@@ -48,7 +51,9 @@ function makeStyle([key, selectors]) {
 const foundType = ([, type]) => type;
 
 function getPlayerStyles(playerTags) {
-  return entries(playerTags.filter(foundType).reduce(byType, {})).map(makeStyle);
+  return entries(playerTags.filter(foundType).reduce(byType, {})).map(
+    makeStyle,
+  );
 }
 
 function playerStyling(logTable, playerTags, privMsg) {
@@ -62,7 +67,9 @@ function playerStyling(logTable, playerTags, privMsg) {
 
 export default async function colorPlayers(logTable, privMsg) {
   const playerLinks = querySelectorArray(playerLinkSelector, logTable);
-  if (!playerLinks.length) { return; }
+  if (!playerLinks.length) {
+    return;
+  }
   const playerTags = await all(playerLinks.map(playerType));
   playerStyling(logTable, playerTags, privMsg);
 }

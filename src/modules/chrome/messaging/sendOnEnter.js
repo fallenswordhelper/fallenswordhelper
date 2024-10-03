@@ -9,7 +9,8 @@ let enterForSendMessage = null;
 let handlerEnabled = 0;
 let sendMessage = 0;
 
-function getSendMessage() { // jQuery
+function getSendMessage() {
+  // jQuery
   if (!sendMessage) {
     const buttons = $(getQuickMessageDialog()).dialog('option', 'buttons');
     sendMessage = buttons['Send Message'];

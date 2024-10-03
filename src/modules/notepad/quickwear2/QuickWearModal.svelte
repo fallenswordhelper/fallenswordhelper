@@ -33,4 +33,4 @@
   ];
 </script>
 
-<ModalTabsPersist on:close={ close } { tabs } { visible } />
+<ModalTabsPersist on:close={close} {tabs} {visible} />

@@ -8,9 +8,12 @@ export const getInvFail = () => inventoryFailure;
 export function injectError(target, err) {
   if (!inventoryFailure) inventoryFailure = err.message;
   if (inventoryFailure) {
-    insertElement(target, cElement('p', {
-      className: 'fshRed',
-      textContent: inventoryFailure,
-    }));
+    insertElement(
+      target,
+      cElement('p', {
+        className: 'fshRed',
+        textContent: inventoryFailure,
+      }),
+    );
   }
 }

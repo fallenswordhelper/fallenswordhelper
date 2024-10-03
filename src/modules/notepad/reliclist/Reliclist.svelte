@@ -34,8 +34,10 @@
   const stamGain = (relic) => getAttr(relic, 6);
   const timeSort = (a, b) => sortDirection * (a.time - b.time);
   const getAttrNum = (relic, id) => getAttr(relic, id)?.value ?? 0;
-  const attrSort = (id) => (a, b) => sortDirection * (getAttrNum(a, id) - getAttrNum(b, id));
-  const guildSort = (a, b) => sortDirection * alpha(a.guild?.name ?? '', b.guild?.name ?? '');
+  const attrSort = (id) => (a, b) =>
+    sortDirection * (getAttrNum(a, id) - getAttrNum(b, id));
+  const guildSort = (a, b) =>
+    sortDirection * alpha(a.guild?.name ?? '', b.guild?.name ?? '');
   const nameSort = (a, b) => sortDirection * alpha(a.name, b.name);
   const level = (relic) => relic.location.realm.min_level;
   const levelSort = (a, b) => sortDirection * (level(a) - level(b));
@@ -56,10 +58,12 @@
     const thisChunk = await reliclist(null, offset, limit);
     if (!thisChunk?.s) return;
     if (thisChunk.r.remaining_relics) {
-      return thisChunk.r.relics.concat(await getRelicList(
-        offset + thisChunk.r.relics.length,
-        Math.min(100, thisChunk.r.remaining_relics),
-      ));
+      return thisChunk.r.relics.concat(
+        await getRelicList(
+          offset + thisChunk.r.relics.length,
+          Math.min(100, thisChunk.r.remaining_relics),
+        ),
+      );
     }
     return thisChunk.r.relics;
   }
@@ -79,103 +83,143 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={ close }>
+<ModalTitled {visible} on:close={close}>
   <svelte:fragment slot="title">Relic List</svelte:fragment>
-  { #await init() }
+  {#await init()}
     <div class="content">
-      { #each log as txt, index (index) }
-        { txt }
-        <br>
-      { /each }
+      {#each log as txt, index (index)}
+        {txt}
+        <br />
+      {/each}
     </div>
-  { :then}
+  {:then}
     <div class="content grid">
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by level', levelSort); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by level', levelSort);
+          }}
+        >
           Level
         </LinkButton>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by name', nameSort); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by name', nameSort);
+          }}
+        >
           Name
         </LinkButton>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by guild', guildSort); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by guild', guildSort);
+          }}
+        >
           Guild
         </LinkButton>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by stam gain', attrSort(6)); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by stam gain', attrSort(6));
+          }}
+        >
           Stam Gain
         </LinkButton>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by attack', attrSort(0)); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by attack', attrSort(0));
+          }}
+        >
           Atk
         </LinkButton>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by damage', attrSort(4)); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by damage', attrSort(4));
+          }}
+        >
           Dmg
         </LinkButton>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by stamina', attrSort(5)); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by stamina', attrSort(5));
+          }}
+        >
           Stam
         </LinkButton>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by gold gain', attrSort(7)); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by gold gain', attrSort(7));
+          }}
+        >
           Gold Gain
         </LinkButton>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by xp gain', attrSort(8)); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by xp gain', attrSort(8));
+          }}
+        >
           XP Gain
         </LinkButton>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton on:click={ () => { sortWrapper('sort by time', timeSort); } }>
+        <LinkButton
+          on:click={() => {
+            sortWrapper('sort by time', timeSort);
+          }}
+        >
           Time
         </LinkButton>
       </div>
-      { #each listOfRelics as relic }
-        <div>{ relic.location.realm.min_level }</div>
+      {#each listOfRelics as relic}
+        <div>{relic.location.realm.min_level}</div>
         <div>
           <a
-            href="{ guideUrl }relics{ defSubcmd }view&relic_id={ relic.id }"
-            on:click={ () => relicEvent('view relic on UFSG') }
+            href="{guideUrl}relics{defSubcmd}view&relic_id={relic.id}"
+            on:click={() => relicEvent('view relic on UFSG')}
           >
-            { relic.name }
+            {relic.name}
           </a>
         </div>
         <div>
-          { #if relic.guild }
+          {#if relic.guild}
             <a
-              href="{ guildViewUrl }{ relic.guild.id }"
-              on:click={ () => relicEvent('view guild') }
+              href="{guildViewUrl}{relic.guild.id}"
+              on:click={() => relicEvent('view guild')}
             >
-              { relic.guild.name }
+              {relic.guild.name}
             </a>
-          { /if }
+          {/if}
         </div>
-        <div>{ getAttrStr(relic, 6) }</div>
-        <div>{ getAttrStr(relic, 0) }</div>
-        <div>{ getAttrStr(relic, 4) }</div>
-        <div>{ getAttrStr(relic, 5) }</div>
-        <div>{ getAttrStr(relic, 7) }</div>
-        <div>{ getAttrStr(relic, 8) }</div>
+        <div>{getAttrStr(relic, 6)}</div>
+        <div>{getAttrStr(relic, 0)}</div>
+        <div>{getAttrStr(relic, 4)}</div>
+        <div>{getAttrStr(relic, 5)}</div>
+        <div>{getAttrStr(relic, 7)}</div>
+        <div>{getAttrStr(relic, 8)}</div>
         <div>
-          { #if relic.time }
-            { formatTime(relic.time) }
-          { /if }
+          {#if relic.time}
+            {formatTime(relic.time)}
+          {/if}
         </div>
-      { /each }
+      {/each}
     </div>
-  { :catch error }
-    <div class="content">{ error.message }</div>
-  { /await }
+  {:catch error}
+    <div class="content">{error.message}</div>
+  {/await}
 </ModalTitled>
 
 <style>

@@ -4,7 +4,8 @@ import task from '../support/task';
 import OneByOne from './OneByOne.svelte';
 import Trade from './Trade.svelte';
 
-const startOneByOne = (sendItems) => new OneByOne({ target: sendItems.parentNode });
+const startOneByOne = (sendItems) =>
+  new OneByOne({ target: sendItems.parentNode });
 
 function oneByOne() {
   const sendItems = getElementById('send-items');

@@ -10,7 +10,9 @@ export default async function viewCombatSets() {
   const doc = await indexAjaxDoc({ cmd: 'profile' });
   if (!doc) return { s: false };
   const select = querySelector('select[name="combatSetId"]', doc);
-  if (!select) { return { s: false }; }
+  if (!select) {
+    return { s: false };
+  }
   return {
     r: arrayFrom(select.children).filter(notNew).map(setId),
     s: true,

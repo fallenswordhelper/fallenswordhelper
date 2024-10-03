@@ -7,7 +7,8 @@ import querySelectorArray from '../../common/querySelectorArray';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import createDocument from '../../system/createDocument';
 
-const getId = (e) => Number(regExpFirstCapture(/\/(?<id>\d+)/, e.getAttribute('background')));
+const getId = (e) =>
+  Number(regExpFirstCapture(/\/(?<id>\d+)/, e.getAttribute('background')));
 
 function getResult(script, e) {
   const thisRe = new RegExp(`${e} = (\\d+)`);
@@ -15,12 +16,15 @@ function getResult(script, e) {
 }
 
 function gettokens(spec) {
-  const matchTokens = [[18, 'leeched'], [21, 'Spell']]
+  const matchTokens = [
+    [18, 'leeched'],
+    [21, 'Spell'],
+  ]
     .map(([id, token]) => [
       id,
       spec.includes(token),
       spec.split(' ')[0],
-      spec.split('\'')[1],
+      spec.split("'")[1],
     ])
     .find(([, match]) => match);
   if (!matchTokens) {
@@ -33,7 +37,9 @@ function gettokens(spec) {
 function formatSpecial(pCC) {
   const divs = querySelectorArray('#specialsDiv', pCC);
   const texts = divs.map(getTextTrim);
-  const filtered = texts.filter((t) => ['leeched', 'Spell'].some((s) => t.includes(s)));
+  const filtered = texts.filter((t) =>
+    ['leeched', 'Spell'].some((s) => t.includes(s)),
+  );
   return filtered.map(gettokens);
 }
 

@@ -13,7 +13,9 @@ import { defJoinallgroupsundersize } from '../../support/constants';
 import addButton from './addButton';
 import fetchGroupStatsButton from './fetchGroupStatsButton';
 
-function filterMercs(e) { return !e.includes('#000099'); }
+function filterMercs(e) {
+  return !e.includes('#000099');
+}
 
 function joined(container) {
   setInnerHtml(
@@ -35,8 +37,7 @@ async function joinGroup(groupID, container) {
 function doJoinUnderSize(joinButton) {
   const memList = joinButton.parentNode.parentNode.parentNode.cells[1];
   const memListArrayWithMercs = csvSplit(getText(memList));
-  const memListArrayWithoutMercs = memListArrayWithMercs
-    .filter(filterMercs);
+  const memListArrayWithoutMercs = memListArrayWithMercs.filter(filterMercs);
   if (memListArrayWithoutMercs.length < calf.maxGroupSizeToJoin) {
     const container = createDiv({
       className: 'group-action-link fshRelative',
@@ -44,7 +45,10 @@ function doJoinUnderSize(joinButton) {
       style: { height: '19px', width: '19px' },
     });
     joinButton.parentNode.replaceChild(container, joinButton);
-    const groupID = regExpFirstCapture(/confirmJoin\((?<id>\d+)\)/, joinButton.href);
+    const groupID = regExpFirstCapture(
+      /confirmJoin\((?<id>\d+)\)/,
+      joinButton.href,
+    );
     joinGroup(groupID, container);
   }
 }
@@ -59,7 +63,10 @@ function joinAllGroupsUnderSize() {
 }
 
 function joinUnderButton(buttonRow) {
-  const joinUnder = addButton(buttonRow, `Join All Groups < ${calf.maxGroupSizeToJoin} Members`);
+  const joinUnder = addButton(
+    buttonRow,
+    `Join All Groups < ${calf.maxGroupSizeToJoin} Members`,
+  );
   onclick(joinUnder, joinAllGroupsUnderSize);
 }
 

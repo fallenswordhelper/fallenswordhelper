@@ -10,13 +10,18 @@ function getIntFromRegExp(theText, rxSearch) {
 
 function mightBePositive(actualXP, xpLockXP) {
   let sign = '';
-  if (actualXP > xpLockXP) { sign = '+'; }
+  if (actualXP > xpLockXP) {
+    sign = '+';
+  }
   return sign + addCommas(actualXP - xpLockXP);
 }
 
 function injectLock(xpLock) {
   const xpLockmouseover = xpLock.dataset.tipped;
-  const xpLockXP = getIntFromRegExp(xpLockmouseover, /XP Lock: <b>(?<lockXp>\d*)/);
+  const xpLockXP = getIntFromRegExp(
+    xpLockmouseover,
+    /XP Lock: <b>(?<lockXp>\d*)/,
+  );
   const actualXP = getIntFromRegExp(xpLockmouseover, /XP: <b>(?<realXp>\d*)/);
   insertHtmlBeforeEnd(
     xpLock.parentNode.nextElementSibling,
@@ -26,5 +31,7 @@ function injectLock(xpLock) {
 
 export default function guildXPLock() {
   const xpLock = querySelector('#pCC a[data-tipped^="<b>Guild XP</b>"]');
-  if (xpLock) { injectLock(xpLock); }
+  if (xpLock) {
+    injectLock(xpLock);
+  }
 }

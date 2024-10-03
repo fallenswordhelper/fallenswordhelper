@@ -6,7 +6,10 @@ import isFunction from '../../../common/isFunction';
 import on from '../../../common/on';
 import onclick from '../../../common/onclick';
 import { simpleCheckboxHtml } from '../../../settings/simpleCheckbox';
-import { defFetchPlayerBuffs, defFetchWorldRealmActions } from '../../../support/constants';
+import {
+  defFetchPlayerBuffs,
+  defFetchWorldRealmActions,
+} from '../../../support/constants';
 import updateBuffInfo from '../buffInfo/updateBuffInfo';
 import { toggleHidePlayerActions } from '../prepareHidePlayerActions';
 import testDynamics from '../titanStats/testDynamics';
@@ -17,14 +20,15 @@ import togglePref from './togglePref';
 function buildPrefsDiv() {
   return createDiv({
     id: 'fshWorldPrefs',
-    innerHTML: `${simpleCheckboxHtml('showCreatureInfo')}&nbsp;&nbsp;${
-      simpleCheckboxHtml('showMonsterLog')}&nbsp;&nbsp;${
-      simpleCheckboxHtml('showTitanInfo')}&nbsp;&nbsp;${
-      simpleCheckboxHtml('showBuffInfo')
-    }<br>${
-      simpleCheckboxHtml('hideSubLvlCreature')}&nbsp;&nbsp;${
-      simpleCheckboxHtml('hidePlayerActions')}&nbsp;&nbsp;${
-      huntingBuffsHtml()}`,
+    innerHTML: `${simpleCheckboxHtml('showCreatureInfo')}&nbsp;&nbsp;${simpleCheckboxHtml(
+      'showMonsterLog',
+    )}&nbsp;&nbsp;${simpleCheckboxHtml(
+      'showTitanInfo',
+    )}&nbsp;&nbsp;${simpleCheckboxHtml('showBuffInfo')}<br>${simpleCheckboxHtml(
+      'hideSubLvlCreature',
+    )}&nbsp;&nbsp;${simpleCheckboxHtml(
+      'hidePlayerActions',
+    )}&nbsp;&nbsp;${huntingBuffsHtml()}`,
   });
 }
 

@@ -13,12 +13,14 @@ function subLvlMobs(realmLevel, el) {
 }
 
 function getLvlToTest(myData) {
-  return (myData.realm?.minlevel) || GameData.realm().minlevel;
+  return myData.realm?.minlevel || GameData.realm().minlevel;
 }
 
 function xhrDataFilter(data) {
   const myData = jsonParse(data);
-  if (!myData?.actions?.length) { return data; }
+  if (!myData?.actions?.length) {
+    return data;
+  }
   myData.actions = myData.actions.filter(
     partial(subLvlMobs, getLvlToTest(myData)),
   );
@@ -26,8 +28,10 @@ function xhrDataFilter(data) {
 }
 
 function isActionList(originalOptions) {
-  return originalOptions.data?.d
-    && bitwiseAnd(originalOptions.data.d, defFetchWorldRealmActions);
+  return (
+    originalOptions.data?.d &&
+    bitwiseAnd(originalOptions.data.d, defFetchWorldRealmActions)
+  );
 }
 
 function xhrPreFilter(options, originalOptions) {
@@ -37,7 +41,8 @@ function xhrPreFilter(options, originalOptions) {
   }
 }
 
-export default function interceptXHR() { // jQuery.min
+export default function interceptXHR() {
+  // jQuery.min
   $.ajaxPrefilter('JSON', xhrPreFilter);
   if (calf.hideSubLvlCreature) {
     GameData.fetch(defFetchWorldRealmActions);

@@ -34,8 +34,8 @@ function getInputCell(label) {
 }
 
 function getInputElement(el) {
-  return el.nextElementSibling.nextElementSibling
-    .nextElementSibling.children[0].rows[0].cells[0].children[0];
+  return el.nextElementSibling.nextElementSibling.nextElementSibling.children[0]
+    .rows[0].cells[0].children[0];
 }
 
 function getRe(type, label) {
@@ -63,7 +63,9 @@ function getCost(type, upgrade) {
 }
 
 function getCell(type, upgrade) {
-  if (!warehouse[type]) { warehouse[type] = {}; }
+  if (!warehouse[type]) {
+    warehouse[type] = {};
+  }
   if (!warehouse[type].span) {
     const span = createSpan();
     insertTextBeforeEnd(upgrade, ' ');
@@ -103,15 +105,21 @@ function updateStamCount(type, upgrade, evt) {
 
 function injectUpgradeHelper(type) {
   const upgrade = findText(type);
-  on(getInputElement(upgrade), 'keyup', partial(updateStamCount, type, upgrade));
+  on(
+    getInputElement(upgrade),
+    'keyup',
+    partial(updateStamCount, type, upgrade),
+  );
 }
 
 function injectPoints() {
   currentFSP = intValue(getText(getElementById('statbar-fsp')));
   injectUpgradeHelper('Current');
   injectUpgradeHelper('Maximum');
-  setInnerHtml(`<a href="${server}${
-    cmdUrl}marketplace">Sell at Marketplace</a>`, getInputCell('Gold'));
+  setInnerHtml(
+    `<a href="${server}${cmdUrl}marketplace">Sell at Marketplace</a>`,
+    getInputCell('Gold'),
+  );
 }
 
 function saveUpgradeValue(upgrade, key) {
@@ -125,8 +133,10 @@ function saveUpgradeValue(upgrade, key) {
 }
 
 export default function upgrades() {
-  playerUpgrades = querySelectorArray('#pCC > table:last-of-type > tbody > '
-    + 'tr:nth-child(even) > td:first-child');
+  playerUpgrades = querySelectorArray(
+    '#pCC > table:last-of-type > tbody > ' +
+      'tr:nth-child(even) > td:first-child',
+  );
   if (playerUpgrades.length < 1) return;
   saveUpgradeValue('+1 Max Allies', 'alliestotal');
   saveUpgradeValue('+1 Max Enemies', 'enemiestotal');

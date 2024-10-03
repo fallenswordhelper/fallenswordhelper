@@ -1,1 +1,3 @@
-export default function isString(e) { return typeof e === 'string'; }
+export default function isString(e) {
+  return typeof e === 'string';
+}

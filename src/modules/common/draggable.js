@@ -3,12 +3,12 @@ import on from './on';
 import once from './once';
 import partial from './partial';
 
-let dragTarget;
-let mouseX;
-let mouseY;
-let offsetX;
-let offsetY;
-let timer;
+let dragTarget = 0;
+let mouseX = 0;
+let mouseY = 0;
+let offsetX = 0;
+let offsetY = 0;
+let timer = 0;
 
 function setDragTarget(parent, event) {
   if (parent) {
@@ -24,7 +24,9 @@ function setMouseCoord(event) {
 }
 
 function getTransformXY(trans) {
-  if (trans === 'none') { return [0, 0]; }
+  if (trans === 'none') {
+    return [0, 0];
+  }
   const matrix = trans.split(/[()]/)[1].split(', ');
   return [Number(matrix[4]), Number(matrix[5])];
 }
@@ -38,8 +40,9 @@ function setOffsets() {
 
 function drawElement(event) {
   if (event.clientX !== mouseX || event.clientY !== mouseY) {
-    dragTarget.style.transform = `matrix(1, 0, 0, 1, ${(event.clientX + offsetX).toString()
-    }, ${(event.clientY + offsetY).toString()})`;
+    dragTarget.style.transform = `matrix(1, 0, 0, 1, ${(
+      event.clientX + offsetX
+    ).toString()}, ${(event.clientY + offsetY).toString()})`;
     setMouseCoord(event);
   }
 }
@@ -67,7 +70,8 @@ function dragDrop(event) {
 
 function setDragImage(event) {
   const img = new Image();
-  img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
+  img.src =
+    'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
   event.dataTransfer.setDragImage(img, 0, 0);
 }
 

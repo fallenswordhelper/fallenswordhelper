@@ -12,14 +12,17 @@ import regExpExec from '../common/regExpExec';
 import { guideUrl } from '../support/constants';
 import { pcc } from '../support/layout';
 
-const creatureSearchHref = (name) => `${guideUrl}creatures&search_name=${encodeURIComponent(name)}`;
+const creatureSearchHref = (name) =>
+  `${guideUrl}creatures&search_name=${encodeURIComponent(name)}`;
 const titanRe = /(?<a> titan has been spotted in )(?<b>[^!]+)(?<c>!)/;
-const realmSearchHref = (name) => `${guideUrl}realms&search_name=${encodeURIComponent(name)}`;
-const makeALink = (name) => createAnchor({
-  href: `${realmSearchHref(name)}`,
-  textContent: name,
-  target: '_blank',
-});
+const realmSearchHref = (name) =>
+  `${guideUrl}realms&search_name=${encodeURIComponent(name)}`;
+const makeALink = (name) =>
+  createAnchor({
+    href: `${realmSearchHref(name)}`,
+    textContent: name,
+    target: '_blank',
+  });
 
 function makeUfsgLink(img) {
   const title = getTitle(img);
@@ -49,8 +52,10 @@ function titanLink(el) {
 }
 
 export default function addUfsgLinks() {
-  querySelectorArray('.news_body img[src*="/creatures/"]')
-    .forEach(makeUfsgLink);
+  querySelectorArray('.news_body img[src*="/creatures/"]').forEach(
+    makeUfsgLink,
+  );
   getArrayByClassName('news_body_tavern', pcc())
-    .filter(titanSpotted).forEach(titanLink);
+    .filter(titanSpotted)
+    .forEach(titanLink);
 }

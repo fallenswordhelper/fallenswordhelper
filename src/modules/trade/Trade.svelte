@@ -4,8 +4,8 @@
 </script>
 
 <QuickSelectClasses
-  on:perf={ () => sendEvent('Trade', 'doPerf') }
-  on:select={ (e) => sendEvent('Trade', 'doSelect', e.detail) }
-  on:toggle={ () => sendEvent('Trade', 'toggleSelectST') }
-  wantsTagged=1
+  on:perf={() => sendEvent('Trade', 'doPerf')}
+  on:select={(e) => sendEvent('Trade', 'doSelect', e.detail)}
+  on:toggle={() => sendEvent('Trade', 'toggleSelectST')}
+  wantsTagged="1"
 />

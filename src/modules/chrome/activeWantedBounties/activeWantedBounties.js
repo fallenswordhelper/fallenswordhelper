@@ -57,17 +57,25 @@ function doReset(eventAction, listName) {
 }
 
 function resetList(e) {
-  if (e.target === getBountyListReset()) doReset('getBountyListReset', 'bountyList');
-  if (e.target === getWantedListReset()) doReset('getWantedListReset', 'wantedList');
+  if (e.target === getBountyListReset())
+    doReset('getBountyListReset', 'bountyList');
+  if (e.target === getWantedListReset())
+    doReset('getWantedListReset', 'wantedList');
 }
 
 function doHandlers() {
-  if (getBountyListDiv()) { onclick(getBountyListDiv(), resetList); }
-  if (getWantedListDiv()) { onclick(getWantedListDiv(), resetList); }
+  if (getBountyListDiv()) {
+    onclick(getBountyListDiv(), resetList);
+  }
+  if (getWantedListDiv()) {
+    onclick(getWantedListDiv(), resetList);
+  }
 }
 
 export default function activeWantedBounties() {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) {
+    return;
+  }
   createDivs();
   doHandlers();
   retrieveBountyInfo();

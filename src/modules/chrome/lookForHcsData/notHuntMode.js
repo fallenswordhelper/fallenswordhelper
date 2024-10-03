@@ -29,8 +29,8 @@ const calfPrefs = [
 
 function getEnvVars() {
   calfPrefs.forEach(getCalfPrefs);
-  calf.allyEnemyOnlineRefreshTime = getValue('allyEnemyOnlineRefreshTime')
-    * 1000;
+  calf.allyEnemyOnlineRefreshTime =
+    getValue('allyEnemyOnlineRefreshTime') * 1000;
 }
 
 export default function notHuntMode() {

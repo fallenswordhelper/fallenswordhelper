@@ -2,7 +2,7 @@
   export let disabled = 0;
 </script>
 
-<button { disabled } on:click type="button">
+<button {disabled} on:click type="button">
   <slot></slot>
 </button>
 

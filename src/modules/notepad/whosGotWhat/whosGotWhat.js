@@ -19,17 +19,23 @@ import prepareData from './prepareData';
 import theadHtml from './theadHtml';
 
 function makeTable(el) {
-  return insertElement(el, createTable({
-    className: 'whosGotWhat',
-    innerHTML: theadHtml,
-  }));
+  return insertElement(
+    el,
+    createTable({
+      className: 'whosGotWhat',
+      innerHTML: theadHtml,
+    }),
+  );
 }
 
 function prepareLayout(el) {
   const top = insertElement(el, createDiv({ className: 'st-top-container' }));
   const tableContainer = insertElement(el, createDiv());
   const domTable = makeTable(tableContainer);
-  const bottom = insertElement(el, createDiv({ className: 'st-bottom-container' }));
+  const bottom = insertElement(
+    el,
+    createDiv({ className: 'st-bottom-container' }),
+  );
   return { top, domTable, bottom };
 }
 

@@ -6,7 +6,9 @@ import deleteBatch from './deleteBatch';
 import getProps from './getProps';
 
 function quickDel(e) {
-  if (e.target.tagName !== 'IMG') { return; }
+  if (e.target.tagName !== 'IMG') {
+    return;
+  }
   e.preventDefault();
   sendEvent('components', 'quickDel');
   hideQTip(e.target);

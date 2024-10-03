@@ -22,7 +22,7 @@
 
   const entitySort = ([a], [b]) => sortDirection * alpha(a, b);
   const classSort = ([, a], [, b]) => sortDirection * alpha(a, b);
-  const levelSort = ([,, a], [,, b]) => sortDirection * (a - b);
+  const levelSort = ([, , a], [, , b]) => sortDirection * (a - b);
 
   function sortWrapper(sortFn, type) {
     sortDirection = lastSort === type ? sortDirection : 1;
@@ -74,18 +74,30 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={ close }>
+<ModalTitled {visible} on:close={close}>
   <svelte:fragment slot="title">Creature Log</svelte:fragment>
   <div class="title">
     <span class="bold">Entity Information</span>
-    <LinkButtonBracketed --button-color="white" --button-width="2.8em" on:click={ clearStorage }>
+    <LinkButtonBracketed
+      --button-color="white"
+      --button-width="2.8em"
+      on:click={clearStorage}
+    >
       Clear
     </LinkButtonBracketed>
   </div>
   <div class="grid headings">
-    <div><button class="sortable" on:click={ sortEntity } type="button">Entity</button></div>
-    <div><button class="sortable" on:click={ sortClass } type="button">Class</button></div>
-    <div><button class="sortable" on:click={ sortLevel } type="button">Lvl</button></div>
+    <div>
+      <button class="sortable" on:click={sortEntity} type="button"
+        >Entity</button
+      >
+    </div>
+    <div>
+      <button class="sortable" on:click={sortClass} type="button">Class</button>
+    </div>
+    <div>
+      <button class="sortable" on:click={sortLevel} type="button">Lvl</button>
+    </div>
     <div>Attack</div>
     <div>Defense</div>
     <div>Armor</div>
@@ -93,48 +105,49 @@
     <div>HP</div>
     <div>Enhancements</div>
   </div>
-  { #await init() then }
-    { #if log.length }
+  {#await init() then}
+    {#if log.length}
       <div class="data grid">
-        { #each log as [
-          entity, classname, lvl, attack, defense, armor, damage, hp, enhancement, image,
-        ] }
+        {#each log as [entity, classname, lvl, attack, defense, armor, damage, hp, enhancement, image]}
           <div class="entity">
             <div
               class="image tip-static"
-              data-tipped="<img height=200 src='{ cdn }creatures/{ image }.png' width=200>"
-              style:background-image="url('{ cdn }creatures/{ image }.png')"
+              data-tipped="<img height=200 src='{cdn}creatures/{image}.png' width=200>"
+              style:background-image="url('{cdn}creatures/{image}.png')"
             ></div>
-            <div>{ entity }</div>
+            <div>{entity}</div>
           </div>
-          <div>{ classname }</div>
-          <div>{ addCommas(lvl) }</div>
-          <div>{ attack.min } - { attack.max }</div>
-          <div>{ defense.min } - { defense.max }</div>
-          <div>{ armor.min } - { armor.max }</div>
-          <div>{ damage.min } - { damage.max }</div>
-          <div>{ hp.min } - { hp.max }</div>
+          <div>{classname}</div>
+          <div>{addCommas(lvl)}</div>
+          <div>{attack.min} - {attack.max}</div>
+          <div>{defense.min} - {defense.max}</div>
+          <div>{armor.min} - {armor.max}</div>
+          <div>{damage.min} - {damage.max}</div>
+          <div>{hp.min} - {hp.max}</div>
           <div>
-            { #if enhancement }
-              { #each enhancement as [enh, { min, max }] }
-                <div class="enhancements">{ enh }: { min } - { max }</div>
-              { /each }
-            { :else }
+            {#if enhancement}
+              {#each enhancement as [enh, { min, max }]}
+                <div class="enhancements">{enh}: {min} - {max}</div>
+              {/each}
+            {:else}
               <div class="missing">**Missing**</div>
-            { /if }
+            {/if}
           </div>
-        { /each }
+        {/each}
       </div>
-    { :else }
+    {:else}
       <div class="no-mobs">
-        No monster information! Please enable creature log and travel a bit to see the world
+        No monster information! Please enable creature log and travel a bit to
+        see the world
       </div>
-    { /if }
-  { /await }
+    {/if}
+  {/await}
 </ModalTitled>
 
 <style>
-  .title, .headings, .data {
+  .title,
+  .headings,
+  .data {
     width: 100%;
   }
   .title {

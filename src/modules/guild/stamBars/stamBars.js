@@ -24,7 +24,9 @@ function changePref() {
 
 function injectPref() {
   const gs = querySelector('#pCC img.guild_openGuildStore');
-  if (!gs) { return; }
+  if (!gs) {
+    return;
+  }
   const tables = getElementsByTagName(defTable, pcc());
   const memberList = tables[tables.length - 1];
   const prefContainer = insertElement(
@@ -40,5 +42,7 @@ function injectPref() {
 export default function stamBars() {
   injectPref();
   enableStamBars = getValue(prefEnableStamBars);
-  if (enableStamBars) { toggleStyle(enableStamBars); }
+  if (enableStamBars) {
+    toggleStyle(enableStamBars);
+  }
 }

@@ -26,7 +26,9 @@ function injectRow(injector) {
 
 export default function injectInvent() {
   const inputRecipeId = querySelector('input[name="recipe_id"]');
-  if (!inputRecipeId) { return; }
+  if (!inputRecipeId) {
+    return;
+  }
   const max = parseRecipe();
   const injector = pcc().lastElementChild;
   addSep(injector);

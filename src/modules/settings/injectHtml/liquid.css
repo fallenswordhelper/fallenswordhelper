@@ -11,7 +11,7 @@
   width: 60%;
 }
 
-.fsh-settings td:first-of-type:not([colspan="2"], .fshCenter) {
+.fsh-settings td:first-of-type:not([colspan='2'], .fshCenter) {
   text-align: right;
   vertical-align: middle;
 }
@@ -41,7 +41,7 @@
   border-color: black transparent transparent transparent;
   border-style: solid;
   border-width: 5px;
-  content: "";
+  content: '';
   left: 50%;
   margin-left: -5px;
   position: absolute;
@@ -53,18 +53,18 @@
 }
 
 .fsh-settings .tooltiptitle {
-  color: #FFF380;
+  color: #fff380;
   font-weight: bold;
 }
 
 .fsh-settings .network {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAB3RJTUUH1QgGDTMWk1twEwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAARnQU1BAACxjwv8YQUAAAC8SURBVHjahVPBEcQgCEQnHdmTqUlr0qe16I8cufOiCGZnGCcIy4LEICJwmGgWJ3o0IOCQEqVg9Y4U3CoCHQhvxuPUZEiA3XYkxyI1/6S6R6rke8AlJbkV7u95lleXq3yrdyUjLGxwnifmnHEXY3fJIQSIMcKOZCLgMltrr+1ZWgxp8wi1VrEqxfeFWloYq4wKtOHeBNqeawqmeOnNvfdYSvkbfaeUxP0w/G+k6WsT/xCBc25SuxDsnownEy4u5BHudpMFegAAAABJRU5ErkJggg==");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAB3RJTUUH1QgGDTMWk1twEwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAARnQU1BAACxjwv8YQUAAAC8SURBVHjahVPBEcQgCEQnHdmTqUlr0qe16I8cufOiCGZnGCcIy4LEICJwmGgWJ3o0IOCQEqVg9Y4U3CoCHQhvxuPUZEiA3XYkxyI1/6S6R6rke8AlJbkV7u95lleXq3yrdyUjLGxwnifmnHEXY3fJIQSIMcKOZCLgMltrr+1ZWgxp8wi1VrEqxfeFWloYq4wKtOHeBNqeawqmeOnNvfdYSvkbfaeUxP0w/G+k6WsT/xCBc25SuxDsnownEy4u5BHudpMFegAAAABJRU5ErkJggg==');
   height: 13px;
   width: 13px;
 }
 
 .fsh-settings .network::before {
-  content: "This function retrieves data from the network. Disable this to increase speed";
+  content: 'This function retrieves data from the network. Disable this to increase speed';
 }
 
 .fsh-settings .unstable {
@@ -74,7 +74,7 @@
 }
 
 .fsh-settings .unstable::before {
-  content: "Warning: Causes page instability";
+  content: 'Warning: Causes page instability';
 }
 
 .fsh-settings .network,
@@ -95,7 +95,7 @@
   pointer-events: none;
   position: absolute;
   transform: translate(-50%, -12px);
-  transition: opacity .35s ease .25s;
+  transition: opacity 0.35s ease 0.25s;
   user-select: none;
   z-index: 1000;
 }
@@ -126,20 +126,20 @@
   opacity: 1;
 }
 
-.fsh-settings input[type=checkbox] {
+.fsh-settings input[type='checkbox'] {
   vertical-align: middle;
 }
 
-.fsh-settings input[type=text] {
+.fsh-settings input[type='text'] {
   width: 80%;
 }
 
-.fsh-settings input[type=number] {
+.fsh-settings input[type='number'] {
   vertical-align: middle;
   width: 40px;
 }
 
-.fsh-settings input[type=color] {
+.fsh-settings input[type='color'] {
   height: 1.5em;
   width: 2em;
   margin-right: 4px;

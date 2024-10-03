@@ -10,11 +10,13 @@
   }
 </script>
 
+<button class="custombutton" on:click={doCheckAll} type="button"
+  >Check All</button
+>&nbsp;
+
 <style>
   button {
     font-family: inherit;
     font-size: inherit;
   }
 </style>
-
-<button class="custombutton" on:click={ doCheckAll } type="button">Check All</button>&nbsp;

@@ -23,17 +23,22 @@
 
   async function getMissingMembers(myGuildId) {
     const memberlist = await guildMembers(myGuildId);
-    if (isArray(memberlist)) missingMembers = memberlist.filter(notBusy).sort(byName);
+    if (isArray(memberlist))
+      missingMembers = memberlist.filter(notBusy).sort(byName);
   }
 
-  guildId.subscribe((val) => { getMissingMembers(val); });
+  guildId.subscribe((val) => {
+    getMissingMembers(val);
+  });
 </script>
-{ missingMembers.length || '' } Offline guild members not at relic:
+
+{missingMembers.length || ''} Offline guild members not at relic:
 <div class="missing">
-  { #each missingMembers as { id, username } }
-    <a href="{ playerIdUrl }{ id }">{ username }</a>{ ' ' }
-  { /each }
+  {#each missingMembers as { id, username }}
+    <a href="{playerIdUrl}{id}">{username}</a>{' '}
+  {/each}
 </div>
+
 <style>
   .missing {
     line-height: 1.1;

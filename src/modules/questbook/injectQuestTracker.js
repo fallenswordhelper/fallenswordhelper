@@ -23,10 +23,10 @@ function getQuestName(injectHere) {
 
 function injectGuideButtons() {
   const injectHere = getElementsByTagName('td', pcc())[0];
-  insertHtmlBeforeEnd(injectHere, guideButtons(
-    getUrlParameter('quest_id'),
-    getQuestName(injectHere),
-  ));
+  insertHtmlBeforeEnd(
+    injectHere,
+    guideButtons(getUrlParameter('quest_id'), getQuestName(injectHere)),
+  );
   onclick(injectHere, questEvent('Quest Tracker'));
 }
 

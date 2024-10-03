@@ -16,9 +16,11 @@ function formatLastReset(lastLadderReset) {
 function formatTime() {
   const lastLadderReset = getValue(defLastLadderReset);
   if (lastLadderReset < twoDaysAgo()) {
-    return '<span class="fshLink tip-static" data-tipped="FSH has not seen '
-      + 'the last ladder reset.<br>You can find it in your log if you '
-      + 'qualified<br>or Tavern Rumours.">???</span>';
+    return (
+      '<span class="fshLink tip-static" data-tipped="FSH has not seen ' +
+      'the last ladder reset.<br>You can find it in your log if you ' +
+      'qualified<br>or Tavern Rumours.">???</span>'
+    );
   }
   return formatLastReset(lastLadderReset);
 }
@@ -37,7 +39,9 @@ function makeRightCell(newRow) {
 
 function lastReset() {
   const firstTable = querySelector('#pCC table');
-  if (!firstTable) { return; }
+  if (!firstTable) {
+    return;
+  }
   const newRow = firstTable.insertRow(-1);
   makeLeftCell(newRow);
   makeRightCell(newRow);

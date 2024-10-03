@@ -7,7 +7,10 @@ let validateTips = 0;
 
 function getValidateTips() {
   if (!validateTips) {
-    const nodes = getElementsByClassName('validateTips', getQuickMessageDialog());
+    const nodes = getElementsByClassName(
+      'validateTips',
+      getQuickMessageDialog(),
+    );
     if (nodes.length === 1) {
       [validateTips] = nodes;
     }

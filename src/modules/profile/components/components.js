@@ -10,12 +10,16 @@ import enableQuickDel from './enableQuickDel';
 function getInvTable() {
   const prc = getElementById('profileRightColumn');
   const invTables = getElementsByClassName('inventory-table', prc);
-  if (invTables.length === 2) { return invTables[1]; }
+  if (invTables.length === 2) {
+    return invTables[1];
+  }
 }
 
 export default function components() {
   const thisInvTable = getInvTable();
-  if (!thisInvTable) { return; }
+  if (!thisInvTable) {
+    return;
+  }
   const app = new Components({ target: thisInvTable.parentNode });
   app.$on('enableQuickDel', partial(enableQuickDel, thisInvTable));
   app.$on('delType', partial(delType, thisInvTable));

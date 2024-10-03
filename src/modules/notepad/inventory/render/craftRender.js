@@ -1,6 +1,8 @@
 import { craftHash } from '../assets';
 
 export default function craftRender(craft) {
-  if (craftHash[craft]) { return craftHash[craft].abbr; }
+  if (craftHash[craft]) {
+    return craftHash[craft].abbr;
+  }
   return '';
 }

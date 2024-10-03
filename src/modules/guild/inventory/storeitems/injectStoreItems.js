@@ -11,9 +11,13 @@ import getCheckboxes from './getCheckboxes';
 import updateDomItems from './updateDomItems';
 
 export default function injectStoreItems() {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) {
+    return;
+  }
   const checkboxes = getCheckboxes();
-  if (!checkboxes) { return; }
+  if (!checkboxes) {
+    return;
+  }
   const prefs = prefTypes.map((p) => getValue(p));
   doStatTotal();
   doToggleButtons(prefs);

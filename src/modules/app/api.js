@@ -8,5 +8,7 @@ export default async function api(data, options) {
     dataType: 'text',
     ...options,
   });
-  return jsonParse(unsafe) ?? { e: { code: 0, message: 'Server Error' }, s: false };
+  return (
+    jsonParse(unsafe) ?? { e: { code: 0, message: 'Server Error' }, s: false }
+  );
 }

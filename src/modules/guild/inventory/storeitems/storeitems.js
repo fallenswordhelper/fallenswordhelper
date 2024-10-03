@@ -17,8 +17,9 @@ async function doFolders(form) {
 }
 
 function doCheckAll() {
-  getCheckboxesVisible()
-    .forEach((ctx) => { ctx.checked = !ctx.disabled && !ctx.checked; });
+  getCheckboxesVisible().forEach((ctx) => {
+    ctx.checked = !ctx.disabled && !ctx.checked;
+  });
 }
 
 function addCheckAll(form) {

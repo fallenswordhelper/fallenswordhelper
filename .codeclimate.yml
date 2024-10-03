@@ -1,5 +1,5 @@
 ---
-version: "2"
+version: '2'
 plugins:
   csslint:
     enabled: false
@@ -7,7 +7,7 @@ plugins:
     enabled: true
     config:
       languages:
-      - javascript:
+        - javascript:
   eslint:
     enabled: false
   fixme:

@@ -5,11 +5,17 @@
   width: 588px;
 }
 
-.whosGotWhat tr:nth-child(odd) {background: wheat;}
+.whosGotWhat tr:nth-child(odd) {
+  background: wheat;
+}
 
-.whosGotWhat tr:nth-child(even) {background: burlywood;}
+.whosGotWhat tr:nth-child(even) {
+  background: burlywood;
+}
 
-.whosGotWhat tr:hover {background: cornsilk;}
+.whosGotWhat tr:hover {
+  background: cornsilk;
+}
 
 .whosGotWhat th {
   background: peru;
@@ -124,7 +130,7 @@
   border-width: 1px;
   border-color: #a9772c #f3d99d #f3d99d #a9772c;
   background-color: #f7ebd3;
-  padding: 1px 6px 1px 1px
+  padding: 1px 6px 1px 1px;
 }
 
 .fsh-search-wrapper input {
@@ -150,4 +156,6 @@
   outline: none; /* Chrome */
 }
 
-.fsh-search-wrapper input:not(:valid) ~ button {visibility: hidden;}
+.fsh-search-wrapper input:not(:valid) ~ button {
+  visibility: hidden;
+}

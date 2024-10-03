@@ -25,7 +25,9 @@ function showTracker() {
 
 export default function tracker() {
   const gs = querySelector('#pCC img.guild_openGuildStore');
-  if (!gs) { return; }
+  if (!gs) {
+    return;
+  }
   const td = gs.parentNode;
   td.classList.add('fshRelative');
   const myDiv = createDiv({

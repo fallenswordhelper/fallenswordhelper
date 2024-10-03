@@ -37,7 +37,9 @@ function makeBtn() {
 }
 
 function potReportNote() {
-  const taggedItemReport = closestTable(querySelector('#pCC table table').parentNode);
+  const taggedItemReport = closestTable(
+    querySelector('#pCC table table').parentNode,
+  );
   const top = taggedItemReport.children?.[0]?.rows?.[0]?.cells?.[0];
   if (top) {
     top.classList.add('fshRelative');
@@ -56,9 +58,12 @@ function finishSpan() {
 }
 
 export default function prepareChildRows() {
-  if (!pcc()) { return; }
-  nodeList = querySelectorAll('#pCC table table '
-    + 'tr:not(.fshHide) td:nth-of-type(3n)');
+  if (!pcc()) {
+    return;
+  }
+  nodeList = querySelectorAll(
+    '#pCC table table tr:not(.fshHide) td:nth-of-type(3n)',
+  );
   nodeArray = [];
   batch([3, nodeList, 0, doSpan, finishSpan]);
 }

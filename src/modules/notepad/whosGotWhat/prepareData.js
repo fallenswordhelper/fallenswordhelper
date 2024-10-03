@@ -8,8 +8,12 @@ import addCommas from '../../system/addCommas';
 
 const notEquipped = ({ equipped }) => !equipped;
 const playerId = ({ player: { id } }) => id;
-const addRank = (rankName) => (thisMember) => ({ ...thisMember, rank_name: rankName });
-const extractMembers = (thisRank) => thisRank.members.map(addRank(thisRank.name));
+const addRank = (rankName) => (thisMember) => ({
+  ...thisMember,
+  rank_name: rankName,
+});
+const extractMembers = (thisRank) =>
+  thisRank.members.map(addRank(thisRank.name));
 const processGuild = (guild) => guild.r.flatMap(extractMembers);
 const decorateMembers = (pots) => (member, index) => ({
   ...member,
@@ -29,10 +33,9 @@ const decorateMembers = (pots) => (member, index) => ({
 
 export default function prepareData([json, guild]) {
   const inv = json.r.filter(notEquipped).map(playerId);
-  const perPlayer = fromEntries(uniq(inv).map((id) => [
-    id,
-    inv.filter((i) => i === id).length,
-  ]));
+  const perPlayer = fromEntries(
+    uniq(inv).map((id) => [id, inv.filter((i) => i === id).length]),
+  );
   const members = processGuild(guild);
   return members.map(decorateMembers(perPlayer));
 }

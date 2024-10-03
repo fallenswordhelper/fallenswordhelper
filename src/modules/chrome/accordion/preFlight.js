@@ -6,11 +6,11 @@ import sendException from '../../exceptions/sendException';
 const problems = [
   [
     (hcsNav) => !isObject(hcsNav),
-    () => sendException('$(\'#nav\').data(\'hcsNav\') is not an object'),
+    () => sendException("$('#nav').data('hcsNav') is not an object"),
   ],
   [
     (hcsNav) => !('heights' in hcsNav),
-    () => sendException('$(\'#nav\').data(\'hcsNav\').heights does not exist'),
+    () => sendException("$('#nav').data('hcsNav').heights does not exist"),
   ],
 ];
 

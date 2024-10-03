@@ -8,7 +8,9 @@ import uniq from '../../common/uniq';
 import { compStore } from './componentsStore';
 
 function updateItem(invIds, itemType) {
-  if (!itemType) { return; }
+  if (!itemType) {
+    return;
+  }
   const items = itemType.get('del').filter((i) => !invIds.includes(i));
   itemType.set('del', items);
 }
@@ -28,12 +30,16 @@ function setValue(itemId, key, value) {
 }
 
 function spinner(container) {
-  if (!container) { return; }
+  if (!container) {
+    return;
+  }
   const prev = container.children[0];
-  prev.replaceWith(createDiv({
-    className: 'compSumSpin',
-    innerHTML: '<span class="fshSpinner fshSpinner12"></span>',
-  }));
+  prev.replaceWith(
+    createDiv({
+      className: 'compSumSpin',
+      innerHTML: '<span class="fshSpinner fshSpinner12"></span>',
+    }),
+  );
   return prev;
 }
 
@@ -42,18 +48,23 @@ function setDelPending(flag, itemId) {
 }
 
 function boxesRestore(boxes) {
-  boxes.forEach(([b, p]) => { if (p) { b.children[0].replaceWith(p); } });
+  boxes.forEach(([b, p]) => {
+    if (p) {
+      b.children[0].replaceWith(p);
+    }
+  });
 }
 
 const boxesClear = (boxes) => boxes.forEach(([t]) => t?.children[0]?.remove());
 const boxesSpinner = (boxes) => boxes.map(([b]) => [b, spinner(b)]);
 const getItemId = ([, i]) => i;
 const getUniqs = (imgData) => uniq(imgData.map(getItemId));
-const getInvId = ([,, i]) => i;
-const getRollup = (imgData) => getUniqs(imgData).map((i) => [
-  i,
-  imgData.filter(([, d]) => d === i).map(getInvId),
-]);
+const getInvId = ([, , i]) => i;
+const getRollup = (imgData) =>
+  getUniqs(imgData).map((i) => [
+    i,
+    imgData.filter(([, d]) => d === i).map(getInvId),
+  ]);
 const removeStored = (itemData) => deleteComponent(...itemData);
 
 async function doDelete(imgData) {

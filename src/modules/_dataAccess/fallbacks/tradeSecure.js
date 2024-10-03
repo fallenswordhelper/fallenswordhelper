@@ -16,8 +16,8 @@ const err = () => ({ e: { code: 0, message: 'Server Error' }, s: false });
 const playerLink = (t) => t.previousElementSibling.children[0];
 const timeBox = (a) => a.parentNode.previousElementSibling;
 
-const parseDateAsOffset = (textDate) => Math
-  .floor((realtime() - parseDateAsTimestamp(textDate)) / 1000);
+const parseDateAsOffset = (textDate) =>
+  Math.floor((realtime() - parseDateAsTimestamp(textDate)) / 1000);
 
 const basicProps = ([a, timeEL, playerEl]) => ({
   id: Number(getCustomUrlParameter(a.href, 'secure_id')),
@@ -29,7 +29,8 @@ const basicProps = ([a, timeEL, playerEl]) => ({
   time: parseDateAsOffset(getTextTrim(timeEL)),
 });
 
-const getNumber = (aTable, i) => Number(getTextTrim(aTable.rows[i].cells[1].children[0]));
+const getNumber = (aTable, i) =>
+  Number(getTextTrim(aTable.rows[i].cells[1].children[0]));
 
 function getItems(img) {
   const { itemId, invId } = regExpGroups(fetchItemRe, img.dataset.tipped);
@@ -56,7 +57,11 @@ function itemDetail(o, aTable) {
 }
 
 async function getDetails(o) {
-  const itemDoc = await indexAjaxDoc({ cmd: 'trade', subcmd: 'viewsecure', secure_id: o.id });
+  const itemDoc = await indexAjaxDoc({
+    cmd: 'trade',
+    subcmd: 'viewsecure',
+    secure_id: o.id,
+  });
   if (!itemDoc) return;
   const aTable = querySelector('#pCC table[width="300"]', itemDoc);
   if (!aTable) return;
@@ -64,18 +69,22 @@ async function getDetails(o) {
 }
 
 async function parseOutgoing(outgoing) {
-  const sent = await all(querySelectorArray('a[href*="&secure_id="]', outgoing)
-    .map((a) => [a, timeBox(a)])
-    .map(([a, timeEl]) => [a, timeEl, playerLink(timeEl)])
-    .map(basicProps)
-    .map(getDetails));
+  const sent = await all(
+    querySelectorArray('a[href*="&secure_id="]', outgoing)
+      .map((a) => [a, timeBox(a)])
+      .map(([a, timeEl]) => [a, timeEl, playerLink(timeEl)])
+      .map(basicProps)
+      .map(getDetails),
+  );
   if (sent.some((o) => !o)) return err();
   return { s: true, r: { sent } };
 }
 
 function parseDoc(doc) {
   const heads = querySelectorArray('b', doc);
-  const outgoing = closestTable(heads.find(contains('Outgoing Trades (Your offers)')));
+  const outgoing = closestTable(
+    heads.find(contains('Outgoing Trades (Your offers)')),
+  );
   if (!outgoing) return err();
   return parseOutgoing(outgoing);
 }

@@ -51,8 +51,7 @@ function bodyText(membrList, row) {
 }
 
 function getData(list, membrList) {
-  return arrayFrom(list.rows).slice(1, -1)
-    .map(partial(bodyText, membrList));
+  return arrayFrom(list.rows).slice(1, -1).map(partial(bodyText, membrList));
 }
 
 function summaryLink() {
@@ -87,9 +86,13 @@ async function switcher(list) {
 }
 
 export default async function guildAdvisor() {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) {
+    return;
+  }
   const list = getElementsByTagName('table', pcc())[1];
-  if (!list) { return; }
+  if (!list) {
+    return;
+  }
   interceptSubmit();
   await loadDataTables();
   switcher(list);

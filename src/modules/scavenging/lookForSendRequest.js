@@ -40,19 +40,27 @@ function buildGainHash(gains) {
   return gains.reduce(makeHash, {});
 }
 
-function alphaEntries([keyA], [keyB]) { return alpha(keyA, keyB); }
+function alphaEntries([keyA], [keyB]) {
+  return alpha(keyA, keyB);
+}
 
-function summary([key, value]) { return `<br>${value} ${key}(s), `; }
+function summary([key, value]) {
+  return `<br>${value} ${key}(s), `;
+}
 
 function gotGains(gains) {
   const gainHash = buildGainHash(gains);
-  return `<br>${gains.length} item(s):${
-    entries(gainHash).sort(alphaEntries).map(summary).join('')}`;
+  return `<br>${gains.length} item(s):${entries(gainHash)
+    .sort(alphaEntries)
+    .map(summary)
+    .join('')}`;
 }
 
 function getGains(report) {
   const gains = report.match(/Item Gained: <strong>[^<]+<\/strong>/g);
-  if (gains) { return gotGains(gains); }
+  if (gains) {
+    return gotGains(gains);
+  }
   return '';
 }
 

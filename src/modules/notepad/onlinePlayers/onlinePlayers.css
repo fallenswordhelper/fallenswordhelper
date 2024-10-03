@@ -4,4 +4,6 @@
   margin-right: auto;
 }
 
-#fshInv_filter input {width: 200px}
+#fshInv_filter input {
+  width: 200px;
+}

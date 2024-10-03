@@ -11,7 +11,7 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={ close }>
+<ModalTitled {visible} on:close={close}>
   <svelte:fragment slot="title">Super Elite Tracker</svelte:fragment>
-  <SuperElite/>
+  <SuperElite />
 </ModalTitled>

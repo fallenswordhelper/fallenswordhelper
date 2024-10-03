@@ -77,10 +77,12 @@ function handleBankAction(bankSettings, mode, e) {
 
 function linkToGuildBank(bankSettings) {
   if (bankSettings.appLink) {
-    pcc().append(createDiv({
-      classList: 'fshCenter',
-      innerHTML: `<a href="${guildSubcmdUrl}bank">Go to Guild Bank</a>`,
-    }));
+    pcc().append(
+      createDiv({
+        classList: 'fshCenter',
+        innerHTML: `<a href="${guildSubcmdUrl}bank">Go to Guild Bank</a>`,
+      }),
+    );
   }
 }
 

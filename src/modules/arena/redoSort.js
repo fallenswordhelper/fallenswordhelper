@@ -7,11 +7,14 @@ const sortClasses = 'td.sorting, td.sorting_asc, td.sorting_desc';
 function calculateSortOrder(target) {
   const classes = target.attr('class');
   const dir = regExpFirstCapture(/sorting(?<dir>[^\s]+)/, classes);
-  if (dir === '_desc') { return 'asc'; }
+  if (dir === '_desc') {
+    return 'asc';
+  }
   return 'desc';
 }
 
-function sortDataTable(target, myCol, sortOrder) { // jQuery
+function sortDataTable(target, myCol, sortOrder) {
+  // jQuery
   const table = target.closest(defTable).DataTable();
   if (myCol !== 3) {
     table.order([3, 'asc'], [myCol, sortOrder]).draw();
@@ -20,7 +23,8 @@ function sortDataTable(target, myCol, sortOrder) { // jQuery
   }
 }
 
-function sortHandler(evt) { // jQuery
+function sortHandler(evt) {
+  // jQuery
   sendEvent('arena', 'sortHandler');
   const target = $(evt.target).closest('td');
   const sortOrder = calculateSortOrder(target);

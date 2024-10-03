@@ -1,10 +1,12 @@
 /* eslint-disable no-param-reassign */
 function caIsRunning(combat) {
-  return combat.player.counterAttackLevel > 0
-    && combat.numberOfHitsRequired === 1;
+  return (
+    combat.player.counterAttackLevel > 0 && combat.numberOfHitsRequired === 1
+  );
 }
 
-const lowest = (bns, amt, val) => Math.max(Math.ceil((bns - amt + 1) / val / 0.0025), 0);
+const lowest = (bns, amt, val) =>
+  Math.max(Math.ceil((bns - amt + 1) / val / 0.0025), 0);
 
 function calcLowest(combat) {
   combat.lowestCALevelToStillHit = lowest(
@@ -21,8 +23,11 @@ function calcLowest(combat) {
 
 function stamAtLowestCa(combat) {
   if (combat.player.counterAttackLevel > 0) {
-    return Math.ceil((1 + combat.player.doublerLevel / 50) * 0.0025
-      * combat.lowestFeasibleCALevel);
+    return Math.ceil(
+      (1 + combat.player.doublerLevel / 50) *
+        0.0025 *
+        combat.lowestFeasibleCALevel,
+    );
   }
   return 0;
 }
@@ -35,8 +40,8 @@ function lowestCaStats(combat) {
     combat.player.damageValue * 0.0025 * combat.lowestFeasibleCALevel,
   );
   combat.extraNotes += `Extra CA Att/Dam at this lowered CA level = ${
-    combat.extraAttackAtLowestFeasibleCALevel} / ${
-    combat.extraDamageAtLowestFeasibleCALevel}<br>`;
+    combat.extraAttackAtLowestFeasibleCALevel
+  } / ${combat.extraDamageAtLowestFeasibleCALevel}<br>`;
 }
 
 function caRunning(combat) {
@@ -46,31 +51,32 @@ function caRunning(combat) {
     combat.lowestCALevelToStillKill,
   );
   combat.extraNotes += `Lowest CA to still 1-hit this creature = ${
-    combat.lowestFeasibleCALevel}<br>`;
+    combat.lowestFeasibleCALevel
+  }<br>`;
   if (combat.lowestFeasibleCALevel !== 0) {
     lowestCaStats(combat);
   }
   combat.extraStaminaPerHitAtLowestFeasibleCALevel = stamAtLowestCa(combat);
-  if (combat.extraStaminaPerHitAtLowestFeasibleCALevel
-    < combat.extraStaminaPerHit) {
-    combat.extraNotes
-      += `Extra Stam Used at this lowered CA level = ${
-        combat.extraStaminaPerHitAtLowestFeasibleCALevel}<br>`;
+  if (
+    combat.extraStaminaPerHitAtLowestFeasibleCALevel < combat.extraStaminaPerHit
+  ) {
+    combat.extraNotes += `Extra Stam Used at this lowered CA level = ${
+      combat.extraStaminaPerHitAtLowestFeasibleCALevel
+    }<br>`;
   } else {
-    combat.extraNotes
-      += 'No reduction of stam used at the lower CA level<br>';
+    combat.extraNotes += 'No reduction of stam used at the lower CA level<br>';
   }
 }
 
 function needCa(combat) {
-  return combat.numberOfHitsRequired === '-'
-    || combat.numberOfHitsRequired !== 1;
+  return (
+    combat.numberOfHitsRequired === '-' || combat.numberOfHitsRequired !== 1
+  );
 }
 
 function fallsShort(combat, prop, type) {
   if (combat[prop] > 203) {
-    combat.extraNotes
-      += `Even with CA203 you cannot ${type} this creature<br>`;
+    combat.extraNotes += `Even with CA203 you cannot ${type} this creature<br>`;
   } else if (combat[prop] !== 0) {
     combat.extraNotes += `You need a minimum of CA${combat[prop]} to ${type} this creature<br>`;
   }

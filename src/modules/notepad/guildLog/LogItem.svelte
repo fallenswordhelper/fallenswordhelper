@@ -28,7 +28,10 @@
 
   function notSelf(entry) {
     const players = entry.msg.attachments?.filter((obj) => obj.type === 0);
-    return players?.length && !players.filter(({ data: { id } }) => id === playerId()).length;
+    return (
+      players?.length &&
+      !players.filter(({ data: { id } }) => id === playerId()).length
+    );
   }
 
   function buff(data) {
@@ -59,77 +62,81 @@
 
 <div
   class="row-container"
-  class:not-self={ hideNonPlayerGuildLogMessages && notSelf(logEntry) }
-  class:separator={ logEntry.index }
+  class:not-self={hideNonPlayerGuildLogMessages && notSelf(logEntry)}
+  class:separator={logEntry.index}
 >
-  <div class:old={ logEntry.old } class:new={ logEntry.new }>
-    { #if logEntry.time }
+  <div class:old={logEntry.old} class:new={logEntry.new}>
+    {#if logEntry.time}
       <i class="fas fa-envelope" aria-hidden="true"></i>
-    { /if }
+    {/if}
   </div>
-  <div class:old={ logEntry.old } class:new={ logEntry.new }>
-    { #if logEntry.time }
-      { formatUtcTimestamp(logEntry.time) }
-    { /if }
+  <div class:old={logEntry.old} class:new={logEntry.new}>
+    {#if logEntry.time}
+      {formatUtcTimestamp(logEntry.time)}
+    {/if}
   </div>
-  <div class:old={ logEntry.old } class:new={ logEntry.new }>
-    { #each logEntry.msg.text
+  <div class:old={logEntry.old} class:new={logEntry.new}>
+    {#each logEntry.msg.text
       .split(/<link=a(\d)><\/link>/)
-      .filter(empty) as chunk }
-      { #if chunk.length === 1 && !numberIsNaN(Number(chunk)) }
-        { #if logEntry.msg.attachments[chunk].type === 0 }
-          <a href="{ playerIdUrl }{ logEntry.msg.attachments[chunk].data.id }">
-            { logEntry.msg.attachments[chunk].data.name }
+      .filter(empty) as chunk}
+      {#if chunk.length === 1 && !numberIsNaN(Number(chunk))}
+        {#if logEntry.msg.attachments[chunk].type === 0}
+          <a href="{playerIdUrl}{logEntry.msg.attachments[chunk].data.id}">
+            {logEntry.msg.attachments[chunk].data.name}
           </a>
-        { /if }
-        { #if logEntry.msg.attachments[chunk].type === 1 }
+        {/if}
+        {#if logEntry.msg.attachments[chunk].type === 1}
           [
-          <a href="{ guildViewUrl }{ logEntry.msg.attachments[chunk].data.id }">
+          <a href="{guildViewUrl}{logEntry.msg.attachments[chunk].data.id}">
             <img
-              src="{ cdn }guilds/{ logEntry.msg.attachments[chunk].data.id }_mini.png"
-              alt={ logEntry.msg.attachments[chunk].data.name }
-            />{ logEntry.msg.attachments[chunk].data.name }
+              src="{cdn}guilds/{logEntry.msg.attachments[chunk].data
+                .id}_mini.png"
+              alt={logEntry.msg.attachments[chunk].data.name}
+            />{logEntry.msg.attachments[chunk].data.name}
           </a>
           ]
-        { /if }
-      { :else }
-        { chunk }
-      { /if }
-    { /each }
-    { #if logEntry.msg?.attachments?.length }
-      { #each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data } }
+        {/if}
+      {:else}
+        {chunk}
+      {/if}
+    {/each}
+    {#if logEntry.msg?.attachments?.length}
+      {#each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data }}
         <span class="action-buttons">
           [
-          <LinkButton on:click={ () => reply(data) }>Reply</LinkButton>
+          <LinkButton on:click={() => reply(data)}>Reply</LinkButton>
           |
-          <LinkButton on:click={ () => buff(data) }>Buff</LinkButton>
+          <LinkButton on:click={() => buff(data)}>Buff</LinkButton>
           |
-          <LinkButton on:click={ () => send(data) }>Send</LinkButton>
+          <LinkButton on:click={() => send(data)}>Send</LinkButton>
           |
-          <LinkButton on:click={ () => trade(data) }>Trade</LinkButton>
+          <LinkButton on:click={() => trade(data)}>Trade</LinkButton>
           ]
         </span>
-      { /each }
-      { #each logEntry.msg.attachments.filter(({ type }) => type === 11) as { data } }
+      {/each}
+      {#each logEntry.msg.attachments.filter(({ type }) => type === 11) as { data }}
         <span class="action-buttons">
           [
-          <LinkButton on:click={ () => combat(data) }>View Combat</LinkButton>
+          <LinkButton on:click={() => combat(data)}>View Combat</LinkButton>
           ]
         </span>
-      { /each }
-      { #if logEntry.type === 17 && groupCombatItems && logEntry.msg.text.includes('victorious') }
-        { #await getCombat(logEntry.time, logEntry.msg.attachments[0].data) then json }
-          { #if json?.r?.combat?.items?.[0]?.n }
+      {/each}
+      {#if logEntry.type === 17 && groupCombatItems && logEntry.msg.text.includes('victorious')}
+        {#await getCombat(logEntry.time, logEntry.msg.attachments[0].data) then json}
+          {#if json?.r?.combat?.items?.[0]?.n}
             <div>
-              <a href="{ playerIdUrl }{ json.r.combat.attacker.group.players[0].id }">
-                { json.r.combat.attacker.group.players[0].name }</a>'s
-              group looted the item
-              '<span class="fshGreen">{ json?.r?.combat?.items?.[0]?.n }</span>'
+              <a
+                href="{playerIdUrl}{json.r.combat.attacker.group.players[0].id}"
+              >
+                {json.r.combat.attacker.group.players[0].name}</a
+              >'s group looted the item '<span class="fshGreen"
+                >{json?.r?.combat?.items?.[0]?.n}</span
+              >'
             </div>
-          { /if }
-        { /await }
-      { /if }
-    { /if }
+          {/if}
+        {/await}
+      {/if}
+    {/if}
   </div>
 </div>
 
@@ -157,10 +164,10 @@
     font-size: x-small;
   }
   .old {
-    background-color: #CD9E4B;
+    background-color: #cd9e4b;
   }
   .new {
-    background-color: #F5F298;
+    background-color: #f5f298;
   }
   a {
     color: #383838;

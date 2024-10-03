@@ -8,13 +8,14 @@ import { pcc } from '../support/layout';
 
 const packRE = />(?<a>[^>(]+) \(Level (?<b>\d{1,4})/g;
 
-const makeSpan = (bf) => `<br><span class="fshRed fshNoWrap">${bf[1]} ${
-  bf[2]} active</span>`;
+const makeSpan = (bf) =>
+  `<br><span class="fshRed fshNoWrap">${bf[1]} ${bf[2]} active</span>`;
 
 function checkForBuffs(myBuffs, el) {
   const { tipped } = el.dataset;
-  const dupeBuffs = [...tipped.matchAll(packRE)]
-    .filter((bf) => myBuffs[bf[1]] === Number(bf[2]));
+  const dupeBuffs = [...tipped.matchAll(packRE)].filter(
+    (bf) => myBuffs[bf[1]] === Number(bf[2]),
+  );
   if (dupeBuffs.length > 0) {
     insertHtmlBeforeEnd(el.parentNode, dupeBuffs.map(makeSpan).join(''));
   }
@@ -22,9 +23,12 @@ function checkForBuffs(myBuffs, el) {
 
 function postWarnings(myBuffs) {
   const packsRow = pcc().children[0].rows[9];
-  if (!packsRow) { return; }
-  getArrayByTagName('a', packsRow.cells[0].children[0])
-    .forEach(partial(checkForBuffs, myBuffs));
+  if (!packsRow) {
+    return;
+  }
+  getArrayByTagName('a', packsRow.cells[0].children[0]).forEach(
+    partial(checkForBuffs, myBuffs),
+  );
 }
 
 function parseProfile(data) {
@@ -35,7 +39,9 @@ function parseProfile(data) {
 }
 
 export default async function injectRPUpgrades() {
-  if (jQueryNotPresent()) { return; }
+  if (jQueryNotPresent()) {
+    return;
+  }
   const data = await myStats(true);
   parseProfile(data);
 }

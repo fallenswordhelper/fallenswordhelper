@@ -3,9 +3,20 @@ import getValue from '../../system/getValue';
 import { get, set } from '../../system/idb';
 
 // Taking the Not Save in case they add new enhancements.
-const notSave = ['Breaker', 'Protection', 'Master Thief', 'Protect Gold',
-  'Disarm', 'Duelist', 'Thievery', 'Master Blacksmith', 'Master Crafter',
-  'Fury Caster', 'Master Inventor', 'Sustain'];
+const notSave = [
+  'Breaker',
+  'Protection',
+  'Master Thief',
+  'Protect Gold',
+  'Disarm',
+  'Duelist',
+  'Thievery',
+  'Master Blacksmith',
+  'Master Crafter',
+  'Fury Caster',
+  'Master Inventor',
+  'Sustain',
+];
 let combatLog = [];
 let combatData = 0;
 
@@ -53,11 +64,16 @@ function processCombatResponse(data) {
 
 function combatResponse(_e, data) {
   // If bad response do nothing.
-  if (data.response.response === 0) { processCombatResponse(data); }
+  if (data.response.response === 0) {
+    processCombatResponse(data);
+  }
 }
 
-function gotCombatLog(data) { // jQuery.min
-  if (data) { combatLog = data; }
+function gotCombatLog(data) {
+  // jQuery.min
+  if (data) {
+    combatLog = data;
+  }
   $.subscribe(defPvE, combatResponse);
 }
 

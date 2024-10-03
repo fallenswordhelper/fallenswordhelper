@@ -9,8 +9,9 @@ export const buffCustom = {
   header: 'Buff',
   what: 'buff',
   control() {
-    return `<select style="width:140px;" id="selectedBuff">${
-      buffList.map(makeOptions).join('')}</select>`;
+    return `<select style="width:140px;" id="selectedBuff">${buffList
+      .map(makeOptions)
+      .join('')}</select>`;
   },
   cutoff: '175 buff',
   searched: 'Nicknames of buff searched',
@@ -23,9 +24,12 @@ export const otherCustom = {
   what: 'text',
   control() {
     const textToSearchFor = getValue('textToSearchFor') || ''; // skipcq: JS-W1043
-    return '<input style="width:140px;" class="custominput" '
-      + `id="textToSearchFor" type="text" title="Text to search for" value="${
-        textToSearchFor}">`;
+    return (
+      '<input style="width:140px;" class="custominput" ' +
+      `id="textToSearchFor" type="text" title="Text to search for" value="${
+        textToSearchFor
+      }">`
+    );
   },
   cutoff: '500+ play',
   searched: 'Text searched for',

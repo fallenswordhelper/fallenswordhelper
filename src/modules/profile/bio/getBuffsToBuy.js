@@ -25,18 +25,21 @@ const buyFormatter = [
   ],
   [
     (greetingText) => !greetingText.includes('{cost}'),
-    (greetingText, buffsToBuy) => greetingText
-      .replace(/{buffs}/g, `\`~${buffsToBuy}~\``),
+    (greetingText, buffsToBuy) =>
+      greetingText.replace(/{buffs}/g, `\`~${buffsToBuy}~\``),
   ],
   [
     () => true,
-    (greetingText, buffsToBuy, buffCost) => greetingText
-      .replace(/{buffs}/g, `\`~${buffsToBuy}~\``)
-      .replace(/{cost}/g, buffCost.buffCostTotalText),
+    (greetingText, buffsToBuy, buffCost) =>
+      greetingText
+        .replace(/{buffs}/g, `\`~${buffsToBuy}~\``)
+        .replace(/{cost}/g, buffCost.buffCostTotalText),
   ],
 ];
 
-function formatToUse(greetingText, el) { return el[0](greetingText); }
+function formatToUse(greetingText, el) {
+  return el[0](greetingText);
+}
 
 function formatGreetingText(greetingText, buffCost) {
   return buyFormatter.find(partial(formatToUse, greetingText))[1](
@@ -46,7 +49,8 @@ function formatGreetingText(greetingText, buffCost) {
   );
 }
 
-function formatBuffsToBuy(buffCost) { // Legacy
+function formatBuffsToBuy(buffCost) {
+  // Legacy
   bioSendEvent('formatBuffsToBuy');
   const targetPlayer = getTargetPlayer();
   let greetingText = trim(getValue('buyBuffsGreeting'));
@@ -55,6 +59,9 @@ function formatBuffsToBuy(buffCost) { // Legacy
   window.openQuickMsgDialog(targetPlayer, greetingText, '');
 }
 
-export default function getBuffsToBuy(buffCost) { // Legacy
-  if (buffCost.count > 0) { formatBuffsToBuy(buffCost); }
+export default function getBuffsToBuy(buffCost) {
+  // Legacy
+  if (buffCost.count > 0) {
+    formatBuffsToBuy(buffCost);
+  }
 }

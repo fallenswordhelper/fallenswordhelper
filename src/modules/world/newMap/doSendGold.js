@@ -11,13 +11,15 @@ function doneSendGold(doc) {
   if (info === 'You successfully sent gold!' || info === '') {
     setValue(
       'currentGoldSentTotal',
-      parseInt(getValue('currentGoldSentTotal'), 10) + parseInt(getValue('goldAmount'), 10),
+      parseInt(getValue('currentGoldSentTotal'), 10) +
+        parseInt(getValue('goldAmount'), 10),
     );
     GameData.fetch(defFetchPlayerStats);
   }
 }
 
-export default async function doSendGold() { // jQuery
+export default async function doSendGold() {
+  // jQuery
   if (!getSendGoldOnWorld()) return;
   sendEvent('NewMap', 'doSendGold');
   const doc = await indexAjaxDoc({

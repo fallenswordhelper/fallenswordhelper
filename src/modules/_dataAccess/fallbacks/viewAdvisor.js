@@ -23,10 +23,12 @@ function parseReport(doc) {
 
 // Incomplete
 export default async function viewAdvisor(period) {
-  return parseReport(await indexAjaxDoc({
-    cmd: 'guild',
-    subcmd: 'advisor',
-    subcmd2: 'view',
-    period,
-  }));
+  return parseReport(
+    await indexAjaxDoc({
+      cmd: 'guild',
+      subcmd: 'advisor',
+      subcmd2: 'view',
+      period,
+    }),
+  );
 }
