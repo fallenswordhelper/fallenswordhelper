@@ -19,9 +19,13 @@ function scoutLink() {
 
 export default function scoutTowerLink() {
   const spoils = getElementById('minibox-spoilsofwar');
-  if (!spoils) { return; }
+  if (!spoils) {
+    return;
+  }
   const content = spoils.children[1];
-  if (!content) { return; }
+  if (!content) {
+    return;
+  }
   const parent = content.children[0];
   insertHtmlBeforeEnd(parent, '&nbsp;');
   insertElement(parent, scoutLink());

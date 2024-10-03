@@ -23,12 +23,17 @@ function checkUpgrade(limit) {
     setValue('needToDoUpgrade', true);
   } else {
     setValue('needToDoUpgrade', false);
-    setValue('lastUpgradeCheck', Date.parse(`${getTextTrim(limit.nextElementSibling)} GMT`));
+    setValue(
+      'lastUpgradeCheck',
+      Date.parse(`${getTextTrim(limit.nextElementSibling)} GMT`),
+    );
   }
 }
 
 export default function parseGoldUpgrades(data) {
-  if (!calf.enableUpgradeAlert) { return; }
+  if (!calf.enableUpgradeAlert) {
+    return;
+  }
   const doc = findDoc(data);
   const tables = querySelectorAll('#pCC > table', doc);
   if (tables.length > 0) {

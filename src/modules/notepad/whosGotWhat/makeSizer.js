@@ -6,9 +6,10 @@ import on from '../../common/on';
 
 export default function makeSizer(el, table) {
   const thisSizer = createSelect({
-    innerHTML: '<option value="25">25</option>'
-      + '<option value="50">50</option>'
-      + '<option value="0" selected>All</option>',
+    innerHTML:
+      '<option value="25">25</option>' +
+      '<option value="50">50</option>' +
+      '<option value="0" selected>All</option>',
   });
   const box = createDiv();
   insertElement(box, thisSizer);

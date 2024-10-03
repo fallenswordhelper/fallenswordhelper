@@ -10,15 +10,17 @@ import { playerLinkSelector } from '../support/constants';
 import { pcc } from '../support/layout';
 import getValue from '../system/getValue';
 
-const getMessageHeader = () => getArrayByTagName('td', pcc()).find(contains('Message'));
+const getMessageHeader = () =>
+  getArrayByTagName('td', pcc()).find(contains('Message'));
 const getPlyrId = (a) => getPlayerId(a.href);
-function stripClassName(ctx) { ctx.className = ''; }
+function stripClassName(ctx) {
+  ctx.className = '';
+}
 
 function msgDoesNotIncludePlayer(aRow) {
   const playerLinks = querySelectorArray(playerLinkSelector, aRow);
   const playerIds = playerLinks.map(getPlyrId).map(Number);
-  return playerIds.length
-    && !playerIds.some((i) => i === playerId());
+  return playerIds.length && !playerIds.some((i) => i === playerId());
 }
 
 function findPlayers(aRow) {
@@ -31,10 +33,13 @@ function findPlayers(aRow) {
 
 function guildLogWidgetsEnabled() {
   const messageNameCell = getMessageHeader();
-  if (!messageNameCell) { return; }
+  if (!messageNameCell) {
+    return;
+  }
   const logTable = closestTable(messageNameCell);
-  messageNameCell.innerHTML += '&nbsp;&nbsp;<span class="fshWhite">'
-    + '(Guild Log messages not involving self are dimmed!)</span>';
+  messageNameCell.innerHTML +=
+    '&nbsp;&nbsp;<span class="fshWhite">' +
+    '(Guild Log messages not involving self are dimmed!)</span>';
   dataRows(logTable, 3, 0).forEach(findPlayers);
 }
 

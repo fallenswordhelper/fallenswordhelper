@@ -5,7 +5,7 @@
   const close = () => dispatch('close');
 </script>
 
-<button class="modal-close" on:click={ close } type="button">×</button>
+<button class="modal-close" on:click={close} type="button">×</button>
 
 <style>
   /* need specificity */

@@ -4,8 +4,10 @@ import toLowerCase from './common/toLowerCase';
 import stdout from './support/stdout';
 import getCustomUrlParameter from './system/getCustomUrlParameter';
 
-const levels = [1, 25, 75, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1400,
-  1600, 2000, 2500, 3000, 3500, 4000, 4500];
+const levels = [
+  1, 25, 75, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1400,
+  1600, 2000, 2500, 3000, 3500, 4000, 4500,
+];
 
 const getTip = (a) => [
   getCustomUrlParameter(a.href, 'skill_id'),
@@ -13,11 +15,7 @@ const getTip = (a) => [
   a.children[0].dataset.tipped,
 ];
 
-const getMatches = ([id, lvl, tip]) => [
-  id,
-  lvl,
-  tip.split(/[<>]/),
-];
+const getMatches = ([id, lvl, tip]) => [id, lvl, tip.split(/[<>]/)];
 
 const getStam = ([id, lvl, tipSplit]) => [
   id,

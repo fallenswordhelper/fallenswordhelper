@@ -15,17 +15,26 @@ function buildHtml(list, adjective, rowMap) {
 }
 
 function getReset(listDiv, list, adjective, rowMap) {
-  const heading = createDiv(
-    { innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">${adjective} Bounties</a> ` },
-  );
-  const bountyListReset = createSpan({ className: 'xxsLink', textContent: 'Reset' });
+  const heading = createDiv({
+    innerHTML: `<a class="fshBountyHeader" href="${bountyUrl}">${adjective} Bounties</a> `,
+  });
+  const bountyListReset = createSpan({
+    className: 'xxsLink',
+    textContent: 'Reset',
+  });
   insertElement(heading, bountyListReset);
   insertElement(listDiv, heading);
   insertHtmlBeforeEnd(listDiv, buildHtml(list, adjective, rowMap));
   return bountyListReset;
 }
 
-export default function injectList([getDivFn, pref, getListFn, adjective, rowMap]) {
+export default function injectList([
+  getDivFn,
+  pref,
+  getListFn,
+  adjective,
+  rowMap,
+]) {
   const listDiv = getDivFn();
   const list = getListFn();
   if (!list) return;

@@ -19,8 +19,12 @@ function bIsNotEquipment(a, b) {
 }
 
 export default function numberSort(a, b) {
-  if (aIsNotEquipment(a)) { return 1; } // non equipment items
-  if (bIsNotEquipment(a, b)) { return -1; }
+  if (aIsNotEquipment(a)) {
+    return 1;
+  } // non equipment items
+  if (bIsNotEquipment(a, b)) {
+    return -1;
+  }
   let valueA = path(a, calf.sortBy, 1);
   let valueB = path(b, calf.sortBy, 1);
   valueA = intFromString(valueA);

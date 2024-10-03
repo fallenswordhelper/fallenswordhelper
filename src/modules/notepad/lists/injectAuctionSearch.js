@@ -21,19 +21,22 @@ function hasUrl(j) {
   return param.url && param.url[j] !== '';
 }
 
-function detailRow(j, itemField) { // Legacy
+function detailRow(j, itemField) {
+  // Legacy
   if (param.tags[j] === 'checkbox') {
-    return `<input type="checkbox"${isChecked(itemField)
-    } disabled>`;
+    return `<input type="checkbox"${isChecked(itemField)} disabled>`;
   }
   if (hasUrl(j)) {
-    return `<a href="${param.url[j].replace('@replaceme@', itemField)
-    }">${itemField}</a>`;
+    return `<a href="${param.url[j].replace(
+      '@replaceme@',
+      itemField,
+    )}">${itemField}</a>`;
   }
   return itemField;
 }
 
-function itemRow(item) { // Legacy
+function itemRow(item) {
+  // Legacy
   let result = '';
   for (let j = 0; j < param.fields.length; j += 1) {
     result += '<td class="fshCenter">';
@@ -50,48 +53,59 @@ function headersToHtml(acc, curr) {
 }
 
 function needsCat(item, i, currentItems) {
-  return param.categoryField && (i === 0
-    || currentItems[i - 1][param.categoryField] !== item[param.categoryField]);
+  return (
+    param.categoryField &&
+    (i === 0 ||
+      currentItems[i - 1][param.categoryField] !== item[param.categoryField])
+  );
 }
 
 function itemRows(acc, item, i, currentItems) {
   let result = '<tr>';
   if (needsCat(item, i, currentItems)) {
-    result += `<td><span class="fshQs">${item[param.categoryField]
+    result += `<td><span class="fshQs">${
+      item[param.categoryField]
     }</span></td><td></td><td></td><td></td><td></td></tr><tr>`;
   }
   result += itemRow(item);
-  result += `<td><span class="HelperTextLink" data-itemId="${i
+  result += `<td><span class="HelperTextLink" data-itemId="${
+    i
   }" id="fshDel${i}">[Del]</span></td></tr>`;
   return acc + result;
 }
 
-function doInputs() { // Legacy
+function doInputs() {
+  // Legacy
   let result = '<tr>';
   for (let i = 0; i < param.tags.length; i += 1) {
-    result += `<td align=center><input type="${param.tags[i]
+    result += `<td align=center><input type="${
+      param.tags[i]
     }" class="custominput" id="fshIn${param.fields[i]}"></td>`;
   }
   return result;
 }
 
-function generateManageTable() { // Legacy
-  let result = '<table cellspacing="2" cellpadding="2" class="fshLists" '
-    + 'width="100%"><tr class="fshOr">';
+function generateManageTable() {
+  // Legacy
+  let result =
+    '<table cellspacing="2" cellpadding="2" class="fshLists" ' +
+    'width="100%"><tr class="fshOr">';
   result += param.headers.reduce(headersToHtml, '');
   result += '<th>Action</th></tr>';
   result += param.currentItems.reduce(itemRows, '');
   result += doInputs();
-  result += '<td><span class="HelperTextLink" id="fshAdd">'
-    + '[Add]</span></td></tr></table>'
-    + '<table width="100%"><tr><td class="fshCenter">'
-    + `<textarea id="fshEd" class="fshEd">${
-      jsonStringify(param.currentItems)}</textarea></td></tr>`
-    + '<tr><td class="fshCenter"><input id="fshSave" '
-    + 'type="button" value="Save" class="custombutton">'
-    + '&nbsp;<input id="fshReset" type="button" value="Reset" '
-    + 'class="custombutton"></td></tr>'
-    + '</tbody></table>';
+  result +=
+    '<td><span class="HelperTextLink" id="fshAdd">' +
+    '[Add]</span></td></tr></table>' +
+    '<table width="100%"><tr><td class="fshCenter">' +
+    `<textarea id="fshEd" class="fshEd">${jsonStringify(
+      param.currentItems,
+    )}</textarea></td></tr>` +
+    '<tr><td class="fshCenter"><input id="fshSave" ' +
+    'type="button" value="Save" class="custombutton">' +
+    '&nbsp;<input id="fshReset" type="button" value="Reset" ' +
+    'class="custombutton"></td></tr>' +
+    '</tbody></table>';
   const target = getElementById(param.id);
   if (target) {
     setInnerHtml(result, getElementById(param.id));
@@ -99,7 +113,8 @@ function generateManageTable() { // Legacy
   }
 }
 
-function deleteQuickItem(target) { // Legacy
+function deleteQuickItem(target) {
+  // Legacy
   sendEvent('injectAuctionSearch', 'deleteQuickItem');
   const itemId = target.getAttribute('data-itemId');
   param.currentItems.splice(itemId, 1);
@@ -108,15 +123,18 @@ function deleteQuickItem(target) { // Legacy
 
 const thisItem = (i) => getElementById(`fshIn${param.fields[i]}`);
 
-function buildNewItem() { // Legacy
+function buildNewItem() {
+  // Legacy
   const newItem = {};
   for (let i = 0; i < param.fields.length; i += 1) {
-    newItem[param.fields[i]] = param.tags[i] === 'checkbox' ? thisItem(i).checked : thisItem(i).value;
+    newItem[param.fields[i]] =
+      param.tags[i] === 'checkbox' ? thisItem(i).checked : thisItem(i).value;
   }
   return newItem;
 }
 
-function addQuickItem() { // Legacy
+function addQuickItem() {
+  // Legacy
   sendEvent('injectAuctionSearch', 'addQuickItem');
   const isArrayOnly = param.fields.length === 0;
   const newItem = isArrayOnly ? getElementById('fshIn0').value : buildNewItem();
@@ -124,7 +142,8 @@ function addQuickItem() { // Legacy
   generateManageTable();
 }
 
-function saveRawEditor() { // Legacy
+function saveRawEditor() {
+  // Legacy
   sendEvent('injectAuctionSearch', 'saveRawEditor');
   const userInput = jsonParse(getElementById('fshEd').value);
   if (isArray(userInput)) {
@@ -133,11 +152,14 @@ function saveRawEditor() { // Legacy
   }
 }
 
-function resetRawEditor() { // Legacy
+function resetRawEditor() {
+  // Legacy
   sendEvent('injectAuctionSearch', 'resetRawEditor');
   if (param.id === 'fshAso') {
     param.currentItems = jsonParse(defaults.quickSearchList);
-  } else { param.currentItems = []; }
+  } else {
+    param.currentItems = [];
+  }
   generateManageTable();
 }
 
@@ -154,10 +176,13 @@ function setupEventHandler(content) {
   onclick(content, eventHandler5(listEvents()));
 }
 
-export default function injectAuctionSearch(injector) { // Legacy
+export default function injectAuctionSearch(injector) {
+  // Legacy
   const content = injector || pcc();
-  setInnerHtml(makePageHeader('Trade Hub Quick Search', '', '', '')
-    + auctionSearchBlurb, content);
+  setInnerHtml(
+    makePageHeader('Trade Hub Quick Search', '', '', '') + auctionSearchBlurb,
+    content,
+  );
   // global parameters for the meta function generateManageTable
   param = auctionSearchParams();
   generateManageTable();

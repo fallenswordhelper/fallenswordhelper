@@ -1,6 +1,7 @@
 <script context="module">
   let context = '';
 </script>
+
 <script>
   import sendEvent from '../../analytics/sendEvent';
   import alpha from '../../common/alpha';
@@ -10,24 +11,27 @@
   import isNull from '../../common/isNull';
   import isUndefined from '../../common/isUndefined';
   import keys from '../../common/keys';
-  import {
-    act, cur, gxp, lvl, max, utc, vl,
-  } from './indexConstants';
+  import { act, cur, gxp, lvl, max, utc, vl } from './indexConstants';
   import { getActivity } from './utils';
 
   let activity = {};
   let members = [];
   let selected = '';
 
-  const revSort = (data) => fromEntries(
-    entries(data).map(([key, val]) => [key, [...val].sort((a, b) => b[utc] - a[utc])]),
-  );
+  const revSort = (data) =>
+    fromEntries(
+      entries(data).map(([key, val]) => [
+        key,
+        [...val].sort((a, b) => b[utc] - a[utc]),
+      ]),
+    );
 
   async function init() {
     const raw = await getActivity();
     activity = revSort(raw.members);
     members = keys(activity).sort(alpha);
-    if (context) selected = context; else [selected] = members;
+    if (context) selected = context;
+    else [selected] = members;
   }
 
   function handleChange() {
@@ -43,15 +47,15 @@
 </script>
 
 <div class="main">
-  { #await init() then }
+  {#await init() then}
     <div class="grid head">
       <div>Date</div>
       <div>
         Member
-        <select bind:value={ selected } on:change={ handleChange }>
-          { #each members as member }
-            <option value="{ member }">{ member }</option>
-          { /each }
+        <select bind:value={selected} on:change={handleChange}>
+          {#each members as member}
+            <option value={member}>{member}</option>
+          {/each}
         </select>
       </div>
       <div>Level</div>
@@ -63,19 +67,19 @@
       <div>GXP</div>
     </div>
     <div class="grid items">
-      { #each activity?.[selected] ?? [] as stuff }
-        <div>{ formatUtcDateTime(new Date(stuff[utc] * 1000)) }</div>
-        <div>{ selected }</div>
-        <div>{ toText(stuff[lvl]) }</div>
-        <div>{ toText(stuff[vl]) }</div>
-        <div>{ toText(stuff[cur]) }</div>
-        <div>{ toText(stuff[max]) }</div>
-        <div>{ Math.floor((stuff[cur] / stuff[max]) * 100) }</div>
-        <div>{ stuff[act] }</div>
-        <div>{ toText(stuff[gxp]) }</div>
-      { /each }
+      {#each activity?.[selected] ?? [] as stuff}
+        <div>{formatUtcDateTime(new Date(stuff[utc] * 1000))}</div>
+        <div>{selected}</div>
+        <div>{toText(stuff[lvl])}</div>
+        <div>{toText(stuff[vl])}</div>
+        <div>{toText(stuff[cur])}</div>
+        <div>{toText(stuff[max])}</div>
+        <div>{Math.floor((stuff[cur] / stuff[max]) * 100)}</div>
+        <div>{stuff[act]}</div>
+        <div>{toText(stuff[gxp])}</div>
+      {/each}
     </div>
-  { /await }
+  {/await}
 </div>
 
 <style>
@@ -91,16 +95,9 @@
     --gxp: 120px;
     --col-gap: 2px;
     --grid-width: calc(
-      var(--date) +
-      var(--member) +
-      var(--level) +
-      var(--vl) +
-      var(--stam) +
-      var(--max-stam) +
-      var(--perc) +
-      var(--last-act) +
-      var(--gxp) +
-      (var(--col-gap) * 8)
+      var(--date) + var(--member) + var(--level) + var(--vl) + var(--stam) +
+        var(--max-stam) + var(--perc) + var(--last-act) + var(--gxp) +
+        (var(--col-gap) * 8)
     );
     --scroll: 20px;
     box-sizing: border-box;
@@ -124,7 +121,7 @@
     width: var(--grid-width);
   }
   .head {
-    background-color: #CD9E4B;
+    background-color: #cd9e4b;
     padding-right: var(--scroll);
     place-items: center;
     text-align: center;

@@ -5,8 +5,11 @@ function userInvNotEquipped(row) {
 }
 
 function guidInvNotEquipped(row) {
-  return row.player_id && !row.equipped
-    && row.player_id === getTheInv().current_player_id;
+  return (
+    row.player_id &&
+    !row.equipped &&
+    row.player_id === getTheInv().current_player_id
+  );
 }
 
 const locations = [
@@ -16,8 +19,8 @@ const locations = [
   ],
   [
     (row) => row.player_id && row.player_id !== getTheInv().current_player_id,
-    (row, act) => `recallItem" playerid="${
-      row.player_id}" mode="0" action="${act.a}`,
+    (row, act) =>
+      `recallItem" playerid="${row.player_id}" mode="0" action="${act.a}`,
   ],
   [
     (row) => userInvNotEquipped(row) || guidInvNotEquipped(row),
@@ -28,15 +31,19 @@ const locations = [
 function wuRender(row, act) {
   const location = locations.find(([fn]) => fn(row));
   if (location) {
-    return `<span class="fshLink ${location[1](row, act)
-    }" invid="${row.inv_id}">${act.b}</span>`;
+    return `<span class="fshLink ${location[1](
+      row,
+      act,
+    )}" invid="${row.inv_id}">${act.b}</span>`;
   }
   return '';
 }
 
 export default function wearUseRender(data, _type, row) {
   //              0  1  2  3  4  5  6  7  8     9 10 11    12    13    14 15
-  const action = [1, 1, 1, 1, 1, 1, 1, 1, 1, null, 2, 2, null, null, null, 2][data];
+  const action = [1, 1, 1, 1, 1, 1, 1, 1, 1, null, 2, 2, null, null, null, 2][
+    data
+  ];
   if (action === 1) {
     return wuRender(row, {
       a: 'wear',

@@ -2,11 +2,13 @@ import partial from '../../common/partial';
 import { defAfterUpdateActionlist } from '../../support/constants';
 import getValue from '../../system/getValue';
 
-function hideGroupByType(type) { // jQuery
+function hideGroupByType(type) {
+  // jQuery
   $(`#actionList li.creature-${type.toString()} a.create-group`).hide();
 }
 
-function hideGroupSubscribe(type) { // jQuery.min
+function hideGroupSubscribe(type) {
+  // jQuery.min
   $.subscribe(defAfterUpdateActionlist, partial(hideGroupByType, type));
 }
 

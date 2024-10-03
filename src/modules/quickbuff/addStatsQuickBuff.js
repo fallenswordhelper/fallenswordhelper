@@ -17,11 +17,16 @@ function getActivitySpan(myPlayer) {
 
 export default function addStatsQuickBuff(data) {
   if (!data) return;
-  const myPlayer = querySelector(`div.player[data-username="${
-    data.username}"]`);
+  const myPlayer = querySelector(
+    `div.player[data-username="${data.username}"]`,
+  );
   const activity = getActivitySpan(myPlayer);
-  setInnerHtml(`Last Activity: ${
-    formatLastActivity(data.last_login)}<br>Stamina: ${
-    data.current_stamina} / ${data.stamina} ( ${
-    Math.floor((data.current_stamina / data.stamina) * 100)}% )`, activity);
+  setInnerHtml(
+    `Last Activity: ${formatLastActivity(data.last_login)}<br>Stamina: ${
+      data.current_stamina
+    } / ${data.stamina} ( ${Math.floor(
+      (data.current_stamina / data.stamina) * 100,
+    )}% )`,
+    activity,
+  );
 }

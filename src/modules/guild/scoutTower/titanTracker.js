@@ -16,9 +16,10 @@ function startTracker(parentTable, theTitans, titanRows) {
   });
 }
 
-const getCoolTime = (cooldown) => (cooldown?.includes('until')
-  ? parseDateAsTimestamp(cooldown.replace('Cooldown until: ', ''))
-  : 0);
+const getCoolTime = (cooldown) =>
+  cooldown?.includes('until')
+    ? parseDateAsTimestamp(cooldown.replace('Cooldown until: ', ''))
+    : 0;
 
 function dataObj(aRow) {
   const cooldownText = getText(aRow.nextElementSibling.cells[0]);
@@ -42,15 +43,18 @@ function remainingTitans(oldTitans, visibleTitans) {
 }
 
 function getNewTitans(oldTitans, titanRows) {
-  const visibleTitans = fromEntries(uniq(titanRows, 'titanName').map(makeEntry));
+  const visibleTitans = fromEntries(
+    uniq(titanRows, 'titanName').map(makeEntry),
+  );
   return {
     ...visibleTitans,
-    ...oldTitans && remainingTitans(oldTitans, visibleTitans),
+    ...(oldTitans && remainingTitans(oldTitans, visibleTitans)),
   };
 }
 
 export default async function titanTracker(titanTables, titanRows) {
   const newTitans = getNewTitans(await get('fsh_titans'), titanRows);
-  if (titanTables[0].rows.length > 5) startTracker(titanTables[0], newTitans, titanRows);
+  if (titanTables[0].rows.length > 5)
+    startTracker(titanTables[0], newTitans, titanRows);
   set('fsh_titans', newTitans);
 }

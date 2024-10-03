@@ -27,22 +27,25 @@ import { getRealmName } from './realm';
 
 function formatOffset(secs) {
   const aDate = new Date(now() + secs * 1000);
-  return `${padZ(aDate.getHours())}:${padZ(aDate.getMinutes())} ${
-    padZ(aDate.getDate())}/${months[aDate.getMonth()]}/${
-    aDate.getFullYear()}`;
+  return `${padZ(aDate.getHours())}:${padZ(aDate.getMinutes())} ${padZ(
+    aDate.getDate(),
+  )}/${months[aDate.getMonth()]}/${aDate.getFullYear()}`;
 }
 
 function getCooldownHtml(cooldown) {
   if (cooldown <= 0) {
     return '<span class="fshGreen cooldown">No active cooldown</span>';
   }
-  return `<span class="fshMaroon cooldown">Cooldown until: ${
-    formatOffset(cooldown)
-  }</span>`;
+  return `<span class="fshMaroon cooldown">Cooldown until: ${formatOffset(
+    cooldown,
+  )}</span>`;
 }
 
 function currentPctText(ourTitan) {
-  return roundToString(getKillsPct(ourTitan.max_hp - ourTitan.current_hp, ourTitan.kills), 2);
+  return roundToString(
+    getKillsPct(ourTitan.max_hp - ourTitan.current_hp, ourTitan.kills),
+    2,
+  );
 }
 
 function totalPctText(ourTitan) {
@@ -72,22 +75,36 @@ function doTopLabels(ourTitan) {
 }
 
 function memberRow(ourTitan, member) {
-  return [[
-    [2, () => textSpan(member.player.name)],
-    [2, () => textSpan(member.kills.toString())],
-    [2, () => textSpan(`${roundToString((member.kills * 100) / ourTitan.kills, 2)}%`)],
-  ]];
+  return [
+    [
+      [2, () => textSpan(member.player.name)],
+      [2, () => textSpan(member.kills.toString())],
+      [
+        2,
+        () =>
+          textSpan(
+            `${roundToString((member.kills * 100) / ourTitan.kills, 2)}%`,
+          ),
+      ],
+    ],
+  ];
 }
 
 function doMemberRows(ourTitan) {
   clearMemberRows();
-  if (!ourTitan.contributors) { return; }
+  if (!ourTitan.contributors) {
+    return;
+  }
   const memberRows = ourTitan.contributors.map(partial(memberRow, ourTitan));
   addRows(getTitanTbl(), memberRows);
 }
 
 function currentTitan(el) {
-  return el.realm && el.creature.base_id === getTitanId() && el.realm === getRealmName();
+  return (
+    el.realm &&
+    el.creature.base_id === getTitanId() &&
+    el.realm === getRealmName()
+  );
 }
 
 export default function processTitans(r) {

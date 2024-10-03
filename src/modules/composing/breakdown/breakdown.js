@@ -18,7 +18,9 @@ const prefDisableBreakdownPrompts = 'disableBreakdownPrompts';
 let disableBreakdownPrompts = 0;
 const selectedList = [];
 
-function disappearance(target) { target.hide(); }
+function disappearance(target) {
+  target.hide();
+}
 
 function goDown(target, disappear) {
   target.animate({ height: 0 }, 500, disappear);
@@ -26,7 +28,11 @@ function goDown(target, disappear) {
 
 function fadeAway() {
   const target = $('#composingMessageContainer');
-  target.animate({ opacity: 0 }, 500, partial(goDown, target, partial(disappearance, target)));
+  target.animate(
+    { opacity: 0 },
+    500,
+    partial(goDown, target, partial(disappearance, target)),
+  );
 }
 
 function msgText(message, bgcolor) {
@@ -42,16 +48,16 @@ function msgText(message, bgcolor) {
     .html(message);
 }
 
-function showComposingMessage(message, bgcolor) { // jQuery
+function showComposingMessage(message, bgcolor) {
+  // jQuery
   $('#composingMessageContainer').remove();
 
-  $('#composingMessage')
-    .append(
-      $('<div/>', {
-        id: 'composingMessageContainer',
-        width: '100%',
-      }).append(msgText(message, bgcolor)),
-    );
+  $('#composingMessage').append(
+    $('<div/>', {
+      id: 'composingMessageContainer',
+      width: '100%',
+    }).append(msgText(message, bgcolor)),
+  );
 
   setTimeout(fadeAway, 5000);
 }
@@ -80,14 +86,15 @@ function validBreakEvent(evt) {
 }
 
 function breakEvt(evt) {
-  if (disableBreakdownPrompts
-      && evt.target.id === 'breakdown-selected-items') {
+  if (disableBreakdownPrompts && evt.target.id === 'breakdown-selected-items') {
     validBreakEvent(evt);
   }
 }
 
 function itemClick(evt) {
-  if (!hasClass('selectable-item', evt.target)) { return; }
+  if (!hasClass('selectable-item', evt.target)) {
+    return;
+  }
   sendEvent('breakdown', 'itemClick');
   const myItem = evt.target.id.replace('composing-item-', '');
   const itemPos = selectedList.indexOf(myItem);
@@ -107,8 +114,9 @@ function togglePref() {
 function prefBox() {
   insertHtmlBeforeEnd(
     pcc(),
-    `<table class="fshTblCenter"><tbody>${
-      simpleCheckbox(prefDisableBreakdownPrompts)}</tbody></table>`,
+    `<table class="fshTblCenter"><tbody>${simpleCheckbox(
+      prefDisableBreakdownPrompts,
+    )}</tbody></table>`,
   );
 }
 

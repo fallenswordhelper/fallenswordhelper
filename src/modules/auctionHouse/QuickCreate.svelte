@@ -4,7 +4,7 @@
 </script>
 
 <QuickSelectClasses
-  on:perf={ () => sendEvent('ahQuickCreate', 'doPerf') }
-  on:select={ (e) => sendEvent('ahQuickCreate', 'doSelect', e.detail) }
-  on:toggle={ () => sendEvent('ahQuickCreate', 'toggleSelectST') }
+  on:perf={() => sendEvent('ahQuickCreate', 'doPerf')}
+  on:select={(e) => sendEvent('ahQuickCreate', 'doSelect', e.detail)}
+  on:toggle={() => sendEvent('ahQuickCreate', 'toggleSelectST')}
 />

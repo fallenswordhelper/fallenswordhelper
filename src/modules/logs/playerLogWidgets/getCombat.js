@@ -9,7 +9,10 @@ const storageKey = 'fsh_pvpCombat';
 let combatPrm = null;
 let newCache = 0;
 
-const testRecent = (sevenDays) => ([key, val]) => key === 'lastCheck' || val?.logTime > sevenDays;
+const testRecent =
+  (sevenDays) =>
+  ([key, val]) =>
+    key === 'lastCheck' || val?.logTime > sevenDays;
 
 function getRecent(internal) {
   const pairs = entries(internal);
@@ -22,7 +25,8 @@ function getRecent(internal) {
 async function prepareCache() {
   const internal = await get(storageKey);
   if (!internal) newCache = { lastCheck: nowSecs() };
-  else if ((internal?.lastCheck ?? 0) < oneDayAgo()) newCache = getRecent(internal);
+  else if ((internal?.lastCheck ?? 0) < oneDayAgo())
+    newCache = getRecent(internal);
   else newCache = internal;
   return newCache;
 }

@@ -34,8 +34,8 @@
   }
 </script>
 
-<ModalBackground { visible } on:click={ close }>
-  <ModalDialog { visible } on:close bind:modal>
+<ModalBackground {visible} on:click={close}>
+  <ModalDialog {visible} on:close bind:modal>
     <slot />
   </ModalDialog>
 </ModalBackground>

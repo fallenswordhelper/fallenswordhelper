@@ -3,12 +3,15 @@ import partial from '../../../common/partial';
 import { cdn } from '../../../system/system';
 
 function removeClass(target) {
-  target.closest('tr')
+  target
+    .closest('tr')
     .find('.takeItem, .recallItem, .wearItem, .dropItem, .sendItem, .storeItem')
     .removeClass();
 }
 
-function clear(td, i) { td.eq(i).empty(); } // jQuery
+function clear(td, i) {
+  td.eq(i).empty();
+} // jQuery
 
 function clearButtons(td) {
   [
@@ -21,7 +24,8 @@ function clearButtons(td) {
   ].forEach(partial(clear, td));
 }
 
-function killRow(target, data) { // jQuery
+function killRow(target, data) {
+  // jQuery
   if (data.r === 1) return;
   const tr = target.closest('tr');
   const td = $('td', tr);
@@ -29,11 +33,15 @@ function killRow(target, data) { // jQuery
   tr.css('text-decoration', 'line-through');
 }
 
-function anotherSpinner(target) { // jQuery
-  target.empty().append(`<img src="${cdn}ui/misc/spinner.gif" width="11" height="11">`);
+function anotherSpinner(target) {
+  // jQuery
+  target
+    .empty()
+    .append(`<img src="${cdn}ui/misc/spinner.gif" width="11" height="11">`);
 }
 
-export default async function doAction(fn, target) { // jQuery
+export default async function doAction(fn, target) {
+  // jQuery
   hideQTip(target);
   removeClass(target);
   anotherSpinner(target);

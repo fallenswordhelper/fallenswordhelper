@@ -33,7 +33,10 @@ function removeRow(inv, folderId, ctx) {
 }
 
 async function doMove(inv, folderId, list) {
-  const json = await daSendToFolder(folderId, list.map((c) => c.value));
+  const json = await daSendToFolder(
+    folderId,
+    list.map((c) => c.value),
+  );
   if (json.s) {
     list.forEach(partial(removeRow, inv, folderId));
   }

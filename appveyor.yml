@@ -3,7 +3,7 @@ skip_tags: true
 
 # Test against the latest version of this Node.js version
 environment:
-  nodejs_version: "6"
+  nodejs_version: '6'
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -23,4 +23,4 @@ test_script:
   - npm run build
 
 # Don't actually build.
-build: off
+build: false

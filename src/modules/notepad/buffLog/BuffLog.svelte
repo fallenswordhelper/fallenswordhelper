@@ -13,7 +13,7 @@
   }
 
   async function init() {
-    const txt = await get(fshBuffLog) ?? '';
+    const txt = (await get(fshBuffLog)) ?? '';
     records = txt.split('<br>').map((log) => [log.slice(0, 19), log.slice(20)]);
   }
 
@@ -24,25 +24,25 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={ close }>
+<ModalTitled {visible} on:close={close}>
   <svelte:fragment slot="title">Buff Log</svelte:fragment>
   <div class="top">
-    <button on:click={ clearStorage } type="button">Clear</button>
+    <button on:click={clearStorage} type="button">Clear</button>
   </div>
   <div class="textContainer">
-    { #await init() then }
-      { #each records as [timestamp, txt] }
-        <br>
-        { timestamp }
-        { #if txt.startsWith('<') }
+    {#await init() then}
+      {#each records as [timestamp, txt]}
+        <br />
+        {timestamp}
+        {#if txt.startsWith('<')}
           <span class="fshRed">
-            { txt.slice(21, -7) }
+            {txt.slice(21, -7)}
           </span>
-        { :else }
-          { txt }
-        { /if }
-      { /each }
-    { /await }
+        {:else}
+          {txt}
+        {/if}
+      {/each}
+    {/await}
   </div>
 </ModalTitled>
 

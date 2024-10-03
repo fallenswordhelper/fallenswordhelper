@@ -13,7 +13,9 @@ function installMonkey(theBackpack) {
   const oldShow = theBackpack._showPage;
   // eslint-disable-next-line no-param-reassign
   theBackpack._showPage = function _showPage(type, page) {
-    if (!theBackpack.tabData) { return; }
+    if (!theBackpack.tabData) {
+      return;
+    }
     oldShow.call(theBackpack, type, page);
     runPatches(theBackpack);
   };
@@ -21,7 +23,13 @@ function installMonkey(theBackpack) {
 }
 
 export default function monkeyBp(theBackpack, fn) {
-  if (patchList.includes(fn)) { return; }
-  if (!monkeyInstalled) { installMonkey(theBackpack); }
-  if (isFunction(fn)) { patchList.push(fn); }
+  if (patchList.includes(fn)) {
+    return;
+  }
+  if (!monkeyInstalled) {
+    installMonkey(theBackpack);
+  }
+  if (isFunction(fn)) {
+    patchList.push(fn);
+  }
 }

@@ -77,17 +77,30 @@ function toObject([anchor]) {
 }
 
 function toApp(doc) {
-  const rows = querySelectorArray('.width_full tr', doc).slice(1).filter(isLogEntry);
+  const rows = querySelectorArray('.width_full tr', doc)
+    .slice(1)
+    .filter(isLogEntry);
   const result = rows
     .map((tr) => [tr, tr.cells[2].innerHTML])
-    .map(([tr, before]) => [tr, before, regExpFirstCapture(/;combat_id=(\d+)/, before)])
-    .map(([tr, before, combat]) => [tr, before, combat, before.split('&nbsp;&nbsp;[')[0]])
+    .map(([tr, before]) => [
+      tr,
+      before,
+      regExpFirstCapture(/;combat_id=(\d+)/, before),
+    ])
+    .map(([tr, before, combat]) => [
+      tr,
+      before,
+      combat,
+      before.split('&nbsp;&nbsp;[')[0],
+    ])
     .map(([tr, before, combat, text]) => ({
       msg: {
         before,
         combat,
         text: text.replace(/<a.+?a>/g, replaceAnchor),
-        attachments: (combat && [{ data: Number(combat), type: 11 }]) ?? [...text.matchAll(/<a.+?a>/g)].map(toObject),
+        attachments:
+          (combat && [{ data: Number(combat), type: 11 }]) ??
+          [...text.matchAll(/<a.+?a>/g)].map(toObject),
       },
       time: parseDateAsTimestamp(getTextTrim(tr.cells[1])) / 1000,
       ...(combat && { type: 17 }),

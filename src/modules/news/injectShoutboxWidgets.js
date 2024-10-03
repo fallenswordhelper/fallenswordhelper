@@ -18,12 +18,18 @@ function updateShoutboxPreview(maxcharacters) {
   }
   if (!shoutboxPreview) {
     shoutboxPreview = textArea.parentNode.parentNode.parentNode.parentNode
-      .insertRow().insertCell();
+      .insertRow()
+      .insertCell();
   }
-  setInnerHtml('<table class="sbpTbl"><tbody><tr>'
-    + `<td class="sbpHdr">Preview (${chars}/${
-      maxcharacters} characters)</td></tr><tr><td class="sbpMsg"><span>${
-      textContent}</span></td></tr></tbody></table>`, shoutboxPreview);
+  setInnerHtml(
+    '<table class="sbpTbl"><tbody><tr>' +
+      `<td class="sbpHdr">Preview (${chars}/${
+        maxcharacters
+      } characters)</td></tr><tr><td class="sbpMsg"><span>${
+        textContent
+      }</span></td></tr></tbody></table>`,
+    shoutboxPreview,
+  );
 }
 
 export default function injectShoutboxWidgets(maxcharacters) {

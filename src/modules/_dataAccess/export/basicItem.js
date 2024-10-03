@@ -1,4 +1,12 @@
-const craftType = ['Perfect', 'Excellent', 'Very Good', 'Good', 'Average', 'Poor', 'Uncrafted'];
+const craftType = [
+  'Perfect',
+  'Excellent',
+  'Very Good',
+  'Good',
+  'Average',
+  'Poor',
+  'Uncrafted',
+];
 
 const top = (o) => ({
   bound: o.bn ?? false,
@@ -24,8 +32,8 @@ const bottom = (o) => ({
 export default function basicItem(o) {
   return o
     ? {
-      ...top(o),
-      ...bottom(o),
-    }
+        ...top(o),
+        ...bottom(o),
+      }
     : {};
 }

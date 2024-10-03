@@ -12,26 +12,34 @@ let wearableGs;
 
 function getWearRe() {
   if (!wearRE) {
-    wearRE = new RegExp('<b>|Bottle|Brew|Draft|Elixir|Potion|Jagua Egg|'
-      + 'Gut Rot Head Splitter|Serum');
+    wearRE = new RegExp(
+      '<b>|Bottle|Brew|Draft|Elixir|Potion|Jagua Egg|' +
+        'Gut Rot Head Splitter|Serum',
+    );
   }
   return wearRE;
 }
 
 function fastBp() {
-  if (!bp) { bp = createDiv({ innerHTML: fastBpHtml + fastGsHtml }); }
+  if (!bp) {
+    bp = createDiv({ innerHTML: fastBpHtml + fastGsHtml });
+  }
   return bp.cloneNode(true);
 }
 
 function fastWearableBp() {
   if (!wearableBp) {
-    wearableBp = createDiv({ innerHTML: fastBpHtml + fastGsHtml + fastWearHtml });
+    wearableBp = createDiv({
+      innerHTML: fastBpHtml + fastGsHtml + fastWearHtml,
+    });
   }
   return wearableBp.cloneNode(true);
 }
 
 function fastGs() {
-  if (!gs) { gs = createDiv({ innerHTML: fastGsHtml }); }
+  if (!gs) {
+    gs = createDiv({ innerHTML: fastGsHtml });
+  }
   return gs.cloneNode(true);
 }
 

@@ -29,10 +29,13 @@ function updateHud(json) {
 
 function callWithHudCount(data, options) {
   const hudCount = hud?.mc?.find(({ k }) => k === 0)?.v;
-  return api({
-    ...data,
-    ...!isUndefined(hudCount) && { hc: hudCount },
-  }, options);
+  return api(
+    {
+      ...data,
+      ...(!isUndefined(hudCount) && { hc: hudCount }),
+    },
+    options,
+  );
 }
 
 export default async function hudApi(data, options) {

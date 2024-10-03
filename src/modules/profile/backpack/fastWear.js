@@ -20,6 +20,10 @@ function foundBackpack(theBackpack) {
 }
 
 export default async function fastWear() {
-  const theBackpack = await awaitWidget(getElementById('backpackContainer'), 'Backpack', 'hcs');
+  const theBackpack = await awaitWidget(
+    getElementById('backpackContainer'),
+    'Backpack',
+    'hcs',
+  );
   if (theBackpack) foundBackpack(theBackpack);
 }

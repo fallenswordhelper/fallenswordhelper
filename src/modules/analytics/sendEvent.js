@@ -26,7 +26,8 @@ function buildKey(eventType, eventLabel) {
 
 export default function sendEvent(eventCategory, eventAction, eventLabel) {
   if (!eventCategory) {
-    if (defineUserIsDev) stdout('sendEvent', eventCategory, eventAction, eventLabel);
+    if (defineUserIsDev)
+      stdout('sendEvent', eventCategory, eventAction, eventLabel);
     return;
   }
   const eventType = buildEvent(eventCategory, eventAction);

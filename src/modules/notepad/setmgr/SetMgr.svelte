@@ -11,12 +11,12 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={ close }>
+<ModalTitled {visible} on:close={close}>
   <svelte:fragment slot="title">Combat Set Manager</svelte:fragment>
   <div class="container">
-    { #await daViewCombatSet() }
+    {#await daViewCombatSet()}
       <p>loading...</p>
-    { :then json }
+    {:then json}
       <div>Combat Set</div>
       <div>Helmet</div>
       <div>Armor</div>
@@ -27,15 +27,15 @@
       <div>Ring</div>
       <div>Amulet</div>
       <div>Rune</div>
-      { #each json.r as { name, items }, i (i) }
-        <div class="data">{ name }</div>
-        { #each items.sort(({ t: a }, { t: b }) => a - b) as { l, n } }
-          <div class="data">{ l } { n }</div>
-        { /each }
-      { /each }
-    { :catch error }
-      <p style="color: red">{ error.message }</p>
-    { /await }
+      {#each json.r as { name, items }, i (i)}
+        <div class="data">{name}</div>
+        {#each items.sort(({ t: a }, { t: b }) => a - b) as { l, n }}
+          <div class="data">{l} {n}</div>
+        {/each}
+      {/each}
+    {:catch error}
+      <p style="color: red">{error.message}</p>
+    {/await}
   </div>
 </ModalTitled>
 

@@ -1,2 +1,4 @@
 /* World Action List */
-#actionList .crate {background-color: PaleVioletRed;}
+#actionList .crate {
+  background-color: PaleVioletRed;
+}

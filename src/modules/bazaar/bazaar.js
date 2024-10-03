@@ -19,18 +19,22 @@ const preparePotions = (p) => ({
   id: Number(getId(p)),
   img: p.children[0].src,
   fetch: p.firstChild.dataset.tipped,
-  price: intValue(getTextTrim(
-    querySelector('img[src*="/currency/"]', closestTable(p).parentElement)
-      .parentElement
-      .previousElementSibling,
-  )),
+  price: intValue(
+    getTextTrim(
+      querySelector('img[src*="/currency/"]', closestTable(p).parentElement)
+        .parentElement.previousElementSibling,
+    ),
+  ),
   count: 1,
   promise: Promise.resolve(),
 });
 
 export default function bazaar() {
   if (!pcc() || jQueryNotPresent()) return;
-  const origPots = querySelectorArray('a[href*="&subcmd=buyitem&"][onclick]', pcc());
+  const origPots = querySelectorArray(
+    'a[href*="&subcmd=buyitem&"][onclick]',
+    pcc(),
+  );
   if (!origPots.length) return;
   const potTable = closestTable(closestTable(origPots[0]).parentElement);
   startApp(origPots.map(preparePotions), potTable);

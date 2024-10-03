@@ -1,3 +1,9 @@
-.fshBackpack  {height: 490px;}
-.backpackTabContent > div {width: 60px;}
-.fshBackpack .backpackTabContent > div {height: 110px;}
+.fshBackpack {
+  height: 490px;
+}
+.backpackTabContent > div {
+  width: 60px;
+}
+.fshBackpack .backpackTabContent > div {
+  height: 110px;
+}

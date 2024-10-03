@@ -8,10 +8,5 @@ export default {
   http2: true,
   key: pathToFile('key.pem'),
   port,
-  stack: [
-    'lws-cors',
-    'lws-rewrite',
-    'lws-static',
-    'lws-index',
-  ],
+  stack: ['lws-cors', 'lws-rewrite', 'lws-static', 'lws-index'],
 };

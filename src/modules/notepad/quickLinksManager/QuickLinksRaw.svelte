@@ -29,15 +29,19 @@
 <div class="container">
   <div class="textContainer">
     <textarea
-      bind:value={ current }
-      class:invalid={ badJson }
-      on:blur={ () => { badJson = isBad(); } }
-      on:focus={ () => { badJson = 0; } }
+      bind:value={current}
+      class:invalid={badJson}
+      on:blur={() => {
+        badJson = isBad();
+      }}
+      on:focus={() => {
+        badJson = 0;
+      }}
     />
   </div>
   <div class="bottom">
-    <button on:click={ save } type="button">Save</button>
-    <button on:click={ reset } type="button">Reset</button>
+    <button on:click={save} type="button">Save</button>
+    <button on:click={reset} type="button">Reset</button>
   </div>
 </div>
 
@@ -52,7 +56,7 @@
   textarea {
     background-color: white;
     box-sizing: border-box;
-    font-family: Consolas, "Lucida Console", "Courier New", monospace;
+    font-family: Consolas, 'Lucida Console', 'Courier New', monospace;
     height: 380px;
     width: 100%;
   }

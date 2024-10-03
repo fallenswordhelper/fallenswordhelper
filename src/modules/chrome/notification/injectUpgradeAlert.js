@@ -13,7 +13,9 @@ function asyncParse(data) {
 
 async function checkLastUpgrade() {
   const lastUpgradeCheck = getValue('lastUpgradeCheck');
-  if (lastUpgradeCheck && now() < lastUpgradeCheck) { return; }
+  if (lastUpgradeCheck && now() < lastUpgradeCheck) {
+    return;
+  }
   const data = await upgradesGold();
   asyncParse(data);
 }

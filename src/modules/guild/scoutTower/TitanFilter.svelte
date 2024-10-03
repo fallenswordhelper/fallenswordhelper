@@ -21,23 +21,27 @@
 
   const byName = ([a], [b]) => alpha(a, b);
   const getPrefs = () => get(prefName);
-  const setPrefs = () => set(prefName, {
-    current,
-    history,
-    securable,
-    titans,
-  });
+  const setPrefs = () =>
+    set(prefName, {
+      current,
+      history,
+      securable,
+      titans,
+    });
   const titanPref = ({ titanName }) => titans.find(([n]) => n === titanName)[1];
-  const mergePrefs = () => entries({
-    ...fromEntries(entries(theTitans).map(([n]) => [n, true])),
-    ...fromEntries(titans.map(([n, o]) => [trimTitanName(n), o])),
-  }).sort(byName);
+  const mergePrefs = () =>
+    entries({
+      ...fromEntries(entries(theTitans).map(([n]) => [n, true])),
+      ...fromEntries(titans.map(([n, o]) => [trimTitanName(n), o])),
+    }).sort(byName);
   const isCurrent = (ctx) => ctx.active && current;
   const isHistory = (ctx) => !ctx.active && history;
   const isSecurable = (ctx) => ctx.securable || !securable;
 
   function testVis(ctx) {
-    return (isCurrent(ctx) || isHistory(ctx)) && titanPref(ctx) && isSecurable(ctx);
+    return (
+      (isCurrent(ctx) || isHistory(ctx)) && titanPref(ctx) && isSecurable(ctx)
+    );
   }
 
   function updateVis([ctx, newVis]) {
@@ -58,12 +62,7 @@
   async function buildTitanList() {
     const oldOptions = await getPrefs();
     if (oldOptions) {
-      ({
-        current,
-        history,
-        securable,
-        titans,
-      } = oldOptions);
+      ({ current, history, securable, titans } = oldOptions);
     }
     titans = mergePrefs();
     doVisibility();
@@ -109,43 +108,63 @@
 
 <table>
   <tbody>
-    <tr><td class="header" colspan="3"/></tr>
+    <tr><td class="header" colspan="3" /></tr>
     <tr>
       <td colspan="3">
         <label>
-          <input bind:checked={ current } on:change={ toggleCurrent } type="checkbox">
+          <input
+            bind:checked={current}
+            on:change={toggleCurrent}
+            type="checkbox"
+          />
           Current
         </label>
         <label>
-          <input bind:checked={ history } on:change={ toggleHistory } type="checkbox">
+          <input
+            bind:checked={history}
+            on:change={toggleHistory}
+            type="checkbox"
+          />
           History
         </label>
         <label>
-          <input bind:checked={ securable } on:change={ toggleSecurable } type="checkbox">
+          <input
+            bind:checked={securable}
+            on:change={toggleSecurable}
+            type="checkbox"
+          />
           Securable
         </label>
       </td>
     </tr>
-    <tr><td class="header" colspan="3"/></tr>
+    <tr><td class="header" colspan="3" /></tr>
     <tr>
       <td colspan="3">
-        { #await buildTitanList() then }
+        {#await buildTitanList() then}
           <div id="titan-list">
-            { #each titans as [name, flag] }
+            {#each titans as [name, flag]}
               <label>
-                <input bind:checked={ flag } on:change={ toggleTitan } type="checkbox">
-                { name }
+                <input
+                  bind:checked={flag}
+                  on:change={toggleTitan}
+                  type="checkbox"
+                />
+                {name}
               </label>&ensp;
-            { /each }
+            {/each}
           </div>
           <div>
-            <LinkButtonBracketed on:click={ selectAll }>Select All</LinkButtonBracketed>
-            <LinkButtonBracketed on:click={ selectNone }>Select None</LinkButtonBracketed>
+            <LinkButtonBracketed on:click={selectAll}
+              >Select All</LinkButtonBracketed
+            >
+            <LinkButtonBracketed on:click={selectNone}
+              >Select None</LinkButtonBracketed
+            >
           </div>
-        { /await }
+        {/await}
       </td>
     </tr>
-    <tr><td class="header" colspan="3"/></tr>
+    <tr><td class="header" colspan="3" /></tr>
   </tbody>
 </table>
 

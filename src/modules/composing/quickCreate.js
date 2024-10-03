@@ -6,11 +6,15 @@ import { pcc } from '../support/layout';
 import backgroundCreate from './backgroundCreate';
 
 function injectButton(el) {
-  insertHtmlAfterEnd(el, '<span class="quickCreate">'
-    + '[<span class="sendLink">Quick Create</span>]</span>');
+  insertHtmlAfterEnd(
+    el,
+    '<span class="quickCreate">' +
+      '[<span class="sendLink">Quick Create</span>]</span>',
+  );
 }
 
-const isOurTarget = (target) => target.tagName === 'SPAN' && target.className === 'quickCreate';
+const isOurTarget = (target) =>
+  target.tagName === 'SPAN' && target.className === 'quickCreate';
 
 function doQuickCreate(target) {
   const temp = target.previousElementSibling.previousElementSibling;
@@ -26,7 +30,8 @@ function hdlQuickCreate(evt) {
 }
 
 export default function quickCreate() {
-  querySelectorArray('input[id^=create-]:not(#create-multi)', pcc())
-    .forEach(injectButton);
+  querySelectorArray('input[id^=create-]:not(#create-multi)', pcc()).forEach(
+    injectButton,
+  );
   onclick(pcc(), hdlQuickCreate);
 }

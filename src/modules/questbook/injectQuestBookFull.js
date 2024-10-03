@@ -44,7 +44,9 @@ function storeLoc() {
   setValue(savePrefKey[currentPageValue], lastQBPage);
 }
 
-function getPref(pref) { return getValue(pref); }
+function getPref(pref) {
+  return getValue(pref);
+}
 
 function getPrevVals() {
   return savePrefKey.map(getPref);
@@ -98,6 +100,8 @@ export default function injectQuestBookFull() {
   interceptSubmit();
   storeQuestPage();
   const questTable = getElementsByTagName(defTable, pcc())[5];
-  if (!questTable) { return; }
+  if (!questTable) {
+    return;
+  }
   injectQuestRow(questTable);
 }

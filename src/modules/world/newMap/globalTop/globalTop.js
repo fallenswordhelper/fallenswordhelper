@@ -33,7 +33,9 @@ function show() {
 
 export default function globalTop() {
   const worldEventBadge = $('#world-event-badge');
-  if (!worldEventBadge.length) { return; }
+  if (!worldEventBadge.length) {
+    return;
+  }
   worldEventBadge.off();
   onclick(worldEventBadge[0], show);
 }

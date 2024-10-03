@@ -4,22 +4,30 @@
 }
 
 #fast-compose,
-#fast-compose + div {display: none;}
-#fast-compose:checked + div {display: block;}
+#fast-compose + div {
+  display: none;
+}
+#fast-compose:checked + div {
+  display: block;
+}
 
-.left-0 td:nth-child(n+2) input,
-.left-1 td:nth-child(n+3) input,
-.left-2 td:nth-child(n+4) input,
-.left-3 td:nth-child(n+5) input,
-.left-4 td:nth-child(n+6) input,
-.left-5 td:nth-child(n+7) input,
-.left-6 td:nth-child(n+8) input,
-.left-7 td:nth-child(n+9) input,
-.left-8 td:nth-child(n+10) input,
-.left-9 td:nth-child(n+11) input {
-  background: #B8B8B8;
+.left-0 td:nth-child(n + 2) input,
+.left-1 td:nth-child(n + 3) input,
+.left-2 td:nth-child(n + 4) input,
+.left-3 td:nth-child(n + 5) input,
+.left-4 td:nth-child(n + 6) input,
+.left-5 td:nth-child(n + 7) input,
+.left-6 td:nth-child(n + 8) input,
+.left-7 td:nth-child(n + 9) input,
+.left-8 td:nth-child(n + 10) input,
+.left-9 td:nth-child(n + 11) input {
+  background: #b8b8b8;
   pointer-events: none;
 }
 
-#fshFastCompose {margin: 0 auto;}
-#fshFastCompose td:nth-child(1) {text-align: left;}
+#fshFastCompose {
+  margin: 0 auto;
+}
+#fshFastCompose td:nth-child(1) {
+  text-align: left;
+}

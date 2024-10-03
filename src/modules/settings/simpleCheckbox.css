@@ -1,5 +1,5 @@
 .fshHelpTitle {
-  color: #FFF380;
+  color: #fff380;
   font-weight: bold;
 }
 
@@ -21,7 +21,7 @@
   pointer-events: none;
   position: absolute;
   transform: translate(-50%, -12px);
-  transition: opacity .35s ease .25s;
+  transition: opacity 0.35s ease 0.25s;
   user-select: none;
   z-index: 1000;
 }
@@ -31,7 +31,7 @@
   border-radius: 3px;
   bottom: 100%;
   box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.65);
-  content: "Warning: Causes page instability";
+  content: 'Warning: Causes page instability';
   color: #eee;
   padding: 8px 12px;
   white-space: nowrap;

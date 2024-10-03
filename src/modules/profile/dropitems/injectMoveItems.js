@@ -25,7 +25,10 @@ function startApp(folders, flrRow) {
 }
 
 async function moveList(folderId, list) {
-  const json = await daSendToFolder(folderId, list.map((c) => c.value));
+  const json = await daSendToFolder(
+    folderId,
+    list.map((c) => c.value),
+  );
   if (json?.s) list.forEach(removeRow);
 }
 
@@ -36,7 +39,9 @@ function moveItemsToFolder(e) {
 
 export default function injectMoveItems() {
   const folderImgs = querySelectorArray('#pCC img[src$="/folder.png"]');
-  if (folderImgs.length === 0) { return; }
+  if (folderImgs.length === 0) {
+    return;
+  }
   const flrRow = closestTr(closestTable(folderImgs[0]));
   const folders = folderImgs.map(folderMap);
   const app = startApp(folders, flrRow);

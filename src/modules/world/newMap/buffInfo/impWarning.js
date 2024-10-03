@@ -24,7 +24,9 @@ function refreshBuffs(json) {
 
 async function recastClick() {
   sendEvent('NewMap', 'recastClick');
-  if (getBuff('Summon Shield Imp')) { return; }
+  if (getBuff('Summon Shield Imp')) {
+    return;
+  }
   const json = await daQuickbuff([playerName()], [55]);
   refreshBuffs(json);
 }
@@ -36,11 +38,7 @@ function getImpsRemaining(imp) {
   return 0;
 }
 
-const impStyles = [
-  'imp-0',
-  'imp-1',
-  'imp-1',
-];
+const impStyles = ['imp-0', 'imp-1', 'imp-1'];
 
 function getImpWarningStyle(impsRem) {
   return impStyles[impsRem] ?? 'fshGreen';
@@ -52,7 +50,10 @@ function initImpDiv(containerDiv) {
   impRemainingSpan = createSpan();
   insertElement(impDiv, impRemainingSpan);
   insertHtmlBeforeEnd(impDiv, '&nbsp;');
-  const recast = createButton({ className: 'xSmallLink', textContent: 'Recast' });
+  const recast = createButton({
+    className: 'xSmallLink',
+    textContent: 'Recast',
+  });
   insertElement(impDiv, recast);
   onclick(recast, recastClick);
 }

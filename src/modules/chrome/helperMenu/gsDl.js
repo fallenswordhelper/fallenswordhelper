@@ -4,9 +4,10 @@ import download from '../../common/download';
 import { getAttr } from '../../notepad/inventory/footer/utils';
 import { get } from '../../system/idb';
 
-const header = 'item_id,inv_id,item_name,rarity,type,durability,max_durability,guild_tag,'
-  + 'in_guide,player_id,equipped,craft,forge,attack,defense,armor,hp,damage,stamina,min_level,'
-  + 'set_name,set_attack,set_defense,set_armor,set_hp,set_damage,cached\n';
+const header =
+  'item_id,inv_id,item_name,rarity,type,durability,max_durability,guild_tag,' +
+  'in_guide,player_id,equipped,craft,forge,attack,defense,armor,hp,damage,stamina,min_level,' +
+  'set_name,set_attack,set_defense,set_armor,set_hp,set_damage,cached\n';
 const mainFields = (item) => [
   item.item_id,
   item.inv_id,
@@ -37,11 +38,8 @@ const statFields = (stats) => [
   stats?.set_hp ?? '',
   stats?.set_damage ?? '',
 ];
-const fields = (item) => [
-  ...mainFields(item),
-  ...statFields(item.stats),
-  item.cached,
-].join(',');
+const fields = (item) =>
+  [...mainFields(item), ...statFields(item.stats), item.cached].join(',');
 
 const toCsv = (items) => items.map(fields).join('\n');
 const csvBlob = (csv) => new Blob([csv], { type: 'text/csv' });
@@ -77,7 +75,7 @@ const addCachedStats = (cache) => (item) => {
 export default async function gsDl() {
   if (!currentGuildId()) return;
   const json = await guildStore();
-  const cache = await get('fsh_guildinvmgr_cache') ?? [];
+  const cache = (await get('fsh_guildinvmgr_cache')) ?? [];
   const updatedItems = json.items.map(addCachedStats(cache));
   download(csvBlob(`${header}${toCsv(updatedItems)}\n`), 'gs_export.csv');
 }

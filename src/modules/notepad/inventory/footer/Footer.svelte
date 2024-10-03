@@ -5,20 +5,20 @@
   import UpdateStats from './UpdateStats.svelte';
 
   export let fshInv = 0;
-
 </script>
+
 <div class="container">
-  { #if calf.subcmd === 'guildinvmgr' }
+  {#if calf.subcmd === 'guildinvmgr'}
     <RecallAll />
     <!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
     <!-- svelte-ignore missing-declaration -->
-    { #if defineUserIsDev }
-      <Repair { fshInv } />
-    { /if }
-  { :else }
+    {#if defineUserIsDev}
+      <Repair {fshInv} />
+    {/if}
+  {:else}
     <div></div>
-  { /if }
-  <UpdateStats { fshInv } />
+  {/if}
+  <UpdateStats {fshInv} />
 </div>
 
 <style>

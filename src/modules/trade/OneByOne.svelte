@@ -18,7 +18,8 @@
   const id = (item) => item.id.split('-').at(-1);
   const resolvedPromise = () => Promise.resolve({ s: 1 });
   const selectedItems = () => getArrayByClassName('trade-create-selected');
-  const target = () => document.forms.sendItemForm.elements.target_username.value;
+  const target = () =>
+    document.forms.sendItemForm.elements.target_username.value;
 
   function handleJson(item, json) {
     if (json.s) {
@@ -68,11 +69,11 @@
 </script>
 
 <span>
-  <LinkButton { disabled } on:click={ onclick }>OneByOne</LinkButton>
+  <LinkButton {disabled} on:click={onclick}>OneByOne</LinkButton>
 </span>
 
 <style>
-span {
-  --button-margin: auto auto auto 10px;
-}
+  span {
+    --button-margin: auto auto auto 10px;
+  }
 </style>

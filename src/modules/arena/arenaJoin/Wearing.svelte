@@ -31,9 +31,12 @@
     }
   }
 
-  const getStatCells = (doc) => querySelectorArray('table[width="300"] b', doc)
-    .slice(1)
-    .map((b) => querySelector('td', b.parentNode.nextElementSibling.children[0]));
+  const getStatCells = (doc) =>
+    querySelectorArray('table[width="300"] b', doc)
+      .slice(1)
+      .map((b) =>
+        querySelector('td', b.parentNode.nextElementSibling.children[0]),
+      );
 
   async function handleChange() {
     await daUseCombatSet(selected);
@@ -45,21 +48,21 @@
   }
 </script>
 
-{ #await getCombatSet() then }
+{#await getCombatSet() then}
   <div>
     <div class="innerColumnHeader">
       <div class="flex">
         Inventory
-        <select bind:value={ selected } on:change={ handleChange }>
-          { #each combatSets as { id, name } }
-            <option value="{ id }">{ name }</option>
-          { /each }
+        <select bind:value={selected} on:change={handleChange}>
+          {#each combatSets as { id, name }}
+            <option value={id}>{name}</option>
+          {/each}
         </select>
       </div>
     </div>
-    <WearingGrid { equipment }/>
+    <WearingGrid {equipment} />
   </div>
-{ /await }
+{/await}
 
 <style>
   .innerColumnHeader {

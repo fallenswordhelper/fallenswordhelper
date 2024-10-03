@@ -6,8 +6,12 @@ import groups from './groups';
 import hall from './hall';
 import inventory from './inventory';
 
-const guildChat = () => { runDefault(import('../../../logs/guildChat')); };
-const guildLog = () => { runDefault(import('../../../logs/guildLog')); };
+const guildChat = () => {
+  runDefault(import('../../../logs/guildChat'));
+};
+const guildLog = () => {
+  runDefault(import('../../../logs/guildLog'));
+};
 const guildMailbox = () => {
   runDefault(import('../../../mailbox/guildMailbox'));
 };

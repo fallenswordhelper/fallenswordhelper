@@ -3,9 +3,7 @@ import { nowSecs } from '../support/now';
 import regExpGroups from './regExpGroups';
 
 export default function lastActivity(str) {
-  const {
-    d: day, h: hour, m: min, s: sec,
-  } = regExpGroups(lastActivityRE, str);
+  const { d: day, h: hour, m: min, s: sec } = regExpGroups(lastActivityRE, str);
   const days = Number(day);
   const hours = Number(hour) + days * 24;
   const mins = Number(min) + hours * 60;

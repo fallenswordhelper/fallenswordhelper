@@ -23,4 +23,4 @@
   ];
 </script>
 
-<ModalTabbed on:close={ close } { tabs } { visible } />
+<ModalTabbed on:close={close} {tabs} {visible} />

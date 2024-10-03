@@ -60,7 +60,8 @@ const usualRoutines = [
 
 export default function newMap() {
   executeAll(usualRoutines);
-  if (defineUserIsDev) { //  hide titan combat results, global top 100
+  if (defineUserIsDev) {
+    //  hide titan combat results, global top 100
     hideTitanCombatResults();
   }
 }

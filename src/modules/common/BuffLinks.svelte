@@ -12,17 +12,25 @@
 
   function buffBatch(batch, i, evt) {
     evt.target.blur();
-    fshOpen(`${quickbuffUrl}&players=${batch.join(',')}`, 'fsQuickBuff', 618, 1000, ',scrollbars');
+    fshOpen(
+      `${quickbuffUrl}&players=${batch.join(',')}`,
+      'fsQuickBuff',
+      618,
+      1000,
+      ',scrollbars',
+    );
     dispatch('buffBatch', batchText(i));
   }
 </script>
 
 <ul>
-  { #each chunk(16, members) as batch, i }
+  {#each chunk(16, members) as batch, i}
     <li>
-      <LinkButton on:click={ (e) => buffBatch(batch, i, e) }>{ batchText(i) }</LinkButton>
+      <LinkButton on:click={(e) => buffBatch(batch, i, e)}
+        >{batchText(i)}</LinkButton
+      >
     </li>
-  { /each }
+  {/each}
 </ul>
 
 <style>

@@ -7,13 +7,7 @@ import { now, nowSecs } from '../../support/now';
 
 function convertDate(textDate) {
   const dateAry = textDate.replace('<br>', ' ').split(/[: /]/);
-  return dateUtc([
-    dateAry[2],
-    dateAry[1],
-    dateAry[0],
-    dateAry[3],
-    dateAry[4],
-  ]);
+  return dateUtc([dateAry[2], dateAry[1], dateAry[0], dateAry[3], dateAry[4]]);
 }
 
 function parseDateAsOffset(textDate) {
@@ -30,7 +24,9 @@ function formatRow(row) {
 function parseReport(doc) {
   if (!doc) return { s: false };
   const logTable = querySelector('#pCC table table', doc);
-  if (!logTable) { return { s: false }; }
+  if (!logTable) {
+    return { s: false };
+  }
   const rows = dataRows(logTable, 4, 1);
   const data = rows.map(formatRow);
   return { r: data, s: true, t: `0 ${String(nowSecs())}` };

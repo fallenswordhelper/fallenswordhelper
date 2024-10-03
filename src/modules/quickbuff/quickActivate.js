@@ -12,9 +12,12 @@ function processResult(trigger, json) {
   }
 }
 
-export default async function quickActivate(evt) { // jQuery.min
+export default async function quickActivate(evt) {
+  // jQuery.min
   const trigger = evt.target;
-  if (trigger.className !== 'quickbuffActivate') { return; }
+  if (trigger.className !== 'quickbuffActivate') {
+    return;
+  }
   sendEvent('quickbuff', 'quickActivate');
   const json = await daQuickbuff([playerName()], [trigger.dataset.buffid]);
   processResult(trigger, json);

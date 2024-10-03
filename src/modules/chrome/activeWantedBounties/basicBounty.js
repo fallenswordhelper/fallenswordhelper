@@ -2,7 +2,9 @@ import getText from '../../common/getText';
 import querySelector from '../../common/querySelector';
 
 function getTarget(firstCell) {
-  if (firstCell.children[0].tagName === 'A') { return firstCell.children[0]; }
+  if (firstCell.children[0].tagName === 'A') {
+    return firstCell.children[0];
+  }
   return firstCell.children[0].children[0];
 }
 

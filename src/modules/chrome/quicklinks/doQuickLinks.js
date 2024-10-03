@@ -13,15 +13,16 @@ import getValue from '../../system/getValue';
 import getValueJSON from '../../system/getValueJSON';
 import isHuntMode from '../lookForHcsData/isHuntMode';
 
-const createQuicklinksDiv = () => createDiv({
-  className: 'fshQuickLinks',
-  style: {
-    left: `${getValue('quickLinksLeftPx')}px`,
-    top: `${getValue('quickLinksTopPx')}px`,
-  },
-});
+const createQuicklinksDiv = () =>
+  createDiv({
+    className: 'fshQuickLinks',
+    style: {
+      left: `${getValue('quickLinksLeftPx')}px`,
+      top: `${getValue('quickLinksTopPx')}px`,
+    },
+  });
 
-const valid = (link) => ('newWindow' in link) && link.url && link.name;
+const valid = (link) => 'newWindow' in link && link.url && link.name;
 
 function createLink(link) {
   const anchor = createAnchor({

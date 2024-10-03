@@ -9,7 +9,10 @@ import { fetchItemRe } from '../../support/constants';
 import createDocument from '../../system/createDocument';
 
 function details(a) {
-  const { itemId, invId, vcode } = regExpGroups(fetchItemRe, a.children[0].dataset.tipped);
+  const { itemId, invId, vcode } = regExpGroups(
+    fetchItemRe,
+    a.children[0].dataset.tipped,
+  );
   return {
     a: Number(invId),
     b: Number(itemId),
@@ -18,11 +21,16 @@ function details(a) {
 }
 
 const ajax = async (a) => createDocument(await retryAjax(a.href));
-const getComponents = (doc) => querySelectorArray('a[href*="=destroycomponent&"]', doc).map(details);
-const componentSlots = (doc) => querySelectorAll('td[background*="/1x1mini."]', doc).length;
+const getComponents = (doc) =>
+  querySelectorArray('a[href*="=destroycomponent&"]', doc).map(details);
+const componentSlots = (doc) =>
+  querySelectorAll('td[background*="/1x1mini."]', doc).length;
 
 function remainder(profileDoc) {
-  const pages = querySelectorArray('a[href*="profile&component_page="]', profileDoc);
+  const pages = querySelectorArray(
+    'a[href*="profile&component_page="]',
+    profileDoc,
+  );
   return pages.slice(1).map(ajax);
 }
 

@@ -4,10 +4,12 @@ import querySelectorArray from '../common/querySelectorArray';
 import relatePlayer from '../logs/playerLogWidgets/relatePlayer';
 import { playerLinkSelector } from '../support/constants';
 
-const getPlayerLinks = () => querySelectorArray(playerLinkSelector, getElementById('resultRows'))
-  .filter((a) => !a.href.endsWith('=null'));
-const getPlayerTags = async (playerLinks) => (await all(playerLinks.map(relatePlayer)))
-  .filter(([, type]) => type);
+const getPlayerLinks = () =>
+  querySelectorArray(playerLinkSelector, getElementById('resultRows')).filter(
+    (a) => !a.href.endsWith('=null'),
+  );
+const getPlayerTags = async (playerLinks) =>
+  (await all(playerLinks.map(relatePlayer))).filter(([, type]) => type);
 const lookup = {
   guild: 'fshGreen',
   ally: 'fshBlue',
@@ -16,9 +18,13 @@ const lookup = {
 
 async function doColours() {
   const playerLinks = getPlayerLinks();
-  if (!playerLinks.length) { return; }
+  if (!playerLinks.length) {
+    return;
+  }
   const playerTags = await getPlayerTags(playerLinks);
-  if (!playerTags.length) { return; }
+  if (!playerTags.length) {
+    return;
+  }
   playerTags.forEach(([a, type]) => {
     a.classList.add(lookup[type]);
   });

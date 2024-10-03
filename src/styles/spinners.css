@@ -5,8 +5,9 @@
     transform: rotate(360deg);
   }
 }
+
 .fshSpinner:before {
-  animation: fshSpinner .6s linear infinite;
+  animation: fshSpinner 0.6s linear infinite;
   border: 2px solid #ccc;
   border-radius: 50%;
   border-top-color: #07d;
@@ -20,6 +21,7 @@
   top: 50%;
   width: 20px;
 }
+
 .fshSpinner64:before {
   border-width: 4px;
   height: 64px;
@@ -27,16 +29,19 @@
   margin-top: -32px;
   width: 64px;
 }
+
 .fshSpinner12:before {
   height: 12px;
   margin-left: -6px;
   margin-top: -6px;
   width: 12px;
 }
+
 .fshSpin12:before {
   height: 12px;
   width: 12px;
 }
+
 .fshComposingSpinner:before {
   top: 75%;
 }

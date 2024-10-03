@@ -36,7 +36,9 @@ const statList = [
 ];
 
 // eslint-disable-next-line no-param-reassign
-function assignStats(obj, json, arr) { obj[arr[0]] = Number(json[arr[1]]); }
+function assignStats(obj, json, arr) {
+  obj[arr[0]] = Number(json[arr[1]]);
+}
 
 function importStats(obj, json) {
   statList.forEach(partial(assignStats, obj, json));
@@ -65,7 +67,9 @@ const buffList = [
 ];
 
 // eslint-disable-next-line no-param-reassign
-function assignBuffs(obj, buffs, arr) { obj[arr[0]] = buffs[arr[1]] || 0; } // skipcq: JS-W1043
+function assignBuffs(obj, buffs, arr) {
+  obj[arr[0]] = buffs[arr[1]] || 0;
+} // skipcq: JS-W1043
 
 function importBuffs(obj, buffs) {
   buffList.forEach(partial(assignBuffs, obj, buffs));
@@ -77,8 +81,9 @@ export default function playerDataObject(json) {
   const obj = {};
   importStats(obj, json);
   importBuffs(obj, buffs);
-  obj.superEliteSlayerMultiplier = round(0.002
-    * obj.superEliteSlayerLevel, 2);
-  if (numberIsNaN(obj.armorValue)) { updateForCloak(obj); }
+  obj.superEliteSlayerMultiplier = round(0.002 * obj.superEliteSlayerLevel, 2);
+  if (numberIsNaN(obj.armorValue)) {
+    updateForCloak(obj);
+  }
   return obj;
 }

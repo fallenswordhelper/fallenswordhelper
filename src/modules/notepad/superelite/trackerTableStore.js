@@ -11,7 +11,7 @@ function prepareLog($seLogStore, set) {
       mob,
       oldMobs
         .filter(([, mb]) => mb === mob)
-        .map(([time,,, realm]) => [time, realm]),
+        .map(([time, , , realm]) => [time, realm]),
     ])
     .map(([mob, locAry]) => [mob, locAry[0][0], locAry[0][1], locAry.slice(1)]);
   set(prepared);

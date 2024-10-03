@@ -1,6 +1,7 @@
 <script>
   import LinkButton from './LinkButton.svelte';
 </script>
+
 <span>[<LinkButton on:click><slot></slot></LinkButton>]</span>
 
 <style>

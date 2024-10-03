@@ -14,7 +14,8 @@ function changePage(e) {
   formToUrl({ target: e.target.form });
 }
 
-function globalQuestAllowBack(topTable) { // jQuery
+function globalQuestAllowBack(topTable) {
+  // jQuery
   const [thisSelect] = getElementsByTagName('select', topTable);
   $(thisSelect).off();
   on(pcc(), 'change', changePage);

@@ -37,13 +37,19 @@
   }
 
   const addIndex = (obj, index) => ({ ...obj, index });
-  const replacer = ({ msg }) => msg.text
-    .replace(/<link=a(\d)><\/link>/g, (match, p1) => msg.attachments[p1].data.name);
+  const replacer = ({ msg }) =>
+    msg.text.replace(
+      /<link=a(\d)><\/link>/g,
+      (match, p1) => msg.attachments[p1].data.name,
+    );
   const decorate = (obj) => ({
     ...obj,
     fshType: profiler(obj.msg.text),
     new: enableLogColoring && obj.time > lastCheckUtc,
-    old: enableLogColoring && (nowUtc - obj.time) / 60 > 20 && obj.time <= lastCheckUtc,
+    old:
+      enableLogColoring &&
+      (nowUtc - obj.time) / 60 > 20 &&
+      obj.time <= lastCheckUtc,
     searchable: replacer(obj).toLowerCase(),
   });
   const reverse = (a, b) => b.time - a.time;
@@ -51,8 +57,10 @@
   function updateDisplayLog() {
     displayLog = liveLog
       .filter(({ fshType }) => checks[fshType])
-      .filter(({ searchable }) => searchValue === ''
-        || searchable.includes(searchValue.toLowerCase()))
+      .filter(
+        ({ searchable }) =>
+          searchValue === '' || searchable.includes(searchValue.toLowerCase()),
+      )
       .map(addIndex);
     if (!displayLog.length) displayLog = [{ index: 0, msg: { text: '' } }];
   }
@@ -136,45 +144,49 @@
   $: updateDisplayLog(searchValue);
 </script>
 
-<ModalTitled { visible } on:close={ close }>
+<ModalTitled {visible} on:close={close}>
   <svelte:fragment slot="title">Guild Log</svelte:fragment>
   <div class="content">
     <FilterHeader
       bind:checks
       bind:searchValue
-      on:cbChange={ cbChange }
-      on:clearSearch={ clearSearch }
-      on:oldGuildLog={ oldGuildLog }
-      on:refresh={ refresh }
-      on:selectAll={ selectAll }
-      on:selectNone={ selectNone }
+      on:cbChange={cbChange}
+      on:clearSearch={clearSearch}
+      on:oldGuildLog={oldGuildLog}
+      on:refresh={refresh}
+      on:selectAll={selectAll}
+      on:selectNone={selectNone}
     />
     <div class="row-container">
       <div class="innerColumnHeader">&nbsp;</div>
       <div class="innerColumnHeader">Date</div>
       <div class="innerColumnHeader">
         Message
-        { #if hideNonPlayerGuildLogMessages }
+        {#if hideNonPlayerGuildLogMessages}
           <span class="white">
             (Guild Log messages not involving self are dimmed!)
           </span>
-        { /if }
+        {/if}
       </div>
     </div>
-    { #await prm }
-      { #each progressLog as txt, index (index) }
-        { txt }
-        <br>
-      { /each }
-    { :then}
+    {#await prm}
+      {#each progressLog as txt, index (index)}
+        {txt}
+        <br />
+      {/each}
+    {:then}
       <div class="vs">
-        <VirtualList items={ displayLog } let:item={ logEntry }>
-          <LogItem { groupCombatItems } { hideNonPlayerGuildLogMessages } { logEntry } />
+        <VirtualList items={displayLog} let:item={logEntry}>
+          <LogItem
+            {groupCombatItems}
+            {hideNonPlayerGuildLogMessages}
+            {logEntry}
+          />
         </VirtualList>
       </div>
-    { :catch error }
-      { error }
-    { /await }
+    {:catch error}
+      {error}
+    {/await}
   </div>
 </ModalTitled>
 

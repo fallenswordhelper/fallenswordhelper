@@ -10,19 +10,47 @@ export const rarity = [
   { colour: '#009900', clas: 'fshEpic' },
 ];
 
-export const places = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth',
-  'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth', 'thirteenth',
-  'fourteenth'];
+export const places = [
+  'first',
+  'second',
+  'third',
+  'fourth',
+  'fifth',
+  'sixth',
+  'seventh',
+  'eighth',
+  'ninth',
+  'tenth',
+  'eleventh',
+  'twelfth',
+  'thirteenth',
+  'fourteenth',
+];
 
-export const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
-  'Sep', 'Oct', 'Nov', 'Dec'];
+export const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 
 export const etaRe = /ETA:\s*(?<h>\d+)h\s*(?<m>\d+)m\s*(?<s>\d+)s/;
-export const fetchItemRe = /fetchitem.php\?item_id=(?<itemId>\d+)&inv_id=(?<invId>[-\d]+)&t=(?<t>\d+)&p=(?<p>\d+)(?:&vcode=(?<vcode>[a-z0-9]+))?/i;
+export const fetchItemRe =
+  /fetchitem.php\?item_id=(?<itemId>\d+)&inv_id=(?<invId>[-\d]+)&t=(?<t>\d+)&p=(?<p>\d+)(?:&vcode=(?<vcode>[a-z0-9]+))?/i;
 export const guildRE = /guild_id=(?<guildId>\d+)/;
-export const lastActivityRE = /<td>Last Activity:<\/td><td>(?<d>\d+)d (?<h>\d+)h (?<m>\d+)m (?<s>\d+)s<\/td>/;
+export const lastActivityRE =
+  /<td>Last Activity:<\/td><td>(?<d>\d+)d (?<h>\d+)h (?<m>\d+)m (?<s>\d+)s<\/td>/;
 export const playerIDRE = /player_id=(?<playerId>\d+)/;
-export const stamRe = /Stamina:<\/td><td>(?<stam>\d{1,12}) \/ (?<max>\d{1,12})<\/td>/;
+export const stamRe =
+  /Stamina:<\/td><td>(?<stam>\d{1,12}) \/ (?<max>\d{1,12})<\/td>/;
 export const vlRe = /VL:.+?(?<vl>\d+)/;
 
 export const defenderMultiplier = 0.2;
@@ -44,7 +72,8 @@ export const playerIdUrl = `${profileUrl}&player_id=`;
 export const dropItemsUrl = `${profileUrl}${defSubcmd}dropitems`;
 export const tradeUrl = `${cmdUrl}trade&target_player=`;
 export const secureUrl = `${cmdUrl}trade${defSubcmd}createsecure${
-  defTargetUsername}`;
+  defTargetUsername
+}`;
 export const arenaUrl = `${cmdUrl}arena${defSubcmd}`;
 export const notepadBlankUrl = `${indexPhp}${notepadBlank}`;
 export const auctionSearchUrl = `${notepadBlankUrl}auctionsearch`;
@@ -59,7 +88,8 @@ export const joinallUrl = `${groupsSubcmdUrl}joinall`;
 export const joinUnderUrl = `${groupsSubcmdUrl}${defJoinallgroupsundersize}`;
 export const worldUrl = `${cmdUrl}world`;
 export const searchPlayerUrl = `${cmdUrl}findplayer`;
-export const showPlayerUrl = `${searchPlayerUrl
+export const showPlayerUrl = `${
+  searchPlayerUrl
 }&search_show_first=1&search_username=`;
 export const blacksmithUrl = `${cmdUrl}blacksmith`;
 export const quickbuffUrl = `${cmdUrl}quickbuff`;
@@ -131,22 +161,76 @@ export const defStatVl = 'stat-vl';
 export const GMSTORAGE_PATH = 'GM_';
 
 export const composingFragmentType = [
-  'Common', 'Rare', 'Unique', 'Legendary', 'Super Elite', 'Crystalline'];
-
-export const attribType = ['Attack', 'Defense', 'Armor', 'HP', 'Damage',
-  'Stamina', 'Stamina Gain', 'Gold Gain', 'XP Gain'];
-
-export const enhancementType = ['Piercing Strike', 'Reinforced Armor',
-  'Thievery', 'Critical Hit', 'Holy', 'Breaker', 'Nullify', 'Banishment',
-  'Protection', 'Oceanic', 'Master Thief', 'Protect Gold', 'Dodge', 'Disarm',
-  'Master Blacksmith', 'Elite Hunter', 'Sustain', 'Master Crafter',
-  'Fury Caster', 'Greenskin Slayer', 'Beast Slayer', 'Duelist', 'Glory Seeker',
-  'First Strike', 'Hypnotize', 'Master Inventor', 'Soulless', 'Temporal Shift',
+  'Common',
+  'Rare',
+  'Unique',
+  'Legendary',
+  'Super Elite',
+  'Crystalline',
 ];
 
-export const itemType = ['Helmet', 'Armor', 'Gloves', 'Boots', 'Weapon',
-  'Shield', 'Ring', 'Amulet', 'Rune', 'Quest Item', 'Potion', 'Component',
-  'Resource', 'Recipe', 'Container', 'Composed', 'Frag Stash'];
+export const attribType = [
+  'Attack',
+  'Defense',
+  'Armor',
+  'HP',
+  'Damage',
+  'Stamina',
+  'Stamina Gain',
+  'Gold Gain',
+  'XP Gain',
+];
+
+export const enhancementType = [
+  'Piercing Strike',
+  'Reinforced Armor',
+  'Thievery',
+  'Critical Hit',
+  'Holy',
+  'Breaker',
+  'Nullify',
+  'Banishment',
+  'Protection',
+  'Oceanic',
+  'Master Thief',
+  'Protect Gold',
+  'Dodge',
+  'Disarm',
+  'Master Blacksmith',
+  'Elite Hunter',
+  'Sustain',
+  'Master Crafter',
+  'Fury Caster',
+  'Greenskin Slayer',
+  'Beast Slayer',
+  'Duelist',
+  'Glory Seeker',
+  'First Strike',
+  'Hypnotize',
+  'Master Inventor',
+  'Soulless',
+  'Temporal Shift',
+];
+
+export const itemType = [
+  'Helmet',
+  'Armor',
+  'Gloves',
+  'Boots',
+  'Weapon',
+  'Shield',
+  'Ring',
+  'Amulet',
+  'Rune',
+  'Quest Item',
+  'Potion',
+  'Component',
+  'Resource',
+  'Recipe',
+  'Container',
+  'Composed',
+  'Frag Stash',
+];
 
 export const oldActionSpinner = `${cdn}ui/world/action_spinner.gif`;
 

@@ -14,9 +14,10 @@ function initDdDiv(containerDiv) {
 
 function getDdBonus(dd, killStreak) {
   if (dd) {
-    const ddPerc = Math.min(Math.round(
-      Math.floor(killStreak / 5) * Number(dd.level),
-    ) * 0.01, 20);
+    const ddPerc = Math.min(
+      Math.round(Math.floor(killStreak / 5) * Number(dd.level)) * 0.01,
+      20,
+    );
     const ddBonus = round(ddPerc, 2);
     return ddBonus.toString();
   }

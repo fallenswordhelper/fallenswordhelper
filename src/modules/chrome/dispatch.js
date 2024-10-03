@@ -37,9 +37,11 @@ function newSelector(selector) {
 }
 
 function isValid() {
-  return isObject(pageSwitcher[cmd])
-    && isObject(pageSwitcher[cmd][subcmd])
-    && isFunction(pageSwitcher[cmd][subcmd][subcmd2]);
+  return (
+    isObject(pageSwitcher[cmd]) &&
+    isObject(pageSwitcher[cmd][subcmd]) &&
+    isFunction(pageSwitcher[cmd][subcmd][subcmd2])
+  );
 }
 
 function testCoreFunction() {
@@ -50,7 +52,9 @@ function getParamsFromUrl() {
   cmd = getParam('cmd');
   subcmd = getParam('subcmd');
   subcmd2 = getParam('subcmd2');
-  if (['points', 'privatemessage'].includes(cmd)) { type = `/${getParam('type')}`; }
+  if (['points', 'privatemessage'].includes(cmd)) {
+    type = `/${getParam('type')}`;
+  }
 }
 
 function getParamsFromPage() {
@@ -117,7 +121,9 @@ function setVer(fshVer, gmInfo) {
 
 // main event dispatcher
 export default function dispatch(fshVer, gmInfo) {
-  if (badEnv()) { return; }
+  if (badEnv()) {
+    return;
+  }
   const cssPrm = loadCss(defineCalfPath);
   exceptions();
   setVer(fshVer, gmInfo);

@@ -10,10 +10,12 @@ function toData(i) {
   return {
     id: i.src.split('/').at(-1).split('.')[0],
     name: getTextTrim(closestTr(i).previousElementSibling),
-    attributes: ['Attack', 'Defense', 'Armor', 'HP', 'Damage'].map((atr, id) => ({
-      id,
-      value: Number(regExpFirstCapture(mre(atr), i.dataset.tipped)),
-    })),
+    attributes: ['Attack', 'Defense', 'Armor', 'HP', 'Damage'].map(
+      (atr, id) => ({
+        id,
+        value: Number(regExpFirstCapture(mre(atr), i.dataset.tipped)),
+      }),
+    ),
   };
 }
 

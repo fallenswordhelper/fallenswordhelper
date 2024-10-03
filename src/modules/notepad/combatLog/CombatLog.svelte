@@ -20,7 +20,7 @@
   }
 
   async function init() {
-    log = await get('fsh_combatLog') ?? [];
+    log = (await get('fsh_combatLog')) ?? [];
   }
 
   async function clearStorage() {
@@ -33,17 +33,17 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={ close }>
+<ModalTitled {visible} on:close={close}>
   <svelte:fragment slot="title">Combat Log</svelte:fragment>
-  { #await init() then }
+  {#await init() then}
     <div class="textContainer">
-      <textarea bind:this={ textArea } readonly>{ jsonStringify(log) }</textarea>
+      <textarea bind:this={textArea} readonly>{jsonStringify(log)}</textarea>
     </div>
     <div class="bottom">
-      <button on:click={ notepadCopyLog } type="button">Select All</button>
-      <button on:click={ clearStorage } type="button">Clear</button>
+      <button on:click={notepadCopyLog} type="button">Select All</button>
+      <button on:click={clearStorage} type="button">Clear</button>
     </div>
-  { /await }
+  {/await}
 </ModalTitled>
 
 <style>
@@ -55,7 +55,7 @@
   }
   textarea {
     background-color: white;
-    font-family: Consolas, "Lucida Console", "Courier New", monospace;
+    font-family: Consolas, 'Lucida Console', 'Courier New', monospace;
     height: 380px;
     width: 580px;
   }

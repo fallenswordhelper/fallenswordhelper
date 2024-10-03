@@ -28,7 +28,9 @@ function questFromLink(type, a) {
     name: a.textContent,
     min_level: Number(getTextTrim(tr.cells[1])),
     realm: { name: getTextTrim(tr.cells[2]) },
-    current_stage: Math.ceil(maxStage * (parseInt(percBar.children[0].style.width, 10) / 100)),
+    current_stage: Math.ceil(
+      maxStage * (parseInt(percBar.children[0].style.width, 10) / 100),
+    ),
     max_stage: maxStage,
     seasonal: type === 1,
   };
@@ -44,12 +46,24 @@ async function getQuests([type, mode]) {
   const doc = await getQuestbookPage(type, mode, 0);
   if (!doc) return { s: false };
   const pages = getOptionValues(doc);
-  const docs = await all([doc, ...pages.slice(1).map(partial(getQuestbookPage, type, mode))]);
+  const docs = await all([
+    doc,
+    ...pages.slice(1).map(partial(getQuestbookPage, type, mode)),
+  ]);
   return docs.filter((dc) => dc).map((dc) => getQuestProps(type, dc));
 }
 
 // incomplete
 export default async function viewQuests() {
-  const questbook = await all([[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2]].map(getQuests));
+  const questbook = await all(
+    [
+      [0, 0],
+      [0, 1],
+      [0, 2],
+      [1, 0],
+      [1, 1],
+      [1, 2],
+    ].map(getQuests),
+  );
   return { r: questbook.flat(2), s: true };
 }

@@ -55,8 +55,9 @@ function makeDnkBtn() {
   });
   const btnContainer = createDiv({
     className: 'description',
-    innerHTML: '<span class="ui-helper-hidden-accessible">'
-      + '<input type="text"></span>',
+    innerHTML:
+      '<span class="ui-helper-hidden-accessible">' +
+      '<input type="text"></span>',
   });
   insertElement(btnContainer, doNotKillBtn);
   insertElement(creatureBody, btnContainer);

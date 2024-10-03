@@ -18,6 +18,7 @@ function formatResponse(json) {
 // incomplete
 export default async function fetchinv() {
   const json = await backpack();
-  if (!backpackOk(json)) return { e: { code: 0, message: 'Server Error' }, s: false };
+  if (!backpackOk(json))
+    return { e: { code: 0, message: 'Server Error' }, s: false };
   return formatResponse(json);
 }

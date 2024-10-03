@@ -7,7 +7,9 @@ import getCombatBias from './getCombatBias';
 import doHuntingBuffs from './huntingBuffs/doHuntingBuffs';
 import interceptXHR from './interceptXHR';
 
-function mappedArray(a) { calf[a[0]] = shouldBeArray(a[1]); }
+function mappedArray(a) {
+  calf[a[0]] = shouldBeArray(a[1]);
+}
 
 function mappedArrays() {
   [
@@ -17,12 +19,12 @@ function mappedArrays() {
   ].forEach(mappedArray);
 }
 
-function straightArray(a) { calf[a] = shouldBeArray(a); }
+function straightArray(a) {
+  calf[a] = shouldBeArray(a);
+}
 
 function straightArrays() {
-  [
-    'doNotKillList',
-  ].forEach(straightArray);
+  ['doNotKillList'].forEach(straightArray);
 }
 
 function arrayType() {
@@ -30,7 +32,9 @@ function arrayType() {
   straightArrays();
 }
 
-function mappedValue(a) { calf[a[0]] = getValue(a[1]); }
+function mappedValue(a) {
+  calf[a[0]] = getValue(a[1]);
+}
 
 function mappedValues() {
   [
@@ -41,7 +45,9 @@ function mappedValues() {
   ].forEach(mappedValue);
 }
 
-function straightValue(a) { calf[a] = getValue(a); }
+function straightValue(a) {
+  calf[a] = getValue(a);
+}
 
 function straightValues() {
   [

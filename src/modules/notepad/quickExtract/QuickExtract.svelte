@@ -29,8 +29,8 @@
   let toExtract = null;
   let results = [];
 
-  const isExtractable = (item) => item.item_name === 'Zombie Coffin'
-    || item.type === 12 || item.type === 16;
+  const isExtractable = (item) =>
+    item.item_name === 'Zombie Coffin' || item.type === 12 || item.type === 16;
   const byName = (a, b) => alpha(a.item_name, b.item_name);
   const inST = (i) => selectST || !i.is_in_st;
   const inMain = (i) => !selectMain || i.folder_id === -1;
@@ -41,10 +41,9 @@
   }
 
   function updateExtract() {
-    toExtract = isArray(extractable) && rollupExtractable(
-      playerId,
-      extractable.filter(inST).filter(inMain),
-    );
+    toExtract =
+      isArray(extractable) &&
+      rollupExtractable(playerId, extractable.filter(inST).filter(inMain));
   }
 
   function toggleSelectST() {
@@ -110,22 +109,31 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={ close }>
+<ModalTitled {visible} on:close={close}>
   <svelte:fragment slot="title">Quick Extract</svelte:fragment>
   <div>
-    Select which type of plants you wish to extract all of. Only select extractable resources.
-    <br>
-    <SelectInST bind:inSt={ selectST } on:toggle={ toggleSelectST } />&nbsp;
+    Select which type of plants you wish to extract all of. Only select
+    extractable resources.
+    <br />
+    <SelectInST bind:inSt={selectST} on:toggle={toggleSelectST} />&nbsp;
     <label>
-      <input bind:checked={ selectMain } on:change={ toggleSelectMain } type="checkbox">
+      <input
+        bind:checked={selectMain}
+        on:change={toggleSelectMain}
+        type="checkbox"
+      />
       Main Folder Only
     </label>&nbsp;
     <label>
-      <input bind:checked={ disablePrompts } on:change={ togglePrompts } type="checkbox">
+      <input
+        bind:checked={disablePrompts}
+        on:change={togglePrompts}
+        type="checkbox"
+      />
       Disable Prompts
     </label>&nbsp;
-    <LinkButtonBracketed on:click={ refresh }>Refresh</LinkButtonBracketed>
-    <br>
+    <LinkButtonBracketed on:click={refresh}>Refresh</LinkButtonBracketed>
+    <br />
     <table>
       <thead>
         <tr>
@@ -137,45 +145,46 @@
         <tr>
           <td colspan="3">
             <ol>
-              { #each results as result }
+              {#each results as result}
                 <li>
-                  { #if result.startsWith('<') }
+                  {#if result.startsWith('<')}
                     <span class="fshRed">
-                      { result.slice(1) }
+                      {result.slice(1)}
                     </span>
-                  { :else }
-                    { result }
-                  { /if }
+                  {:else}
+                    {result}
+                  {/if}
                 </li>
-              { /each }
+              {/each}
             </ol>
           </td>
         </tr>
-        { #await prm then }
-          { #each toExtract as {
-            count, delPending, item_name: name, style, tip,
-          }, index }
+        {#await prm then}
+          {#each toExtract as { count, delPending, item_name: name, style, tip }, index}
             <tr>
               <td class:delPending>
-                { #if count }
-                  { #if delPending }
+                {#if count}
+                  {#if delPending}
                     <span class="fshSpinner fshSpinner12"></span>
-                  { :else }
-                    <LinkButton on:click={ () => extractEvt(index) }>Extract { count }</LinkButton>
-                  { /if }
-                { :else }
+                  {:else}
+                    <LinkButton on:click={() => extractEvt(index)}
+                      >Extract {count}</LinkButton
+                    >
+                  {/if}
+                {:else}
                   Done
-                { /if }
+                {/if}
               </td>
               <td class="imgCol">
-                <span class="imgSpan tip-dynamic" data-tipped={ tip } style={ style }></span>
+                <span class="imgSpan tip-dynamic" data-tipped={tip} {style}
+                ></span>
               </td>
-              <td>{ name }</td>
+              <td>{name}</td>
             </tr>
-          { /each }
-        { :catch error }
-          <p style="color: red">{ error.message }</p>
-        { /await }
+          {/each}
+        {:catch error}
+          <p style="color: red">{error.message}</p>
+        {/await}
       </tbody>
     </table>
   </div>

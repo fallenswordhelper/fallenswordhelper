@@ -20,10 +20,10 @@ function parseDateAsTimestamp(textDate) {
 
 function calcCd(e) {
   const cdText = getTextTrim(e[1]);
-  if (cdText === 'No active cooldown') { return 0; }
-  return Math.ceil(
-    (parseDateAsTimestamp(cdText.slice(16)) - now()) / 1000,
-  );
+  if (cdText === 'No active cooldown') {
+    return 0;
+  }
+  return Math.ceil((parseDateAsTimestamp(cdText.slice(16)) - now()) / 1000);
 }
 
 function creature(e) {
@@ -76,7 +76,9 @@ const titanRows = (_e, i, a) => i !== 0 && i < a.length - 1 && (i - 1) % 6 < 3;
 function parseReport(doc) {
   if (!doc) return { s: false };
   const titanTable = querySelector('table[width="500"]', doc);
-  if (!titanTable) { return { s: false }; }
+  if (!titanTable) {
+    return { s: false };
+  }
   const thisRows = arrayFrom(titanTable.rows).filter(titanRows);
   const titans = chunk(3, thisRows);
   return { r: titans.map(testTitan), s: true };
@@ -84,5 +86,7 @@ function parseReport(doc) {
 
 // Incomplete
 export default async function scouttower() {
-  return parseReport(await indexAjaxDoc({ cmd: 'guild', subcmd: 'scouttower' }));
+  return parseReport(
+    await indexAjaxDoc({ cmd: 'guild', subcmd: 'scouttower' }),
+  );
 }

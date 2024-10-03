@@ -45,7 +45,7 @@
   }
 
   div {
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     color-scheme: dark;
     height: 100%;
     left: 0;

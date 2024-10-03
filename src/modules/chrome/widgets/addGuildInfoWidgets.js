@@ -19,16 +19,25 @@ function guildColour(el) {
 }
 
 function makeLink(hNo, word, page) {
-  querySelectorArray(`#pCR h${hNo}`).filter(contains(word)).forEach((el) => {
-    const anchor = createAnchor({ href: `${guildSubcmdUrl}${page}`, textContent: word });
-    onclick(anchor, () => { sendEvent('widgets', `guild ${page}`); });
-    el.replaceChild(anchor, el.firstChild);
-  });
+  querySelectorArray(`#pCR h${hNo}`)
+    .filter(contains(word))
+    .forEach((el) => {
+      const anchor = createAnchor({
+        href: `${guildSubcmdUrl}${page}`,
+        textContent: word,
+      });
+      onclick(anchor, () => {
+        sendEvent('widgets', `guild ${page}`);
+      });
+      el.replaceChild(anchor, el.firstChild);
+    });
 }
 
 export default function addGuildInfoWidgets() {
   const guildMembrList = getElementById('minibox-guild-members-list');
-  if (!guildMembrList) { return; } // list exists
+  if (!guildMembrList) {
+    return;
+  } // list exists
   // hide guild info links
   doHideBtn(guildMembrList, 1);
   doHideBuffSelected(guildMembrList, 'guild');

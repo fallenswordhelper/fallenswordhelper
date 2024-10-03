@@ -27,11 +27,14 @@
   function addBtn() {
     sendEvent('AH Quick Search', 'Add Item');
     if (nameMissing || urlMissing) return;
-    currentItems = [...currentItems, {
-      name: nameCtrl.value,
-      url: urlCtrl.value,
-      newWindow: newCtrl.checked,
-    }];
+    currentItems = [
+      ...currentItems,
+      {
+        name: nameCtrl.value,
+        url: urlCtrl.value,
+        newWindow: newCtrl.checked,
+      },
+    ];
     nameCtrl.value = '';
     urlCtrl.value = '';
     newCtrl.checked = 0;
@@ -40,11 +43,13 @@
 </script>
 
 <div class="container">
-  This screen allows you to set up some quick search templates for the Auction House. The Display
-  on AH column indicates if the quick search will show on the short list on the Auction House main
-  screen. A maximum of 36 items can show on this list (It will not show more than 36 even if you
-  have more than 36 flagged). To edit items, either use the large text area below, or add a new
-  entry and delete the old one. You can always reset the list to the default values.
+  This screen allows you to set up some quick search templates for the Auction
+  House. The Display on AH column indicates if the quick search will show on the
+  short list on the Auction House main screen. A maximum of 36 items can show on
+  this list (It will not show more than 36 even if you have more than 36
+  flagged). To edit items, either use the large text area below, or add a new
+  entry and delete the old one. You can always reset the list to the default
+  values.
   <div class="grid headings">
     <div>Category</div>
     <div>Nickname</div>
@@ -53,62 +58,72 @@
     <div class="centered">Action</div>
   </div>
   <div class="grid">
-    { #each currentItems as {
-      category, displayOnAH, nickname, searchname,
-    }, i }
-      <div>{ category }</div>
-      <div>{ nickname }</div>
+    {#each currentItems as { category, displayOnAH, nickname, searchname }, i}
+      <div>{category}</div>
+      <div>{nickname}</div>
       <div>
-        <a href="{ ahSearchUrl }{ searchname }">{ searchname }</a>
+        <a href="{ahSearchUrl}{searchname}">{searchname}</a>
       </div>
       <div class="centered">
-        <input bind:checked={ displayOnAH } disabled type="checkbox">
+        <input bind:checked={displayOnAH} disabled type="checkbox" />
       </div>
       <div class="buttons centered">
         [
-        <button on:click={ () => delBtn(i) } type="button">Del</button>
+        <button on:click={() => delBtn(i)} type="button">Del</button>
         ]
       </div>
-    { /each }
+    {/each}
   </div>
   <div class="grid">
     <div>
       <input
-        bind:this={ catCtrl }
-        class:invalid={ catMissing }
-        on:blur={ () => { catMissing = nameCtrl.validity.valueMissing; } }
-        on:focus={ () => { catMissing = 0; } }
+        bind:this={catCtrl}
+        class:invalid={catMissing}
+        on:blur={() => {
+          catMissing = nameCtrl.validity.valueMissing;
+        }}
+        on:focus={() => {
+          catMissing = 0;
+        }}
         placeholder="Potions"
         required
         type="text"
-      >
+      />
     </div>
     <div>
       <input
-        bind:this={ nameCtrl }
-        class:invalid={ nameMissing }
-        on:blur={ () => { nameMissing = nameCtrl.validity.valueMissing; } }
-        on:focus={ () => { nameMissing = 0; } }
+        bind:this={nameCtrl}
+        class:invalid={nameMissing}
+        on:blur={() => {
+          nameMissing = nameCtrl.validity.valueMissing;
+        }}
+        on:focus={() => {
+          nameMissing = 0;
+        }}
         placeholder="DC225"
         required
         type="text"
-      >
+      />
     </div>
     <div>
       <input
-        bind:this={ urlCtrl }
-        class:invalid={ urlMissing }
-        on:blur={ () => { urlMissing = urlCtrl.validity.valueMissing; } }
-        on:focus={ () => { urlMissing = 0; } }
+        bind:this={urlCtrl}
+        class:invalid={urlMissing}
+        on:blur={() => {
+          urlMissing = urlCtrl.validity.valueMissing;
+        }}
+        on:focus={() => {
+          urlMissing = 0;
+        }}
         placeholder="Potion of Black Death"
         required
         type="text"
-      >
+      />
     </div>
-    <div class="centered"><input bind:this={ newCtrl } type="checkbox"></div>
+    <div class="centered"><input bind:this={newCtrl} type="checkbox" /></div>
     <div class="buttons centered">
       [
-      <button on:click={ addBtn } type="button">Add</button>
+      <button on:click={addBtn} type="button">Add</button>
       ]
     </div>
   </div>
@@ -129,7 +144,7 @@
     row-gap: 2px;
   }
   .headings {
-    background-color: #CD9E4B;
+    background-color: #cd9e4b;
     user-select: none;
   }
   .headings div {
@@ -159,7 +174,7 @@
     opacity: 0.8;
     text-decoration: underline;
   }
-  input[type="text"] {
+  input[type='text'] {
     box-sizing: border-box;
     width: 100%;
   }

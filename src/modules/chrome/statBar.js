@@ -21,7 +21,9 @@ function preventHcs(id, evt) {
 
 function statbarWrapper(href, id) {
   const character = getElementById(`statbar-${id}`);
-  if (!character) { return; }
+  if (!character) {
+    return;
+  }
   const myWrapper = createAnchor({ href });
   const statWrapper = character.parentNode;
   insertElement(myWrapper, character);

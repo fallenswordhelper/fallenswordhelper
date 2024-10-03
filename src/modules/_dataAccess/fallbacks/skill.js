@@ -50,7 +50,10 @@ function makeAppResponse(got, expected) {
 
 export default async function skill(level, blocked) {
   const levelResponse = await updateLevels(level);
-  const levelApp = makeAppResponse(levelResponse, 'Account Settings have been updated');
+  const levelApp = makeAppResponse(
+    levelResponse,
+    'Account Settings have been updated',
+  );
   if (!levelApp.s) {
     return levelApp;
   }

@@ -21,7 +21,10 @@ function fragObj(pair) {
 }
 
 function stash(info) {
-  const fragList = regExpFirstCapture(/You gained {1,2}}(?<fragList>.*) Fragment\(s\)/, info);
+  const fragList = regExpFirstCapture(
+    /You gained {1,2}}(?<fragList>.*) Fragment\(s\)/,
+    info,
+  );
   if (fragList) {
     const frags = fragList.split(', ').map(fragObj);
     return { r: { frags }, s: true };

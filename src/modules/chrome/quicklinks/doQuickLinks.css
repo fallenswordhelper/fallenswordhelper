@@ -13,4 +13,6 @@
   z-index: 20;
 }
 
-.fshFixed {position: fixed;}
+.fshFixed {
+  position: fixed;
+}

@@ -12,11 +12,12 @@ let fshSeLog = {};
 let lastAttempt = 0;
 let trackerPref = false;
 
-const getDelay = (data) => Math.max(
-  0,
-  600 - (realtimeSecs() - (data?.lastUpdate ?? 0)),
-  600 - (realtimeSecs() - lastAttempt),
-);
+const getDelay = (data) =>
+  Math.max(
+    0,
+    600 - (realtimeSecs() - (data?.lastUpdate ?? 0)),
+    600 - (realtimeSecs() - lastAttempt),
+  );
 
 async function updateSeLog() {
   lastAttempt = realtimeSecs();

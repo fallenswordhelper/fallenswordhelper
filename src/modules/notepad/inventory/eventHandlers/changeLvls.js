@@ -14,7 +14,8 @@ function redrawTable(fshInv) {
   $(fshInv).DataTable().draw(false);
 }
 
-export default function changeLvls(fshInv) { // jQuery
+export default function changeLvls(fshInv) {
+  // jQuery
   headerEvent('changeLvls');
   changeMinMax(newOpts, partial(redrawTable, fshInv));
 }

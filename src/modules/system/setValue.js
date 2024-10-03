@@ -9,14 +9,26 @@ function storItem(name, type, value) {
 }
 
 const cold = [
-  [isString, (name, value) => { storItem(name, 'S]', value); }],
+  [
+    isString,
+    (name, value) => {
+      storItem(name, 'S]', value);
+    },
+  ],
   [
     (e) => typeof e === 'number',
     (name, value) => {
-      if (value.toString().indexOf('.') < 0) { storItem(name, 'N]', value); }
+      if (value.toString().indexOf('.') < 0) {
+        storItem(name, 'N]', value);
+      }
     },
   ],
-  [isBoolean, (name, value) => { storItem(name, 'B]', value); }],
+  [
+    isBoolean,
+    (name, value) => {
+      storItem(name, 'B]', value);
+    },
+  ],
 ];
 
 export default function setValue(name, value) {

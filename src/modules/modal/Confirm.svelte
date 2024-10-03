@@ -18,11 +18,11 @@
   }
 </script>
 
-<Modal { visible } on:close={ close }>
-  <div>{ msg }</div>
+<Modal {visible} on:close={close}>
+  <div>{msg}</div>
   <div>
-    <button on:click={ sayYes } type="button">Yes</button>
-    <button on:click={ close } type="button">No</button>
+    <button on:click={sayYes} type="button">Yes</button>
+    <button on:click={close} type="button">No</button>
   </div>
 </Modal>
 

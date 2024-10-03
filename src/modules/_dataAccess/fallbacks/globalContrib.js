@@ -1,7 +1,10 @@
 import indexAjaxJson from '../../ajax/indexAjaxJson';
 import isArray from '../../common/isArray';
 
-const contrib = ({ username, value }) => ({ player: { name: username }, value });
+const contrib = ({ username, value }) => ({
+  player: { name: username },
+  value,
+});
 
 export default async function globalContrib() {
   const gq = await indexAjaxJson({ cmd: 'toprated', subcmd: 'eventcontrib' });

@@ -32,20 +32,22 @@
   window.$.subscribe('stats.player', updateCountdown);
   window.$.subscribe(defTeleport, startTimer);
 </script>
-{ #if timer }
-  <div id="tp-overlay">{ countdown }</div>
-{ /if }
+
+{#if timer}
+  <div id="tp-overlay">{countdown}</div>
+{/if}
+
 <style>
-#tp-overlay {
-  opacity: 0.6;
-  background-color: #000;
-  color: #fff;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 17px;
-  height: 17px;
-  line-height: 17px;
-  text-align: center;
-}
+  #tp-overlay {
+    opacity: 0.6;
+    background-color: #000;
+    color: #fff;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 17px;
+    height: 17px;
+    line-height: 17px;
+    text-align: center;
+  }
 </style>

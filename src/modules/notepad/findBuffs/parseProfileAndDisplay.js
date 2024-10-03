@@ -17,17 +17,22 @@ import { updateProgress } from './bufferProgress';
 const sustainLevelRE = /Level<br>(?<lvl>\d+)%/;
 
 function getBioLines(bioCellHtml, findBuffNicks) {
-  const myRe = new RegExp(`^.*\\b(?:(?:${
-    findBuffNicks.replace(/,/g, ')|(?:')}))\\b.*$`, 'gim');
+  const myRe = new RegExp(
+    `^.*\\b(?:(?:${findBuffNicks.replace(/,/g, ')|(?:')}))\\b.*$`,
+    'gim',
+  );
   return [...bioCellHtml.matchAll(myRe)].map((el) => el[0]);
 }
 
 function getSustain(doc) {
-  const sustainLink = getArrayByTagName('a', getElementById('profileLeftColumn', doc))
-    .find(contains('Sustain'));
+  const sustainLink = getArrayByTagName(
+    'a',
+    getElementById('profileLeftColumn', doc),
+  ).find(contains('Sustain'));
   if (sustainLink) {
-    const sustainText = sustainLink.parentNode.parentNode.parentNode
-      .nextElementSibling.children[0].dataset.tipped;
+    const sustainText =
+      sustainLink.parentNode.parentNode.parentNode.nextElementSibling
+        .children[0].dataset.tipped;
     return parseInt(regExpFirstCapture(sustainLevelRE, sustainText), 10) || -1;
   }
   return 0;
@@ -38,15 +43,20 @@ function getInnerPlayerName(doc) {
 }
 
 function getInnerLevelValue(doc) {
-  return intValue(getText(getElementById('profileLeftColumn', doc)
-    .children[4].children[0].rows[0].cells[1]));
+  return intValue(
+    getText(
+      getElementById('profileLeftColumn', doc).children[4].children[0].rows[0]
+        .cells[1],
+    ),
+  );
 }
 
 function getInnerVirtualLevel(doc) {
   return parseInt(getText(getElementById(defStatVl, doc)), 10);
 }
 
-function nameCell(doc, callback, lastActivity, bioCellHtml) { // Legacy
+function nameCell(doc, callback, lastActivity, bioCellHtml) {
+  // Legacy
   const innerPlayerName = getInnerPlayerName(doc);
   const levelValue = getInnerLevelValue(doc);
   const virtualLevelValue = getInnerVirtualLevel(doc);
@@ -54,13 +64,16 @@ function nameCell(doc, callback, lastActivity, bioCellHtml) { // Legacy
   const lastActivityIMG = onlineDot({ min: lastActivityMinutes });
   const playerHREF = callback.href;
   const bioTip = bioCellHtml.replace(/['"\n]/g, '');
-  return `<nobr>${lastActivityIMG}&nbsp;<a href="${playerHREF}" target="new" `
-    + 'class="tip-static" '
-    + `data-tipped="${bioTip}">${innerPlayerName}</a>`
-    + '&nbsp;<span class="fshBlue">[<span class="a-reply fshLink" '
-    + `target_player="${innerPlayerName}">m</span>]</span></nobr><br>`
-    + `<span class="fshGrey">Level:&nbsp;</span>${levelValue
-    }&nbsp;(${virtualLevelValue})`;
+  return (
+    `<nobr>${lastActivityIMG}&nbsp;<a href="${playerHREF}" target="new" ` +
+    'class="tip-static" ' +
+    `data-tipped="${bioTip}">${innerPlayerName}</a>` +
+    '&nbsp;<span class="fshBlue">[<span class="a-reply fshLink" ' +
+    `target_player="${innerPlayerName}">m</span>]</span></nobr><br>` +
+    `<span class="fshGrey">Level:&nbsp;</span>${
+      levelValue
+    }&nbsp;(${virtualLevelValue})`
+  );
 }
 
 function openMsg(evt) {
@@ -70,22 +83,32 @@ function openMsg(evt) {
 function doNameCell(o) {
   const newCell = o.newRow.insertCell(0);
   newCell.style.verticalAlign = 'top';
-  setInnerHtml(nameCell(o.doc, o.callback, o.lastActivity, o.bioCellHtml), newCell);
+  setInnerHtml(
+    nameCell(o.doc, o.callback, o.lastActivity, o.bioCellHtml),
+    newCell,
+  );
   $('.a-reply').on('click', openMsg);
 }
 
-function playerInfo(lastActivity, sustainLevel, hasExtendBuff) { // Legacy
+function playerInfo(lastActivity, sustainLevel, hasExtendBuff) {
+  // Legacy
   let sustain = 'fshRed';
-  if (sustainLevel >= 100) { sustain = 'fshGreen'; }
+  if (sustainLevel >= 100) {
+    sustain = 'fshGreen';
+  }
   let extend = '<span class="fshRed">No</span>';
-  if (hasExtendBuff) { extend = '<span class="fshGreen">Yes</span>'; }
-  return '<table><tbody><tr>'
-    + '<td colspan="2" class="resAct">Last Activity:</td>'
-    + `<td colspan="2"><nobr>${lastActivity[0]}</nobr></td></tr>`
-    + '<tr><td class="resLbl">Sustain:'
-    + `</td><td class="resVal ${sustain}">${sustainLevel}%</td>`
-    + '<td class="resLbl">Extend:</td>'
-    + `<td class="resVal">${extend}</td></tr>`;
+  if (hasExtendBuff) {
+    extend = '<span class="fshGreen">Yes</span>';
+  }
+  return (
+    '<table><tbody><tr>' +
+    '<td colspan="2" class="resAct">Last Activity:</td>' +
+    `<td colspan="2"><nobr>${lastActivity[0]}</nobr></td></tr>` +
+    '<tr><td class="resLbl">Sustain:' +
+    `</td><td class="resVal ${sustain}">${sustainLevel}%</td>` +
+    '<td class="resLbl">Extend:</td>' +
+    `<td class="resVal">${extend}</td></tr>`
+  );
 }
 
 function playerInfoCell(newRow, lastActivity, sustainLevel, hasExtendBuff) {
@@ -106,7 +129,10 @@ function buffCell(newRow, textLineArray) {
 
 function updateProcessed() {
   const processedBuffers = getElementById('buffersProcessed');
-  const potentialBuffers = parseInt(getText(getElementById('potentialBuffers')), 10);
+  const potentialBuffers = parseInt(
+    getText(getElementById('potentialBuffers')),
+    10,
+  );
   const processedBuffersCount = parseInt(getText(processedBuffers), 10);
   setInnerHtml(processedBuffersCount + 1, processedBuffers);
   if (potentialBuffers === processedBuffersCount + 1) {
@@ -117,7 +143,10 @@ function updateProcessed() {
 function calcLastActivity(doc) {
   const innerPcc = getElementById('pCC', doc);
   const lastActivityElement = getElementsByTagName('p', innerPcc)[0];
-  return regExpExec(/(?<mins>\d{1,2}) mins, (?<secs>\d{1,2}) secs/, getText(lastActivityElement));
+  return regExpExec(
+    /(?<mins>\d{1,2}) mins, (?<secs>\d{1,2}) secs/,
+    getText(lastActivityElement),
+  );
 }
 
 function getExtend(doc) {
@@ -139,7 +168,8 @@ function addRowToTable(bioCellHtml, callback, doc, textLineArray) {
   buffCell(newRow, textLineArray);
 }
 
-export default function parseProfileAndDisplay(responseText, callback) { // Hybrid - Evil
+export default function parseProfileAndDisplay(responseText, callback) {
+  // Hybrid - Evil
   const doc = createDocument(responseText);
   const bioCellHtml = getElementById('profile-bio', doc).innerHTML;
   const textLineArray = getBioLines(bioCellHtml, callback.findBuffNicks);

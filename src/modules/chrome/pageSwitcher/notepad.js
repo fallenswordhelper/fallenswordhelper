@@ -14,10 +14,16 @@ import quickwear from './loader/quickwear';
 import recipeMgr from './loader/recipeMgr';
 import reliclist from './loader/reliclist';
 
-const inventory = () => { runDefault(import('../../notepad/inventory/inventory')); };
-const load = () => { runDefault(import('../../settings/load')); };
+const inventory = () => {
+  runDefault(import('../../notepad/inventory/inventory'));
+};
+const load = () => {
+  runDefault(import('../../settings/load'));
+};
 const whosGotWhat = () => {
-  if (!defineUserIsDev) { return; } // whosGotWhat
+  if (!defineUserIsDev) {
+    return;
+  } // whosGotWhat
   runDefault(import('../../notepad/whosGotWhat/whosGotWhat'));
 };
 

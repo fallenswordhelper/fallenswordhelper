@@ -20,12 +20,16 @@ function hideOther(el) {
 
 export default function searchUser() {
   findUser = getUrlParameter('user');
-  if (!findUser) { return; }
+  if (!findUser) {
+    return;
+  }
   const userNodes = querySelectorArray(
     '#pCC table table td[bgcolor="#DAA534"] b',
   );
   const userNode = userNodes.some(contains(findUser));
-  if (!userNode) { return; }
+  if (!userNode) {
+    return;
+  }
   const nodeList = querySelectorAll('#pCC table table tr');
   batch([2, nodeList, 0, hideOther]);
 }

@@ -14,10 +14,13 @@ function clearTheTimeout() {
 }
 
 const goodData = (data) => data?.s && isArray(data.r);
-const titanToShow = (dynamic) => calf.showTitanInfo && isArray(dynamic) && dynamic.some(hasTitan);
+const titanToShow = (dynamic) =>
+  calf.showTitanInfo && isArray(dynamic) && dynamic.some(hasTitan);
 
 function processScoutTower(ast, data) {
-  if (!goodData(data)) { return; }
+  if (!goodData(data)) {
+    return;
+  }
   processTitans(data.r);
   if (titanToShow(GameData.realm().dynamic)) {
     timeoutId = window.setTimeout(ast, 30000);

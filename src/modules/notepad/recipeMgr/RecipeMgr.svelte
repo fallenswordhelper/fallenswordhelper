@@ -41,7 +41,8 @@
     visible = false;
   }
 
-  const getPage = (fid = -1, page = 0) => indexAjaxDoc({ cmd: 'inventing', folder_id: fid, page });
+  const getPage = (fid = -1, page = 0) =>
+    indexAjaxDoc({ cmd: 'inventing', folder_id: fid, page });
   const nameSort = ([, a], [, b]) => sortDirection * alpha(a, b);
 
   function sortByName() {
@@ -54,18 +55,24 @@
     progressLog = ary.concat(progressLog);
   }
 
-  const itemInfo = (doc, bgGif) => querySelectorArray(`#pCC td[background*="${bgGif}"]`, doc)
-    .map((bg) => [
-      bg.children[0].children[0].dataset.tipped.split(/[?&=]/),
-      bg.parentNode.nextElementSibling,
-    ]).map(([parts, tr]) => [
-      parts[2],
-      parts[10],
-      ...tr ? [Number(getTextTrim(tr).split('/')[1])] : [],
-    ]);
+  const itemInfo = (doc, bgGif) =>
+    querySelectorArray(`#pCC td[background*="${bgGif}"]`, doc)
+      .map((bg) => [
+        bg.children[0].children[0].dataset.tipped.split(/[?&=]/),
+        bg.parentNode.nextElementSibling,
+      ])
+      .map(([parts, tr]) => [
+        parts[2],
+        parts[10],
+        ...(tr ? [Number(getTextTrim(tr).split('/')[1])] : []),
+      ]);
 
   async function getParts([id, n, image]) {
-    const doc = await indexAjaxDoc({ cmd: 'inventing', subcmd: 'viewrecipe', recipe_id: id });
+    const doc = await indexAjaxDoc({
+      cmd: 'inventing',
+      subcmd: 'viewrecipe',
+      recipe_id: id,
+    });
     addToProgressLog([`Parsing blueprint ${n}...`]);
     if (doc) {
       return [
@@ -80,8 +87,12 @@
     return [id, n, image];
   }
 
-  const makeTally = (byId) => (uid) => [uid, byId.filter((iid) => iid === uid).length];
-  const buildObj = (invById) => fromEntries(uniq(invById).map(makeTally(invById)));
+  const makeTally = (byId) => (uid) => [
+    uid,
+    byId.filter((iid) => iid === uid).length,
+  ];
+  const buildObj = (invById) =>
+    fromEntries(uniq(invById).map(makeTally(invById)));
 
   async function getInv() {
     addToProgressLog(['Updating inventory.']);
@@ -120,7 +131,8 @@
   }
 
   const validFolderResponse = (doc) => doc;
-  const findRecipes = (doc) => arrayFrom(querySelectorAll('#pCC a[href*="&recipe_id="]', doc));
+  const findRecipes = (doc) =>
+    arrayFrom(querySelectorAll('#pCC a[href*="&recipe_id="]', doc));
   const recipeValues = (a) => [
     a.href.split('=').at(-1),
     getTextTrim(a),
@@ -128,14 +140,25 @@
   ];
   const shouldHide = (rName) => (hName) => hName === rName;
   const isHidden = (hideNames, rName) => hideNames.some(shouldHide(rName));
-  const hidden = (hideNames) => ([, rName]) => isHidden(hideNames, rName);
-  const notHidden = (hideNames) => ([, rName]) => !isHidden(hideNames, rName);
-  const hiding = (toHide) => toHide.map(([, name]) => `Skipping blueprint "${name}" as it is hidden.`);
-  const found = (toCheck) => toCheck.map(([, name]) => `Found blueprint "${name}".`);
+  const hidden =
+    (hideNames) =>
+    ([, rName]) =>
+      isHidden(hideNames, rName);
+  const notHidden =
+    (hideNames) =>
+    ([, rName]) =>
+      !isHidden(hideNames, rName);
+  const hiding = (toHide) =>
+    toHide.map(([, name]) => `Skipping blueprint "${name}" as it is hidden.`);
+  const found = (toCheck) =>
+    toCheck.map(([, name]) => `Found blueprint "${name}".`);
 
   function parseFolders(folders) {
     const hideNames = csvSplit(getValue('hideRecipeNames'));
-    const foundRecipes = folders.filter(validFolderResponse).flatMap(findRecipes).map(recipeValues);
+    const foundRecipes = folders
+      .filter(validFolderResponse)
+      .flatMap(findRecipes)
+      .map(recipeValues);
     addToProgressLog(hiding(foundRecipes.filter(hidden(hideNames))));
     const toCheck = foundRecipes.filter(notHidden(hideNames));
     addToProgressLog(found(toCheck));
@@ -167,17 +190,30 @@
 
   const hasQuest = (n) => toLowerCase(n).includes('quest');
   const withQuest = ([, n]) => hasQuest(n);
-  const skipped = (folders) => folders.filter(withQuest)
-    .map(([, n]) => `Skipping folder "${n}" as it has the word "quest" in folder name.`);
+  const skipped = (folders) =>
+    folders
+      .filter(withQuest)
+      .map(
+        ([, n]) =>
+          `Skipping folder "${n}" as it has the word "quest" in folder name.`,
+      );
   const withoutQuest = ([, n]) => !hasQuest(n);
-  const toFolderHref = ([div, name]) => [div.previousElementSibling.children[0].href, name];
+  const toFolderHref = ([div, name]) => [
+    div.previousElementSibling.children[0].href,
+    name,
+  ];
 
   function parseUnassigned(unassigned) {
     addToProgressLog(['Parsing folder "Unassigned"...']);
-    const otherFolderDivs = querySelectorArray('div[id^="folder_name_"]', unassigned)
-      .map((div) => [div, getTextTrim(div)]);
+    const otherFolderDivs = querySelectorArray(
+      'div[id^="folder_name_"]',
+      unassigned,
+    ).map((div) => [div, getTextTrim(div)]);
     addToProgressLog(skipped(otherFolderDivs));
-    const remainder = otherFolderDivs.filter(withoutQuest).map(toFolderHref).map(getFirstPage);
+    const remainder = otherFolderDivs
+      .filter(withoutQuest)
+      .map(toFolderHref)
+      .map(getFirstPage);
     eachFolder([['-1', unassigned], ...remainder]);
   }
 
@@ -205,92 +241,92 @@
   }
 </script>
 
-<ModalTitled { visible } on:close={ close }>
+<ModalTitled {visible} on:close={close}>
   <svelte:fragment slot="title">
     Recipe Manager
-    <LinkButtonBracketed --button-color="#494437" --button-size="10px" on:click={ refreshBtn }>
+    <LinkButtonBracketed
+      --button-color="#494437"
+      --button-size="10px"
+      on:click={refreshBtn}
+    >
       Refresh
     </LinkButtonBracketed>
   </svelte:fragment>
-  { #await init() then }
-    { #if progressLog.length }
+  {#await init() then}
+    {#if progressLog.length}
       <div class="progress-log">
-        { #each progressLog as txt, index (index) }
-          { txt }
-          <br>
-        { /each }
+        {#each progressLog as txt, index (index)}
+          {txt}
+          <br />
+        {/each}
       </div>
-    { :else if recipeBook }
+    {:else if recipeBook}
       <div class="recipes ui-widget-content">
         <div class="innerColumnHeader item-container">Recipe</div>
         <div class="innerColumnHeader item-container">
-          <LinkButton --button-color="#383838" on:click={ sortByName }>Name</LinkButton>
+          <LinkButton --button-color="#383838" on:click={sortByName}
+            >Name</LinkButton
+          >
         </div>
         <div class="innerColumnHeader item-container">Items</div>
         <div class="innerColumnHeader item-container">Components</div>
         <div class="innerColumnHeader item-container">Target</div>
-        { #each recipeBook as [
-          id,
-          name,
-          recipe,
-          items,
-          components,
-          [targetId, vcode],
-        ], index (index) }
+        {#each recipeBook as [id, name, recipe, items, components, [targetId, vcode]], index (index)}
           <div class="item-container">
-            <a href="{ viewRecipeUrl }{ id }" on:click={ nav }>
+            <a href="{viewRecipeUrl}{id}" on:click={nav}>
               <div
                 class="image"
-                style:background-image="url('{ cdn }recipes/{ recipe }')"
+                style:background-image="url('{cdn}recipes/{recipe}')"
               />
             </a>
           </div>
           <div class="item-container">
-            <a href="{ viewRecipeUrl }{ id }" on:click={ nav }>
-              { name }
+            <a href="{viewRecipeUrl}{id}" on:click={nav}>
+              {name}
             </a>
           </div>
           <div class="item-container">
-            { #each items as [itemId, itemVcode, itemReq] }
+            {#each items as [itemId, itemVcode, itemReq]}
               <div>
                 <div
-                  data-tipped="fetchitem.php?item_id={ itemId }&t=2&vcode={ itemVcode }"
+                  data-tipped="fetchitem.php?item_id={itemId}&t=2&vcode={itemVcode}"
                   class="small-image tip-dynamic"
-                  style:background-image="url('{ cdn }items/{ itemId }.gif')"
+                  style:background-image="url('{cdn}items/{itemId}.gif')"
                 />
-                <div>{ invTally[itemId] ?? 0 }/{ itemReq }</div>
+                <div>{invTally[itemId] ?? 0}/{itemReq}</div>
               </div>
-            { /each }
+            {/each}
           </div>
           <div class="item-container">
-            { #each components as [itemId, itemVcode, itemReq] }
+            {#each components as [itemId, itemVcode, itemReq]}
               <div>
                 <div
-                  data-tipped="fetchitem.php?item_id={ itemId }&t=2&vcode={ itemVcode }"
+                  data-tipped="fetchitem.php?item_id={itemId}&t=2&vcode={itemVcode}"
                   class="small-image tip-dynamic"
-                  style:background-image="url('{ cdn }items/{ itemId }.gif')"
+                  style:background-image="url('{cdn}items/{itemId}.gif')"
                 />
-                <div>{ compTally[itemId] ?? 0 }/{ itemReq }</div>
+                <div>{compTally[itemId] ?? 0}/{itemReq}</div>
               </div>
-            { /each }
+            {/each}
           </div>
           <div class="item-container">
             <div
-              data-tipped="fetchitem.php?item_id={ targetId }&t=2&vcode={ vcode }"
+              data-tipped="fetchitem.php?item_id={targetId}&t=2&vcode={vcode}"
               class="image tip-dynamic"
-              style:background-image="url('{ cdn }items/{ targetId }.gif')"
+              style:background-image="url('{cdn}items/{targetId}.gif')"
             />
           </div>
-        { /each }
+        {/each}
       </div>
-    { /if }
-  { :catch error }
-    <p style="color: red">{ error.message }</p>
-  { /await }
+    {/if}
+  {:catch error}
+    <p style="color: red">{error.message}</p>
+  {/await}
 </ModalTitled>
 
 <style>
-  .progress-log, .recipes {
+  .progress-log,
+  .recipes {
     width: 620px;
   }
   .recipes {
@@ -301,7 +337,7 @@
     row-gap: 2px;
   }
   .recipes > div:nth-child(n + 6):not(:nth-last-child(-n + 5)) {
-    border-bottom-color: #CD9E4B;
+    border-bottom-color: #cd9e4b;
     border-bottom-style: solid;
     border-bottom-width: 1px;
   }

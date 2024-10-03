@@ -10,7 +10,9 @@ import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 
 function debuffSuccess(aLink, json) {
-  if (json?.s) { setInnerHtml('', aLink.parentNode); }
+  if (json?.s) {
+    setInnerHtml('', aLink.parentNode);
+  }
 }
 
 async function doDebuff(fastDebuff, aLink) {
@@ -41,9 +43,13 @@ function capturing(e) {
 }
 
 function interceptDebuff(fastDebuff, e) {
-  if (!e.returnValue) { return; }
+  if (!e.returnValue) {
+    return;
+  }
   const aLink = getALink(e.target);
-  if (aLink.tagName !== 'A') { return; }
+  if (aLink.tagName !== 'A') {
+    return;
+  }
   capturing(e);
   e.preventDefault();
   doDebuff(fastDebuff, aLink);

@@ -32,22 +32,28 @@ export default [
     section: 'Character',
     menu: [
       {
-        label: 'Buff Log', fn: buffLog,
+        label: 'Buff Log',
+        fn: buffLog,
       },
       {
-        label: 'Combat Log', fn: combatLog,
+        label: 'Combat Log',
+        fn: combatLog,
       },
       {
-        label: 'Creature Log', fn: creatureLog,
+        label: 'Creature Log',
+        fn: creatureLog,
       },
       {
-        label: 'Recipe Manager', fn: recipeMgr,
+        label: 'Recipe Manager',
+        fn: recipeMgr,
       },
       {
-        label: 'Quick Links', fn: quickLinksManager,
+        label: 'Quick Links',
+        fn: quickLinksManager,
       },
       {
-        label: 'Inventory Manager', href: `${notepadBlankUrl}invmanagernew`,
+        label: 'Inventory Manager',
+        href: `${notepadBlankUrl}invmanagernew`,
       },
     ],
   },
@@ -55,16 +61,20 @@ export default [
     section: 'Actions',
     menu: [
       {
-        label: 'Find Buffs', fn: convertToModal(injectFindBuffs),
+        label: 'Find Buffs',
+        fn: convertToModal(injectFindBuffs),
       },
       {
-        label: 'Find Other', fn: convertToModal(injectFindOther),
+        label: 'Find Other',
+        fn: convertToModal(injectFindOther),
       },
       {
-        label: 'Online Players', fn: convertToModal(injectOnlinePlayers),
+        label: 'Online Players',
+        fn: convertToModal(injectOnlinePlayers),
       },
       {
-        label: 'AH Quick Search', fn: convertToModal(injectAuctionSearch),
+        label: 'AH Quick Search',
+        fn: convertToModal(injectAuctionSearch),
       },
     ],
   },
@@ -76,16 +86,20 @@ export default [
         href: `${notepadBlankUrl}guildinvmgr`,
       },
       {
-        label: 'New Guild Log', fn: guildLog,
+        label: 'New Guild Log',
+        fn: guildLog,
       },
       {
-        label: 'Merc Hunter', fn: mercs,
+        label: 'Merc Hunter',
+        fn: mercs,
       },
       {
-        label: 'Pot Report', fn: potReport,
+        label: 'Pot Report',
+        fn: potReport,
       },
       {
-        label: 'Guild Tracker', fn: guildTracker,
+        label: 'Guild Tracker',
+        fn: guildTracker,
       },
     ],
   },
@@ -93,16 +107,20 @@ export default [
     section: 'Extra',
     menu: [
       {
-        label: 'Quick Extract', fn: quickExtract,
+        label: 'Quick Extract',
+        fn: quickExtract,
       },
       {
-        label: 'Quick Wear', fn: convertToModal(quickwear),
+        label: 'Quick Wear',
+        fn: convertToModal(quickwear),
       },
       {
-        label: 'FS Box Log', fn: fsboxlog,
+        label: 'FS Box Log',
+        fn: fsboxlog,
       },
       {
-        label: 'SE Tracker', fn: superelite,
+        label: 'SE Tracker',
+        fn: superelite,
       },
     ],
   },
@@ -110,10 +128,14 @@ export default [
     section: 'Beta Features',
     menu: [
       {
-        label: 'Relic List', fn: reliclist, beta: true,
+        label: 'Relic List',
+        fn: reliclist,
+        beta: true,
       },
       {
-        label: 'GS Export', fn: gsDl, beta: true,
+        label: 'GS Export',
+        fn: gsDl,
+        beta: true,
       },
     ],
   },
@@ -121,13 +143,17 @@ export default [
     section: 'Dev Links',
     menu: [
       {
-        label: 'Combat Set Manager', fn: setmgr, beta: true,
+        label: 'Combat Set Manager',
+        fn: setmgr,
+        beta: true,
       },
       {
-        label: 'Quest Book', fn: questbook,
+        label: 'Quest Book',
+        fn: questbook,
       },
       {
-        label: 'New Quick Wear', fn: quickwear2,
+        label: 'New Quick Wear',
+        fn: quickwear2,
       },
     ],
   },
@@ -135,10 +161,12 @@ export default [
     section: 'FSH developer quick links',
     menu: [
       {
-        playerId: 1963510, playerName: 'PointyHair',
+        playerId: 1963510,
+        playerName: 'PointyHair',
       },
       {
-        playerId: 1674838, playerName: 'Lusterless',
+        playerId: 1674838,
+        playerName: 'Lusterless',
       },
     ],
   },
