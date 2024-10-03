@@ -68,10 +68,11 @@ function evalDeathDealer(combat) {
 
 function evalCounterAttack(combat) {
   if (combat.player.counterAttackLevel > 0) {
-    combat.extraNotes +=
-      `CA Bonus Attack/Damage = ${combat.counterAttackBonusAttack} / ${
-        combat.counterAttackBonusDamage
-      }<br>` + `CA Extra Stam Used = ${combat.extraStaminaPerHit}<br>`;
+    combat.extraNotes += `CA Bonus Attack/Damage = ${
+      combat.counterAttackBonusAttack
+    } / ${combat.counterAttackBonusDamage}<br>CA Extra Stam Used = ${
+      combat.extraStaminaPerHit
+    }<br>`;
   }
 }
 

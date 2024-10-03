@@ -1,7 +1,7 @@
 import isFunction from '../../common/isFunction';
 
 const patchList = [];
-let monkeyInstalled;
+let monkeyInstalled = 0;
 
 function runPatches(theBackpack) {
   if (patchList.length > 0) {

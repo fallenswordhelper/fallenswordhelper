@@ -4,11 +4,11 @@ import partial from '../../../common/partial';
 const fastBpHtml = '<span class="sendLink fast-bp">Fast BP</span> | ';
 const fastGsHtml = '<span class="sendLink fast-gs">Fast GS</span>';
 const fastWearHtml = ' | <span class="sendLink fast-wear">Fast Wear</span>';
-let wearRE;
-let gs;
-let bp;
-let wearableBp;
-let wearableGs;
+let wearRE = 0;
+let gs = 0;
+let bp = 0;
+let wearableBp = 0;
+let wearableGs = 0;
 
 function getWearRe() {
   if (!wearRE) {

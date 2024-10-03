@@ -3,12 +3,12 @@ import on from './on';
 import once from './once';
 import partial from './partial';
 
-let dragTarget;
-let mouseX;
-let mouseY;
-let offsetX;
-let offsetY;
-let timer;
+let dragTarget = 0;
+let mouseX = 0;
+let mouseY = 0;
+let offsetX = 0;
+let offsetY = 0;
+let timer = 0;
 
 function setDragTarget(parent, event) {
   if (parent) {

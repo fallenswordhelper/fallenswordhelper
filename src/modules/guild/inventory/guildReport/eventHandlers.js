@@ -22,7 +22,7 @@ const spinner =
 
 function recalled(theTd) {
   setInnerHtml(
-    '<span class="fastWorn">You successfully recalled the item' + '</span>',
+    '<span class="fastWorn">You successfully recalled the item</span>',
     theTd,
   );
 }

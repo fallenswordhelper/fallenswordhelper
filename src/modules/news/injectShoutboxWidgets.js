@@ -4,8 +4,8 @@ import on from '../common/on';
 import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
 
-let textArea;
-let shoutboxPreview;
+let textArea = 0;
+let shoutboxPreview = 0;
 
 function updateShoutboxPreview(maxcharacters) {
   sendEvent('Shoutbox Preview', maxcharacters === 150 ? 'shoutbox' : 'fsbox');

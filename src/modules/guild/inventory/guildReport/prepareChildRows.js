@@ -62,7 +62,7 @@ export default function prepareChildRows() {
     return;
   }
   nodeList = querySelectorAll(
-    '#pCC table table ' + 'tr:not(.fshHide) td:nth-of-type(3n)',
+    '#pCC table table tr:not(.fshHide) td:nth-of-type(3n)',
   );
   nodeArray = [];
   batch([3, nodeList, 0, doSpan, finishSpan]);

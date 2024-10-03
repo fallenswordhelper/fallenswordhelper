@@ -1,6 +1,6 @@
 import outputResult from './outputResult';
 
-let lastMsg;
+let lastMsg = '';
 
 function notSeenErrorMessage(json) {
   return !json.s && lastMsg !== json.e.message;

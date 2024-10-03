@@ -1,6 +1,6 @@
 import getElementById from '../../common/getElementById';
 
-let findBuffsLevel175Only;
+let findBuffsLevel175Only = 0;
 
 export function calcMinLvl() {
   // Legacy
