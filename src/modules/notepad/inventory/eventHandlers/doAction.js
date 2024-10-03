@@ -1,3 +1,4 @@
+import dynamicAlert from '../../../alert/dynamicAlert';
 import hideQTip from '../../../common/hideQTip';
 import partial from '../../../common/partial';
 import { cdn } from '../../../system/system';
@@ -38,5 +39,11 @@ export default async function doAction(fn, target) { // jQuery
   removeClass(target);
   anotherSpinner(target);
   const json = await fn();
-  if (json) killRow(target, json);
+  if (!json) {
+    dynamicAlert('Something went wrong.');
+  } else if (json.s === false) {
+    dynamicAlert(json.e.message);
+  } else {
+    killRow(target, json);
+  }
 }
