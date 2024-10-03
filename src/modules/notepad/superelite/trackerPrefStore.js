@@ -33,8 +33,7 @@ async function backgroundPoll() {
   bgRunning = true;
   fshSeLog = await idbget('fsh_seLog');
   seLogStore.set(fshSeLog);
-  // skip-cq: JS-0092
-  while (trackerPref) {
+  while (trackerPref) { // skip-cq: JS-0092
     bgRunning = true;
     /* eslint-disable-next-line no-await-in-loop */
     await delay(getDelay(fshSeLog) * 1000);
