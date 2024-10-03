@@ -11,13 +11,11 @@ function cloakGuess(bonus, level) {
 }
 
 function updateForCloak(obj) {
-  /* eslint-disable no-param-reassign */
   obj.attackValue = cloakGuess(obj.attackBonus, obj.levelValue);
   obj.defenseValue = cloakGuess(obj.defenseBonus, obj.levelValue);
   obj.armorValue = cloakGuess(obj.armorBonus, obj.levelValue);
   obj.damageValue = cloakGuess(obj.damageBonus, obj.levelValue);
   obj.hpValue = obj.hpBonus;
-  /* eslint-enable no-param-reassign */
 }
 
 const statList = [
@@ -35,7 +33,6 @@ const statList = [
   ['killStreakValue', 'killstreak'],
 ];
 
-// eslint-disable-next-line no-param-reassign
 function assignStats(obj, json, arr) {
   obj[arr[0]] = Number(json[arr[1]]);
 }
@@ -66,7 +63,6 @@ const buffList = [
   ['cloakLevel', 'Cloak'],
 ];
 
-// eslint-disable-next-line no-param-reassign
 function assignBuffs(obj, buffs, arr) {
   obj[arr[0]] = buffs[arr[1]] || 0;
 } // skipcq: JS-W1043

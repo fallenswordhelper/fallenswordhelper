@@ -11,7 +11,6 @@ function runPatches(theBackpack) {
 
 function installMonkey(theBackpack) {
   const oldShow = theBackpack._showPage;
-  // eslint-disable-next-line no-param-reassign
   theBackpack._showPage = function _showPage(type, page) {
     if (!theBackpack.tabData) {
       return;

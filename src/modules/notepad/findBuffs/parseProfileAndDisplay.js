@@ -118,7 +118,6 @@ function playerInfoCell(newRow, lastActivity, sustainLevel, hasExtendBuff) {
 }
 
 function injectTextLine(newCell, el) {
-  // eslint-disable-next-line no-param-reassign
   newCell.innerHTML += `${el}<br>`;
 }
 

@@ -29,31 +29,33 @@ function injectSearch(buffResults) {
   on(searchForm, 'submit', partial(search, buffResults.parentNode));
 }
 
-async function interceptBuy(e) {
+async function doIntercept(e, packageId) {
+  const actionRow = e.target.parentNode;
+  actionRow.className = 'fshActionRow';
+  setInnerHtml(
+    '<div class="fshSpin"><span class="fshSpinner"></span></div>',
+    actionRow,
+  );
+  const response = await daBuffMarketBuy(packageId);
+  if (response?.s) {
+    setInnerHtml(
+      '<span class="fshBuffSuccess">Buffs have been applied</span>',
+      actionRow,
+    );
+  } else {
+    const msg = response?.e?.message ?? 'Failed';
+    setInnerHtml(`<span class="fshBuffFail">${msg}</span>`, actionRow);
+  }
+}
+
+function interceptBuy(e) {
   sendEvent('buffmarket', 'interceptBuy');
   e.stopPropagation();
   const packageId = regExpFirstCapture(
     /id=(?<id>\d+)/,
     e.target.getAttribute('onclick'),
   );
-  if (packageId) {
-    const actionRow = e.target.parentNode;
-    actionRow.className = 'fshActionRow';
-    setInnerHtml(
-      '<div class="fshSpin"><span class="fshSpinner"></span></div>',
-      actionRow,
-    );
-    const response = await daBuffMarketBuy(packageId);
-    if (response?.s) {
-      setInnerHtml(
-        '<span class="fshBuffSuccess">Buffs have been applied</span>',
-        actionRow,
-      );
-    } else {
-      const msg = response?.e?.message ?? 'Failed';
-      setInnerHtml(`<span class="fshBuffFail">${msg}</span>`, actionRow);
-    }
-  }
+  if (packageId) doIntercept(e, packageId);
 }
 
 function interceptClick(e) {

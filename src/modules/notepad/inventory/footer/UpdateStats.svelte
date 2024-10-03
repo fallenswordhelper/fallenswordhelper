@@ -34,7 +34,6 @@
     chunksNeeded = chunks.length;
     chunksReceived = 0;
     const responses = await all(chunks.map(getItem));
-    // eslint-disable-next-line array-callback-return
     rows.every(updateAttr(responses.flatMap(justItems)));
     api.draw();
   }

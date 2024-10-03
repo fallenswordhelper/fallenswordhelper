@@ -76,11 +76,25 @@ function toObject([anchor]) {
   return {};
 }
 
+function buildResult([tr, before, combat, text]) {
+  return {
+    msg: {
+      before,
+      combat,
+      text: text.replace(/<a.+?a>/g, replaceAnchor),
+      attachments:
+        (combat && [{ data: Number(combat), type: 11 }]) ??
+        [...text.matchAll(/<a.+?a>/g)].map(toObject),
+    },
+    time: parseDateAsTimestamp(getTextTrim(tr.cells[1])) / 1000,
+    ...(combat && { type: 17 }),
+  };
+}
+
 function toApp(doc) {
-  const rows = querySelectorArray('.width_full tr', doc)
+  return querySelectorArray('.width_full tr', doc)
     .slice(1)
-    .filter(isLogEntry);
-  const result = rows
+    .filter(isLogEntry)
     .map((tr) => [tr, tr.cells[2].innerHTML])
     .map(([tr, before]) => [
       tr,
@@ -93,19 +107,7 @@ function toApp(doc) {
       combat,
       before.split('&nbsp;&nbsp;[')[0],
     ])
-    .map(([tr, before, combat, text]) => ({
-      msg: {
-        before,
-        combat,
-        text: text.replace(/<a.+?a>/g, replaceAnchor),
-        attachments:
-          (combat && [{ data: Number(combat), type: 11 }]) ??
-          [...text.matchAll(/<a.+?a>/g)].map(toObject),
-      },
-      time: parseDateAsTimestamp(getTextTrim(tr.cells[1])) / 1000,
-      ...(combat && { type: 17 }),
-    }));
-  return result;
+    .map(buildResult);
 }
 
 async function fallback() {

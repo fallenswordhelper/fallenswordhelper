@@ -21,15 +21,12 @@ export function getCheckedSkills() {
 }
 
 export function clearCheckedSkills() {
-  querySelectorAll(blockedSkillsCheckboxes)
-    // eslint-disable-next-line no-param-reassign
-    .forEach((i) => {
-      i.checked = false;
-    });
+  querySelectorAll(blockedSkillsCheckboxes).forEach((i) => {
+    i.checked = false;
+  });
 }
 
 function updateLevelDefaults(level, [index, inputName]) {
-  // eslint-disable-next-line no-param-reassign
   level[index] = Number(querySelector(`input[name="${inputName}"]`).value);
 }
 

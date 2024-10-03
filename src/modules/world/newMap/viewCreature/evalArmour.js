@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import effectiveStat from './effectiveStat';
 import evalBuff from './evalBuff';
 

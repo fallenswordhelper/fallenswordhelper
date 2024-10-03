@@ -8,7 +8,6 @@ function gearOnly(pair) {
 }
 
 function hydrate(acc, curr) {
-  // eslint-disable-next-line prefer-destructuring
   acc[curr[0]] = curr[1];
   return acc;
 }

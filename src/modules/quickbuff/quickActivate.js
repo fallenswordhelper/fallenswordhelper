@@ -6,7 +6,6 @@ import setInnerHtml from '../dom/setInnerHtml';
 
 function processResult(trigger, json) {
   if (quickbuffSuccess(json)) {
-    // eslint-disable-next-line no-param-reassign
     trigger.className = 'fshLime';
     setInnerHtml('On', trigger);
   }

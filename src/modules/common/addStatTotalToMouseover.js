@@ -73,7 +73,6 @@ function fshDataFilter(data) {
 
 function fshPreFilter(options) {
   if (options.url.startsWith('fetchitem')) {
-    // eslint-disable-next-line no-param-reassign
     options.dataFilter = fshDataFilter;
   }
 }

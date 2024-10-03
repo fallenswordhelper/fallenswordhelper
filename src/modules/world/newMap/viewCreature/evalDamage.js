@@ -1,15 +1,7 @@
-/* eslint-disable no-param-reassign */
 import effectiveStat from './effectiveStat';
 
 const calcHp = (combat) =>
   effectiveStat(combat, combat.callback.groupHPValue, combat.player.hpValue);
-
-const calcDmg = (combat) =>
-  effectiveStat(
-    combat,
-    combat.callback.groupDamageValue,
-    combat.player.damageValue,
-  );
 
 function evalFortitude(combat) {
   const hpValue = calcHp(combat);
@@ -33,22 +25,31 @@ function evalChiStrike(combat) {
   }
 }
 
-export default function evalDamage(combat) {
-  // Damage:
-  evalFortitude(combat);
-  evalChiStrike(combat);
+const calcOverallDmg = (combat) =>
+  effectiveStat(
+    combat,
+    combat.callback.groupDamageValue,
+    combat.player.damageValue,
+  ) +
+  combat.deathDealerBonusDamage +
+  combat.counterAttackBonusDamage +
+  combat.holyFlameBonusDamage +
+  combat.chiStrikeExtraDamage;
 
-  combat.overallDamageValue =
-    calcDmg(combat) +
-    combat.deathDealerBonusDamage +
-    combat.counterAttackBonusDamage +
-    combat.holyFlameBonusDamage +
-    combat.chiStrikeExtraDamage;
-  combat.damageDone = Math.floor(
+const calcDmgDone = (combat) =>
+  Math.floor(
     combat.overallDamageValue -
       (combat.generalVariable * combat.creature.armor +
         combat.hpVariable * combat.creature.hp),
   );
+
+// Damage:
+export default function evalDamage(combat) {
+  evalFortitude(combat);
+  evalChiStrike(combat);
+
+  combat.overallDamageValue = calcOverallDmg(combat);
+  combat.damageDone = calcDmgDone(combat);
 
   if (combat.hitByHowMuch > 0) {
     let dmgLessArmor = 1;

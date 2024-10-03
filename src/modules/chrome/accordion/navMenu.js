@@ -19,7 +19,6 @@ function validateId(id) {
 
 export default function navMenu(myNav) {
   const oldSave = myNav._saveState;
-  // eslint-disable-next-line no-param-reassign
   myNav._saveState = function _saveState(id) {
     oldSave.call(myNav, validateId(id));
   };

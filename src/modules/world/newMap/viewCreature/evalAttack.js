@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { darkCurseMultiplier } from '../../../support/constants';
 import effectiveStat from './effectiveStat';
 

@@ -36,7 +36,6 @@ function isActionList(originalOptions) {
 
 function xhrPreFilter(options, originalOptions) {
   if (calf.hideSubLvlCreature && isActionList(originalOptions)) {
-    // eslint-disable-next-line no-param-reassign
     options.dataFilter = xhrDataFilter;
   }
 }

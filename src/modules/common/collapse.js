@@ -16,7 +16,6 @@ let headerIndex = 0;
 
 function showHideArt(article, rowFn, isOpen) {
   article.rows.forEach(rowFn);
-  // eslint-disable-next-line no-param-reassign
   article.open = isOpen; // skipcq: JS-0083
 }
 
@@ -100,10 +99,8 @@ function makeHeaderClickable(row) {
 function collapseDuringAnalysis(row, thisArticle) {
   if (prefValue) {
     hideElement(row);
-    // eslint-disable-next-line no-param-reassign
     thisArticle.open = false; // skipcq: JS-0083
   } else {
-    // eslint-disable-next-line no-param-reassign
     thisArticle.open = true; // skipcq: JS-0083
   }
 }
@@ -116,15 +113,12 @@ function hasExtraFn(extraFn, row) {
 
 function testRowType(row, rowType, thisArticle, param) {
   if (rowType === 0) {
-    // eslint-disable-next-line no-param-reassign
     thisArticle.header = row; // skipcq: JS-0083
     makeHeaderClickable(row);
     hasExtraFn(param.extraFn, row);
   }
   if (param.articleTest(rowType)) {
-    // eslint-disable-next-line no-param-reassign
     thisArticle.rows[rowType] = fallback(thisArticle[rowType], {}); // skipcq: JS-0083
-    // eslint-disable-next-line no-param-reassign
     thisArticle.rows[rowType].row = row; // skipcq: JS-0083
     collapseDuringAnalysis(row, thisArticle);
   }

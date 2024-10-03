@@ -4,10 +4,8 @@ import partial from './partial';
 
 function overwriteKey(obj, fn, [key, value]) {
   if (isObject(value) && value !== null) {
-    // eslint-disable-next-line no-param-reassign
     obj[key] = fn(value.constructor(), value);
   } else {
-    // eslint-disable-next-line no-param-reassign
     obj[key] = value;
   }
 }

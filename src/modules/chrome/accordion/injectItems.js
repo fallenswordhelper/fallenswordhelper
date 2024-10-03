@@ -134,12 +134,10 @@ const subItems = (li) => querySelectorArray('li', li).length * 22 || null; // sk
 
 function adjustHeight(theNav, myNav) {
   // first the closed saved variables
-  // eslint-disable-next-line no-param-reassign
   myNav.heights = querySelectorArray('#nav > li').map(subItems); // skipcq: JS-0083
   const index = Number(myNav.state);
   if (index && index > -1 && index < theNav.children.length) {
     // and now the open one
-    // eslint-disable-next-line no-param-reassign
     theNav.children[myNav.state].children[1].style.height =
       `${myNav.heights[myNav.state]}px`; // skipcq: JS-0083
   }

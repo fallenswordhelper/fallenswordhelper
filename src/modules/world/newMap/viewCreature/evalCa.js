@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 function caIsRunning(combat) {
   return (
     combat.player.counterAttackLevel > 0 && combat.numberOfHitsRequired === 1

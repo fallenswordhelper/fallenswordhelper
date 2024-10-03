@@ -12,6 +12,31 @@ import {
   calcTerrorizeEffect,
 } from './helpers';
 
+function setDerived([
+  $ldProfile,
+  $rawDefStats,
+  set,
+  nmv,
+  defWithConst,
+  hpWithFortitude,
+]) {
+  set({
+    attackWithNmv: $rawDefStats.attackValue - nmv,
+    chiStrike: $ldProfile.chiStrikeLevel,
+    cloak: $ldProfile.cloakLevel ? 'Yes' : 'No',
+    dmgWithChiStrike:
+      $rawDefStats.damageValue +
+      calcChiStrikeBonusDamage(hpWithFortitude, $ldProfile.chiStrikeLevel),
+    defWithConst,
+    hpWithFortitude,
+    nmv,
+    sanctuary: calcSanctuaryBonusArmor(
+      $rawDefStats.armorValue,
+      $ldProfile.sanctuaryLevel,
+    ),
+  });
+}
+
 const ldEffects = derived(
   [ldProfile, rawDefStats],
   ([$ldProfile, $rawDefStats], set) => {
@@ -24,29 +49,17 @@ const ldEffects = derived(
       $rawDefStats.defenseValue,
       $ldProfile.constitutionLevel,
     );
-    const fortitudeBonusHP = calcFortitudeBonusHp(
-      defWithConst,
-      $ldProfile.fortitudeLevel,
-    );
-    const hpWithFortitude = $rawDefStats.hpValue + fortitudeBonusHP;
-    const chiStrike = calcChiStrikeBonusDamage(
-      hpWithFortitude,
-      $ldProfile.chiStrikeLevel,
-    );
-    const dmgWithChiStrike = $rawDefStats.damageValue + chiStrike;
-    set({
-      attackWithNmv: $rawDefStats.attackValue - nmv,
-      chiStrike: $ldProfile.chiStrikeLevel,
-      cloak: $ldProfile.cloakLevel ? 'Yes' : 'No',
-      dmgWithChiStrike,
-      defWithConst,
-      hpWithFortitude,
+    const hpWithFortitude =
+      $rawDefStats.hpValue +
+      calcFortitudeBonusHp(defWithConst, $ldProfile.fortitudeLevel);
+    setDerived([
+      $ldProfile,
+      $rawDefStats,
+      set,
       nmv,
-      sanctuary: calcSanctuaryBonusArmor(
-        $rawDefStats.armorValue,
-        $ldProfile.sanctuaryLevel,
-      ),
-    });
+      defWithConst,
+      hpWithFortitude,
+    ]);
   },
 );
 

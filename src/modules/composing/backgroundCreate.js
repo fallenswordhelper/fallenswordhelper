@@ -17,7 +17,6 @@ function randomBackgroundImage() {
 function updateInfoDiv(infoDiv, potName) {
   setInnerHtml('', infoDiv.children[0]);
   infoDiv.children[0].classList.add('fshPot');
-  // eslint-disable-next-line no-param-reassign
   infoDiv.children[0].style.backgroundImage = randomBackgroundImage();
   setInnerHtml(
     `Creating '<span class="fshBold">${potName}</span>' Potion`,
@@ -66,7 +65,6 @@ async function createPotion(temp) {
 }
 
 export default function backgroundCreate(target, temp) {
-  // eslint-disable-next-line no-param-reassign
   temp.id = `proc-${temp.id}`;
   setInnerHtml('', target);
   target.classList.add('fshSpinner', 'fshSpinner12', 'fshComposingSpinner');
