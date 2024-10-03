@@ -48,5 +48,4 @@ function calcDefBuffed([$buffObj, $ldEffects, $rawDefStats], set) {
   });
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const defBuffed = derived([buffObj, ldEffects, rawDefStats], calcDefBuffed);
