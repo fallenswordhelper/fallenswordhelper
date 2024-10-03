@@ -48,7 +48,7 @@ async function doIntercept(e, packageId) {
   }
 }
 
-async function interceptBuy(e) {
+function interceptBuy(e) {
   sendEvent('buffmarket', 'interceptBuy');
   e.stopPropagation();
   const packageId = regExpFirstCapture(

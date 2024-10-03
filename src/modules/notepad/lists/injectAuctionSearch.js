@@ -100,15 +100,12 @@ const rawTableEnd =
 
 // Legacy
 function generateManageTable() {
-  let result =
-    ahTableStart +
-    param.headers.reduce(headersToHtml, '') +
-    '<th>Action</th></tr>' +
-    param.currentItems.reduce(itemRows, '') +
-    doInputs() +
-    rawTableStart +
-    jsonStringify(param.currentItems) +
-    rawTableEnd;
+  const result = `${ahTableStart}${param.headers.reduce(
+    headersToHtml,
+    '',
+  )}<th>Action</th></tr>${param.currentItems.reduce(itemRows, '')}${doInputs()}${
+    rawTableStart
+  }${jsonStringify(param.currentItems)}${rawTableEnd}`;
   const target = getElementById(param.id);
   if (target) {
     setInnerHtml(result, getElementById(param.id));
