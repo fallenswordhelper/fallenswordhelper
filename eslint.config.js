@@ -23,9 +23,6 @@ export default [
         gtag: 'readonly',
       },
     },
-    linterOptions: {
-      reportUnusedDisableDirectives: 'off',
-    },
   },
   pluginJs.configs.recommended,
   eslintConfigPrettier,

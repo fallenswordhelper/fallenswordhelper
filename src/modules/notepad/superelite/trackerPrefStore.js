@@ -36,9 +36,7 @@ async function backgroundPoll() {
   // skipcq: JS-0092
   while (trackerPref) {
     bgRunning = true;
-    /* eslint-disable-next-line no-await-in-loop */
     await delay(getDelay(fshSeLog) * 1000);
-    /* eslint-disable-next-line no-await-in-loop */
     if (trackerPref) await updateSeLog();
     bgRunning = false;
   }

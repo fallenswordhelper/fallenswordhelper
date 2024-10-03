@@ -6,7 +6,6 @@ let dblDiv = 0;
 let dblSpan = 0;
 
 function initDblDiv(containerDiv) {
-  // eslint-disable-next-line prefer-destructuring
   dblDiv = containerDiv.children[4];
   dblSpan = initBuffDiv(dblDiv, 'fshRed', 'Doubler ', ' active');
 }

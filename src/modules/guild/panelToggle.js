@@ -43,7 +43,6 @@ function toggleVisibilty(evt) {
 function thisToggle(inject, panel, linkto) {
   const thisButton = makeButton(linkto);
   insertElement(inject, wrapper(thisButton));
-  // eslint-disable-next-line no-param-reassign
   panel.id = linkto;
   if (getValue(linkto)) {
     hideElement(panel);

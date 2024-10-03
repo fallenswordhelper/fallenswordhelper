@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import partial from '../../../common/partial';
 
 function evalMiss(combat) {

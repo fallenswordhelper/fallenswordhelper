@@ -29,7 +29,6 @@ async function refillTokens() {
 }
 
 async function limiter() {
-  // eslint-disable-next-line no-await-in-loop
   while (tokens < 1) await refillTokens();
   tokens -= 1;
 }
@@ -39,9 +38,7 @@ function getAjax(options) {
   const opt = setOpts(options);
   opt.beforeSend = beforeSend;
   return $.ajax(opt).fail((jqXHR, textStatus, errorThrown) => {
-    // eslint-disable-next-line no-param-reassign
     jqXHR.textStatus = textStatus;
-    // eslint-disable-next-line no-param-reassign
     jqXHR.errorThrown = errorThrown;
   });
 }

@@ -14,7 +14,6 @@ import getValue from '../system/getValue';
 
 function removeCrlf(fshTxt) {
   sendEvent('guildChat', 'removeCrlf');
-  // eslint-disable-next-line no-param-reassign
   fshTxt.value = fshTxt.value
     .replace(/\r\n|\n|\r/g, ' ')
     .replace(/'/g, '’')
@@ -29,7 +28,6 @@ const formAttr = (el) => {
 };
 
 function setDoChat(theForm) {
-  // eslint-disable-next-line no-param-reassign
   theForm.id = 'dochat';
   arrayFrom(theForm.elements).forEach(formAttr);
 }

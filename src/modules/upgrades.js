@@ -82,10 +82,8 @@ function doStamCount(type, upgrade, quantity, cell) {
   let extraStam = Math.floor(currentFSP / cost) * amount;
   if (quantity * cost <= currentFSP) {
     extraStam = quantity * amount;
-    // eslint-disable-next-line no-param-reassign
     cell.className = 'fshBlue';
   } else {
-    // eslint-disable-next-line no-param-reassign
     cell.className = 'fshRed';
   }
   setText(`(+${extraStam} stamina)`, cell);

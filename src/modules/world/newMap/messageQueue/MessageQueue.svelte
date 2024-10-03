@@ -15,7 +15,7 @@
   const getId = () => idIterator.next().value;
 
   function repos() {
-    mc._reposition(); // eslint-disable-line no-underscore-dangle
+    mc._reposition();
   }
 
   async function displayMessage(msg, type, time = 3000) {
@@ -40,7 +40,7 @@
     repos();
   }
 
-  mc._displayMessage = displayMessage; // eslint-disable-line no-underscore-dangle
+  mc._displayMessage = displayMessage;
 </script>
 
 {#each getMsgs(messages) as { msg, type, count } (msg)}

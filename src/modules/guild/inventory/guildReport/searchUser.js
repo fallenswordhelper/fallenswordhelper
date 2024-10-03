@@ -13,7 +13,6 @@ function hideOther(el) {
     foundUser = containsText(findUser, el.children[0].children[0]);
   }
   if (!foundUser) {
-    // eslint-disable-next-line no-param-reassign
     el.className = 'fshHide';
   }
 }

@@ -91,7 +91,6 @@ async function getCleanCache(rows) {
 async function updateRows(api) {
   const rows = api.rows(equipable);
   const cleanCache = await getCleanCache(rows);
-  // eslint-disable-next-line array-callback-return
   rows.every(updateAttr(cleanCache)); // skipcq: JS-D008
 }
 

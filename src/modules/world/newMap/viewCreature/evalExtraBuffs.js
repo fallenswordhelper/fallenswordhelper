@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 function evalSes(combat) {
   if (combat.player.superEliteSlayerLevel > 0) {
     combat.extraNotes += `SES Stat Reduction Multiplier = ${

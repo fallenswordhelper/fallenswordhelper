@@ -38,7 +38,6 @@ function sink(j) {
 function bubble(j) {
   let i = j;
   while (i > 1) {
-    // eslint-disable-next-line no-bitwise
     const parentIndex = i >> 1;
     if (!cmp(i, parentIndex)) {
       break;

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import './viewCreature.css';
 import daGroupStats from '../../../_dataAccess/daGroupStats';
 import daViewGroups from '../../../_dataAccess/daViewGroups';

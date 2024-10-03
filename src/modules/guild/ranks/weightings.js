@@ -29,7 +29,7 @@ const privLookup = [
 const sumWeights = (a, [, weight]) => a + weight - 1;
 const getWeighted = (perms) =>
   privLookup.filter(([flag]) => bitwiseAnd(perms, flag)).reduce(sumWeights, 0);
-const unsignedShiftZero = (signed) => signed >>> 0; // eslint-disable-line no-bitwise
+const unsignedShiftZero = (signed) => signed >>> 0;
 const toBinary = (number) => unsignedShiftZero(number).toString(2);
 const addBits = (number) =>
   toBinary(number).split('').map(Number).reduce(sum, 0);

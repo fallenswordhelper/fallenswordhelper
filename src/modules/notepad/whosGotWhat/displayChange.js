@@ -17,7 +17,6 @@ function rowHtml(obj) {
 
 function rowFactory(aRow) {
   if (!aRow.dom) {
-    // eslint-disable-next-line no-param-reassign
     aRow.dom = createTr({ innerHTML: rowHtml(aRow) });
   }
   return aRow.dom;
