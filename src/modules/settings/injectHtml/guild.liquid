@@ -1,107 +1,107 @@
 <tr>
   <td class="header" colspan="2">Guild &gt; Manage preferences</td>
 </tr>
-{% render 'settingsRow'
- field: 'showGuildRelationship'
- label: 'Show Guild Relationship'
- tooltipText: "This shows the guild relationship in players' profiles."
- unstable: true %}
-{% render 'settingsRow'
- field: 'guildSelfMessage'
- label: 'Own Guild Message'
- type: 'text' %}
+{% render 'settingsRow',
+  field: 'showGuildRelationship',
+  label: 'Show Guild Relationship',
+  tooltipText: "This shows the guild relationship in players' profiles.",
+  unstable: true
+%}
+{% render 'settingsRow',
+  field: 'guildSelfMessage',
+  label: 'Own Guild Message',
+  type: 'text'
+%}
 <tr>
   <td></td>
-  <td>
-    Enter guild names, separated by commas
-  </td>
+  <td>Enter guild names, separated by commas</td>
 </tr>
 <tr>
-  {% render 'settingsRowLabel'
-   field: 'guildFrnd'
-   label: 'Friendly Guilds' %}
+  {% render 'settingsRowLabel', field: 'guildFrnd', label: 'Friendly Guilds' %}
   <td>
-    {% render 'settingsControl'
-     field: 'guildFrnd'
-     type: 'text' %}
+    {% render 'settingsControl', field: 'guildFrnd', type: 'text' %}
     <button class="fsh-toggle" type="button">»</button>
   </td>
 </tr>
-{% render 'settingsRow'
- className: 'fshHide'
- field: 'guildFrndMessage'
- label: 'Friendly Guild Message'
- type: 'text' %}
+{% render 'settingsRow',
+  className: 'fshHide',
+  field: 'guildFrndMessage',
+  label: 'Friendly Guild Message',
+  type: 'text'
+%}
 <tr>
-  {% render 'settingsRowLabel'
-   field: 'guildPast'
-   label: 'Old Guilds' %}
+  {% render 'settingsRowLabel', field: 'guildPast', label: 'Old Guilds' %}
   <td>
-    {% render 'settingsControl'
-     field: 'guildPast'
-     type: 'text' %}
+    {% render 'settingsControl', field: 'guildPast', type: 'text' %}
     <button class="fsh-toggle" type="button">»</button>
   </td>
 </tr>
-{% render 'settingsRow'
- className: 'fshHide'
- field: 'guildPastMessage'
- label: 'Old Guild Message'
- type: 'text' %}
+{% render 'settingsRow',
+  className: 'fshHide',
+  field: 'guildPastMessage',
+  label: 'Old Guild Message',
+  type: 'text'
+%}
 <tr>
-  {% render 'settingsRowLabel'
-   field: 'guildEnmy'
-   label: 'Enemy Guilds' %}
+  {% render 'settingsRowLabel', field: 'guildEnmy', label: 'Enemy Guilds' %}
   <td>
-    {% render 'settingsControl'
-     field: 'guildEnmy'
-     type: 'text' %}
+    {% render 'settingsControl', field: 'guildEnmy', type: 'text' %}
     <button class="fsh-toggle" type="button">»</button>
   </td>
 </tr>
-{% render 'settingsRow'
- className: 'fshHide'
- field: 'guildEnmyMessage'
- label: 'Enemy Guild Message'
- type: 'text' %}
+{% render 'settingsRow',
+  className: 'fshHide',
+  field: 'guildEnmyMessage',
+  label: 'Enemy Guild Message',
+  type: 'text'
+%}
 <tr>
-  {% render 'settingsRowLabel'
-   label: 'Highlight Valid PvP Targets'
-   tooltipText: 'Highlights targets in OTHER guilds that are within your level range to attack
-   for PvP or GvG.' %}
+  {% render 'settingsRowLabel',
+    label: 'Highlight Valid PvP Targets',
+    tooltipText: 'Highlights targets in OTHER guilds that are within your level
+                  range to attack for PvP or GvG.'
+  %}
   <td>
-    {% render 'settingsLabelledControl'
-     field: 'highlightPlayersNearMyLvl'
-     textAfter: 'PvP' %}
-    {% render 'settingsLabelledControl'
-     field: 'highlightGvGPlayersNearMyLvl'
-     textAfter: 'GvG' %}
+    {% render 'settingsLabelledControl',
+      field: 'highlightPlayersNearMyLvl',
+      textAfter: 'PvP'
+    %}
+    {% render 'settingsLabelledControl',
+      field: 'highlightGvGPlayersNearMyLvl',
+      textAfter: 'GvG'
+    %}
   </td>
 </tr>
-{% render 'settingsRow'
- field: 'showAdmin'
- label: 'Show rank controls'
- tooltipText: 'Show ranking controls for guild management in member profile page -
- this works for members with ranking rights only' %}
-{% render 'settingsRow'
- field: 'ajaxifyRankControls'
- label: 'AJAXify rank controls'
- tooltipText: 'Enables members with ranking rights to change rank positions without a
- screen refresh.' %}
-{% render 'settingsRow'
- field: 'detailedConflictInfo'
- label: 'Show Conflict Details'
- network: true
- tooltipText: "Inserts detailed conflict information onto your guild's manage page.
- Currently displays the target guild as well as the current score."
- unstable: true %}
-{% render 'settingsRow'
- field: 'enableHistoryCompressor'
- label: 'Guild History Compressor'
- tooltipText: 'Compresses long guild histories and provides a link to expand the compressed
- section.'
- unstable: true %}
-{% render 'settingsRow'
- field: 'showBuffLinks'
- label: 'Show Buff Links'
- tooltipText: 'Shows buffs links after guild members names' %}
+{% render 'settingsRow',
+  field: 'showAdmin',
+  label: 'Show rank controls',
+  tooltipText: 'Show ranking controls for guild management in member profile
+                page - this works for members with ranking rights only'
+%}
+{% render 'settingsRow',
+  field: 'ajaxifyRankControls',
+  label: 'AJAXify rank controls',
+  tooltipText: 'Enables members with ranking rights to change rank positions
+                without a screen refresh.'
+%}
+{% render 'settingsRow',
+  field: 'detailedConflictInfo',
+  label: 'Show Conflict Details',
+  network: true,
+  tooltipText: "Inserts detailed conflict information onto your guild's manage
+                page. Currently displays the target guild as well as the current
+                score.",
+  unstable: true
+%}
+{% render 'settingsRow',
+  field: 'enableHistoryCompressor',
+  label: 'Guild History Compressor',
+  tooltipText: 'Compresses long guild histories and provides a link to expand
+                the compressed section.',
+  unstable: true
+%}
+{% render 'settingsRow',
+  field: 'showBuffLinks',
+  label: 'Show Buff Links',
+  tooltipText: 'Shows buffs links after guild members names'
+%}

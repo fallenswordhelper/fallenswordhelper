@@ -9,8 +9,11 @@ const config = {
   tabWidth: 2,
   semi: true,
   singleQuote: true,
-  plugins: ['prettier-plugin-svelte'],
-  overrides: [{ files: '*.svelte', options: { parser: 'svelte' } }],
+  plugins: ['prettier-plugin-svelte', '@shopify/prettier-plugin-liquid'],
+  overrides: [
+    { files: '*.svelte', options: { parser: 'svelte' } },
+    { files: '*.liquid', options: { printWidth: 80, singleQuote: false } },
+  ],
 };
 
 export default config;
