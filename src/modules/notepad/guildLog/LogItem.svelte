@@ -9,12 +9,15 @@
   import getCombat from '../../logs/playerLogWidgets/getCombat';
   import {
     cmdUrl,
+    guildSubcmdUrl,
     guildViewUrl,
     playerIdUrl,
     secureUrl,
     tradeUrl,
   } from '../../support/constants';
   import { cdn } from '../../system/system';
+  import view from '../../app/guild/recruit/view';
+  import isArray from '../../common/isArray';
 
   export let groupCombatItems = null;
   export let hideNonPlayerGuildLogMessages = null;
@@ -32,6 +35,19 @@
       players?.length &&
       !players.filter(({ data: { id } }) => id === playerId()).length
     );
+  }
+
+  async function recruiting(data, subcmd) {
+    logEvent(subcmd);
+    const json = await view();
+    if (json?.s && isArray(json?.r)) {
+      const joinReq = json.r.find(({ player: { id } }) => id === data.id);
+      if (joinReq?.id) {
+        navigateTo(
+          `${guildSubcmdUrl}recruit&subcmd2=${subcmd}&id=${joinReq.id}`,
+        );
+      }
+    }
   }
 
   function buff(data) {
@@ -102,6 +118,19 @@
     {/each}
     {#if logEntry.msg?.attachments?.length}
       {#each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data }}
+        {#if logEntry.type === 21}
+          <span class="action-buttons">
+            [
+            <LinkButton on:click={() => recruiting(data, 'acceptjoin')}
+              >Accept</LinkButton
+            >
+            |
+            <LinkButton on:click={() => recruiting(data, 'denyjoin')}
+              >Deny</LinkButton
+            >
+            ]
+          </span>
+        {/if}
         <span class="action-buttons">
           [
           <LinkButton on:click={() => reply(data)}>Reply</LinkButton>
