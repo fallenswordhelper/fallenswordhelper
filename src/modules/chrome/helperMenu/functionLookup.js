@@ -23,6 +23,7 @@ import recipeMgr from '../pageSwitcher/loader/recipeMgr';
 import reliclist from '../pageSwitcher/loader/reliclist';
 import setmgr from '../pageSwitcher/loader/setmgr';
 import superelite from '../pageSwitcher/loader/superelite';
+import whosGotWhat from '../pageSwitcher/loader/whosGotWhat';
 import gsDl from './gsDl';
 
 function convertToModal(fn) {
@@ -130,7 +131,7 @@ export default [
       },
     ],
   },
-  ...(getValue('betaOptIn')
+  ...(getValue('betaOptIn') && currentGuildId()
     ? [
         {
           section: 'Beta Features',
@@ -143,6 +144,11 @@ export default [
             {
               label: 'GS Export',
               fn: gsDl,
+              beta: true,
+            },
+            {
+              label: "Who's Got What",
+              fn: whosGotWhat,
               beta: true,
             },
           ],
