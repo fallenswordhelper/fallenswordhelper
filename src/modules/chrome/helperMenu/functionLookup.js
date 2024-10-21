@@ -1,4 +1,6 @@
+import currentGuildId from '../../common/currentGuildId';
 import { notepadBlankUrl } from '../../support/constants';
+import getValue from '../../system/getValue';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
@@ -78,31 +80,35 @@ export default [
       },
     ],
   },
-  {
-    section: 'Guild',
-    menu: [
-      {
-        label: 'Guild Inventory',
-        href: `${notepadBlankUrl}guildinvmgr`,
-      },
-      {
-        label: 'New Guild Log',
-        fn: guildLog,
-      },
-      {
-        label: 'Merc Hunter',
-        fn: mercs,
-      },
-      {
-        label: 'Pot Report',
-        fn: potReport,
-      },
-      {
-        label: 'Guild Tracker',
-        fn: guildTracker,
-      },
-    ],
-  },
+  ...(currentGuildId()
+    ? [
+        {
+          section: 'Guild',
+          menu: [
+            {
+              label: 'Guild Inventory',
+              href: `${notepadBlankUrl}guildinvmgr`,
+            },
+            {
+              label: 'New Guild Log',
+              fn: guildLog,
+            },
+            {
+              label: 'Merc Hunter',
+              fn: mercs,
+            },
+            {
+              label: 'Pot Report',
+              fn: potReport,
+            },
+            {
+              label: 'Guild Tracker',
+              fn: guildTracker,
+            },
+          ],
+        },
+      ]
+    : []),
   {
     section: 'Extra',
     menu: [
@@ -124,39 +130,47 @@ export default [
       },
     ],
   },
-  {
-    section: 'Beta Features',
-    menu: [
-      {
-        label: 'Relic List',
-        fn: reliclist,
-        beta: true,
-      },
-      {
-        label: 'GS Export',
-        fn: gsDl,
-        beta: true,
-      },
-    ],
-  },
-  {
-    section: 'Dev Links',
-    menu: [
-      {
-        label: 'Combat Set Manager',
-        fn: setmgr,
-        beta: true,
-      },
-      {
-        label: 'Quest Book',
-        fn: questbook,
-      },
-      {
-        label: 'New Quick Wear',
-        fn: quickwear2,
-      },
-    ],
-  },
+  ...(getValue('betaOptIn')
+    ? [
+        {
+          section: 'Beta Features',
+          menu: [
+            {
+              label: 'Relic List',
+              fn: reliclist,
+              beta: true,
+            },
+            {
+              label: 'GS Export',
+              fn: gsDl,
+              beta: true,
+            },
+          ],
+        },
+      ]
+    : []),
+  ...(defineUserIsDev
+    ? [
+        {
+          section: 'Dev Links',
+          menu: [
+            {
+              label: 'Combat Set Manager',
+              fn: setmgr,
+              beta: true,
+            },
+            {
+              label: 'Quest Book',
+              fn: questbook,
+            },
+            {
+              label: 'New Quick Wear',
+              fn: quickwear2,
+            },
+          ],
+        },
+      ]
+    : []),
   {
     section: 'FSH developer quick links',
     menu: [
