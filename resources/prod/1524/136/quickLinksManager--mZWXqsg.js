@@ -1,0 +1,29 @@
+import{i as t}from"./instantiate-upFtXRx7.js"
+import{S as e,L as s,M as i,N as n,O as l,P as a,a3 as c,Q as d,cg as o,T as r,U as u,X as v,_ as k,a0 as h,b6 as p,a1 as f,a2 as b,a4 as x,s as m,cl as g,a7 as w,W as L,ai as y,aU as M,ae as $,bj as j,bk as Q,be as q,bh as R,bl as C}from"./calfSystem-CUgWHLtG.js"
+import{M as S}from"./ModalTabbed-R2een0fx.js"
+import{i as A}from"./isArray-eVldfhw1.js"
+import"./ModalTitled-DwG8wP1C.js"
+import"./Modal-BIzCdrcz.js"
+function T(t,e,s){const i=t.slice()
+return i[18]=e[s].name,i[19]=e[s].newWindow,i[20]=e[s].url,i[21]=e,i[22]=s,i}function W(t){let e,s,i,n,o,k,p,b,m,g,w,L,y,M,$,j=t[18]+"",Q=t[20]+""
+function q(){t[8].call(b,t[21],t[22])}function R(){return t[9](t[22])}return{c(){e=l("div"),s=c(j),i=a(),n=l("div"),o=c(Q),k=a(),p=l("div"),b=l("input"),m=a(),g=l("div"),w=c("[\n        "),L=l("button"),L.textContent="Del",y=c("\n        ]\n      "),d(e,"class","svelte-dkxhir"),d(n,"class","svelte-dkxhir"),b.disabled=!0,d(b,"type","checkbox"),d(p,"class","centered svelte-dkxhir"),d(L,"type","button"),d(L,"class","svelte-dkxhir"),d(g,"class","buttons centered svelte-dkxhir")},m(l,a){r(l,e,a),u(e,s),r(l,i,a),r(l,n,a),u(n,o),r(l,k,a),r(l,p,a),u(p,b),b.checked=t[19],r(l,m,a),r(l,g,a),u(g,w),u(g,L),u(g,y),M||($=[v(b,"change",q),v(L,"click",R)],M=!0)},p(e,i){t=e,32&i&&j!==(j=t[18]+"")&&x(s,j),32&i&&Q!==(Q=t[20]+"")&&x(o,Q),32&i&&(b.checked=t[19])},d(t){t&&(h(e),h(i),h(n),h(k),h(p),h(m),h(g)),M=!1,f($)}}}function E(t){let e,s,i,b,x,m,g,w,L,y,M,$,j,Q,q,R,C,S,A,E,N,U=n(t[5]),D=[]
+for(let e=0;e<U.length;e+=1)D[e]=W(T(t,U,e))
+return{c(){e=l("div"),s=l("div"),s.innerHTML='<div class="svelte-dkxhir">Name</div> <div class="svelte-dkxhir">URL</div> <div class="centered svelte-dkxhir">New\n      <div class="wrapper svelte-dkxhir">[\n        <div class="tooltip svelte-dkxhir"><span class="tooltip-bottom-right" data-tooltip="Open page in a new window/tab">?</span></div>\n        ]</div></div> <div class="centered svelte-dkxhir">Action</div>',i=a(),b=l("div")
+for(let t=0;t<D.length;t+=1)D[t].c()
+x=a(),m=l("div"),g=l("div"),w=l("input"),L=a(),y=l("div"),M=l("input"),$=a(),j=l("div"),Q=l("input"),q=a(),R=l("div"),C=c("[\n      "),S=l("button"),S.textContent="Add",A=c("\n      ]"),d(s,"class","grid headings svelte-dkxhir"),d(b,"class","grid items svelte-dkxhir"),d(w,"placeholder","Log"),w.required=!0,d(w,"type","text"),d(w,"class","svelte-dkxhir"),o(w,"invalid",t[1]),d(M,"placeholder","?cmd=log"),M.required=!0,d(M,"type","text"),d(M,"class","svelte-dkxhir"),o(M,"invalid",t[3]),d(Q,"type","checkbox"),d(j,"class","centered svelte-dkxhir"),d(S,"type","button"),d(S,"class","svelte-dkxhir"),d(R,"class","buttons centered svelte-dkxhir"),d(m,"class","grid add svelte-dkxhir"),d(e,"class","container svelte-dkxhir")},m(n,l){r(n,e,l),u(e,s),u(e,i),u(e,b)
+for(let t=0;t<D.length;t+=1)D[t]&&D[t].m(b,null)
+u(e,x),u(e,m),u(m,g),u(g,w),t[10](w),u(m,L),u(m,y),u(y,M),t[13](M),u(m,$),u(m,j),u(j,Q),t[16](Q),u(m,q),u(m,R),u(R,C),u(R,S),u(R,A),E||(N=[v(w,"blur",t[11]),v(w,"focus",t[12]),v(M,"blur",t[14]),v(M,"focus",t[15]),v(S,"click",t[7])],E=!0)},p(t,[e]){if(96&e){let s
+for(U=n(t[5]),s=0;s<U.length;s+=1){const i=T(t,U,s)
+D[s]?D[s].p(i,e):(D[s]=W(i),D[s].c(),D[s].m(b,null))}for(;s<D.length;s+=1)D[s].d(1)
+D.length=U.length}2&e&&o(w,"invalid",t[1]),8&e&&o(M,"invalid",t[3])},i:k,o:k,d(s){s&&h(e),p(D,s),t[10](null),t[13](null),t[16](null),E=!1,f(N)}}}function N(t,e,s){let i=0,n=0,l=0,a=0,c=0,d=b("quickLinks")||[]
+function o(){w("quickLinks",d)}function r(t){m("Quick Links Manager","Delete Item"),s(5,d=d.toSpliced(t,1)),o()}return[i,n,l,a,c,d,r,function(){m("Quick Links Manager","Add Item"),n||a||(s(5,d=[...d,{name:i.value,url:l.value,newWindow:c.checked}]),s(0,i.value="",i),s(2,l.value="",l),s(4,c.checked=0,c),o())},function(t,e){t[e].newWindow=this.checked,s(5,d)},t=>r(t),function(t){g[t?"unshift":"push"]((()=>{i=t,s(0,i)}))},()=>{s(1,n=i.validity.valueMissing)},()=>{s(1,n=0)},function(t){g[t?"unshift":"push"]((()=>{l=t,s(2,l)}))},()=>{s(3,a=l.validity.valueMissing)},()=>{s(3,a=0)},function(t){g[t?"unshift":"push"]((()=>{c=t,s(4,c)}))}]}class U extends e{constructor(t){super(),s(this,t,N,E,i,{})}}function D(t){let e,s,i,n,c,p,b,x,m,g
+return{c(){e=l("div"),s=l("div"),i=l("textarea"),n=a(),c=l("div"),p=l("button"),p.textContent="Save",b=a(),x=l("button"),x.textContent="Reset",d(i,"class","svelte-atd1b8"),o(i,"invalid",t[1]),d(s,"class","textContainer svelte-atd1b8"),d(p,"type","button"),d(x,"type","button"),d(c,"class","bottom svelte-atd1b8"),d(e,"class","container svelte-atd1b8")},m(l,a){r(l,e,a),u(e,s),u(s,i),L(i,t[0]),u(e,n),u(e,c),u(c,p),u(c,b),u(c,x),m||(g=[v(i,"input",t[5]),v(i,"blur",t[6]),v(i,"focus",t[7]),v(p,"click",t[3]),v(x,"click",t[4])],m=!0)},p(t,[e]){1&e&&L(i,t[0]),2&e&&o(i,"invalid",t[1])},i:k,o:k,d(t){t&&h(e),m=!1,f(g)}}}function I(t,e,s){let i=y("quickLinks"),n=0
+const l=()=>A(M(i)),a=()=>!l(),c=()=>$("quickLinks",i.trim())
+return[i,n,a,function(){m("Quick Links Raw Editor","Save"),l()?c():s(1,n=1)},function(){m("Quick Links Raw Editor","Reset"),s(0,i="[]"),s(1,n=0),c()},function(){i=this.value,s(0,i)},()=>{s(1,n=a())},()=>{s(1,n=0)}]}class O extends e{constructor(t){super(),s(this,t,I,D,i,{})}}function G(t){let e,s
+return e=new S({props:{tabs:t[2],visible:t[0]}}),e.$on("close",t[1]),{c(){j(e.$$.fragment)},m(t,i){Q(e,t,i),s=!0},p(t,[s]){const i={}
+1&s&&(i.visible=t[0]),e.$set(i)},i(t){s||(q(e.$$.fragment,t),s=!0)},o(t){R(e.$$.fragment,t),s=!1},d(t){C(e,t)}}}function H(t,e,s){let{visible:i=!0}=e
+const n=[{component:U,label:"Quick Links"},{component:O,label:"Raw Editor"}]
+return t.$$set=t=>{"visible"in t&&s(0,i=t.visible)},[i,function(){m("Quick Links Manager","close"),s(0,i=!1)},n]}class P extends e{constructor(t){super(),s(this,t,H,G,i,{visible:0})}}const X={visible:!0}
+let _=0
+function z(){_=t(X,_,P)}export{z as default}
+//# sourceMappingURL=quickLinksManager--mZWXqsg.js.map
