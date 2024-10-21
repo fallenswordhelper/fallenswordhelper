@@ -2,15 +2,11 @@
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import draggable from '../../common/draggable';
-  import getElementById from '../../common/getElementById';
-  import jQueryPresent from '../../common/jQueryPresent';
   import getValue from '../../system/getValue';
   import MenuItems from './MenuItems.svelte';
 
   const isFixed = getValue('keepHelperMenuOnScreen');
   const isDraggable = getValue('draggableHelperMenu');
-  const isNewWorld =
-    jQueryPresent() && getElementById('worldPage') && window.GameData;
   let thisHelperMenu = 0;
 
   onMount(() => {
@@ -36,11 +32,7 @@
   >
     Helper Menu
   </button>
-  {#if showMenu && isNewWorld}
-    <div class="modal">
-      <MenuItems on:toggle={doToggle} />
-    </div>
-  {:else if showMenu}
+  {#if showMenu}
     <div class="modal" transition:fade={{ duration: 100 }}>
       <MenuItems on:toggle={doToggle} />
     </div>
