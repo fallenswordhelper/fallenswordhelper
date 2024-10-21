@@ -290,7 +290,7 @@
                 max="999"
                 min="0"
                 on:input={() => sendPrEvent('minpoint')}
-                on:input={storeOptions}
+                on:input={doMapping}
                 type="number"
               />
               Max:
@@ -299,7 +299,7 @@
                 max="999"
                 min="0"
                 on:input={() => sendPrEvent('maxpoint')}
-                on:input={storeOptions}
+                on:input={doMapping}
                 type="number"
               />
             </div>
