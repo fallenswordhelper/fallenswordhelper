@@ -20,12 +20,6 @@ const inventory = () => {
 const load = () => {
   runDefault(import('../../settings/load'));
 };
-const whosGotWhat = () => {
-  if (!defineUserIsDev) {
-    return;
-  } // whosGotWhat
-  runDefault(import('../../notepad/whosGotWhat/whosGotWhat'));
-};
 
 const notepad = {
   showlogs: { '-': combatLog },
@@ -40,12 +34,11 @@ const notepad = {
   quickwear: { '-': quickwear },
   fsboxcontent: { '-': fsboxlog },
   bufflogcontent: { '-': buffLog },
-  newguildlog: { '-': guildLog }, // active
+  newguildlog: { '-': guildLog }, // deprecated
   findbuffs: { '-': injectFindBuffs },
   findother: { '-': injectFindOther },
   savesettings: { '-': load }, // active
   reliclist: { '-': reliclist },
-  whosgotwhat: { '-': whosGotWhat },
 };
 
 export default notepad;
