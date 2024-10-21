@@ -22,8 +22,7 @@
   function message(playerName) {
     dispatch('toggle');
     sendHelperEvent('sendMsg');
-    // eslint-disable-next-line no-undef
-    openQuickMsgDialog(playerName);
+    window.openQuickMsgDialog(playerName);
   }
 </script>
 
