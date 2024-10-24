@@ -12,7 +12,7 @@ function haveTargets(retries) {
     setTimeout(haveTargets, 100, retries - 1);
     return;
   }
-  doBuffLevels(firstPlayer);
+  if (firstPlayer) doBuffLevels(firstPlayer);
 }
 
 export default function firstPlayerStats() {
