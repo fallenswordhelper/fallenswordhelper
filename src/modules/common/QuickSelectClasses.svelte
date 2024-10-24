@@ -41,7 +41,7 @@
       (selectId) => selectId === -99,
       (_selectId, [, itm]) => itm?.craft === 'Perfect',
     ],
-    [() => true, (selectId, [, itm]) => selectId === itm.item_id],
+    [() => true, (selectId, [, itm]) => selectId === itm?.item_id],
   ];
 
   function deselectAll() {
