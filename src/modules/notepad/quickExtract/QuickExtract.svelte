@@ -104,7 +104,7 @@
     if (canProceed) {
       toExtract[index].delPending = true;
       await all(toExtract[index].extractIds.map(ajaxExtract));
-      toExtract[index].count = 0;
+      if (toExtract[index]?.count) toExtract[index].count = 0;
     }
   }
 </script>
