@@ -277,7 +277,7 @@
               <div
                 class="image"
                 style:background-image="url('{cdn}recipes/{recipe}')"
-              />
+              ></div>
             </a>
           </div>
           <div class="item-container">
@@ -292,7 +292,7 @@
                   data-tipped="fetchitem.php?item_id={itemId}&t=2&vcode={itemVcode}"
                   class="small-image tip-dynamic"
                   style:background-image="url('{cdn}items/{itemId}.gif')"
-                />
+                ></div>
                 <div>{invTally[itemId] ?? 0}/{itemReq}</div>
               </div>
             {/each}
@@ -304,7 +304,7 @@
                   data-tipped="fetchitem.php?item_id={itemId}&t=2&vcode={itemVcode}"
                   class="small-image tip-dynamic"
                   style:background-image="url('{cdn}items/{itemId}.gif')"
-                />
+                ></div>
                 <div>{compTally[itemId] ?? 0}/{itemReq}</div>
               </div>
             {/each}
@@ -314,7 +314,7 @@
               data-tipped="fetchitem.php?item_id={targetId}&t=2&vcode={vcode}"
               class="image tip-dynamic"
               style:background-image="url('{cdn}items/{targetId}.gif')"
-            />
+            ></div>
           </div>
         {/each}
       </div>

@@ -108,7 +108,7 @@
 
 <table>
   <tbody>
-    <tr><td class="header" colspan="3" /></tr>
+    <tr><td class="header" colspan="3"></td></tr>
     <tr>
       <td colspan="3">
         <label>
@@ -137,7 +137,7 @@
         </label>
       </td>
     </tr>
-    <tr><td class="header" colspan="3" /></tr>
+    <tr><td class="header" colspan="3"></td></tr>
     <tr>
       <td colspan="3">
         {#await buildTitanList() then}
@@ -164,7 +164,7 @@
         {/await}
       </td>
     </tr>
-    <tr><td class="header" colspan="3" /></tr>
+    <tr><td class="header" colspan="3"></td></tr>
   </tbody>
 </table>
 

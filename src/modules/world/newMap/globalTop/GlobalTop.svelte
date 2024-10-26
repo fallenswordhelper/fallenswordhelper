@@ -11,29 +11,31 @@
 {:then { r: list }}
   {#if isArray(list)}
     <table id="world-event-contrib-table">
-      <tr>
-        <td class="header"></td>
-        <td class="header"></td>
-        <td class="header">Username</td>
-        <td class="header">Kills</td>
-      </tr>
-      {#each list as { player, value }, i}
+      <tbody>
         <tr>
-          <td>{i + 1}</td>
-          <td>
-            {#if player.guild_id}
-              <a href="{guildViewUrl}{player.guild_id}">
-                <img
-                  src="{cdn}guilds/{player.guild_id}_mini.png"
-                  alt="guild logo"
-                />
-              </a>
-            {/if}
-          </td>
-          <td><a href="{showPlayerUrl}{player.name}">{player.name}</a></td>
-          <td>{value}</td>
+          <td class="header"></td>
+          <td class="header"></td>
+          <td class="header">Username</td>
+          <td class="header">Kills</td>
         </tr>
-      {/each}
+        {#each list as { player, value }, i}
+          <tr>
+            <td>{i + 1}</td>
+            <td>
+              {#if player.guild_id}
+                <a href="{guildViewUrl}{player.guild_id}">
+                  <img
+                    src="{cdn}guilds/{player.guild_id}_mini.png"
+                    alt="guild logo"
+                  />
+                </a>
+              {/if}
+            </td>
+            <td><a href="{showPlayerUrl}{player.name}">{player.name}</a></td>
+            <td>{value}</td>
+          </tr>
+        {/each}
+      </tbody>
     </table>
   {:else}
     Server Error

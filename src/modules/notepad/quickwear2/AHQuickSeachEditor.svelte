@@ -37,7 +37,7 @@
       on:focus={() => {
         badJson = 0;
       }}
-    />
+    ></textarea>
   </div>
   <div class="bottom">
     <button on:click={save} type="button">Save</button>

@@ -183,7 +183,11 @@
             </tr>
           {/each}
         {:catch error}
-          <p style="color: red">{error.message}</p>
+          <tr>
+            <td colspan="3">
+              <p style="color: red">{error.message}</p>
+            </td>
+          </tr>
         {/await}
       </tbody>
     </table>

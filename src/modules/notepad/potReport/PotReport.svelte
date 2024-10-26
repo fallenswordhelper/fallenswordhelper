@@ -141,8 +141,8 @@
 
 <ModalTitled
   {visible}
-  on:close={() => sendPrEvent('close')}
   on:close={() => {
+    sendPrEvent('close');
     visible = false;
   }}
 >
@@ -155,9 +155,11 @@
         <label>
           <input
             bind:checked={options.backpack}
-            on:change={() => sendPrEvent('backpack')}
-            on:change={storeOptions}
-            on:change={doMapping}
+            on:change={() => {
+              sendPrEvent('backpack');
+              storeOptions();
+              doMapping();
+            }}
             type="checkbox"
           />
           Member Backpacks
@@ -165,9 +167,11 @@
         <label>
           <input
             bind:checked={options.guildstore}
-            on:change={() => sendPrEvent('guildstore')}
-            on:change={storeOptions}
-            on:change={doMapping}
+            on:change={() => {
+              sendPrEvent('guildstore');
+              storeOptions();
+              doMapping();
+            }}
             type="checkbox"
           />
           Guild Store
@@ -178,8 +182,10 @@
           bind:checked={options.inventory}
           class="tab-ctrl"
           id="pr-inv"
-          on:change={() => sendPrEvent('inventory')}
-          on:change={storeOptions}
+          on:change={() => {
+            sendPrEvent('inventory');
+            storeOptions();
+          }}
           on:click|once={() => {
             inventoryRender = true;
           }}
@@ -190,8 +196,10 @@
           bind:checked={options.mapping}
           class="tab-ctrl"
           id="pr-map"
-          on:change={() => sendPrEvent('mapping')}
-          on:change={storeOptions}
+          on:change={() => {
+            sendPrEvent('mapping');
+            storeOptions();
+          }}
           on:click|once={() => {
             mappingRender = true;
           }}
@@ -202,8 +210,10 @@
           bind:checked={options.thresholds}
           class="tab-ctrl"
           id="pr-levels"
-          on:change={() => sendPrEvent('thresholds')}
-          on:change={storeOptions}
+          on:change={() => {
+            sendPrEvent('thresholds');
+            storeOptions();
+          }}
           on:click|once={() => {
             thresholdRender = true;
           }}
@@ -232,8 +242,10 @@
                     <select
                       bind:value={mapped}
                       {name}
-                      on:change={() => sendPrEvent('mapped')}
-                      on:change={mappingChange}
+                      on:change={() => {
+                        sendPrEvent('mapped');
+                        mappingChange();
+                      }}
                       on:mousedown={() => {
                         waiting = false;
                       }}
@@ -252,8 +264,10 @@
                   <div>
                     <input
                       bind:checked={ignore}
-                      on:change={() => sendPrEvent('ignore')}
-                      on:change={mappingChange}
+                      on:change={() => {
+                        sendPrEvent('ignore');
+                        mappingChange();
+                      }}
                       on:click={(e) => e.target.blur()}
                       title="Ignore"
                       type="checkbox"
@@ -264,16 +278,20 @@
                 <div>
                   <button
                     class="custombutton"
-                    on:click={() => sendPrEvent('ignore-all')}
-                    on:click={ignoreAll}
+                    on:click={() => {
+                      sendPrEvent('ignore-all');
+                      ignoreAll();
+                    }}
                     type="button"
                   >
                     Ignore All
                   </button>
                   <button
                     class="custombutton"
-                    on:click={() => sendPrEvent('reset')}
-                    on:click={doReset}
+                    on:click={() => {
+                      sendPrEvent('reset');
+                      doReset();
+                    }}
                     type="button"
                   >
                     Reset
@@ -289,8 +307,10 @@
                 bind:value={options.minpoint}
                 max="999"
                 min="0"
-                on:input={() => sendPrEvent('minpoint')}
-                on:input={doMapping}
+                on:input={() => {
+                  sendPrEvent('minpoint');
+                  doMapping();
+                }}
                 type="number"
               />
               Max:
@@ -298,8 +318,10 @@
                 bind:value={options.maxpoint}
                 max="999"
                 min="0"
-                on:input={() => sendPrEvent('maxpoint')}
-                on:input={doMapping}
+                on:input={() => {
+                  sendPrEvent('maxpoint');
+                  doMapping();
+                }}
                 type="number"
               />
             </div>
