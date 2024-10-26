@@ -199,7 +199,7 @@ async function processCreature(_e, data) {
   if (data?.response?.data) {
     makeDoNotKillLink(data.response.data.name, dialogViewCreature);
     const json = await myStats(true);
-    if (json) processPlayer(data, json);
+    if (json?._skills) processPlayer(data, json);
   }
 }
 
