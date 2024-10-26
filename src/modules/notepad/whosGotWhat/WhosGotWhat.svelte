@@ -87,9 +87,7 @@
   async function init() {
     const [store, ranks] = await all([daGuildReport(), ranksView()]);
     if (store?.s && ranks?.s) {
-      console.log([store, ranks]);
       const myData = prepareData([store, ranks]);
-      console.log(myData);
       rows = myData;
     }
   }
