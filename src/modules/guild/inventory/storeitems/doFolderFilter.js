@@ -17,7 +17,7 @@ function startFolderFilter(inv, form) {
 function updateList(inv, id, ctx) {
   ctx.checked = false;
   const tr = closestTr(ctx);
-  const folder = inv.items[ctx.value].folder_id;
+  const folder = inv.items[ctx.value]?.folder_id;
   const force = id !== -2 && id !== folder;
   toggleForce(tr, force);
   toggleForce(tr.nextElementSibling, force);
