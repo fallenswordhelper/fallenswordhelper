@@ -13,6 +13,7 @@ const substrings = [
   'play method is not allowed',
   'world.min.js',
   'openuserjs.org',
+  'Discord-Message-Checks-for-Updates.user.js',
 ];
 
 const dontSend = (msg) => substrings.some((ss) => msg.includes(ss));
