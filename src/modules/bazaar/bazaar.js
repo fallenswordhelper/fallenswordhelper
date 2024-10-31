@@ -8,6 +8,14 @@ import { pcc } from '../support/layout';
 import intValue from '../system/intValue';
 import Bazaar from './Bazaar.svelte';
 
+const getCcy = (p) => ({
+  p,
+  ccy: querySelector(
+    'img[src*="/currency/"]',
+    closestTable(p).nextElementSibling,
+  ),
+});
+
 function startApp(potions, target) {
   return new Bazaar({
     target: target.parentElement,
@@ -15,16 +23,11 @@ function startApp(potions, target) {
   });
 }
 
-const preparePotions = (p) => ({
+const preparePotions = ({ p, ccy }) => ({
   id: Number(getId(p)),
   img: p.children[0].src,
   fetch: p.firstChild.dataset.tipped,
-  price: intValue(
-    getTextTrim(
-      querySelector('img[src*="/currency/"]', closestTable(p).parentElement)
-        .parentElement.previousElementSibling,
-    ),
-  ),
+  price: intValue(getTextTrim(ccy.parentElement.previousElementSibling)),
   count: 1,
   promise: Promise.resolve(),
 });
@@ -36,7 +39,9 @@ export default function bazaar() {
     pcc(),
   );
   if (!origPots.length) return;
+  const withCcy = origPots.map(getCcy);
+  if (withCcy.some(({ ccy }) => !ccy)) return;
   const potTable = closestTable(closestTable(origPots[0]).parentElement);
-  startApp(origPots.map(preparePotions), potTable);
+  startApp(withCcy.map(preparePotions), potTable);
   potTable.remove();
 }

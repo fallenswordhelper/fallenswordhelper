@@ -11,7 +11,7 @@ function formatShortDate(aDate) {
 }
 
 export default function timeBox(nextGainTime, hrsToGo) {
-  const nextGain = nextGainTime.split(' ').map((p) => p.slice(0, -1));
+  const nextGain = nextGainTime?.split(' ').map((p) => p.slice(0, -1));
   if (!nextGain) {
     return;
   }

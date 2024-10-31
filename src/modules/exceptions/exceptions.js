@@ -10,10 +10,10 @@ const substrings = [
   'index.php?cmd=composing&subcmd=breakdown',
   'index.php?cmd=trade&target_player=',
   'layerClick',
+  'moz-extension://',
+  'openuserjs.org',
   'play method is not allowed',
   'world.min.js',
-  'openuserjs.org',
-  'Discord-Message-Checks-for-Updates.user.js',
 ];
 
 const dontSend = (msg) => substrings.some((ss) => msg.includes(ss));
