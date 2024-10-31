@@ -32,16 +32,19 @@ const preparePotions = ({ p, ccy }) => ({
   promise: Promise.resolve(),
 });
 
+function havePots(origPots) {
+  const withCcy = origPots.map(getCcy);
+  if (withCcy.some(({ ccy }) => !ccy)) return;
+  const potTable = closestTable(closestTable(origPots[0]).parentElement);
+  startApp(withCcy.map(preparePotions), potTable);
+  potTable.remove();
+}
+
 export default function bazaar() {
   if (!pcc() || jQueryNotPresent()) return;
   const origPots = querySelectorArray(
     'a[href*="&subcmd=buyitem&"][onclick]',
     pcc(),
   );
-  if (!origPots.length) return;
-  const withCcy = origPots.map(getCcy);
-  if (withCcy.some(({ ccy }) => !ccy)) return;
-  const potTable = closestTable(closestTable(origPots[0]).parentElement);
-  startApp(withCcy.map(preparePotions), potTable);
-  potTable.remove();
+  if (origPots.length) havePots(origPots);
 }
