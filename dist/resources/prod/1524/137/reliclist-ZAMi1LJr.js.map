@@ -1,1 +1,0 @@
-{"version":3,"file":"reliclist-ZAMi1LJr.js","sources":["src/modules/app/guild/reliclist.js"],"sourcesContent":null,"names":["reliclist","guildId","offset","limit","data","subcmd","guild_id","guild"],"mappings":";AAEe,SAASA,EAAUC,EAASC,EAAQC,GACjD,MAAMC,EAAO,CACXC,OAAQ,eACJJ,GAAW,CAAEK,SAAUL,GAC3BC,SACAC;AAGF,OAAOI,EAAMH,EACf"}
