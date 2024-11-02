@@ -3,6 +3,7 @@ import playerName from '../common/playerName';
 
 const substrings = [
   'attackplayer.min.js',
+  'chrome-extension://',
   'dynamically imported module',
   'fs.min.js',
   'hcsBar',
