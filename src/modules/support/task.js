@@ -40,7 +40,7 @@ function asyncTask() {
   try {
     testPop();
   } catch (e) {
-    Honeybadger.notify(e);
+    Honeybadger.notify(e, 'taskFailure');
   } finally {
     taskRunner();
   }

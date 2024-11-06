@@ -3,7 +3,7 @@ import { get as idbGet, set as idbSet } from 'idb-keyval';
 
 const processError = (e) => {
   if (e && e.name !== 'NotFoundError') {
-    Honeybadger.notify(e);
+    Honeybadger.notify(e, 'idbkeyval');
   }
 };
 

@@ -1,9 +1,9 @@
 import Honeybadger from '@honeybadger-io/js';
 import playerName from '../common/playerName';
+import stdout from '../support/stdout';
 
 const substrings = [
   'attackplayer.min.js',
-  'chrome-extension://',
   'dynamically imported module',
   'fs.min.js',
   'hcsBar',
@@ -11,7 +11,6 @@ const substrings = [
   'index.php?cmd=composing&subcmd=breakdown',
   'index.php?cmd=trade&target_player=',
   'layerClick',
-  'moz-extension://',
   'openuserjs.org',
   'play method is not allowed',
   'world.min.js',
@@ -34,6 +33,11 @@ function hbSetup() {
   if (pid) {
     Honeybadger.setContext({ user_id: pid });
   }
+  Honeybadger.afterNotify((err) => {
+    if (err) {
+      return stdout(`Honeybadger notification failed: ${err}`);
+    }
+  });
   Honeybadger.beforeNotify(hbBeforeNotify);
 }
 
