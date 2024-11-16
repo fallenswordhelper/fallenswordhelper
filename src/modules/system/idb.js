@@ -2,7 +2,7 @@ import Honeybadger from '@honeybadger-io/js';
 import { get as idbGet, set as idbSet } from 'idb-keyval';
 
 const processError = (e) => {
-  if (e && e.name !== 'NotFoundError') {
+  if (!['QuotaExceededError', 'NotFoundError'].includes(e?.name)) {
     Honeybadger.notify(e, 'idbkeyval');
   }
 };

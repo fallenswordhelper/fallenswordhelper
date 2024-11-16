@@ -3,9 +3,15 @@ import playerName from '../common/playerName';
 import stdout from '../support/stdout';
 
 const substrings = [
+  '(reading\'$$\')',
   'attackplayer.min.js',
+  'Discord-Message-Checks-for-Updates.user.js',
   'dynamically imported module',
+  'Fallen-Sword-Champion-and-Super-Elite-Alert.user.js',
+  'Fallen-Sword-Super-Elite-Notifier.user.js',
   'fs.min.js',
+  'GVG-and-Relics-Notifications.user.js',
+  'GvG-List-v2.user.js',
   'hcsBar',
   'index.php?cmd=auctionhouse&subcmd=quickcreate',
   'index.php?cmd=composing&subcmd=breakdown',
