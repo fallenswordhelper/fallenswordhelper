@@ -3,22 +3,29 @@ import playerName from '../common/playerName';
 import stdout from '../support/stdout';
 
 const substrings = [
-  '(reading\'$$\')',
+  '(reading\'$$\')', // Why does this work?
   'attackplayer.min.js',
   'Discord-Message-Checks-for-Updates.user.js',
-  'dynamically imported module',
+  'dynamically imported module', // Why does this work?
   'Fallen-Sword-Champion-and-Super-Elite-Alert.user.js',
+  'Fallen-Sword-Message-Alert.user.js',
   'Fallen-Sword-Super-Elite-Notifier.user.js',
+  'Fallensword-GvG-Target-Checker-with-Button-and-Buff-Check.user.js',
   'fs.min.js',
   'GVG-and-Relics-Notifications.user.js',
+  'GvG-Initiate-Enhanced.user.js',
   'GvG-List-v2.user.js',
+  'GVG%252FRelics-Discord.user.js',
+  'GVG%252FRelics-Notifications.user.js',
   'hcsBar',
   'index.php?cmd=auctionhouse&subcmd=quickcreate',
   'index.php?cmd=composing&subcmd=breakdown',
   'index.php?cmd=trade&target_player=',
   'layerClick',
   'openuserjs.org',
-  'play method is not allowed',
+  'Permission denied to access object', // Will this work?
+  'play method is not allowed', // Why does this work?
+  'Superelite-searcher.user.js',
   'world.min.js',
 ];
 
