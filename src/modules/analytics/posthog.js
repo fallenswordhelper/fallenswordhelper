@@ -1,4 +1,4 @@
-import ph from 'posthog-js';
+import ph from 'posthog-js/dist/module.no-external';
 import playerName from '../common/playerName';
 import stdout from '../support/stdout';
 

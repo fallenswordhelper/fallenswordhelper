@@ -73,9 +73,7 @@ function doHandlers() {
 }
 
 export default function activeWantedBounties() {
-  if (jQueryNotPresent()) {
-    return;
-  }
+  if ((!calf.enableWantedList && !calf.enableActiveBountyList) || jQueryNotPresent()) return;
   createDivs();
   doHandlers();
   retrieveBountyInfo();

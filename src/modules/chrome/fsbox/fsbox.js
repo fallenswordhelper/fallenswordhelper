@@ -13,6 +13,7 @@ import trim from '../../common/trim';
 import { doAddIgnore, playerLinkSelector } from '../../support/constants';
 import { get, set } from '../../system/idb';
 import fsboxlog from '../pageSwitcher/loader/fsboxlog';
+import getValue from '../../system/getValue';
 
 function openLog() {
   sendEvent('fsbox', 'open log');
@@ -66,6 +67,7 @@ function haveFsBox(node) {
 }
 
 export default function fsbox() {
+  if (!getValue('fsboxlog')) return;
   const node = getElementById('minibox-fsbox');
   if (node) haveFsBox(node);
 }

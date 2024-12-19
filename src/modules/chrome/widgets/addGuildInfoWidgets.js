@@ -4,6 +4,7 @@ import contains from '../../common/contains';
 import getElementById from '../../common/getElementById';
 import onclick from '../../common/onclick';
 import querySelectorArray from '../../common/querySelectorArray';
+import calf from '../../support/calf';
 import { guildSubcmdUrl } from '../../support/constants';
 import colouring from './colouring';
 import contactColour from './contactColour';
@@ -34,10 +35,10 @@ function makeLink(hNo, word, page) {
 }
 
 export default function addGuildInfoWidgets() {
+  if (!calf.enableGuildInfoWidgets) return;
   const guildMembrList = getElementById('minibox-guild-members-list');
-  if (!guildMembrList) {
-    return;
-  } // list exists
+  if (!guildMembrList) return;
+  // list exists
   // hide guild info links
   doHideBtn(guildMembrList, 1);
   doHideBuffSelected(guildMembrList, 'guild');

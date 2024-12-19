@@ -2,11 +2,14 @@ import ranksView from '../../_dataAccess/fallbacks/ranksView';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
 import isNull from '../../common/isNull';
+import jQueryPresent from '../../common/jQueryPresent';
 import keys from '../../common/keys';
 import lastActivityToDays from '../../common/lastActivityToDays';
 import numberIsNaN from '../../common/numberIsNaN';
+import { defEnableGuildActivityTracker } from '../../support/constants';
 import { nowSecs } from '../../support/now';
 import fallback from '../../system/fallback';
+import getValue from '../../system/getValue';
 import { set } from '../../system/idb';
 import {
   cur,
@@ -146,6 +149,8 @@ function checkLastUpdate(archive) {
 }
 
 export default async function guildActivity() {
-  const archive = await getActivity();
-  checkLastUpdate(archive);
+  if (jQueryPresent() && getValue(defEnableGuildActivityTracker)) {
+    const archive = await getActivity();
+    checkLastUpdate(archive);
+  }
 }

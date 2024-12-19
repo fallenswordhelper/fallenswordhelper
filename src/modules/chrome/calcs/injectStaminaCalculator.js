@@ -2,6 +2,7 @@ import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import valueText from '../../common/valueText';
+import getValue from '../../system/getValue';
 import intValue from '../../system/intValue';
 import asInt from './asInt';
 import timeBox from './timeBox';
@@ -21,10 +22,9 @@ function maxStamAt(nextGain, stamVals) {
 }
 
 export default function injectStaminaCalculator() {
+  if (!getValue('staminaCalculator')) return;
   const nextGain = getElementsByClassName('stat-stamina-nextGain');
-  if (nextGain.length === 0) {
-    return;
-  }
+  if (nextGain.length === 0) return;
   const staminaMouseover = getElementById('statbar-stamina-tooltip-stamina');
   const stamVals = getStamVals(staminaMouseover);
   if (stamVals.length === 2) {
