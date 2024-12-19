@@ -3,13 +3,15 @@ import playerName from '../common/playerName';
 import stdout from '../support/stdout';
 
 const substrings = [
-  '(reading\'$$\')', // Why does this work?
+  "(reading'$$')",
   'attackplayer.min.js',
   'Discord-Message-Checks-for-Updates.user.js',
-  'dynamically imported module', // Why does this work?
+  'dynamically imported module',
   'Fallen-Sword-Champion-and-Super-Elite-Alert.user.js',
   'Fallen-Sword-Message-Alert.user.js',
   'Fallen-Sword-Super-Elite-Notifier.user.js',
+  'Fallen-Sword-Win%252FLoss-Checker.user.js',
+  'Fallen-Sword-Win%252FLoss-Checker-with-Buffs-and-Buff-Levels.user.js',
   'Fallensword-GvG-Target-Checker-with-Button-and-Buff-Check.user.js',
   'fs.min.js',
   'GVG-and-Relics-Notifications.user.js',
@@ -22,17 +24,20 @@ const substrings = [
   'index.php?cmd=composing&subcmd=breakdown',
   'index.php?cmd=trade&target_player=',
   'layerClick',
+  'New-Userscript.user.js',
   'openuserjs.org',
-  'Permission denied to access object', // Will this work?
-  'play method is not allowed', // Why does this work?
+  'Permission denied to access object',
+  'play method is not allowed',
+  'se-searcher-v2-draft.user.js',
   'Superelite-searcher.user.js',
+  'UnhandledPromiseRejectionWarning: 404',
   'world.min.js',
 ];
 
 const dontSend = (msg) => substrings.some((ss) => msg.includes(ss));
 
 function hbBeforeNotify(notice) {
-  if (dontSend(notice.stack)) return false;
+  if (dontSend(notice.message) || dontSend(notice.stack)) return false;
 }
 
 function hbSetup() {
