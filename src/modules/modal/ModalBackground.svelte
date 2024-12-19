@@ -53,7 +53,7 @@
     top: 0;
     transform: translateX(-1000vw);
     width: 100%;
-    z-index: 60;
+    z-index: 120;
   }
 
   .visible {
