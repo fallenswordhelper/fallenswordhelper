@@ -170,7 +170,9 @@ function addRowToTable(bioCellHtml, callback, doc, textLineArray) {
 export default function parseProfileAndDisplay(responseText, callback) {
   // Hybrid - Evil
   const doc = createDocument(responseText);
-  const bioCellHtml = getElementById('profile-bio', doc).innerHTML;
+  const bioCell = getElementById('profile-bio', doc);
+  if (!bioCell) return;
+  const bioCellHtml = bioCell.innerHTML;
   const textLineArray = getBioLines(bioCellHtml, callback.findBuffNicks);
   // add row to table
   if (textLineArray.length > 0) {

@@ -13,6 +13,7 @@ import {
   pointsUrl,
   profileUrl,
 } from '../support/constants';
+import getValue from '../system/getValue';
 
 function preventHcs(id, evt) {
   evt.stopPropagation();
@@ -31,7 +32,8 @@ function statbarWrapper(href, id) {
   onclick(myWrapper, partial(preventHcs, id), true);
 }
 
-export default function statbar() {
+export default function statBarLinks() {
+  if (!getValue('statBarLinks')) return;
   statbarWrapper(profileUrl, 'character');
   statbarWrapper(`${pointsUrl + defSubcmd}reserve`, 'stamina');
   statbarWrapper(blacksmithUrl, 'equipment');

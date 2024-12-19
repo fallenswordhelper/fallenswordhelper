@@ -1,5 +1,6 @@
 import upgradesGold from '../../ajax/upgradesGold';
 import jQueryPresent from '../../common/jQueryPresent';
+import calf from '../../support/calf';
 import { now } from '../../support/now';
 import task from '../../support/task';
 import getValue from '../../system/getValue';
@@ -29,7 +30,7 @@ function notUpgradesPage() {
 }
 
 export default function injectUpgradeAlert() {
-  if (jQueryPresent() && notGoldUpgradesPage()) {
+  if (calf.enableUpgradeAlert && jQueryPresent() && notGoldUpgradesPage()) {
     notUpgradesPage();
   }
 }

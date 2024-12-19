@@ -1,4 +1,5 @@
 import getElementById from '../../common/getElementById';
+import calf from '../../support/calf';
 import colouring from './colouring';
 import contactColour from './contactColour';
 import doHideBtn from './doHideBtn';
@@ -13,10 +14,9 @@ function alliesColour(el) {
 }
 
 export default function addOnlineAlliesWidgets() {
+  if (!calf.enableOnlineAlliesWidgets) return;
   const onlineAlliesList = getElementById('minibox-allies-list');
-  if (!onlineAlliesList) {
-    return;
-  }
+  if (!onlineAlliesList) return;
   doHideBtn(onlineAlliesList, 2);
   doHideBuffSelected(onlineAlliesList, 'ally');
   // add coloring for offline time

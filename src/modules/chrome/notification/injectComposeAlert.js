@@ -55,5 +55,5 @@ function composeAlert() {
 }
 
 export default function injectComposeAlert() {
-  if (calf.cmd !== 'composing' && jQueryPresent()) composeAlert();
+  if (calf.enableComposingAlert && calf.cmd !== 'composing' && jQueryPresent()) composeAlert();
 }
