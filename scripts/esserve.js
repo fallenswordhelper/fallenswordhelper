@@ -31,11 +31,12 @@ const ctx = await esbuild.context({
   },
   entryPoints: [pathToFile('src/calfSystem.js')],
   format: 'esm',
+  minify: true,
   outdir: pathToFile(calfPath),
   plugins: [liquidPlugin, sveltePlugin()],
   sourcemap: true,
   sourcesContent: false,
-  splitting: true,
+  splitting: false,
   write: false,
 });
 
