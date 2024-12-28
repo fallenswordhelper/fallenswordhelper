@@ -4,6 +4,7 @@
 
   export let fshInv = 0;
   let disabled = 1;
+  let recalling = 0;
 
   const repairable = (
     _idx,
@@ -15,17 +16,34 @@
   const data = arrayFrom(rows.data());
   if (data.length) disabled = 0;
 
+  function doRecall() {
+    return daGsTake(data.map(({ inv_id: id }) => id));
+  }
+
   function toBp() {
-    daGsTake(data.map(({ inv_id: id }) => id));
+    recalling = 1;
   }
 </script>
 
 <div class="main">
   <div class="head">Recall repairable to</div>
   <div class="btnbox">
-    <button class="custombutton" {disabled} on:click={toBp} type="button"
-      >BP</button
-    >
+    {#if recalling}
+      {#await doRecall()}
+        <span class="fshSpinner"></span>
+      {:then}
+        <span class="fshGreen">Recalled</span>
+      {/await}
+    {:else}
+      <button
+        class="custombutton"
+        {disabled}
+        on:click|once={toBp}
+        type="button"
+      >
+        BP
+      </button>
+    {/if}
   </div>
   <div class="btnbox">
     {data.length} items to repair
@@ -46,7 +64,9 @@
     padding: 4px;
   }
   .btnbox {
+    height: 20px;
     padding: 4px;
+    position: relative;
   }
   button {
     font-family: inherit;
