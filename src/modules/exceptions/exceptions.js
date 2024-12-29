@@ -5,6 +5,7 @@ import stdout from '../support/stdout';
 const substrings = [
   "(reading'$$')",
   'attackplayer.min.js',
+  'Auction-House-Monitor.user.js',
   'Discord-Message-Checks-for-Updates.user.js',
   'dynamically imported module',
   'Fallen-Sword-Champion-and-Super-Elite-Alert.user.js',
@@ -13,6 +14,7 @@ const substrings = [
   'Fallen-Sword-Win%252FLoss-Checker.user.js',
   'Fallen-Sword-Win%252FLoss-Checker-with-Buffs-and-Buff-Levels.user.js',
   'Fallensword-GvG-Target-Checker-with-Button-and-Buff-Check.user.js',
+  'Fetch-Auction-and-Send-to-Discord.user.js',
   'fs.min.js',
   'GVG-and-Relics-Notifications.user.js',
   'GvG-Initiate-Enhanced.user.js',
@@ -28,8 +30,11 @@ const substrings = [
   'openuserjs.org',
   'Permission denied to access object',
   'play method is not allowed',
+  'Quick-Kill.user.js',
   'se-searcher-v2-draft.user.js',
   'Superelite-searcher.user.js',
+  'Titan-Quick-Kill.user.js',
+  'UFSG-dodatki.user.js',
   'UnhandledPromiseRejectionWarning: 404',
   'world.min.js',
 ];
