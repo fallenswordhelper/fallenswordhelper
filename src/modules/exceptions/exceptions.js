@@ -3,16 +3,16 @@ import playerName from '../common/playerName';
 import stdout from '../support/stdout';
 
 const substrings = [
-  "(reading'$$')",
   'attackplayer.min.js',
   'Auction-House-Monitor.user.js',
   'Discord-Message-Checks-for-Updates.user.js',
   'dynamically imported module',
   'Fallen-Sword-Champion-and-Super-Elite-Alert.user.js',
   'Fallen-Sword-Message-Alert.user.js',
+  'Fallen-Sword-Super-Elite-%2526-Crate-Notifier.user.js',
   'Fallen-Sword-Super-Elite-Notifier.user.js',
-  'Fallen-Sword-Win%252FLoss-Checker.user.js',
   'Fallen-Sword-Win%252FLoss-Checker-with-Buffs-and-Buff-Levels.user.js',
+  'Fallen-Sword-Win%252FLoss-Checker.user.js',
   'Fallensword-GvG-Target-Checker-with-Button-and-Buff-Check.user.js',
   'Fetch-Auction-and-Send-to-Discord.user.js',
   'fs.min.js',
@@ -37,6 +37,7 @@ const substrings = [
   'UFSG-dodatki.user.js',
   'UnhandledPromiseRejectionWarning: 404',
   'world.min.js',
+  "(reading '$$')",
 ];
 
 const dontSend = (msg) => substrings.some((ss) => msg.includes(ss));
