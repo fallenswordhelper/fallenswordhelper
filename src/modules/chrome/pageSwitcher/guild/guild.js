@@ -27,6 +27,9 @@ const injectRPUpgrades = () => {
 const injectScouttower = () => {
   runDefault(import('../../../guild/scoutTower/injectScouttower'));
 };
+const titanrewards = () => {
+  runDefault(import('../../../guild/titanrewards/titanrewards'));
+};
 
 export default {
   inventory,
@@ -45,4 +48,5 @@ export default {
   bank: { '-': injectGuildBank },
   hall,
   '-': { '-': injectGuild },
+  titanrewards: { '-': titanrewards },
 };
