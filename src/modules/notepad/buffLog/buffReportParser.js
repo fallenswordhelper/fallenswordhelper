@@ -11,6 +11,7 @@ const outcomes = [
   "Player '(\\w*)' (has set their preferences to block the skill) '([\\w ]*)' from being cast on them.",
   "Player '\\w*' could not be found to buff.",
   'You do not have enough stamina remaining.',
+  "Unable to cast skill(s) on '\\w*' due to their preferences.",
 ];
 
 function getTransform() {
