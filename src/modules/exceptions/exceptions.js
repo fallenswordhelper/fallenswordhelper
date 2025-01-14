@@ -5,6 +5,7 @@ import stdout from '../support/stdout';
 const substrings = [
   'attackplayer.min.js',
   'Auction-House-Monitor.user.js',
+  'Compra-%2526-Venda-de-Recursos-%25E2%259C%2585.user.js',
   'Discord-Message-Checks-for-Updates.user.js',
   'dynamically imported module',
   'Fallen-Sword-Champion-and-Super-Elite-Alert.user.js',
