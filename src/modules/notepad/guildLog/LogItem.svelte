@@ -23,6 +23,9 @@
   export let hideNonPlayerGuildLogMessages = null;
   export let logEntry = null;
 
+  let recruiting_prm = Promise.resolve();
+  let recruiting_result = 'waiting';
+
   function logEvent(type) {
     sendEvent('Guild Log', type);
   }
@@ -38,15 +41,21 @@
   }
 
   async function recruiting(data, subcmd) {
+    // TODO improve feedback
     logEvent(subcmd);
-    const json = await view();
+    recruiting_prm = view();
+    const json = await recruiting_prm;
     if (json?.s && isArray(json?.r)) {
       const joinReq = json.r.find(({ player: { id } }) => id === data.id);
       if (joinReq?.id) {
         navigateTo(
           `${guildSubcmdUrl}recruit&subcmd2=${subcmd}&id=${joinReq.id}`,
         );
+      } else {
+        recruiting_result = 'gone';
       }
+    } else {
+      recruiting_result = 'error';
     }
   }
 
@@ -119,17 +128,29 @@
     {#if logEntry.msg?.attachments?.length}
       {#each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data }}
         {#if logEntry.type === 21}
-          <span class="action-buttons">
-            [
-            <LinkButton on:click={() => recruiting(data, 'acceptjoin')}
-              >Accept</LinkButton
-            >
-            |
-            <LinkButton on:click={() => recruiting(data, 'denyjoin')}
-              >Deny</LinkButton
-            >
-            ]
-          </span>
+          {#await recruiting_prm}
+            <div class="rel">
+              <span class="fshSpinner recruit-spinner"></span>
+            </div>
+          {:then}
+            {#if recruiting_result === 'waiting'}
+              <span class="action-buttons">
+                [
+                <LinkButton on:click={() => recruiting(data, 'acceptjoin')}
+                  >Accept</LinkButton
+                >
+                |
+                <LinkButton on:click={() => recruiting(data, 'denyjoin')}
+                  >Deny</LinkButton
+                >
+                ]
+              </span>
+            {:else}
+              <div class="rel">
+                {recruiting_result}
+              </div>
+            {/if}
+          {/await}
         {/if}
         <span class="action-buttons">
           [
@@ -211,5 +232,18 @@
   .action-buttons {
     margin-left: 4px;
     white-space: nowrap;
+  }
+  .rel {
+    color: rgb(56, 56, 56);
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 77px;
+  }
+  .recruit-spinner:before {
+    height: 8px;
+    margin-left: -7px;
+    margin-top: -7px;
+    width: 8px;
   }
 </style>
