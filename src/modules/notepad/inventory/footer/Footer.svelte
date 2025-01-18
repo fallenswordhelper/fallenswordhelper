@@ -10,11 +10,7 @@
 <div class="container">
   {#if calf.subcmd === 'guildinvmgr'}
     <RecallAll />
-    <!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
-    <!-- svelte-ignore missing-declaration -->
-    {#if defineUserIsDev}
-      <Repair {fshInv} />
-    {/if}
+    <Repair {fshInv} />
   {:else}
     <div></div>
   {/if}
