@@ -1,0 +1,1 @@
+{"version":3,"file":"dataRows-DV8H12Ga.js","sources":["src/modules/common/dataRows.js"],"sourcesContent":null,"names":["dataRows","table","cols","skip","rows","arrayFrom","filter","row","i","children","length"],"mappings":";AAEe,SAASA,EAASC,EAAOC,EAAMC,GAC5C,GAAIF,GAAOG,KACT,OAAOC,EAAUJ,EAAMG,MAAME,QAC3B,CAACC,EAAKC,IAAMD,EAAIE,SAASC,SAAWR,GAAQM,EAAIL,GAGtD"}
