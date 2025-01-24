@@ -4,20 +4,15 @@ import playerName from '../common/playerName';
 import quickbuffSuccess from '../common/quickbuffSuccess';
 import setInnerHtml from '../dom/setInnerHtml';
 
-function processResult(trigger, json) {
+export default async function quickActivate(evt) {
+  const trigger = evt.target;
+  if (trigger.className !== 'quickbuffActivate') return;
+  sendEvent('quickbuff', 'quickActivate');
+  setInnerHtml('', trigger);
+  trigger.className = 'fshSpinner fshSpinner12';
+  const json = await daQuickbuff([playerName()], [trigger.dataset.buffid]);
   if (quickbuffSuccess(json)) {
     trigger.className = 'fshLime';
     setInnerHtml('On', trigger);
   }
-}
-
-export default async function quickActivate(evt) {
-  // jQuery.min
-  const trigger = evt.target;
-  if (trigger.className !== 'quickbuffActivate') {
-    return;
-  }
-  sendEvent('quickbuff', 'quickActivate');
-  const json = await daQuickbuff([playerName()], [trigger.dataset.buffid]);
-  processResult(trigger, json);
 }
