@@ -6,6 +6,7 @@ import activeWantedBounties from '../../activeWantedBounties/activeWantedBountie
 import allyEnemy from '../../allyEnemy/allyEnemy';
 import injectLevelupCalculator from '../../calcs/injectLevelupCalculator';
 import injectStaminaCalculator from '../../calcs/injectStaminaCalculator';
+import dailyQuest from '../../dailyQuest';
 import fsbox from '../../fsbox/fsbox';
 import injectServerNode from '../../injectServerNode';
 import interceptQuickBuff from '../../interceptQuickBuff';
@@ -78,6 +79,7 @@ const p3functions = [
   scoutTowerLink,
   guildActivity,
   seTracker,
+  dailyQuest,
 ];
 
 export default function priorityThree() {
