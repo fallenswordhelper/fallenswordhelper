@@ -247,5 +247,6 @@
   "groupCombatItems": false,
   "footprintColor": "#ee9252",
   "compactRanks": false,
-  "lastModalGuildLogCheck": 0
+  "lastModalGuildLogCheck": 0,
+  "dailyQuestReRoll": false
 }
