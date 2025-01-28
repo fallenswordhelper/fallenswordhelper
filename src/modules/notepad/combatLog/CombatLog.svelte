@@ -3,7 +3,7 @@
   import jsonStringify from '../../common/jsonStringify';
   import confirm from '../../modal/confirm';
   import ModalTitled from '../../modal/ModalTitled.svelte';
-  import { get, set } from '../../system/idb';
+  import { combatLogClear, combatLogGetAll } from '../../system/idbLogger';
 
   export let visible = true;
   let log = [];
@@ -20,7 +20,7 @@
   }
 
   async function init() {
-    log = (await get('fsh_combatLog')) ?? [];
+    log = (await combatLogGetAll()) ?? [];
   }
 
   async function clearStorage() {
@@ -28,7 +28,7 @@
     const yes = await confirm('Are you sure you want to clear your log?');
     if (yes) {
       log = [];
-      set('fsh_combatLog', log);
+      combatLogClear();
     }
   }
 </script>
