@@ -2,7 +2,7 @@ import { openDB } from 'idb';
 import stdout from '../support/stdout';
 import { del, get } from './idb';
 
-let db = undefined;
+let db; // skipcq: JS-0119
 let initDb = false;
 let combatLogNeedsKeyvalTransfer = false;
 
