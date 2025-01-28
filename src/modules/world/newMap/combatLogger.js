@@ -23,6 +23,6 @@ function combatResponse(_e, data) {
   if (data.response.response === 0) processCombatResponse(data);
 }
 
-export default async function combatLogger() {
+export default function combatLogger() {
   if (getValue('keepLogs')) $.subscribe(defPvE, combatResponse);
 }

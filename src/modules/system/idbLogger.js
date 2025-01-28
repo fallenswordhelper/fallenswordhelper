@@ -2,39 +2,44 @@ import { openDB } from 'idb';
 import stdout from '../support/stdout';
 import { del, get } from './idb';
 
-let db;
+let db = undefined;
 let initDb = false;
 let combatLogNeedsKeyvalTransfer = false;
 
-async function combatLogKeyvalTransfer() {
+async function combatLogKeyvalTransfer(newDb) {
   const fshCombatLog = await get('fsh_combatLog');
   if (fshCombatLog) {
-    const tx = db.transaction('combat-log', 'readwrite');
+    const tx = newDb.transaction('combat-log', 'readwrite');
     for (const entry of fshCombatLog) tx.store.add(entry);
     await tx.done;
     await del('fsh_combatLog');
   }
 }
 
-function initCombatLogStore(db) {
-  const combatLog = db.createObjectStore('combat-log', {
+function initCombatLogStore(newDb) {
+  const combatLog = newDb.createObjectStore('combat-log', {
     autoIncrement: true,
   });
   combatLog.createIndex('time', 'time');
   combatLogNeedsKeyvalTransfer = true;
 }
 
-async function getDb() {
-  if (!initDb) {
-    db = await openDB('fsh-db1', 1, {
-      upgrade(db) {
-        if (!db.objectStoreNames.contains('combat-log')) initCombatLogStore(db);
-      },
-    });
-    initDb = true;
+const dbOptions = {
+  upgrade(newDb) {
+    if (!newDb.objectStoreNames.contains('combat-log')) {
+      initCombatLogStore(newDb);
+    }
+  },
+};
 
-    if (combatLogNeedsKeyvalTransfer) await combatLogKeyvalTransfer();
-  }
+async function makeFshDb() {
+  db = await openDB('fsh-db1', 1, dbOptions);
+  initDb = true;
+  if (combatLogNeedsKeyvalTransfer) await combatLogKeyvalTransfer(db);
+}
+
+async function getDb() {
+  if (!initDb) await makeFshDb();
   return db;
 }
 
