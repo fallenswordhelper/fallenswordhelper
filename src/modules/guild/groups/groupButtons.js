@@ -14,7 +14,7 @@ import addButton from './addButton';
 import fetchGroupStatsButton from './fetchGroupStatsButton';
 
 const filterMercs = (e) => !e.includes('#000099');
-const underSize = ([, noOfMembers]) => noOfMembers < calf.maxGroupSizeToJoin;
+const underSize = ([, noOfMbrs]) => noOfMbrs < calf.maxGroupSizeToJoin;
 const decorate = ([joinButton]) => [
   joinButton,
   createDiv({
