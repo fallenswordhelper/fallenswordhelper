@@ -1,6 +1,6 @@
 import aGenericFallback from './aGenericFallback';
 
-export default async function tradeSendGold(playerName, amount) {
+export default function tradeSendGold(playerName, amount) {
   return aGenericFallback(
     {
       cmd: 'trade',
