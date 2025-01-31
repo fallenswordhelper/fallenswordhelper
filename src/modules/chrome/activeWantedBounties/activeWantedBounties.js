@@ -1,5 +1,5 @@
 import './activeWantedBounties.css';
-import bountyPage from '../../ajax/bountyPage';
+import bountyPage from './bountyPage';
 import sendEvent from '../../analytics/sendEvent';
 import functionPasses from '../../common/functionPasses';
 import jQueryNotPresent from '../../common/jQueryNotPresent';

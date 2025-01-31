@@ -1,4 +1,4 @@
-import bountyPage from '../../ajax/bountyPage';
+import bountyPage from './bountyPage';
 import getElementById from '../../common/getElementById';
 import querySelector from '../../common/querySelector';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
