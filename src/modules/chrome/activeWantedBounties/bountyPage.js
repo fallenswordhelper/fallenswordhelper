@@ -1,4 +1,4 @@
-import indexAjaxData from './indexAjaxData';
+import indexAjaxData from '../../ajax/indexAjaxData';
 
 export default function bountyPage(page) {
   return indexAjaxData({
