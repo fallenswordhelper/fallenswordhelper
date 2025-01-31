@@ -1,4 +1,5 @@
 import daArenaPickMove from '../../_dataAccess/daArenaPickMove';
+import sendEvent from '../../analytics/sendEvent';
 import all from '../../common/all';
 import getArrayByTagName from '../../common/getArrayByTagName';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
@@ -57,6 +58,7 @@ async function changeMoves(newMoves) {
 
 async function updateMoves() {
   // jQuery
+  sendEvent('arena__setup', 'updateMoves');
   const newMoves = getAllMoves();
   const prm = newMoves.map(resetMove);
   await all(prm);
@@ -102,6 +104,7 @@ function getTable() {
 
 function selectMoves(evt) {
   // jQuery
+  sendEvent('arena__setup', 'setupMoves');
   $(evt.target).off();
   imgNodes = $('#pCC a[href*="=pickmove&"] img');
   const table = getTable();
