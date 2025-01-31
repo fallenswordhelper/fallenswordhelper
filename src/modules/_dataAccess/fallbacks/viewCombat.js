@@ -1,4 +1,4 @@
-import combatView from '../../ajax/combatView';
+import indexAjaxData from '../../ajax/indexAjaxData';
 import sendEvent from '../../analytics/sendEvent';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
@@ -88,6 +88,10 @@ function parseReport(id, html) {
 }
 
 export default async function viewCombat(id) {
-  const html = await combatView(id);
+  const html = await indexAjaxData({
+    cmd: 'combat',
+    subcmd: 'view',
+    combat_id: id,
+  });
   return parseReport(id, html);
 }
