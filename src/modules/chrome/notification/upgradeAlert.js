@@ -1,6 +1,7 @@
 import daUpgradesGold from '../../_dataAccess/daUpgradesGold';
 import jQueryPresent from '../../common/jQueryPresent';
 import parseGoldUpgrades from '../../common/parseGoldUpgrades';
+import querySelectorAll from '../../common/querySelectorAll';
 import calf from '../../support/calf';
 import { pointsUrl } from '../../support/constants';
 import { now } from '../../support/now';
@@ -8,12 +9,12 @@ import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
 import genericNotification from './genericNotification';
 
-function notGoldUpgradesPage() {
-  return window.location.search.indexOf('cmd=points&type=1') === -1;
+function goldUpgradesPage() {
+  return window.location.search.indexOf('cmd=points&type=1') !== -1;
 }
 
 function displayUpgradeMsg() {
-  if (notGoldUpgradesPage()) {
+  if (!goldUpgradesPage()) {
     genericNotification(
       'stamina',
       'Upgrade stamina with gold',
@@ -32,11 +33,18 @@ function checkUpgrade(response) {
   }
 }
 
+function fillBoxes() {
+  const boxes = querySelectorAll('#pCC input[name="quantity"]');
+  boxes[0].value = '100';
+  boxes[1].value = '10';
+}
+
 export async function checkGoldUpgrades() {
+  if (goldUpgradesPage()) fillBoxes();
   if (!calf.enableUpgradeAlert) return;
-  const response = notGoldUpgradesPage()
-    ? await daUpgradesGold()
-    : parseGoldUpgrades(document);
+  const response = goldUpgradesPage()
+    ? parseGoldUpgrades(document)
+    : await daUpgradesGold();
   if (!response.s) return;
   checkUpgrade(response.r[1]);
 }
@@ -51,7 +59,7 @@ function notUpgradesPage() {
 }
 
 export function injectUpgradeAlert() {
-  if (calf.enableUpgradeAlert && jQueryPresent() && notGoldUpgradesPage()) {
+  if (calf.enableUpgradeAlert && jQueryPresent() && !goldUpgradesPage()) {
     notUpgradesPage();
   }
 }
