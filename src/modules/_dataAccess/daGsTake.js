@@ -1,7 +1,19 @@
-import takeitem from '../app/guild/inventory/takeitem';
+import takeItem from '../ajax/takeItem';
+import appTakeitem from '../app/guild/inventory/takeitem';
 import $dataAccess from './$dataAccess';
-import gsTake from './fallbacks/gsTake';
+
+function formatResults(json) {
+  if (json.r === 0) {
+    return { s: true };
+  }
+  return { e: { message: json.m }, s: false };
+}
+
+async function gsTake(invId) {
+  const json = await takeItem(invId);
+  return formatResults(json);
+}
 
 export default function daGsTake(invId) {
-  return $dataAccess(takeitem, gsTake, invId);
+  return $dataAccess(appTakeitem, gsTake, invId);
 }
