@@ -1,7 +1,18 @@
-import usecombatset from '../app/profile/usecombatset';
+import indexAjaxData from '../ajax/indexAjaxData';
+import appUseCombatSet from '../app/profile/usecombatset';
 import $dataAccess from './$dataAccess';
-import useCombatSet from './fallbacks/useCombatSet';
+import htmlResult from './fallbacks/htmlResult';
+
+async function useCombatSet(combatSetId) {
+  const html = await indexAjaxData({
+    cmd: 'profile',
+    subcmd: 'managecombatset',
+    submit: 'Use',
+    combatSetId,
+  });
+  return htmlResult(html);
+}
 
 export default function daUseCombatSet(combatSetId) {
-  return $dataAccess(usecombatset, useCombatSet, combatSetId);
+  return $dataAccess(appUseCombatSet, useCombatSet, combatSetId);
 }
