@@ -1,6 +1,6 @@
 import indexAjaxData from '../ajax/indexAjaxData';
 import indexAjaxDoc from '../ajax/indexAjaxDoc';
-import flags from '../app/settings/flags';
+import appFlags from '../app/settings/flags';
 import all from '../common/all';
 import fromEntries from '../common/fromEntries';
 import $dataAccess from './$dataAccess';
@@ -39,5 +39,5 @@ async function settingsFlags(flags) {
 }
 
 export default function daSettingsFlags(flagsArray) {
-  return $dataAccess(flags, settingsFlags, flagsArray);
+  return $dataAccess(appFlags, settingsFlags, flagsArray);
 }
