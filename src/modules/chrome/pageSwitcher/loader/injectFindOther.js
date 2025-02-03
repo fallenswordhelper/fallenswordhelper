@@ -1,6 +1,6 @@
 export default async function injectFindOther(i) {
-  const { injectFindOther } = await import(
+  const { injectFindOther: ifo } = await import(
     '../../../notepad/findBuffs/findBuffs'
   );
-  injectFindOther(i);
+  ifo(i);
 }

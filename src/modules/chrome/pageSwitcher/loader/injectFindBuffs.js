@@ -1,6 +1,6 @@
 export default async function injectFindBuffs(i) {
-  const { injectFindBuffs } = await import(
+  const { injectFindBuffs: ifb } = await import(
     '../../../notepad/findBuffs/findBuffs'
   );
-  injectFindBuffs(i);
+  ifb(i);
 }
