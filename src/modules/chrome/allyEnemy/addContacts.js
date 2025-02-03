@@ -9,7 +9,7 @@ import {
   enemySendMessage,
 } from './constants';
 
-export const contactClass = [
+const contactClass = [
   [(n) => n < 120, 'fshDodgerBlue', 'fshRed'],
   [(n) => n < 300, 'fshDodgerBlue', 'fshRed'],
   [() => true, 'fshPowderBlue', 'fshPink'],

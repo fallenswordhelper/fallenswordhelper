@@ -1,0 +1,4 @@
+{
+  "entry": ["src/calfSystem.js", "scripts/*.js"],
+  "project": ["src/**", "scripts/**"]
+}

@@ -8,6 +8,7 @@ import jsonParse from '../common/jsonParse';
 import loadCss from '../common/loadCss';
 import querySelector from '../common/querySelector';
 import exceptions from '../exceptions/exceptions';
+import globalErrorHandler from '../exceptions/globalErrorHandler';
 import calf from '../support/calf';
 import stdout from '../support/stdout';
 import task from '../support/task';
@@ -121,10 +122,10 @@ function setVer(fshVer, gmInfo) {
 
 // main event dispatcher
 export default function dispatch(fshVer, gmInfo) {
-  if (badEnv()) {
-    return;
-  }
+  if (badEnv()) return;
   const cssPrm = loadCss(defineCalfPath);
+  const globalHandler = false;
+  if (globalHandler) globalErrorHandler();
   exceptions();
   setVer(fshVer, gmInfo);
   analytics();

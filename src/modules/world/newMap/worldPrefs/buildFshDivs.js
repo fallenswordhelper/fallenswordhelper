@@ -13,7 +13,7 @@ import {
 import updateBuffInfo from '../buffInfo/updateBuffInfo';
 import { toggleHidePlayerActions } from '../prepareHidePlayerActions';
 import testDynamics from '../titanStats/testDynamics';
-import { huntingBuffsHtml } from './huntingBuffs';
+import huntingBuffsHtml from './huntingBuffs';
 import toggleEnabledHuntingMode from './huntingBuffs/toggleEnabledHuntingMode';
 import togglePref from './togglePref';
 

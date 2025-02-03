@@ -1,5 +1,4 @@
 import {
-  justCheckbox,
   justLabel,
   simpleCheckboxHtml,
 } from '../../../settings/simpleCheckbox';
@@ -19,15 +18,6 @@ function huntMode() {
   );
 }
 
-export function huntingBuffsHtml() {
+export default function huntingBuffsHtml() {
   return `${simpleCheckboxHtml(defShowHuntingBuffs)} ${huntMode()}`;
-}
-
-export function huntingBuffs() {
-  return (
-    '<tr>' +
-    `<td class="fshRight">${justLabel(defShowHuntingBuffs)}</td>` +
-    `<td>${justCheckbox(defShowHuntingBuffs)} ${huntMode()}</td>` +
-    '</tr>'
-  );
 }
