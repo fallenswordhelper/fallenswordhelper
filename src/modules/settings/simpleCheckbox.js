@@ -37,7 +37,7 @@ function isValueChecked(pref) {
   return isChecked(getValue(pref));
 }
 
-export function justCheckbox(name) {
+function justCheckbox(name) {
   return `<input id="${name}" name="${name}" class="fsh-va-text-bottom" type="checkbox"${isValueChecked(name)}>`;
 }
 

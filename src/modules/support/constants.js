@@ -111,7 +111,7 @@ export const defShopPrompt = 'prompt.worldDialogShop';
 export const defControlsKeydown = 'keydown.controls';
 export const defRealmUpdate = 'update.realm';
 
-export const defSuffixSuccessActionResponse = '-success.action-response';
+const defSuffixSuccessActionResponse = '-success.action-response';
 export const defRefreshActionList = `-1${defSuffixSuccessActionResponse}`;
 export const defViewCreature = `1${defSuffixSuccessActionResponse}`;
 export const defPvE = `2${defSuffixSuccessActionResponse}`;
@@ -119,22 +119,14 @@ export const defRelicView = `9${defSuffixSuccessActionResponse}`;
 export const defStairway = `5${defSuffixSuccessActionResponse}`;
 export const defTeleport = `25${defSuffixSuccessActionResponse}`;
 
-export const defCreatureCombat = 2;
-export const defRepairAll = 15;
 
 export const defFetchPlayerStats = 1;
 export const defFetchPlayerBackpackCount = 2;
-export const defFetchPlayerBackpackItems = 4;
-export const defFetchPlayerPrefs = 8;
 
 export const defFetchPlayerBuffs = 16;
-export const defFetchWorldDefines = 32;
-export const defFetchWorldRealmStatic = 64;
 export const defFetchWorldRealmDynamic = 128;
 
 export const defFetchWorldRealmActions = 256;
-export const defFetchPlayerEquipment = 512;
-export const defFetchPlayerNotifications = 1024;
 
 export const defNeedToCompose = 'needToCompose';
 export const defLastComposeCheck = 'lastComposeCheck';
@@ -167,49 +159,6 @@ export const composingFragmentType = [
   'Legendary',
   'Super Elite',
   'Crystalline',
-];
-
-export const attribType = [
-  'Attack',
-  'Defense',
-  'Armor',
-  'HP',
-  'Damage',
-  'Stamina',
-  'Stamina Gain',
-  'Gold Gain',
-  'XP Gain',
-];
-
-export const enhancementType = [
-  'Piercing Strike',
-  'Reinforced Armor',
-  'Thievery',
-  'Critical Hit',
-  'Holy',
-  'Breaker',
-  'Nullify',
-  'Banishment',
-  'Protection',
-  'Oceanic',
-  'Master Thief',
-  'Protect Gold',
-  'Dodge',
-  'Disarm',
-  'Master Blacksmith',
-  'Elite Hunter',
-  'Sustain',
-  'Master Crafter',
-  'Fury Caster',
-  'Greenskin Slayer',
-  'Beast Slayer',
-  'Duelist',
-  'Glory Seeker',
-  'First Strike',
-  'Hypnotize',
-  'Master Inventor',
-  'Soulless',
-  'Temporal Shift',
 ];
 
 export const itemType = [

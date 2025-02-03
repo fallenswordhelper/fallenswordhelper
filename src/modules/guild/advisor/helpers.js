@@ -9,7 +9,7 @@ import trim from '../../common/trim';
 import chromeHandlers from '../../notepad/inventory/eventHandlers/chromeHandlers';
 import task from '../../support/task';
 
-export const advisorColumns = [
+const advisorColumns = [
   { title: '<div class="fshBold">Member</div>' },
   { title: '<div class="fshBold">Lvl</div>', class: 'dt-center' },
   { title: '<div class="fshBold">Rank</div>', class: 'dt-center dt-nowrap' },

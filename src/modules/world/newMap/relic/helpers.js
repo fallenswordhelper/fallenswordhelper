@@ -1,7 +1,7 @@
 import { darkCurseMultiplier } from '../../../support/constants';
 import fallback from '../../../system/fallback';
 
-export const calcBuffEffect = (base, lvl, effect) =>
+const calcBuffEffect = (base, lvl, effect) =>
   Math.ceil(base * fallback(lvl, 0) * effect);
 export const calcNmvEffect = (atk, nmv) => calcBuffEffect(atk, nmv, 0.0025);
 
