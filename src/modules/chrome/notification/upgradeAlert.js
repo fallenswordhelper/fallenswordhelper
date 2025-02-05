@@ -35,6 +35,7 @@ function checkUpgrade(response) {
 
 function fillBoxes() {
   const boxes = querySelectorAll('#pCC input[name="quantity"]');
+  if (boxes?.length < 2) return;
   boxes[0].value = '100';
   boxes[1].value = '10';
 }
