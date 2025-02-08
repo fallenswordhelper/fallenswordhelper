@@ -40,15 +40,15 @@ const ctx = await esbuild.context({
   write: false,
 });
 
-const { host, port } = await ctx.serve({ servedir: root });
+const { hosts, port } = await ctx.serve({ host: '127.0.0.1', servedir: root });
 
-console.log(`esbuild listening on http://${host}:${port}`);
+console.log(`esbuild listening on http://${hosts[0]}:${port}`);
 
 const ws = await lws.create({
   rewrite: [
     {
       from: '/(.*)',
-      to: `http://${host}:${port}/$1`,
+      to: `http://${hosts[0]}:${port}/$1`,
     },
   ],
 });
