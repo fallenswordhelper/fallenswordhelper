@@ -47,7 +47,7 @@
     "@shopify/prettier-plugin-liquid": "^1.8.0",
     "@types/node": "^22.13.1",
     "csso": "^5.0.5",
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.25.0",
     "esbuild-svelte": "^0.9.0",
     "eslint": "^9.20.0",
     "eslint-config-prettier": "^10.0.1",
