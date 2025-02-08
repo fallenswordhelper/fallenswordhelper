@@ -1,4 +1,5 @@
 import daUpgradesGold from '../../_dataAccess/daUpgradesGold';
+import isUndefined from '../../common/isUndefined';
 import jQueryPresent from '../../common/jQueryPresent';
 import parseGoldUpgrades from '../../common/parseGoldUpgrades';
 import querySelectorAll from '../../common/querySelectorAll';
@@ -46,8 +47,7 @@ export async function checkGoldUpgrades() {
   const response = goldUpgradesPage()
     ? parseGoldUpgrades(document)
     : await daUpgradesGold();
-  if (!response.s) return;
-  checkUpgrade(response.r[1]);
+  if (!isUndefined(response?.r?.[1]?.current)) checkUpgrade(response.r[1]);
 }
 
 function notUpgradesPage() {
