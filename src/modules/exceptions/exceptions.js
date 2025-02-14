@@ -16,6 +16,7 @@ const substrings = [
   'Fallen-Sword-Win%252FLoss-Checker.user.js',
   'Fallensword-GvG-Target-Checker-with-Button-and-Buff-Check.user.js',
   'Fetch-Auction-and-Send-to-Discord.user.js',
+  'FS-Fixer.user.js',
   'fs.min.js',
   'GVG-and-Relics-Notifications.user.js',
   'GvG-Initiate-Enhanced.user.js',
