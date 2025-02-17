@@ -2,16 +2,13 @@
   import sendEvent from '../analytics/sendEvent';
   import isBoolean from '../common/isBoolean';
 
-  export let isOnLadder;
-  export let toggleLadder;
-
-  let opt;
+  const { isOnLadder, toggleLadder } = $props();
+  let opt = $state(false);
+  let togglePromise = $state(Promise.resolve());
 
   async function init() {
     opt = await isOnLadder();
   }
-
-  let togglePromise;
 
   function toggle() {
     opt = !opt;
@@ -43,7 +40,7 @@
             <span class="fshSpinner fshSpinner12"></span>
           </div>
         {:then}
-          <input type="checkbox" bind:checked={opt} on:click={toggle} />
+          <input type="checkbox" bind:checked={opt} onclick={toggle} />
         {/await}
       </td>
     {/if}
