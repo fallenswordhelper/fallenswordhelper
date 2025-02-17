@@ -31,9 +31,19 @@ const ctx = await esbuild.context({
   },
   entryPoints: [pathToFile('src/calfSystem.js')],
   format: 'esm',
+  logOverride: { 'suspicious-nullish-coalescing': 'silent' },
   minify: true,
   outdir: pathToFile(calfPath),
-  plugins: [liquidPlugin, sveltePlugin()],
+  plugins: [
+    liquidPlugin,
+    sveltePlugin({
+      compilerOptions: { compatibility: { componentApi: 4 } },
+      filterWarnings: (warning) =>
+        warning.code !== 'a11y_consider_explicit_label' &&
+        warning.code !== 'reactive_declaration_module_script_dependency' &&
+        warning.filename !== 'node_modules/svelte-table/src/SvelteTable.svelte',
+    }),
+  ],
   sourcemap: true,
   sourcesContent: false,
   splitting: false,
@@ -45,12 +55,7 @@ const { hosts, port } = await ctx.serve({ host: '127.0.0.1', servedir: root });
 console.log(`esbuild listening on http://${hosts[0]}:${port}`);
 
 const ws = await lws.create({
-  rewrite: [
-    {
-      from: '/(.*)',
-      to: `http://${hosts[0]}:${port}/$1`,
-    },
-  ],
+  rewrite: [{ from: '/(.*)', to: `http://${hosts[0]}:${port}/$1` }],
 });
 
 console.log(`lws listening on port ${ws.config.port}`);
