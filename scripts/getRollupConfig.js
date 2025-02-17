@@ -50,7 +50,20 @@ export default async function getRollupConfig(env) {
       }),
     },
     plugins: [
-      svelte({ emitCss: true }),
+      svelte({
+        compilerOptions: { compatibility: { componentApi: 4 } },
+        emitCss: true,
+        onwarn: (warning, handler) => {
+          if (
+            warning.code !== 'a11y_consider_explicit_label' &&
+            warning.code !== 'reactive_declaration_module_script_dependency' &&
+            warning.filename !==
+              'node_modules/svelte-table/src/SvelteTable.svelte'
+          ) {
+            handler(warning);
+          }
+        },
+      }),
       commonjs(),
       resolve({ browser: true }),
       replace({

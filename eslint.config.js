@@ -29,5 +29,10 @@ export default [
   ...eslintPluginSvelte.configs['flat/recommended'],
   ...eslintPluginSvelte.configs['flat/prettier'],
   { ignores: ['dist/'] },
-  { rules: { 'no-unused-vars': ['error', { caughtErrors: 'none' }] } },
+  {
+    rules: {
+      'no-unused-vars': ['error', { caughtErrors: 'none' }],
+      'svelte/valid-compile': ['error', { ignoreWarnings: true }],
+    },
+  },
 ];
