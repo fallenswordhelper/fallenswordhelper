@@ -4,12 +4,3 @@
   display: inline-block;
   background-size: contain;
 }
-
-.pot-report-moved {
-  position: absolute;
-  right: 0;
-}
-
-.pot-report-button {
-  font-size: 12px;
-}
