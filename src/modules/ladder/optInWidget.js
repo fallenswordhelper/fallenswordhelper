@@ -1,3 +1,4 @@
+import { mount } from 'svelte';
 import daSettingsFlags from '../_dataAccess/daSettingsFlags';
 import daSettingsView from '../_dataAccess/daSettingsView';
 import isArray from '../common/isArray';
@@ -20,16 +21,9 @@ function toggleLadder(o) {
   }
 }
 
-function startApp(target) {
-  return new OptIn({
-    props: { toggleLadder, isOnLadder },
-    target,
-  });
-}
-
 export default function optInWidget() {
   if (getValue('optInOnLadderPage')) {
     const target = querySelector('#pCC table tbody');
-    startApp(target);
+    mount(OptIn, { props: { toggleLadder, isOnLadder }, target });
   }
 }
