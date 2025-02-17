@@ -2,6 +2,7 @@
   import daJoinAll from '../../_dataAccess/daJoinAll';
   import daViewGroups from '../../_dataAccess/daViewGroups';
   import sendEvent from '../../analytics/sendEvent';
+  import callOnce from '../../common/callOnce';
   import playerName from '../../common/playerName';
   import calf from '../../support/calf';
   import { joinUnderUrl, joinallUrl } from '../../support/constants';
@@ -13,14 +14,11 @@
   const isOpen = (g) => !g.members.find(hasPlayer);
   const getId = (g) => g.id;
 
-  let joining = 0;
+  let joining = $state(0);
 
-  let groupJoinUrl = joinallUrl;
-  let groupJoinText = '';
-  if (calf.enableMaxGroupSizeToJoin) {
-    groupJoinUrl = joinUnderUrl;
-    groupJoinText = ` less than size ${calf.maxGroupSizeToJoin}`;
-  }
+  const [groupJoinUrl, groupJoinText] = calf.enableMaxGroupSizeToJoin
+    ? [joinUnderUrl, ` less than size ${calf.maxGroupSizeToJoin}`]
+    : [joinallUrl, ''];
 
   async function processGroups(json) {
     const openGroups = json.r.filter(smallEnough).filter(isOpen).map(getId);
@@ -53,7 +51,7 @@
     {/await}
   {:else}
     <p class="notification-content">
-      <button on:click|once={handleClick} type="button">
+      <button onclick={callOnce(handleClick)} type="button">
         Join all attack groups{groupJoinText}.
       </button>
     </p>
