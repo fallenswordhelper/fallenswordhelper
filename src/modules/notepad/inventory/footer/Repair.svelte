@@ -1,10 +1,11 @@
 <script>
   import daGsTake from '../../../_dataAccess/daGsTake';
   import arrayFrom from '../../../common/arrayFrom';
+  import callOnce from '../../../common/callOnce';
 
-  export let fshInv = 0;
-  let disabled = 1;
-  let recalling = 0;
+  let { fshInv } = $props();
+  let disabled = $state(1);
+  let recalling = $state(0);
 
   const repairable = (
     _idx,
@@ -38,7 +39,7 @@
       <button
         class="custombutton"
         {disabled}
-        on:click|once={toBp}
+        onclick={callOnce(toBp)}
         type="button"
       >
         BP

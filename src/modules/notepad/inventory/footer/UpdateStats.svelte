@@ -15,12 +15,11 @@
     updateAttr,
   } from './utils';
 
-  export let fshInv = 0;
+  let { fshInv } = $props();
+  let chunksNeeded = $state(0);
+  let chunksReceived = $state(0);
 
   const api = new DataTable(fshInv);
-
-  let chunksNeeded = 0;
-  let chunksReceived = 0;
 
   async function getItem([ary, pFn, tConst]) {
     const json = await itemDetails(ary, pFn, tConst);
@@ -80,13 +79,13 @@
     </div>
   </div>
   <div class="btnbox">
-    <button class="custombutton" on:click={updThisPage} type="button"
+    <button class="custombutton" onclick={updThisPage} type="button"
       >On page</button
     >
-    <button class="custombutton" on:click={updAll} type="button">All</button>
+    <button class="custombutton" onclick={updAll} type="button">All</button>
   </div>
   <div class="btnbox">
-    <button class="custombutton" on:click={clearCache} type="button"
+    <button class="custombutton" onclick={clearCache} type="button"
       >Clear cache</button
     >
   </div>
