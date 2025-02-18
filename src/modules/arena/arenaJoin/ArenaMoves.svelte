@@ -2,17 +2,19 @@
   import usesetup from '../../app/arena/usesetup';
   import { cdn } from '../../system/system';
 
-  export let res = 0;
+  const { res } = $props();
 
-  let currentSet = 0;
-  let selected = 0;
-  let sets = 0;
+  let currentSet = $state(0);
+  let selected = $state(0);
+  let sets = $derived([
+    ...(!res.sets.some(findSet) ? [currentSet] : []),
+    ...res.sets,
+  ]);
 
   const findSet = ({ slots }) => slots.join() === currentSet.slots.join();
 
   (function init() {
     currentSet = res.current_set;
-    sets = [...(!res.sets.some(findSet) ? [currentSet] : []), ...res.sets];
     selected = sets.find(findSet).id;
   })();
 
@@ -23,7 +25,7 @@
 </script>
 
 <div class="ams">
-  <select bind:value={selected} on:change={handleChange}>
+  <select bind:value={selected} onchange={handleChange}>
     {#each sets as { id, name }}
       <option value={id}>{name}</option>
     {/each}

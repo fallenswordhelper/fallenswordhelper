@@ -1,10 +1,7 @@
 <script>
   import ItemImg from '../../common/ItemImg.svelte';
 
-  let className = '';
-
-  export let item = 0;
-  export { className as class };
+  const { class: className, item } = $props();
 </script>
 
 <div class={className}>
