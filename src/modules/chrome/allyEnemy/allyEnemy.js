@@ -156,7 +156,12 @@ function nextTick(data) {
 }
 
 export default async function allyEnemy() {
-  if ((!calf.enableAllyOnlineList && !calf.enableEnemyOnlineList) || jQueryNotPresent()) return;
+  if (
+    (!calf.enableAllyOnlineList && !calf.enableEnemyOnlineList) ||
+    jQueryNotPresent()
+  ) {
+    return;
+  }
   const data = await myStats(false);
   nextTick(data);
 }

@@ -1,12 +1,9 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-
-  const dispatch = createEventDispatcher();
-  export let folders;
-  let folderId;
+  let { folders, moveItemsToFolder } = $props();
+  let folderId = $state();
 
   function doMove() {
-    dispatch('move', folderId);
+    moveItemsToFolder(folderId);
   }
 </script>
 
@@ -19,7 +16,7 @@
       {/each}
     </select>
     <span>&nbsp;</span>
-    <button class="custombutton" on:click={doMove} type="button">Move</button>
+    <button class="custombutton" onclick={doMove} type="button">Move</button>
   </td>
 </tr>
 

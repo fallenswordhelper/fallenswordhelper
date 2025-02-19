@@ -1,3 +1,4 @@
+import { mount } from 'svelte';
 import closestTable from '../common/closestTable';
 import getId from '../common/getId';
 import getTextTrim from '../common/getTextTrim';
@@ -17,7 +18,7 @@ const getCcy = (p) => ({
 });
 
 function startApp(potions, target) {
-  return new Bazaar({
+  return mount(Bazaar, {
     target: target.parentElement,
     props: { potions },
   });

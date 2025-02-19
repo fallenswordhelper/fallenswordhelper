@@ -2,11 +2,17 @@
   import usesetup from '../../app/arena/usesetup';
   import { cdn } from '../../system/system';
 
-  export let res = 0;
+  /**
+   * @typedef {Object} Props
+   * @property {number} [res]
+   */
 
-  let currentSet = 0;
-  let selected = 0;
-  let sets = 0;
+  /** @type {Props} */
+  let { res = 0 } = $props();
+
+  let currentSet = $state(0);
+  let selected = $state(0);
+  let sets = $state(0);
 
   const findSet = ({ slots }) => slots.join() === currentSet.slots.join();
 
@@ -23,7 +29,7 @@
 </script>
 
 <div class="ams">
-  <select bind:value={selected} on:change={handleChange}>
+  <select bind:value={selected} onchange={handleChange}>
     {#each sets as { id, name }}
       <option value={id}>{name}</option>
     {/each}

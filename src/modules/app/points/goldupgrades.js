@@ -1,4 +1,4 @@
-import points from "./points";
+import points from './points';
 
 export default function goldupgrades() {
   return points({ subcmd: 'goldupgrades' });

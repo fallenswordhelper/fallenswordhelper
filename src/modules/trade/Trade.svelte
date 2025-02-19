@@ -12,7 +12,7 @@
 
 {#if getElementById('send-items')}
   <div>
-    <button class="custombutton" on:click={sendBtn} type="button">Send</button>
+    <button class="custombutton" onclick={sendBtn} type="button">Send</button>
   </div>
 {/if}
 

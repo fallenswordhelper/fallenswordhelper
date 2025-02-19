@@ -1,4 +1,6 @@
 <script>
+  import { run } from 'svelte/legacy';
+
   import daGuildReport from '../../_dataAccess/daGuildReport';
   import ranksView from '../../_dataAccess/fallbacks/ranksView';
   import sendEvent from '../../analytics/sendEvent';
@@ -11,7 +13,13 @@
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import addCommas from '../../system/addCommas';
 
-  export let visible = true;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [visible]
+   */
+
+  /** @type {Props} */
+  let { visible = $bindable(true) } = $props();
 
   const columns = [
     { key: 'slot', title: 'Slot', value: (r) => r.slot, sortable: true },
@@ -52,8 +60,8 @@
       renderValue: (r) => addCommas(r.max_stamina),
     },
   ];
-  let prm = null;
-  let rows = [];
+  let prm = $state(null);
+  let rows = $state([]);
 
   const notEquipped = ({ equipped }) => !equipped;
   const playerId = ({ player: { id } }) => id;
@@ -96,13 +104,17 @@
     prm = init();
   }
 
-  $: if (visible) {
-    refresh();
-  }
+  run(() => {
+    if (visible) {
+      refresh();
+    }
+  });
 </script>
 
 <ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Who's Got What</svelte:fragment>
+  {#snippet title()}
+    Who's Got What
+  {/snippet}
   <div class="content">
     {#await prm}
       Loading...

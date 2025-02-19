@@ -6,8 +6,8 @@
   import ArenaMoves from './ArenaMoves.svelte';
 
   const pvpId = Number(getUrlParameter('pvp_id'));
-  let res = 0;
-  let thisArena = 0;
+  let res = $state(0);
+  let thisArena = $state(0);
 
   const findArena = (r) => r.arenas.find((e) => e.id === pvpId);
 

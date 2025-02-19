@@ -7,12 +7,22 @@
   import setValue from '../../system/setValue';
   import { cdn } from '../../system/system';
 
-  export let seasonal = false;
-  export let status = 'active';
-  export let visible = true;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [seasonal]
+   * @property {string} [status]
+   * @property {boolean} [visible]
+   */
+
+  /** @type {Props} */
+  let {
+    seasonal = $bindable(false),
+    status = $bindable('active'),
+    visible = $bindable(true),
+  } = $props();
 
   // Split is for backwards compatability
-  let hiddenQuests = getValue('hideQuestNames').split(',');
+  let hiddenQuests = $state(getValue('hideQuestNames').split(','));
   function updateHiddenQuests() {
     setValue('hideQuestNames', hiddenQuests.join(','));
   }
@@ -25,12 +35,12 @@
     updateHiddenQuests();
   }
 
-  let query = '';
-  let realm = '';
-  let minLvl = 0;
-  let maxLvl = 6000;
+  let query = $state('');
+  let realm = $state('');
+  let minLvl = $state(0);
+  let maxLvl = $state(6000);
 
-  let questBook = [];
+  let questBook = $state([]);
   async function loadQuestBook() {
     const response = await daQuestBook();
     questBook = response.r.map((i) => {
@@ -58,14 +68,19 @@
     hidden: (i) => hiddenQuests.includes(i.name),
   };
 
-  $: seasonalQuests = questBook.filter((i) => i.seasonal === seasonal);
-  $: progress =
+  let seasonalQuests = $derived(
+    questBook.filter((i) => i.seasonal === seasonal),
+  );
+  let progress = $derived(
     seasonalQuests.filter(statusFilters.completed).length /
-    seasonalQuests.length;
-  $: queryQuests = seasonalQuests
-    .filter(statusFilters[status])
-    .filter((i) => hiddenQuests.includes(i.name) === (status === 'hidden'))
-    .filter(inputFilters(query, realm, minLvl, maxLvl));
+      seasonalQuests.length,
+  );
+  let queryQuests = $derived(
+    seasonalQuests
+      .filter(statusFilters[status])
+      .filter((i) => hiddenQuests.includes(i.name) === (status === 'hidden'))
+      .filter(inputFilters(query, realm, minLvl, maxLvl)),
+  );
 
   let lastSort = '';
   function sortQuests(feature) {
@@ -83,7 +98,9 @@
 </script>
 
 <ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Quest Book</svelte:fragment>
+  {#snippet title()}
+    Quest Book
+  {/snippet}
   <div id="fshQuestContainer">
     {#await loadQuestBook()}
       Loading...
@@ -175,24 +192,32 @@
           <tr>
             <th
               width="20%"
-              on:click={() => sortQuests('name')}
-              class="fshPointer">Quest Name</th
+              onclick={() => sortQuests('name')}
+              class="fshPointer"
             >
+              Quest Name
+            </th>
             <th
               width="20%"
-              on:click={() => sortQuests('min_level')}
-              class="fshPointer">Level</th
+              onclick={() => sortQuests('min_level')}
+              class="fshPointer"
             >
+              Level
+            </th>
             <th
               width="25%"
-              on:click={() => sortQuests('realm_name')}
-              class="fshPointer">Starting Realm</th
+              onclick={() => sortQuests('realm_name')}
+              class="fshPointer"
             >
+              Starting Realm
+            </th>
             <th
               width="10%"
-              on:click={() => sortQuests('current_stage')}
-              class="fshPointer">Status</th
+              onclick={() => sortQuests('current_stage')}
+              class="fshPointer"
             >
+              Status
+            </th>
             <th width="10%">Guides</th>
             <th width="10%">Hide</th>
           </tr>
@@ -269,12 +294,11 @@
               </td>
               <td>
                 {#if status === 'hidden'}
-                  <button type="button" on:click={unHideQuest(quest)}
-                    >Unhide</button
-                  >
+                  <button type="button" onclick={unHideQuest(quest)}>
+                    Unhide
+                  </button>
                 {:else}
-                  <button type="button" on:click={hideQuest(quest)}>Hide</button
-                  >
+                  <button type="button" onclick={hideQuest(quest)}>Hide</button>
                 {/if}
               </td>
             </tr>

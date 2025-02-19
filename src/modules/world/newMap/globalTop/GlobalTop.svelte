@@ -3,7 +3,7 @@
   import { guildViewUrl, showPlayerUrl } from '../../../support/constants';
   import { cdn } from '../../../system/system';
 
-  export let promise;
+  let { promise } = $props();
 </script>
 
 {#await promise}

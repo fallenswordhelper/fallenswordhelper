@@ -19,12 +19,22 @@
   import view from '../../app/guild/recruit/view';
   import isArray from '../../common/isArray';
 
-  export let groupCombatItems = null;
-  export let hideNonPlayerGuildLogMessages = null;
-  export let logEntry = null;
+  /**
+   * @typedef {Object} Props
+   * @property {any} [groupCombatItems]
+   * @property {any} [hideNonPlayerGuildLogMessages]
+   * @property {any} [logEntry]
+   */
 
-  let recruiting_prm = Promise.resolve();
-  let recruiting_result = 'waiting';
+  /** @type {Props} */
+  let {
+    groupCombatItems = null,
+    hideNonPlayerGuildLogMessages = null,
+    logEntry = null,
+  } = $props();
+
+  let recruiting_prm = $state(Promise.resolve());
+  let recruiting_result = $state('waiting');
 
   function logEvent(type) {
     sendEvent('Guild Log', type);

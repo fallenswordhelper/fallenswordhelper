@@ -2,8 +2,7 @@
   import Cooldown from './Cooldown.svelte';
   import TitanFilter from './TitanFilter.svelte';
 
-  export let theTitans;
-  export let titanRows;
+  let { theTitans, titanRows } = $props();
 </script>
 
 <tr>

@@ -10,14 +10,13 @@
   import trimTitanName from '../../common/trimTitanName';
   import { get, set } from '../../system/idb';
 
-  export let theTitans;
-  export let titanRows;
+  let { theTitans, titanRows } = $props();
 
   const prefName = 'fsh_titanFilter';
-  let current = true;
-  let history = true;
-  let securable = false;
-  let titans = [];
+  let current = $state(true);
+  let history = $state(true);
+  let securable = $state(false);
+  let titans = $state([]);
 
   const byName = ([a], [b]) => alpha(a, b);
   const getPrefs = () => get(prefName);
@@ -114,7 +113,7 @@
         <label>
           <input
             bind:checked={current}
-            on:change={toggleCurrent}
+            onchange={toggleCurrent}
             type="checkbox"
           />
           Current
@@ -122,7 +121,7 @@
         <label>
           <input
             bind:checked={history}
-            on:change={toggleHistory}
+            onchange={toggleHistory}
             type="checkbox"
           />
           History
@@ -130,7 +129,7 @@
         <label>
           <input
             bind:checked={securable}
-            on:change={toggleSecurable}
+            onchange={toggleSecurable}
             type="checkbox"
           />
           Securable
@@ -142,11 +141,11 @@
       <td colspan="3">
         {#await buildTitanList() then}
           <div id="titan-list">
-            {#each titans as [name, flag]}
+            {#each titans as [name], i}
               <label>
                 <input
-                  bind:checked={flag}
-                  on:change={toggleTitan}
+                  bind:checked={titans[i].flag}
+                  onchange={toggleTitan}
                   type="checkbox"
                 />
                 {name}

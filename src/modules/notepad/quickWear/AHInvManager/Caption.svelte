@@ -2,14 +2,20 @@
   import sendEvent from '../../../analytics/sendEvent';
   import { auctionSearchUrl } from '../../../support/constants';
 
-  export let data = '';
+  /**
+   * @typedef {Object} Props
+   * @property {string} [data]
+   */
+
+  /** @type {Props} */
+  let { data = '' } = $props();
 </script>
 
 <div>
   Items {data} from
   <a
     href={auctionSearchUrl}
-    on:click={() => sendEvent('QuickWear', 'AH Quick Search', data)}
+    onclick={() => sendEvent('QuickWear', 'AH Quick Search', data)}
     >AH Quick Search</a
   >
   found in your inventory

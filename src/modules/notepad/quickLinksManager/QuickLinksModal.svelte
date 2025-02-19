@@ -4,7 +4,13 @@
   import QuickLinksManager from './QuickLinksManager.svelte';
   import QuickLinksRaw from './QuickLinksRaw.svelte';
 
-  export let visible = true;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [visible]
+   */
+
+  /** @type {Props} */
+  let { visible = $bindable(true) } = $props();
 
   function close() {
     sendEvent('Quick Links Manager', 'close');

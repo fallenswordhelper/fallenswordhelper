@@ -5,11 +5,20 @@
   import { get, set } from '../../system/idb';
 
   const dispatch = createEventDispatcher();
-  export let checks = Array(11).fill(true);
-  export let searchValue = '';
+  /**
+   * @typedef {Object} Props
+   * @property {any} [checks]
+   * @property {string} [searchValue]
+   */
+
+  /** @type {Props} */
+  let {
+    checks = $bindable(Array(11).fill(true)),
+    searchValue = $bindable(''),
+  } = $props();
 
   function storeChecks() {
-    set('fsh_LogChecks', checks);
+    set('fsh_LogChecks', $state.snapshot(checks));
   }
 
   function cbChange() {
@@ -61,7 +70,7 @@
         Potions:
         <input
           bind:checked={checks[1]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="1"
         />
@@ -72,7 +81,7 @@
         Store/Recalls:
         <input
           bind:checked={checks[2]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="2"
         />
@@ -83,7 +92,7 @@
         Relics:
         <input
           bind:checked={checks[4]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="4"
         />
@@ -94,7 +103,7 @@
         Mercenaries:
         <input
           bind:checked={checks[5]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="5"
         />
@@ -105,7 +114,7 @@
         Group Combats:
         <input
           bind:checked={checks[6]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="6"
         />
@@ -119,7 +128,7 @@
         Donations:
         <input
           bind:checked={checks[7]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="7"
         />
@@ -130,7 +139,7 @@
         Rankings:
         <input
           bind:checked={checks[8]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="8"
         />
@@ -141,7 +150,7 @@
         GvGs:
         <input
           bind:checked={checks[9]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="9"
         />
@@ -152,7 +161,7 @@
         Tag/UnTags:
         <input
           bind:checked={checks[3]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="3"
         />
@@ -163,7 +172,7 @@
         Titans:
         <input
           bind:checked={checks[10]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="10"
         />
@@ -174,7 +183,7 @@
         Other:
         <input
           bind:checked={checks[0]}
-          on:change={cbChange}
+          onchange={cbChange}
           type="checkbox"
           value="0"
         />

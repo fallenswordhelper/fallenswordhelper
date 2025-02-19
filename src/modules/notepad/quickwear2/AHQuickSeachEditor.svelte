@@ -5,8 +5,8 @@
   import getValue from '../../system/getValue';
   import setValue from '../../system/setValue';
 
-  let current = getValue('quickSearchList');
-  let badJson = 0;
+  let current = $state(getValue('quickSearchList'));
+  let badJson = $state(0);
 
   const isGood = () => isArray(jsonParse(current));
   const isBad = () => !isGood();
@@ -31,17 +31,17 @@
     <textarea
       bind:value={current}
       class:invalid={badJson}
-      on:blur={() => {
+      onblur={() => {
         badJson = isBad();
       }}
-      on:focus={() => {
+      onfocus={() => {
         badJson = 0;
       }}
     ></textarea>
   </div>
   <div class="bottom">
-    <button on:click={save} type="button">Save</button>
-    <button on:click={reset} type="button">Reset</button>
+    <button onclick={save} type="button">Save</button>
+    <button onclick={reset} type="button">Reset</button>
   </div>
 </div>
 

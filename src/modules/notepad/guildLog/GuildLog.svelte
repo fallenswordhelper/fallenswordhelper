@@ -1,4 +1,6 @@
 <script>
+  import { run } from 'svelte/legacy';
+
   import VirtualList from '../../common/VirtualList.svelte';
   import daGuildLog from '../../_dataAccess/daGuildLog';
   import sendEvent from '../../analytics/sendEvent';
@@ -12,20 +14,26 @@
   import LogItem from './LogItem.svelte';
   import profiler from './profiler';
 
-  export let visible = true;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [visible]
+   */
 
-  let checks = Array(11).fill(true);
+  /** @type {Props} */
+  let { visible = $bindable(true) } = $props();
+
+  let checks = $state(Array(11).fill(true));
   let chunkNo = 0;
-  let displayLog = [];
+  let displayLog = $state([]);
   let enableLogColoring = null;
-  let groupCombatItems = null;
-  let hideNonPlayerGuildLogMessages = null;
+  let groupCombatItems = $state(null);
+  let hideNonPlayerGuildLogMessages = $state(null);
   let lastCheckUtc = null;
   let liveLog = [];
-  let prm = null;
-  let progressLog = [];
+  let prm = $state(null);
+  let progressLog = $state([]);
   let nowUtc = null;
-  let searchValue = '';
+  let searchValue = $state('');
 
   function logEvent(type) {
     sendEvent('Guild Log', type);
@@ -137,15 +145,21 @@
     prm = init();
   }
 
-  $: if (visible) {
-    refresh();
-  }
+  run(() => {
+    if (visible) {
+      refresh();
+    }
+  });
 
-  $: updateDisplayLog(searchValue);
+  run(() => {
+    updateDisplayLog(searchValue);
+  });
 </script>
 
 <ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Guild Log</svelte:fragment>
+  {#snippet title()}
+    Guild Log
+  {/snippet}
   <div class="content">
     <FilterHeader
       bind:checks
@@ -176,12 +190,14 @@
       {/each}
     {:then}
       <div class="vs">
-        <VirtualList items={displayLog} let:item={logEntry}>
-          <LogItem
-            {groupCombatItems}
-            {hideNonPlayerGuildLogMessages}
-            {logEntry}
-          />
+        <VirtualList items={displayLog}>
+          {#snippet children({ item: logEntry })}
+            <LogItem
+              {groupCombatItems}
+              {hideNonPlayerGuildLogMessages}
+              {logEntry}
+            />
+          {/snippet}
         </VirtualList>
       </div>
     {:catch error}

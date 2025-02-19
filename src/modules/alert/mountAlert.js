@@ -1,3 +1,4 @@
+import { mount } from 'svelte';
 import Alert from './Alert.svelte';
 
 let mounted;
@@ -5,6 +6,6 @@ let mounted;
 export default function mountAlert() {
   if (!mounted) {
     mounted = true;
-    return new Alert({ target: document.body });
+    return mount(Alert, { target: document.body });
   }
 }

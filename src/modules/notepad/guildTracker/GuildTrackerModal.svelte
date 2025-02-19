@@ -4,7 +4,13 @@
   import GuildTracker from './GuildTracker.svelte';
   import Utils from './Utils.svelte';
 
-  export let visible = true;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [visible]
+   */
+
+  /** @type {Props} */
+  let { visible = $bindable(true) } = $props();
 
   function close() {
     sendEvent('Guild Tracker', 'close');

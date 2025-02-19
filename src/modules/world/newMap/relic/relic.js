@@ -1,3 +1,4 @@
+import { mount, unmount } from 'svelte';
 import getElementById from '../../../common/getElementById';
 import { defRelicView } from '../../../support/constants';
 import Relic from './Relic.svelte';
@@ -5,8 +6,8 @@ import Relic from './Relic.svelte';
 let app = 0;
 
 function startApp(target, relicData) {
-  if (app) app.$destroy();
-  app = new Relic({ props: { relicData }, target });
+  if (app) unmount(app);
+  app = mount(Relic, { props: { relicData }, target });
 }
 
 function viewRelic(_e, data) {

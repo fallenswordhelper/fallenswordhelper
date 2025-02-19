@@ -1,10 +1,11 @@
+import { mount } from 'svelte';
 import querySelector from '../../common/querySelector';
 import { pcc } from '../../support/layout';
 import parseRecipe from './parseRecipe';
 import QuickInvent from './QuickInvent.svelte';
 
 function startApp(props, target) {
-  return new QuickInvent({
+  return mount(QuickInvent, {
     props,
     target,
   });

@@ -1,5 +1,15 @@
 <script>
-  export let visible = true;
+  import { run, createBubbler, self } from 'svelte/legacy';
+
+  const bubble = createBubbler();
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [visible]
+   * @property {import('svelte').Snippet} [children]
+   */
+
+  /** @type {Props} */
+  let { visible = true, children } = $props();
 
   let atBottom;
   let docScrollY;
@@ -23,18 +33,19 @@
     }
   }
 
-  $: {
+  run(() => {
     if (visible) {
       disableScroll();
     } else {
       enableScroll();
     }
-  }
+  });
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
-<div class:visible on:click|self>
-  <slot />
+<!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
+<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+<div class:visible onclick={self(bubble('click'))}>
+  {@render children?.()}
 </div>
 
 <style>

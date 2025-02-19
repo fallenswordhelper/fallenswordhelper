@@ -1,16 +1,17 @@
 <script>
+  import { preventDefault } from 'svelte/legacy';
+
   import { slide } from 'svelte/transition';
   import daDoInvent from '../../_dataAccess/daDoInvent';
   import sendEvent from '../../analytics/sendEvent';
   import LinkButton from '../../common/LinkButton.svelte';
 
-  export let max;
-  export let recipeID;
-  let amountToInvent = 1;
-  let successes = 0;
-  let failures = 0;
-  let progress = 0;
-  let errorMessage = '';
+  let { max, recipeID } = $props();
+  let amountToInvent = $state(1);
+  let successes = $state(0);
+  let failures = $state(0);
+  let progress = $state(0);
+  let errorMessage = $state('');
 
   function reset() {
     successes = 0;
@@ -48,7 +49,7 @@
 
 <form
   class="fshCenter"
-  on:submit|preventDefault={quickInvent}
+  onsubmit={preventDefault(quickInvent)}
   style="margin-top: 12px;"
 >
   <label for="quick-invent-amount">Select how many to quick invent</label>

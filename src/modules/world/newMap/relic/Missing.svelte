@@ -6,8 +6,8 @@
   import { sevenDaysAgo, twoMinutesAgo } from '../../../support/now';
   import { guildId } from './relicStore';
 
-  export let members = [];
-  let missingMembers = [];
+  let { members = [] } = $props();
+  let missingMembers = $state([]);
 
   const available = [
     ({ username }) => !members.includes(username),

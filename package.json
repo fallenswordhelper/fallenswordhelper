@@ -65,6 +65,7 @@
     "rollup-plugin-css-only": "^4.5.2",
     "rollup-plugin-svelte": "^7.2.2",
     "rollup-pluginutils": "^2.8.2",
+    "svelte-eslint-parser": "^0.43.0",
     "typescript": "^5.7.3"
   },
   "dependencies": {
@@ -72,7 +73,7 @@
     "css-tooltip": "^0.3.4",
     "idb": "^8.0.2",
     "posthog-js": "^1.215.6",
-    "svelte": "4.2.19"
+    "svelte": "^5.20.2"
   },
   "type": "module"
 }

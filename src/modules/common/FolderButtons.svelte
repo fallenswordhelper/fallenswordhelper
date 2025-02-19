@@ -1,15 +1,8 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import entries from './entries';
   import LinkButton from './LinkButton.svelte';
 
-  const dispatch = createEventDispatcher();
-  export let folders = {};
-  export let needsWorn = 0;
-
-  function doFilter(id) {
-    dispatch('filter', id);
-  }
+  let { doFilter, folders = {}, needsWorn = 0 } = $props();
 </script>
 
 <LinkButton on:click={() => doFilter('-2')}>All</LinkButton>{#if needsWorn}

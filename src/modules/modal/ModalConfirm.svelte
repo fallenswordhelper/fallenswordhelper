@@ -1,28 +1,24 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import Modal from './Modal.svelte';
 
-  export let msg = 'Are you sure?';
-  export let visible = true;
-
-  const dispatch = createEventDispatcher();
+  let { msg = 'Are you sure?', resolve, visible = $bindable(true) } = $props();
 
   function close() {
     visible = false;
-    dispatch('no');
+    resolve(false);
   }
 
   function sayYes() {
     visible = false;
-    dispatch('yes');
+    resolve(true);
   }
 </script>
 
 <Modal {visible} on:close={close}>
   <div>{msg}</div>
   <div>
-    <button on:click={sayYes} type="button">Yes</button>
-    <button on:click={close} type="button">No</button>
+    <button onclick={sayYes} type="button">Yes</button>
+    <button onclick={close} type="button">No</button>
   </div>
 </Modal>
 

@@ -28,8 +28,8 @@
 <div class="main">
   <div class="head">Recall all visible to</div>
   <div class="btnbox">
-    <button class="custombutton" on:click={toBp} type="button">BP</button>
-    <button class="custombutton" on:click={toGs} type="button">GS</button>
+    <button class="custombutton" onclick={toBp} type="button">BP</button>
+    <button class="custombutton" onclick={toGs} type="button">GS</button>
   </div>
 </div>
 

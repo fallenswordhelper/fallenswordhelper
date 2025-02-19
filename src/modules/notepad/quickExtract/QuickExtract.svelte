@@ -1,4 +1,6 @@
 <script>
+  import { run } from 'svelte/legacy';
+
   import daUseItem from '../../_dataAccess/daUseItem';
   import sendEvent from '../../analytics/sendEvent';
   import all from '../../common/all';
@@ -8,7 +10,7 @@
   import LinkButton from '../../common/LinkButton.svelte';
   import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import SelectInST from '../../common/SelectInST.svelte';
-  import confirm from '../../modal/confirm';
+  import confirm from '../../modal/confirm.svelte';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import getValue from '../../system/getValue';
   import setValue from '../../system/setValue';
@@ -19,15 +21,21 @@
   const prefSelectMain = 'selectMain';
   const prefDisablePrompts = 'disableQuickExtractPrompts';
 
-  export let visible = true;
-  let prm = null;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [visible]
+   */
+
+  /** @type {Props} */
+  let { visible = $bindable(true) } = $props();
+  let prm = $state(null);
   let playerId = null;
-  let selectST = null;
-  let selectMain = getValue(prefSelectMain);
-  let disablePrompts = getValue(prefDisablePrompts);
+  let selectST = $state(null);
+  let selectMain = $state(getValue(prefSelectMain));
+  let disablePrompts = $state(getValue(prefDisablePrompts));
   let extractable = null;
-  let toExtract = null;
-  let results = [];
+  let toExtract = $state(null);
+  let results = $state([]);
 
   const isExtractable = (item) =>
     item.item_name === 'Zombie Coffin' || item.type === 12 || item.type === 16;
@@ -75,10 +83,12 @@
     prm = getInv();
   }
 
-  $: if (visible) {
-    results = [];
-    prm = getInv();
-  }
+  run(() => {
+    if (visible) {
+      results = [];
+      prm = getInv();
+    }
+  });
 
   let lastMsg;
 
@@ -110,7 +120,9 @@
 </script>
 
 <ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Quick Extract</svelte:fragment>
+  {#snippet title()}
+    Quick Extract
+  {/snippet}
   <div>
     Select which type of plants you wish to extract all of. Only select
     extractable resources.
@@ -119,7 +131,7 @@
     <label>
       <input
         bind:checked={selectMain}
-        on:change={toggleSelectMain}
+        onchange={toggleSelectMain}
         type="checkbox"
       />
       Main Folder Only
@@ -127,7 +139,7 @@
     <label>
       <input
         bind:checked={disablePrompts}
-        on:change={togglePrompts}
+        onchange={togglePrompts}
         type="checkbox"
       />
       Disable Prompts

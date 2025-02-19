@@ -71,8 +71,10 @@
 
 <div class="wrapper">
   <div class="vs">
-    <VirtualList items={theStuff} let:item>
-      <svelte:component this={item.component} data={item.data} />
+    <VirtualList items={theStuff}>
+      {#snippet children({ item })}
+        <item.component data={item.data} />
+      {/snippet}
     </VirtualList>
   </div>
 </div>

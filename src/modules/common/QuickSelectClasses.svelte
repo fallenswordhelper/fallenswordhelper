@@ -17,10 +17,16 @@
 
   const dispatch = createEventDispatcher();
 
-  export let wantsTagged = 0;
-  let howMany = null;
-  let inSt = null;
-  let inv = null;
+  /**
+   * @typedef {Object} Props
+   * @property {number} [wantsTagged]
+   */
+
+  /** @type {Props} */
+  let { wantsTagged = 0 } = $props();
+  let howMany = $state(null);
+  let inSt = $state(null);
+  let inv = $state(null);
 
   howMany = 'all';
 

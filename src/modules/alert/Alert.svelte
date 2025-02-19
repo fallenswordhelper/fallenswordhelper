@@ -1,12 +1,20 @@
 <script>
+  import { run } from 'svelte/legacy';
+
   import { onDestroy } from 'svelte';
   import { fly } from 'svelte/transition';
   import alert from './alert';
 
-  export let ms = 3000;
-  let visible = false;
+  /**
+   * @typedef {Object} Props
+   * @property {number} [ms]
+   */
+
+  /** @type {Props} */
+  let { ms = 3000 } = $props();
+  let visible = $state(false);
   let timeout = 0;
-  let transform = '';
+  let transform = $state('');
 
   async function showMsg() {
     const vvp = window.visualViewport;
@@ -33,17 +41,19 @@
   };
 
   // whenever the alert store or the ms props changes run onMessageChange
-  $: onMessageChange($alert, ms);
+  run(() => {
+    onMessageChange($alert, ms);
+  });
 
   onDestroy(() => clearTimeout(timeout)); // make sure we clean-up the timeout
 </script>
 
 {#if visible}
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
   <div
     role="alert"
-    on:click={() => {
+    onclick={() => {
       visible = false;
     }}
     transition:fly={{

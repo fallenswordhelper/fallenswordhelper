@@ -9,7 +9,13 @@
   import ListItem from './ListItem.svelte';
   import NotFound from './NotFound.svelte';
 
-  export let itemList = 0;
+  /**
+   * @typedef {Object} Props
+   * @property {number} [itemList]
+   */
+
+  /** @type {Props} */
+  let { itemList = 0 } = $props();
 
   const itemCount = uniq(itemList.items, 'n').map(({ n }) => ({
     n,
@@ -68,8 +74,10 @@
 </script>
 
 <div class="vs">
-  <VirtualList items={theStuff} let:item>
-    <svelte:component this={item.component} data={item.data} />
+  <VirtualList items={theStuff}>
+    {#snippet children({ item })}
+      <item.component data={item.data} />
+    {/snippet}
   </VirtualList>
 </div>
 

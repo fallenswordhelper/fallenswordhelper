@@ -2,7 +2,13 @@
   import { itemType } from '../../support/constants';
   import ItemImage from './ItemImage.svelte';
 
-  export let equipment = 0;
+  /**
+   * @typedef {Object} Props
+   * @property {number} [equipment]
+   */
+
+  /** @type {Props} */
+  let { equipment = 0 } = $props();
 
   const anItem = (eq, type) =>
     eq && eq.find((i) => i.t === itemType.indexOf(type));

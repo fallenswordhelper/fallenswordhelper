@@ -11,9 +11,9 @@
   import createDocument from '../../system/createDocument';
   import WearingGrid from './WearingGrid.svelte';
 
-  let equipment = 0;
-  let combatSets = 0;
-  let selected = 0;
+  let equipment = $state(0);
+  let combatSets = $state(0);
+  let selected = $state(0);
 
   const equipped = ({ a: sa }) => equipment.some(({ a: ea }) => ea === sa);
   const equippedSet = ({ items }) => items.every(equipped);
@@ -53,7 +53,7 @@
     <div class="innerColumnHeader">
       <div class="flex">
         Inventory
-        <select bind:value={selected} on:change={handleChange}>
+        <select bind:value={selected} onchange={handleChange}>
           {#each combatSets as { id, name }}
             <option value={id}>{name}</option>
           {/each}

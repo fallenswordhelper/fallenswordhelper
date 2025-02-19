@@ -11,14 +11,14 @@
     retired,
   } from './utils';
 
-  let fileInput = 0;
-  let overwrite = 0;
-  let purgedate = '';
-  let missing = [];
-  let selected = '';
-  let disabled = 1;
+  let fileInput = $state(0);
+  let overwrite = $state(0);
+  let purgedate = $state('');
+  let missing = $state([]);
+  let selected = $state('');
+  let disabled = $state(1);
 
-  $: dateAsTimestamp = purgedate && Date.parse(purgedate) / 1000;
+  let dateAsTimestamp = $derived(purgedate && Date.parse(purgedate) / 1000);
 
   function exportJson() {
     sendEvent('Utils', 'exportJson');
@@ -70,20 +70,21 @@
 </script>
 
 <div>
-  <button on:click={exportJson} type="button">Export JSON</button><br /><br />
-  <button on:click={exportCsv} type="button">Export CSV</button><br /><br /><br
-  />
+  <button onclick={exportJson} type="button">Export JSON</button>
+  <br /><br />
+  <button onclick={exportCsv} type="button">Export CSV</button>
+  <br /><br /><br />
   <input
     accept=".csv, .json, .txt"
     bind:this={fileInput}
-    on:change={importFile}
+    onchange={importFile}
     type="file"
   />
-  <button on:click={importButton} type="button">Import</button>
+  <button onclick={importButton} type="button">Import</button>
   <label>
     <input
       bind:checked={overwrite}
-      on:change={() => {
+      onchange={() => {
         sendEvent('Utils', 'overwriteToggle');
       }}
       type="checkbox"
@@ -91,21 +92,20 @@
     Overwrite
   </label>
   (Warning: This can take a while on large files)<br /><br /><br />
-  <button disabled={!purgedate} on:click={datePurge} type="button">Purge</button
-  >
+  <button disabled={!purgedate} onclick={datePurge} type="button">Purge</button>
   data before
   <input
     bind:value={purgedate}
-    on:change={() => {
+    onchange={() => {
       sendEvent('Utils', 'purgeDateChange');
     }}
     type="date"
   /><br /><br />
-  <button on:click={userPurge} {disabled} type="button">Purge</button>
+  <button onclick={userPurge} {disabled} type="button">Purge</button>
   username
   <select
     bind:value={selected}
-    on:change={() => {
+    onchange={() => {
       sendEvent('Utils', 'handleChange');
     }}
     {disabled}

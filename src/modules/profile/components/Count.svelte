@@ -6,6 +6,8 @@
   import CountRow from './CountRow.svelte';
   import getAsyncData from './getAsyncData';
 
+  const { dispatchDelType } = $props();
+
   function rollupComponents(componentsJson) {
     const aggregate = new Map(
       uniq(componentsJson, 'b').map((o) => [
@@ -42,7 +44,7 @@
       </thead>
       <tbody>
         {#each rollup as itemId}
-          <CountRow {itemId} on:delType />
+          <CountRow {dispatchDelType} {itemId} />
         {/each}
       </tbody>
     </table>

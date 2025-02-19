@@ -24,12 +24,18 @@
   import { get, set } from '../../system/idb';
   import { cdn } from '../../system/system';
 
-  export let visible = true;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [visible]
+   */
 
-  let compTally = {};
-  let invTally = {};
-  let progressLog = [];
-  let recipeBook = [];
+  /** @type {Props} */
+  let { visible = $bindable(true) } = $props();
+
+  let compTally = $state({});
+  let invTally = $state({});
+  let progressLog = $state([]);
+  let recipeBook = $state([]);
   let sortDirection = 1;
 
   function recipeMgrEvent(type) {
@@ -119,7 +125,7 @@
 
   async function parseRecipes(toCheck) {
     recipeBook = await all(toCheck.map(getParts));
-    set('fsh_recipeMgr', recipeBook);
+    set('fsh_recipeMgr', $state.snapshot(recipeBook));
     getInventory();
   }
 
@@ -242,7 +248,7 @@
 </script>
 
 <ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">
+  {#snippet title()}
     Recipe Manager
     <LinkButtonBracketed
       --button-color="#494437"
@@ -251,7 +257,7 @@
     >
       Refresh
     </LinkButtonBracketed>
-  </svelte:fragment>
+  {/snippet}
   {#await init() then}
     {#if progressLog.length}
       <div class="progress-log">
@@ -273,7 +279,7 @@
         <div class="innerColumnHeader item-container">Target</div>
         {#each recipeBook as [id, name, recipe, items, components, [targetId, vcode]], index (index)}
           <div class="item-container">
-            <a href="{viewRecipeUrl}{id}" on:click={nav}>
+            <a href="{viewRecipeUrl}{id}" onclick={nav}>
               <div
                 class="image"
                 style:background-image="url('{cdn}recipes/{recipe}')"
@@ -281,7 +287,7 @@
             </a>
           </div>
           <div class="item-container">
-            <a href="{viewRecipeUrl}{id}" on:click={nav}>
+            <a href="{viewRecipeUrl}{id}" onclick={nav}>
               {name}
             </a>
           </div>

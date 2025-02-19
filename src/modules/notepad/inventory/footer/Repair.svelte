@@ -1,10 +1,18 @@
 <script>
+  import { once } from 'svelte/legacy';
+
   import daGsTake from '../../../_dataAccess/daGsTake';
   import arrayFrom from '../../../common/arrayFrom';
 
-  export let fshInv = 0;
-  let disabled = 1;
-  let recalling = 0;
+  /**
+   * @typedef {Object} Props
+   * @property {number} [fshInv]
+   */
+
+  /** @type {Props} */
+  let { fshInv = 0 } = $props();
+  let disabled = $state(1);
+  let recalling = $state(0);
 
   const repairable = (
     _idx,
@@ -38,7 +46,7 @@
       <button
         class="custombutton"
         {disabled}
-        on:click|once={toBp}
+        onclick={once(toBp)}
         type="button"
       >
         BP

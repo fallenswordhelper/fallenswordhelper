@@ -1,33 +1,36 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import sendEvent from '../../../analytics/sendEvent';
   import LinkButtonBracketed from '../../../common/LinkButtonBracketed.svelte';
   import calf from '../../../support/calf';
   import setValue from '../../../system/setValue';
 
-  const dispatch = createEventDispatcher();
   const label = (pref) => (pref ? 'Hide' : 'Show');
 
-  export let showExtraLinks = false;
-  export let showQuickDropLinks = false;
+  let {
+    doDropLinks,
+    doExtraLinks,
+    doSelectLocked,
+    showExtraLinks = $bindable(false),
+    showQuickDropLinks = $bindable(false),
+  } = $props();
 
   function toggleShowExtraLinks() {
     sendEvent('storeitems', 'toggleShowExtraLinks');
     showExtraLinks = !showExtraLinks;
     setValue('showExtraLinks', showExtraLinks);
-    dispatch('showExtraLinks', showExtraLinks);
+    doExtraLinks(showExtraLinks);
   }
 
   function toggleShowQuickDropLinks() {
     sendEvent('storeitems', 'toggleShowQuickDropLinks');
     showQuickDropLinks = !showQuickDropLinks;
     setValue('showQuickDropLinks', showQuickDropLinks);
-    dispatch('showQuickDropLinks', showQuickDropLinks);
+    doDropLinks(showQuickDropLinks);
   }
 
   function selectLocked() {
     sendEvent('storeitems', 'selectLocked');
-    dispatch('selectLocked');
+    doSelectLocked();
   }
 </script>
 

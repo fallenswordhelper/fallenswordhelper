@@ -2,7 +2,7 @@
   import sendEvent from '../../../analytics/sendEvent';
   import { ahSearchUrl } from '../../../support/constants';
 
-  export let data = [];
+  let { data = [] } = $props();
 </script>
 
 <div>
@@ -11,7 +11,7 @@
     {#if index > 0},{/if}
     <a
       href="{ahSearchUrl}{searchname}"
-      on:click={() => sendEvent('QuickWear', 'Not Found', searchname)}
+      onclick={() => sendEvent('QuickWear', 'Not Found', searchname)}
       >{nickname}</a
     >
   {/each}

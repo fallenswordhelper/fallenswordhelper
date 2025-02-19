@@ -2,7 +2,7 @@
   import entries from '../../common/entries';
   import { now } from '../../support/now';
 
-  export let theTitans;
+  let { theTitans } = $props();
 
   const onCd = ([, data]) => data.coolTime > now();
   const int = ([, a], [, b]) => a.coolTime - b.coolTime;

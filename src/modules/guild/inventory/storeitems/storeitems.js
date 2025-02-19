@@ -7,6 +7,7 @@ import doMoveItems from './doMoveItems';
 import getCheckboxesVisible from './getCheckboxesVisible';
 import getInv from './getInv';
 import injectStoreItems from './injectStoreItems';
+import { mount } from 'svelte';
 
 async function doFolders(form) {
   if (!getValue('enableFolderFilter')) return;
@@ -16,7 +17,7 @@ async function doFolders(form) {
   doMoveItems(inv, form);
 }
 
-function doCheckAll() {
+function dispatchCheckAll() {
   getCheckboxesVisible().forEach((ctx) => {
     ctx.checked = !ctx.disabled && !ctx.checked;
   });
@@ -27,11 +28,11 @@ function addCheckAll(form) {
   if (!elements?.length) return;
   const [submitButton] = arrayFrom(elements).filter((e) => e.type === 'submit');
   if (!submitButton) return;
-  const checkAll = new CheckAll({
+  mount(CheckAll, {
     anchor: submitButton,
+    props: { dispatchCheckAll },
     target: submitButton.parentNode,
   });
-  checkAll.$on('checkall', doCheckAll);
 }
 
 export default function storeitems() {

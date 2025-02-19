@@ -6,7 +6,7 @@
   import LinkButton from './LinkButton.svelte';
 
   const dispatch = createEventDispatcher();
-  export let members = [];
+  let { members = [] } = $props();
 
   const batchText = (i) => `Buff ${places[i]} 16`;
 

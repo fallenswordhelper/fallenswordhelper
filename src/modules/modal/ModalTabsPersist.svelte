@@ -2,9 +2,7 @@
   import sendEvent from '../analytics/sendEvent';
   import ModalTitled from './ModalTitled.svelte';
 
-  export let activeTabValue = 0;
-  export let tabs = [];
-  export let visible = true;
+  let { activeTabValue = $bindable(0), tabs = [], visible = true } = $props();
 
   const handleClick = (label, tabIndex) => () => {
     sendEvent('ModalTabbedPersist', label);
@@ -13,18 +11,21 @@
 </script>
 
 <ModalTitled {visible} on:close>
-  <ul slot="title">
-    {#each tabs as { label }, index}
-      <li class:active={activeTabValue === index}>
-        <button on:click={handleClick(label, index)} type="button"
-          >{label}</button
-        >
-      </li>
-    {/each}
-  </ul>
+  {#snippet title()}
+    <ul>
+      {#each tabs as { label }, index}
+        <li class:active={activeTabValue === index}>
+          <button onclick={handleClick(label, index)} type="button">
+            {label}
+          </button>
+        </li>
+      {/each}
+    </ul>
+  {/snippet}
   {#each tabs as { component }, value}
     {#if activeTabValue === value}
-      <svelte:component this={component} />
+      {@const SvelteComponent = component}
+      <SvelteComponent />
     {/if}
   {/each}
 </ModalTitled>

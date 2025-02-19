@@ -6,7 +6,13 @@
   const dispatch = createEventDispatcher();
   const prefSelectST = 'selectST';
 
-  export let inSt = null;
+  /**
+   * @typedef {Object} Props
+   * @property {any} [inSt]
+   */
+
+  /** @type {Props} */
+  let { inSt = $bindable(null) } = $props();
   inSt = getValue(prefSelectST);
 
   function toggleSelectST() {
@@ -16,7 +22,7 @@
 </script>
 
 <label>
-  <input bind:checked={inSt} on:change={toggleSelectST} type="checkbox" />
+  <input bind:checked={inSt} onchange={toggleSelectST} type="checkbox" />
   Select items in ST
 </label>
 

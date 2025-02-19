@@ -7,13 +7,13 @@
 
   const isFixed = getValue('keepHelperMenuOnScreen');
   const isDraggable = getValue('draggableHelperMenu');
-  let thisHelperMenu = 0;
+  let thisHelperMenu = $state(0);
 
   onMount(() => {
     if (isDraggable) draggable(thisHelperMenu);
   });
 
-  let showMenu = false;
+  let showMenu = $state(false);
   function doToggle() {
     showMenu = !showMenu;
   }
@@ -28,7 +28,7 @@
     class:helper-menu-move={isDraggable}
     type="button"
     class="toggle"
-    on:click={doToggle}
+    onclick={doToggle}
   >
     Helper Menu
   </button>

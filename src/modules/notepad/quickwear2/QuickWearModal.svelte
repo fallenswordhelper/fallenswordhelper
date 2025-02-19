@@ -6,7 +6,13 @@
   import InvCounter from './InvCounter/InvCounter.svelte';
   import QuickWear from './QuickWear.svelte';
 
-  export let visible = true;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [visible]
+   */
+
+  /** @type {Props} */
+  let { visible = $bindable(true) } = $props();
 
   function close() {
     sendEvent('Quick Wear', 'close');

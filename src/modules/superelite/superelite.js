@@ -1,8 +1,9 @@
+import { mount } from 'svelte';
 import { pcc } from '../support/layout';
 import SuperElite from './SuperElite.svelte';
 
 function startApp() {
-  return new SuperElite({
+  return mount(SuperElite, {
     target: pcc(),
   });
 }

@@ -8,7 +8,7 @@
   import LinkButton from '../common/LinkButton.svelte';
   import partial from '../common/partial';
 
-  let disabled = 0;
+  let disabled = $state(0);
 
   const spinner = createDiv({
     className: 'fshSpinner fshRelative',

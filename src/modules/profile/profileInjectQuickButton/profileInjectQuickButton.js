@@ -1,8 +1,9 @@
+import { mount } from 'svelte';
 import querySelector from '../../common/querySelector';
 import QuickButtons from './QuickButtons.svelte';
 
 function startApp(anchor, target) {
-  return new QuickButtons({
+  return mount(QuickButtons, {
     anchor,
     target,
   });

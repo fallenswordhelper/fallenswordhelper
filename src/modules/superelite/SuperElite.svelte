@@ -9,7 +9,7 @@
 </script>
 
 <div>
-  <button on:click={open} type="button">SE Tracker</button> moved to Helper Menu
+  <button onclick={open} type="button">SE Tracker</button> moved to Helper Menu
 </div>
 
 <style>

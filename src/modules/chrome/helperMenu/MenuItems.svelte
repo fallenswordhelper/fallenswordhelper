@@ -34,14 +34,14 @@
         {#if menuItem.fn}
           <button
             type="button"
-            on:click={() => callMenuFunction(menuItem.label, menuItem.fn)}
+            onclick={() => callMenuFunction(menuItem.label, menuItem.fn)}
           >
             {menuItem.label}
           </button>
         {:else if menuItem.href}
           <a
             href={menuItem.href}
-            on:click={() => sendHelperEvent(menuItem.label)}
+            onclick={() => sendHelperEvent(menuItem.label)}
           >
             {menuItem.label}
           </a>
@@ -49,7 +49,7 @@
           <button
             type="button"
             class="helperDevBtn"
-            on:click={() => message(menuItem.playerName)}
+            onclick={() => message(menuItem.playerName)}
           >
             PM
           </button>

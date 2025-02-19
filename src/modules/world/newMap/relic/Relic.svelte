@@ -19,9 +19,9 @@
   import { guildId } from './relicStore';
   import { trackStatus } from './statusStore';
 
-  export let relicData = {};
+  let { relicData = {} } = $props();
   const members = relicData.defenders.map((x) => x.player_name);
-  let showStats = false;
+  let showStats = $state(false);
 
   function buffBatch(e) {
     sendEvent('relic', e.detail);
@@ -53,7 +53,7 @@
       </div>
     {/if}
     {#if !showStats}
-      <button class="custombutton" on:click={fetchStats} type="button"
+      <button class="custombutton" onclick={fetchStats} type="button"
         >Fetch Stats</button
       >
     {:else}

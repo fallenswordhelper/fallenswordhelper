@@ -9,7 +9,7 @@ import interceptMouseEvents from './creatureInfo/interceptMouseEvents';
 import doMonsterColors from './doMonsterColors';
 import doNotKill from './doNotKill/doNotKill';
 import fixRafInWorld from './fixRafInWorld';
-import globalTop from './globalTop/globalTop';
+import injectGlobalTop from './globalTop/injectGlobalTop.svelte';
 import hideGroupButton from './hideGroupButton';
 import hideTitanCombatResults from './hideTitanCombatResults';
 import messageQueue from './messageQueue/messageQueue';
@@ -52,7 +52,7 @@ const usualRoutines = [
   buffInfo,
   interceptMouseEvents,
   champAttacks,
-  globalTop,
+  injectGlobalTop,
   teleport,
   messageQueue,
   replaceFootprints,

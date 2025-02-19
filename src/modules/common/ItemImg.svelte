@@ -2,9 +2,15 @@
   import { cdn } from '../system/system';
   import playerId from './playerId';
 
-  export let item = 0;
-  export let small = 0;
-  export let t = 0;
+  /**
+   * @typedef {Object} Props
+   * @property {number} [item]
+   * @property {number} [small]
+   * @property {number} [t]
+   */
+
+  /** @type {Props} */
+  let { item = 0, small = 0, t = 0 } = $props();
 
   const composed = (i) => `${cdn}composing/${i.x.d}_${i.x.c}.png`;
   const basic = (i) => `${cdn}items/${i.b}.gif`;
