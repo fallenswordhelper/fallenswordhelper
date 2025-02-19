@@ -1,5 +1,5 @@
 <script>
-  import VirtualList from 'svelte-virtual-list-ce';
+  import VirtualList from '../../common/VirtualList.svelte';
   import daGuildLog from '../../_dataAccess/daGuildLog';
   import sendEvent from '../../analytics/sendEvent';
   import navigateTo from '../../common/navigateTo';

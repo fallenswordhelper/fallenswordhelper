@@ -1,5 +1,4 @@
 <script>
-  import SvelteTable from 'svelte-table';
   import daGuildReport from '../../_dataAccess/daGuildReport';
   import ranksView from '../../_dataAccess/fallbacks/ranksView';
   import sendEvent from '../../analytics/sendEvent';
@@ -7,6 +6,7 @@
   import fromEntries from '../../common/fromEntries';
   import lastActivityToDays from '../../common/lastActivityToDays';
   import playerLink from '../../common/playerLink';
+  import SvelteTable from '../../common/SvelteTable.svelte';
   import uniq from '../../common/uniq';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import addCommas from '../../system/addCommas';
