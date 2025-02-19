@@ -1,4 +1,3 @@
-import instantiate from '../../modal/instantiate';
 import getValue from '../../system/getValue';
 import Reliclist from './Reliclist.svelte';
 
@@ -7,5 +6,9 @@ let thisModal = 0;
 
 export default function reliclist() {
   if (!getValue('betaOptIn')) return;
-  thisModal = instantiate(props, thisModal, Reliclist);
+  if (thisModal) {
+    thisModal.$set(props);
+  } else {
+    thisModal = new Reliclist({ props, target: document.body });
+  }
 }
