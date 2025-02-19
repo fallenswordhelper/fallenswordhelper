@@ -1,5 +1,4 @@
 <script>
-  import VirtualScroll from 'svelte-virtual-scroll-list';
   import daEquipItem from '../../_dataAccess/daEquipItem';
   import daUseItem from '../../_dataAccess/daUseItem';
   import backpack from '../../ajaxQueue/backpack';
@@ -7,10 +6,10 @@
   import alpha from '../../common/alpha';
   import FolderButtons from '../../common/FolderButtons.svelte';
   import fromEntries from '../../common/fromEntries';
-  import getHeightGuess from '../../common/getHeightGuess';
   import isArray from '../../common/isArray';
   import ItemImg from '../../common/ItemImg.svelte';
   import LinkButton from '../../common/LinkButton.svelte';
+  import VirtualList from '../../common/VirtualList.svelte';
   import confirm from '../../modal/confirm';
   import calf from '../../support/calf';
   import invStore from './invStore';
@@ -71,13 +70,7 @@
       <div>Items</div>
     </div>
     <div class="vs">
-      <VirtualScroll
-        data={items}
-        key="a"
-        keeps={Math.floor(getHeightGuess() / 22)}
-        estimateSize="30"
-        let:data={item}
-      >
+      <VirtualList {items} let:item>
         <div class="grid">
           <div class="actionButtons">
             {#if item.used}
@@ -102,8 +95,10 @@
                 {:else}
                   <LinkButton
                     disabled={item.eq || !(item.u && !item.c)}
-                    on:click={() => doUse(item.a)}>Use/Ext</LinkButton
+                    on:click={() => doUse(item.a)}
                   >
+                    Use/Ext
+                  </LinkButton>
                 {/if}
               </span>
             {/if}
@@ -115,7 +110,7 @@
             {item.n}
           </div>
         </div>
-      </VirtualScroll>
+      </VirtualList>
     </div>
   {/await}
 </div>

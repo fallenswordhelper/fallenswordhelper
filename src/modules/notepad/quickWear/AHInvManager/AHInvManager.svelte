@@ -1,7 +1,6 @@
 <script>
-  import VirtualScroll from 'svelte-virtual-scroll-list';
   import alpha from '../../../common/alpha';
-  import getHeightGuess from '../../../common/getHeightGuess';
+  import VirtualList from '../../../common/VirtualList.svelte';
   import uniq from '../../../common/uniq';
   import getValueJSON from '../../../system/getValueJSON';
   import Caption from './Caption.svelte';
@@ -69,15 +68,9 @@
 </script>
 
 <div class="vs">
-  <VirtualScroll
-    data={theStuff}
-    key="id"
-    keeps={Math.floor(getHeightGuess() / 10)}
-    estimateSize="14"
-    let:data={item}
-  >
+  <VirtualList items={theStuff} let:item>
     <svelte:component this={item.component} data={item.data} />
-  </VirtualScroll>
+  </VirtualList>
 </div>
 
 <style>
