@@ -1,6 +1,6 @@
 <script>
   import sendEvent from '../../../analytics/sendEvent';
-  import LinkButtonBracketed from '../../../common/LinkButtonBracketed.svelte';
+  import LinkBtnBracketed from '../../../common/LinkBtnBracketed.svelte';
   import calf from '../../../support/calf';
   import setValue from '../../../system/setValue';
 
@@ -34,17 +34,14 @@
   }
 </script>
 
-<LinkButtonBracketed --button-width="11.8em" on:click={toggleShowExtraLinks}>
+<LinkBtnBracketed --button-width="11.8em" onclick={toggleShowExtraLinks}>
   {label(showExtraLinks)} AH and UFSG Links
-</LinkButtonBracketed>&nbsp;
-<LinkButtonBracketed
-  --button-width="10.6em"
-  on:click={toggleShowQuickDropLinks}
->
+</LinkBtnBracketed>&nbsp;
+<LinkBtnBracketed --button-width="10.6em" onclick={toggleShowQuickDropLinks}>
   {label(showQuickDropLinks)} Quick Drop links
-</LinkButtonBracketed>&nbsp;
+</LinkBtnBracketed>&nbsp;
 {#if calf.subcmd2 === 'storeitems'}
-  <LinkButtonBracketed --button-width="10.8em" on:click={selectLocked}>
+  <LinkBtnBracketed --button-width="10.8em" onclick={selectLocked}>
     Select All Guild Locked
-  </LinkButtonBracketed>
+  </LinkBtnBracketed>
 {/if}

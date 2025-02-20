@@ -1,11 +1,15 @@
 <script>
   import sendEvent from '../../analytics/sendEvent';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import playerId from '../../common/playerId';
   import { cdn } from '../../system/system';
   import { compStore } from './componentsStore';
 
   let { dispatchDelType, itemId } = $props();
+
+  let item = $derived($compStore.get(itemId));
+
+  let delTypeEnabled = true;
 
   const pid = playerId();
   const imgSrc = (m) => `${cdn}items/${m.get('b')}.gif`;
@@ -14,11 +18,12 @@
       pid
     }&vcode=${m.get('v')}`;
 
-  let item = $derived($compStore.get(itemId));
-
   function delType() {
-    sendEvent('components', 'delType');
-    dispatchDelType(itemId);
+    if (delTypeEnabled) {
+      delTypeEnabled = false;
+      sendEvent('components', 'delType');
+      dispatchDelType(itemId);
+    }
   }
 </script>
 
@@ -37,7 +42,7 @@
       <td class="compSumSpin"><span class="fshSpinner fshSpinner12"></span></td>
     {:else}
       <td>
-        <LinkButtonBracketed on:click|once={delType}>Del</LinkButtonBracketed>
+        <LinkBtnBracketed onclick={delType}>Del</LinkBtnBracketed>
       </td>
     {/if}
   </tr>

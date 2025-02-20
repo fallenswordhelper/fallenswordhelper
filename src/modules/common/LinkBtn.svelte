@@ -1,18 +1,8 @@
 <script>
-  import { createBubbler } from 'svelte/legacy';
-
-  const bubble = createBubbler();
-  /**
-   * @typedef {Object} Props
-   * @property {number} [disabled]
-   * @property {import('svelte').Snippet} [children]
-   */
-
-  /** @type {Props} */
-  let { disabled = 0, children } = $props();
+  let { children, disabled = 0, onclick } = $props();
 </script>
 
-<button {disabled} onclick={bubble('click')} type="button">
+<button {disabled} {onclick} type="button">
   {@render children?.()}
 </button>
 

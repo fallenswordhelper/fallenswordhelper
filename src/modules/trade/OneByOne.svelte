@@ -5,7 +5,7 @@
   import createDiv from '../common/cElement/createDiv';
   import clickThis from '../common/clickThis';
   import getArrayByClassName from '../common/getArrayByClassName';
-  import LinkButton from '../common/LinkButton.svelte';
+  import LinkBtn from '../common/LinkBtn.svelte';
   import partial from '../common/partial';
 
   let disabled = $state(0);
@@ -69,7 +69,7 @@
 </script>
 
 <span>
-  <LinkButton {disabled} on:click={onclick}>OneByOne</LinkButton>
+  <LinkBtn {disabled} {onclick}>OneByOne</LinkBtn>
 </span>
 
 <style>

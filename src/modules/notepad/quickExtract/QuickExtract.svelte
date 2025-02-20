@@ -7,8 +7,6 @@
   import alpha from '../../common/alpha';
   import invWithSt from '../../common/invWithSt';
   import isArray from '../../common/isArray';
-  import LinkButton from '../../common/LinkButton.svelte';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import SelectInST from '../../common/SelectInST.svelte';
   import confirm from '../../modal/confirm.svelte';
   import ModalTitled from '../../modal/ModalTitled.svelte';
@@ -16,18 +14,15 @@
   import setValue from '../../system/setValue';
   import processResult from './processResult';
   import rollupExtractable from './rollupExtractable';
+  import LinkBtn from '../../common/LinkBtn.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
+
+  let { visible = $bindable(true) } = $props();
 
   const prompt = 'Are you sure you want to extract all similar items?';
   const prefSelectMain = 'selectMain';
   const prefDisablePrompts = 'disableQuickExtractPrompts';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
-  let { visible = $bindable(true) } = $props();
   let prm = $state(null);
   let playerId = null;
   let selectST = $state(null);
@@ -127,7 +122,7 @@
     Select which type of plants you wish to extract all of. Only select
     extractable resources.
     <br />
-    <SelectInST bind:inSt={selectST} on:toggle={toggleSelectST} />&nbsp;
+    <SelectInST bind:inSt={selectST} dispatchToggle={toggleSelectST} />&nbsp;
     <label>
       <input
         bind:checked={selectMain}
@@ -144,7 +139,7 @@
       />
       Disable Prompts
     </label>&nbsp;
-    <LinkButtonBracketed on:click={refresh}>Refresh</LinkButtonBracketed>
+    <LinkBtnBracketed onclick={refresh}>Refresh</LinkBtnBracketed>
     <br />
     <table>
       <thead>
@@ -179,9 +174,9 @@
                   {#if delPending}
                     <span class="fshSpinner fshSpinner12"></span>
                   {:else}
-                    <LinkButton on:click={() => extractEvt(index)}
-                      >Extract {count}</LinkButton
-                    >
+                    <LinkBtn onclick={() => extractEvt(index)}>
+                      Extract {count}
+                    </LinkBtn>
                   {/if}
                 {:else}
                   Done

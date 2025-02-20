@@ -6,19 +6,14 @@
   import FolderButtons from '../../common/FolderButtons.svelte';
   import fromEntries from '../../common/fromEntries';
   import ItemImg from '../../common/ItemImg.svelte';
-  import LinkButton from '../../common/LinkButton.svelte';
+  import LinkBtn from '../../common/LinkBtn.svelte';
   import VirtualList from '../../common/VirtualList.svelte';
   import confirm from '../../modal/confirm.svelte';
   import calf from '../../support/calf';
 
-  const prompt = 'Are you sure you want to use/extract the item?';
-  /**
-   * @typedef {Object} Props
-   * @property {number} [appInv]
-   */
-
-  /** @type {Props} */
   let { appInv = 0 } = $props();
+
+  const prompt = 'Are you sure you want to use/extract the item?';
 
   const main = ({ a }) => a !== -1;
   const names = ({ a, n }) => [a, n];
@@ -73,9 +68,9 @@
               {#if item.equip}
                 <span class="fshSpinner fshSpin12"></span>
               {:else}
-                <LinkButton disabled={!item.eq} on:click={() => doWear(item.a)}>
+                <LinkBtn disabled={!item.eq} onclick={() => doWear(item.a)}>
                   Wear
-                </LinkButton>
+                </LinkBtn>
               {/if}
             </span>
             |
@@ -83,12 +78,12 @@
               {#if item.use}
                 <span class="fshSpinner fshSpin12"></span>
               {:else}
-                <LinkButton
+                <LinkBtn
                   disabled={item.eq || !(item.u && !item.c)}
-                  on:click={() => doUse(item.a)}
+                  onclick={() => doUse(item.a)}
                 >
                   Use/Ext
-                </LinkButton>
+                </LinkBtn>
               {/if}
             </span>
           {/if}

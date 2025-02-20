@@ -1,7 +1,7 @@
 <script>
   import sendEvent from '../../analytics/sendEvent';
   import quickExtract from '../../chrome/pageSwitcher/loader/quickExtract';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import Count from './Count.svelte';
 
   const { dispatchDelete, dispatchDelType, dispatchQuickDel } = $props();
@@ -9,15 +9,25 @@
   let quickDelete = $state();
   let rollup = $state();
 
+  let quickDelHidden = true;
+  let countHidden = true;
+  let deleteHidden = true;
+
   function enableQuickDel() {
-    sendEvent('components', 'enableQuickDel');
-    quickDelete = true;
-    dispatchQuickDel();
+    if (quickDelHidden) {
+      quickDelHidden = false;
+      sendEvent('components', 'enableQuickDel');
+      quickDelete = true;
+      dispatchQuickDel();
+    }
   }
 
   function countComponents() {
-    sendEvent('components', 'countComponents');
-    rollup = true;
+    if (countHidden) {
+      countHidden = false;
+      sendEvent('components', 'countComponents');
+      rollup = true;
+    }
   }
 
   function insertQuickExtract() {
@@ -26,41 +36,41 @@
   }
 
   function deleteAllVisible() {
-    sendEvent('components', 'deleteAllVisible');
-    dispatchDelete();
+    if (deleteHidden) {
+      deleteHidden = false;
+      sendEvent('components', 'deleteAllVisible');
+      dispatchDelete();
+    }
   }
 </script>
 
 <div class="fshCenter">
   {#if !quickDelete}
     <div>
-      <LinkButtonBracketed on:click|once={enableQuickDel}>
+      <LinkBtnBracketed onclick={enableQuickDel}>
         Enable Quick Del
-      </LinkButtonBracketed>
+      </LinkBtnBracketed>
     </div>
   {/if}
   {#if !rollup}
     <div>
-      <LinkButtonBracketed on:click|once={countComponents}>
+      <LinkBtnBracketed onclick={countComponents}>
         Count Components
-      </LinkButtonBracketed>
+      </LinkBtnBracketed>
     </div>
   {:else}
     <Count {dispatchDelType} />
   {/if}
   <div>
-    <LinkButtonBracketed on:click={insertQuickExtract}>
+    <LinkBtnBracketed onclick={insertQuickExtract}>
       Quick Extract
-    </LinkButtonBracketed>
+    </LinkBtnBracketed>
   </div>
   {#if quickDelete}
     <div>
-      <LinkButtonBracketed
-        --button-color="red"
-        on:click|once={deleteAllVisible}
-      >
+      <LinkBtnBracketed --button-color="red" onclick={deleteAllVisible}>
         Delete All Visible
-      </LinkButtonBracketed>
+      </LinkBtnBracketed>
     </div>
   {/if}
 </div>

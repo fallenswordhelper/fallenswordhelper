@@ -23,8 +23,8 @@
   const members = relicData.defenders.map((x) => x.player_name);
   let showStats = $state(false);
 
-  function buffBatch(e) {
-    sendEvent('relic', e.detail);
+  function emitBuffBatch(batchText) {
+    sendEvent('relic', batchText);
   }
 
   function fetchStats() {
@@ -49,13 +49,13 @@
   <div class="left">
     {#if relicData.is_owner}
       <div class="buff-links">
-        <BuffLinks {members} on:buffBatch={buffBatch} />
+        <BuffLinks {members} {emitBuffBatch} />
       </div>
     {/if}
     {#if !showStats}
-      <button class="custombutton" onclick={fetchStats} type="button"
-        >Fetch Stats</button
-      >
+      <button class="custombutton" onclick={fetchStats} type="button">
+        Fetch Stats
+      </button>
     {:else}
       <div class="b-top">Processing</div>
       <div class="proc-stat">

@@ -11,8 +11,8 @@
   import fromEntries from '../../common/fromEntries';
   import getTextTrim from '../../common/getTextTrim';
   import isArray from '../../common/isArray';
-  import LinkButton from '../../common/LinkButton.svelte';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import LinkBtn from '../../common/LinkBtn.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import querySelector from '../../common/querySelector';
   import querySelectorAll from '../../common/querySelectorAll';
   import querySelectorArray from '../../common/querySelectorArray';
@@ -24,12 +24,6 @@
   import { get, set } from '../../system/idb';
   import { cdn } from '../../system/system';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
 
   let compTally = $state({});
@@ -250,13 +244,13 @@
 <ModalTitled {visible} on:close={close}>
   {#snippet title()}
     Recipe Manager
-    <LinkButtonBracketed
+    <LinkBtnBracketed
       --button-color="#494437"
       --button-size="10px"
-      on:click={refreshBtn}
+      onclick={refreshBtn}
     >
       Refresh
-    </LinkButtonBracketed>
+    </LinkBtnBracketed>
   {/snippet}
   {#await init() then}
     {#if progressLog.length}
@@ -270,9 +264,9 @@
       <div class="recipes ui-widget-content">
         <div class="innerColumnHeader item-container">Recipe</div>
         <div class="innerColumnHeader item-container">
-          <LinkButton --button-color="#383838" on:click={sortByName}
-            >Name</LinkButton
-          >
+          <LinkBtn --button-color="#383838" onclick={sortByName}>
+            Name
+          </LinkBtn>
         </div>
         <div class="innerColumnHeader item-container">Items</div>
         <div class="innerColumnHeader item-container">Components</div>

@@ -3,18 +3,12 @@
   import reliclist from '../../app/guild/reliclist';
   import alpha from '../../common/alpha';
   import isArray from '../../common/isArray';
-  import LinkButton from '../../common/LinkButton.svelte';
+  import LinkBtn from '../../common/LinkBtn.svelte';
   import splitTime from '../../common/splitTime';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import { defSubcmd, guideUrl, guildViewUrl } from '../../support/constants';
   import padZ from '../../system/padZ';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
   let listOfRelics = $state([]);
   let log = $state([]);
@@ -109,94 +103,94 @@
   {:then}
     <div class="content grid">
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by level', levelSort);
           }}
         >
           Level
-        </LinkButton>
+        </LinkBtn>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by name', nameSort);
           }}
         >
           Name
-        </LinkButton>
+        </LinkBtn>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by guild', guildSort);
           }}
         >
           Guild
-        </LinkButton>
+        </LinkBtn>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by stam gain', attrSort(6));
           }}
         >
           Stam Gain
-        </LinkButton>
+        </LinkBtn>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by attack', attrSort(0));
           }}
         >
           Atk
-        </LinkButton>
+        </LinkBtn>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by damage', attrSort(4));
           }}
         >
           Dmg
-        </LinkButton>
+        </LinkBtn>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by stamina', attrSort(5));
           }}
         >
           Stam
-        </LinkButton>
+        </LinkBtn>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by gold gain', attrSort(7));
           }}
         >
           Gold Gain
-        </LinkButton>
+        </LinkBtn>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by xp gain', attrSort(8));
           }}
         >
           XP Gain
-        </LinkButton>
+        </LinkBtn>
       </div>
       <div class="innerColumnHeader">
-        <LinkButton
-          on:click={() => {
+        <LinkBtn
+          onclick={() => {
             sortWrapper('sort by time', timeSort);
           }}
         >
           Time
-        </LinkButton>
+        </LinkBtn>
       </div>
       {#each listOfRelics as relic}
         <div>{relic.location.realm.min_level}</div>

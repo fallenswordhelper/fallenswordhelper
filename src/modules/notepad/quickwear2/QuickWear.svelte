@@ -8,7 +8,7 @@
   import fromEntries from '../../common/fromEntries';
   import isArray from '../../common/isArray';
   import ItemImg from '../../common/ItemImg.svelte';
-  import LinkButton from '../../common/LinkButton.svelte';
+  import LinkBtn from '../../common/LinkBtn.svelte';
   import VirtualList from '../../common/VirtualList.svelte';
   import confirm from '../../modal/confirm.svelte';
   import calf from '../../support/calf';
@@ -81,12 +81,9 @@
                   {#if item.equip}
                     <span class="fshSpinner fshSpin12"></span>
                   {:else}
-                    <LinkButton
-                      disabled={!item.eq}
-                      on:click={() => doWear(item.a)}
-                    >
+                    <LinkBtn disabled={!item.eq} onclick={() => doWear(item.a)}>
                       Wear
-                    </LinkButton>
+                    </LinkBtn>
                   {/if}
                 </span>
                 |
@@ -94,12 +91,12 @@
                   {#if item.use}
                     <span class="fshSpinner fshSpin12"></span>
                   {:else}
-                    <LinkButton
+                    <LinkBtn
                       disabled={item.eq || !(item.u && !item.c)}
-                      on:click={() => doUse(item.a)}
+                      onclick={() => doUse(item.a)}
                     >
                       Use/Ext
-                    </LinkButton>
+                    </LinkBtn>
                   {/if}
                 </span>
               {/if}

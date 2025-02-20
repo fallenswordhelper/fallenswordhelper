@@ -1,5 +1,4 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import calf from '../support/calf';
   import defaults from '../support/dataObj.json';
   import getValue from '../system/getValue';
@@ -9,21 +8,19 @@
   import entries from './entries';
   import insertElement from './insertElement';
   import invWithStById from './invWithStById';
-  import LinkButton from './LinkButton.svelte';
+  import LinkBtn from './LinkBtn.svelte';
   import numberIsNaN from './numberIsNaN';
   import partial from './partial';
   import querySelectorArray from './querySelectorArray';
   import SelectInST from './SelectInST.svelte';
 
-  const dispatch = createEventDispatcher();
+  let {
+    dispatchPerf,
+    dispatchSelect,
+    dispatchToggle,
+    wantsTagged = 0,
+  } = $props();
 
-  /**
-   * @typedef {Object} Props
-   * @property {number} [wantsTagged]
-   */
-
-  /** @type {Props} */
-  let { wantsTagged = 0 } = $props();
   let howMany = $state(null);
   let inSt = $state(null);
   let inv = $state(null);
@@ -85,12 +82,12 @@
   }
 
   function doSelect(id) {
-    dispatch('select', id);
+    dispatchSelect(id);
     doType(id);
   }
 
   function doPerf() {
-    dispatch('perf');
+    dispatchPerf();
     doType('-99');
   }
 
@@ -113,21 +110,21 @@
   {#if inv?.items}
     <div>
       Select:
-      <LinkButton on:click={() => doSelect('-1')}>All Items</LinkButton>
-      <LinkButton on:click={() => doSelect('-2')}>All Resources</LinkButton>
+      <LinkBtn onclick={() => doSelect('-1')}>All Items</LinkBtn>
+      <LinkBtn onclick={() => doSelect('-2')}>All Resources</LinkBtn>
       {#if wantsTagged}
-        <LinkButton on:click={() => doSelect('-3')}>Guild Tagged</LinkButton>
+        <LinkBtn onclick={() => doSelect('-3')}>Guild Tagged</LinkBtn>
       {/if}
       {#each getItemList() as [name, id]}
-        <LinkButton on:click={() => doSelect(id)}>{name}</LinkButton>
+        <LinkBtn onclick={() => doSelect(id)}>{name}</LinkBtn>
       {/each}
       How many:<input bind:value={howMany} class="custominput" type="text" />
     </div>
     <div use:highlightSts>
-      <SelectInST bind:inSt on:toggle />
+      <SelectInST bind:inSt {dispatchToggle} />
     </div>
     <div>
-      <LinkButton --button-color="blue" on:click={doPerf}>Perfect</LinkButton>
+      <LinkBtn --button-color="blue" onclick={doPerf}>Perfect</LinkBtn>
     </div>
   {:else}
     <p style="color: red">Server Error</p>

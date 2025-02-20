@@ -2,7 +2,7 @@
   import sendEvent from '../../analytics/sendEvent';
   import alpha from '../../common/alpha';
   import entries from '../../common/entries';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import confirm from '../../modal/confirm.svelte';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import addCommas from '../../system/addCommas';
@@ -80,13 +80,13 @@
   {/snippet}
   <div class="title">
     <span class="bold">Entity Information</span>
-    <LinkButtonBracketed
+    <LinkBtnBracketed
       --button-color="white"
       --button-width="2.8em"
-      on:click={clearStorage}
+      onclick={clearStorage}
     >
       Clear
-    </LinkButtonBracketed>
+    </LinkBtnBracketed>
   </div>
   <div class="grid headings">
     <div>

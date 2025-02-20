@@ -5,7 +5,7 @@
   import closestTable from '../../common/closestTable';
   import entries from '../../common/entries';
   import fromEntries from '../../common/fromEntries';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import toggleForce from '../../common/toggleForce';
   import trimTitanName from '../../common/trimTitanName';
   import { get, set } from '../../system/idb';
@@ -22,10 +22,10 @@
   const getPrefs = () => get(prefName);
   const setPrefs = () =>
     set(prefName, {
-      current,
-      history,
-      securable,
-      titans,
+      current: $state.snapshot(current),
+      history: $state.snapshot(history),
+      securable: $state.snapshot(securable),
+      titans: $state.snapshot(titans),
     });
   const titanPref = ({ titanName }) => titans.find(([n]) => n === titanName)[1];
   const mergePrefs = () =>
@@ -142,23 +142,21 @@
         {#await buildTitanList() then}
           <div id="titan-list">
             {#each titans as [name], i}
-              <label>
+              <label class="titan-label">
                 <input
-                  bind:checked={titans[i].flag}
+                  bind:checked={titans[i][1]}
                   onchange={toggleTitan}
                   type="checkbox"
                 />
                 {name}
-              </label>&ensp;
+              </label>
             {/each}
           </div>
           <div>
-            <LinkButtonBracketed on:click={selectAll}
-              >Select All</LinkButtonBracketed
-            >
-            <LinkButtonBracketed on:click={selectNone}
-              >Select None</LinkButtonBracketed
-            >
+            <LinkBtnBracketed onclick={selectAll}>Select All</LinkBtnBracketed>
+            <LinkBtnBracketed onclick={selectNone}>
+              Select None
+            </LinkBtnBracketed>
           </div>
         {/await}
       </td>
@@ -190,7 +188,7 @@
   #titan-list {
     column-count: 3;
   }
-  #titan-list > label {
+  .titan-label {
     display: block;
     text-align: left;
   }

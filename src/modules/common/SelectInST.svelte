@@ -1,23 +1,15 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import getValue from '../system/getValue';
   import setValue from '../system/setValue';
 
-  const dispatch = createEventDispatcher();
+  let { dispatchToggle, inSt = $bindable(null) } = $props();
+
   const prefSelectST = 'selectST';
-
-  /**
-   * @typedef {Object} Props
-   * @property {any} [inSt]
-   */
-
-  /** @type {Props} */
-  let { inSt = $bindable(null) } = $props();
   inSt = getValue(prefSelectST);
 
   function toggleSelectST() {
     setValue(prefSelectST, inSt);
-    dispatch('toggle');
+    dispatchToggle();
   }
 </script>
 

@@ -14,12 +14,6 @@
   import LogItem from './LogItem.svelte';
   import profiler from './profiler';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
 
   let checks = $state(Array(11).fill(true));
@@ -164,12 +158,12 @@
     <FilterHeader
       bind:checks
       bind:searchValue
-      on:cbChange={cbChange}
-      on:clearSearch={clearSearch}
-      on:oldGuildLog={oldGuildLog}
-      on:refresh={refresh}
-      on:selectAll={selectAll}
-      on:selectNone={selectNone}
+      {cbChange}
+      {clearSearch}
+      {oldGuildLog}
+      {refresh}
+      {selectAll}
+      {selectNone}
     />
     <div class="row-container">
       <div class="innerColumnHeader">&nbsp;</div>
