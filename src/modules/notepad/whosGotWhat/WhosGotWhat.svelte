@@ -13,12 +13,6 @@
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import addCommas from '../../system/addCommas';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
 
   const columns = [
@@ -111,7 +105,7 @@
   });
 </script>
 
-<ModalTitled {visible} on:close={close}>
+<ModalTitled {close} {visible}>
   {#snippet title()}
     Who's Got What
   {/snippet}

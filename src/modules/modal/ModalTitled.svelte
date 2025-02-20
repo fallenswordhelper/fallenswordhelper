@@ -4,15 +4,7 @@
   import Modal from './Modal.svelte';
   import ModalCloseButton from './ModalCloseButton.svelte';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   * @property {import('svelte').Snippet} [title]
-   * @property {import('svelte').Snippet} [children]
-   */
-
-  /** @type {Props} */
-  let { visible = true, title, children } = $props();
+  let { children, close, title, visible = true } = $props();
 
   let modal = $state();
   let header = $state();
@@ -22,10 +14,10 @@
   });
 </script>
 
-<Modal {visible} on:close bind:modal>
+<Modal bind:modal {close} {visible}>
   <div class="modal-title" bind:this={header}>
     {@render title?.()}
-    <ModalCloseButton on:close />
+    <ModalCloseButton {close} />
   </div>
   <div class="modal-content">
     {@render children?.()}

@@ -5,12 +5,6 @@
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import { combatLogClear, combatLogGetAll } from '../../system/idbLogger';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
   let log = $state([]);
   let textArea = $state(0);
@@ -39,7 +33,7 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
+<ModalTitled {close} {visible}>
   {#snippet title()}
     Combat Log
   {/snippet}

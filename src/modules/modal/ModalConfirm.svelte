@@ -14,7 +14,7 @@
   }
 </script>
 
-<Modal {visible} on:close={close}>
+<Modal {close} {visible}>
   <div>{msg}</div>
   <div>
     <button onclick={sayYes} type="button">Yes</button>

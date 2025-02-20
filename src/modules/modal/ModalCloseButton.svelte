@@ -1,8 +1,5 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-
-  const dispatch = createEventDispatcher();
-  const close = () => dispatch('close');
+  const { close } = $props();
 </script>
 
 <button class="modal-close" onclick={close} type="button">×</button>

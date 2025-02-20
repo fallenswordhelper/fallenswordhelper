@@ -6,12 +6,6 @@
   import InvCounter from './InvCounter/InvCounter.svelte';
   import QuickWear from './QuickWear.svelte';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
 
   function close() {
@@ -39,4 +33,4 @@
   ];
 </script>
 
-<ModalTabsPersist on:close={close} {tabs} {visible} />
+<ModalTabsPersist {close} {tabs} {visible} />

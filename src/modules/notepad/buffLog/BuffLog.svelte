@@ -4,12 +4,6 @@
   import { fshBuffLog } from '../../support/constants';
   import { get, set } from '../../system/idb';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
   let records = $state([]);
 
@@ -30,7 +24,7 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
+<ModalTitled {close} {visible}>
   {#snippet title()}
     Buff Log
   {/snippet}

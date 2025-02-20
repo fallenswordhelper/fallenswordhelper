@@ -7,14 +7,6 @@
   import setValue from '../../system/setValue';
   import { cdn } from '../../system/system';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [seasonal]
-   * @property {string} [status]
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let {
     seasonal = $bindable(false),
     status = $bindable('active'),
@@ -97,7 +89,7 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
+<ModalTitled {close} {visible}>
   {#snippet title()}
     Quest Book
   {/snippet}

@@ -27,12 +27,6 @@
   const backpackLoc = 1;
   const guildStoreLoc = 2;
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
 
   let options = $state(null);
@@ -145,15 +139,14 @@
     options.potMap = buildMapping(currentInventory);
     doMapping();
   }
-</script>
 
-<ModalTitled
-  {visible}
-  on:close={() => {
+  function close() {
     sendPrEvent('close');
     visible = false;
-  }}
->
+  }
+</script>
+
+<ModalTitled {close} {visible}>
   {#snippet title()}
     Pot Report
   {/snippet}

@@ -114,7 +114,7 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
+<ModalTitled {close} {visible}>
   {#snippet title()}
     Quick Extract
   {/snippet}

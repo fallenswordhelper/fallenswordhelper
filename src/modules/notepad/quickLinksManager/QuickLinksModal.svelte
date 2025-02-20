@@ -4,12 +4,6 @@
   import QuickLinksManager from './QuickLinksManager.svelte';
   import QuickLinksRaw from './QuickLinksRaw.svelte';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
 
   function close() {
@@ -29,4 +23,4 @@
   ];
 </script>
 
-<ModalTabbed on:close={close} {tabs} {visible} />
+<ModalTabbed {close} {tabs} {visible} />

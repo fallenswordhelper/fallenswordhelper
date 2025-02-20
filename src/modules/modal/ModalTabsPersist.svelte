@@ -2,15 +2,15 @@
   import sendEvent from '../analytics/sendEvent';
   import ModalTitled from './ModalTitled.svelte';
 
-  let { activeTabValue = $bindable(0), tabs = [], visible = true } = $props();
+  let { activeTabValue = $bindable(0), close, tabs = [], visible = true } = $props();
 
   const handleClick = (label, tabIndex) => () => {
-    sendEvent('ModalTabbedPersist', label);
+    sendEvent('ModalTabsPersist', label);
     activeTabValue = tabIndex;
   };
 </script>
 
-<ModalTitled {visible} on:close>
+<ModalTitled {close} {visible}>
   {#snippet title()}
     <ul>
       {#each tabs as { label }, index}

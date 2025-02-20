@@ -40,12 +40,6 @@
     'Magical',
   ];
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
   let doingSomething = $state(1);
   let haveOffer = $state(0);
@@ -126,7 +120,7 @@
   init();
 </script>
 
-<ModalTitled {visible} on:close={close}>
+<ModalTitled {close} {visible}>
   {#snippet title()}
     Merc Hunter
   {/snippet}

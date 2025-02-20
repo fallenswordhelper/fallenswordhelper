@@ -89,7 +89,7 @@
   })();
 </script>
 
-<ModalTitled {visible} on:close={close}>
+<ModalTitled {close} {visible}>
   {#snippet title()}
     Relic List
   {/snippet}

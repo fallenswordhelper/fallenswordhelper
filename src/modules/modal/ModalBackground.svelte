@@ -1,15 +1,7 @@
 <script>
-  import { run, createBubbler, self } from 'svelte/legacy';
+  import { run } from 'svelte/legacy';
 
-  const bubble = createBubbler();
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   * @property {import('svelte').Snippet} [children]
-   */
-
-  /** @type {Props} */
-  let { visible = true, children } = $props();
+  let { close, children, visible = true } = $props();
 
   let atBottom;
   let docScrollY;
@@ -44,7 +36,7 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class:visible onclick={self(bubble('click'))}>
+<div class:visible onclick={close}>
   {@render children?.()}
 </div>
 

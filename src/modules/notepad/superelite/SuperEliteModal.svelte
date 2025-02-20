@@ -3,12 +3,6 @@
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import SuperElite from './SuperElite.svelte';
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [visible]
-   */
-
-  /** @type {Props} */
   let { visible = $bindable(true) } = $props();
 
   function close() {
@@ -17,7 +11,7 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
+<ModalTitled {close} {visible}>
   {#snippet title()}
     Super Elite Tracker
   {/snippet}

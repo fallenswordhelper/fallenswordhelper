@@ -11,21 +11,9 @@
 <script>
   import { run } from 'svelte/legacy';
 
-  import { createEventDispatcher } from 'svelte';
   import querySelectorArray from '../common/querySelectorArray';
 
-  /**
-   * @typedef {Object} Props
-   * @property {any} modal
-   * @property {boolean} [visible]
-   * @property {import('svelte').Snippet} [children]
-   */
-
-  /** @type {Props} */
-  let { modal = $bindable(), visible = true, children } = $props();
-
-  const dispatch = createEventDispatcher();
-  const close = () => dispatch('close');
+  let { close, children, modal = $bindable(), visible = true } = $props();
 
   let modalVisible = $derived(visible);
   let previouslyFocused = $state();
