@@ -1,29 +1,24 @@
 <script>
-  import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import draggable from '../../common/draggable';
   import getValue from '../../system/getValue';
   import MenuItems from './MenuItems.svelte';
 
+  let showMenu = $state(false);
+
   const isFixed = getValue('keepHelperMenuOnScreen');
   const isDraggable = getValue('draggableHelperMenu');
-  let thisHelperMenu = $state(0);
 
-  onMount(() => {
-    if (isDraggable) draggable(thisHelperMenu);
-  });
+  function maybeDraggable(node) {
+    if (isDraggable) draggable(node);
+  }
 
-  let showMenu = $state(false);
   function doToggle() {
     showMenu = !showMenu;
   }
 </script>
 
-<div
-  bind:this={thisHelperMenu}
-  class="helper-menu"
-  class:helper-menu-fixed={isFixed}
->
+<div class="helper-menu" class:helper-menu-fixed={isFixed} use:maybeDraggable>
   <button
     class:helper-menu-move={isDraggable}
     type="button"
@@ -34,7 +29,7 @@
   </button>
   {#if showMenu}
     <div class="modal" transition:fade={{ duration: 100 }}>
-      <MenuItems on:toggle={doToggle} />
+      <MenuItems {doToggle} />
     </div>
   {/if}
 </div>

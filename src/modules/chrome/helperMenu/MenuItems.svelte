@@ -1,11 +1,10 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import sendEvent from '../../analytics/sendEvent';
   import isFunction from '../../common/isFunction';
   import { playerIdUrl } from '../../support/constants';
   import functionLookup from './functionLookup';
 
-  const dispatch = createEventDispatcher();
+  const { doToggle } = $props();
 
   function sendHelperEvent(name) {
     sendEvent('helperMenu', name);
@@ -14,14 +13,14 @@
   function callMenuFunction(name, fn) {
     if (isFunction(fn)) {
       sendHelperEvent(name);
-      dispatch('toggle');
+      doToggle();
       fn();
     }
   }
 
   function message(playerName) {
-    dispatch('toggle');
     sendHelperEvent('sendMsg');
+    doToggle();
     window.openQuickMsgDialog(playerName);
   }
 </script>
