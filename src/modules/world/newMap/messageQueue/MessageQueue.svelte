@@ -44,8 +44,8 @@
 </script>
 
 {#each getMsgs(messages) as { msg, type, count } (msg)}
-  <!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
-  <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="fsh-message {type}" onclick={() => destroy(msg)}>
     {msg}
     {#if count > 1}

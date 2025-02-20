@@ -34,18 +34,7 @@ const ctx = await esbuild.context({
   logOverride: { 'suspicious-nullish-coalescing': 'silent' },
   minify: false,
   outdir: pathToFile(calfPath),
-  plugins: [
-    liquidPlugin,
-    sveltePlugin({
-      filterWarnings: (warning) =>
-        ![
-          // 'a11y_click_events_have_key_events',
-          'a11y_consider_explicit_label',
-          // 'a11y_no_static_element_interactions',
-          // 'reactive_declaration_module_script_dependency',
-        ].includes(warning.code),
-    }),
-  ],
+  plugins: [liquidPlugin, sveltePlugin()],
   sourcemap: true,
   sourcesContent: false,
   splitting: true,

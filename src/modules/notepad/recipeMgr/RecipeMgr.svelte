@@ -279,6 +279,7 @@
         <div class="innerColumnHeader item-container">Target</div>
         {#each recipeBook as [id, name, recipe, items, components, [targetId, vcode]], index (index)}
           <div class="item-container">
+            <!-- svelte-ignore a11y_consider_explicit_label -->
             <a href="{viewRecipeUrl}{id}" onclick={nav}>
               <div
                 class="image"
