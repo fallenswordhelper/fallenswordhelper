@@ -2,12 +2,6 @@
   import usesetup from '../../app/arena/usesetup';
   import { cdn } from '../../system/system';
 
-  /**
-   * @typedef {Object} Props
-   * @property {number} [res]
-   */
-
-  /** @type {Props} */
   let { res = 0 } = $props();
 
   let currentSet = $state(0);

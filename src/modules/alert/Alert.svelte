@@ -5,12 +5,6 @@
   import { fly } from 'svelte/transition';
   import alert from './alert';
 
-  /**
-   * @typedef {Object} Props
-   * @property {number} [ms]
-   */
-
-  /** @type {Props} */
   let { ms = 3000 } = $props();
   let visible = $state(false);
   let timeout = 0;

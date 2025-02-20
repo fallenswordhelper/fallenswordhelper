@@ -15,12 +15,6 @@
     updateAttr,
   } from './utils';
 
-  /**
-   * @typedef {Object} Props
-   * @property {number} [fshInv]
-   */
-
-  /** @type {Props} */
   let { fshInv = 0 } = $props();
 
   const api = new DataTable(fshInv);

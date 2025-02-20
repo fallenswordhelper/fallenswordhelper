@@ -3,22 +3,11 @@
 
   import { onMount, tick } from 'svelte';
 
-  /**
-   * @typedef {Object} Props
-   * @property {any} items - props
-   * @property {string} [height]
-   * @property {any} [itemHeight]
-   * @property {number} [start] - read-only, but visible to consumers via bind:start
-   * @property {number} [end]
-   * @property {import('svelte').Snippet<[any]>} [children]
-   */
-
-  /** @type {Props} */
   let {
     items,
     height = '100%',
     itemHeight = undefined,
-    start = $bindable(0),
+    start = $bindable(0), // read-only, but visible to consumers via bind:start
     end = $bindable(0),
     children,
   } = $props();

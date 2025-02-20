@@ -1,15 +1,7 @@
 <script>
-  import { once } from 'svelte/legacy';
-
   import daGsTake from '../../../_dataAccess/daGsTake';
   import arrayFrom from '../../../common/arrayFrom';
 
-  /**
-   * @typedef {Object} Props
-   * @property {number} [fshInv]
-   */
-
-  /** @type {Props} */
   let { fshInv = 0 } = $props();
   let disabled = $state(1);
   let recalling = $state(0);
@@ -29,7 +21,9 @@
   }
 
   function toBp() {
-    recalling = 1;
+    if (!recalling) {
+      recalling = 1;
+    }
   }
 </script>
 
@@ -46,7 +40,7 @@
       <button
         class="custombutton"
         {disabled}
-        onclick={once(toBp)}
+        onclick={toBp}
         type="button"
       >
         BP

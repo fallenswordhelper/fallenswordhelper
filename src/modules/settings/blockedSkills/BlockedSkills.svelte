@@ -1,6 +1,4 @@
 <script>
-  import { self } from 'svelte/legacy';
-
   import sendEvent from '../../analytics/sendEvent';
   import getValueJSON from '../../system/getValueJSON';
   import setValueJSON from '../../system/setValueJSON';
@@ -139,23 +137,18 @@
         <option value={bsl.name}>{bsl.name}</option>
       {/each}
     </select>
-    <input
-      class="custominput"
-      type="button"
-      value="Use"
-      onclick={self(applyList)}
-    />
+    <input class="custominput" type="button" value="Use" onclick={applyList} />
     <input
       class="custominput"
       type="button"
       value="Delete"
-      onclick={self(deleteList)}
+      onclick={deleteList}
     />
     <input
       class="custominput"
       type="button"
       value="Update"
-      onclick={self(updateList)}
+      onclick={updateList}
     />
   </div>
   <div class="newlists">
@@ -172,7 +165,7 @@
       class="custominput"
       type="button"
       value="Save New Blocked Skill Set"
-      onclick={self(createList)}
+      onclick={createList}
     />
   </div>
   {#if infoBoxText}

@@ -1,12 +1,14 @@
 <script>
-  import { once } from 'svelte/legacy';
-
   import daJoinAll from '../../_dataAccess/daJoinAll';
   import daViewGroups from '../../_dataAccess/daViewGroups';
   import sendEvent from '../../analytics/sendEvent';
   import playerName from '../../common/playerName';
   import calf from '../../support/calf';
   import { joinUnderUrl, joinallUrl } from '../../support/constants';
+
+  let joining = $state(0);
+  let groupJoinUrl = $state(joinallUrl);
+  let groupJoinText = $state('');
 
   const smallEnough = (g) =>
     !calf.enableMaxGroupSizeToJoin ||
@@ -15,10 +17,6 @@
   const isOpen = (g) => !g.members.find(hasPlayer);
   const getId = (g) => g.id;
 
-  let joining = $state(0);
-
-  let groupJoinUrl = $state(joinallUrl);
-  let groupJoinText = $state('');
   if (calf.enableMaxGroupSizeToJoin) {
     groupJoinUrl = joinUnderUrl;
     groupJoinText = ` less than size ${calf.maxGroupSizeToJoin}`;
@@ -39,9 +37,11 @@
   }
 
   function handleClick(e) {
-    e.preventDefault();
-    sendEvent('notification', 'Join All');
-    joining = 1;
+    if (!joining) {
+      e.preventDefault();
+      sendEvent('notification', 'Join All');
+      joining = 1;
+    }
   }
 </script>
 
@@ -55,7 +55,7 @@
     {/await}
   {:else}
     <p class="notification-content">
-      <button onclick={once(handleClick)} type="button">
+      <button onclick={handleClick} type="button">
         Join all attack groups{groupJoinText}.
       </button>
     </p>

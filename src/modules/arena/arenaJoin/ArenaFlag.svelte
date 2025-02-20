@@ -1,13 +1,6 @@
 <script>
   import { cdn } from '../../system/system';
 
-  /**
-   * @typedef {Object} Props
-   * @property {string} [title]
-   * @property {number} [flag]
-   */
-
-  /** @type {Props} */
   let { title = '', flag = 0 } = $props();
 
   const boolToString = (e) => String(Number(e));

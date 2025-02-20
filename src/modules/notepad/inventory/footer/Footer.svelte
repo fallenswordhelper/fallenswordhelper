@@ -4,12 +4,6 @@
   import Repair from './Repair.svelte';
   import UpdateStats from './UpdateStats.svelte';
 
-  /**
-   * @typedef {Object} Props
-   * @property {number} [fshInv]
-   */
-
-  /** @type {Props} */
   let { fshInv = 0 } = $props();
 </script>
 

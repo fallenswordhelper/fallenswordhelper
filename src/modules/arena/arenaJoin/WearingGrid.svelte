@@ -2,12 +2,6 @@
   import { itemType } from '../../support/constants';
   import ItemImage from './ItemImage.svelte';
 
-  /**
-   * @typedef {Object} Props
-   * @property {number} [equipment]
-   */
-
-  /** @type {Props} */
   let { equipment = 0 } = $props();
 
   const anItem = (eq, type) =>

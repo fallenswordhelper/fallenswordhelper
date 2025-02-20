@@ -2,14 +2,6 @@
   import { cdn } from '../system/system';
   import playerId from './playerId';
 
-  /**
-   * @typedef {Object} Props
-   * @property {number} [item]
-   * @property {number} [small]
-   * @property {number} [t]
-   */
-
-  /** @type {Props} */
   let { item = 0, small = 0, t = 0 } = $props();
 
   const composed = (i) => `${cdn}composing/${i.x.d}_${i.x.c}.png`;

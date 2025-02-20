@@ -9,12 +9,6 @@
   import ListItem from './ListItem.svelte';
   import NotFound from './NotFound.svelte';
 
-  /**
-   * @typedef {Object} Props
-   * @property {number} [itemList]
-   */
-
-  /** @type {Props} */
   let { itemList = 0 } = $props();
 
   const itemCount = uniq(itemList.items, 'n').map(({ n }) => ({

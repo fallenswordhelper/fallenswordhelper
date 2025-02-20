@@ -3,6 +3,8 @@
 
   let { close, children, visible = true } = $props();
 
+  let bgDiv = $state();
+
   let atBottom;
   let docScrollY;
   let docTop;
@@ -25,6 +27,12 @@
     }
   }
 
+  function bgClose(e) {
+    if (e.target === bgDiv) {
+      close();
+    }
+  }
+
   run(() => {
     if (visible) {
       disableScroll();
@@ -36,7 +44,7 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class:visible onclick={close}>
+<div bind:this={bgDiv} class:visible onclick={bgClose}>
   {@render children?.()}
 </div>
 

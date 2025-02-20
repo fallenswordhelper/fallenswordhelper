@@ -2,12 +2,6 @@
   import sendEvent from '../../../analytics/sendEvent';
   import { auctionSearchUrl } from '../../../support/constants';
 
-  /**
-   * @typedef {Object} Props
-   * @property {string} [data]
-   */
-
-  /** @type {Props} */
   let { data = '' } = $props();
 </script>
 

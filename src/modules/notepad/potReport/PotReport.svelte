@@ -1,6 +1,4 @@
 <script>
-  import { once } from 'svelte/legacy';
-
   import daGuildFetchInv from '../../_dataAccess/daGuildFetchInv';
   import daGuildReport from '../../_dataAccess/daGuildReport';
   import sendEvent from '../../analytics/sendEvent';
@@ -189,9 +187,11 @@
             sendPrEvent('inventory');
             storeOptions();
           }}
-          onclick={once(() => {
-            inventoryRender = true;
-          })}
+          onclick={() => {
+            if (!inventoryRender) {
+              inventoryRender = true;
+            }
+          }}
           type="checkbox"
         />
         <label for="pr-inv">Composed Potion Inventory</label>
@@ -203,9 +203,11 @@
             sendPrEvent('mapping');
             storeOptions();
           }}
-          onclick={once(() => {
-            mappingRender = true;
-          })}
+          onclick={() => {
+            if (!mappingRender) {
+              mappingRender = true;
+            }
+          }}
           type="checkbox"
         />
         <label for="pr-map">Mapping</label>
@@ -217,9 +219,11 @@
             sendPrEvent('thresholds');
             storeOptions();
           }}
-          onclick={once(() => {
-            thresholdRender = true;
-          })}
+          onclick={() => {
+            if (!thresholdRender) {
+              thresholdRender = true;
+            }
+          }}
           type="checkbox"
         />
         <label for="pr-levels">Thresholds</label>
