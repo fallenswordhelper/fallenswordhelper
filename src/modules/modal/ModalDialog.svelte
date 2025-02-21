@@ -5,12 +5,7 @@
   let onTop;
 </script>
 
-<!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
-<!-- svelte-ignore reactive_declaration_module_script_dependency -->
-
 <script>
-  import { run } from 'svelte/legacy';
-
   import querySelectorArray from '../common/querySelectorArray';
 
   let { close, children, modal = $bindable(), visible = true } = $props();
@@ -46,24 +41,18 @@
     }
   }
 
-  run(() => {
-    if (modal && visible) {
-      prevOnTop = onTop;
-      onTop = modal;
-    }
-  });
-
-  run(() => {
-    if (modal && !visible) {
-      onTop = prevOnTop;
-    }
-  });
-
-  run(() => {
+  $effect(() => {
     if (visible) {
       previouslyFocused = document?.activeElement;
+      if (modal) {
+        prevOnTop = onTop;
+        onTop = modal;
+      }
     } else {
       previouslyFocused?.focus();
+      if (modal) {
+        onTop = prevOnTop;
+      }
     }
   });
 </script>

@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy';
-
   import calf from '../support/calf';
   import ModalBackground from './ModalBackground.svelte';
   import ModalDialog from './ModalDialog.svelte';
@@ -9,24 +7,16 @@
 
   let oldDialogIsClosed;
 
-  function replaceDialogIsClosed() {
-    if (calf.dialogIsClosed) {
-      oldDialogIsClosed = calf.dialogIsClosed;
-    }
-    calf.dialogIsClosed = () => !visible;
-  }
-
-  function restoreDialogIsClosed() {
-    if (oldDialogIsClosed) {
-      calf.dialogIsClosed = oldDialogIsClosed;
-    }
-  }
-
-  run(() => {
+  $effect(() => {
     if (visible) {
-      replaceDialogIsClosed();
+      if (calf.dialogIsClosed) {
+        oldDialogIsClosed = calf.dialogIsClosed;
+      }
+      calf.dialogIsClosed = () => !visible;
     } else {
-      restoreDialogIsClosed();
+      if (oldDialogIsClosed) {
+        calf.dialogIsClosed = oldDialogIsClosed;
+      }
     }
   });
 </script>

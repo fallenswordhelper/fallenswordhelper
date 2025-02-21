@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy';
-
   let { close, children, visible = true } = $props();
 
   let bgDiv = $state();
@@ -33,7 +31,7 @@
     }
   }
 
-  run(() => {
+  $effect(() => {
     if (visible) {
       disableScroll();
     } else {
