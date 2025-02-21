@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy';
-
   import daGuildReport from '../../_dataAccess/daGuildReport';
   import ranksView from '../../_dataAccess/fallbacks/ranksView';
   import sendEvent from '../../analytics/sendEvent';
@@ -54,7 +52,6 @@
       renderValue: (r) => addCommas(r.max_stamina),
     },
   ];
-  let prm = $state(null);
   let rows = $state([]);
 
   const notEquipped = ({ equipped }) => !equipped;
@@ -94,13 +91,9 @@
     }
   }
 
-  function refresh() {
-    prm = init();
-  }
-
-  run(() => {
+  const prm = $derived.by(() => {
     if (visible) {
-      refresh();
+      return init();
     }
   });
 </script>
