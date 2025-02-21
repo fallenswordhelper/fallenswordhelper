@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy';
-
   import { onDestroy } from 'svelte';
   import { fly } from 'svelte/transition';
   import alert from './alert';
@@ -34,8 +32,8 @@
     }
   };
 
-  // whenever the alert store or the ms props changes run onMessageChange
-  run(() => {
+  // whenever the alert store changes run onMessageChange
+  $effect(() => {
     onMessageChange($alert, ms);
   });
 

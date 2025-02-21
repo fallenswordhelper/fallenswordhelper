@@ -1,5 +1,15 @@
+import { mount } from 'svelte';
 import alert from './alert';
-import mountAlert from './mountAlert';
+import Alert from './Alert.svelte';
+
+let mounted;
+
+function mountAlert() {
+  if (!mounted) {
+    mounted = true;
+    mount(Alert, { target: document.body });
+  }
+}
 
 export default function dynamicAlert(msg) {
   if (msg) {
