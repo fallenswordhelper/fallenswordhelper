@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy';
-
   import VirtualList from '../../common/VirtualList.svelte';
   import daGuildLog from '../../_dataAccess/daGuildLog';
   import sendEvent from '../../analytics/sendEvent';
@@ -17,26 +15,31 @@
   let { visible = $bindable(true) } = $props();
 
   let checks = $state(Array(11).fill(true));
-  let chunkNo = 0;
-  let displayLog = $state([]);
-  let enableLogColoring = null;
   let groupCombatItems = $state(null);
   let hideNonPlayerGuildLogMessages = $state(null);
-  let lastCheckUtc = null;
-  let liveLog = [];
-  let prm = $state(null);
+  let liveLog = $state([]);
+  let prm = $state(Promise.resolve());
   let progressLog = $state([]);
-  let nowUtc = null;
   let searchValue = $state('');
 
-  function logEvent(type) {
-    sendEvent('Guild Log', type);
-  }
+  const tmpDisplayLog = $derived(
+    liveLog
+      .filter(({ fshType }) => checks[fshType])
+      .filter(
+        ({ searchable }) =>
+          searchValue === '' || searchable.includes(searchValue.toLowerCase()),
+      )
+      .map(addIndex),
+  );
 
-  function close() {
-    logEvent('close');
-    visible = false;
-  }
+  const displayLog = $derived(
+    tmpDisplayLog.length ? tmpDisplayLog : [{ index: 0, msg: { text: '' } }],
+  );
+
+  let chunkNo = 0;
+  let enableLogColoring = null;
+  let lastCheckUtc = null;
+  let nowUtc = null;
 
   const addIndex = (obj, index) => ({ ...obj, index });
   const replacer = ({ msg }) =>
@@ -56,30 +59,25 @@
   });
   const reverse = (a, b) => b.time - a.time;
 
-  function updateDisplayLog() {
-    displayLog = liveLog
-      .filter(({ fshType }) => checks[fshType])
-      .filter(
-        ({ searchable }) =>
-          searchValue === '' || searchable.includes(searchValue.toLowerCase()),
-      )
-      .map(addIndex);
-    if (!displayLog.length) displayLog = [{ index: 0, msg: { text: '' } }];
+  function logEvent(type) {
+    sendEvent('Guild Log', type);
+  }
+
+  function close() {
+    logEvent('close');
+    visible = false;
   }
 
   function cbChange() {
     logEvent('cbChange');
-    updateDisplayLog();
   }
 
   function selectAll() {
     logEvent('selectAll');
-    updateDisplayLog();
   }
 
   function selectNone() {
     logEvent('selectNone');
-    updateDisplayLog();
   }
 
   function oldGuildLog() {
@@ -95,7 +93,6 @@
   function initVars() {
     progressLog = ['Loading...'];
     liveLog = [];
-    displayLog = [];
     nowUtc = new Date().setUTCSeconds(0, 0) / 1000;
     lastCheckUtc = getValue('lastModalGuildLogCheck') ?? nowUtc;
     setValue('lastModalGuildLogCheck', nowUtc);
@@ -132,21 +129,14 @@
     const builtLogs = await daGuildLog();
     if (!builtLogs) return;
     liveLog = builtLogs.toSorted(reverse).map(decorate);
-    updateDisplayLog();
   }
 
   function refresh() {
     prm = init();
   }
 
-  run(() => {
-    if (visible) {
-      refresh();
-    }
-  });
-
-  run(() => {
-    updateDisplayLog(searchValue);
+  $effect(() => {
+    if (visible) refresh();
   });
 </script>
 
