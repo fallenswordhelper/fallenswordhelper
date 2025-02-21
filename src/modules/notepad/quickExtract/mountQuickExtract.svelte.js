@@ -4,7 +4,7 @@ import QuickExtract from './QuickExtract.svelte';
 const props = $state({ visible: true });
 let thisModal = 0;
 
-export default function quickExtract() {
+export default function mountQuickExtract() {
   if (thisModal) {
     props.visible = true;
   } else {

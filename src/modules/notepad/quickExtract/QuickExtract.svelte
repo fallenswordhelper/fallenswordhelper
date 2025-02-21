@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy';
-
   import daUseItem from '../../_dataAccess/daUseItem';
   import sendEvent from '../../analytics/sendEvent';
   import all from '../../common/all';
@@ -78,7 +76,7 @@
     prm = getInv();
   }
 
-  run(() => {
+  $effect(() => {
     if (visible) {
       results = [];
       prm = getInv();
