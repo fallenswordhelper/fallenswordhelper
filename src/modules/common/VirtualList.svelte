@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy';
-
   import { onMount, tick } from 'svelte';
 
   let {
@@ -27,8 +25,12 @@
   let top = $state(0);
   let bottom = $state(0);
   let average_height;
+  let refreshing = 0;
 
   async function refresh(items, viewport_height, itemHeight) {
+    if (refreshing) return;
+    refreshing = true;
+
     const isStartOverflow = items.length < start;
 
     if (isStartOverflow) {
@@ -51,8 +53,11 @@
         row = rows[i - start];
       }
 
+      if (row) {
       const row_height = (height_map[i] = itemHeight || row.offsetHeight);
       content_height += row_height;
+      }
+
       i += 1;
     }
 
@@ -63,6 +68,8 @@
 
     bottom = remaining * average_height;
     height_map.length = items.length;
+
+    refreshing = false;
   }
 
   async function handle_scroll() {
@@ -108,7 +115,7 @@
     // more. maybe we can just call handle_scroll again?
   }
 
-  export async function scrollToIndex(index, opts) {
+  async function scrollToIndex(index, opts) {
     const { scrollTop } = viewport;
     const itemsDelta = index - start;
     const _itemHeight = itemHeight || average_height;
@@ -129,7 +136,7 @@
   });
 
   // whenever `items` changes, invalidate the current heightmap
-  run(() => {
+  $effect(() => {
     if (mounted) refresh(items, viewport_height, itemHeight);
   });
 </script>
