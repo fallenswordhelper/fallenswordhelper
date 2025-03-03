@@ -5,12 +5,12 @@ import getElementById from '../../../common/getElementById';
 import onclick from '../../../common/onclick';
 import GlobalTop from './GlobalTop.svelte';
 
-const props = $state();
+let promise = $state(Promise.resolve());
 let gt = 0;
 
 function startApp(target) {
-  props.promise = daGlobalContrib();
-  if (!gt) gt = mount(GlobalTop, { props, target });
+  promise = daGlobalContrib();
+  if (!gt) gt = mount(GlobalTop, { props: { promise }, target });
 }
 
 function show() {
