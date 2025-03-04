@@ -8,6 +8,7 @@ const substrings = [
   'Compra-%2526-Venda-de-Recursos-%25E2%259C%2585.user.js',
   'Discord-Message-Checks-for-Updates.user.js',
   'dynamically imported module',
+  'Fallen-Sword-Auto-Invent.user.js',
   'Fallen-Sword-Champion-and-Super-Elite-Alert.user.js',
   'Fallen-Sword-Message-Alert.user.js',
   'Fallen-Sword-Super-Elite-%2526-Crate-Notifier.user.js',
