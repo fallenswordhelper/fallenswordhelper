@@ -106,8 +106,7 @@
     {#await prm}
       Loading...
     {:then}
-      <SvelteTable classNameTable="whos-got-what" {columns} {rows}
-      ></SvelteTable>
+      <SvelteTable classNameTable="whos-got-what" {columns} {rows} />
     {:catch error}
       {error}
     {/await}
