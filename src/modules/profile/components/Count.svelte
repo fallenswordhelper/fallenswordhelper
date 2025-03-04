@@ -1,15 +1,20 @@
 <script>
+  import { SvelteMap } from 'svelte/reactivity';
   import daComponents from '../../_dataAccess/daComponents';
-  import objectToMap from '../../common/objectToMap';
   import uniq from '../../common/uniq';
   import { compStore, total } from './componentsStore';
   import CountRow from './CountRow.svelte';
   import getAsyncData from './getAsyncData';
+  import entries from '../../common/entries';
 
   const { dispatchDelType } = $props();
 
+  function objectToMap(obj) {
+    return new SvelteMap(entries(obj));
+  }
+
   function rollupComponents(componentsJson) {
-    const aggregate = new Map(
+    const aggregate = new SvelteMap(
       uniq(componentsJson, 'b').map((o) => [
         o.b,
         objectToMap({
