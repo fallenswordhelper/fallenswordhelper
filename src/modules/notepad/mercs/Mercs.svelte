@@ -40,13 +40,13 @@
     'Magical',
   ];
 
-  export let visible = true;
-  let doingSomething = 1;
-  let haveOffer = 0;
-  let noOffer = 0;
-  let available = '?';
-  let cost = '?';
-  let active = [];
+  let { visible = $bindable(true) } = $props();
+  let doingSomething = $state(1);
+  let haveOffer = $state(0);
+  let noOffer = $state(0);
+  let available = $state('?');
+  let cost = $state('?');
+  let active = $state([]);
 
   function close() {
     sendEvent('mercs', 'close');
@@ -120,8 +120,10 @@
   init();
 </script>
 
-<ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Merc Hunter</svelte:fragment>
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    Merc Hunter
+  {/snippet}
   <div class="merc-hunter">
     <div class="top-div">(<b>{available}</b> available for hire)</div>
     <div class="button-div">
@@ -129,7 +131,7 @@
         <button
           class="custombutton"
           disabled={doingSomething}
-          on:click={getOffer}
+          onclick={getOffer}
           type="button"
         >
           Send Expedition ({cost}g)
@@ -138,7 +140,7 @@
         <button
           class="custombutton"
           disabled={doingSomething}
-          on:click={doAccept}
+          onclick={doAccept}
           type="button"
         >
           Accept Offer
@@ -147,7 +149,7 @@
         <button
           class="custombutton"
           disabled={doingSomething}
-          on:click={doDecline}
+          onclick={doDecline}
           type="button"
         >
           Decline Offer
@@ -244,7 +246,7 @@
                 <button
                   class="custombutton"
                   disabled={doingSomething}
-                  on:click={() => doDisband(id)}
+                  onclick={() => doDisband(id)}
                   type="button"
                 >
                   Disband

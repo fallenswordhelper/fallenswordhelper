@@ -11,11 +11,11 @@
   } from './blockedSkills';
   import { checkLoadList, checkNewList, checkUpdateList } from './errorChecks';
 
-  let blockedSkillLists = getValueJSON('blockedSkillLists');
-  let newListName = '';
-  let listName = '';
-  let infoBoxHeader = '';
-  let infoBoxText = '';
+  let blockedSkillLists = $state(getValueJSON('blockedSkillLists'));
+  let newListName = $state('');
+  let listName = $state('');
+  let infoBoxHeader = $state('');
+  let infoBoxText = $state('');
 
   function clearMessages() {
     infoBoxText = '';
@@ -115,16 +115,18 @@
     submitChanges();
   }
 
-  const list = findList(blockedSkillLists, getCheckedSkills());
-  if (list) {
-    listName = list.name;
-  }
+  (() => {
+    const list = findList(blockedSkillLists, getCheckedSkills());
+    if (list) {
+      listName = list.name;
+    }
 
-  if (blockedSkillLists.length >= 10) {
-    infoBox(
-      'Having more than 10 blocked skills lists may slow down this page.',
-    );
-  }
+    if (blockedSkillLists.length >= 10) {
+      infoBox(
+        'Having more than 10 blocked skills lists may slow down this page.',
+      );
+    }
+  })();
 </script>
 
 <div class="fshCenter">
@@ -135,23 +137,18 @@
         <option value={bsl.name}>{bsl.name}</option>
       {/each}
     </select>
-    <input
-      class="custominput"
-      type="button"
-      value="Use"
-      on:click|self={applyList}
-    />
+    <input class="custominput" type="button" value="Use" onclick={applyList} />
     <input
       class="custominput"
       type="button"
       value="Delete"
-      on:click|self={deleteList}
+      onclick={deleteList}
     />
     <input
       class="custominput"
       type="button"
       value="Update"
-      on:click|self={updateList}
+      onclick={updateList}
     />
   </div>
   <div class="newlists">
@@ -168,7 +165,7 @@
       class="custominput"
       type="button"
       value="Save New Blocked Skill Set"
-      on:click|self={createList}
+      onclick={createList}
     />
   </div>
   {#if infoBoxText}

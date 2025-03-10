@@ -1,3 +1,4 @@
+import { mount } from 'svelte';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
 import getText from '../../common/getText';
@@ -9,7 +10,7 @@ import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import TitanTracker from './TitanTracker.svelte';
 
 function startTracker(parentTable, theTitans, titanRows) {
-  return new TitanTracker({
+  return mount(TitanTracker, {
     anchor: parentTable.rows[5],
     props: { theTitans, titanRows },
     target: parentTable.children[0],
@@ -54,7 +55,8 @@ function getNewTitans(oldTitans, titanRows) {
 
 export default async function titanTracker(titanTables, titanRows) {
   const newTitans = getNewTitans(await get('fsh_titans'), titanRows);
-  if (titanTables[0].rows.length > 5)
+  if (titanTables[0].rows.length > 5) {
     startTracker(titanTables[0], newTitans, titanRows);
+  }
   set('fsh_titans', newTitans);
 }

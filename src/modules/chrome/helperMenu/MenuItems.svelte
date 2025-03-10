@@ -1,11 +1,10 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import sendEvent from '../../analytics/sendEvent';
   import isFunction from '../../common/isFunction';
   import { playerIdUrl } from '../../support/constants';
   import functionLookup from './functionLookup';
 
-  const dispatch = createEventDispatcher();
+  const { doToggle } = $props();
 
   function sendHelperEvent(name) {
     sendEvent('helperMenu', name);
@@ -14,14 +13,14 @@
   function callMenuFunction(name, fn) {
     if (isFunction(fn)) {
       sendHelperEvent(name);
-      dispatch('toggle');
+      doToggle();
       fn();
     }
   }
 
   function message(playerName) {
-    dispatch('toggle');
     sendHelperEvent('sendMsg');
+    doToggle();
     window.openQuickMsgDialog(playerName);
   }
 </script>
@@ -34,14 +33,14 @@
         {#if menuItem.fn}
           <button
             type="button"
-            on:click={() => callMenuFunction(menuItem.label, menuItem.fn)}
+            onclick={() => callMenuFunction(menuItem.label, menuItem.fn)}
           >
             {menuItem.label}
           </button>
         {:else if menuItem.href}
           <a
             href={menuItem.href}
-            on:click={() => sendHelperEvent(menuItem.label)}
+            onclick={() => sendHelperEvent(menuItem.label)}
           >
             {menuItem.label}
           </a>
@@ -49,7 +48,7 @@
           <button
             type="button"
             class="helperDevBtn"
-            on:click={() => message(menuItem.playerName)}
+            onclick={() => message(menuItem.playerName)}
           >
             PM
           </button>

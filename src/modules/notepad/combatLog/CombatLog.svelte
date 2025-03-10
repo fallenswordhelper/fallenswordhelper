@@ -1,13 +1,13 @@
 <script>
   import sendEvent from '../../analytics/sendEvent';
   import jsonStringify from '../../common/jsonStringify';
-  import confirm from '../../modal/confirm';
+  import confirm from '../../modal/confirm.svelte';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import { combatLogClear, combatLogGetAll } from '../../system/idbLogger';
 
-  export let visible = true;
-  let log = [];
-  let textArea = 0;
+  let { visible = $bindable(true) } = $props();
+  let log = $state([]);
+  let textArea = $state(0);
 
   function close() {
     sendEvent('Combat Log', 'close');
@@ -33,15 +33,17 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Combat Log</svelte:fragment>
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    Combat Log
+  {/snippet}
   {#await init() then}
     <div class="textContainer">
       <textarea bind:this={textArea} readonly>{jsonStringify(log)}</textarea>
     </div>
     <div class="bottom">
-      <button on:click={notepadCopyLog} type="button">Select All</button>
-      <button on:click={clearStorage} type="button">Clear</button>
+      <button onclick={notepadCopyLog} type="button">Select All</button>
+      <button onclick={clearStorage} type="button">Clear</button>
     </div>
   {/await}
 </ModalTitled>

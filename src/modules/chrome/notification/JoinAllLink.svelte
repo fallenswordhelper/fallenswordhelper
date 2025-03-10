@@ -6,6 +6,10 @@
   import calf from '../../support/calf';
   import { joinUnderUrl, joinallUrl } from '../../support/constants';
 
+  let joining = $state(0);
+  let groupJoinUrl = $state(joinallUrl);
+  let groupJoinText = $state('');
+
   const smallEnough = (g) =>
     !calf.enableMaxGroupSizeToJoin ||
     g.members.length < calf.maxGroupSizeToJoin;
@@ -13,10 +17,6 @@
   const isOpen = (g) => !g.members.find(hasPlayer);
   const getId = (g) => g.id;
 
-  let joining = 0;
-
-  let groupJoinUrl = joinallUrl;
-  let groupJoinText = '';
   if (calf.enableMaxGroupSizeToJoin) {
     groupJoinUrl = joinUnderUrl;
     groupJoinText = ` less than size ${calf.maxGroupSizeToJoin}`;
@@ -37,9 +37,11 @@
   }
 
   function handleClick(e) {
-    e.preventDefault();
-    sendEvent('notification', 'Join All');
-    joining = 1;
+    if (!joining) {
+      e.preventDefault();
+      sendEvent('notification', 'Join All');
+      joining = 1;
+    }
   }
 </script>
 
@@ -53,7 +55,7 @@
     {/await}
   {:else}
     <p class="notification-content">
-      <button on:click|once={handleClick} type="button">
+      <button onclick={handleClick} type="button">
         Join all attack groups{groupJoinText}.
       </button>
     </p>

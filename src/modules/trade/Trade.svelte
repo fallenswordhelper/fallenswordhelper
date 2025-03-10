@@ -12,14 +12,14 @@
 
 {#if getElementById('send-items')}
   <div>
-    <button class="custombutton" on:click={sendBtn} type="button">Send</button>
+    <button class="custombutton" onclick={sendBtn} type="button">Send</button>
   </div>
 {/if}
 
 <QuickSelectClasses
-  on:perf={() => sendEvent('Trade', 'doPerf')}
-  on:select={(e) => sendEvent('Trade', 'doSelect', e.detail)}
-  on:toggle={() => sendEvent('Trade', 'toggleSelectST')}
+  dispatchPerf={() => sendEvent('Trade', 'doPerf')}
+  dispatchSelect={(itemId) => sendEvent('Trade', 'doSelect', itemId)}
+  dispatchToggle={() => sendEvent('Trade', 'toggleSelectST')}
   wantsTagged="1"
 />
 

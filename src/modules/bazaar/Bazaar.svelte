@@ -5,7 +5,7 @@
   import addCommas from '../system/addCommas';
   import { cdn } from '../system/system';
 
-  export let potions = [];
+  let { potions = [] } = $props();
 
   async function buyButton(potion) {
     sendEvent('bazaar', 'buyButton');
@@ -57,7 +57,7 @@
       {#await potion.promise}
         <span class="fshSpinner fshSpinner12"></span>
       {:then}
-        <button type="button" class="custombutton" on:click={buyButton(potion)}
+        <button type="button" class="custombutton" onclick={buyButton(potion)}
           >Buy</button
         >
       {/await}

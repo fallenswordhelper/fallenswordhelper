@@ -1,7 +1,6 @@
 <script>
   import sendEvent from '../../analytics/sendEvent';
   import formatUtcTimestamp from '../../common/formatUtcTimestamp';
-  import LinkButton from '../../common/LinkButton.svelte';
   import navigateTo from '../../common/navigateTo';
   import numberIsNaN from '../../common/numberIsNaN';
   import openQuickBuffById from '../../common/openQuickBuffById';
@@ -18,13 +17,16 @@
   import { cdn } from '../../system/system';
   import view from '../../app/guild/recruit/view';
   import isArray from '../../common/isArray';
+  import LinkBtn from '../../common/LinkBtn.svelte';
 
-  export let groupCombatItems = null;
-  export let hideNonPlayerGuildLogMessages = null;
-  export let logEntry = null;
+  let {
+    groupCombatItems = null,
+    hideNonPlayerGuildLogMessages = null,
+    logEntry = null,
+  } = $props();
 
-  let recruiting_prm = Promise.resolve();
-  let recruiting_result = 'waiting';
+  let recruiting_prm = $state(Promise.resolve());
+  let recruiting_result = $state('waiting');
 
   function logEvent(type) {
     sendEvent('Guild Log', type);
@@ -136,13 +138,13 @@
             {#if recruiting_result === 'waiting'}
               <span class="action-buttons">
                 [
-                <LinkButton on:click={() => recruiting(data, 'acceptjoin')}
-                  >Accept</LinkButton
-                >
+                <LinkBtn onclick={() => recruiting(data, 'acceptjoin')}>
+                  Accept
+                </LinkBtn>
                 |
-                <LinkButton on:click={() => recruiting(data, 'denyjoin')}
-                  >Deny</LinkButton
-                >
+                <LinkBtn onclick={() => recruiting(data, 'denyjoin')}>
+                  Deny
+                </LinkBtn>
                 ]
               </span>
             {:else}
@@ -154,20 +156,20 @@
         {/if}
         <span class="action-buttons">
           [
-          <LinkButton on:click={() => reply(data)}>Reply</LinkButton>
+          <LinkBtn onclick={() => reply(data)}>Reply</LinkBtn>
           |
-          <LinkButton on:click={() => buff(data)}>Buff</LinkButton>
+          <LinkBtn onclick={() => buff(data)}>Buff</LinkBtn>
           |
-          <LinkButton on:click={() => send(data)}>Send</LinkButton>
+          <LinkBtn onclick={() => send(data)}>Send</LinkBtn>
           |
-          <LinkButton on:click={() => trade(data)}>Trade</LinkButton>
+          <LinkBtn onclick={() => trade(data)}>Trade</LinkBtn>
           ]
         </span>
       {/each}
       {#each logEntry.msg.attachments.filter(({ type }) => type === 11) as { data }}
         <span class="action-buttons">
           [
-          <LinkButton on:click={() => combat(data)}>View Combat</LinkButton>
+          <LinkBtn onclick={() => combat(data)}>View Combat</LinkBtn>
           ]
         </span>
       {/each}

@@ -5,6 +5,6 @@ import getProps from './getProps';
 
 const prepare = (i) => [closestTd(i), ...getProps(i)];
 
-export default function deleteAllVisible(thisInvTable) {
+export default function dispatchDelete(thisInvTable) {
   deleteBatch(querySelectorArray('img', thisInvTable).map(prepare));
 }

@@ -2,7 +2,7 @@ import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import sendEvent from '../analytics/sendEvent';
 import getElementById from '../common/getElementById';
 import onclick from '../common/onclick';
-import confirm from '../modal/confirm';
+import confirm from '../modal/confirm.svelte';
 import getValue from '../system/getValue';
 
 async function reroll() {

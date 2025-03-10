@@ -3,8 +3,8 @@
   import sendEvent from '../../analytics/sendEvent';
   import formatUtcTimestamp from '../../common/formatUtcTimestamp';
 
-  export let entry;
-  let isOpen = false;
+  let { entry } = $props();
+  let isOpen = $state(false);
 
   const toggle = () => {
     sendEvent('SE Tracker', 'Expand Row');
@@ -14,7 +14,7 @@
 
 <div class="expando">
   {#if entry[3].length}
-    <button on:click={toggle} aria-expanded={isOpen} type="button">
+    <button onclick={toggle} aria-expanded={isOpen} type="button">
       {#if isOpen}
         &or;
       {:else}

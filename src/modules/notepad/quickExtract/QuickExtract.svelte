@@ -5,29 +5,30 @@
   import alpha from '../../common/alpha';
   import invWithSt from '../../common/invWithSt';
   import isArray from '../../common/isArray';
-  import LinkButton from '../../common/LinkButton.svelte';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import SelectInST from '../../common/SelectInST.svelte';
-  import confirm from '../../modal/confirm';
+  import confirm from '../../modal/confirm.svelte';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import getValue from '../../system/getValue';
   import setValue from '../../system/setValue';
   import processResult from './processResult';
   import rollupExtractable from './rollupExtractable';
+  import LinkBtn from '../../common/LinkBtn.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
+
+  let { visible = $bindable(true) } = $props();
 
   const prompt = 'Are you sure you want to extract all similar items?';
   const prefSelectMain = 'selectMain';
   const prefDisablePrompts = 'disableQuickExtractPrompts';
 
-  export let visible = true;
-  let prm = null;
+  let prm = $state(null);
   let playerId = null;
-  let selectST = null;
-  let selectMain = getValue(prefSelectMain);
-  let disablePrompts = getValue(prefDisablePrompts);
+  let selectST = $state(null);
+  let selectMain = $state(getValue(prefSelectMain));
+  let disablePrompts = $state(getValue(prefDisablePrompts));
   let extractable = null;
-  let toExtract = null;
-  let results = [];
+  let toExtract = $state(null);
+  let results = $state([]);
 
   const isExtractable = (item) =>
     item.item_name === 'Zombie Coffin' || item.type === 12 || item.type === 16;
@@ -75,10 +76,12 @@
     prm = getInv();
   }
 
-  $: if (visible) {
-    results = [];
-    prm = getInv();
-  }
+  $effect(() => {
+    if (visible) {
+      results = [];
+      prm = getInv();
+    }
+  });
 
   let lastMsg;
 
@@ -109,17 +112,19 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Quick Extract</svelte:fragment>
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    Quick Extract
+  {/snippet}
   <div>
     Select which type of plants you wish to extract all of. Only select
     extractable resources.
     <br />
-    <SelectInST bind:inSt={selectST} on:toggle={toggleSelectST} />&nbsp;
+    <SelectInST bind:inSt={selectST} dispatchToggle={toggleSelectST} />&nbsp;
     <label>
       <input
         bind:checked={selectMain}
-        on:change={toggleSelectMain}
+        onchange={toggleSelectMain}
         type="checkbox"
       />
       Main Folder Only
@@ -127,12 +132,12 @@
     <label>
       <input
         bind:checked={disablePrompts}
-        on:change={togglePrompts}
+        onchange={togglePrompts}
         type="checkbox"
       />
       Disable Prompts
     </label>&nbsp;
-    <LinkButtonBracketed on:click={refresh}>Refresh</LinkButtonBracketed>
+    <LinkBtnBracketed onclick={refresh}>Refresh</LinkBtnBracketed>
     <br />
     <table>
       <thead>
@@ -167,9 +172,9 @@
                   {#if delPending}
                     <span class="fshSpinner fshSpinner12"></span>
                   {:else}
-                    <LinkButton on:click={() => extractEvt(index)}
-                      >Extract {count}</LinkButton
-                    >
+                    <LinkBtn onclick={() => extractEvt(index)}>
+                      Extract {count}
+                    </LinkBtn>
                   {/if}
                 {:else}
                   Done

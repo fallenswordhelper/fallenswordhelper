@@ -33,7 +33,7 @@
     </div>
   </div>
   &thinsp;]:
-  <input bind:checked={$trackerPrefStore} on:click={toggle} type="checkbox" />
+  <input bind:checked={$trackerPrefStore} onclick={toggle} type="checkbox" />
 </label>
 
 <style>

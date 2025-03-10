@@ -1,24 +1,26 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import LinkButton from '../../common/LinkButton.svelte';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import LinkBtn from '../../common/LinkBtn.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import { get, set } from '../../system/idb';
 
-  const dispatch = createEventDispatcher();
-  export let checks = Array(11).fill(true);
-  export let searchValue = '';
+  let {
+    cbChange,
+    checks = $bindable(Array(11).fill(true)),
+    clearSearch,
+    oldGuildLog,
+    searchValue = $bindable(''),
+    selectAll,
+    selectNone,
+    refresh,
+  } = $props();
 
   function storeChecks() {
-    set('fsh_LogChecks', checks);
+    set('fsh_LogChecks', $state.snapshot(checks));
   }
 
-  function cbChange() {
+  function doCbChange() {
     storeChecks();
-    dispatch('cbChange');
-  }
-
-  function oldGuildLog() {
-    dispatch('oldGuildLog');
+    cbChange();
   }
 
   function updateChecks(to) {
@@ -26,22 +28,14 @@
     storeChecks();
   }
 
-  function selectAll() {
+  function doSelectAll() {
     updateChecks(true);
-    dispatch('selectAll');
+    selectAll();
   }
 
-  function selectNone() {
+  function doSelectNone() {
     updateChecks(false);
-    dispatch('selectNone');
-  }
-
-  function refresh() {
-    dispatch('refresh');
-  }
-
-  function clearSearch() {
-    dispatch('clearSearch');
+    selectNone();
   }
 
   async function init() {
@@ -61,7 +55,7 @@
         Potions:
         <input
           bind:checked={checks[1]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="1"
         />
@@ -72,7 +66,7 @@
         Store/Recalls:
         <input
           bind:checked={checks[2]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="2"
         />
@@ -83,7 +77,7 @@
         Relics:
         <input
           bind:checked={checks[4]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="4"
         />
@@ -94,7 +88,7 @@
         Mercenaries:
         <input
           bind:checked={checks[5]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="5"
         />
@@ -105,21 +99,21 @@
         Group Combats:
         <input
           bind:checked={checks[6]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="6"
         />
       </label>
     </div>
     <div>
-      <LinkButton on:click={oldGuildLog}>Old Guild Log</LinkButton>
+      <LinkBtn onclick={oldGuildLog}>Old Guild Log</LinkBtn>
     </div>
     <div>
       <label>
         Donations:
         <input
           bind:checked={checks[7]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="7"
         />
@@ -130,7 +124,7 @@
         Rankings:
         <input
           bind:checked={checks[8]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="8"
         />
@@ -141,7 +135,7 @@
         GvGs:
         <input
           bind:checked={checks[9]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="9"
         />
@@ -152,7 +146,7 @@
         Tag/UnTags:
         <input
           bind:checked={checks[3]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="3"
         />
@@ -163,7 +157,7 @@
         Titans:
         <input
           bind:checked={checks[10]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="10"
         />
@@ -174,7 +168,7 @@
         Other:
         <input
           bind:checked={checks[0]}
-          on:change={cbChange}
+          onchange={doCbChange}
           type="checkbox"
           value="0"
         />
@@ -185,17 +179,13 @@
     <div></div>
     <div class="buttons">
       <div>
-        <LinkButtonBracketed on:click={selectAll}
-          >Select All</LinkButtonBracketed
-        >
+        <LinkBtnBracketed onclick={doSelectAll}>Select All</LinkBtnBracketed>
       </div>
       <div>
-        <LinkButtonBracketed on:click={selectNone}
-          >Select None</LinkButtonBracketed
-        >
+        <LinkBtnBracketed onclick={doSelectNone}>Select None</LinkBtnBracketed>
       </div>
       <div>
-        <LinkButtonBracketed on:click={refresh}>Refresh</LinkButtonBracketed>
+        <LinkBtnBracketed onclick={refresh}>Refresh</LinkBtnBracketed>
       </div>
     </div>
     <div class="search-box">
@@ -203,11 +193,13 @@
         Search:
         <span class="search-wrapper">
           <input bind:value={searchValue} type="text" />
-          <LinkButton
+          <LinkBtn
             --button-deco="none"
             disabled={!searchValue}
-            on:click={clearSearch}>&times;</LinkButton
+            onclick={clearSearch}
           >
+            &times;
+          </LinkBtn>
         </span>
       </label>
     </div>

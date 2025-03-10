@@ -2,9 +2,9 @@
   import daGsTake from '../../../_dataAccess/daGsTake';
   import arrayFrom from '../../../common/arrayFrom';
 
-  export let fshInv = 0;
-  let disabled = 1;
-  let recalling = 0;
+  let { fshInv = 0 } = $props();
+  let disabled = $state(1);
+  let recalling = $state(0);
 
   const repairable = (
     _idx,
@@ -21,7 +21,9 @@
   }
 
   function toBp() {
-    recalling = 1;
+    if (!recalling) {
+      recalling = 1;
+    }
   }
 </script>
 
@@ -38,7 +40,7 @@
       <button
         class="custombutton"
         {disabled}
-        on:click|once={toBp}
+        onclick={toBp}
         type="button"
       >
         BP

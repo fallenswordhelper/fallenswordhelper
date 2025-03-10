@@ -4,7 +4,7 @@
   import GuildTracker from './GuildTracker.svelte';
   import Utils from './Utils.svelte';
 
-  export let visible = true;
+  let { visible = $bindable(true) } = $props();
 
   function close() {
     sendEvent('Guild Tracker', 'close');
@@ -23,4 +23,4 @@
   ];
 </script>
 
-<ModalTabbed on:close={close} {tabs} {visible} />
+<ModalTabbed {close} {tabs} {visible} />

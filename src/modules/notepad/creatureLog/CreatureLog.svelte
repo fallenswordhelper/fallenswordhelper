@@ -2,21 +2,21 @@
   import sendEvent from '../../analytics/sendEvent';
   import alpha from '../../common/alpha';
   import entries from '../../common/entries';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
-  import confirm from '../../modal/confirm';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
+  import confirm from '../../modal/confirm.svelte';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import addCommas from '../../system/addCommas';
   import { get, set } from '../../system/idb';
   import { cdn } from '../../system/system';
 
-  export let visible = true;
+  let { visible = $bindable(true) } = $props();
 
   function close() {
     sendEvent('Creature Log', 'close');
     visible = false;
   }
 
-  let log = [];
+  let log = $state([]);
   let sortDirection = 1;
   let lastSort = '';
 
@@ -74,29 +74,33 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Creature Log</svelte:fragment>
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    Creature Log
+  {/snippet}
   <div class="title">
     <span class="bold">Entity Information</span>
-    <LinkButtonBracketed
+    <LinkBtnBracketed
       --button-color="white"
       --button-width="2.8em"
-      on:click={clearStorage}
+      onclick={clearStorage}
     >
       Clear
-    </LinkButtonBracketed>
+    </LinkBtnBracketed>
   </div>
   <div class="grid headings">
     <div>
-      <button class="sortable" on:click={sortEntity} type="button"
-        >Entity</button
-      >
+      <button class="sortable" onclick={sortEntity} type="button">
+        Entity
+      </button>
     </div>
     <div>
-      <button class="sortable" on:click={sortClass} type="button">Class</button>
+      <button class="sortable" onclick={sortClass} type="button">
+        Class
+      </button>
     </div>
     <div>
-      <button class="sortable" on:click={sortLevel} type="button">Lvl</button>
+      <button class="sortable" onclick={sortLevel} type="button">Lvl</button>
     </div>
     <div>Attack</div>
     <div>Defense</div>

@@ -63,35 +63,37 @@
   }
 </script>
 
+<!-- svelte-ignore a11y_consider_explicit_label -->
+
 <div>
   <button
     class="fshQuickBuff"
-    on:click={quickbuff}
+    onclick={quickbuff}
     type="button"
     data-tooltip="Buff {playername}">&nbsp;</button
   >
   <button
     class="fshJoin"
-    on:click={join}
+    onclick={join}
     type="button"
     data-tooltip="Join All Groups{joinTip}">&nbsp;</button
   >
   <button
     class="fshGold"
-    on:click={auctions}
+    onclick={auctions}
     type="button"
     data-tooltip="Go to {playername}'s auctions">&nbsp;</button
   >
   <button
     class="fshTempleTwo"
-    on:click={sTrade}
+    onclick={sTrade}
     type="button"
     data-tooltip="Create Secure Trade to {playername}">&nbsp;</button
   >
   {#if ownGuild}
     <button
       class="fshTempleThree"
-      on:click={recall}
+      onclick={recall}
       type="button"
       data-tooltip="Recall items from {playername}">&nbsp;</button
     >
@@ -99,7 +101,7 @@
   {#if ownGuild && getValue('showAdmin')}
     <button
       style="background-image: url('{cdn}guilds/{currentGuildId()}_mini.png');"
-      on:click={rank}
+      onclick={rank}
       type="button"
       data-tooltip="Rank {playername}">&nbsp;</button
     >

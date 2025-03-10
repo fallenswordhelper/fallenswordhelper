@@ -11,6 +11,7 @@ enabled = true
   [analyzers.meta]
   environment = ["jquery"]
   globals = [
+    "$state",
     "DataTable",
     "defineCalfPath",
     "defineCalfVer",

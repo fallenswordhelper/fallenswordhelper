@@ -1,22 +1,20 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import getValue from '../system/getValue';
   import setValue from '../system/setValue';
 
-  const dispatch = createEventDispatcher();
-  const prefSelectST = 'selectST';
+  let { dispatchToggle, inSt = $bindable(null) } = $props();
 
-  export let inSt = null;
+  const prefSelectST = 'selectST';
   inSt = getValue(prefSelectST);
 
   function toggleSelectST() {
     setValue(prefSelectST, inSt);
-    dispatch('toggle');
+    dispatchToggle();
   }
 </script>
 
 <label>
-  <input bind:checked={inSt} on:change={toggleSelectST} type="checkbox" />
+  <input bind:checked={inSt} onchange={toggleSelectST} type="checkbox" />
   Select items in ST
 </label>
 

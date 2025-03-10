@@ -1,12 +1,12 @@
 <script>
   import FolderButtons from '../../../common/FolderButtons.svelte';
 
-  export let inv = { folders: {} };
+  let { doFilter, inv = { folders: {} } } = $props();
 </script>
 
 <tr class="fshCenter">
   <td colspan="3">
-    <FolderButtons folders={inv.folders} on:filter />
+    <FolderButtons {doFilter} folders={inv.folders} />
   </td>
 </tr>
 

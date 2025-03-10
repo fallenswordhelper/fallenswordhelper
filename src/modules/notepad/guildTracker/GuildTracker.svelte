@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   let context = '';
 </script>
 
@@ -14,9 +14,9 @@
   import { act, cur, gxp, lvl, max, utc, vl } from './indexConstants';
   import { getActivity } from './utils';
 
-  let activity = {};
-  let members = [];
-  let selected = '';
+  let activity = $state({});
+  let members = $state([]);
+  let selected = $state('');
 
   const revSort = (data) =>
     fromEntries(
@@ -52,7 +52,7 @@
       <div>Date</div>
       <div>
         Member
-        <select bind:value={selected} on:change={handleChange}>
+        <select bind:value={selected} onchange={handleChange}>
           {#each members as member}
             <option value={member}>{member}</option>
           {/each}

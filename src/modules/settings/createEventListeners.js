@@ -10,7 +10,7 @@ import numberIsNaN from '../common/numberIsNaN';
 import onclick from '../common/onclick';
 import querySelectorArray from '../common/querySelectorArray';
 import selfIdIs from '../common/selfIdIs';
-import confirm from '../modal/confirm';
+import confirm from '../modal/confirm.svelte';
 import setValue from '../system/setValue';
 
 async function clearStorage() {

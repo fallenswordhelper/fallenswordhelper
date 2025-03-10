@@ -1,9 +1,9 @@
 <script>
-  export let disabled = 0;
+  let { children, disabled = 0, onclick } = $props();
 </script>
 
-<button {disabled} on:click type="button">
-  <slot></slot>
+<button {disabled} {onclick} type="button">
+  {@render children?.()}
 </button>
 
 <style>

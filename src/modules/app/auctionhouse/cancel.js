@@ -1,4 +1,4 @@
-import auctionhouse from "./auctionhouse";
+import auctionhouse from './auctionhouse';
 
 export default function cancel(auctionId) {
   return auctionhouse({

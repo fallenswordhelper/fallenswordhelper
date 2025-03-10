@@ -11,8 +11,8 @@
   import fromEntries from '../../common/fromEntries';
   import getTextTrim from '../../common/getTextTrim';
   import isArray from '../../common/isArray';
-  import LinkButton from '../../common/LinkButton.svelte';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import LinkBtn from '../../common/LinkBtn.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import querySelector from '../../common/querySelector';
   import querySelectorAll from '../../common/querySelectorAll';
   import querySelectorArray from '../../common/querySelectorArray';
@@ -24,12 +24,12 @@
   import { get, set } from '../../system/idb';
   import { cdn } from '../../system/system';
 
-  export let visible = true;
+  let { visible = $bindable(true) } = $props();
 
-  let compTally = {};
-  let invTally = {};
-  let progressLog = [];
-  let recipeBook = [];
+  let compTally = $state({});
+  let invTally = $state({});
+  let progressLog = $state([]);
+  let recipeBook = $state([]);
   let sortDirection = 1;
 
   function recipeMgrEvent(type) {
@@ -119,7 +119,7 @@
 
   async function parseRecipes(toCheck) {
     recipeBook = await all(toCheck.map(getParts));
-    set('fsh_recipeMgr', recipeBook);
+    set('fsh_recipeMgr', $state.snapshot(recipeBook));
     getInventory();
   }
 
@@ -241,17 +241,17 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">
+<ModalTitled {close} {visible}>
+  {#snippet title()}
     Recipe Manager
-    <LinkButtonBracketed
+    <LinkBtnBracketed
       --button-color="#494437"
       --button-size="10px"
-      on:click={refreshBtn}
+      onclick={refreshBtn}
     >
       Refresh
-    </LinkButtonBracketed>
-  </svelte:fragment>
+    </LinkBtnBracketed>
+  {/snippet}
   {#await init() then}
     {#if progressLog.length}
       <div class="progress-log">
@@ -264,16 +264,17 @@
       <div class="recipes ui-widget-content">
         <div class="innerColumnHeader item-container">Recipe</div>
         <div class="innerColumnHeader item-container">
-          <LinkButton --button-color="#383838" on:click={sortByName}
-            >Name</LinkButton
-          >
+          <LinkBtn --button-color="#383838" onclick={sortByName}>
+            Name
+          </LinkBtn>
         </div>
         <div class="innerColumnHeader item-container">Items</div>
         <div class="innerColumnHeader item-container">Components</div>
         <div class="innerColumnHeader item-container">Target</div>
         {#each recipeBook as [id, name, recipe, items, components, [targetId, vcode]], index (index)}
           <div class="item-container">
-            <a href="{viewRecipeUrl}{id}" on:click={nav}>
+            <!-- svelte-ignore a11y_consider_explicit_label -->
+            <a href="{viewRecipeUrl}{id}" onclick={nav}>
               <div
                 class="image"
                 style:background-image="url('{cdn}recipes/{recipe}')"
@@ -281,7 +282,7 @@
             </a>
           </div>
           <div class="item-container">
-            <a href="{viewRecipeUrl}{id}" on:click={nav}>
+            <a href="{viewRecipeUrl}{id}" onclick={nav}>
               {name}
             </a>
           </div>

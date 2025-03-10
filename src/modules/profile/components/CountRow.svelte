@@ -1,14 +1,16 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import sendEvent from '../../analytics/sendEvent';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import playerId from '../../common/playerId';
   import { cdn } from '../../system/system';
   import { compStore } from './componentsStore';
 
-  export let itemId;
+  let { dispatchDelType, itemId } = $props();
 
-  const dispatch = createEventDispatcher();
+  let item = $derived($compStore.get(itemId));
+
+  let delTypeEnabled = true;
+
   const pid = playerId();
   const imgSrc = (m) => `${cdn}items/${m.get('b')}.gif`;
   const tipped = (m) =>
@@ -16,13 +18,12 @@
       pid
     }&vcode=${m.get('v')}`;
 
-  let item;
-
-  $: item = $compStore.get(itemId);
-
   function delType() {
-    sendEvent('components', 'delType');
-    dispatch('delType', itemId);
+    if (delTypeEnabled) {
+      delTypeEnabled = false;
+      sendEvent('components', 'delType');
+      dispatchDelType(itemId);
+    }
   }
 </script>
 
@@ -40,10 +41,9 @@
     {#if item.get('delPending')}
       <td class="compSumSpin"><span class="fshSpinner fshSpinner12"></span></td>
     {:else}
-      <td
-        ><LinkButtonBracketed on:click|once={delType}>Del</LinkButtonBracketed
-        ></td
-      >
+      <td>
+        <LinkBtnBracketed onclick={delType}>Del</LinkBtnBracketed>
+      </td>
     {/if}
   </tr>
 {:else}

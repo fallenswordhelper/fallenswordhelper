@@ -10,8 +10,8 @@
   import getCustomUrlParameter from '../../system/getCustomUrlParameter';
   import { get, set } from '../../system/idb';
 
-  export let visible = true;
-  let records = [];
+  let { visible = $bindable(true) } = $props();
+  let records = $state([]);
 
   function close() {
     sendEvent('FS Box Log', 'close');
@@ -41,10 +41,12 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">FS Box Log</svelte:fragment>
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    FS Box Log
+  {/snippet}
   <div class="top">
-    <button on:click={clearStorage} type="button">Clear</button>
+    <button onclick={clearStorage} type="button">Clear</button>
   </div>
   <div class="textContainer">
     {#await init() then}

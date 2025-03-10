@@ -1,8 +1,7 @@
 <script>
   import { cdn } from '../../system/system';
 
-  export let title = '';
-  export let flag = 0;
+  let { title = '', flag = 0 } = $props();
 
   const boolToString = (e) => String(Number(e));
 </script>

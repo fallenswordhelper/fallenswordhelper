@@ -11,7 +11,7 @@
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import addCommas from '../../system/addCommas';
 
-  export let visible = true;
+  let { visible = $bindable(true) } = $props();
 
   const columns = [
     { key: 'slot', title: 'Slot', value: (r) => r.slot, sortable: true },
@@ -52,8 +52,7 @@
       renderValue: (r) => addCommas(r.max_stamina),
     },
   ];
-  let prm = null;
-  let rows = [];
+  let rows = $state([]);
 
   const notEquipped = ({ equipped }) => !equipped;
   const playerId = ({ player: { id } }) => id;
@@ -92,23 +91,22 @@
     }
   }
 
-  function refresh() {
-    prm = init();
-  }
-
-  $: if (visible) {
-    refresh();
-  }
+  const prm = $derived.by(() => {
+    if (visible) {
+      return init();
+    }
+  });
 </script>
 
-<ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Who's Got What</svelte:fragment>
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    Who's Got What
+  {/snippet}
   <div class="content">
     {#await prm}
       Loading...
     {:then}
-      <SvelteTable classNameTable="whos-got-what" {columns} {rows}
-      ></SvelteTable>
+      <SvelteTable classNameTable="whos-got-what" {columns} {rows} />
     {:catch error}
       {error}
     {/await}

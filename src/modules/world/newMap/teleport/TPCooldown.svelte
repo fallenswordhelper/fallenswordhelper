@@ -2,10 +2,10 @@
   import { defTeleport } from '../../../support/constants';
   import { realtimeSecs } from '../../../support/now';
 
-  export let tpButton;
-  let countdown = 0;
+  let { tpButton } = $props();
+  let countdown = $state(0);
   let t0 = 0;
-  let timer = false;
+  let timer = $state(false);
 
   function checkCountdown() {
     if (countdown > 0) return;

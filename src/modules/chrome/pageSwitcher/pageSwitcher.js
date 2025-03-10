@@ -60,9 +60,6 @@ const privateMsg = () => {
 const quickBuff = () => {
   runDefault(import('../../quickbuff/quickBuff'));
 };
-const superelite = () => {
-  runDefault(import('../../superelite/superelite'));
-};
 
 const skills = () => {
   if (!defineUserIsDev) {
@@ -105,7 +102,6 @@ export default {
   scavenging,
   settings: { '-': { '-': injectSettings } },
   skills: { '-': { '-': skills } },
-  superelite: { '-': { '-': superelite } },
   tempinv: { '-': { '-': injectMailbox } },
   temple: { '-': { '-': checkTemple } },
   titan: { '-': { '-': injectTitan } },

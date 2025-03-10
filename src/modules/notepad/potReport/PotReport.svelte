@@ -25,15 +25,15 @@
   const backpackLoc = 1;
   const guildStoreLoc = 2;
 
-  export let visible = true;
+  let { visible = $bindable(true) } = $props();
 
-  let options = null;
-  let inventoryRender = false;
-  let mappingRender = false;
-  let thresholdRender = false;
-  let countPots = [];
+  let options = $state(null);
+  let inventoryRender = $state(false);
+  let mappingRender = $state(false);
+  let thresholdRender = $state(false);
+  let countPots = $state([]);
   let currentInventory = [];
-  let renderMap = [];
+  let renderMap = $state([]);
 
   const composed = ({ t }) => t === 15;
   const countBg = (count) =>
@@ -50,7 +50,7 @@
     loc: player ? backpackLoc : guildStoreLoc,
     n,
   });
-  const storeOptions = () => set(storageKey, options);
+  const storeOptions = () => set(storageKey, $state.snapshot(options));
 
   const buildCurrentInventory = (json) =>
     json.flatMap(result).filter(composed).map(setLocation).sort(nameSort);
@@ -137,16 +137,17 @@
     options.potMap = buildMapping(currentInventory);
     doMapping();
   }
-</script>
 
-<ModalTitled
-  {visible}
-  on:close={() => {
+  function close() {
     sendPrEvent('close');
     visible = false;
-  }}
->
-  <svelte:fragment slot="title">Pot Report</svelte:fragment>
+  }
+</script>
+
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    Pot Report
+  {/snippet}
   <div class="main">
     {#await init()}
       Loading...
@@ -155,7 +156,7 @@
         <label>
           <input
             bind:checked={options.backpack}
-            on:change={() => {
+            onchange={() => {
               sendPrEvent('backpack');
               storeOptions();
               doMapping();
@@ -167,7 +168,7 @@
         <label>
           <input
             bind:checked={options.guildstore}
-            on:change={() => {
+            onchange={() => {
               sendPrEvent('guildstore');
               storeOptions();
               doMapping();
@@ -182,12 +183,14 @@
           bind:checked={options.inventory}
           class="tab-ctrl"
           id="pr-inv"
-          on:change={() => {
+          onchange={() => {
             sendPrEvent('inventory');
             storeOptions();
           }}
-          on:click|once={() => {
-            inventoryRender = true;
+          onclick={() => {
+            if (!inventoryRender) {
+              inventoryRender = true;
+            }
           }}
           type="checkbox"
         />
@@ -196,12 +199,14 @@
           bind:checked={options.mapping}
           class="tab-ctrl"
           id="pr-map"
-          on:change={() => {
+          onchange={() => {
             sendPrEvent('mapping');
             storeOptions();
           }}
-          on:click|once={() => {
-            mappingRender = true;
+          onclick={() => {
+            if (!mappingRender) {
+              mappingRender = true;
+            }
           }}
           type="checkbox"
         />
@@ -210,12 +215,14 @@
           bind:checked={options.thresholds}
           class="tab-ctrl"
           id="pr-levels"
-          on:change={() => {
+          onchange={() => {
             sendPrEvent('thresholds');
             storeOptions();
           }}
-          on:click|once={() => {
-            thresholdRender = true;
+          onclick={() => {
+            if (!thresholdRender) {
+              thresholdRender = true;
+            }
           }}
           type="checkbox"
         />
@@ -236,18 +243,18 @@
           {#if mappingRender}
             <div class="mapping">
               <div class="mapping-grid-container">
-                {#each renderMap as { name, mapped, ignore, waiting }}
+                {#each renderMap as { name, mapped, waiting }, i}
                   <div>{name}</div>
                   <div>
                     <select
-                      bind:value={mapped}
+                      bind:value={renderMap[i].mapped}
                       {name}
-                      on:change={() => {
+                      onchange={() => {
                         sendPrEvent('mapped');
                         mappingChange();
                       }}
-                      on:mousedown={() => {
-                        waiting = false;
+                      onmousedown={() => {
+                        renderMap[i].waiting = false;
                       }}
                     >
                       {#if waiting}
@@ -263,12 +270,12 @@
                   </div>
                   <div>
                     <input
-                      bind:checked={ignore}
-                      on:change={() => {
+                      bind:checked={renderMap[i].ignore}
+                      onchange={() => {
                         sendPrEvent('ignore');
                         mappingChange();
                       }}
-                      on:click={(e) => e.target.blur()}
+                      onclick={(e) => e.target.blur()}
                       title="Ignore"
                       type="checkbox"
                     />
@@ -278,7 +285,7 @@
                 <div>
                   <button
                     class="custombutton"
-                    on:click={() => {
+                    onclick={() => {
                       sendPrEvent('ignore-all');
                       ignoreAll();
                     }}
@@ -288,7 +295,7 @@
                   </button>
                   <button
                     class="custombutton"
-                    on:click={() => {
+                    onclick={() => {
                       sendPrEvent('reset');
                       doReset();
                     }}
@@ -307,7 +314,7 @@
                 bind:value={options.minpoint}
                 max="999"
                 min="0"
-                on:input={() => {
+                oninput={() => {
                   sendPrEvent('minpoint');
                   doMapping();
                 }}
@@ -318,7 +325,7 @@
                 bind:value={options.maxpoint}
                 max="999"
                 min="0"
-                on:input={() => {
+                oninput={() => {
                   sendPrEvent('maxpoint');
                   doMapping();
                 }}

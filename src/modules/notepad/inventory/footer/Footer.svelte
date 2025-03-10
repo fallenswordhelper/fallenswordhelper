@@ -4,7 +4,7 @@
   import Repair from './Repair.svelte';
   import UpdateStats from './UpdateStats.svelte';
 
-  export let fshInv = 0;
+  let { fshInv = 0 } = $props();
 </script>
 
 <div class="container">

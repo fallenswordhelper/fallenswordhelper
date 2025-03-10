@@ -1,23 +1,18 @@
 <!-- uses bits of https://github.com/flekschas/svelte-simple-modal -->
 <!-- uses bits of https://svelte.dev/repl/514f1335749a4eae9d34ad74dc277f20 -->
 
-<script context="module">
+<script module>
   let onTop;
 </script>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
   import querySelectorArray from '../common/querySelectorArray';
 
-  export let modal;
-  export let visible = true;
+  let { close, children, modal = $bindable(), visible = true } = $props();
 
-  const dispatch = createEventDispatcher();
-  const close = () => dispatch('close');
-
-  $: modalVisible = visible;
-  let previouslyFocused;
-  let prevOnTop;
+  let modalVisible = $derived(visible);
+  let previouslyFocused = $state();
+  let prevOnTop = $state();
 
   const liveTab = (n) =>
     n.tabIndex >= 0 && n.offsetWidth > 0 && n.offsetHeight > 0 && !n.disabled;
@@ -46,23 +41,23 @@
     }
   }
 
-  $: if (modal && visible) {
-    prevOnTop = onTop;
-    onTop = modal;
-  }
-
-  $: if (modal && !visible) {
-    onTop = prevOnTop;
-  }
-
-  $: if (visible) {
-    previouslyFocused = document?.activeElement;
-  } else {
-    previouslyFocused?.focus();
-  }
+  $effect(() => {
+    if (visible) {
+      previouslyFocused = document?.activeElement;
+      if (modal) {
+        prevOnTop = onTop;
+        onTop = modal;
+      }
+    } else {
+      previouslyFocused?.focus();
+      if (modal) {
+        onTop = prevOnTop;
+      }
+    }
+  });
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window onkeydown={handleKeydown} />
 
 <div
   class="ui-dialog"
@@ -71,7 +66,7 @@
   aria-modal="true"
   bind:this={modal}
 >
-  <slot />
+  {@render children?.()}
 </div>
 
 <style>

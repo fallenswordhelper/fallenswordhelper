@@ -4,15 +4,15 @@
   import getValueJSON from '../../system/getValueJSON';
   import setValueJSON from '../../system/setValueJSON';
 
-  let catCtrl = 0;
-  let catMissing = 0;
-  let nameCtrl = 0;
-  let nameMissing = 0;
-  let urlCtrl = 0;
-  let urlMissing = 0;
-  let newCtrl = 0;
+  let catCtrl = $state(0);
+  let catMissing = $state(0);
+  let nameCtrl = $state(0);
+  let nameMissing = $state(0);
+  let urlCtrl = $state(0);
+  let urlMissing = $state(0);
+  let newCtrl = $state(0);
 
-  let currentItems = getValueJSON('quickSearchList') || [];
+  let currentItems = $state(getValueJSON('quickSearchList') || []);
 
   function saveCurrent() {
     setValueJSON('quickLinks', currentItems);
@@ -58,18 +58,22 @@
     <div class="centered">Action</div>
   </div>
   <div class="grid">
-    {#each currentItems as { category, displayOnAH, nickname, searchname }, i}
+    {#each currentItems as { category, nickname, searchname }, i}
       <div>{category}</div>
       <div>{nickname}</div>
       <div>
         <a href="{ahSearchUrl}{searchname}">{searchname}</a>
       </div>
       <div class="centered">
-        <input bind:checked={displayOnAH} disabled type="checkbox" />
+        <input
+          bind:checked={currentItems[i].displayOnAH}
+          disabled
+          type="checkbox"
+        />
       </div>
       <div class="buttons centered">
         [
-        <button on:click={() => delBtn(i)} type="button">Del</button>
+        <button onclick={() => delBtn(i)} type="button">Del</button>
         ]
       </div>
     {/each}
@@ -79,10 +83,10 @@
       <input
         bind:this={catCtrl}
         class:invalid={catMissing}
-        on:blur={() => {
+        onblur={() => {
           catMissing = nameCtrl.validity.valueMissing;
         }}
-        on:focus={() => {
+        onfocus={() => {
           catMissing = 0;
         }}
         placeholder="Potions"
@@ -94,10 +98,10 @@
       <input
         bind:this={nameCtrl}
         class:invalid={nameMissing}
-        on:blur={() => {
+        onblur={() => {
           nameMissing = nameCtrl.validity.valueMissing;
         }}
-        on:focus={() => {
+        onfocus={() => {
           nameMissing = 0;
         }}
         placeholder="DC225"
@@ -109,10 +113,10 @@
       <input
         bind:this={urlCtrl}
         class:invalid={urlMissing}
-        on:blur={() => {
+        onblur={() => {
           urlMissing = urlCtrl.validity.valueMissing;
         }}
-        on:focus={() => {
+        onfocus={() => {
           urlMissing = 0;
         }}
         placeholder="Potion of Black Death"
@@ -123,7 +127,7 @@
     <div class="centered"><input bind:this={newCtrl} type="checkbox" /></div>
     <div class="buttons centered">
       [
-      <button on:click={addBtn} type="button">Add</button>
+      <button onclick={addBtn} type="button">Add</button>
       ]
     </div>
   </div>

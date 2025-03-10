@@ -3,7 +3,7 @@
   import sendEvent from '../../analytics/sendEvent';
   import ModalTitled from '../../modal/ModalTitled.svelte';
 
-  export let visible = true;
+  let { visible = $bindable(true) } = $props();
 
   function close() {
     sendEvent('setmgr', 'close');
@@ -11,8 +11,10 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Combat Set Manager</svelte:fragment>
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    Combat Set Manager
+  {/snippet}
   <div class="container">
     {#await daViewCombatSet()}
       <p>loading...</p>

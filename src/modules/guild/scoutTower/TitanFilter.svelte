@@ -5,28 +5,27 @@
   import closestTable from '../../common/closestTable';
   import entries from '../../common/entries';
   import fromEntries from '../../common/fromEntries';
-  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
+  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import toggleForce from '../../common/toggleForce';
   import trimTitanName from '../../common/trimTitanName';
   import { get, set } from '../../system/idb';
 
-  export let theTitans;
-  export let titanRows;
+  let { theTitans, titanRows } = $props();
 
   const prefName = 'fsh_titanFilter';
-  let current = true;
-  let history = true;
-  let securable = false;
-  let titans = [];
+  let current = $state(true);
+  let history = $state(true);
+  let securable = $state(false);
+  let titans = $state([]);
 
   const byName = ([a], [b]) => alpha(a, b);
   const getPrefs = () => get(prefName);
   const setPrefs = () =>
     set(prefName, {
-      current,
-      history,
-      securable,
-      titans,
+      current: $state.snapshot(current),
+      history: $state.snapshot(history),
+      securable: $state.snapshot(securable),
+      titans: $state.snapshot(titans),
     });
   const titanPref = ({ titanName }) => titans.find(([n]) => n === titanName)[1];
   const mergePrefs = () =>
@@ -114,7 +113,7 @@
         <label>
           <input
             bind:checked={current}
-            on:change={toggleCurrent}
+            onchange={toggleCurrent}
             type="checkbox"
           />
           Current
@@ -122,7 +121,7 @@
         <label>
           <input
             bind:checked={history}
-            on:change={toggleHistory}
+            onchange={toggleHistory}
             type="checkbox"
           />
           History
@@ -130,7 +129,7 @@
         <label>
           <input
             bind:checked={securable}
-            on:change={toggleSecurable}
+            onchange={toggleSecurable}
             type="checkbox"
           />
           Securable
@@ -142,24 +141,22 @@
       <td colspan="3">
         {#await buildTitanList() then}
           <div id="titan-list">
-            {#each titans as [name, flag]}
-              <label>
+            {#each titans as [name], i}
+              <label class="titan-label">
                 <input
-                  bind:checked={flag}
-                  on:change={toggleTitan}
+                  bind:checked={titans[i][1]}
+                  onchange={toggleTitan}
                   type="checkbox"
                 />
                 {name}
-              </label>&ensp;
+              </label>
             {/each}
           </div>
           <div>
-            <LinkButtonBracketed on:click={selectAll}
-              >Select All</LinkButtonBracketed
-            >
-            <LinkButtonBracketed on:click={selectNone}
-              >Select None</LinkButtonBracketed
-            >
+            <LinkBtnBracketed onclick={selectAll}>Select All</LinkBtnBracketed>
+            <LinkBtnBracketed onclick={selectNone}>
+              Select None
+            </LinkBtnBracketed>
           </div>
         {/await}
       </td>
@@ -191,7 +188,7 @@
   #titan-list {
     column-count: 3;
   }
-  #titan-list > label {
+  .titan-label {
     display: block;
     text-align: left;
   }

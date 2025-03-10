@@ -3,7 +3,7 @@
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import SuperElite from './SuperElite.svelte';
 
-  export let visible = true;
+  let { visible = $bindable(true) } = $props();
 
   function close() {
     sendEvent('SE Tracker', 'close');
@@ -11,7 +11,9 @@
   }
 </script>
 
-<ModalTitled {visible} on:close={close}>
-  <svelte:fragment slot="title">Super Elite Tracker</svelte:fragment>
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    Super Elite Tracker
+  {/snippet}
   <SuperElite />
 </ModalTitled>

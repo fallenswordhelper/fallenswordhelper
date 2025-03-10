@@ -119,7 +119,6 @@ export const defRelicView = `9${defSuffixSuccessActionResponse}`;
 export const defStairway = `5${defSuffixSuccessActionResponse}`;
 export const defTeleport = `25${defSuffixSuccessActionResponse}`;
 
-
 export const defFetchPlayerStats = 1;
 export const defFetchPlayerBackpackCount = 2;
 
