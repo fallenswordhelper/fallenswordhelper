@@ -2,7 +2,7 @@ import { mount } from 'svelte';
 import QuestBook from './QuestBook.svelte';
 
 const props = $state({ visible: true });
-let qb;
+let qb = null;
 
 export default function mountQuestBook() {
   if (qb) {

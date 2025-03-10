@@ -2,7 +2,7 @@ import { mount } from 'svelte';
 import alert from './alert';
 import Alert from './Alert.svelte';
 
-let mounted;
+let mounted = false;
 
 function mountAlert() {
   if (!mounted) {

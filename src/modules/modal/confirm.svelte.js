@@ -2,7 +2,7 @@ import Confirm from './ModalConfirm.svelte';
 import { mount } from 'svelte';
 
 const props = $state({ visible: true });
-let thisModal;
+let thisModal = null;
 
 function promiseConfirm(resolve) {
   props.resolve = resolve;
