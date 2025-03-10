@@ -1,4 +1,5 @@
 import runDefault from '../../common/runDefault';
+import blank from '../../notepad/blank';
 import buffLog from './loader/buffLog';
 import combatLog from './loader/combatLog';
 import creatureLog from './loader/creatureLog';
@@ -39,6 +40,7 @@ const notepad = {
   findother: { '-': injectFindOther },
   savesettings: { '-': load }, // active
   reliclist: { '-': reliclist },
+  '-': { '-': blank },
 };
 
 export default notepad;
