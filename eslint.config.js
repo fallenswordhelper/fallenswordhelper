@@ -32,7 +32,7 @@ export default [
   {
     files: ['**/*.svelte.js', '*.svelte.js'],
     languageOptions: {
-      globals: {$svelte: 'readonly'},
+      globals: {$state: 'readonly'},
       parser: svelteParser,
     },
   },
