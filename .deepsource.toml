@@ -21,5 +21,6 @@ enabled = true
     "defineVersion",
     "GameController",
     "GameData",
+    "GM_info",
     "gtag",
   ]

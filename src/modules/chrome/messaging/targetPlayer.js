@@ -1,7 +1,7 @@
 import getElementById from '../../common/getElementById';
 import setText from '../../dom/setText';
 
-let targetPlayer;
+let targetPlayer = null;
 
 export function getName() {
   return targetPlayer;
