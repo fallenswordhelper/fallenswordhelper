@@ -87,7 +87,9 @@
   function buildCount() {
     const mappedPots = options.potMap.filter(ignored);
     const inv = buildInv(mappedPots);
-    return uniq(mappedPots, 'mapped').map(countFromInv(inv));
+    return uniq(mappedPots, 'mapped')
+      .map(countFromInv(inv))
+      .sort((a, b) => alpha(a.name, b.name));
   }
 
   function doMapping() {
