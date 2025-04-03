@@ -3,6 +3,7 @@ import sendEvent from '../analytics/sendEvent';
 import getElementById from '../common/getElementById';
 import onclick from '../common/onclick';
 import confirm from '../modal/confirm.svelte';
+import { pcr } from '../support/layout';
 import getValue from '../system/getValue';
 
 async function reroll() {
@@ -20,6 +21,7 @@ async function reroll() {
 }
 
 async function interceptReRoll(e) {
+  if (e.target.id !== 'daily-quest-reroll-button') return;
   e.stopPropagation();
   const canProceed = await confirm(
     'Are you sure you want to re-roll the Daily Quest?',
@@ -28,8 +30,6 @@ async function interceptReRoll(e) {
 }
 
 export default function dailyQuest() {
-  if (!getValue('dailyQuestReRoll')) return;
-  const rerollBtn = getElementById('daily-quest-reroll-button');
-  if (!rerollBtn) return;
-  onclick(rerollBtn, interceptReRoll, true);
+  if (!getValue('dailyQuestReRoll') || !pcr()) return;
+  onclick(pcr(), interceptReRoll, true);
 }
