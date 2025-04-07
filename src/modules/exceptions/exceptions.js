@@ -21,6 +21,8 @@ const substrings = [
   'Fetch-Auction-and-Send-to-Discord.user.js',
   'FS-Fixer.user.js',
   'fs.min.js',
+  'FSH1.user.js',
+  'Gold-alert.user.js',
   'GVG-and-Relics-Notifications.user.js',
   'GvG-Initiate-Enhanced.user.js',
   'GvG-List-v2.user.js',
