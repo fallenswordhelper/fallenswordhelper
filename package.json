@@ -38,7 +38,7 @@
   },
   "homepage": "https://fallenswordhelper.github.io/fallenswordhelper",
   "devDependencies": {
-    "@eslint/js": "^9.23.0",
+    "@eslint/js": "^9.24.0",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
@@ -49,14 +49,14 @@
     "csso": "^5.0.5",
     "esbuild": "^0.25.2",
     "esbuild-svelte": "^0.9.2",
-    "eslint": "^9.23.0",
+    "eslint": "^9.24.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-svelte": "^3.5.1",
     "fast-glob": "^3.3.3",
     "globals": "^16.0.0",
     "html-minifier-terser": "^7.2.0",
     "husky": "^9.1.7",
-    "knip": "^5.46.5",
+    "knip": "^5.47.0",
     "liquidjs": "^10.21.0",
     "local-web-server": "^5.4.0",
     "prettier": "^3.5.3",
@@ -66,14 +66,14 @@
     "rollup-plugin-svelte": "^7.2.2",
     "rollup-pluginutils": "^2.8.2",
     "svelte-eslint-parser": "^1.1.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@honeybadger-io/js": "^6.11.0",
     "css-tooltip": "^0.3.4",
     "idb": "^8.0.2",
-    "posthog-js": "^1.234.7",
-    "svelte": "^5.25.6"
+    "posthog-js": "^1.234.9",
+    "svelte": "^5.25.7"
   },
   "type": "module"
 }
