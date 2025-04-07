@@ -33,7 +33,7 @@
   </div>
   <div class="textContainer">
     {#await init() then}
-      {#each records as [timestamp, txt]}
+      {#each records as [timestamp, txt], x (x)}
         <br />
         {timestamp}
         {#if txt.startsWith('<')}

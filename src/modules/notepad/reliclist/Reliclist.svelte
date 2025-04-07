@@ -192,7 +192,7 @@
           Time
         </LinkBtn>
       </div>
-      {#each listOfRelics as relic}
+      {#each listOfRelics as relic (relic.id)}
         <div>{relic.location.realm.min_level}</div>
         <div>
           <a

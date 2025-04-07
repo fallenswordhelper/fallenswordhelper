@@ -150,7 +150,7 @@
         <tr>
           <td colspan="3">
             <ol>
-              {#each results as result}
+              {#each results as result, x (x)}
                 <li>
                   {#if result.startsWith('<')}
                     <span class="fshRed">
@@ -165,7 +165,7 @@
           </td>
         </tr>
         {#await prm then}
-          {#each toExtract as { count, delPending, item_name: name, style, tip }, index}
+          {#each toExtract as { count, delPending, item_name: name, style, tip }, index (index)}
             <tr>
               <td class:delPending>
                 {#if count}

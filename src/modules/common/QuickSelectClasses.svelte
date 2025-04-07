@@ -115,7 +115,7 @@
       {#if wantsTagged}
         <LinkBtn onclick={() => doSelect('-3')}>Guild Tagged</LinkBtn>
       {/if}
-      {#each getItemList() as [name, id]}
+      {#each getItemList() as [name, id], x (x)}
         <LinkBtn onclick={() => doSelect(id)}>{name}</LinkBtn>
       {/each}
       How many:<input bind:value={howMany} class="custominput" type="text" />

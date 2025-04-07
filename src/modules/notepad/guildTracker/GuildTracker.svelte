@@ -53,7 +53,7 @@
       <div>
         Member
         <select bind:value={selected} onchange={handleChange}>
-          {#each members as member}
+          {#each members as member, x (x)}
             <option value={member}>{member}</option>
           {/each}
         </select>
@@ -67,7 +67,7 @@
       <div>GXP</div>
     </div>
     <div class="grid items">
-      {#each activity?.[selected] ?? [] as stuff}
+      {#each activity?.[selected] ?? [] as stuff, x (x)}
         <div>{formatUtcDateTime(new Date(stuff[utc] * 1000))}</div>
         <div>{selected}</div>
         <div>{toText(stuff[lvl])}</div>

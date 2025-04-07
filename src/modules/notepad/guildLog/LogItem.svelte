@@ -105,7 +105,7 @@
   <div class:old={logEntry.old} class:new={logEntry.new}>
     {#each logEntry.msg.text
       .split(/<link=a(\d)><\/link>/)
-      .filter(empty) as chunk}
+      .filter(empty) as chunk, x (x)}
       {#if chunk.length === 1 && !numberIsNaN(Number(chunk))}
         {#if logEntry.msg.attachments[chunk].type === 0}
           <a href="{playerIdUrl}{logEntry.msg.attachments[chunk].data.id}">
@@ -128,7 +128,7 @@
       {/if}
     {/each}
     {#if logEntry.msg?.attachments?.length}
-      {#each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data }}
+      {#each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data }, x (x)}
         {#if logEntry.type === 21}
           {#await recruiting_prm}
             <div class="rel">
@@ -166,7 +166,7 @@
           ]
         </span>
       {/each}
-      {#each logEntry.msg.attachments.filter(({ type }) => type === 11) as { data }}
+      {#each logEntry.msg.attachments.filter(({ type }) => type === 11) as { data }, x (x)}
         <span class="action-buttons">
           [
           <LinkBtn onclick={() => combat(data)}>View Combat</LinkBtn>

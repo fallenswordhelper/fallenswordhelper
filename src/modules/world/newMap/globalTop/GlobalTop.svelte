@@ -18,7 +18,7 @@
           <td class="header">Username</td>
           <td class="header">Kills</td>
         </tr>
-        {#each list as { player, value }, i}
+        {#each list as { player, value }, i (player.id)}
           <tr>
             <td>{i + 1}</td>
             <td>

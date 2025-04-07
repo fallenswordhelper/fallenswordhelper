@@ -25,10 +25,10 @@
   }
 </script>
 
-{#each functionLookup as menuSection}
+{#each functionLookup as menuSection, x (x)}
   <h2>{menuSection.section}</h2>
   <ul>
-    {#each menuSection.menu as menuItem}
+    {#each menuSection.menu as menuItem, x (x)}
       <li>
         {#if menuItem.fn}
           <button

@@ -9,6 +9,6 @@
   <LinkBtn onclick={() => doFilter('-3')}>Worn</LinkBtn>
 {/if}<LinkBtn onclick={() => doFilter('-1')}
   >Main
-</LinkBtn>{#each entries(folders) as [id, name]}
+</LinkBtn>{#each entries(folders) as [id, name] (id)}
   <LinkBtn onclick={() => doFilter(id)}>{name}</LinkBtn>
 {/each}

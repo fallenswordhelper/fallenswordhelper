@@ -29,7 +29,7 @@
 
 {#if isOpen}
   <div class="wide" transition:slide={{ duration: 300 }}>
-    {#each entry[3] as [val, loc]}
+    {#each entry[3] as [val, loc], i (i)}
       <div></div>
       <div></div>
       <div class="last-kill">{formatUtcTimestamp(val)}</div>

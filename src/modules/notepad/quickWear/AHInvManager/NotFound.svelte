@@ -7,7 +7,7 @@
 
 <div>
   Did not find:
-  {#each data as { nickname, searchname }, index}
+  {#each data as { nickname, searchname }, index (index)}
     {#if index > 0},{/if}
     <a
       href="{ahSearchUrl}{searchname}"

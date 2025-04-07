@@ -110,7 +110,7 @@
     }}
     {disabled}
   >
-    {#each missing as user}
+    {#each missing as user, x (x)}
       <option value={user}>{user}</option>
     {/each}
   </select>

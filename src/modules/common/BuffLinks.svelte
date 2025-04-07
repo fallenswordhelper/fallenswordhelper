@@ -22,7 +22,7 @@
 </script>
 
 <ul>
-  {#each chunk(16, members) as batch, i}
+  {#each chunk(16, members) as batch, i (i)}
     <li>
       <LinkBtn onclick={(e) => buffBatch(batch, i, e)}>
         {batchText(i)}

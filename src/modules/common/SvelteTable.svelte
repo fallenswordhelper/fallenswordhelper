@@ -275,7 +275,7 @@
   };
 </script>
 
-<!-- eslint-disable svelte/no-at-html-tags -->
+<!-- eslint-disable svelte/no-at-html-tags, svelte/require-each-key -->
 
 <table class={asStringArray(classNameTable)}>
   <thead class={asStringArray(classNameThead)}>

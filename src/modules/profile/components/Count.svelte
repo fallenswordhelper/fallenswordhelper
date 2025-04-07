@@ -48,7 +48,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each rollup as itemId}
+        {#each rollup as itemId (itemId)}
           <CountRow {dispatchDelType} {itemId} />
         {/each}
       </tbody>
