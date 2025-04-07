@@ -61,7 +61,7 @@
     <div class="centered">Action</div>
   </div>
   <div class="grid items">
-    {#each currentItems as { name, url }, i}
+    {#each currentItems as { name, url }, i (i)}
       <div>{name}</div>
       <div>{url}</div>
       <div class="centered">

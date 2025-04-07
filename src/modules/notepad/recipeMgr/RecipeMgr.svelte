@@ -287,7 +287,7 @@
             </a>
           </div>
           <div class="item-container">
-            {#each items as [itemId, itemVcode, itemReq]}
+            {#each items as [itemId, itemVcode, itemReq], x (x)}
               <div>
                 <div
                   data-tipped="fetchitem.php?item_id={itemId}&t=2&vcode={itemVcode}"
@@ -299,7 +299,7 @@
             {/each}
           </div>
           <div class="item-container">
-            {#each components as [itemId, itemVcode, itemReq]}
+            {#each components as [itemId, itemVcode, itemReq], x (x)}
               <div>
                 <div
                   data-tipped="fetchitem.php?item_id={itemId}&t=2&vcode={itemVcode}"

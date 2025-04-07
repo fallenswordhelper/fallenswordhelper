@@ -17,7 +17,7 @@
       <td class="header">Cooldown</td>
       <td class="header">Visible</td>
     </tr>
-    {#each titansOnCooldown() as [name, data]}
+    {#each titansOnCooldown() as [name, data] (name)}
       <tr>
         <td>{name}</td>
         <td class="cd">{data.cooldownText}</td>

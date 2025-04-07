@@ -214,7 +214,7 @@
     <div class="lower-div">
       <div class="active">
         {#if active.length}
-          {#each active as { attributes, class: className, id, level, name, type, hours, mins }}
+          {#each active as { attributes, class: className, id, level, name, type, hours, mins } (id)}
             <div class="active-merc">
               <div><b>{name}</b></div>
               <div>

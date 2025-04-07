@@ -9,6 +9,8 @@
   let { members = [] } = $props();
   let missingMembers = $state([]);
 
+  const space = ' ';
+
   const available = [
     ({ username }) => !members.includes(username),
     ({ last_login: lastLogin }) => lastLogin,
@@ -34,8 +36,8 @@
 
 {missingMembers.length || ''} Offline guild members not at relic:
 <div class="missing">
-  {#each missingMembers as { id, username }}
-    <a href="{playerIdUrl}{id}">{username}</a>{' '}
+  {#each missingMembers as { id, username } (id)}
+    <a href="{playerIdUrl}{id}">{username}</a>{space}
   {/each}
 </div>
 

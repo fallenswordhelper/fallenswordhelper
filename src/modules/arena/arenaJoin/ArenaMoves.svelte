@@ -24,13 +24,13 @@
 
 <div class="ams">
   <select bind:value={selected} onchange={handleChange}>
-    {#each sets as { id, name }}
+    {#each sets as { id, name } (id)}
       <option value={id}>{name}</option>
     {/each}
   </select>
 </div>
 <div class="amf">
-  {#each currentSet.slots as move}
+  {#each currentSet.slots as move, x (x)}
     <img alt="Move" src="{cdn}arena/{move ? move - 1 : 'x'}.png" />
   {/each}
 </div>

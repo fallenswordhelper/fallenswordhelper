@@ -58,7 +58,7 @@
     <div class="centered">Action</div>
   </div>
   <div class="grid">
-    {#each currentItems as { category, nickname, searchname }, i}
+    {#each currentItems as { category, nickname, searchname }, i (i)}
       <div>{category}</div>
       <div>{nickname}</div>
       <div>

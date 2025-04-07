@@ -50,7 +50,7 @@
   </div>
   <div class="textContainer">
     {#await init() then}
-      {#each records as [playerid, playername, quote]}
+      {#each records as [playerid, playername, quote], x (x)}
         <br />
         <span>
           <a href="{playerIdUrl}{playerid}">

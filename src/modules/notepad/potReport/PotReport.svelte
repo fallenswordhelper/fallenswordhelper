@@ -233,7 +233,7 @@
           {#if inventoryRender}
             <div class="inventory">
               <div class="inventory-grid-container">
-                {#each countPots as { name, count }}
+                {#each countPots as { name, count }, x (x)}
                   <div>{name}</div>
                   <div style:background-color={countBg(count)}>
                     {count}
@@ -245,7 +245,7 @@
           {#if mappingRender}
             <div class="mapping">
               <div class="mapping-grid-container">
-                {#each renderMap as { name, mapped, waiting }, i}
+                {#each renderMap as { name, mapped, waiting }, i (i)}
                   <div>{name}</div>
                   <div>
                     <select
@@ -262,7 +262,7 @@
                       {#if waiting}
                         <option>{mapped}</option>
                       {:else}
-                        {#each renderMap as { name: innerName }}
+                        {#each renderMap as { name: innerName }, x (x)}
                           <option selected={mapped === innerName}
                             >{innerName}</option
                           >

@@ -11,7 +11,7 @@
   <td class="fshCenter">
     <span>Move selected items to:</span>
     <select bind:value={folderId} class="customselect">
-      {#each folders as folder}
+      {#each folders as folder (folder.id)}
         <option value={folder.id}>{folder.name}</option>
       {/each}
     </select>

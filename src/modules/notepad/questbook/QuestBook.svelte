@@ -137,22 +137,22 @@
       <p>
         [
         <label class="asLink" class:active={status === 'active'}>
-          <input type="radio" bind:group={status} value={'active'} />
+          <input type="radio" bind:group={status} value="active" />
           Active
         </label>
         |
         <label class="asLink" class:active={status === 'completed'}>
-          <input type="radio" bind:group={status} value={'completed'} />
+          <input type="radio" bind:group={status} value="completed" />
           Complete
         </label>
         |
         <label class="asLink" class:active={status === 'notStarted'}>
-          <input type="radio" bind:group={status} value={'notStarted'} />
+          <input type="radio" bind:group={status} value="notStarted" />
           Not Started
         </label>
         |
         <label class="asLink" class:active={status === 'hidden'}>
-          <input type="radio" bind:group={status} value={'hidden'} />
+          <input type="radio" bind:group={status} value="hidden" />
           Hidden
         </label>
         ]
@@ -215,7 +215,7 @@
           </tr>
         </thead>
         <tbody>
-          {#each queryQuests as quest}
+          {#each queryQuests as quest (quest.id)}
             <tr>
               <td>
                 <a

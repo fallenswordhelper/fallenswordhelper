@@ -13,7 +13,7 @@
 <ModalTitled {close} {visible}>
   {#snippet title()}
     <ul>
-      {#each tabs as { label }, index}
+      {#each tabs as { label }, index (index)}
         <li class:active={activeTabValue === index}>
           <button onclick={handleClick(label, index)} type="button">
             {label}
@@ -22,7 +22,7 @@
       {/each}
     </ul>
   {/snippet}
-  {#each tabs as { component }, value}
+  {#each tabs as { component }, value (value)}
     {#if activeTabValue === value}
       {@const SvelteComponent = component}
       <SvelteComponent />

@@ -112,7 +112,7 @@
   {#await init() then}
     {#if log.length}
       <div class="data grid">
-        {#each log as [entity, classname, lvl, attack, defense, armor, damage, hp, enhancement, image]}
+        {#each log as [entity, classname, lvl, attack, defense, armor, damage, hp, enhancement, image], x (x)}
           <div class="entity">
             <div
               class="image tip-static"
@@ -130,7 +130,7 @@
           <div>{hp.min} - {hp.max}</div>
           <div>
             {#if enhancement}
-              {#each enhancement as [enh, { min, max }]}
+              {#each enhancement as [enh, { min, max }], x (x)}
                 <div class="enhancements">{enh}: {min} - {max}</div>
               {/each}
             {:else}

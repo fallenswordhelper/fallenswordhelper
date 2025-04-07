@@ -141,7 +141,7 @@
       <td colspan="3">
         {#await buildTitanList() then}
           <div id="titan-list">
-            {#each titans as [name], i}
+            {#each titans as [name], i (i)}
               <label class="titan-label">
                 <input
                   bind:checked={titans[i][1]}

@@ -31,7 +31,7 @@
       <div>Rune</div>
       {#each json.r as { name, items }, i (i)}
         <div class="data">{name}</div>
-        {#each items.sort(({ t: a }, { t: b }) => a - b) as { l, n }}
+        {#each items.sort(({ t: a }, { t: b }) => a - b) as { l, n, t } (t)}
           <div class="data">{l} {n}</div>
         {/each}
       {/each}
