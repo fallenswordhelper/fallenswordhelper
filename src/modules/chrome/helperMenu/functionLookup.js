@@ -184,10 +184,6 @@ export default [
         playerId: 1963510,
         playerName: 'PointyHair',
       },
-      {
-        playerId: 1674838,
-        playerName: 'Lusterless',
-      },
     ],
   },
 ];

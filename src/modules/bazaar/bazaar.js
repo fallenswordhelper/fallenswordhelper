@@ -17,13 +17,6 @@ const getCcy = (p) => ({
   ),
 });
 
-function startApp(potions, target) {
-  return mount(Bazaar, {
-    target: target.parentElement,
-    props: { potions },
-  });
-}
-
 const preparePotions = ({ p, ccy }) => ({
   id: Number(getId(p)),
   img: p.children[0].src,
@@ -36,9 +29,9 @@ const preparePotions = ({ p, ccy }) => ({
 function havePots(origPots) {
   const withCcy = origPots.map(getCcy);
   if (withCcy.some(({ ccy }) => !ccy)) return;
-  const potTable = closestTable(closestTable(origPots[0]).parentElement);
-  startApp(withCcy.map(preparePotions), potTable);
-  potTable.remove();
+  const potions = withCcy.map(preparePotions);
+  mount(Bazaar, { target: pcc(), props: { potions } });
+  closestTable(closestTable(origPots[0]).parentElement).remove();
 }
 
 export default function bazaar() {

@@ -7,22 +7,24 @@
 
   let { potions = [] } = $props();
 
+  let bob = $state(potions);
+
   async function buyButton(potion) {
     sendEvent('bazaar', 'buyButton');
     potion.promise = daBazaarBuy(potion.id, potion.count);
     const response = await potion.promise;
-    if (response.s) {
+    if (response?.s) {
       dynamicAlert(
         `You successfully purchased ${potion.count} "${response.r[0].n}"`,
       );
-    } else {
+    } else if (response?.e) {
       dynamicAlert(response.e.message);
     }
   }
 </script>
 
 <div id="bazaar">
-  {#each potions as potion (potion.id)}
+  {#each bob as potion (potion.id)}
     <div class="potion">
       <img
         class="potion-img tip-dynamic"
@@ -33,61 +35,58 @@
       />
       <div class="prices">
         {addCommas(potion.price)}
-        <img
-          src="{cdn}currency/0.png"
-          data-hasqtip="1"
-          oldtitle="Gold"
-          alt="Gold"
-          title=""
-          aria-describedby="qtip-1"
-        />
+        <img src="{cdn}currency/0.png" alt="Gold" title="Gold" />
         x
-        <input type="number" bind:value={potion.count} min="1" max="100" /><br
-        />
+        <input type="number" bind:value={potion.count} min="1" max="100" />
+        <br />
         = {addCommas(potion.price * potion.count)}
-        <img
-          src="{cdn}currency/0.png"
-          alt="Gold"
-          data-hasqtip="1"
-          oldtitle="Gold"
-          title=""
-          aria-describedby="qtip-1"
-        />
+        <img src="{cdn}currency/0.png" alt="Gold" title="Gold" />
       </div>
-      {#await potion.promise}
-        <span class="fshSpinner fshSpinner12"></span>
-      {:then}
-        <button type="button" class="custombutton" onclick={buyButton(potion)}
-          >Buy</button
-        >
-      {/await}
+      <div class="btn-container">
+        {#await potion.promise}
+          <span class="fshSpinner fshSpinner12"></span>
+        {:then}
+          <button
+            type="button"
+            class="custombutton"
+            onclick={() => {
+              buyButton(potion);
+            }}
+          >
+            Buy
+          </button>
+        {/await}
+      </div>
     </div>
   {/each}
 </div>
 
 <style>
   #bazaar {
-    text-align: center;
-  }
-  .potion-img {
-    width: 60px;
-    height: 90px;
-    margin: 0px auto;
+    column-gap: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 24px;
   }
   .potion {
-    display: inline-block;
-    width: 120px;
     text-align: center;
-    margin: 12px;
+    width: 120px;
+  }
+  .potion-img {
+    height: 90px;
+    margin: 0px auto;
+    width: 60px;
   }
   .prices {
-    margin-top: 6px;
     line-height: 2em;
-  }
-  .prices > img {
-    display: inline-block;
+    margin-top: 6px;
   }
   input {
     width: 3.5em;
+  }
+  .btn-container {
+    height: 21px;
+    position: relative;
   }
 </style>
