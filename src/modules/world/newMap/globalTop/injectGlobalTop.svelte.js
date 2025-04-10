@@ -5,7 +5,8 @@ import getElementById from '../../../common/getElementById';
 import onclick from '../../../common/onclick';
 import GlobalTop from './GlobalTop.svelte';
 
-let promise = $state(Promise.resolve());
+// not sure if this will work but can't test until the next event
+let promise = $state.raw(Promise.resolve());
 let gt = 0;
 
 function startApp(target) {
