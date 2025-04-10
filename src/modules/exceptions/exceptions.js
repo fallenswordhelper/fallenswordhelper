@@ -1,6 +1,7 @@
 import Honeybadger from '@honeybadger-io/js';
 import playerName from '../common/playerName';
 import stdout from '../support/stdout';
+import isString from '../common/isString';
 
 const substrings = [
   'attackplayer.min.js',
@@ -48,7 +49,8 @@ const substrings = [
   "(reading '$$')",
 ];
 
-const dontSend = (msg) => substrings.some((ss) => msg.includes(ss));
+const dontSend = (msg) =>
+  isString(msg) && substrings.some((ss) => msg.includes(ss));
 
 function hbBeforeNotify(notice) {
   if (dontSend(notice.message) || dontSend(notice.stack)) return false;
