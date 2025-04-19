@@ -5,13 +5,12 @@ import getElementById from '../../../common/getElementById';
 import onclick from '../../../common/onclick';
 import GlobalTop from './GlobalTop.svelte';
 
-// not sure if this will work but can't test until the next event
-let promise = $state.raw(Promise.resolve());
+const props = $state({ promise: Promise.resolve() });
 let gt = 0;
 
 function startApp(target) {
-  promise = daGlobalContrib();
-  if (!gt) gt = mount(GlobalTop, { props: { promise }, target });
+  props.promise = daGlobalContrib();
+  if (!gt) gt = mount(GlobalTop, { props, target });
 }
 
 function show() {
@@ -20,7 +19,7 @@ function show() {
   startApp(worldEventContrib);
   globalThis.$(worldEventContrib).dialog({
     title: 'Top 100 Event Contributers',
-    minWidth: 300,
+    minWidth: 312,
     height: 300,
     zIndex: 9999,
   });
