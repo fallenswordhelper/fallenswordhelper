@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import partial from '../../../common/partial';
 
 function evalMiss(combat) {
@@ -29,9 +30,7 @@ const evalFightStatus = [
   ],
 ];
 
-function condition(combat, el) {
-  return el[0](combat);
-}
+function condition(combat, el) { return el[0](combat); }
 
 function getStatus(combat) {
   const status = evalFightStatus.find(partial(condition, combat));
@@ -43,13 +42,7 @@ function getStatus(combat) {
 
 export default function evalAnalysis(combat) {
   // Analysis:
-  combat.playerHits = evalHits(
-    combat.numberOfHitsRequired,
-    combat.numberOfCreatureHitsTillDead,
-  );
-  combat.creatureHits = evalHits(
-    combat.numberOfCreatureHitsTillDead,
-    combat.numberOfHitsRequired,
-  );
+  combat.playerHits = evalHits(combat.numberOfHitsRequired, combat.numberOfCreatureHitsTillDead);
+  combat.creatureHits = evalHits(combat.numberOfCreatureHitsTillDead, combat.numberOfHitsRequired);
   combat.fightStatus = getStatus(combat);
 }

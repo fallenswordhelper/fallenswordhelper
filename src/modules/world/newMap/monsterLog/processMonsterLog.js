@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import partial from '../../../common/partial';
 import calf from '../../../support/calf';
 import { get, set } from '../../../system/idb';
@@ -69,9 +70,7 @@ function storeEnhancements(creature, logCreature) {
 }
 
 function doMonsterLog(creature) {
-  if (!monsterLog) {
-    monsterLog = {};
-  }
+  if (!monsterLog) { monsterLog = {}; }
   setupMob(creature);
   storeStats(creature, monsterLog[creature.name]);
   storeEnhancements(creature, monsterLog[creature.name]);
@@ -79,9 +78,7 @@ function doMonsterLog(creature) {
 }
 
 export function processMonsterLog(creature) {
-  if (calf.showMonsterLog) {
-    doMonsterLog(creature);
-  }
+  if (calf.showMonsterLog) { doMonsterLog(creature); }
 }
 
 function initLog(data) {

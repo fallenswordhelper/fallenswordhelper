@@ -9,7 +9,5 @@ export default async function fetchdata(data) {
     data: { ...data, fshrnd: rnd() },
     dataType: 'text',
   });
-  return (
-    jsonParse(unsafe) ?? { response: { msg: 'Server Error', response: 1 } }
-  );
+  return jsonParse(unsafe) ?? { response: { msg: 'Server Error', response: 1 } };
 }

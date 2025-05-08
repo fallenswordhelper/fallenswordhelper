@@ -6,7 +6,7 @@
   import InvCounter from './InvCounter/InvCounter.svelte';
   import QuickWear from './QuickWear.svelte';
 
-  let { visible = $bindable(true) } = $props();
+  export let visible = true;
 
   function close() {
     sendEvent('Quick Wear', 'close');
@@ -33,4 +33,4 @@
   ];
 </script>
 
-<ModalTabsPersist {close} {tabs} {visible} />
+<ModalTabsPersist on:close={ close } { tabs } { visible } />

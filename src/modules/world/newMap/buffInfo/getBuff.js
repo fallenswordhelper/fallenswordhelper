@@ -1,8 +1,6 @@
 import partial from '../../../common/partial';
 
-function thisBuff(name, e) {
-  return e.name === name;
-}
+function thisBuff(name, e) { return e.name === name; }
 
 export default function getBuff(name) {
   const { buffs } = GameData.player();

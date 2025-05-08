@@ -4,8 +4,8 @@ import on from '../common/on';
 import partial from '../common/partial';
 import setInnerHtml from '../dom/setInnerHtml';
 
-let textArea = 0;
-let shoutboxPreview = 0;
+let textArea;
+let shoutboxPreview;
 
 function updateShoutboxPreview(maxcharacters) {
   sendEvent('Shoutbox Preview', maxcharacters === 150 ? 'shoutbox' : 'fsbox');
@@ -18,18 +18,12 @@ function updateShoutboxPreview(maxcharacters) {
   }
   if (!shoutboxPreview) {
     shoutboxPreview = textArea.parentNode.parentNode.parentNode.parentNode
-      .insertRow()
-      .insertCell();
+      .insertRow().insertCell();
   }
-  setInnerHtml(
-    '<table class="sbpTbl"><tbody><tr>' +
-      `<td class="sbpHdr">Preview (${chars}/${
-        maxcharacters
-      } characters)</td></tr><tr><td class="sbpMsg"><span>${
-        textContent
-      }</span></td></tr></tbody></table>`,
-    shoutboxPreview,
-  );
+  setInnerHtml('<table class="sbpTbl"><tbody><tr>'
+    + `<td class="sbpHdr">Preview (${chars}/${
+      maxcharacters} characters)</td></tr><tr><td class="sbpMsg"><span>${
+      textContent}</span></td></tr></tbody></table>`, shoutboxPreview);
 }
 
 export default function injectShoutboxWidgets(maxcharacters) {

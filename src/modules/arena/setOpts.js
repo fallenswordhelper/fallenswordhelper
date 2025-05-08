@@ -25,14 +25,12 @@ function redrawTable() {
   $('#arenaTypeTabs table[width="635"]').DataTable().draw();
 }
 
-export function changeLvls() {
-  // jQuery
+export function changeLvls() { // jQuery
   sendEvent('arena', 'changeLvls');
   changeMinMax(newOpts, redrawTable);
 }
 
-export function resetLvls() {
-  // jQuery
+export function resetLvls() { // jQuery
   sendEvent('arena', 'resetLvls');
   newOpts(defaults.arenaMinLvl, defaults.arenaMaxLvl);
   $('#fshMinLvl').val(opts.minLvl);
@@ -40,8 +38,7 @@ export function resetLvls() {
   redrawTable();
 }
 
-export function hideMoves(evt) {
-  // jQuery
+export function hideMoves(evt) { // jQuery
   sendEvent('arena', 'hideMoves');
   opts = opts || {};
   opts.hideMoves = evt.target.checked;

@@ -44,9 +44,7 @@ const testList = [
   (guildId, membrList) => membrList[guildId].lastUpdate > fiveMinutesAgo(),
 ];
 
-function condition(guildId, membrList, e) {
-  return e(guildId, membrList);
-}
+function condition(guildId, membrList, e) { return e(guildId, membrList); }
 
 function isValid(guildId, membrList) {
   return testList.every(partial(condition, guildId, membrList));

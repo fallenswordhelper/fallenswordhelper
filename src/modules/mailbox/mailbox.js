@@ -55,11 +55,10 @@ function reduceItems(acc, curr) {
 function basicQt() {
   return createDiv({
     id: 'quickTake',
-    innerHTML:
-      '<div class="fshCenter">' +
-      '<br><font size="3"><b>Quick Take</b></font><br><br>' +
-      'Select which item to take all similar items from your Mailbox.' +
-      '</div><div></div>',
+    innerHTML: '<div class="fshCenter">'
+      + '<br><font size="3"><b>Quick Take</b></font><br><br>'
+      + 'Select which item to take all similar items from your Mailbox.'
+    + '</div><div></div>',
   });
 }
 
@@ -74,14 +73,12 @@ function makeItemBox(itemTbl, pair) {
   const item = pair[1];
   const container = createDiv();
   const itemDiv = createDiv({
-    innerHTML:
-      `<img src="${item.src}" class="tip-dynamic" ` +
-      `data-tipped="${item.tipped}">`,
+    innerHTML: `<img src="${item.src}" class="tip-dynamic" `
+      + `data-tipped="${item.tipped}">`,
   });
   insertElement(container, itemDiv);
   const buttonDiv = createDiv({
-    innerHTML: `<button class="fshBl fshBls" data-id="${
-      pair[0]
+    innerHTML: `<button class="fshBl fshBls" data-id="${pair[0]
     }">Take All ${item.invIds.length}</button>`,
   });
   insertElement(container, buttonDiv);
@@ -92,20 +89,15 @@ function makeItemBoxes(itemTbl, itemList) {
   entries(itemList).forEach(partial(makeItemBox, itemTbl));
 }
 
-function killQTip(itemId) {
-  // jQuery
+function killQTip(itemId) { // jQuery
   const qtipApi = $(`#temp-inv-img-${itemId}`).qtip('api');
-  if (qtipApi) {
-    qtipApi.destroy(true);
-  }
+  if (qtipApi) { qtipApi.destroy(true); }
 }
 
 function removeImg(item) {
   killQTip(item.id);
   const thisCell = getElementById(`temp-inv-${item.id}`);
-  if (thisCell) {
-    setInnerHtml('', thisCell);
-  }
+  if (thisCell) { setInnerHtml('', thisCell); }
 }
 
 function takeSuccess(takeResult, json) {
@@ -114,12 +106,8 @@ function takeSuccess(takeResult, json) {
 }
 
 function doneTake(takeResult, json) {
-  if (jsonFail(json, takeResult)) {
-    return;
-  }
-  if (isArray(json.r)) {
-    takeSuccess(takeResult, json);
-  }
+  if (jsonFail(json, takeResult)) { return; }
+  if (isArray(json.r)) { takeSuccess(takeResult, json); }
 }
 
 async function doTakeItem(takeResult, el) {
@@ -174,13 +162,9 @@ function makeQtCheckbox(items, injector) {
 }
 
 export default function mailbox() {
-  if (jQueryNotPresent() || !pcc()) {
-    return;
-  }
+  if (jQueryNotPresent() || !pcc()) { return; }
   const items = getArrayByTagName('a', pcc());
-  if (items.length === 0) {
-    return;
-  } // Empty mailbox
+  if (items.length === 0) { return; } // Empty mailbox
   const injector = pcc().lastElementChild;
   makeQtCheckbox(items, injector);
   makeQtLabel('qtOff', 'Quick Take', injector);

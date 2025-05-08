@@ -30,11 +30,7 @@ export default function activeMembers() {
     const dots = getPlayers();
     const memberStats = getActive(dots);
     members.classList.add('tip-static');
-    setTipped(
-      `Active: ${memberStats[ACTIVE]}/${dots.length}<br>Stamina: ${addCommas(
-        memberStats[STAMINA],
-      )}`,
-      members,
-    );
+    setTipped(`Active: ${memberStats[ACTIVE]}/${dots.length}<br>Stamina: ${
+      addCommas(memberStats[STAMINA])}`, members);
   }
 }

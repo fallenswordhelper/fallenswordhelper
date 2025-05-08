@@ -51,8 +51,7 @@ function priceBeforeName(buffNameNode) {
 
 export default function getPrice(buffNameNode) {
   let price = priceAfterName(buffNameNode);
-  if (!price) {
-    // some players have prices BEFORE the buff names
+  if (!price) { // some players have prices BEFORE the buff names
     price = priceBeforeName(buffNameNode);
   }
   return price;

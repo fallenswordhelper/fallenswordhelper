@@ -1,18 +1,21 @@
 import sendEvent from '../analytics/sendEvent';
 import closest from '../common/closest';
-import getElementById from '../common/getElementById';
-import hideElement from '../common/hideElement';
 import on from '../common/on';
-import { guildLogUrl } from '../support/constants';
-import guildLog from './pageSwitcher/loader/guildLog';
+import { guildLogUrl, newGuildLogUrl } from '../support/constants';
+
+const conditions = [
+  (anchor) => anchor,
+  (anchor) => anchor.getAttribute('href') === guildLogUrl,
+  (anchor) => !anchor.classList.contains('sendLink'),
+];
+
+const allConditions = (anchor) => conditions.every((c) => c(anchor));
 
 function handleClick(e) {
   const anchor = closest('a', e.target);
-  if (anchor?.getAttribute('href') === guildLogUrl) {
+  if (allConditions(anchor)) {
     sendEvent('useNewGuildLog', 'Alter Href');
-    e.preventDefault();
-    guildLog();
-    hideElement(getElementById('notification-guild-log'));
+    anchor.href = newGuildLogUrl;
   }
 }
 

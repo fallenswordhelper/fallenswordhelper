@@ -1,6 +1,6 @@
+import clickThis from '../common/clickThis';
 import getElementById from '../common/getElementById';
 import getElementsByTagName from '../common/getElementsByTagName';
-import { doBuffLevels } from './addBuffLevels';
 
 function waitForPlayer(firstPlayer, retries) {
   return !firstPlayer && retries;
@@ -12,10 +12,10 @@ function haveTargets(retries) {
     setTimeout(haveTargets, 100, retries - 1);
     return;
   }
-  if (firstPlayer) doBuffLevels(firstPlayer);
+  if (firstPlayer) { clickThis(firstPlayer); }
 }
 
 export default function firstPlayerStats() {
   const targets = getElementById('targetPlayers').value;
-  if (targets) haveTargets(9);
+  if (targets) { haveTargets(9); }
 }

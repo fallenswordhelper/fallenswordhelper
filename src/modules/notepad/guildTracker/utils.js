@@ -10,14 +10,7 @@ import keys from '../../common/keys';
 import { get, set } from '../../system/idb';
 import padZ from '../../system/padZ';
 import {
-  act,
-  cur,
-  fshGuildActivity,
-  gxp,
-  lvl,
-  max,
-  utc,
-  vl,
+  act, cur, fshGuildActivity, gxp, lvl, max, utc, vl,
 } from './indexConstants';
 
 export async function getActivity() {
@@ -25,8 +18,7 @@ export async function getActivity() {
   return raw ?? { lastUpdate: 0, members: {} };
 }
 
-const formatTimestamp = (timestamp) =>
-  formatUtcDateTime(new Date(timestamp * 1000));
+const formatTimestamp = (timestamp) => formatUtcDateTime(new Date(timestamp * 1000));
 
 const formatUtc = (sub) => [
   sub[act],
@@ -38,26 +30,22 @@ const formatUtc = (sub) => [
   sub[gxp],
 ];
 
-const flatten =
-  (lastUpdateString) =>
-  ([name, ary]) =>
-    ary.map(formatUtc).map((rec) => [lastUpdateString, name, ...rec].join(','));
+const flatten = (lastUpdateString) => ([name, ary]) => ary.map(formatUtc).map((rec) => [
+  lastUpdateString,
+  name,
+  ...rec,
+].join(','));
 
-const header =
-  'Last Update,Member,Last Activity,Stam,Level,Max Stam,Date,VL,GXP\n';
+const header = 'Last Update,Member,Last Activity,Stam,Level,Max Stam,Date,VL,GXP\n';
 
 export function createCsv(data) {
   const { lastUpdate, members } = data;
-  const csv = entries(members)
-    .flatMap(flatten(formatTimestamp(lastUpdate)))
-    .join('\n');
+  const csv = entries(members).flatMap(flatten(formatTimestamp(lastUpdate))).join('\n');
   return `${header}${csv}`;
 }
 
-const formatDateTime = (dtPartAry) =>
-  `${dtPartAry[0]}${dtPartAry[1]}${dtPartAry[2]}${
-    dtPartAry[3]
-  }${dtPartAry[4]}${dtPartAry[5]}`;
+const formatDateTime = (dtPartAry) => `${dtPartAry[0]}${dtPartAry[1]}${dtPartAry[2]}${
+  dtPartAry[3]}${dtPartAry[4]}${dtPartAry[5]}`;
 
 const dateParts = [
   (aDate) => aDate.getFullYear().toString(),
@@ -108,8 +96,7 @@ export async function purgeByDate(dateAsTimestamp) {
   set(fshGuildActivity, lessActivity);
 }
 
-const notFound = (currentMembers) => (user) =>
-  !currentMembers.find((name) => name === user);
+const notFound = (currentMembers) => (user) => !currentMembers.find((name) => name === user);
 
 export async function retired() {
   const [raw, memberlist] = await all([

@@ -1,6 +1,3 @@
 export default function trimTitanName(titanName) {
-  return titanName
-    .replace(' (Titan)', '')
-    .replace(' (STF Titan)', '')
-    .replace(' (Xmas Titan)', '');
+  return titanName.replace(' (Titan)', '').replace(' (STF Titan)', '');
 }

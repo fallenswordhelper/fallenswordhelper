@@ -8,8 +8,7 @@ import combatLogger from './combatLogger';
 import interceptMouseEvents from './creatureInfo/interceptMouseEvents';
 import doMonsterColors from './doMonsterColors';
 import doNotKill from './doNotKill/doNotKill';
-import fixRafInWorld from './fixRafInWorld';
-import injectGlobalTop from './globalTop/injectGlobalTop.svelte';
+import globalTop from './globalTop/globalTop';
 import hideGroupButton from './hideGroupButton';
 import hideTitanCombatResults from './hideTitanCombatResults';
 import messageQueue from './messageQueue/messageQueue';
@@ -33,7 +32,6 @@ function hideMapTooltip() {
 }
 
 const usualRoutines = [
-  fixRafInWorld,
   worldPrefs,
   sendGold,
   viewCreature,
@@ -52,7 +50,7 @@ const usualRoutines = [
   buffInfo,
   interceptMouseEvents,
   champAttacks,
-  injectGlobalTop,
+  globalTop,
   teleport,
   messageQueue,
   replaceFootprints,
@@ -60,8 +58,7 @@ const usualRoutines = [
 
 export default function newMap() {
   executeAll(usualRoutines);
-  if (defineUserIsDev) {
-    //  hide titan combat results, global top 100
+  if (defineUserIsDev) { //  hide titan combat results, global top 100
     hideTitanCombatResults();
   }
 }

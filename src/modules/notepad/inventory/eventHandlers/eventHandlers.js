@@ -10,15 +10,13 @@ import resetLvls from './resetLvls';
 import spanClickHandlers from './spanClickHandlers';
 import { invEvent } from './telemetry';
 
-function doMoveItem(e) {
-  // jQuery
+function doMoveItem(e) { // jQuery
   invEvent('doMoveItem');
   const target = $(e.target);
   moveItem([target.data('inv')], target.val());
 }
 
-function elClick(fshInv, el) {
-  // jQuery
+function elClick(fshInv, el) { // jQuery
   $(el[0]).on('click', partial(el[1], fshInv));
 }
 
@@ -31,31 +29,26 @@ function elementClickHandlers(fshInv) {
   ].forEach(partial(elClick, fshInv));
 }
 
-const classClick = (type) => () => {
-  invEvent(type);
-};
+const classClick = (type) => () => { invEvent(type); };
 
-function classClickHandlers(fshInv) {
-  // jQuery
-  ['fshInvItem', 'fshMaroon', 'sorting'].forEach((className) => {
+function classClickHandlers(fshInv) { // jQuery
+  [
+    'fshInvItem',
+    'fshMaroon',
+    'sorting',
+  ].forEach((className) => {
     $(fshInv).on('click', `.${className}`, classClick(className));
   });
 }
 
-function setupClickHandlers(fshInv) {
-  // jQuery
+function setupClickHandlers(fshInv) { // jQuery
   elementClickHandlers(fshInv);
-  $('table.fshInvFilter').on(
-    'click',
-    'input[type="checkbox"]',
-    partial(getChecks, fshInv),
-  );
+  $('table.fshInvFilter').on('click', 'input[type="checkbox"]', partial(getChecks, fshInv));
   spanClickHandlers(fshInv);
   classClickHandlers(fshInv);
 }
 
-export default function eventHandlers(fshInv) {
-  // jQuery
+export default function eventHandlers(fshInv) { // jQuery
   $('#fshMinLvl, #fshMaxLvl').on('keyup', partial(changeLvls, fshInv));
   $(fshInv).on('change', 'select.fshMoveItem', doMoveItem);
   setupClickHandlers(fshInv);

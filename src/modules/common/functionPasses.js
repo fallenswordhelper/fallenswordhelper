@@ -1,3 +1,1 @@
-export default function functionPasses(fn) {
-  return fn();
-}
+export default function functionPasses(fn) { return fn(); }

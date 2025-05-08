@@ -1,7 +1,7 @@
 import getElementById from '../../common/getElementById';
 import setInnerHtml from '../../dom/setInnerHtml';
 
-let bufferProgress = null;
+let bufferProgress;
 
 export function getBufferProgress() {
   bufferProgress = getElementById('bufferProgress');

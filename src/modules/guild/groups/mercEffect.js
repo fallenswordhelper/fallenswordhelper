@@ -6,9 +6,8 @@ const justEffect = ({ attributes }) => attribsToArray(attributes).map(effect);
 const addEffects = (acc, merc) => acc.map((stat, i) => stat + merc[i]);
 
 export default function mercEffect(mercs) {
-  return (
-    mercs?.r?.mercs?.map(justEffect).reduce(addEffects, [0, 0, 0, 0, 0]) ?? [
-      0, 0, 0, 0, 0,
-    ]
-  );
+  return mercs?.r?.mercs
+    ?.map(justEffect)
+    .reduce(addEffects, [0, 0, 0, 0, 0])
+    ?? [0, 0, 0, 0, 0];
 }

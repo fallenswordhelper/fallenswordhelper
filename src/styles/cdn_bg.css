@@ -1,33 +1,11 @@
-.fshFormGroup {
-  background-image: url('https://cdn2.fallensword.com/ui/world/icon_action_formgroup.png');
-}
-.fshQuickBuff {
-  background-image: url('https://cdn2.fallensword.com/ui/world/icon_action_quickbuff.png');
-}
-.fshRealmMap {
-  background-image: url('https://cdn2.fallensword.com/ui/world/icon_action_map.png');
-}
-.fshTempleZero {
-  background-image: url('https://cdn2.fallensword.com/temple/0.png');
-}
-.fshTempleOne {
-  background-image: url('https://cdn2.fallensword.com/temple/1.png');
-}
-.fshTempleTwo {
-  background-image: url('https://cdn2.fallensword.com/temple/2.png');
-}
-.fshTempleThree {
-  background-image: url('https://cdn2.fallensword.com/temple/3.png');
-}
-.fshOldSpinner {
-  background-image: url('https://cdn2.fallensword.com/ui/world/action_spinner.gif');
-}
-.fshJoin {
-  background-image: url('https://cdn2.fallensword.com/ui/world/icon_action_join.png');
-}
-.fshGold {
-  background-image: url('https://cdn2.fallensword.com/currency/0.png');
-}
-.fshWiki {
-  background-image: url('https://cdn2.fallensword.com/ui/misc/wiki.png');
-}
+.fshFormGroup {background-image: url('https://cdn2.fallensword.com/ui/world/icon_action_formgroup.png');}
+.fshQuickBuff {background-image: url('https://cdn2.fallensword.com/ui/world/icon_action_quickbuff.png');}
+.fshRealmMap {background-image: url('https://cdn2.fallensword.com/ui/world/icon_action_map.png');}
+.fshTempleZero {background-image: url('https://cdn2.fallensword.com/temple/0.png');}
+.fshTempleOne {background-image: url('https://cdn2.fallensword.com/temple/1.png');}
+.fshTempleTwo {background-image: url('https://cdn2.fallensword.com/temple/2.png');}
+.fshTempleThree {background-image: url('https://cdn2.fallensword.com/temple/3.png');}
+.fshOldSpinner {background-image: url('https://cdn2.fallensword.com/ui/world/action_spinner.gif')}
+.fshJoin {background-image: url('https://cdn2.fallensword.com/ui/world/icon_action_join.png');}
+.fshGold {background-image: url('https://cdn2.fallensword.com/currency/0.png');}
+.fshWiki {background-image: url('https://cdn2.fallensword.com/ui/misc/wiki.png');}

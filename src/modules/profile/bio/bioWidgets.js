@@ -37,13 +37,9 @@ const guildTagReplacements = [
   [/\[\*\](?<line>[^[]*)/g, '<li>$1</li>'],
 ];
 
-function replaceTag(acc, re) {
-  return acc.replace(re[0], re[1]);
-}
+function replaceTag(acc, re) { return acc.replace(re[0], re[1]); }
 
-function replaceTags(inputText, ary) {
-  return ary.reduce(replaceTag, inputText);
-}
+function replaceTags(inputText, ary) { return ary.reduce(replaceTag, inputText); }
 
 function convertTextToHtml(inputText) {
   let ret = replaceTags(inputText, basicTagReplacements);
@@ -59,7 +55,8 @@ function bioPreview() {
     widthClass = calf.subcmd === 'hall' ? 'fshBioHall' : 'fshBioGuild';
   }
   const previewContainer = createDiv({
-    className: `fshBioContainer ${widthClass}`,
+    className:
+      `fshBioContainer ${widthClass}`,
   });
   const previewHeader = createDiv({
     className: 'fshBioHeader fshBioInner',
@@ -74,20 +71,17 @@ function bioPreview() {
 function bioWords() {
   if (calf.cmd === 'profile') {
     // Add description text for the new tags
-    insertHtmlBeforeEnd(
-      pcc(),
-      '<div>' +
-        '`~This will allow FSH Script users to select buffs from your bio~`<br>' +
-        'You can use the [cmd] tag as well to determine where to put the "Ask ' +
-        'For Buffs" button<br><br><blockquote><ul class="list">' +
-        '<li>Note 1: The ` and ~ characters are on the same key on US QWERTY ' +
-        'keyboards. ` is <b>NOT</b> an apostrophe.</li>' +
-        '<li>Note 2: Inner text will not contain special characters ' +
-        '(non-alphanumeric).</li>' +
-        '<li>P.S. Be creative with these! Wrap your buff pack names in ' +
-        'them to make buffing even easier!</li>' +
-        '</ul></blockquote></div>',
-    );
+    insertHtmlBeforeEnd(pcc(), '<div>'
+      + '`~This will allow FSH Script users to select buffs from your bio~`<br>'
+      + 'You can use the [cmd] tag as well to determine where to put the "Ask '
+      + 'For Buffs" button<br><br><blockquote><ul class="list">'
+      + '<li>Note 1: The ` and ~ characters are on the same key on US QWERTY '
+      + 'keyboards. ` is <b>NOT</b> an apostrophe.</li>'
+      + '<li>Note 2: Inner text will not contain special characters '
+      + '(non-alphanumeric).</li>'
+      + '<li>P.S. Be creative with these! Wrap your buff pack names in '
+      + 'them to make buffing even easier!</li>'
+      + '</ul></blockquote></div>');
   }
 }
 
@@ -103,10 +97,7 @@ function changeHeight() {
 function bioHeight() {
   const bioEditLinesDiv = createDiv({ innerHTML: '<br>Display ' });
   theBox = createInput({
-    min: 1,
-    max: 99,
-    type: 'number',
-    value: bioEditLines,
+    min: 1, max: 99, type: 'number', value: bioEditLines,
   });
   insertElement(bioEditLinesDiv, theBox);
   insertTextBeforeEnd(bioEditLinesDiv, ' Lines ');
@@ -129,9 +120,7 @@ function updateBioCharacters() {
 export default function bioWidgets() {
   bioEditLines = getValue('bioEditLines');
   textArea = getElementById('textInputBox');
-  if (!textArea) {
-    return;
-  }
+  if (!textArea) { return; }
   bioPreview();
   bioWords();
   bioHeight();

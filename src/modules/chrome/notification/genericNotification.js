@@ -11,9 +11,7 @@ export default function genericNotification(eventAction, text, url) {
     href: url,
     innerHTML: `<span class="notification-icon"></span><p class="notification-content">${text}</p>`,
   });
-  onclick(anchor, () => {
-    sendEvent('notification', eventAction);
-  });
+  onclick(anchor, () => { sendEvent('notification', eventAction); });
   insertElement(li, anchor);
   insertElement(getElementById('notifications'), li);
 }

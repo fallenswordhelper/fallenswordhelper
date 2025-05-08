@@ -10,20 +10,17 @@ import numberIsNaN from '../common/numberIsNaN';
 import onclick from '../common/onclick';
 import querySelectorArray from '../common/querySelectorArray';
 import selfIdIs from '../common/selfIdIs';
-import confirm from '../modal/confirm.svelte';
+import confirm from '../modal/confirm';
 import setValue from '../system/setValue';
 
 async function clearStorage() {
   sendEvent('settingsPage', 'clearStorage');
-  const canProceed = await confirm(
-    'Are you sure you want to clear you localStorage?',
-  );
+  const canProceed = await confirm('Are you sure you want to clear you localStorage?');
   if (canProceed) localStorage.clear();
 }
 
 function saveNumeric(i) {
-  if (!numberIsNaN(i.value) && i.value >= Number(i.min))
-    setValue(i.name, i.value);
+  if (!numberIsNaN(i.value) && i.value >= Number(i.min)) setValue(i.name, i.value);
 }
 
 function savePref(i) {
@@ -38,9 +35,7 @@ function savePref(i) {
 
 function saveConfig() {
   sendEvent('settingsPage', 'saveConfig');
-  const fields = querySelectorArray(
-    '.fsh-settings input[name], .fsh-settings select[name]',
-  );
+  const fields = querySelectorArray('.fsh-settings input[name], .fsh-settings select[name]');
   fields.forEach(savePref);
   dynamicAlert('FS Helper Settings Saved');
 }

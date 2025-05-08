@@ -1,8 +1,7 @@
-import { mount } from 'svelte';
 import AHInvManager from './AHInvManager.svelte';
 
 function startAHInvMgr(itemList, im) {
-  return mount(AHInvManager, {
+  return new AHInvManager({
     props: { itemList },
     target: im,
   });

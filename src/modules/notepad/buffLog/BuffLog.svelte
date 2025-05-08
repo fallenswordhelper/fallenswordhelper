@@ -4,8 +4,8 @@
   import { fshBuffLog } from '../../support/constants';
   import { get, set } from '../../system/idb';
 
-  let { visible = $bindable(true) } = $props();
-  let records = $state([]);
+  export let visible = true;
+  let records = [];
 
   function close() {
     sendEvent('Buff Log', 'close');
@@ -13,7 +13,7 @@
   }
 
   async function init() {
-    const txt = (await get(fshBuffLog)) ?? '';
+    const txt = await get(fshBuffLog) ?? '';
     records = txt.split('<br>').map((log) => [log.slice(0, 19), log.slice(20)]);
   }
 
@@ -24,27 +24,25 @@
   }
 </script>
 
-<ModalTitled {close} {visible}>
-  {#snippet title()}
-    Buff Log
-  {/snippet}
+<ModalTitled { visible } on:close={ close }>
+  <svelte:fragment slot="title">Buff Log</svelte:fragment>
   <div class="top">
-    <button onclick={clearStorage} type="button">Clear</button>
+    <button on:click={ clearStorage } type="button">Clear</button>
   </div>
   <div class="textContainer">
-    {#await init() then}
-      {#each records as [timestamp, txt], x (x)}
-        <br />
-        {timestamp}
-        {#if txt.startsWith('<')}
+    { #await init() then }
+      { #each records as [timestamp, txt] }
+        <br>
+        { timestamp }
+        { #if txt.startsWith('<') }
           <span class="fshRed">
-            {txt.slice(21, -7)}
+            { txt.slice(21, -7) }
           </span>
-        {:else}
-          {txt}
-        {/if}
-      {/each}
-    {/await}
+        { :else }
+          { txt }
+        { /if }
+      { /each }
+    { /await }
   </div>
 </ModalTitled>
 

@@ -4,23 +4,23 @@
   import Modal from './Modal.svelte';
   import ModalCloseButton from './ModalCloseButton.svelte';
 
-  let { children, close, title, visible = true } = $props();
+  export let visible = true;
 
-  let modal = $state();
-  let header = $state();
+  let modal;
+  let header;
 
   onMount(() => {
     draggable(header, modal);
   });
 </script>
 
-<Modal bind:modal {close} {visible}>
-  <div class="modal-title" bind:this={header}>
-    {@render title?.()}
-    <ModalCloseButton {close} />
+<Modal { visible } on:close bind:modal>
+  <div class="modal-title" bind:this={ header }>
+    <slot name="title" />
+    <ModalCloseButton on:close />
   </div>
   <div class="modal-content">
-    {@render children?.()}
+    <slot />
   </div>
 </Modal>
 

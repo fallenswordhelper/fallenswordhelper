@@ -13,9 +13,7 @@ function insertBuffLink(el) {
 }
 
 function openQuickBuff(evt) {
-  if (evt.target.className !== 'smallLink') {
-    return;
-  }
+  if (evt.target.className !== 'smallLink') { return; }
   sendEvent('guild', 'buffLinks');
   openQuickBuffById(getPlayerId(evt.target.previousElementSibling.href));
 }

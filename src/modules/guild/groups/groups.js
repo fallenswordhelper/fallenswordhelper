@@ -22,9 +22,7 @@ function displayMinGroupLevel() {
 function fixTable() {
   // Cows don't add!
   const tds = querySelectorArray('#pCC td.header-dark');
-  if (tds.length < 5) {
-    return;
-  }
+  if (tds.length < 5) { return; }
   tds[0].setAttribute('width', '20%');
   tds[1].setAttribute('width', '44%');
   tds[2].setAttribute('width', '7%');
@@ -34,9 +32,7 @@ function fixTable() {
 
 export default async function groups() {
   if (!currentGuildId() || jQueryNotPresent()) return;
-  const joinAll = querySelector(
-    '#pCC input[value="Join All Available Groups"]',
-  );
+  const joinAll = querySelector('#pCC input[value="Join All Available Groups"]');
   if (!joinAll) return;
   const membrListPrm = getMembrList(false);
   displayMinGroupLevel();

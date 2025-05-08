@@ -8,10 +8,9 @@ import setInnerHtml from '../../../dom/setInnerHtml';
 import calf from '../../../support/calf';
 
 function memberHeader(oldhtml) {
-  return `${onlineDot({ last_login: calf.membrList[oldhtml].last_login })}${playerLink(
-    calf.membrList[oldhtml].id,
-    oldhtml,
-  )} [ <span class="a-reply fshLink" target_player=${oldhtml}>m</span> ]`;
+  return `${onlineDot({ last_login: calf.membrList[oldhtml].last_login })}${
+    playerLink(calf.membrList[oldhtml].id, oldhtml)
+  } [ <span class="a-reply fshLink" target_player=${oldhtml}>m</span> ]`;
 }
 
 function updateMemberHeader(el) {
@@ -26,9 +25,7 @@ function updateMemberHeader(el) {
 }
 
 export default function reportHeader() {
-  const headers = querySelectorAll(
-    '#pCC table table ' +
-      'tr:not(.fshHide) td[bgcolor="#DAA534"][colspan="2"] b',
-  );
+  const headers = querySelectorAll('#pCC table table '
+    + 'tr:not(.fshHide) td[bgcolor="#DAA534"][colspan="2"] b');
   batch([3, headers, 0, updateMemberHeader]);
 }

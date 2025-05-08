@@ -1,12 +1,7 @@
-import { nowSecs, oneDayAgo } from '../support/now';
-import getValue from '../system/getValue';
-import setValue from '../system/setValue';
-import { phEvent } from './posthog';
+import noGa from './noGa';
 
 export default function screenview(funcName) {
-  const eventType = `screenview__${funcName}`;
-  const lastScreenView = getValue(eventType);
-  if (Number.isFinite(lastScreenView) && lastScreenView > oneDayAgo()) return;
-  phEvent(eventType);
-  setValue(eventType, nowSecs());
+  if (noGa()) { return; }
+  ga('fshApp.set', 'screenName', funcName);
+  ga('fshApp.send', 'screenview');
 }

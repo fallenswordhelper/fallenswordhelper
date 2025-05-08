@@ -15,8 +15,7 @@ function setMsg(msg) {
   dialogMsg.disabled = false;
 }
 
-function openQuickMsgDialog(name, msg, tip) {
-  // jQuery
+function openQuickMsgDialog(name, msg, tip) { // jQuery
   const quickMsgDialog = getQuickMessageDialog();
   if (hasClass('ui-dialog-content', quickMsgDialog)) {
     setName(name);
@@ -29,8 +28,6 @@ function openQuickMsgDialog(name, msg, tip) {
 }
 
 export default function messaging() {
-  if (jQueryNotPresent()) {
-    return;
-  }
+  if (jQueryNotPresent()) { return; }
   window.openQuickMsgDialog = openQuickMsgDialog;
 }

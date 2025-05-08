@@ -8,8 +8,7 @@ export const getHuntingBuffs = () => huntingBuffs;
 export const getHuntingBuffsName = () => huntingBuffsName;
 
 export function setCurrentBuffList() {
-  const lookup = [
-    null,
+  const lookup = [null,
     [calf.buffs, calf.buffsName],
     [calf.buffs2, calf.buffs2Name],
     [calf.buffs3, calf.buffs3Name],

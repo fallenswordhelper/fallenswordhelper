@@ -7,9 +7,7 @@
   const BpFromPlayer = 'span[mode="0"][action="recall"]';
   const GsFromPlayer = 'span[mode="1"][action="recall"]';
 
-  const recallEvent = (type) => {
-    sendEvent('Inventory', 'Recall All', type);
-  };
+  const recallEvent = (type) => { sendEvent('Inventory', 'Recall All', type); };
 
   function toBp() {
     recallEvent('toBp');
@@ -28,8 +26,8 @@
 <div class="main">
   <div class="head">Recall all visible to</div>
   <div class="btnbox">
-    <button class="custombutton" onclick={toBp} type="button">BP</button>
-    <button class="custombutton" onclick={toGs} type="button">GS</button>
+    <button class="custombutton" on:click={ toBp } type="button">BP</button>
+    <button class="custombutton" on:click={ toGs } type="button">GS</button>
   </div>
 </div>
 

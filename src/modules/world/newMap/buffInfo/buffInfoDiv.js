@@ -6,9 +6,7 @@ import calf from '../../../support/calf';
 
 let containerDiv = 0;
 
-function value(e) {
-  return e;
-}
+function value(e) { return e; }
 
 function wantsBuffInfo(ary) {
   return calf.showBuffInfo && ary.some(value);

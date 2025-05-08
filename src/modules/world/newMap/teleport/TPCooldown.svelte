@@ -2,10 +2,10 @@
   import { defTeleport } from '../../../support/constants';
   import { realtimeSecs } from '../../../support/now';
 
-  let { tpButton } = $props();
-  let countdown = $state(0);
+  export let tpButton;
+  let countdown = 0;
   let t0 = 0;
-  let timer = $state(false);
+  let timer = false;
 
   function checkCountdown() {
     if (countdown > 0) return;
@@ -32,22 +32,20 @@
   window.$.subscribe('stats.player', updateCountdown);
   window.$.subscribe(defTeleport, startTimer);
 </script>
-
-{#if timer}
-  <div id="tp-overlay">{countdown}</div>
-{/if}
-
+{ #if timer }
+  <div id="tp-overlay">{ countdown }</div>
+{ /if }
 <style>
-  #tp-overlay {
-    opacity: 0.6;
-    background-color: #000;
-    color: #fff;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 17px;
-    height: 17px;
-    line-height: 17px;
-    text-align: center;
-  }
+#tp-overlay {
+  opacity: 0.6;
+  background-color: #000;
+  color: #fff;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 17px;
+  height: 17px;
+  line-height: 17px;
+  text-align: center;
+}
 </style>

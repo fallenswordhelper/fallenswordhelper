@@ -21,7 +21,7 @@
 }
 #fshAllyEnemy .enemy-quick-buff {
   clear: both;
-  color: #f7eac9;
+  color: #F7EAC9;
   cursor: pointer;
   font-size: 11px;
   margin: 0;
@@ -36,10 +36,10 @@
 }
 .minibox-enemy {
   margin: 0 0 10px;
-  overflow: hidden;
+  overflow: hidden
 }
 .player-row {
-  white-space: nowrap;
+  white-space: nowrap
 }
 .enemy-buff-check-on,
 .enemy-buff-check-off {

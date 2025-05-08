@@ -9,8 +9,7 @@ function updateControls(fshInv) {
   $(fshInv).DataTable().draw(false);
 }
 
-export default function resetLvls(fshInv) {
-  // jQuery
+export default function resetLvls(fshInv) { // jQuery
   headerEvent('Reset levels');
   getOptions().fshMinLvl = defaultOptions.fshMinLvl;
   getOptions().fshMaxLvl = defaultOptions.fshMaxLvl;

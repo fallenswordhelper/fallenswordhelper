@@ -17,15 +17,10 @@ function updateName(checkboxes, item) {
 async function updateNamesForComposedPots(checkboxes) {
   const inv = await getInv();
   if (!inv?.items) return {};
-  return fromEntries(
-    entries(inv.items).map(([key, obj]) => [
-      key,
-      {
-        ...obj,
-        item_name: updateName(checkboxes, obj),
-      },
-    ]),
-  );
+  return fromEntries(entries(inv.items).map(([key, obj]) => [key, {
+    ...obj,
+    item_name: updateName(checkboxes, obj),
+  }]));
 }
 
 function getItemsFromInventory(checkboxes) {
@@ -38,6 +33,9 @@ export default async function getItems() {
   if (!checkboxes.length) return [];
   const items = await getItemsFromInventory(checkboxes);
   return checkboxes
-    .map((cb) => [closestTr(cb).cells[2], items[cb.value]])
+    .map((cb) => [
+      closestTr(cb).cells[2],
+      items[cb.value],
+    ])
     .filter(([, invItem]) => invItem);
 }

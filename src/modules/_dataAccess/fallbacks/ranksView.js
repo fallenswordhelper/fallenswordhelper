@@ -16,8 +16,7 @@ import {
 } from '../../support/constants';
 import createDocument from '../../system/createDocument';
 
-const guildXp = (el) =>
-  Number(getTextTrim(closestTr(el)?.cells[4])?.replaceAll(',', ''));
+const guildXp = (el) => Number(getTextTrim(closestTr(el)?.cells[4])?.replaceAll(',', ''));
 const playerId = (el) => Number(regExpFirstCapture(playerIDRE, el.href));
 const rank = (el) => getTextTrim(closestTr(el)?.cells[3]);
 const vl = (tipped) => Number(regExpFirstCapture(vlRe, tipped));
@@ -67,9 +66,7 @@ export default async function ranksView() {
   const doc = createDocument(html);
   const docPcc = doc.getElementById('pCC');
   if (!docPcc) return { e: { code: 0, message: 'Failure' }, s: false };
-  const players = querySelectorArray(playerLinkSelector, docPcc).map(
-    parsePlayerLink,
-  );
+  const players = querySelectorArray(playerLinkSelector, docPcc).map(parsePlayerLink);
   const ranks = uniq(players, 'rank').map(partial(getRanks, players));
   return { r: ranks, s: true };
 }

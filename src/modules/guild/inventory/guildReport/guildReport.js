@@ -12,11 +12,8 @@ async function doReportHeader() {
   task(3, reportHeader);
 }
 
-export default function guildReport() {
-  // jQuery
-  if (jQueryNotPresent() || !currentGuildId()) {
-    return;
-  }
+export default function guildReport() { // jQuery
+  if (jQueryNotPresent() || !currentGuildId()) { return; }
   doReportHeader();
   task(2, searchUser);
   task(3, prepareChildRows);

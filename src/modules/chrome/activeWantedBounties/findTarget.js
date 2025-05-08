@@ -23,15 +23,13 @@ function getTarget(theCells) {
 const isWanted = [
   () => getWantedArray().includes('*'),
   (target) => getWantedArray().includes(target),
-  (_target, theRow) =>
-    calf.wantedGuildMembers && getTextTrim(theRow.cells[6]) === '[n/a]',
+  (_target, theRow) => calf.wantedGuildMembers
+    && getTextTrim(theRow.cells[6]) === '[n/a]',
 ];
 
 function wanted(target, theRow) {
-  return (
-    getTextTrim(theRow.cells[6]) !== '[active]' &&
-    isWanted.some((el) => el(target, theRow))
-  );
+  return getTextTrim(theRow.cells[6]) !== '[active]'
+    && isWanted.some((el) => el(target, theRow));
 }
 
 function wantedTarget(target, theRow) {
@@ -44,9 +42,7 @@ export default function findTarget(activeTable) {
   for (let i = 1; i < activeTable.rows.length - 2; i += 2) {
     const theRow = activeTable.rows[i];
     const target = getTextTrim(theRow.cells[0].children[0].children[0]);
-    if (target === '[ No bounties available. ]') {
-      break;
-    }
+    if (target === '[ No bounties available. ]') { break; }
     wantedTarget(target, theRow);
   }
 }

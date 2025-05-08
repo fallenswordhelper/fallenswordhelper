@@ -1,13 +1,16 @@
 <script>
   import ItemImg from '../../common/ItemImg.svelte';
 
-  let { class: className = '', item = 0 } = $props();
+  let className = '';
+
+  export let item = 0;
+  export { className as class };
 </script>
 
-<div class={className}>
-  {#if item}
-    <ItemImg {item} t="1" />
-  {/if}
+<div class="{ className }">
+  { #if item }
+    <ItemImg { item } t=1/>
+  { /if }
 </div>
 
 <style>

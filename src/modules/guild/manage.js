@@ -20,15 +20,11 @@ import stamBars from './stamBars/stamBars';
 import tracker from './tracker/tracker';
 
 function relicControl(leftHandSideColumnTable) {
-  const relic = getArrayByTagName('b', leftHandSideColumnTable).filter(
-    contains('Relics'),
-  );
+  const relic = getArrayByTagName('b', leftHandSideColumnTable)
+    .filter(contains('Relics'));
   if (relic.length !== 1) return;
   const thisFont = relic[0].parentNode.nextElementSibling.children[0];
-  setInnerHtml(
-    `[ <a href="${guildSubcmdUrl}reliclist">Control</a> ]&nbsp;`,
-    thisFont,
-  );
+  setInnerHtml(`[ <a href="${guildSubcmdUrl}reliclist">Control</a> ]&nbsp;`, thisFont);
   onclick(thisFont, (e) => {
     if (e.target.tagName === 'A') sendEvent('guildManage', 'relic control');
   });
@@ -44,8 +40,7 @@ function selfRecallLink(leftHandSideColumnTable) {
     `<li><a href="${recallUserUrl}${playerName()}">Self Recall</a></li>`,
   );
   onclick(selfRecall, (e) => {
-    if (getText(e.target) === 'Self Recall')
-      sendEvent('guildManage', 'Self Recall');
+    if (getText(e.target) === 'Self Recall') sendEvent('guildManage', 'Self Recall');
   });
 }
 

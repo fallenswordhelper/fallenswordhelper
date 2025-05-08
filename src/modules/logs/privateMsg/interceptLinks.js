@@ -7,8 +7,7 @@ import getValue from '../../system/getValue';
 import getMsg from './getMsg';
 import parseBuffs from './parseBuffs';
 
-const getPlayerName = (target) =>
-  getText(closestTr(target).children[2].children[0]);
+const getPlayerName = (target) => getText(closestTr(target).children[2].children[0]);
 
 function formatTip(target) {
   const msg = getMsg(target);
@@ -19,9 +18,7 @@ function formatTip(target) {
 }
 
 function parseReply(e) {
-  if (!getValue('enableChatParsing')) {
-    return;
-  }
+  if (!getValue('enableChatParsing')) { return; }
   const { target } = e;
   window.openQuickMsgDialog(getPlayerName(target), '', formatTip(target));
   e.preventDefault();
@@ -40,9 +37,7 @@ const classEvents = [
 function intercept(e) {
   const { target } = e;
   const hdl = classEvents.find((pair) => classPair(target, pair));
-  if (hdl) {
-    hdl[1](e);
-  }
+  if (hdl) { hdl[1](e); }
 }
 
 export default function interceptLinks(logTable) {

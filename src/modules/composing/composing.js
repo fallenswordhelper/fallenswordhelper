@@ -13,10 +13,7 @@ import quickCreate from './quickCreate';
 
 function moveButtons() {
   if (!getValue('moveComposingButtons')) return;
-  const buttonDiv = getElementById(
-    'composing-error-dialog',
-  )?.previousElementSibling;
-  if (!buttonDiv) return;
+  const buttonDiv = getElementById('composing-error-dialog').previousElementSibling;
   buttonDiv.setAttribute('style', 'text-align: right; padding: 0 38px 0 0');
   const top = getElementsByClassName('composing-level', pcc())[0].parentNode;
   insertElementBefore(buttonDiv, top);

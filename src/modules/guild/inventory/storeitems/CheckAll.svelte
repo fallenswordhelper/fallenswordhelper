@@ -1,17 +1,14 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import sendEvent from '../../../analytics/sendEvent';
 
-  const { dispatchCheckAll } = $props();
+  const dispatch = createEventDispatcher();
 
   function doCheckAll() {
     sendEvent('storeitems', 'Check All');
-    dispatchCheckAll();
+    dispatch('checkall');
   }
 </script>
-
-<button class="custombutton" onclick={doCheckAll} type="button">
-  Check All
-</button>&nbsp;
 
 <style>
   button {
@@ -19,3 +16,5 @@
     font-size: inherit;
   }
 </style>
+
+<button class="custombutton" on:click={ doCheckAll } type="button">Check All</button>&nbsp;

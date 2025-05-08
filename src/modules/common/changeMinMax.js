@@ -7,9 +7,7 @@ function getIntVal(selector) {
 export default function changeMinMax(newOpts, redraw) {
   const minLvl = getIntVal('#fshMinLvl');
   const maxLvl = getIntVal('#fshMaxLvl');
-  if (numberIsNaN(minLvl) || numberIsNaN(maxLvl)) {
-    return;
-  }
+  if (numberIsNaN(minLvl) || numberIsNaN(maxLvl)) { return; }
   newOpts(minLvl, maxLvl);
   redraw();
 }

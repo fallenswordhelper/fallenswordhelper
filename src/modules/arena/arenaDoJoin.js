@@ -22,9 +22,7 @@ function yourGuild(thisInfo) {
 
 async function evalMsg() {
   const thisInfo = infoBox();
-  if (maxMoves(thisInfo)) {
-    return;
-  }
+  if (maxMoves(thisInfo)) { return; }
   if (yourGuild(thisInfo)) {
     const thisId = querySelector('#pCC input[name="pvp_id"]').value;
     const obj = await get('fsh_arenaFull');

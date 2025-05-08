@@ -14,8 +14,7 @@ function changePage(e) {
   formToUrl({ target: e.target.form });
 }
 
-function globalQuestAllowBack(topTable) {
-  // jQuery
+function globalQuestAllowBack(topTable) { // jQuery
   const [thisSelect] = getElementsByTagName('select', topTable);
   $(thisSelect).off();
   on(pcc(), 'change', changePage);
@@ -27,9 +26,7 @@ function playerLink(el) {
 }
 
 export default function globalQuest() {
-  if (!pcc()) return;
-  const tables = getElementsByTagName(defTable, pcc());
-  if (tables.length < 4) return;
-  globalQuestAllowBack(tables[3]);
-  dataRows(tables[3], 4, 1).forEach(playerLink);
+  const [, , , topTable] = getElementsByTagName(defTable, pcc());
+  globalQuestAllowBack(topTable);
+  dataRows(topTable, 4, 1).forEach(playerLink);
 }

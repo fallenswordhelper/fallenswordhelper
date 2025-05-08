@@ -4,5 +4,5 @@ import getValue from '../system/getValue';
 
 export default function sendException(desc) {
   if (getValue('betaOptIn')) stdout('sendException', desc); //  sendException
-  Honeybadger.notify(desc, 'sendException');
+  Honeybadger.notify(desc);
 }

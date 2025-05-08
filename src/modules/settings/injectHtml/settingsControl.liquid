@@ -1,35 +1,31 @@
 {% case type %}
   {% when 'text' %}
-    <input
-      id="{{field}}"
-      {% if max %}
-        max="{{max}}"
-      {% endif %}
-      name="{{field}}"
-      {% if title %}
-        title="{{title}}"
-      {% endif %}
-      type="text"
-    >
+  <input
+    id="{{field}}"
+    {% if max %}
+    max="{{max}}"
+    {% endif %}
+    name="{{field}}"
+    {% if title %}
+    title="{{title}}"
+    {% endif %}
+    type="text">
   {% when 'number' %}
-    <input
-      class="fsh-va-text-bottom"
-      id="{{field}}"
-      min="0"
-      name="{{field}}"
-      type="number"
-    >
+  <input
+    class="fsh-va-text-bottom"
+    id="{{field}}"
+    min="0"
+    name="{{field}}"
+    type="number">
   {% when 'color' %}
-    <input
-      id="{{field}}"
-      name="{{field}}"
-      type="color"
-    >
-  {% else %}
-    <input
-      id="{{field}}"
-      name="{{field}}"
-      type="checkbox"
-      value="true"
-    >
+  <input
+    id="{{field}}"
+    name="{{field}}"
+    type="color">
+{% else %}
+  <input
+    id="{{field}}"
+    name="{{field}}"
+    type="checkbox"
+    value="true">
 {% endcase %}

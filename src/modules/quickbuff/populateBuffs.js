@@ -7,9 +7,7 @@ function buffTimeLeft(secs) {
   const min = Math.floor(secs / 60);
   const sec = secs % 60;
   let buffTimeToExpire = outputFormat(min, 'm');
-  if (min > 0 && sec > 0) {
-    buffTimeToExpire += ' ';
-  }
+  if (min > 0 && sec > 0) { buffTimeToExpire += ' '; }
   buffTimeToExpire += outputFormat(sec, 's');
   return buffTimeToExpire;
 }
@@ -17,15 +15,13 @@ function buffTimeLeft(secs) {
 function timeToExpire(secs) {
   const buffTimeToExpire = buffTimeLeft(secs);
   return `<span class="fshLime">On</span>&nbsp;<span class="fshBuffOn">(${
-    buffTimeToExpire
-  })</span>`;
+    buffTimeToExpire})</span>`;
 }
 
 function isAvailable(buff) {
   const elem = querySelector(`#buff-outer input[data-name="${buff}"]`);
   if (elem) {
-    return `<span class="quickbuffActivate" data-buffid="${
-      elem.value
+    return `<span class="quickbuffActivate" data-buffid="${elem.value
     }">Activate</span>`;
   }
   return '<span class="fshRed;">Off</span>';
@@ -33,9 +29,7 @@ function isAvailable(buff) {
 
 function buffRunning(dict, buff) {
   const secs = dict[buff] ?? 0;
-  if (secs) {
-    return timeToExpire(secs);
-  }
+  if (secs) { return timeToExpire(secs); }
   return isAvailable(buff);
 }
 

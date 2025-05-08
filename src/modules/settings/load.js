@@ -13,21 +13,17 @@ import listKeys from '../system/listKeys';
 import setValue from '../system/setValue';
 
 function drawBox(content, fshSettings) {
-  setInnerHtml(
-    '<h1>FSH Settings</h1><br><center>The box below ' +
-      'is your current settings. Copy it to save your current settings<br>' +
-      'To load saved settings, simply replace the contents of the box with ' +
-      'your saved copy and press the button below.' +
-      '<textarea align="center" cols="80" rows="25" style="' +
-      'background-color:white;' +
-      "font-family:Consolas,'Lucida Console','Courier New',monospace;\" " +
-      `id="HelperfshSettings" name="fshSettings">${jsonStringify(
-        fshSettings,
-      )}</textarea>` +
-      '<br><input id="HelperLoadSettings" class="custombutton" ' +
-      'type="submit" value="Load Settings!" /></center>',
-    content,
-  );
+  setInnerHtml('<h1>FSH Settings</h1><br><center>The box below '
+    + 'is your current settings. Copy it to save your current settings<br>'
+    + 'To load saved settings, simply replace the contents of the box with '
+    + 'your saved copy and press the button below.'
+    + '<textarea align="center" cols="80" rows="25" style="'
+    + 'background-color:white;'
+    + 'font-family:Consolas,\'Lucida Console\',\'Courier New\',monospace;" '
+    + `id="HelperfshSettings" name="fshSettings">${
+      jsonStringify(fshSettings)}</textarea>`
+    + '<br><input id="HelperLoadSettings" class="custombutton" '
+    + 'type="submit" value="Load Settings!" /></center>', content);
 }
 
 function saveSetting(settings, id) {
@@ -48,11 +44,8 @@ function buildSettingsObj(acc, curr) {
   return acc;
 }
 
-export default function load() {
-  // Hybrid
-  if (jQueryNotPresent()) {
-    return;
-  }
+export default function load() { // Hybrid
+  if (jQueryNotPresent()) { return; }
   const fshSettings = listKeys().reduce(buildSettingsObj, {});
   drawBox(pcc(), fshSettings);
   $('#HelperLoadSettings').on('click', clickHandler);

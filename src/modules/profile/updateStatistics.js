@@ -28,10 +28,8 @@ function removeStatTable(tbl) {
   );
 }
 
-const removeAttr = (root, el, attr) =>
-  querySelectorArray(`${el}[${attr}]`, root).forEach((l) =>
-    l.removeAttribute(attr),
-  );
+const removeAttr = (root, el, attr) => querySelectorArray(`${el}[${attr}]`, root)
+  .forEach((l) => l.removeAttribute(attr));
 
 function cleanTable(charStats) {
   removeAttr(charStats, 'tr', 'style');

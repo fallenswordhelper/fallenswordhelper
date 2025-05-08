@@ -47,9 +47,7 @@ function makeButton() {
 
 export default function nekidBtn() {
   profileCombatSetDiv = getElementById('profileCombatSetDiv');
-  if (!profileCombatSetDiv) {
-    return;
-  }
+  if (!profileCombatSetDiv) { return; }
   const targetBr = profileCombatSetDiv.parentNode.nextElementSibling;
   if (!targetBr) return;
   const nekidDiv = makeButton();

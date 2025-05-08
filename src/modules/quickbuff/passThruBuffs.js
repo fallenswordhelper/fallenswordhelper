@@ -14,7 +14,5 @@ function tickBuffs(passThru) {
 
 export default function passThruBuffs() {
   const passThru = getUrlParameter('blist');
-  if (passThru) {
-    tickBuffs(passThru);
-  }
+  if (passThru) { tickBuffs(passThru); }
 }

@@ -10,33 +10,34 @@ import addCommas from '../system/addCommas';
 
 let costs = [];
 
-const setupCosts = (templates) =>
-  templates.map(({ buffs, duration, id }) => ({
-    cost: Math.max(
-      buffs.map(({ level }) => level).reduce(sum, 0) * duration,
-      5000,
-    ),
-    id,
-  }));
+const setupCosts = (templates) => templates.map(({
+  buffs,
+  duration,
+  id,
+}) => ({
+  cost: Math.max(buffs.map(({ level }) => level).reduce(sum, 0) * duration, 5000),
+  id,
+}));
 
 const scenarios = [
-  [(thisCost, existingCostDiv) => !thisCost && !existingCostDiv, () => 0],
+  [
+    (thisCost, existingCostDiv) => !thisCost && !existingCostDiv,
+    () => 0,
+  ],
   [
     (thisCost, existingCostDiv) => !thisCost && existingCostDiv,
     (select, thisCost, existingCostDiv) => existingCostDiv.remove(),
   ],
   [
     (thisCost, existingCostDiv) => thisCost && existingCostDiv,
-    (select, thisCost, existingCostDiv) =>
-      setText(`Cost: ${addCommas(thisCost)}`, existingCostDiv),
+    (select, thisCost, existingCostDiv) => setText(`Cost: ${addCommas(thisCost)}`, existingCostDiv),
   ],
   [
     (thisCost, existingCostDiv) => thisCost && !existingCostDiv,
-    (select, thisCost) =>
-      insertHtmlBeforeEnd(
-        select.parentNode,
-        `<div class="fshBlue template-cost">Cost: ${addCommas(thisCost)}</div>`,
-      ),
+    (select, thisCost) => insertHtmlBeforeEnd(
+      select.parentNode,
+      `<div class="fshBlue template-cost">Cost: ${addCommas(thisCost)}</div>`,
+    ),
   ],
 ];
 

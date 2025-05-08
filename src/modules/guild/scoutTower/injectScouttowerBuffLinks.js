@@ -35,29 +35,19 @@ function buffEvent(e) {
 }
 
 function evtHdl(e) {
-  if (hasClass('fshBl', e.target)) {
-    buffEvent(e);
-  }
+  if (hasClass('fshBl', e.target)) { buffEvent(e); }
 }
 
 function playerBufflink(el) {
-  insertHtmlBeforeEnd(
-    el.cells[0],
-    ' <button class="fshBl fshXSmall">[b]</button>',
-  );
+  insertHtmlBeforeEnd(el.cells[0], ' <button class="fshBl fshXSmall">[b]</button>');
 }
 
 function doBuffLinks(titanTable) {
   dataRows(titanTable, 3, 0).forEach(playerBufflink);
-  insertHtmlBeforeEnd(
-    titanTable.rows[0].cells[0],
-    ' <button class="fshBl fshXSmall">all</button>',
-  );
+  insertHtmlBeforeEnd(titanTable.rows[0].cells[0], ' <button class="fshBl fshXSmall">all</button>');
 }
 
-function myTables(el, i) {
-  return el.rows.length > 1 && i > 1;
-}
+function myTables(el, i) { return el.rows.length > 1 && i > 1; }
 
 function gotTables(titanTables) {
   arrayFrom(titanTables).filter(myTables).forEach(doBuffLinks);
@@ -65,7 +55,5 @@ function gotTables(titanTables) {
 }
 
 export default function injectScouttowerBuffLinks(titanTables) {
-  if (titanTables.length > 2) {
-    gotTables(titanTables);
-  }
+  if (titanTables.length > 2) { gotTables(titanTables); }
 }

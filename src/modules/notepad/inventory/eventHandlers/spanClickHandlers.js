@@ -8,24 +8,18 @@ import partial from '../../../common/partial';
 import doAction from './doAction';
 import { invEvent } from './telemetry';
 
-function setName(fshInv, target) {
-  // jQuery
+function setName(fshInv, target) { // jQuery
   invEvent('setName');
   $(fshInv).DataTable().search(target.attr('set')).draw();
   $(`#${fshInv.id}_filter input`).trigger('focus');
 }
 
-function takeItem(target) {
-  // jQuery
+function takeItem(target) { // jQuery
   invEvent('takeItem');
-  doAction(
-    partial(queueTakeItem, target.attr('invid'), target.attr('action')),
-    target,
-  );
+  doAction(partial(queueTakeItem, target.attr('invid'), target.attr('action')), target);
 }
 
-function recallItem(target) {
-  // jQuery
+function recallItem(target) { // jQuery
   invEvent('recallItem');
   doAction(
     partial(
@@ -44,21 +38,18 @@ function genericEventAction(fn, someData, thisEvent, target) {
   doAction(partial(fn, someData), target);
 }
 
-function doStoreItem(target) {
-  // jQuery
+function doStoreItem(target) { // jQuery
   genericEventAction(storeItems, [target.attr('invid')], 'doStoreItem', target);
 }
 
-function useWear(fn, thisEvent, target) {
-  // jQuery
+function useWear(fn, thisEvent, target) { // jQuery
   genericEventAction(fn, target.attr('invid'), thisEvent, target);
 }
 
 const doUseItem = (target) => useWear(useItem, 'doUseItem', target);
 const doWearItem = (target) => useWear(equipItem, 'doWearItem', target);
 
-function dropSend(fn, thisEvent, target) {
-  // jQuery
+function dropSend(fn, thisEvent, target) { // jQuery
   genericEventAction(fn, [target.data('inv')], thisEvent, target);
 }
 
@@ -67,8 +58,7 @@ const doSendItem = (target) => dropSend(ajaxSendItems, 'doSendItem', target);
 
 const genericHandler = (fn) => (e) => fn($(e.target)); // jQuery
 
-function spanClick(fshInv, [className, fn]) {
-  // jQuery
+function spanClick(fshInv, [className, fn]) { // jQuery
   $(fshInv).on('click', `span.${className}`, genericHandler(fn));
 }
 

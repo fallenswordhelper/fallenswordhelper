@@ -37,45 +37,34 @@ function getAllBounties(activeTable) {
   }
 }
 
-function parseActiveBounty(activeTable) {
-  // Legacy
+function parseActiveBounty(activeTable) { // Legacy
   if (hasActiveBounties(activeTable)) {
     getAllBounties(activeTable);
   }
 }
 
-export function getActiveBountyList(doc) {
-  // Legacy
+export function getActiveBountyList(doc) { // Legacy
   const bountyInfo = getElementById('bounty-info', doc);
-  if (!bountyInfo) {
-    return;
-  }
-  const activeTable =
-    bountyInfo.parentNode.parentNode.previousElementSibling.children[0]
-      .children[0];
+  if (!bountyInfo) { return; }
+  const activeTable = bountyInfo.parentNode.parentNode
+    .previousElementSibling.children[0].children[0];
   bountyList = {};
   bountyList.bounty = [];
   bountyList.isRefreshed = true;
   bountyList.lastUpdate = nowSecs();
-  if (activeTable) {
-    parseActiveBounty(activeTable);
-  }
+  if (activeTable) { parseActiveBounty(activeTable); }
   activeBountyListPosted = true;
 }
 
 function testBountyList(enableActiveList) {
   if (enableActiveList) {
-    return (
-      bountyList && nowSecs() - bountyList.lastUpdate > bountyListRefreshTime
-    );
+    return bountyList && nowSecs() - bountyList.lastUpdate > bountyListRefreshTime;
   }
 }
 
 function testWantedList(enableWantedList) {
   if (enableWantedList) {
-    return (
-      wantedList && nowSecs() - wantedList.lastUpdate > bountyListRefreshTime
-    );
+    return wantedList && nowSecs() - wantedList.lastUpdate > bountyListRefreshTime;
   }
 }
 
@@ -88,9 +77,7 @@ export function invalidateCache(enableActiveList, enableWantedList) {
   wantedList = getValueJSON('wantedList');
   bountyListRefreshTime = getValue('bountyListRefreshTime');
   bwNeedsRefresh = getValue('bwNeedsRefresh');
-  if (bwNeedsRefresh) {
-    return;
-  }
+  if (bwNeedsRefresh) { return; }
   if (testCacheInvalid(enableActiveList, enableWantedList)) {
     bwNeedsRefresh = true; // invalidate cache
   }

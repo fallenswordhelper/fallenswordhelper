@@ -1,20 +1,14 @@
 import indexAjaxData from '../../ajax/indexAjaxData';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
-import {
-  blockedSkillsCheckboxes,
-  levelDefaults,
-} from '../../support/constants';
+import { blockedSkillsCheckboxes, levelDefaults } from '../../support/constants';
 import createDocument from '../../system/createDocument';
 
 function getSkills(settingsPage) {
   const buffLevels = levelDefaults.map(([id, ctl]) => ({
     id,
     level: Number(querySelector(`input[name="${ctl}"]`, settingsPage).value),
-    blocked: querySelector(
-      `${blockedSkillsCheckboxes}[value="${id}"]`,
-      settingsPage,
-    ).checked,
+    blocked: querySelector(`${blockedSkillsCheckboxes}[value="${id}"]`, settingsPage).checked,
   }));
   return [
     ...buffLevels,
@@ -27,8 +21,7 @@ function getSkills(settingsPage) {
 
 function getDrops(form) {
   const entries = [...form.entries()];
-  return entries
-    .filter((e) => e[0].startsWith('discardPref'))
+  return entries.filter((e) => e[0].startsWith('discardPref'))
     .map((e) => ({
       id: parseInt(e[0][e[0].length - 1], 10),
       action: parseInt(e[1], 10),
@@ -48,8 +41,7 @@ function makeFlags(fds) {
   ];
 }
 
-const buildFormData = (settingsPage) =>
-  [...settingsPage.forms].map((e) => new FormData(e));
+const buildFormData = (settingsPage) => [...settingsPage.forms].map((e) => new FormData(e));
 const getNumeric = (form, key) => parseInt(form.get(key), 10);
 
 function resultObject(settingsPage) {

@@ -1,22 +1,16 @@
 .fshButton {
-  background: #fece2f
-    url(https://www.fallensword.com/media/dist/img/jQueryUITheme/ui-bg_gloss-wave_60_fece2f_500x100.png)
-    50% 50% repeat-x;
+  background: #fece2f url(https://www.fallensword.com/media/dist/img/jQueryUITheme/ui-bg_gloss-wave_60_fece2f_500x100.png) 50% 50% repeat-x;
   border: 1px solid #d19405;
   color: #4c3000;
   font-weight: bold;
 }
 .fshButton:hover {
-  background: #f0be00
-    url(https://www.fallensword.com/media/dist/img/jQueryUITheme/ui-bg_gloss-wave_70_f0be00_500x100.png)
-    50% 50% repeat-x;
+  background: #f0be00 url(https://www.fallensword.com/media/dist/img/jQueryUITheme/ui-bg_gloss-wave_70_f0be00_500x100.png) 50% 50% repeat-x;
   border: 1px solid #a45b13;
   color: #381f00;
   font-weight: bold;
 }
-.fshBlck {
-  display: block;
-}
+.fshBlck {display: block;}
 .fshTmpl {
   box-sizing: border-box;
   width: 100%;

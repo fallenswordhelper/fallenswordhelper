@@ -12,7 +12,5 @@ export default function download(blob, filename) {
   insertElement(document.body, anchor);
   clickThis(anchor);
   document.body.removeChild(anchor);
-  setTimeout(() => {
-    URL.revokeObjectURL(href);
-  }, 0);
+  setTimeout(() => { URL.revokeObjectURL(href); }, 0);
 }

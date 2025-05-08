@@ -1,100 +1,82 @@
 <tr>
   <td class="header" colspan="2">Other preferences</td>
 </tr>
-{% render 'settingsRow',
-  field: 'autoFillMinBidPrice',
-  label: 'Auto Fill Min Bid Price',
-  tooltipText: 'Automatically fill in the min bid price in the auction house.'
-%}
+{% render 'settingsRow'
+ field: 'autoFillMinBidPrice'
+ label: 'Auto Fill Min Bid Price'
+ tooltipText: 'Automatically fill in the min bid price in the auction house.' %}
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'hideRecipes',
-    label: 'Hide Specific Recipes',
-    tooltipText: 'Hides recipes whose name matches the list (separated by
-                  commas). This works on Recipe Manager.'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'hideRecipes'
+   label: 'Hide Specific Recipes'
+   tooltipText: 'Hides recipes whose name matches the list (separated by commas).
+   This works on Recipe Manager.' %}
   <td>
-    {% render 'settingsControl', field: 'hideRecipes' %}
-    {% render 'settingsControl', field: 'hideRecipeNames', type: 'text' %}
+    {% render 'settingsControl' field: 'hideRecipes' %}
+    {% render 'settingsControl' field: 'hideRecipeNames' type: 'text' %}
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'hideRelicOffline',
-  label: 'Hide Relic Offline',
-  tooltipText: 'Hides the relic offline defenders checker.'
-%}
-{% render 'settingsRow',
-  field: 'enterForSendMessage',
-  label: 'Enter Sends Message',
-  tooltipText: 'Send a message from the Send Message screen if you press enter.
-                <br>You can still insert a new line by holding down shift when
-                you press enter.'
-%}
-{% render 'settingsRow',
-  field: 'enableMessageTemplates',
-  label: 'Enable Message Templates',
-  tooltipText: 'Add templates to the message dialog.'
-%}
-{% render 'settingsRow',
-  field: 'joinAllLink',
-  label: 'Join All Groups Link',
-  tooltipText: 'Get a notification with a join all groups link in it when there
-                are new groups.'
-%}
+{% render 'settingsRow'
+ field: 'hideRelicOffline'
+ label: 'Hide Relic Offline'
+ tooltipText: 'Hides the relic offline defenders checker.' %}
+{% render 'settingsRow'
+ field: 'enterForSendMessage'
+ label: 'Enter Sends Message'
+ tooltipText: 'Send a message from the Send Message screen if you press enter.<br>
+ You can still insert a new line by holding down shift when you press enter.' %}
+{% render 'settingsRow'
+ field: 'enableMessageTemplates'
+ label: 'Enable Message Templates'
+ tooltipText: 'Add templates to the message dialog.' %}
+{% render 'settingsRow'
+ field: 'joinAllLink'
+ label: 'Join All Groups Link'
+ tooltipText: 'Get a notification with a join all groups link in it when there are new groups.' %}
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'enableMaxGroupSizeToJoin',
-    label: 'Max Group Size to Join',
-    tooltipText: 'Only join groups less than a set size.'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'enableMaxGroupSizeToJoin'
+   label: 'Max Group Size to Join'
+   tooltipText: 'Only join groups less than a set size.' %}
   <td>
-    {% render 'settingsControl', field: 'enableMaxGroupSizeToJoin' %}
-    {% render 'settingsLabelledControl',
-      field: 'maxGroupSizeToJoin',
-      max: '99',
-      textBefore: 'Max Size:',
-      type: 'number'
-    %}
+    {% render 'settingsControl' field: 'enableMaxGroupSizeToJoin' %}
+    {% render 'settingsLabelledControl'
+     field: 'maxGroupSizeToJoin'
+     max: "99"
+     textBefore: 'Max Size:'
+     type: 'number' %}
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'moveComposingButtons',
-  label: 'Move Composing Buttons',
-  tooltipText: 'Move composing buttons to the top of the composing screen.',
-  unstable: true
-%}
-{% render 'settingsRow',
-  field: 'pageTwoLinks',
-  label: 'Archive Page 2 Links',
-  tooltipText: 'Add links to page 2 of each archive on the news page.'
-%}
-{% render 'settingsRow',
-  field: 'addUfsgLinks',
-  label: 'Add UFSG Links to News',
-  tooltipText: 'Add UFSG links to news articles.'
-%}
-{% render 'settingsRow',
-  field: 'trackLadderReset',
-  label: 'Track Ladder Reset',
-  tooltipText: 'Tracks ladder resets from logs and news articles.',
-  unstable: true
-%}
-{% render 'settingsRow',
-  field: 'optInOnLadderPage',
-  label: 'Opt in on Ladder Page',
-  network: true,
-  tooltipText: 'Adds Opt in to the Ladder page.',
-  unstable: true
-%}
-{% render 'settingsRow',
-  field: 'storeLastScavPage',
-  label: 'Store Last Scavenging Page',
-  tooltipText: 'Remember last used scavenging settings.'
-%}
-{% render 'settingsRow',
-  field: 'betaOptIn',
-  label: 'FSH Beta Opt-In',
-  tooltipText: 'Opt in to beta features and additional debugging info.<br>The
-                beta features are often incomplete, possibly buggy and subject
-                to change at any time.'
-%}
+{% render 'settingsRow'
+ field: 'moveComposingButtons'
+ label: 'Move Composing Buttons'
+ tooltipText: "Move composing buttons to the top of the composing screen."
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'pageTwoLinks'
+ label: 'Archive Page 2 Links'
+ tooltipText: 'Add links to page 2 of each archive on the news page.' %}
+{% render 'settingsRow'
+ field: 'addUfsgLinks'
+ label: 'Add UFSG Links to News'
+ tooltipText: 'Add UFSG links to news articles.' %}
+{% render 'settingsRow'
+ field: 'trackLadderReset'
+ label: 'Track Ladder Reset'
+ tooltipText: "Tracks ladder resets from logs and news articles."
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'optInOnLadderPage'
+ label: 'Opt in on Ladder Page'
+ network: true
+ tooltipText: 'Adds Opt in to the Ladder page.'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'storeLastScavPage'
+ label: 'Store Last Scavenging Page'
+ tooltipText: 'Remember last used scavenging settings.' %}
+{% render 'settingsRow'
+ field: 'betaOptIn'
+ label: 'FSH Beta Opt-In'
+ tooltipText: 'Opt in to beta features and additional debugging info.<br>The beta features are
+ often incomplete, possibly buggy and subject to change at any time.' %}

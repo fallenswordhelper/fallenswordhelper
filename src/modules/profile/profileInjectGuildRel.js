@@ -34,9 +34,7 @@ function externalRelationship(_txt) {
   const scenario = typeMapping.map(([pref, label]) => [guildAry(pref), label]);
   const txt = replaceDoubleSpace(toLowerCase(_txt));
   const relObj = scenario.find(([guilds]) => guilds.includes(txt));
-  if (relObj) {
-    return relObj[1];
-  }
+  if (relObj) { return relObj[1]; }
 }
 
 function guildRelationship(aLink) {

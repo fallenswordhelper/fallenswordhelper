@@ -1,4 +1,3 @@
-import { mount } from 'svelte';
 import daSettingsFlags from '../_dataAccess/daSettingsFlags';
 import daSettingsView from '../_dataAccess/daSettingsView';
 import isArray from '../common/isArray';
@@ -22,7 +21,7 @@ function toggleLadder(o) {
 }
 
 function startApp(target) {
-  return mount(OptIn, {
+  return new OptIn({
     props: { toggleLadder, isOnLadder },
     target,
   });

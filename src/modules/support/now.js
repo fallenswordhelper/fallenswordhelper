@@ -5,6 +5,7 @@ let thisNowSecs = 0;
 let thisSecsTwoMinutesAgo = 0;
 let thisOneDayAgo = 0;
 let thisSecsSevenDaysAgo = 0;
+let thisYearAgo = 0;
 
 export const realtime = () => Date.now();
 export const realtimeSecs = () => Math.floor(realtime() / 1000);
@@ -15,12 +16,12 @@ export function now() {
 }
 
 export function fiveMinutesAgo() {
-  if (!thisFiveMinutesAgo) thisFiveMinutesAgo = now() - 5 * 60 * 1000;
+  if (!thisFiveMinutesAgo) thisFiveMinutesAgo = now() - (5 * 60 * 1000);
   return thisFiveMinutesAgo;
 }
 
 export function twoDaysAgo() {
-  if (!thisTwoDaysAgo) thisTwoDaysAgo = now() - 2 * 24 * 60 * 60 * 1000;
+  if (!thisTwoDaysAgo) thisTwoDaysAgo = now() - (2 * 24 * 60 * 60 * 1000);
   return thisTwoDaysAgo;
 }
 
@@ -35,12 +36,16 @@ export function twoMinutesAgo() {
 }
 
 export function oneDayAgo() {
-  if (!thisOneDayAgo) thisOneDayAgo = nowSecs() - 24 * 60 * 60;
+  if (!thisOneDayAgo) thisOneDayAgo = nowSecs() - (24 * 60 * 60);
   return thisOneDayAgo;
 }
 
 export function sevenDaysAgo() {
-  if (!thisSecsSevenDaysAgo)
-    thisSecsSevenDaysAgo = nowSecs() - 7 * 24 * 60 * 60;
+  if (!thisSecsSevenDaysAgo) thisSecsSevenDaysAgo = nowSecs() - (7 * 24 * 60 * 60);
   return thisSecsSevenDaysAgo;
+}
+
+export function oneYearAgo() {
+  if (!thisYearAgo) thisYearAgo = nowSecs() - (365 * 24 * 60 * 60);
+  return thisYearAgo;
 }

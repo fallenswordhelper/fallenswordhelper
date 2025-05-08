@@ -16,19 +16,11 @@ function openQwDialog() {
 
 export default function quickWearLink() {
   // quick wear manager link
-  const node = querySelector(
-    `#profileRightColumn a[href="${
-      cmdUrl
-    }profile&subcmd=togglesection&section_id=2"]`,
-  );
-  if (!node) {
-    return;
-  }
+  const node = querySelector(`#profileRightColumn a[href="${
+    cmdUrl}profile&subcmd=togglesection&section_id=2"]`);
+  if (!node) { return; }
   const wrap = createSpan({ innerHTML: '[&nbsp;' });
-  const qw = createSpan({
-    className: 'sendLink',
-    innerHTML: 'Quick&nbsp;Wear',
-  });
+  const qw = createSpan({ className: 'sendLink', innerHTML: 'Quick&nbsp;Wear' });
   insertElement(wrap, qw);
   insertHtmlBeforeEnd(wrap, '&nbsp;]&nbsp;');
   insertElementAfterBegin(node.parentNode, wrap);

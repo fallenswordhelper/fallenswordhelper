@@ -21,8 +21,7 @@ export default async function getRollupConfig(env) {
   const fshTarget = env === 'Prod' ? 'Current' : env;
   const calfPath = `resources/${env.toLowerCase()}/${core}`;
   const fshPath = `Releases/${fshTarget}`;
-  const rootPath =
-    env === 'Prod' ? `${github}` : `https://localhost:${port}/dist/`;
+  const rootPath = env === 'Prod' ? `${github}` : `https://localhost:${port}/dist/`;
   const ver = env === 'dev' ? `${core}a` : `${core}`;
   const userIsDev = env === 'Prod' ? 'false' : 'true';
 
@@ -45,9 +44,7 @@ export default async function getRollupConfig(env) {
       format: 'es',
       sourcemap: true,
       sourcemapExcludeSources: true,
-      ...(env === 'Prod' && {
-        sourcemapPathTransform: (source) => source.replaceAll('../', ''),
-      }),
+      ...(env === 'Prod' && { sourcemapPathTransform: (source) => source.replaceAll('../', '') }),
     },
     plugins: [
       svelte({ emitCss: true }),

@@ -13,9 +13,7 @@ const defaultBuffOrder = [];
 
 function sortBuffsHelper(parentElementId) {
   const buffs = querySelectorArray(`#${parentElementId} > p`);
-  buffs.sort((a, b) =>
-    a.children[0].dataset.name > b.children[0].dataset.name ? 1 : -1,
-  );
+  buffs.sort((a, b) => (a.children[0].dataset.name > b.children[0].dataset.name ? 1 : -1));
   const buffBlock = querySelector(`#${parentElementId}`);
   for (const value of buffs) {
     buffBlock.appendChild(value);

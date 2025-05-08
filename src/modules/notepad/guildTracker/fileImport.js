@@ -7,14 +7,7 @@ import numberIsNaN from '../../common/numberIsNaN';
 import uniq from '../../common/uniq';
 import { set } from '../../system/idb';
 import {
-  act,
-  cur,
-  fshGuildActivity,
-  gxp,
-  lvl,
-  max,
-  utc,
-  vl,
+  act, cur, fshGuildActivity, gxp, lvl, max, utc, vl,
 } from './indexConstants';
 import { getActivity } from './utils';
 
@@ -31,8 +24,7 @@ function hopefullyJson(unsafe) {
 }
 
 const lineSplit = (str) => str.split(',');
-const stringToTimestamp = (str) =>
-  Date.parse(`${str.replace(' ', 'T')}Z`) / 1000;
+const stringToTimestamp = (str) => Date.parse(`${str.replace(' ', 'T')}Z`) / 1000;
 const memberRecord = ([, member, ...rec]) => [
   member,
   Number(rec[act]),
@@ -46,7 +38,10 @@ const memberRecord = ([, member, ...rec]) => [
 
 function hopefullyCsv(unsafe) {
   const records = unsafe.split('\n').slice(1).map(lineSplit);
-  return [stringToTimestamp(records[0][0]), records.map(memberRecord)];
+  return [
+    stringToTimestamp(records[0][0]),
+    records.map(memberRecord),
+  ];
 }
 
 function processFile(unsafe) {
@@ -62,25 +57,18 @@ const addDate = ([name, ...rec]) => [
   Math.trunc(rec[utc] / (60 * 60 * 24)),
   ...rec,
 ];
-const insertDate = (guildActivity, fileActivity) =>
-  guildActivity
-    .concat(fileActivity)
-    .filter(noNull)
-    .filter(noNaN)
-    .sort(byUtc)
-    .map(addDate);
+const insertDate = (guildActivity, fileActivity) => guildActivity
+  .concat(fileActivity)
+  .filter(noNull)
+  .filter(noNaN)
+  .sort(byUtc)
+  .map(addDate);
 const fakeKey = ([name, date]) => `${name}|${date}`;
 const splitKey = (str) => str.split('|');
 const dateNum = ([name, dateStr]) => [name, Number(dateStr)];
-const thisDate =
-  (name, date) =>
-  ([nm, dt]) =>
-    nm === name && dt === date;
-const oneRec =
-  (withDate) =>
-  ([name, date]) =>
-    withDate.find(thisDate(name, date));
-const removeDate = ([name, , ...rec]) => [name, ...rec];
+const thisDate = (name, date) => ([nm, dt]) => nm === name && dt === date;
+const oneRec = (withDate) => ([name, date]) => withDate.find(thisDate(name, date));
+const removeDate = ([name,, ...rec]) => [name, ...rec];
 
 function combineActivity(guildActivity, fileActivity) {
   const withDate = insertDate(guildActivity, fileActivity);
@@ -96,20 +84,28 @@ const others = ([, ...rec]) => [...rec];
 
 function buildMembers(combined) {
   return fromEntries(
-    uniq(combined.map(getName)).map((name) => [
-      name,
-      combined.filter(([cn]) => cn === name).map(others),
-    ]),
+    uniq(combined.map(getName)).map(
+      (name) => [
+        name,
+        combined.filter(([cn]) => cn === name).map(others),
+      ],
+    ),
   );
 }
 
 export default async function fileImport(file, overwrite) {
-  const [raw, fileContent] = await all([getActivity(), file.text()]);
+  const [raw, fileContent] = await all([
+    getActivity(),
+    file.text(),
+  ]);
   const guildFlatActivity = overwrite ? [] : flatten(raw);
   const [fileUpdate, fileActivity] = processFile(fileContent);
   const combined = combineActivity(guildFlatActivity, fileActivity);
-  set(fshGuildActivity, {
-    lastUpdate: raw.lastUpdate ?? fileUpdate ?? 0,
-    members: buildMembers(combined),
-  });
+  set(
+    fshGuildActivity,
+    {
+      lastUpdate: raw.lastUpdate ?? fileUpdate ?? 0,
+      members: buildMembers(combined),
+    },
+  );
 }

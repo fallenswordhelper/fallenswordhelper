@@ -4,7 +4,12 @@ import sveltePlugin from 'esbuild-svelte';
 import { port as calfPort } from './config.js';
 import { calfVer, core } from './getVersion.js';
 import liquidPlugin from './liquidPlugin.js';
-import { buildFsh, dataTablesCss, pathToFile, perfLogger } from './utils.js';
+import {
+  buildFsh,
+  dataTablesCss,
+  pathToFile,
+  perfLogger,
+} from './utils.js';
 
 const perfObserver = new PerformanceObserver(perfLogger);
 perfObserver.observe({ entryTypes: ['measure'], buffer: true });

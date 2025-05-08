@@ -1,60 +1,51 @@
 <tr>
   <td class="header" colspan="2">Equipment screen preferences</td>
 </tr>
-{% render 'settingsRow',
-  field: 'showExtraLinks',
-  label: 'Show Extra Links',
-  network: true,
-  tooltipText: 'Adds AH and UFSG links to equipment screens.'
-%}
-{% render 'settingsRow',
-  field: 'enableItemColoring',
-  label: 'Enable Item Coloring',
-  network: true,
-  tooltipText: 'Colors the item text based on the rarity of the item.'
-%}
-{% render 'settingsRow',
-  field: 'checkAllOfType',
-  label: 'Check All of Type',
-  network: true,
-  tooltipText: 'Adds a button to select all of the same items.'
-%}
-{% render 'settingsRow',
-  field: 'enableFolderFilter',
-  label: 'Enable Folder Filter',
-  network: true,
-  tooltipText: 'Adds folder filtering to the Store Items page, including moving
-                tagged items between folders'
-%}
+{% render 'settingsRow'
+ field: 'showExtraLinks'
+ label: 'Show Extra Links'
+ network: true
+ tooltipText: 'Adds AH and UFSG links to equipment screens.' %}
+{% render 'settingsRow'
+ field: 'enableItemColoring'
+ label: 'Enable Item Coloring'
+ network: true
+ tooltipText: 'Colors the item text based on the rarity of the item.' %}
+{% render 'settingsRow'
+ field: 'checkAllOfType'
+ label: 'Check All of Type'
+ network: true
+ tooltipText: 'Adds a button to select all of the same items.' %}
+{% render 'settingsRow'
+ field: 'enableFolderFilter'
+ label: 'Enable Folder Filter'
+ network: true
+ tooltipText: 'Adds folder filtering to the Store Items page, including moving tagged items between
+ folders' %}
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'showQuickSendLinks',
-    label: 'Show Quick Send Item',
-    tooltipText: 'Shows a link beside each item which gives the option to quick
-                  send the item to this person'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'showQuickSendLinks'
+   label: 'Show Quick Send Item'
+   tooltipText: 'Shows a link beside each item which gives the option to quick send the item to
+   this person' %}
   <td>
-    {% render 'settingsControl', field: 'showQuickSendLinks' %}
-    {% render 'settingsLabelledControl',
-      field: 'itemRecipient',
-      textBefore: 'Send Items To',
-      type: 'text'
-    %}
+    {% render 'settingsControl' field: 'showQuickSendLinks' %}
+    {% render 'settingsLabelledControl'
+     field: 'itemRecipient'
+     textBefore: 'Send Items To'
+     type: 'text' %}
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'showQuickDropLinks',
-  label: 'Show Quick Drop Item',
-  network: true,
-  tooltipText: 'Shows a link beside each item which gives the option to drop the
-                item. WARNING: NO REFUNDS ON ERROR'
-%}
-{% render 'settingsRow',
-  field: 'sendClasses',
-  label: 'Quick Select all of type in Send Screen',
-  tooltipText: 'Allows you to customize what quick links you would like
-                displayed in your send item screen.<br>Use the format
-                ["name","itemid"],["othername","itemid2"].<br>
-                WARNING: NO REFUNDS ON ERROR',
-  type: 'text'
-%}
+{% render 'settingsRow'
+ field: 'showQuickDropLinks'
+ label: 'Show Quick Drop Item'
+ network: true
+ tooltipText: 'Shows a link beside each item which gives the option to drop the item.
+ WARNING: NO REFUNDS ON ERROR' %}
+{% render 'settingsRow'
+ field: 'sendClasses'
+ label: 'Quick Select all of type in Send Screen'
+ tooltipText: 'Allows you to customize what quick links you would like displayed in your send
+ item screen.<br>Use the format ["name","itemid"],["othername","itemid2"].<br>
+ WARNING: NO REFUNDS ON ERROR'
+ type: 'text' %}

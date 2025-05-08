@@ -7,8 +7,7 @@ function clearSearch(fshInv, input) {
   $(fshInv).DataTable().search('').draw();
 }
 
-export default function clearButton(fshInv) {
-  // jQuery
+export default function clearButton(fshInv) { // jQuery
   const input = $(`#${fshInv.id}_filter input`);
   input.prop('type', 'text');
   const clear = $('<span>&times;</span>');

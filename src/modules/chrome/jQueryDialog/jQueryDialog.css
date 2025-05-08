@@ -1,5 +1,4 @@
-#content {
-  /* csslint allow: ids */
+#content { /* csslint allow: ids */
   font-size: 13px;
-  max-width: 600px;
+  max-width:600px
 }

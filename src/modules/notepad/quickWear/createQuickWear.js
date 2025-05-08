@@ -1,8 +1,7 @@
-import { mount } from 'svelte';
 import QuickWear from './QuickWear.svelte';
 
 function startQuickWear(appInv, qw) {
-  return mount(QuickWear, {
+  return new QuickWear({
     props: { appInv },
     target: qw,
   });

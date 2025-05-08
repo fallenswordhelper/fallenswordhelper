@@ -1,6 +1,8 @@
 import defaults from '../support/dataObj.json';
 import { arenaFilter } from './assets';
-import { changeLvls, getOpts, hideMoves, resetLvls } from './setOpts';
+import {
+  changeLvls, getOpts, hideMoves, resetLvls,
+} from './setOpts';
 
 function makeTheRow() {
   const theRow = $('#pCC > table > tbody > tr:nth-child(4)');
@@ -9,19 +11,16 @@ function makeTheRow() {
   return theRow;
 }
 
-function hideMovesCheckbox(aTable) {
-  // jQuery
+function hideMovesCheckbox(aTable) { // jQuery
   const fshHideMoves = $('#fshHideMoves', aTable);
-  if (getOpts()?.hideMoves != null) {
-    // skipcq: JS-0050
+  if (getOpts()?.hideMoves != null) { // skipcq: JS-0050
     fshHideMoves.prop('checked', getOpts().hideMoves);
     $('.moveMax').toggle(!getOpts().hideMoves);
   }
   fshHideMoves.on('click', hideMoves);
 }
 
-function genericUpdate(label, aTable, optProp, defProp) {
-  // jQuery
+function genericUpdate(label, aTable, optProp, defProp) { // jQuery
   const $thisControl = $(`#${label}`, aTable);
   $thisControl.val(getOpts()?.[optProp] ?? defaults[defProp]);
 }
@@ -39,8 +38,7 @@ function eventHandlers(aTable) {
   $('#fshReset', aTable).on('click', resetLvls);
 }
 
-export default function filterHeader() {
-  // jQuery
+export default function filterHeader() { // jQuery
   const theRow = makeTheRow();
   const aTable = $(arenaFilter);
   hideMovesCheckbox(aTable);

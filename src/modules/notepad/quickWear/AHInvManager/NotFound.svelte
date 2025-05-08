@@ -2,17 +2,16 @@
   import sendEvent from '../../../analytics/sendEvent';
   import { ahSearchUrl } from '../../../support/constants';
 
-  let { data = [] } = $props();
+  export let data = [];
 </script>
 
 <div>
   Did not find:
-  {#each data as { nickname, searchname }, index (index)}
-    {#if index > 0},{/if}
+  { #each data as { nickname, searchname }, index }
+    { #if index > 0 },{ /if }
     <a
-      href="{ahSearchUrl}{searchname}"
-      onclick={() => sendEvent('QuickWear', 'Not Found', searchname)}
-      >{nickname}</a
-    >
-  {/each}
+      href="{ ahSearchUrl }{ searchname }"
+      on:click={ () => sendEvent('QuickWear', 'Not Found', searchname) }
+    >{ nickname }</a>
+  { /each }
 </div>

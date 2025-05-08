@@ -7,20 +7,3 @@ exclude_patterns = [
 [[analyzers]]
 name = "javascript"
 enabled = true
-
-  [analyzers.meta]
-  environment = ["jquery"]
-  globals = [
-    "$state",
-    "DataTable",
-    "defineCalfPath",
-    "defineCalfVer",
-    "defineDataTablesPath",
-    "defineEnvironment",
-    "defineUserIsDev",
-    "defineVersion",
-    "GameController",
-    "GameData",
-    "GM_info",
-    "gtag",
-  ]

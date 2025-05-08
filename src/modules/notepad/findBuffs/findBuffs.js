@@ -17,7 +17,11 @@ import trim from '../../common/trim';
 import setInnerHtml from '../../dom/setInnerHtml';
 import buffList from '../../support/buffObj.json';
 import calf from '../../support/calf';
-import { profileUrl, showPlayerUrl, vlRe } from '../../support/constants';
+import {
+  profileUrl,
+  showPlayerUrl,
+  vlRe,
+} from '../../support/constants';
 import { pcc } from '../../support/layout';
 import createDocument from '../../system/createDocument';
 import getValue from '../../system/getValue';
@@ -37,9 +41,7 @@ let extraProfile = 0;
 let profilePagesToSearch = 0;
 let profilePagesToSearchProcessed = 0;
 
-function setInnerById(html, id) {
-  setInnerHtml(html, getElementById(id));
-}
+function setInnerById(html, id) { setInnerHtml(html, getElementById(id)); }
 
 function gotProfile(j, html) {
   parseProfileAndDisplay(html, {
@@ -53,8 +55,7 @@ async function getProfile(j) {
   gotProfile(j, html);
 }
 
-function findBuffsParsePlayersForBuffs() {
-  // Legacy
+function findBuffsParsePlayersForBuffs() { // Legacy
   // now need to parse player pages for buff ...
   setInnerById(onlinePlayers.length, 'potentialBuffers');
   if (onlinePlayers.length <= 0) {
@@ -65,8 +66,7 @@ function findBuffsParsePlayersForBuffs() {
   onlinePlayers.forEach(getProfile);
 }
 
-function calcNextPage(curPage, maxPage) {
-  // Legacy
+function calcNextPage(curPage, maxPage) { // Legacy
   if (curPage === 1) {
     return Math.round((onlinePlayersSetting * maxPage) / 50);
   }
@@ -85,10 +85,8 @@ function getOnlinePlayerLevel(e) {
 }
 
 function includePlayer(onlinePlayerLevel) {
-  return (
-    onlinePlayerLevel >= findBuffMinCastLevel &&
-    onlinePlayerLevel >= calcMinLvl()
-  );
+  return onlinePlayerLevel >= findBuffMinCastLevel
+    && onlinePlayerLevel >= calcMinLvl();
 }
 
 function playerRow(_i, e) {
@@ -100,26 +98,18 @@ function playerRow(_i, e) {
 }
 
 function getMaxPage(doc) {
-  return parseInt(
-    $(doc).find('td:has(input[name="page"]):last').text().replace(/\D/g, ''),
-    10,
-  );
+  return parseInt($(doc).find('td:has(input[name="page"]):last')
+    .text().replace(/\D/g, ''), 10);
 }
 
 function getCurrPage(doc) {
-  return parseInt(
-    $(doc).find('input[name="page"]:last').val().replace(/\D/g, ''),
-    10,
-  );
+  return parseInt($(doc).find('input[name="page"]:last').val()
+    .replace(/\D/g, ''), 10);
 }
 
 function playerRows(doc) {
-  $(doc)
-    .find(
-      'table:contains("Username")>tbody>tr:has' +
-        '(td>a[href*="cmd=profile&player_id="])',
-    )
-    .each(playerRow);
+  $(doc).find('table:contains("Username")>tbody>tr:has'
+    + '(td>a[href*="cmd=profile&player_id="])').each(playerRow);
 }
 
 async function nextPage(curPage, maxPage, callback) {
@@ -129,8 +119,7 @@ async function nextPage(curPage, maxPage, callback) {
   callback(html);
 }
 
-function findBuffsParseOnlinePlayers(responseText) {
-  // Legacy
+function findBuffsParseOnlinePlayers(responseText) { // Legacy
   const doc = createDocument(responseText);
   const curPage = getCurrPage(doc);
   if (curPage !== 1) {
@@ -145,8 +134,7 @@ function findBuffsParseOnlinePlayers(responseText) {
   }
 }
 
-async function findBuffsParseOnlinePlayersStart() {
-  // Legacy
+async function findBuffsParseOnlinePlayersStart() { // Legacy
   // if option enabled then parse online players
   onlinePlayersSetting = parseInt(getElementById('onlinePlayers').value, 10);
   if (onlinePlayersSetting !== 0) {
@@ -158,11 +146,8 @@ async function findBuffsParseOnlinePlayersStart() {
 }
 
 function isValidPlayer(lastActivityMinutes, vlevel, minPlayerVirtualLevel) {
-  return (
-    lastActivityMinutes < 5 &&
-    vlevel >= findBuffMinCastLevel &&
-    vlevel >= minPlayerVirtualLevel
-  );
+  return lastActivityMinutes < 5 && vlevel >= findBuffMinCastLevel
+    && vlevel >= minPlayerVirtualLevel;
 }
 
 function parsePlayerLink(el) {
@@ -178,28 +163,24 @@ function parsePlayerLink(el) {
 
 function findBuffsParseProfilePage(responseText) {
   const doc = createDocument(responseText);
-  querySelectorArray(
-    '#profileLeftColumn a[data-tipped*="Last Activity"]',
-    doc,
-  ).forEach(parsePlayerLink);
+  querySelectorArray('#profileLeftColumn a[data-tipped*="Last Activity"]', doc)
+    .forEach(parsePlayerLink);
   // continue with online players
   profilePagesToSearchProcessed += 1;
-  if (profilePagesToSearchProcessed === profilePagesToSearch.length) {
+  if (profilePagesToSearchProcessed
+    === profilePagesToSearch.length) {
     findBuffsParseOnlinePlayersStart();
   }
 }
 
-function addExtraProfile(el) {
-  profilePagesToSearch.push(showPlayerUrl + el);
-}
+function addExtraProfile(el) { profilePagesToSearch.push(showPlayerUrl + el); }
 
 async function getAlliesEnemies(el) {
   const html = await retryAjax(el);
   findBuffsParseProfilePage(html);
 }
 
-function findBuffsParseProfilePageStart() {
-  // Legacy
+function findBuffsParseProfilePageStart() { // Legacy
   // if option enabled then parse profiles
   profilePagesToSearch = [];
   profilePagesToSearch.push(profileUrl); // ???
@@ -216,31 +197,23 @@ function findBuffsParseProfilePageStart() {
 function findBuffsParseGuildManagePage(responseText) {
   const doc = createDocument(responseText);
   if (getElementById('guildMembers').checked) {
-    querySelectorArray('#pCC a[data-tipped*="<td>VL:</td>"]', doc).forEach(
-      parsePlayerLink,
-    );
+    querySelectorArray('#pCC a[data-tipped*="<td>VL:</td>"]', doc)
+      .forEach(parsePlayerLink);
   }
   // continue with profile pages
   findBuffsParseProfilePageStart();
 }
 
-function notHeader(_el, i) {
-  return i !== 0;
-}
+function notHeader(_el, i) { return i !== 0; }
 
-function deleteRow(buffTable) {
-  buffTable.deleteRow(-1);
-}
+function deleteRow(buffTable) { buffTable.deleteRow(-1); }
 
 function clearTable() {
   const buffTable = getElementById('buffTable');
-  arrayFrom(buffTable.rows)
-    .filter(notHeader)
-    .forEach(partial(deleteRow, buffTable));
+  arrayFrom(buffTable.rows).filter(notHeader).forEach(partial(deleteRow, buffTable));
 }
 
-function findBuffsClearResults() {
-  // Legacy
+function findBuffsClearResults() { // Legacy
   sendEvent('find buffs', 'clear results');
   clearTable();
   setInnerById('', 'buffNicks');
@@ -255,11 +228,8 @@ async function goFindBuffs() {
   findBuffsParseGuildManagePage(responseText);
 }
 
-function findAnyStart(progMsg) {
-  // jQuery
-  if (jQueryNotPresent()) {
-    return;
-  }
+function findAnyStart(progMsg) { // jQuery
+  if (jQueryNotPresent()) { return; }
   setInnerById(findBuffNicks, 'buffNicks');
   updateProgress(`Gathering list of ${progMsg} ...`, 'green');
   setMinLvl();
@@ -270,12 +240,9 @@ function findAnyStart(progMsg) {
   goFindBuffs();
 }
 
-function thisBuff(selectedBuff, el) {
-  return selectedBuff === el.id;
-}
+function thisBuff(selectedBuff, el) { return selectedBuff === el.id; }
 
-function findBuffsStart() {
-  // Legacy
+function findBuffsStart() { // Legacy
   sendEvent('find buffs', 'findBuffsStart');
   const selectedBuff = parseInt($('#selectedBuff').val(), 10);
   const findThisBuff = buffList.find(partial(thisBuff, selectedBuff));
@@ -284,13 +251,9 @@ function findBuffsStart() {
   findAnyStart('potential buffers');
 }
 
-function findOtherStart() {
-  // Legacy
+function findOtherStart() { // Legacy
   sendEvent('find buffs', 'findOtherStart');
-  const textToSearchFor = $('#textToSearchFor')
-    .val()
-    .split(',')
-    .map(trim)
+  const textToSearchFor = $('#textToSearchFor').val().split(',').map(trim)
     .join(',');
   setValue('textToSearchFor', textToSearchFor);
   findBuffNicks = textToSearchFor;
@@ -310,8 +273,7 @@ function setupClearEvent() {
   onclick(getElementById('clearresultsbutton'), findBuffsClearResults, true);
 }
 
-export function injectFindBuffs(injector) {
-  // Legacy
+export function injectFindBuffs(injector) { // Legacy
   const content = injector || pcc();
   calf.sortBy = 'name';
   calf.sortAsc = true;
@@ -323,8 +285,7 @@ export function injectFindBuffs(injector) {
   setupClearEvent();
 }
 
-export function injectFindOther(injector) {
-  // Native - Bad
+export function injectFindOther(injector) { // Native - Bad
   const content = injector || pcc();
   getExtraProfile();
   setInnerHtml(pageLayout(otherCustom, extraProfile), content);

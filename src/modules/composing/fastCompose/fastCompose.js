@@ -33,24 +33,17 @@ function composePots(button, templateId) {
   const openTemplates = querySelectorAll(
     '[id|="composing-template"]:not(#composing-template-multi)',
   );
-  if (openTemplates.length < button.value) {
-    return;
-  }
+  if (openTemplates.length < button.value) { return; }
   for (let i = 0; i < button.value; i += 1) {
     openTemplates[i].value = templateId;
-    backgroundCreate(
-      openTemplates[i].nextElementSibling.nextElementSibling,
-      openTemplates[i],
-    );
+    backgroundCreate(openTemplates[i].nextElementSibling.nextElementSibling, openTemplates[i]);
   }
 }
 
 function handleClick(evt) {
   const button = evt.target;
   const { templateId } = button.dataset;
-  if (templateId) {
-    composePots(button, templateId);
-  }
+  if (templateId) { composePots(button, templateId); }
 }
 
 function buildButton(val, templateId) {
@@ -84,14 +77,11 @@ function buildTable(templates, compSlots, openSlots) {
   return templates.reduce(partial(buildRows, compSlots), myTable);
 }
 
-function keyValuePairs(el) {
-  return [el.value, el.text];
-}
+function keyValuePairs(el) { return [el.value, el.text]; }
 
 function setupFastCompose(fcDiv, compSlots, openSlots) {
-  const templates = querySelectorArray('#composing-template-multi option').map(
-    keyValuePairs,
-  );
+  const templates = querySelectorArray('#composing-template-multi option')
+    .map(keyValuePairs);
   const myTable = buildTable(templates, compSlots, openSlots);
   insertElement(fcDiv, myTable);
   onclick(pcc(), handleClick);
@@ -114,8 +104,8 @@ export default function fastCompose() {
   const buttonDiv = querySelector('#pCC div.centered');
   insertHtmlBeforeEnd(
     buttonDiv,
-    '<span class="fsh-fast-compose">[ <label for="fast-compose">' +
-      '<span class="sendLink">Fast Compose</span></label> ]</span>',
+    '<span class="fsh-fast-compose">[ <label for="fast-compose">'
+      + '<span class="sendLink">Fast Compose</span></label> ]</span>',
   );
   const fcDiv = createDiv({ className: 'centered' });
   insertElementAfter(fcDiv, buttonDiv);

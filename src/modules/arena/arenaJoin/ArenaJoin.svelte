@@ -3,5 +3,5 @@
   import Wearing from './Wearing.svelte';
 </script>
 
-<ArenaAttribs />
-<Wearing />
+<ArenaAttribs/>
+<Wearing/>

@@ -1,12 +1,13 @@
-import { mount } from 'svelte';
 import getElementById from '../../common/getElementById';
 import interceptSubmit from '../../common/interceptSubmit';
 import { pcc } from '../../support/layout';
 import arena from '../arena';
 import ArenaJoin from './ArenaJoin.svelte';
 
-function startApp() {
-  return mount(ArenaJoin, { target: pcc() });
+function startApp(constructor) {
+  return new constructor({
+    target: pcc(),
+  });
 }
 
 export default function arenaJoin() {
@@ -15,6 +16,6 @@ export default function arenaJoin() {
     arena();
   } else {
     interceptSubmit();
-    startApp();
+    startApp(ArenaJoin);
   }
 }

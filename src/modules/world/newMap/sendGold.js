@@ -10,8 +10,7 @@ function statbarGoldBackground(colour) {
   $('#statbar-gold').css('background-color', colour);
 }
 
-function updateSendGoldOnWorld() {
-  // jQuery
+function updateSendGoldOnWorld() { // jQuery
   $('#HelperSendTotal').html(addCommas(getValue('currentGoldSentTotal')));
   if (Number(GameData.player().gold) > goldAmount) {
     statbarGoldBackground('red');
@@ -21,19 +20,16 @@ function updateSendGoldOnWorld() {
 }
 
 function extraHtml() {
-  return (
-    '<dt class="stat-gold-sendTo">Send To:</dt>' +
-    `<dd id="HelperSendTo">${getValue('goldRecipient')}</dd>` +
-    '<dt class="stat-gold-sendAmt">Amount:</dt>' +
-    `<dd id="HelperSendAmt">${addCommas(goldAmount)}</dd>` +
-    '<dt class="stat-gold-sendTo">Send?</dt>' +
-    '<dd><input id="HelperSendGold" value="Send!" class="custombutton" ' +
-    'type="submit"><input type="hidden" id="xc" value=""</dd>' +
-    '<dt class="stat-gold-sendTotal">Total Sent:</dt>' +
-    `<dd id="HelperSendTotal">${addCommas(
-      getValue('currentGoldSentTotal'),
-    )}</dd>`
-  );
+  return '<dt class="stat-gold-sendTo">Send To:</dt>'
+    + `<dd id="HelperSendTo">${getValue('goldRecipient')}</dd>`
+    + '<dt class="stat-gold-sendAmt">Amount:</dt>'
+    + `<dd id="HelperSendAmt">${addCommas(goldAmount)}</dd>`
+    + '<dt class="stat-gold-sendTo">Send?</dt>'
+    + '<dd><input id="HelperSendGold" value="Send!" class="custombutton" '
+    + 'type="submit"><input type="hidden" id="xc" value=""</dd>'
+    + '<dt class="stat-gold-sendTotal">Total Sent:</dt>'
+    + `<dd id="HelperSendTotal">${
+      addCommas(getValue('currentGoldSentTotal'))}</dd>`;
 }
 
 function prepareSendGoldOnWorld() {
@@ -44,10 +40,7 @@ function prepareSendGoldOnWorld() {
   $.subscribe(defPlayerGold, updateSendGoldOnWorld);
 }
 
-export default function sendGold() {
-  // jQuery
+export default function sendGold() { // jQuery
   initSendGoldOnWorld();
-  if (getSendGoldOnWorld()) {
-    prepareSendGoldOnWorld();
-  }
+  if (getSendGoldOnWorld()) { prepareSendGoldOnWorld(); }
 }

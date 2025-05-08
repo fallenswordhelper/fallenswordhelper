@@ -9,8 +9,7 @@ const loadListChecks = [
 
 const updateListChecks = [
   [
-    (list, blockedSkillLists) =>
-      !blockedSkillLists.some((l) => l.name === list.name),
+    (list, blockedSkillLists) => !blockedSkillLists.some((l) => l.name === list.name),
     (list) => `Cannot find list named "${list.name}". Try refreshing the page.`,
   ],
   [
@@ -20,14 +19,16 @@ const updateListChecks = [
 ];
 
 const newListChecks = [
-  [(list) => !list.name.length, () => 'You must name your list.'],
+  [
+    (list) => !list.name.length,
+    () => 'You must name your list.',
+  ],
   [
     (list) => list.name.length > 50,
     () => 'List names can only be at most 50 characters long.',
   ],
   [
-    (list, blockedSkillLists) =>
-      blockedSkillLists.some((l) => l.name === list.name),
+    (list, blockedSkillLists) => blockedSkillLists.some((l) => l.name === list.name),
     (list) => `You already have a list named ${list.name}.`,
   ],
   [

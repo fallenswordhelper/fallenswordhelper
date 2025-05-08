@@ -10,18 +10,14 @@ function hazOpts(data) {
 }
 
 function lvlFilter(_settings, data) {
-  if (getOpts()) {
-    return hazOpts(data);
-  }
+  if (getOpts()) { return hazOpts(data); }
   return true;
 }
 
 function specFilter(_settings, _searchData, _index, rowData) {
   const dev = 0;
   if (defineUserIsDev && dev) {
-    return (
-      rowData[4]['@data-order'] === '0' && rowData[6]['@data-order'] === '0'
-    );
+    return rowData[4]['@data-order'] === '0' && rowData[6]['@data-order'] === '0';
   }
   return true;
 }

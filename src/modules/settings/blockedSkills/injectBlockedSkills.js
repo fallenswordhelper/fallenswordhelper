@@ -1,4 +1,3 @@
-import { mount } from 'svelte';
 import getElementById from '../../common/getElementById';
 import once from '../../common/once';
 import querySelector from '../../common/querySelector';
@@ -10,7 +9,7 @@ let app = false;
 
 function startApp() {
   if (!app) {
-    app = mount(BlockedSkills, {
+    app = new BlockedSkills({
       target: getElementById('settingsTabs-4'),
     });
     doTickAll();

@@ -10,43 +10,18 @@
   import addCommas from '../../system/addCommas';
   import { cdn } from '../../system/system';
 
-  const creatureType = [
-    'Normal',
-    'Champion',
-    'Elite',
-    'Super Elite',
-    'Titan',
-    'Legendary',
-  ];
-  const creatureClass = [
-    'Human',
-    'Vermin',
-    'Undead',
-    'Dragon',
-    'Greenskin',
-    'Demon',
-    'Golem',
-    'Dwarf',
-    'Feline',
-    'Elf',
-    'Avian',
-    'Aquatic',
-    'Plant',
-    'Canine',
-    'Reptile',
-    'Beast',
-    'Mechanical',
-    'Mounted',
-    'Magical',
-  ];
+  const creatureType = ['Normal', 'Champion', 'Elite', 'Super Elite', 'Titan', 'Legendary'];
+  const creatureClass = ['Human', 'Vermin', 'Undead', 'Dragon', 'Greenskin', 'Demon', 'Golem',
+    'Dwarf', 'Feline', 'Elf', 'Avian', 'Aquatic', 'Plant', 'Canine', 'Reptile', 'Beast',
+    'Mechanical', 'Mounted', 'Magical'];
 
-  let { visible = $bindable(true) } = $props();
-  let doingSomething = $state(1);
-  let haveOffer = $state(0);
-  let noOffer = $state(0);
-  let available = $state('?');
-  let cost = $state('?');
-  let active = $state([]);
+  export let visible = true;
+  let doingSomething = 1;
+  let haveOffer = 0;
+  let noOffer = 0;
+  let available = '?';
+  let cost = '?';
+  let active = [];
 
   function close() {
     sendEvent('mercs', 'close');
@@ -120,27 +95,25 @@
   init();
 </script>
 
-<ModalTitled {close} {visible}>
-  {#snippet title()}
-    Merc Hunter
-  {/snippet}
+<ModalTitled { visible } on:close={ close }>
+  <svelte:fragment slot="title">Merc Hunter</svelte:fragment>
   <div class="merc-hunter">
-    <div class="top-div">(<b>{available}</b> available for hire)</div>
+    <div class="top-div">(<b>{ available }</b> available for hire)</div>
     <div class="button-div">
-      {#if !haveOffer}
+      { #if !haveOffer }
         <button
           class="custombutton"
-          disabled={doingSomething}
-          onclick={getOffer}
+          disabled={ doingSomething }
+          on:click={ getOffer }
           type="button"
         >
-          Send Expedition ({cost}g)
+          Send Expedition ({ cost }g)
         </button>
-      {:else}
+      { :else }
         <button
           class="custombutton"
-          disabled={doingSomething}
-          onclick={doAccept}
+          disabled={ doingSomething }
+          on:click={ doAccept }
           type="button"
         >
           Accept Offer
@@ -148,115 +121,107 @@
         &nbsp;
         <button
           class="custombutton"
-          disabled={doingSomething}
-          onclick={doDecline}
+          disabled={ doingSomething }
+          on:click={ doDecline }
           type="button"
         >
           Decline Offer
         </button>
-      {/if}
+      { /if }
     </div>
     <div class="result-div">
       <div class="cols">
-        {#if haveOffer}
+        { #if haveOffer }
           <div class="merc">
-            <div><b>{haveOffer.name}</b></div>
+            <div><b>{ haveOffer.name }</b></div>
             <div>
               <img
                 alt="alt"
                 height="125"
-                src="{cdn}mercs/{haveOffer.id}.png"
+                src="{ cdn }mercs/{ haveOffer.id }.png"
                 width="125"
-              />
+              >
             </div>
             <div class="offer">
               <div>Hire Price:</div>
               <div>
-                <b>{addCommas(haveOffer.gold)}</b>
-                <img alt="Gold" class="gold" src="{cdn}currency/0.png" />
+                <b>{ addCommas(haveOffer.gold) }</b>
+                <img alt="Gold" class="gold" src="{ cdn }currency/0.png">
               </div>
               <div>Hire Time:</div>
-              <div><b>{haveOffer.hire_time / 3600}</b> hour(s)</div>
+              <div><b>{ haveOffer.hire_time / 3600 }</b> hour(s)</div>
               <div>Offer Time Left:</div>
-              <div>
-                <b>{haveOffer.hours}</b> hour(s) <b>{haveOffer.mins}</b> min(s)
-              </div>
+              <div><b>{ haveOffer.hours }</b> hour(s) <b>{ haveOffer.mins }</b> min(s)</div>
             </div>
           </div>
           <div class="attribs">
-            <div>Level:</div>
-            <div>{haveOffer.level}</div>
-            <div>Classification:</div>
-            <div>{creatureClass[haveOffer.class]}</div>
-            <div>Type:</div>
-            <div>{creatureType[haveOffer.type]}</div>
-            <div>Attack:</div>
-            <div>{haveOffer.attributes[0].value}</div>
-            <div>Defense:</div>
-            <div>{haveOffer.attributes[1].value}</div>
-            <div>Armor:</div>
-            <div>{haveOffer.attributes[2].value}</div>
-            <div>HP:</div>
-            <div>{haveOffer.attributes[3].value}</div>
-            <div>Damage:</div>
-            <div>{haveOffer.attributes[4].value}</div>
+            <div>Level:</div><div>{ haveOffer.level }</div>
+            <div>Classification:</div><div>{ creatureClass[haveOffer.class] }</div>
+            <div>Type:</div><div>{ creatureType[haveOffer.type] }</div>
+            <div>Attack:</div><div>{ haveOffer.attributes[0].value }</div>
+            <div>Defense:</div><div>{ haveOffer.attributes[1].value }</div>
+            <div>Armor:</div><div>{ haveOffer.attributes[2].value }</div>
+            <div>HP:</div><div>{ haveOffer.attributes[3].value }</div>
+            <div>Damage:</div><div>{ haveOffer.attributes[4].value }</div>
           </div>
-        {/if}
-        {#if noOffer}
+        { /if }
+        { #if noOffer }
           <div class="no-offer">
             Your expedition returned without finding any mercenaries.
           </div>
-        {/if}
+        { /if }
         <div class="auto-decline"></div>
       </div>
     </div>
     <div class="active-title"><b>Active Mercenaries</b></div>
     <div class="lower-div">
       <div class="active">
-        {#if active.length}
-          {#each active as { attributes, class: className, id, level, name, type, hours, mins } (id)}
+        { #if active.length }
+          { #each active as {
+            attributes, class: className, id, level, name, type, hours, mins,
+          } }
             <div class="active-merc">
-              <div><b>{name}</b></div>
+              <div><b>{ name }</b></div>
               <div>
                 <img
                   alt="alt"
                   class="tip-static"
                   data-tipped="<div style=&quot;column-gap: 2px; display: grid;
                     grid-template-columns: repeat(2, 1fr);&quot;>
-                    <div>Name:</div><div>{name}</div>
-                      <div>Level:</div><div>{level}</div>
-                      <div>Classification:</div><div>{creatureClass[
-                    className
-                  ]}</div>
-                      <div>Type:</div><div>{creatureType[type]}</div>
-                      <div>Attack:</div><div>{attributes[0].value}</div>
-                      <div>Defense:</div><div>{attributes[1].value}</div>
-                      <div>Armor:</div><div>{attributes[2].value}</div>
-                      <div>HP:</div><div>{attributes[3].value}</div>
-                      <div>Damage:</div><div>{attributes[4].value}</div>
+                    <div>Name:</div><div>{ name }</div>
+                      <div>Level:</div><div>{ level }</div>
+                      <div>Classification:</div><div>{ creatureClass[className] }</div>
+                      <div>Type:</div><div>{ creatureType[type] }</div>
+                      <div>Attack:</div><div>{ attributes[0].value }</div>
+                      <div>Defense:</div><div>{ attributes[1].value }</div>
+                      <div>Armor:</div><div>{ attributes[2].value }</div>
+                      <div>HP:</div><div>{ attributes[3].value }</div>
+                      <div>Damage:</div><div>{ attributes[4].value }</div>
                       </div>"
                   height="125"
-                  src="{cdn}mercs/{id}.png"
+                  src="{ cdn }mercs/{ id }.png"
                   width="125"
-                />
+                >
               </div>
               <div>Time Remaining</div>
-              <div><b>{hours}</b> hour(s) <b>{mins}</b> min(s)</div>
+              <div><b>{ hours }</b> hour(s) <b>{ mins }</b> min(s)</div>
               <div class="disband">
                 <button
                   class="custombutton"
-                  disabled={doingSomething}
-                  onclick={() => doDisband(id)}
+                  disabled={ doingSomething }
+                  on:click={ () => doDisband(id) }
                   type="button"
                 >
                   Disband
                 </button>
               </div>
             </div>
-          {/each}
-        {:else}
-          <div class="no-active">[ no active mercenaries ]</div>
-        {/if}
+          { /each }
+        { :else }
+          <div class="no-active">
+            [ no active mercenaries ]
+          </div>
+        { /if }
       </div>
     </div>
   </div>
@@ -270,43 +235,33 @@
     font-size: smaller;
     height: 16px;
   }
-  .button-div,
-  .active-title {
+  .button-div, .active-title {
     height: 28px;
   }
-  .result-div,
-  .lower-div {
+  .result-div, .lower-div {
     height: 200px;
   }
-  .top-div,
-  .button-div,
-  .active-title {
+  .top-div, .button-div, .active-title {
     text-align: center;
   }
-  .top-div,
-  .button-div,
-  .result-div,
-  .lower-div {
+  .top-div, .button-div, .result-div, .lower-div {
     width: 640px;
   }
   button {
     font-size: inherit;
     font-weight: inherit;
   }
-  .active,
-  .cols {
+  .active, .cols {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
   }
-  .merc,
-  .active-merc {
+  .merc, .active-merc {
     display: grid;
     grid-template-columns: 1fr;
     justify-items: center;
   }
-  .offer,
-  .attribs {
+  .offer, .attribs {
     align-items: end;
     column-gap: 2px;
     display: grid;

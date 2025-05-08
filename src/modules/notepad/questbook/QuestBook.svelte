@@ -7,14 +7,12 @@
   import setValue from '../../system/setValue';
   import { cdn } from '../../system/system';
 
-  let {
-    seasonal = $bindable(false),
-    status = $bindable('active'),
-    visible = $bindable(true),
-  } = $props();
+  export let seasonal = false;
+  export let status = 'active';
+  export let visible = true;
 
   // Split is for backwards compatability
-  let hiddenQuests = $state(getValue('hideQuestNames').split(','));
+  let hiddenQuests = getValue('hideQuestNames').split(',');
   function updateHiddenQuests() {
     setValue('hideQuestNames', hiddenQuests.join(','));
   }
@@ -27,12 +25,12 @@
     updateHiddenQuests();
   }
 
-  let query = $state('');
-  let realm = $state('');
-  let minLvl = $state(0);
-  let maxLvl = $state(6000);
+  let query = '';
+  let realm = '';
+  let minLvl = 0;
+  let maxLvl = 6000;
 
-  let questBook = $state([]);
+  let questBook = [];
   async function loadQuestBook() {
     const response = await daQuestBook();
     questBook = response.r.map((i) => {
@@ -46,11 +44,9 @@
   }
 
   function inputFilters(questName, realmName, minLevel, maxLevel) {
-    return (i) =>
-      i.min_level >= minLevel &&
-      i.min_level <= maxLevel &&
-      includes(i.realm_name, realmName) &&
-      includes(i.name, questName);
+    return (i) => i.min_level >= minLevel && i.min_level <= maxLevel
+      && includes(i.realm_name, realmName)
+      && includes(i.name, questName);
   }
 
   const statusFilters = {
@@ -60,25 +56,17 @@
     hidden: (i) => hiddenQuests.includes(i.name),
   };
 
-  let seasonalQuests = $derived(
-    questBook.filter((i) => i.seasonal === seasonal),
-  );
-  let progress = $derived(
-    seasonalQuests.filter(statusFilters.completed).length /
-      seasonalQuests.length,
-  );
-  let queryQuests = $derived(
-    seasonalQuests
-      .filter(statusFilters[status])
-      .filter((i) => hiddenQuests.includes(i.name) === (status === 'hidden'))
-      .filter(inputFilters(query, realm, minLvl, maxLvl)),
-  );
+  $: seasonalQuests = questBook.filter((i) => i.seasonal === seasonal);
+  $: progress = seasonalQuests.filter(statusFilters.completed).length / seasonalQuests.length;
+  $: queryQuests = seasonalQuests
+    .filter(statusFilters[status])
+    .filter((i) => hiddenQuests.includes(i.name) === (status === 'hidden'))
+    .filter(inputFilters(query, realm, minLvl, maxLvl));
 
   let lastSort = '';
   function sortQuests(feature) {
     if (lastSort === feature) questBook.reverse();
-    else if (typeof questBook[0][feature] === 'string')
-      questBook.sort((a, b) => alpha(a[feature], b[feature]));
+    else if (typeof questBook[0][feature] === 'string') questBook.sort((a, b) => alpha(a[feature], b[feature]));
     else questBook.sort((a, b) => a[feature] - b[feature]);
     questBook = questBook;
     lastSort = feature;
@@ -89,70 +77,60 @@
   }
 </script>
 
-<ModalTitled {close} {visible}>
-  {#snippet title()}
-    Quest Book
-  {/snippet}
+<ModalTitled { visible } on:close={ close }>
+  <svelte:fragment slot="title">Quest Book</svelte:fragment>
   <div id="fshQuestContainer">
-    {#await loadQuestBook()}
+    { #await loadQuestBook() }
       Loading...
-    {:then}
+    { :then}
       <h1>Quest Book</h1>
-      <p>
-        [
-        <label class:active={!seasonal} class="asLink">
+      <p>[
+        <label class:active="{ !seasonal }" class="asLink">
           <input
             type="radio"
             name="seasonal"
-            bind:group={seasonal}
-            value={false}
-          />
+            bind:group={ seasonal }
+            value={ false }>
           Normal
         </label>
         &vert;
-        <label class:active={seasonal} class="asLink">
+        <label class:active="{ seasonal }" class="asLink">
           <input
             type="radio"
             name="seasonal"
-            bind:group={seasonal}
-            value={true}
-          />
+            bind:group={ seasonal }
+            value={ true }>
           Seasonal
         </label>
-        ]
-      </p>
-      <p>Total {seasonal ? 'Seasonal' : 'Normal'} Quest Progress:</p>
+        ]</p>
+      <p>Total { seasonal ? 'Seasonal' : 'Normal' } Quest Progress:</p>
       <div id="fshQuestProgress">
         <img
-          src="{cdn}ui/misc/progress_purple.png"
-          style="width: {100 * progress}%"
+          src="{ cdn }ui/misc/progress_purple.png"
+          style="width: { 100 * progress }%"
           height="10"
           class="tip-static"
           alt="Progress"
-          data-tipped="<span class='fshHelpTitle'>Quests Completed</span><br>{seasonalQuests.filter(
-            statusFilters.completed,
-          ).length} / {seasonalQuests.length}"
-        />
+          data-tipped="<span class='fshHelpTitle'>Quests Completed</span><br>{
+            seasonalQuests.filter(statusFilters.completed).length } / { seasonalQuests.length }"
+        >
       </div>
       <p>
         [
-        <label class="asLink" class:active={status === 'active'}>
-          <input type="radio" bind:group={status} value="active" />
+        <label class="asLink" class:active="{ status === 'active' }">
+          <input type="radio" bind:group={ status } value={ 'active' }>
           Active
-        </label>
-        |
-        <label class="asLink" class:active={status === 'completed'}>
-          <input type="radio" bind:group={status} value="completed" />
+        </label> |
+        <label class="asLink" class:active="{ status === 'completed' }">
+          <input type="radio" bind:group={ status } value={ 'completed' }>
           Complete
-        </label>
-        |
-        <label class="asLink" class:active={status === 'notStarted'}>
-          <input type="radio" bind:group={status} value="notStarted" />
+        </label> |
+        <label class="asLink" class:active="{ status === 'notStarted' }">
+          <input type="radio" bind:group={ status } value={ 'notStarted' }>
           Not Started
-        </label>
-        |
-        <label class="asLink" class:active={status === 'hidden'}>
-          <input type="radio" bind:group={status} value="hidden" />
+        </label> |
+        <label class="asLink" class:active="{ status === 'hidden' }">
+          <input type="radio" bind:group={ status } value={ 'hidden' }>
           Hidden
         </label>
         ]
@@ -161,143 +139,95 @@
         <thead>
           <tr>
             <td>
-              <input
-                type="text"
-                placeholder="Search quest name"
-                bind:value={query}
-              />
+              <input type="text" placeholder="Search quest name" bind:value={ query }>
             </td>
             <td>
-              Min lvl - Max lvl<br />
-              <input type="number" placeholder="Min lvl" bind:value={minLvl} />
-              -
-              <input type="number" placeholder="Max lvl" bind:value={maxLvl} />
+              Min lvl - Max lvl<br>
+              <input type="number" placeholder="Min lvl" bind:value={ minLvl }> -
+              <input type="number" placeholder="Max lvl" bind:value={ maxLvl }>
             </td>
             <td>
-              <input
-                type="text"
-                placeholder="Search realm name"
-                bind:value={realm}
-              />
+              <input type="text" placeholder="Search realm name" bind:value={ realm }>
             </td>
           </tr>
           <tr>
-            <th
-              width="20%"
-              onclick={() => sortQuests('name')}
-              class="fshPointer"
-            >
-              Quest Name
-            </th>
-            <th
-              width="20%"
-              onclick={() => sortQuests('min_level')}
-              class="fshPointer"
-            >
-              Level
-            </th>
-            <th
-              width="25%"
-              onclick={() => sortQuests('realm_name')}
-              class="fshPointer"
-            >
-              Starting Realm
-            </th>
-            <th
-              width="10%"
-              onclick={() => sortQuests('current_stage')}
-              class="fshPointer"
-            >
-              Status
-            </th>
+            <th width="20%" on:click={ () => sortQuests('name') } class="fshPointer">Quest Name</th>
+            <th width="20%" on:click={ () => sortQuests('min_level') } class="fshPointer">Level</th>
+            <th width="25%" on:click={ () => sortQuests('realm_name') } class="fshPointer">Starting Realm</th>
+            <th width="10%" on:click={ () => sortQuests('current_stage') } class="fshPointer">Status</th>
             <th width="10%">Guides</th>
             <th width="10%">Hide</th>
           </tr>
         </thead>
         <tbody>
-          {#each queryQuests as quest (quest.id)}
+          { #each queryQuests as quest }
             <tr>
               <td>
-                <a
-                  href="https://fallensword.com/index.php?cmd=questbook&subcmd=viewquest&quest_id={quest.id}"
-                >
-                  {quest.name}
+                <a href="https://fallensword.com/index.php?cmd=questbook&subcmd=viewquest&quest_id={ quest.id }">
+                  { quest.name }
                 </a>
               </td>
-              <td>{quest.min_level}</td>
+              <td>{ quest.min_level }</td>
               <td>
                 <a
-                  href="{guideUrl}realms&subcmd=view&realm_id={quest.realm.id}"
+                  href="{ guideUrl }realms&subcmd=view&realm_id={ quest.realm.id }"
                   target="_blank"
-                  rel="noreferrer"
-                >
-                  {quest.realm.name}
+                  rel="noreferrer">
+                  { quest.realm.name }
                 </a>
               </td>
               <td>
                 <div
                   class="fshPercentbar"
-                  class:complete={quest.current_stage === quest.max_stage}
+                  class:complete="{ quest.current_stage === quest.max_stage }"
                 >
                   <!-- eslint-disable-next-line no-unused-vars -->
-                  {#each Array(quest.max_stage) as _, i (i)}
-                    <div
-                      class="fshStage"
-                      class:incomplete={i >= quest.current_stage}
-                    ></div>
-                  {/each}
+                  { #each Array(quest.max_stage) as _, i (i) }
+                    <div class="fshStage" class:incomplete="{ i >= quest.current_stage }"></div>
+                  { /each }
                   <div class="percentbar-value">
-                    {Math.round(100 * (quest.current_stage / quest.max_stage))}%
+                    { Math.round(100 * (quest.current_stage / quest.max_stage)) }%
                   </div>
                 </div>
               </td>
               <td>
                 <a
-                  href="{guideUrl}quests&subcmd=view&quest_id={quest.id}"
+                  href="{ guideUrl }quests&subcmd=view&quest_id={ quest.id }"
                   target="_blank"
-                  rel="noreferrer"
-                >
+                  rel="noreferrer">
                   <img
                     src="https://fallensword.com/favicon.ico"
                     alt="UFSG"
                     width="16"
                     hieght="16"
                     class="tip-static"
-                    data-tipped="Search for this quest on the Ultimate Fallen Sword Guide"
-                  />
+                    data-tipped="Search for this quest on the Ultimate Fallen Sword Guide">
                 </a>
                 <a
-                  href="https://wiki.fallensword.com/index.php?title={quest.name.replace(
-                    / /g,
-                    '_',
-                  )}"
+                  href="https://wiki.fallensword.com/index.php?title={ quest.name.replace(/ /g, '_') }"
                   target="_blank"
-                  rel="noreferrer"
-                >
+                  rel="noreferrer">
                   <img
-                    src="{cdn}ui/misc/wiki.png"
+                    src="{ cdn }ui/misc/wiki.png"
                     alt="Wiki"
                     width="16"
                     height="16"
                     class="tip-static"
-                    data-tipped="Search for this quest on the Wiki"
-                  />
+                    data-tipped="Search for this quest on the Wiki">
                 </a>
               </td>
               <td>
-                {#if status === 'hidden'}
-                  <button type="button" onclick={unHideQuest(quest)}>
-                    Unhide
-                  </button>
-                {:else}
-                  <button type="button" onclick={hideQuest(quest)}>Hide</button>
-                {/if}
+                { #if status === 'hidden' }
+                  <button type="button" on:click={ unHideQuest(quest) }>Unhide</button>
+                { :else }
+                  <button type="button" on:click={ hideQuest(quest) }>Hide</button>
+                { /if }
               </td>
             </tr>
-          {/each}
+          { /each }
         </tbody>
       </table>
-    {/await}
+    { /await }
   </div>
 </ModalTitled>
 
@@ -306,9 +236,7 @@
     min-width: 620px;
     font-size: 12px;
   }
-  h1 {
-    font-weight: bold;
-  }
+  h1 { font-weight: bold; }
   .active {
     color: #f00;
     text-decoration: none;
@@ -318,7 +246,7 @@
     vertical-align: bottom;
   }
   table thead tr th {
-    background: rgb(205, 158, 75);
+    background: rgb(205,158,75);
     padding: 0px 4px;
   }
   table td:nth-child(2),
@@ -354,7 +282,7 @@
   .fshStage.incomplete {
     background: #c5a869;
   }
-  table td:nth-child(5) img {
+  table td:nth-child(5) img{
     border: solid 1px #4f3717;
     border-radius: 2px;
   }
@@ -389,9 +317,7 @@
   .fshPointer {
     cursor: pointer;
   }
-  input[type='number'] {
-    width: 40%;
-  }
+  input[type="number"] { width: 40%; }
   table img {
     display: inline;
   }

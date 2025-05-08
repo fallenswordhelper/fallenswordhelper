@@ -5,19 +5,14 @@
   {% if network %}
     <span class="network"></span>
   {% endif %}
-  <label
-    {% if field %}
-      for="{{field}}"
-    {% endif %}
-  >
+  <label {% if field %}for="{{field}}"{% endif %}>
     {{ label }}
     {% if tooltipText %}
       [&thinsp;
       <div class="tooltip">
         ?
         <div class="tooltiptext">
-          <span class="tooltiptitle">{{ label }}</span><br>
-          <br>
+          <span class="tooltiptitle">{{ label }}</span><br><br>
           <div>{{ tooltipText }}</div>
         </div>
       </div>

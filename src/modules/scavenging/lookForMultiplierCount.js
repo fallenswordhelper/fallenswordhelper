@@ -50,16 +50,10 @@ function initMaxTimes(maxTimes, statbarGold, gold) {
 
 function foundMultiplierCount(multCnt) {
   clearWidth(multCnt);
-  initMaxTimes(
-    makeMaxTimes(multCnt),
-    getElementById('statbar-gold'),
-    getElementById('gold'),
-  );
+  initMaxTimes(makeMaxTimes(multCnt), getElementById('statbar-gold'), getElementById('gold'));
 }
 
 export default function lookForMultiplierCount() {
   const multCnt = getElementById('multiplier_count');
-  if (multCnt) {
-    foundMultiplierCount(multCnt);
-  }
+  if (multCnt) { foundMultiplierCount(multCnt); }
 }

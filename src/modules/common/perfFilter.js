@@ -23,10 +23,7 @@ function clickOnPerf(el) {
 
 function selectPerf(loc) {
   sendEvent('perfFilter', loc);
-  const items = getArrayByClassName(
-    'selectable-item',
-    getElementById(`${target}-items`),
-  );
+  const items = getArrayByClassName('selectable-item', getElementById(`${target}-items`));
   items.forEach(clickOnPerf);
 }
 
@@ -42,10 +39,8 @@ export default async function perfFilter(loc) {
   target = loc;
   const data = await daLoadInventory();
   if (!data?.s) return;
-  inv = fromEntries(
-    flattenItems(data.r)
-      .filter(({ cf }) => cf === 0)
-      .map(({ a }) => [a, 1]),
-  );
+  inv = fromEntries(flattenItems(data.r)
+    .filter(({ cf }) => cf === 0)
+    .map(({ a }) => [a, 1]));
   drawFilters(loc);
 }

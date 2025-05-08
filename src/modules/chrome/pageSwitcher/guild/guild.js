@@ -6,12 +6,8 @@ import groups from './groups';
 import hall from './hall';
 import inventory from './inventory';
 
-const guildChat = () => {
-  runDefault(import('../../../logs/guildChat'));
-};
-const guildLog = () => {
-  runDefault(import('../../../logs/guildLog'));
-};
+const guildChat = () => { runDefault(import('../../../logs/guildChat')); };
+const guildLog = () => { runDefault(import('../../../logs/guildLog')); };
 const guildMailbox = () => {
   runDefault(import('../../../mailbox/guildMailbox'));
 };
@@ -26,9 +22,6 @@ const injectRPUpgrades = () => {
 };
 const injectScouttower = () => {
   runDefault(import('../../../guild/scoutTower/injectScouttower'));
-};
-const titanrewards = () => {
-  runDefault(import('../../../guild/titanrewards/titanrewards'));
 };
 
 export default {
@@ -48,5 +41,4 @@ export default {
   bank: { '-': injectGuildBank },
   hall,
   '-': { '-': injectGuild },
-  titanrewards: { '-': titanrewards },
 };

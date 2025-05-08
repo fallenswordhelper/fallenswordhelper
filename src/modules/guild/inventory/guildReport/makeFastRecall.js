@@ -4,42 +4,34 @@ import partial from '../../../common/partial';
 const fastBpHtml = '<span class="sendLink fast-bp">Fast BP</span> | ';
 const fastGsHtml = '<span class="sendLink fast-gs">Fast GS</span>';
 const fastWearHtml = ' | <span class="sendLink fast-wear">Fast Wear</span>';
-let wearRE = 0;
-let gs = 0;
-let bp = 0;
-let wearableBp = 0;
-let wearableGs = 0;
+let wearRE;
+let gs;
+let bp;
+let wearableBp;
+let wearableGs;
 
 function getWearRe() {
   if (!wearRE) {
-    wearRE = new RegExp(
-      '<b>|Bottle|Brew|Draft|Elixir|Potion|Jagua Egg|' +
-        'Gut Rot Head Splitter|Serum',
-    );
+    wearRE = new RegExp('<b>|Bottle|Brew|Draft|Elixir|Potion|Jagua Egg|'
+      + 'Gut Rot Head Splitter|Serum');
   }
   return wearRE;
 }
 
 function fastBp() {
-  if (!bp) {
-    bp = createDiv({ innerHTML: fastBpHtml + fastGsHtml });
-  }
+  if (!bp) { bp = createDiv({ innerHTML: fastBpHtml + fastGsHtml }); }
   return bp.cloneNode(true);
 }
 
 function fastWearableBp() {
   if (!wearableBp) {
-    wearableBp = createDiv({
-      innerHTML: fastBpHtml + fastGsHtml + fastWearHtml,
-    });
+    wearableBp = createDiv({ innerHTML: fastBpHtml + fastGsHtml + fastWearHtml });
   }
   return wearableBp.cloneNode(true);
 }
 
 function fastGs() {
-  if (!gs) {
-    gs = createDiv({ innerHTML: fastGsHtml });
-  }
+  if (!gs) { gs = createDiv({ innerHTML: fastGsHtml }); }
   return gs.cloneNode(true);
 }
 

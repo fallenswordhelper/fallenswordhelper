@@ -1,5 +1,6 @@
 import getMembrList from '../../ajax/getMembrList';
 import sendEvent from '../../analytics/sendEvent';
+import { end, start } from '../../analytics/timing';
 import arrayFrom from '../../common/arrayFrom';
 import createAnchor from '../../common/cElement/createAnchor';
 import createTFoot from '../../common/cElement/createTFoot';
@@ -51,7 +52,8 @@ function bodyText(membrList, row) {
 }
 
 function getData(list, membrList) {
-  return arrayFrom(list.rows).slice(1, -1).map(partial(bodyText, membrList));
+  return arrayFrom(list.rows).slice(1, -1)
+    .map(partial(bodyText, membrList));
 }
 
 function summaryLink() {
@@ -69,10 +71,12 @@ function summaryLink() {
 }
 
 function injectAdvisorDaily(list, membrList) {
+  start('JS Perf', 'injectAdvisorDaily');
   const data = getData(list, membrList);
   const tfoot = getTfoot(list);
   injectTable(list, tfoot, data);
   summaryLink();
+  end('JS Perf', 'injectAdvisorDaily');
 }
 
 async function switcher(list) {
@@ -80,19 +84,14 @@ async function switcher(list) {
     injectAdvisorWeekly(list);
   } else {
     const membrList = await getMembrList(false);
-    if (!membrList) return;
     injectAdvisorDaily(list, membrList);
   }
 }
 
 export default async function guildAdvisor() {
-  if (jQueryNotPresent()) {
-    return;
-  }
+  if (jQueryNotPresent()) { return; }
   const list = getElementsByTagName('table', pcc())[1];
-  if (!list) {
-    return;
-  }
+  if (!list) { return; }
   interceptSubmit();
   await loadDataTables();
   switcher(list);

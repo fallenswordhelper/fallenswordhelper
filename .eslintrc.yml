@@ -1,0 +1,122 @@
+---
+parserOptions:
+  ecmaVersion: latest
+  sourceType: module
+  extraFileExtensions:
+    - .svelte
+overrides:
+  - files:
+    - '*.svelte'
+    rules:
+      import/no-mutable-exports: off
+      import/no-unresolved:
+        - error
+        - ignore:
+          - 'svelte/store'
+          - 'svelte/transition'
+          - 'svelte-virtual-scroll-list'
+      import/prefer-default-export: off
+      svelte/button-has-type:
+        - error
+      svelte/indent:
+        - error
+      svelte/mustache-spacing:
+        - error
+        - textExpressions: always
+          attributesAndProps: always
+          directiveExpressions: always
+          tags:
+            openingBrace: always
+            closingBrace: always
+  - files:
+    - 'scripts/*.js'
+    rules:
+      import/extensions:
+        - error
+        - ignorePackages
+        - js: always
+      import/no-extraneous-dependencies:
+        - error
+        - packageDir: './'
+      no-console: off
+  - files:
+    - 'lws.config.js'
+    rules:
+      import/extensions:
+        - error
+        - ignorePackages
+        - js: always
+extends:
+  - 'airbnb-base'
+  - 'plugin:svelte/recommended'
+globals:
+  Audio: readonly
+  Blob: readonly
+  clearTimeout: readonly
+  console: readonly
+  CSSContainerRule: readonly
+  document: readonly
+  Document: readonly
+  DOMParser: readonly
+  Element: readonly
+  EventTarget: readonly
+  FileReader: readonly
+  FormData: readonly
+  getComputedStyle: readonly
+  HTMLTableElement: readonly
+  Image: readonly
+  localStorage: readonly
+  MutationObserver: readonly
+  navigator: readonly
+  Node: readonly
+  performance: readonly
+  Promise: readonly
+  requestAnimationFrame: readonly
+  setTimeout: readonly
+  URL: readonly
+  window: readonly
+  XPathResult: readonly
+  require: readonly
+  '$': readonly
+  jQuery: readonly
+  GM_info: readonly
+  ga: readonly
+  GameController: readonly
+  GameData: readonly
+  RadioNodeList: readonly
+  gtag: readonly
+  defineCalfPath: readonly
+  defineCalfVer: readonly
+  defineDataTablesPath: readonly
+  defineEnvironment: readonly
+  defineUserIsDev: readonly
+  defineVersion: readonly
+  DataTable: readonly
+rules:
+  consistent-return: off # 74
+  import/no-unresolved:
+    - error
+    - ignore:
+      - '_CALFJS'
+      - 'svelte/store'
+  import/order:
+    - error
+    - alphabetize:
+        order: asc
+        caseInsensitive: true
+  no-plusplus:
+    - error
+    - allowForLoopAfterthoughts: true
+  no-restricted-syntax: off # 2
+  no-underscore-dangle:
+    - error
+    - allow:
+      - _allies
+      - _enemies
+      - _enhancements
+      - _saveState
+      - _showPage
+      - _skills
+settings:
+  import/parsers:
+    'espree': [ .js ]

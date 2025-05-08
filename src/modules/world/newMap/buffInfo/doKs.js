@@ -6,6 +6,7 @@ let ksDiv = 0;
 let killStreakSpan = 0;
 
 function initKsDiv(containerDiv) {
+  // eslint-disable-next-line prefer-destructuring
   ksDiv = containerDiv.children[1];
   killStreakSpan = initBuffDiv(ksDiv, '', 'Kill Streak: ', '');
 }

@@ -4,7 +4,7 @@
 </script>
 
 <QuickSelectClasses
-  dispatchPerf={() => sendEvent('ahQuickCreate', 'doPerf')}
-  dispatchSelect={(itemId) => sendEvent('ahQuickCreate', 'doSelect', itemId)}
-  dispatchToggle={() => sendEvent('ahQuickCreate', 'toggleSelectST')}
+  on:perf={ () => sendEvent('ahQuickCreate', 'doPerf') }
+  on:select={ (e) => sendEvent('ahQuickCreate', 'doSelect', e.detail) }
+  on:toggle={ () => sendEvent('ahQuickCreate', 'toggleSelectST') }
 />

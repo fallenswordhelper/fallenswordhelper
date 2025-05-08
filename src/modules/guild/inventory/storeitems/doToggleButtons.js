@@ -3,9 +3,19 @@ import getCheckboxesVisible from './getCheckboxesVisible';
 import getInv from './getInv';
 import ToggleButtons from './ToggleButtons.svelte';
 import updateDomItems from './updateDomItems';
-import { mount } from 'svelte';
 
-async function doSelectLocked() {
+function makeToggleButtons(prefs) {
+  const [form] = document.forms;
+  return new ToggleButtons({
+    props: {
+      showExtraLinks: prefs[showExtraLinks],
+      showQuickDropLinks: prefs[showQuickDropLinks],
+    },
+    target: form.parentNode.children[5].children[0],
+  });
+}
+
+async function selectLocked() {
   const visibleCheckboxes = getCheckboxesVisible();
   if (!visibleCheckboxes.length) return;
   const inv = await getInv();
@@ -18,30 +28,17 @@ async function doSelectLocked() {
     });
 }
 
-function handleExtraLinks(ctx) {
-  return function doExtraLinks(pref) {
-    ctx[showExtraLinks] = pref;
-    updateDomItems(ctx);
-  };
-}
-
-function handleDropLinks(ctx) {
-  return function doDropLinks(pref) {
-    ctx[showQuickDropLinks] = pref;
-    updateDomItems(ctx);
-  };
-}
-
 export default function doToggleButtons(ctx) {
-  const [form] = document.forms;
-  mount(ToggleButtons, {
-    props: {
-      doDropLinks: handleDropLinks(ctx),
-      doExtraLinks: handleExtraLinks(ctx),
-      doSelectLocked,
-      showExtraLinks: ctx[showExtraLinks],
-      showQuickDropLinks: ctx[showQuickDropLinks],
-    },
-    target: form.parentNode.children[5].children[0],
+  const toggleButtons = makeToggleButtons(ctx);
+  toggleButtons.$on('showExtraLinks', (e) => {
+    ctx[showExtraLinks] = e.detail;
+    updateDomItems(ctx);
+  });
+  toggleButtons.$on('showQuickDropLinks', (e) => {
+    ctx[showQuickDropLinks] = e.detail;
+    updateDomItems(ctx);
+  });
+  toggleButtons.$on('selectLocked', () => {
+    selectLocked();
   });
 }

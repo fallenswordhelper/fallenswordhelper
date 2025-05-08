@@ -20,84 +20,83 @@ export const defaultOptions = {
   fshMinLvl: 1,
   fshMaxLvl: 9999,
 };
-export const invManFilter =
-  '<table class="fshInvFilter">' +
-  '<tr><th colspan="14">@@reportTitle@@</th>' +
-  '<th><span id="fshRefresh" class="fshLink">[Refresh]</span></th></tr>' +
-  '<tr><td colspan="2" rowspan="3"><b>&nbsp;Show Items:</b></td>' +
-  '<td class="fshRight">&nbsp;Helmet:</td>' +
-  '<td><input id="fshHelmet" type="checkbox" item="0"/></td>' +
-  '<td class="fshRight">&nbsp;Armor:</td>' +
-  '<td><input id="fshArmor" type="checkbox" item="1"/></td>' +
-  '<td class="fshRight">&nbsp;Gloves:</td>' +
-  '<td><input id="fshGloves" type="checkbox" item="2"/></td>' +
-  '<td class="fshRight">&nbsp;Boots:</td>' +
-  '<td><input id="fshBoots" type="checkbox" item="3"/></td>' +
-  '<td class="fshRight">&nbsp;Weapon:</td>' +
-  '<td><input id="fshWeapon" type="checkbox" item="4"/></td>' +
-  '<td></td>' +
-  '<td class="fshRight">&nbsp;Min lvl:</td>' +
-  '<td rowspan="2">' +
-  '<input id="fshMinLvl" class="fshNumberInput" type="number" value="1" min="0"><br>' +
-  '<input id="fshMaxLvl" class="fshNumberInput" type="number" value="9999" min="0">' +
-  '</td>' +
-  '</tr><tr>' +
-  '<td class="fshRight">&nbsp;Shield:</td>' +
-  '<td><input id="fshShield" type="checkbox" item="5"/></td>' +
-  '<td class="fshRight">&nbsp;Ring:</td>' +
-  '<td><input id="fshRing" type="checkbox" item="6"/></td>' +
-  '<td class="fshRight">&nbsp;Amulet:</td>' +
-  '<td><input id="fshAmulet" type="checkbox" item="7"/></td>' +
-  '<td class="fshRight">&nbsp;Rune:</td>' +
-  '<td><input id="fshRune" type="checkbox" item="8"/></td>' +
-  '<td class="fshRight">&nbsp;Sets Only:</td>' +
-  '<td><input id="fshSets" item="-1" type="checkbox"/></td>' +
-  '<td></td>' +
-  '<td class="fshRight">&nbsp;Max lvl:</td>' +
-  '</tr><tr>' +
-  '<td colspan="2">' +
-  '&nbsp;[<span id="fshAll" class="fshLink">Select All</span>]</td>' +
-  '<td colspan="2">' +
-  '&nbsp;[<span id="fshNone" class="fshLink">Select None</span>]</td>' +
-  '<td colspan="2">' +
-  '&nbsp;[<span id="fshDefault" class="fshLink">Defaults</span>]</td>' +
-  '<td colspan="6"></td>' +
-  '<td><input id="fshReset" type="button" value="Reset"/></td>' +
-  '</tr>' +
-  '<tr>' +
-  '<td class="fshRight">&nbsp;Quest Item:</td>' +
-  '<td><input id="fshQuest" item="9" type="checkbox"/></td>' +
-  '<td class="fshRight">&nbsp;Potion:</td>' +
-  '<td><input id="fshPotion" item="10" type="checkbox"/></td>' +
-  '<td class="fshRight">&nbsp;Resource:</td>' +
-  '<td><input id="fshResource" item="12" type="checkbox"/></td>' +
-  '<td class="fshRight">&nbsp;Recipe:</td>' +
-  '<td><input id="fshRecipe" item="13" type="checkbox"/></td>' +
-  '<td class="fshRight">&nbsp;Container:</td>' +
-  '<td><input id="fshContainer" item="14" type="checkbox"/></td>' +
-  '<td class="fshRight">&nbsp;Frag Stash:</td>' +
-  '<td><input id="fshStash" item="16" type="checkbox"/></td>' +
-  '<td class="fshRight">&nbsp;Composed:</td>' +
-  '<td><input id="fshComposed" item="15" type="checkbox"/></td>' +
-  '<td></td></tr>' +
-  '<tr>' +
-  '<td class="fshRight">&nbsp;Common:</td>' +
-  '<td><input id="fshCommon" item="100" type="checkbox" checked/></td>' +
-  '<td class="fshRight">&nbsp;Rare:</td>' +
-  '<td><input id="fshRare" item="101" type="checkbox" checked/></td>' +
-  '<td class="fshRight">&nbsp;Unique:</td>' +
-  '<td><input id="fshUnique" item="102" type="checkbox" checked/></td>' +
-  '<td class="fshRight">&nbsp;Legendary:</td>' +
-  '<td><input id="fshLegendary" item="103" type="checkbox" checked/></td>' +
-  '<td class="fshRight">&nbsp;Super Elite:</td>' +
-  '<td><input id="fshSuperElite" item="104" type="checkbox" checked/></td>' +
-  '<td class="fshRight">&nbsp;Crystalline:</td>' +
-  '<td><input id="fshCrystalline" item="105" type="checkbox" checked/></td>' +
-  '<td class="fshRight">&nbsp;Epic:</td>' +
-  '<td colspan="2"><input id="fshEpic" item="106" type="checkbox" checked/>' +
-  '</td>' +
-  '</tr>' +
-  '</table>';
+export const invManFilter = '<table class="fshInvFilter">'
+  + '<tr><th colspan="14">@@reportTitle@@</th>'
+  + '<th><span id="fshRefresh" class="fshLink">[Refresh]</span></th></tr>'
+  + '<tr><td colspan="2" rowspan="3"><b>&nbsp;Show Items:</b></td>'
+  + '<td class="fshRight">&nbsp;Helmet:</td>'
+  + '<td><input id="fshHelmet" type="checkbox" item="0"/></td>'
+  + '<td class="fshRight">&nbsp;Armor:</td>'
+  + '<td><input id="fshArmor" type="checkbox" item="1"/></td>'
+  + '<td class="fshRight">&nbsp;Gloves:</td>'
+  + '<td><input id="fshGloves" type="checkbox" item="2"/></td>'
+  + '<td class="fshRight">&nbsp;Boots:</td>'
+  + '<td><input id="fshBoots" type="checkbox" item="3"/></td>'
+  + '<td class="fshRight">&nbsp;Weapon:</td>'
+  + '<td><input id="fshWeapon" type="checkbox" item="4"/></td>'
+  + '<td></td>'
+  + '<td class="fshRight">&nbsp;Min lvl:</td>'
+  + '<td rowspan="2">'
+  + '<input id="fshMinLvl" class="fshNumberInput" type="number" value="1" min="0"><br>'
+  + '<input id="fshMaxLvl" class="fshNumberInput" type="number" value="9999" min="0">'
+  + '</td>'
+  + '</tr><tr>'
+  + '<td class="fshRight">&nbsp;Shield:</td>'
+  + '<td><input id="fshShield" type="checkbox" item="5"/></td>'
+  + '<td class="fshRight">&nbsp;Ring:</td>'
+  + '<td><input id="fshRing" type="checkbox" item="6"/></td>'
+  + '<td class="fshRight">&nbsp;Amulet:</td>'
+  + '<td><input id="fshAmulet" type="checkbox" item="7"/></td>'
+  + '<td class="fshRight">&nbsp;Rune:</td>'
+  + '<td><input id="fshRune" type="checkbox" item="8"/></td>'
+  + '<td class="fshRight">&nbsp;Sets Only:</td>'
+  + '<td><input id="fshSets" item="-1" type="checkbox"/></td>'
+  + '<td></td>'
+  + '<td class="fshRight">&nbsp;Max lvl:</td>'
+  + '</tr><tr>'
+  + '<td colspan="2">'
+  + '&nbsp;[<span id="fshAll" class="fshLink">Select All</span>]</td>'
+  + '<td colspan="2">'
+  + '&nbsp;[<span id="fshNone" class="fshLink">Select None</span>]</td>'
+  + '<td colspan="2">'
+  + '&nbsp;[<span id="fshDefault" class="fshLink">Defaults</span>]</td>'
+  + '<td colspan="6"></td>'
+  + '<td><input id="fshReset" type="button" value="Reset"/></td>'
+  + '</tr>'
+  + '<tr>'
+  + '<td class="fshRight">&nbsp;Quest Item:</td>'
+  + '<td><input id="fshQuest" item="9" type="checkbox"/></td>'
+  + '<td class="fshRight">&nbsp;Potion:</td>'
+  + '<td><input id="fshPotion" item="10" type="checkbox"/></td>'
+  + '<td class="fshRight">&nbsp;Resource:</td>'
+  + '<td><input id="fshResource" item="12" type="checkbox"/></td>'
+  + '<td class="fshRight">&nbsp;Recipe:</td>'
+  + '<td><input id="fshRecipe" item="13" type="checkbox"/></td>'
+  + '<td class="fshRight">&nbsp;Container:</td>'
+  + '<td><input id="fshContainer" item="14" type="checkbox"/></td>'
+  + '<td class="fshRight">&nbsp;Frag Stash:</td>'
+  + '<td><input id="fshStash" item="16" type="checkbox"/></td>'
+  + '<td class="fshRight">&nbsp;Composed:</td>'
+  + '<td><input id="fshComposed" item="15" type="checkbox"/></td>'
+  + '<td></td></tr>'
+  + '<tr>'
+  + '<td class="fshRight">&nbsp;Common:</td>'
+  + '<td><input id="fshCommon" item="100" type="checkbox" checked/></td>'
+  + '<td class="fshRight">&nbsp;Rare:</td>'
+  + '<td><input id="fshRare" item="101" type="checkbox" checked/></td>'
+  + '<td class="fshRight">&nbsp;Unique:</td>'
+  + '<td><input id="fshUnique" item="102" type="checkbox" checked/></td>'
+  + '<td class="fshRight">&nbsp;Legendary:</td>'
+  + '<td><input id="fshLegendary" item="103" type="checkbox" checked/></td>'
+  + '<td class="fshRight">&nbsp;Super Elite:</td>'
+  + '<td><input id="fshSuperElite" item="104" type="checkbox" checked/></td>'
+  + '<td class="fshRight">&nbsp;Crystalline:</td>'
+  + '<td><input id="fshCrystalline" item="105" type="checkbox" checked/></td>'
+  + '<td class="fshRight">&nbsp;Epic:</td>'
+  + '<td colspan="2"><input id="fshEpic" item="106" type="checkbox" checked/>'
+  + '</td>'
+  + '</tr>'
+  + '</table>';
 export const inventoryCheckAll = {
   0: 1,
   1: 1,

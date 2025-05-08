@@ -1,5 +1,5 @@
 .custombutton[disabled] {
-  background: #b8b8b8;
+  background: #B8B8B8;
   pointer-events: none;
 }
 
@@ -52,9 +52,7 @@
   font-size: x-small;
   cursor: pointer;
 }
-.HelperTextLink:hover {
-  text-decoration: underline;
-}
+.HelperTextLink:hover {text-decoration: underline;}
 
 /* Profile*/
 .fastWorn {
@@ -64,16 +62,12 @@
 .compDelBtn {
   cursor: pointer;
   text-decoration: underline;
-  color: #a0cfec;
+  color: #A0CFEC;
 }
 
 /* General */
-.custombutton.fshHide {
-  display: none;
-}
-.no-close .ui-dialog-titlebar-close {
-  display: none;
-}
+.custombutton.fshHide {display: none;}
+.no-close .ui-dialog-titlebar-close {display: none;}
 .sendLink {
   cursor: pointer;
   text-decoration: underline;
@@ -88,12 +82,8 @@
   cursor: pointer;
   text-decoration: underline;
 }
-.buffLink {
-  cursor: pointer;
-}
-.fshPoint {
-  cursor: pointer;
-}
+.buffLink {cursor: pointer;}
+.fshPoint {cursor: pointer;}
 .smallLink {
   cursor: pointer;
   text-decoration: underline;
@@ -104,184 +94,74 @@
   color: grey;
   font-size: x-small;
 }
-.fshMove {
-  cursor: move;
-}
+.fshMove {cursor: move;}
 
-.pCR a {
-  color: #f7eac9;
-}
+.pCR a {color: #F7EAC9;}
 
-.fshRed {
-  color: red;
-}
-.fshBlue {
-  color: blue;
-}
-.fshGreen {
-  color: green;
-}
-.fshNavy {
-  color: navy;
-}
-.fshMaroon {
-  color: maroon;
-}
-.fshWhite {
-  color: white;
-}
-.fshGrey {
-  color: grey;
-}
-.fshLime {
-  color: lime;
-}
-.fshYellow {
-  color: yellow;
-}
-.fshPink {
-  color: pink;
-}
-.fshBrown {
-  color: brown;
-}
-.fshDarkCyan {
-  color: DarkCyan;
-}
-.fshOliveDrab {
-  color: OliveDrab;
-}
-.fshDodgerBlue {
-  color: DodgerBlue;
-}
-.fshPowderBlue {
-  color: PowderBlue;
-}
-.fshLightSkyBlue {
-  color: LightSkyBlue;
-}
-.fshPaleVioletRed {
-  color: PaleVioletRed;
-}
-.fshRed a {
-  color: red;
-}
-.fshGreen a {
-  color: green;
-}
-.fshYellow a {
-  color: yellow;
-}
-.fshDarkCyan a {
-  color: DarkCyan;
-}
-.fshOliveDrab a {
-  color: OliveDrab;
-}
-.fshPaleVioletRed a {
-  color: PaleVioletRed;
-}
-.fshHeader {
-  background-color: #cd9e4b;
-}
-.fshBlack {
-  background-color: black;
-}
+.fshRed {color: red;}
+.fshBlue {color: blue;}
+.fshGreen {color: green;}
+.fshNavy {color: navy;}
+.fshMaroon {color: maroon;}
+.fshWhite {color: white;}
+.fshGrey {color: grey;}
+.fshLime {color: lime;}
+.fshYellow {color: yellow;}
+.fshPink {color: pink;}
+.fshBrown {color: brown;}
+.fshDarkCyan {color: DarkCyan;}
+.fshOliveDrab {color: OliveDrab;}
+.fshDodgerBlue {color: DodgerBlue;}
+.fshPowderBlue {color: PowderBlue;}
+.fshLightSkyBlue {color: LightSkyBlue;}
+.fshPaleVioletRed {color: PaleVioletRed;}
+.fshRed a {color: red;}
+.fshGreen a {color: green;}
+.fshYellow a {color: yellow;}
+.fshDarkCyan a {color: DarkCyan;}
+.fshOliveDrab a {color: OliveDrab;}
+.fshPaleVioletRed a {color: PaleVioletRed;}
+.fshHeader {background-color: #CD9E4B;}
+.fshBlack {background-color: black;}
 .fshBtnBox {
   font-size: x-small;
   text-align: right;
 }
-.fshBkRed {
-  background-color: red;
-}
+.fshBkRed {background-color: red;}
 
-.fshCommon {
-  color: white;
-}
-.fshRare {
-  color: #3366ff;
-}
-.fshUnique {
-  color: #cc33ff;
-}
-.fshLegendary {
-  color: #ffff40;
-}
-.fshSuper {
-  color: #ff0000;
-}
-.fshCrystal {
-  color: #6633ff;
-}
-.fshEpic {
-  color: #009933;
-}
+.fshCommon {color: white;}
+.fshRare {color: #3366ff;}
+.fshUnique {color: #cc33ff;}
+.fshLegendary {color: #ffff40;}
+.fshSuper {color: #ff0000;}
+.fshCrystal {color: #6633ff;}
+.fshEpic {color: #009933;}
 
-.fsh-va-text-bottom {
-  vertical-align: text-bottom;
-}
-.fshVTTop {
-  vertical-align: text-top;
-}
-.fshCenter {
-  text-align: center;
-}
-.fshTblCenter {
-  margin: 0 auto;
-}
-.fshRight {
-  text-align: right;
-}
-.fshHide {
-  display: none;
-}
-.fshInvisible {
-  visibility: hidden;
-}
-.fshWearHide {
-  display: none;
-}
-.fshInline {
-  display: inline;
-}
-.fshBlock {
-  display: inline-block;
-}
-.fshNoWrap {
-  white-space: nowrap;
-}
-.fshBold {
-  font-weight: bold;
-}
-.fshRelative {
-  position: relative;
-}
-.fshXSmall {
-  font-size: x-small;
-}
-.fshXXSmall {
-  font-size: xx-small;
-}
-.fshSmall {
-  font-size: small;
-}
-.fshFloatLeft {
-  float: left;
-}
-.fshFloatRight {
-  float: right;
-}
-.fshFlex {
-  display: flex;
-}
+.fsh-va-text-bottom {vertical-align: text-bottom;}
+.fshVTTop {vertical-align: text-top;}
+.fshCenter {text-align: center;}
+.fshTblCenter {margin: 0 auto;}
+.fshRight {text-align: right;}
+.fshHide {display: none;}
+.fshInvisible {visibility: hidden;}
+.fshWearHide {display: none;}
+.fshInline {display: inline;}
+.fshBlock {display: inline-block;}
+.fshNoWrap {white-space: nowrap;}
+.fshBold {font-weight: bold;}
+.fshRelative {position: relative;}
+.fshXSmall {font-size: x-small;}
+.fshXXSmall {font-size: xx-small;}
+.fshSmall {font-size: small;}
+.fshFloatLeft {float: left;}
+.fshFloatRight {float: right;}
+.fshFlex {display: flex;}
 .fshAdvRank {
   width: 62px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.fshBreakAll {
-  word-break: break-all;
-}
+.fshBreakAll {word-break: break-all}
 
 /* Shoutbox Preview Table */
 .sbpTbl {
@@ -291,8 +171,8 @@
 /* Shoutbox Preview Header */
 .sbpHdr {
   text-align: center;
-  color: #7d2252;
-  background-color: #cd9e4b;
+  color: #7D2252;
+  background-color: #CD9E4B;
 }
 /* Shoutbox Preview Msg */
 .sbpMsg {
@@ -302,30 +182,14 @@
   font-size: 11px;
 }
 
-#minibox-guild-members-list .fshGreen {
-  color: green;
-}
-#minibox-guild-members-list .fshWhite {
-  color: white;
-}
-#minibox-guild-members-list .fshGrey {
-  color: grey;
-}
-#minibox-guild-members-list .fshHide {
-  display: none;
-}
-#minibox-allies-list .fshDodgerBlue {
-  color: DodgerBlue;
-}
-#minibox-allies-list .fshLightSkyBlue {
-  color: LightSkyBlue;
-}
-#minibox-allies-list .fshPowderBlue {
-  color: PowderBlue;
-}
-#minibox-allies-list .fshHide {
-  display: none;
-}
+#minibox-guild-members-list .fshGreen {color: green;}
+#minibox-guild-members-list .fshWhite {color: white;}
+#minibox-guild-members-list .fshGrey {color: grey;}
+#minibox-guild-members-list .fshHide {display: none;}
+#minibox-allies-list .fshDodgerBlue {color: DodgerBlue;}
+#minibox-allies-list .fshLightSkyBlue {color: LightSkyBlue;}
+#minibox-allies-list .fshPowderBlue {color: PowderBlue;}
+#minibox-allies-list .fshHide {display: none;}
 
 .fshMoveItem {
   font-size: xx-small;
@@ -353,40 +217,19 @@
 .fshRelicLowDiv a {
   color: red;
 }
-.relicT th {
-  border-top: 2px black solid;
-}
-.relicT td {
-  font-size: x-small;
-}
-.relicT td,
-.relicT th {
-  text-align: right;
-}
-.relicS td:nth-child(1) {
-  color: brown;
-}
-.relicS td:nth-child(1),
-.relicS th:nth-child(1) {
-  width: 116px;
-}
-.relicS td:nth-child(2),
-.relicS th:nth-child(2) {
-  width: 48px;
-}
+.relicT th {border-top: 2px black solid;}
+.relicT td {font-size: x-small;}
+.relicT td, .relicT th {text-align: right;}
+.relicS td:nth-child(1) {color: brown;}
+.relicS td:nth-child(1), .relicS th:nth-child(1) {width: 116px;}
+.relicS td:nth-child(2), .relicS th:nth-child(2) {width: 48px;}
 
-.lvlHighlight {
-  background-color: #4671c8;
-}
+.lvlHighlight {background-color: #4671C8;}
 
-.fshNumberInput {
-  width: 4em;
-}
+.fshNumberInput {width: 4em;}
 
 /* New World Shop Multi Buy */
-.fshClear {
-  clear: both;
-}
+.fshClear {clear: both;}
 
 /* Button as Link */
 .fshBl {
@@ -394,7 +237,7 @@
   border: none;
   color: blue;
   cursor: pointer;
-  font-family: inherit;
+  font-family : inherit;
   margin: 0;
   padding: 0;
   text-decoration: underline;
@@ -404,9 +247,7 @@ button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
-.fshBl.fshBls {
-  font-size: 84%;
-}
+.fshBl.fshBls {font-size: 84%;}
 .fsh-bli {
   font-size: inherit;
 }
@@ -423,17 +264,15 @@ button::-moz-focus-inner {
   background-position: center;
 }
 /* Success Msg */
-.fshScs {
-  height: 26px;
-}
+.fshScs {height: 26px;}
 
 /* New Row */
 .fshNr {
-  background-color: #f5f298;
+  background-color: #F5F298;
 }
 /* Old Row */
 .fshOr {
-  background-color: #cd9e4b;
+  background-color: #CD9E4B;
 }
 
 /* AH Quick Search - Category Header */
@@ -444,7 +283,7 @@ button::-moz-focus-inner {
 
 /* Quick Extract */
 .qeHead {
-  background-color: #cd9e4b;
+  background-color: #CD9E4B;
   width: 100%;
 }
 
@@ -507,8 +346,7 @@ button::-moz-focus-inner {
   border-color: gray black black gray;
 }
 
-.fshResult > tbody > tr > th,
-.fshResult > tbody > tr > td {
+.fshResult > tbody > tr > th, .fshResult > tbody > tr > td {
   padding: 2px;
   border-width: 1px;
   border-style: solid;
@@ -528,25 +366,19 @@ button::-moz-focus-inner {
 }
 
 .resVal {
-  width: 25%;
+  width: 25%
 }
 
 /* End of Find Buffs & Other */
 
 /* Stop resizable textareas */
-textarea {
-  resize: none;
-}
+textarea {resize: none;}
 
 /* Quick Extract and Inventing results */
-.fshNbrList {
-  list-style: decimal inside;
-}
+.fshNbrList {list-style: decimal inside;}
 
 /* topbanner-stats */
-#topbanner-stats a {
-  color: #f7eac9;
-}
+#topbanner-stats a {color: #F7EAC9;}
 
 /* Spoils of War */
 #fshScoutTower {

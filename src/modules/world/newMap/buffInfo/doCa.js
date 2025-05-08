@@ -6,6 +6,7 @@ let caDiv = 0;
 let caSpan = 0;
 
 function initCaDiv(containerDiv) {
+  // eslint-disable-next-line prefer-destructuring
   caDiv = containerDiv.children[3];
   caSpan = initBuffDiv(caDiv, 'fshBlue', 'CA ', ' active');
 }

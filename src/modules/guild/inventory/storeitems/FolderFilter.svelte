@@ -1,14 +1,8 @@
 <script>
   import FolderButtons from '../../../common/FolderButtons.svelte';
 
-  let { doFilter, inv = { folders: {} } } = $props();
+  export let inv = { folders: {} };
 </script>
-
-<tr class="fshCenter">
-  <td colspan="3">
-    <FolderButtons {doFilter} folders={inv.folders} />
-  </td>
-</tr>
 
 <style>
   td {
@@ -17,3 +11,9 @@
     padding: 2px 0;
   }
 </style>
+
+<tr class="fshCenter">
+  <td colspan="3">
+    <FolderButtons folders={ inv.folders } on:filter/>
+  </td>
+</tr>

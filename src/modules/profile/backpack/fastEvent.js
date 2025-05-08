@@ -8,9 +8,7 @@ import setText from '../../dom/setText';
 function backpackRemove(theBackpack, invId) {
   // remove from srcData
   const i = theBackpack.srcData.findIndex((el) => el.a === invId);
-  if (i !== -1) {
-    theBackpack.srcData.splice(i, 1);
-  }
+  if (i !== -1) { theBackpack.srcData.splice(i, 1); }
 }
 
 function actionResult([theBackpack, result, target, invId, data]) {

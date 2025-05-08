@@ -1,33 +1,24 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import sendEvent from '../../analytics/sendEvent';
   import quickExtract from '../../chrome/pageSwitcher/loader/quickExtract';
-  import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
+  import LinkButtonBracketed from '../../common/LinkButtonBracketed.svelte';
   import Count from './Count.svelte';
 
-  const { dispatchDelete, dispatchDelType, dispatchQuickDel } = $props();
+  let quickDelete;
+  let rollup;
 
-  let quickDelete = $state();
-  let rollup = $state();
-
-  let quickDelHidden = true;
-  let countHidden = true;
-  let deleteHidden = true;
+  const dispatch = createEventDispatcher();
 
   function enableQuickDel() {
-    if (quickDelHidden) {
-      quickDelHidden = false;
-      sendEvent('components', 'enableQuickDel');
-      quickDelete = true;
-      dispatchQuickDel();
-    }
+    sendEvent('components', 'enableQuickDel');
+    quickDelete = true;
+    dispatch('enableQuickDel');
   }
 
   function countComponents() {
-    if (countHidden) {
-      countHidden = false;
-      sendEvent('components', 'countComponents');
-      rollup = true;
-    }
+    sendEvent('components', 'countComponents');
+    rollup = true;
   }
 
   function insertQuickExtract() {
@@ -36,41 +27,32 @@
   }
 
   function deleteAllVisible() {
-    if (deleteHidden) {
-      deleteHidden = false;
-      sendEvent('components', 'deleteAllVisible');
-      dispatchDelete();
-    }
+    sendEvent('components', 'deleteAllVisible');
+    dispatch('deleteAllVisible');
   }
 </script>
 
 <div class="fshCenter">
-  {#if !quickDelete}
+  { #if !quickDelete }
     <div>
-      <LinkBtnBracketed onclick={enableQuickDel}>
-        Enable Quick Del
-      </LinkBtnBracketed>
+      <LinkButtonBracketed on:click|once={ enableQuickDel }>Enable Quick Del</LinkButtonBracketed>
     </div>
-  {/if}
-  {#if !rollup}
+  { /if }
+  { #if !rollup }
     <div>
-      <LinkBtnBracketed onclick={countComponents}>
-        Count Components
-      </LinkBtnBracketed>
+      <LinkButtonBracketed on:click|once={ countComponents }>Count Components</LinkButtonBracketed>
     </div>
-  {:else}
-    <Count {dispatchDelType} />
-  {/if}
+  { :else }
+    <Count on:delType/>
+  { /if }
   <div>
-    <LinkBtnBracketed onclick={insertQuickExtract}>
-      Quick Extract
-    </LinkBtnBracketed>
+    <LinkButtonBracketed on:click={ insertQuickExtract }>Quick Extract</LinkButtonBracketed>
   </div>
-  {#if quickDelete}
+  { #if quickDelete }
     <div>
-      <LinkBtnBracketed --button-color="red" onclick={deleteAllVisible}>
+      <LinkButtonBracketed --button-color="red" on:click|once={ deleteAllVisible }>
         Delete All Visible
-      </LinkBtnBracketed>
+      </LinkButtonBracketed>
     </div>
-  {/if}
+  { /if }
 </div>

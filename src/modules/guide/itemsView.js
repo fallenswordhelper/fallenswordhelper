@@ -10,10 +10,11 @@ import xPath from '../common/xPath';
 import { ahSearchUrl } from '../support/constants';
 
 const isNotBound = () => !xPath('.//*[text() = "This item is bound"]');
-const isNotComponent = () =>
-  !containsText('Component', xPath('.//tr[td/b/text() = "Type:"]/td[2]'));
-const ahItemHref = (name) =>
-  `https://www.fallensword.com/${ahSearchUrl}${name}`;
+const isNotComponent = () => !containsText(
+  'Component',
+  xPath('.//tr[td/b/text() = "Type:"]/td[2]'),
+);
+const ahItemHref = (name) => `https://www.fallensword.com/${ahSearchUrl}${name}`;
 
 function insertAhLink(target) {
   if (!target) return;
@@ -29,6 +30,5 @@ function insertAhLink(target) {
 }
 
 export default function itemsView() {
-  if (isNotBound() && isNotComponent())
-    insertAhLink(querySelector('.tHeader')?.children?.[0]);
+  if (isNotBound() && isNotComponent()) insertAhLink(querySelector('.tHeader')?.children?.[0]);
 }

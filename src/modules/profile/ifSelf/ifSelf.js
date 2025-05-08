@@ -14,9 +14,7 @@ async function doFastDebuff() {
 }
 
 function doAllyEnemy() {
-  if (getValue('countAllyEnemy')) {
-    runDefault(import('./profileAllyEnemy'));
-  }
+  if (getValue('countAllyEnemy')) { runDefault(import('./profileAllyEnemy')); }
 }
 
 function doFastWear() {
@@ -32,21 +30,15 @@ function doComponents() {
 }
 
 function doQuickWearLink() {
-  if (getValue('quickWearLink')) {
-    runDefault(import('./quickWearLink'));
-  }
+  if (getValue('quickWearLink')) { runDefault(import('./quickWearLink')); }
 }
 
 function doSelectAllLink() {
-  if (getValue('selectAllLink')) {
-    runDefault(import('./selectAllLink'));
-  }
+  if (getValue('selectAllLink')) { runDefault(import('./selectAllLink')); }
 }
 
 function doNekidBtn() {
-  if (getValue('nekidButton')) {
-    runDefault(import('./nekidBtn'));
-  }
+  if (getValue('nekidButton')) { runDefault(import('./nekidBtn')); }
 }
 
 function doAjaxifySections() {

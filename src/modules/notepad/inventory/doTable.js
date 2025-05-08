@@ -35,9 +35,7 @@ const tblCols = [
   {
     title: 'Type',
     data: 'type',
-    render(type) {
-      return itemType[type];
-    },
+    render(type) { return itemType[type]; },
   },
   { title: 'Att', data: 'stats.attack' },
   { title: 'Def', data: 'stats.defense' },
@@ -73,9 +71,7 @@ const tblCols = [
     title: 'Tag',
     data: 'guild_tag',
     render(tag) {
-      if (tag === -1) {
-        return 'No';
-      }
+      if (tag === -1) { return 'No'; }
       return 'Yes';
     },
   },
@@ -103,25 +99,19 @@ function injectTable() {
   return fshInv;
 }
 
-function makeDataTable(fshInv) {
-  // jQuery
+function makeDataTable(fshInv) { // jQuery
   return $(fshInv).DataTable({
     autoWidth: false,
-    columnDefs: [
-      { targets: '_all', defaultContent: '' },
+    columnDefs: [{ targets: '_all', defaultContent: '' },
       {
         targets: [1, 4, 5, 6, 7, 8, 9, 10, 12, 13],
         orderSequence: ['desc', 'asc'],
-      },
-    ],
+      }],
     columns: tblCols,
     createdRow,
     data: getTheInv().items,
     deferRender: true,
-    lengthMenu: [
-      [50, 100, 150, 200, -1],
-      [50, 100, 150, 200, 'All'],
-    ],
+    lengthMenu: [[50, 100, 150, 200, -1], [50, 100, 150, 200, 'All']],
     pageLength: 50,
     stateDuration: 0,
     stateSave: true,

@@ -10,9 +10,8 @@ import { doButtons, setCharacterRow } from './doButtons';
 import weightings from './weightings';
 
 function findTheRows() {
-  const theRows =
-    pcc().lastElementChild.previousElementSibling.rows?.[7]?.children[0]
-      ?.children[0]?.rows;
+  const theRows = pcc().lastElementChild.previousElementSibling.rows
+    ?.[7]?.children[0]?.children[0]?.rows;
   if (theRows) {
     return arrayFrom(theRows);
   }
@@ -25,10 +24,7 @@ function writeRanks(memberRanks, row) {
   if (thisRank?.members.length) {
     const members = thisRank.members.map((m) => m.name);
     setCharacterRow(row, members);
-    insertHtmlBeforeEnd(
-      rankCell,
-      ` <span class="fshBlue">- ${members.join(', ')}</span>`,
-    );
+    insertHtmlBeforeEnd(rankCell, ` <span class="fshBlue">- ${members.join(', ')}</span>`);
   }
 }
 
@@ -42,11 +38,7 @@ function gotMembers(memberRanks) {
 }
 
 export default async function rank() {
-  if (jQueryNotPresent()) {
-    return;
-  }
+  if (jQueryNotPresent()) { return; }
   const json = await daRanksView();
-  if (json?.s) {
-    gotMembers(json.r);
-  }
+  if (json?.s) { gotMembers(json.r); }
 }

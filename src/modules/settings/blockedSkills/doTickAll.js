@@ -14,18 +14,13 @@ const tickAllBuffs = 'Tick all buffs';
 function toggleTickAllBuffs(e) {
   sendEvent('settingsBlockedSkills', 'doTickAll');
   const tckTxt = getText(e.target) === tickAllBuffs;
-  querySelectorAll(blockedSkillsCheckboxes).forEach((ctx) => {
-    ctx.checked = tckTxt;
-  });
+  querySelectorAll(blockedSkillsCheckboxes).forEach((ctx) => { ctx.checked = tckTxt; });
   if (tckTxt) setText('Untick all buffs', e.target);
   else setText(tickAllBuffs, e.target);
 }
 
 export default function doTickAll() {
-  const tickAll = createButton({
-    className: 'tick-all',
-    textContent: tickAllBuffs,
-  });
+  const tickAll = createButton({ className: 'tick-all', textContent: tickAllBuffs });
   onclick(tickAll, toggleTickAllBuffs);
   const inject = getElementById('settingsTabs-4').children[0].rows[0].cells[0];
   inject.classList.add('fshRelative');

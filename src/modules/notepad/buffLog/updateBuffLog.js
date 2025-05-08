@@ -17,14 +17,13 @@ function logFormat(timeStamp, el) {
 
 function buffResult(buffLog) {
   const timeStamp = formatLocalDateTime(new Date());
-  const buffsAttempted = buffReportParser(document).map(
-    partial(logFormat, timeStamp),
-  );
+  const buffsAttempted = buffReportParser(document)
+    .map(partial(logFormat, timeStamp));
   set(fshBuffLog, buffsAttempted.reverse().join('') + buffLog);
 }
 
 export default async function updateBuffLog() {
   if (!getValue('keepBuffLog')) return;
-  const json = (await get(fshBuffLog)) ?? '';
+  const json = await get(fshBuffLog) ?? '';
   buffResult(json);
 }

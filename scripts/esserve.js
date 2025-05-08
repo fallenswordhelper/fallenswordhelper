@@ -4,7 +4,11 @@ import lws from 'local-web-server';
 import { port as calfPort } from './config.js';
 import { calfVer, core, version } from './getVersion.js';
 import liquidPlugin from './liquidPlugin.js';
-import { buildFsh, pathToFile, root } from './utils.js';
+import {
+  buildFsh,
+  pathToFile,
+  root,
+} from './utils.js';
 
 const rootPath = `https://localhost:${calfPort}/`;
 const fshPath = 'dist/Releases/watch';
@@ -31,8 +35,6 @@ const ctx = await esbuild.context({
   },
   entryPoints: [pathToFile('src/calfSystem.js')],
   format: 'esm',
-  logOverride: { 'suspicious-nullish-coalescing': 'silent' },
-  minify: false,
   outdir: pathToFile(calfPath),
   plugins: [liquidPlugin, sveltePlugin()],
   sourcemap: true,
@@ -41,17 +43,15 @@ const ctx = await esbuild.context({
   write: false,
 });
 
-const { hosts, port } = await ctx.serve({ host: '127.0.0.1', servedir: root });
+const { host, port } = await ctx.serve({ servedir: root });
 
-console.log(`esbuild listening on http://${hosts[0]}:${port}`);
+console.log(`esbuild listening on http://${host}:${port}`);
 
 const ws = await lws.create({
-  rewrite: [
-    {
-      from: '/(.*)',
-      to: `http://${hosts[0]}:${port}/$1`,
-    },
-  ],
+  rewrite: [{
+    from: '/(.*)',
+    to: `http://${host}:${port}/$1`,
+  }],
 });
 
 console.log(`lws listening on port ${ws.config.port}`);

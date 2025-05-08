@@ -14,11 +14,11 @@
 }
 
 .fshCompressor > label:after {
-  content: 'More ...';
+  content: "More ...";
 }
 
 .fshCompressor > input:checked + label:after {
-  content: 'Less ...';
+  content: "Less ...";
 }
 
 .fshCompressor > input ~ div {

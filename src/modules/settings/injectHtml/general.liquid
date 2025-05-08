@@ -1,224 +1,174 @@
 <tr>
-  <td class="header" colspan="2">
-    General preferences (apply to most screens)
-  </td>
+  <td class="header" colspan="2">General preferences (apply to most screens)</td>
 </tr>
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'enableGuildInfoWidgets',
-    label: 'Enable Guild Info Widgets',
-    tooltipText: 'Enabling this option will enable the Guild Info Widgets
-                  (coloring on the Guild Info panel)'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'enableGuildInfoWidgets'
+   label: 'Enable Guild Info Widgets'
+   tooltipText: 'Enabling this option will enable the Guild Info Widgets
+   (coloring on the Guild Info panel)' %}
   <td>
-    {% render 'settingsControl', field: 'enableGuildInfoWidgets' %}
-    {% render 'settingsLabelledControl',
-      field: 'hideGuildInfoMessage',
-      textBefore: 'Hide Message&gt;'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'hideGuildInfoBuff',
-      textBefore: 'Hide Buff&gt;'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'hideGuildInfoSecureTrade',
-      textBefore: 'Hide ST&gt;'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'hideGuildInfoTrade',
-      textBefore: 'Hide Trade&gt;'
-    %}
+    {% render 'settingsControl' field: 'enableGuildInfoWidgets' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideGuildInfoMessage'
+     textBefore: 'Hide Message&gt;' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideGuildInfoBuff'
+     textBefore: 'Hide Buff&gt;' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideGuildInfoSecureTrade'
+     textBefore: 'Hide ST&gt;' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideGuildInfoTrade'
+     textBefore: 'Hide Trade&gt;' %}
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'moveGuildList',
-  label: 'Move Guild Info List',
-  tooltipText: 'This will Move the Guild Info List higher on the bar on the
-                right',
-  unstable: true
-%}
-{% render 'settingsRow',
-  field: 'moveOnlineAlliesList',
-  label: 'Move Online Allies List',
-  tooltipText: 'This will Move the Online Allies List higher on the bar on the
-                right',
-  unstable: true
-%}
+{% render 'settingsRow'
+ field: 'moveGuildList'
+ label: 'Move Guild Info List'
+ tooltipText: 'This will Move the Guild Info List higher on the bar on the right'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'moveOnlineAlliesList'
+ label: 'Move Online Allies List'
+ tooltipText: 'This will Move the Online Allies List higher on the bar on the right'
+ unstable: true %}
 <tr>
-  {% render 'settingsRowLabel',
-    label: 'Show Online Allies/Enemies',
-    network: true,
-    tooltipText: 'This will show the allies/enemies online list on the left.'
-  %}
+  {% render 'settingsRowLabel'
+   label: 'Show Online Allies/Enemies'
+   network: true
+   tooltipText: 'This will show the allies/enemies online list on the left.' %}
   <td>
-    {% render 'settingsLabelledControl',
-      field: 'enableAllyOnlineList',
-      textBefore: 'Allies'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'enableEnemyOnlineList',
-      textBefore: 'Enemies'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'allyEnemyOnlineRefreshTime',
-      textAfter: 'seconds refresh',
-      type: 'number'
-    %}
+    {% render 'settingsLabelledControl'
+     field: 'enableAllyOnlineList'
+     textBefore: 'Allies' %}
+    {% render 'settingsLabelledControl'
+     field: 'enableEnemyOnlineList'
+     textBefore: 'Enemies' %}
+    {% render 'settingsLabelledControl'
+     field: 'allyEnemyOnlineRefreshTime'
+     textAfter: 'seconds refresh'
+     type: 'number' %}
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'enableOnlineAlliesWidgets',
-  label: 'Enable Online Allies Widgets',
-  tooltipText: 'Enabling this option will enable the Allies List Widgets
-                (coloring on the Allies List panel)'
-%}
-{% render 'settingsRow',
-  field: 'moveDailyQuest',
-  label: 'Move Daily Quest',
-  tooltipText: 'This will move the Daily Quest to the left, under the menu, for
-                better visibility.',
-  unstable: true
-%}
-{% render 'settingsRow',
-  field: 'moveXmasBox',
-  label: 'Move Christmas Offer',
-  tooltipText: 'This will move the Christmas Offer to the left, under the menu,
-                for better visibility.',
-  unstable: true
-%}
-{% render 'settingsRow',
-  field: 'moveFSBox',
-  label: 'Move FS box',
-  tooltipText: 'This will move the FS box to the left, under the menu, for
-                better visibility (unless it is already hidden.)',
-  unstable: true
-%}
-{% render 'settingsRow',
-  field: 'fsboxlog',
-  label: 'Enable FS Box Log',
-  tooltipText: 'This enables the functionality to keep a log of recent seen FS
-                Box message.'
-%}
-{% render 'settingsRow',
-  field: 'gameHelpLink',
-  label: '"Game Help" Settings Link',
-  tooltipText: 'This turns the Game Help text in the lower right box into a link
-                to this settings page.'
-%}
-{% render 'settingsRow',
-  field: 'enableTempleAlert',
-  label: 'Enable Temple Alert',
-  network: true,
-  tooltipText: 'Puts an alert on the LHS if you have not prayed at the temple
-                today.'
-%}
-{% render 'settingsRow',
-  field: 'enableUpgradeAlert',
-  label: 'Enable Gold Upgrade Alert',
-  network: true,
-  tooltipText: 'Puts an alert on the LHS if you have not upgraded your stamina
-                with gold today.'
-%}
-{% render 'settingsRow',
-  field: 'enableComposingAlert',
-  label: 'Enable Composing Alert',
-  network: true,
-  tooltipText: 'Puts an alert on the LHS if you have composing slots available.'
-%}
-{% render 'settingsRow',
-  field: 'enhanceOnlineDots',
-  label: 'Enhance Online Dots',
-  tooltipText: 'Enhances the green/grey dots by player names to show
-                online/offline status.'
-%}
-{% render 'settingsRow',
-  field: 'hideBuffSelected',
-  label: 'Hide Buff Selected',
-  tooltipText: 'Hides the buff selected functionality in the online allies and
-                guild info section.'
-%}
-{% render 'settingsRow',
-  field: 'hideHelperMenu',
-  label: 'Hide Helper Menu',
-  tooltipText: 'Hides the helper menu from top left.'
-%}
-{% render 'settingsRow',
-  field: 'keepHelperMenuOnScreen',
-  label: 'Keep Helper Menu On Screen',
-  tooltipText: 'Keeps helper menu on screen as you scroll (helper menu must be
-                enabled to work). Also works with quick links.'
-%}
-{% render 'settingsRow',
-  field: 'draggableHelperMenu',
-  label: 'Draggable Helper Menu',
-  tooltipText: 'Allows the helper menu to be dragged around the screen.'
-%}
+{% render 'settingsRow'
+ field: 'enableOnlineAlliesWidgets'
+ label: 'Enable Online Allies Widgets'
+ tooltipText: 'Enabling this option will enable the Allies List Widgets
+ (coloring on the Allies List panel)' %}
+{% render 'settingsRow'
+ field: 'moveDailyQuest'
+ label: 'Move Daily Quest'
+ tooltipText: 'This will move the Daily Quest to the left, under the menu, for better visibility.'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'moveXmasBox'
+ label: 'Move Christmas Offer'
+ tooltipText: 'This will move the Christmas Offer to the left, under the menu,
+ for better visibility.'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'moveFSBox'
+ label: 'Move FS box'
+ tooltipText: 'This will move the FS box to the left, under the menu, for better visibility
+ (unless it is already hidden.)'
+ unstable: true %}
+{% render 'settingsRow'
+ field: 'fsboxlog'
+ label: 'Enable FS Box Log'
+ tooltipText: 'This enables the functionality to keep a log of recent seen FS Box message.' %}
+{% render 'settingsRow'
+ field: 'gameHelpLink'
+ label: '"Game Help" Settings Link'
+ tooltipText: 'This turns the Game Help text in the lower right box into a link to this settings
+ page.' %}
+{% render 'settingsRow'
+ field: 'enableTempleAlert'
+ label: 'Enable Temple Alert'
+ network: true
+ tooltipText: 'Puts an alert on the LHS if you have not prayed at the temple today.' %}
+{% render 'settingsRow'
+ field: 'enableUpgradeAlert'
+ label: 'Enable Gold Upgrade Alert'
+ network: true
+ tooltipText: 'Puts an alert on the LHS if you have not upgraded your stamina with gold today.' %}
+{% render 'settingsRow'
+ field: 'enableComposingAlert'
+ label: 'Enable Composing Alert'
+ network: true
+ tooltipText: 'Puts an alert on the LHS if you have composing slots available.' %}
+{% render 'settingsRow'
+ field: 'enhanceOnlineDots'
+ label: 'Enhance Online Dots'
+ tooltipText: 'Enhances the green/grey dots by player names to show online/offline status.' %}
+{% render 'settingsRow'
+ field: 'hideBuffSelected'
+ label: 'Hide Buff Selected'
+ tooltipText: 'Hides the buff selected functionality in the online allies and guild info
+ section.' %}
+{% render 'settingsRow'
+ field: 'hideHelperMenu'
+ label: 'Hide Helper Menu'
+ tooltipText: 'Hides the helper menu from top left.' %}
+{% render 'settingsRow'
+ field: 'keepHelperMenuOnScreen'
+ label: 'Keep Helper Menu On Screen'
+ tooltipText: 'Keeps helper menu on screen as you scroll (helper menu must be enabled to work).
+ Also works with quick links.' %}
+{% render 'settingsRow'
+ field: 'draggableHelperMenu'
+ label: 'Draggable Helper Menu'
+ tooltipText: 'Allows the helper menu to be dragged around the screen.' %}
 <tr>
-  {% render 'settingsRowLabel',
-    label: 'Quick Links Screen Location',
-    tooltipText: 'Determines where the quick links dialog shows on the screen.
-                  Default is top 22, left 0.'
-  %}
+  {% render 'settingsRowLabel'
+   label: 'Quick Links Screen Location'
+   tooltipText: 'Determines where the quick links dialog shows on the screen.
+   Default is top 22, left 0.' %}
   <td>
-    {% render 'settingsLabelledControl',
-      field: 'quickLinksTopPx',
-      textBefore: 'Top:',
-      type: 'number'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'quickLinksLeftPx',
-      textBefore: 'Left:',
-      type: 'number'
-    %}
+    {% render 'settingsLabelledControl'
+     field: 'quickLinksTopPx'
+     textBefore: 'Top:'
+     type: 'number' %}
+    {% render 'settingsLabelledControl'
+     field: 'quickLinksLeftPx'
+     textBefore: 'Left:'
+     type: 'number' %}
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'draggableQuickLinks',
-  label: 'Draggable Quick Links',
-  tooltipText: 'Allows the quick link box to be dragged around the screen.'
-%}
-{% render 'settingsRow',
-  field: 'expandMenuOnKeyPress',
-  label: 'Expand Menu on Key Press',
-  tooltipText: 'Expands the left hand menu when you use hotkeys.'
-%}
-{% render 'settingsRow',
-  field: 'statBarLinks',
-  label: 'Statbar links',
-  tooltipText: 'This changes the statbar links to allow middle button clicks.'
-%}
-{% render 'settingsRow',
-  field: 'staminaCalculator',
-  label: 'Stamina Calculator',
-  tooltipText: 'This displays when you will reach max stamina thru stamina gain.'
-%}
-{% render 'settingsRow',
-  field: 'levelUpCalculator',
-  label: 'Level Up Calculator',
-  tooltipText: 'This displays when you will reach your next level thru XP gain.'
-%}
-{% render 'settingsRow',
-  field: 'resizeQuickBuff',
-  label: 'Resize Quick Buff Window',
-  tooltipText: 'This makes the quick buff window a bit bigger.'
-%}
-{% render 'settingsRow',
-  field: 'addServerNode',
-  label: 'Add Server Node to Top Stats',
-  tooltipText: "This adds clickable online players and server<br>
-                node to top stats if you have the options:<br>
-                'Show Game Stats At Top' enabled,<br>
-                'Hide Games Stats' disabled and<br>
-                'Game Stats Summary Only' disabled.<br>
-                It also hides the Game Stats box."
-%}
-{% render 'settingsRow',
-  field: 'addScoutTowerLink',
-  label: 'Add Scout Tower Link',
-  tooltipText: 'This adds a Scout Tower link to the Spoils of War info box.'
-%}
-{% render 'settingsRow',
-  field: 'dailyQuestReRoll',
-  label: 'AJAXify Daily Quest Re-roll',
-  tooltipText: 'Re-roll Daily Quest without a page reload.'
-%}
+{% render 'settingsRow'
+ field: 'draggableQuickLinks'
+ label: 'Draggable Quick Links'
+ tooltipText: 'Allows the quick link box to be dragged around the screen.' %}
+{% render 'settingsRow'
+ field: 'expandMenuOnKeyPress'
+ label: 'Expand Menu on Key Press'
+ tooltipText: 'Expands the left hand menu when you use hotkeys.' %}
+{% render 'settingsRow'
+ field: 'statBarLinks'
+ label: 'Statbar links'
+ tooltipText: 'This changes the statbar links to allow middle button clicks.' %}
+{% render 'settingsRow'
+ field: 'staminaCalculator'
+ label: 'Stamina Calculator'
+ tooltipText: 'This displays when you will reach max stamina thru stamina gain.' %}
+{% render 'settingsRow'
+ field: 'levelUpCalculator'
+ label: 'Level Up Calculator'
+ tooltipText: 'This displays when you will reach your next level thru XP gain.' %}
+{% render 'settingsRow'
+ field: 'resizeQuickBuff'
+ label: 'Resize Quick Buff Window'
+ tooltipText: 'This makes the quick buff window a bit bigger.' %}
+{% render 'settingsRow'
+ field: 'addServerNode'
+ label: 'Add Server Node to Top Stats'
+ tooltipText: "This adds clickable online players and server<br>
+ node to top stats if you have the options:<br>
+ 'Show Game Stats At Top' enabled,<br>
+ 'Hide Games Stats' disabled and<br>
+ 'Game Stats Summary Only' disabled.<br>
+ It also hides the Game Stats box." %}
+{% render 'settingsRow'
+ field: 'addScoutTowerLink'
+ label: 'Add Scout Tower Link'
+ tooltipText: 'This adds a Scout Tower link to the Spoils of War info box.' %}

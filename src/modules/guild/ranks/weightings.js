@@ -27,14 +27,13 @@ const privLookup = [
 ];
 
 const sumWeights = (a, [, weight]) => a + weight - 1;
-const getWeighted = (perms) =>
-  privLookup.filter(([flag]) => bitwiseAnd(perms, flag)).reduce(sumWeights, 0);
-const unsignedShiftZero = (signed) => signed >>> 0;
+const getWeighted = (perms) => privLookup
+  .filter(([flag]) => bitwiseAnd(perms, flag))
+  .reduce(sumWeights, 0);
+const unsignedShiftZero = (signed) => signed >>> 0; // eslint-disable-line no-bitwise
 const toBinary = (number) => unsignedShiftZero(number).toString(2);
-const addBits = (number) =>
-  toBinary(number).split('').map(Number).reduce(sum, 0);
-const calcPermWeight = (perms) =>
-  roundToString(getWeighted(perms) + addBits(perms), 1);
+const addBits = (number) => toBinary(number).split('').map(Number).reduce(sum, 0);
+const calcPermWeight = (perms) => roundToString(getWeighted(perms) + addBits(perms), 1);
 
 function parseRankData(memberRanks, row) {
   // Makes a weighted calculation of available permissions and gets tax rate
@@ -42,12 +41,9 @@ function parseRankData(memberRanks, row) {
   const rankName = getText(rankCell.firstChild); // Text Node
   const thisRank = memberRanks.find((r) => r && r.name === rankName);
   if (thisRank) {
-    insertHtmlAfterBegin(
-      rankCell,
-      `<span class="fshBlue">(${calcPermWeight(
-        thisRank.permissions,
-      )}) Tax:(${thisRank.tax ?? 0}%)</span> `,
-    );
+    insertHtmlAfterBegin(rankCell, `<span class="fshBlue">(${
+      calcPermWeight(thisRank.permissions)
+    }) Tax:(${thisRank.tax ?? 0}%)</span> `);
   }
 }
 
@@ -57,10 +53,7 @@ function fetchRankData(theRows, memberRanks) {
 }
 
 function injectWeightButton(theRows, memberRanks, addNewRank) {
-  const container = createSpan({
-    className: 'fsh-weightings',
-    innerHTML: '[ ',
-  });
+  const container = createSpan({ className: 'fsh-weightings', innerHTML: '[ ' });
   const weightButton = createButton({
     className: 'fshBl fsh-bli',
     textContent: 'Get Rank Weightings',

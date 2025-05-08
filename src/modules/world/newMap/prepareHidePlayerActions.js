@@ -27,9 +27,7 @@ function hideActions(el) {
 }
 
 function doHidePlayerActions() {
-  if (!hidePlayerActions) {
-    return;
-  }
+  if (!hidePlayerActions) { return; }
   const act = getElementById('actionList');
   getArrayByClassName('player', act).forEach(hideActions);
 }

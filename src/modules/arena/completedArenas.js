@@ -20,10 +20,8 @@ function gotoFirstPage() {
   gotoPage(1);
 }
 
-const getTarget = (inputValue) =>
-  querySelector(`#pCC input[value="${inputValue}"]`);
-const newButton = (newValue) =>
-  createInput({ type: 'button', value: newValue });
+const getTarget = (inputValue) => querySelector(`#pCC input[value="${inputValue}"]`);
+const newButton = (newValue) => createInput({ type: 'button', value: newValue });
 
 function injectStartButton(startButton, prevButton) {
   insertElementBefore(startButton, prevButton);
@@ -31,10 +29,8 @@ function injectStartButton(startButton, prevButton) {
   onclick(startButton, gotoFirstPage);
 }
 
-const lastPage = () =>
-  getText(
-    querySelector('#pCC input[value="Go"]').parentNode.previousElementSibling,
-  ).replace(/\D/g, '');
+const lastPage = () => getText(querySelector('#pCC input[value="Go"]')
+  .parentNode.previousElementSibling).replace(/\D/g, '');
 
 function gotoLastPage() {
   sendEvent('arena completed', 'gotoLastPage');

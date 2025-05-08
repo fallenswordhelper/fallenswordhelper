@@ -4,9 +4,7 @@ import partial from '../../../common/partial';
 function addNextCell(row, [colSpan, anElementFn, isHeader]) {
   const aCell = row.insertCell(-1);
   aCell.colSpan = colSpan;
-  if (isHeader) {
-    aCell.className = 'header';
-  }
+  if (isHeader) { aCell.className = 'header'; }
   insertElement(aCell, anElementFn());
   return aCell;
 }
@@ -17,9 +15,7 @@ function addRowCells(aRow, someCells) {
 
 function addNextRow(tbl, cells, isBlue) {
   const aRow = tbl.insertRow(-1);
-  if (isBlue) {
-    aRow.className = 'fshBlue';
-  }
+  if (isBlue) { aRow.className = 'fshBlue'; }
   addRowCells(aRow, cells);
   return aRow;
 }

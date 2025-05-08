@@ -13,13 +13,11 @@ function injectButtons(btn) {
   insertHtmlAfterBegin(
     btn.parentNode,
     `[ <span class="fsh-quick-collect"><button class="fshBl fsh-bli" type="button" value="${
-      pid
-    }">Quick Collect</button></span> ]&nbsp;`,
+      pid}">Quick Collect</button></span> ]&nbsp;`,
   );
 }
 
-const isOurTarget = (target) =>
-  target.tagName === 'BUTTON' && getText(target) === 'Quick Collect';
+const isOurTarget = (target) => target.tagName === 'BUTTON' && getText(target) === 'Quick Collect';
 
 function prepareCollect(ctx) {
   ctx.nextElementSibling.disabled = true;
@@ -53,10 +51,7 @@ function hdlQuickCollect(evt) {
 }
 
 export default function quickCollect() {
-  const collectButtons = querySelectorArray(
-    'input[value="Collect Potion"]',
-    pcc(),
-  );
+  const collectButtons = querySelectorArray('input[value="Collect Potion"]', pcc());
   collectButtons.forEach(injectButtons);
   onclick(pcc(), hdlQuickCollect);
 }

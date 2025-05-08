@@ -16,13 +16,7 @@ function getListItem(words, names) {
   });
   onclick(btn, (evt) => {
     evt.target.blur();
-    fshOpen(
-      `${quickbuffUrl}&players=${names}`,
-      'fsQuickBuff',
-      618,
-      1000,
-      ',scrollbars',
-    );
+    fshOpen(`${quickbuffUrl}&players=${names}`, 'fsQuickBuff', 618, 1000, ',scrollbars');
     sendEvent('doBuffLinks', words);
   });
   insertElement(li, btn);

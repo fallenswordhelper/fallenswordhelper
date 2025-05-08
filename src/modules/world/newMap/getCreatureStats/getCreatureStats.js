@@ -11,14 +11,12 @@ function cacheResult(json) {
 
 const thisMob = (id, el) => id === Number(el.response.data.id);
 
-function nextTick(resolve, cached) {
-  resolve(cached);
-}
+function nextTick(resolve, cached) { resolve(cached); }
 
 function fromCache(cached) {
-  return new Promise((resolve) => {
+  return new Promise(((resolve) => {
     task(3, nextTick, [resolve, cached]);
-  });
+  }));
 }
 
 export default async function getCreatureStats(id, passback) {

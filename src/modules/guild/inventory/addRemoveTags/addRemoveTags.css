@@ -40,15 +40,12 @@
   font-size: 11px;
 }
 
-.tag-all-btn,
-.tag-add-btn,
-.tag-bp-btn,
-.tag-remove-btn {
+.tag-all-btn, .tag-add-btn, .tag-bp-btn, .tag-remove-btn {
   background: transparent;
   border: none;
   color: blue;
   cursor: pointer;
-  font-family: inherit;
+  font-family : inherit;
   font-size: inherit;
   margin: 0;
   padding: 0;
@@ -57,10 +54,7 @@
   user-select: text;
 }
 
-.tag-all,
-.tag-add,
-.tag-bp,
-.tag-remove {
+.tag-all, .tag-add, .tag-bp, .tag-remove {
   color: green;
   display: inline-block;
   height: 12px;
@@ -69,22 +63,18 @@
   vertical-align: bottom;
 }
 
-.tag-all,
-.tag-all-btn {
+.tag-all, .tag-all-btn {
   width: 48px;
 }
 
-.tag-add,
-.tag-add-btn {
+.tag-add, .tag-add-btn {
   width: 46px;
 }
 
-.tag-bp,
-.tag-bp-btn {
+.tag-bp, .tag-bp-btn {
   width: 42px;
 }
 
-.tag-remove,
-.tag-remove-btn {
+.tag-remove, .tag-remove-btn {
   width: 68px;
 }

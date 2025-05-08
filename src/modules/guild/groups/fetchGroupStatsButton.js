@@ -10,12 +10,9 @@ import addButton from './addButton';
 
 function parseGroupData(attribs) {
   return `<div class="fshgrpstat"><div>Attack</div><div>${
-    attribs[0]
-  }</div><div>Defense</div><div>${attribs[1]}</div><div>Armor</div><div>${
-    attribs[2]
-  }</div><div>Damage</div><div>${attribs[4]}</div><div>HP</div><div>${
-    attribs[3]
-  }</div></div>`;
+    attribs[0]}</div><div>Defense</div><div>${attribs[1]}</div><div>Armor</div><div>${
+    attribs[2]}</div><div>Damage</div><div>${attribs[4]}</div><div>HP</div><div>${
+    attribs[3]}</div></div>`;
 }
 
 async function thisLink(aLink) {

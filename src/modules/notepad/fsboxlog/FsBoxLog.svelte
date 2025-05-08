@@ -10,8 +10,8 @@
   import getCustomUrlParameter from '../../system/getCustomUrlParameter';
   import { get, set } from '../../system/idb';
 
-  let { visible = $bindable(true) } = $props();
-  let records = $state([]);
+  export let visible = true;
+  let records = [];
 
   function close() {
     sendEvent('FS Box Log', 'close');
@@ -30,7 +30,7 @@
   const real = ([pid, pnm, qot]) => pid && isString(pnm) && isString(qot);
 
   async function init() {
-    const txt = (await get('fsh_fsboxcontent')) ?? '';
+    const txt = await get('fsh_fsboxcontent') ?? '';
     records = txt.split('<br>').map(breakUp).filter(real);
   }
 
@@ -41,28 +41,26 @@
   }
 </script>
 
-<ModalTitled {close} {visible}>
-  {#snippet title()}
-    FS Box Log
-  {/snippet}
+<ModalTitled { visible } on:close={ close }>
+  <svelte:fragment slot="title">FS Box Log</svelte:fragment>
   <div class="top">
-    <button onclick={clearStorage} type="button">Clear</button>
+    <button on:click={ clearStorage } type="button">Clear</button>
   </div>
   <div class="textContainer">
-    {#await init() then}
-      {#each records as [playerid, playername, quote], x (x)}
-        <br />
+    { #await init() then }
+      { #each records as [playerid, playername, quote] }
+        <br>
         <span>
-          <a href="{playerIdUrl}{playerid}">
-            {playername}
+          <a href="{ playerIdUrl }{ playerid }">
+            { playername }
           </a>
           says:
         </span>
         <q>
-          {quote}
+          { quote }
         </q>
-      {/each}
-    {/await}
+      { /each }
+    { /await }
   </div>
 </ModalTitled>
 

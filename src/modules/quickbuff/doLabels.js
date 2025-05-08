@@ -7,24 +7,16 @@ import parseBuffLevel from './parseBuffLevel';
 function addStamCost(el, nameSpan) {
   const dataTipped = nameSpan.dataset.tipped;
   const { cost } = el.previousElementSibling.dataset;
-  setTipped(
-    dataTipped.replace('</center>', `<br>Stamina Cost: ${cost}$&`),
-    nameSpan,
-  );
+  setTipped(dataTipped.replace('</center>', `<br>Stamina Cost: ${cost}$&`), nameSpan);
   if (defineUserIsDev) {
-    insertHtmlBeforeEnd(
-      el.parentNode,
-      '<span></span> <span class="fshDodgerBlue ' +
-        `tooltip-bottom-right" data-tooltip="Stamina Cost">${cost}</span>`,
-    );
+    insertHtmlBeforeEnd(el.parentNode, '<span></span> <span class="fshDodgerBlue '
+     + `tooltip-bottom-right" data-tooltip="Stamina Cost">${cost}</span>`);
   }
 }
 
 function canBeDimmed(el, nameSpan) {
-  return (
-    !excludeBuff.includes(Number(el.htmlFor.slice(6))) &&
-    parseBuffLevel(nameSpan.children[0]) < 125
-  );
+  return !excludeBuff.includes(Number(el.htmlFor.slice(6)))
+    && parseBuffLevel(nameSpan.children[0]) < 125;
 }
 
 function dimPreReqs(el, nameSpan) {

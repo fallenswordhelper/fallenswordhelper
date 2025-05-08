@@ -27,9 +27,7 @@ function makeGuideItemAnchor(itemId) {
 
 function wrapInGuideLink(el, source) {
   const itemId = getItemId(source);
-  if (!itemId) {
-    return;
-  }
+  if (!itemId) { return; }
   const myLink = makeGuideItemAnchor(itemId);
   insertElementBefore(myLink, el);
   insertElement(myLink, el);

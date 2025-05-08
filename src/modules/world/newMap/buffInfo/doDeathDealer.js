@@ -7,16 +7,16 @@ let ddDiv = 0;
 let ddSpan = 0;
 
 function initDdDiv(containerDiv) {
+  // eslint-disable-next-line prefer-destructuring
   ddDiv = containerDiv.children[2];
   ddSpan = initBuffDiv(ddDiv, '', 'Damage bonus: ', '%');
 }
 
 function getDdBonus(dd, killStreak) {
   if (dd) {
-    const ddPerc = Math.min(
-      Math.round(Math.floor(killStreak / 5) * Number(dd.level)) * 0.01,
-      20,
-    );
+    const ddPerc = Math.min(Math.round(
+      Math.floor(killStreak / 5) * Number(dd.level),
+    ) * 0.01, 20);
     const ddBonus = round(ddPerc, 2);
     return ddBonus.toString();
   }

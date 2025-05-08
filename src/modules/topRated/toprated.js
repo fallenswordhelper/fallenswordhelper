@@ -17,9 +17,8 @@ function looksLikeTopRated() {
     type: 'button',
     value: 'Find Online Players',
     dataset: {
-      tipped:
-        'Fetch the online status of the ' +
-        'top 250 players (warning ... takes a few seconds).',
+      tipped: 'Fetch the online status of the '
+        + 'top 250 players (warning ... takes a few seconds).',
     },
   });
   insertElementAfterBegin(theCell, findBtn);
@@ -37,7 +36,5 @@ function testforTopRated() {
 }
 
 export default function toprated() {
-  if (testforTopRated()) {
-    looksLikeTopRated();
-  }
+  if (testforTopRated()) { looksLikeTopRated(); }
 }

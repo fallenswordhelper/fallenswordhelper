@@ -2,7 +2,9 @@
   {% if textBefore %}
     {{ textBefore }}
   {% endif %}
-  {% render 'settingsControl', field: field, type: type %}
+  {% render 'settingsControl'
+   field: field
+   type: type %}
   {% if textAfter %}
     {{ textAfter }}
   {% endif %}

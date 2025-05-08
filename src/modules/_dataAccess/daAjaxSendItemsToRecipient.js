@@ -1,11 +1,6 @@
 import appSendItemsToRecipient from '../app/trade/sendItemsToRecipient';
-import getValue from '../system/getValue';
 import $dataAccess from './$dataAccess';
-import senditems from './fallbacks/sendItems';
-
-function sendItemsToRecipient(invIdAry) {
-  return senditems(getValue('itemRecipient'), invIdAry);
-}
+import sendItemsToRecipient from './fallbacks/sendItemsToRecipient';
 
 export default function daAjaxSendItemsToRecipient(invIdAry) {
   return $dataAccess(appSendItemsToRecipient, sendItemsToRecipient, invIdAry);

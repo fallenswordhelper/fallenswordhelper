@@ -1,47 +1,44 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import sendEvent from '../../../analytics/sendEvent';
-  import LinkBtnBracketed from '../../../common/LinkBtnBracketed.svelte';
+  import LinkButtonBracketed from '../../../common/LinkButtonBracketed.svelte';
   import calf from '../../../support/calf';
   import setValue from '../../../system/setValue';
 
+  const dispatch = createEventDispatcher();
   const label = (pref) => (pref ? 'Hide' : 'Show');
 
-  let {
-    doDropLinks,
-    doExtraLinks,
-    doSelectLocked,
-    showExtraLinks = $bindable(false),
-    showQuickDropLinks = $bindable(false),
-  } = $props();
+  export let showExtraLinks = false;
+  export let showQuickDropLinks = false;
 
   function toggleShowExtraLinks() {
     sendEvent('storeitems', 'toggleShowExtraLinks');
     showExtraLinks = !showExtraLinks;
     setValue('showExtraLinks', showExtraLinks);
-    doExtraLinks(showExtraLinks);
+    dispatch('showExtraLinks', showExtraLinks);
   }
 
   function toggleShowQuickDropLinks() {
     sendEvent('storeitems', 'toggleShowQuickDropLinks');
     showQuickDropLinks = !showQuickDropLinks;
     setValue('showQuickDropLinks', showQuickDropLinks);
-    doDropLinks(showQuickDropLinks);
+    dispatch('showQuickDropLinks', showQuickDropLinks);
   }
 
   function selectLocked() {
     sendEvent('storeitems', 'selectLocked');
-    doSelectLocked();
+    dispatch('selectLocked');
   }
 </script>
 
-<LinkBtnBracketed --button-width="11.8em" onclick={toggleShowExtraLinks}>
-  {label(showExtraLinks)} AH and UFSG Links
-</LinkBtnBracketed>&nbsp;
-<LinkBtnBracketed --button-width="10.6em" onclick={toggleShowQuickDropLinks}>
-  {label(showQuickDropLinks)} Quick Drop links
-</LinkBtnBracketed>&nbsp;
-{#if calf.subcmd2 === 'storeitems'}
-  <LinkBtnBracketed --button-width="10.8em" onclick={selectLocked}>
+<LinkButtonBracketed --button-width="11.8em" on:click={ toggleShowExtraLinks }>
+  { label(showExtraLinks) } AH and UFSG Links
+</LinkButtonBracketed>&nbsp;
+<LinkButtonBracketed --button-width="10.6em" on:click={ toggleShowQuickDropLinks }>
+  { label(showQuickDropLinks) } Quick Drop links
+</LinkButtonBracketed>&nbsp;
+{ #if calf.subcmd2 === 'storeitems' }
+  <LinkButtonBracketed --button-width="10.8em" on:click={ selectLocked }>
     Select All Guild Locked
-  </LinkBtnBracketed>
-{/if}
+  </LinkButtonBracketed>
+{ /if }

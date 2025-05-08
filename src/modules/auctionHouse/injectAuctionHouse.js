@@ -1,4 +1,4 @@
-import daAuctionCancel from '../_dataAccess/daAuctionCancel';
+import indexAjaxData from '../ajax/indexAjaxData';
 import sendEvent from '../analytics/sendEvent';
 import all from '../common/all';
 import createSpan from '../common/cElement/createSpan';
@@ -24,29 +24,24 @@ function doRefresh() {
 function doCancel(ctx) {
   const [itemImage] = ctx.parentNode.parentNode.children[0].children;
   ctx.outerHTML = `<img src="${
-    cdn
-  }ui/misc/spinner.gif" width="14" height="14">`;
-  return daAuctionCancel(
-    getCustomUrlParameter(itemImage.dataset.tipped, 'inv_id'),
-  );
+    cdn}ui/misc/spinner.gif" width="14" height="14">`;
+  return indexAjaxData({
+    cmd: 'auctionhouse',
+    subcmd: 'cancel',
+    auction_id: getCustomUrlParameter(itemImage.dataset.tipped, 'inv_id'),
+  });
 }
 
 async function cancelAllAH() {
   sendEvent('AH', 'cancelAllAH');
-  const cancelButtons = getArrayByClassName(
-    'auctionCancel',
-    getElementById('resultRows'),
-  );
-  if (cancelButtons.length === 0) {
-    return;
-  }
+  const cancelButtons = getArrayByClassName('auctionCancel', getElementById('resultRows'));
+  if (cancelButtons.length === 0) { return; }
   await all(cancelButtons.map(doCancel));
   doRefresh();
 }
 
 function makeCancelAll() {
-  const spacer = closestTr(getElementById('fill'))?.nextElementSibling
-    ?.children?.[0];
+  const spacer = closestTr(getElementById('fill'))?.nextElementSibling?.children?.[0];
   if (!spacer) return;
   const cancelAllSpan = createSpan({
     className: 'smallLink',
@@ -66,9 +61,7 @@ function autoFill() {
 }
 
 export default function injectAuctionHouse() {
-  if (jQueryNotPresent() || !pcc()) {
-    return;
-  }
+  if (jQueryNotPresent() || !pcc()) { return; }
   makeCancelAll();
   autoFill();
   doStatTotal();

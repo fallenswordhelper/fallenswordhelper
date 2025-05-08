@@ -30,14 +30,10 @@ import {
 const noAlliesTests = [
   (allies, enemies) => allies.length + enemies.length,
   (_allies, enemies) => {
-    if (!calf.enableAllyOnlineList) {
-      return enemies.length;
-    }
+    if (!calf.enableAllyOnlineList) { return enemies.length; }
   },
   (allies) => {
-    if (!calf.enableEnemyOnlineList) {
-      return allies.length;
-    }
+    if (!calf.enableEnemyOnlineList) { return allies.length; }
   },
 ];
 
@@ -45,9 +41,7 @@ function sendAllyEvent(label) {
   sendEvent('allyEnemy', label);
 }
 
-function condition(allies, enemies, e) {
-  return e(allies, enemies) === 0;
-}
+function condition(allies, enemies, e) { return e(allies, enemies) === 0; }
 
 function noAllies(allies, enemies) {
   return noAlliesTests.every(partial(condition, allies, enemies));
@@ -69,9 +63,7 @@ function hazAllies(allies, enemies) {
 function injectAllyEnemyList(data) {
   const allies = fallback(data._allies, []);
   const enemies = fallback(data._enemies, []);
-  if (noAllies(allies, enemies)) {
-    return;
-  }
+  if (noAllies(allies, enemies)) { return; }
   hazAllies(allies, enemies);
 }
 
@@ -89,27 +81,19 @@ function toggleBuffSelected(target) {
 
 function msgPlayer(target) {
   sendAllyEvent('msgPlayer');
-  window.openQuickMsgDialog(
-    getText(target.parentNode.previousElementSibling.lastElementChild),
-  );
+  window.openQuickMsgDialog(getText(target.parentNode.previousElementSibling
+    .lastElementChild));
 }
 
 function buffPlayer(target) {
   sendAllyEvent('buffPlayer');
-  openQuickBuffById(
-    getPlayerId(target.parentNode.previousElementSibling.lastElementChild.href),
-  );
+  openQuickBuffById(getPlayerId(target.parentNode.previousElementSibling.lastElementChild.href));
 }
 
 function selectedBuff() {
   sendAllyEvent('selectedBuff');
-  const buffBalls = getArrayByClassName(
-    enemyBuffCheckOn,
-    getElementById('fshContactList'),
-  );
-  const sendstring = buffBalls
-    .map((el) => getPlayerId(el.nextElementSibling.href))
-    .join(',');
+  const buffBalls = getArrayByClassName(enemyBuffCheckOn, getElementById('fshContactList'));
+  const sendstring = buffBalls.map((el) => getPlayerId(el.nextElementSibling.href)).join(',');
   openQuickBuffById(sendstring);
 }
 
@@ -135,10 +119,9 @@ function makeDiv(data) {
     id: 'fshAllyEnemy',
     className: 'minibox',
   });
-  let wrapper =
-    '<h3>Allies/Enemies</h3><div class="minibox-content">' +
-    '<h4>Online Contacts <span id="fshResetEnemy">Reset</span></h4>' +
-    '<div class="minibox-enemy"><ul id="fshContactList"></ul>';
+  let wrapper = '<h3>Allies/Enemies</h3><div class="minibox-content">'
+    + '<h4>Online Contacts <span id="fshResetEnemy">Reset</span></h4>'
+    + '<div class="minibox-enemy"><ul id="fshContactList"></ul>';
   if (!calf.hideBuffSelected) {
     wrapper += `<ul class="${enemySelectedBuff}">Quick Buff Selected</ul>`;
   }
@@ -156,12 +139,7 @@ function nextTick(data) {
 }
 
 export default async function allyEnemy() {
-  if (
-    (!calf.enableAllyOnlineList && !calf.enableEnemyOnlineList) ||
-    jQueryNotPresent()
-  ) {
-    return;
-  }
+  if (jQueryNotPresent()) { return; }
   const data = await myStats(false);
   nextTick(data);
 }

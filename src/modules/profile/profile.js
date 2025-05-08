@@ -22,15 +22,11 @@ function doQuickButtons() {
 }
 
 function doUpdateBuffs() {
-  if (getValue('injectBuffGuide')) {
-    runDefault(import('./updateBuffs'));
-  }
+  if (getValue('injectBuffGuide')) { runDefault(import('./updateBuffs')); }
 }
 
 function doUpdateStatistics() {
-  if (getValue('statisticsWrap')) {
-    runDefault(import('./updateStatistics'));
-  }
+  if (getValue('statisticsWrap')) { runDefault(import('./updateStatistics')); }
 }
 
 function doHighlightPvPProt() {
@@ -40,9 +36,7 @@ function doHighlightPvPProt() {
 }
 
 function doRenderBio() {
-  if (shouldRender()) {
-    runDefault(import('./bio/bio'));
-  }
+  if (shouldRender()) { runDefault(import('./bio/bio')); }
 }
 
 function doCompressBio() {
@@ -52,9 +46,7 @@ function doCompressBio() {
 }
 
 function doBuffLevels() {
-  if (getValue('showBuffLevel')) {
-    runDefault(import('./buffLevelDisplay'));
-  }
+  if (getValue('showBuffLevel')) { runDefault(import('./buffLevelDisplay')); }
 }
 
 function updateDom() {
@@ -74,9 +66,7 @@ function updateDom() {
 }
 
 export default function profile() {
-  if (jQueryNotPresent()) {
-    return;
-  }
+  if (jQueryNotPresent()) { return; }
   updateDom();
   interceptSubmit();
 }

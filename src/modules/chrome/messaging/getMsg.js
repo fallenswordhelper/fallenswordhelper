@@ -1,6 +1,6 @@
 import getElementById from '../../common/getElementById';
 
-let dialogMsg = null;
+let dialogMsg;
 
 export default function getMsg() {
   if (!dialogMsg) {

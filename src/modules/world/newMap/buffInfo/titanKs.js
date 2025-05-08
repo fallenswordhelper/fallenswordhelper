@@ -1,8 +1,6 @@
 import isArray from '../../../common/isArray';
 
-function hasTitan(el) {
-  return el.type === 0;
-}
+function hasTitan(el) { return el.type === 0; }
 
 export default function titanKs() {
   const { dynamic } = GameData.realm();

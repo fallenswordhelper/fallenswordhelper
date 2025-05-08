@@ -21,27 +21,20 @@ let highlightPlayersNearMyLvl = 0;
 let highlightGvGPlayersNearMyLvl = 0;
 
 function isPvpTarget(vlevel) {
-  return (
-    highlightPlayersNearMyLvl &&
-    vlevel >= getLowerPvpLevel() &&
-    vlevel <= getUpperPvpLevel()
-  );
+  return highlightPlayersNearMyLvl
+    && vlevel >= getLowerPvpLevel()
+    && vlevel <= getUpperPvpLevel();
 }
 
 function isGvgTarget(vlevel) {
-  return (
-    highlightGvGPlayersNearMyLvl &&
-    vlevel >= getLowerGvGLevel() &&
-    vlevel <= getUpperGvgLevel()
-  );
+  return highlightGvGPlayersNearMyLvl
+    && vlevel >= getLowerGvGLevel()
+    && vlevel <= getUpperGvgLevel();
 }
 
 const getLastActivity = (a) => [a, lastActivity(a.dataset.tipped).days];
 const recentActivity = ([, lastActDays]) => lastActDays < 7;
-const getVLevel = ([a]) => [
-  a,
-  Number(regExpFirstCapture(vlRe, a.dataset.tipped)),
-];
+const getVLevel = ([a]) => [a, Number(regExpFirstCapture(vlRe, a.dataset.tipped))];
 const getFlags = ([a, vlevel]) => [
   a.parentNode.parentNode.rowIndex,
   isPvpTarget(vlevel),
@@ -57,16 +50,13 @@ function getPlayerLinks() {
 }
 
 function shouldHighlight() {
-  return (
-    Number(getUrlParameter('guild_id')) !== currentGuildId() &&
-    (highlightPlayersNearMyLvl || highlightGvGPlayersNearMyLvl)
-  );
+  return Number(getUrlParameter('guild_id')) !== currentGuildId()
+    && (highlightPlayersNearMyLvl || highlightGvGPlayersNearMyLvl);
 }
 
-const selector = (targets) =>
-  targets
-    .map(([rowIndex]) => `.fshHighlight tr:nth-child(${rowIndex + 1})`)
-    .join(',');
+const selector = (targets) => targets
+  .map(([rowIndex]) => `.fshHighlight tr:nth-child(${rowIndex + 1})`)
+  .join(',');
 
 function targetStyle(target, value) {
   if (target.length) {
@@ -86,9 +76,7 @@ function memberListStyle(pvpTargets, gvgTargets) {
 function actuallyHighlight() {
   const playerLinks = getPlayerLinks();
   const pvpTargets = playerLinks.filter(([, pvpTarget]) => pvpTarget);
-  const gvgTargets = playerLinks.filter(
-    ([, pvpTarget, gvgTarget]) => !pvpTarget && gvgTarget,
-  );
+  const gvgTargets = playerLinks.filter(([, pvpTarget, gvgTarget]) => !pvpTarget && gvgTarget);
   targetStyle(pvpTargets, '4671C8');
   targetStyle(gvgTargets, 'FF9900');
   memberListStyle(pvpTargets, gvgTargets);
@@ -104,7 +92,5 @@ export default function injectViewGuild() {
   highlightPlayersNearMyLvl = getValue('highlightPlayersNearMyLvl');
   highlightGvGPlayersNearMyLvl = getValue('highlightGvGPlayersNearMyLvl');
   doHighlights();
-  if (getValue('enableHistoryCompressor')) {
-    compressHistory();
-  }
+  if (getValue('enableHistoryCompressor')) { compressHistory(); }
 }

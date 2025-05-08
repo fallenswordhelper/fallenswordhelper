@@ -11,9 +11,7 @@ function thisEnhancementLevel(enhancements, name) {
 function getEnhancement(enhancements, name, inject) {
   const enhLevel = thisEnhancementLevel(enhancements, name);
   let enhClass = 'fshLime';
-  if (enhLevel < 100) {
-    enhClass = 'fshRed';
-  }
+  if (enhLevel < 100) { enhClass = 'fshRed'; }
   setInnerHtml(`<span class="${enhClass}">${enhLevel}%</span>`, inject);
 }
 

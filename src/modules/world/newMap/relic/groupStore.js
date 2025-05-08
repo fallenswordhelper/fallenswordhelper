@@ -30,8 +30,8 @@ async function groupStuff($hasGroup, set) {
   if (!$hasGroup) return;
   processingStatus.set(['groupStore', 'Processing attacking group stats ... ']);
   const groupId = await getGroupId();
-  const groupStats = groupId && (await getGroupStats(groupId));
-  const withoutMercs = groupStats && (await statsWithoutMercs(groupStats));
+  const groupStats = groupId && await getGroupStats(groupId);
+  const withoutMercs = groupStats && await statsWithoutMercs(groupStats);
   if (withoutMercs) {
     set({
       attack: withoutMercs[0],

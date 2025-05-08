@@ -17,8 +17,7 @@ import injectHtml from './injectHtml/injectHtml';
 
 function addTab(tabs) {
   const settingsTabs = $(tabs);
-  settingsTabs
-    .find('.ui-tabs-nav')
+  settingsTabs.find('.ui-tabs-nav')
     .append('<li><a href="#fshSettings">FSH</a></li>');
   settingsTabs.append('<div id="fshSettings"></div>');
   settingsTabs.tabs('refresh');
@@ -31,10 +30,7 @@ function doVersion() {
 }
 
 function doStorage() {
-  const storage = (
-    (jsonStringify(localStorage).length / (5 * 1024 * 1024)) *
-    100
-  ).toFixed(2);
+  const storage = ((jsonStringify(localStorage).length / (5 * 1024 * 1024)) * 100).toFixed(2);
   setText(storage, getElementById('calf-used'));
   setText((100 - storage).toFixed(2), getElementById('calf-remain'));
 }
@@ -42,22 +38,16 @@ function doStorage() {
 function injectHuntBuffNames() {
   const huntingBuffsSelect = getElementById('enabledHuntingMode');
   if (!huntingBuffsSelect) return;
-  ['huntingBuffsName', 'huntingBuffs2Name', 'huntingBuffs3Name'].forEach(
-    (pref, i) => {
-      const prefVal = getValue(pref);
-      huntingBuffsSelect.options[i].text = prefVal;
-      getArrayByClassName(`fsh-buff${i + 1}`).forEach((s) =>
-        setText(prefVal, s),
-      );
-    },
-  );
+  ['huntingBuffsName', 'huntingBuffs2Name', 'huntingBuffs3Name'].forEach((pref, i) => {
+    const prefVal = getValue(pref);
+    huntingBuffsSelect.options[i].text = prefVal;
+    getArrayByClassName(`fsh-buff${i + 1}`).forEach((s) => setText(prefVal, s));
+  });
 }
 
 function loadSettings() {
   injectHuntBuffNames();
-  const fields = querySelectorArray(
-    '.fsh-settings input[name], .fsh-settings select[name]',
-  );
+  const fields = querySelectorArray('.fsh-settings input[name], .fsh-settings select[name]');
   fields.forEach((ctx) => {
     if (ctx.type === 'checkbox') ctx.checked = getValue(ctx.name);
     else ctx.value = getValue(ctx.name);
@@ -84,8 +74,5 @@ export default async function injectSettings() {
   await awaitWidget(tabs, 'Tabs', 'ui');
   fshSettings(tabs);
   injectBlockedSkills();
-  setValue(
-    'minGroupLevel',
-    querySelector('input[name="min_group_level"]').value,
-  );
+  setValue('minGroupLevel', querySelector('input[name="min_group_level"]').value);
 }

@@ -10,9 +10,7 @@ import task from './task';
 const topics = {};
 let subUid = -1;
 
-function execute(args, el) {
-  task(3, el.func, [args]);
-}
+function execute(args, el) { task(3, el.func, [args]); }
 
 export function publish(topic, args) {
   if (defineUserIsDev) stdout('publish', topic); //  pubsubz publish
@@ -22,9 +20,7 @@ export function publish(topic, args) {
 }
 
 export function subscribe(topic, func) {
-  if (!topics[topic]) {
-    topics[topic] = [];
-  }
+  if (!topics[topic]) { topics[topic] = []; }
   subUid += 1;
   const token = subUid.toString();
   topics[topic].push({ token, func });
@@ -48,7 +44,5 @@ function hasTopic(token, subs) {
 }
 
 export function unsubscribe(token) {
-  if (topics.values().some(partial(hasTopic, token))) {
-    return token;
-  }
+  if (topics.values().some(partial(hasTopic, token))) { return token; }
 }

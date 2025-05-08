@@ -24,9 +24,7 @@ function imgLink(aRow) {
     href: `${guideUrl}creatures&search_name=${myName}`,
     target: '_blank',
   });
-  onclick(myLink, () => {
-    sendEvent('scoutTower', 'guideLink');
-  });
+  onclick(myLink, () => { sendEvent('scoutTower', 'guideLink'); });
   insertElement(myLink, myImg);
   insertElement(aRow.tr.cells[0], myLink);
 }
@@ -38,12 +36,8 @@ function realmLinkClick(e) {
 function realmLink(aRow) {
   const [, realmCell] = aRow.tr.cells;
   const realmName = getText(realmCell);
-  setInnerHtml(
-    `<a href="${guideUrl}realms&search_name=${
-      realmName
-    }" target="_blank">${realmName}</a>`,
-    realmCell,
-  );
+  setInnerHtml(`<a href="${guideUrl}realms&search_name=${
+    realmName}" target="_blank">${realmName}</a>`, realmCell);
   onclick(realmCell, realmLinkClick);
 }
 
@@ -80,11 +74,12 @@ const active = (o) => ({
 });
 const secure = (o) => ({
   ...o,
-  securable:
-    o.active && Math.ceil(o.titanHp[1] / 2 + 1) - o.guildKills <= o.titanHp[0],
+  securable: o.active && Math.ceil(o.titanHp[1] / 2 + 1) - o.guildKills <= o.titanHp[0],
 });
-const makeTitanRows = (titanTables) =>
-  dataRows(titanTables[1], 4, 0)?.map(meta).map(active).map(secure);
+const makeTitanRows = (titanTables) => dataRows(titanTables[1], 4, 0)
+  ?.map(meta)
+  .map(active)
+  .map(secure);
 
 export default function injectScouttower() {
   if (jQueryNotPresent()) return;

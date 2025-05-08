@@ -2,76 +2,63 @@
   <td class="header" colspan="2">World screen/Hunting preferences</td>
 </tr>
 <tr>
-  {% render 'settingsRowLabel',
-    label: 'Hide Create Group Button',
-    tooltipText: 'Hides the Create Group button'
-  %}
+  {% render 'settingsRowLabel'
+   label: 'Hide Create Group Button'
+   tooltipText: 'Hides the Create Group button' %}
   <td>
-    {% render 'settingsLabelledControl',
-      field: 'hideChampionsGroup',
-      textAfter: 'Champions'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'hideElitesGroup',
-      textAfter: 'Elite'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'hideSEGroup',
-      textAfter: 'Super Elite'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'hideTitanGroup',
-      textAfter: 'Titan'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'hideLegendaryGroup',
-      textAfter: 'Legendary'
-    %}
+    {% render 'settingsLabelledControl'
+     field: 'hideChampionsGroup'
+     textAfter: 'Champions' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideElitesGroup'
+     textAfter: 'Elite' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideSEGroup'
+     textAfter: 'Super Elite' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideTitanGroup'
+     textAfter: 'Titan' %}
+    {% render 'settingsLabelledControl'
+     field: 'hideLegendaryGroup'
+     textAfter: 'Legendary' %}
   </td>
 </tr>
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'keepLogs',
-    label: 'Keep Combat Logs',
-    tooltipText: 'Save combat logs to a temporary variable.<br>
-                  Press <u>Show logs</u> on the right to display and copy them'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'keepLogs'
+   label: 'Keep Combat Logs'
+   tooltipText: 'Save combat logs to a temporary variable.<br>
+   Press <u>Show logs</u> on the right to display and copy them' %}
   <td>
-    {% render 'settingsControl', field: 'keepLogs' %}
+    {% render 'settingsControl' field: 'keepLogs' %}
     <button
       class="custombutton"
       id="fsh-settings-show-combat-log"
-      type="button"
-    >
+      type="button">
       Show Logs
     </button>
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'enableCreatureColoring',
-  label: 'Color Special Creatures',
-  tooltipText: 'Creatures will be colored according to their rarity. Champions
-                will be colored green, Elites yellow and Super Elites red.'
-%}
-{% render 'settingsRow',
-  field: 'showCreatureInfo',
-  label: 'Show Creature Info',
-  network: true,
-  tooltipText: 'Shows information from the view creature link when you mouseover
-                monsters.'
-%}
+{% render 'settingsRow'
+ field: 'enableCreatureColoring'
+ label: 'Color Special Creatures'
+ tooltipText: 'Creatures will be colored according to their rarity.
+ Champions will be colored green, Elites yellow and Super Elites red.' %}
+{% render 'settingsRow'
+ field: 'showCreatureInfo'
+ label: 'Show Creature Info'
+ network: true
+ tooltipText: "Shows information from the view creature link when you mouseover monsters." %}
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'combatEvaluatorBias',
-    label: 'Combat Evaluator Bias',
-    tooltipText: 'Changes the bias of the combat evaluator for the damage and HP
-                  evaluation. It will not change the attack bias (1.1053).<br>
-                  Conservative = 1.1053 and 1.1 (Safest)<br>
-                  Semi-Conservative = 1.1 and 1.053<br>
-                  Adventurous = 1.053 and 1 (Bleeding Edge)<br>
-                  Conservative+ = 1.1053 and 1 with the attack calculation
-                  changed to ±48 per RJEM'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'combatEvaluatorBias'
+   label: 'Combat Evaluator Bias'
+   tooltipText: 'Changes the bias of the combat evaluator for the damage and HP evaluation.
+   It will not change the attack bias (1.1053).<br>
+   Conservative = 1.1053 and 1.1 (Safest)<br>
+   Semi-Conservative = 1.1 and 1.053<br>
+   Adventurous = 1.053 and 1 (Bleeding Edge)<br>
+   Conservative+ = 1.1053 and 1 with the attack calculation changed to ±48 per RJEM' %}
   <td>
     <select id="combatEvaluatorBias" name="combatEvaluatorBias">
       <option value="0">Conservative</option>
@@ -82,74 +69,60 @@
   </td>
 </tr>
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'showMonsterLog',
-    label: 'Keep Creature Logs',
-    network: true,
-    tooltipText: 'Shows the creature log for each creature you see when you
-                  travel.'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'showMonsterLog'
+   label: 'Keep Creature Logs'
+   network: true
+   tooltipText: 'Shows the creature log for each creature you see when you travel.' %}
   <td>
-    {% render 'settingsControl', field: 'showMonsterLog' %}
+    {% render 'settingsControl' field: 'showMonsterLog' %}
     <button
       class="custombutton"
       id="fsh-settings-show-monster-log"
-      type="button"
-    >
+      type="button">
       Show
     </button>
   </td>
 </tr>
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'sendGoldonWorld',
-    label: 'Show Send Gold',
-    tooltipText: 'Creates a button in the gold dropdown to allow you to quickly
-                  send gold to a friend.'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'sendGoldonWorld'
+   label: 'Show Send Gold'
+   tooltipText: 'Creates a button in the gold dropdown to allow you to quickly send gold to a
+   friend.' %}
   <td>
-    {% render 'settingsControl', field: 'sendGoldonWorld' %}
-    {% render 'settingsLabelledControl',
-      field: 'goldAmount',
-      textBefore: 'Send',
-      type: 'number'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'goldRecipient',
-      textBefore: 'gold to',
-      type: 'text'
-    %}
-    {% render 'settingsLabelledControl',
-      field: 'currentGoldSentTotal',
-      textBefore: 'Current total:',
-      type: 'number'
-    %}
+    {% render 'settingsControl' field: 'sendGoldonWorld' %}
+    {% render 'settingsLabelledControl'
+     field: 'goldAmount'
+     textBefore: 'Send'
+     type: 'number' %}
+    {% render 'settingsLabelledControl'
+     field: 'goldRecipient'
+     textBefore: 'gold to'
+     type: 'text' %}
+    {% render 'settingsLabelledControl'
+     field: 'currentGoldSentTotal'
+     textBefore: 'Current total:'
+     type: 'number' %}
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'doNotKillList',
-  label: 'Do Not Kill List',
-  tooltipText: 'List of creatures that will not be killed by quick kill. You
-                must type the full name of each creature, separated by commas.
-                Creature name will show up in blue color on world screen and
-                will not be killed by keyboard entry (but can still be killed
-                by mouseclick).',
-  type: 'text'
-%}
-{% render 'settingsRow',
-  field: 'showHuntingBuffs',
-  label: 'Hunting Buffs',
-  tooltipText: 'Customize which buffs are designated as hunting buffs. You must
-                type the full name of each buff, separated by commas. Use the
-                checkbox to enable/disable them.'
-%}
+{% render 'settingsRow'
+ field: 'doNotKillList'
+ label: 'Do Not Kill List'
+ tooltipText: 'List of creatures that will not be killed by quick kill. You must type the full
+ name of each creature, separated by commas. Creature name will show up in blue color on world
+ screen and will not be killed by keyboard entry (but can still be killed by mouseclick).'
+ type: 'text' %}
+{% render 'settingsRow'
+ field: 'showHuntingBuffs'
+ label: 'Hunting Buffs'
+ tooltipText: "Customize which buffs are designated as hunting buffs. You must type the full name
+ of each buff, separated by commas. Use the checkbox to enable/disable them." %}
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'enabledHuntingMode',
-    label: 'Active Hunting Buff List',
-    tooltipText: 'Determines which list of buffs gets checked on the world
-                  screen.'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'enabledHuntingMode'
+   label: 'Active Hunting Buff List'
+   tooltipText: 'Determines which list of buffs gets checked on the world screen.' %}
   <td>
     <select id="enabledHuntingMode" name="enabledHuntingMode">
       <option value="1"></option>
@@ -159,71 +132,58 @@
   </td>
 </tr>
 <tr>
-  {% render 'settingsRowLabel',
-    label: '<span class="fsh-buff1"></span> Hunting Buff List',
-    tooltipText: '<span class="fsh-buff1"></span> list of hunting buffs.'
-  %}
+  {% render 'settingsRowLabel'
+   label: '<span class="fsh-buff1"></span> Hunting Buff List'
+   tooltipText: '<span class="fsh-buff1"></span> list of hunting buffs.' %}
   <td>
-    {% render 'settingsControl',
-      field: 'huntingBuffsName',
-      title: 'Hunting mode name',
-      type: 'text'
-    %}
-    {% render 'settingsControl', field: 'huntingBuffs', type: 'text' %}
+    {% render 'settingsControl' field: 'huntingBuffsName' title: 'Hunting mode name' type: 'text' %}
+    {% render 'settingsControl' field: 'huntingBuffs' type: 'text' %}
   </td>
 </tr>
 <tr>
-  {% render 'settingsRowLabel',
-    label: '<span class="fsh-buff2"></span> Hunting Buff List',
-    tooltipText: '<span class="fsh-buff2"></span> list of hunting buffs.'
-  %}
+  {% render 'settingsRowLabel'
+   label: '<span class="fsh-buff2"></span> Hunting Buff List'
+   tooltipText: '<span class="fsh-buff2"></span> list of hunting buffs.' %}
   <td>
-    {% render 'settingsControl',
-      field: 'huntingBuffs2Name',
-      title: 'Hunting mode name',
-      type: 'text'
-    %}
-    {% render 'settingsControl', field: 'huntingBuffs2', type: 'text' %}
+    {% render 'settingsControl'
+     field: 'huntingBuffs2Name'
+     title: 'Hunting mode name'
+     type: 'text' %}
+    {% render 'settingsControl' field: 'huntingBuffs2' type: 'text' %}
   </td>
 </tr>
 <tr>
-  {% render 'settingsRowLabel',
-    label: '<span class="fsh-buff3"></span> Hunting Buff List',
-    tooltipText: '<span class="fsh-buff3"></span> list of hunting buffs.'
-  %}
+  {% render 'settingsRowLabel'
+   label: '<span class="fsh-buff3"></span> Hunting Buff List'
+   tooltipText: '<span class="fsh-buff3"></span> list of hunting buffs.' %}
   <td>
-    {% render 'settingsControl',
-      field: 'huntingBuffs3Name',
-      title: 'Hunting mode name',
-      type: 'text'
-    %}
-    {% render 'settingsControl', field: 'huntingBuffs3', type: 'text' %}
+    {% render 'settingsControl'
+     field: 'huntingBuffs3Name'
+     title: 'Hunting mode name'
+     type: 'text' %}
+    {% render 'settingsControl' field: 'huntingBuffs3' type: 'text' %}
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'huntingMode',
-  label: 'Enable Hunt Mode',
-  tooltipText: 'Disables menu and some visual features to speed up FSH.'
-%}
-{% render 'settingsRow',
-  field: 'messageStack',
-  label: 'Stack repeating world messages',
-  tooltipText: 'Messages on the world screen that have the same text will
-                combine into a single stack, saving some screen space.'
-%}
+{% render 'settingsRow'
+ field: 'huntingMode'
+ label: 'Enable Hunt Mode'
+ tooltipText: "Disables menu and some visual features to speed up FSH." %}
+{% render 'settingsRow'
+ field: 'messageStack'
+ label: 'Stack repeating world messages'
+ tooltipText: "Messages on the world screen that have the same text will combine into a single
+ stack, saving some screen space." %}
 <tr>
-  {% render 'settingsRowLabel',
-    field: 'footprintColor',
-    label: 'Footprint color',
-    tooltipText: 'Alters the color of footprints left on the world map.'
-  %}
+  {% render 'settingsRowLabel'
+   field: 'footprintColor'
+   label: 'Footprint color'
+   tooltipText: 'Alters the color of footprints left on the world map.' %}
   <td>
-    {% render 'settingsControl', field: 'footprintColor', type: 'color' %}
+    {% render 'settingsControl' field: 'footprintColor' type: 'color' %}
     <button
       class="custombutton"
       id="fsh-settings-footprint-reset"
-      type="button"
-    >
+      type="button">
       Reset
     </button>
   </td>

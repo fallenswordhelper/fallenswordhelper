@@ -13,9 +13,7 @@ function doRender(bioCell) {
 
 export default function bio() {
   const bioCell = getElementById('profile-bio');
-  if (!bioCell) {
-    return;
-  }
+  if (!bioCell) { return; }
   doRender(bioCell);
   onclick(bioCell, bioEvtHdl);
 }

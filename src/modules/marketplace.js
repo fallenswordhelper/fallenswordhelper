@@ -36,14 +36,9 @@ function totalPrice(amount, sellPrice) {
 
 function marketplaceWarning(sellPrice) {
   const amount = getAmount().value;
-  setInnerHtml(
-    `You are offering to buy <b>${
-      amount
-    }</b> FSP for >> <b>${addCommas(sellPrice)}</b> (Total: ${addCommas(
-      totalPrice(amount, sellPrice),
-    )})`,
-    getWarning(),
-  );
+  setInnerHtml(`You are offering to buy <b>${
+    amount}</b> FSP for >> <b>${addCommas(sellPrice)}</b> (Total: ${
+    addCommas(totalPrice(amount, sellPrice))})`, getWarning());
 }
 
 function clearWarning() {

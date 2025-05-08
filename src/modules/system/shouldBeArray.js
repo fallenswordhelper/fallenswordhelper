@@ -3,8 +3,6 @@ import getValue from './getValue';
 
 export default function shouldBeArray(pref) {
   const stored = getValue(pref);
-  if (stored) {
-    return csvSplit(stored);
-  }
+  if (stored) { return csvSplit(stored); }
   return [];
 }

@@ -32,10 +32,7 @@ function doHideQuests(hideQuests, questName, aRow) {
 function decorate(questsToHide, aRow) {
   const questName = replaceDoubleSpace(getTextTrim(aRow.cells[0]));
   doHideQuests(questsToHide, questName, aRow);
-  const questID = getCustomUrlParameter(
-    aRow.cells[0].children[0].href,
-    'quest_id',
-  );
+  const questID = getCustomUrlParameter(aRow.cells[0].children[0].href, 'quest_id');
   setInnerHtml(guideButtons(questID, questName), aRow.cells[4]);
 }
 

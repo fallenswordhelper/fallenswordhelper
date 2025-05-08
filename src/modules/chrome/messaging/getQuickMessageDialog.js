@@ -1,6 +1,6 @@
 import getElementById from '../../common/getElementById';
 
-let quickMsgDialog = null;
+let quickMsgDialog;
 
 export default function getQuickMessageDialog() {
   if (!quickMsgDialog) {
