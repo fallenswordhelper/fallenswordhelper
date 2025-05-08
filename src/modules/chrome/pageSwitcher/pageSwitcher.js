@@ -24,6 +24,7 @@ import trade from './trade';
 const hellforge = () => { runDefault(import('../../hellforge')); };
 const injectBank = () => { runDefault(import('../../bank/injectBank')); };
 const injectBuffmarket = () => { runDefault(import('../../buffmarket/injectBuffmarket')); };
+const injectManage = () => { runDefault(import('../../buffmarket/injectManage')); };
 const findplayer = () => { runDefault(import('../../findplayer/findplayer')); };
 const injectMailbox = () => { runDefault(import('../../mailbox/mailbox')); };
 const injectSettings = () => { runDefault(import('../../settings/injectSettings')); };
@@ -54,7 +55,7 @@ export default {
   auctionhouse,
   bank: { '-': { '-': injectBank } },
   blacksmith: { repairall: { '-': repairall } },
-  buffmarket: { '-': { '-': injectBuffmarket } },
+  buffmarket: { '-': { '-': injectBuffmarket }, manage: { '-': injectManage } },
   combat: { attackplayer: { '-': injectProfile } },
   composing,
   findplayer: { '-': { '-': findplayer } },
