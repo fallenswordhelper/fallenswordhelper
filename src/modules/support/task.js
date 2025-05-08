@@ -31,14 +31,16 @@ function testPop() {
   const testFn = pop();
   if (isFunction(testFn)) {
     testFn();
-  } else { popError(testFn); }
+  } else {
+    popError(testFn);
+  }
 }
 
 function asyncTask() {
   try {
     testPop();
   } catch (e) {
-    Honeybadger.notify(e);
+    Honeybadger.notify(e, 'taskFailure');
   } finally {
     taskRunner();
   }
@@ -69,6 +71,8 @@ export default function task(priority, fn, args, scope) {
     const scopeGuard = fallback(scope, window);
     const argsGuard = fallback(args, []);
     push(fn.bind(scopeGuard, ...argsGuard), priority);
-    if (paused) { taskRunner(); }
+    if (paused) {
+      taskRunner();
+    }
   }
 }

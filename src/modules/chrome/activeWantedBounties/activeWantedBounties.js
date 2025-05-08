@@ -1,5 +1,5 @@
 import './activeWantedBounties.css';
-import bountyPage from '../../ajax/bountyPage';
+import bountyPage from './bountyPage';
 import sendEvent from '../../analytics/sendEvent';
 import functionPasses from '../../common/functionPasses';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
@@ -57,17 +57,28 @@ function doReset(eventAction, listName) {
 }
 
 function resetList(e) {
-  if (e.target === getBountyListReset()) doReset('getBountyListReset', 'bountyList');
-  if (e.target === getWantedListReset()) doReset('getWantedListReset', 'wantedList');
+  if (e.target === getBountyListReset())
+    doReset('getBountyListReset', 'bountyList');
+  if (e.target === getWantedListReset())
+    doReset('getWantedListReset', 'wantedList');
 }
 
 function doHandlers() {
-  if (getBountyListDiv()) { onclick(getBountyListDiv(), resetList); }
-  if (getWantedListDiv()) { onclick(getWantedListDiv(), resetList); }
+  if (getBountyListDiv()) {
+    onclick(getBountyListDiv(), resetList);
+  }
+  if (getWantedListDiv()) {
+    onclick(getWantedListDiv(), resetList);
+  }
 }
 
 export default function activeWantedBounties() {
-  if (jQueryNotPresent()) { return; }
+  if (
+    (!calf.enableWantedList && !calf.enableActiveBountyList) ||
+    jQueryNotPresent()
+  ) {
+    return;
+  }
   createDivs();
   doHandlers();
   retrieveBountyInfo();

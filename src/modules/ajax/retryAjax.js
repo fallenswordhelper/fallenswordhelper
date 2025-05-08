@@ -19,31 +19,32 @@ const refillAmount = 5;
 let tokens = 0;
 
 async function refillTokens() {
-  if (tokens < refillAmount - $.active && performance.now() - lastRefill >= interval) {
+  if (
+    tokens < refillAmount - $.active &&
+    performance.now() - lastRefill >= interval
+  ) {
     tokens = refillAmount - $.active;
     lastRefill = performance.now();
   } else await delay(100);
 }
 
 async function limiter() {
-  // eslint-disable-next-line no-await-in-loop
   while (tokens < 1) await refillTokens();
   tokens -= 1;
 }
 
-function getAjax(options) { // jQuery
+function getAjax(options) {
+  // jQuery
   const opt = setOpts(options);
   opt.beforeSend = beforeSend;
   return $.ajax(opt).fail((jqXHR, textStatus, errorThrown) => {
-    // eslint-disable-next-line no-param-reassign
     jqXHR.textStatus = textStatus;
-    // eslint-disable-next-line no-param-reassign
     jqXHR.errorThrown = errorThrown;
   });
 }
 
 function mightThrow(options, jqXhr) {
-  if (jqXhr.status !== 0) {
+  if (![0, 500, 503].includes(jqXhr.status)) {
     throw new AjaxError([options, jqXhr, jqXhr.textStatus, jqXhr.errorThrown]);
   }
 }

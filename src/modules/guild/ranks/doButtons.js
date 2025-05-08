@@ -13,25 +13,34 @@ let characterRow = 0;
 const upOrDown = (evt) => ['Up', 'Down'].includes(evt.target.value);
 
 function notValidRow(thisRankRow, targetRowNum) {
-  return characterRow >= Math.min(thisRankRow.rowIndex, targetRowNum)
-    || targetRowNum < 1
-    || targetRowNum > thisRankRow.parentNode.rows.length;
+  return (
+    characterRow >= Math.min(thisRankRow.rowIndex, targetRowNum) ||
+    targetRowNum < 1 ||
+    targetRowNum > thisRankRow.parentNode.rows.length
+  );
 }
 
 function getTargetRowNumber(val) {
-  if (val === 'Up') { return -1; }
+  if (val === 'Up') {
+    return -1;
+  }
   return 2;
 }
 
 function getPxScroll(val) {
-  if (val === 'Up') { return -22; }
+  if (val === 'Up') {
+    return -22;
+  }
   return 22;
 }
 
 const rankIdRe = /rank_id=(?<rankId>\d+)/;
 
 function shuffleRows(evt, thisRankRow, targetRowNum) {
-  const matchRankId = regExpFirstCapture(rankIdRe, evt.target.getAttribute('onclick'));
+  const matchRankId = regExpFirstCapture(
+    rankIdRe,
+    evt.target.getAttribute('onclick'),
+  );
   daRankPosition(toLowerCase(evt.target.value), matchRankId);
   const injectRow = thisRankRow.parentNode.rows[targetRowNum];
   insertElementBefore(thisRankRow, injectRow);
@@ -43,14 +52,18 @@ function shuffleRows(evt, thisRankRow, targetRowNum) {
 function overrideUpDown(evt) {
   sendEvent('ranks', 'overrideUpDown');
   const thisRankRow = evt.target.parentNode.parentNode.parentNode;
-  const targetRowNum = thisRankRow.rowIndex
-    + getTargetRowNumber(evt.target.value);
-  if (notValidRow(thisRankRow, targetRowNum)) { return; }
+  const targetRowNum =
+    thisRankRow.rowIndex + getTargetRowNumber(evt.target.value);
+  if (notValidRow(thisRankRow, targetRowNum)) {
+    return;
+  }
   shuffleRows(evt, thisRankRow, targetRowNum);
 }
 
 function ajaxifyRankControls(evt) {
-  if (upOrDown(evt)) { overrideUpDown(evt); }
+  if (upOrDown(evt)) {
+    overrideUpDown(evt);
+  }
 }
 
 export function doButtons() {

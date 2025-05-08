@@ -1,4 +1,4 @@
-import bountyPage from '../../ajax/bountyPage';
+import bountyPage from './bountyPage';
 import getElementById from '../../common/getElementById';
 import querySelector from '../../common/querySelector';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
@@ -14,12 +14,18 @@ let maxPage = 0;
 
 function getWantedBountyList(doc) {
   const page = querySelector('#pCC input[name="page"]', doc);
-  if (!page) { return; }
+  if (!page) {
+    return;
+  }
   curPage = Number(page.value);
-  maxPage = Number(regExpFirstCapture(/of&nbsp;(?<of>\d*)/, page.parentNode.innerHTML));
+  maxPage = Number(
+    regExpFirstCapture(/of&nbsp;(?<of>\d*)/, page.parentNode.innerHTML),
+  );
   const activeTable = getElementById('bounty-info', doc).parentNode.parentNode
     .nextElementSibling.children[0].children[0];
-  if (activeTable) { findTarget(activeTable); }
+  if (activeTable) {
+    findTarget(activeTable);
+  }
 }
 
 function hazActiveBountyList(doc) {

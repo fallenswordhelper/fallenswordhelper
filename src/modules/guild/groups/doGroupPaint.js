@@ -1,5 +1,4 @@
 import sendEvent from '../../analytics/sendEvent';
-import { end, start } from '../../analytics/timing';
 import closestTable from '../../common/closestTable';
 import closestTr from '../../common/closestTr';
 import csvSplit from '../../common/csvSplit';
@@ -18,9 +17,11 @@ import regExpExec from '../../common/regExpExec';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { months, playerIdUrl } from '../../support/constants';
 
-const dateRe = /(?<day>[a-zA-Z]{3}), (?<date>\d{1,2}) (?<month>[a-zA-Z]{3}) (?<hr>\d{1,2}):(?<min>\d{2}):(?<sec>\d{2}) UTC/;
+const dateRe =
+  /(?<day>[a-zA-Z]{3}), (?<date>\d{1,2}) (?<month>[a-zA-Z]{3}) (?<hr>\d{1,2}):(?<min>\d{2}):(?<sec>\d{2}) UTC/;
 const memberLevel = (membrlist, member) => membrlist?.[member]?.level ?? 0;
-const byMemberLevel = (membrlist, a, b) => memberLevel(membrlist, b) - memberLevel(membrlist, a);
+const byMemberLevel = (membrlist, a, b) =>
+  memberLevel(membrlist, b) - memberLevel(membrlist, a);
 const ourMembers = (name) => name !== '[none]' && name.indexOf('<font') === -1;
 
 function guessYear(targetMonth) {
@@ -30,28 +31,28 @@ function guessYear(targetMonth) {
   return curYear;
 }
 
-function dateLocalFromUtc([,, date, month, hr, min]) {
-  return new Date(dateUtc([
-    guessYear(month),
-    month,
-    date,
-    hr,
-    min,
-  ]));
+function dateLocalFromUtc([, , date, month, hr, min]) {
+  return new Date(dateUtc([guessYear(month), month, date, hr, min]));
 }
 
 function groupLocalTime(row) {
   const theDateCell = row.cells[3];
   const dateMatches = regExpExec(dateRe, getText(theDateCell));
-  insertHtmlBeforeEnd(theDateCell, `<br><span class="fshBlue fshXSmall">Local: ${
-    dateLocalFromUtc(dateMatches).toString().slice(0, 21)}</span>`);
+  if (!dateMatches) return;
+  insertHtmlBeforeEnd(
+    theDateCell,
+    `<br><span class="fshBlue fshXSmall">Local: ${dateLocalFromUtc(dateMatches)
+      .toString()
+      .slice(0, 21)}</span>`,
+  );
 }
 
 function creatorDotAndLink(membrlist, creatorCell) {
   const creator = getText(creatorCell.children[0]);
   if (membrlist?.[creator]) {
     return `${onlineDot({ last_login: membrlist[creator].last_login })}&nbsp;<a href="${
-      playerIdUrl}${membrlist[creator].id}"><b>${creator}</b></a> [${membrlist[creator].level}]`;
+      playerIdUrl
+    }${membrlist[creator].id}"><b>${creator}</b></a> [${membrlist[creator].level}]`;
   }
   return `<b>${creator}</b>`;
 }
@@ -65,7 +66,10 @@ function groupMembers(membrlist, membersCell) {
 function buffLinks(creatorCell, listArr) {
   const buffList = listArr.filter(ourMembers);
   if (buffList.length > 0) insertElement(creatorCell, doBuffLinks(buffList));
-  insertHtmlBeforeEnd(creatorCell, `<span class="fshXSmall">Members: ${buffList.length}</span>`);
+  insertHtmlBeforeEnd(
+    creatorCell,
+    `<span class="fshXSmall">Members: ${buffList.length}</span>`,
+  );
 }
 
 function memberProfileLinks(membrlist, membersCell, listArr) {
@@ -89,10 +93,8 @@ function clickHdl(e) {
 }
 
 export default function doGroupPaint(membrlist) {
-  start('JS Perf', 'doGroupPaint');
   getArrayByClassName('group-action-container')
     .map((c) => closestTr(c))
     .forEach(partial(doGroupRow, membrlist));
   onclick(closestTable(querySelector('.group-action-container')), clickHdl);
-  end('JS Perf', 'doGroupPaint');
 }

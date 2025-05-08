@@ -43,9 +43,10 @@ function toggleVisibilty(evt) {
 function thisToggle(inject, panel, linkto) {
   const thisButton = makeButton(linkto);
   insertElement(inject, wrapper(thisButton));
-  // eslint-disable-next-line no-param-reassign
   panel.id = linkto;
-  if (getValue(linkto)) { hideElement(panel); }
+  if (getValue(linkto)) {
+    hideElement(panel);
+  }
   onclick(thisButton, toggleVisibilty);
 }
 
@@ -68,7 +69,8 @@ export function statToggle(leftHandSideColumnTable) {
 }
 
 export function structureToggle(leftHandSideColumnTable) {
-  const structureHeader = leftHandSideColumnTable.rows[15]?.cells[1].children[0];
+  const structureHeader =
+    leftHandSideColumnTable.rows[15]?.cells[1].children[0];
   if (structureHeader) {
     thisToggle(
       structureHeader,

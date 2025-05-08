@@ -5,25 +5,32 @@ import getElementById from '../../common/getElementById';
 import insertElement from '../../common/insertElement';
 import setInnerHtml from '../../dom/setInnerHtml';
 
-export default function jQueryDialog(fn) { // jQuery
+const divProps = {
+  id: 'content',
+  style: { display: 'none' },
+};
+const dialogProps = {
+  width: 640,
+  modal: true,
+  position: {
+    my: 'top',
+    at: 'top',
+    offset: '0 60',
+    collision: 'none',
+  },
+  resizable: false,
+};
+
+// jQuery
+export default function jQueryDialog(fn) {
   let content = getElementById('content');
   if (content) {
     setInnerHtml('', content);
   } else {
-    content = createDiv({
-      id: 'content',
-      style: { display: 'none' },
-    });
+    content = createDiv(divProps);
     insertElement(document.body, content);
   }
-  $(content).dialog({
-    width: 640,
-    modal: true,
-    position: {
-      my: 'top', at: 'top', offset: '0 60', collision: 'none',
-    },
-    resizable: false,
-  });
+  $(content).dialog(dialogProps);
   getArrayByClassName('ui-dialog-titlebar-close').forEach((e) => e.blur());
   fn(content);
 }

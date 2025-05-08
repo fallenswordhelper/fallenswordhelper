@@ -25,26 +25,32 @@ function makeRadio(groupName, _e, i) {
 
 function makeListItem(groupName, thisDivs, e, i) {
   const thisLi = createLi({ className: 'ui-state-default ui-corner-top' });
-  insertElement(thisLi, createLabel({
-    htmlFor: toggleId(groupName, i),
-    innerHTML: e,
-  }));
-  if (i !== 0) once(thisLi, 'click', () => publish(toggleId(groupName, i), thisDivs[i]));
+  insertElement(
+    thisLi,
+    createLabel({
+      htmlFor: toggleId(groupName, i),
+      innerHTML: e,
+    }),
+  );
+  if (i !== 0)
+    once(thisLi, 'click', () => publish(toggleId(groupName, i), thisDivs[i]));
   onclick(thisLi, () => sendEvent('QuickWear', toggleId(groupName, i)));
   return thisLi;
 }
 
 function makeUl(tabs, groupName, thisDivs) {
   const thisUl = createUl({
-    className: 'ui-tabs-nav ui-helper-reset ui-helper-clearfix '
-      + 'ui-widget-header ui-corner-all',
+    className:
+      'ui-tabs-nav ui-helper-reset ui-helper-clearfix ' +
+      'ui-widget-header ui-corner-all',
   });
   const thisItems = tabs.map(partial(makeListItem, groupName, thisDivs));
   thisItems.forEach(partial(insertElement, thisUl));
   return thisUl;
 }
 
-const makeDiv = () => createDiv({ className: 'ui-tabs-panel ui-corner-bottom' });
+const makeDiv = () =>
+  createDiv({ className: 'ui-tabs-panel ui-corner-bottom' });
 
 function appendRadios(tabs, groupName, appendToTabSet) {
   const thisRadios = tabs.map(partial(makeRadio, groupName));
@@ -58,7 +64,9 @@ function appendList(tabs, groupName, thisTabSet, thisDivs) {
 }
 
 function makeTabSet(tabs, groupName) {
-  const thisTabSet = createDiv({ className: 'fshTabSet ui-tabs ui-widget-content ui-corner-all' });
+  const thisTabSet = createDiv({
+    className: 'fshTabSet ui-tabs ui-widget-content ui-corner-all',
+  });
   const appendToTabSet = partial(insertElement, thisTabSet);
   appendRadios(tabs, groupName, appendToTabSet);
   const thisDivs = tabs.map(makeDiv);

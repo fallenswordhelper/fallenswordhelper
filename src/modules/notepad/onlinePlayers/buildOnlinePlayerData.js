@@ -8,11 +8,11 @@ function onlinePlayer(onlinePlayers, player) {
     guildImage.html(),
     onlinePlayers[player][1],
     onlinePlayers[player][2],
-    onlinePlayers[player][3] * 100
-    + onlinePlayers[player][4] + 1,
+    onlinePlayers[player][3] * 100 + onlinePlayers[player][4] + 1,
   ];
 }
 
-export default function buildOnlinePlayerData(onlinePlayers) { // jQuery
+export default function buildOnlinePlayerData(onlinePlayers) {
+  // jQuery
   return keys(onlinePlayers).map(partial(onlinePlayer, onlinePlayers));
 }

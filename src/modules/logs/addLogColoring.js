@@ -44,7 +44,8 @@ function typeMap(dateColumn, aRow) {
 
 function doBuffLinks(logScreen, rowTags) {
   if (logScreen === 'Chat') {
-    rowTags.filter(([, rowType]) => rowType !== 'old')
+    rowTags
+      .filter(([, rowType]) => rowType !== 'old')
       .map(([aRow]) => querySelector(playerLinkSelector, aRow))
       .forEach(doBuffLink);
   }
@@ -65,19 +66,21 @@ function byType(acc, [aRow, rowType]) {
 
 function toStyle(spacing, [rowType, { min, max }]) {
   return `.fshLogColoring tr:nth-of-type(${spacing}n+${min}):nth-of-type(-${
-    spacing}n+${max}) {background-color: ${
-    rowType === 'old' ? '#CD9E4B' : '#F5F298'};}`;
+    spacing
+  }n+${max}) {background-color: ${rowType === 'old' ? '#CD9E4B' : '#F5F298'};}`;
 }
 
 function makeRowStyle(logScreen, rowTags) {
   const spacing = logScreen === 'Chat' ? 4 : 2;
-  return entries(rowTags.filter(([, rowType]) => rowType !== 'seen')
-    .reduce(byType, {}))
-    .map(partial(toStyle, spacing));
+  return entries(
+    rowTags.filter(([, rowType]) => rowType !== 'seen').reduce(byType, {}),
+  ).map(partial(toStyle, spacing));
 }
 
 function processRows(logScreen, dateColumn, chatTable, cols) {
-  const rowTags = dataRows(chatTable, cols, 0).map(partial(typeMap, dateColumn));
+  const rowTags = dataRows(chatTable, cols, 0).map(
+    partial(typeMap, dateColumn),
+  );
   doBuffLinks(logScreen, rowTags);
   const rowStyle = makeRowStyle(logScreen, rowTags);
   if (rowStyle.length) {
@@ -96,7 +99,11 @@ function doLogColoring(logScreen, dateColumn, chatTable, cols) {
 }
 
 export default function addLogColoring(logScreen, dateColumn, cols) {
-  if (!getValue('enableLogColoring')) { return; }
+  if (!getValue('enableLogColoring')) {
+    return;
+  }
   const chatTable = findChatTable(logScreen);
-  if (chatTable) { doLogColoring(logScreen, dateColumn, chatTable, cols); }
+  if (chatTable) {
+    doLogColoring(logScreen, dateColumn, chatTable, cols);
+  }
 }

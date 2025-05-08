@@ -7,22 +7,23 @@ function expandFrags(frag) {
 const resultType = [
   [
     (r) => r.components?.length,
-    (r) => `You successfully extracted 1 '${
-      r.components?.[0].n}' component(s) from 1 resource(s).`,
+    (r) =>
+      `You successfully extracted 1 '${
+        r.components?.[0].n
+      }' component(s) from 1 resource(s).`,
   ],
   [
     (r) => r.frags,
-    (r) => `You gained ${
-      r.frags.map(expandFrags).join(', ')} Fragments by opening the Fragment Stash.`,
+    (r) =>
+      `You gained ${r.frags
+        .map(expandFrags)
+        .join(', ')} Fragments by opening the Fragment Stash.`,
   ],
   [
     (r) => r.mailbox_items?.length,
     (r) => `You received 1 x '${r.mailbox_items?.[0].n}' from the container.`,
   ],
-  [
-    () => 1,
-    () => '<You failed to extract any components from resource(s).',
-  ],
+  [() => 1, () => '<You failed to extract any components from resource(s).'],
 ];
 
 export default function processResult(r) {

@@ -8,20 +8,21 @@ import draggable from '../../common/draggable';
 import insertElement from '../../common/insertElement';
 import onclick from '../../common/onclick';
 import querySelector from '../../common/querySelector';
-import calf from '../../support/calf';
 import task from '../../support/task';
 import getValue from '../../system/getValue';
 import getValueJSON from '../../system/getValueJSON';
+import isHuntMode from '../lookForHcsData/isHuntMode';
 
-const createQuicklinksDiv = () => createDiv({
-  className: 'fshQuickLinks',
-  style: {
-    left: `${getValue('quickLinksLeftPx')}px`,
-    top: `${getValue('quickLinksTopPx')}px`,
-  },
-});
+const createQuicklinksDiv = () =>
+  createDiv({
+    className: 'fshQuickLinks',
+    style: {
+      left: `${getValue('quickLinksLeftPx')}px`,
+      top: `${getValue('quickLinksTopPx')}px`,
+    },
+  });
 
-const valid = (link) => ('newWindow' in link) && link.url && link.name;
+const valid = (link) => 'newWindow' in link && link.url && link.name;
 
 function createLink(link) {
   const anchor = createAnchor({
@@ -59,5 +60,6 @@ function injectQuickLinks() {
 }
 
 export default function doQuickLinks() {
-  if (!calf.huntingMode) task(3, injectQuickLinks);
+  if (isHuntMode()) return;
+  task(3, injectQuickLinks);
 }

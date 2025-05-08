@@ -52,18 +52,64 @@ function makePctWrapper(pct) {
   return pctWrapper;
 }
 
+const row1 = [
+  [
+    [5, getTitanName, true],
+    [1, getTitanLocation, true],
+  ],
+];
+const row2 = [
+  [
+    [2, getTitanHp, true],
+    [4, getYourGuild, true],
+  ],
+];
+const row3 = [
+  [
+    [2, makeTitanHpWrapper],
+    [4, getGuildKills],
+  ],
+];
+const row4 = () => [
+  [
+    [2, getCurrent, true],
+    [4, partial(makePctWrapper, getCurrentPct())],
+  ],
+  true,
+];
+const row5 = () => [
+  [
+    [2, getTotal, true],
+    [4, partial(makePctWrapper, getTotalPct())],
+  ],
+  true,
+];
+const row6 = [
+  [
+    [2, getStatus, true],
+    [4, getStatusText],
+  ],
+  true,
+];
+const row8 = [
+  [
+    [2, getMember, true],
+    [2, getKills, true],
+    [2, getPctTotal, true],
+  ],
+];
+
 export function buildTitanInfoTable() {
   titanTbl = createTable({ className: 'fshCenter' });
   buildAssets();
   addRows(titanTbl, [
-    [[[5, getTitanName, true], [1, getTitanLocation, true]]],
-    [[[2, getTitanHp, true], [4, getYourGuild, true]]],
-    [[[2, makeTitanHpWrapper], [4, getGuildKills]]],
-    [[[2, getCurrent, true], [4, partial(makePctWrapper, getCurrentPct())]], true],
-    [[[2, getTotal, true], [4, partial(makePctWrapper, getTotalPct())]], true],
-    [[[2, getStatus, true], [4, getStatusText]], true],
+    row1,
+    row2,
+    row3,
+    row4(),
+    row5(),
+    row6,
     [[[6, getCooldownText]]],
-    [[[2, getMember, true], [2, getKills, true],
-      [2, getPctTotal, true]]],
+    row8,
   ]);
 }

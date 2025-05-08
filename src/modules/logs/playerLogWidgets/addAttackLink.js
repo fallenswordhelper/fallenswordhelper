@@ -13,8 +13,12 @@ const guildTest = async ([t, name]) => [t, name, await isGuildMate(name)];
 const pmClass = (privMsg) => (privMsg ? ' class="pmAttackUrl"' : '');
 
 function addAttack(privMsg, [t, playerName]) {
-  insertHtmlAfterEnd(t, ` | <a${pmClass(privMsg)} href="${
-    attackplayerUrl}${playerName}">Attack</a>`);
+  insertHtmlAfterEnd(
+    t,
+    ` | <a${pmClass(privMsg)} href="${
+      attackplayerUrl
+    }${playerName}">Attack</a>`,
+  );
   if (privMsg) return;
   onclick(t.parentNode, (e) => {
     if (getText(e.target) === 'Attack') sendEvent('playerLogWidgets', 'Attack');
@@ -23,8 +27,12 @@ function addAttack(privMsg, [t, playerName]) {
 
 export default async function addAttackLink(logTable, privMsg) {
   const trade = querySelectorArray('a[href*="=createsecure&"]', logTable);
-  if (!trade.length) { return; }
+  if (!trade.length) {
+    return;
+  }
   const withPlayer = trade.map(getPlayer);
   const guildMate = await all(withPlayer.map(guildTest));
-  guildMate.filter(([, , gm]) => !gm).forEach((player) => addAttack(privMsg, player));
+  guildMate
+    .filter(([, , gm]) => !gm)
+    .forEach((player) => addAttack(privMsg, player));
 }

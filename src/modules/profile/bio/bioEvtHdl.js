@@ -12,8 +12,7 @@ import getPrice from './getPrice';
 const buffCost = { count: 0, buffs: {} };
 
 function buffRows(pair) {
-  return `<tr><td>${pair[0]}</td><td>: ${pair[1][0]
-  }${pair[1][1]}</td></tr>`;
+  return `<tr><td>${pair[0]}</td><td>: ${pair[1][0]}${pair[1][1]}</td></tr>`;
 }
 
 function totalCost(acc, pair) {
@@ -23,28 +22,30 @@ function totalCost(acc, pair) {
 
 function hazBuffs() {
   const myEntries = entries(buffCost.buffs);
-  const totalText = formatCost(myEntries.reduce(
-    totalCost,
-    {
+  const totalText = formatCost(
+    myEntries.reduce(totalCost, {
       k: 0,
       fsp: 0,
       stam: 0,
       unknown: 0,
-    },
-  ));
+    }),
+  );
   setInnerHtml(
-    '<span class="tip-static" '
-    + 'data-tipped="This is an estimated cost based on how the script finds '
-    + 'the cost associated with buffs from viewing bio. It can be incorrect, '
-    + `please use with discretion.<br><hr><table border=0>${
-      myEntries.map(buffRows).join('')}</table><b>Total: ${
-      totalText}</b>">Estimated Cost: <b>${totalText}</b></span>`,
+    '<span class="tip-static" ' +
+      'data-tipped="This is an estimated cost based on how the script finds ' +
+      'the cost associated with buffs from viewing bio. It can be incorrect, ' +
+      `please use with discretion.<br><hr><table border=0>${myEntries
+        .map(buffRows)
+        .join('')}</table><b>Total: ${
+        totalText
+      }</b>">Estimated Cost: <b>${totalText}</b></span>`,
     getElementById('buffCost'),
   );
   buffCost.buffCostTotalText = totalText;
 }
 
-function updateBuffCost() { // Legacy
+function updateBuffCost() {
+  // Legacy
   if (buffCost.count > 0) {
     hazBuffs();
   } else {
@@ -75,7 +76,8 @@ function getBuffCost(buffNameNode) {
   buffCost.count += 1;
 }
 
-function toggleBuffsToBuy(buffNameNode) { // Legacy
+function toggleBuffsToBuy(buffNameNode) {
+  // Legacy
   bioSendEvent('toggleBuffsToBuy');
   const selected = hasClass('fshBlue', buffNameNode);
   buffNameNode.classList.toggle('fshBlue');
@@ -91,7 +93,9 @@ function toggleBuffsToBuy(buffNameNode) { // Legacy
 }
 
 function closestSpan(el) {
-  if (!el.tagName || el.tagName === 'SPAN') { return el; }
+  if (!el.tagName || el.tagName === 'SPAN') {
+    return el;
+  }
   return closestSpan(el.parentNode);
 }
 

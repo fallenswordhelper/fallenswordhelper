@@ -25,56 +25,71 @@
   const backpackLoc = 1;
   const guildStoreLoc = 2;
 
-  export let visible = true;
+  let { visible = $bindable(true) } = $props();
 
-  let options = null;
-  let inventoryRender = false;
-  let mappingRender = false;
-  let thresholdRender = false;
-  let countPots = [];
+  let options = $state(null);
+  let inventoryRender = $state(false);
+  let mappingRender = $state(false);
+  let thresholdRender = $state(false);
+  let countPots = $state([]);
   let currentInventory = [];
-  let renderMap = [];
+  let renderMap = $state([]);
 
   const composed = ({ t }) => t === 15;
-  const countBg = (count) => perc2color(count, options.minpoint, options.maxpoint);
+  const countBg = (count) =>
+    perc2color(count, options.minpoint, options.maxpoint);
   const ignored = ({ ignore }) => !ignore;
-  const nameSearch = (n) => ({ name }) => name === n;
+  const nameSearch =
+    (n) =>
+    ({ name }) =>
+      name === n;
   const nameSort = (a, b) => alpha(a.n, b.n);
   const result = ({ r }) => r;
   const sendPrEvent = (type) => sendEvent('pot-report', type);
-  const setLocation = ({ player, n }) => ({ loc: player ? backpackLoc : guildStoreLoc, n });
-  const storeOptions = () => set(storageKey, options);
-
-  const buildCurrentInventory = (json) => json
-    .flatMap(result)
-    .filter(composed)
-    .map(setLocation)
-    .sort(nameSort);
-  const countFromInv = (inv) => ({ mapped }) => ({
-    name: mapped,
-    count: inv.filter(({ mapped: invMap }) => invMap === mapped).length,
-  });
-  const byMap = (mappedPots) => ({ n }) => mappedPots.some(nameSearch(n));
-  const addMapping = (mappedPots) => ({ loc, n }) => ({
-    loc,
-    mapped: mappedPots.find(nameSearch(n)).mapped,
+  const setLocation = ({ player, n }) => ({
+    loc: player ? backpackLoc : guildStoreLoc,
     n,
   });
-  const buildInv = (mappedPots) => currentInventory
-    .filter(byMap(mappedPots))
-    .filter(({ loc }) => options.backpack || loc !== backpackLoc)
-    .filter(({ loc }) => options.guildstore || loc !== guildStoreLoc)
-    .map(addMapping(mappedPots));
-  const buildMapping = (pots) => uniq(pots, 'n').map(({ n }) => ({
-    name: n,
-    mapped: options?.potMap?.find(nameSearch(n))?.mapped || n,
-    ignore: options?.potMap?.find(nameSearch(n))?.ignore ?? false,
-  }));
+  const storeOptions = () => set(storageKey, $state.snapshot(options));
+
+  const buildCurrentInventory = (json) =>
+    json.flatMap(result).filter(composed).map(setLocation).sort(nameSort);
+  const countFromInv =
+    (inv) =>
+    ({ mapped }) => ({
+      name: mapped,
+      count: inv.filter(({ mapped: invMap }) => invMap === mapped).length,
+    });
+  const byMap =
+    (mappedPots) =>
+    ({ n }) =>
+      mappedPots.some(nameSearch(n));
+  const addMapping =
+    (mappedPots) =>
+    ({ loc, n }) => ({
+      loc,
+      mapped: mappedPots.find(nameSearch(n)).mapped,
+      n,
+    });
+  const buildInv = (mappedPots) =>
+    currentInventory
+      .filter(byMap(mappedPots))
+      .filter(({ loc }) => options.backpack || loc !== backpackLoc)
+      .filter(({ loc }) => options.guildstore || loc !== guildStoreLoc)
+      .map(addMapping(mappedPots));
+  const buildMapping = (pots) =>
+    uniq(pots, 'n').map(({ n }) => ({
+      name: n,
+      mapped: options?.potMap?.find(nameSearch(n))?.mapped || n,
+      ignore: options?.potMap?.find(nameSearch(n))?.ignore ?? false,
+    }));
 
   function buildCount() {
     const mappedPots = options.potMap.filter(ignored);
     const inv = buildInv(mappedPots);
-    return uniq(mappedPots, 'mapped').map(countFromInv(inv));
+    return uniq(mappedPots, 'mapped')
+      .map(countFromInv(inv))
+      .sort((a, b) => alpha(a.name, b.name));
   }
 
   function doMapping() {
@@ -84,7 +99,11 @@
   }
 
   function mappingChange() {
-    options.potMap = renderMap.map(({ ignore, mapped, name }) => ({ ignore, mapped, name }));
+    options.potMap = renderMap.map(({ ignore, mapped, name }) => ({
+      ignore,
+      mapped,
+      name,
+    }));
     doMapping();
   }
 
@@ -94,12 +113,16 @@
   }
 
   function doReset() {
-    options.potMap = options.potMap.map((o) => ({ ...o, mapped: o.name, ignore: false }));
+    options.potMap = options.potMap.map((o) => ({
+      ...o,
+      mapped: o.name,
+      ignore: false,
+    }));
     doMapping();
   }
 
   async function getOptions() {
-    options = await get(storageKey) || deepClone(defaultOpts);
+    options = (await get(storageKey)) || deepClone(defaultOpts);
     inventoryRender = options.inventory;
     mappingRender = options.mapping;
     thresholdRender = options.thresholds;
@@ -110,138 +133,174 @@
   async function init() {
     getOptions();
     const json = await all([daGuildFetchInv(), daGuildReport()]);
-    if (!isArray(json[0]?.r) || !isArray(json[1]?.r)) throw new Error('Server Error');
+    if (!isArray(json[0]?.r) || !isArray(json[1]?.r))
+      throw new Error('Server Error');
     currentInventory = buildCurrentInventory(json);
     options.potMap = buildMapping(currentInventory);
     doMapping();
   }
+
+  function close() {
+    sendPrEvent('close');
+    visible = false;
+  }
 </script>
 
-<ModalTitled
-  { visible }
-  on:close={ () => sendPrEvent('close') }
-  on:close={ () => { visible = false; } }
->
-  <svelte:fragment slot="title">Pot Report</svelte:fragment>
+<ModalTitled {close} {visible}>
+  {#snippet title()}
+    Pot Report
+  {/snippet}
   <div class="main">
-    { #await init() }
+    {#await init()}
       Loading...
-    { :then}
+    {:then}
       <div class="filters">
         <label>
           <input
-            bind:checked={ options.backpack }
-            on:change={ () => sendPrEvent('backpack') }
-            on:change={ storeOptions }
-            on:change={ doMapping }
+            bind:checked={options.backpack}
+            onchange={() => {
+              sendPrEvent('backpack');
+              storeOptions();
+              doMapping();
+            }}
             type="checkbox"
-          >
+          />
           Member Backpacks
         </label>
         <label>
           <input
-            bind:checked={ options.guildstore }
-            on:change={ () => sendPrEvent('guildstore') }
-            on:change={ storeOptions }
-            on:change={ doMapping }
+            bind:checked={options.guildstore}
+            onchange={() => {
+              sendPrEvent('guildstore');
+              storeOptions();
+              doMapping();
+            }}
             type="checkbox"
-          >
+          />
           Guild Store
         </label>
       </div>
       <div class="pot-report">
         <input
-          bind:checked={ options.inventory }
+          bind:checked={options.inventory}
           class="tab-ctrl"
           id="pr-inv"
-          on:change={ () => sendPrEvent('inventory') }
-          on:change={ storeOptions }
-          on:click|once={ () => { inventoryRender = true; } }
+          onchange={() => {
+            sendPrEvent('inventory');
+            storeOptions();
+          }}
+          onclick={() => {
+            if (!inventoryRender) {
+              inventoryRender = true;
+            }
+          }}
           type="checkbox"
-        >
+        />
         <label for="pr-inv">Composed Potion Inventory</label>
         <input
-          bind:checked={ options.mapping }
+          bind:checked={options.mapping}
           class="tab-ctrl"
           id="pr-map"
-          on:change={ () => sendPrEvent('mapping') }
-          on:change={ storeOptions }
-          on:click|once={ () => { mappingRender = true; } }
+          onchange={() => {
+            sendPrEvent('mapping');
+            storeOptions();
+          }}
+          onclick={() => {
+            if (!mappingRender) {
+              mappingRender = true;
+            }
+          }}
           type="checkbox"
-        >
+        />
         <label for="pr-map">Mapping</label>
         <input
-          bind:checked={ options.thresholds }
+          bind:checked={options.thresholds}
           class="tab-ctrl"
           id="pr-levels"
-          on:change={ () => sendPrEvent('thresholds') }
-          on:change={ storeOptions }
-          on:click|once={ () => { thresholdRender = true; } }
+          onchange={() => {
+            sendPrEvent('thresholds');
+            storeOptions();
+          }}
+          onclick={() => {
+            if (!thresholdRender) {
+              thresholdRender = true;
+            }
+          }}
           type="checkbox"
-        >
+        />
         <label for="pr-levels">Thresholds</label>
         <div class="panels">
-          { #if inventoryRender }
+          {#if inventoryRender}
             <div class="inventory">
               <div class="inventory-grid-container">
-                { #each countPots as { name, count } }
-                  <div>{ name }</div>
-                  <div style:background-color={ countBg(count) }>
-                    { count }
+                {#each countPots as { name, count }, x (x)}
+                  <div>{name}</div>
+                  <div style:background-color={countBg(count)}>
+                    {count}
                   </div>
-                { /each }
+                {/each}
               </div>
             </div>
-          { /if }
-          { #if mappingRender }
+          {/if}
+          {#if mappingRender}
             <div class="mapping">
               <div class="mapping-grid-container">
-                { #each renderMap as {
-                  name, mapped, ignore, waiting,
-                } }
-                  <div>{ name }</div>
+                {#each renderMap as { name, mapped, waiting }, i (i)}
+                  <div>{name}</div>
                   <div>
                     <select
-                      bind:value={ mapped }
-                      { name }
-                      on:change={ () => sendPrEvent('mapped') }
-                      on:change={ mappingChange }
-                      on:mousedown|once={ () => { waiting = false; } }
+                      bind:value={renderMap[i].mapped}
+                      {name}
+                      onchange={() => {
+                        sendPrEvent('mapped');
+                        mappingChange();
+                      }}
+                      onmousedown={() => {
+                        renderMap[i].waiting = false;
+                      }}
                     >
-                      { #if waiting }
-                        <option>{ mapped }</option>
-                      { :else }
-                        { #each renderMap as { name: innerName } }
-                          <option selected={ mapped === innerName }>{ innerName }</option>
-                        { /each }
-                      { /if }
+                      {#if waiting}
+                        <option>{mapped}</option>
+                      {:else}
+                        {#each renderMap as { name: innerName }, x (x)}
+                          <option selected={mapped === innerName}
+                            >{innerName}</option
+                          >
+                        {/each}
+                      {/if}
                     </select>
                   </div>
                   <div>
                     <input
-                      bind:checked={ ignore }
-                      on:change={ () => sendPrEvent('ignore') }
-                      on:change={ mappingChange }
-                      on:click={ (e) => e.target.blur() }
+                      bind:checked={renderMap[i].ignore}
+                      onchange={() => {
+                        sendPrEvent('ignore');
+                        mappingChange();
+                      }}
+                      onclick={(e) => e.target.blur()}
                       title="Ignore"
                       type="checkbox"
-                    >
+                    />
                   </div>
-                { /each }
+                {/each}
                 <div></div>
                 <div>
                   <button
                     class="custombutton"
-                    on:click={ () => sendPrEvent('ignore-all') }
-                    on:click={ ignoreAll }
+                    onclick={() => {
+                      sendPrEvent('ignore-all');
+                      ignoreAll();
+                    }}
                     type="button"
                   >
                     Ignore All
                   </button>
                   <button
                     class="custombutton"
-                    on:click={ () => sendPrEvent('reset') }
-                    on:click={ doReset }
+                    onclick={() => {
+                      sendPrEvent('reset');
+                      doReset();
+                    }}
                     type="button"
                   >
                     Reset
@@ -249,34 +308,38 @@
                 </div>
               </div>
             </div>
-          { /if }
-          { #if thresholdRender }
+          {/if}
+          {#if thresholdRender}
             <div class="thresholds">
               Min:
               <input
-                bind:value={ options.minpoint }
+                bind:value={options.minpoint}
                 max="999"
                 min="0"
-                on:input={ () => sendPrEvent('minpoint') }
-                on:input={ storeOptions }
+                oninput={() => {
+                  sendPrEvent('minpoint');
+                  doMapping();
+                }}
                 type="number"
-              >
+              />
               Max:
               <input
-                bind:value={ options.maxpoint }
+                bind:value={options.maxpoint}
                 max="999"
                 min="0"
-                on:input={ () => sendPrEvent('maxpoint') }
-                on:input={ storeOptions }
+                oninput={() => {
+                  sendPrEvent('maxpoint');
+                  doMapping();
+                }}
                 type="number"
-              >
+              />
             </div>
-          { /if }
+          {/if}
         </div>
       </div>
-    { :catch error }
-      <p style="color: red">{ error.message }</p>
-    { /await }
+    {:catch error}
+      <p style="color: red">{error.message}</p>
+    {/await}
   </div>
 </ModalTitled>
 
@@ -308,7 +371,7 @@
     background: #fece2f;
     color: #4c3000;
     margin-right: -1px;
-    padding: .5em 1em;
+    padding: 0.5em 1em;
   }
   input:checked + label {
     background: #ffa614;

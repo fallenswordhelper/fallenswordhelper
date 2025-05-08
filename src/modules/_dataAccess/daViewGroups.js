@@ -1,6 +1,33 @@
+import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import view from '../app/guild/groups/view';
+import closestTr from '../common/closestTr';
+import querySelectorArray from '../common/querySelectorArray';
+import trim from '../common/trim';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import $dataAccess from './$dataAccess';
-import viewGroups from './fallbacks/viewGroups';
+
+const viewGrp = (doc) =>
+  querySelectorArray('#pCC img[src$="/icon_action_view.png"]', doc);
+const getGroupId = (i) =>
+  Number(getCustomUrlParameter(i.parentElement.href, 'group_id'));
+const getLead = (i) => closestTr(i).cells[0].children[0].textContent;
+const toArray = (list) => list.split(',').map(trim).filter(Boolean);
+const memberList = (i) => closestTr(i).cells[1].firstChild.textContent;
+const remainingMembers = (i) =>
+  toArray(memberList(i)).map((name) => ({ name }));
+const getMembers = (i) => [{ name: getLead(i) }, ...remainingMembers(i)];
+const formatGrp = (i) => ({ id: getGroupId(i), members: getMembers(i) });
+const getResults = (doc) => viewGrp(doc).map(formatGrp);
+
+function parseReport(doc) {
+  if (doc) return { r: getResults(doc), s: true };
+  return { s: false };
+}
+
+// Incomplete
+async function viewGroups() {
+  return parseReport(await indexAjaxDoc({ cmd: 'guild', subcmd: 'groups' }));
+}
 
 export default function daViewGroups() {
   return $dataAccess(view, viewGroups);

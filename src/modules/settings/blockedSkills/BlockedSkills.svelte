@@ -9,17 +9,13 @@
     getCheckedSkills,
     submitSkillChanges,
   } from './blockedSkills';
-  import {
-    checkLoadList,
-    checkNewList,
-    checkUpdateList,
-  } from './errorChecks';
+  import { checkLoadList, checkNewList, checkUpdateList } from './errorChecks';
 
-  let blockedSkillLists = getValueJSON('blockedSkillLists');
-  let newListName = '';
-  let listName = '';
-  let infoBoxHeader = '';
-  let infoBoxText = '';
+  let blockedSkillLists = $state(getValueJSON('blockedSkillLists'));
+  let newListName = $state('');
+  let listName = $state('');
+  let infoBoxHeader = $state('');
+  let infoBoxText = $state('');
 
   function clearMessages() {
     infoBoxText = '';
@@ -119,76 +115,82 @@
     submitChanges();
   }
 
-  const list = findList(blockedSkillLists, getCheckedSkills());
-  if (list) {
-    listName = list.name;
-  }
+  (() => {
+    const list = findList(blockedSkillLists, getCheckedSkills());
+    if (list) {
+      listName = list.name;
+    }
 
-  if (blockedSkillLists.length >= 10) {
-    infoBox('Having more than 10 blocked skills lists may slow down this page.');
-  }
+    if (blockedSkillLists.length >= 10) {
+      infoBox(
+        'Having more than 10 blocked skills lists may slow down this page.',
+      );
+    }
+  })();
 </script>
 
-<div class='fshCenter'>
-  <span class='fshBold'>Saved Blocked Skill Sets</span><br/>
+<div class="fshCenter">
+  <span class="fshBold">Saved Blocked Skill Sets</span><br />
   <div>
-    <select id='fsh-skillSets' bind:value={ listName }>
-      { #each blockedSkillLists as bsl (bsl.name) }
-        <option value={ bsl.name }>{ bsl.name }</option>
-      { /each }
+    <select id="fsh-skillSets" bind:value={listName}>
+      {#each blockedSkillLists as bsl (bsl.name)}
+        <option value={bsl.name}>{bsl.name}</option>
+      {/each}
     </select>
+    <input class="custominput" type="button" value="Use" onclick={applyList} />
     <input
-      class='custominput'
-      type='button'
-      value='Use'
-      on:click|self={ applyList } />
+      class="custominput"
+      type="button"
+      value="Delete"
+      onclick={deleteList}
+    />
     <input
-      class='custominput'
-      type='button'
-      value='Delete'
-      on:click|self={ deleteList } />
-    <input
-      class='custominput'
-      type='button'
-      value='Update'
-      on:click|self={ updateList } />
+      class="custominput"
+      type="button"
+      value="Update"
+      onclick={updateList}
+    />
   </div>
   <div class="newlists">
     <input
-      class='custominput'
-      type='text'
-      name='new-set-name'
-      id='new-set-name'
-      placeholder='Set Name'
-      maxlength='50'
-      bind:value={ newListName } />
+      class="custominput"
+      type="text"
+      name="new-set-name"
+      id="new-set-name"
+      placeholder="Set Name"
+      maxlength="50"
+      bind:value={newListName}
+    />
     <input
-      class='custominput'
-      type='button'
-      value='Save New Blocked Skill Set'
-      on:click|self={ createList } />
+      class="custominput"
+      type="button"
+      value="Save New Blocked Skill Set"
+      onclick={createList}
+    />
   </div>
-  { #if infoBoxText }
+  {#if infoBoxText}
     <div class="infobox">
-      <div class="infobox-header">{ infoBoxHeader }</div>
-      <div>{ infoBoxText }</div>
+      <div class="infobox-header">{infoBoxHeader}</div>
+      <div>{infoBoxText}</div>
     </div>
-  { /if }
+  {/if}
 </div>
 
 <style>
-.infobox {
-  background: #D3CFC1;
-  border: 2px solid white;
-  margin: 10px auto;
-  width: 80%;
-}
+  .infobox {
+    background: #d3cfc1;
+    border: 2px solid white;
+    margin: 10px auto;
+    width: 80%;
+  }
 
-.infobox-header {
-  background: #8E8668;
-  color: white;
-  font-size: smaller;
-}
+  .infobox-header {
+    background: #8e8668;
+    color: white;
+    font-size: smaller;
+  }
 
-.newlists { margin-top: 4px; }
+  .newlists {
+    margin-top: 4px;
+  }
 </style>

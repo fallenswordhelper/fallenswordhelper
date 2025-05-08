@@ -15,10 +15,12 @@ function getStamPerc(a) {
 
 function stamBarStyle(a) {
   const perc = getStamPerc(a);
-  return '.fshProgressBar '
-    + `tr:nth-child(${a.parentNode.parentNode.rowIndex + 1}) {`
-    + `background-image: linear-gradient(to right, rgba(255, 153, 0, 0.5) ${perc}%, `
-    + `transparent ${perc + 1}%)}`;
+  return (
+    '.fshProgressBar ' +
+    `tr:nth-child(${a.parentNode.parentNode.rowIndex + 1}) {` +
+    `background-image: linear-gradient(to right, rgba(255, 153, 0, 0.5) ${perc}%, ` +
+    `transparent ${perc + 1}%)}`
+  );
 }
 
 function injectStyle() {

@@ -1,6 +1,5 @@
 import './inventory.css';
 import getMembrList from '../../ajax/getMembrList';
-import { end, start } from '../../analytics/timing';
 import all from '../../common/all';
 import currentGuildId from '../../common/currentGuildId';
 import entries from '../../common/entries';
@@ -19,9 +18,7 @@ import clearButton from './clearButton';
 import decorate from './decorate';
 import doTable from './doTable';
 import eventHandlers from './eventHandlers/eventHandlers';
-import {
-  lvlFilter, rarityFilter, setFilter, typeFilter,
-} from './filters';
+import { lvlFilter, rarityFilter, setFilter, typeFilter } from './filters';
 import footer from './footer/footer';
 import headers from './headers';
 import { extendOptions } from './options';
@@ -31,14 +28,21 @@ import setLvls from './setLvls';
 const rekey = ([, o]) => [o.id, o];
 
 function doSpinner() {
-  setInnerHtml(`<span id="fshInvMan"><img src = "${
-    oldActionSpinner}">&nbsp;Getting inventory data...</span>`, pcc());
+  setInnerHtml(
+    `<span id="fshInvMan"><img src = "${
+      oldActionSpinner
+    }">&nbsp;Getting inventory data...</span>`,
+    pcc(),
+  );
 }
 
 async function rekeyMembrList() {
   await getMembrList(false);
+  if (!calf.membrList) return;
   // Rekey membrList from names to id's
-  calf.membrList = fromEntries(entries(calf.membrList).filter(notLastUpdate).map(rekey));
+  calf.membrList = fromEntries(
+    entries(calf.membrList).filter(notLastUpdate).map(rekey),
+  );
 }
 
 function prepareLayout() {
@@ -64,9 +68,7 @@ function doInventory(reset) {
 }
 
 function getInvMan(reset) {
-  start('JS Perf', 'getInvMan');
   doInventory(reset);
-  end('JS Perf', 'getInvMan');
 }
 
 function asyncCall(reset) {

@@ -1,8 +1,10 @@
 import runDefault from '../../common/runDefault';
+import blank from '../../notepad/blank';
 import buffLog from './loader/buffLog';
 import combatLog from './loader/combatLog';
 import creatureLog from './loader/creatureLog';
 import fsboxlog from './loader/fsboxlog';
+import guildLog from './loader/guildLog';
 import injectAuctionSearch from './loader/injectAuctionSearch';
 import injectFindBuffs from './loader/injectFindBuffs';
 import injectFindOther from './loader/injectFindOther';
@@ -13,12 +15,11 @@ import quickwear from './loader/quickwear';
 import recipeMgr from './loader/recipeMgr';
 import reliclist from './loader/reliclist';
 
-const inventory = () => { runDefault(import('../../notepad/inventory/inventory')); };
-const newGuildLog = () => { runDefault(import('../../notepad/newGuildLog/newGuildLog')); };
-const load = () => { runDefault(import('../../settings/load')); };
-const whosGotWhat = () => {
-  if (!defineUserIsDev) { return; } // whosGotWhat
-  runDefault(import('../../notepad/whosGotWhat/whosGotWhat'));
+const inventory = () => {
+  runDefault(import('../../notepad/inventory/inventory'));
+};
+const load = () => {
+  runDefault(import('../../settings/load'));
 };
 
 const notepad = {
@@ -34,12 +35,12 @@ const notepad = {
   quickwear: { '-': quickwear },
   fsboxcontent: { '-': fsboxlog },
   bufflogcontent: { '-': buffLog },
-  newguildlog: { '-': newGuildLog }, // active
+  newguildlog: { '-': guildLog }, // deprecated
   findbuffs: { '-': injectFindBuffs },
   findother: { '-': injectFindOther },
   savesettings: { '-': load }, // active
   reliclist: { '-': reliclist },
-  whosgotwhat: { '-': whosGotWhat },
+  '-': { '-': blank },
 };
 
 export default notepad;

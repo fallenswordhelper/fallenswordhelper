@@ -10,7 +10,9 @@
   text-align: left;
   white-space: nowrap;
   width: 100px;
-  z-index: 50;
+  z-index: 20;
 }
 
-.fshFixed {position: fixed;}
+.fshFixed {
+  position: fixed;
+}

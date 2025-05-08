@@ -3,13 +3,13 @@
   import getValueJSON from '../../system/getValueJSON';
   import setValueJSON from '../../system/setValueJSON';
 
-  let nameCtrl = 0;
-  let nameMissing = 0;
-  let urlCtrl = 0;
-  let urlMissing = 0;
-  let newCtrl = 0;
+  let nameCtrl = $state(0);
+  let nameMissing = $state(0);
+  let urlCtrl = $state(0);
+  let urlMissing = $state(0);
+  let newCtrl = $state(0);
 
-  let currentItems = getValueJSON('quickLinks') || [];
+  let currentItems = $state(getValueJSON('quickLinks') || []);
 
   function saveCurrent() {
     setValueJSON('quickLinks', currentItems);
@@ -24,11 +24,14 @@
   function addBtn() {
     sendEvent('Quick Links Manager', 'Add Item');
     if (nameMissing || urlMissing) return;
-    currentItems = [...currentItems, {
-      name: nameCtrl.value,
-      url: urlCtrl.value,
-      newWindow: newCtrl.checked,
-    }];
+    currentItems = [
+      ...currentItems,
+      {
+        name: nameCtrl.value,
+        url: urlCtrl.value,
+        newWindow: newCtrl.checked,
+      },
+    ];
     nameCtrl.value = '';
     urlCtrl.value = '';
     newCtrl.checked = 0;
@@ -45,7 +48,12 @@
       <div class="wrapper">
         [
         <div class="tooltip">
-          <span class="tooltip-bottom-right" data-tooltip="Open page in a new window/tab">?</span>
+          <span
+            class="tooltip-bottom-right"
+            data-tooltip="Open page in a new window/tab"
+          >
+            ?
+          </span>
         </div>
         ]
       </div>
@@ -53,46 +61,58 @@
     <div class="centered">Action</div>
   </div>
   <div class="grid items">
-    { #each currentItems as { name, newWindow, url }, i }
-      <div>{ name }</div>
-      <div>{ url }</div>
+    {#each currentItems as { name, url }, i (i)}
+      <div>{name}</div>
+      <div>{url}</div>
       <div class="centered">
-        <input bind:checked={ newWindow } disabled type="checkbox">
+        <input
+          bind:checked={currentItems[i].newWindow}
+          disabled
+          type="checkbox"
+        />
       </div>
       <div class="buttons centered">
         [
-        <button on:click={ () => delBtn(i) } type="button">Del</button>
+        <button onclick={() => delBtn(i)} type="button">Del</button>
         ]
       </div>
-    { /each }
+    {/each}
   </div>
   <div class="grid add">
     <div>
       <input
-        bind:this={ nameCtrl }
-        class:invalid={ nameMissing }
-        on:blur={ () => { nameMissing = nameCtrl.validity.valueMissing; } }
-        on:focus={ () => { nameMissing = 0; } }
+        bind:this={nameCtrl}
+        class:invalid={nameMissing}
+        onblur={() => {
+          nameMissing = nameCtrl.validity.valueMissing;
+        }}
+        onfocus={() => {
+          nameMissing = 0;
+        }}
         placeholder="Log"
         required
         type="text"
-      >
+      />
     </div>
     <div>
       <input
-        bind:this={ urlCtrl }
-        class:invalid={ urlMissing }
-        on:blur={ () => { urlMissing = urlCtrl.validity.valueMissing; } }
-        on:focus={ () => { urlMissing = 0; } }
+        bind:this={urlCtrl}
+        class:invalid={urlMissing}
+        onblur={() => {
+          urlMissing = urlCtrl.validity.valueMissing;
+        }}
+        onfocus={() => {
+          urlMissing = 0;
+        }}
         placeholder="?cmd=log"
         required
         type="text"
-      >
+      />
     </div>
-    <div class="centered"><input bind:this={ newCtrl } type="checkbox"></div>
+    <div class="centered"><input bind:this={newCtrl} type="checkbox" /></div>
     <div class="buttons centered">
       [
-      <button on:click={ addBtn } type="button">Add</button>
+      <button onclick={addBtn} type="button">Add</button>
       ]
     </div>
   </div>
@@ -113,7 +133,7 @@
     row-gap: 2px;
   }
   .headings {
-    background-color: #CD9E4B;
+    background-color: #cd9e4b;
     user-select: none;
   }
   .headings div {
@@ -153,7 +173,7 @@
     opacity: 0.8;
     text-decoration: underline;
   }
-  input[type="text"] {
+  input[type='text'] {
     box-sizing: border-box;
     width: 100%;
   }

@@ -1,28 +1,26 @@
 <!-- uses bits of https://github.com/flekschas/svelte-simple-modal -->
 <!-- uses bits of https://svelte.dev/repl/514f1335749a4eae9d34ad74dc277f20 -->
 
-<script context="module">
+<script module>
   let onTop;
 </script>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
   import querySelectorArray from '../common/querySelectorArray';
 
-  export let modal;
-  export let visible = true;
+  let { close, children, modal = $bindable(), visible = true } = $props();
 
-  const dispatch = createEventDispatcher();
-  const close = () => dispatch('close');
+  let modalVisible = $derived(visible);
+  let previouslyFocused = $state();
+  let prevOnTop = $state();
 
-  $: modalVisible = visible;
-  let previouslyFocused;
-  let prevOnTop;
-
-  const liveTab = (n) => n.tabIndex >= 0 && n.offsetWidth > 0 && n.offsetHeight > 0 && !n.disabled;
+  const liveTab = (n) =>
+    n.tabIndex >= 0 && n.offsetWidth > 0 && n.offsetHeight > 0 && !n.disabled;
 
   function handleKeydown(e) {
-    if (!visible) { return; }
+    if (!visible) {
+      return;
+    }
 
     if (e.key === 'Escape' && onTop === modal) {
       close();
@@ -43,26 +41,32 @@
     }
   }
 
-  $: if (modal && visible) {
-    prevOnTop = onTop;
-    onTop = modal;
-  }
-
-  $: if (modal && !visible) {
-    onTop = prevOnTop;
-  }
-
-  $: if (visible) {
-    previouslyFocused = document?.activeElement;
-  } else {
-    previouslyFocused?.focus();
-  }
+  $effect(() => {
+    if (visible) {
+      previouslyFocused = document?.activeElement;
+      if (modal) {
+        prevOnTop = onTop;
+        onTop = modal;
+      }
+    } else {
+      previouslyFocused?.focus();
+      if (modal) {
+        onTop = prevOnTop;
+      }
+    }
+  });
 </script>
 
-<svelte:window on:keydown={ handleKeydown }/>
+<svelte:window onkeydown={handleKeydown} />
 
-<div class="ui-dialog" class:modalVisible role="dialog" aria-modal="true" bind:this={ modal }>
-  <slot />
+<div
+  class="ui-dialog"
+  class:modalVisible
+  role="dialog"
+  aria-modal="true"
+  bind:this={modal}
+>
+  {@render children?.()}
 </div>
 
 <style>

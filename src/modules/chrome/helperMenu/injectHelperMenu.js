@@ -1,8 +1,9 @@
+import { mount } from 'svelte';
 import querySelector from '../../common/querySelector';
 import HelperMenu from './HelperMenu.svelte';
 
 function startApp(props, target) {
-  return new HelperMenu({
+  return mount(HelperMenu, {
     target: target.parentElement,
     props: { props },
   });

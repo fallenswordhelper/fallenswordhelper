@@ -34,25 +34,27 @@ async function doInventory(fn) {
   }
 }
 
-const injectStats = (anInventory) => function updateStats(o) {
-  const lookup = anInventory?.find(({ inv_id: invId }) => invId === o.inv_id);
-  return {
-    ...o,
-    ...(lookup?.stats && {
-      stats: {
-        ...o.stats,
-        armor: lookup.stats.armor,
-        attack: lookup.stats.attack,
-        damage: lookup.stats.damage,
-        defense: lookup.stats.defense,
-        hp: lookup.stats.hp,
-        set_name: lookup.stats.set_name ?? '',
-      },
-    }),
+const injectStats = (anInventory) =>
+  function updateStats(o) {
+    const lookup = anInventory?.find(({ inv_id: invId }) => invId === o.inv_id);
+    return {
+      ...o,
+      ...(lookup?.stats && {
+        stats: {
+          ...o.stats,
+          armor: lookup.stats.armor,
+          attack: lookup.stats.attack,
+          damage: lookup.stats.damage,
+          defense: lookup.stats.defense,
+          hp: lookup.stats.hp,
+          set_name: lookup.stats.set_name ?? '',
+        },
+      }),
+    };
   };
-};
 
-const buildItemArray = (invItems, combined) => combined.map(basicItem).map(injectStats(invItems));
+const buildItemArray = (invItems, combined) =>
+  combined.map(basicItem).map(injectStats(invItems));
 const equipmentMap = (o) => ({ ...o, equipped: true, folder_id: -2 });
 const playerInv = (thisBackpack, invItems, combined) => ({
   folders: enumFolders(thisBackpack),

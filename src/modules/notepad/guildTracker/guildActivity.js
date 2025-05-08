@@ -2,14 +2,23 @@ import ranksView from '../../_dataAccess/fallbacks/ranksView';
 import entries from '../../common/entries';
 import fromEntries from '../../common/fromEntries';
 import isNull from '../../common/isNull';
+import jQueryPresent from '../../common/jQueryPresent';
 import keys from '../../common/keys';
 import lastActivityToDays from '../../common/lastActivityToDays';
 import numberIsNaN from '../../common/numberIsNaN';
+import { defEnableGuildActivityTracker } from '../../support/constants';
 import { nowSecs } from '../../support/now';
 import fallback from '../../system/fallback';
+import getValue from '../../system/getValue';
 import { set } from '../../system/idb';
 import {
-  cur, fshGuildActivity, gxp, lvl, max, utc, vl,
+  cur,
+  fshGuildActivity,
+  gxp,
+  lvl,
+  max,
+  utc,
+  vl,
 } from './indexConstants';
 import { getActivity } from './utils';
 
@@ -47,20 +56,30 @@ const noNull = (ary) => !ary.some(isNull);
 const noNaN = (ary) => !ary.some(numberIsNaN);
 const hasLength = ([, val]) => val.length;
 const clean = ([key, val]) => [key, val.filter(noNull).filter(noNaN)];
-const cleanArchive = (data) => entries(data.members || {}).map(clean).filter(hasLength);
+const cleanArchive = (data) =>
+  entries(data.members || {})
+    .map(clean)
+    .filter(hasLength);
 
 const latest = (a, b) => (a[utc] > b[utc] ? a : b);
 const onlyLatest = ([key, val]) => [key, val.reduce(latest)];
-const toKeep = (current) => ([key, val]) => testForChange.some((fn) => fn(current[key]?.[0], val));
+const toKeep =
+  (current) =>
+  ([key, val]) =>
+    testForChange.some((fn) => fn(current[key]?.[0], val));
 const toEntry = ([key, val]) => [key, [val]];
 
-const oldRecords = (archiveLatestObj) => ([key, val]) => [
-  key,
-  val.filter((ary) => ary[utc] !== archiveLatestObj[key][utc]),
-];
+const oldRecords =
+  (archiveLatestObj) =>
+  ([key, val]) => [
+    key,
+    val.filter((ary) => ary[utc] !== archiveLatestObj[key][utc]),
+  ];
 
-const oneDay = (archiveLatestObj) => ([key]) => !archiveLatestObj[key]
-  || nowSecs() - archiveLatestObj[key][utc] >= 86100;
+const oneDay =
+  (archiveLatestObj) =>
+  ([key]) =>
+    !archiveLatestObj[key] || nowSecs() - archiveLatestObj[key][utc] >= 86100;
 
 const merge = (archiveOldObj, archiveToKeepObj, currentNewObj) => ({
   lastUpdate: nowSecs(),
@@ -69,31 +88,44 @@ const merge = (archiveOldObj, archiveToKeepObj, currentNewObj) => ({
       ...archiveOldObj,
       ...archiveToKeepObj,
       ...currentNewObj,
-    }).map((key) => [key, [
-      ...archiveOldObj[key] ?? [],
-      ...(archiveToKeepObj[key] ?? []),
-      ...(currentNewObj[key] ?? []),
-    ]]),
+    }).map((key) => [
+      key,
+      [
+        ...(archiveOldObj[key] ?? []),
+        ...(archiveToKeepObj[key] ?? []),
+        ...(currentNewObj[key] ?? []),
+      ],
+    ]),
   ),
 });
 
-const mergeWrapper = (archiveClean, archiveLatestObj, currentNewObj) => merge(
-  fromEntries(archiveClean.map(oldRecords(archiveLatestObj))),
-  fromEntries(entries(archiveLatestObj).filter(toKeep(currentNewObj)).map(toEntry)),
-  currentNewObj,
-);
+const mergeWrapper = (archiveClean, archiveLatestObj, currentNewObj) =>
+  merge(
+    fromEntries(archiveClean.map(oldRecords(archiveLatestObj))),
+    fromEntries(
+      entries(archiveLatestObj).filter(toKeep(currentNewObj)).map(toEntry),
+    ),
+    currentNewObj,
+  );
 
 function makeChange(currentNew, archiveClean, archiveLatestObj) {
   if (!currentNew || !archiveClean || !archiveLatestObj) return;
   set(
     fshGuildActivity,
-    mergeWrapper(archiveClean, archiveLatestObj, fromEntries(currentNew.map(toEntry))),
+    mergeWrapper(
+      archiveClean,
+      archiveLatestObj,
+      fromEntries(currentNew.map(toEntry)),
+    ),
   );
 }
 
 function noChange(archiveClean) {
   if (!archiveClean) return;
-  set(fshGuildActivity, { lastUpdate: nowSecs(), members: fromEntries(archiveClean) });
+  set(fshGuildActivity, {
+    lastUpdate: nowSecs(),
+    members: fromEntries(archiveClean),
+  });
 }
 
 function doMerge(archive, ranks) {
@@ -109,13 +141,16 @@ async function getRanks(archive) {
   if (ranks.s) doMerge(archive, ranks);
 }
 
-const moreThanFiveMins = (archive) => nowSecs() > fallback(archive.lastUpdate, 0) + 300;
+const moreThanFiveMins = (archive) =>
+  nowSecs() > fallback(archive.lastUpdate, 0) + 300;
 
 function checkLastUpdate(archive) {
   if (moreThanFiveMins(archive)) getRanks(archive);
 }
 
 export default async function guildActivity() {
-  const archive = await getActivity();
-  checkLastUpdate(archive);
+  if (jQueryPresent() && getValue(defEnableGuildActivityTracker)) {
+    const archive = await getActivity();
+    checkLastUpdate(archive);
+  }
 }

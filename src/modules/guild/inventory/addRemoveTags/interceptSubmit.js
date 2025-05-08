@@ -11,7 +11,10 @@ import actionType from './actionType';
 const getCheckedItems = () => querySelectorArray('[name="tagIndex[]"]:checked');
 
 async function tagChunk(action, items) {
-  const json = await daTagItems(action, items.map((i) => i.value));
+  const json = await daTagItems(
+    action,
+    items.map((i) => i.value),
+  );
   if (json.s) {
     items.forEach(removeRow);
   } else {

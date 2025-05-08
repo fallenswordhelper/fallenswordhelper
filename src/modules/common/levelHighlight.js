@@ -17,13 +17,25 @@ function calcLvlToTest() {
 
 const lowerPvpCalcs = [
   [(levelToTest) => levelToTest > 3999 + 50, () => 50],
-  [(levelToTest) => levelToTest > 3999 + 40, (levelToTest) => levelToTest - 4000],
+  [
+    (levelToTest) => levelToTest > 3999 + 40,
+    (levelToTest) => levelToTest - 4000,
+  ],
   [(levelToTest) => levelToTest > 2999 + 40, () => 40],
-  [(levelToTest) => levelToTest > 2999 + 30, (levelToTest) => levelToTest - 3000],
+  [
+    (levelToTest) => levelToTest > 2999 + 30,
+    (levelToTest) => levelToTest - 3000,
+  ],
   [(levelToTest) => levelToTest > 1999 + 30, () => 30],
-  [(levelToTest) => levelToTest > 1999 + 20, (levelToTest) => levelToTest - 2000],
+  [
+    (levelToTest) => levelToTest > 1999 + 20,
+    (levelToTest) => levelToTest - 2000,
+  ],
   [(levelToTest) => levelToTest > 999 + 20, () => 20],
-  [(levelToTest) => levelToTest > 999 + 10, (levelToTest) => levelToTest - 1000],
+  [
+    (levelToTest) => levelToTest > 999 + 10,
+    (levelToTest) => levelToTest - 1000,
+  ],
   [(levelToTest) => levelToTest > 199 + 10, () => 10],
   [(levelToTest) => levelToTest > 199 + 5, (levelToTest) => levelToTest - 200],
   [(levelToTest) => levelToTest > 5, () => 5],
@@ -87,7 +99,10 @@ function calcLowerGvgLevel(levelToTest) {
   const playerRange = getGvgRange(levelToTest);
   const bandMin = calcLowerGvgMin(levelToTest);
   if (levelToTest - playerRange < bandMin) {
-    return Math.max(Math.min(bandMin, levelToTest - getGvgRange(levelToTest - playerRange)), 50);
+    return Math.max(
+      Math.min(bandMin, levelToTest - getGvgRange(levelToTest - playerRange)),
+      50,
+    );
   }
   return Math.max(levelToTest - playerRange, 50);
 }

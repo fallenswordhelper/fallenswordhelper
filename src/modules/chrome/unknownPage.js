@@ -40,11 +40,14 @@ const unknown = [
   ],
   [
     () => defineUserIsDev, // unknownPage
-    () => { stdout('Fell through!'); },
+    () => {
+      stdout('Fell through!');
+    },
   ],
 ];
 
-export default function unknownPage() { // Legacy
+export default function unknownPage() {
+  // Legacy
   if (jQueryNotPresent()) return;
   const show = 0;
   if (defineUserIsDev && show) stdout('unknownPage'); // unknownPage

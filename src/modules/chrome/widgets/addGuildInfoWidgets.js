@@ -4,6 +4,7 @@ import contains from '../../common/contains';
 import getElementById from '../../common/getElementById';
 import onclick from '../../common/onclick';
 import querySelectorArray from '../../common/querySelectorArray';
+import calf from '../../support/calf';
 import { guildSubcmdUrl } from '../../support/constants';
 import colouring from './colouring';
 import contactColour from './contactColour';
@@ -18,23 +19,31 @@ function guildColour(el) {
   });
 }
 
-function makeLink(el) {
-  const anchor = createAnchor({ href: `${guildSubcmdUrl}chat`, textContent: 'Chat' });
-  onclick(anchor, () => { sendEvent('widgets', 'guild chat'); });
-  el.replaceChild(anchor, el.firstChild);
-}
-
-function updateChatLink() {
-  querySelectorArray('#pCR h4').filter(contains('Chat')).forEach(makeLink);
+function makeLink(hNo, word, page) {
+  querySelectorArray(`#pCR h${hNo}`)
+    .filter(contains(word))
+    .forEach((el) => {
+      const anchor = createAnchor({
+        href: `${guildSubcmdUrl}${page}`,
+        textContent: word,
+      });
+      onclick(anchor, () => {
+        sendEvent('widgets', `guild ${page}`);
+      });
+      el.replaceChild(anchor, el.firstChild);
+    });
 }
 
 export default function addGuildInfoWidgets() {
+  if (!calf.enableGuildInfoWidgets) return;
   const guildMembrList = getElementById('minibox-guild-members-list');
-  if (!guildMembrList) { return; } // list exists
+  if (!guildMembrList) return;
+  // list exists
   // hide guild info links
   doHideBtn(guildMembrList, 1);
   doHideBuffSelected(guildMembrList, 'guild');
   // add coloring for offline time
   colouring(guildMembrList, guildColour);
-  updateChatLink();
+  makeLink(4, 'Chat', 'chat');
+  makeLink(3, 'Guild', 'manage');
 }

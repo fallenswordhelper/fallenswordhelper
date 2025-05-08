@@ -4,17 +4,21 @@
   import jsonStringify from '../../common/jsonStringify';
   import fileImport from './fileImport';
   import {
-    createCsv, downloadFile, purgeByDate, purgeByUser, retired,
+    createCsv,
+    downloadFile,
+    purgeByDate,
+    purgeByUser,
+    retired,
   } from './utils';
 
-  let fileInput = 0;
-  let overwrite = 0;
-  let purgedate = '';
-  let missing = [];
-  let selected = '';
-  let disabled = 1;
+  let fileInput = $state(0);
+  let overwrite = $state(0);
+  let purgedate = $state('');
+  let missing = $state([]);
+  let selected = $state('');
+  let disabled = $state(1);
 
-  $: dateAsTimestamp = purgedate && Date.parse(purgedate) / 1000;
+  let dateAsTimestamp = $derived(purgedate && Date.parse(purgedate) / 1000);
 
   function exportJson() {
     sendEvent('Utils', 'exportJson');
@@ -66,92 +70,106 @@
 </script>
 
 <div>
-  <button on:click={ exportJson } type="button">Export JSON</button><br><br>
-  <button on:click={ exportCsv } type="button">Export CSV</button><br><br><br>
-  <input accept=".csv, .json, .txt" bind:this={ fileInput } on:change={ importFile } type="file">
-  <button on:click={ importButton } type="button">Import</button>
+  <button onclick={exportJson} type="button">Export JSON</button>
+  <br /><br />
+  <button onclick={exportCsv} type="button">Export CSV</button>
+  <br /><br /><br />
+  <input
+    accept=".csv, .json, .txt"
+    bind:this={fileInput}
+    onchange={importFile}
+    type="file"
+  />
+  <button onclick={importButton} type="button">Import</button>
   <label>
     <input
-      bind:checked={ overwrite }
-      on:change={ () => { sendEvent('Utils', 'overwriteToggle'); } }
+      bind:checked={overwrite}
+      onchange={() => {
+        sendEvent('Utils', 'overwriteToggle');
+      }}
       type="checkbox"
-    >
+    />
     Overwrite
   </label>
-  (Warning: This can take a while on large files)<br><br><br>
-  <button disabled={ !purgedate } on:click={ datePurge } type="button">Purge</button>
+  (Warning: This can take a while on large files)<br /><br /><br />
+  <button disabled={!purgedate} onclick={datePurge} type="button">Purge</button>
   data before
   <input
-    bind:value={ purgedate }
-    on:change={ () => { sendEvent('Utils', 'purgeDateChange'); } }
+    bind:value={purgedate}
+    onchange={() => {
+      sendEvent('Utils', 'purgeDateChange');
+    }}
     type="date"
-  ><br><br>
-  <button on:click={ userPurge } { disabled } type="button">Purge</button>
+  /><br /><br />
+  <button onclick={userPurge} {disabled} type="button">Purge</button>
   username
   <select
-    bind:value={ selected }
-    on:change={ () => { sendEvent('Utils', 'handleChange'); } }
-    { disabled }
+    bind:value={selected}
+    onchange={() => {
+      sendEvent('Utils', 'handleChange');
+    }}
+    {disabled}
   >
-    { #each missing as user }
-      <option value="{ user }">{ user }</option>
-    { /each }
+    {#each missing as user, x (x)}
+      <option value={user}>{user}</option>
+    {/each}
   </select>
 </div>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-div {
-  color-scheme: light;
-  min-width: 640px;
-  padding: 4px;
-}
-button {
-  background-color: #d6af6a;
-  background-image: linear-gradient(#d9b677, #d2a85d);
-  border-bottom-color: rgba(255, 255, 255, 0.2);
-  border-left-color: rgba(255, 255, 255, 0.4);
-  border-radius: 2px;
-  border-right-color: rgba(255, 255, 255, 0.4);
-  border-style: solid;
-  border-top-color: rgba(255, 255, 255, 0.6);
-  border-width: 1px;
-  box-shadow: 0 0 3px rgb(0,0,0);
-  color: #201703;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  margin-bottom: 2px;
-  margin-right: 2px;
-  padding: 1px 10px;
-  position: relative;
-}
-button:hover {
-  background-color: #f5e0ae;
-  background-image: linear-gradient(#f6e2b5, #f4dda7);
-}
-button:active {
-  top: 1px;
-}
-:disabled {
-  background-color: #b8b8b8;
-  background-image: none;
-  pointer-events: none;
-}
-input[type="file"] {
-  display: none;
-}
-input[type="date"], select {
-  background-color: #f7ebd3;
-  border-color: #a9772c #f3d99d #f3d99d #a9772c;
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 1px;
-  color: #2f240f;
-}
-select {
-  width: 100px;
-}
+  * {
+    box-sizing: border-box;
+  }
+  div {
+    color-scheme: light;
+    min-width: 640px;
+    padding: 4px;
+  }
+  button {
+    background-color: #d6af6a;
+    background-image: linear-gradient(#d9b677, #d2a85d);
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+    border-left-color: rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    border-right-color: rgba(255, 255, 255, 0.4);
+    border-style: solid;
+    border-top-color: rgba(255, 255, 255, 0.6);
+    border-width: 1px;
+    box-shadow: 0 0 3px rgb(0, 0, 0);
+    color: #201703;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    padding: 1px 10px;
+    position: relative;
+  }
+  button:hover {
+    background-color: #f5e0ae;
+    background-image: linear-gradient(#f6e2b5, #f4dda7);
+  }
+  button:active {
+    top: 1px;
+  }
+  :disabled {
+    background-color: #b8b8b8;
+    background-image: none;
+    pointer-events: none;
+  }
+  input[type='file'] {
+    display: none;
+  }
+  input[type='date'],
+  select {
+    background-color: #f7ebd3;
+    border-color: #a9772c #f3d99d #f3d99d #a9772c;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: #2f240f;
+  }
+  select {
+    width: 100px;
+  }
 </style>

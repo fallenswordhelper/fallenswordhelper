@@ -1,13 +1,14 @@
 import analytics from '../analytics/analytics';
 import isAuto from '../analytics/isAuto';
+import { posthogInit } from '../analytics/posthog';
 import screenview from '../analytics/screenview';
-import { end, start } from '../analytics/timing';
 import isFunction from '../common/isFunction';
 import isObject from '../common/isObject';
 import jsonParse from '../common/jsonParse';
 import loadCss from '../common/loadCss';
 import querySelector from '../common/querySelector';
 import exceptions from '../exceptions/exceptions';
+import globalErrorHandler from '../exceptions/globalErrorHandler';
 import calf from '../support/calf';
 import stdout from '../support/stdout';
 import task from '../support/task';
@@ -37,9 +38,11 @@ function newSelector(selector) {
 }
 
 function isValid() {
-  return isObject(pageSwitcher[cmd])
-    && isObject(pageSwitcher[cmd][subcmd])
-    && isFunction(pageSwitcher[cmd][subcmd][subcmd2]);
+  return (
+    isObject(pageSwitcher[cmd]) &&
+    isObject(pageSwitcher[cmd][subcmd]) &&
+    isFunction(pageSwitcher[cmd][subcmd][subcmd2])
+  );
 }
 
 function testCoreFunction() {
@@ -50,7 +53,9 @@ function getParamsFromUrl() {
   cmd = getParam('cmd');
   subcmd = getParam('subcmd');
   subcmd2 = getParam('subcmd2');
-  if (['points', 'privatemessage'].includes(cmd)) { type = `/${getParam('type')}`; }
+  if (['points', 'privatemessage'].includes(cmd)) {
+    type = `/${getParam('type')}`;
+  }
 }
 
 function getParamsFromPage() {
@@ -84,14 +89,11 @@ function asyncDispatcher() {
   if (defineUserIsDev) devHooks(); //  asyncDispatcher messages
   if (isFunction(coreFunction)) {
     screenview(functionPath);
-    start('JS Perf', functionPath);
     coreFunction();
-    end('JS Perf', functionPath);
   }
 }
 
 async function runCore(cssPrm) {
-  start('JS Perf', 'FSH.runCore');
   getCoreFunction();
   await cssPrm;
   lookForHcsData();
@@ -100,12 +102,10 @@ async function runCore(cssPrm) {
   /* This must be at the end in order not to
   screw up other findNode calls (Issue 351) */
   doQuickLinks();
-  end('JS Perf', 'FSH.runCore');
 }
 
 const envTests = [
-  () => !('containerName' in CSSContainerRule.prototype),
-  () => !('toSpliced' in Array.prototype),
+  () => !('showPicker' in HTMLSelectElement.prototype),
   () => !navigator.cookieEnabled,
   () => window !== window.parent,
   isAuto,
@@ -122,12 +122,13 @@ function setVer(fshVer, gmInfo) {
 
 // main event dispatcher
 export default function dispatch(fshVer, gmInfo) {
-  start('JS Perf', 'FSH.dispatch');
-  if (badEnv()) { return; }
+  if (badEnv()) return;
   const cssPrm = loadCss(defineCalfPath);
+  const globalHandler = false;
+  if (globalHandler) globalErrorHandler();
   exceptions();
   setVer(fshVer, gmInfo);
   analytics();
+  posthogInit();
   runCore(cssPrm);
-  end('JS Perf', 'FSH.dispatch');
 }

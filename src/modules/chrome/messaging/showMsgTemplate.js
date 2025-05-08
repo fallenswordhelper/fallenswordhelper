@@ -37,7 +37,8 @@ function addRow(index, myBtn, html) {
 }
 
 function fshButton(classPrefix, label) {
-  return `<button class="fshButton ui-corner-all ${classPrefix
+  return `<button class="fshButton ui-corner-all ${
+    classPrefix
   }-button">${label}</button>`;
 }
 
@@ -51,8 +52,7 @@ function addTemplateRow(index, text) {
 
 function insertTemplate(target) {
   sendEvent('messaging', 'insertTemplate');
-  getMsg().value += `${getText(target)
-    .replace(/\{playername\}/g, getName())}`;
+  getMsg().value += `${getText(target).replace(/\{playername\}/g, getName())}`;
 }
 
 function deleteTemplate(target) {
@@ -82,7 +82,9 @@ const classEvents = [
   ['add-template', insertTemplate],
 ];
 
-function makeRows(text) { addTemplateRow(-1, text); }
+function makeRows(text) {
+  addTemplateRow(-1, text);
+}
 
 export default function showMsgTemplate() {
   if (getValue('enableMessageTemplates') && !showingTemplates) {

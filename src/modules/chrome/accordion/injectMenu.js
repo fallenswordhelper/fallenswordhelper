@@ -4,6 +4,7 @@ import getElementById from '../../common/getElementById';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import { pcl } from '../../support/layout';
 import getValue from '../../system/getValue';
+import injectItems from './injectItems';
 import theLinks from './leftHandLinks.json';
 import navMenu from './navMenu';
 import preFlight from './preFlight';
@@ -27,11 +28,10 @@ function updateLinks() {
   updateScavLink();
 }
 
-async function getLinkConfig(theNav, myNav) {
+function getLinkConfig(theNav, myNav) {
   const linkConfig = theLinks.map((c) => [c, getValue(c)]);
   if (linkConfig.some(([, b]) => b)) {
-    const module = await import('./injectItems');
-    module.default(theNav, myNav, fromEntries(linkConfig));
+    injectItems(theNav, myNav, fromEntries(linkConfig));
   }
 }
 
@@ -45,6 +45,8 @@ async function doAccordion() {
 }
 
 export default function injectMenu() {
-  if (!pcl() || jQueryNotPresent()) { return; }
+  if (!pcl() || jQueryNotPresent()) {
+    return;
+  }
   doAccordion();
 }

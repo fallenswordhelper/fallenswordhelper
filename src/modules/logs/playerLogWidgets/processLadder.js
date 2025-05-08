@@ -8,7 +8,8 @@ import parseDateAsTimestamp from '../../system/parseDateAsTimestamp';
 import setValue from '../../system/setValue';
 
 let lastLadderReset = 0;
-const ladderRe = /You ranked \w{3} in your PvP Band! You have gained \d x PvP Ladder Token/;
+const ladderRe =
+  /You ranked \w{3} in your PvP Band! You have gained \d x PvP Ladder Token/;
 
 function pvp(r) {
   return ladderRe.test(getText(r.cells[2]));

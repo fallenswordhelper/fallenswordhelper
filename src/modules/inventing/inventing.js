@@ -43,6 +43,7 @@ function addSpinner(i) {
 
 function removeRow(i) {
   const tr = closestTr(i);
+  if (!tr) return;
   tr.nextElementSibling.remove();
   tr.remove();
 }
@@ -64,29 +65,43 @@ function handleResult(recipes, json) {
 async function ajaxMove(targetId, recipes) {
   sendEvent('inventing', 'Move recipes by AJAX');
   recipes.forEach(addSpinner);
-  const json = await daRecipeMove(targetId, recipes.map((i) => Number(i.value)));
+  const json = await daRecipeMove(
+    targetId,
+    recipes.map((i) => Number(i.value)),
+  );
   handleResult(recipes, json);
 }
 
 function getRecipes(elements, targetId) {
   const recipeSelected = elements['recipe_selected[]'];
-  if (!recipeSelected) { return; }
-  const recipes = arrayFromRadioNodeList(recipeSelected).filter((i) => i.checked);
-  if (recipes.length) { ajaxMove(targetId, recipes); }
+  if (!recipeSelected) {
+    return;
+  }
+  const recipes = arrayFromRadioNodeList(recipeSelected).filter(
+    (i) => i.checked,
+  );
+  if (recipes.length) {
+    ajaxMove(targetId, recipes);
+  }
 }
 
 function getCurrentFolderId() {
-  const currentFolderHref = querySelector('#pCC img[src*="/folder_on."]').parentNode.href;
+  const currentFolderHref = querySelector('#pCC img[src*="/folder_on."]')
+    .parentNode.href;
   return getCustomUrlParameter(currentFolderHref, 'folder_id');
 }
 
 function submitHandler(e) {
-  if (!ajaxifyMove) { return; }
+  if (!ajaxifyMove) {
+    return;
+  }
   e.preventDefault();
   const folderId = getCurrentFolderId();
   const { elements } = e.target;
   const targetId = elements.target_folder_id.value;
-  if (folderId !== targetId) { getRecipes(elements, targetId); }
+  if (folderId !== targetId) {
+    getRecipes(elements, targetId);
+  }
 }
 
 export default function inventing() {

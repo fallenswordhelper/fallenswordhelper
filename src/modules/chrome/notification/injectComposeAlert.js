@@ -1,10 +1,7 @@
 import daComposing from '../../_dataAccess/daComposing';
 import jQueryPresent from '../../common/jQueryPresent';
 import calf from '../../support/calf';
-import {
-  defLastComposeCheck,
-  defNeedToCompose,
-} from '../../support/constants';
+import { defLastComposeCheck, defNeedToCompose } from '../../support/constants';
 import { now } from '../../support/now';
 import getValue from '../../system/getValue';
 import setValue from '../../system/setValue';
@@ -29,23 +26,24 @@ function potsBrewing(potions) {
   }
 }
 
-function parseComposingApp(result) {
-  if (result.potions.length !== result.max_potions) {
+const hUDLocalPlayerTypeMaxComposingPotions = 52;
+
+function parseComposingApp(json) {
+  const maxPotions = json.h.p.find(
+    ({ k }) => k === hUDLocalPlayerTypeMaxComposingPotions,
+  )?.v;
+  if (json.r.potions.length !== maxPotions) {
     displayAlert();
   } else {
-    potsBrewing(result.potions);
+    potsBrewing(json.r.potions);
   }
-}
-
-function checkAppResponse(json) {
-  if (json?.s) parseComposingApp(json.r);
 }
 
 async function checkLastCompose() {
   const lastComposeCheck = getValue(defLastComposeCheck);
-  if (lastComposeCheck && now() < lastComposeCheck) { return; }
+  if (lastComposeCheck && now() < lastComposeCheck) return;
   const json = await daComposing();
-  checkAppResponse(json);
+  if (json?.s) parseComposingApp(json);
 }
 
 function composeAlert() {
@@ -57,5 +55,11 @@ function composeAlert() {
 }
 
 export default function injectComposeAlert() {
-  if (calf.cmd !== 'composing' && jQueryPresent()) { composeAlert(); }
+  if (
+    calf.enableComposingAlert &&
+    calf.cmd !== 'composing' &&
+    jQueryPresent()
+  ) {
+    composeAlert();
+  }
 }

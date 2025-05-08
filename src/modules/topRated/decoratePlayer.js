@@ -26,7 +26,8 @@ function getMyGuildId() {
 
 const highlightTests = [
   () => getPref(),
-  (_data, guildId) => isUndefined(guildId) || guildId !== (myGuildId || getMyGuildId()),
+  (_data, guildId) =>
+    isUndefined(guildId) || guildId !== (myGuildId || getMyGuildId()),
   (data) => data.last_login >= sevenDaysAgo(),
   (data) => data.virtual_level >= getLowerPvpLevel(),
   (data) => data.virtual_level <= getUpperPvpLevel(),
@@ -34,7 +35,9 @@ const highlightTests = [
 
 function getGuild(tbl) {
   if (tbl.rows[0].cells[0].children[0]) {
-    return Number(regExpFirstCapture(guildRE, tbl.rows[0].cells[0].children[0].href));
+    return Number(
+      regExpFirstCapture(guildRE, tbl.rows[0].cells[0].children[0].href),
+    );
   }
 }
 
@@ -44,7 +47,10 @@ function pvpHighlight(guildId, data) {
 
 export default function decoratePlayer(aTable, data) {
   const guildId = getGuild(aTable);
-  insertHtmlBeforeEnd(aTable.rows[0], `<td>${onlineDot({ last_login: data.last_login })}</td>`);
+  insertHtmlBeforeEnd(
+    aTable.rows[0],
+    `<td>${onlineDot({ last_login: data.last_login })}</td>`,
+  );
   if (pvpHighlight(guildId, data)) {
     aTable.parentNode.parentNode.classList.add('lvlHighlight');
   }

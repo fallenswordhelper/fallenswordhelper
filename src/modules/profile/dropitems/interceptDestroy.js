@@ -15,7 +15,9 @@ import getCheckedItems from './getCheckedItems';
 import removeRow from './removeRow';
 
 function scopedCheck(mode) {
-  getCheckboxesArray().forEach((ctx) => { ctx.checked = Boolean(mode); });
+  getCheckboxesArray().forEach((ctx) => {
+    ctx.checked = Boolean(mode);
+  });
 }
 
 const prefAjaxifyDestroy = 'ajaxifyDestroy';
@@ -27,12 +29,16 @@ let hcsConfirmDestroy = 0;
 async function destroyChunk(itemsAry) {
   const json = await daDropItems(itemsAry.map((i) => i.value));
   errorDialog(json);
-  if (!json.s) { return; }
+  if (!json.s) {
+    return;
+  }
   itemsAry.forEach(removeRow);
 }
 
 function submitHandler(e) {
-  if (!e.returnValue || !ajaxifyDestroy) { return; }
+  if (!e.returnValue || !ajaxifyDestroy) {
+    return;
+  }
   e.preventDefault();
   chunk(30, getCheckedItems()).forEach(destroyChunk);
   sendEvent('dropitems', 'Destroy by AJAX');
@@ -44,7 +50,9 @@ function fshConfirmDestroy() {
 }
 
 function setDestroyPrompt() {
-  window.confirmDestroy = disableDestroyPrompts ? fshConfirmDestroy : hcsConfirmDestroy;
+  window.confirmDestroy = disableDestroyPrompts
+    ? fshConfirmDestroy
+    : hcsConfirmDestroy;
 }
 
 function initDestroyPrompt() {
@@ -66,16 +74,18 @@ function handleDestroyPref() {
   setDestroyPrompt();
 }
 
-const changePref = () => eventHandler5([
-  [selfIdIs(prefAjaxifyDestroy), handleAjaxifyPref],
-  [selfIdIs(prefDisableDestroyPrompts), handleDestroyPref],
-]);
+const changePref = () =>
+  eventHandler5([
+    [selfIdIs(prefAjaxifyDestroy), handleAjaxifyPref],
+    [selfIdIs(prefDisableDestroyPrompts), handleDestroyPref],
+  ]);
 
 function injectPrefs(submitBtn) {
   insertHtmlBeforeEnd(
     submitBtn.parentNode,
-    `&nbsp;&nbsp;${simpleCheckboxHtml(prefAjaxifyDestroy)}&nbsp;&nbsp;${
-      simpleCheckboxHtml(prefDisableDestroyPrompts)}`,
+    `&nbsp;&nbsp;${simpleCheckboxHtml(prefAjaxifyDestroy)}&nbsp;&nbsp;${simpleCheckboxHtml(
+      prefDisableDestroyPrompts,
+    )}`,
   );
   on(submitBtn.parentNode, 'change', changePref());
 }

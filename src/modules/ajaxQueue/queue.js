@@ -1,7 +1,7 @@
 import pipeRecallToQueue from './pipeRecallToQueue';
 import pipeTakeToQueue from './pipeTakeToQueue';
 
-let dfr;
+let dfr = Promise.resolve();
 
 function getDfr() {
   if (!dfr) dfr = Promise.resolve();

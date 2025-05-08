@@ -6,7 +6,6 @@ function mutate(fn, obj, [key, value]) {
   if (isObject(value) && value !== null) {
     fn(obj[key], value);
   } else {
-    // eslint-disable-next-line no-param-reassign
     obj[key] = value;
   }
 }

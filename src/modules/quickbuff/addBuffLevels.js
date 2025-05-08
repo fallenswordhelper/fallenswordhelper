@@ -20,7 +20,9 @@ function newPlayerSpan(el, playerSpan) {
 }
 
 function getBuffColor(myLvl, playerBuffLevel) {
-  if (myLvl > playerBuffLevel) { return 'fshRed'; }
+  if (myLvl > playerBuffLevel) {
+    return 'fshRed';
+  }
   return 'fshGreen';
 }
 
@@ -33,7 +35,10 @@ function buffRunning(el, playerBuffLevel, playerSpan) {
   const myLvl = parseBuffLevel(lvlSpan);
   const fshPlayerSpan = newPlayerSpan(el, playerSpan);
   const buffColor = getBuffColor(myLvl, playerBuffLevel);
-  setInnerHtml(` <span class="${buffColor}">[${playerBuffLevel}]</span>`, fshPlayerSpan);
+  setInnerHtml(
+    ` <span class="${buffColor}">[${playerBuffLevel}]</span>`,
+    fshPlayerSpan,
+  );
 }
 
 function thisBuff(myBuffName, arr) {
@@ -43,7 +48,9 @@ function thisBuff(myBuffName, arr) {
 function thisBuffLevel(playerData, el) {
   const myBuffName = el.getAttribute('data-name');
   const buffArr = playerData.find(partial(thisBuff, myBuffName));
-  if (buffArr) { return buffArr[1]; }
+  if (buffArr) {
+    return buffArr[1];
+  }
 }
 
 function hazBuff(playerData, el) {
@@ -62,13 +69,20 @@ function makeBuffArray(player) {
   return csvSplit(getText(player.parentNode.lastElementChild)).map(shred);
 }
 
-export default async function addBuffLevels(evt) {
-  const player = evt.target;
-  if (player.tagName !== 'H1') { return; }
-  sendEvent('quickbuff', 'addBuffLevels');
+export async function doBuffLevels(player) {
   const data = getProfile(getText(player));
   const playerData = makeBuffArray(player);
-  querySelectorArray('#buff-outer input[name]')
-    .forEach(partial(hazBuff, playerData));
+  querySelectorArray('#buff-outer input[name]').forEach(
+    partial(hazBuff, playerData),
+  );
   addStatsQuickBuff(await data);
+}
+
+export function addBuffLevels(evt) {
+  const player = evt.target;
+  if (player.tagName !== 'H1') {
+    return;
+  }
+  sendEvent('quickbuff', 'addBuffLevels');
+  doBuffLevels(player);
 }

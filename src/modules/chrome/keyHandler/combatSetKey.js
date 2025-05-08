@@ -9,7 +9,8 @@ const jsonTests = [
   (json, itemIndex) => json.r?.length > itemIndex,
 ];
 
-const goodData = (itemIndex, json) => jsonTests.every((fn) => fn(json, itemIndex));
+const goodData = (itemIndex, json) =>
+  jsonTests.every((fn) => fn(json, itemIndex));
 
 export default async function combatSetKey(itemIndex) {
   const json = await daViewCombatSet();
@@ -17,6 +18,8 @@ export default async function combatSetKey(itemIndex) {
     keyHandlerEvent('changeCombatSet');
     const cbsIndex = json.r[itemIndex].id;
     expandMenu('2');
-    navigateTo(`${profileUrl + defSubcmd}managecombatset&submit=Use&combatSetId=${cbsIndex}`);
+    navigateTo(
+      `${profileUrl + defSubcmd}managecombatset&submit=Use&combatSetId=${cbsIndex}`,
+    );
   }
 }

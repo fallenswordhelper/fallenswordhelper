@@ -7,14 +7,18 @@ export const guildId = writable(0);
 
 async function getRelicStuff($guildId, set) {
   if (!$guildId) return;
-  processingStatus.set(['relicStore', 'Processing defending guild relics ... ']);
+  processingStatus.set([
+    'relicStore',
+    'Processing defending guild relics ... ',
+  ]);
   const relics = await reliclist($guildId);
-  if (!relics) {
+  if (!relics?.r?.relics) {
     processingStatus.set(['relicStore', 'AJAX Error']);
     return;
   }
   const noOfRelics = relics.r.relics.length;
-  const relicMultiplier = noOfRelics === 1 ? 1.5 : round(1 - noOfRelics / 10, 2);
+  const relicMultiplier =
+    noOfRelics === 1 ? 1.5 : round(1 - noOfRelics / 10, 2);
   const leadDefenderBonus = `${String(relicMultiplier * 100)}%`;
   set({ noOfRelics, relicMultiplier, leadDefenderBonus });
   processingStatus.set(['relicStore', 'Done.']);

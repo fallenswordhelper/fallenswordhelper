@@ -1,28 +1,34 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import fshOpen from '../chrome/fshOpen';
   import { places, quickbuffUrl } from '../support/constants';
   import chunk from './chunk';
-  import LinkButton from './LinkButton.svelte';
+  import LinkBtn from './LinkBtn.svelte';
 
-  const dispatch = createEventDispatcher();
-  export let members = [];
+  let { emitBuffBatch, members = [] } = $props();
 
   const batchText = (i) => `Buff ${places[i]} 16`;
 
   function buffBatch(batch, i, evt) {
     evt.target.blur();
-    fshOpen(`${quickbuffUrl}&players=${batch.join(',')}`, 'fsQuickBuff', 618, 1000, ',scrollbars');
-    dispatch('buffBatch', batchText(i));
+    fshOpen(
+      `${quickbuffUrl}&players=${batch.join(',')}`,
+      'fsQuickBuff',
+      618,
+      1000,
+      ',scrollbars',
+    );
+    emitBuffBatch(batchText(i));
   }
 </script>
 
 <ul>
-  { #each chunk(16, members) as batch, i }
+  {#each chunk(16, members) as batch, i (i)}
     <li>
-      <LinkButton on:click={ (e) => buffBatch(batch, i, e) }>{ batchText(i) }</LinkButton>
+      <LinkBtn onclick={(e) => buffBatch(batch, i, e)}>
+        {batchText(i)}
+      </LinkBtn>
     </li>
-  { /each }
+  {/each}
 </ul>
 
 <style>

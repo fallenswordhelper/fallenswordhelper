@@ -15,19 +15,23 @@ function updateBackHref() {
   }
 }
 
-const getQuestName = (injectHere) => getText(getElementsByTagName('font', injectHere)[1])
-  .replace(/"/g, '');
+function getQuestName(injectHere) {
+  const fonts = getElementsByTagName('font', injectHere);
+  if (fonts.length !== 2) return '';
+  return getText(fonts[1]).replace(/"/g, '');
+}
 
 function injectGuideButtons() {
   const injectHere = getElementsByTagName('td', pcc())[0];
-  insertHtmlBeforeEnd(injectHere, guideButtons(
-    getUrlParameter('quest_id'),
-    getQuestName(injectHere),
-  ));
+  insertHtmlBeforeEnd(
+    injectHere,
+    guideButtons(getUrlParameter('quest_id'), getQuestName(injectHere)),
+  );
   onclick(injectHere, questEvent('Quest Tracker'));
 }
 
 export default function injectQuestTracker() {
+  if (!pcc()) return;
   updateBackHref();
   injectGuideButtons();
 }

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import './viewCreature.css';
 import daGroupStats from '../../../_dataAccess/daGroupStats';
 import daViewGroups from '../../../_dataAccess/daViewGroups';
@@ -38,14 +37,18 @@ function getCombatEvalContainer() {
   if (!combatEvalContainer) {
     combatEvalContainer = createDiv();
     insertElement(dialogViewCreature, combatEvalContainer);
-    insertElement(dialogViewCreature, createDiv({
-      innerHTML: '<span class="fshFooter">'
-        + '*Does include CA, DD, HF, DC, Flinch, Super Elite Slayer, NMV, '
-        + 'Sanctuary, Constitution, Fortitude, Chi Strike and '
-        + 'Terrorize (if active) and allow for randomness (1.1053). '
-        + 'Constitution, NMV, Fortitude and Chi Strike apply to group '
-        + 'stats.</span>',
-    }));
+    insertElement(
+      dialogViewCreature,
+      createDiv({
+        innerHTML:
+          '<span class="fshFooter">' +
+          '*Does include CA, DD, HF, DC, Flinch, Super Elite Slayer, NMV, ' +
+          'Sanctuary, Constitution, Fortitude, Chi Strike and ' +
+          'Terrorize (if active) and allow for randomness (1.1053). ' +
+          'Constitution, NMV, Fortitude and Chi Strike apply to group ' +
+          'stats.</span>',
+      }),
+    );
   }
 }
 
@@ -128,7 +131,10 @@ function doCombatEval(data, playerJson, groupData) {
   // playerdata
   combat.player = playerDataObject(playerJson);
   biasVars(combat);
-  combat.creature = creatureData(data.response.data, combat.player.superEliteSlayerMultiplier);
+  combat.creature = creatureData(
+    data.response.data,
+    combat.player.superEliteSlayerMultiplier,
+  );
   buffProcessing(combat);
   combat.evaluatorHTML = evalHTML(combat);
   if (groupData.groupExists) {
@@ -149,7 +155,9 @@ function getGroupId(json) {
 }
 
 function processGroupStats(data, playerJson, groupJson) {
-  if (!groupJson.r?.attributes) { return; }
+  if (!groupJson.r?.attributes) {
+    return;
+  }
   const attr = groupJson.r.attributes;
   doCombatEval(data, playerJson, {
     groupExists: true,
@@ -175,19 +183,23 @@ async function processGroup(data, playerJson) {
 }
 
 function processPlayer(data, playerJson) {
-  if (data.player.hasGroup) { processGroup(data, playerJson); }
+  if (data.player.hasGroup) {
+    processGroup(data, playerJson);
+  }
   doCombatEval(data, playerJson, { groupExists: false });
 }
 
 async function processCreature(_e, data) {
   getDialogViewCreature();
-  if (!dialogViewCreature) { return; }
+  if (!dialogViewCreature) {
+    return;
+  }
   setCombatEvaluator('');
   setGroupEvalalutor('');
   if (data?.response?.data) {
     makeDoNotKillLink(data.response.data.name, dialogViewCreature);
     const json = await myStats(true);
-    if (json) processPlayer(data, json);
+    if (json?._skills) processPlayer(data, json);
   }
 }
 

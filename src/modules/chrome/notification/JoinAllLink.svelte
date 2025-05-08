@@ -6,16 +6,17 @@
   import calf from '../../support/calf';
   import { joinUnderUrl, joinallUrl } from '../../support/constants';
 
-  const smallEnough = (g) => !calf.enableMaxGroupSizeToJoin
-    || g.members.length < calf.maxGroupSizeToJoin;
+  let joining = $state(0);
+  let groupJoinUrl = $state(joinallUrl);
+  let groupJoinText = $state('');
+
+  const smallEnough = (g) =>
+    !calf.enableMaxGroupSizeToJoin ||
+    g.members.length < calf.maxGroupSizeToJoin;
   const hasPlayer = (m) => m.name === playerName();
   const isOpen = (g) => !g.members.find(hasPlayer);
   const getId = (g) => g.id;
 
-  let joining = 0;
-
-  let groupJoinUrl = joinallUrl;
-  let groupJoinText = '';
   if (calf.enableMaxGroupSizeToJoin) {
     groupJoinUrl = joinUnderUrl;
     groupJoinText = ` less than size ${calf.maxGroupSizeToJoin}`;
@@ -36,30 +37,29 @@
   }
 
   function handleClick(e) {
-    e.preventDefault();
-    sendEvent('notification', 'Join All');
-    joining = 1;
+    if (!joining) {
+      e.preventDefault();
+      sendEvent('notification', 'Join All');
+      joining = 1;
+    }
   }
 </script>
 
-<a href={ groupJoinUrl }>
+<a href={groupJoinUrl}>
   <span id="notification-icon-guild-group" class="notification-icon"></span>
-  { #if joining }
-    { #await doJoinAll() }
+  {#if joining}
+    {#await doJoinAll()}
       <span class="notification-content fshSpinner fix-classic-theme"></span>
-    { :then}
+    {:then}
       <p class="notification-content" style="line-height: 32px;">Joined.</p>
-    { /await }
-  { :else }
+    {/await}
+  {:else}
     <p class="notification-content">
-      <button
-        on:click|once={ handleClick }
-        type="button"
-      >
-        Join all attack groups{ groupJoinText }.
+      <button onclick={handleClick} type="button">
+        Join all attack groups{groupJoinText}.
       </button>
     </p>
-  { /if }
+  {/if}
 </a>
 
 <style>

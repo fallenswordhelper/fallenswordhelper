@@ -9,7 +9,10 @@ import { pcc } from './support/layout';
 
 export default function injectTitan() {
   if (!pcc()) return;
-  const aLink = createAnchor({ href: scouttowerUrl, textContent: 'Scout Tower' });
+  const aLink = createAnchor({
+    href: scouttowerUrl,
+    textContent: 'Scout Tower',
+  });
   onclick(aLink, () => sendEvent('titan', 'scout tower'));
   const cDiv = createDiv({ className: 'fshBold fshCenter', textContent: '[ ' });
   insertElement(cDiv, aLink);

@@ -5,15 +5,21 @@ import playerId from '../../../common/playerId';
 import calf from '../../../support/calf';
 import { get, set } from '../../../system/idb';
 
-const decorateItems = (ary, items) => items.map((o, i) => ({ ...o, inv_id: ary[i].inv_id }));
+const decorateItems = (ary, items) =>
+  items.map((o, i) => ({ ...o, inv_id: ary[i].inv_id }));
 const isInBackpack = ({ folder_id: fid }) => (fid ?? -2) !== -2;
 const isEquipped = ({ folder_id: fid }) => fid === -2;
 const playerHas = ({ player_id: id }) => (id ?? -1) !== -1;
 const itemPlayer = ({ player_id: pid }) => pid;
 const inStore = ({ player_id: id }) => id === -1;
-const byChunk = ([ary, pFn, tConst]) => chunk(20, ary).map((aChunk) => [aChunk, pFn, tConst]);
-const thisItem = (rowdata) => ({ inv_id: invId }) => invId === rowdata.inv_id;
-export const getAttr = (lookup, i) => lookup.attributes.find(({ id }) => id === i)?.value ?? 0;
+const byChunk = ([ary, pFn, tConst]) =>
+  chunk(20, ary).map((aChunk) => [aChunk, pFn, tConst]);
+const thisItem =
+  (rowdata) =>
+  ({ inv_id: invId }) =>
+    invId === rowdata.inv_id;
+export const getAttr = (lookup, i) =>
+  lookup.attributes.find(({ id }) => id === i)?.value ?? 0;
 const updStats = (lookup, stats) => ({
   ...stats,
   armor: getAttr(lookup, 2),
@@ -24,15 +30,16 @@ const updStats = (lookup, stats) => ({
   set_name: lookup.set_name ?? '',
 });
 
-export const equipable = (_idx, { forge }) => forge;
+export const equipable = (_idx, obj) => obj.forge || obj.stats?.set_name;
 export const justItems = (o) => (o?.s ? o.r.items : []);
 
-export const getChunks = (dataAry) => [
-  [dataAry.filter(isInBackpack), playerId, 0],
-  [dataAry.filter(isEquipped), playerId, 1],
-  [dataAry.filter(playerHas), itemPlayer, 7],
-  [dataAry.filter(inStore), playerId, 4],
-].flatMap(byChunk);
+export const getChunks = (dataAry) =>
+  [
+    [dataAry.filter(isInBackpack), playerId, 0],
+    [dataAry.filter(isEquipped), playerId, 1],
+    [dataAry.filter(playerHas), itemPlayer, 7],
+    [dataAry.filter(inStore), playerId, 4],
+  ].flatMap(byChunk);
 
 export function updateAttr(items) {
   return function upd() {
@@ -44,11 +51,11 @@ export function updateAttr(items) {
   };
 }
 
-const getCache = async () => await get(`fsh_${calf.subcmd}_cache`) ?? [];
+const getCache = async () => (await get(`fsh_${calf.subcmd}_cache`)) ?? [];
 const setCache = (data) => set(`fsh_${calf.subcmd}_cache`, data);
 
-const other = (newItemsAry) => (cacheItem) => newItemsAry
-  .every((newItem) => newItem.inv_id !== cacheItem.inv_id);
+const other = (newItemsAry) => (cacheItem) =>
+  newItemsAry.every((newItem) => newItem.inv_id !== cacheItem.inv_id);
 
 async function tryCache(items) {
   const cache = await getCache();
@@ -70,8 +77,8 @@ export async function itemDetails(ary, pFn, tConst) {
   return json;
 }
 
-const keep = (rowdata) => (cacheItem) => rowdata
-  .some((rowItem) => cacheItem.inv_id === rowItem.inv_id);
+const keep = (rowdata) => (cacheItem) =>
+  rowdata.some((rowItem) => cacheItem.inv_id === rowItem.inv_id);
 const getClean = (rows, cache) => cache.filter(keep(arrayFrom(rows.data())));
 
 async function getCleanCache(rows) {
@@ -84,7 +91,6 @@ async function getCleanCache(rows) {
 async function updateRows(api) {
   const rows = api.rows(equipable);
   const cleanCache = await getCleanCache(rows);
-  // eslint-disable-next-line array-callback-return
   rows.every(updateAttr(cleanCache)); // skipcq: JS-D008
 }
 

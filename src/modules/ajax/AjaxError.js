@@ -1,6 +1,5 @@
 function url(opt) {
   if (opt.data) {
-    // eslint-disable-next-line no-param-reassign
     delete opt.data.fshrnd;
     return $.param(opt.data);
   }

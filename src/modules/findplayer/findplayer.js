@@ -20,8 +20,10 @@ import querySelectorArray from '../common/querySelectorArray';
 import { playerLinkSelector, searchPlayerUrl } from '../support/constants';
 import { pcc } from '../support/layout';
 
-const searchUrl = (min, max, guild) => `${searchPlayerUrl}&search_level_min=${
-  min}&search_level_max=${max}&search_in_guild=${guild}`;
+const searchUrl = (min, max, guild) =>
+  `${searchPlayerUrl}&search_level_min=${
+    min
+  }&search_level_max=${max}&search_in_guild=${guild}`;
 
 function makeLink(min, max, guild, textContent) {
   const thisLink = createAnchor({
@@ -33,8 +35,10 @@ function makeLink(min, max, guild, textContent) {
   return thisLink;
 }
 
-const pnpLink = () => makeLink(getLowerPvpLevel(), getUpperPvpLevel(), '-1', 'Get PvP targets');
-const gngLink = () => makeLink(getLowerGvGLevel(), getUpperGvgLevel(), '1', 'Get GvG targets');
+const pnpLink = () =>
+  makeLink(getLowerPvpLevel(), getUpperPvpLevel(), '-1', 'Get PvP targets');
+const gngLink = () =>
+  makeLink(getLowerGvGLevel(), getUpperGvgLevel(), '1', 'Get GvG targets');
 
 function doShortcuts(findPlayerButton) {
   const parent = closestForm(findPlayerButton);

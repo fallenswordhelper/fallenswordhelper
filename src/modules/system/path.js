@@ -7,7 +7,9 @@ function getPath(obj, aPath, def) {
   const pathAry = aPath.split('.');
   const len = pathAry.length;
   for (let i = 0; i < len; i += 1) {
-    if (fallback(!resultantObj, !isObject(resultantObj))) { return def; }
+    if (fallback(!resultantObj, !isObject(resultantObj))) {
+      return def;
+    }
     resultantObj = resultantObj[pathAry[i]];
   }
   return resultantObj;
@@ -15,6 +17,8 @@ function getPath(obj, aPath, def) {
 
 export default function path(obj, aPath, def) {
   const resultantObj = getPath(obj, aPath, def);
-  if (isUndefined(resultantObj)) { return def; }
+  if (isUndefined(resultantObj)) {
+    return def;
+  }
   return resultantObj;
 }

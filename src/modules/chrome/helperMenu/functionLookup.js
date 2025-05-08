@@ -1,9 +1,12 @@
-import { newGuildLogUrl, notepadBlankUrl } from '../../support/constants';
+import currentGuildId from '../../common/currentGuildId';
+import { notepadBlankUrl } from '../../support/constants';
+import getValue from '../../system/getValue';
 import jQueryDialog from '../jQueryDialog/jQueryDialog';
 import buffLog from '../pageSwitcher/loader/buffLog';
 import combatLog from '../pageSwitcher/loader/combatLog';
 import creatureLog from '../pageSwitcher/loader/creatureLog';
 import fsboxlog from '../pageSwitcher/loader/fsboxlog';
+import guildLog from '../pageSwitcher/loader/guildLog';
 import guildTracker from '../pageSwitcher/loader/guildTracker';
 import injectAuctionSearch from '../pageSwitcher/loader/injectAuctionSearch';
 import injectFindBuffs from '../pageSwitcher/loader/injectFindBuffs';
@@ -20,6 +23,7 @@ import recipeMgr from '../pageSwitcher/loader/recipeMgr';
 import reliclist from '../pageSwitcher/loader/reliclist';
 import setmgr from '../pageSwitcher/loader/setmgr';
 import superelite from '../pageSwitcher/loader/superelite';
+import whosGotWhat from '../pageSwitcher/loader/whosGotWhat';
 import gsDl from './gsDl';
 
 function convertToModal(fn) {
@@ -31,22 +35,28 @@ export default [
     section: 'Character',
     menu: [
       {
-        label: 'Buff Log', fn: buffLog,
+        label: 'Buff Log',
+        fn: buffLog,
       },
       {
-        label: 'Combat Log', fn: combatLog,
+        label: 'Combat Log',
+        fn: combatLog,
       },
       {
-        label: 'Creature Log', fn: creatureLog,
+        label: 'Creature Log',
+        fn: creatureLog,
       },
       {
-        label: 'Recipe Manager', fn: recipeMgr,
+        label: 'Recipe Manager',
+        fn: recipeMgr,
       },
       {
-        label: 'Quick Links', fn: quickLinksManager,
+        label: 'Quick Links',
+        fn: quickLinksManager,
       },
       {
-        label: 'Inventory Manager', href: `${notepadBlankUrl}invmanagernew`,
+        label: 'Inventory Manager',
+        href: `${notepadBlankUrl}invmanagernew`,
       },
     ],
   },
@@ -54,91 +64,125 @@ export default [
     section: 'Actions',
     menu: [
       {
-        label: 'Find Buffs', fn: convertToModal(injectFindOther),
+        label: 'Find Buffs',
+        fn: convertToModal(injectFindBuffs),
       },
       {
-        label: 'Find Other', fn: convertToModal(injectFindBuffs),
+        label: 'Find Other',
+        fn: convertToModal(injectFindOther),
       },
       {
-        label: 'Online Players', fn: convertToModal(injectOnlinePlayers),
+        label: 'Online Players',
+        fn: convertToModal(injectOnlinePlayers),
       },
       {
-        label: 'AH Quick Search', fn: convertToModal(injectAuctionSearch),
+        label: 'AH Quick Search',
+        fn: convertToModal(injectAuctionSearch),
       },
     ],
   },
-  {
-    section: 'Guild',
-    menu: [
-      {
-        label: 'Guild Inventory',
-        href: `${notepadBlankUrl}guildinvmgr`,
-      },
-      {
-        label: 'New Guild Log',
-        href: `${newGuildLogUrl}`,
-      },
-      {
-        label: 'Merc Hunter', fn: mercs,
-      },
-      {
-        label: 'Pot Report', fn: potReport,
-      },
-      {
-        label: 'Guild Tracker', fn: guildTracker,
-      },
-    ],
-  },
+  ...(currentGuildId()
+    ? [
+        {
+          section: 'Guild',
+          menu: [
+            {
+              label: 'Guild Inventory',
+              href: `${notepadBlankUrl}guildinvmgr`,
+            },
+            {
+              label: 'New Guild Log',
+              fn: guildLog,
+            },
+            {
+              label: 'Merc Hunter',
+              fn: mercs,
+            },
+            {
+              label: 'Pot Report',
+              fn: potReport,
+            },
+            {
+              label: 'Guild Tracker',
+              fn: guildTracker,
+            },
+          ],
+        },
+      ]
+    : []),
   {
     section: 'Extra',
     menu: [
       {
-        label: 'Quick Extract', fn: quickExtract,
+        label: 'Quick Extract',
+        fn: quickExtract,
       },
       {
-        label: 'Quick Wear', fn: convertToModal(quickwear),
+        label: 'Quick Wear',
+        fn: convertToModal(quickwear),
       },
       {
-        label: 'FS Box Log', fn: fsboxlog,
+        label: 'FS Box Log',
+        fn: fsboxlog,
       },
       {
-        label: 'SE Tracker', fn: superelite,
+        label: 'SE Tracker',
+        fn: superelite,
       },
     ],
   },
-  {
-    section: 'Beta Features',
-    menu: [
-      {
-        label: 'Relic List', fn: reliclist, beta: true,
-      },
-      {
-        label: 'GS Export', fn: gsDl, beta: true,
-      },
-    ],
-  },
-  {
-    section: 'Dev Links',
-    menu: [
-      {
-        label: 'Combat Set Manager', fn: setmgr, beta: true,
-      },
-      {
-        label: 'Quest Book', fn: questbook,
-      },
-      {
-        label: 'New Quick Wear', fn: quickwear2,
-      },
-    ],
-  },
+  ...(getValue('betaOptIn') && currentGuildId()
+    ? [
+        {
+          section: 'Beta Features',
+          menu: [
+            {
+              label: 'Relic List',
+              fn: reliclist,
+              beta: true,
+            },
+            {
+              label: 'GS Export',
+              fn: gsDl,
+              beta: true,
+            },
+            {
+              label: "Who's Got What",
+              fn: whosGotWhat,
+              beta: true,
+            },
+          ],
+        },
+      ]
+    : []),
+  ...(defineUserIsDev
+    ? [
+        {
+          section: 'Dev Links',
+          menu: [
+            {
+              label: 'Combat Set Manager',
+              fn: setmgr,
+              beta: true,
+            },
+            {
+              label: 'Quest Book',
+              fn: questbook,
+            },
+            {
+              label: 'New Quick Wear',
+              fn: quickwear2,
+            },
+          ],
+        },
+      ]
+    : []),
   {
     section: 'FSH developer quick links',
     menu: [
       {
-        playerId: 1963510, playerName: 'PointyHair',
-      },
-      {
-        playerId: 1674838, playerName: 'Lusterless',
+        playerId: 1963510,
+        playerName: 'PointyHair',
       },
     ],
   },

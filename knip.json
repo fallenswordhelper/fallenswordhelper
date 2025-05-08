@@ -1,0 +1,5 @@
+{
+  "entry": ["src/calfSystem.js", "scripts/*.js"],
+  "ignoreDependencies": ["css-tooltip"],
+  "project": ["src/**", "scripts/**"]
+}

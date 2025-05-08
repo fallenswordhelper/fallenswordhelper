@@ -5,10 +5,10 @@
   import createDiv from '../common/cElement/createDiv';
   import clickThis from '../common/clickThis';
   import getArrayByClassName from '../common/getArrayByClassName';
-  import LinkButton from '../common/LinkButton.svelte';
+  import LinkBtn from '../common/LinkBtn.svelte';
   import partial from '../common/partial';
 
-  let disabled = 0;
+  let disabled = $state(0);
 
   const spinner = createDiv({
     className: 'fshSpinner fshRelative',
@@ -18,7 +18,8 @@
   const id = (item) => item.id.split('-').at(-1);
   const resolvedPromise = () => Promise.resolve({ s: 1 });
   const selectedItems = () => getArrayByClassName('trade-create-selected');
-  const target = () => document.forms.sendItemForm.elements.target_username.value;
+  const target = () =>
+    document.forms.sendItemForm.elements.target_username.value;
 
   function handleJson(item, json) {
     if (json.s) {
@@ -68,11 +69,11 @@
 </script>
 
 <span>
-  <LinkButton { disabled } on:click={ onclick }>OneByOne</LinkButton>
+  <LinkBtn {disabled} {onclick}>OneByOne</LinkBtn>
 </span>
 
 <style>
-span {
-  --button-margin: auto auto auto 10px;
-}
+  span {
+    --button-margin: auto auto auto 10px;
+  }
 </style>

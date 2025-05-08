@@ -1,40 +1,49 @@
-/* eslint-disable no-param-reassign */
 import effectiveStat from './effectiveStat';
 import evalBuff from './evalBuff';
 
-const calcArm = (combat) => effectiveStat(
-  combat,
-  combat.callback.groupArmorValue,
-  combat.player.armorValue,
-);
+const calcArm = (combat) =>
+  effectiveStat(
+    combat,
+    combat.callback.groupArmorValue,
+    combat.player.armorValue,
+  );
 
 function overallArmour(combat) {
   const armorVal = calcArm(combat);
-  combat.overallArmorValue = armorVal
-    + Math.floor(combat.player.armorValue
-    * combat.player.sanctuaryLevel * 0.001);
+  combat.overallArmorValue =
+    armorVal +
+    Math.floor(combat.player.armorValue * combat.player.sanctuaryLevel * 0.001);
 }
 
 function evalSanctuary(combat) {
-  evalBuff(combat, combat.player.sanctuaryLevel, 'Sanc Bonus Armor', combat.player.armorValue);
+  evalBuff(
+    combat,
+    combat.player.sanctuaryLevel,
+    'Sanc Bonus Armor',
+    combat.player.armorValue,
+  );
 }
 
 function calcTerrorizeEffect(combat) {
-  combat.terrorizeEffect = Math.floor(combat.creature.damage
-    * combat.player.terrorizeLevel * 0.001);
+  combat.terrorizeEffect = Math.floor(
+    combat.creature.damage * combat.player.terrorizeLevel * 0.001,
+  );
 }
 
 function evalTerrorize(combat) {
   if (combat.player.terrorizeLevel > 0) {
     combat.extraNotes += `Terrorize Creature Damage Effect = ${
-      combat.terrorizeEffect * -1}<br>`;
+      combat.terrorizeEffect * -1
+    }<br>`;
   }
 }
 
 function calcDamageDone(combat) {
-  combat.creatureDamageDone = Math.ceil(combat.generalVariable
-    * combat.creature.damage - combat.overallArmorValue
-    + combat.overallHPValue);
+  combat.creatureDamageDone = Math.ceil(
+    combat.generalVariable * combat.creature.damage -
+      combat.overallArmorValue +
+      combat.overallHPValue,
+  );
 }
 
 function creatureCanHit(combat) {

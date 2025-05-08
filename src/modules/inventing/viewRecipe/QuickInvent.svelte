@@ -2,15 +2,16 @@
   import { slide } from 'svelte/transition';
   import daDoInvent from '../../_dataAccess/daDoInvent';
   import sendEvent from '../../analytics/sendEvent';
-  import LinkButton from '../../common/LinkButton.svelte';
+  import LinkBtn from '../../common/LinkBtn.svelte';
 
-  export let max;
-  export let recipeID;
-  let amountToInvent = 1;
-  let successes = 0;
-  let failures = 0;
-  let progress = 0;
-  let errorMessage = '';
+  let { max, recipeID } = $props();
+
+  let inputElement = $state();
+  let amountToInvent = $state(1);
+  let successes = $state(0);
+  let failures = $state(0);
+  let progress = $state(0);
+  let errorMessage = $state('');
 
   function reset() {
     successes = 0;
@@ -24,67 +25,124 @@
     sendEvent('inventing', 'maxInventButton');
   }
 
-  async function quickInvent() {
+  async function serialiseRequests(prev, recipe) {
+    const prevData = await prev;
+    if (!prevData || prevData.s === true) {
+      const data = await daDoInvent(recipe);
+      if (!data?.s) errorMessage = data?.e?.message ?? 'Server Error';
+      else if (data.r.success_count > 0) successes += 1;
+      else failures += 1;
+      progress = 100 * ((successes + failures) / amountToInvent);
+      return data;
+    }
+    return prevData;
+  }
+
+  function quickInvent() {
+    if (!inputElement.checkValidity()) {
+      inputElement.reportValidity();
+      return;
+    }
     sendEvent('inventing', 'quickInvent');
-    if (!amountToInvent) { return; }
     reset();
     const requests = Array(amountToInvent).fill(recipeID);
-    requests.reduce(async (prev, recipe) => {
-      const prevData = await prev;
-      if (!prevData || prevData.s === true) {
-        const data = await daDoInvent(recipe);
-        if (!data?.s) errorMessage = data?.e?.message ?? 'Server Error';
-        else if (data.r.success_count > 0) successes += 1;
-        else failures += 1;
-        progress = 100 * ((successes + failures) / amountToInvent);
-        return data;
-      }
-      return prevData;
-    }, Promise.resolve());
+    requests.reduce(serialiseRequests, Promise.resolve());
   }
 </script>
-<form class="fshCenter" on:submit|preventDefault={ quickInvent } style="margin-top: 12px;">
+
+<div class="qi-container">
   <label for="quick-invent-amount">Select how many to quick invent</label>
   <input
-    type="number"
-    id="quick-invent-amount"
-    name="quick-invent-amount"
-    min="0"
+    bind:this={inputElement}
+    bind:value={amountToInvent}
+    class="custominput"
+    min="1"
+    required
     step="1"
-    class="custominput fshNumberInput"
-    bind:value={ amountToInvent }
-    required />
-  <LinkButton on:click={ maxInvent }>(max)</LinkButton>
-  <input class="custombutton" type="submit" value="Quick Invent" style="margin-left: 8px;"/>
+    type="number"
+  />
+  <LinkBtn onclick={maxInvent}>(max)</LinkBtn>
+  <button class="custombutton" onclick={quickInvent} type="button">
+    Quick Invent
+  </button>
   <div>
-    { #if errorMessage }
-      <div
-        style="border: 2px solid #FFF; margin: 10px auto; width: 80%; background: #D3CFC1"
-        transition:slide|local
-      >
-        <div style="background: #8E8668; color: #FFF; font-size: smaller">INFORMATION</div>
-        <div>{ errorMessage }</div>
+    {#if errorMessage}
+      <div class="qi-error-container" transition:slide|local>
+        <div class="qi-error-heading">INFORMATION</div>
+        <div>{errorMessage}</div>
       </div>
-    { /if }
-    <div
-      class="composing-progress"
-      style="margin: 0px auto; font-weight: bold; color: #fff; left: 0px;"
-    >
-      <div
-        class="composing-progress-bar"
-        style="background-position: right top; width: { progress }%;
-          transition: width 0.4s ease-out; position: absolute; top: 0px"
-      >
-      </div>
-      <p style="position: relative;">{ successes + failures } / { amountToInvent }</p>
+    {/if}
+    <div class="composing-progress">
+      <div class="composing-progress-bar" style="width: {progress}%;"></div>
+      <p>
+        {successes + failures} / {amountToInvent}
+      </p>
     </div>
-    <div style="margin-top: 36px;">
-      <div style="display: inline-block; width: 250px;" class="fshQs fshGreen">
-        Successes: { successes }
+    <div class="qi-results-container">
+      <div class="qi-result qi-result-success">
+        Successes: {successes}
       </div>
-      <div style="display: inline-block; width: 250px;" class="fshQs fshRed">
-        Failures: { failures }
+      <div class="qi-result qi-result-failure">
+        Failures: {failures}
       </div>
     </div>
   </div>
-</form>
+</div>
+
+<style>
+  .qi-container {
+    border-top-color: #ddd;
+    border-top-style: solid;
+    border-top-width: 1px;
+    margin: 12px auto 0 auto;
+    padding-top: 12px;
+    text-align: center;
+    width: 592px;
+  }
+  input {
+    width: 4em;
+  }
+  button {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    margin-left: 8px;
+  }
+  .qi-error-container {
+    background: #d3cfc1;
+    border: 2px solid #fff;
+    margin: 10px auto;
+    width: 80%;
+  }
+  .qi-error-heading {
+    background: #8e8668;
+    color: #fff;
+    font-size: smaller;
+  }
+  .composing-progress {
+    color: #fff;
+    font-weight: bold;
+    left: 0px;
+    margin: 0px auto;
+  }
+  .composing-progress-bar {
+    background-position: right top;
+    position: absolute;
+    top: 0px;
+    transition: width 0.4s ease-out;
+  }
+  .qi-results-container {
+    margin-top: 36px;
+  }
+  .qi-result {
+    display: inline-block;
+    font-weight: bold;
+    font-size: large;
+    width: 250px;
+  }
+  .qi-result-success {
+    color: green;
+  }
+  .qi-result-failure {
+    color: red;
+  }
+</style>

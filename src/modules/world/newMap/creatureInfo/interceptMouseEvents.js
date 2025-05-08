@@ -11,7 +11,8 @@ import processMouseOver from './processMouseOver';
 
 const creatureViewTests = ['verb', 'view', 'tip-static'];
 
-function setQTip(monster, qtipText) { // jQuery
+function setQTip(monster, qtipText) {
+  // jQuery
   return $(monster).qtip({
     overwrite: true,
     show: {
@@ -41,7 +42,10 @@ function displayJson(api, data) {
 
 async function updateQTip(listItem, api) {
   const passback = getIndex(listItem);
-  const creatureStats = await getCreatureStats(GameData.actions()[passback].data.id, passback);
+  const creatureStats = await getCreatureStats(
+    GameData.actions()[passback].data.id,
+    passback,
+  );
   if (!badData(creatureStats)) displayJson(api, creatureStats);
 }
 
@@ -54,8 +58,11 @@ function makeMouseOver(target, listItem) {
 }
 
 function isViewCreature(target, listItem) {
-  return hasClasses(creatureViewTests, target) && !hasClass('fshTip', target)
-    && hasClass('creature', listItem);
+  return (
+    hasClasses(creatureViewTests, target) &&
+    !hasClass('fshTip', target) &&
+    hasClass('creature', listItem)
+  );
 }
 
 function moEvt(evt) {

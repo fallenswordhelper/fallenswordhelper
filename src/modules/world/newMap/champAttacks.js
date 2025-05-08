@@ -5,7 +5,14 @@ import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
 import { cdn } from '../../system/system';
 
-const creatureTypeIndex = ['NORMAL', 'CHAMPION', 'ELITE', 'SUPER ELITE', 'TITAN', 'LEGENDARY'];
+const creatureTypeIndex = [
+  'NORMAL',
+  'CHAMPION',
+  'ELITE',
+  'SUPER ELITE',
+  'TITAN',
+  'LEGENDARY',
+];
 const attackIconPrefix = `url("${cdn}ui/world/icon_action_attack_`;
 let altShiftDown = false;
 
@@ -52,9 +59,7 @@ function showChampAttack(toggle) {
   g1.map(getAttack)
     .filter((e) => e !== null)
     .forEach(clearAttribs);
-  g2.slice(0, 8)
-    .map(getAttack)
-    .forEach(addAttribs);
+  g2.slice(0, 8).map(getAttack).forEach(addAttribs);
 }
 
 function tryAttack(creature) {
@@ -66,10 +71,13 @@ function tryAttack(creature) {
 }
 
 function champAttackListener(e) {
-  if (!e.altKey
-    || !e.shiftKey
-    || e.target.tagName === 'INPUT'
-    || e.target.tagName === 'TEXTAREA') return;
+  if (
+    !e.altKey ||
+    !e.shiftKey ||
+    e.target.tagName === 'INPUT' ||
+    e.target.tagName === 'TEXTAREA'
+  )
+    return;
   if (!altShiftDown) showChampAttack(true);
   altShiftDown = true;
   if (!/(?:Digit|Numpad)[1-8]/.test(e.code)) return;

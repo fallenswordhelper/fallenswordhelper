@@ -1,7 +1,10 @@
 import sendEvent from '../../analytics/sendEvent';
 import currentGuildId from '../../common/currentGuildId';
 import getElementById from '../../common/getElementById';
-import { getLowerPvpLevel, getUpperPvpLevel } from '../../common/levelHighlight';
+import {
+  getLowerPvpLevel,
+  getUpperPvpLevel,
+} from '../../common/levelHighlight';
 import onclick from '../../common/onclick';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import { guildRE } from '../../support/constants';
@@ -13,7 +16,9 @@ let table = 0;
 
 function guildNumber(html) {
   const match = regExpFirstCapture(guildRE, html);
-  if (match) { return Number(match); }
+  if (match) {
+    return Number(match);
+  }
 }
 
 const highlightTests = [
@@ -44,7 +49,10 @@ function tableOpts(onlineData) {
     createdRow,
     data: onlineData,
     deferRender: true,
-    lengthMenu: [[30, 60, -1], [30, 60, 'All']],
+    lengthMenu: [
+      [30, 60, -1],
+      [30, 60, 'All'],
+    ],
     order: [3, 'desc'],
     pageLength: 30,
     stateDuration: 0,
@@ -53,10 +61,13 @@ function tableOpts(onlineData) {
 }
 
 const onlinePlayersEvent = (type) => sendEvent('OnlinePlayers', type);
-const onlinePlayersEventHdl = (type) => () => { sendEvent('OnlinePlayers', type); };
+const onlinePlayersEventHdl = (type) => () => {
+  sendEvent('OnlinePlayers', type);
+};
 
 function anchorHdl(e) {
-  if (e.currentTarget.children[0]?.tagName === 'IMG') onlinePlayersEvent('guild click');
+  if (e.currentTarget.children[0]?.tagName === 'IMG')
+    onlinePlayersEvent('guild click');
   else onlinePlayersEvent('player click');
 }
 
@@ -65,12 +76,20 @@ function tableHandlers() {
   $('#fshInv').on('click', '.sorting', onlinePlayersEventHdl('sorting'));
 }
 
-function chromeHandlers() { // jQuery
-  $('#fshInv_length select').on('change', onlinePlayersEventHdl('dataTables_length'));
-  $('#fshInv_filter input').on('keyup', onlinePlayersEventHdl('dataTables_filter'));
+function chromeHandlers() {
+  // jQuery
+  $('#fshInv_length select').on(
+    'change',
+    onlinePlayersEventHdl('dataTables_length'),
+  );
+  $('#fshInv_filter input').on(
+    'keyup',
+    onlinePlayersEventHdl('dataTables_filter'),
+  );
   // something is preventing jQuery bubbling
   onclick(getElementById('fshInv_paginate'), (e) => {
-    if (e.target.classList.contains('paginate_button')) onlinePlayersEvent('paginate_button');
+    if (e.target.classList.contains('paginate_button'))
+      onlinePlayersEvent('paginate_button');
   });
 }
 

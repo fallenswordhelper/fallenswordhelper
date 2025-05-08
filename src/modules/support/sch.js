@@ -16,7 +16,9 @@ function swp(i, j) {
 }
 
 function calcChildIndex(leftHigher, i) {
-  if (leftHigher) { return i * 2; }
+  if (leftHigher) {
+    return i * 2;
+  }
   return i * 2 + 1;
 }
 
@@ -25,7 +27,9 @@ function sink(j) {
   while (i * 2 < heap.length) {
     const leftHigher = !cmp(i * 2 + 1, i * 2);
     const childIndex = calcChildIndex(leftHigher, i);
-    if (cmp(i, childIndex)) { break; }
+    if (cmp(i, childIndex)) {
+      break;
+    }
     swp(i, childIndex);
     i = childIndex;
   }
@@ -34,16 +38,19 @@ function sink(j) {
 function bubble(j) {
   let i = j;
   while (i > 1) {
-    // eslint-disable-next-line no-bitwise
     const parentIndex = i >> 1;
-    if (!cmp(i, parentIndex)) { break; }
+    if (!cmp(i, parentIndex)) {
+      break;
+    }
     swp(i, parentIndex);
     i = parentIndex;
   }
 }
 
 export function pop() {
-  if (heap.length === 1) { return; }
+  if (heap.length === 1) {
+    return;
+  }
   const topVal = heap[1].data;
   const last = heap.pop();
   if (heap.length > 1) {

@@ -19,20 +19,31 @@ export const buffObj = derived(buffs, ($buffs, set) => {
   set(reduceBuffArray($buffs));
 });
 
-const buffEffect = derived([buffObj, rawGroupStats], ([$buffObj, $rawGroupStats], set) => {
-  if (!$buffObj || !$rawGroupStats) return;
-  const defWithConst = calcDefWithConst($rawGroupStats.defense, $buffObj.Constitution);
-  const fortitudeBonusHP = calcFortitudeBonusHp(defWithConst, $buffObj.Fortitude);
-  const hpWithFortitude = $rawGroupStats.hp + fortitudeBonusHP;
-  const chiStrikeBonusDamage = calcChiStrikeBonusDamage(hpWithFortitude, $buffObj['Chi Strike']);
-  set({
-    dmgWithChiStrike: $rawGroupStats.damage + chiStrikeBonusDamage,
-    defWithConst,
-    hpWithFortitude,
-    nmv: calcNmvEffect($rawGroupStats.attack, $buffObj['Nightmare Visage']),
-    sanctuary: calcSanctuaryBonusArmor($rawGroupStats.armor, $buffObj.Sanctuary),
-  });
-});
+const buffEffect = derived(
+  [buffObj, rawGroupStats],
+  ([$buffObj, $rawGroupStats], set) => {
+    if (!$buffObj || !$rawGroupStats) return;
+    const defWithConst = calcDefWithConst(
+      $rawGroupStats.defense,
+      $buffObj.Constitution,
+    );
+    const hpWithFortitude =
+      $rawGroupStats.hp +
+      calcFortitudeBonusHp(defWithConst, $buffObj.Fortitude);
+    set({
+      dmgWithChiStrike:
+        $rawGroupStats.damage +
+        calcChiStrikeBonusDamage(hpWithFortitude, $buffObj['Chi Strike']),
+      defWithConst,
+      hpWithFortitude,
+      nmv: calcNmvEffect($rawGroupStats.attack, $buffObj['Nightmare Visage']),
+      sanctuary: calcSanctuaryBonusArmor(
+        $rawGroupStats.armor,
+        $buffObj.Sanctuary,
+      ),
+    });
+  },
+);
 
 function calcBuffResults([$buffEffect, $ldProfile, $rawGroupStats], set) {
   if (!$buffEffect || !$ldProfile || !$rawGroupStats) return;
@@ -51,4 +62,7 @@ function calcBuffResults([$buffEffect, $ldProfile, $rawGroupStats], set) {
   });
 }
 
-export const buffResult = derived([buffEffect, ldProfile, rawGroupStats], calcBuffResults);
+export const buffResult = derived(
+  [buffEffect, ldProfile, rawGroupStats],
+  calcBuffResults,
+);

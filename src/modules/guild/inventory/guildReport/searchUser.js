@@ -13,19 +13,22 @@ function hideOther(el) {
     foundUser = containsText(findUser, el.children[0].children[0]);
   }
   if (!foundUser) {
-    // eslint-disable-next-line no-param-reassign
     el.className = 'fshHide';
   }
 }
 
 export default function searchUser() {
   findUser = getUrlParameter('user');
-  if (!findUser) { return; }
+  if (!findUser) {
+    return;
+  }
   const userNodes = querySelectorArray(
     '#pCC table table td[bgcolor="#DAA534"] b',
   );
   const userNode = userNodes.some(contains(findUser));
-  if (!userNode) { return; }
+  if (!userNode) {
+    return;
+  }
   const nodeList = querySelectorAll('#pCC table table tr');
   batch([2, nodeList, 0, hideOther]);
 }

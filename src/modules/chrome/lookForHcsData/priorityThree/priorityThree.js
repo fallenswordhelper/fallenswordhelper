@@ -1,45 +1,56 @@
 import asyncPThree from '../../../common/asyncPThree';
+import guildActivity from '../../../notepad/guildTracker/guildActivity';
 import getValue from '../../../system/getValue';
 import injectMenu from '../../accordion/injectMenu';
+import activeWantedBounties from '../../activeWantedBounties/activeWantedBounties';
+import allyEnemy from '../../allyEnemy/allyEnemy';
+import injectLevelupCalculator from '../../calcs/injectLevelupCalculator';
+import injectStaminaCalculator from '../../calcs/injectStaminaCalculator';
+import dailyQuest from '../../dailyQuest';
+import fsbox from '../../fsbox/fsbox';
+import injectServerNode from '../../injectServerNode';
+import interceptQuickBuff from '../../interceptQuickBuff';
 import messaging from '../../messaging/messaging';
-import callAllies from './callAllies';
-import callAllyEnemy from './callAllyEnemy';
-import callBounties from './callBounties';
-import callComposing from './callComposing';
-import callGuildInfo from './callGuildInfo';
-import callTemple from './callTemple';
-import callUpgrade from './callUpgrade';
-import expandQb from './expandQb';
-import fsBoxLog from './fsBoxLog';
-import gameStats from './gameStats';
-import guildActivityTracker from './guildActivityTracker';
-import joinAll from './joinAll';
-import levelCalc from './levelCalc';
+import injectComposeAlert from '../../notification/injectComposeAlert';
+import injectJoinAllLink from '../../notification/injectJoinAllLink';
+import { injectTempleAlert } from '../../notification/templeAlert';
+import { injectUpgradeAlert } from '../../notification/upgradeAlert';
+import scoutTowerLink from '../../scoutTowerLink';
+import statBarLinks from '../../statBarLinks';
+import addGuildInfoWidgets from '../../widgets/addGuildInfoWidgets';
+import addOnlineAlliesWidgets from '../../widgets/addOnlineAlliesWidgets';
 import moveRHSBoxToLHS from './moveRHSBoxToLHS';
 import moveRHSBoxUpOnRHS from './moveRHSBoxUpOnRHS';
-import scoutTower from './scoutTower';
 import seTracker from './seTracker';
-import staminaCalc from './staminaCalc';
-import statbar from './statbar';
 
 function doMoveGuildList() {
-  if (getValue('moveGuildList')) { moveRHSBoxUpOnRHS('minibox-guild'); }
+  if (getValue('moveGuildList')) {
+    moveRHSBoxUpOnRHS('minibox-guild');
+  }
 }
 
 function doMoveAllyList() {
-  if (getValue('moveOnlineAlliesList')) { moveRHSBoxUpOnRHS('minibox-allies'); }
+  if (getValue('moveOnlineAlliesList')) {
+    moveRHSBoxUpOnRHS('minibox-allies');
+  }
 }
 
 function doMoveFsBox() {
-  if (getValue('moveFSBox')) { moveRHSBoxToLHS('minibox-fsbox'); }
+  if (getValue('moveFSBox')) {
+    moveRHSBoxToLHS('minibox-fsbox');
+  }
 }
 
 function doMoveDailyQuest() {
-  if (getValue('moveDailyQuest')) { moveRHSBoxToLHS('minibox-daily-quest'); }
+  if (getValue('moveDailyQuest')) {
+    moveRHSBoxToLHS('minibox-daily-quest');
+  }
 }
 
 function doMoveXmas() {
-  if (getValue('moveXmasBox')) { moveRHSBoxToLHS('minibox-xmas'); }
+  if (getValue('moveXmasBox')) {
+    moveRHSBoxToLHS('minibox-xmas');
+  }
 }
 
 // move boxes in opposite order that you want them to appear.
@@ -49,25 +60,26 @@ const p3functions = [
   doMoveXmas,
   doMoveDailyQuest,
   doMoveFsBox,
-  callAllyEnemy,
-  callBounties,
-  callGuildInfo,
-  callAllies,
-  callTemple,
-  callUpgrade,
-  callComposing,
+  allyEnemy,
+  activeWantedBounties,
+  addGuildInfoWidgets,
+  addOnlineAlliesWidgets,
+  injectTempleAlert,
+  injectUpgradeAlert,
+  injectComposeAlert,
   injectMenu,
   messaging,
-  statbar,
-  staminaCalc,
-  levelCalc,
-  fsBoxLog,
-  expandQb,
-  joinAll,
-  gameStats,
-  scoutTower,
-  guildActivityTracker,
+  statBarLinks,
+  injectStaminaCalculator,
+  injectLevelupCalculator,
+  fsbox,
+  interceptQuickBuff,
+  injectJoinAllLink,
+  injectServerNode,
+  scoutTowerLink,
+  guildActivity,
   seTracker,
+  dailyQuest,
 ];
 
 export default function priorityThree() {

@@ -28,7 +28,9 @@ async function ajaxPlayer([tbl, player]) {
 }
 
 async function prepareAjax() {
-  const players = querySelectorArray(playerLinkSelector, pcc()).map(addPlayerName);
+  const players = querySelectorArray(playerLinkSelector, pcc()).map(
+    addPlayerName,
+  );
   await all(players.map(ajaxPlayer));
 }
 

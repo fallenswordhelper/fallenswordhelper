@@ -6,5 +6,5 @@ export default function formToUrl(e) {
   if (e.submitter?.name) {
     form.append(e.submitter.name, e.submitter.value);
   }
-  navigateTo(`${indexPhp}?${(new URLSearchParams(form)).toString()}`);
+  navigateTo(`${indexPhp}?${new URLSearchParams(form).toString()}`);
 }

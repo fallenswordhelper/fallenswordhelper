@@ -13,6 +13,7 @@ import trim from '../../common/trim';
 import { doAddIgnore, playerLinkSelector } from '../../support/constants';
 import { get, set } from '../../system/idb';
 import fsboxlog from '../pageSwitcher/loader/fsboxlog';
+import getValue from '../../system/getValue';
 
 function openLog() {
   sendEvent('fsbox', 'open log');
@@ -45,7 +46,7 @@ function injectIgnoreButton(node, playerLink) {
 }
 
 async function storeMessage(node) {
-  const boxList = await get('fsh_fsboxcontent') ?? '';
+  const boxList = (await get('fsh_fsboxcontent')) ?? '';
   const msg = trim(querySelector('.message', node).innerHTML);
   if (boxList.includes(msg)) return;
   const newBoxList = `<br>${msg}${boxList}`;
@@ -66,6 +67,7 @@ function haveFsBox(node) {
 }
 
 export default function fsbox() {
+  if (!getValue('fsboxlog')) return;
   const node = getElementById('minibox-fsbox');
   if (node) haveFsBox(node);
 }

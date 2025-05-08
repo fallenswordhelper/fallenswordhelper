@@ -1,24 +1,41 @@
-import Honeybadger from '@honeybadger-io/js';
-import { get as idbGet, set as idbSet } from 'idb-keyval';
+import { openDB } from 'idb';
+import stdout from '../support/stdout';
 
-const processError = (e) => {
-  if (e && e.name !== 'NotFoundError') {
-    Honeybadger.notify(e);
+let dbPrm = Promise.resolve();
+let initDb = false;
+
+function getDb() {
+  if (!initDb) {
+    dbPrm = openDB('keyval-store', 1, {
+      upgrade(db) {
+        db.createObjectStore('keyval');
+      },
+    });
+    initDb = true;
   }
-};
+  return dbPrm;
+}
 
-export async function get(key, store) {
+export async function get(key) {
   try {
-    return await idbGet(key, store);
+    return (await getDb()).get('keyval', key);
   } catch (e) {
-    processError(e);
+    stdout(e);
   }
 }
 
-export async function set(key, value, store) {
+export async function set(key, val) {
   try {
-    return await idbSet(key, value, store);
+    return (await getDb()).put('keyval', val, key);
   } catch (e) {
-    processError(e);
+    stdout(e);
+  }
+}
+
+export async function del(key) {
+  try {
+    return (await getDb()).delete('keyval', key);
+  } catch (e) {
+    stdout(e);
   }
 }

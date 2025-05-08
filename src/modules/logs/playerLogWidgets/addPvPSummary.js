@@ -9,46 +9,61 @@ import querySelectorArray from '../../common/querySelectorArray';
 import { playerLinkSelector } from '../../support/constants';
 import addCommas from '../../system/addCommas';
 import getCombat from './getCombat';
+import getLogTime from './getLogTime';
 
 const green = 'fshGreen';
 const red = 'fshRed';
 const isPvp = ([, r]) => querySelector(playerLinkSelector, r);
-const getCombats = async ([cl, r, msgHtml]) => [r, msgHtml, await getCombat(r, getId(cl))];
+const getCombats = async ([cl, r, msgHtml]) => [
+  r,
+  msgHtml,
+  await getCombat(getLogTime(r), getId(cl)),
+];
 const goodCombats = ([, , json]) => json?.s;
 const filterSpecial = (el) => [18, 21, 31].includes(el.id);
 const specialSpan = (text) => `<span class="fshRed fshBold">${text}.</span>`;
 
 function parseCombatWinner(msgHtml) {
   const victory = msgHtml.includes('You were victorious over');
-  if (victory) return [green, `You were <span class="${green}">victorious</span> over `];
+  if (victory)
+    return [green, `You were <span class="${green}">victorious</span> over `];
   const defeat = msgHtml.includes('You were defeated by');
   if (defeat) return [red, `You were <span class="${red}">defeated</span> by `];
   return ['', null]; // unresolved combat
 }
 
 function highlightSpecial(el) {
-  if (el.id === 18) return specialSpan(`${el.params[0]} leeched the buff '${el.params[1]}'`);
+  if (el.id === 18)
+    return specialSpan(`${el.params[0]} leeched the buff '${el.params[1]}'`);
   if (el.id === 21) {
-    return specialSpan(`${el.params[0]} was mesmerized by Spell Breaker, losing the '${
-      el.params[1]}' buff`);
+    return specialSpan(
+      `${el.params[0]} was mesmerized by Spell Breaker, losing the '${
+        el.params[1]
+      }' buff`,
+    );
   }
   return specialSpan(`${el.params[0]} activated Fist Fight`);
 }
 
 function result(stat, desc, color) {
-  return stat !== 0 ? `${desc}:<span class="${color}">${addCommas(stat)}</span> ` : '';
+  return stat !== 0
+    ? `${desc}:<span class="${color}">${addCommas(stat)}</span> `
+    : '';
 }
 
 function parseCombat(combat, color) {
   const specials = combat.specials.filter(filterSpecial).map(highlightSpecial);
-  const results = result(combat.xp_gain, 'XP stolen', color)
-    + result(combat.gold_gain, 'Gold lost', color)
-    + result(combat.gold_stolen, 'Gold stolen', color)
-    + result(combat.pvp_prestige_gain, 'Prestige gain', color)
-    + result(combat.pvp_rating_change, 'PvP change', color);
-  return results
-    + (results && specials.length ? '<br>' : '')
-    + (specials.length ? `${specials.join('<br>')}` : '');
+  const results =
+    result(combat.xp_gain, 'XP stolen', color) +
+    result(combat.gold_gain, 'Gold lost', color) +
+    result(combat.gold_stolen, 'Gold stolen', color) +
+    result(combat.pvp_prestige_gain, 'Prestige gain', color) +
+    result(combat.pvp_rating_change, 'PvP change', color);
+  return (
+    results +
+    (results && specials.length ? '<br>' : '') +
+    (specials.length ? `${specials.join('<br>')}` : '')
+  );
 }
 
 function updateTd([r, msgHtml, json]) {
@@ -73,7 +88,9 @@ function notGroups(combatLinks) {
 
 export default async function addPvPSummary(logTable) {
   const combatLinks = querySelectorArray('a[href*="&combat_id="]', logTable);
-  if (combatLinks.length === 0) { return; }
+  if (combatLinks.length === 0) {
+    return;
+  }
   const combats = await all(notGroups(combatLinks));
   combats.filter(goodCombats).forEach(updateTd);
 }

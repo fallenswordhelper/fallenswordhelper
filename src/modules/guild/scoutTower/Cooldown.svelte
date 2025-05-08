@@ -2,7 +2,7 @@
   import entries from '../../common/entries';
   import { now } from '../../support/now';
 
-  export let theTitans;
+  let { theTitans } = $props();
 
   const onCd = ([, data]) => data.coolTime > now();
   const int = ([, a], [, b]) => a.coolTime - b.coolTime;
@@ -17,13 +17,13 @@
       <td class="header">Cooldown</td>
       <td class="header">Visible</td>
     </tr>
-    { #each titansOnCooldown() as [name, data] }
+    {#each titansOnCooldown() as [name, data] (name)}
       <tr>
-        <td>{ name }</td>
-        <td class="cd">{ data.cooldownText }</td>
-        <td>{ data.seen }</td>
+        <td>{name}</td>
+        <td class="cd">{data.cooldownText}</td>
+        <td>{data.seen}</td>
       </tr>
-    { /each }
+    {/each}
   </tbody>
 </table>
 

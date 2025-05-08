@@ -9,7 +9,7 @@ import trim from '../../common/trim';
 import chromeHandlers from '../../notepad/inventory/eventHandlers/chromeHandlers';
 import task from '../../support/task';
 
-export const advisorColumns = [
+const advisorColumns = [
   { title: '<div class="fshBold">Member</div>' },
   { title: '<div class="fshBold">Lvl</div>', class: 'dt-center' },
   { title: '<div class="fshBold">Rank</div>', class: 'dt-center dt-nowrap' },
@@ -28,28 +28,37 @@ export const advisorColumns = [
 ];
 
 export function playerLevel(f, membrList) {
-  if (!membrList[f]) { return ''; }
+  if (!membrList[f]) {
+    return '';
+  }
   return membrList[f].level;
 }
 
 export function playerRank(f, membrList) {
-  if (!membrList[f]) { return ''; }
-  return `<div class="fshAdvRank">${
-    trim(membrList[f].rank_name)}</div>`;
+  if (!membrList[f]) {
+    return '';
+  }
+  return `<div class="fshAdvRank">${trim(membrList[f].rank_name)}</div>`;
 }
 
-function doTable(tbl, data, callback) { // jQuery
+function doTable(tbl, data, callback) {
+  // jQuery
   $(tbl).DataTable({
     autoWidth: false,
-    columnDefs: [{
-      targets: [1, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-      orderSequence: ['desc', 'asc'],
-    }],
+    columnDefs: [
+      {
+        targets: [1, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        orderSequence: ['desc', 'asc'],
+      },
+    ],
     columns: advisorColumns,
     data,
     deferRender: true,
     initComplete: callback,
-    lengthMenu: [[25, 50, -1], [25, 50, 'All']],
+    lengthMenu: [
+      [25, 50, -1],
+      [25, 50, 'All'],
+    ],
     pageLength: 25,
     stateDuration: 0,
     stateSave: true,
@@ -57,7 +66,9 @@ function doTable(tbl, data, callback) { // jQuery
 }
 
 const advisorEvent = (type) => sendEvent('advisor', type);
-const advisorEventHdl = (type) => () => { sendEvent('advisor', type); };
+const advisorEventHdl = (type) => () => {
+  sendEvent('advisor', type);
+};
 
 function doSwitch(targetElement, div, tbl) {
   replaceChild(div, targetElement);

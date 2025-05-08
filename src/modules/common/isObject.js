@@ -1,1 +1,3 @@
-export default function isObject(e) { return typeof e === 'object'; }
+export default function isObject(e) {
+  return typeof e === 'object';
+}

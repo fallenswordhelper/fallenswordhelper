@@ -6,7 +6,9 @@ export default function loadCss(c) {
     const linkTag = document.createElement('link');
     linkTag.type = 'text/css';
     linkTag.rel = 'stylesheet';
-    linkTag.onload = () => { resolve(); };
+    linkTag.onload = () => {
+      resolve();
+    };
     linkTag.href = c;
     if (target) {
       target.before(linkTag);

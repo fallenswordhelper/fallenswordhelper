@@ -15,7 +15,6 @@ let titanDiv = 0;
 let titanId = 0;
 let titanLoc = '';
 
-export const getTitanDiv = () => titanDiv;
 export const getTitanId = () => titanId;
 export const getTitanLoc = () => titanLoc;
 

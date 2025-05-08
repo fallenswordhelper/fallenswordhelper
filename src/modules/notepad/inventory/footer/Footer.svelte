@@ -4,21 +4,17 @@
   import Repair from './Repair.svelte';
   import UpdateStats from './UpdateStats.svelte';
 
-  export let fshInv = 0;
-
+  let { fshInv = 0 } = $props();
 </script>
+
 <div class="container">
-  { #if calf.subcmd === 'guildinvmgr' }
+  {#if calf.subcmd === 'guildinvmgr'}
     <RecallAll />
-    <!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
-    <!-- svelte-ignore missing-declaration -->
-    { #if defineUserIsDev }
-      <Repair { fshInv } />
-    { /if }
-  { :else }
+    <Repair {fshInv} />
+  {:else}
     <div></div>
-  { /if }
-  <UpdateStats { fshInv } />
+  {/if}
+  <UpdateStats {fshInv} />
 </div>
 
 <style>

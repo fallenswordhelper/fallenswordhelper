@@ -41,7 +41,9 @@ const keyLookup = [
 
 function handleKey(key) {
   const mapping = keyLookup.find(([mapped]) => key === mapped);
-  if (mapping) { mapping[1](mapping[2]); }
+  if (mapping) {
+    mapping[1](mapping[2]);
+  }
 }
 
 const bailOut = [
@@ -58,7 +60,9 @@ function doNotHandle(evt) {
 }
 
 function handleKeyUp(e) {
-  if (doNotHandle(e)) { return; }
+  if (doNotHandle(e)) {
+    return;
+  }
   handleKey(e.key);
 }
 

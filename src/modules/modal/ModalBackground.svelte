@@ -1,5 +1,7 @@
 <script>
-  export let visible = true;
+  let { close, children, visible = true } = $props();
+
+  let bgDiv = $state();
 
   let atBottom;
   let docScrollY;
@@ -23,18 +25,25 @@
     }
   }
 
-  $: {
+  function bgClose(e) {
+    if (e.target === bgDiv) {
+      close();
+    }
+  }
+
+  $effect(() => {
     if (visible) {
       disableScroll();
     } else {
       enableScroll();
     }
-  }
+  });
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
-<div class:visible on:click|self>
-  <slot />
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div bind:this={bgDiv} class:visible onclick={bgClose}>
+  {@render children?.()}
 </div>
 
 <style>
@@ -45,7 +54,7 @@
   }
 
   div {
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     color-scheme: dark;
     height: 100%;
     left: 0;
@@ -53,7 +62,7 @@
     top: 0;
     transform: translateX(-1000vw);
     width: 100%;
-    z-index: 200;
+    z-index: 120;
   }
 
   .visible {

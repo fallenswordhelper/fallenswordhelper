@@ -28,24 +28,31 @@ function togglePref() {
 }
 
 function evts5() {
-  return [
-    [selfIdIs(defDisableQuickWearPrompts), togglePref],
-  ];
+  return [[selfIdIs(defDisableQuickWearPrompts), togglePref]];
 }
 
 function makePref(thisList) {
-  insertElement(thisList, createDiv({
-    className: 'qwPref',
-    innerHTML: simpleCheckboxHtml(defDisableQuickWearPrompts),
-  }));
+  insertElement(
+    thisList,
+    createDiv({
+      className: 'qwPref',
+      innerHTML: simpleCheckboxHtml(defDisableQuickWearPrompts),
+    }),
+  );
 }
 
 function buildQuickWear(content, appInv) {
   subscribeOnce('qwtab-header', makePref);
   subscribeOnce('qwtab0', (thisDiv) => createQuickWear(appInv, thisDiv));
   subscribeOnce('qwtab1', (thisDiv) => showAHInvManager(appInv, thisDiv));
-  fshTabSet(content, ['Quick Wear / Use / Extract<br>Manager',
-    'Inventory Manager Counter<br>filtered by AH Quick Search'], 'qwtab');
+  fshTabSet(
+    content,
+    [
+      'Quick Wear / Use / Extract<br>Manager',
+      'Inventory Manager Counter<br>filtered by AH Quick Search',
+    ],
+    'qwtab',
+  );
   onclick(content, eventHandler5(evts5()));
 }
 
@@ -54,7 +61,8 @@ function showQuickWear(content, appInv) {
 }
 
 async function hasJquery(injector) {
-  if (injector) $(injector).on('dialogclose', () => sendEvent('QuickWear', 'Close'));
+  if (injector)
+    $(injector).on('dialogclose', () => sendEvent('QuickWear', 'Close'));
   const content = injector || pcc();
   if (!content) return;
   insertHtmlBeforeEnd(content, 'Getting item list from backpack...');

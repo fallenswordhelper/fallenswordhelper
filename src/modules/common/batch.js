@@ -6,7 +6,9 @@ function moreToDo(limit, ctr, list) {
 }
 
 function maybeEndFn(priority, endFn) {
-  if (isFunction(endFn)) { task(priority, endFn); }
+  if (isFunction(endFn)) {
+    task(priority, endFn);
+  }
 }
 
 export default function batch([priority, itemsAry, ctr, doFn, endFn]) {
@@ -17,8 +19,7 @@ export default function batch([priority, itemsAry, ctr, doFn, endFn]) {
     localCounter += 1;
   }
   if (localCounter < itemsAry.length) {
-    task(priority, batch, [[
-      priority, itemsAry, localCounter, doFn, endFn]]);
+    task(priority, batch, [[priority, itemsAry, localCounter, doFn, endFn]]);
   } else {
     maybeEndFn(priority, endFn);
   }
