@@ -7,12 +7,12 @@ import onclick from '../../common/onclick';
 import { mount } from 'svelte';
 import BigBuffPackages from './BigBuffPackages.svelte';
 
-let app;
+let app = 0;
 
 function getBuffList() {
   const select = querySelectorArray("select[name=buff_type_0] option");
   const buffs = select.map((option) => {
-    const matches = option.innerText.match(/(.*) \[Max (\d+)\]/);
+    const matches = option.innerText.match(/^(.+) \[Max (\d+)\]/);
     return {
       value: option.value,
       name: matches[1],
