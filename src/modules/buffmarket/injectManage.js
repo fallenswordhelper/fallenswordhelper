@@ -3,7 +3,7 @@ import onclick from '../common/onclick';
 import querySelector from '../common/querySelector';
 import ResetCasts from './ResetCasts.svelte';
 
-let app;
+let app = false;
 
 function startApp() {
   if (!app) {

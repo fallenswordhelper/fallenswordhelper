@@ -3,9 +3,18 @@ import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
 
 function parseBuffPackageElement(tr) {
-  const id = querySelector('img', tr).src.match(/(\d+)\.png/)[1];
-  const level = querySelector('td:nth-child(2)', tr).innerText.match(/\[(\d+)\]/)[1];
+  const id = querySelector('img', tr).src.match(/([0-9]+)\.png$/)[1];
+  const level = querySelector('td:nth-child(2)', tr).innerText.match(/\[([0-9]+)\]$/)[1];
   return { id: Number(id), level: Number(level) };
+}
+
+function parseBuffCost(tr) {
+  const costTds = querySelectorArray('td', tr.children[1]);
+  const cost = Number(costTds[0].innerText.replace(',', ''));
+  if (costTds[1].firstChild.alt === 'Fallen Sword Points') {
+    return { points: cost };
+  }
+  return { gold: cost };
 }
 
 function parseBuffPackage(tr) {
@@ -14,24 +23,14 @@ function parseBuffPackage(tr) {
     .getNamedItem('onclick')
     .nodeValue
     .match(/id=([0-9]+)/)[1];
-  const name = tr.children[0].innerText;
-  const casts = Number(tr.children[5].innerText);
-  const active = tr.children[3].innerText === 'Yes';
 
   const buffPackage = {
     id,
-    name,
-    casts,
-    active,
+    name: tr.children[0].innerText,
+    casts: Number(tr.children[5].innerText),
+    active: tr.children[3].innerText === 'Yes',
+    ...parseBuffCost(tr),
   };
-
-  const costTds = querySelectorArray('td', tr.children[1]);
-  const cost = Number(costTds[0].innerText.replace(',', ''));
-  if (costTds[1].firstChild.alt === 'Fallen Sword Points') {
-    buffPackage.points = cost;
-  } else {
-    buffPackage.gold = cost;
-  }
 
   buffPackage.buffs = querySelectorArray('tr', tr.children[2])
     .map(parseBuffPackageElement);
