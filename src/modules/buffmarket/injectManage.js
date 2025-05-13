@@ -12,6 +12,7 @@ import { pcc } from '../support/layout';
 import insertElementAfterBegin from '../common/insertElementAfterBegin';
 import closestTr from '../common/closestTr';
 import closestTd from '../common/closestTd';
+import setText from '../dom/setText';
 
 const getPackageId = (button) =>
   button.getAttribute('onclick').match(/id=(\d+)/)[1];
@@ -49,7 +50,7 @@ function doInfoBox(msg) {
     createInfoBox();
     infoBox = querySelector('#info-msg');
   }
-  infoBox.innerText = msg;
+  setText(infoBox, msg);
 }
 
 function replaceOnClick(target, fn) {
@@ -80,7 +81,11 @@ async function toggleBuffPackage(event) {
   const response = await doDaAction(event, daToggleBuffPackage);
   if (response?.s === true) {
     const statusTd = closestTr(event.target).children[3];
-    statusTd.innerText = getText(statusTd) == 'Yes' ? 'No' : 'Yes';
+    setText(
+      statusTd,
+      getText(statusTd) == 'Yes' ? 'No' : 'Yes',
+    );
+
     doInfoBox('Buff Package toggled!');
   } else {
     doInfoBox(response?.e?.message ?? 'Server Error');
@@ -104,7 +109,10 @@ async function deleteBuffPackage(event) {
 async function featureBuffPackage(event) {
   const response = await doDaAction(event, daFeatureBuffPackage);
   if (response?.s === true) {
-    closestTr(event.target).children[4].innerText = 'Yes';
+    setText(
+      closestTr(event.target).children[4],
+      'Yes',
+    );
     doInfoBox('Buff Package featured for 24 hours!');
   } else {
     doInfoBox(response?.e?.message ?? 'Server Error');
