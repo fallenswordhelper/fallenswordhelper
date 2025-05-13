@@ -3,6 +3,8 @@ import createDiv from '../../common/cElement/createDiv';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray.js';
 import onclick from '../../common/onclick';
+import getText from '../../common/getText';
+import insertElement from '../../common/insertElement';
 
 import { mount } from 'svelte';
 import BigBuffPackages from './BigBuffPackages.svelte';
@@ -10,9 +12,9 @@ import BigBuffPackages from './BigBuffPackages.svelte';
 let app = 0;
 
 function getBuffList() {
-  const select = querySelectorArray("select[name=buff_type_0] option");
+  const select = querySelectorArray('select[name=buff_type_0] option');
   const buffs = select.map((option) => {
-    const matches = option.innerText.match(/^(.+) \[Max (\d+)\]/);
+    const matches = getText(option).match(/^(.+) \[Max (\d+)\]/);
     return {
       value: option.value,
       name: matches[1],
@@ -23,7 +25,7 @@ function getBuffList() {
 }
 
 function injectBulkInput() {
-  const packageAddInput = querySelector("#pCC form");
+  const packageAddInput = querySelector('#pCC form');
   const wrapperDiv = createDiv({
     className: 'fshCenter',
   })
@@ -34,8 +36,8 @@ function injectBulkInput() {
   });
   bulkInput.style.margin = '12px';
   onclick(bulkInput, openBulkPage);
-  wrapperDiv.append(bulkInput);
-  packageAddInput.after(" ", wrapperDiv);
+  insertElement(wrapperDiv, bulkInput);
+  packageAddInput.after(' ', wrapperDiv);
 }
 
 function openBulkPage() {
