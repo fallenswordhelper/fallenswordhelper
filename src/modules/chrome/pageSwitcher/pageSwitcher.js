@@ -30,6 +30,9 @@ const injectBank = () => {
 const injectBuffmarket = () => {
   runDefault(import('../../buffmarket/injectBuffmarket'));
 };
+const injectBuffmarketManage = () => {
+  runDefault(import('../../buffmarket/injectManage'));
+};
 const findplayer = () => {
   runDefault(import('../../findplayer/findplayer'));
 };
@@ -81,7 +84,7 @@ export default {
   auctionhouse,
   bank: { '-': { '-': injectBank } },
   blacksmith: { repairall: { '-': repairall } },
-  buffmarket: { '-': { '-': injectBuffmarket } },
+  buffmarket: { '-': { '-': injectBuffmarket }, 'manage': { '-' : injectBuffmarketManage } },
   combat: { attackplayer: { '-': injectProfile } },
   composing,
   findplayer: { '-': { '-': findplayer } },
