@@ -55,6 +55,7 @@ function getAmount(mode, doc = document) {
 
 function updateDepoAmount(walletBalance, bankSettings) {
   const newDepo = Math.ceil(walletBalance * 0.25);
+  $('#depositSlider').slider('option', 'max', newDepo);
   const maxDepoElement = querySelector(
     'b',
     querySelector(`tr:nth-child(${bankSettings.maxDepoPos})`,bankTable()),
@@ -76,6 +77,7 @@ function updateBankBalance(bankBalance) {
   const balanceString = addCommas(bankBalance);
   setText(balanceString, querySelector('.stat-bank +dd'));
   setText(balanceString, querySelector('tr b', bankTable()));
+  $('#withdrawSlider').slider('option', 'max', bankBalance);
 }
 
 function updateValues(bankSettings, response, infoBox) {
