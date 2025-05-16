@@ -1,17 +1,17 @@
+import daGuildBankWithdraw from '../_dataAccess/daGuildBankWithdraw';
+import daGuildBankDeposit from '../_dataAccess/daGuildBankDeposit';
 import ajaxifyBank from './ajaxifyBank';
 
 export default function injectGuildBank() {
   ajaxifyBank({
-    headSelector: '#pCC b',
     headText: 'Guild Bank',
     appLink: false,
-    depoPos: 3,
-    balPos: 2,
-    data: {
-      cmd: 'guild',
-      subcmd: 'bank',
-      subcmd2: 'transaction',
-    },
     initWithdraw: '1',
+    daWithdraw: daGuildBankWithdraw,
+    daDeposit: daGuildBankDeposit,
+    balanceKey: { h: 'g', k: 10 },
+    maxDepoPos: 3,
+    depositMessage: 'You successfully deposited gold to the guild!',
+    withdrawMessage: 'You successfully withdrew gold from the guild!',
   });
 }
