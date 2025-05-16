@@ -12,6 +12,7 @@ import { pcc } from '../support/layout';
 import createInfoBox from '../common/createInfoBox';
 import setTextCommas from '../common/setTextCommas';
 import addCommas from '../system/addCommas';
+import hData from '../common/hData';
 
 const withdrawAmount = '#pCC #withdraw_amount';
 const depositAmount = '#pCC #deposit_amount';
@@ -82,13 +83,11 @@ function updateBankBalance(bankBalance) {
 
 function updateValues(bankSettings, response, infoBox) {
   doInfoBox(infoBox);
-  const walletBalance = response.h.p.find((i) => i.k === 0).v;
+  const walletBalance = hData(response, 'p', 'gold');
   updateDepoAmount(walletBalance, bankSettings);
   updateWalletBalance(walletBalance);
 
-  const bankBalance = response.h[bankSettings.balanceKey.h]
-    .find((i) => i.k === bankSettings.balanceKey.k)
-    .v;
+  const bankBalance = hData(response, bankSettings.balanceKey, 'bank');
   updateBankBalance(bankBalance);
   updateDeposLeft();
 

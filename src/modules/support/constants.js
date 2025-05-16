@@ -197,3 +197,12 @@ export const levelDefaults = [
 ];
 
 export const blockedSkillsCheckboxes = 'input[name="blockedSkillList[]"]';
+
+export const hDataPlayerFields = {
+  'gold': 0,
+  'bank': 2,
+}
+
+export const hDataGuildFields = {
+  'bank': 10,
+}

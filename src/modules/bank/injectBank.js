@@ -9,7 +9,7 @@ export default function injectBank() {
     initWithdraw: '',
     daWithdraw: daBankWithdraw,
     daDeposit: daBankDeposit,
-    balanceKey: { h: 'p', k: 2 },
+    balanceKey: 'p',
     maxDepoPos: 4,
     depositMessage: 'You successfully deposited gold!',
     withdrawMessage: 'You successfully withdrew gold!',
