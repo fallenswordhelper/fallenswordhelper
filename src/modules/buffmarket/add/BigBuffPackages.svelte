@@ -2,6 +2,7 @@
 import sendEvent from '../../analytics/sendEvent';
 import Modal from '../../modal/Modal.svelte';
 import daBuffMarketDoAdd from '../../_dataAccess/daBuffMarketDoAdd';
+import navigateTo from '../../common/navigateTo';
 
 export let buffList;
 let visible = true;
@@ -29,7 +30,6 @@ function addPkg(buff) {
     buff_type_0: buff.value,
     buff_level_0: buff.max_level,
   };
-  console.log(buffPkgData);
   return daBuffMarketDoAdd(buffPkgData);
 }
 
@@ -51,7 +51,7 @@ async function submit() {
     .map((buffIndex) => buffList[buffIndex])
     .reduce(serialiseRequests, Promise.resolve());
   if (response?.s) {
-    window.location.replace('https://www.fallensword.com/index.php?cmd=buffmarket&subcmd=manage&m=1');
+    navigateTo('https://www.fallensword.com/index.php?cmd=buffmarket&subcmd=manage&m=1');
   } else {
     processing = false;
   }
