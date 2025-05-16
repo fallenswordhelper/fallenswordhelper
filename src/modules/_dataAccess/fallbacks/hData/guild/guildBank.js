@@ -1,6 +1,6 @@
-import querySelector from '../../common/querySelector';
-import getText from '../../common/getText';
-import closestTable from '../../common/closestTable';
+import querySelector from '../../../../common/querySelector';
+import getText from '../../../../common/getText';
+import closestTable from '../../../../common/closestTable';
 
 export default function guildBank(doc) {
   const bankTable = closestTable(querySelector('#deposit_amount', doc));

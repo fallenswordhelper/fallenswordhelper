@@ -2,8 +2,7 @@ import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import infoBox from '../common/infoBox';
 import withdraw from '../app/bank/withdraw';
 import $dataAccess from './$dataAccess';
-import gold from './fallbacks/gold';
-import bank from './fallbacks/bank';
+import hData from './fallbacks/hData/hData';
 
 async function withdrawFallback(amount) {
   const doc = await indexAjaxDoc({
@@ -17,7 +16,7 @@ async function withdrawFallback(amount) {
   if (info === 'You successfully withdrew gold!') {
     return {
       s: true,
-      h: { p: [ gold(doc), bank(doc) ] },
+      h: hData(doc, { player: ['gold', 'bank'] }),
     };
   }
   return { e: { message: info }, s: false };

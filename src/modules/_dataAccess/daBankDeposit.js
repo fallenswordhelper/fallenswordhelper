@@ -2,8 +2,7 @@ import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import infoBox from '../common/infoBox';
 import deposit from '../app/bank/deposit';
 import $dataAccess from './$dataAccess';
-import gold from './fallbacks/gold';
-import bank from './fallbacks/bank';
+import hData from './fallbacks/hData/hData';
 
 async function depositFallback(amount) {
   const doc = await indexAjaxDoc({
@@ -17,7 +16,7 @@ async function depositFallback(amount) {
   if (info === 'You successfully deposited gold!') {
     return {
       s: true,
-      h: { p: [ gold(doc), bank(doc) ] },
+      h: hData(doc, { player: ['gold', 'bank'] }),
     };
   }
   return { e: { message: info }, s: false };
