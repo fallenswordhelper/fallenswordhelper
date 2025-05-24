@@ -124,6 +124,12 @@
     left: 0px;
     margin: 0px auto;
   }
+  .composing-progress p {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    top: 2px;
+  }
   .composing-progress-bar {
     background-position: right top;
     position: absolute;
