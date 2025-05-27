@@ -85,10 +85,10 @@ function gotoNextPage() {
   gotoPage(Math.min(pageId + 1, lastPage()), folderId);
 }
 
-function createButton(value, onclick) {
+function createButton(value, clickFn) {
   return createInput({
     value,
-    onclick,
+    onclick: clickFn,
     type: 'button',
   });
 }
@@ -109,14 +109,12 @@ export default function pagination() {
   navTd().replaceWith(createButtonsTd());
   insertElementBefore(spinner, pageSelect());
   querySelectorArray('a[href*=folder_id]:first-child').forEach((a) => {
-    const folderId = getCustomUrlParameter(a.href, 'folder_id');
-    a.href = '#';
-    a.dataset.folderId = folderId;
+    const thisFolder = getCustomUrlParameter(a.href, 'folder_id');
     onclick(a, (event) => {
       event.preventDefault();
       querySelector('img[src*=folder_on]').src = folderImgSrc;
       querySelector('img', a).src = folderOnImgSrc;
-      gotoPage(0, folderId);
+      gotoPage(0, thisFolder);
     });
   });
 }
