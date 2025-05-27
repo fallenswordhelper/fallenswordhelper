@@ -14,6 +14,9 @@ import closestTr from '../common/closestTr';
 import closestTd from '../common/closestTd';
 import setText from '../dom/setText';
 
+import { mount } from 'svelte';
+import ModalConfirm from '../modal/ModalConfirm.svelte';
+
 const getPackageId = (button) =>
   button.getAttribute('onclick').match(/id=(\d+)/)[1];
 
@@ -50,7 +53,7 @@ function doInfoBox(msg) {
     createInfoBox();
     infoBox = querySelector('#info-msg');
   }
-  setText(infoBox, msg);
+  setText(msg, infoBox);
 }
 
 function replaceOnClick(target, fn) {
@@ -82,10 +85,9 @@ async function toggleBuffPackage(event) {
   if (response?.s === true) {
     const statusTd = closestTr(event.target).children[3];
     setText(
-      statusTd,
       getText(statusTd) == 'Yes' ? 'No' : 'Yes',
+      statusTd,
     );
-
     doInfoBox('Buff Package toggled!');
   } else {
     doInfoBox(response?.e?.message ?? 'Server Error');
@@ -93,25 +95,30 @@ async function toggleBuffPackage(event) {
 }
 
 async function deleteBuffPackage(event) {
-  if (confirm('Are you sure you want to delete this package?')) {
-    const response = await doDaAction(event, daDeleteBuffPackage);
-    if (response?.s === true) {
-      const tr = closestTr(event.target);
-      tr.nextElementSibling.remove();
-      tr.remove();
-      doInfoBox('Buff Package deleted!');
-    } else {
-      doInfoBox(response?.e?.message ?? 'Server Error');
-    }
-  }
+  mount(ModalConfirm, { target: pcc(), props: {
+    msg: 'Are you sure you want to delete this package?',
+    visible: true,
+    resolve: async (doDelete) => {
+      if (!doDelete) { return; }
+      const response = await doDaAction(event, daDeleteBuffPackage);
+      if (response?.s === true) {
+        const tr = closestTr(event.target);
+        tr.nextElementSibling.remove();
+        tr.remove();
+        doInfoBox('Buff Package deleted!');
+      } else {
+        doInfoBox(response?.e?.message ?? 'Server Error');
+      }
+    },
+  }});
 }
 
 async function featureBuffPackage(event) {
   const response = await doDaAction(event, daFeatureBuffPackage);
   if (response?.s === true) {
     setText(
-      closestTr(event.target).children[4],
       'Yes',
+      closestTr(event.target).children[4],
     );
     doInfoBox('Buff Package featured for 24 hours!');
   } else {
