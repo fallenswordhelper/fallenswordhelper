@@ -94,22 +94,21 @@ async function toggleBuffPackage(event) {
   }
 }
 
-async function deleteBuffPackage(event) {
+function deleteBuffPackage(event) {
   mount(ModalConfirm, { target: pcc(), props: {
     msg: 'Are you sure you want to delete this package?',
     visible: true,
-    resolve: (doDelete) => {
+    resolve: async (doDelete) => {
       if (!doDelete) { return; }
-      doDaAction(event, daDeleteBuffPackage).then((response) => {
-        if (response?.s === true) {
-          const tr = closestTr(event.target);
-          tr.nextElementSibling.remove();
-          tr.remove();
-          doInfoBox('Buff Package deleted!');
-        } else {
-          doInfoBox(response?.e?.message ?? 'Server Error');
-        }
-      });
+      const response =  await doDaAction(event, daDeleteBuffPackage);
+      if (response?.s === true) {
+        const tr = closestTr(event.target);
+        tr.nextElementSibling.remove();
+        tr.remove();
+        doInfoBox('Buff Package deleted!');
+      } else {
+        doInfoBox(response?.e?.message ?? 'Server Error');
+      }
     },
   }});
 }
