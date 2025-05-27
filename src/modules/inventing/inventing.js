@@ -12,9 +12,10 @@ import on from '../common/on';
 import querySelector from '../common/querySelector';
 import selfIdIs from '../common/selfIdIs';
 import { simpleCheckboxHtml } from '../settings/simpleCheckbox';
-import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getValue from '../system/getValue';
 import setValue from '../system/setValue';
+import pagination from './pagination';
+import getCurrentFolderId from './getCurrentFolderId';
 
 const prefAjaxifyMoveRecipe = 'ajaxifyMoveRecipe';
 let ajaxifyMove = 0;
@@ -85,12 +86,6 @@ function getRecipes(elements, targetId) {
   }
 }
 
-function getCurrentFolderId() {
-  const currentFolderHref = querySelector('#pCC img[src*="/folder_on."]')
-    .parentNode.href;
-  return getCustomUrlParameter(currentFolderHref, 'folder_id');
-}
-
 function submitHandler(e) {
   if (!ajaxifyMove) {
     return;
@@ -110,4 +105,5 @@ export default function inventing() {
   injectPrefs(moveBtn);
   ajaxifyMove = getValue(prefAjaxifyMoveRecipe);
   on(moveBtn.form, 'submit', submitHandler);
+  pagination();
 }
