@@ -46,6 +46,13 @@ function createSpinner() {
 
 const spinner = createSpinner();
 
+function updatePage(newDoc) {
+  navTd(newDoc).replaceWith(navTd());
+  folderTable(newDoc).replaceWith(folderTable());
+  insertElementBefore(spinner, pageSelect(newDoc));
+  querySelector('#pCC').replaceWith(querySelector('#pCC', newDoc));
+}
+
 async function gotoPage(page, folder) {
   if (page === pageId && folder === folderId) {
     return;
@@ -60,10 +67,7 @@ async function gotoPage(page, folder) {
     page: pageId,
     folder_id: folderId,
   });
-  navTd(doc).replaceWith(navTd());
-  folderTable(doc).replaceWith(folderTable());
-  insertElementBefore(spinner, pageSelect(doc));
-  querySelector('#pCC').replaceWith(querySelector('#pCC', doc));
+  updatePage(doc);
   spinner.style.display = 'none';
 }
 
