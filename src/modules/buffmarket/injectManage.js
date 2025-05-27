@@ -85,7 +85,7 @@ async function toggleBuffPackage(event) {
   if (response?.s === true) {
     const statusTd = closestTr(event.target).children[3];
     setText(
-      getText(statusTd) == 'Yes' ? 'No' : 'Yes',
+      getText(statusTd) === 'Yes' ? 'No' : 'Yes',
       statusTd,
     );
     doInfoBox('Buff Package toggled!');
@@ -98,17 +98,18 @@ async function deleteBuffPackage(event) {
   mount(ModalConfirm, { target: pcc(), props: {
     msg: 'Are you sure you want to delete this package?',
     visible: true,
-    resolve: async (doDelete) => {
+    resolve: (doDelete) => {
       if (!doDelete) { return; }
-      const response = await doDaAction(event, daDeleteBuffPackage);
-      if (response?.s === true) {
-        const tr = closestTr(event.target);
-        tr.nextElementSibling.remove();
-        tr.remove();
-        doInfoBox('Buff Package deleted!');
-      } else {
-        doInfoBox(response?.e?.message ?? 'Server Error');
-      }
+      doDaAction(event, daDeleteBuffPackage).then((response) => {
+        if (response?.s === true) {
+          const tr = closestTr(event.target);
+          tr.nextElementSibling.remove();
+          tr.remove();
+          doInfoBox('Buff Package deleted!');
+        } else {
+          doInfoBox(response?.e?.message ?? 'Server Error');
+        }
+      });
     },
   }});
 }
