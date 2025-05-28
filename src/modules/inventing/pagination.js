@@ -6,69 +6,81 @@ import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
 import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import closestTd from '../common/closestTd';
+import closestTr from '../common/closestTr';
 import closestTable from '../common/closestTable';
-import insertElementBefore from '../common/insertElementBefore';
 import getCurrentFolderId from './getCurrentFolderId';
 import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import onclick from '../common/onclick';
+import setText from '../dom/setText';
 
 const folderImgSrc = 'https://cdn2.fallensword.com/ui/misc/folder.png';
 const folderOnImgSrc = 'https://cdn2.fallensword.com/ui/misc/folder_on.png';
 
 const pageSelect = (context=document) =>
-  querySelector('select[name=page]', context);
+  querySelectorArray('select[name=page]', context);
 
-const navTd = (context=document) => closestTd(pageSelect(context)).nextElementSibling;
+const navTd = (context=document) => pageSelect(context)
+  .map((i) => closestTd(i).nextElementSibling);
 
-const folderTable = (context=document) =>
-  closestTable(querySelector('img[src*=folder]', context));
+const recipeTable = (context=document) =>
+  closestTable(querySelector('#pCC a[href*=viewrecipe]', context))
+    .parentElement
+    .parentElement
+    .parentElement;
 
-let pageId = Number(pageSelect().value);
+let pageId = Number(pageSelect()[0].value);
 let folderId = getCurrentFolderId();
 
-const lastPage = () =>
-  Number(querySelector('option:last-child', pageSelect()).value);
+const lastPage = (context=document) =>
+  Number(querySelector('option:last-child', pageSelect(context)[0]).value);
 
 function createSpinner() {
   const spinner = createDiv();
-  spinner.style.cssText = `
-    animation: fshSpinner 0.6s linear infinite;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    border-top-color: #07d;
-    height: 8px;
-    width: 8px;
-    margin: 0px 4px;
-    display: none;
-  `;
+  spinner.className = 'fshSpinner fshSpinner64';
+  spinner.style.display = 'none';
   return spinner;
 }
 
 const spinner = createSpinner();
 
-function updatePage(newDoc) {
-  navTd(newDoc).replaceWith(navTd());
-  folderTable(newDoc).replaceWith(folderTable());
-  insertElementBefore(spinner, pageSelect(newDoc));
-  querySelector('#pCC').replaceWith(querySelector('#pCC', newDoc));
+function updatePageNumbers(newDoc) {
+  const newLastPage = lastPage(newDoc);
+  const options = Array.from(Array(newLastPage + 1).keys())
+    .map((value) => {
+      const option = cElement('option', { value });
+      setText(value + 1, option);
+      return option;
+    });
+  console.log(options);
+  pageSelect().forEach((select) => {
+    select.replaceChildren(...options.map((i) => i.cloneNode(true)));
+    setText(` of ${newLastPage + 1} `, select.nextSibling);
+    closestTd(select).style.paddingRight = '4px';
+  });
 }
 
 async function gotoPage(page, folder) {
+  console.log(`page: ${page}/${pageId}; folder: ${folder}/${folderId}`);
   if (page === pageId && folder === folderId) {
     return;
   }
-  pageId = page;
-  folderId = folder;
 
-  pageSelect().value = page;
-  spinner.style.display = 'inline-block';
+  pageSelect().forEach((i) => i.value = page);
+  spinner.style.display = 'block';
   const doc = await indexAjaxDoc({
     cmd: 'inventing',
-    page: pageId,
-    folder_id: folderId,
+    page,
+    folder_id: folder,
   });
-  updatePage(doc);
+  recipeTable().replaceWith(recipeTable(doc));
+
+  if ( folder !== folderId ) {
+    updatePageNumbers(doc);
+  }
   spinner.style.display = 'none';
+
+  pageId = page;
+  folderId = folder;
 }
 
 function gotoFirstPage() {
@@ -97,10 +109,15 @@ function createButton(value, clickFn) {
   });
 }
 
+function gotoSpecificPage(event) {
+  const select = pageSelect(closestTr(event.target))[0];
+  gotoPage(Number(select.value), folderId);
+}
+
 function createButtonsTd() {
   const inputTd = cElement('td');
   inputTd.append(
-    createButton('Go', () => gotoPage(pageSelect().value)), ' ',
+    createButton('Go', gotoSpecificPage), ' ',
     createButton('<<', gotoFirstPage), ' ',
     createButton('<', gotoPrevPage), ' ',
     createButton('>', gotoNextPage), ' ',
@@ -110,8 +127,8 @@ function createButtonsTd() {
 }
 
 export default function pagination() {
-  navTd().replaceWith(createButtonsTd());
-  insertElementBefore(spinner, pageSelect());
+  navTd().forEach((i) => i.replaceWith(createButtonsTd()));
+  document.body.append(spinner);
   querySelectorArray('a[href*=folder_id]:first-child').forEach((a) => {
     const thisFolder = getCustomUrlParameter(a.href, 'folder_id');
     onclick(a, (event) => {
