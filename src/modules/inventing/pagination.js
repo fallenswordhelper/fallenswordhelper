@@ -51,7 +51,6 @@ function updatePageNumbers(newDoc) {
       setText(value + 1, option);
       return option;
     });
-  console.log(options);
   pageSelect().forEach((select) => {
     select.replaceChildren(...options.map((i) => i.cloneNode(true)));
     setText(` of ${newLastPage + 1} `, select.nextSibling);
@@ -60,12 +59,11 @@ function updatePageNumbers(newDoc) {
 }
 
 async function gotoPage(page, folder) {
-  console.log(`page: ${page}/${pageId}; folder: ${folder}/${folderId}`);
   if (page === pageId && folder === folderId) {
     return;
   }
 
-  pageSelect().forEach((i) => i.value = page);
+  pageSelect().forEach((i) => { i.value = page });
   spinner.style.display = 'block';
   const doc = await indexAjaxDoc({
     cmd: 'inventing',
