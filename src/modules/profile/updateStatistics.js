@@ -35,7 +35,7 @@ function enhancementTooltip(enhancement) {
   return `<center><b>${enhancement.name}</b></center><br>${enhancement.tooltip}`;
 }
 
-function enhancementTr(enhancement) {
+function enhancementLabel(enhancement) {
   const labelAnchor = createAnchor({
     href: '#',
     className: 'tip-static',
@@ -44,8 +44,10 @@ function enhancementTr(enhancement) {
   setTipped(enhancementTooltip(enhancement), labelAnchor);
   const labelSpan = cElement('span');
   labelSpan.append(labelAnchor, ':');
+  return labelSpan;
+}
 
-  const valueTd = cElement('td');
+function enhancementValueBar(enhancement) {
   const valueBar = createDiv({
     className: 'tip-static',
   });
@@ -69,8 +71,11 @@ function enhancementTr(enhancement) {
     background: url('${fillImg}');
   `;
   valueBar.append(valueBarFill);
-  valueTd.append(valueBar);
+  return valueBar;
+}
 
+
+function enhancementElement(enhancement) {
   const element = cElement('div');
   element.style.cssText = `
     display: grid;
@@ -80,15 +85,15 @@ function enhancementTr(enhancement) {
   `;
 
   element.append(
-    labelSpan,
-    valueBar,
+    enhancementLabel(enhancement),
+    enhancementValueBar(enhancement),
   );
   return(element);
 }
 
 function updateEnhancements(response) {
   querySelector('#profileLeftColumn > div:nth-child(11)')
-    .replaceChildren(...response._enhancements.map(enhancementTr));
+    .replaceChildren(...response._enhancements.map(enhancementElement));
 }
 
 export default async function updateStatistics() {
