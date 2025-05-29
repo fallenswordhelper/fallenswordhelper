@@ -2,25 +2,19 @@ import equipItem from '../../ajax/equipItem';
 import useItem from '../../ajax/useItem';
 import sendEvent from '../../analytics/sendEvent';
 import hasClass from '../../common/hasClass';
-import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
+import updateEquipment from '../updateEquipment';
+import updateStatistics from '../updateStatistics';
 
-function backpackRemove(theBackpack, invId) {
-  // remove from srcData
-  const i = theBackpack.srcData.findIndex((el) => el.a === invId);
-  if (i !== -1) {
-    theBackpack.srcData.splice(i, 1);
-  }
-}
 
-function actionResult([theBackpack, result, target, invId, data]) {
+function actionResult(data, target) {
   if (data.r !== 0) {
     target.remove();
     return;
   }
-  backpackRemove(theBackpack, invId);
-  target.classList.remove('fshSpinner');
-  setInnerHtml(`<span class="fastWorn">${result}</span>`, target.parentNode);
+  $('#backpackContainer').data('hcsBackpack')._loadData();
+  updateEquipment();
+  updateStatistics();
 }
 
 async function fastAction(theBackpack, evt, action, result) {
@@ -31,7 +25,7 @@ async function fastAction(theBackpack, evt, action, result) {
   target.blur();
   target.className = 'fastAction fshBl fshSpinner fshSpinner12';
   const data = await action(invId);
-  if (data) actionResult([theBackpack, result, target, invId, data]);
+  if (data) actionResult(data, target);
 }
 
 export default function fastEvent(theBackpack, evt) {

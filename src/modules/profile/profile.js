@@ -29,7 +29,7 @@ function doUpdateBuffs() {
 
 function doUpdateStatistics() {
   if (getValue('statisticsWrap')) {
-    runDefault(import('./updateStatistics'));
+    runDefault(import('./updateStatsStyles'));
   }
 }
 
