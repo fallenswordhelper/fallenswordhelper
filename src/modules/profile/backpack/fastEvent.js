@@ -17,7 +17,7 @@ function actionResult(data, target) {
   updateStatistics();
 }
 
-async function fastAction(theBackpack, evt, action, result) {
+async function fastAction(evt, action, result) {
   sendEvent('profile', `fastAction - ${result}`);
   const { target } = evt;
   const invId = target.parentNode.parentNode.children[0].dataset.inv;
@@ -28,11 +28,11 @@ async function fastAction(theBackpack, evt, action, result) {
   if (data) actionResult(data, target);
 }
 
-export default function fastEvent(theBackpack, evt) {
+export default function fastEvent(evt) {
   if (hasClass('fastWear', evt.target)) {
-    fastAction(theBackpack, evt, equipItem, 'Worn');
+    fastAction(evt, equipItem, 'Worn');
   }
   if (hasClass('fastUse', evt.target)) {
-    fastAction(theBackpack, evt, useItem, 'Used');
+    fastAction(evt, useItem, 'Used');
   }
 }
