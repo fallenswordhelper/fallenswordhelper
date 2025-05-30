@@ -2,59 +2,22 @@ import './manage.css';
 import cElement from '../common/cElement/cElement';
 import createDiv from '../common/cElement/createDiv';
 import onclick from '../common/onclick';
-import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
 import daToggleBuffPackage from '../_dataAccess/daToggleBuffPackage';
 import getText from '../common/getText';
 import daFeatureBuffPackage from '../_dataAccess/daFeatureBuffPackage';
 import daDeleteBuffPackage from '../_dataAccess/daDeleteBuffPackage';
 import { pcc } from '../support/layout';
-import insertElementAfterBegin from '../common/insertElementAfterBegin';
 import closestTr from '../common/closestTr';
 import closestTd from '../common/closestTd';
 import setText from '../dom/setText';
+import dynamicAlert from '../alert/dynamicAlert';
 
 import { mount } from 'svelte';
 import ModalConfirm from '../modal/ModalConfirm.svelte';
 
 const getPackageId = (button) =>
   button.getAttribute('onclick').match(/id=(\d+)/)[1];
-
-
-function createInfoBox() {
-  const wrapper = createDiv();
-  wrapper.style.cssText = `
-    width: 80%;
-    background: #D3CFC1;
-    text-align: center;
-    border: 2px solid white;
-    margin: 10px auto 0px auto;
-  `;
-  const header = createDiv({ innerText: 'INFORMATION' });
-  header.style.cssText = `
-    background: #8E8668;
-    color: white;
-    font-size: 10px;
-    margin: 2px;
-  `;
-  const message = createDiv({ id: 'info-msg' });
-  message.style.cssText = `
-    font-size: 13px;
-    padding-bottom: 2px;
-  `
-  wrapper.append(header, message);
-  insertElementAfterBegin(pcc(), wrapper);
-}
-
-
-function doInfoBox(msg) {
-  let infoBox = querySelector('#info-msg');
-  if (!infoBox) {
-    createInfoBox();
-    infoBox = querySelector('#info-msg');
-  }
-  setText(msg, infoBox);
-}
 
 function replaceOnClick(target, fn) {
   const packageId = getPackageId(target);
@@ -88,9 +51,9 @@ async function toggleBuffPackage(event) {
       getText(statusTd) === 'Yes' ? 'No' : 'Yes',
       statusTd,
     );
-    doInfoBox('Buff Package toggled!');
+    dynamicAlert('Buff Package toggled!');
   } else {
-    doInfoBox(response?.e?.message ?? 'Server Error');
+    dynamicAlert(response?.e?.message ?? 'Server Error');
   }
 }
 
@@ -105,9 +68,9 @@ function deleteBuffPackage(event) {
         const tr = closestTr(event.target);
         tr.nextElementSibling.remove();
         tr.remove();
-        doInfoBox('Buff Package deleted!');
+        dynamicAlert('Buff Package deleted!');
       } else {
-        doInfoBox(response?.e?.message ?? 'Server Error');
+        dynamicAlert(response?.e?.message ?? 'Server Error');
       }
     },
   }});
@@ -120,9 +83,9 @@ async function featureBuffPackage(event) {
       'Yes',
       closestTr(event.target).children[4],
     );
-    doInfoBox('Buff Package featured for 24 hours!');
+    dynamicAlert('Buff Package featured for 24 hours!');
   } else {
-    doInfoBox(response?.e?.message ?? 'Server Error');
+    dynamicAlert(response?.e?.message ?? 'Server Error');
   }
 }
 
