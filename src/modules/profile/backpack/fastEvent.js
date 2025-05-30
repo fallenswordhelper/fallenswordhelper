@@ -5,14 +5,18 @@ import hasClass from '../../common/hasClass';
 import setText from '../../dom/setText';
 import updateEquipment from '../updateEquipment';
 import updateStatistics from '../updateStatistics';
-
+import querySelector from '../../common/querySelector';
 
 function actionResult(data, target) {
   if (data.r !== 0) {
     target.remove();
     return;
   }
-  $('#backpackContainer').data('hcsBackpack')._loadData();
+  const backpack = $('#backpackContainer').data('hcsBackpack');
+  backpack.page = Number(
+    querySelector('.hcsPaginate_pageLink.hcsPaginate_selected')
+       .dataset.page);
+  backpack._loadData();
   updateEquipment();
   updateStatistics();
 }
