@@ -1,12 +1,12 @@
-import profile from '../_dataAccess/export/profile';
-import setTipped from '../common/setTipped';
-import querySelector from '../common/querySelector';
-import setText from '../dom/setText';
-import createDiv from '../common/cElement/createDiv';
-import createAnchor from '../common/cElement/createAnchor';
-import cElement from '../common/cElement/cElement';
-import playerName from '../common/playerName';
-import addCommas from '../system/addCommas';
+import profile from '../../../_dataAccess/export/profile';
+import setTipped from '../../../common/setTipped';
+import querySelector from '../../../common/querySelector';
+import setText from '../../../dom/setText';
+import createDiv from '../../../common/cElement/createDiv';
+import createAnchor from '../../../common/cElement/createAnchor';
+import cElement from '../../../common/cElement/cElement';
+import playerName from '../../../common/playerName';
+import addCommas from '../../../system/addCommas';
 
 function updateStamina(response) {
   const staminaTd = querySelector('span#stat-stamina');

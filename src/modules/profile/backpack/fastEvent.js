@@ -2,26 +2,28 @@ import equipItem from '../../ajax/equipItem';
 import useItem from '../../ajax/useItem';
 import sendEvent from '../../analytics/sendEvent';
 import hasClass from '../../common/hasClass';
+import setInnerHtml from '../../dom/setInnerHtml';
 import setText from '../../dom/setText';
-import updateEquipment from '../updateEquipment';
-import updateStatistics from '../updateStatistics';
-import querySelector from '../../common/querySelector';
 
-function actionResult(data, target) {
+function backpackRemove(theBackpack, invId) {
+  // remove from srcData
+  const i = theBackpack.srcData.findIndex((el) => el.a === invId);
+  if (i !== -1) {
+    theBackpack.srcData.splice(i, 1);
+  }
+}
+
+function actionResult([theBackpack, result, target, invId, data]) {
   if (data.r !== 0) {
     target.remove();
     return;
   }
-  const backpack = $('#backpackContainer').data('hcsBackpack');
-  backpack.page = Number(
-    querySelector('.hcsPaginate_pageLink.hcsPaginate_selected')
-       .dataset.page);
-  backpack._loadData();
-  updateEquipment();
-  updateStatistics();
+  backpackRemove(theBackpack, invId);
+  target.classList.remove('fshSpinner');
+  setInnerHtml(`<span class="fastWorn">${result}</span>`, target.parentNode);
 }
 
-async function fastAction(evt, action, result) {
+async function fastAction(theBackpack, evt, action, result) {
   sendEvent('profile', `fastAction - ${result}`);
   const { target } = evt;
   const invId = target.parentNode.parentNode.children[0].dataset.inv;
@@ -29,14 +31,14 @@ async function fastAction(evt, action, result) {
   target.blur();
   target.className = 'fastAction fshBl fshSpinner fshSpinner12';
   const data = await action(invId);
-  if (data) actionResult(data, target);
+  if (data) actionResult([theBackpack, result, target, invId, data]);
 }
 
-export default function fastEvent(evt) {
+export default function fastEvent(theBackpack, evt) {
   if (hasClass('fastWear', evt.target)) {
-    fastAction(evt, equipItem, 'Worn');
+    fastAction(theBackpack, evt, equipItem, 'Worn');
   }
   if (hasClass('fastUse', evt.target)) {
-    fastAction(evt, useItem, 'Used');
+    fastAction(theBackpack, evt, useItem, 'Used');
   }
 }

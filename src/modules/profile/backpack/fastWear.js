@@ -3,6 +3,7 @@ import awaitWidget from '../../common/awaitWidget';
 import getElementById from '../../common/getElementById';
 import getText from '../../common/getText';
 import onclick from '../../common/onclick';
+import partial from '../../common/partial';
 import task from '../../support/task';
 import fastEvent from './fastEvent';
 import fastWearLinks from './fastWearLinks';
@@ -15,7 +16,7 @@ function foundBackpack(theBackpack) {
   if (getText(getElementById('backpack_current')).length !== 0) {
     task(3, fastWearLinks, [theBackpack]);
   }
-  onclick(getElementById('backpackContainer'), fastEvent);
+  onclick(getElementById('backpackContainer'), partial(fastEvent, theBackpack));
 }
 
 export default async function fastWear() {

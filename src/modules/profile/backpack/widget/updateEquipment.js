@@ -1,10 +1,10 @@
-import daProfile from '../_dataAccess/daProfile';
-import querySelectorArray from '../common/querySelectorArray';
-import { itemType } from '../support/constants';
-import createAnchor from '../common/cElement/createAnchor';
-import cElement from '../common/cElement/cElement';
-import setTipped from '../common/setTipped';
-import replaceChild from '../common/replaceChild';
+import daProfile from '../../../_dataAccess/daProfile';
+import querySelectorArray from '../../../common/querySelectorArray';
+import { itemType } from '../../../support/constants';
+import createAnchor from '../../../common/cElement/createAnchor';
+import cElement from '../../../common/cElement/cElement';
+import setTipped from '../../../common/setTipped';
+import replaceChild from '../../../common/replaceChild';
 
 const equipmentIndeces = {
   Gloves: 0,
