@@ -74,12 +74,12 @@ function compareItemNames(item1, item2) {
 }
 
 function ascLevelSortFn(item1, item2) {
-  if (item1.l != item2.l) return item1.l - item2.l;
+  if (item1.l !== item2.l) return item1.l - item2.l;
   return compareItemNames(item1, item2);
 }
 
 function descLevelSortFn(item1, item2) {
-  if (item1.l != item2.l) return item2.l - item1.l;
+  if (item1.l !== item2.l) return item2.l - item1.l;
   return compareItemNames(item1, item2);
 }
 
@@ -89,16 +89,12 @@ async function loadData() {
   widget.srcData = response.r.inventories
     .map((folder) => folder.items.map((item) => ({ f: folder.id, ...item })))
     .flat();
-  switch (widget.ordering) {
-    case 0:
-      widget.srcData.sort(defaultSortFn);
-      break;
-    case 1:
-      widget.srcData.sort(ascLevelSortFn);
-      break;
-    case 2:
-      widget.srcData.sort(descLevelSortFn);
-      break;
+  if (widget.ordering === 1) {
+    widget.srcData.sort(ascLevelSortFn);
+  } else if (widget.ordering === 2) {
+    widget.srcData.sort(descLevelSortFn);
+  } else {
+    widget.srcData.sort(defaultSortFn);
   }
 
   widget._applyFilter();
