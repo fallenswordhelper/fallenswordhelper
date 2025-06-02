@@ -88,7 +88,11 @@ function descLevelSortFn(item1, item2) {
 async function loadData() {
   const response = await daLoadInventory();
   widget.srcData = response.r.inventories
-    .map((folder) => folder.items.map((item) => ({ f: folder.id, ...item })))
+    .map((folder) => folder.items.map((item) => ({
+      f: folder.id,
+      u: item.t !== 9,
+      ...item,
+    })))
     .flat();
   if (widget.ordering === 1) {
     widget.srcData.sort(ascLevelSortFn);
