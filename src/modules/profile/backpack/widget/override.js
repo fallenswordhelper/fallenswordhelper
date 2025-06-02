@@ -6,6 +6,7 @@ import daUseItem from '../../../_dataAccess/daUseItem';
 import dynamicAlert from '../../../alert/dynamicAlert';
 import createDiv from '../../../common/cElement/createDiv';
 import daLoadInventory from '../../../_dataAccess/daLoadInventory';
+import awaitWidget from '../../../common/awaitWidget';
 
 let widget = 0;
 
@@ -103,10 +104,15 @@ async function loadData() {
   updateEquipment(response.r.equipment);
 }
 
-export default function override() {
-  widget = $('#backpackContainer').data('hcsBackpack');
-  querySelector('#backpackContainer').style.position = 'relative';
-  querySelector('#backpackContainer').append(spinnerContainer);
+export default async function override() {
+  const backpackContainer = querySelector('#backpackContainer');
+  widget = await awaitWidget(
+    backpackContainer,
+    'Backpack',
+    'hcs',
+  );
+  backpackContainer.style.position = 'relative';
+  backpackContainer.append(spinnerContainer);
   widget._equipItem = equipItem;
   widget._useItem = useItem;
   widget._loadData = loadData;
