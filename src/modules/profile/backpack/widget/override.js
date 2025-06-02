@@ -5,6 +5,7 @@ import daEquipItem from '../../../_dataAccess/daEquipItem';
 import daUseItem from '../../../_dataAccess/daUseItem';
 import dynamicAlert from '../../../alert/dynamicAlert';
 import createDiv from '../../../common/cElement/createDiv';
+import daLoadInventory from '../../../_dataAccess/daLoadInventory';
 
 let widget = 0;
 
@@ -35,7 +36,6 @@ function refresh() {
     querySelector('.hcsPaginate_pageLink.hcsPaginate_selected')
        .dataset.page);
   widget._loadData();
-  updateEquipment();
   updateStatistics();
 }
 
@@ -63,10 +63,55 @@ async function useItem(invId) {
   spinnerContainer.style.display = 'none';
 }
 
+function defaultSortFn(item1, item2) {
+  return item1.o - item2.o;
+}
+
+function compareItemNames(item1, item2) {
+  const lower1 = item1.n.toLowerCase();
+  const lower2 = item2.n.toLowerCase();
+  return lower1.localeCompare(lower2);
+}
+
+function ascLevelSortFn(item1, item2) {
+  if (item1.l != item2.l) return item1.l - item2.l;
+  return compareItemNames(item1, item2);
+}
+
+function descLevelSortFn(item1, item2) {
+  if (item1.l != item2.l) return item2.l - item1.l;
+  return compareItemNames(item1, item2);
+}
+
+// need to set f
+async function loadData() {
+  const response = await daLoadInventory();
+  widget.srcData = response.r.inventories
+    .map((folder) => folder.items.map((item) => ({ f: folder.id, ...item })))
+    .flat();
+  switch (widget.ordering) {
+    case 0:
+      widget.srcData.sort(defaultSortFn);
+      break;
+    case 1:
+      widget.srcData.sort(ascLevelSortFn);
+      break;
+    case 2:
+      widget.srcData.sort(descLevelSortFn);
+      break;
+  }
+
+  widget._applyFilter();
+  widget._updateItemCount();
+  widget._updateFolders(response.r.inventories.map((folder) => ({a: folder.id, n: folder.name})));
+  updateEquipment(response.r.equipment);
+}
+
 export default function override() {
   widget = $('#backpackContainer').data('hcsBackpack');
   querySelector('#backpackContainer').style.position = 'relative';
   querySelector('#backpackContainer').append(spinnerContainer);
   widget._equipItem = equipItem;
   widget._useItem = useItem;
+  widget._loadData = loadData;
 }

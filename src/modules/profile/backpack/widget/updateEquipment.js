@@ -1,4 +1,4 @@
-import daProfile from '../../../_dataAccess/daProfile';
+import playerId from '../../../common/playerId';
 import querySelectorArray from '../../../common/querySelectorArray';
 import { itemType } from '../../../support/constants';
 import createAnchor from '../../../common/cElement/createAnchor';
@@ -20,10 +20,9 @@ const equipmentIndeces = {
 
 const itemPosition = (item) => equipmentIndeces[itemType[item.t]];
 
-export default async function updateEquipment() {
-  const profile = await daProfile();
+export default function updateEquipment(equipment) {
   const inventoryTableAnchors = querySelectorArray('.inventory-table a');
-  profile.r.equipped_items.forEach((item) => {
+  equipment.forEach((item) => {
     const oldAnchor = inventoryTableAnchors[itemPosition(item)];
     const newAnchor = createAnchor({
       href: `index.php?cmd=profile&subcmd=unequipitem&inventory_id=${item.a}`,
@@ -33,7 +32,7 @@ export default async function updateEquipment() {
       src: `https://cdn2.fallensword.com/items/${item.b}.gif`,
     });
     setTipped(
-      `fetchitem.php?item_id=${item.b}&inv_id=${item.a}&p=${profile.r.id}&extra=10&t=1`,
+      `fetchitem.php?item_id=${item.b}&inv_id=${item.a}&p=${playerId()}&extra=10&t=1`,
       img,
     );
     newAnchor.append(img);
