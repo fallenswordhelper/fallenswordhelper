@@ -25,8 +25,9 @@ function updateBaseStats(response) {
         addCommas(response[statName]),
         statTd.childNodes[0],
       );
+      const bonus = response[`bonus_${statName}`];
       setText(
-        addCommas(response[`bonus_${statName}`]),
+        `(+${addCommas(bonus)})`,
         querySelector('.profile-stat-bonus', statTd),
       );
   });
