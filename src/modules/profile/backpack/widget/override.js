@@ -7,8 +7,10 @@ import dynamicAlert from '../../../alert/dynamicAlert';
 import createDiv from '../../../common/cElement/createDiv';
 import daLoadInventory from '../../../_dataAccess/daLoadInventory';
 import awaitWidget from '../../../common/awaitWidget';
+import mountEnhancements from '../../mountEnhancements';
 
 let widget = 0;
+let enhancementsApp = 0;
 
 const spinnerContainer = createDiv();
 spinnerContainer.style.cssText = `
@@ -37,7 +39,7 @@ function refresh() {
     querySelector('.hcsPaginate_pageLink.hcsPaginate_selected')
        .dataset.page);
   widget._loadData();
-  updateStatistics();
+  updateStatistics(enhancementsApp);
 }
 
 async function equipItem(invId) {
@@ -120,4 +122,6 @@ export default async function override() {
   widget._equipItem = equipItem;
   widget._useItem = useItem;
   widget._loadData = loadData;
+
+  enhancementsApp = mountEnhancements();
 }
