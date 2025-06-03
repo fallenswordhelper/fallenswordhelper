@@ -1,4 +1,6 @@
 <script>
+    import getValue from '../system/getValue';
+
     let { activeBuffs } = $props();
     let buffs = $state(activeBuffs);
     export function updateActiveBuffs(ary) {
@@ -12,6 +14,8 @@
         }
         return `${secondsLeft}s`;
     }
+
+    const showBuffLevel = getValue('showBuffLevel');
 </script>
 <div class="buff-list">
 {#each buffs as buff (buff.id)}
@@ -23,7 +27,9 @@
             height="25"
             class="tip-static"
             data-tipped="<div style='width: 250px; font-size: 12px;'><center><span style='color: #0f0'><b>{buff.name}</b> (Level: {buff.level})</span><br><b>{buff.tooltip}<br>[Click to De-Activate]</center></div>">
+        {#if showBuffLevel}
         <div class="buff-level">({buff.level})</div>
+        {/if}
         <div class="time-left">{formatDuration(buff.duration)}</div>
     </div>
 {/each}
