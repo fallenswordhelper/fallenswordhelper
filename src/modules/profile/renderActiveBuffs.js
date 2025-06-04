@@ -51,6 +51,12 @@ function buffImg(buff) {
   return img;
 }
 
+function buffLevelDiv(buff) {
+  const buffLevel = createDiv({ innerText: `(${buff.level})` });
+  buffLevel.style.fontWeight = 'bold';
+  return buffLevel;
+}
+
 function buffElement(buff) {
   const div = createDiv();
   div.style.cssText = `
@@ -64,13 +70,12 @@ function buffElement(buff) {
   div.append(buffImg(buff));
 
   if (getValue('showBuffLevel')) {
-    const buffLevel = createDiv({ innerText: `(${buff.level})` });
-    buffLevel.style.fontWeight = 'bold';
-    div.append(buffLevel);
+    div.append(buffLevelDiv(buff));
   }
 
-  const timeLeft = createDiv({ innerText: formatDuration(buff.duration) });
-  div.append(timeLeft);
+  div.append(
+    createDiv({ innerText: formatDuration(buff.duration) }),
+  );
   return(div);
 }
 
