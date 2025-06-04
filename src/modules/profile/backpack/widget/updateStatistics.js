@@ -39,7 +39,7 @@ export default async function updateStatistics() {
   updateStamina(response);
 
   if (!enhancementsApp) {
-    mountEnhancements(response._enhancements);
+    enhancementsApp = mountEnhancements(response._enhancements);
   } else {
     enhancementsApp.updateEnhancements(response._enhancements);
   }
