@@ -24,7 +24,7 @@ function updateBaseStats(response) {
       );
       const bonus = response[`bonus_${statName}`];
       setText(
-        `(+${addCommas(bonus)})`,
+        `(+${bonus})`,
         querySelector('.profile-stat-bonus', statTd),
       );
   });
