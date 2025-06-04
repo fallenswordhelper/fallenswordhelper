@@ -8,13 +8,14 @@ import insertElement from '../common/insertElement';
 import { cdn } from '../system/system';
 
 function turducken(...elements) {
+  const outerMost = elements.shift();
   return elements.reduce((outer, inner) => {
     if(isString(inner)) {
       const element = cElement(inner);
       return insertElement(outer, element);
     }
     return insertElement(outer, inner);
-  });
+  }, outerMost);
 }
 
 function enhancementLabelTd(enhancement) {
