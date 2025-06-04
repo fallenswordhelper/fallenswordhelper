@@ -3,10 +3,9 @@ import querySelector from '../../../common/querySelector';
 import setText from '../../../dom/setText';
 import playerName from '../../../common/playerName';
 import addCommas from '../../../system/addCommas';
-import mountActiveBuffs from '../../mountActiveBuffs';
 import mountEnhancements from '../../mountEnhancements';
+import renderActiveBuffs from '../../renderActiveBuffs';
 
-let buffsApp = 0;
 let enhancementsApp = 0;
 
 function updateStamina(response) {
@@ -44,8 +43,5 @@ export default async function updateStatistics() {
     enhancementsApp.updateEnhancements(response._enhancements);
   }
 
-  if (!buffsApp) {
-    buffsApp = mountActiveBuffs();
-  }
-  buffsApp.updateActiveBuffs(response._skills);
+  renderActiveBuffs(response._skills);
 }
