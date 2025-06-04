@@ -3,6 +3,19 @@ import createSpan from '../common/cElement/createSpan';
 import createTable from '../common/cElement/createTable';
 import setTipped from '../common/setTipped';
 import querySelector from '../common/querySelector';
+import isString from '../common/isString';
+
+function turducken(...elements) {
+  return elements.reduce((outer, inner) => {
+    if(isString(inner)) {
+      const element = cElement(inner);
+      outer.append(element);
+      return element;
+    }
+    outer.append(inner);
+    return inner;
+  });
+}
 
 function enhancementLabelTd(enhancement) {
   const labelSpan = createSpan({
@@ -10,7 +23,7 @@ function enhancementLabelTd(enhancement) {
     innerText: enhancement.name,
   });
   labelSpan.style.cssText = `
-    color: #333;
+    color: #000;
     text-wrap: nowrap;
     cursor: pointer;
     text-decoration: underline;
@@ -19,7 +32,7 @@ function enhancementLabelTd(enhancement) {
     `<center><b>${enhancement.name}</b></center><br>${enhancement.tooltip}`,
     labelSpan,
   );
-  const labelTd = cElement('td', { colspan: 2 });
+  const labelTd = cElement('td');
   labelTd.append(labelSpan, ':');
   return labelTd;
 }
@@ -30,32 +43,20 @@ function enhancementValueBarTd(enhancement) {
     border: 1px solid #333;
     border-spacing: 0px;
     width: 162px;
-    height: 12px;
   `;
   setTipped(
     `<center>Skill Level<br>${enhancement.value}%</center>`,
     table,
   );
-  const tbody = cElement('tbody');
-  const tr = cElement('tr');
-  const td = cElement('td', { align: 'left' });
-  const src = enhancement.value > 100
-    ? 'https://cdn2.fallensword.com/ui/misc/progress_blue.png'
-    : 'https://cdn2.fallensword.com/ui/misc/progress_purple.png';
+  const barColor = enhancement.value > 100 ? 'blue' : 'purple';
   const img = cElement('img', {
-    src,
+    src: `https://cdn2.fallensword.com/ui/misc/progress_${barColor}.png`,
     height: 10,
     width: Math.min(160, 160 * enhancement.value / 100),
   });
 
-  const outerTd = cElement('td', { colspan: 2, align: 'right' });
-  [table, tbody, tr, td, img].reduce(
-    (prev, e) => {
-      prev.append(e);
-      return e;
-    },
-    outerTd,
-  );
+  const outerTd = cElement('td', { align: 'right' });
+  turducken(outerTd, table, 'tbody', 'tr', 'td', img);
   return outerTd;
 }
 
