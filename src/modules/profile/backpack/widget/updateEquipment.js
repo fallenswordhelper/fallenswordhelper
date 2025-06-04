@@ -4,7 +4,6 @@ import { itemType } from '../../../support/constants';
 import createAnchor from '../../../common/cElement/createAnchor';
 import cElement from '../../../common/cElement/cElement';
 import setTipped from '../../../common/setTipped';
-import replaceChild from '../../../common/replaceChild';
 import { cdn } from '../../../system/system';
 
 const equipmentIndeces = {
@@ -22,9 +21,9 @@ const equipmentIndeces = {
 const itemPosition = (item) => equipmentIndeces[itemType[item.t]];
 
 export default function updateEquipment(equipment) {
-  const inventoryTableAnchors = querySelectorArray('.inventory-table a');
+  const inventoryTableTds = querySelectorArray('.inventory-table td[background*=inventory]');
+  //const inventoryTableAnchors = querySelectorArray('.inventory-table a');
   equipment.forEach((item) => {
-    const oldAnchor = inventoryTableAnchors[itemPosition(item)];
     const newAnchor = createAnchor({
       href: `index.php?cmd=profile&subcmd=unequipitem&inventory_id=${item.a}`,
     });
@@ -37,6 +36,7 @@ export default function updateEquipment(equipment) {
       img,
     );
     newAnchor.append(img);
-    replaceChild(newAnchor, oldAnchor);
+    const equipTd = inventoryTableTds[itemPosition(item)];
+    equipTd.replaceChildren(newAnchor);
   });
 }
