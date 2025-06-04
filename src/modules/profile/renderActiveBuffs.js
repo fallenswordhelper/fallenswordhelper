@@ -8,6 +8,7 @@ import onclick from '../common/onclick';
 import setTipped from '../common/setTipped';
 import setText from '../dom/setText';
 import querySelector from '../common/querySelector';
+import { cdn } from '../system/system';
 
 function formatDuration(secondsLeft) {
   if (secondsLeft > 60) {
@@ -47,7 +48,7 @@ function buffElement(buff) {
   onclick(div, () => deactivateBuff(buff));
 
   const img = cElement('img', {
-    src: `https://cdn2.fallensword.com/skills/${buff.id}.png`,
+    src: `${cdn}skills/${buff.id}.png`,
     alt: buff.name,
     width: 25,
     height: 24,

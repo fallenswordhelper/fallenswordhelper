@@ -5,6 +5,7 @@ import createAnchor from '../../../common/cElement/createAnchor';
 import cElement from '../../../common/cElement/cElement';
 import setTipped from '../../../common/setTipped';
 import replaceChild from '../../../common/replaceChild';
+import { cdn } from '../../../system/system';
 
 const equipmentIndeces = {
   Gloves: 0,
@@ -29,7 +30,7 @@ export default function updateEquipment(equipment) {
     });
     const img = cElement('img', {
       className: 'tip-dynamic',
-      src: `https://cdn2.fallensword.com/items/${item.b}.gif`,
+      src: `${cdn}items/${item.b}.gif`,
     });
     setTipped(
       `fetchitem.php?item_id=${item.b}&inv_id=${item.a}&p=${playerId()}&extra=10&t=1`,

@@ -4,16 +4,16 @@ import createTable from '../common/cElement/createTable';
 import setTipped from '../common/setTipped';
 import querySelector from '../common/querySelector';
 import isString from '../common/isString';
+import insertElement from '../common/insertElement';
+import { cdn } from '../system/system';
 
 function turducken(...elements) {
   return elements.reduce((outer, inner) => {
     if(isString(inner)) {
       const element = cElement(inner);
-      outer.append(element);
-      return element;
+      return insertElement(outer, element);
     }
-    outer.append(inner);
-    return inner;
+    return insertElement(outer, inner);
   });
 }
 
@@ -50,7 +50,7 @@ function enhancementValueBarTd(enhancement) {
   );
   const barColor = enhancement.value > 100 ? 'blue' : 'purple';
   const img = cElement('img', {
-    src: `https://cdn2.fallensword.com/ui/misc/progress_${barColor}.png`,
+    src: `${cdn}ui/misc/progress_${barColor}.png`,
     height: 10,
     width: Math.min(160, 160 * enhancement.value / 100),
   });
