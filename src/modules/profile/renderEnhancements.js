@@ -20,15 +20,17 @@ function turducken(...elements) {
 
 function enhancementLabelTd(enhancement) {
   const labelSpan = createSpan({
-    className: 'tip-static',
+    className: 'tip-static fshPoint',
     innerText: enhancement.name,
+    style: {
+      cssText: `
+        color: #000;
+        text-wrap: nowrap;
+        text-decoration: underline;
+      `,
+    },
   });
-  labelSpan.style.cssText = `
-    color: #000;
-    text-wrap: nowrap;
-    cursor: pointer;
-    text-decoration: underline;
-  `;
+
   setTipped(
     `<center><b>${enhancement.name}</b></center><br>${enhancement.tooltip}`,
     labelSpan,
@@ -39,12 +41,16 @@ function enhancementLabelTd(enhancement) {
 }
 
 function enhancementValueBarTd(enhancement) {
-  const table = createTable({ className: 'tip-static' });
-  table.style.cssText = `
-    border: 1px solid #333;
-    border-spacing: 0px;
-    width: 162px;
-  `;
+  const table = createTable({
+    className: 'tip-static',
+    style: {
+      cssText: `
+        border: 1px solid #333;
+        border-spacing: 0px;
+        width: 162px;
+      `,
+    }
+  });
   setTipped(
     `<center>Skill Level<br>${enhancement.value}%</center>`,
     table,

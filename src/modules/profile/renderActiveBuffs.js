@@ -52,21 +52,24 @@ function buffImg(buff) {
 }
 
 function buffLevelDiv(buff) {
-  const buffLevel = createDiv({ innerText: `(${buff.level})` });
-  buffLevel.style.fontWeight = 'bold';
+  const buffLevel = createDiv({
+    className: 'fshBold',
+    innerText: `(${buff.level})`,
+  });
   return buffLevel;
 }
 
 function buffElement(buff) {
-  const div = createDiv();
-  div.style.cssText = `
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-    font-size: 10px;
-    text-wrap: nowrap;
-  `;
-  onclick(div, () => deactivateBuff(div, buff));
+  const div = createDiv({
+    className: 'fshBlock fshCenter fshPoint',
+    style: { cssText: `
+      font-size: 10px;
+      text-wrap: nowrap;
+      width: 52px;
+      padding-top: 2px;`,
+    },
+    onclick: () => deactivateBuff(div, buff),
+  });
   div.append(buffImg(buff));
 
   if (getValue('showBuffLevel')) {
@@ -80,12 +83,15 @@ function buffElement(buff) {
 }
 
 export default function renderActiveBuffs(activeBuffs) {
+  activeBuffs.sort((a, b) => a.duration > b.duration);
   const buffListWrapper = createDiv();
-  buffListWrapper.style.cssText = `
-    padding-top: 2px;
-    display: flex;
-    justify-content: space-around;
-  `;
+  if (activeBuffs.length < 6) {
+    buffListWrapper.style.cssText = `
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    `;
+  }
 
   buffListWrapper.append(...activeBuffs.map(buffElement));
   querySelector('#profileRightColumn > div:nth-child(14)')
