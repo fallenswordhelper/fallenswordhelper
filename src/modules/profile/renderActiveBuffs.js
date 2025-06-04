@@ -4,7 +4,6 @@ import daRemoveSkill from '../_dataAccess/daRemoveSkill';
 import { mount } from 'svelte';
 import createDiv from '../common/cElement/createDiv';
 import cElement from '../common/cElement/cElement';
-import onclick from '../common/onclick';
 import setTipped from '../common/setTipped';
 import querySelector from '../common/querySelector';
 import { cdn } from '../system/system';
