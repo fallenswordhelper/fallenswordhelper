@@ -8,7 +8,7 @@ const storageKey = 'fsh_pvpCombat';
 
 let combatPrm = null;
 let newCache = {};
-let prmCache = {};
+const prmCache = {};
 
 const testRecent =
   (sevenDays) =>
@@ -54,6 +54,5 @@ export default async function getCombat(logTime, combatId) {
   const combatCache = await combatPrm;
   if (combatCache[combatId]) return combatCache[combatId];
   if (prmCache[combatId]) return prmCache[combatId];
-  console.log(`getCombat(${logTime}, ${combatId})`);
   return newCombat(logTime, combatId);
 }
