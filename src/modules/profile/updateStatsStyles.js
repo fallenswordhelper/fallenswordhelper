@@ -46,7 +46,7 @@ function updateCharStats(charStats) {
   insertElementBefore(createStyle(statStyle), charStats);
 }
 
-export default function updateStatistics() {
+export default function updateStatsStyles() {
   const charStats = querySelector('#profileLeftColumn table');
   if (charStats) updateCharStats(charStats);
 }
