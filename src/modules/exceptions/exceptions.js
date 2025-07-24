@@ -6,8 +6,10 @@ import isString from '../common/isString';
 const substrings = [
   'attackplayer.min.js',
   'Auction-House-Monitor.user.js',
+  'Cocaine.user.js',
   'Compra-%2526-Venda-de-Recursos-%25E2%259C%2585.user.js',
   'cross-origin frame',
+  'Daily-Quest-Auto-Hunter-All-Creatures-%252B-SE-Searcher-Movement.user.js',
   'Discord-Message-Checks-for-Updates.user.js',
   'dynamically imported module',
   'Fallen-Sword-Auto-Invent.user.js',
