@@ -93,6 +93,7 @@
   function initVars() {
     progressLog = ['Loading...'];
     liveLog = [];
+    // eslint-disable-next-line svelte/prefer-svelte-reactivity
     nowUtc = new Date().setUTCSeconds(0, 0) / 1000;
     lastCheckUtc = getValue('lastModalGuildLogCheck') ?? nowUtc;
     setValue('lastModalGuildLogCheck', nowUtc);
