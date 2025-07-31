@@ -28,6 +28,5 @@ export default function processLadder(logTable) {
   const noteImgs = querySelectorArray(noteSelector, logTable);
   const noteRows = noteImgs.map(closestTr);
   const pvpImgs = noteRows.filter(pvp);
-  console.log(`Found ${pvpImgs.length} PvP Ladder logs`);
   pvpImgs.forEach(saveLastResetTime);
 }
