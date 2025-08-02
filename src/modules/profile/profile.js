@@ -8,7 +8,6 @@ import getValue from '../system/getValue';
 import shouldRender from './bio/shouldRender';
 import doStatTotal from './doStatTotal';
 import ifSelf from './ifSelf/ifSelf';
-import override from './backpack/widget/override';
 
 function doGuildRelationship() {
   if (getValue('showGuildRelationship')) {
@@ -80,5 +79,4 @@ export default function profile() {
   }
   updateDom();
   interceptSubmit();
-  override();
 }

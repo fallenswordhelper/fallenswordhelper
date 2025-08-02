@@ -2,6 +2,7 @@ import executeAll from '../../common/executeAll';
 import runDefault from '../../common/runDefault';
 import getValue from '../../system/getValue';
 import getIsSelf from '../getIsSelf';
+import override from '../backpack/widget/override';
 import storeVL from './storeVL';
 
 async function doFastDebuff() {
@@ -68,6 +69,7 @@ export default function ifSelf() {
       storeVL,
       doNekidBtn,
       doAjaxifySections,
+      override,
     ]);
   }
 }
