@@ -3,11 +3,8 @@ import querySelector from '../../../common/querySelector';
 import setText from '../../../dom/setText';
 import playerName from '../../../common/playerName';
 import addCommas from '../../../system/addCommas';
-import mountActiveBuffs from '../../mountActiveBuffs';
-import mountEnhancements from '../../mountEnhancements';
-
-let buffsApp = 0;
-let enhancementsApp = 0;
+import renderActiveBuffs from '../../renderActiveBuffs';
+import renderEnhancements from '../../renderEnhancements';
 
 function updateStamina(response) {
   const staminaTd = querySelector('span#stat-stamina');
@@ -27,7 +24,7 @@ function updateBaseStats(response) {
       );
       const bonus = response[`bonus_${statName}`];
       setText(
-        `(+${addCommas(bonus)})`,
+        `(+${bonus})`,
         querySelector('.profile-stat-bonus', statTd),
       );
   });
@@ -38,14 +35,6 @@ export default async function updateStatistics() {
   updateBaseStats(response);
   updateStamina(response);
 
-  if (!enhancementsApp) {
-    enhancementsApp = mountEnhancements(response._enhancements);
-  } else {
-    enhancementsApp.updateEnhancements(response._enhancements);
-  }
-
-  if (!buffsApp) {
-    buffsApp = mountActiveBuffs();
-  }
-  buffsApp.updateActiveBuffs(response._skills);
+  renderEnhancements(response._enhancements);
+  renderActiveBuffs(response._skills);
 }
