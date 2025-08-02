@@ -63,7 +63,7 @@ function loadSettings() {
       ctx.checked = getValue(ctx.name);
     }
     else if(ctx.type === 'radio') {
-      ctx.checked = getValue(ctx.name) == ctx.value;
+      ctx.checked = getValue(ctx.name) === ctx.value;
     }
     else {
       ctx.value = getValue(ctx.name);
