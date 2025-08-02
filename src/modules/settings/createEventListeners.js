@@ -31,6 +31,10 @@ function savePref(i) {
     setValue(i.name, Number(i.value));
   } else if (i.type === 'number') {
     saveNumeric(i);
+  } else if (i.type === 'radio') {
+    if (i.checked) {
+      setValue(i.name, i.value);
+    }
   } else {
     setValue(i.name, i.type === 'checkbox' ? i.checked : i.value);
   }

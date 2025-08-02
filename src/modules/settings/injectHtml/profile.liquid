@@ -57,6 +57,45 @@
   label: 'Quick Wear Link',
   tooltipText: 'Adds a quick wear link to the inventory section header.'
 %}
+<tr>
+  <td>Equipping Items:</td>
+  <td>
+    {% render 'settingsLabelledControl',
+    field: 'equipping',
+    textAfter: 'None',
+    value: 'None',
+    type: 'radio',
+    %}
+    {% render 'settingsLabelledControl',
+    field: 'equipping',
+    textAfter: 'Quick Wear Link',
+    value: 'quickWearLink',
+    type: 'radio',
+    %}
+    [&thinsp;
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <div>Adds the quick drink/wear button to the profile page.</div>
+      </div>
+    </div>
+    &thinsp;]
+    {% render 'settingsLabelledControl',
+    field: 'equipping',
+    textAfter: 'AJAXified Backpack',
+    value: 'backpackWidget',
+    type: 'radio',
+    %}
+    [&thinsp;
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <div>Backpack items can be used/equipped without refreshing the page.</div>
+      </div>
+    </div>
+    &thinsp;]
+  </td>
+</tr>
 {% render 'settingsRow',
   field: 'nekidButton',
   label: 'Nekid Button',

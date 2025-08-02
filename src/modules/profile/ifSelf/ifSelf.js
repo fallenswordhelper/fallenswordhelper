@@ -33,8 +33,12 @@ function doComponents() {
 }
 
 function doQuickWearLink() {
-  if (getValue('quickWearLink')) {
+  const equipOption = getValue('equipping');
+  if(equipOption === 'quickWearLink') {
     runDefault(import('./quickWearLink'));
+  }
+  else if(equipOption === 'backpackWidget') {
+    override();
   }
 }
 
@@ -69,7 +73,6 @@ export default function ifSelf() {
       storeVL,
       doNekidBtn,
       doAjaxifySections,
-      override,
     ]);
   }
 }

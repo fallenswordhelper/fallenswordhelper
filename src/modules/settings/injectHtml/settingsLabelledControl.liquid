@@ -1,8 +1,8 @@
-<label for="{{field}}">
+<label>
   {% if textBefore %}
     {{ textBefore }}
   {% endif %}
-  {% render 'settingsControl', field: field, type: type %}
+  {% render 'settingsControl', field: field, type: type, value: value %}
   {% if textAfter %}
     {{ textAfter }}
   {% endif %}

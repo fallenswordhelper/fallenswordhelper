@@ -59,8 +59,15 @@ function loadSettings() {
     '.fsh-settings input[name], .fsh-settings select[name]',
   );
   fields.forEach((ctx) => {
-    if (ctx.type === 'checkbox') ctx.checked = getValue(ctx.name);
-    else ctx.value = getValue(ctx.name);
+    if (ctx.type === 'checkbox') {
+      ctx.checked = getValue(ctx.name);
+    }
+    else if(ctx.type === 'radio') {
+      ctx.checked = getValue(ctx.name) == ctx.value;
+    }
+    else {
+      ctx.value = getValue(ctx.name);
+    }
   });
 }
 
