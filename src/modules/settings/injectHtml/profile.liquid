@@ -67,11 +67,58 @@
   label: 'Select All Link',
   tooltipText: 'Adds a select all link to the backpack section header.'
 %}
-{% render 'settingsRow',
-  field: 'enableQuickDrink',
-  label: 'Enable Quick Drink/Wear',
-  tooltipText: 'Enables the quick drink/wear functionality on the profile page.'
-%}
+<tr>
+  <td>
+    Quick Drink/Wear Options:
+    [&thinsp;
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Quick Dring/Wear Options</span>
+        <br><br>
+        <div>Use or equip items from the backpack without refreshing the page.</div>
+      </div>
+    </div>
+    &thinsp;]:
+  </td>
+  <td>
+    {% render 'settingsLabelledControl',
+    field: 'equipping',
+    textAfter: 'Off',
+    value: 'None',
+    type: 'radio',
+    %}
+    {% render 'settingsLabelledControl',
+    field: 'equipping',
+    textAfter: 'Quick Drink/Wear Links',
+    value: 'enableQuickDrink',
+    type: 'radio',
+    %}
+    [&thinsp;
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <div>Adds a quick link below wearable/usable items.</div>
+      </div>
+    </div>
+    &thinsp;]
+    {% render 'settingsLabelledControl',
+    field: 'equipping',
+    textAfter: 'AJAXify Backpack',
+    value: 'backpackWidget',
+    type: 'radio',
+    %}
+    [&thinsp;
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <div>Backpack items can be used/equipped without refreshing the page.</div>
+      </div>
+    </div>
+    &thinsp;]
+  </td>
+</tr>
+
 {% render 'settingsRow',
   field: 'componentWidgets',
   label: 'Component Widgets',

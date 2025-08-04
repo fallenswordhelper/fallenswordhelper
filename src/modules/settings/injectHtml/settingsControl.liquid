@@ -25,6 +25,12 @@
       name="{{field}}"
       type="color"
     >
+  {% when 'radio; %}
+  <input
+      name="{{field}}"
+      value="{{value}}"
+      type="radio"
+    >
   {% else %}
     <input
       id="{{field}}"

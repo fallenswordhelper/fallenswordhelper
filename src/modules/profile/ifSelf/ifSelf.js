@@ -20,8 +20,12 @@ function doAllyEnemy() {
 }
 
 function doFastWear() {
-  if (getValue('enableQuickDrink')) {
+  const equipOption = getValue('equipping');
+  if(equipOption === 'enableQuickDrink') {
     runDefault(import('../backpack/fastWear'));
+  }
+  else if(equipOption === 'backpackWidget') {
+    runDefault(import('../backpack/widget/override'));
   }
 }
 

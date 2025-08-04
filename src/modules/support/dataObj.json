@@ -218,7 +218,7 @@
   "fastDebuff": false,
   "countAllyEnemy": false,
   "componentWidgets": false,
-  "quickWearLink": false,
+  "equipping": "None",
   "selectAllLink": false,
   "nekidButton": false,
   "ajaxifyProfileSections": false,
