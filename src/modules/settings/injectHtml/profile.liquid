@@ -52,32 +52,59 @@
   tooltipText: 'Fixes the wrapping of the statistics section.',
   unstable: true
 %}
+{% render 'settingsRow',
+  field: 'quickWearLink',
+  label: 'Quick Wear Link',
+  tooltipText: 'Adds a quick wear link to the inventory section header.'
+%}
+{% render 'settingsRow',
+  field: 'nekidButton',
+  label: 'Nekid Button',
+  tooltipText: 'Adds Nekid button below worn items.'
+%}
+{% render 'settingsRow',
+  field: 'selectAllLink',
+  label: 'Select All Link',
+  tooltipText: 'Adds a select all link to the backpack section header.'
+%}
 <tr>
-  <td>Equipping Items:</td>
+  <td>
+    Quick Drink/Wear Options:
+    [&thinsp;
+    <div class="tooltip">
+      ?
+      <div class="tooltiptext">
+        <span class="tooltiptitle">Quick Dring/Wear Options</span>
+        <br><br>
+        <div>Use or equip items from the backpack without refreshing the page.</div>
+      </div>
+    </div>
+    &thinsp;]:
+  </td>
   <td>
     {% render 'settingsLabelledControl',
     field: 'equipping',
-    textAfter: 'None',
+    textAfter: 'Off',
     value: 'None',
     type: 'radio',
     %}
     {% render 'settingsLabelledControl',
     field: 'equipping',
-    textAfter: 'Quick Wear Link',
-    value: 'quickWearLink',
+    textAfter: 'Quick Drink/Wear Links',
+    value: 'enableQuickDrink',
     type: 'radio',
     %}
     [&thinsp;
     <div class="tooltip">
       ?
       <div class="tooltiptext">
-        <div>Adds the quick drink/wear button to the profile page.</div>
+        <div>Adds a quick link below wearable/usable items.</div>
       </div>
     </div>
     &thinsp;]
     {% render 'settingsLabelledControl',
     field: 'equipping',
-    textAfter: 'AJAXified Backpack',
+    textAfter: 'AJAXify Backpack',
     value: 'backpackWidget',
     type: 'radio',
     %}
@@ -91,21 +118,7 @@
     &thinsp;]
   </td>
 </tr>
-{% render 'settingsRow',
-  field: 'nekidButton',
-  label: 'Nekid Button',
-  tooltipText: 'Adds Nekid button below worn items.'
-%}
-{% render 'settingsRow',
-  field: 'selectAllLink',
-  label: 'Select All Link',
-  tooltipText: 'Adds a select all link to the backpack section header.'
-%}
-{% render 'settingsRow',
-  field: 'enableQuickDrink',
-  label: 'Enable Quick Drink/Wear',
-  tooltipText: 'Enables the quick drink/wear functionality on the profile page.'
-%}
+
 {% render 'settingsRow',
   field: 'componentWidgets',
   label: 'Component Widgets',

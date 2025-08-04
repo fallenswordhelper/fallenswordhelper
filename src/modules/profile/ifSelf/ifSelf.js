@@ -2,7 +2,6 @@ import executeAll from '../../common/executeAll';
 import runDefault from '../../common/runDefault';
 import getValue from '../../system/getValue';
 import getIsSelf from '../getIsSelf';
-import override from '../backpack/widget/override';
 import storeVL from './storeVL';
 
 async function doFastDebuff() {
@@ -21,8 +20,12 @@ function doAllyEnemy() {
 }
 
 function doFastWear() {
-  if (getValue('enableQuickDrink')) {
+  const equipOption = getValue('equipping');
+  if(equipOption === 'enableQuickDrink') {
     runDefault(import('../backpack/fastWear'));
+  }
+  else if(equipOption === 'backpackWidget') {
+    runDefault(import('../backpack/widget/override'));
   }
 }
 
@@ -33,12 +36,8 @@ function doComponents() {
 }
 
 function doQuickWearLink() {
-  const equipOption = getValue('equipping');
-  if(equipOption === 'quickWearLink') {
+  if (getValue('quickWearLink')) {
     runDefault(import('./quickWearLink'));
-  }
-  else if(equipOption === 'backpackWidget') {
-    override();
   }
 }
 
