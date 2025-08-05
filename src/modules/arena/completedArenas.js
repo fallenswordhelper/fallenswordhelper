@@ -6,7 +6,8 @@ import getText from '../common/getText';
 import querySelector from '../common/querySelector';
 import indexAjaxDoc from '../ajax/indexAjaxDoc';
 
-let pageId = querySelector('#pCC #page').value;
+const pageInputValue = () => Number(querySelector('#pCC #page').value);
+let pageId = pageInputValue();
 
 const lastPage = getText(
     querySelector('#pCC input[value=Go]').parentNode.previousElementSibling,
@@ -82,7 +83,7 @@ function createButton(value, onclick) {
 function createButtonsTd() {
   const inputTd = cElement('td');
   inputTd.append(
-    createButton('Go', () => gotoPage(querySelector('#page').value)), ' ',
+    createButton('Go', () => gotoPage(pageInputValue())),
     createButton('<<', gotoFirstPage), ' ',
     createButton('<', gotoPrevPage), ' ',
     createButton('>', gotoNextPage), ' ',
