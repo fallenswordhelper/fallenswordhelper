@@ -48,6 +48,8 @@ const prepareForStorage = (testDedupe) => ({
 });
 
 export default function mergeSeData(fshSeLog, data) {
+  const bugged = true;
+  if (bugged) return;
   const serverTime = Number(data.t.split(' ')[1]);
   const mobs = processSeData(data, serverTime);
   const oldMobs = processOldMobs(fshSeLog);
