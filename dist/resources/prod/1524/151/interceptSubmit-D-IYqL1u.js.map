@@ -1,1 +1,0 @@
-{"version":3,"file":"interceptSubmit-D-IYqL1u.js","sources":["src/modules/common/interceptSubmit.js"],"sourcesContent":null,"names":["handleSubmit","e","preventDefault","formToUrl","interceptSubmit","target","on","pcc"],"mappings":";;AAIA,SAASA,EAAaC,GACpBA,EAAEC,iBACFC,EAAUF,EACZ,CAEe,SAASG,EAAgBC,GACtCC,EAAGD,GAAUE,IAAO,SAAUP,EAChC"}
