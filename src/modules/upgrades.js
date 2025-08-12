@@ -131,6 +131,8 @@ function saveUpgradeValue(upgrade, key) {
 }
 
 export default function upgrades() {
+  const bugged = true;
+  if (bugged) return;
   playerUpgrades = querySelectorArray(
     '#pCC > table:last-of-type > tbody > ' +
       'tr:nth-child(even) > td:first-child',
