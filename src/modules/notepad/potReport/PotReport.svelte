@@ -35,7 +35,7 @@
   let currentInventory = [];
   let renderMap = $state([]);
 
-  const composed = ({ t }) => t === 15;
+  const composed = ({ b }) => b === 13699;
   const countBg = (count) =>
     perc2color(count, options.minpoint, options.maxpoint);
   const ignored = ({ ignore }) => !ignore;
