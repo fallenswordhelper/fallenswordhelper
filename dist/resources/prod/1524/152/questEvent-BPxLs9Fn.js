@@ -1,3 +1,0 @@
-import{bf as t,s}from"./calfSystem-BlPuMQGT.js"
-function e(s,e){return`<div class="parent"><a href="${t}quests&subcmd=view&quest_id=${s}" class="fshTempleOne" data-tooltip="Search for this quest on the Ultimate Fallen Sword Guide" target="_blank"></a>&nbsp;<a href="https://wiki.fallensword.com/index.php?title=${e.replace(/ /g,"_")}" class="fshWiki" data-tooltip="Search for this quest on the Wiki" target="_blank"></a></div>`}function a(t){return e=>{e.target.classList.contains("fshTempleOne")&&s(t,"UFSG Link"),e.target.classList.contains("fshWiki")&&s(t,"Wiki Link")}}export{e as g,a as q}
-//# sourceMappingURL=questEvent-BPxLs9Fn.js.map
