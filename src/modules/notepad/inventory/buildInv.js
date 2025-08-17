@@ -1,7 +1,6 @@
 import daGuildFetchInv from '../../_dataAccess/daGuildFetchInv';
 import daGuildReport from '../../_dataAccess/daGuildReport';
 import daLoadInventory from '../../_dataAccess/daLoadInventory';
-import basicItem from '../../_dataAccess/export/basicItem';
 import enumFolders from '../../_dataAccess/export/enumFolders';
 import flattenItems from '../../_dataAccess/export/flattenItems';
 import guildStore from '../../_dataAccess/export/guildStore';
@@ -34,31 +33,15 @@ async function doInventory(fn) {
   }
 }
 
-const injectStats = (anInventory) =>
-  function updateStats(o) {
-    const lookup = anInventory?.find(({ inv_id: invId }) => invId === o.inv_id);
-    return {
-      ...o,
-      ...(lookup?.stats && {
-        stats: {
-          ...o.stats,
-          armor: lookup.stats.armor,
-          attack: lookup.stats.attack,
-          damage: lookup.stats.damage,
-          defense: lookup.stats.defense,
-          hp: lookup.stats.hp,
-          set_name: lookup.stats.set_name ?? '',
-        },
-      }),
-    };
-  };
+const decorateItems = (combined) => (o) => {
+  const thisObj = combined.find((p) => p.a === o.inv_id);
+  return { ...o, ...(thisObj?.n && { item_name: thisObj.n }) };
+};
 
-const buildItemArray = (invItems, combined) =>
-  combined.map(basicItem).map(injectStats(invItems));
 const equipmentMap = (o) => ({ ...o, equipped: true, folder_id: -2 });
 const playerInv = (thisBackpack, invItems, combined) => ({
   folders: enumFolders(thisBackpack),
-  items: buildItemArray(invItems, combined),
+  items: invItems.map(decorateItems(combined)),
   player_id: playerId(),
 });
 
@@ -77,7 +60,7 @@ async function doInvMgr() {
 const gsMap = (o) => ({ ...o, player: { id: -1 } });
 const guildInv = (invItems, combined) => ({
   current_player_id: playerId(),
-  items: buildItemArray(invItems, combined),
+  items: invItems.map(decorateItems(combined)),
   guild_id: currentGuildId(),
 });
 
