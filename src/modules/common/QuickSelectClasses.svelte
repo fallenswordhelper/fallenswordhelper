@@ -1,4 +1,5 @@
 <script>
+  import inventory from '../_dataAccess/export/inventory';
   import calf from '../support/calf';
   import defaults from '../support/dataObj.json';
   import getValue from '../system/getValue';
@@ -6,8 +7,8 @@
   import createStyle from './cElement/createStyle';
   import clickThis from './clickThis';
   import entries from './entries';
+  import fromEntries from './fromEntries';
   import insertElement from './insertElement';
-  import invWithStById from './invWithStById';
   import LinkBtn from './LinkBtn.svelte';
   import numberIsNaN from './numberIsNaN';
   import partial from './partial';
@@ -28,7 +29,10 @@
   howMany = 'all';
 
   async function getInv() {
-    inv = await invWithStById();
+    const myData = await inventory();
+    if (myData?.items) {
+      inv = { items: fromEntries(myData?.items.map((o) => [o.inv_id, o])) };
+    }
   }
 
   function getItemList() {
