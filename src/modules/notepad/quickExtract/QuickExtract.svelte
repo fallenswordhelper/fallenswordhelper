@@ -1,9 +1,9 @@
 <script>
   import daUseItem from '../../_dataAccess/daUseItem';
+  import inventory from '../../_dataAccess/export/inventory';
   import sendEvent from '../../analytics/sendEvent';
   import all from '../../common/all';
   import alpha from '../../common/alpha';
-  import invWithSt from '../../common/invWithSt';
   import isArray from '../../common/isArray';
   import SelectInST from '../../common/SelectInST.svelte';
   import confirm from '../../modal/confirm.svelte';
@@ -64,7 +64,7 @@
   }
 
   async function getInv() {
-    const inv = await invWithSt();
+    const inv = await inventory();
     playerId = inv?.player_id;
     extractable = inv?.items?.filter(isExtractable).sort(byName);
     updateExtract();
