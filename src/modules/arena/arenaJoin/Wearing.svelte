@@ -9,7 +9,6 @@
   import querySelectorArray from '../../common/querySelectorArray';
   import setText from '../../dom/setText';
   import createDocument from '../../system/createDocument';
-  import WearingGrid from './WearingGrid.svelte';
 
   let equipment = $state(0);
   let combatSets = $state(0);
@@ -55,12 +54,11 @@
         Inventory
         <select bind:value={selected} onchange={handleChange}>
           {#each combatSets as { id, name } (id)}
-            <option value={id}>{name}</option>
+            <option value={id} disabled={id === -1 && selected !== -1}>{name}</option>
           {/each}
         </select>
       </div>
     </div>
-    <WearingGrid {equipment} />
   </div>
 {/await}
 
