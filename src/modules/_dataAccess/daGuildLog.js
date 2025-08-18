@@ -117,7 +117,7 @@ async function fallback() {
   return mapped;
 }
 
-async function getGuildLog(logId = -1, direction = 1, acc = []) {
+async function getGuildLog(logId = -1, direction = 0, acc = []) {
   const limit = 1000;
   const thisChunk = await log(logId, direction, limit);
   if (!thisChunk?.s) return serverError();
@@ -126,7 +126,8 @@ async function getGuildLog(logId = -1, direction = 1, acc = []) {
   if (thisChunk.r.logs.length !== limit) {
     return newAcc;
   }
-  return getGuildLog(thisChunk.r.logs[0].id, 0, newAcc);
+  const lastIdx = thisChunk.r.logs.length - 1;
+  return getGuildLog(thisChunk.r.logs[lastIdx].id, 1, newAcc);
 }
 
 export default function daGuildLog() {
