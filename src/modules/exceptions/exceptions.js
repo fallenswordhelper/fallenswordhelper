@@ -44,6 +44,7 @@ const substrings = [
   'Permission denied to access object',
   'play method is not allowed',
   'Quick-Kill.user.js',
+  'SE-Searcher-Replay-Fix.user.js',
   'se-searcher-v2-draft.user.js',
   'Superelite-searcher.user.js',
   'Titan-3.0.user.js',
