@@ -1,5 +1,6 @@
 import sendEvent from './analytics/sendEvent';
 import createSpan from './common/cElement/createSpan';
+import closestTr from './common/closestTr';
 import getElementById from './common/getElementById';
 import getText from './common/getText';
 import insertElement from './common/insertElement';
@@ -7,6 +8,7 @@ import insertTextBeforeEnd from './common/insertTextBeforeEnd';
 import numberIsNaN from './common/numberIsNaN';
 import on from './common/on';
 import partial from './common/partial';
+import querySelector from './common/querySelector';
 import querySelectorArray from './common/querySelectorArray';
 import regExpFirstCapture from './common/regExpFirstCapture';
 import setInnerHtml from './dom/setInnerHtml';
@@ -31,11 +33,6 @@ function findText(text) {
 function getInputCell(label) {
   return findText(label).nextElementSibling.nextElementSibling
     .nextElementSibling;
-}
-
-function getInputElement(el) {
-  return el.nextElementSibling.nextElementSibling.nextElementSibling.children[0]
-    .rows[0].cells[0].children[0];
 }
 
 function getRe(type, label) {
@@ -104,7 +101,7 @@ function updateStamCount(type, upgrade, evt) {
 function injectUpgradeHelper(type) {
   const upgrade = findText(type);
   on(
-    getInputElement(upgrade),
+    querySelector('input[name="quantity"]', closestTr(upgrade)),
     'keyup',
     partial(updateStamCount, type, upgrade),
   );

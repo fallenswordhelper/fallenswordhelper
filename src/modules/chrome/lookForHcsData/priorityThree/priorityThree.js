@@ -8,7 +8,6 @@ import injectLevelupCalculator from '../../calcs/injectLevelupCalculator';
 import injectStaminaCalculator from '../../calcs/injectStaminaCalculator';
 import dailyQuest from '../../dailyQuest';
 import fsbox from '../../fsbox/fsbox';
-import injectServerNode from '../../injectServerNode';
 import interceptQuickBuff from '../../interceptQuickBuff';
 import messaging from '../../messaging/messaging';
 import injectComposeAlert from '../../notification/injectComposeAlert';
@@ -75,7 +74,6 @@ const p3functions = [
   fsbox,
   interceptQuickBuff,
   injectJoinAllLink,
-  injectServerNode,
   scoutTowerLink,
   guildActivity,
   seTracker,

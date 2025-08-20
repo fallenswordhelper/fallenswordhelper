@@ -31,7 +31,10 @@ const ctx = await esbuild.context({
   },
   entryPoints: [pathToFile('src/calfSystem.js')],
   format: 'esm',
-  logOverride: { 'suspicious-nullish-coalescing': 'silent' },
+  logOverride: {
+    'invalid-source-mappings': 'silent',
+    'suspicious-nullish-coalescing': 'silent',
+  },
   minify: false,
   outdir: pathToFile(calfPath),
   plugins: [liquidPlugin, sveltePlugin()],

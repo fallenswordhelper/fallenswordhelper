@@ -7,7 +7,8 @@ import { get, set } from '../../system/idb';
 const storageKey = 'fsh_pvpCombat';
 
 let combatPrm = null;
-let newCache = 0;
+let newCache = {};
+const prmCache = {};
 
 const testRecent =
   (sevenDays) =>
@@ -32,8 +33,12 @@ async function prepareCache() {
 }
 
 async function newCombat(logTime, combatId) {
-  const thisCombat = await daViewCombat(combatId);
-  if (!thisCombat?.s) return;
+  prmCache[combatId] = daViewCombat(combatId);
+  const thisCombat = await prmCache[combatId];
+  if (!thisCombat?.s) {
+    delete prmCache[combatId];
+    return;
+  }
   newCache[combatId] = {
     ...thisCombat,
     logTime,
@@ -47,6 +52,7 @@ export default async function getCombat(logTime, combatId) {
     combatPrm = prepareCache();
   }
   const combatCache = await combatPrm;
-  if (combatCache[combatId]?.logTime) return combatCache[combatId];
+  if (combatCache[combatId]) return combatCache[combatId];
+  if (prmCache[combatId]) return prmCache[combatId];
   return newCombat(logTime, combatId);
 }

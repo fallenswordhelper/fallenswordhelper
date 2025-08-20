@@ -45,6 +45,8 @@ async function backgroundPoll() {
 function setTrackerPref(set, value) {
   trackerPref = value;
   set(trackerPref);
+  const bugged = true;
+  if (bugged) return;
   if (trackerPref && !bgRunning) backgroundPoll();
 }
 

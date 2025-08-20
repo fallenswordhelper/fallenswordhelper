@@ -76,6 +76,14 @@ export default async function getRollupConfig(env) {
       liquid(),
       terser({ output: { beautify: false, semicolons: false } }),
     ],
+    onwarn: (log, handler) => {
+      if (
+        log.code === 'CIRCULAR_DEPENDENCY' &&
+        log.message.includes('node_modules/svelte/src')
+      )
+        return;
+      handler(log);
+    },
     treeshake: true,
   };
 }
