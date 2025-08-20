@@ -15,7 +15,7 @@
     const response = await potion.promise;
     if (response?.s) {
       dynamicAlert(
-        `You successfully purchased ${potion.count} "${response.r[0].n}"`,
+          `You successfully purchased ${potion.count} potion${potion.count > 1 ? 's' : ''}`,
       );
     } else if (response?.e) {
       dynamicAlert(response.e.message);
