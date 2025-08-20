@@ -52,7 +52,7 @@
           >
             PM
           </button>
-          <a href="{playerIdUrl}menuItem.playerId">{menuItem.playerName}</a>
+          <a href="{playerIdUrl}{menuItem.playerId}">{menuItem.playerName}</a>
         {/if}
         {#if menuItem.beta}<sup class="fshRed">beta</sup>{/if}
       </li>
