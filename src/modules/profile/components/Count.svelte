@@ -6,8 +6,8 @@
   import CountRow from './CountRow.svelte';
   import getAsyncData from './getAsyncData';
   import entries from '../../common/entries';
-
   const { dispatchDelType } = $props();
+  import getVcode from './getVcode';
 
   function objectToMap(obj) {
     return new SvelteMap(entries(obj));
@@ -29,9 +29,16 @@
   }
 
   async function getComponents() {
-    const components = await getAsyncData(daComponents);
-    const rollup = rollupComponents(components.r);
-    return { rollup, maxComp: components.h?.p.find(({ k }) => k === 56)?.v };
+    const response = await getAsyncData(daComponents);
+    const maxComp = response.h?.p.find(({ k }) => k === 56)?.v;
+    const components = await response.r.reduce(async (c, d) => {
+      const accumulator = await c;
+      const v = await getVcode(d.b);
+      accumulator.push({...d, v});
+      return accumulator;
+    }, Promise.resolve([]));
+    const rollup = rollupComponents(components);
+    return { rollup, maxComp };
   }
 </script>
 
