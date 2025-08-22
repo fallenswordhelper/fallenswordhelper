@@ -10,6 +10,7 @@ function startApp() {
 }
 
 export default function arenaJoin() {
+  if (!pcc()) return;
   const tabs = getElementById('arenaTypeTabs');
   if (tabs) {
     arena();
