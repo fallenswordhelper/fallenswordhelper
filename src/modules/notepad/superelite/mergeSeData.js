@@ -1,57 +1,62 @@
 import fromEntries from '../../common/fromEntries';
+import alpha from '../../common/alpha';
 import uniq from '../../common/uniq';
 import processOldMobs from './processOldMobs';
 
 const merge = (a) => a.join('|');
+const unmerge = (s) => s.split('|');
 
-const processSeData = (data, serverTime) =>
-  data.r.map((o) => [
-    serverTime - o.time,
-    o.creature.name.replace(' (Super Elite)', '').replaceAll(' ', '_'),
-    o.realm.realm.id,
-    o.realm.realm.name,
-  ]);
+function processLogEntry(entry) {
+  const { time, creature, playerId, playerName, location, drop } = entry;
+  const locationMatches = location.match(/^(.*?)\s(\(\d+, \d+\))$/);
+  return [
+    time,
+    creature.replace(' (Super Elite)', '').replaceAll(' ', '_'),
+    playerId,
+    playerName,
+    locationMatches ? locationMatches[1] : 'realm unknown',
+    locationMatches ? locationMatches[2] : 'coordinates unknown',
+    drop,
+  ];
+}
 
 const dedupeMobData = (mobs, oldMobs) =>
   uniq(mobs.map(merge).concat(oldMobs.map(merge)))
-    .map((s) => s.split('|'))
-    .map(([time, mob, realmId, location]) => [
+    .map(unmerge)
+    .map(([time, mob, playerId, playerName, realm, coord, drop]) => [
       Number(time),
       mob,
-      Number(realmId),
-      location,
+      Number(playerId),
+      playerName,
+      realm,
+      coord,
+      drop,
     ])
     .sort(([ta], [tb]) => tb - ta);
 
-const formatMobs = (testDedupe) =>
+const formatMobs = (realms) => (testDedupe) =>
   fromEntries(
     uniq(testDedupe.map(([, mob]) => mob)).map((mob) => [
       mob,
       testDedupe
         .filter(([, mb]) => mb === mob)
-        .map(([time, , realmId]) => [time, realmId])
+        .map(([time, , playerId, playerName, realm, coord, drop]) => [
+          time,
+          playerId,
+          playerName,
+          realms.findIndex((r) => r === realm),
+          coord,
+          drop,
+        ])
         .slice(0, 10),
     ]),
   );
 
-const formatLocations = (testDedupe) =>
-  fromEntries(
-    uniq(testDedupe.map(([, , realmId]) => realmId)).map((realmId) => [
-      realmId,
-      testDedupe.find(([, , rid]) => rid === realmId)[3],
-    ]),
-  );
-
-const prepareForStorage = (testDedupe) => ({
-  se: formatMobs(testDedupe),
-  loc: formatLocations(testDedupe),
-});
-
 export default function mergeSeData(fshSeLog, data) {
-  const serverTime = Number(data.t.split(' ')[1]);
-  const mobs = processSeData(data, serverTime);
+  const mobs = data.map(processLogEntry);
   const oldMobs = processOldMobs(fshSeLog);
   const testDedupe = dedupeMobData(mobs, oldMobs);
-  const clean = prepareForStorage(testDedupe);
-  return { lastUpdate: serverTime, ...clean };
+  const realms = uniq(testDedupe.map(([, , , , realm]) => realm)).sort(alpha);
+  const seData = formatMobs(realms)(testDedupe);
+  return { seData, realms };
 }

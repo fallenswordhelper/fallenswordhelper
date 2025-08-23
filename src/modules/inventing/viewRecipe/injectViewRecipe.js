@@ -2,17 +2,11 @@ import createAnchor from '../../common/cElement/createAnchor';
 import insertElement from '../../common/insertElement';
 import insertElementBefore from '../../common/insertElementBefore';
 import interceptSubmit from '../../common/interceptSubmit';
+import itemIdFromImg from '../../common/itemIdFromImg';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
-import regExpFirstCapture from '../../common/regExpFirstCapture';
 import xPath from '../../common/xPath';
 import { defSubcmd, guideUrl } from '../../support/constants';
-
-function getItemId(el) {
-  if (!el) return;
-  const match = regExpFirstCapture(/\/items\/(?<id>\d+)\.gif/, el.src);
-  if (match) return match;
-}
 
 function guideItemHref(itemId) {
   return `${guideUrl}items${defSubcmd}view&item_id=${itemId}`;
@@ -26,10 +20,8 @@ function makeGuideItemAnchor(itemId) {
 }
 
 function wrapInGuideLink(el, source) {
-  const itemId = getItemId(source);
-  if (!itemId) {
-    return;
-  }
+  const itemId = itemIdFromImg(source);
+  if (!itemId) return;
   const myLink = makeGuideItemAnchor(itemId);
   insertElementBefore(myLink, el);
   insertElement(myLink, el);
