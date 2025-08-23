@@ -2,14 +2,17 @@ import entries from '../../common/entries';
 import isArray from '../../common/isArray';
 
 export default function processOldMobs(fshSeLog) {
-  return entries(fshSeLog?.se ?? {}).flatMap(([mob, val]) =>
+  return entries(fshSeLog?.seData ?? {}).flatMap(([mob, val]) =>
     isArray(val)
-      ? val.map(([time, realmId]) => [
+      ? val.map(([time, playerId, playerName, realmId, coord, drop]) => [
           time,
           mob,
-          realmId,
-          fshSeLog?.loc[realmId],
+          playerId,
+          playerName,
+          fshSeLog?.realms[realmId],
+          coord,
+          drop,
         ])
-      : [[val, mob.replaceAll(' ', '_'), 0, '']],
+      : [[val, mob.replaceAll(' ', '_'), 0, '', '', '', '']],
   );
 }
