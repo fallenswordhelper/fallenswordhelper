@@ -8,11 +8,10 @@ import onclick from '../common/onclick';
 import querySelectorArray from '../common/querySelectorArray';
 import regExpExec from '../common/regExpExec';
 import regExpFirstCapture from '../common/regExpFirstCapture';
-import { guideUrl } from '../support/constants';
+import { guideUrl, monsterIdRe } from '../support/constants';
 import { pcc } from '../support/layout';
 
 const titanSpottedRe = /(?<a> titan has been spotted in )(?<b>[^!]+)(?<c>!)/;
-const monsterIdRe = /creatures\/(\d+)[A-Za-z0-9]{32}\.png/;
 const realmSearchHref = (name) =>
   `${guideUrl}realms&search_name=${encodeURIComponent(name)}`;
 
