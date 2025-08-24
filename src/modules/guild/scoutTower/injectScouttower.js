@@ -104,7 +104,7 @@ export default function injectScouttower() {
   if (!titanTables?.length) return;
   injectScouttowerBuffLinks(titanTables);
   const tabName = getUrlParameter('tab');
-  let titanRows =
+  const titanRows =
     tabName === 'completed'
       ? makeCompletedRows(titanTables)
       : makeTitanRows(titanTables);
