@@ -52,6 +52,7 @@ export const playerIDRE = /player_id=(?<playerId>\d+)/;
 export const stamRe =
   /Stamina:<\/td><td>(?<stam>\d{1,12}) \/ (?<max>\d{1,12})<\/td>/;
 export const vlRe = /VL:.+?(?<vl>\d+)/;
+export const monsterIdRe = /creatures\/(\d+)[A-Za-z0-9]{32}\.png/;
 
 export const defenderMultiplier = 0.2;
 

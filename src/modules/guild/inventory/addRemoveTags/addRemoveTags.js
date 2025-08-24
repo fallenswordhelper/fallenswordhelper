@@ -12,10 +12,10 @@ import calf from '../../../support/calf';
 import { pcc } from '../../../support/layout';
 import clickHandler from './clickHandler';
 import interceptSubmit from './interceptSubmit';
+import itemIdFromImg from '../../../common/itemIdFromImg';
 
 const isAdd = () => calf.subcmd2 === 'addtags';
-const getItemId = (cb) =>
-  querySelector('img', closestTr(cb)).src.split('/').at(-1).split('.')[0];
+const getItemId = (cb) => itemIdFromImg(querySelector('img', closestTr(cb)));
 const getItemName = (cb) => getTextTrim(closestTr(cb).cells[2]);
 const btn = (className, text) =>
   `<button class="${className}" type="button">${text}</button>`;

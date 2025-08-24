@@ -54,6 +54,8 @@ function getNewTitans(oldTitans, titanRows) {
 }
 
 export default async function titanTracker(titanTables, titanRows) {
+  const bugged = 1;
+  if (bugged) return;
   const newTitans = getNewTitans(await get('fsh_titans'), titanRows);
   if (titanTables[0].rows.length > 5) {
     startTracker(titanTables[0], newTitans, titanRows);

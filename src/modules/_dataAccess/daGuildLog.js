@@ -2,11 +2,12 @@ import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import log from '../app/guild/log';
 import getText from '../common/getText';
 import getTextTrim from '../common/getTextTrim';
+import playerIdFromAnchor from '../common/playerIdFromAnchor';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
 import regExpExec from '../common/regExpExec';
 import regExpFirstCapture from '../common/regExpFirstCapture';
-import { guildRE, playerIDRE } from '../support/constants';
+import { guildRE } from '../support/constants';
 import { publish } from '../support/pubsub';
 import getValue from '../system/getValue';
 import parseDateAsTimestamp from '../system/parseDateAsTimestamp';
@@ -53,7 +54,7 @@ const replaceAnchor = (match, offset) => {
 };
 
 function toObject([anchor]) {
-  const playerId = regExpFirstCapture(playerIDRE, anchor);
+  const playerId = playerIdFromAnchor(anchor);
   if (playerId) {
     return {
       data: {

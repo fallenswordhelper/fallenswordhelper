@@ -4,12 +4,12 @@ import currentGuildId from '../../common/currentGuildId';
 import getTextTrim from '../../common/getTextTrim';
 import lastActivity from '../../common/lastActivity';
 import partial from '../../common/partial';
+import playerIdFromAnchor from '../../common/playerIdFromAnchor';
 import querySelectorArray from '../../common/querySelectorArray';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import regExpGroups from '../../common/regExpGroups';
 import uniq from '../../common/uniq';
 import {
-  playerIDRE,
   playerLinkSelector,
   stamRe,
   vlRe,
@@ -18,14 +18,13 @@ import createDocument from '../../system/createDocument';
 
 const guildXp = (el) =>
   Number(getTextTrim(closestTr(el)?.cells[4])?.replaceAll(',', ''));
-const playerId = (el) => Number(regExpFirstCapture(playerIDRE, el.href));
 const rank = (el) => getTextTrim(closestTr(el)?.cells[3]);
 const vl = (tipped) => Number(regExpFirstCapture(vlRe, tipped));
 
 function fromElement(el) {
   return {
     guild_xp: guildXp(el),
-    id: playerId(el),
+    id: playerIdFromAnchor(el),
     name: getTextTrim(el),
     rank: rank(el),
   };

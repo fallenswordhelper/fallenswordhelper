@@ -6,6 +6,7 @@ import { pcc } from '../support/layout';
 import mountGuildLog from './guildLog/mountGuildLog.svelte';
 import mountPotReport from './potReport/mountPotReport.svelte';
 import mountQuickExtract from './quickExtract/mountQuickExtract.svelte';
+import mountSuperElite from './superelite/mountSuperElite.svelte';
 import mountWhosGotWhat from './whosGotWhat/mountWhosGotWhat.svelte';
 
 let index = 0;
@@ -27,8 +28,9 @@ function addBtn(textContent, btnHdl) {
 export default function blank() {
   if (!defineUserIsDev || location.search !== '?cmd=notepad&blank=1') return;
   addBtn('Alert', alertHdl);
-  addBtn('WhosGotWhat', mountWhosGotWhat);
-  addBtn('Quick Extract', mountQuickExtract);
   addBtn('Guild Log', mountGuildLog);
   addBtn('Pot Report', mountPotReport);
+  addBtn('Quick Extract', mountQuickExtract);
+  addBtn('SE Tracker', mountSuperElite)
+  addBtn('WhosGotWhat', mountWhosGotWhat);
 }
