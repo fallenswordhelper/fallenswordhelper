@@ -29,8 +29,7 @@ function startApp(target) {
 }
 
 export default function optInWidget() {
-  if (getValue('optInOnLadderPage')) {
-    const target = querySelector('#pCC table tbody');
-    startApp(target);
-  }
+  if (!getValue('optInOnLadderPage')) return;
+  const target = querySelector('#pCC table tbody');
+  if (target) startApp(target);
 }
