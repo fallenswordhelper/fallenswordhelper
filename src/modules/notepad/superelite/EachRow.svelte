@@ -2,6 +2,7 @@
   import { slide } from 'svelte/transition';
   import sendEvent from '../../analytics/sendEvent';
   import formatUtcTimestamp from '../../common/formatUtcTimestamp';
+  import { defSubcmd, guideUrl } from '../../support/constants';
 
   let { entry } = $props();
   let isOpen = $state(false);
@@ -23,9 +24,27 @@
     </button>
   {/if}
 </div>
-<div>{entry[0].replaceAll('_', ' ')}</div>
+<div>
+  {#if entry[4] > 0}
+    <a
+      href="{guideUrl}creatures{defSubcmd}view&creature_id={entry[4]}"
+      target="_blank"
+    >
+      {entry[0].replaceAll('_', ' ')}
+    </a>
+  {:else}
+    {entry[0].replaceAll('_', ' ')}
+  {/if}
+</div>
 <div class="last-kill">{formatUtcTimestamp(entry[1])}</div>
-<div>{entry[2]}</div>
+<div>
+  <a
+    href="{guideUrl}realms&search_name={encodeURIComponent(entry[2])}"
+    target="_blank"
+  >
+    {entry[2]}
+  </a>
+</div>
 
 {#if isOpen}
   <div class="wide" transition:slide={{ duration: 300 }}>
@@ -33,7 +52,14 @@
       <div></div>
       <div></div>
       <div class="last-kill">{formatUtcTimestamp(val)}</div>
-      <div>{loc}</div>
+      <div>
+        <a
+          href="{guideUrl}realms&search_name={encodeURIComponent(loc)}"
+          target="_blank"
+        >
+          {loc}
+        </a>
+      </div>
     {/each}
   </div>
 {/if}
@@ -51,6 +77,9 @@
     font-size: inherit;
     line-height: 1;
     padding: 0;
+  }
+  a {
+    color: #383838;
   }
   .last-kill {
     color: maroon;
