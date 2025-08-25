@@ -1,5 +1,5 @@
 import sendEvent from "../analytics/sendEvent";
-import { guideUrl, monsterIdRe } from "../support/constants";
+import { defSubcmd, guideUrl, monsterIdRe } from "../support/constants";
 import createAnchor from "./cElement/createAnchor";
 import insertElement from "./insertElement";
 import insertElementBefore from "./insertElementBefore";
@@ -8,7 +8,7 @@ import regExpFirstCapture from "./regExpFirstCapture";
 
 export function ufsgMonsterLink(eventSource, monsterId, anchor) {
   const thisAnchor = anchor ?? createAnchor({});
-  thisAnchor.href = `${guideUrl}creatures&subcmd=view&creature_id=${monsterId}`;
+  thisAnchor.href = `${guideUrl}creatures${defSubcmd}view&creature_id=${monsterId}`;
   thisAnchor.target = '_blank';
   onclick(thisAnchor, () => sendEvent(eventSource, 'Ufsg link'));
   return thisAnchor;

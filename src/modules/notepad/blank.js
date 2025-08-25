@@ -1,8 +1,11 @@
 import dynamicAlert from '../alert/dynamicAlert';
 import createButton from '../common/cElement/createButton';
+import createDiv from '../common/cElement/createDiv';
 import insertElement from '../common/insertElement';
 import onclick from '../common/onclick';
 import { pcc } from '../support/layout';
+import { realtimeSecs } from '../support/now';
+import { get as idbget } from '../system/idb';
 import mountGuildLog from './guildLog/mountGuildLog.svelte';
 import mountPotReport from './potReport/mountPotReport.svelte';
 import mountQuickExtract from './quickExtract/mountQuickExtract.svelte';
@@ -25,12 +28,33 @@ function addBtn(textContent, btnHdl) {
   onclick(btn, btnHdl);
 }
 
+const getDelay = (data) =>
+  Math.max(0, 600 - (realtimeSecs() - (data?.lastUpdate ?? 0)));
+
+async function nextSELogRefresh() {
+  const fshSeLog = await idbget('fsh_seLog');
+  insertElement(
+    pcc(),
+    createDiv({
+      style: { paddingTop: '8px' },
+      textContent: `Next SE Log refresh: ${getDelay(fshSeLog)}s`,
+    }),
+  );
+}
+
 export default function blank() {
-  if (!defineUserIsDev || location.search !== '?cmd=notepad&blank=1') return;
+  if (
+    !defineUserIsDev ||
+    location.search !== '?cmd=notepad&blank=1' ||
+    !pcc()
+  ) {
+    return;
+  }
   addBtn('Alert', alertHdl);
   addBtn('Guild Log', mountGuildLog);
   addBtn('Pot Report', mountPotReport);
   addBtn('Quick Extract', mountQuickExtract);
-  addBtn('SE Tracker', mountSuperElite)
+  addBtn('SE Tracker', mountSuperElite);
   addBtn('WhosGotWhat', mountWhosGotWhat);
+  nextSELogRefresh();
 }

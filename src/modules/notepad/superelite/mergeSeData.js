@@ -7,7 +7,8 @@ const merge = (a) => a.join('|');
 const unmerge = (s) => s.split('|');
 
 function processLogEntry(entry) {
-  const { time, creature, playerId, playerName, location, drop } = entry;
+  const { time, creature, playerId, playerName, location, drop, creatureId } =
+    entry;
   const locationMatches = location.match(/^(.*?)\s(\(\d+, \d+\))$/);
   return [
     time,
@@ -17,21 +18,25 @@ function processLogEntry(entry) {
     locationMatches ? locationMatches[1] : 'realm unknown',
     locationMatches ? locationMatches[2] : 'coordinates unknown',
     drop,
+    creatureId,
   ];
 }
 
 const dedupeMobData = (mobs, oldMobs) =>
   uniq(mobs.map(merge).concat(oldMobs.map(merge)))
     .map(unmerge)
-    .map(([time, mob, playerId, playerName, realm, coord, drop]) => [
-      Number(time),
-      mob,
-      Number(playerId),
-      playerName,
-      realm,
-      coord,
-      drop,
-    ])
+    .map(
+      ([time, mob, playerId, playerName, realm, coord, drop, creatureId]) => [
+        Number(time),
+        mob,
+        Number(playerId),
+        playerName,
+        realm,
+        coord,
+        drop,
+        Number(creatureId),
+      ],
+    )
     .sort(([ta], [tb]) => tb - ta);
 
 const formatMobs = (realms) => (testDedupe) =>
@@ -40,14 +45,17 @@ const formatMobs = (realms) => (testDedupe) =>
       mob,
       testDedupe
         .filter(([, mb]) => mb === mob)
-        .map(([time, , playerId, playerName, realm, coord, drop]) => [
-          time,
-          playerId,
-          playerName,
-          realms.findIndex((r) => r === realm),
-          coord,
-          drop,
-        ])
+        .map(
+          ([time, , playerId, playerName, realm, coord, drop, creatureId]) => [
+            time,
+            playerId,
+            playerName,
+            realms.findIndex((r) => r === realm),
+            coord,
+            drop,
+            creatureId,
+          ],
+        )
         .slice(0, 10),
     ]),
   );
