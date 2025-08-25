@@ -1,5 +1,6 @@
 import sendEvent from '../analytics/sendEvent';
 import createAnchor from '../common/cElement/createAnchor';
+import currentGuildId from '../common/currentGuildId';
 import getElementById from '../common/getElementById';
 import insertElement from '../common/insertElement';
 import insertHtmlBeforeEnd from '../common/insertHtmlBeforeEnd';
@@ -19,7 +20,7 @@ function scoutLink() {
 }
 
 export default function scoutTowerLink() {
-  if (!getValue('addScoutTowerLink')) return;
+  if (!getValue('addScoutTowerLink') || !currentGuildId()) return;
   const spoils = getElementById('minibox-spoilsofwar');
   if (!spoils) return;
   const content = spoils.children[1];
