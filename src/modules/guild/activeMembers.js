@@ -7,7 +7,6 @@ import regExpFirstCapture from '../common/regExpFirstCapture';
 import setTipped from '../common/setTipped';
 import { stamRe } from '../support/constants';
 import { pcc } from '../support/layout';
-import stdout from '../support/stdout';
 import addCommas from '../system/addCommas';
 
 const ACTIVE = 0;
@@ -19,10 +18,6 @@ function countActive(acc, curr) {
     acc[ACTIVE] += 1;
     acc[STAMINA] += Number(regExpFirstCapture(stamRe, curr.dataset.tipped));
   }
-  stdout(
-    lastActivity(curr.dataset.tipped),
-    regExpFirstCapture(stamRe, curr.dataset.tipped),
-  );
   return acc;
 }
 
