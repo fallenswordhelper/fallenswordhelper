@@ -5,6 +5,7 @@
   import all from '../../common/all';
   import fromEntries from '../../common/fromEntries';
   import lastActivityToDays from '../../common/lastActivityToDays';
+  import numberIsNaN from '../../common/numberIsNaN';
   import playerLink from '../../common/playerLink';
   import SvelteTable from '../../common/SvelteTable.svelte';
   import uniq from '../../common/uniq';
@@ -49,7 +50,8 @@
       title: 'Stam',
       value: (r) => r.max_stamina,
       sortable: true,
-      renderValue: (r) => addCommas(r.max_stamina),
+      renderValue: (r) =>
+        numberIsNaN(r.max_stamina) ? '' : addCommas(r.max_stamina),
     },
   ];
   let rows = $state([]);
