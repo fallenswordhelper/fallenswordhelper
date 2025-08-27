@@ -2,10 +2,12 @@ import contains from '../common/contains';
 import getArrayByTagName from '../common/getArrayByTagName';
 import getPlayers from '../common/getPlayers';
 import lastActivity from '../common/lastActivity';
+import numberIsNaN from '../common/numberIsNaN';
 import regExpFirstCapture from '../common/regExpFirstCapture';
 import setTipped from '../common/setTipped';
 import { stamRe } from '../support/constants';
 import { pcc } from '../support/layout';
+import stdout from '../support/stdout';
 import addCommas from '../system/addCommas';
 
 const ACTIVE = 0;
@@ -17,6 +19,10 @@ function countActive(acc, curr) {
     acc[ACTIVE] += 1;
     acc[STAMINA] += Number(regExpFirstCapture(stamRe, curr.dataset.tipped));
   }
+  stdout(
+    lastActivity(curr.dataset.tipped),
+    regExpFirstCapture(stamRe, curr.dataset.tipped),
+  );
   return acc;
 }
 
@@ -30,10 +36,11 @@ export default function activeMembers() {
     const dots = getPlayers();
     const memberStats = getActive(dots);
     members.classList.add('tip-static');
+    const staminaText = numberIsNaN(memberStats[STAMINA])
+      ? ''
+      : `<br>Stamina: ${addCommas(memberStats[STAMINA])}`;
     setTipped(
-      `Active: ${memberStats[ACTIVE]}/${dots.length}<br>Stamina: ${addCommas(
-        memberStats[STAMINA],
-      )}`,
+      `Active: ${memberStats[ACTIVE]}/${dots.length}${staminaText}`,
       members,
     );
   }
