@@ -15,6 +15,7 @@ function getStamPerc(a) {
 
 function stamBarStyle(a) {
   const perc = getStamPerc(a);
+
   return (
     '.fshProgressBar ' +
     `tr:nth-child(${a.parentNode.parentNode.rowIndex + 1}) {` +
@@ -26,8 +27,11 @@ function stamBarStyle(a) {
 function injectStyle() {
   const tables = getElementsByTagName(defTable, pcc());
   const memberList = tables[tables.length - 1];
+  const playerLinks = querySelectorArray(playerLinkSelector, memberList);
+  if (!playerLinks.length) return;
+  const memberLinks = playerLinks.filter((a) => stamRe.test(a.dataset.tipped));
+  if (!memberLinks.length) return;
   memberList.classList.add('fshProgressBar');
-  const memberLinks = querySelectorArray(playerLinkSelector, memberList);
   const myTest = memberLinks.map(stamBarStyle).join('\n');
   thisStyle = insertElement(document.body, createStyle(myTest)).sheet;
 }
