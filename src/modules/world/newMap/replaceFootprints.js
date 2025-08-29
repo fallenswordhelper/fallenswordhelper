@@ -2,7 +2,6 @@ import getValue from '../../system/getValue';
 
 let patched = false;
 
-// codebeat:disable[ARITY]
 function drawCircle(
   context,
   cropX,
@@ -23,7 +22,6 @@ function drawCircle(
   context.stroke();
   return true;
 }
-// codebeat:enable[ARITY]
 
 function patchFootprints() {
   if (!patched) {
