@@ -42,6 +42,7 @@ const substrings = [
   'League-of-Legends.user.js',
   'MetaMask',
   'New-Userscript.user.js',
+  'News.user.js',
   'openuserjs.org',
   'out of memory',
   'Permission denied to access object',
