@@ -3,9 +3,12 @@ import createDiv from './common/cElement/createDiv';
 import getElementById from './common/getElementById';
 import insertElement from './common/insertElement';
 import on from './common/on';
+import onclick from './common/onclick';
 import setInnerHtml from './dom/setInnerHtml';
 import { pcc } from './support/layout';
 import addCommas from './system/addCommas';
+import createButton from './common/cElement/createButton';
+import closestTd from './common/closestTd';
 
 let amt = 0;
 let prc = 0;
@@ -60,6 +63,34 @@ function addMarketplaceWarning() {
   }
 }
 
+const fspWanted = () => Number(getElementById('amount').value);
+
+function btnListener() {
+  const fsp = fspWanted();
+  if (fsp) {
+    const gold = Number(getElementById('statbar-gold').innerText.replaceAll(',', ''));
+    const goldPerFsp = Math.floor(gold / fsp / 1.005);
+    getElementById('price').value = goldPerFsp;
+    addMarketplaceWarning();
+  }
+}
+
+function addMaxButton() {
+  const btn = createButton({
+    innerText: 'Spend It All',
+    class: 'custombutton',
+    disabled: true,
+    style: 'position: absolute',
+  });
+  onclick(btn, btnListener);
+  closestTd(getElementById('price')).append(btn);
+  on(
+    getElementById('amount'),
+    'change',
+    () => { btn.disabled = !(fspWanted() > 0) },
+  );
+}
 export default function marketplace() {
+  addMaxButton();
   on(pcc(), 'keyup', addMarketplaceWarning);
 }
