@@ -1,18 +1,16 @@
 import sendEvent from '../../analytics/sendEvent';
-import createAnchor from '../../common/cElement/createAnchor';
 import dataRows from '../../common/dataRows';
 import getElementsByTagName from '../../common/getElementsByTagName';
 import getText from '../../common/getText';
 import getTitle from '../../common/getTitle';
-import insertElement from '../../common/insertElement';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
 import onclick from '../../common/onclick';
 import querySelector from '../../common/querySelector';
-import regExpFirstCapture from '../../common/regExpFirstCapture';
 import trimTitanName from '../../common/trimTitanName';
+import { ufsgLinkFromImg } from '../../common/ufsgMonsterLink';
 import setInnerHtml from '../../dom/setInnerHtml';
-import { defTable, guideUrl, monsterIdRe } from '../../support/constants';
+import { defTable, guideUrl } from '../../support/constants';
 import { pcc } from '../../support/layout';
 import getUrlParameter from '../../system/getUrlParameter';
 import injectScouttowerBuffLinks from './injectScouttowerBuffLinks';
@@ -21,17 +19,7 @@ import titanTracker from './titanTracker';
 
 function imgLink(aRow) {
   const [myImg] = aRow.tr.cells[0].children;
-  const monsterId = regExpFirstCapture(monsterIdRe, myImg.src);
-  if (!monsterId) return;
-  const myLink = createAnchor({
-    href: `${guideUrl}creatures&subcmd=view&creature_id=${monsterId}`,
-    target: '_blank',
-  });
-  onclick(myLink, () => {
-    sendEvent('scoutTower', 'guideLink');
-  });
-  insertElement(myLink, myImg);
-  insertElement(aRow.tr.cells[0], myLink);
+  ufsgLinkFromImg('scoutTower', myImg);
 }
 
 function realmLinkClick(e) {
@@ -104,12 +92,10 @@ export default function injectScouttower() {
   if (!titanTables?.length) return;
   injectScouttowerBuffLinks(titanTables);
   const tabName = getUrlParameter('tab');
-  let titanRows = [];
-  if (tabName === 'active') {
-    titanRows = makeTitanRows(titanTables);
-  } else if (tabName === 'completed') {
-    titanRows = makeCompletedRows(titanTables);
-  }
+  const titanRows =
+    tabName === 'completed'
+      ? makeCompletedRows(titanTables)
+      : makeTitanRows(titanTables);
   if (titanRows) {
     titanRows.forEach(decorate);
     titanTracker(titanTables, titanRows);

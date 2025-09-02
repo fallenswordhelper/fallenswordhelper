@@ -2,12 +2,12 @@ import sendEvent from '../analytics/sendEvent';
 import arrayFrom from '../common/arrayFrom';
 import createAnchor from '../common/cElement/createAnchor';
 import getArrayByClassName from '../common/getArrayByClassName';
-import insertElement from '../common/insertElement';
-import insertElementBefore from '../common/insertElementBefore';
 import onclick from '../common/onclick';
+import partial from '../common/partial';
 import querySelectorArray from '../common/querySelectorArray';
 import regExpExec from '../common/regExpExec';
 import regExpFirstCapture from '../common/regExpFirstCapture';
+import { ufsgLinkFromImg, ufsgMonsterLink } from '../common/ufsgMonsterLink';
 import { guideUrl, monsterIdRe } from '../support/constants';
 import { pcc } from '../support/layout';
 
@@ -21,24 +21,6 @@ const makeALink = (name) =>
     textContent: name,
     target: '_blank',
   });
-
-function ufsgMonsterLink(monsterId, anchor) {
-  if (!anchor) {
-    anchor = createAnchor({})
-  }
-  anchor.href = `${guideUrl}creatures&subcmd=view&creature_id=${monsterId}`;
-  anchor.target = '_blank';
-  onclick(anchor, () => sendEvent('news', 'Ufsg link'));
-  return anchor;
-}
-
-function ufsgLinkFromImg(img) {
-  const monsterId = regExpFirstCapture(monsterIdRe, img.src);
-  if (!monsterId) return;
-  const myLink = ufsgMonsterLink(monsterId);
-  insertElementBefore(myLink, img);
-  insertElement(myLink, img);
-}
 
 function titanSpotted(el) {
   return titanSpottedRe.test(el.lastChild.nodeValue); // Text Node
@@ -58,7 +40,7 @@ function titanRealmLink(el) {
 
 export default function addUfsgLinks() {
   querySelectorArray('.news_body img[src*="/creatures/"]')
-    .forEach(ufsgLinkFromImg);
+    .forEach(partial(ufsgLinkFromImg, 'news'));
   querySelectorArray(
       '.news_body a[data-tipped*="/creatures/"],' +
       '.news_body_tavern a[data-tipped*="/creatures/"]',
@@ -66,7 +48,7 @@ export default function addUfsgLinks() {
     .filter(isMonsterLink)
     .forEach((anchor) => {
       const monsterId = regExpFirstCapture(monsterIdRe, anchor.dataset.tipped);
-      ufsgMonsterLink(monsterId, anchor);
+      ufsgMonsterLink('news', monsterId, anchor);
     });
 
   getArrayByClassName('news_body_tavern', pcc())

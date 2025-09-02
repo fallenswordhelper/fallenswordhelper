@@ -1,18 +1,20 @@
 import { writable } from 'svelte/store';
 import indexAjaxDoc from '../../ajax/indexAjaxDoc';
+import arrayFrom from '../../common/arrayFrom';
+import dataRows from '../../common/dataRows';
+import dateUtc from '../../common/dateUtc';
 import delay from '../../common/delay';
+import getTextTrim from '../../common/getTextTrim';
+import itemIdFromImg from '../../common/itemIdFromImg';
 import partial from '../../common/partial';
+import playerIdFromAnchor from '../../common/playerIdFromAnchor';
 import querySelector from '../../common/querySelector';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
+import { monsterIdRe } from '../../support/constants';
 import { realtimeSecs } from '../../support/now';
 import { get as idbget, set as idbset } from '../../system/idb';
 import mergeSeData from './mergeSeData';
 import seLogStore from './seLogStore';
-import dataRows from '../../common/dataRows';
-import getTextTrim from '../../common/getTextTrim';
-import playerIdFromAnchor from '../../common/playerIdFromAnchor';
-import itemIdFromImg from '../../common/itemIdFromImg';
-import dateUtc from '../../common/dateUtc';
-import arrayFrom from '../../common/arrayFrom';
 
 let bgRunning = false;
 let fshSeLog = {};
@@ -42,6 +44,9 @@ function parseLocation(cell) {
 const extractData = (row) => ({
   time: convertDate(row.cells[0].innerHTML) / 1000,
   creature: getTextTrim(row.cells[1]),
+  creatureId: Number(
+    regExpFirstCapture(monsterIdRe, querySelector('img', row.cells[1]).src),
+  ),
   playerId: playerIdFromAnchor(querySelector('a', row.cells[2])),
   playerName: getTextTrim(querySelector('a', row.cells[2])),
   location: parseLocation(row.cells[2]),

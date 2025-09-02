@@ -1,5 +1,6 @@
 <script>
   import daLoadInventory from '../../_dataAccess/daLoadInventory';
+  import inventory from '../../_dataAccess/export/inventory';
   import daUseCombatSet from '../../_dataAccess/daUseCombatSet';
   import daViewCombatSet from '../../_dataAccess/daViewCombatSet';
   import retryAjax from '../../ajax/retryAjax';
@@ -9,6 +10,7 @@
   import querySelectorArray from '../../common/querySelectorArray';
   import setText from '../../dom/setText';
   import createDocument from '../../system/createDocument';
+  import WearingGrid from './WearingGrid.svelte';
 
   let equipment = $state(0);
   let combatSets = $state(0);
@@ -17,15 +19,40 @@
   const equipped = ({ a: sa }) => equipment.some(({ a: ea }) => ea === sa);
   const equippedSet = ({ items }) => items.every(equipped);
 
+  // Add type property to equipment items using export inventory data
+  const enrichEquipmentWithType = (equipmentItems, inventoryItems) => {
+    if (!equipmentItems || !inventoryItems.length) return equipmentItems || [];
+
+    return equipmentItems.map((item) => {
+      const inventoryItem = inventoryItems.find((inv) => inv.inv_id === item.a);
+      return {
+        ...item,
+        t: inventoryItem?.type,
+      };
+    });
+  };
+
   async function getCombatSet() {
-    const [ms, cs] = await all([daLoadInventory(), daViewCombatSet()]);
-    if (ms?.r && cs?.r) {
-      equipment = ms.r.equipment;
+    const [ms, cs, inv] = await all([
+      daLoadInventory(),
+      daViewCombatSet(),
+      inventory(),
+    ]);
+    if (ms?.r && cs?.r && inv?.items) {
+      // Enrich equipment with type information from export inventory
+      equipment = enrichEquipmentWithType(ms.r.equipment, inv.items);
       const wornSet = cs.r.find(equippedSet);
       selected = wornSet?.id ?? -1;
+
+      // Also enrich combat sets with type information
+      const enrichedCombatSets = cs.r.map((set) => ({
+        ...set,
+        items: enrichEquipmentWithType(set.items, inv.items),
+      }));
+
       combatSets = [
         ...(!wornSet ? [{ id: -1, name: 'Primary', items: equipment }] : []),
-        ...cs.r,
+        ...enrichedCombatSets,
       ];
     }
   }
@@ -54,11 +81,14 @@
         Inventory
         <select bind:value={selected} onchange={handleChange}>
           {#each combatSets as { id, name } (id)}
-            <option value={id} disabled={id === -1 && selected !== -1}>{name}</option>
+            <option value={id} disabled={id === -1 && selected !== -1}>
+              {name}
+            </option>
           {/each}
         </select>
       </div>
     </div>
+    <WearingGrid {equipment} />
   </div>
 {/await}
 

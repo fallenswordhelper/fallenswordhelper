@@ -66,6 +66,12 @@ const privateMsg = () => {
 const quickBuff = () => {
   runDefault(import('../../quickbuff/quickBuff'));
 };
+const superelite = () => {
+  runDefault(import('../../superelite'));
+};
+const crates = () => {
+  runDefault(import('../../crates'));
+};
 
 const skills = () => {
   if (!defineUserIsDev) {
@@ -75,6 +81,7 @@ const skills = () => {
 };
 
 export default {
+  crates:{ '-': { '-': crates } },
   creatures: { '-': { '-': ufsgAllowBack } }, // UFSG
   items, // UFSG
   masterrealms: { '-': { '-': ufsgAllowBack } }, // UFSG
@@ -90,7 +97,7 @@ export default {
   buffmarket: {
     '-': { '-': injectBuffmarket },
     add: { '-': injectBigBuffPacakges },
-    manage: { '-' : injectBuffmarketManage },
+    manage: { '-': injectBuffmarketManage },
   },
   combat: { attackplayer: { '-': injectProfile } },
   composing,
@@ -112,6 +119,7 @@ export default {
   scavenging,
   settings: { '-': { '-': injectSettings } },
   skills: { '-': { '-': skills } },
+  superelite: { '-': { '-': superelite } },
   tempinv: { '-': { '-': injectMailbox } },
   temple: { '-': { '-': checkTemple } },
   titan: { '-': { '-': injectTitan } },
