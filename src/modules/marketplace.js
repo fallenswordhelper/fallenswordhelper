@@ -57,40 +57,48 @@ function addMarketplaceWarning() {
   sendEvent('marketplace', 'addMarketplaceWarning');
   const price = getPrice();
   if (price) {
-    const sellPrice = price.value;
-    if (sellPrice.search(/^\d+$/) !== -1) marketplaceWarning(sellPrice);
+    const sellPrice = Number(price.value);
+    if (sellPrice) marketplaceWarning(sellPrice);
     else clearWarning();
   }
 }
 
-const fspWanted = () => Number(getElementById('amount').value);
-
-function btnListener() {
-  const fsp = fspWanted();
-  if (fsp) {
-    const gold = Number(getElementById('statbar-gold').innerText.replaceAll(',', ''));
-    const goldPerFsp = Math.floor(gold / fsp / 1.005);
-    getElementById('price').value = goldPerFsp;
-    addMarketplaceWarning();
-  }
+function wallet() {
+  return Number(getElementById('statbar-gold')
+    .innerText
+    .replaceAll(',', ''));
 }
 
-function addMaxButton() {
-  const btn = createButton({
+function findMax(value) {
+  if (value) return Math.floor(wallet() / value / 1.005);
+  return '';
+}
+
+function makeMaxButton() {
+  return createButton({
     innerText: 'Spend It All',
-    class: 'custombutton',
-    disabled: true,
-    style: 'position: absolute',
+    className: 'custombutton',
+    style: 'font-size: 9px;',
   });
-  onclick(btn, btnListener);
-  closestTd(getElementById('price')).append(btn);
-  on(
-    getElementById('amount'),
-    'change',
-    () => { btn.disabled = !(fspWanted() > 0) },
-  );
 }
+
+function addMaxButtons() {
+  const maxFsp = makeMaxButton();
+  onclick(maxFsp, () => {
+    getPrice().value = findMax(Number(getAmount().value));
+    addMarketplaceWarning();
+  });
+  closestTd(getAmount()).append(maxFsp);
+
+  const maxGold = makeMaxButton();
+  onclick(maxGold, () => {
+    getAmount().value = findMax(Number(getPrice().value));
+    addMarketplaceWarning();
+  });
+  closestTd(getPrice()).append(maxGold);
+}
+
 export default function marketplace() {
-  addMaxButton();
+  addMaxButtons();
   on(pcc(), 'keyup', addMarketplaceWarning);
 }
