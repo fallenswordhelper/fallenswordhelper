@@ -77,8 +77,7 @@ function findMax(value) {
 function makeMaxButton() {
   return createButton({
     innerText: 'Spend It All',
-    className: 'custombutton',
-    style: 'font-size: 9px;',
+    style: 'font-size: 8px; position: absolute;',
   });
 }
 
