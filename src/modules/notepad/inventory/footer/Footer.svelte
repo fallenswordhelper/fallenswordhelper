@@ -2,7 +2,6 @@
   import calf from '../../../support/calf';
   import RecallAll from './RecallAll.svelte';
   import Repair from './Repair.svelte';
-  import UpdateStats from './UpdateStats.svelte';
 
   let { fshInv = 0 } = $props();
 </script>
@@ -14,7 +13,6 @@
   {:else}
     <div></div>
   {/if}
-  <UpdateStats {fshInv} />
 </div>
 
 <style>
