@@ -24,7 +24,7 @@ import reliclist from '../pageSwitcher/loader/reliclist';
 import setmgr from '../pageSwitcher/loader/setmgr';
 import superelite from '../pageSwitcher/loader/superelite';
 import whosGotWhat from '../pageSwitcher/loader/whosGotWhat';
-import gsDl from './gsDl';
+import gsDl from '../pageSwitcher/loader/gsDl';
 
 function convertToModal(fn) {
   return () => jQueryDialog(fn);

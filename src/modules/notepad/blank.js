@@ -6,7 +6,9 @@ import onclick from '../common/onclick';
 import { pcc } from '../support/layout';
 import { realtimeSecs } from '../support/now';
 import { get as idbget } from '../system/idb';
+import mountGsExport from './gsExport/mountGsExport.svelte';
 import mountGuildLog from './guildLog/mountGuildLog.svelte';
+import mountMolds from './molds/mountMolds.svelte';
 import mountPotReport from './potReport/mountPotReport.svelte';
 import mountQuickExtract from './quickExtract/mountQuickExtract.svelte';
 import mountSuperElite from './superelite/mountSuperElite.svelte';
@@ -51,7 +53,9 @@ export default function blank() {
     return;
   }
   addBtn('Alert', alertHdl);
+  addBtn('GS Export', mountGsExport);
   addBtn('Guild Log', mountGuildLog);
+  addBtn('Molds', mountMolds);
   addBtn('Pot Report', mountPotReport);
   addBtn('Quick Extract', mountQuickExtract);
   addBtn('SE Tracker', mountSuperElite);
