@@ -69,11 +69,6 @@ function wallet() {
   return intValue(getText(getElementById('statbar-gold')));
 }
 
-function findMax(value) {
-  if (value) return Math.floor(wallet() / value / 1.005);
-  return '';
-}
-
 function makeMaxButton() {
   return createButton({
     innerText: 'Spend It All',
@@ -81,19 +76,25 @@ function makeMaxButton() {
   });
 }
 
+function maxInput(sourceInput, targetInput) {
+  if (!sourceInput || !targetInput) return;
+  const value = Number(sourceInput.value);
+  if (value && value > 0) {
+    targetInput.value = Math.floor(wallet() / value / 1.005);
+  }
+  else {
+    targetInput.value = '';
+  }
+  addMarketplaceWarning();
+}
+
 function addMaxButtons() {
   const maxFsp = makeMaxButton();
-  onclick(maxFsp, () => {
-    getPrice().value = findMax(Number(getAmount().value));
-    addMarketplaceWarning();
-  });
+  onclick(maxFsp, () => maxInput(getAmount(), getPrice()));
   closestTd(getAmount()).append(maxFsp);
 
   const maxGold = makeMaxButton();
-  onclick(maxGold, () => {
-    getAmount().value = findMax(Number(getPrice().value));
-    addMarketplaceWarning();
-  });
+  onclick(maxGold, () => maxInput(getPrice(), getAmount()));
   closestTd(getPrice()).append(maxGold);
 }
 
