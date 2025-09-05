@@ -88,14 +88,18 @@ function maxInput(sourceInput, targetInput) {
   addMarketplaceWarning();
 }
 
+function addMaxBtn(input, btn) {
+  closestTd(input).append(btn);
+}
+
 function addMaxButtons() {
   const maxFsp = makeMaxButton();
   onclick(maxFsp, () => maxInput(getAmount(), getPrice()));
-  closestTd(getAmount()).append(maxFsp);
+  addMaxBtn(getAmount(), maxFsp);
 
   const maxGold = makeMaxButton();
   onclick(maxGold, () => maxInput(getPrice(), getAmount()));
-  closestTd(getPrice()).append(maxGold);
+  addMaxBtn(getPrice(), maxGold);
 }
 
 export default function marketplace() {
