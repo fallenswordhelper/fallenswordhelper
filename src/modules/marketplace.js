@@ -9,6 +9,8 @@ import { pcc } from './support/layout';
 import addCommas from './system/addCommas';
 import createButton from './common/cElement/createButton';
 import closestTd from './common/closestTd';
+import intValue from './system/intValue';
+import getText from './common/getText';
 
 let amt = 0;
 let prc = 0;
@@ -64,9 +66,7 @@ function addMarketplaceWarning() {
 }
 
 function wallet() {
-  return Number(getElementById('statbar-gold')
-    .innerText
-    .replaceAll(',', ''));
+  return intValue(getText(getElementById('statbar-gold')));
 }
 
 function findMax(value) {
