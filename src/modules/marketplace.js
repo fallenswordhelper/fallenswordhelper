@@ -93,6 +93,7 @@ function addMaxBtn(input, btn) {
 }
 
 function addMaxButtons() {
+  if (!getAmount() || !getPrice()) return;
   const maxFsp = makeMaxButton();
   onclick(maxFsp, () => maxInput(getAmount(), getPrice()));
   addMaxBtn(getAmount(), maxFsp);
