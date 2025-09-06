@@ -3,9 +3,14 @@ import createDiv from './common/cElement/createDiv';
 import getElementById from './common/getElementById';
 import insertElement from './common/insertElement';
 import on from './common/on';
+import onclick from './common/onclick';
 import setInnerHtml from './dom/setInnerHtml';
 import { pcc } from './support/layout';
 import addCommas from './system/addCommas';
+import createButton from './common/cElement/createButton';
+import closestTd from './common/closestTd';
+import intValue from './system/intValue';
+import getText from './common/getText';
 
 let amt = 0;
 let prc = 0;
@@ -54,12 +59,51 @@ function addMarketplaceWarning() {
   sendEvent('marketplace', 'addMarketplaceWarning');
   const price = getPrice();
   if (price) {
-    const sellPrice = price.value;
-    if (sellPrice.search(/^\d+$/) !== -1) marketplaceWarning(sellPrice);
+    const sellPrice = Number(price.value);
+    if (sellPrice) marketplaceWarning(sellPrice);
     else clearWarning();
   }
 }
 
+function wallet() {
+  return intValue(getText(getElementById('statbar-gold')));
+}
+
+function makeMaxButton() {
+  return createButton({
+    innerText: 'Spend It All',
+    style: 'font-size: 8px; position: absolute;',
+  });
+}
+
+function maxInput(sourceInput, targetInput) {
+  if (!sourceInput || !targetInput) return;
+  const value = Number(sourceInput.value);
+  if (value && value > 0) {
+    targetInput.value = Math.floor(wallet() / value / 1.005);
+  }
+  else {
+    targetInput.value = '';
+  }
+  addMarketplaceWarning();
+}
+
+function addMaxBtn(input, btn) {
+  closestTd(input).append(btn);
+}
+
+function addMaxButtons() {
+  if (!getAmount() || !getPrice()) return;
+  const maxFsp = makeMaxButton();
+  onclick(maxFsp, () => maxInput(getAmount(), getPrice()));
+  addMaxBtn(getAmount(), maxFsp);
+
+  const maxGold = makeMaxButton();
+  onclick(maxGold, () => maxInput(getPrice(), getAmount()));
+  addMaxBtn(getPrice(), maxGold);
+}
+
 export default function marketplace() {
+  addMaxButtons();
   on(pcc(), 'keyup', addMarketplaceWarning);
 }
