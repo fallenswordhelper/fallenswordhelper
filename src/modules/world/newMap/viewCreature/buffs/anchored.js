@@ -3,5 +3,6 @@ import getBuffLevel from './getBuffLevel';
 
 export default function anchored(player) {
   const buffLevel = getBuffLevel(player, 154);
+  if (!buffLevel) return {};
   return { player: { hp: Math.floor(buffLevel * 0.0005 * player.damage) } };
 }

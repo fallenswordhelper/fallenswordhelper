@@ -14,7 +14,7 @@ import sanctuary from './sanctuary';
 import superEliteSlayer from './superEliteSlayer';
 import terrorize from './terrorize';
 import wither from './wither';
-import entries from '../../../common/entries';
+import entries from '../../../../common/entries';
 
 const buffs = [
   anchored,
@@ -41,8 +41,9 @@ export default function calcBuffBonuses(player, enemy) {
     .reduce((acc, bonus) => {
       entries(bonus).forEach(([source, stats]) => {
         entries(stats).forEach(([statName, statValue]) => {
-          acc[source][statName] = (acc.source[statName] ?? 0) + statValue;
+          acc[source][statName] = (acc[source][statName] ?? 0) + statValue;
         });
       });
+      return acc;
     }, {player: {}, enemy: {}});
 }

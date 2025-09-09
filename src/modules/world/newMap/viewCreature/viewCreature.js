@@ -3,29 +3,23 @@ import daGroupStats from '../../../_dataAccess/daGroupStats';
 import daViewGroups from '../../../_dataAccess/daViewGroups';
 import myStats from '../../../ajax/myStats';
 import createDiv from '../../../common/cElement/createDiv';
-import executeParam from '../../../common/executeParam';
 import getElementById from '../../../common/getElementById';
 import insertElement from '../../../common/insertElement';
 import isArray from '../../../common/isArray';
-import playerDataObject from '../../../common/playerDataObject';
 import playerName from '../../../common/playerName';
 import setInnerHtml from '../../../dom/setInnerHtml';
-import calf from '../../../support/calf';
 import { defViewCreature } from '../../../support/constants';
-import evalAnalysis from './evalAnalysis';
-import evalArmour from './evalArmour';
-import evalAttack from './evalAttack';
-import evalCA from './evalCa';
-import evalDamage from './evalDamage';
-import evalDefence from './evalDefence';
-import evalExtraBuffs from './evalExtraBuffs';
-import evalHTML from './evalHtml';
 import makeDoNotKillLink from './makeDoNotKillLink';
+import CombatEval from './CombatEval.svelte';
+import calcStats from './calcStats';
+import { mount } from 'svelte';
 
 let dialogViewCreature = 0;
 let combatEvalContainer = 0;
 let combatEvaluator = 0;
 let groupEvaluator = 0;
+let combatEvaluatorApp = 0;
+let combatEvaluatorContainer = 0;
 
 function getDialogViewCreature() {
   if (!dialogViewCreature) {
@@ -39,15 +33,7 @@ function getCombatEvalContainer() {
     insertElement(dialogViewCreature, combatEvalContainer);
     insertElement(
       dialogViewCreature,
-      createDiv({
-        innerHTML:
-          '<span class="fshFooter">' +
-          '*Does include CA, DD, HF, DC, Flinch, Super Elite Slayer, NMV, ' +
-          'Sanctuary, Constitution, Fortitude, Chi Strike and ' +
-          'Terrorize (if active) and allow for randomness (1.1053). ' +
-          'Constitution, NMV, Fortitude and Chi Strike apply to group ' +
-          'stats.</span>',
-      }),
+      createDiv(),
     );
   }
 }
@@ -78,70 +64,17 @@ function setGroupEvalalutor(html) {
   setInnerHtml(html, groupEvaluator);
 }
 
-function superElite(ses, obj, type) {
-  // reduce stats if critter is a SE and player has SES cast on them.
-  if (type === 3) {
-    obj.attack -= Math.ceil(obj.attack * ses);
-    obj.defense -= Math.ceil(obj.defense * ses);
-    obj.armor -= Math.ceil(obj.armor * ses);
-    obj.damage -= Math.ceil(obj.damage * ses);
-    obj.hp -= Math.ceil(obj.hp * ses);
-  }
-}
-
-function creatureData(creature, ses) {
-  const obj = {
-    name: creature.name,
-    class: creature.creature_class,
-    attack: Number(creature.attack),
-    defense: Number(creature.defense),
-    armor: Number(creature.armor),
-    damage: Number(creature.damage),
-    hp: Number(creature.hp),
-  };
-  superElite(ses, obj, creature.type);
-  return obj;
-}
-
-function biasVars(combat) {
-  combat.combatEvaluatorBias = calf.combatEvaluatorBias;
-  combat.attackVariable = 1.1053;
-  combat.generalVariable = calf.generalVariable;
-  combat.hpVariable = calf.hpVariable;
-}
-
-function buffProcessing(combat) {
-  executeParam(
-    [
-      evalExtraBuffs,
-      evalAttack,
-      evalDamage,
-      evalDefence,
-      evalArmour,
-      evalAnalysis,
-      evalCA,
-    ],
-    combat,
-  );
-}
-
 function doCombatEval(data, playerJson, groupData) {
-  const combat = {};
-  combat.callback = groupData;
-  // playerdata
-  combat.player = playerDataObject(playerJson);
-  biasVars(combat);
-  combat.creature = creatureData(
-    data.response.data,
-    combat.player.superEliteSlayerMultiplier,
-  );
-  buffProcessing(combat);
-  combat.evaluatorHTML = evalHTML(combat);
-  if (groupData.groupExists) {
-    setGroupEvalalutor(combat.evaluatorHTML);
-  } else {
-    setCombatEvaluator(combat.evaluatorHTML);
+  const enemy = data.response.data;
+  const player = playerJson;
+  const bonuses = calcStats(player, enemy);
+  if(!combatEvaluatorApp) {
+    combatEvaluatorApp = mount(CombatEval, { target: combatEvaluatorContainer, props: {player, enemy, bonuses} });
   }
+  else {
+    combatEvaluatorApp.update(player, enemy, bonuses);
+  }
+  combatEvaluator.append(combatEvaluatorContainer);
 }
 
 function myGroup(el) {
@@ -190,6 +123,7 @@ function processPlayer(data, playerJson) {
 }
 
 async function processCreature(_e, data) {
+  if (!combatEvaluatorContainer) combatEvaluatorContainer = createDiv();
   getDialogViewCreature();
   if (!dialogViewCreature) {
     return;

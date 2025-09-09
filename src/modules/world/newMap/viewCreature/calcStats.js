@@ -25,4 +25,5 @@ export default function calcStats(player, enemy) {
   applyBonuses(enemy, bonuses.enemy);
   player.hits = playerHits(player, enemy);
   enemy.hits = enemyHits(player, enemy);
+  return bonuses;
 }
