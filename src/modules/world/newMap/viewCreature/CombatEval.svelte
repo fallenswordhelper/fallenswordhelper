@@ -1,5 +1,5 @@
 <script>
-  let {player = {}, enemy = {}, buffs = {}, bonuses = {}} = $props();
+  let { title = '', player = {}, enemy = {}, buffs = {}, bonuses = {}} = $props();
 
   const willIHit = player.attack > enemy.defense;
   const willIBeHit = enemy.attack > player.defense;
@@ -9,7 +9,6 @@
     enemy = b;
     buffs = c;
     bonuses = d;
-    console.log(buffs);
   }
 
   function isEmpty(obj) {
@@ -23,6 +22,7 @@
     const buffNames = buffs
       .filter(d => !isEmpty(d.bonuses))
       .map(d => d.buff);
+    if (buffNames.length === 0) return 'no buffs';
     if (buffNames.length > 1) {
       buffNames[buffNames.length - 1] = `and ${buffNames[buffNames.length - 1]}`;
     }
@@ -41,7 +41,7 @@
   ];
 </script>
 &nbsp;
-<div id="combat-eval-header">Combat Evaluation</div>
+<div id="combat-eval-header">{title}</div>
 <div id="combat-eval-bonuses">
   <table id="combat-eval-player-bonuses">
     <thead><tr><th colspan="2">Player Stats</th></tr></thead>

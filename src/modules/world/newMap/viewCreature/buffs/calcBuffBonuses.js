@@ -14,7 +14,6 @@ import sanctuary from './sanctuary';
 import superEliteSlayer from './superEliteSlayer';
 import terrorize from './terrorize';
 import wither from './wither';
-import entries from '../../../../common/entries';
 
 const buffs = [
   { buff: 'Anchored', fn: anchored },
