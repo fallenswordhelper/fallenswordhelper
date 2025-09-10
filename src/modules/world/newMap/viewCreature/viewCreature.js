@@ -1,4 +1,3 @@
-import './viewCreature.css';
 import daGroupStats from '../../../_dataAccess/daGroupStats';
 import daViewGroups from '../../../_dataAccess/daViewGroups';
 import myStats from '../../../ajax/myStats';

@@ -103,5 +103,8 @@
 #combat-eval-bonuses { columns: 2; }
 #combat-eval-bonuses table { width: 100%; }
 #combat-eval-bonuses table th { text-align: center; }
-.combat-eval-bonus { color: gray; }
+.fshFooter, .combat-eval-bonus { color: gray; }
+.fshFooter {
+  font-size: x-small;
+}
 </style>
