@@ -17,33 +17,24 @@ import wither from './wither';
 import entries from '../../../../common/entries';
 
 const buffs = [
-  anchored,
-  chiStrike,
-  constitution,
-  coordinatedAttack,
-  coordinatedDefense,
-  counterAttack,
-  darkCurse,
-  deathDealer,
-  flinch,
-  fortitude,
-  holyFlame,
-  nightmareVisage,
-  sanctuary,
-  superEliteSlayer,
-  terrorize,
-  wither,
+  { buff: 'Anchored', fn: anchored },
+  { buff: 'Chi Strike', fn: chiStrike },
+  { buff: 'Constitution', fn: constitution },
+  { buff: 'Coordinated Attack', fn: coordinatedAttack },
+  { buff: 'Coordinated Defense', fn: coordinatedDefense },
+  { buff: 'Counter Attack', fn: counterAttack },
+  { buff: 'Dark Curse', fn: darkCurse },
+  { buff: 'Death Dealer', fn: deathDealer },
+  { buff: 'Flinch', fn: flinch },
+  { buff: 'Fortitude', fn: fortitude },
+  { buff: 'Holy Flame', fn: holyFlame },
+  { buff: 'Nightmare Visage', fn: nightmareVisage },
+  { buff: 'Sanctuary', fn: sanctuary },
+  { buff: 'Super Elite Slayer', fn: superEliteSlayer },
+  { buff: 'Terrorize', fn: terrorize },
+  { buff: 'Wither', fn: wither },
 ];
 
 export default function calcBuffBonuses(player, enemy) {
-  return buffs
-    .map(fn => fn(player, enemy))
-    .reduce((acc, bonus) => {
-      entries(bonus).forEach(([source, stats]) => {
-        entries(stats).forEach(([statName, statValue]) => {
-          acc[source][statName] = (acc[source][statName] ?? 0) + statValue;
-        });
-      });
-      return acc;
-    }, {player: {}, enemy: {}});
+  return buffs.map(({buff, fn}) => ({buff, bonuses: fn(player, enemy)}));
 }

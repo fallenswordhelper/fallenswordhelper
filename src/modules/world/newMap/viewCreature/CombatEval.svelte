@@ -1,14 +1,37 @@
 <script>
-  let {player = {}, enemy = {}, bonuses = {}} = $props();
+  let {player = {}, enemy = {}, buffs = {}, bonuses = {}} = $props();
 
   const willIHit = player.attack > enemy.defense;
   const willIBeHit = enemy.attack > player.defense;
 
-  export function update(a, b, c) {
+  export function update(a, b, c, d) {
     player = a;
     enemy = b;
-    bonuses = c;
+    buffs = c;
+    bonuses = d;
+    console.log(buffs);
   }
+
+  function isEmpty(obj) {
+    for (const prop in obj) {
+      if (Object.hasOwn(obj, prop)) return false;
+    }
+    return true;
+  }
+
+  function buffList() {
+    const buffNames = buffs
+      .filter(d => !isEmpty(d.bonuses))
+      .map(d => d.buff);
+    if (buffNames.length > 1) {
+      buffNames[buffNames.length - 1] = `and ${buffNames[buffNames.length - 1]}`;
+    }
+    if (buffNames.length == 2) {
+      return buffNames.join(' ');
+    }
+    return buffNames.join(', ');
+  }
+
   const statLabels = [
     { label: 'Attack', key: 'attack' },
     { label: 'Damage', key: 'damage' },
@@ -36,7 +59,9 @@
         <td>{label}:</td>
         <td>
           {player[key]}
-          {#if bonuses.player[key]}({bonuses.player[key] > 0 ? '+' : ''}{bonuses.player[key]}){/if}
+          {#if bonuses.player[key]}
+          <span class="combat-eval-bonus">({bonuses.player[key] > 0 ? '+' : ''}{bonuses.player[key]})</span>
+          {/if}
         </td>
       </tr>
       {/each}
@@ -68,11 +93,7 @@
   </table>
 </div>
 <p class="fshFooter">
-  *Does include CA, DD, HF, DC, Flinch, Super Elite Slayer, NMV,
-  Sanctuary, Constitution, Fortitude, Chi Strike and
-  Terrorize (if active) and allow for randomness (1.1053).
-  Constitution, NMV, Fortitude and Chi Strike apply to group
-  stats.
+  *Accounts for {buffList()} and allow for randomness (1.1053).
 </p>
 <style>
 #combat-eval-header {

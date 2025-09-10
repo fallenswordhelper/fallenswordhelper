@@ -19,8 +19,20 @@ function applyBonuses(source, bonuses) {
     });
 }
 
-export default function calcStats(player, enemy) {
-  const bonuses = calcBuffBonuses(player, enemy);
+function reduceBuffs(buffs) {
+  return buffs
+    .reduce((acc, bonus) => {
+      entries(bonus.bonuses).forEach(([source, stats]) => {
+        entries(stats).forEach(([statName, statValue]) => {
+          acc[source][statName] = (acc[source][statName] ?? 0) + statValue;
+        });
+      });
+      return acc;
+    }, {player: {}, enemy: {}});
+}
+
+export default function calcStats(player, enemy, buffs) {
+  const bonuses = reduceBuffs(buffs);
   applyBonuses(player, bonuses.player);
   applyBonuses(enemy, bonuses.enemy);
   player.hits = playerHits(player, enemy);

@@ -13,6 +13,7 @@ import makeDoNotKillLink from './makeDoNotKillLink';
 import CombatEval from './CombatEval.svelte';
 import calcStats from './calcStats';
 import { mount } from 'svelte';
+import calcBuffBonuses from './buffs/calcBuffBonuses';
 
 let dialogViewCreature = 0;
 let combatEvalContainer = 0;
@@ -67,12 +68,14 @@ function setGroupEvalalutor(html) {
 function doCombatEval(data, playerJson, groupData) {
   const enemy = data.response.data;
   const player = playerJson;
-  const bonuses = calcStats(player, enemy);
+  const buffs = calcBuffBonuses(player, enemy);
+  const bonuses = calcStats(player, enemy, buffs);
+
   if(!combatEvaluatorApp) {
-    combatEvaluatorApp = mount(CombatEval, { target: combatEvaluatorContainer, props: {player, enemy, bonuses} });
+    combatEvaluatorApp = mount(CombatEval, { target: combatEvaluatorContainer, props: {player, enemy, buffs, bonuses} });
   }
   else {
-    combatEvaluatorApp.update(player, enemy, bonuses);
+    combatEvaluatorApp.update(player, enemy, buffs, bonuses);
   }
   combatEvaluator.append(combatEvaluatorContainer);
 }
