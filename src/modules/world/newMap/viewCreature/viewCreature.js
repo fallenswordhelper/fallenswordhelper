@@ -67,7 +67,7 @@ function showPlayerCombatEval(data, player) {
       CombatEval,
       {
         target: getCombatEvaluatorContainer(),
-        props: { title: 'One-On-One Combat Evaluation', player, enemy, buffs, bonuses },
+        props: { title: 'One-On-One Combat Evaluation', player, enemy, buffs },
       },
     );
   }
@@ -86,7 +86,7 @@ function showGroupCombatEval(data, group) {
       CombatEval,
       {
         target: getGroupCombatEvaluatorContainer(),
-        props: { title: 'Group Combat Evaluation', player: group, enemy, buffs, bonuses },
+        props: { title: 'Group Combat Evaluation', player: group, enemy, buffs },
       },
     );
   }

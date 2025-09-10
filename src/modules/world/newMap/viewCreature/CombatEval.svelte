@@ -1,6 +1,6 @@
 <script>
   import calf from '../../../support/calf';
-  let { title = '', player = {}, enemy = {}, buffs = {}, bonuses = {}} = $props();
+  let { title = '', player = {}, enemy = {}, buffs = {} } = $props();
 
   const altVal = d => Math.ceil(calf.generalVariable * d);
 
@@ -9,11 +9,10 @@
   const overkill = $derived(player._skills.includes(d => d.id === 109));
 
 
-  export function update(a, b, c, d) {
+  export function update(a, b, c) {
     player = a;
     enemy = b;
     buffs = c;
-    bonuses = d;
   }
 
   function isEmpty(obj) {
