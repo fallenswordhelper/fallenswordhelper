@@ -6,7 +6,7 @@
 
   const willIHit = $derived(player.attack > altVal(enemy.defense));
   const willIBeHit = $derived(altVal(enemy.attack) > player.defense);
-  const excessDamage = $derived(player.damage - enemy.hp - altVal(enemy.armor));
+  const overkill = $derived(player._skills.includes(d => d.id === 109));
 
 
   export function update(a, b, c, d) {
@@ -37,6 +37,22 @@
     return buffNames.join(', ');
   }
 
+  function damageMessage() {
+    if (player.hits > 1) {
+      return `(${altVal(enemy.armor) + enemy.hp - player.damage} more damage to one-hit)`;
+    }
+    const excessDamage = player.damage - enemy.hp - altVal(enemy.armor);
+    let msg = `${excessDamage} excess damage`;
+    if (!overkill) {
+      return `${msg}`;
+    }
+    if (Math.floor(excessDamage / enemy.hp) > 1) {
+      return `${msg}, overkill activates`;
+    }
+    const damageLeft = (altVal(enemy.armor) + enemy.hp * 2) - player.damage;
+    return `${msg}, ${damageLeft} more damage to overkill`;
+  }
+
 </script>
 &nbsp;
 <div id="combat-eval-header">{title}</div>
@@ -59,11 +75,7 @@
         <td>-</td>
         {:else}
         <td>{player.hits > 20 ? ">20" : player.hits}</td>
-        {#if player.hits > 1}
-        <td>({altVal(enemy.armor) + enemy.hp - player.damage} more damage to one-hit)</td>
-        {:else}
-        <td>({excessDamage} excess damage, {Math.floor(excessDamage / enemy.hp * 100)}% of enemy HP)</td>
-        {/if}
+        <td>({damageMessage()})</td>
         {/if}
       </tr>
       <tr>
