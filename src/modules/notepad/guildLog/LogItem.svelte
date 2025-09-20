@@ -127,67 +127,63 @@
         {chunk}
       {/if}
     {/each}
-    {#if logEntry.msg?.attachments?.length}
-      {#each logEntry.msg.attachments.filter(({ type }) => type === 0) as { data }, x (x)}
-        {#if logEntry.type === 21}
-          {#await recruiting_prm}
+    {#each logEntry.msg.attachments && logEntry.msg.attachments.filter(({ type }) => type === 0) as { data }, x (x)}
+      {#if logEntry.type === 21}
+        {#await recruiting_prm}
+          <div class="rel">
+            <span class="fshSpinner recruit-spinner"></span>
+          </div>
+        {:then}
+          {#if recruiting_result === 'waiting'}
+            <span class="action-buttons">
+              [
+              <LinkBtn onclick={() => recruiting(data, 'acceptjoin')}>
+                Accept
+              </LinkBtn>
+              |
+              <LinkBtn onclick={() => recruiting(data, 'denyjoin')}>
+                Deny
+              </LinkBtn>
+              ]
+            </span>
+          {:else}
             <div class="rel">
-              <span class="fshSpinner recruit-spinner"></span>
-            </div>
-          {:then}
-            {#if recruiting_result === 'waiting'}
-              <span class="action-buttons">
-                [
-                <LinkBtn onclick={() => recruiting(data, 'acceptjoin')}>
-                  Accept
-                </LinkBtn>
-                |
-                <LinkBtn onclick={() => recruiting(data, 'denyjoin')}>
-                  Deny
-                </LinkBtn>
-                ]
-              </span>
-            {:else}
-              <div class="rel">
-                {recruiting_result}
-              </div>
-            {/if}
-          {/await}
-        {/if}
-        <span class="action-buttons">
-          [
-          <LinkBtn onclick={() => reply(data)}>Reply</LinkBtn>
-          |
-          <LinkBtn onclick={() => buff(data)}>Buff</LinkBtn>
-          |
-          <LinkBtn onclick={() => send(data)}>Send</LinkBtn>
-          |
-          <LinkBtn onclick={() => trade(data)}>Trade</LinkBtn>
-          ]
-        </span>
-      {/each}
-      {#each logEntry.msg.attachments.filter(({ type }) => type === 11) as { data }, x (x)}
-        <span class="action-buttons">
-          [
-          <LinkBtn onclick={() => combat(data)}>View Combat</LinkBtn>
-          ]
-        </span>
-      {/each}
-      {#if logEntry.type === 17 && groupCombatItems && logEntry.msg.text.includes('victorious')}
-        {#await getCombat(logEntry.time, logEntry.msg.attachments[0].data) then json}
-          {#if json?.r?.combat?.items?.[0]?.n}
-            <div>
-              <a
-                href="{playerIdUrl}{json.r.combat.attacker.group.players[0].id}"
-              >
-                {json.r.combat.attacker.group.players[0].name}</a
-              >'s group looted the item '<span class="fshGreen"
-                >{json?.r?.combat?.items?.[0]?.n}</span
-              >'
+              {recruiting_result}
             </div>
           {/if}
         {/await}
       {/if}
+      <span class="action-buttons">
+        [
+        <LinkBtn onclick={() => reply(data)}>Reply</LinkBtn>
+        |
+        <LinkBtn onclick={() => buff(data)}>Buff</LinkBtn>
+        |
+        <LinkBtn onclick={() => send(data)}>Send</LinkBtn>
+        |
+        <LinkBtn onclick={() => trade(data)}>Trade</LinkBtn>
+        ]
+      </span>
+    {/each}
+    {#each logEntry.msg.attachments && logEntry.msg.attachments.filter(({ type }) => type === 11) as { data }, x (x)}
+      <span class="action-buttons">
+        [
+        <LinkBtn onclick={() => combat(data)}>View Combat</LinkBtn>
+        ]
+      </span>
+    {/each}
+    {#if logEntry.type === 17 && groupCombatItems && logEntry.msg.text.includes('victorious')}
+      {#await getCombat(logEntry.time, logEntry.msg.attachments[0].data) then json}
+        {#if json?.r?.combat?.items?.[0]?.n}
+          <div>
+            <a href="{playerIdUrl}{json.r.combat.attacker.group.players[0].id}">
+              {json.r.combat.attacker.group.players[0].name}</a
+            >'s group looted the item '<span class="fshGreen"
+              >{json?.r?.combat?.items?.[0]?.n}</span
+            >'
+          </div>
+        {/if}
+      {/await}
     {/if}
   </div>
 </div>
