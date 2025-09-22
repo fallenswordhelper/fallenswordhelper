@@ -56,7 +56,7 @@ function statusTextHtml(ourTitan) {
 }
 
 function setAllText(ourTitan) {
-  [
+  for (const [txt, ctx] of [
     [getTitanNm(), getTitanName],
     [getTitanLoc(), getTitanLocation],
     [ourTitan.current_hp, getCurrentHp],
@@ -64,7 +64,9 @@ function setAllText(ourTitan) {
     [ourTitan.kills, getGuildKills],
     [currentPctText(ourTitan), getCurrentPct],
     [totalPctText(ourTitan), getTotalPct],
-  ].forEach(([txt, ctx]) => setText(txt, ctx()));
+  ]) {
+    setText(txt, ctx());
+  }
 }
 
 function doTopLabels(ourTitan) {
@@ -100,9 +102,7 @@ function doMemberRows(ourTitan) {
 
 function currentTitan(el) {
   return (
-    el.realm &&
-    el.creature === getTitanId() &&
-    el.realm === getRealmName()
+    el.realm && el.creature === getTitanId() && el.realm === getRealmName()
   );
 }
 
