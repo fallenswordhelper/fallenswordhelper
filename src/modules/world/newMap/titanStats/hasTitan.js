@@ -4,6 +4,7 @@ import getElementById from '../../../common/getElementById';
 import hasClass from '../../../common/hasClass';
 import insertElement from '../../../common/insertElement';
 import toggleForce from '../../../common/toggleForce';
+import trimTitanName from '../../../common/trimTitanName';
 import {
   buildTitanInfoTable,
   clearMemberRows,
@@ -14,9 +15,11 @@ import { clearTitanDiv, initVars } from './placeholders';
 let titanDiv = 0;
 let titanId = 0;
 let titanLoc = '';
+let titanNm = '';
 
 export const getTitanId = () => titanId;
 export const getTitanLoc = () => titanLoc;
+export const getTitanNm = () => titanNm;
 
 export function hideTitanDiv() {
   titanId = null;
@@ -31,6 +34,7 @@ export function hasTitan(el) {
   if (el.type === 0) {
     titanId = el.base_creature_id;
     titanLoc = `(${el.x},${el.y})`;
+    titanNm = trimTitanName(el.name);
     return true;
   }
   return false;

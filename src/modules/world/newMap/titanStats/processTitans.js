@@ -1,7 +1,6 @@
 import textSpan from '../../../common/cElement/textSpan';
 import partial from '../../../common/partial';
 import roundToString from '../../../common/roundToString';
-import trimTitanName from '../../../common/trimTitanName';
 import setInnerHtml from '../../../dom/setInnerHtml';
 import setText from '../../../dom/setText';
 import getKillsPct from '../../../guild/scoutTower/getKillsPct';
@@ -11,7 +10,7 @@ import { now } from '../../../support/now';
 import padZ from '../../../system/padZ';
 import addRows from './addRows';
 import { clearMemberRows, getTitanTbl } from './buildTitanInfoTable';
-import { getTitanId, getTitanLoc } from './hasTitan';
+import { getTitanId, getTitanLoc, getTitanNm } from './hasTitan';
 import {
   getCooldownText,
   getCurrentHp,
@@ -57,15 +56,17 @@ function statusTextHtml(ourTitan) {
 }
 
 function setAllText(ourTitan) {
-  [
-    [trimTitanName(ourTitan.creature.name), getTitanName],
+  for (const [txt, ctx] of [
+    [getTitanNm(), getTitanName],
     [getTitanLoc(), getTitanLocation],
     [ourTitan.current_hp, getCurrentHp],
     [ourTitan.max_hp, getMaxHp],
     [ourTitan.kills, getGuildKills],
     [currentPctText(ourTitan), getCurrentPct],
     [totalPctText(ourTitan), getTotalPct],
-  ].forEach(([txt, ctx]) => setText(txt, ctx()));
+  ]) {
+    setText(txt, ctx());
+  }
 }
 
 function doTopLabels(ourTitan) {
@@ -101,9 +102,7 @@ function doMemberRows(ourTitan) {
 
 function currentTitan(el) {
   return (
-    el.realm &&
-    el.creature.base_id === getTitanId() &&
-    el.realm === getRealmName()
+    el.realm && el.creature === getTitanId() && el.realm === getRealmName()
   );
 }
 
