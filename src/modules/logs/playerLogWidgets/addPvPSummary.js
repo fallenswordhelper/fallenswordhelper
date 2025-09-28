@@ -61,8 +61,8 @@ function parseCombat(combat, color) {
     result(combat.pvp_rating_change, 'PvP change', color);
   return (
     results +
-    (results && specials.length ? '<br>' : '') +
-    (specials.length ? `${specials.join('<br>')}` : '')
+    (results && specials?.length ? '<br>' : '') +
+    (specials?.length ? `${specials.join('<br>')}` : '')
   );
 }
 
