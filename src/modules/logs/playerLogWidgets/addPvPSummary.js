@@ -52,7 +52,7 @@ function result(stat, desc, color) {
 }
 
 function parseCombat(combat, color) {
-  const specials = combat.specials.filter(filterSpecial).map(highlightSpecial);
+  const specials = combat.specials?.filter(filterSpecial).map(highlightSpecial);
   const results =
     result(combat.xp_gain, 'XP stolen', color) +
     result(combat.gold_gain, 'Gold lost', color) +
@@ -61,8 +61,8 @@ function parseCombat(combat, color) {
     result(combat.pvp_rating_change, 'PvP change', color);
   return (
     results +
-    (results && specials.length ? '<br>' : '') +
-    (specials.length ? `${specials.join('<br>')}` : '')
+    (results && specials?.length ? '<br>' : '') +
+    (specials?.length ? `${specials.join('<br>')}` : '')
   );
 }
 
