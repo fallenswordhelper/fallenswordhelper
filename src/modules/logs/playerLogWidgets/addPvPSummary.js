@@ -52,7 +52,7 @@ function result(stat, desc, color) {
 }
 
 function parseCombat(combat, color) {
-  const specials = combat.specials.filter(filterSpecial).map(highlightSpecial);
+  const specials = combat.specials?.filter(filterSpecial).map(highlightSpecial);
   const results =
     result(combat.xp_gain, 'XP stolen', color) +
     result(combat.gold_gain, 'Gold lost', color) +

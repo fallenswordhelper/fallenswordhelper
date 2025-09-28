@@ -1,10 +1,11 @@
+import indexAjaxDoc from '../ajax/indexAjaxDoc';
+import sendEvent from '../analytics/sendEvent';
 import cElement from '../common/cElement/cElement';
 import createDiv from '../common/cElement/createDiv';
-import sendEvent from '../analytics/sendEvent';
 import createInput from '../common/cElement/createInput';
 import getText from '../common/getText';
 import querySelector from '../common/querySelector';
-import indexAjaxDoc from '../ajax/indexAjaxDoc';
+import { pcc } from '../support/layout';
 
 const pageInputValue = () => Number(querySelector('#pCC #page').value);
 let pageId = pageInputValue();
@@ -94,6 +95,8 @@ function createButtonsTd() {
 
 
 export default function completedArenas() {
+  if (!pcc() || !querySelector('#page')) return;
+
   getTarget().children[1].replaceWith(createButtonsTd());
 
   const td = querySelector('#pCC #page').closest('td');
