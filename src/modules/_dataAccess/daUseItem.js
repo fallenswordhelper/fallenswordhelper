@@ -4,7 +4,7 @@ import appUseItem from '../app/profile/useitem';
 import infoBox from '../common/infoBox';
 import regExpFirstCapture from '../common/regExpFirstCapture';
 import { composingFragmentType } from '../support/constants';
-import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 import $dataAccess from './$dataAccess';
 
 const ret = (info, prop) => ({
@@ -32,7 +32,7 @@ function stash(info) {
     return { r: { frags }, s: true };
   }
   sendEvent('da/useItem', 'Bad Msg', info);
-  if (defineUserIsDev) stdout('da/useItem', 'Bad Msg', info); //  da/useItem Bad Msg
+  devStdOut('da/useItem', 'Bad Msg', info); //  da/useItem Bad Msg
 }
 
 const outputLookup = [
@@ -44,7 +44,7 @@ const outputLookup = [
 ];
 
 function devHook() {
-  if (defineUserIsDev) stdout('da/useItem', 'No Info'); //  da/useItem No Info
+  devStdOut('da/useItem', 'No Info'); //  da/useItem No Info
 }
 
 function formatResults(doc) {

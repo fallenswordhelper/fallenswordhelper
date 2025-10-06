@@ -6,7 +6,7 @@ import on from '../common/on';
 import sendException from '../exceptions/sendException';
 import fallback from '../system/fallback';
 import { getLength, pop, push } from './sch';
-import stdout from './stdout';
+import devStdOut from './devStdOut';
 
 let paused = true;
 const message = 'fshMessage';
@@ -61,7 +61,7 @@ function initMessageHandler() {
 }
 
 function devLog(args) {
-  if (args && !isArray(args)) stdout('addTask isArray(args)', isArray(args));
+  if (args && !isArray(args)) devStdOut('addTask isArray(args)', isArray(args));
 }
 
 export default function task(priority, fn, args, scope) {

@@ -1,5 +1,5 @@
 import { openDB } from 'idb';
-import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 import { del, get } from './idb';
 
 let db; // skipcq: JS-0119
@@ -47,7 +47,7 @@ export async function combatLogAdd(value) {
   try {
     return (await getDb()).add('combat-log', value);
   } catch (e) {
-    stdout(e);
+    devStdOut(e);
   }
 }
 
@@ -55,7 +55,7 @@ export async function combatLogGetAll() {
   try {
     return (await getDb()).getAllFromIndex('combat-log', 'time');
   } catch (e) {
-    stdout(e);
+    devStdOut(e);
   }
 }
 
@@ -63,6 +63,6 @@ export async function combatLogClear() {
   try {
     return (await getDb()).clear('combat-log');
   } catch (e) {
-    stdout(e);
+    devStdOut(e);
   }
 }

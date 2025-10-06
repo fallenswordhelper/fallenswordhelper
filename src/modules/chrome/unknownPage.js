@@ -4,7 +4,7 @@ import jQueryNotPresent from '../common/jQueryNotPresent';
 import querySelector from '../common/querySelector';
 import xPath from '../common/xPath';
 import updateBuffLog from '../notepad/buffLog/updateBuffLog';
-import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 import injectQuestBookFull from './pageSwitcher/loader/injectQuestBookFull';
 import news from './pageSwitcher/loader/news';
 import viewRecipe from './pageSwitcher/loader/viewRecipe';
@@ -41,7 +41,7 @@ const unknown = [
   [
     () => defineUserIsDev, // unknownPage
     () => {
-      stdout('Fell through!');
+      devStdOut('Fell through!');
     },
   ],
 ];
@@ -50,7 +50,7 @@ export default function unknownPage() {
   // Legacy
   if (jQueryNotPresent()) return;
   const show = 0;
-  if (defineUserIsDev && show) stdout('unknownPage'); // unknownPage
+  if (show) devStdOut('unknownPage'); // unknownPage
   const known = unknown.find((el) => el[0]());
   if (known) known[1]();
 }

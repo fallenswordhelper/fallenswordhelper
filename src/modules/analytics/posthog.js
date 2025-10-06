@@ -1,12 +1,13 @@
 import ph from 'posthog-js/dist/module.no-external';
 import playerName from '../common/playerName';
 import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 
 const phTest = false;
 
 export function phEvent(event, props) {
   const showEvent = 0;
-  if (defineUserIsDev && showEvent) stdout('phEvent', event, props);
+  if (showEvent) devStdOut('phEvent', event, props);
   if (!defineUserIsDev || phTest) ph.capture(event, props);
 }
 

@@ -1,5 +1,5 @@
 import { openDB } from 'idb';
-import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 
 let dbPrm = Promise.resolve();
 let initDb = false;
@@ -20,7 +20,7 @@ export async function get(key) {
   try {
     return (await getDb()).get('keyval', key);
   } catch (e) {
-    stdout(e);
+    devStdOut(e);
   }
 }
 
@@ -28,7 +28,7 @@ export async function set(key, val) {
   try {
     return (await getDb()).put('keyval', val, key);
   } catch (e) {
-    stdout(e);
+    devStdOut(e);
   }
 }
 
@@ -36,6 +36,6 @@ export async function del(key) {
   try {
     return (await getDb()).delete('keyval', key);
   } catch (e) {
-    stdout(e);
+    devStdOut(e);
   }
 }

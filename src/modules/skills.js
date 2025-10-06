@@ -1,7 +1,7 @@
 import getBuff from './common/getBuff';
 import querySelectorArray from './common/querySelectorArray';
 import toLowerCase from './common/toLowerCase';
-import stdout from './support/stdout';
+import devStdOut from './support/devStdOut';
 import getCustomUrlParameter from './system/getCustomUrlParameter';
 
 const levels = [
@@ -56,5 +56,5 @@ export default function skills() {
     .map(getLabels)
     .map(doConcat)
     .join('\n');
-  stdout(as);
+  devStdOut(as);
 }
