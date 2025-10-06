@@ -2,7 +2,7 @@ import isNull from '../common/isNull';
 import isUndefined from '../common/isUndefined';
 import { GMSTORAGE_PATH } from '../support/constants';
 import defaults from '../support/dataObj.json';
-import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 
 const reviver = [
   ['S]', (value) => value.slice(2)],
@@ -27,12 +27,8 @@ function fshGetValue(name, defValue) {
 }
 
 export default function getValue(name) {
-  if (
-    defineUserIsDev &&
-    !name.startsWith('screenview__') &&
-    isUndefined(defaults[name])
-  ) {
-    stdout('No default setting available', name, defaults[name]);
+  if (!name.startsWith('screenview__') && isUndefined(defaults[name])) {
+    devStdOut('No default setting available', name, defaults[name]);
   }
   return fshGetValue(name, defaults[name]);
 }

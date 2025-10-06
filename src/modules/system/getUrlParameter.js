@@ -1,4 +1,4 @@
-import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 import getCustomUrlParameter from './getCustomUrlParameter';
 
 export default function getUrlParameter(sParam) {
@@ -6,7 +6,7 @@ export default function getUrlParameter(sParam) {
     const sPageURL = decodeURIComponent(window.location.search);
     return getCustomUrlParameter(sPageURL, sParam);
   } catch (e) {
-    stdout(e);
+    devStdOut(e);
     return '';
   }
 }

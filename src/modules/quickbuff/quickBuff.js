@@ -6,7 +6,7 @@ import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import onclick from '../common/onclick';
 import playerName from '../common/playerName';
-import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 import { addBuffLevels } from './addBuffLevels';
 import { quickBuffHeader } from './assets';
 import doLabels from './doLabels';
@@ -23,7 +23,7 @@ function setupEventHandlers() {
 }
 
 function devCheck() {
-  if (defineUserIsDev) stdout('playerName', playerName());
+  devStdOut('playerName', playerName());
 }
 
 export default async function quickBuff() {

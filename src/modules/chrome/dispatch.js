@@ -10,7 +10,7 @@ import querySelector from '../common/querySelector';
 import exceptions from '../exceptions/exceptions';
 import globalErrorHandler from '../exceptions/globalErrorHandler';
 import calf from '../support/calf';
-import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 import task from '../support/task';
 import getUrlParameter from '../system/getUrlParameter';
 import isMessageSound from './isMessageSound';
@@ -80,9 +80,9 @@ function getCoreFunction() {
 
 function devHooks() {
   const showPath = 0;
-  if (showPath) stdout('functionPath', functionPath);
-  if (!coreFunction) stdout('No Core Function.');
-  else if (!isFunction(coreFunction)) stdout('Not Core Function.');
+  if (showPath) devStdOut('functionPath', functionPath);
+  if (!coreFunction) devStdOut('No Core Function.');
+  else if (!isFunction(coreFunction)) devStdOut('Not Core Function.');
 }
 
 function asyncDispatcher() {

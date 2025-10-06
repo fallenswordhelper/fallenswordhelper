@@ -4,7 +4,7 @@ https://github.com/addyosmani/pubsubz
 */
 
 import partial from '../common/partial';
-import stdout from './stdout';
+import devStdOut from './devStdOut';
 import task from './task';
 
 const topics = {};
@@ -15,7 +15,7 @@ function execute(args, el) {
 }
 
 export function publish(topic, args) {
-  if (defineUserIsDev) stdout('publish', topic); //  pubsubz publish
+  devStdOut('publish', topic); //  pubsubz publish
   if (!topics[topic]) return;
   topics[topic].forEach(partial(execute, args));
   return true; // probably not needed

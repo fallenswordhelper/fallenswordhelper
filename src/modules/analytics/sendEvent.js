@@ -1,4 +1,4 @@
-import stdout from '../support/stdout';
+import devStdOut from '../support/devStdOut';
 import { phEvent } from './posthog';
 
 function spaceToUnderscore(maybeStr) {
@@ -26,8 +26,7 @@ function buildKey(eventType, eventLabel) {
 
 export default function sendEvent(eventCategory, eventAction, eventLabel) {
   if (!eventCategory) {
-    if (defineUserIsDev)
-      stdout('sendEvent', eventCategory, eventAction, eventLabel);
+    devStdOut('sendEvent', eventCategory, eventAction, eventLabel);
     return;
   }
   const eventType = buildEvent(eventCategory, eventAction);
