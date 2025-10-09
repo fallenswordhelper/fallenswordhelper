@@ -207,13 +207,11 @@ async function startBackgroundProcess() {
   }
 
   // skipcq: JS-0092
-  // BEGIN-NOSCAN
   while (bgRunning) {
     const waitTime = calculateWaitTime(guildData, allMembers);
     await delay(waitTime);
     await collectGuildData(guildData, allMembers);
   }
-  // END-NOSCAN
 }
 
 export default function guildActivity() {
