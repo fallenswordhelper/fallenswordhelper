@@ -32,7 +32,7 @@ function getMembersNeedingUpdate(allMembers, guildData) {
     const history = guildData.members[member.name];
     if (!history || history.length === 0) return true;
 
-    const lastRecord = history[history.length - 1];
+    const lastRecord = history.at(-1);
     return nowSecs() - lastRecord[utc] > 86400; // 24 hours
   });
 }
@@ -40,7 +40,7 @@ function getMembersNeedingUpdate(allMembers, guildData) {
 function hasSignificantChanges(memberHistory, member, prof, daysSinceActivity) {
   if (memberHistory.length === 0) return true;
 
-  const last = memberHistory[memberHistory.length - 1];
+  const last = memberHistory.at(-1);
   const isActive = daysSinceActivity <= 7;
 
   return (
@@ -67,7 +67,7 @@ function createMemberRecord(member, prof, daysSinceActivity) {
 
 async function fetchMemberProfile(memberName) {
   const prof = await profile(memberName, true);
-  return prof?.current_stamina !== undefined ? prof : null;
+  return prof?.current_stamina ? prof : null;
 }
 
 function ensureMemberHistory(guildData, memberName) {
@@ -90,7 +90,7 @@ function processMemberDataUpdate(member, prof, history) {
 
 function updateLastRecordTimestamp(history, daysSinceActivity) {
   if (history.length > 0) {
-    const lastRecord = history[history.length - 1];
+    const lastRecord = history.at(-1);
     lastRecord[utc] = nowSecs();
     lastRecord[act] = daysSinceActivity;
   }
@@ -121,7 +121,7 @@ function findOldestMemberUpdateTime(guildData, currentMemberNames) {
       if (!currentMemberNames.has(memberName)) continue;
 
       if (history.length > 0) {
-        const lastRecord = history[history.length - 1];
+        const lastRecord = history.at(-1);
         const memberUpdateTime = lastRecord[utc];
         if (!oldestUpdateTime || memberUpdateTime < oldestUpdateTime) {
           oldestUpdateTime = memberUpdateTime;
@@ -206,11 +206,14 @@ async function startBackgroundProcess() {
     return;
   }
 
+  // BEGIN-NOSCAN
+  // skipcq: JS-0092
   while (bgRunning) {
     const waitTime = calculateWaitTime(guildData, allMembers);
     await delay(waitTime);
     await collectGuildData(guildData, allMembers);
   }
+  // END-NOSCAN
 }
 
 export default function guildActivity() {

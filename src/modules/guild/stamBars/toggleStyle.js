@@ -21,7 +21,7 @@ async function loadTrackerData() {
     trackerData = {};
     for (const [name, history] of Object.entries(raw.members)) {
       if (history.length > 0) {
-        const latest = history[history.length - 1];
+        const latest = history.at(-1);
         trackerData[name] = {
           current: latest[cur],
           max: latest[max],
