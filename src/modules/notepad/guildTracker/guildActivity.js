@@ -206,8 +206,8 @@ async function startBackgroundProcess() {
     return;
   }
 
-  // BEGIN-NOSCAN
   // skipcq: JS-0092
+  // BEGIN-NOSCAN
   while (bgRunning) {
     const waitTime = calculateWaitTime(guildData, allMembers);
     await delay(waitTime);
