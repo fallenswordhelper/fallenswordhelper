@@ -1,5 +1,5 @@
 <script>
-  import VirtualList from '../../common/VirtualList.svelte';
+  import VirtualScroll from '../../common/VirtualScroll.svelte';
   import daGuildLog from '../../_dataAccess/daGuildLog';
   import sendEvent from '../../analytics/sendEvent';
   import navigateTo from '../../common/navigateTo';
@@ -145,7 +145,7 @@
   {#snippet title()}
     Guild Log
   {/snippet}
-  <div class="content">
+  <div class="fsh-guild-log">
     <FilterHeader
       bind:checks
       bind:searchValue
@@ -175,7 +175,7 @@
       {/each}
     {:then}
       <div class="vs">
-        <VirtualList items={displayLog}>
+        <VirtualScroll items={displayLog} overscan={20}>
           {#snippet children({ item: logEntry })}
             <LogItem
               {groupCombatItems}
@@ -183,7 +183,7 @@
               {logEntry}
             />
           {/snippet}
-        </VirtualList>
+        </VirtualScroll>
       </div>
     {:catch error}
       {error}
@@ -192,7 +192,7 @@
 </ModalTitled>
 
 <style>
-  .content {
+  .fsh-guild-log {
     font-size: 12px;
     width: 800px;
   }
@@ -205,6 +205,7 @@
   .vs {
     --button-color: #383838;
     height: calc(100vh - 180px);
+    overflow: hidden;
   }
   .row-container {
     display: grid;
@@ -216,5 +217,8 @@
     padding-left: 2px;
     padding-top: 1px;
     margin-top: 2px;
+  }
+  :global(.modal-content:has(.fsh-guild-log)) {
+    scrollbar-gutter: auto;
   }
 </style>

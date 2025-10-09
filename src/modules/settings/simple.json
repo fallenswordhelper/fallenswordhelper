@@ -47,7 +47,7 @@
   },
   "enableStamBars": {
     "helpTitle": "Stamina Bars",
-    "helpText": "This shows stamina as a coloured bar."
+    "helpText": "This shows stamina as a coloured bar. It depends on the guild activity tracker to get the data."
   },
   "hidePlayerActions": {
     "helpTitle": "Hide Player Actions",

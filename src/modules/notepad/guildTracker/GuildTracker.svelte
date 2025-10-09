@@ -11,12 +11,15 @@
   import isNull from '../../common/isNull';
   import isUndefined from '../../common/isUndefined';
   import keys from '../../common/keys';
+  import VirtualScroll from '../../common/VirtualScroll.svelte';
   import { act, cur, gxp, lvl, max, utc, vl } from './indexConstants';
   import { getActivity } from './utils';
 
   let activity = $state({});
   let members = $state([]);
   let selected = $state('');
+
+  const items = $derived(activity?.[selected] ?? []);
 
   const revSort = (data) =>
     fromEntries(
@@ -46,9 +49,9 @@
   }
 </script>
 
-<div class="main">
+<div class="fsh-guild-tracker">
   {#await init() then}
-    <div class="grid head">
+    <div class="grid-row head">
       <div>Date</div>
       <div>
         Member
@@ -66,24 +69,28 @@
       <div>Last Activity (Days)</div>
       <div>GXP</div>
     </div>
-    <div class="grid items">
-      {#each activity?.[selected] ?? [] as stuff, x (x)}
-        <div>{formatUtcDateTime(new Date(stuff[utc] * 1000))}</div>
-        <div>{selected}</div>
-        <div>{toText(stuff[lvl])}</div>
-        <div>{toText(stuff[vl])}</div>
-        <div>{toText(stuff[cur])}</div>
-        <div>{toText(stuff[max])}</div>
-        <div>{Math.floor((stuff[cur] / stuff[max]) * 100)}</div>
-        <div>{stuff[act]}</div>
-        <div>{toText(stuff[gxp])}</div>
-      {/each}
+    <div class="items">
+      <VirtualScroll {items}>
+        {#snippet children({ item: stuff })}
+          <div class="grid-row">
+            <div>{formatUtcDateTime(new Date(stuff[utc] * 1000))}</div>
+            <div>{selected}</div>
+            <div>{toText(stuff[lvl])}</div>
+            <div>{toText(stuff[vl])}</div>
+            <div>{toText(stuff[cur])}</div>
+            <div>{toText(stuff[max])}</div>
+            <div>{Math.floor((stuff[cur] / stuff[max]) * 100)}</div>
+            <div>{stuff[act]}</div>
+            <div>{toText(stuff[gxp])}</div>
+          </div>
+        {/snippet}
+      </VirtualScroll>
     </div>
   {/await}
 </div>
 
 <style>
-  .main {
+  .fsh-guild-tracker {
     --date: 128px;
     --member: 80px;
     --level: 40px;
@@ -105,7 +112,7 @@
     padding-bottom: 4px;
     padding-left: 4px;
   }
-  .grid {
+  .grid-row {
     column-gap: var(--col-gap);
     display: grid;
     grid-template-columns:
@@ -136,20 +143,20 @@
     width: 80px;
   }
   .items {
-    max-height: calc(100vh - 140px);
-    overflow-y: auto;
+    height: calc(100vh - 140px);
+    overflow: hidden;
     width: calc(var(--grid-width) + var(--scroll));
   }
-  .items div {
-    overflow-x: hidden;
+  :global(.modal-content:has(.fsh-guild-tracker)) {
+    scrollbar-gutter: auto;
   }
-  .items div:nth-child(9n-6),
-  .items div:nth-child(9n-5),
-  .items div:nth-child(9n-4),
-  .items div:nth-child(9n-3),
-  .items div:nth-child(9n-2),
-  .items div:nth-child(9n-1),
-  .items div:nth-child(9n) {
+  .grid-row div:nth-child(3),
+  .grid-row div:nth-child(4),
+  .grid-row div:nth-child(5),
+  .grid-row div:nth-child(6),
+  .grid-row div:nth-child(7),
+  .grid-row div:nth-child(8),
+  .grid-row div:nth-child(9) {
     text-align: right;
   }
 </style>
