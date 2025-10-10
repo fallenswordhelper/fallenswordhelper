@@ -1,5 +1,5 @@
 import asyncPThree from '../../../common/asyncPThree';
-import guildActivity from '../../../notepad/guildTracker/guildActivity';
+import { init as guildActivity } from '../../../notepad/guildTracker/guildActivity';
 import getValue from '../../../system/getValue';
 import injectMenu from '../../accordion/injectMenu';
 import activeWantedBounties from '../../activeWantedBounties/activeWantedBounties';
