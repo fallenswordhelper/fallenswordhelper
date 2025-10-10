@@ -7,6 +7,7 @@ import insertElement from '../../common/insertElement';
 import on from '../../common/on';
 import onclick from '../../common/onclick';
 import querySelector from '../../common/querySelector';
+import { start, stop } from '../../notepad/guildTracker/guildActivity';
 import { simpleCheckboxHtml } from '../../settings/simpleCheckbox';
 import { defEnableGuildActivityTracker } from '../../support/constants';
 import setValue from '../../system/setValue';
@@ -15,6 +16,11 @@ function togglePref(evt) {
   if (evt.target.id === defEnableGuildActivityTracker) {
     sendEvent('Guild Tracker', 'togglePref');
     setValue(defEnableGuildActivityTracker, evt.target.checked);
+    if (evt.target.checked) {
+      start();
+    } else {
+      stop();
+    }
   }
 }
 
@@ -25,9 +31,7 @@ function showTracker() {
 
 export default function tracker() {
   const gs = querySelector('#pCC img.guild_openGuildStore');
-  if (!gs) {
-    return;
-  }
+  if (!gs) return;
   const td = gs.parentNode;
   td.classList.add('fshRelative');
   const myDiv = createDiv({

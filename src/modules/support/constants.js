@@ -198,3 +198,10 @@ export const levelDefaults = [
 ];
 
 export const blockedSkillsCheckboxes = 'input[name="blockedSkillList[]"]';
+
+export const SECONDS_PER_DAY = 86400;
+export const MS_PER_SECOND = 1000;
+export const GUILD_ACTIVITY_BATCH_SIZE = 3;
+export const MIN_UPDATE_INTERVAL_SECS = 30;
+export const MIN_WAIT_TIME_SECS = 60;
+export const ACTIVE_PLAYER_THRESHOLD_DAYS = 7;
