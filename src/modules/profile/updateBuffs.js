@@ -17,6 +17,8 @@ function getStatVal(stat) {
     arrayFrom(getElementById(`stat-${stat.toLowerCase()}`).childNodes)
       .filter(textNodes)
       .map(getTextTrim)
+      .join('')
+      .split(',')
       .join(''),
   );
 }

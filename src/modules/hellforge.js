@@ -3,6 +3,7 @@ import flattenItems from './_dataAccess/export/flattenItems';
 import createStyle from './common/cElement/createStyle';
 import getElementById from './common/getElementById';
 import insertElement from './common/insertElement';
+import jQueryPresent from './common/jQueryPresent';
 import { pcc } from './support/layout';
 
 const itemStyle = ({ a }) => `div[id$="-highlight-${a}"] {
@@ -22,5 +23,5 @@ async function highlightPerf() {
 
 export default function hellforge() {
   const hellforgeItems = getElementById('hellforge-items');
-  if (hellforgeItems) highlightPerf();
+  if (jQueryPresent() && hellforgeItems) highlightPerf();
 }
