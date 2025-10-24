@@ -23,7 +23,10 @@ const getCoolTime = (cooldown) =>
     : 0;
 
 function dataObj(aRow) {
-  const cooldownText = getText(aRow.nextElementSibling.cells[0]);
+  let cooldownText = getText(aRow.nextElementSibling.cells[0]);
+  if (!cooldownText.startsWith('Cooldown until: ')) {
+    cooldownText = getText(aRow.cells[4]);
+  }
   return {
     cooldownText,
     coolTime: getCoolTime(cooldownText),
@@ -54,8 +57,6 @@ function getNewTitans(oldTitans, titanRows) {
 }
 
 export default async function titanTracker(titanTables, titanRows) {
-  const bugged = 1;
-  if (bugged) return;
   const newTitans = getNewTitans(await get('fsh_titans'), titanRows);
   if (titanTables[0].rows.length > 5) {
     startTracker(titanTables[0], newTitans, titanRows);
