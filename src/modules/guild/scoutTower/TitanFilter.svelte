@@ -8,13 +8,12 @@
   import LinkBtnBracketed from '../../common/LinkBtnBracketed.svelte';
   import toggleForce from '../../common/toggleForce';
   import trimTitanName from '../../common/trimTitanName';
+  import getUrlParameter from '../../system/getUrlParameter';
   import { get, set } from '../../system/idb';
 
   let { theTitans, titanRows } = $props();
 
   const prefName = 'fsh_titanFilter';
-  let current = $state(true);
-  let history = $state(true);
   let securable = $state(false);
   let titans = $state([]);
 
@@ -22,8 +21,6 @@
   const getPrefs = () => get(prefName);
   const setPrefs = () =>
     set(prefName, {
-      current: $state.snapshot(current),
-      history: $state.snapshot(history),
       securable: $state.snapshot(securable),
       titans: $state.snapshot(titans),
     });
@@ -33,14 +30,10 @@
       ...fromEntries(entries(theTitans).map(([n]) => [n, true])),
       ...fromEntries(titans.map(([n, o]) => [trimTitanName(n), o])),
     }).sort(byName);
-  const isCurrent = (ctx) => ctx.active && current;
-  const isHistory = (ctx) => !ctx.active && history;
   const isSecurable = (ctx) => ctx.securable || !securable;
 
   function testVis(ctx) {
-    return (
-      (isCurrent(ctx) || isHistory(ctx)) && titanPref(ctx) && isSecurable(ctx)
-    );
+    return titanPref(ctx) && isSecurable(ctx);
   }
 
   function updateVis([ctx, newVis]) {
@@ -61,7 +54,7 @@
   async function buildTitanList() {
     const oldOptions = await getPrefs();
     if (oldOptions) {
-      ({ current, history, securable, titans } = oldOptions);
+      ({ securable, titans } = oldOptions);
     }
     titans = mergePrefs();
     doVisibility();
@@ -70,16 +63,6 @@
   function toggleVisibility() {
     setPrefs();
     doVisibility();
-  }
-
-  function toggleCurrent() {
-    sendEvent('TitanFilter', 'toggleCurrent');
-    toggleVisibility();
-  }
-
-  function toggleHistory() {
-    sendEvent('TitanFilter', 'toggleHistory');
-    toggleVisibility();
   }
 
   function toggleSecurable() {
@@ -107,35 +90,21 @@
 
 <table>
   <tbody>
-    <tr><td class="header" colspan="3"></td></tr>
-    <tr>
-      <td colspan="3">
-        <label>
-          <input
-            bind:checked={current}
-            onchange={toggleCurrent}
-            type="checkbox"
-          />
-          Current
-        </label>
-        <label>
-          <input
-            bind:checked={history}
-            onchange={toggleHistory}
-            type="checkbox"
-          />
-          History
-        </label>
-        <label>
-          <input
-            bind:checked={securable}
-            onchange={toggleSecurable}
-            type="checkbox"
-          />
-          Securable
-        </label>
-      </td>
-    </tr>
+    {#if getUrlParameter('tab') !== 'completed'}
+      <tr><td class="header" colspan="3"></td></tr>
+      <tr>
+        <td colspan="3">
+          <label>
+            <input
+              bind:checked={securable}
+              onchange={toggleSecurable}
+              type="checkbox"
+            />
+            Securable
+          </label>
+        </td>
+      </tr>
+    {/if}
     <tr><td class="header" colspan="3"></td></tr>
     <tr>
       <td colspan="3">
@@ -167,13 +136,15 @@
 
 <style>
   table {
-    width: 500px;
-    margin: auto;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 10px;
+    width: 500px;
   }
   td:not(.header) {
-    text-align: center;
     padding: 4px 0;
+    text-align: center;
   }
   .header {
     height: 1px;
@@ -182,8 +153,8 @@
     white-space: nowrap;
   }
   div {
-    margin-top: 4px;
     --button-margin: auto 2px;
+    margin-top: 4px;
   }
   #titan-list {
     column-count: 3;
