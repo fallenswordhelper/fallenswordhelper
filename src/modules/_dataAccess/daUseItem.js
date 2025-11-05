@@ -71,5 +71,5 @@ async function useItem(backpackInvId) {
 }
 
 export default function daUseItem(item) {
-  return $dataAccess(appUseItem, useItem, item);
+  return $dataAccess(useItem, appUseItem, item);
 }
