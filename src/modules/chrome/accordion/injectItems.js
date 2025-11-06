@@ -136,10 +136,10 @@ function adjustHeight(theNav, myNav) {
   // first the closed saved variables
   myNav.heights = querySelectorArray('#nav > li').map(subItems); // skipcq: JS-0083
   const index = Number(myNav.state);
-  if (index && index > -1 && index < theNav.children.length) {
+  const listStyle = theNav?.children?.[index]?.children?.[1]?.style;
+  if (listStyle) {
     // and now the open one
-    theNav.children[myNav.state].children[1].style.height =
-      `${myNav.heights[myNav.state]}px`; // skipcq: JS-0083
+    listStyle.height = `${myNav.heights[index]}px`; // skipcq: JS-0083
   }
 }
 

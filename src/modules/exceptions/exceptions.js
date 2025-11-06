@@ -55,6 +55,7 @@ const substrings = [
   'Superelite-searcher.user.js',
   'SWS-Creature-Killer.user.js',
   'Titan-3.0.user.js',
+  'Titan-Kill-Counter-Kill-Streak-Based.user.js',
   'Titan-Quick-Kill.user.js',
   'UFSG-dodatki.user.js',
   'UnhandledPromiseRejectionWarning: 404',
