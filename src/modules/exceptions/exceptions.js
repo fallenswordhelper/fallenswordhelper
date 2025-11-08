@@ -35,6 +35,7 @@ const substrings = [
   'GvG-Name-Only.user.js',
   'GVG%252FRelics-Discord.user.js',
   'GVG%252FRelics-Notifications.user.js',
+  'GVG%252FRelics%252FTitan-Drop-Discord-Alerts-Titan-Image-Fix-%252B-Text-Mode-for-Others.user.js',
   'hcsBar',
   'index.php?cmd=auctionhouse&subcmd=quickcreate',
   'index.php?cmd=composing&subcmd=breakdown',
