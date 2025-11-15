@@ -1,13 +1,22 @@
-.fshGc {
+.fsh-guild-chat,
+.fsh-guild-chat-action {
   table-layout: fixed;
   overflow-wrap: break-word;
 }
-.fshGc td:nth-child(1) {
+.fsh-guild-chat td:nth-child(1),
+.fsh-guild-chat-action td:nth-child(1) {
   width: 120px;
 }
-.fshGc td:nth-child(2) {
+.fsh-guild-chat td:nth-child(2),
+.fsh-guild-chat-action td:nth-child(2) {
   width: 100px;
 }
-.fshGc td:nth-child(3) {
+.fsh-guild-chat td:nth-child(3) {
   width: 418px;
+}
+.fsh-guild-chat-action td:nth-child(3) {
+  width: 378px;
+}
+.fsh-guild-chat-action td:nth-child(4) {
+  width: 40px;
 }
