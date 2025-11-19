@@ -29,10 +29,10 @@ function drawButtons(bp, theSpan) {
   if (bp.options.checkboxesEnabled) {
     insertElement(
       myDiv,
-      theSpan.parentNode.nextElementSibling.nextElementSibling,
+      theSpan.parentNode.parentNode.nextElementSibling.nextElementSibling,
     );
   }
-  insertElement(theSpan.parentNode.parentNode, myDiv);
+  insertElement(theSpan.parentNode.parentNode.parentNode, myDiv);
 }
 
 export default function fastWearLinks(bp) {
