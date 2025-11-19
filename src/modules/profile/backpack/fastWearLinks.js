@@ -2,6 +2,7 @@ import createDiv from '../../common/cElement/createDiv';
 import hasClass from '../../common/hasClass';
 import insertElement from '../../common/insertElement';
 import partial from '../../common/partial';
+import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
 
 function actionClass(usable) {
@@ -26,13 +27,14 @@ function drawButtons(bp, theSpan) {
       toUse,
     )}">${actionText(toUse)}</button>`,
   });
+  const parent = theSpan.closest('div');
   if (bp.options.checkboxesEnabled) {
     insertElement(
       myDiv,
-      theSpan.parentNode.parentNode.nextElementSibling.nextElementSibling,
+      querySelector('input', parent),
     );
   }
-  insertElement(theSpan.parentNode.parentNode.parentNode, myDiv);
+  insertElement(parent, myDiv);
 }
 
 export default function fastWearLinks(bp) {
