@@ -174,13 +174,11 @@
     {/each}
     {#if logEntry.type === 17 && groupCombatItems && logEntry.msg.text.includes('victorious')}
       {#await getCombat(logEntry.time, logEntry.msg.attachments[0].data) then json}
-        {#if json?.r?.combat?.items?.[0]?.n}
+        {#if json?.r?.combat?.items?.[0]}
           <div>
             <a href="{playerIdUrl}{json.r.combat.attacker.group.players[0].id}">
               {json.r.combat.attacker.group.players[0].name}</a
-            >'s group looted the item '<span class="fshGreen"
-              >{json?.r?.combat?.items?.[0]?.n}</span
-            >'
+            >'s group looted an item
           </div>
         {/if}
       {/await}
