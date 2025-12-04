@@ -72,6 +72,9 @@ const superelite = () => {
 const crates = () => {
   runDefault(import('../../crates'));
 };
+const xmas = () => {
+  runDefault(import('../../points/xmas/xmas'));
+};
 
 const skills = () => {
   if (!defineUserIsDev) {
@@ -81,7 +84,7 @@ const skills = () => {
 };
 
 export default {
-  crates:{ '-': { '-': crates } },
+  crates: { '-': { '-': crates } },
   creatures: { '-': { '-': ufsgAllowBack } }, // UFSG
   items, // UFSG
   masterrealms: { '-': { '-': ufsgAllowBack } }, // UFSG
@@ -109,7 +112,7 @@ export default {
   marketplace: { createreq: { '-': marketplace } },
   news,
   notepad,
-  points: { '-': { '-': points } },
+  points: { '-': { '-': points }, xmas: { '-': xmas } },
   potionbazaar,
   privatemessage: { '-': { '-': privateMsg } },
   profile,
