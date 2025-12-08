@@ -1,7 +1,15 @@
 import indexAjaxJson from '../ajax/indexAjaxJson';
-import contrib from '../app/globalquests/contrib';
+import getApp from '../app/getApp';
 import isArray from '../common/isArray';
 import $dataAccess from './$dataAccess';
+
+function globalquests(data) {
+  return getApp({ cmd: 'globalquests', ...data });
+}
+
+function contrib() {
+  return globalquests({ subcmd: 'contrib' });
+}
 
 const formatContrib = ({ username, value }) => ({
   player: { name: username },
@@ -15,5 +23,5 @@ async function globalContrib() {
 }
 
 export default function daGlobalContrib() {
-  return $dataAccess(contrib, globalContrib);
+  return $dataAccess(globalContrib, contrib);
 }

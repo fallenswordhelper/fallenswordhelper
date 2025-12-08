@@ -52,7 +52,6 @@ const usualRoutines = [
   buffInfo,
   interceptMouseEvents,
   champAttacks,
-  injectGlobalTop,
   teleport,
   messageQueue,
   replaceFootprints,
@@ -61,6 +60,7 @@ const usualRoutines = [
 export default function newMap() {
   executeAll(usualRoutines);
   if (defineUserIsDev) {
+    injectGlobalTop();
     //  hide titan combat results, global top 100
     hideTitanCombatResults();
   }
