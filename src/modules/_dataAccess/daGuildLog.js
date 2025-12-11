@@ -112,7 +112,6 @@ function toApp(doc) {
 }
 
 async function fallback() {
-  newGuildLogHistoryPages = Number(getValue('newGuildLogHistoryPages'));
   const builtLog = await buildLog();
   const mapped = builtLog.flatMap(toApp);
   return mapped;
@@ -124,13 +123,17 @@ async function getGuildLog(logId = -1, direction = 1, acc = []) {
   if (!thisChunk?.s) return serverError();
   publish('guildLog-progress');
   const newAcc = acc.concat(thisChunk.r.logs);
-  if (thisChunk.r.logs.length !== limit) {
+  if (
+    thisChunk.r.logs.length !== limit ||
+    newAcc.length >= limit * newGuildLogHistoryPages
+  ) {
     return newAcc;
   }
   return getGuildLog(thisChunk.r.logs[0].id, 0, newAcc);
 }
 
 export default function daGuildLog() {
+  newGuildLogHistoryPages = Number(getValue('newGuildLogHistoryPages'));
   const test = 0;
   if (test) return fallback();
   return $dataAccess(getGuildLog, fallback);
