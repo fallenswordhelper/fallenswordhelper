@@ -6,6 +6,7 @@
 
   let exportPromise = $state(Promise.resolve(null));
   let csvData = $state(null);
+  let jsonData = $state(null);
 
   const header =
     'item_id,inv_id,item_name,rarity,type,durability,max_durability,guild_tag,' +
@@ -21,7 +22,7 @@
     item.durability,
     item.max_durability,
     item.guild_tag,
-    item.in_guide,
+    String(!!item.in_guide),
     item.player_id,
     item.equipped,
     item.craft,
@@ -49,6 +50,7 @@
     const json = await guildStore();
     if (!json?.items?.length) throw new Error('Invalid export data');
     const items = json.items;
+    jsonData = json;
     csvData = `${header}${toCsv(items)}\n`;
     return null;
   }
@@ -67,6 +69,18 @@
     const filename = `gs_export_${timestamp}.csv`;
     download(csvBlob(csvData), filename);
   }
+
+  function downloadJson() {
+    if (!jsonData) return;
+    sendEvent('GS Export', 'Download JSON');
+    const now = new Date();
+    const timestamp = now.toISOString().slice(0, 19).replace(/[:.]/g, '-');
+    const filename = `gs_export_${timestamp}.json`;
+    const jsonBlob = new Blob([JSON.stringify(jsonData, null, 2)], {
+      type: 'application/json',
+    });
+    download(jsonBlob, filename);
+  }
 </script>
 
 {#if !currentGuildId()}
@@ -82,9 +96,10 @@
     {#if csvData}
       <div class="export-ready">
         <p class="success">
-          Export ready! Click the button below to download your CSV file.
+          Export ready! Click the button below to download your file.
         </p>
         <button type="button" onclick={downloadExport}> Download CSV </button>
+        <button type="button" onclick={downloadJson}> Download JSON </button>
       </div>
     {:else}
       <button type="button" onclick={generateExport}> Generate Export </button>
