@@ -1,0 +1,1 @@
+{"version":3,"file":"reliclist-BOzIgkiA.js","sources":["src/modules/app/guild/reliclist.js"],"names":["reliclist","guildId","offset","limit","data","subcmd","guild_id","guild"],"mappings":";AAEe,SAASA,EAAUC,EAASC,EAAQC,GACjD,MAAMC,EAAO,CACXC,OAAQ,eACJJ,GAAW,CAAEK,SAAUL,GAC3BC,SACAC;AAGF,OAAOI,EAAMH,EACf"}

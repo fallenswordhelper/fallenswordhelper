@@ -1,1 +1,0 @@
-{"version":3,"file":"superelite-B_5bzg_l.js","sources":["src/modules/superelite.js"],"sourcesContent":null,"names":["superelite","querySelectorAll","forEach","partial","ufsgLinkFromImg","ufsgItemLink"],"mappings":";;;AAKe,SAASA,IACtBC,EAAiB,4CAA4CC,QAC3DC,EAAQC,EAAiB,WAE3BH,EAAiB,wCAAwCC,QACvDC,EAAQE,EAAc,UAE1B"}
