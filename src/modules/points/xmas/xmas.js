@@ -6,7 +6,7 @@ import { pcc } from '../../support/layout';
 /* global flamedeerData:true */
 
 export default function xmas() {
-  if (flamedeerData?.endTime && pcc()) {
+  if ('flamedeerData' in window && flamedeerData?.endTime && pcc()) {
     insertHtmlBeforeEnd(
       pcc(),
       `<div style="color: blue; text-align: center;">

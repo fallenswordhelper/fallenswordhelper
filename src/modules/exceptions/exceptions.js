@@ -12,6 +12,8 @@ const substrings = [
   'Daily-Quest-Auto-Hunter-All-Creatures-%252B-SE-Searcher-Movement.user.js',
   'Discord-Message-Checks-for-Updates.user.js',
   'dynamically imported module',
+  'Fallen-Sword-Arena-Filter-Profile-Inv-Refresh.user.js',
+  'Fallen-Sword-Arena-Filter-Tournament-Box-Layout.user.js',
   'Fallen-Sword-Auto-Invent.user.js',
   'Fallen-Sword-Auto-Skill-Caster.user.js',
   'Fallen-Sword-Champion-and-Super-Elite-Alert.user.js',
