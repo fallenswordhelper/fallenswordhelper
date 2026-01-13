@@ -83,14 +83,17 @@
   // Validation
   if (!Array.isArray(expanded)) throw "'expanded' needs to be an array";
   if (!Array.isArray(selected)) throw "'selection' needs to be an array";
-  if (expandRowKey !== null) {
+  // svelte-ignore state_referenced_locally
+    if (expandRowKey !== null) {
     console.warn("'expandRowKey' is deprecated in favour of 'rowKey'");
   }
-  if (classNameRowSelected && !rowKey) {
+  // svelte-ignore state_referenced_locally
+    if (classNameRowSelected && !rowKey) {
     console.error("'rowKey' is needed to use 'classNameRowSelected'");
   }
 
-  let showFilterHeader = columns.some((c) => {
+  // svelte-ignore state_referenced_locally
+    let showFilterHeader = columns.some((c) => {
     // check if there are any filter or search headers
     return (
       !c.hideFilterHeader &&

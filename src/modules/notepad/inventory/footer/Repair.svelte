@@ -11,7 +11,8 @@
     { durability, max_durability: maxDur, player_id: pid, rarity, type },
   ) => durability < maxDur && pid === -1 && rarity !== 5 && type < 9;
 
-  const api = new DataTable(fshInv);
+  // svelte-ignore state_referenced_locally
+    const api = new DataTable(fshInv);
   const rows = api.rows(repairable);
   const data = arrayFrom(rows.data());
   if (data.length) disabled = 0;
