@@ -2,11 +2,12 @@ import profile from '../../_dataAccess/export/profile';
 import lastActivityToDays from '../../common/lastActivityToDays';
 import {
   ACTIVE_PLAYER_THRESHOLD_DAYS,
+  GUILD_ACTIVITY_UPDATE_INTERVAL,
   SECONDS_PER_DAY,
 } from '../../support/constants';
 import devStdOut from '../../support/devStdOut';
-import { nowSecs } from '../../support/now';
-import { act, cur, gxp, lvl, max, utc, vl } from './indexConstants';
+import { realtimeSecs } from '../../support/now';
+import { act, created, cur, gxp, lvl, max, utc, vl } from './indexConstants';
 
 function hasSignificantChanges(memberHistory, member, prof, daysSinceActivity) {
   if (memberHistory.length === 0) return true;
@@ -24,14 +25,16 @@ function hasSignificantChanges(memberHistory, member, prof, daysSinceActivity) {
 }
 
 function createMemberRecord(member, prof, daysSinceActivity) {
+  const now = realtimeSecs();
   const record = [];
   record[act] = daysSinceActivity;
   record[cur] = prof.current_stamina;
   record[lvl] = member.level;
   record[max] = prof.stamina;
-  record[utc] = nowSecs();
+  record[utc] = now;
   record[vl] = member.vl;
   record[gxp] = member.guild_xp || 0;
+  record[created] = now; // Track when record was created
 
   return record;
 }
@@ -48,36 +51,70 @@ function ensureMemberHistory(guildData, memberName) {
   return guildData.members[memberName];
 }
 
-function updateLastRecordTimestamp(history, daysSinceActivity) {
-  if (history.length > 0) {
-    const lastRecord = history.at(-1);
-    lastRecord[utc] = nowSecs();
-    lastRecord[act] = daysSinceActivity;
-  }
+function updateExistingRecord(history, member, prof, daysSinceActivity) {
+  const lastRecord = history.at(-1);
+  lastRecord[act] = daysSinceActivity;
+  lastRecord[cur] = prof.current_stamina;
+  lastRecord[lvl] = member.level;
+  lastRecord[max] = prof.stamina;
+  lastRecord[utc] = realtimeSecs(); // Update when data was last verified
+  lastRecord[vl] = member.vl;
+  lastRecord[gxp] = member.guild_xp || 0;
+  // Don't update [created] - keep original creation time for 24h check
 }
 
 function processMemberDataUpdate(member, prof, history) {
   const daysSinceActivity = lastActivityToDays(member.last_activity);
+  const lastRecord = history.length > 0 ? history.at(-1) : null;
 
-  if (hasSignificantChanges(history, member, prof, daysSinceActivity)) {
-    const record = createMemberRecord(member, prof, daysSinceActivity);
-    history.push(record);
+  // First check if there are significant changes
+  const significantChanges = hasSignificantChanges(history, member, prof, daysSinceActivity);
+
+  if (!significantChanges) {
+    // No significant changes - just update the check timestamp
+    lastRecord[utc] = realtimeSecs();
+    lastRecord[act] = daysSinceActivity;
+    devStdOut(
+      `Guild Tracker: ${member.name} - no changes, updating check timestamp`,
+    );
   } else {
-    updateLastRecordTimestamp(history, daysSinceActivity);
+    // Significant changes detected - check if record is over 24 hours old
+    const recordCreationTime = lastRecord?.[created] || lastRecord?.[utc]; // Fallback to utc for old records
+    const timeSinceRecordCreation = recordCreationTime ? realtimeSecs() - recordCreationTime : Infinity;
+    const recordIsOld = timeSinceRecordCreation > SECONDS_PER_DAY;
+
+    if (recordIsOld) {
+      // Create new record
+      const record = createMemberRecord(member, prof, daysSinceActivity);
+      history.push(record);
+      devStdOut(
+        `Guild Tracker: ${member.name} - significant changes + 24h elapsed, adding new record`,
+      );
+    } else {
+      // Update existing record
+      updateExistingRecord(history, member, prof, daysSinceActivity);
+      devStdOut(
+        `Guild Tracker: ${member.name} - significant changes, updating existing record`,
+      );
+    }
   }
 }
 
 export async function processMemberBatch(batch, guildData) {
   for (const member of batch) {
     try {
+      devStdOut(`Guild Tracker: Fetching profile for ${member.name}`);
       const prof = await fetchMemberProfile(member.name);
-      if (!prof) continue;
+      if (!prof) {
+        devStdOut(`Guild Tracker: No profile data for ${member.name}`);
+        continue;
+      }
 
       const history = ensureMemberHistory(guildData, member.name);
       processMemberDataUpdate(member, prof, history);
     } catch (e) {
       devStdOut(
-        `Simple Guild Tracker: Failed to fetch ${member.name}: ${e.message}`,
+        `Guild Tracker: Failed to fetch ${member.name}: ${e.message}`,
       );
     }
   }
@@ -89,6 +126,7 @@ export function getMembersNeedingUpdate(allMembers, guildData) {
     if (!history || history.length === 0) return true;
 
     const lastRecord = history.at(-1);
-    return nowSecs() - lastRecord[utc] > SECONDS_PER_DAY;
+    // Use utc (last verified time) to check if we need to check this member again
+    return realtimeSecs() - lastRecord[utc] > GUILD_ACTIVITY_UPDATE_INTERVAL;
   });
 }
