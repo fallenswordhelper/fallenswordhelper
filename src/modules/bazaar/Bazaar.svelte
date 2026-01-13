@@ -7,7 +7,8 @@
 
   let { potions = [] } = $props();
 
-  let bob = $state(potions);
+  // svelte-ignore state_referenced_locally
+    let bob = $state(potions);
 
   async function buyButton(potion) {
     sendEvent('bazaar', 'buyButton');

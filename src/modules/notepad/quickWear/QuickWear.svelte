@@ -17,9 +17,11 @@
 
   const main = ({ a }) => a !== -1;
   const names = ({ a, n }) => [a, n];
-  const folders = fromEntries(appInv.folders.filter(main).map(names));
+  // svelte-ignore state_referenced_locally
+    const folders = fromEntries(appInv.folders.filter(main).map(names));
   const byName = (a, b) => alpha(a.n, b.n);
-  let items = $state(appInv.items.sort(byName));
+  // svelte-ignore state_referenced_locally
+    let items = $state(appInv.items.sort(byName));
   const byFolder = (folderId) => (item) =>
     folderId === -2 || item.f === folderId;
 
