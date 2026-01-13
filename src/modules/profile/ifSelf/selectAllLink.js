@@ -14,7 +14,7 @@ import { dropItemsUrl } from '../../support/constants';
 function profileSelectAll() {
   sendEvent('profile', 'select all');
   const bpTabs = getElementById('backpack_tabs');
-  const type = getElementsByClassName('tab-selected', bpTabs)[0].getAttribute(
+  const type = getElementsByClassName('tab-selected', bpTabs)[0]?.getAttribute(
     'data-type',
   );
   let items = querySelectorArray(
