@@ -1,12 +1,21 @@
 import {
+  GUILD_ACTIVITY_UPDATE_INTERVAL,
   MIN_UPDATE_INTERVAL_SECS,
   MIN_WAIT_TIME_SECS,
   MS_PER_SECOND,
-  SECONDS_PER_DAY,
 } from '../../support/constants';
-import { nowSecs } from '../../support/now';
-import { utc } from './indexConstants';
+import devStdOut from '../../support/devStdOut';
+import { realtimeSecs } from '../../support/now';
+import { created, utc } from './indexConstants';
 import { getMembersNeedingUpdate } from './memberDataProcessor';
+
+function formatDuration(milliseconds) {
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
 
 function findOldestMemberUpdateTime(guildData, currentMemberNames) {
   let oldestUpdateTime = null;
@@ -17,7 +26,8 @@ function findOldestMemberUpdateTime(guildData, currentMemberNames) {
 
       if (history.length > 0) {
         const lastRecord = history.at(-1);
-        const memberUpdateTime = lastRecord[utc];
+        // Use created time for age check, fallback to utc for old records
+        const memberUpdateTime = lastRecord[created] || lastRecord[utc];
         if (!oldestUpdateTime || memberUpdateTime < oldestUpdateTime) {
           oldestUpdateTime = memberUpdateTime;
         }
@@ -30,11 +40,11 @@ function findOldestMemberUpdateTime(guildData, currentMemberNames) {
 
 function calculateWaitTimeFromOldest(oldestUpdateTime) {
   if (!oldestUpdateTime) {
-    return SECONDS_PER_DAY * MS_PER_SECOND;
+    return GUILD_ACTIVITY_UPDATE_INTERVAL * MS_PER_SECOND;
   }
 
-  const nextUpdateTime = oldestUpdateTime + SECONDS_PER_DAY;
-  const waitTime = Math.max(MIN_WAIT_TIME_SECS, nextUpdateTime - nowSecs());
+  const nextUpdateTime = oldestUpdateTime + GUILD_ACTIVITY_UPDATE_INTERVAL;
+  const waitTime = Math.max(MIN_WAIT_TIME_SECS, nextUpdateTime - realtimeSecs());
 
   return waitTime * MS_PER_SECOND;
 }
@@ -45,21 +55,36 @@ function calculateNextUpdateTime(guildData, currentMembers) {
     guildData,
     currentMemberNames,
   );
-  return calculateWaitTimeFromOldest(oldestUpdateTime);
+  return {
+    waitTime: calculateWaitTimeFromOldest(oldestUpdateTime),
+    oldestUpdateTime,
+  };
 }
 
 export function calculateWaitTime(guildData, allMembers) {
   const needsUpdate = getMembersNeedingUpdate(allMembers, guildData);
 
   if (needsUpdate.length > 0) {
-    const timeSinceLastUpdate = nowSecs() - guildData.lastUpdate;
+    const timeSinceLastUpdate = realtimeSecs() - guildData.lastUpdate;
     const waitTime = Math.max(
       0,
       (MIN_UPDATE_INTERVAL_SECS - timeSinceLastUpdate) * MS_PER_SECOND,
     );
 
+    devStdOut(
+      `Guild Tracker: Members need update, waiting ${formatDuration(waitTime)} (min interval)`,
+    );
+
     return waitTime;
   }
 
-  return calculateNextUpdateTime(guildData, allMembers);
+  const { waitTime: nextUpdateTime, oldestUpdateTime } =
+    calculateNextUpdateTime(guildData, allMembers);
+  const ageHours = oldestUpdateTime
+    ? ((realtimeSecs() - oldestUpdateTime) / 3600).toFixed(1)
+    : 'N/A';
+  devStdOut(
+    `Guild Tracker: All members current, oldest update ${ageHours}h ago, next update in ${formatDuration(nextUpdateTime)}`,
+  );
+  return nextUpdateTime;
 }

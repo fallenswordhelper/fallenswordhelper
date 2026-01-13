@@ -5,4 +5,5 @@ export const max = 3;
 export const utc = 4;
 export const vl = 5;
 export const gxp = 6;
+export const created = 7; // When the record was first created (for 24h check)
 export const fshGuildActivity = 'fsh_guildActivity';
