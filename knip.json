@@ -1,5 +1,5 @@
 {
-  "entry": ["src/calfSystem.js", "scripts/*.js"],
+  "entry": ["src/calfSystem.js", "vite.config.js", "vite/*.js", "scripts/*.js"],
   "ignoreDependencies": ["css-tooltip"],
-  "project": ["src/**", "scripts/**"]
+  "project": ["src/**", "scripts/**", "vite/**"]
 }

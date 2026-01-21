@@ -37,7 +37,22 @@ mkcert localhost 127.0.0.1 ::1
 1. Start dev server
 
 ```
-npm run watch
+npm run dev
 ```
 
-2. Install local FSH from [https://localhost:9966/dist/Releases/watch/fallenswordhelper.user.js](https://localhost:9966/dist/Releases/watch/fallenswordhelper.user.js)
+2. Install local FSH from [https://localhost:9966/fallenswordhelper.user.js](https://localhost:9966/fallenswordhelper.user.js)
+
+The dev server uses Vite with HMR (Hot Module Replacement) - changes to source files are reflected instantly without rebuilding.
+
+## Preview build (optional)
+
+To test a bundled build locally (mirrors production but with localhost URLs):
+
+```
+npm run build:dev
+npm run serve
+```
+
+Install from [https://localhost:9966/fallenswordhelper.user.js](https://localhost:9966/fallenswordhelper.user.js)
+
+When done: `npm run cleandev`
