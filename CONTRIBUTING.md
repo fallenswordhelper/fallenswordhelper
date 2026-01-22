@@ -53,6 +53,6 @@ npm run build:dev
 npm run serve
 ```
 
-Install from [https://localhost:9966/fallenswordhelper.user.js](https://localhost:9966/fallenswordhelper.user.js)
+If you already installed the dev userscript above, it works here too - no reinstall needed.
 
 When done: `npm run cleandev`
