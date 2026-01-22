@@ -79,9 +79,11 @@ function processMemberDataUpdate(member, prof, history) {
     );
   } else {
     // Significant changes detected - check if record is over 24 hours old
-    const recordCreationTime = lastRecord?.[created] || lastRecord?.[utc]; // Fallback to utc for old records
-    const timeSinceRecordCreation = recordCreationTime ? realtimeSecs() - recordCreationTime : Infinity;
-    const recordIsOld = timeSinceRecordCreation > SECONDS_PER_DAY;
+    // Don't fallback to utc - if created doesn't exist, treat as old to create a proper new record
+    const recordCreationTime = lastRecord?.[created];
+    const recordIsOld =
+      !recordCreationTime ||
+      realtimeSecs() - recordCreationTime > SECONDS_PER_DAY;
 
     if (recordIsOld) {
       // Create new record
