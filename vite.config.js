@@ -19,67 +19,72 @@ function getHttpsConfig() {
       cert: readFileSync(resolve(__dirname, 'cert.pem')),
     };
   } catch {
-    return false; // Certs not available (CI), disable HTTPS
+    return undefined;
   }
 }
 
-export default defineConfig(({ command, mode }) => {
-  const httpsConfig = command !== 'build' ? getHttpsConfig() : false;
+function getBuildContext(command, mode) {
   const isDevServer = command === 'serve';
   const isBuild = command === 'build';
-  const isProd = isBuild && mode !== 'development';
-  const env = isProd ? 'prod' : 'dev';
+  const isDevBuild = isBuild && mode === 'development';
+  const isProd = isBuild && !isDevBuild;
   const rootPath = isProd ? github : `https://localhost:${port}/`;
-  const calfPath = `resources/${env}/${core}`;
+  const calfPath = `resources/${isProd ? 'prod' : 'dev'}/${core}`;
+  const assetBase = isProd ? `${rootPath}${calfPath}/` : rootPath;
 
-  // In build mode, generate userscript file
-  if (isBuild) {
-    const fshPath = isProd ? 'Releases/Current' : 'Releases/dev';
-    const calfJsUrl = isProd
-      ? `${rootPath}${calfPath}/calfSystem.min.js`
-      : `${rootPath}calfSystem.min.js`;
-    const dlPath = isProd ? `${rootPath}${fshPath}` : rootPath.slice(0, -1);
-    buildFsh(`dist/${fshPath}`, isProd ? core : `${core}a`, dlPath, calfJsUrl);
+  return { isDevServer, isBuild, isProd, rootPath, calfPath, assetBase };
+}
+
+function generateUserscript(ctx) {
+  const { isProd, rootPath, assetBase } = ctx;
+  const fshPath = isProd ? 'Releases/Current' : 'Releases/dev';
+  buildFsh(
+    `dist/${fshPath}`,
+    isProd ? core : `${core}a`,
+    isProd ? `${rootPath}${fshPath}` : rootPath.slice(0, -1),
+    `${assetBase}calfSystem.min.js`,
+  );
+}
+
+function assetPath(ctx, filename, sourcePath) {
+  if (ctx.isDevServer) {
+    return sourcePath ? JSON.stringify(`${ctx.rootPath}${sourcePath}`) : '""';
   }
+  return JSON.stringify(`${ctx.assetBase}${filename}`);
+}
 
-  // Helper for bundled asset paths (empty in dev server - Vite injects CSS)
-  function bundledAssetPath(filename) {
-    if (isDevServer) return '""';
-    const base = isProd ? `${rootPath}${calfPath}/` : rootPath;
-    return JSON.stringify(`${base}${filename}`);
-  }
+export default defineConfig(({ command, mode }) => {
+  const ctx = getBuildContext(command, mode);
+  const httpsConfig = ctx.isBuild ? undefined : getHttpsConfig();
 
-  // Helper for external asset paths (need explicit URL in all modes)
-  function externalAssetPath(filename, sourcePath) {
-    if (isDevServer) return JSON.stringify(`${rootPath}${sourcePath}`);
-    const base = isProd ? `${rootPath}${calfPath}/` : rootPath;
-    return JSON.stringify(`${base}${filename}`);
+  if (ctx.isBuild) {
+    generateUserscript(ctx);
   }
 
   return {
     plugins: [
       svelte({ emitCss: true }),
       liquid(),
-      devServerPlugin({ rootPath, core }),
-      isProd && cssoPlugin(),
-      isBuild && {
+      devServerPlugin({ rootPath: ctx.rootPath, core }),
+      ctx.isProd && cssoPlugin(),
+      ctx.isBuild && {
         name: 'copy-datatables-css',
-        closeBundle: () => copyDataTablesCss(`dist/${calfPath}`),
+        closeBundle: () => copyDataTablesCss(`dist/${ctx.calfPath}`),
       },
     ].filter(Boolean),
 
     define: {
-      defineCalfPath: bundledAssetPath('calfSystem.min.css'),
+      defineCalfPath: assetPath(ctx, 'calfSystem.min.css'),
       defineCalfVer: JSON.stringify(calfVer),
-      defineDataTablesPath: externalAssetPath('dataTables.css', 'src/styles/dataTables.css'),
-      defineEnvironment: JSON.stringify(env === 'prod' ? 'production' : 'development'),
-      defineUserIsDev: env === 'dev',
+      defineDataTablesPath: assetPath(ctx, 'dataTables.css', 'src/styles/dataTables.css'),
+      defineEnvironment: JSON.stringify(ctx.isProd ? 'production' : 'development'),
+      defineUserIsDev: !ctx.isProd,
       defineVersion: JSON.stringify(version),
     },
 
     build: {
       target: 'esnext',
-      outDir: `dist/${calfPath}`,
+      outDir: `dist/${ctx.calfPath}`,
       emptyOutDir: true,
       lib: {
         entry: resolve(__dirname, 'src/calfSystem.js'),
@@ -88,7 +93,7 @@ export default defineConfig(({ command, mode }) => {
       },
       cssCodeSplit: false,
       sourcemap: true,
-      minify: isProd ? 'terser' : false,
+      minify: ctx.isProd ? 'terser' : false,
       rollupOptions: {
         output: {
           chunkFileNames: `${calfVer}/[name]-[hash].js`,

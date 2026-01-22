@@ -4,6 +4,13 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
+function getBuiltUserscript() {
+  return readFileSync(
+    resolve(__dirname, '../dist/Releases/dev/fallenswordhelper.user.js'),
+    'utf8',
+  );
+}
+
 export default function devServerPlugin({ rootPath, core }) {
   function getDevUserscript() {
     const src = readFileSync(
@@ -14,13 +21,6 @@ export default function devServerPlugin({ rootPath, core }) {
       .replaceAll('_VER', `${core}a`)
       .replace('_DLURL', `${rootPath}fallenswordhelper.user.js`)
       .replace('_CALFJS', `${rootPath}calfSystem.min.js`);
-  }
-
-  function getBuiltUserscript() {
-    return readFileSync(
-      resolve(__dirname, '../dist/Releases/dev/fallenswordhelper.user.js'),
-      'utf8',
-    );
   }
 
   return {
