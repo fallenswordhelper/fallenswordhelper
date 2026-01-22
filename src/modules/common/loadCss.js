@@ -1,6 +1,9 @@
 import querySelector from './querySelector';
 
 export default function loadCss(c) {
+  // In dev mode, CSS is injected by Vite, so path is empty
+  if (!c) return Promise.resolve();
+
   const target = querySelector('link', document.body);
   return new Promise((resolve) => {
     const linkTag = document.createElement('link');
