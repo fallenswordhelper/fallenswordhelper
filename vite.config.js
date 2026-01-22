@@ -12,12 +12,19 @@ import { calfVer, core, version } from './vite/version.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-const httpsConfig = {
-  key: readFileSync(resolve(__dirname, 'key.pem')),
-  cert: readFileSync(resolve(__dirname, 'cert.pem')),
-};
+function getHttpsConfig() {
+  try {
+    return {
+      key: readFileSync(resolve(__dirname, 'key.pem')),
+      cert: readFileSync(resolve(__dirname, 'cert.pem')),
+    };
+  } catch {
+    return false; // Certs not available (CI), disable HTTPS
+  }
+}
 
 export default defineConfig(({ command, mode }) => {
+  const httpsConfig = command !== 'build' ? getHttpsConfig() : false;
   const isDevServer = command === 'serve';
   const isBuild = command === 'build';
   const isProd = isBuild && mode !== 'development';
