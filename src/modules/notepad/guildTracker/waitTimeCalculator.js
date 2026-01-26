@@ -6,7 +6,7 @@ import {
 } from '../../support/constants';
 import devStdOut from '../../support/devStdOut';
 import { realtimeSecs } from '../../support/now';
-import { created, utc } from './indexConstants';
+import { utc } from './indexConstants';
 import { getMembersNeedingUpdate } from './memberDataProcessor';
 
 function formatDuration(milliseconds) {
@@ -26,8 +26,8 @@ function findOldestMemberUpdateTime(guildData, currentMemberNames) {
 
       if (history.length > 0) {
         const lastRecord = history.at(-1);
-        // Use created time for age check, fallback to utc for old records
-        const memberUpdateTime = lastRecord[created] || lastRecord[utc];
+        // Use utc (last verification time) to determine when member was last checked
+        const memberUpdateTime = lastRecord[utc];
         if (!oldestUpdateTime || memberUpdateTime < oldestUpdateTime) {
           oldestUpdateTime = memberUpdateTime;
         }
