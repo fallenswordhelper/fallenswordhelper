@@ -1,5 +1,5 @@
 <script>
-  import VirtualScroll from '../../common/VirtualScroll.svelte';
+  import VirtualScrollFiltered from '../../common/VirtualScrollFiltered.svelte';
   import daGuildLog from '../../_dataAccess/daGuildLog';
   import sendEvent from '../../analytics/sendEvent';
   import navigateTo from '../../common/navigateTo';
@@ -22,26 +22,28 @@
   let progressLog = $state([]);
   let searchValue = $state('');
 
-  const tmpDisplayLog = $derived(
-    liveLog
-      .filter(({ fshType }) => checks[fshType])
-      .filter(
-        ({ searchable }) =>
-          searchValue === '' || searchable.includes(searchValue.toLowerCase()),
-      )
-      .map(addIndex),
-  );
+  const filterFn = $derived.by(() => {
+    // Capture reactive values so $derived tracks them
+    const c = checks;
+    const sv = searchValue.toLowerCase();
+    return (item) => {
+      if (!c[item.fshType]) return false;
+      if (sv === '') return true;
+      return item.searchable.includes(sv);
+    };
+  });
 
-  const displayLog = $derived(
-    tmpDisplayLog.length ? tmpDisplayLog : [{ index: 0, msg: { text: '' } }],
-  );
+  // Primitive key that changes when filter dependencies change
+  const filterKey = $derived(checks.join(',') + '|' + searchValue);
+
+  const getKey = (item) => item.id;
 
   let chunkNo = 0;
+  let nextId = 0;
   let enableLogColoring = null;
   let lastCheckUtc = null;
   let nowUtc = null;
 
-  const addIndex = (obj, index) => ({ ...obj, index });
   const replacer = ({ msg }) =>
     msg.text.replace(
       /<link=a(\d)><\/link>/g,
@@ -49,6 +51,7 @@
     );
   const decorate = (obj) => ({
     ...obj,
+    id: nextId++,
     fshType: profiler(obj.msg.text),
     new: enableLogColoring && obj.time > lastCheckUtc,
     old:
@@ -93,6 +96,7 @@
   function initVars() {
     progressLog = ['Loading...'];
     liveLog = [];
+    nextId = 0;
     // eslint-disable-next-line svelte/prefer-svelte-reactivity
     nowUtc = new Date().setUTCSeconds(0, 0) / 1000;
     lastCheckUtc = getValue('lastModalGuildLogCheck') ?? nowUtc;
@@ -175,7 +179,15 @@
       {/each}
     {:then}
       <div class="vs">
-        <VirtualScroll items={displayLog} overscan={20}>
+        <VirtualScrollFiltered
+          items={liveLog}
+          filter={filterFn}
+          {filterKey}
+          {getKey}
+          debounceMs={50}
+          overscan={20}
+          estimatedHeight={22}
+        >
           {#snippet children({ item: logEntry })}
             <LogItem
               {groupCombatItems}
@@ -183,7 +195,7 @@
               {logEntry}
             />
           {/snippet}
-        </VirtualScroll>
+        </VirtualScrollFiltered>
       </div>
     {:catch error}
       {error}
