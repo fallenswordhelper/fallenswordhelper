@@ -1,0 +1,1 @@
+{"version":3,"file":"indexAjaxPost-EsQkTWl0.js","names":[],"sources":["../../../../../src/modules/ajax/indexAjaxPost.js"],"sourcesContent":["import indexAjax from './indexAjax';\n\nexport default function indexAjaxPost(options) {\n  return indexAjax({ ...options, method: 'POST' });\n}\n"],"mappings":";;AAEA,SAAwB,EAAc,GAAS;AAC7C,QAAO,EAAU;EAAE,GAAG;EAAS,QAAQ;EAAQ,CAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"injectGuild-Cr_z6d6S.js","names":[],"sources":["../../../../../src/modules/chrome/pageSwitcher/loader/injectGuild.js"],"sourcesContent":["import runDefault from '../../../common/runDefault';\n\nexport default function injectGuild() {\n  runDefault(import('../../../guild/injectGuild'));\n}\n"],"mappings":";;AAEA,SAAwB,IAAc;AACpC,GAAW,OAAO,6BAA8B"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"arena-CfQRp9P7.js","names":[],"sources":["../../../../../src/modules/app/arena/arena.js"],"sourcesContent":["import getApp from '../getApp';\n\nexport default function arena(data) {\n  return getApp({ cmd: 'arena', ...data });\n}\n"],"mappings":";;AAEA,SAAwB,EAAM,GAAM;AAClC,QAAO,EAAO;EAAE,KAAK;EAAS,GAAG;EAAM,CAAC"}

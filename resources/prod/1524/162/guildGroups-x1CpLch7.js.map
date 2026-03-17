@@ -1,0 +1,1 @@
+{"version":3,"file":"guildGroups-x1CpLch7.js","names":[],"sources":["../../../../../src/modules/app/guild/groups/guildGroups.js"],"sourcesContent":["import guild from '../guild';\n\nexport default function guildGroups(data) {\n  return guild({ subcmd: 'groups', ...data });\n}\n"],"mappings":";;AAEA,SAAwB,EAAY,GAAM;AACxC,QAAO,EAAM;EAAE,QAAQ;EAAU,GAAG;EAAM,CAAC"}

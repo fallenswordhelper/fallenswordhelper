@@ -1,0 +1,1 @@
+{"version":3,"file":"padZ-Cypg_I1Q.js","names":[],"sources":["../../../../../src/modules/system/padZ.js"],"sourcesContent":["export default function padZ(n) {\n  let ret = n.toString();\n  if (n < 10) {\n    ret = `0${ret}`;\n  }\n  return ret;\n}\n"],"mappings":";AAAA,SAAwB,EAAK,GAAG;CAC9B,IAAI,IAAM,EAAE,UAAU;AAItB,QAHI,IAAI,OACN,IAAM,IAAI,MAEL"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"closestTr-C0LB9ALA.js","names":[],"sources":["../../../../../src/modules/common/closestTr.js"],"sourcesContent":["import { defTr } from '../support/constants';\nimport closest from './closest';\n\nexport default function closestTr(el) {\n  return closest(defTr, el);\n}\n"],"mappings":";;AAGA,SAAwB,EAAU,GAAI;AACpC,QAAO,EAAA,MAAe,EAAG"}

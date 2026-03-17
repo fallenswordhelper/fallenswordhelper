@@ -1,0 +1,1 @@
+{"version":3,"file":"insertHtmlBeforeEnd-CRJWaYJw.js","names":[],"sources":["../../../../../src/modules/common/insertHtmlBeforeEnd.js"],"sourcesContent":["import insertHtml from './insertHtml';\n\nexport default function insertHtmlBeforeEnd(parent, html) {\n  insertHtml(parent, 'beforeend', html);\n}\n"],"mappings":";;AAEA,SAAwB,EAAoB,GAAQ,GAAM;AACxD,GAAW,GAAQ,aAAa,EAAK"}

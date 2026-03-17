@@ -1,0 +1,1 @@
+{"version":3,"file":"insertHtml-DcEwLHKG.js","names":[],"sources":["../../../../../src/modules/common/insertHtml.js"],"sourcesContent":["export default function insertHtml(parent, where, html) {\n  if (parent instanceof Element) {\n    parent.insertAdjacentHTML(where, html);\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAW,GAAQ,GAAO,GAAM;AACtD,CAAI,aAAkB,WACpB,EAAO,mBAAmB,GAAO,EAAK"}

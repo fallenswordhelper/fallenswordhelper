@@ -1,0 +1,1 @@
+{"version":3,"file":"outputFormat-Oy78OCSG.js","names":[],"sources":["../../../../../src/modules/system/outputFormat.js"],"sourcesContent":["export default function outputFormat(value, suffix) {\n  if (value === 0) {\n    return '';\n  }\n  return String(value) + suffix;\n}\n"],"mappings":";AAAA,SAAwB,EAAa,GAAO,GAAQ;AAIlD,QAHI,MAAU,IACL,KAEF,OAAO,EAAM,GAAG"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"trim-BIFcpoD2.js","names":[],"sources":["../../../../../src/modules/common/trim.js"],"sourcesContent":["export default function trim(str) {\n  return str.trim();\n}\n"],"mappings":";AAAA,SAAwB,EAAK,GAAK;AAChC,QAAO,EAAI,MAAM"}

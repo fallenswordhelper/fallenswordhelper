@@ -1,0 +1,1 @@
+{"version":3,"file":"jQueryNotPresent-oTtW_9Ua.js","names":[],"sources":["../../../../../src/modules/common/jQueryNotPresent.js"],"sourcesContent":["import jQueryPresent from './jQueryPresent';\n\nexport default function jQueryNotPresent() {\n  return !jQueryPresent();\n}\n"],"mappings":";;AAEA,SAAwB,IAAmB;AACzC,QAAO,CAAC,GAAe"}

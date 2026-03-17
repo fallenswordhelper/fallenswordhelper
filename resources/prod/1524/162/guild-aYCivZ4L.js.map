@@ -1,0 +1,1 @@
+{"version":3,"file":"guild-aYCivZ4L.js","names":[],"sources":["../../../../../src/modules/app/guild/guild.js"],"sourcesContent":["import getApp from '../getApp';\n\nexport default function guild(data) {\n  return getApp({ cmd: 'guild', ...data });\n}\n"],"mappings":";;AAEA,SAAwB,EAAM,GAAM;AAClC,QAAO,EAAO;EAAE,KAAK;EAAS,GAAG;EAAM,CAAC"}

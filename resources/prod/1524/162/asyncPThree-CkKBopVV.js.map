@@ -1,0 +1,1 @@
+{"version":3,"file":"asyncPThree-CkKBopVV.js","names":[],"sources":["../../../../../src/modules/common/asyncPThree.js"],"sourcesContent":["import task from '../support/task';\n\nexport default function asyncPThree(fnList) {\n  fnList.forEach((fn) => task(3, fn));\n}\n"],"mappings":";;AAEA,SAAwB,EAAY,GAAQ;AAC1C,GAAO,SAAS,MAAO,EAAK,GAAG,EAAG,CAAC"}
