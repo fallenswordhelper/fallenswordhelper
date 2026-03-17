@@ -1,1 +1,0 @@
-{"version":3,"file":"isObject-gppvJNXN.js","names":[],"sources":["../../../../../src/modules/common/isObject.js"],"sourcesContent":["export default function isObject(e) {\n  return typeof e === 'object';\n}\n"],"mappings":";AAAA,SAAwB,EAAS,GAAG;AAClC,QAAO,OAAO,KAAM"}

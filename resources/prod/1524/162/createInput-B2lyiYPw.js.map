@@ -1,1 +1,0 @@
-{"version":3,"file":"createInput-B2lyiYPw.js","names":[],"sources":["../../../../../src/modules/common/cElement/createInput.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createInput(props) {\n  return cElement('input', props);\n}\n"],"mappings":";;AAEA,SAAwB,EAAY,GAAO;AACzC,QAAO,EAAS,SAAS,EAAM"}

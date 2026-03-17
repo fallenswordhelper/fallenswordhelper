@@ -1,1 +1,0 @@
-{"version":3,"file":"setInnerHtml-ClDKp0Zh.js","names":[],"sources":["../../../../../src/modules/dom/setInnerHtml.js"],"sourcesContent":["export default function setInnerHtml(html, ctx) {\n  if (ctx instanceof Element) {\n    ctx.innerHTML = String(html);\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAa,GAAM,GAAK;AAC9C,CAAI,aAAe,YACjB,EAAI,YAAY,OAAO,EAAK"}

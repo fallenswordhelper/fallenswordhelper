@@ -1,1 +1,0 @@
-{"version":3,"file":"setTipped-vR4mu9k3.js","names":[],"sources":["../../../../../src/modules/common/setTipped.js"],"sourcesContent":["export default function setTipped(value, element) {\n  if (element instanceof Element) {\n    element.dataset.tipped = value;\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAU,GAAO,GAAS;AAChD,CAAI,aAAmB,YACrB,EAAQ,QAAQ,SAAS"}

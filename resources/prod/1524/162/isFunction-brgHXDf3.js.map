@@ -1,1 +1,0 @@
-{"version":3,"file":"isFunction-brgHXDf3.js","names":[],"sources":["../../../../../src/modules/common/isFunction.js"],"sourcesContent":["export default function isFunction(e) {\n  return typeof e === 'function';\n}\n"],"mappings":";AAAA,SAAwB,EAAW,GAAG;AACpC,QAAO,OAAO,KAAM"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"onclick-9iRduoOH.js","names":[],"sources":["../../../../../src/modules/common/onclick.js"],"sourcesContent":["import on from './on';\n\nexport default function onclick(target, listener, options) {\n  on(target, 'click', listener, options);\n}\n"],"mappings":";;AAEA,SAAwB,EAAQ,GAAQ,GAAU,GAAS;AACzD,GAAG,GAAQ,SAAS,GAAU,EAAQ"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"getCustomUrlParameter-CFd8fvHs.js","names":[],"sources":["../../../../../src/modules/system/getCustomUrlParameter.js"],"sourcesContent":["export default function getCustomUrlParameter(sPageURL, sParam) {\n  return new URLSearchParams(sPageURL).get(sParam);\n}\n"],"mappings":";AAAA,SAAwB,EAAsB,GAAU,GAAQ;AAC9D,QAAO,IAAI,gBAAgB,EAAS,CAAC,IAAI,EAAO"}

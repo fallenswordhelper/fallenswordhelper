@@ -1,1 +1,0 @@
-{"version":3,"file":"createUl-DZ1yA1il.js","names":[],"sources":["../../../../../src/modules/common/cElement/createUl.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createUl(props) {\n  return cElement('ul', props);\n}\n"],"mappings":";;AAEA,SAAwB,EAAS,GAAO;AACtC,QAAO,EAAS,MAAM,EAAM"}

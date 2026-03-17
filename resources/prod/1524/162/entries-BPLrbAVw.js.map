@@ -1,1 +1,0 @@
-{"version":3,"file":"entries-BPLrbAVw.js","names":[],"sources":["../../../../../src/modules/common/entries.js"],"sourcesContent":["export default function entries(obj) {\n  return Object.entries(obj);\n}\n"],"mappings":";AAAA,SAAwB,EAAQ,GAAK;AACnC,QAAO,OAAO,QAAQ,EAAI"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"containsText-s1xoTwSh.js","names":[],"sources":["../../../../../src/modules/common/containsText.js"],"sourcesContent":["import getTextTrim from './getTextTrim';\n\nexport default function containsText(text, el) {\n  return getTextTrim(el) === text;\n}\n"],"mappings":";;AAEA,SAAwB,EAAa,GAAM,GAAI;AAC7C,QAAO,EAAY,EAAG,KAAK"}

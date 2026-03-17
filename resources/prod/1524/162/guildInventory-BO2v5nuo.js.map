@@ -1,1 +1,0 @@
-{"version":3,"file":"guildInventory-BO2v5nuo.js","names":[],"sources":["../../../../../src/modules/app/guild/inventory/guildInventory.js"],"sourcesContent":["import guild from '../guild';\n\nexport default function guildInventory(data) {\n  return guild({ subcmd: 'inventory', ...data });\n}\n"],"mappings":";;AAEA,SAAwB,EAAe,GAAM;AAC3C,QAAO,EAAM;EAAE,QAAQ;EAAa,GAAG;EAAM,CAAC"}
