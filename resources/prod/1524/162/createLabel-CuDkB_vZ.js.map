@@ -1,0 +1,1 @@
+{"version":3,"file":"createLabel-CuDkB_vZ.js","names":[],"sources":["../../../../../src/modules/common/cElement/createLabel.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createLabel(props) {\n  return cElement('label', props);\n}\n"],"mappings":";;AAEA,SAAwB,EAAY,GAAO;AACzC,QAAO,EAAS,SAAS,EAAM"}

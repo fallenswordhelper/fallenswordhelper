@@ -1,0 +1,1 @@
+{"version":3,"file":"buffmarket-Bjl5Z8Bj.js","names":[],"sources":["../../../../../src/modules/app/buffmarket/buffmarket.js"],"sourcesContent":["import getApp from '../getApp';\n\nexport default function buffmarket(data) {\n  return getApp({ cmd: 'buffmarket', ...data });\n}\n"],"mappings":";;AAEA,SAAwB,EAAW,GAAM;AACvC,QAAO,EAAO;EAAE,KAAK;EAAc,GAAG;EAAM,CAAC"}

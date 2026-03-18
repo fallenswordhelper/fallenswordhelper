@@ -1,0 +1,1 @@
+{"version":3,"file":"isBoolean-ftrvSwoc.js","names":[],"sources":["../../../../../src/modules/common/isBoolean.js"],"sourcesContent":["export default function isBoolean(e) {\n  return typeof e === 'boolean';\n}\n"],"mappings":";AAAA,SAAwB,EAAU,GAAG;AACnC,QAAO,OAAO,KAAM"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"all-Dy4LjBGw.js","names":[],"sources":["../../../../../src/modules/common/all.js"],"sourcesContent":["export default function all(prm) {\n  return Promise.all(prm);\n}\n"],"mappings":";AAAA,SAAwB,EAAI,GAAK;AAC/B,QAAO,QAAQ,IAAI,EAAI"}

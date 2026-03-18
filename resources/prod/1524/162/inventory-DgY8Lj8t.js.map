@@ -1,0 +1,1 @@
+{"version":3,"file":"inventory-DgY8Lj8t.js","names":[],"sources":["../../../../../src/modules/_dataAccess/export/inventory.js"],"sourcesContent":["import cmdExport from './cmdExport';\n\nexport default function inventory() {\n  return cmdExport({ subcmd: 'inventory' });\n}\n"],"mappings":";;AAEA,SAAwB,IAAY;AAClC,QAAO,EAAU,EAAE,QAAQ,aAAa,CAAC"}

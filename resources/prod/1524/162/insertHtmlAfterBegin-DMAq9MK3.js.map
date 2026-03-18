@@ -1,0 +1,1 @@
+{"version":3,"file":"insertHtmlAfterBegin-DMAq9MK3.js","names":[],"sources":["../../../../../src/modules/common/insertHtmlAfterBegin.js"],"sourcesContent":["import insertHtml from './insertHtml';\n\nexport default function insertHtmlAfterBegin(parent, html) {\n  insertHtml(parent, 'afterbegin', html);\n}\n"],"mappings":";;AAEA,SAAwB,EAAqB,GAAQ,GAAM;AACzD,GAAW,GAAQ,cAAc,EAAK"}

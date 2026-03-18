@@ -1,0 +1,1 @@
+{"version":3,"file":"system-De1jBRGa.js","names":[],"sources":["../../../../../src/modules/system/system.js"],"sourcesContent":["export const server = `${document.location.protocol}//${\n  document.location.host\n}/`;\nexport const cdn = window.HCS?.defines?.cdn;\n"],"mappings":";AAAA,IAAa,IAAS,GAAG,SAAS,SAAS,SAAS,IAClD,SAAS,SAAS,KACnB,IACY,IAAM,OAAO,KAAK,SAAS"}

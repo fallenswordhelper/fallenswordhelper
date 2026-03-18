@@ -1,0 +1,1 @@
+{"version":3,"file":"runDefault-D8heasmq.js","names":[],"sources":["../../../../../src/modules/common/runDefault.js"],"sourcesContent":["export default async function runDefault(prm) {\n  const mod = await prm;\n  mod.default();\n}\n"],"mappings":";AAAA,eAA8B,EAAW,GAAK;AAE5C,EADY,MAAM,GACd,SAAS"}

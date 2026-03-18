@@ -1,0 +1,1 @@
+{"version":3,"file":"classPair-C2pEaqbM.js","names":[],"sources":["../../../../../src/modules/common/classPair.js"],"sourcesContent":["import hasClass from './hasClass';\n\nexport default function classPair(element, pair) {\n  return hasClass(pair[0], element);\n}\n"],"mappings":";;AAEA,SAAwB,EAAU,GAAS,GAAM;AAC/C,QAAO,EAAS,EAAK,IAAI,EAAQ"}

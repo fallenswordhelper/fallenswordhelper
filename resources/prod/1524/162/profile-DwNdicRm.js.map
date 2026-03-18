@@ -1,0 +1,1 @@
+{"version":3,"file":"profile-DwNdicRm.js","names":[],"sources":["../../../../../src/modules/app/profile/profile.js"],"sourcesContent":["import getApp from '../getApp';\n\nexport default function profile(data) {\n  return getApp({ cmd: 'profile', ...data });\n}\n"],"mappings":";;AAEA,SAAwB,EAAQ,GAAM;AACpC,QAAO,EAAO;EAAE,KAAK;EAAW,GAAG;EAAM,CAAC"}
