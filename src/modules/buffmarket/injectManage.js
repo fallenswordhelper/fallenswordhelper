@@ -1,26 +1,27 @@
 import './manage.css';
-import cElement from '../common/cElement/cElement';
-import createDiv from '../common/cElement/createDiv';
-import onclick from '../common/onclick';
-import querySelectorArray from '../common/querySelectorArray';
-import daToggleBuffPackage from '../_dataAccess/daToggleBuffPackage';
-import getText from '../common/getText';
+import { mount } from 'svelte';
 import daFeatureBuffPackage from '../_dataAccess/daFeatureBuffPackage';
 import daDeleteBuffPackage from '../_dataAccess/daDeleteBuffPackage';
-import { pcc } from '../support/layout';
+import daToggleBuffPackage from '../_dataAccess/daToggleBuffPackage';
+import dynamicAlert from '../alert/dynamicAlert';
+import cElement from '../common/cElement/cElement';
+import createDiv from '../common/cElement/createDiv';
 import closestTr from '../common/closestTr';
 import closestTd from '../common/closestTd';
+import getText from '../common/getText';
+import jQueryNotPresent from '../common/jQueryNotPresent';
+import onclick from '../common/onclick';
+import querySelectorArray from '../common/querySelectorArray';
 import setText from '../dom/setText';
-import dynamicAlert from '../alert/dynamicAlert';
-
-import { mount } from 'svelte';
 import ModalConfirm from '../modal/ModalConfirm.svelte';
+import { pcc } from '../support/layout';
 
 const getPackageId = (button) =>
-  button.getAttribute('onclick').match(/id=(\d+)/)[1];
+  button.getAttribute('onclick').match(/id=(\d+)/)?.[1];
 
 function replaceOnClick(target, fn) {
   const packageId = getPackageId(target);
+  if (!packageId) return;
   target.setAttribute('onclick', '');
   target.setAttribute('data-packageId', packageId)
   onclick(target, fn)
@@ -90,6 +91,7 @@ async function featureBuffPackage(event) {
 }
 
 export default function injectManage() {
+  if (!pcc() || jQueryNotPresent()) return;
   querySelectorArray('#pCC input[value=Toggle]')
     .forEach((button) => replaceOnClick(button, toggleBuffPackage));
   querySelectorArray('#pCC input[value=Delete]')
