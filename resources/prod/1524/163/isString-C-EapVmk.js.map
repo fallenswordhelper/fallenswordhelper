@@ -1,0 +1,1 @@
+{"version":3,"file":"isString-C-EapVmk.js","names":[],"sources":["../../../../../src/modules/common/isString.js"],"sourcesContent":["export default function isString(e) {\n  return typeof e === 'string';\n}\n"],"mappings":";AAAA,SAAwB,EAAS,GAAG;AAClC,QAAO,OAAO,KAAM"}

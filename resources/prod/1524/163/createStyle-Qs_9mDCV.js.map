@@ -1,0 +1,1 @@
+{"version":3,"file":"createStyle-Qs_9mDCV.js","names":[],"sources":["../../../../../src/modules/common/cElement/createStyle.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createStyle(style) {\n  return cElement('style', { innerHTML: style });\n}\n"],"mappings":";;AAEA,SAAwB,EAAY,GAAO;AACzC,QAAO,EAAS,SAAS,EAAE,WAAW,GAAO,CAAC"}

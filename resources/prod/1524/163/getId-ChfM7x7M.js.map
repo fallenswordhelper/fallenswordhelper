@@ -1,0 +1,1 @@
+{"version":3,"file":"getId-ChfM7x7M.js","names":[],"sources":["../../../../../src/modules/common/getId.js"],"sourcesContent":["export default function getId(a) {\n  return a.href.split('=').at(-1);\n}\n"],"mappings":";AAAA,SAAwB,EAAM,GAAG;AAC/B,QAAO,EAAE,KAAK,MAAM,IAAI,CAAC,GAAG,GAAG"}

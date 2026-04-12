@@ -1,0 +1,1 @@
+{"version":3,"file":"setText-Ckr3aw9W.js","names":[],"sources":["../../../../../src/modules/dom/setText.js"],"sourcesContent":["export default function setText(text, ctx) {\n  if (ctx instanceof Node) {\n    ctx.textContent = String(text);\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAQ,GAAM,GAAK;AACzC,CAAI,aAAe,SACjB,EAAI,cAAc,OAAO,EAAK"}

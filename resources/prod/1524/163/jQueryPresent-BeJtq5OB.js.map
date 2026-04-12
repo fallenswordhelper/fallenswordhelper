@@ -1,0 +1,1 @@
+{"version":3,"file":"jQueryPresent-BeJtq5OB.js","names":[],"sources":["../../../../../src/modules/common/jQueryPresent.js"],"sourcesContent":["import isFunction from './isFunction';\n\nexport default function jQueryPresent() {\n  return isFunction(window.jQuery);\n}\n"],"mappings":";;AAEA,SAAwB,IAAgB;AACtC,QAAO,EAAW,OAAO,OAAO"}

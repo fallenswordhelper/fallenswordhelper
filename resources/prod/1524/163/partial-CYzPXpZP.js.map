@@ -1,0 +1,1 @@
+{"version":3,"file":"partial-CYzPXpZP.js","names":[],"sources":["../../../../../src/modules/common/partial.js"],"sourcesContent":["export default function partial(fn, ...outer) {\n  return (...inner) => fn(...outer, ...inner);\n}\n"],"mappings":";AAAA,SAAwB,EAAQ,GAAI,GAAG,GAAO;AAC5C,SAAQ,GAAG,MAAU,EAAG,GAAG,GAAO,GAAG,EAAM"}

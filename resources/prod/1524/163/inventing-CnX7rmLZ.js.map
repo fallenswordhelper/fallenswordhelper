@@ -1,0 +1,1 @@
+{"version":3,"file":"inventing-CnX7rmLZ.js","names":[],"sources":["../../../../../src/modules/app/inventing/inventing.js"],"sourcesContent":["import getApp from '../getApp';\n\nexport default function inventing(data) {\n  return getApp({ cmd: 'inventing', ...data });\n}\n"],"mappings":";;AAEA,SAAwB,EAAU,GAAM;AACtC,QAAO,EAAO;EAAE,KAAK;EAAa,GAAG;EAAM,CAAC"}

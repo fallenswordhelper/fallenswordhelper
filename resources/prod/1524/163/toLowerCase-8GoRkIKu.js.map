@@ -1,0 +1,1 @@
+{"version":3,"file":"toLowerCase-8GoRkIKu.js","names":[],"sources":["../../../../../src/modules/common/toLowerCase.js"],"sourcesContent":["export default function toLowerCase(str) {\n  return str?.toLowerCase?.();\n}\n"],"mappings":";AAAA,SAAwB,EAAY,GAAK;AACvC,QAAO,GAAK,eAAe"}

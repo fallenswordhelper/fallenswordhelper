@@ -1,0 +1,1 @@
+{"version":3,"file":"hideElement-TH4JEbXy.js","names":[],"sources":["../../../../../src/modules/common/hideElement.js"],"sourcesContent":["export default function hideElement(el) {\n  if (el?.classList) {\n    el.classList.add('fshHide');\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAY,GAAI;AACtC,CAAI,GAAI,aACN,EAAG,UAAU,IAAI,UAAU"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"createLi-D1Lt29de.js","names":[],"sources":["../../../../../src/modules/common/cElement/createLi.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createLi(props) {\n  return cElement('li', props);\n}\n"],"mappings":";;AAEA,SAAwB,EAAS,GAAO;AACtC,QAAO,EAAS,MAAM,EAAM"}

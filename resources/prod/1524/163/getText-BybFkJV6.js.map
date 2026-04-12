@@ -1,0 +1,1 @@
+{"version":3,"file":"getText-BybFkJV6.js","names":[],"sources":["../../../../../src/modules/common/getText.js"],"sourcesContent":["export default function getText(node) {\n  if (node instanceof Node) {\n    return node.textContent;\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAQ,GAAM;AACpC,KAAI,aAAgB,KAClB,QAAO,EAAK"}

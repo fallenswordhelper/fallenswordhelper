@@ -1,0 +1,1 @@
+{"version":3,"file":"jsonParse-C99pLn1W.js","names":[],"sources":["../../../../../src/modules/common/jsonParse.js"],"sourcesContent":["export default function jsonParse(str, reviver) {\n  try {\n    return JSON.parse(str, reviver);\n  } catch (e) {\n    // Ignore bad json\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAU,GAAK,GAAS;AAC9C,KAAI;AACF,SAAO,KAAK,MAAM,GAAK,EAAQ;SACrB"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"sum-C7p962tc.js","names":[],"sources":["../../../../../src/modules/common/sum.js"],"sourcesContent":["export default function sum(acc, cur) {\n  return acc + cur;\n}\n"],"mappings":";AAAA,SAAwB,EAAI,GAAK,GAAK;AACpC,QAAO,IAAM"}

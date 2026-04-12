@@ -1,0 +1,1 @@
+{"version":3,"file":"addCommas-BgpPUQrd.js","names":[],"sources":["../../../../../src/modules/system/addCommas.js"],"sourcesContent":["export default function addCommas(x) {\n  return new Intl.NumberFormat('en-us').format(x);\n}\n"],"mappings":";AAAA,SAAwB,EAAU,GAAG;AACnC,QAAO,IAAI,KAAK,aAAa,QAAQ,CAAC,OAAO,EAAE"}

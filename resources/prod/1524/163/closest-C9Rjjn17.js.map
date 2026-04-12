@@ -1,0 +1,1 @@
+{"version":3,"file":"closest-C9Rjjn17.js","names":[],"sources":["../../../../../src/modules/common/closest.js"],"sourcesContent":["export default function closest(selector, el) {\n  if (el instanceof Element) {\n    return el.closest(selector);\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAQ,GAAU,GAAI;AAC5C,KAAI,aAAc,QAChB,QAAO,EAAG,QAAQ,EAAS"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"insertHtmlAfterEnd-CedwWY1B.js","names":[],"sources":["../../../../../src/modules/common/insertHtmlAfterEnd.js"],"sourcesContent":["import insertHtml from './insertHtml';\n\nexport default function insertHtmlAfterEnd(parent, html) {\n  insertHtml(parent, 'afterend', html);\n}\n"],"mappings":";;AAEA,SAAwB,EAAmB,GAAQ,GAAM;AACvD,GAAW,GAAQ,YAAY,EAAK"}

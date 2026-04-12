@@ -1,0 +1,1 @@
+{"version":3,"file":"createDiv-CH3rNL4c.js","names":[],"sources":["../../../../../src/modules/common/cElement/createDiv.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createDiv(props) {\n  return cElement('div', props);\n}\n"],"mappings":";;AAEA,SAAwB,EAAU,GAAO;AACvC,QAAO,EAAS,OAAO,EAAM"}

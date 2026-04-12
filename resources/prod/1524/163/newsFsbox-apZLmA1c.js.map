@@ -1,0 +1,1 @@
+{"version":3,"file":"newsFsbox-apZLmA1c.js","names":[],"sources":["../../../../../src/modules/news/newsFsbox.js"],"sourcesContent":["import injectShoutboxWidgets from './injectShoutboxWidgets';\n\nexport default function newsFsbox() {\n  injectShoutboxWidgets(100);\n}\n"],"mappings":";;AAEA,SAAwB,IAAY;AAClC,GAAsB,IAAI"}

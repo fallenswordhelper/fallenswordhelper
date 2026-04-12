@@ -1,0 +1,1 @@
+{"version":3,"file":"hasClass-B5HBqSaS.js","names":[],"sources":["../../../../../src/modules/common/hasClass.js"],"sourcesContent":["export default function hasClass(className, el) {\n  return el?.classList?.contains(className);\n}\n"],"mappings":";AAAA,SAAwB,EAAS,GAAW,GAAI;AAC9C,QAAO,GAAI,WAAW,SAAS,EAAU"}

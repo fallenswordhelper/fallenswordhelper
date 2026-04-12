@@ -1,0 +1,1 @@
+{"version":3,"file":"getPlayerId-DOaPZMl6.js","names":[],"sources":["../../../../../src/modules/common/getPlayerId.js"],"sourcesContent":["import getCustomUrlParameter from '../system/getCustomUrlParameter';\n\nexport default function getPlayerId(href) {\n  return getCustomUrlParameter(href, 'player_id');\n}\n"],"mappings":";;AAEA,SAAwB,EAAY,GAAM;AACxC,QAAO,EAAsB,GAAM,YAAY"}

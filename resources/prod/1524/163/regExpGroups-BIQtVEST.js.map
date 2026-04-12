@@ -1,0 +1,1 @@
+{"version":3,"file":"regExpGroups-BIQtVEST.js","names":[],"sources":["../../../../../src/modules/common/regExpGroups.js"],"sourcesContent":["import regExpExec from './regExpExec';\n\nexport default function regExpGroups(re, str) {\n  return regExpExec(re, str)?.groups ?? {};\n}\n"],"mappings":";;AAEA,SAAwB,EAAa,GAAI,GAAK;AAC5C,QAAO,EAAW,GAAI,EAAI,EAAE,UAAU,EAAE"}

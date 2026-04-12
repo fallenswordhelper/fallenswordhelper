@@ -1,0 +1,1 @@
+{"version":3,"file":"functionPasses-sNk2duHs.js","names":[],"sources":["../../../../../src/modules/common/functionPasses.js"],"sourcesContent":["export default function functionPasses(fn) {\n  return fn();\n}\n"],"mappings":";AAAA,SAAwB,EAAe,GAAI;AACzC,QAAO,GAAI"}

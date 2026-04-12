@@ -1,0 +1,1 @@
+{"version":3,"file":"closestTd-B6S4IM7U.js","names":[],"sources":["../../../../../src/modules/common/closestTd.js"],"sourcesContent":["import { defTd } from '../support/constants';\nimport closest from './closest';\n\nexport default function closestTd(el) {\n  return closest(defTd, el);\n}\n"],"mappings":";;;AAGA,SAAwB,EAAU,GAAI;AACpC,QAAO,EAAA,MAAe,EAAG"}

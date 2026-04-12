@@ -1,0 +1,1 @@
+{"version":3,"file":"insertHtmlBeforeBegin-cRb3-rQb.js","names":[],"sources":["../../../../../src/modules/common/insertHtmlBeforeBegin.js"],"sourcesContent":["import insertHtml from './insertHtml';\n\nexport default function insertHtmlBeforeBegin(parent, html) {\n  insertHtml(parent, 'beforebegin', html);\n}\n"],"mappings":";;AAEA,SAAwB,EAAsB,GAAQ,GAAM;AAC1D,GAAW,GAAQ,eAAe,EAAK"}
