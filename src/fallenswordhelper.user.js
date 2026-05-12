@@ -22,11 +22,7 @@
 // EVERYTHING MUST BE IN main()
 async function fshMain(gmInfo) {
   const module = await import('_CALFJS');
-  module.default('_VER', gmInfo);
+  module.default(gmInfo);
 }
-// end of var main
 
-const script = document.createElement('script');
-script.textContent = `(${fshMain.toString()})("${encodeURIComponent(JSON.stringify(GM_info))}");`;
-document.body.appendChild(script);
-document.body.removeChild(script);
+fshMain({ script: { version: '_VER' } });
