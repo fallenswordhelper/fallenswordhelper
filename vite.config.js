@@ -38,7 +38,7 @@ function getBuildContext(command, mode) {
 function generateUserscript(ctx) {
   const { isProd, rootPath, assetBase } = ctx;
   const fshPath = isProd ? 'Releases/Current' : 'Releases/dev';
-  buildFsh(
+  return buildFsh(
     `dist/${fshPath}`,
     isProd ? core : `${core}a`,
     isProd ? `${rootPath}${fshPath}` : rootPath.slice(0, -1),
@@ -57,18 +57,16 @@ export default defineConfig(({ command, mode }) => {
   const ctx = getBuildContext(command, mode);
   const httpsConfig = ctx.isBuild ? undefined : getHttpsConfig();
 
-  if (ctx.isBuild) {
-    generateUserscript(ctx);
-  }
-
   return {
     plugins: [
       svelte({ emitCss: true }),
       liquid(),
       devServerPlugin({ rootPath: ctx.rootPath, core }),
       ctx.isProd && cssoPlugin(),
+      // in hooks, not the config body, so tools that load the config (knip) don't write to dist
       ctx.isBuild && {
-        name: 'copy-datatables-css',
+        name: 'fsh-build-files',
+        buildStart: () => generateUserscript(ctx),
         closeBundle: () => copyDataTablesCss(`dist/${ctx.calfPath}`),
       },
     ].filter(Boolean),
