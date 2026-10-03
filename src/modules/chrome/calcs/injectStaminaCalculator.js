@@ -5,20 +5,24 @@ import valueText from '../../common/valueText';
 import getValue from '../../system/getValue';
 import intValue from '../../system/intValue';
 import asInt from './asInt';
+import hoursAfterNextGain from './hoursAfterNextGain';
 import timeBox from './timeBox';
 
 const getStamVals = (m) =>
   valueText(getElementsByClassName('stat-name', m)).split(' / ');
 
+const dtClass = 'stat-stamina-nextHuntTime';
+const label = 'Max Stam At';
+
 function maxStamAt(nextGain, stamVals) {
-  return `<dt class="stat-stamina-nextHuntTime">Max Stam At</dt>${timeBox(
+  const remaining = intValue(stamVals[1]) - intValue(stamVals[0]);
+  if (remaining <= 0) return `<dt class="${dtClass}">${label}</dt><dd>Now</dd>`;
+  return timeBox(
+    dtClass,
+    label,
     valueText(nextGain),
-    // get the max hours to still be inside stamina maximum
-    Math.floor(
-      (intValue(stamVals[1]) - intValue(stamVals[0])) /
-        asInt('stat-stamina-gainPerHour'),
-    ),
-  )}`;
+    hoursAfterNextGain(remaining, asInt('stat-stamina-gainPerHour')),
+  );
 }
 
 export default function injectStaminaCalculator() {
