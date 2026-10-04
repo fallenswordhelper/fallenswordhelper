@@ -11,6 +11,7 @@ enabled = true
   [analyzers.meta]
   environment = ["jquery"]
   globals = [
+    "$",
     "$state",
     "DataTable",
     "defineCalfPath",
@@ -23,4 +24,5 @@ enabled = true
     "GameData",
     "GM_info",
     "gtag",
+    "jQuery",
   ]
