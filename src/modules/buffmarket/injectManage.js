@@ -23,8 +23,8 @@ function replaceOnClick(target, fn) {
   const packageId = getPackageId(target);
   if (!packageId) return;
   target.setAttribute('onclick', '');
-  target.setAttribute('data-packageId', packageId)
-  onclick(target, fn)
+  target.setAttribute('data-packageId', packageId);
+  onclick(target, fn);
 }
 
 function makeSpinnerCell() {
@@ -48,10 +48,7 @@ async function toggleBuffPackage(event) {
   const response = await doDaAction(event, daToggleBuffPackage);
   if (response?.s === true) {
     const statusTd = closestTr(event.target).children[3];
-    setText(
-      getText(statusTd) === 'Yes' ? 'No' : 'Yes',
-      statusTd,
-    );
+    setText(getText(statusTd) === 'Yes' ? 'No' : 'Yes', statusTd);
     dynamicAlert('Buff Package toggled!');
   } else {
     dynamicAlert(response?.e?.message ?? 'Server Error');
@@ -59,31 +56,33 @@ async function toggleBuffPackage(event) {
 }
 
 function deleteBuffPackage(event) {
-  mount(ModalConfirm, { target: pcc(), props: {
-    msg: 'Are you sure you want to delete this package?',
-    visible: true,
-    resolve: async (doDelete) => {
-      if (!doDelete) { return; }
-      const response =  await doDaAction(event, daDeleteBuffPackage);
-      if (response?.s === true) {
-        const tr = closestTr(event.target);
-        tr.nextElementSibling.remove();
-        tr.remove();
-        dynamicAlert('Buff Package deleted!');
-      } else {
-        dynamicAlert(response?.e?.message ?? 'Server Error');
-      }
+  mount(ModalConfirm, {
+    target: pcc(),
+    props: {
+      msg: 'Are you sure you want to delete this package?',
+      visible: true,
+      resolve: async (doDelete) => {
+        if (!doDelete) {
+          return;
+        }
+        const response = await doDaAction(event, daDeleteBuffPackage);
+        if (response?.s === true) {
+          const tr = closestTr(event.target);
+          tr.nextElementSibling.remove();
+          tr.remove();
+          dynamicAlert('Buff Package deleted!');
+        } else {
+          dynamicAlert(response?.e?.message ?? 'Server Error');
+        }
+      },
     },
-  }});
+  });
 }
 
 async function featureBuffPackage(event) {
   const response = await doDaAction(event, daFeatureBuffPackage);
   if (response?.s === true) {
-    setText(
-      'Yes',
-      closestTr(event.target).children[4],
-    );
+    setText('Yes', closestTr(event.target).children[4]);
     dynamicAlert('Buff Package featured for 24 hours!');
   } else {
     dynamicAlert(response?.e?.message ?? 'Server Error');
@@ -92,10 +91,13 @@ async function featureBuffPackage(event) {
 
 export default function injectManage() {
   if (!pcc() || jQueryNotPresent()) return;
-  querySelectorArray('#pCC input[value=Toggle]')
-    .forEach((button) => replaceOnClick(button, toggleBuffPackage));
-  querySelectorArray('#pCC input[value=Delete]')
-    .forEach((button) => replaceOnClick(button, deleteBuffPackage));
-  querySelectorArray('#pCC input[value=Feature]')
-    .forEach((button) => replaceOnClick(button, featureBuffPackage));
+  querySelectorArray('#pCC input[value=Toggle]').forEach((button) =>
+    replaceOnClick(button, toggleBuffPackage),
+  );
+  querySelectorArray('#pCC input[value=Delete]').forEach((button) =>
+    replaceOnClick(button, deleteBuffPackage),
+  );
+  querySelectorArray('#pCC input[value=Feature]').forEach((button) =>
+    replaceOnClick(button, featureBuffPackage),
+  );
 }

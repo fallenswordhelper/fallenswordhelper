@@ -26,8 +26,8 @@
       <div>
         If enabled, will track the last time each SE was killed.<br />
         This is DIFFERENT from the usual FSH network activity.<br />
-        When this is enabled, if you have ANY game page open in a browser tab it
-        will scan the SE Log every 10 minutes.<br />
+        When this is enabled, if you have ANY game page open in a browser tab it will
+        scan the SE Log every 10 minutes.<br />
         You do not need auto-refresh for this to work.
       </div>
     </div>

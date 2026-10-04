@@ -1,5 +1,5 @@
 <script>
-  import LinkBtn from "./LinkBtn.svelte";
+  import LinkBtn from './LinkBtn.svelte';
 
   let { children, onclick } = $props();
 </script>

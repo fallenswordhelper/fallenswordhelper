@@ -89,7 +89,9 @@ async function startBackgroundProcess() {
         // Check actual time elapsed (handles inactive tabs)
         const stillRemaining = targetTime - Date.now();
         if (stillRemaining > chunkSize && state.running) {
-          devStdOut(`Guild Tracker: Still waiting... ${Math.round(stillRemaining / 1000 / 60)} min remaining`);
+          devStdOut(
+            `Guild Tracker: Still waiting... ${Math.round(stillRemaining / 1000 / 60)} min remaining`,
+          );
         }
       }
 

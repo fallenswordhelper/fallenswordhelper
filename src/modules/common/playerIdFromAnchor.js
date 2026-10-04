@@ -1,5 +1,5 @@
-import { playerIDRE } from "../support/constants";
-import regExpFirstCapture from "./regExpFirstCapture";
+import { playerIDRE } from '../support/constants';
+import regExpFirstCapture from './regExpFirstCapture';
 
 export default function playerIdFromAnchor(anchor) {
   if (!anchor?.href) return;

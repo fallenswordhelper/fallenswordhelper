@@ -264,9 +264,7 @@
       <div class="recipes ui-widget-content">
         <div class="innerColumnHeader item-container">Recipe</div>
         <div class="innerColumnHeader item-container">
-          <LinkBtn --button-color="#383838" onclick={sortByName}>
-            Name
-          </LinkBtn>
+          <LinkBtn --button-color="#383838" onclick={sortByName}>Name</LinkBtn>
         </div>
         <div class="innerColumnHeader item-container">Items</div>
         <div class="innerColumnHeader item-container">Components</div>

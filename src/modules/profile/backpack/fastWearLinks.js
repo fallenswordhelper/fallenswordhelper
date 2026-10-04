@@ -29,10 +29,7 @@ function drawButtons(bp, theSpan) {
   });
   const parent = theSpan.closest('div');
   if (bp.options.checkboxesEnabled) {
-    insertElement(
-      myDiv,
-      querySelector('input', parent),
-    );
+    insertElement(myDiv, querySelector('input', parent));
   }
   insertElement(parent, myDiv);
 }

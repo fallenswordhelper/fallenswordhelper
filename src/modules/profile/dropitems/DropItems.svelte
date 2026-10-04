@@ -1,5 +1,5 @@
 <script>
-  import sendEvent from "../../analytics/sendEvent";
+  import sendEvent from '../../analytics/sendEvent';
   import QuickSelectClasses from '../../common/QuickSelectClasses.svelte';
 </script>
 

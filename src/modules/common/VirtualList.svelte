@@ -54,8 +54,8 @@
       }
 
       if (row) {
-      const row_height = (height_map[i] = itemHeight || row.offsetHeight);
-      content_height += row_height;
+        const row_height = (height_map[i] = itemHeight || row.offsetHeight);
+        content_height += row_height;
       }
 
       i += 1;

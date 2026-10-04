@@ -12,7 +12,7 @@
   let { itemList = 0 } = $props();
 
   // svelte-ignore state_referenced_locally
-    const itemCount = uniq(itemList.items, 'n').map(({ n }) => ({
+  const itemCount = uniq(itemList.items, 'n').map(({ n }) => ({
     n,
     count: itemList.items.filter(({ n: fn }) => fn === n).length,
   }));

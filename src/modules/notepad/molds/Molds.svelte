@@ -180,7 +180,6 @@
     background-image: linear-gradient(#fec94d, #fedd8f);
   }
 
-
   .error {
     color: #d32f2f;
     font-weight: bold;

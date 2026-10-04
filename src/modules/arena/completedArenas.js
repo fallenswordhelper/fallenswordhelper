@@ -11,14 +11,13 @@ const pageInputValue = () => Number(querySelector('#pCC #page').value);
 let pageId = pageInputValue();
 
 const lastPage = getText(
-    querySelector('#pCC input[value=Go]').parentNode.previousElementSibling,
-  ).replace(/\D/g, '');
+  querySelector('#pCC input[value=Go]').parentNode.previousElementSibling,
+).replace(/\D/g, '');
 
 const inputTr = querySelector('#pCC #page').closest('tr');
 
-const getTarget = (context=document) =>
+const getTarget = (context = document) =>
   querySelector('#pCC input[value=Go]', context).closest('tr');
-
 
 function createSpinner() {
   const spinner = createDiv();
@@ -85,14 +84,16 @@ function createButtonsTd() {
   const inputTd = cElement('td');
   inputTd.append(
     createButton('Go', () => gotoPage(pageInputValue())),
-    createButton('<<', gotoFirstPage), ' ',
-    createButton('<', gotoPrevPage), ' ',
-    createButton('>', gotoNextPage), ' ',
+    createButton('<<', gotoFirstPage),
+    ' ',
+    createButton('<', gotoPrevPage),
+    ' ',
+    createButton('>', gotoNextPage),
+    ' ',
     createButton('>>', gotoLastPage),
   );
   return inputTd;
 }
-
 
 export default function completedArenas() {
   if (!pcc() || !querySelector('#page')) return;

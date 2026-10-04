@@ -21,7 +21,7 @@
 
   let { relicData = {} } = $props();
   // svelte-ignore state_referenced_locally
-    const members = relicData.defenders.map((x) => x.player_name);
+  const members = relicData.defenders.map((x) => x.player_name);
   let showStats = $state(false);
 
   function emitBuffBatch(batchText) {

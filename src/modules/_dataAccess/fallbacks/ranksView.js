@@ -9,11 +9,7 @@ import querySelectorArray from '../../common/querySelectorArray';
 import regExpFirstCapture from '../../common/regExpFirstCapture';
 import regExpGroups from '../../common/regExpGroups';
 import uniq from '../../common/uniq';
-import {
-  playerLinkSelector,
-  stamRe,
-  vlRe,
-} from '../../support/constants';
+import { playerLinkSelector, stamRe, vlRe } from '../../support/constants';
 import createDocument from '../../system/createDocument';
 
 const guildXp = (el) =>

@@ -187,7 +187,7 @@ export default [
       {
         playerId: 1674838,
         playerName: 'Lusterless',
-      }
+      },
     ],
   },
 ];

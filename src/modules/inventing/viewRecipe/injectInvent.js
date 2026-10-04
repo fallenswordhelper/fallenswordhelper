@@ -8,5 +8,8 @@ export default function injectInvent() {
   const inputRecipeId = querySelector('input[name="recipe_id"]');
   if (!inputRecipeId) return;
   const max = parseRecipe();
-  mount(QuickInvent, { props: { max, recipeID: inputRecipeId.value }, target: pcc() });
+  mount(QuickInvent, {
+    props: { max, recipeID: inputRecipeId.value },
+    target: pcc(),
+  });
 }

@@ -11,7 +11,11 @@ function prepareLog($seLogStore, set) {
       mob,
       oldMobs
         .filter(([, mb]) => mb === mob)
-        .map(([time, , , , realm, , , creatureId = -1]) => [time, realm, creatureId]),
+        .map(([time, , , , realm, , , creatureId = -1]) => [
+          time,
+          realm,
+          creatureId,
+        ]),
     ])
     .map(([mob, locAry]) => [
       mob,

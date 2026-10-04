@@ -74,8 +74,14 @@ export default defineConfig(({ command, mode }) => {
     define: {
       defineCalfPath: assetPath(ctx, 'calfSystem.min.css'),
       defineCalfVer: JSON.stringify(calfVer),
-      defineDataTablesPath: assetPath(ctx, 'dataTables.css', 'src/styles/dataTables.css'),
-      defineEnvironment: JSON.stringify(ctx.isProd ? 'production' : 'development'),
+      defineDataTablesPath: assetPath(
+        ctx,
+        'dataTables.css',
+        'src/styles/dataTables.css',
+      ),
+      defineEnvironment: JSON.stringify(
+        ctx.isProd ? 'production' : 'development',
+      ),
       defineUserIsDev: !ctx.isProd,
       defineVersion: JSON.stringify(version),
     },

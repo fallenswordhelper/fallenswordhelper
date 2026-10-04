@@ -19,7 +19,7 @@ function getBuffList() {
       value: option.value,
       name: matches[1],
       max_level: matches[2],
-    }
+    };
   });
   return buffs;
 }
@@ -28,7 +28,7 @@ function injectBulkInput() {
   const packageAddInput = querySelector('#pCC form');
   const wrapperDiv = createDiv({
     className: 'fshCenter',
-  })
+  });
   const bulkInput = createInput({
     value: 'Create Bulk Package',
     type: 'button',
@@ -46,8 +46,7 @@ function openBulkPage() {
       target: querySelector('body'),
       props: { buffList: getBuffList() },
     });
-  }
-  else {
+  } else {
     app.show();
   }
   return app;

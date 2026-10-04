@@ -68,7 +68,12 @@ function processMemberDataUpdate(member, prof, history) {
   const lastRecord = history.length > 0 ? history.at(-1) : null;
 
   // First check if there are significant changes
-  const significantChanges = hasSignificantChanges(history, member, prof, daysSinceActivity);
+  const significantChanges = hasSignificantChanges(
+    history,
+    member,
+    prof,
+    daysSinceActivity,
+  );
 
   if (!significantChanges) {
     // No significant changes - just update the check timestamp
@@ -115,9 +120,7 @@ export async function processMemberBatch(batch, guildData) {
       const history = ensureMemberHistory(guildData, member.name);
       processMemberDataUpdate(member, prof, history);
     } catch (e) {
-      devStdOut(
-        `Guild Tracker: Failed to fetch ${member.name}: ${e.message}`,
-      );
+      devStdOut(`Guild Tracker: Failed to fetch ${member.name}: ${e.message}`);
     }
   }
 }

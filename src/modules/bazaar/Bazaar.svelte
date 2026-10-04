@@ -8,7 +8,7 @@
   let { potions = [] } = $props();
 
   // svelte-ignore state_referenced_locally
-    let bob = $state(potions);
+  let bob = $state(potions);
 
   async function buyButton(potion) {
     sendEvent('bazaar', 'buyButton');
@@ -16,7 +16,7 @@
     const response = await potion.promise;
     if (response?.s) {
       dynamicAlert(
-          `You successfully purchased ${potion.count} potion${potion.count > 1 ? 's' : ''}`,
+        `You successfully purchased ${potion.count} potion${potion.count > 1 ? 's' : ''}`,
       );
     } else if (response?.e) {
       dynamicAlert(response.e.message);

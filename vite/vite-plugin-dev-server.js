@@ -34,10 +34,13 @@ export default function devServerPlugin({ rootPath, core }) {
         }
         // Serve transformed entry point at /calfSystem.min.js
         if (req.url === '/calfSystem.min.js') {
-          server.transformRequest('/src/calfSystem.js').then((result) => {
-            res.setHeader('Content-Type', 'application/javascript');
-            res.end(result?.code || '');
-          }).catch(next);
+          server
+            .transformRequest('/src/calfSystem.js')
+            .then((result) => {
+              res.setHeader('Content-Type', 'application/javascript');
+              res.end(result?.code || '');
+            })
+            .catch(next);
           return;
         }
         next();

@@ -12,7 +12,7 @@
   ) => durability < maxDur && pid === -1 && rarity !== 5 && type < 9;
 
   // svelte-ignore state_referenced_locally
-    const api = new DataTable(fshInv);
+  const api = new DataTable(fshInv);
   const rows = api.rows(repairable);
   const data = arrayFrom(rows.data());
   if (data.length) disabled = 0;
@@ -38,12 +38,7 @@
         <span class="fshGreen">Recalled</span>
       {/await}
     {:else}
-      <button
-        class="custombutton"
-        {disabled}
-        onclick={toBp}
-        type="button"
-      >
+      <button class="custombutton" {disabled} onclick={toBp} type="button">
         BP
       </button>
     {/if}

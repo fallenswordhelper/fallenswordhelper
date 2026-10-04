@@ -1,11 +1,11 @@
-import { mount } from "svelte";
+import { mount } from 'svelte';
 import asyncPThree from '../../common/asyncPThree';
 import jQueryNotPresent from '../../common/jQueryNotPresent';
-import querySelector from "../../common/querySelector";
+import querySelector from '../../common/querySelector';
 import getCheckboxes from '../../guild/inventory/storeitems/getCheckboxes';
 import injectStoreItems from '../../guild/inventory/storeitems/injectStoreItems';
-import { pcc } from "../../support/layout";
-import DropItems from "./DropItems.svelte";
+import { pcc } from '../../support/layout';
+import DropItems from './DropItems.svelte';
 import injectMoveItems from './injectMoveItems';
 import interceptDestroy from './interceptDestroy';
 

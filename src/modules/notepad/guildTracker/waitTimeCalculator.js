@@ -44,7 +44,10 @@ function calculateWaitTimeFromOldest(oldestUpdateTime) {
   }
 
   const nextUpdateTime = oldestUpdateTime + GUILD_ACTIVITY_UPDATE_INTERVAL;
-  const waitTime = Math.max(MIN_WAIT_TIME_SECS, nextUpdateTime - realtimeSecs());
+  const waitTime = Math.max(
+    MIN_WAIT_TIME_SECS,
+    nextUpdateTime - realtimeSecs(),
+  );
 
   return waitTime * MS_PER_SECOND;
 }

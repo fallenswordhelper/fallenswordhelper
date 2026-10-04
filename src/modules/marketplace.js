@@ -81,8 +81,7 @@ function maxInput(sourceInput, targetInput) {
   const value = Number(sourceInput.value);
   if (value && value > 0) {
     targetInput.value = Math.floor(wallet() / value / 1.005);
-  }
-  else {
+  } else {
     targetInput.value = '';
   }
   addMarketplaceWarning();

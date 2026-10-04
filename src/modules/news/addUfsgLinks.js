@@ -39,10 +39,11 @@ function titanRealmLink(el) {
 }
 
 export default function addUfsgLinks() {
-  querySelectorArray('.news_body img[src*="/creatures/"]')
-    .forEach(partial(ufsgLinkFromImg, 'news'));
+  querySelectorArray('.news_body img[src*="/creatures/"]').forEach(
+    partial(ufsgLinkFromImg, 'news'),
+  );
   querySelectorArray(
-      '.news_body a[data-tipped*="/creatures/"],' +
+    '.news_body a[data-tipped*="/creatures/"],' +
       '.news_body_tavern a[data-tipped*="/creatures/"]',
   )
     .filter(isMonsterLink)
