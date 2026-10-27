@@ -5,8 +5,9 @@ import createSpan from '../../common/cElement/createSpan';
 import insertElement from '../../common/insertElement';
 import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
+import hrefIs from '../../common/hrefIs';
 import onclick from '../../common/onclick';
-import querySelector from '../../common/querySelector';
+import querySelectorArray from '../../common/querySelectorArray';
 import { cmdUrl } from '../../support/constants';
 
 function openQwDialog() {
@@ -16,10 +17,8 @@ function openQwDialog() {
 
 export default function quickWearLink() {
   // quick wear manager link
-  const node = querySelector(
-    `#profileRightColumn a[href="${
-      cmdUrl
-    }profile&subcmd=togglesection&section_id=2"]`,
+  const node = querySelectorArray('#profileRightColumn a').find(
+    hrefIs(`${cmdUrl}profile&subcmd=togglesection&section_id=2`),
   );
   if (!node) {
     return;

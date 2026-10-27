@@ -1,9 +1,10 @@
 import sendEvent from '../analytics/sendEvent';
 import getElementsByClassName from '../common/getElementsByClassName';
 import getText from '../common/getText';
+import hrefIs from '../common/hrefIs';
 import insertHtmlAfterEnd from '../common/insertHtmlAfterEnd';
 import onclick from '../common/onclick';
-import querySelector from '../common/querySelector';
+import querySelectorArray from '../common/querySelectorArray';
 import { archiveUrl, updateArchiveUrl } from '../support/constants';
 
 const news = 'News';
@@ -12,14 +13,16 @@ const typeText = (type) => `View ${type} Page 2`;
 const pageTwoLink = (url, type) =>
   `&nbsp;<a href="${url}&page=2">${typeText(type)}</a>`;
 
+const findLink = (url) => querySelectorArray('#pCC a').find(hrefIs(url));
+
 export default function injectHomePageTwoLink() {
-  const updateLink = querySelector(`#pCC a[href="${updateArchiveUrl}"]`);
+  const updateLink = findLink(updateArchiveUrl);
   if (!updateLink) {
     return;
   }
   insertHtmlAfterEnd(updateLink, pageTwoLink(updateArchiveUrl, updates));
 
-  const archiveLink = querySelector(`#pCC a[href="${archiveUrl}"]`);
+  const archiveLink = findLink(archiveUrl);
   insertHtmlAfterEnd(archiveLink, pageTwoLink(archiveUrl, news));
 
   const newsLeftCol = getElementsByClassName('news_left_column');
