@@ -32,10 +32,10 @@ function setDoChat(theForm) {
   arrayFrom(theForm.elements).forEach(formAttr);
 }
 
-function rearrangeTable(elements) {
-  const theTable = closestTable(elements[5]);
+function rearrangeTable(sendBtn, secondBtn) {
+  const theTable = closestTable(sendBtn);
   theTable.rows[0].cells[0].remove();
-  insertElement(theTable.insertRow(-1).insertCell(-1), elements[6]);
+  insertElement(theTable.insertRow(-1).insertCell(-1), secondBtn);
   theTable.rows[0].cells[0].rowSpan = 2;
 }
 
@@ -69,10 +69,13 @@ export default function addChatTextArea() {
     return;
   }
   const theForm = document.forms[0];
+  const { msg, submit } = theForm.elements;
+  const [sendBtn, secondBtn] = submit ?? [];
+  if (!msg || !sendBtn || !secondBtn) return;
   setDoChat(theForm);
-  rearrangeTable(theForm.elements);
+  rearrangeTable(sendBtn, secondBtn);
   const fshTxt = makeTextArea();
-  on(fshTxt, 'keypress', partial(keypress, theForm.elements[5]));
-  theForm.elements[4].replaceWith(fshTxt);
+  on(fshTxt, 'keypress', partial(keypress, sendBtn));
+  msg.replaceWith(fshTxt);
   on(theForm, 'submit', partial(removeCrlf, fshTxt));
 }
