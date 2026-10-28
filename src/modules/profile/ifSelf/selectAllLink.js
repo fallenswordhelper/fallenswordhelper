@@ -3,11 +3,11 @@ import createSpan from '../../common/cElement/createSpan';
 import clickThis from '../../common/clickThis';
 import getElementById from '../../common/getElementById';
 import getElementsByClassName from '../../common/getElementsByClassName';
+import hrefIs from '../../common/hrefIs';
 import insertElement from '../../common/insertElement';
 import insertElementAfterBegin from '../../common/insertElementAfterBegin';
 import insertHtmlBeforeEnd from '../../common/insertHtmlBeforeEnd';
 import onclick from '../../common/onclick';
-import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
 import { dropItemsUrl } from '../../support/constants';
 
@@ -32,7 +32,9 @@ function profileSelectAll() {
 
 export default function selectAllLink() {
   // select all link
-  const node = querySelector(`#profileRightColumn a[href="${dropItemsUrl}"]`);
+  const node = querySelectorArray('#profileRightColumn a').find(
+    hrefIs(dropItemsUrl),
+  );
   if (!node) {
     return;
   }
