@@ -5,11 +5,15 @@ import getText from '../../common/getText';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import onclick from '../../common/onclick';
 import querySelectorArray from '../../common/querySelectorArray';
+import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { pcc } from '../../support/layout';
 
 function injectButtons(btn) {
-  const pid = btn.getAttribute('onclick').split('&')[2].split('=')[1];
+  const pid = regExpFirstCapture(
+    /potion_id=(?<id>\d+)/,
+    btn.getAttribute('onclick'),
+  );
   insertHtmlAfterBegin(
     btn.parentNode,
     `[ <span class="fsh-quick-collect"><button class="fshBl fsh-bli" type="button" value="${
