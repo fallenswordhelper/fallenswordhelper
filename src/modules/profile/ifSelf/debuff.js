@@ -6,8 +6,8 @@ import hideQTip from '../../common/hideQTip';
 import navigateTo from '../../common/navigateTo';
 import onclick from '../../common/onclick';
 import partial from '../../common/partial';
-import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 
 function debuffSuccess(aLink, json) {
   if (json?.s) {
@@ -18,7 +18,7 @@ function debuffSuccess(aLink, json) {
 async function doDebuff(fastDebuff, aLink) {
   if (fastDebuff) {
     sendEvent('profile', 'doDebuff');
-    const buffId = regExpFirstCapture(/d=(?<id>\d{1,3})$/, aLink.href);
+    const buffId = getCustomUrlParameter(aLink.href, 'skill_id');
     const json = await daRemoveSkill(buffId);
     errorDialog(json);
     debuffSuccess(aLink, json);
