@@ -1,1 +1,0 @@
-{"version":3,"file":"legacy-TVNYOKqu.js","names":[],"sources":["../../../../../node_modules/svelte/src/internal/flags/legacy.js"],"sourcesContent":["import { enable_legacy_mode_flag } from './index.js';\n\nenable_legacy_mode_flag();\n"],"x_google_ignoreList":[0],"mappings":";;AAEA,GAAyB"}

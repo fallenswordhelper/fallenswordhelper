@@ -1,1 +1,0 @@
-{"version":3,"file":"clickThis-CZdkFZtj.js","names":[],"sources":["../../../../../src/modules/common/clickThis.js"],"sourcesContent":["export default function clickThis(el) {\n  if (el instanceof Element) {\n    el.click();\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAU,GAAI;AACpC,CAAI,aAAc,WAChB,EAAG,OAAO"}

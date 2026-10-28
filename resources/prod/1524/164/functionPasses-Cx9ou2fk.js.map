@@ -1,0 +1,1 @@
+{"version":3,"file":"functionPasses-Cx9ou2fk.js","names":["functionPasses","fn"],"sources":["../../../../../src/modules/common/functionPasses.js"],"sourcesContent":["export default function functionPasses(fn) {\n  return fn();\n}\n"],"mappings":";AAAA,SAAwBA,EAAe,GAAI;CACzC,OAAOC,EAAG;AACZ"}

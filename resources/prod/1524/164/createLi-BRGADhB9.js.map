@@ -1,0 +1,1 @@
+{"version":3,"file":"createLi-BRGADhB9.js","names":["cElement","createLi","props"],"sources":["../../../../../src/modules/common/cElement/createLi.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createLi(props) {\n  return cElement('li', props);\n}\n"],"mappings":";;AAEA,SAAwBC,EAAS,GAAO;CACtC,OAAOD,EAAS,MAAME,CAAK;AAC7B"}

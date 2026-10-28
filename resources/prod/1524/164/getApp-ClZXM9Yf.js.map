@@ -1,0 +1,1 @@
+{"version":3,"file":"getApp-ClZXM9Yf.js","names":["api","getApp","data"],"sources":["../../../../../src/modules/app/getApp.js"],"sourcesContent":["import api from './api';\n\nexport default function getApp(data) {\n  return api(data, { method: 'GET' });\n}\n"],"mappings":";;AAEA,SAAwBC,EAAO,GAAM;CACnC,OAAOD,EAAIE,GAAM,EAAE,QAAQ,MAAM,CAAC;AACpC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"jQueryPresent-DUWNBls9.js","names":["isFunction","jQueryPresent"],"sources":["../../../../../src/modules/common/jQueryPresent.js"],"sourcesContent":["import isFunction from './isFunction';\n\nexport default function jQueryPresent() {\n  return isFunction(window.jQuery);\n}\n"],"mappings":";;AAEA,SAAwBC,IAAgB;CACtC,OAAOD,EAAW,OAAO,MAAM;AACjC"}

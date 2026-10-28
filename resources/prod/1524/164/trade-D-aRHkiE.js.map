@@ -1,0 +1,1 @@
+{"version":3,"file":"trade-D-aRHkiE.js","names":["getApp","trade","data"],"sources":["../../../../../src/modules/app/trade/trade.js"],"sourcesContent":["import getApp from '../getApp';\n\nexport default function trade(data) {\n  return getApp({ cmd: 'trade', ...data });\n}\n"],"mappings":";;AAEA,SAAwBC,EAAM,GAAM;CAClC,OAAOD,EAAO;EAAE,KAAK;EAAS,GAAGE;CAAK,CAAC;AACzC"}

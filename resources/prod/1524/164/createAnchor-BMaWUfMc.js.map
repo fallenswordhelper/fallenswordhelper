@@ -1,0 +1,1 @@
+{"version":3,"file":"createAnchor-BMaWUfMc.js","names":["cElement","createAnchor","props"],"sources":["../../../../../src/modules/common/cElement/createAnchor.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createAnchor(props) {\n  return cElement('a', props);\n}\n"],"mappings":";;AAEA,SAAwBC,EAAa,GAAO;CAC1C,OAAOD,EAAS,KAAKE,CAAK;AAC5B"}

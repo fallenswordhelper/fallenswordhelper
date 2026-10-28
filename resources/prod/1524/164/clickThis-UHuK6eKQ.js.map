@@ -1,0 +1,1 @@
+{"version":3,"file":"clickThis-UHuK6eKQ.js","names":["clickThis","el"],"sources":["../../../../../src/modules/common/clickThis.js"],"sourcesContent":["export default function clickThis(el) {\n  if (el instanceof Element) {\n    el.click();\n  }\n}\n"],"mappings":";AAAA,SAAwBA,EAAU,GAAI;CACpC,AAAIC,aAAc,WAChBA,EAAG,MAAM;AAEb"}

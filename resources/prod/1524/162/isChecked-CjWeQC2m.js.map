@@ -1,1 +1,0 @@
-{"version":3,"file":"isChecked-CjWeQC2m.js","names":[],"sources":["../../../../../src/modules/system/isChecked.js"],"sourcesContent":["export default function isChecked(pref) {\n  if (pref) {\n    return ' checked';\n  }\n  return '';\n}\n"],"mappings":";AAAA,SAAwB,EAAU,GAAM;AAItC,QAHI,IACK,aAEF"}

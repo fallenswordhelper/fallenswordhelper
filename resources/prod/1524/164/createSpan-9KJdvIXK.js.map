@@ -1,0 +1,1 @@
+{"version":3,"file":"createSpan-9KJdvIXK.js","names":["cElement","createSpan","props"],"sources":["../../../../../src/modules/common/cElement/createSpan.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createSpan(props) {\n  return cElement('span', props);\n}\n"],"mappings":";;AAEA,SAAwBC,EAAW,GAAO;CACxC,OAAOD,EAAS,QAAQE,CAAK;AAC/B"}

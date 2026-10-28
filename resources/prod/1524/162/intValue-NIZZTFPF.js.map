@@ -1,1 +1,0 @@
-{"version":3,"file":"intValue-NIZZTFPF.js","names":[],"sources":["../../../../../src/modules/system/intValue.js"],"sourcesContent":["export default function intValue(theText) {\n  if (!theText) {\n    return 0;\n  }\n  return Number(theText.replace(/,/g, ''));\n}\n"],"mappings":";AAAA,SAAwB,EAAS,GAAS;AAIxC,QAHK,IAGE,OAAO,EAAQ,QAAQ,MAAM,GAAG,CAAC,GAF/B"}

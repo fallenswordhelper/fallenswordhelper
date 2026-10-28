@@ -1,0 +1,1 @@
+{"version":3,"file":"addCommas-Bv8TEVoY.js","names":["addCommas","x"],"sources":["../../../../../src/modules/system/addCommas.js"],"sourcesContent":["export default function addCommas(x) {\n  return new Intl.NumberFormat('en-us').format(x);\n}\n"],"mappings":";AAAA,SAAwBA,EAAU,GAAG;CACnC,OAAO,IAAI,KAAK,aAAa,OAAO,CAAC,CAAC,OAAOC,CAAC;AAChD"}

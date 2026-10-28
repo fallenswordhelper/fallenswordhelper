@@ -1,0 +1,1 @@
+{"version":3,"file":"jQueryNotPresent-Cx9lm32d.js","names":["jQueryPresent","jQueryNotPresent"],"sources":["../../../../../src/modules/common/jQueryNotPresent.js"],"sourcesContent":["import jQueryPresent from './jQueryPresent';\n\nexport default function jQueryNotPresent() {\n  return !jQueryPresent();\n}\n"],"mappings":";;AAEA,SAAwBC,IAAmB;CACzC,OAAO,CAACD,EAAc;AACxB"}

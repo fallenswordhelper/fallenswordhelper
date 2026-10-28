@@ -1,1 +1,0 @@
-{"version":3,"file":"csvSplit-Dg-U97MN.js","names":[],"sources":["../../../../../src/modules/common/csvSplit.js"],"sourcesContent":["import trim from './trim';\n\nexport default function csvSplit(csv) {\n  return csv.split(',').map(trim);\n}\n"],"mappings":";;AAEA,SAAwB,EAAS,GAAK;AACpC,QAAO,EAAI,MAAM,IAAI,CAAC,IAAI,EAAK"}

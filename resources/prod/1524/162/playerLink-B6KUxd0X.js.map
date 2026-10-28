@@ -1,1 +1,0 @@
-{"version":3,"file":"playerLink-B6KUxd0X.js","names":[],"sources":["../../../../../src/modules/common/playerLink.js"],"sourcesContent":["import { playerIdUrl } from '../support/constants';\n\nexport default function playerLink(id, name) {\n  return `<a href=\"${playerIdUrl}${id}\">${name}</a>`;\n}\n"],"mappings":";;AAEA,SAAwB,EAAW,GAAI,GAAM;AAC3C,QAAO,YAAY,IAAc,EAAG,IAAI,EAAK"}

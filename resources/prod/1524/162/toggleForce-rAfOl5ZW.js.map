@@ -1,1 +1,0 @@
-{"version":3,"file":"toggleForce-rAfOl5ZW.js","names":[],"sources":["../../../../../src/modules/common/toggleForce.js"],"sourcesContent":["export default function toggleForce(el, force) {\n  if (el instanceof Element) {\n    el.classList.toggle('fshHide', force);\n  }\n}\n"],"mappings":";AAAA,SAAwB,EAAY,GAAI,GAAO;AAC7C,CAAI,aAAc,WAChB,EAAG,UAAU,OAAO,WAAW,EAAM"}

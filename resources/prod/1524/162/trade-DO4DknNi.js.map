@@ -1,1 +1,0 @@
-{"version":3,"file":"trade-DO4DknNi.js","names":[],"sources":["../../../../../src/modules/app/trade/trade.js"],"sourcesContent":["import getApp from '../getApp';\n\nexport default function trade(data) {\n  return getApp({ cmd: 'trade', ...data });\n}\n"],"mappings":";;AAEA,SAAwB,EAAM,GAAM;AAClC,QAAO,EAAO;EAAE,KAAK;EAAS,GAAG;EAAM,CAAC"}

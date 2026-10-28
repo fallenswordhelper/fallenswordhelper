@@ -1,0 +1,1 @@
+{"version":3,"file":"trim-CU-eMahN.js","names":["trim","str"],"sources":["../../../../../src/modules/common/trim.js"],"sourcesContent":["export default function trim(str) {\n  return str.trim();\n}\n"],"mappings":";AAAA,SAAwBA,EAAK,GAAK;CAChC,OAAOC,EAAI,KAAK;AAClB"}

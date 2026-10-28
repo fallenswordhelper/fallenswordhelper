@@ -1,0 +1,1 @@
+{"version":3,"file":"stdout-BBXc-13D.js","names":["stdout","rest"],"sources":["../../../../../src/modules/support/stdout.js"],"sourcesContent":["export default function stdout(...rest) {\n  console.log(...rest); // skipcq: JS-0002\n}\n"],"mappings":";AAAA,SAAwBA,EAAO,GAAGC,GAAM;CACtC,QAAQ,IAAI,GAAGA,CAAI;AACrB"}

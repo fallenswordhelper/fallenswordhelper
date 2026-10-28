@@ -1,1 +1,0 @@
-{"version":3,"file":"indexAjaxData-CqOTihOX.js","names":[],"sources":["../../../../../src/modules/ajax/indexAjaxData.js"],"sourcesContent":["import indexAjax from './indexAjax';\n\nexport default function indexAjaxData(data) {\n  return indexAjax({ data });\n}\n"],"mappings":";;AAEA,SAAwB,EAAc,GAAM;AAC1C,QAAO,EAAU,EAAE,SAAM,CAAC"}

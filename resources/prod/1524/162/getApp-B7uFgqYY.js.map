@@ -1,1 +1,0 @@
-{"version":3,"file":"getApp-B7uFgqYY.js","names":[],"sources":["../../../../../src/modules/app/getApp.js"],"sourcesContent":["import api from './api';\n\nexport default function getApp(data) {\n  return api(data, { method: 'GET' });\n}\n"],"mappings":";;AAEA,SAAwB,EAAO,GAAM;AACnC,QAAO,EAAI,GAAM,EAAE,QAAQ,OAAO,CAAC"}

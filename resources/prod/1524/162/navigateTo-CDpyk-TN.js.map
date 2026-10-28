@@ -1,1 +1,0 @@
-{"version":3,"file":"navigateTo-CDpyk-TN.js","names":[],"sources":["../../../../../src/modules/common/navigateTo.js"],"sourcesContent":["export default function navigateTo(url) {\n  window.location = url;\n}\n"],"mappings":";AAAA,SAAwB,EAAW,GAAK;AACtC,QAAO,WAAW"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"createAnchor-DH9dG-LN.js","names":[],"sources":["../../../../../src/modules/common/cElement/createAnchor.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createAnchor(props) {\n  return cElement('a', props);\n}\n"],"mappings":";;AAEA,SAAwB,EAAa,GAAO;AAC1C,QAAO,EAAS,KAAK,EAAM"}

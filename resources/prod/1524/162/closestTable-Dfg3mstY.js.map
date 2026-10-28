@@ -1,1 +1,0 @@
-{"version":3,"file":"closestTable-Dfg3mstY.js","names":[],"sources":["../../../../../src/modules/common/closestTable.js"],"sourcesContent":["import { defTable } from '../support/constants';\nimport closest from './closest';\n\nexport default function closestTable(el) {\n  return closest(defTable, el);\n}\n"],"mappings":";;;AAGA,SAAwB,EAAa,GAAI;AACvC,QAAO,EAAQ,GAAU,EAAG"}
