@@ -1,6 +1,7 @@
 import dynamicAlert from '../alert/dynamicAlert';
 import createButton from '../common/cElement/createButton';
 import createDiv from '../common/cElement/createDiv';
+import hrefWithoutFst from '../common/hrefWithoutFst';
 import insertElement from '../common/insertElement';
 import onclick from '../common/onclick';
 import { pcc } from '../support/layout';
@@ -47,7 +48,7 @@ async function nextSELogRefresh() {
 export default function blank() {
   if (
     !defineUserIsDev ||
-    location.search !== '?cmd=notepad&blank=1' ||
+    hrefWithoutFst(location) !== 'index.php?cmd=notepad&blank=1' ||
     !pcc()
   ) {
     return;
