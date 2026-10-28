@@ -1,0 +1,1 @@
+{"version":3,"file":"isBoolean-CDs7KbAY.js","names":["isBoolean"],"sources":["../../../../../src/modules/common/isBoolean.js"],"sourcesContent":["export default function isBoolean(e) {\n  return typeof e === 'boolean';\n}\n"],"mappings":";AAAA,SAAwBA,EAAU,GAAG;CACnC,OAAO,OAAO,KAAM;AACtB"}

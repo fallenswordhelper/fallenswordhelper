@@ -1,0 +1,1 @@
+{"version":3,"file":"inventory-BxKMawFk.js","names":["cmdExport","inventory"],"sources":["../../../../../src/modules/_dataAccess/export/inventory.js"],"sourcesContent":["import cmdExport from './cmdExport';\n\nexport default function inventory() {\n  return cmdExport({ subcmd: 'inventory' });\n}\n"],"mappings":";;AAEA,SAAwBC,IAAY;CAClC,OAAOD,EAAU,EAAE,QAAQ,YAAY,CAAC;AAC1C"}
