@@ -3,9 +3,7 @@ import isString from '../common/isString';
 import { GMSTORAGE_PATH } from '../support/constants';
 
 function storItem(name, type, value) {
-  if (window.Modernizr?.localstorage) {
-    window.localStorage.setItem(GMSTORAGE_PATH + name, type + value);
-  }
+  window.localStorage.setItem(GMSTORAGE_PATH + name, type + value);
 }
 
 const cold = [
