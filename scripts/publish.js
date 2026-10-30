@@ -1,13 +1,13 @@
 // Publish the release built by `npm run patch` (or `minor`) to gh-pages.
 //
 // Run from a clean master checkout once `npm run patch` has pushed:
-//   npm run publish:gh-pages              wait for CI, then ask before pushing
+//   npm run publish:gh-pages              check CI, then ask before pushing
 //   npm run publish:gh-pages -- --dry-run do everything except push
 //   npm run publish:gh-pages -- --yes     push without asking
 //
-// It waits for CI on the build commit, then commits dist/ to gh-pages in a
-// temporary worktree. The previous patch folder is kept for players still on
-// the old version. Set GH_TOKEN or GITHUB_TOKEN to raise the GitHub API limit.
+// It stops unless CI has passed on the build commit, then commits dist/ to
+// gh-pages in a temporary worktree. The previous patch folder is kept for
+// players still on the old version.
 
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
@@ -16,11 +16,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { stdin, stdout } from 'node:process';
 import { createInterface } from 'node:readline/promises';
-import { setTimeout as sleep } from 'node:timers/promises';
 import { calfVer, core, version } from '../vite/version.js';
 
-const CI_POLL_MS = 45_000;
-const CI_TIMEOUT_MS = 30 * 60_000;
 const USERSCRIPT = 'Releases/Current/fallenswordhelper.user.js';
 
 const args = new Set(process.argv.slice(2));
@@ -90,37 +87,23 @@ function checkCheckout(slug) {
   return { remote, sha, build };
 }
 
-async function ciRuns(slug, sha) {
-  const headers = { Accept: 'application/vnd.github+json' };
-  const token = process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN;
-  if (token) headers.Authorization = `Bearer ${token}`;
+async function checkCi(slug, sha) {
   const res = await fetch(
     `https://api.github.com/repos/${slug}/actions/runs?head_sha=${sha}&event=push`,
-    { headers },
+    { headers: { Accept: 'application/vnd.github+json' } },
   );
-  if (res.status === 403 || res.status === 429) {
-    fail('GitHub API rate limit reached. Set GH_TOKEN and run again.');
-  }
   if (!res.ok) fail(`GitHub API returned ${res.status} ${res.statusText}`);
-  return (await res.json()).workflow_runs;
-}
-
-async function waitForCi(slug, sha, deadline = Date.now() + CI_TIMEOUT_MS) {
-  const runs = await ciRuns(slug, sha);
+  const runs = (await res.json()).workflow_runs;
   const failed = runs.find(
     (r) => r.status === 'completed' && r.conclusion !== 'success',
   );
   if (failed) {
     fail(`CI "${failed.name}" ended ${failed.conclusion}: ${failed.html_url}`);
   }
-  if (runs.length && runs.every((r) => r.status === 'completed')) {
-    console.log('CI passed.');
-    return;
+  if (!runs.length || runs.some((r) => r.status !== 'completed')) {
+    fail('CI has not finished yet. Try again in a minute.');
   }
-  if (Date.now() > deadline) fail('Gave up waiting for CI after 30 minutes.');
-  console.log(runs.length ? 'CI is running...' : 'Waiting for CI to start...');
-  await sleep(CI_POLL_MS);
-  await waitForCi(slug, sha, deadline);
+  console.log('CI passed.');
 }
 
 // Highest patch folder below this release, or undefined if there is none.
@@ -199,7 +182,7 @@ try {
   const slug = repoSlug();
   const checkout = checkCheckout(slug);
   console.log(`Publishing ${version} (${core}/${calfVer}) to ${slug}.`);
-  await waitForCi(slug, checkout.sha);
+  await checkCi(slug, checkout.sha);
   await publish(checkout);
 } catch (err) {
   if (!(err instanceof PublishError)) throw err;
