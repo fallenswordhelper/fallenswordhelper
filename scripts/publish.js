@@ -46,6 +46,16 @@ function repoSlug() {
   return match[1];
 }
 
+function upstreamRemote() {
+  try {
+    return git(['rev-parse', '--abbrev-ref', 'master@{upstream}']).split(
+      '/',
+    )[0];
+  } catch {
+    return fail('master has no upstream branch.');
+  }
+}
+
 function checkCheckout(slug) {
   if (git(['status', '--porcelain'])) {
     fail('Working tree is not clean. Commit or stash changes first.');
@@ -56,13 +66,7 @@ function checkCheckout(slug) {
   if (!git(['tag', '--points-at', 'HEAD']).split('\n').includes(version)) {
     fail(`HEAD is not tagged ${version}. Run npm run patch first.`);
   }
-  let upstream;
-  try {
-    upstream = git(['rev-parse', '--abbrev-ref', 'master@{upstream}']);
-  } catch {
-    fail('master has no upstream branch.');
-  }
-  const remote = upstream.split('/')[0];
+  const remote = upstreamRemote();
   const url = git(['remote', 'get-url', remote]);
   if (!new RegExp(String.raw`${slug}(\.git)?/?$`).test(url)) {
     fail(`master tracks ${remote} (${url}), not ${slug}.`);
