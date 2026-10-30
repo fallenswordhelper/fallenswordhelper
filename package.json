@@ -15,6 +15,7 @@
     "test": "npm run eslint && npm run format:check",
     "minor": "npm version minor -m \"Build %s\" --tag-version-prefix=\"\"",
     "patch": "npm version patch -m \"Build %s\" --tag-version-prefix=\"\"",
+    "publish:gh-pages": "node scripts/publish.js",
     "prepare": "husky",
     "preversion": "npm run test",
     "version": "npm run build && git add -A",
