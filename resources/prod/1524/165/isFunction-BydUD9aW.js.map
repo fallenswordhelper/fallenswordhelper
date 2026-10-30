@@ -1,0 +1,1 @@
+{"version":3,"file":"isFunction-BydUD9aW.js","names":["isFunction"],"sources":["../../../../../src/modules/common/isFunction.js"],"sourcesContent":["export default function isFunction(e) {\n  return typeof e === 'function';\n}\n"],"mappings":";AAAA,SAAwBA,EAAW,GAAG;CACpC,OAAO,OAAO,KAAM;AACtB"}

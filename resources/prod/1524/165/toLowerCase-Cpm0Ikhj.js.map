@@ -1,0 +1,1 @@
+{"version":3,"file":"toLowerCase-Cpm0Ikhj.js","names":["toLowerCase","str"],"sources":["../../../../../src/modules/common/toLowerCase.js"],"sourcesContent":["export default function toLowerCase(str) {\n  return str?.toLowerCase?.();\n}\n"],"mappings":";AAAA,SAAwBA,EAAY,GAAK;CACvC,OAAOC,GAAK,cAAc;AAC5B"}

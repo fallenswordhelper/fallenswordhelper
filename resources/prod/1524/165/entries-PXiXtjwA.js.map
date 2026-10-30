@@ -1,0 +1,1 @@
+{"version":3,"file":"entries-PXiXtjwA.js","names":["entries","obj"],"sources":["../../../../../src/modules/common/entries.js"],"sourcesContent":["export default function entries(obj) {\n  return Object.entries(obj);\n}\n"],"mappings":";AAAA,SAAwBA,EAAQ,GAAK;CACnC,OAAO,OAAO,QAAQC,CAAG;AAC3B"}

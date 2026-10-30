@@ -1,0 +1,1 @@
+{"version":3,"file":"csvSplit-C5BboO-R.js","names":["trim","csvSplit","csv"],"sources":["../../../../../src/modules/common/csvSplit.js"],"sourcesContent":["import trim from './trim';\n\nexport default function csvSplit(csv) {\n  return csv.split(',').map(trim);\n}\n"],"mappings":";;AAEA,SAAwBC,EAAS,GAAK;CACpC,OAAOC,EAAI,MAAM,GAAG,CAAC,CAAC,IAAIF,CAAI;AAChC"}

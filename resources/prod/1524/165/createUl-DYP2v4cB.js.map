@@ -1,0 +1,1 @@
+{"version":3,"file":"createUl-DYP2v4cB.js","names":["cElement","createUl","props"],"sources":["../../../../../src/modules/common/cElement/createUl.js"],"sourcesContent":["import cElement from './cElement';\n\nexport default function createUl(props) {\n  return cElement('ul', props);\n}\n"],"mappings":";;AAEA,SAAwBC,EAAS,GAAO;CACtC,OAAOD,EAAS,MAAME,CAAK;AAC7B"}

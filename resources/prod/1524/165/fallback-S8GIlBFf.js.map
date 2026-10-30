@@ -1,0 +1,1 @@
+{"version":3,"file":"fallback-S8GIlBFf.js","names":["fallback","a","b"],"sources":["../../../../../src/modules/system/fallback.js"],"sourcesContent":["export default function fallback(a, b) {\n  return a || b;\n}\n"],"mappings":";AAAA,SAAwBA,EAAS,GAAG,GAAG;CACrC,OAAOC,KAAKC;AACd"}

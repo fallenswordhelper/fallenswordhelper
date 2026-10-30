@@ -1,0 +1,1 @@
+{"version":3,"file":"setText-CVjyFkRt.js","names":["setText","ctx","text"],"sources":["../../../../../src/modules/dom/setText.js"],"sourcesContent":["export default function setText(text, ctx) {\n  if (ctx instanceof Node) {\n    ctx.textContent = String(text);\n  }\n}\n"],"mappings":";AAAA,SAAwBA,EAAQ,GAAM,GAAK;CACzC,AAAIC,aAAe,SACjB,EAAI,cAAc,OAAOC,CAAI;AAEjC"}

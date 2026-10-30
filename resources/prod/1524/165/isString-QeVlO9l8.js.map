@@ -1,0 +1,1 @@
+{"version":3,"file":"isString-QeVlO9l8.js","names":["isString"],"sources":["../../../../../src/modules/common/isString.js"],"sourcesContent":["export default function isString(e) {\n  return typeof e === 'string';\n}\n"],"mappings":";AAAA,SAAwBA,EAAS,GAAG;CAClC,OAAO,OAAO,KAAM;AACtB"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"ufsgAllowBack-B3yLJhTP.js","names":["interceptSubmit","ufsgAllowBack"],"sources":["../../../../../src/modules/guide/ufsgAllowBack.js"],"sourcesContent":["import interceptSubmit from '../common/interceptSubmit';\n\nexport default function ufsgAllowBack() {\n  interceptSubmit(document.body);\n}\n"],"mappings":";;AAEA,SAAwBC,IAAgB;CACtC,EAAgB,SAAS,IAAI;AAC/B"}
