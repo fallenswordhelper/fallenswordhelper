@@ -64,7 +64,7 @@ function checkCheckout(slug) {
   }
   const remote = upstream.split('/')[0];
   const url = git(['remote', 'get-url', remote]);
-  if (!new RegExp(`${slug}(\\.git)?/?$`).test(url)) {
+  if (!new RegExp(String.raw`${slug}(\.git)?/?$`).test(url)) {
     fail(`master tracks ${remote} (${url}), not ${slug}.`);
   }
   git(['fetch', '--quiet', remote, 'master', 'gh-pages']);
@@ -101,28 +101,22 @@ async function ciRuns(slug, sha) {
   return (await res.json()).workflow_runs;
 }
 
-async function waitForCi(slug, sha) {
-  const deadline = Date.now() + CI_TIMEOUT_MS;
-  for (;;) {
-    const runs = await ciRuns(slug, sha);
-    const failed = runs.find(
-      (r) => r.status === 'completed' && r.conclusion !== 'success',
-    );
-    if (failed) {
-      fail(
-        `CI "${failed.name}" ended ${failed.conclusion}: ${failed.html_url}`,
-      );
-    }
-    if (runs.length && runs.every((r) => r.status === 'completed')) {
-      console.log('CI passed.');
-      return;
-    }
-    if (Date.now() > deadline) fail('Gave up waiting for CI after 30 minutes.');
-    console.log(
-      runs.length ? 'CI is running...' : 'Waiting for CI to start...',
-    );
-    await sleep(CI_POLL_MS);
+async function waitForCi(slug, sha, deadline = Date.now() + CI_TIMEOUT_MS) {
+  const runs = await ciRuns(slug, sha);
+  const failed = runs.find(
+    (r) => r.status === 'completed' && r.conclusion !== 'success',
+  );
+  if (failed) {
+    fail(`CI "${failed.name}" ended ${failed.conclusion}: ${failed.html_url}`);
   }
+  if (runs.length && runs.every((r) => r.status === 'completed')) {
+    console.log('CI passed.');
+    return;
+  }
+  if (Date.now() > deadline) fail('Gave up waiting for CI after 30 minutes.');
+  console.log(runs.length ? 'CI is running...' : 'Waiting for CI to start...');
+  await sleep(CI_POLL_MS);
+  await waitForCi(slug, sha, deadline);
 }
 
 // Highest patch folder below this release, or undefined if there is none.
