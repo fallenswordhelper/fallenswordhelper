@@ -1,1 +1,0 @@
-{"version":3,"file":"newsShoutbox-Df8vZ7tB.js","names":["injectShoutboxWidgets","newsShoutbox"],"sources":["../../../../../src/modules/news/newsShoutbox.js"],"sourcesContent":["import injectShoutboxWidgets from './injectShoutboxWidgets';\n\nexport default function newsShoutbox() {\n  injectShoutboxWidgets(150);\n}\n"],"mappings":";;AAEA,SAAwBC,IAAe;CACrC,EAAsB,GAAG;AAC3B"}
