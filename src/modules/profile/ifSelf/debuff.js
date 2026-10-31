@@ -35,7 +35,7 @@ function getALink(target) {
 // The game asks first (data-confirm), then clicks the link again once you
 // say OK. Only that second click removes the buff.
 const confirmed = (aLink) =>
-  !aLink.hasAttribute('data-confirm') ||
+  !('confirm' in aLink.dataset) ||
   Boolean(window.jQuery?.(aLink).data('fsConfirmed'));
 
 function interceptDebuff(e) {
@@ -43,7 +43,7 @@ function interceptDebuff(e) {
   const aLink = getALink(e.target);
   if (aLink.tagName !== 'A' || !confirmed(aLink)) return;
   e.preventDefault();
-  doDebuff(aLink);
+  void doDebuff(aLink);
 }
 
 export default function debuff(fastDebuff, disableDeactivatePrompts) {
