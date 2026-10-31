@@ -7,7 +7,7 @@ import entries from '../../../common/entries';
 import partial from '../../../common/partial';
 import querySelectorArray from '../../../common/querySelectorArray';
 import toggleForce from '../../../common/toggleForce';
-import MoveItems from '../../../profile/dropitems/MoveItems.svelte';
+import MoveItems from './MoveItems.svelte';
 
 function setFolder(ctx, folderId, itemId) {
   ctx.items[itemId].folder_id = Number(folderId);

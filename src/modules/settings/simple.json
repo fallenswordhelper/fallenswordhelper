@@ -1,9 +1,4 @@
 {
-  "ajaxifyDestroy": {
-    "helpTitle": "Ajaxify Destroy",
-    "helpText": "Destroy items without page redirect.<br>This also allows you to drop more than 100 items",
-    "network": true
-  },
   "ajaxifyMoveRecipe": {
     "helpTitle": "Ajaxify Move Recipe",
     "helpText": "Move recipe without page redirect.",

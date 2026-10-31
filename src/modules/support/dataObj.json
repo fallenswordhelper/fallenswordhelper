@@ -184,7 +184,6 @@
   "enableHistoryCompressor": false,
   "enableStamBars": false,
   "appBad": [0, false],
-  "ajaxifyDestroy": false,
   "statBarLinks": false,
   "staminaCalculator": false,
   "levelUpCalculator": false,

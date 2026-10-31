@@ -51,8 +51,12 @@
     [() => true, (selectId, [, itm]) => selectId === itm?.item_id],
   ];
 
+  // Trade and Auction House mark selected items -create-selected,
+  // Manage Backpack marks them backpack-manage-selected.
   function deselectAll() {
-    querySelectorArray('[class$="-create-selected"] div').forEach(clickThis);
+    querySelectorArray(
+      '[class$="-create-selected"] div, .backpack-manage-selected .selectable-item',
+    ).forEach(clickThis);
   }
 
   function getHowMany() {
@@ -98,7 +102,7 @@
   const isInSt = ([, obj]) => obj.is_in_st;
   const itemStyle = ([, obj]) => `div[id$="-highlight-${
     obj.inv_id
-  }"]:not([class$="-create-selected"]) {
+  }"]:not([class$="-create-selected"], .backpack-manage-selected) {
     background-color: rgba(255, 0, 0, 0.3);
   }`;
   const styleSheet = () =>

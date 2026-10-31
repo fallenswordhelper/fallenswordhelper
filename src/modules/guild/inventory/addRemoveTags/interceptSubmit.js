@@ -5,7 +5,7 @@ import chunk from '../../../common/chunk';
 import on from '../../../common/on';
 import partial from '../../../common/partial';
 import querySelectorArray from '../../../common/querySelectorArray';
-import removeRow from '../../../profile/dropitems/removeRow';
+import removeRow from './removeRow';
 import actionType from './actionType';
 
 const getCheckedItems = () => querySelectorArray('[name="tagIndex[]"]:checked');

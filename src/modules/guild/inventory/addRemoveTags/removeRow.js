@@ -1,4 +1,4 @@
-import closestTr from '../../common/closestTr';
+import closestTr from '../../../common/closestTr';
 
 export default function removeRow(c) {
   const tr = closestTr(c);
