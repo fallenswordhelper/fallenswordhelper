@@ -1,1 +1,0 @@
-{"version":3,"file":"asyncPThree-bWSwOXri.js","names":["task","asyncPThree","fn"],"sources":["../../../../../src/modules/common/asyncPThree.js"],"sourcesContent":["import task from '../support/task';\n\nexport default function asyncPThree(fnList) {\n  fnList.forEach((fn) => task(3, fn));\n}\n"],"mappings":";;AAEA,SAAwBC,EAAY,GAAQ;CAC1C,EAAO,SAAS,MAAOD,EAAK,GAAGE,CAAE,CAAC;AACpC"}
