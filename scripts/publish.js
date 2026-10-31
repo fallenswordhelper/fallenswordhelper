@@ -87,20 +87,45 @@ function checkCheckout(slug) {
   return { remote, sha, build };
 }
 
-async function checkCi(slug, sha) {
-  const res = await fetch(
-    `https://api.github.com/repos/${slug}/actions/runs?head_sha=${sha}&event=push`,
-    { headers: { Accept: 'application/vnd.github+json' } },
-  );
+async function getJson(url) {
+  const res = await fetch(url, {
+    headers: { Accept: 'application/vnd.github+json' },
+  });
   if (!res.ok) fail(`GitHub API returned ${res.status} ${res.statusText}`);
-  const runs = (await res.json()).workflow_runs;
+  return res.json();
+}
+
+// GitHub Actions runs on the build commit.
+async function checkActions(api, sha) {
+  const { workflow_runs: runs } = await getJson(
+    `${api}/actions/runs?head_sha=${sha}&event=push`,
+  );
   const failed = runs.find(
     (r) => r.status === 'completed' && r.conclusion !== 'success',
   );
   if (failed) {
     fail(`CI "${failed.name}" ended ${failed.conclusion}: ${failed.html_url}`);
   }
-  if (!runs.length || runs.some((r) => r.status !== 'completed')) {
+  return runs.length > 0 && runs.every((r) => r.status === 'completed');
+}
+
+// Commit statuses from outside GitHub Actions, such as AppVeyor.
+async function checkStatuses(api, sha) {
+  const { state, statuses } = await getJson(`${api}/commits/${sha}/status`);
+  const failed = statuses.find((s) => ['error', 'failure'].includes(s.state));
+  if (failed) {
+    fail(`CI "${failed.context}" ended ${failed.state}: ${failed.target_url}`);
+  }
+  return statuses.length > 0 && state === 'success';
+}
+
+async function checkCi(slug, sha) {
+  const api = `https://api.github.com/repos/${slug}`;
+  const [actionsDone, statusesDone] = await Promise.all([
+    checkActions(api, sha),
+    checkStatuses(api, sha),
+  ]);
+  if (!actionsDone || !statusesDone) {
     fail('CI has not finished yet. Try again in a minute.');
   }
   console.log('CI passed.');
