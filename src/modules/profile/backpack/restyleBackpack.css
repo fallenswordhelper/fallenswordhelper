@@ -1,9 +1,19 @@
-.fshBackpack {
-  height: 490px;
+/*
+  The game sizes backpack rows itself (100px, or 114px with checkboxes).
+  Fast wear adds a 13px line under each item, 5px below the picture so it
+  clears the level pips, so every row is 118px.
+*/
+#backpack.fshBackpack .backpackTabContent {
+  grid-auto-rows: 118px;
 }
-.backpackTabContent > div {
-  width: 60px;
+#backpack.fshBackpack .backpackTabContent > .backpackSlot {
+  height: 118px;
 }
-.fshBackpack .backpackTabContent > div {
-  height: 110px;
+/* Four rows. */
+#backpack.fshBackpack ul.backpackItemList {
+  height: 472px;
+}
+/* The rows plus 34px for the page links. */
+#backpack.fshBackpack .backpackTab {
+  height: 506px;
 }

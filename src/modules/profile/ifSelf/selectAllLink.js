@@ -11,23 +11,29 @@ import onclick from '../../common/onclick';
 import querySelectorArray from '../../common/querySelectorArray';
 import { dropItemsUrl } from '../../support/constants';
 
+// A plain click on an item makes the game equip or use it; Ctrl-click selects.
+function ctrlClick(el) {
+  el.dispatchEvent(
+    new MouseEvent('click', { bubbles: true, cancelable: true, ctrlKey: true }),
+  );
+}
+
 function profileSelectAll() {
   sendEvent('profile', 'select all');
   const bpTabs = getElementById('backpack_tabs');
   const type = getElementsByClassName('tab-selected', bpTabs)[0]?.getAttribute(
     'data-type',
   );
-  let items = querySelectorArray(
-    `#backpackTab_${type} li:not(.hcsPaginate_hidden) .backpackItem`,
-  );
-  if (!items.length) return;
+  // Skip slots fast wear has emptied.
+  const slots = `#backpackTab_${type} li:not(.hcsPaginate_hidden) .backpackSlot:not(.fastDone)`;
   const checkboxes = querySelectorArray(
-    `#backpackTab_${
-      type
-    } li:not(.hcsPaginate_hidden) .backpackCheckbox:not(:disabled)`,
+    `${slots} .backpackCheckbox:not(:disabled)`,
   );
-  if (checkboxes.length > 0) items = checkboxes;
-  items.forEach(clickThis);
+  if (checkboxes.length > 0) {
+    checkboxes.forEach(clickThis);
+    return;
+  }
+  querySelectorArray(`${slots} .backpackItem`).forEach(ctrlClick);
 }
 
 export default function selectAllLink() {

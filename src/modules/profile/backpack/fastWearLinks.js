@@ -1,6 +1,7 @@
 import createDiv from '../../common/cElement/createDiv';
 import hasClass from '../../common/hasClass';
 import insertElement from '../../common/insertElement';
+import insertElementBefore from '../../common/insertElementBefore';
 import partial from '../../common/partial';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
@@ -28,10 +29,13 @@ function drawButtons(bp, theSpan) {
     )}">${actionText(toUse)}</button>`,
   });
   const parent = theSpan.closest('div');
-  if (bp.options.checkboxesEnabled) {
-    insertElement(myDiv, querySelector('input', parent));
+  // The game finds the item from the checkbox's parent, so leave it in place.
+  const checkbox = querySelector('.backpackCheckbox', parent);
+  if (bp.options.checkboxesEnabled && checkbox) {
+    insertElementBefore(myDiv, checkbox);
+  } else {
+    insertElement(parent, myDiv);
   }
-  insertElement(parent, myDiv);
 }
 
 export default function fastWearLinks(bp) {
