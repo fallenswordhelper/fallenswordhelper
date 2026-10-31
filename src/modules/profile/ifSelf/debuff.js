@@ -3,11 +3,12 @@ import sendEvent from '../../analytics/sendEvent';
 import errorDialog from '../../common/errorDialog';
 import getElementById from '../../common/getElementById';
 import hideQTip from '../../common/hideQTip';
-import navigateTo from '../../common/navigateTo';
 import onclick from '../../common/onclick';
-import partial from '../../common/partial';
+import skipGamePrompts from '../../common/skipGamePrompts';
 import setInnerHtml from '../../dom/setInnerHtml';
 import getCustomUrlParameter from '../../system/getCustomUrlParameter';
+
+const deactivatePrompts = [/^Are you sure you wish to remove the .+ skill\?$/];
 
 function debuffSuccess(aLink, json) {
   if (json?.s) {
@@ -15,53 +16,42 @@ function debuffSuccess(aLink, json) {
   }
 }
 
-async function doDebuff(fastDebuff, aLink) {
-  if (fastDebuff) {
-    sendEvent('profile', 'doDebuff');
-    const buffId = getCustomUrlParameter(aLink.href, 'skill_id');
-    const json = await daRemoveSkill(buffId);
-    errorDialog(json);
-    debuffSuccess(aLink, json);
-  } else {
-    navigateTo(aLink.href);
-  }
+async function doDebuff(aLink) {
+  sendEvent('profile', 'doDebuff');
+  const buffId = getCustomUrlParameter(aLink.href, 'skill_id');
+  const json = await daRemoveSkill(buffId);
+  errorDialog(json);
+  debuffSuccess(aLink, json);
 }
 
 function getALink(target) {
-  let aLink = target;
-  if (aLink.tagName === 'IMG') {
+  if (target.tagName === 'IMG') {
     hideQTip(target);
-    aLink = aLink.parentNode;
+    return target.parentNode;
   }
-  return aLink;
+  return target;
 }
 
-function capturing(e) {
-  if (e.eventPhase === 1) {
-    e.stopPropagation();
-  }
-}
+// The game asks first (data-confirm), then clicks the link again once you
+// say OK. Only that second click removes the buff.
+const confirmed = (aLink) =>
+  !('confirm' in aLink.dataset) ||
+  Boolean(window.jQuery?.(aLink).data('fsConfirmed'));
 
-function interceptDebuff(fastDebuff, e) {
-  if (!e.returnValue) {
-    return;
-  }
+function interceptDebuff(e) {
+  if (e.defaultPrevented) return;
   const aLink = getALink(e.target);
-  if (aLink.tagName !== 'A') {
-    return;
-  }
-  capturing(e);
+  if (aLink.tagName !== 'A' || !confirmed(aLink)) return;
   e.preventDefault();
-  doDebuff(fastDebuff, aLink);
+  void doDebuff(aLink); // skipcq: JS-0098
 }
 
 export default function debuff(fastDebuff, disableDeactivatePrompts) {
+  if (disableDeactivatePrompts) {
+    skipGamePrompts('disableDeactivatePrompts', deactivatePrompts);
+  }
   const profileRightColumn = getElementById('profileRightColumn');
-  if (profileRightColumn) {
-    onclick(
-      profileRightColumn.lastElementChild,
-      partial(interceptDebuff, fastDebuff),
-      disableDeactivatePrompts,
-    );
+  if (fastDebuff && profileRightColumn) {
+    onclick(profileRightColumn.lastElementChild, interceptDebuff);
   }
 }
