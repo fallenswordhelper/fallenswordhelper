@@ -1,12 +1,38 @@
+/* The Wear/Use line under each item. Row sizes are in restyleBackpack.css. */
 .fastDiv {
   display: flex;
-  height: 16px;
+  height: 13px;
   justify-content: center;
 }
 .fastAction {
   font-size: 12px;
-  /* margin-right: 0.2em; */
-  position: relative;
-  top: -10%;
+  height: 13px;
+  line-height: 13px;
   width: 3em;
+}
+/* Without checkboxes the line sits 5px under the picture, clear of the pips. */
+#backpack.fshBackpack .backpackSlot > .fastDiv {
+  margin-top: 5px;
+}
+/*
+  With checkboxes: the item, then one centred line holding Wear/Use and the
+  checkbox, at the same height in every slot of a row.
+*/
+#backpack.fshBackpack .backpackSlot:has(> .backpackCheckbox) {
+  align-content: flex-start;
+  column-gap: 2px;
+  flex-flow: row wrap;
+  justify-content: center;
+  row-gap: 5px;
+}
+#backpack.fshBackpack .backpackSlot:has(> .backpackCheckbox) > .fastDiv {
+  margin-top: 0;
+}
+#backpack.fshBackpack
+  .backpackSlot:has(> .backpackCheckbox)
+  > .backpackCheckbox {
+  margin: 0;
+}
+.fastDone > a {
+  pointer-events: none;
 }
