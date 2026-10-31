@@ -43,7 +43,7 @@ function interceptDebuff(e) {
   const aLink = getALink(e.target);
   if (aLink.tagName !== 'A' || !confirmed(aLink)) return;
   e.preventDefault();
-  void doDebuff(aLink);
+  void doDebuff(aLink); // skipcq: JS-0098
 }
 
 export default function debuff(fastDebuff, disableDeactivatePrompts) {
