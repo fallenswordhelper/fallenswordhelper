@@ -44,7 +44,3 @@ function justCheckbox(name) {
 export function simpleCheckboxHtml(name) {
   return justLabel(name) + justCheckbox(name);
 }
-
-export function simpleCheckbox(name) {
-  return `<tr><td class="fshRight">${justLabel(name)}</td><td>${justCheckbox(name)}</td></tr>`;
-}
