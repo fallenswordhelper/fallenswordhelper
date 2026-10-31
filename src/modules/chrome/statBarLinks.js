@@ -1,3 +1,4 @@
+import './statBarLinks.css';
 import sendEvent from '../analytics/sendEvent';
 import createAnchor from '../common/cElement/createAnchor';
 import getElementById from '../common/getElementById';
@@ -25,7 +26,7 @@ function statbarWrapper(href, id) {
   if (!character) {
     return;
   }
-  const myWrapper = createAnchor({ href });
+  const myWrapper = createAnchor({ className: 'fshStatbarLink', href });
   const statWrapper = character.parentNode;
   insertElement(myWrapper, character);
   insertElementAfterBegin(statWrapper, myWrapper);
