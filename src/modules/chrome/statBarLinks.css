@@ -1,0 +1,4 @@
+/* The link adds no box of its own, so the game's statbar layout is unchanged. */
+.fshStatbarLink {
+  display: contents;
+}
