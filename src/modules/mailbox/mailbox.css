@@ -36,3 +36,18 @@
 #quickTake > div:nth-child(4) {
   height: 10px;
 }
+
+/*
+  The game floats each item, sized by its timer text, so rows hold 6 or 7.
+  A grid keeps 7 to a row. Seven of the widest timers overflow the game's
+  box by a pixel, into its margins, so the timers stay on one line.
+*/
+#pCC div:has(> div[id^='temp-inv-']) {
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  justify-content: center;
+  justify-items: center;
+}
+#pCC div[id^='temp-inv-'] {
+  white-space: nowrap;
+}
