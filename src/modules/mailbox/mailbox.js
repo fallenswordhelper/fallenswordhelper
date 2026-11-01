@@ -1,7 +1,7 @@
 import './mailbox.css';
 import daMailboxTake from '../_dataAccess/daMailboxTake';
+import daMailboxView from '../_dataAccess/daMailboxView';
 import sendEvent from '../analytics/sendEvent';
-import view from '../app/tempinv/view';
 import createDiv from '../common/cElement/createDiv';
 import createInput from '../common/cElement/createInput';
 import createLabel from '../common/cElement/createLabel';
@@ -36,7 +36,7 @@ function makeQtLabel(id, text, injector) {
   return lbl;
 }
 
-// The mailbox page shows 100 items at a time, so the list comes from the app.
+// The mailbox page shows 100 items at a time, so the list comes from daMailboxView.
 // Each item: a = mailbox id, b = item id.
 function reduceItems(acc, { a: invId, b: itemId }) {
   if (acc[itemId]) {
@@ -160,7 +160,7 @@ function makeQtDiv(itemList) {
 async function toggleQuickTake(injector) {
   sendEvent('mailbox', 'toggleQuickTake');
   makeQtLabel('qtOn', 'Mailbox', injector);
-  const json = await view();
+  const json = await daMailboxView();
   const items = json.s && isArray(json.r) ? json.r : [];
   const takeResult = makeQtDiv(items.reduce(reduceItems, {}));
   jsonFail(json, takeResult);
