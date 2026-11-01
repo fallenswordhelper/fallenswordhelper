@@ -1,5 +1,6 @@
 import './mailbox.css';
 import daMailboxTake from '../_dataAccess/daMailboxTake';
+import daMailboxView from '../_dataAccess/daMailboxView';
 import sendEvent from '../analytics/sendEvent';
 import createDiv from '../common/cElement/createDiv';
 import createInput from '../common/cElement/createInput';
@@ -19,9 +20,9 @@ import once from '../common/once';
 import onclick from '../common/onclick';
 import outputResult from '../common/outputResult';
 import partial from '../common/partial';
-import regExpGroups from '../common/regExpGroups';
+import playerId from '../common/playerId';
 import setInnerHtml from '../dom/setInnerHtml';
-import { fetchItemRe } from '../support/constants';
+import { cdn } from '../system/system';
 import { pcc } from '../support/layout';
 
 function makeQtLabel(id, text, injector) {
@@ -35,18 +36,16 @@ function makeQtLabel(id, text, injector) {
   return lbl;
 }
 
-function reduceItems(acc, curr) {
-  const img = curr.children[0];
-  const { tipped } = img.dataset;
-  const { itemId, invId } = regExpGroups(fetchItemRe, tipped);
-  if (!itemId || !invId) return acc;
+// The mailbox page shows 100 items at a time, so the list comes from daMailboxView.
+// Each item: a = mailbox id, b = item id.
+function reduceItems(acc, { a: invId, b: itemId }) {
   if (acc[itemId]) {
     acc[itemId].invIds.push(invId);
   } else {
     acc[itemId] = {
       invIds: [invId],
-      tipped: tipped.replace(/&extra=\d/, ''),
-      src: img.src,
+      tipped: `fetchitem.php?item_id=${itemId}&inv_id=${invId}&t=5&p=${playerId()}`,
+      src: `${cdn}items/${itemId}.gif`,
     };
   }
   return acc;
@@ -155,33 +154,35 @@ function makeQtDiv(itemList) {
   insertElement(qt, createDiv());
   insertElement(qt, takeContainer);
   insertElement(pcc(), qt);
+  return takeResult;
 }
 
-function toggleQuickTake(items, injector) {
+async function toggleQuickTake(injector) {
   sendEvent('mailbox', 'toggleQuickTake');
   makeQtLabel('qtOn', 'Mailbox', injector);
-  const itemList = items.reduce(reduceItems, {});
-  makeQtDiv(itemList);
+  const json = await daMailboxView();
+  const items = json.s && isArray(json.r) ? json.r : [];
+  const takeResult = makeQtDiv(items.reduce(reduceItems, {}));
+  jsonFail(json, takeResult);
 }
 
-function makeQtCheckbox(items, injector) {
+function makeQtCheckbox(injector) {
   const qtCheckbox = createInput({
     id: 'fshQuickTake',
     type: 'checkbox',
   });
   insertElementBefore(qtCheckbox, injector);
-  once(qtCheckbox, 'change', partial(toggleQuickTake, items, injector));
+  once(qtCheckbox, 'change', partial(toggleQuickTake, injector));
 }
 
 export default function mailbox() {
   if (jQueryNotPresent() || !pcc()) {
     return;
   }
-  const items = getArrayByTagName('a', pcc());
-  if (items.length === 0) {
+  if (getArrayByTagName('a', pcc()).length === 0) {
     return;
   } // Empty mailbox
   const injector = pcc().lastElementChild;
-  makeQtCheckbox(items, injector);
+  makeQtCheckbox(injector);
   makeQtLabel('qtOff', 'Quick Take', injector);
 }
