@@ -111,7 +111,7 @@ export default function createRouter(D) {
         });
       });
     }
-    if (name !== FREE_TO && byName[FREE_TO])
+    if (byName[FREE_TO])
       out.push({
         e: { to: FREE_TO, kind: 'free', ax: FREE_AT[0], ay: FREE_AT[1] },
         walk: 0,
