@@ -8,7 +8,8 @@ const norm = (s) =>
     .toLowerCase()
     .replace(/[^a-z0-9]/g, '');
 const FREE_TO = 'Mountain Path';
-const FREE_AT = [9, 11]; // the free teleport always puts you on this tile
+const FREE_AT = [9, 11]; // the teleport always puts you on this tile
+const TELEPORT_COST = 25; // it costs 25 stamina, about 25 moves
 
 export default function createRouter(D) {
   const byName = {};
@@ -68,7 +69,7 @@ export default function createRouter(D) {
 
   // Cost is in moves: walking inside a realm is the straight-line distance between the tile you arrive on and the tile of
   // the next stairs / portal (diagonals allowed, obstacles ignored). A portal reaches any master realm's world map, and you can
-  // always teleport to Mountain Path for free, so the cheapest way may start by walking to a nearby portal instead.
+  // teleport to Mountain Path for 25 stamina, so the cheapest way may start by walking to a nearby portal instead.
   const cheb = (t, x, y) =>
     t && x != null ? Math.max(Math.abs(t[0] - x), Math.abs(t[1] - y)) : 0;
   function moveOptions(name, tile) {
@@ -115,7 +116,7 @@ export default function createRouter(D) {
       out.push({
         e: { to: FREE_TO, kind: 'free', ax: FREE_AT[0], ay: FREE_AT[1] },
         walk: 0,
-        cost: 1,
+        cost: TELEPORT_COST,
         at: FREE_AT,
       });
     return out;
