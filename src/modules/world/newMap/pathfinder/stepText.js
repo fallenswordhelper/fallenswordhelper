@@ -20,8 +20,8 @@ const isWalk = (kind) =>
  * @returns {string}
  */
 export function worldMap(router, name) {
-  const a = router.byName[name];
-  return a?.kind === 'master' ? `${name} [${a.level}]` : name;
+  const area = router.byName[name];
+  return area?.kind === 'master' ? `${name} [${area.level}]` : name;
 }
 
 /**
@@ -47,13 +47,14 @@ export function startsOnTile(step) {
 
 /**
  * Words for a stairs step.
- * @param {object} e The stairs edge.
+ * @param {object} edge The stairs edge.
  * @returns {{lead: string, main: string, sub: string}}
  */
-function stairs(e) {
-  const at = e.x == null ? '' : ` at ${coord(e.x, e.y)}`;
-  const arrive = e.ax == null ? '' : `you arrive at ${coord(e.ax, e.ay)}`;
-  return { lead: `Take the stairs${at} to`, main: e.to, sub: arrive };
+function stairs(edge) {
+  const at = edge.x == null ? '' : ` at ${coord(edge.x, edge.y)}`;
+  const arrive =
+    edge.ax == null ? '' : `you arrive at ${coord(edge.ax, edge.ay)}`;
+  return { lead: `Take the stairs${at} to`, main: edge.to, sub: arrive };
 }
 
 /**
@@ -63,38 +64,38 @@ function stairs(e) {
  * @returns {{lead?: string, main: string, sub?: string}}
  */
 export function stepMain(router, step) {
-  const e = step.edge;
-  const wm = (n) => worldMap(router, n);
-  if (e.kind === 'stairs') return stairs(e);
-  if (e.kind === 'portal') {
+  const edge = step.edge;
+  const wm = (mapName) => worldMap(router, mapName);
+  if (edge.kind === 'stairs') return stairs(edge);
+  if (edge.kind === 'portal') {
     return {
-      lead: `Take the portal at ${coord(e.x, e.y)} to`,
-      main: wm(e.to),
-      sub: `${e.name}, world map`,
+      lead: `Take the portal at ${coord(edge.x, edge.y)} to`,
+      main: wm(edge.to),
+      sub: `${edge.name}, world map`,
     };
   }
-  if (e.kind === 'free') {
+  if (edge.kind === 'free') {
     return {
-      main: `Teleport to ${e.to}`,
-      sub: `from anywhere, costs 25 stamina, you arrive at ${coord(e.ax, e.ay)}`,
+      main: `Teleport to ${edge.to}`,
+      sub: `from anywhere, costs 25 stamina, you arrive at ${coord(edge.ax, edge.ay)}`,
     };
   }
-  if (e.kind === 'exit') {
+  if (edge.kind === 'exit') {
     return {
-      main: `Leave to the ${wm(e.to)} world map`,
-      sub: e.x == null ? '' : `exit tile ${coord(e.x, e.y)}`,
+      main: `Leave to the ${wm(edge.to)} world map`,
+      sub: edge.x == null ? '' : `exit tile ${coord(edge.x, edge.y)}`,
     };
   }
-  if (e.kind === 'enter') {
+  if (edge.kind === 'enter') {
     return {
-      main: `Enter ${e.to}`,
+      main: `Enter ${edge.to}`,
       sub: `from the ${wm(step.from)} world map${
-        e.x == null ? '' : `, you appear at ${coord(e.x, e.y)}`
+        edge.x == null ? '' : `, you appear at ${coord(edge.x, edge.y)}`
       }`,
     };
   }
   return {
-    main: `Cross to the ${wm(e.to)} world map`,
+    main: `Cross to the ${wm(edge.to)} world map`,
     sub: 'neighbouring world maps',
   };
 }
@@ -106,17 +107,17 @@ export function stepMain(router, step) {
  * @returns {string}
  */
 export function stepShort(router, step) {
-  const e = step.edge;
-  const wm = (n) => worldMap(router, n);
-  if (e.kind === 'stairs') {
-    const at = e.x == null ? '' : `${coord(e.x, e.y)} `;
-    return `Stairs ${at}→ ${e.to}`;
+  const edge = step.edge;
+  const wm = (mapName) => worldMap(router, mapName);
+  if (edge.kind === 'stairs') {
+    const at = edge.x == null ? '' : `${coord(edge.x, edge.y)} `;
+    return `Stairs ${at}→ ${edge.to}`;
   }
-  if (e.kind === 'portal') {
-    return `Portal ${coord(e.x, e.y)} → ${wm(e.to)} world map`;
+  if (edge.kind === 'portal') {
+    return `Portal ${coord(edge.x, edge.y)} → ${wm(edge.to)} world map`;
   }
-  if (e.kind === 'free') return `Teleport → ${e.to}`;
-  if (e.kind === 'exit') return `Leave to ${wm(e.to)} world map`;
-  if (e.kind === 'enter') return `Enter ${e.to}`;
-  return `Cross to ${wm(e.to)} world map`;
+  if (edge.kind === 'free') return `Teleport → ${edge.to}`;
+  if (edge.kind === 'exit') return `Leave to ${wm(edge.to)} world map`;
+  if (edge.kind === 'enter') return `Enter ${edge.to}`;
+  return `Cross to ${wm(edge.to)} world map`;
 }

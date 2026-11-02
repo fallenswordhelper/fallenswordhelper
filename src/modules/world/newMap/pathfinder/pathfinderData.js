@@ -6,7 +6,7 @@ import createRouter from './route';
 export const siteUrl = 'https://cristimirt.github.io/fspathfinder/';
 const dataUrl = () => getValue('pathfinderDataUrl') || `${siteUrl}route.json`;
 
-let loading;
+let loading = null;
 
 /**
  * Downloads the route data and builds a router from it.
@@ -20,7 +20,7 @@ async function fetchRouter() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return createRouter(await response.json());
   } catch (error) {
-    loading = undefined;
+    loading = null;
     throw new Error(
       `Could not load the map data (${error.message}) from ${url}`,
       { cause: error },
