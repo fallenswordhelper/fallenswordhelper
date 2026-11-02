@@ -124,7 +124,7 @@ export default function createRouter(D) {
   // Cheapest way from one area to another. `tile` is [x, y] of where you stand now (optional, makes the first walk exact).
   // Event-only areas are never used as a way through, only as the start or the destination.
   function findRoute(from, to, tile) {
-    const key = (n, t) => n + '@' + (t ? t[0] + ',' + t[1] : '');
+    const key = (n, t) => `${n}@${t ? t.join(',') : ''}`;
     const info = {};
     const dist = {};
     const prev = {};
