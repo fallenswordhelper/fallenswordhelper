@@ -29,11 +29,10 @@ export default function createRouter(D) {
   D.areas.forEach((a) => {
     adj[a.name] = [];
   });
-  const addEdge = (a, b, kind, info) =>
-    adj[a].push(Object.assign({ to: b, kind }, info));
+  const addEdge = (a, b, kind, info) => adj[a].push({ to: b, kind, ...info });
   const drawn = new Map(); // one entry per pair of connected areas, used by the website to draw lines
   const addDrawn = (a, b, kind) => {
-    const k = [a, b].sort().join('\u0000');
+    const k = [a, b].sort((x, y) => x.localeCompare(y)).join('\u0000');
     if (!drawn.has(k)) drawn.set(k, { a, b, kind });
   };
   realms.forEach((a) => {
@@ -41,8 +40,8 @@ export default function createRouter(D) {
       addEdge(a.name, s.to, 'stairs', {
         x: s.x,
         y: s.y,
-        ax: s.arrive && s.arrive.x,
-        ay: s.arrive && s.arrive.y,
+        ax: s.arrive?.x,
+        ay: s.arrive?.y,
         note: s.note || '',
       });
       addDrawn(a.name, s.to, 'stairs');
@@ -179,8 +178,8 @@ export default function createRouter(D) {
     index.forEach((e) => {
       let rank = -1;
       if (e.n.startsWith(nq)) rank = 0;
-      else if (e.n.indexOf(nq) !== -1) rank = 1;
-      else if (words.length > 1 && words.every((w) => e.w.indexOf(w) !== -1))
+      else if (e.n.includes(nq)) rank = 1;
+      else if (words.length > 1 && words.every((w) => e.w.includes(w)))
         rank = 2;
       if (rank >= 0) hits.push([rank, e.a]);
     });

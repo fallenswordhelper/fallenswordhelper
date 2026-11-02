@@ -13,7 +13,7 @@ import { closePanel, openPanel, pf, restoreState } from './pathfinder.svelte';
 function toggle() {
   sendEvent('NewMap', 'pathfinder');
   if (pf.open) closePanel();
-  else openPanel();
+  else void openPanel(); // skipcq: JS-0098
 }
 
 function makeButton() {
@@ -36,5 +36,5 @@ export default function injectPathfinder() {
   const target = createDiv();
   insertElement(container, target);
   mount(PathfinderPanel, { target, props: { container } });
-  if (restoreState()) openPanel();
+  if (restoreState()) void openPanel(); // skipcq: JS-0098
 }

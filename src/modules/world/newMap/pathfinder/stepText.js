@@ -67,7 +67,8 @@ export function stepShort(router, step) {
   const e = step.edge;
   const wm = (n) => worldMap(router, n);
   if (e.kind === 'stairs') {
-    return `Stairs ${e.x == null ? '' : `${coord(e.x, e.y)} `}→ ${e.to}`;
+    const at = e.x == null ? '' : `${coord(e.x, e.y)} `;
+    return `Stairs ${at}→ ${e.to}`;
   }
   if (e.kind === 'portal') {
     return `Portal ${coord(e.x, e.y)} → ${wm(e.to)} world map`;
