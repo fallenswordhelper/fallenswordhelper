@@ -1,8 +1,18 @@
-// Binary min-heap of [priority, value] pairs, used by the route search.
+/**
+ * Binary min-heap of [priority, value] pairs, used by the route search.
+ */
 export default class MinHeap {
+  /**
+   * Creates an empty heap.
+   */
   constructor() {
     this.items = [];
   }
+  /**
+   * Adds a value.
+   * @param {number} priority Smaller comes out first.
+   * @param {*} value What to return from `pop`.
+   */
   push(priority, value) {
     const { items } = this;
     items.push([priority, value]);
@@ -14,6 +24,10 @@ export default class MinHeap {
       index = parent;
     }
   }
+  /**
+   * Removes the entry with the smallest priority.
+   * @returns {Array|undefined} The [priority, value] pair, or undefined when empty.
+   */
   pop() {
     const { items } = this;
     const top = items[0];
@@ -36,6 +50,10 @@ export default class MinHeap {
     }
     return top;
   }
+  /**
+   * Number of entries in the heap.
+   * @returns {number}
+   */
   get size() {
     return this.items.length;
   }

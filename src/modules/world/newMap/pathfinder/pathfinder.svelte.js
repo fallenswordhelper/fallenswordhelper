@@ -2,7 +2,9 @@ import getValue from '../../../system/getValue';
 import setValue from '../../../system/setValue';
 import loadRouter from './pathfinderData';
 
-// Everything the widget shows lives here. The panel is a view of this state.
+/**
+ * Everything the widget shows lives here. The panel is a view of this state.
+ */
 export const pf = $state({
   open: false,
   dest: '',
@@ -19,6 +21,10 @@ let timer = 0;
 let settle = 0;
 let hereKey = null;
 
+/**
+ * Reads where the player is from the game.
+ * @returns {{realmId: number, masterId: number, x: number, y: number, name: string}|null} Null when the game has no position yet.
+ */
 function readGame() {
   try {
     const player = GameData.player();
@@ -41,6 +47,9 @@ function readGame() {
   }
 }
 
+/**
+ * Works out the route from here to the destination, or clears it when there is none.
+ */
 function recompute() {
   const { router, dest, here, tile } = pf;
   pf.route = null;
@@ -50,11 +59,19 @@ function recompute() {
   pf.route = router.findRoute(here.name, dest, tile);
 }
 
+/**
+ * Runs `fn` after `ms`, replacing any run that is still waiting.
+ * @param {number} ms
+ * @param {Function} fn
+ */
 function later(ms, fn) {
   clearTimeout(settle);
   settle = setTimeout(fn, ms);
 }
 
+/**
+ * Checks where the player is and plans again when the area or tile changed.
+ */
 function tick() {
   const game = readGame();
   const { router } = pf;
@@ -83,18 +100,27 @@ function tick() {
   }
 }
 
+/**
+ * Starts following the player, if it is not already.
+ */
 function startTicking() {
   if (timer) return;
   timer = setInterval(tick, 400);
   tick();
 }
 
+/**
+ * Stops following the player.
+ */
 function stopTicking() {
   clearInterval(timer);
   clearTimeout(settle);
   timer = 0;
 }
 
+/**
+ * Loads the route data into the state; sets `loadError` when it fails.
+ */
 export async function loadData() {
   pf.loadError = '';
   try {
@@ -105,12 +131,19 @@ export async function loadData() {
   }
 }
 
+/**
+ * Sets the destination, remembers it and plans the route.
+ * @param {string} name Area name, or empty to clear it.
+ */
 export function setDest(name) {
   pf.dest = name || '';
   setValue('pathfinderDest', pf.dest);
   recompute();
 }
 
+/**
+ * Opens the panel, loads the data if needed and starts following the player.
+ */
 export async function openPanel() {
   pf.open = true;
   setValue('pathfinderOpen', true);
@@ -118,12 +151,19 @@ export async function openPanel() {
   if (pf.open && pf.router) startTicking();
 }
 
+/**
+ * Closes the panel and stops following the player.
+ */
 export function closePanel() {
   pf.open = false;
   setValue('pathfinderOpen', false);
   stopTicking();
 }
 
+/**
+ * Restores the saved destination.
+ * @returns {boolean} Whether the panel was open last time.
+ */
 export function restoreState() {
   pf.dest = getValue('pathfinderDest') || '';
   return getValue('pathfinderOpen');

@@ -10,12 +10,19 @@ import getValue from '../../../system/getValue';
 import PathfinderPanel from './PathfinderPanel.svelte';
 import { closePanel, openPanel, pf, restoreState } from './pathfinder.svelte';
 
+/**
+ * Opens the panel when it is closed, closes it when it is open.
+ */
 function toggle() {
   sendEvent('NewMap', 'pathfinder');
   if (pf.open) closePanel();
   else void openPanel(); // skipcq: JS-0098
 }
 
+/**
+ * Builds the Path Finder button for the world button bar.
+ * @returns {HTMLButtonElement}
+ */
 function makeButton() {
   const btn = createButton({
     className: 'fshCurveEle fshCurveBtn fshPoint fshPfButton tip-static',
@@ -25,6 +32,9 @@ function makeButton() {
   return btn;
 }
 
+/**
+ * Adds the Path Finder button and panel to the world page, unless the setting is off.
+ */
 export default function injectPathfinder() {
   if (!getValue('showPathfinder')) return;
   const buttons = getElementById('fshWorldButtonContainer');

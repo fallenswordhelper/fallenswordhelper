@@ -8,6 +8,11 @@ const dataUrl = () => getValue('pathfinderDataUrl') || `${siteUrl}route.json`;
 
 let loading;
 
+/**
+ * Downloads the route data and builds a router from it.
+ * @returns {Promise<object>} The router.
+ * @throws {Error} When the data cannot be loaded.
+ */
 async function fetchRouter() {
   const url = dataUrl();
   try {
@@ -23,6 +28,10 @@ async function fetchRouter() {
   }
 }
 
+/**
+ * Loads the router once; later calls share the same promise until a load fails.
+ * @returns {Promise<object>} The router.
+ */
 export default function loadRouter() {
   loading ??= fetchRouter();
   return loading;

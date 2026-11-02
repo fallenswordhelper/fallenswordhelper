@@ -1,31 +1,67 @@
-// Words for one step of a route. `step` is what the router returns: { from, edge, walk, cost }.
+/**
+ * Formats a tile as (x,y).
+ * @param {number} x
+ * @param {number} y
+ * @returns {string}
+ */
 const coord = (x, y) => `(${x},${y})`;
+/**
+ * Whether a step starts by walking to a tile.
+ * @param {string} kind Edge kind.
+ * @returns {boolean}
+ */
 const isWalk = (kind) =>
   kind === 'stairs' || kind === 'exit' || kind === 'portal';
 
-// a world map is shown with its level in brackets, the way the game sorts its portal menu
+/**
+ * A world map is shown with its level in brackets, the way the game sorts its portal menu.
+ * @param {object} router
+ * @param {string} name
+ * @returns {string}
+ */
 export function worldMap(router, name) {
   const a = router.byName[name];
   return a?.kind === 'master' ? `${name} [${a.level}]` : name;
 }
 
-// moves from where you stand to the tile the step starts on
+/**
+ * Moves from where you stand to the tile the step starts on.
+ * @param {object} step
+ * @param {number[]} [tile] Where you stand, [x, y].
+ * @returns {number}
+ */
 export function liveWalk(step, tile) {
   const { edge } = step;
   if (!isWalk(edge.kind) || !tile || edge.x == null) return 0;
   return Math.max(Math.abs(tile[0] - edge.x), Math.abs(tile[1] - edge.y));
 }
 
+/**
+ * Whether the step starts on a tile you have to walk to.
+ * @param {object} step
+ * @returns {boolean}
+ */
 export function startsOnTile(step) {
   return isWalk(step.edge.kind);
 }
 
+/**
+ * Words for a stairs step.
+ * @param {object} e The stairs edge.
+ * @returns {{lead: string, main: string, sub: string}}
+ */
 function stairs(e) {
   const at = e.x == null ? '' : ` at ${coord(e.x, e.y)}`;
   const arrive = e.ax == null ? '' : `you arrive at ${coord(e.ax, e.ay)}`;
   return { lead: `Take the stairs${at} to`, main: e.to, sub: arrive };
 }
 
+/**
+ * Words for the next step, shown big. `step` is what the router returns: { from, edge, walk, cost }.
+ * @param {object} router
+ * @param {object} step
+ * @returns {{lead?: string, main: string, sub?: string}}
+ */
 export function stepMain(router, step) {
   const e = step.edge;
   const wm = (n) => worldMap(router, n);
@@ -63,6 +99,12 @@ export function stepMain(router, step) {
   };
 }
 
+/**
+ * One line for a step further along the route.
+ * @param {object} router
+ * @param {object} step
+ * @returns {string}
+ */
 export function stepShort(router, step) {
   const e = step.edge;
   const wm = (n) => worldMap(router, n);

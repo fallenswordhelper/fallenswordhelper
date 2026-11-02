@@ -3,6 +3,11 @@
 //   router.findRoute('Mountain Path', 'Ramdal Caves (Level 1)', [3, 8])  ->  steps (or null), steps.total = estimated moves
 import MinHeap from './minHeap';
 
+/**
+ * Lower-cases a name and drops everything but letters and digits, for matching.
+ * @param {string} s
+ * @returns {string}
+ */
 const norm = (s) =>
   String(s)
     .toLowerCase()
@@ -11,6 +16,11 @@ const FREE_TO = 'Mountain Path';
 const FREE_AT = [9, 11]; // the teleport always puts you on this tile
 const TELEPORT_COST = 25; // it costs 25 stamina, about 25 moves
 
+/**
+ * Builds a router over the route data.
+ * @param {object} D The parsed route.json.
+ * @returns {{byName: object, masters: object[], realms: object[], adj: object, drawn: Map, findRoute: Function, search: Function, fromGame: Function}}
+ */
 export default function createRouter(D) {
   const byName = {};
   const realmByGuide = {};
@@ -29,8 +39,21 @@ export default function createRouter(D) {
   D.areas.forEach((a) => {
     adj[a.name] = [];
   });
+  /**
+   * Adds a way from area `a` to area `b`.
+   * @param {string} a
+   * @param {string} b
+   * @param {string} kind stairs, exit, enter, world, portal or free.
+   * @param {object} info Tile and arrival details.
+   */
   const addEdge = (a, b, kind, info) => adj[a].push({ to: b, kind, ...info });
   const drawn = new Map(); // one entry per pair of connected areas, used by the website to draw lines
+  /**
+   * Remembers that two areas are connected, once per pair, for the website to draw.
+   * @param {string} a
+   * @param {string} b
+   * @param {string} kind
+   */
   const addDrawn = (a, b, kind) => {
     const k = [a, b].sort((x, y) => x.localeCompare(y)).join('\u0000');
     if (!drawn.has(k)) drawn.set(k, { a, b, kind });
@@ -66,11 +89,21 @@ export default function createRouter(D) {
     }
   });
 
-  // Cost is in moves: walking inside a realm is the straight-line distance between the tile you arrive on and the tile of
-  // the next stairs / portal (diagonals allowed, obstacles ignored). A portal reaches any master realm's world map, and you can
-  // teleport to Mountain Path for 25 stamina, so the cheapest way may start by walking to a nearby portal instead.
+  /**
+   * Cost is in moves: walking inside a realm is the straight-line distance between the tile you arrive on and the tile of the next stairs / portal (diagonals allowed, obstacles ignored). A portal reaches any master realm's world map, and you can teleport to Mountain Path for 25 stamina, so the cheapest way may start by walking to a nearby portal instead.
+   * @param {number[]|null} t Where you stand, [x, y].
+   * @param {number} x
+   * @param {number} y
+   * @returns {number} Moves between the tiles, 0 when either is unknown.
+   */
   const cheb = (t, x, y) =>
     t && x != null ? Math.max(Math.abs(t[0] - x), Math.abs(t[1] - y)) : 0;
+  /**
+   * Every way out of an area from a given tile, with what it costs.
+   * @param {string} name
+   * @param {number[]|null} tile
+   * @returns {object[]}
+   */
   function moveOptions(name, tile) {
     const out = [];
     adj[name].forEach((e) => {
@@ -121,8 +154,13 @@ export default function createRouter(D) {
     return out;
   }
 
-  // Cheapest way from one area to another. `tile` is [x, y] of where you stand now (optional, makes the first walk exact).
-  // Event-only areas are never used as a way through, only as the start or the destination.
+  /**
+   * Cheapest way from one area to another. Event-only areas are never used as a way through, only as the start or the destination.
+   * @param {string} from
+   * @param {string} to
+   * @param {number[]} [tile] [x, y] of where you stand now, makes the first walk exact.
+   * @returns {object[]|null} The steps, with `total` as the estimated moves; null when there is no way.
+   */
   function findRoute(from, to, tile) {
     const key = (n, t) => `${n}@${t ? t.join(',') : ''}`;
     const info = {};
@@ -170,6 +208,12 @@ export default function createRouter(D) {
     n: norm(a.name),
     w: a.name.toLowerCase(),
   }));
+  /**
+   * Name search: starts-with first, then contains, then every typed word somewhere in the name. Shorter names first.
+   * @param {string} q
+   * @param {number} [limit] 8 by default.
+   * @returns {object[]} Matching areas.
+   */
   function search(q, limit) {
     const nq = norm(q);
     if (!nq) return [];
@@ -192,7 +236,12 @@ export default function createRouter(D) {
     return hits.slice(0, limit || 8).map((h) => h[1]);
   }
 
-  // Where the game says the player is. `realmId` / `masterRealmId` are the game's realm_id and master_realm_id, which are the guide's ids.
+  /**
+   * Where the game says the player is. `realmId` / `masterRealmId` are the game's realm_id and master_realm_id, which are the guide's ids.
+   * @param {number} realmId
+   * @param {number} masterRealmId
+   * @returns {object|null} The area.
+   */
   function fromGame(realmId, masterRealmId) {
     if (realmId != null && realmId > 0 && realmByGuide[realmId])
       return realmByGuide[realmId];
