@@ -42,6 +42,28 @@
   padding: 0 4px;
 }
 
+.fshPfModes {
+  display: flex;
+  gap: 4px;
+  padding: 6px 8px 0;
+}
+
+.fshPfModes button {
+  flex: 1;
+  padding: 2px 6px;
+  border: 1px solid #4f3717;
+  border-radius: 3px;
+  background: #d8c18a;
+  color: #361c04;
+  font: inherit;
+  cursor: pointer;
+}
+
+.fshPfModes button.on {
+  background: #7a5a2c;
+  color: #fbf3dc;
+}
+
 .fshPfSearch {
   position: relative;
   display: flex;

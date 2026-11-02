@@ -9,6 +9,7 @@
   let { container } = $props();
 
   let query = $state(pf.dest);
+  let mode = $state('name');
   let suggestions = $state([]);
   let active = $state(0);
   let panel = $state();
@@ -65,9 +66,29 @@
     );
   }
 
+  // "120" is one level, "100-120" (or "100 120") a range
+  function byLevel(text) {
+    const nums = text.match(/\d+/g);
+    if (!nums) return [];
+    const lo = Math.min(+nums[0], +nums[nums.length - 1]);
+    const hi = Math.max(+nums[0], +nums[nums.length - 1]);
+    return pf.router.realms
+      .filter((a) => a.level >= lo && a.level <= hi)
+      .sort((a, b) => a.level - b.level || a.name.localeCompare(b.name));
+  }
+
   function suggest() {
-    suggestions = pf.router && query.trim() ? pf.router.search(query, 8) : [];
+    if (!pf.router || !query.trim()) suggestions = [];
+    else if (mode === 'level') suggestions = byLevel(query);
+    else suggestions = pf.router.search(query, 8);
     active = 0;
+  }
+
+  function setMode(next) {
+    if (mode === next) return;
+    mode = next;
+    query = '';
+    suggestions = [];
   }
 
   function pick(name) {
@@ -91,7 +112,8 @@
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (suggestions.length) pick(suggestions[active].name);
-      else if (pf.router?.byName[query.trim()]) pick(query.trim());
+      else if (mode === 'name' && pf.router?.byName[query.trim()])
+        pick(query.trim());
     } else if (e.key === 'Escape') {
       suggestions = [];
     }
@@ -164,10 +186,30 @@
     </button>
   </div>
 
+  <div class="fshPfModes" role="group" aria-label="Search by">
+    <button
+      type="button"
+      class:on={mode === 'name'}
+      onclick={() => setMode('name')}
+    >
+      Name
+    </button>
+    <button
+      type="button"
+      class:on={mode === 'level'}
+      onclick={() => setMode('level')}
+    >
+      Level
+    </button>
+  </div>
+
   <div class="fshPfSearch">
     <input
       type="text"
-      placeholder="Where to? e.g. Ramdal Caves"
+      inputmode={mode === 'level' ? 'numeric' : 'text'}
+      placeholder={mode === 'level'
+        ? 'Level, e.g. 120 or 100-120'
+        : 'Where to? e.g. Ramdal Caves'}
       autocomplete="off"
       spellcheck="false"
       bind:value={query}
@@ -205,7 +247,11 @@
 
   <div class="fshPfBody">
     {#if !pf.dest}
-      <div class="fshPfMsg">Type an area name above to see the way there.</div>
+      <div class="fshPfMsg">
+        {mode === 'level'
+          ? 'Type a level above, then pick one of its realms.'
+          : 'Type an area name above to see the way there.'}
+      </div>
     {:else if pf.loadError}
       <div class="fshPfMsg fshPfErr">
         {pf.loadError}<br />
