@@ -8,6 +8,7 @@ const norm = (s) =>
     .toLowerCase()
     .replace(/[^a-z0-9]/g, '');
 const FREE_TO = 'Mountain Path';
+const FREE_AT = [9, 11]; // the free teleport always puts you on this tile
 
 export default function createRouter(D) {
   const byName = {};
@@ -112,10 +113,10 @@ export default function createRouter(D) {
     }
     if (name !== FREE_TO && byName[FREE_TO])
       out.push({
-        e: { to: FREE_TO, kind: 'free' },
+        e: { to: FREE_TO, kind: 'free', ax: FREE_AT[0], ay: FREE_AT[1] },
         walk: 0,
         cost: 1,
-        at: null,
+        at: FREE_AT,
       });
     return out;
   }

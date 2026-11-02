@@ -37,7 +37,10 @@ export function stepMain(router, step) {
     };
   }
   if (e.kind === 'free') {
-    return { main: `Teleport to ${e.to}`, sub: 'free from anywhere' };
+    return {
+      main: `Teleport to ${e.to}`,
+      sub: `free from anywhere, you arrive at ${coord(e.ax, e.ay)}`,
+    };
   }
   if (e.kind === 'exit') {
     return {
