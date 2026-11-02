@@ -230,3 +230,41 @@
   border-radius: 3px;
   margin-left: 3px;
 }
+
+/* scrollbars in the parchment colours; Firefox gets the thin standard one */
+.fshPfRest,
+.fshPfSugg {
+  scrollbar-width: thin;
+  scrollbar-color: #a98a52 #e3cf9c;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  .fshPfRest,
+  .fshPfSugg {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  .fshPfRest::-webkit-scrollbar,
+  .fshPfSugg::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .fshPfRest::-webkit-scrollbar-track,
+  .fshPfSugg::-webkit-scrollbar-track {
+    background: #e3cf9c;
+    border-radius: 4px;
+  }
+
+  .fshPfRest::-webkit-scrollbar-thumb,
+  .fshPfSugg::-webkit-scrollbar-thumb {
+    background: #a98a52;
+    border: 1px solid #4f3717;
+    border-radius: 4px;
+  }
+
+  .fshPfRest::-webkit-scrollbar-thumb:hover,
+  .fshPfSugg::-webkit-scrollbar-thumb:hover {
+    background: #8a6b3a;
+  }
+}
