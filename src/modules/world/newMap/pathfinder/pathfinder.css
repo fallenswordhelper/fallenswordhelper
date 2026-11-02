@@ -1,8 +1,8 @@
 #fshPathfinder {
-  position: fixed;
+  position: absolute;
   z-index: 9000;
   width: 320px;
-  max-width: calc(100vw - 8px);
+  max-width: calc(100% - 8px);
   font:
     13px/1.35 'Open Sans',
     Helvetica,

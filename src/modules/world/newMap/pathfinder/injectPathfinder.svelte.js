@@ -30,8 +30,11 @@ export default function injectPathfinder() {
   const buttons = getElementById('fshWorldButtonContainer');
   if (!buttons) return;
   insertElement(buttons, makeButton());
+  // like the Action List, the panel sits inside the map's container, so it moves with the map when the page scrolls
+  const container =
+    getElementById('actionContainer')?.offsetParent ?? document.body;
   const target = createDiv();
-  insertElement(document.body, target);
-  mount(PathfinderPanel, { target });
+  insertElement(container, target);
+  mount(PathfinderPanel, { target, props: { container } });
   if (restoreState()) openPanel();
 }

@@ -5,11 +5,15 @@
   import { closePanel, loadData, pf, setDest } from './pathfinder.svelte';
   import { liveWalk, startsOnTile, stepMain, stepShort } from './stepText';
 
+  // the element the panel lives in (the one the Action List is in), so it scrolls with the map
+  let { container } = $props();
+
   let query = $state(pf.dest);
   let suggestions = $state([]);
   let active = $state(0);
   let panel = $state();
   let pos = $state(readPos());
+  let bounds = $state(pageBounds());
   let drag = 0;
 
   function readPos() {
@@ -19,17 +23,39 @@
     } catch {
       // nothing saved yet
     }
-    return { left: window.innerWidth - 344, top: 150 };
+    return { left: container.clientWidth - 344, top: 150 };
   }
 
-  function clamp(value, max) {
-    return Math.max(0, Math.min(value, max));
+  // the panel may go anywhere on the page, like the Action List; positions are relative to the container
+  function pageBounds() {
+    const r = container.getBoundingClientRect();
+    const x = r.left + window.scrollX - container.scrollLeft;
+    const y = r.top + window.scrollY - container.scrollTop;
+    const doc = document.documentElement;
+    return {
+      minLeft: -x,
+      maxLeft: doc.scrollWidth - x,
+      minTop: -y,
+      maxTop: doc.scrollHeight - y,
+    };
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(value, max));
   }
 
   const left = $derived(
-    clamp(pos.left, window.innerWidth - (panel?.offsetWidth ?? 320)),
+    clamp(
+      pos.left,
+      bounds.minLeft,
+      bounds.maxLeft - (panel?.offsetWidth ?? 320),
+    ),
   );
-  const top = $derived(clamp(pos.top, window.innerHeight - 60));
+  const top = $derived(clamp(pos.top, bounds.minTop, bounds.maxTop - 60));
+
+  function measure() {
+    bounds = pageBounds();
+  }
 
   // typing here must not walk the character: the game listens to the keyboard on the whole page
   function stopKeys(node) {
@@ -75,13 +101,18 @@
     if (e.target.closest('button')) return;
     const r = panel.getBoundingClientRect();
     drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+    measure();
     e.currentTarget.setPointerCapture(e.pointerId);
     e.preventDefault();
   }
 
   function moveDrag(e) {
     if (!drag) return;
-    pos = { left: e.clientX - drag.dx, top: e.clientY - drag.dy };
+    const origin = container.getBoundingClientRect();
+    pos = {
+      left: e.clientX - drag.dx - origin.left + container.scrollLeft,
+      top: e.clientY - drag.dy - origin.top + container.scrollTop,
+    };
   }
 
   function endDrag() {
@@ -105,7 +136,12 @@
   const main = $derived(first ? stepMain(pf.router, first) : null);
 </script>
 
-<svelte:window onresize={() => (pos = { left, top })} />
+<svelte:window
+  onresize={() => {
+    measure();
+    pos = { left, top };
+  }}
+/>
 
 <div
   id="fshPathfinder"
