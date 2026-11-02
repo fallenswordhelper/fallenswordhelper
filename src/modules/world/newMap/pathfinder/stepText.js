@@ -22,8 +22,8 @@ export function startsOnTile(step) {
 
 function stairs(e) {
   const at = e.x == null ? '' : ` at ${coord(e.x, e.y)}`;
-  const arrive = e.ax == null ? '' : `, you arrive at ${coord(e.ax, e.ay)}`;
-  return { main: `Stairs${at}`, sub: `to ${e.to}${arrive}` };
+  const arrive = e.ax == null ? '' : `you arrive at ${coord(e.ax, e.ay)}`;
+  return { lead: `Take the stairs${at} to`, main: e.to, sub: arrive };
 }
 
 export function stepMain(router, step) {
@@ -32,8 +32,9 @@ export function stepMain(router, step) {
   if (e.kind === 'stairs') return stairs(e);
   if (e.kind === 'portal') {
     return {
-      main: `Portal at ${coord(e.x, e.y)}`,
-      sub: `${e.name} to the ${wm(e.to)} world map`,
+      lead: `Take the portal at ${coord(e.x, e.y)} to`,
+      main: wm(e.to),
+      sub: `${e.name}, world map`,
     };
   }
   if (e.kind === 'free') {

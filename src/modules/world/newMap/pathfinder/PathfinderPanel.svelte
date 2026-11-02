@@ -180,7 +180,7 @@
     onpointerup={endDrag}
     onpointercancel={endDrag}
   >
-    <span>Path finder</span>
+    <span><i class="fshPfLogo"></i>Path Finder</span>
     <button type="button" class="fshPfX" title="Close" onclick={closePanel}>
       &times;
     </button>
@@ -286,6 +286,7 @@
         </div>
         <div class="fshPfNext">
           <div class="fshPfIn">Next, in {first.from}</div>
+          {#if main.lead}<div class="fshPfLead">{main.lead}</div>{/if}
           <div class="fshPfBig">{main.main}</div>
           {#if main.sub}<div class="fshPfSub">{main.sub}</div>{/if}
           {#if first.edge.note}

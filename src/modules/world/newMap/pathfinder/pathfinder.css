@@ -19,6 +19,19 @@
   display: none;
 }
 
+:root {
+  --fshPfIcon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23151a23'/%3E%3Crect x='1.5' y='1.5' width='61' height='61' rx='12.5' fill='none' stroke='%23e0b252' stroke-width='3'/%3E%3Crect x='29' y='10' width='6' height='46' rx='2' fill='%238d5e2b'/%3E%3Cpath d='M12 14h30l7 7-7 7H12z' fill='%23ffd980' stroke='%236b4b00' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M52 31H22l-7 7 7 7h30z' fill='%23e0b252' stroke='%236b4b00' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.fshPfLogo {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: -3px;
+  background: center / contain no-repeat var(--fshPfIcon);
+}
+
 .fshPfHead {
   display: flex;
   align-items: center;
@@ -187,6 +200,11 @@
   color: #7a5a2c;
 }
 
+.fshPfLead {
+  font-size: 12px;
+  color: #4a3216;
+}
+
 .fshPfBig {
   font-size: 20px;
   font-weight: 700;
@@ -245,8 +263,7 @@
 
 .fshPfButton {
   background:
-    center / 11px no-repeat
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='6.5' cy='6.5' r='4.3' fill='none' stroke='%234f3717' stroke-width='1.8'/%3E%3Cpath d='M9.8 9.8L14 14' stroke='%234f3717' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E"),
+    center / 16px no-repeat var(--fshPfIcon),
     #e9d6a8;
   border: 1px solid #4f3717;
   border-radius: 3px;
