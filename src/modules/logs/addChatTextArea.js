@@ -69,9 +69,12 @@ export default function addChatTextArea() {
     return;
   }
   const theForm = document.forms[0];
-  const { msg, submit } = theForm.elements;
-  const [sendBtn, secondBtn] = submit ?? [];
-  if (!msg || !sendBtn || !secondBtn) return;
+  const { msg } = theForm.elements;
+  // Leader chat has no Send As Mass button
+  const [sendBtn, secondBtn] = arrayFrom(theForm.elements).filter(
+    ({ name }) => name === 'submit',
+  );
+  if (!msg || !sendBtn) return;
   setDoChat(theForm);
   rearrangeTable(sendBtn, secondBtn);
   const fshTxt = makeTextArea();
