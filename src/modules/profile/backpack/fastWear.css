@@ -8,6 +8,7 @@
   font-size: 12px;
   height: 13px;
   line-height: 13px;
+  position: relative; /* the spinner centres on the button */
   width: 3em;
 }
 /* Without checkboxes the line sits 5px under the picture, clear of the pips. */
