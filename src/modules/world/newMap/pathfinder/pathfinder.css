@@ -1,0 +1,309 @@
+#fshPathfinder {
+  position: absolute;
+  z-index: 9000;
+  width: 320px;
+  max-width: calc(100% - 8px);
+  font:
+    13px/1.35 'Open Sans',
+    Helvetica,
+    Arial,
+    sans-serif;
+  color: #361c04;
+  background: #efe0b9;
+  border: 2px solid #4f3717;
+  border-radius: 5px;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 55%);
+}
+
+#fshPathfinder[hidden] {
+  display: none;
+}
+
+:root {
+  --fshPfIcon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23151a23'/%3E%3Crect x='1.5' y='1.5' width='61' height='61' rx='12.5' fill='none' stroke='%23e0b252' stroke-width='3'/%3E%3Crect x='29' y='10' width='6' height='46' rx='2' fill='%238d5e2b'/%3E%3Cpath d='M12 14h30l7 7-7 7H12z' fill='%23ffd980' stroke='%236b4b00' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M52 31H22l-7 7 7 7h30z' fill='%23e0b252' stroke='%236b4b00' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.fshPfLogo {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: -3px;
+  background: center / contain no-repeat var(--fshPfIcon);
+}
+
+.fshPfHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 4px 10px;
+  background: #4f3717;
+  color: #f3e3b8;
+  font-weight: 700;
+  cursor: move;
+  touch-action: none;
+  user-select: none;
+}
+
+.fshPfX {
+  border: 0;
+  background: none;
+  color: #f3e3b8;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.fshPfModes {
+  display: flex;
+  gap: 4px;
+  padding: 6px 8px 0;
+}
+
+.fshPfModes button {
+  flex: 1;
+  padding: 2px 6px;
+  border: 1px solid #4f3717;
+  border-radius: 3px;
+  background: #d8c18a;
+  color: #361c04;
+  font: inherit;
+  cursor: pointer;
+}
+
+.fshPfModes button.on {
+  background: #7a5a2c;
+  color: #fbf3dc;
+}
+
+.fshPfSearch {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  padding: 8px 8px 4px;
+}
+
+.fshPfSearch input {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 6px;
+  border: 1px solid #8a6b3a;
+  border-radius: 3px;
+  background: #fbf3dc;
+  color: #361c04;
+  font: inherit;
+}
+
+.fshPfSearch > button {
+  padding: 0 8px;
+  border: 1px solid #4f3717;
+  border-radius: 3px;
+  background: #d8c18a;
+  color: #361c04;
+  font: inherit;
+  cursor: pointer;
+}
+
+.fshPfSugg {
+  position: absolute;
+  inset: 100% 8px auto;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #fbf3dc;
+  border: 1px solid #4f3717;
+  border-radius: 3px;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 40%);
+  max-height: 260px;
+  overflow: auto;
+}
+
+.fshPfSugg li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.fshPfSugg li span {
+  color: #7a5a2c;
+  white-space: nowrap;
+}
+
+.fshPfSugg li.on,
+.fshPfSugg li:hover {
+  background: #e3cf9c;
+}
+
+.fshPfBody {
+  padding: 4px 8px 8px;
+}
+
+.fshPfFoot {
+  padding: 4px 8px 6px;
+  border-top: 1px solid #c9b27f;
+  text-align: center;
+  font-size: 11px;
+}
+
+.fshPfFoot a {
+  color: #6b3d00;
+}
+
+.fshPfMsg {
+  padding: 8px 2px;
+  color: #5b4020;
+}
+
+.fshPfErr {
+  color: #8a1d12;
+}
+
+.fshPfDest span {
+  color: #7a5a2c;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.fshPfCount {
+  color: #5b4020;
+  font-size: 12px;
+  margin: 0 0 6px;
+}
+
+.fshPfDone {
+  margin: 8px 0 2px;
+  padding: 10px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  background: #cfe3b0;
+  border: 1px solid #5a7a2c;
+  border-radius: 4px;
+  color: #2f4a10;
+}
+
+.fshPfNext {
+  padding: 8px 10px;
+  background: #fbf3dc;
+  border: 2px solid #b8721b;
+  border-radius: 5px;
+}
+
+.fshPfIn {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #7a5a2c;
+}
+
+.fshPfLead {
+  font-size: 12px;
+  color: #4a3216;
+}
+
+.fshPfBig {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 2px 0;
+}
+
+.fshPfSub {
+  font-size: 13px;
+  color: #4a3216;
+}
+
+.fshPfNote {
+  margin-top: 4px;
+  font-size: 12px;
+  font-style: italic;
+  color: #8a1d12;
+}
+
+.fshPfAway {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8a4d00;
+}
+
+.fshPfHere {
+  color: #2f6a10;
+}
+
+.fshPfRest {
+  margin: 8px 0 0;
+  padding-left: 22px;
+  max-height: 230px;
+  overflow: auto;
+  font-size: 11.5px;
+  color: #4a3216;
+}
+
+.fshPfRest li {
+  padding: 2px 0;
+  border-top: 1px dotted #c9b27c;
+}
+
+.fshPfRest li:first-child {
+  border-top: 0;
+}
+
+.fshPfFrom {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #8a6b3a;
+}
+
+.fshPfButton {
+  background:
+    center / 16px no-repeat var(--fshPfIcon),
+    #e9d6a8;
+  border: 1px solid #4f3717;
+  border-radius: 3px;
+  margin-left: 3px;
+}
+
+/* scrollbars in the parchment colours; Firefox gets the thin standard one */
+.fshPfRest,
+.fshPfSugg {
+  scrollbar-width: thin;
+  scrollbar-color: #a98a52 #e3cf9c;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  .fshPfRest,
+  .fshPfSugg {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  .fshPfRest::-webkit-scrollbar,
+  .fshPfSugg::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .fshPfRest::-webkit-scrollbar-track,
+  .fshPfSugg::-webkit-scrollbar-track {
+    background: #e3cf9c;
+    border-radius: 4px;
+  }
+
+  .fshPfRest::-webkit-scrollbar-thumb,
+  .fshPfSugg::-webkit-scrollbar-thumb {
+    background: #a98a52;
+    border: 1px solid #4f3717;
+    border-radius: 4px;
+  }
+
+  .fshPfRest::-webkit-scrollbar-thumb:hover,
+  .fshPfSugg::-webkit-scrollbar-thumb:hover {
+    background: #8a6b3a;
+  }
+}

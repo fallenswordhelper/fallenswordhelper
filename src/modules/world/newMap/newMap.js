@@ -14,6 +14,7 @@ import hideTitanCombatResults from './hideTitanCombatResults';
 import messageQueue from './messageQueue/messageQueue';
 import monsterLog from './monsterLog/monsterLog';
 import onWorld from './onWorld';
+import injectPathfinder from './pathfinder/injectPathfinder.svelte';
 import relic from './relic/relic';
 import repairButton from './repairButton';
 import replaceFootprints from './replaceFootprints';
@@ -47,6 +48,7 @@ const usualRoutines = [
   msgCenterOffset,
   hideMapTooltip,
   buttons,
+  injectPathfinder,
   buffInfo,
   interceptMouseEvents,
   champAttacks,
