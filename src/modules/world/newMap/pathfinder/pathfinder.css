@@ -77,6 +77,66 @@
   color: #fbf3dc;
 }
 
+.fshPfOpt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px 0;
+  font-size: 11px;
+  color: #5b4020;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fshPfHelp {
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+  cursor: help;
+}
+
+.fshPfOpt input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fshPfSwitch {
+  position: relative;
+  flex: none;
+  width: 26px;
+  height: 14px;
+  border: 1px solid #4f3717;
+  border-radius: 8px;
+  background: #d8c18a;
+  transition: background 0.15s;
+}
+
+.fshPfSwitch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4f3717;
+  transition: transform 0.15s;
+}
+
+.fshPfOpt input:checked + .fshPfSwitch {
+  background: #7a5a2c;
+}
+
+.fshPfOpt input:checked + .fshPfSwitch::after {
+  background: #fbf3dc;
+  transform: translateX(12px);
+}
+
+.fshPfOpt input:focus-visible + .fshPfSwitch {
+  outline: 2px solid #6b3d00;
+  outline-offset: 1px;
+}
+
 .fshPfSearch {
   position: relative;
   display: flex;
@@ -140,17 +200,6 @@
 
 .fshPfBody {
   padding: 4px 8px 8px;
-}
-
-.fshPfFoot {
-  padding: 4px 8px 6px;
-  border-top: 1px solid #c9b27f;
-  text-align: center;
-  font-size: 11px;
-}
-
-.fshPfFoot a {
-  color: #6b3d00;
 }
 
 .fshPfMsg {

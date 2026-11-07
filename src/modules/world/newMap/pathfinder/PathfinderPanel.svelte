@@ -1,8 +1,13 @@
 <script>
   import getValue from '../../../system/getValue';
   import setValue from '../../../system/setValue';
-  import { siteUrl } from './pathfinderData';
-  import { closePanel, loadData, pf, setDest } from './pathfinder.svelte';
+  import {
+    closePanel,
+    loadData,
+    pf,
+    setDest,
+    setWaysOnly,
+  } from './pathfinder.svelte';
   import { liveWalk, startsOnTile, stepMain, stepShort } from './stepText';
 
   // the element the panel lives in (the one the Action List is in), so it scrolls with the map
@@ -245,6 +250,26 @@
     {/if}
   </div>
 
+  <label class="fshPfOpt">
+    <input
+      type="checkbox"
+      role="switch"
+      checked={pf.waysOnly}
+      onchange={(e) => setWaysOnly(e.currentTarget.checked)}
+    />
+    <span class="fshPfSwitch"></span>
+    Only the Cathedral of Ways portal
+    <!-- the game's tooltip; a click on it must not flip the switch -->
+    <span
+      class="fshPfHelp tip-static"
+      role="note"
+      data-tipped="All the other portals, except the one in the Cathedral of Ways, are ignored when working out the way."
+      onclick={(e) => e.preventDefault()}
+    >
+      [?]
+    </span>
+  </label>
+
   <div class="fshPfBody">
     {#if !pf.dest}
       <div class="fshPfMsg">
@@ -314,11 +339,5 @@
         {/if}
       {/if}
     {/if}
-  </div>
-
-  <div class="fshPfFoot">
-    <a href={siteUrl} target="_blank" rel="noopener">
-      Fallen Sword Path Finder website ↗
-    </a>
   </div>
 </div>

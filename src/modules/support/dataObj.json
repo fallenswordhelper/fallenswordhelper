@@ -55,7 +55,7 @@
   "pathfinderDest": "",
   "pathfinderOpen": false,
   "pathfinderPos": "",
-  "pathfinderDataUrl": "",
+  "pathfinderWaysOnly": false,
   "defaultMessageSound": "https://fallenswordhelper.github.io/fallenswordhelper/audio/sms-alert-2-daniel_simon.wav",
   "highlightPlayersNearMyLvl": false,
   "highlightGvGPlayersNearMyLvl": false,

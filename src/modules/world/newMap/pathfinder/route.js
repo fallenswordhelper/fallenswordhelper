@@ -1,5 +1,5 @@
-// Routing over the Path Finder data (https://cristimirt.github.io/fspathfinder/). No DOM in here.
-//   const router = createRouter(data);   // data = the parsed route.json
+// Routing over the Path Finder data (routeData.json in this folder). No DOM in here.
+//   const router = createRouter(data);   // data = the parsed routeData.json
 //   router.findRoute('Mountain Path', 'Ramdal Caves (Level 1)', [3, 8])  ->  steps (or null), steps.total = estimated moves
 import MinHeap from './minHeap';
 
@@ -14,11 +14,12 @@ const norm = (s) =>
     .replace(/[^a-z0-9]/g, '');
 const FREE_TO = 'Mountain Path';
 const FREE_AT = [9, 11]; // the teleport always puts you on this tile
+const WAYS = 'Cathedral of Ways'; // the one portal that is kept when the other portals are switched off
 const TELEPORT_COST = 25; // it costs 25 stamina, about 25 moves
 
 /**
  * Builds a router over the route data.
- * @param {object} D The parsed route.json.
+ * @param {object} D The parsed routeData.json.
  * @returns {{byName: object, masters: object[], realms: object[], adj: object, drawn: Map, findRoute: Function, search: Function, fromGame: Function}}
  */
 export default function createRouter(D) {
@@ -47,9 +48,9 @@ export default function createRouter(D) {
    * @param {object} info Tile and arrival details.
    */
   const addEdge = (a, b, kind, info) => adj[a].push({ to: b, kind, ...info });
-  const drawn = new Map(); // one entry per pair of connected areas, used by the website to draw lines
+  const drawn = new Map(); // one entry per pair of connected areas, only needed to draw lines, not used by the widget
   /**
-   * Remembers that two areas are connected, once per pair, for the website to draw.
+   * Remembers that two areas are connected, once per pair, for drawing lines (not used by the widget).
    * @param {string} a
    * @param {string} b
    * @param {string} kind
@@ -83,10 +84,7 @@ export default function createRouter(D) {
         addDrawn(m.name, n, 'exit');
       }
     });
-    if (m.nextWorld) {
-      addEdge(m.name, m.nextWorld, 'world', {});
-      addEdge(m.nextWorld, m.name, 'world', {});
-    }
+    // world maps next to each other are not connected: the data does not say which ones are, so none are
   });
 
   /**
@@ -102,9 +100,10 @@ export default function createRouter(D) {
    * Every way out of an area from a given tile, with what it costs.
    * @param {string} name
    * @param {number[]|null} tile
+   * @param {boolean} [waysOnly] Leave out every portal except the one in the Cathedral of Ways.
    * @returns {object[]}
    */
-  function moveOptions(name, tile) {
+  function moveOptions(name, tile, waysOnly) {
     const out = [];
     adj[name].forEach((e) => {
       const walk = cheb(tile, e.x, e.y);
@@ -123,10 +122,12 @@ export default function createRouter(D) {
     });
     // a portal takes you to the world map of any master realm; every portal of a realm leads to the same places, so only the nearest one counts
     let near = null;
-    (byName[name].portals || []).forEach((p) => {
-      const walk = cheb(tile, p.x, p.y);
-      if (!near || walk < near.walk) near = { p, walk };
-    });
+    (waysOnly && name !== WAYS ? [] : byName[name].portals || []).forEach(
+      (p) => {
+        const walk = cheb(tile, p.x, p.y);
+        if (!near || walk < near.walk) near = { p, walk };
+      },
+    );
     if (near) {
       masters.forEach((m) => {
         if (m.name === name) return;
@@ -159,9 +160,11 @@ export default function createRouter(D) {
    * @param {string} from
    * @param {string} to
    * @param {number[]} [tile] [x, y] of where you stand now, makes the first walk exact.
+   * @param {{waysOnly?: boolean}} [opts] `waysOnly`: no portals except the one in the Cathedral of Ways.
    * @returns {object[]|null} The steps, with `total` as the estimated moves; null when there is no way.
    */
-  function findRoute(from, to, tile) {
+  function findRoute(from, to, tile, opts) {
+    const waysOnly = Boolean(opts?.waysOnly);
     const key = (n, t) => `${n}@${t ? t.join(',') : ''}`;
     const info = {};
     const dist = {};
@@ -180,7 +183,7 @@ export default function createRouter(D) {
         goal = k;
         break;
       }
-      moveOptions(st.name, st.tile).forEach((o) => {
+      moveOptions(st.name, st.tile, waysOnly).forEach((o) => {
         if (o.e.to !== to && byName[o.e.to].event) return;
         const nk = key(o.e.to, o.at);
         const nd = d + o.cost;

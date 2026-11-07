@@ -15,6 +15,7 @@ export const pf = $state({
   tile: null, // [x, y]
   route: null, // steps from here to dest
   planning: false, // a re-plan is queued, so the panel does not show an old route
+  waysOnly: false, // no portals except the one in the Cathedral of Ways
 });
 
 let timer = 0;
@@ -56,7 +57,9 @@ function recompute() {
   if (!router || !dest || !here || !router.byName[dest] || here.name === dest) {
     return;
   }
-  pf.route = router.findRoute(here.name, dest, tile);
+  pf.route = router.findRoute(here.name, dest, tile, {
+    waysOnly: pf.waysOnly,
+  });
 }
 
 /**
@@ -142,6 +145,16 @@ export function setDest(name) {
 }
 
 /**
+ * Switches the other portals on or off, remembers it and plans the route again.
+ * @param {boolean} on True to use only the portal in the Cathedral of Ways.
+ */
+export function setWaysOnly(on) {
+  pf.waysOnly = on;
+  setValue('pathfinderWaysOnly', on);
+  recompute();
+}
+
+/**
  * Opens the panel, loads the data if needed and starts following the player.
  */
 export async function openPanel() {
@@ -166,5 +179,6 @@ export function closePanel() {
  */
 export function restoreState() {
   pf.dest = getValue('pathfinderDest') || '';
+  pf.waysOnly = Boolean(getValue('pathfinderWaysOnly'));
   return getValue('pathfinderOpen');
 }

@@ -1,30 +1,23 @@
-import getValue from '../../../system/getValue';
 import createRouter from './route';
-
-// The route data (the same file the Path Finder website uses) is a static file on GitHub Pages;
-// the browser keeps it for ten minutes between visits.
-export const siteUrl = 'https://cristimirt.github.io/fspathfinder/';
-const dataUrl = () => getValue('pathfinderDataUrl') || `${siteUrl}route.json`;
 
 let loading = null;
 
 /**
- * Downloads the route data and builds a router from it.
+ * Builds the router from the route data that ships with the helper (routeData.json in this folder). The data is its own file
+ * so that it is only fetched, together with the helper's other files, when the panel is first opened. See README.md here for
+ * how to update it.
  * @returns {Promise<object>} The router.
  * @throws {Error} When the data cannot be loaded.
  */
-async function fetchRouter() {
-  const url = dataUrl();
+async function buildRouter() {
   try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return createRouter(await response.json());
+    const { default: data } = await import('./routeData.json');
+    return createRouter(data);
   } catch (error) {
     loading = null;
-    throw new Error(
-      `Could not load the map data (${error.message}) from ${url}`,
-      { cause: error },
-    );
+    throw new Error(`Could not load the map data (${error.message})`, {
+      cause: error,
+    });
   }
 }
 
@@ -33,6 +26,6 @@ async function fetchRouter() {
  * @returns {Promise<object>} The router.
  */
 export default function loadRouter() {
-  loading ??= fetchRouter();
+  loading ??= buildRouter();
   return loading;
 }
