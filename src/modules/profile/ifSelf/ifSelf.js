@@ -49,12 +49,6 @@ function doNekidBtn() {
   }
 }
 
-function doAjaxifySections() {
-  if (getValue('ajaxifyProfileSections')) {
-    runDefault(import('./ajaxifyProfileSections'));
-  }
-}
-
 export default function ifSelf() {
   if (getIsSelf()) {
     // self inventory
@@ -67,7 +61,6 @@ export default function ifSelf() {
       doSelectAllLink,
       storeVL,
       doNekidBtn,
-      doAjaxifySections,
     ]);
   }
 }
