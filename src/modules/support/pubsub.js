@@ -47,6 +47,7 @@ function hasTopic(token, subs) {
   return subs.some(partial(hasSub, token, subs));
 }
 
+/** @public Unused, kept for a complete pubsub API */
 export function unsubscribe(token) {
   if (topics.values().some(partial(hasTopic, token))) {
     return token;

@@ -6,7 +6,7 @@ import insertElementBefore from './insertElementBefore';
 import itemIdFromImg from './itemIdFromImg';
 import onclick from './onclick';
 
-export function makeGuideItemAnchor(eventSource, itemId) {
+function makeGuideItemAnchor(eventSource, itemId) {
   const thisAnchor = createAnchor({
     href: `${guideUrl}items${defSubcmd}view&item_id=${itemId}`,
     target: '_blank',
