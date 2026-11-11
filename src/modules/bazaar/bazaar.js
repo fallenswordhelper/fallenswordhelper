@@ -36,9 +36,6 @@ function havePots(origPots) {
 
 export default function bazaar() {
   if (!pcc() || jQueryNotPresent()) return;
-  const origPots = querySelectorArray(
-    'a[href*="&subcmd=buyitem&"][onclick]',
-    pcc(),
-  );
+  const origPots = querySelectorArray('a[href*="&subcmd=buyitem&"]', pcc());
   if (origPots.length) havePots(origPots);
 }
