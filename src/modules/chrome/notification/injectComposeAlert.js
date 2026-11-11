@@ -1,4 +1,4 @@
-import daComposing from '../../_dataAccess/daComposing';
+import composingView from '../../_dataAccess/fallbacks/composingView';
 import jQueryPresent from '../../common/jQueryPresent';
 import calf from '../../support/calf';
 import { defLastComposeCheck, defNeedToCompose } from '../../support/constants';
@@ -26,24 +26,19 @@ function potsBrewing(potions) {
   }
 }
 
-const hUDLocalPlayerTypeMaxComposingPotions = 52;
-
-function parseComposingApp(json) {
-  const maxPotions = json.h.p.find(
-    ({ k }) => k === hUDLocalPlayerTypeMaxComposingPotions,
-  )?.v;
-  if (json.r.potions.length !== maxPotions) {
+function parseComposingSlots({ max_potions: maxPotions, potions }) {
+  if (potions.length !== maxPotions) {
     displayAlert();
   } else {
-    potsBrewing(json.r.potions);
+    potsBrewing(potions);
   }
 }
 
 async function checkLastCompose() {
   const lastComposeCheck = getValue(defLastComposeCheck);
   if (lastComposeCheck && now() < lastComposeCheck) return;
-  const json = await daComposing();
-  if (json?.s) parseComposingApp(json);
+  const json = await composingView();
+  if (json.s) parseComposingSlots(json.r);
 }
 
 function composeAlert() {
