@@ -1,6 +1,6 @@
 <script>
   import { SvelteMap } from 'svelte/reactivity';
-  import daComponents from '../../_dataAccess/daComponents';
+  import profileComponents from '../../_dataAccess/fallbacks/profileComponents';
   import uniq from '../../common/uniq';
   import { compStore, total } from './componentsStore';
   import CountRow from './CountRow.svelte';
@@ -29,7 +29,7 @@
   }
 
   async function getComponents() {
-    const components = await getAsyncData(daComponents);
+    const components = await getAsyncData(profileComponents);
     const rollup = rollupComponents(components.r);
     return { rollup, maxComp: components.h?.p.find(({ k }) => k === 56)?.v };
   }
