@@ -1,9 +1,9 @@
 import daRankPosition from '../../_dataAccess/daRankPosition';
 import sendEvent from '../../analytics/sendEvent';
+import fsPostParam from '../../common/fsPostParam';
 import insertElementBefore from '../../common/insertElementBefore';
 import onclick from '../../common/onclick';
 import playerName from '../../common/playerName';
-import regExpFirstCapture from '../../common/regExpFirstCapture';
 import toLowerCase from '../../common/toLowerCase';
 import { pcc } from '../../support/layout';
 import getValue from '../../system/getValue';
@@ -34,14 +34,8 @@ function getPxScroll(val) {
   return 22;
 }
 
-const rankIdRe = /rank_id=(?<rankId>\d+)/;
-
-function shuffleRows(evt, thisRankRow, targetRowNum) {
-  const matchRankId = regExpFirstCapture(
-    rankIdRe,
-    evt.target.getAttribute('onclick'),
-  );
-  daRankPosition(toLowerCase(evt.target.value), matchRankId);
+function shuffleRows(evt, thisRankRow, targetRowNum, rankId) {
+  daRankPosition(toLowerCase(evt.target.value), rankId);
   const injectRow = thisRankRow.parentNode.rows[targetRowNum];
   insertElementBefore(thisRankRow, injectRow);
   const pxScroll = getPxScroll(evt.target.value);
@@ -50,6 +44,9 @@ function shuffleRows(evt, thisRankRow, targetRowNum) {
 }
 
 function overrideUpDown(evt) {
+  const rankId = fsPostParam(evt.target, 'rank_id');
+  // Without an id, leave the click to the game
+  if (!rankId) return;
   sendEvent('ranks', 'overrideUpDown');
   const thisRankRow = evt.target.parentNode.parentNode.parentNode;
   const targetRowNum =
@@ -57,7 +54,7 @@ function overrideUpDown(evt) {
   if (notValidRow(thisRankRow, targetRowNum)) {
     return;
   }
-  shuffleRows(evt, thisRankRow, targetRowNum);
+  shuffleRows(evt, thisRankRow, targetRowNum, rankId);
 }
 
 function ajaxifyRankControls(evt) {

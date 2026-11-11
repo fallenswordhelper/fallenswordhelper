@@ -3,13 +3,13 @@ import daBuffMarketBuy from '../_dataAccess/daBuffMarketBuy';
 import indexAjaxDoc from '../ajax/indexAjaxDoc';
 import sendEvent from '../analytics/sendEvent';
 import fromEntries from '../common/fromEntries';
+import fsPostParam from '../common/fsPostParam';
 import on from '../common/on';
 import onclick from '../common/onclick';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import setInnerHtml from '../dom/setInnerHtml';
 import { pcc } from '../support/layout';
-import getPackageId from './getPackageId';
 
 async function search(injector, e) {
   sendEvent('buffmarket', 'search');
@@ -49,7 +49,7 @@ async function doIntercept(e, packageId) {
 }
 
 function interceptBuy(e) {
-  const packageId = getPackageId(e.target);
+  const packageId = fsPostParam(e.target, 'id');
   // Without an id, leave the click to the game
   if (!packageId) return;
   sendEvent('buffmarket', 'interceptBuy');

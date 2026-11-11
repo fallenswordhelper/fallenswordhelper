@@ -6,6 +6,7 @@ import daToggleBuffPackage from '../_dataAccess/daToggleBuffPackage';
 import dynamicAlert from '../alert/dynamicAlert';
 import cElement from '../common/cElement/cElement';
 import createDiv from '../common/cElement/createDiv';
+import fsPostParam from '../common/fsPostParam';
 import closestTr from '../common/closestTr';
 import closestTd from '../common/closestTd';
 import getText from '../common/getText';
@@ -15,10 +16,9 @@ import querySelectorArray from '../common/querySelectorArray';
 import setText from '../dom/setText';
 import ModalConfirm from '../modal/ModalConfirm.svelte';
 import { pcc } from '../support/layout';
-import getPackageId from './getPackageId';
 
 function replaceOnClick(target, fn) {
-  const packageId = getPackageId(target);
+  const packageId = fsPostParam(target, 'id');
   if (!packageId) return;
   target.removeAttribute('onclick');
   // Stop the game's own data-fs-post handler running as well
