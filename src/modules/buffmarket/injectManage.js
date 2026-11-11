@@ -22,8 +22,8 @@ function replaceOnClick(target, fn) {
   if (!packageId) return;
   target.removeAttribute('onclick');
   // Stop the game's own data-fs-post handler running as well
-  target.removeAttribute('data-fs-post');
-  target.removeAttribute('data-fs-confirm');
+  delete target.dataset.fsPost;
+  delete target.dataset.fsConfirm;
   target.setAttribute('data-packageId', packageId);
   onclick(target, fn);
 }

@@ -54,7 +54,7 @@ function interceptBuy(e) {
   if (!packageId) return;
   sendEvent('buffmarket', 'interceptBuy');
   e.stopPropagation();
-  doIntercept(e, packageId);
+  void doIntercept(e, packageId); // skipcq: JS-0098
 }
 
 function interceptClick(e) {
