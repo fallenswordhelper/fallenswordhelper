@@ -56,7 +56,9 @@ function doReset(eventAction, listName) {
   retrieveBountyInfo();
 }
 
-function resetList(e) {
+function listClick(e) {
+  // The game's own [data-confirm] handler does the accept
+  if (e.target.dataset.confirmHref) sendEvent('activeWantedBounties', 'accept');
   if (e.target === getBountyListReset())
     doReset('getBountyListReset', 'bountyList');
   if (e.target === getWantedListReset())
@@ -65,10 +67,10 @@ function resetList(e) {
 
 function doHandlers() {
   if (getBountyListDiv()) {
-    onclick(getBountyListDiv(), resetList);
+    onclick(getBountyListDiv(), listClick);
   }
   if (getWantedListDiv()) {
-    onclick(getWantedListDiv(), resetList);
+    onclick(getWantedListDiv(), listClick);
   }
 }
 
