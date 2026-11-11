@@ -6,6 +6,7 @@ import getTextTrim from '../common/getTextTrim';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import $dataAccess from './$dataAccess';
 
 const getSelect = (doc) => querySelector('select[name="page"]', doc);
@@ -26,7 +27,7 @@ function questFromLink(type, a) {
   const percBar = tr.cells[3].children[0];
   const maxStage = percBar.children.length - 2;
   return {
-    id: Number(a.href.split('=').at(-1)),
+    id: Number(getCustomUrlParameter(a.href, 'quest_id')),
     name: a.textContent,
     min_level: Number(getTextTrim(tr.cells[1])),
     realm: { name: getTextTrim(tr.cells[2]) },

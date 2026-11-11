@@ -20,6 +20,7 @@
   import uniq from '../../common/uniq';
   import ModalTitled from '../../modal/ModalTitled.svelte';
   import { viewRecipeUrl } from '../../support/constants';
+  import getCustomUrlParameter from '../../system/getCustomUrlParameter';
   import getValue from '../../system/getValue';
   import { get, set } from '../../system/idb';
   import { cdn } from '../../system/system';
@@ -124,7 +125,7 @@
   }
 
   async function getFirstPage([href, name]) {
-    const fid = href.split('=').at(-1);
+    const fid = getCustomUrlParameter(href, 'folder_id');
     const doc = await getPage(fid);
     addToProgressLog([`Parsing folder "${name}"...`]);
     return [fid, doc];
@@ -134,7 +135,7 @@
   const findRecipes = (doc) =>
     arrayFrom(querySelectorAll('#pCC a[href*="&recipe_id="]', doc));
   const recipeValues = (a) => [
-    a.href.split('=').at(-1),
+    getCustomUrlParameter(a.href, 'recipe_id'),
     getTextTrim(a),
     a.parentNode.previousElementSibling.children[0].src.split('/').at(-1),
   ];

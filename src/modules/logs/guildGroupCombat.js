@@ -1,10 +1,10 @@
 import createDiv from '../common/cElement/createDiv';
 import closestTr from '../common/closestTr';
-import getId from '../common/getId';
 import getText from '../common/getText';
 import insertElement from '../common/insertElement';
 import playerLink from '../common/playerLink';
 import querySelectorArray from '../common/querySelectorArray';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import getValue from '../system/getValue';
 import getCombat from './playerLogWidgets/getCombat';
 import getLogTime from './playerLogWidgets/getLogTime';
@@ -23,7 +23,10 @@ function decorate(row, leader, itemName) {
 
 async function addItem(a) {
   const row = closestTr(a);
-  const json = await getCombat(getLogTime(row), getId(a));
+  const json = await getCombat(
+    getLogTime(row),
+    getCustomUrlParameter(a.href, 'combat_id'),
+  );
   const itemName = json?.r?.combat?.items?.[0]?.n;
   if (itemName)
     decorate(row, json.r.combat.attacker.group.players[0], itemName);

@@ -1,13 +1,13 @@
 import all from '../../common/all';
 import createDiv from '../../common/cElement/createDiv';
 import closestTr from '../../common/closestTr';
-import getId from '../../common/getId';
 import insertElement from '../../common/insertElement';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import querySelector from '../../common/querySelector';
 import querySelectorArray from '../../common/querySelectorArray';
 import { playerLinkSelector } from '../../support/constants';
 import addCommas from '../../system/addCommas';
+import getCustomUrlParameter from '../../system/getCustomUrlParameter';
 import getCombat from './getCombat';
 import getLogTime from './getLogTime';
 
@@ -17,7 +17,7 @@ const isPvp = ([, r]) => querySelector(playerLinkSelector, r);
 const getCombats = async ([cl, r, msgHtml]) => [
   r,
   msgHtml,
-  await getCombat(getLogTime(r), getId(cl)),
+  await getCombat(getLogTime(r), getCustomUrlParameter(cl.href, 'combat_id')),
 ];
 const goodCombats = ([, , json]) => json?.s;
 const filterSpecial = (el) => [18, 21, 31].includes(el.id);

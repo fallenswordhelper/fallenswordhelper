@@ -1,11 +1,11 @@
 import { mount } from 'svelte';
 import closestTable from '../common/closestTable';
-import getId from '../common/getId';
 import getTextTrim from '../common/getTextTrim';
 import jQueryNotPresent from '../common/jQueryNotPresent';
 import querySelector from '../common/querySelector';
 import querySelectorArray from '../common/querySelectorArray';
 import { pcc } from '../support/layout';
+import getCustomUrlParameter from '../system/getCustomUrlParameter';
 import intValue from '../system/intValue';
 import Bazaar from './Bazaar.svelte';
 
@@ -18,7 +18,7 @@ const getCcy = (p) => ({
 });
 
 const preparePotions = ({ p, ccy }) => ({
-  id: Number(getId(p)),
+  id: Number(getCustomUrlParameter(p.href, 'item_id')),
   img: p.children[0].src,
   fetch: p.firstChild.dataset.tipped,
   price: intValue(getTextTrim(ccy.parentElement.previousElementSibling)),
