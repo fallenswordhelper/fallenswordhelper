@@ -1,5 +1,9 @@
 {
-  "entry": ["src/calfSystem.js", "vite.config.js", "vite/*.js", "scripts/*.js"],
+  "entry": ["vite/*.js", "scripts/*.js"],
+  "ignore": [
+    "src/fallenswordhelper.user.js",
+    "src/modules/_dataAccess/delay.js"
+  ],
   "ignoreDependencies": ["css-tooltip"],
   "project": ["src/**", "scripts/**", "vite/**"]
 }
