@@ -219,7 +219,6 @@
   "quickWearLink": false,
   "selectAllLink": false,
   "nekidButton": false,
-  "ajaxifyProfileSections": false,
   "injectBuffGuide": false,
   "statisticsWrap": false,
   "showGuildRelationship": false,
