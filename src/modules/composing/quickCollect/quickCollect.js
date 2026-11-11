@@ -1,19 +1,17 @@
 import './quickCollect.css';
 import daComposingCollect from '../../_dataAccess/daComposingCollect';
 import sendEvent from '../../analytics/sendEvent';
+import fsPostParam from '../../common/fsPostParam';
 import getText from '../../common/getText';
 import insertHtmlAfterBegin from '../../common/insertHtmlAfterBegin';
 import onclick from '../../common/onclick';
 import querySelectorArray from '../../common/querySelectorArray';
-import regExpFirstCapture from '../../common/regExpFirstCapture';
 import setInnerHtml from '../../dom/setInnerHtml';
 import { pcc } from '../../support/layout';
 
 function injectButtons(btn) {
-  const pid = regExpFirstCapture(
-    /potion_id=(?<id>\d+)/,
-    btn.getAttribute('onclick'),
-  );
+  const pid = fsPostParam(btn, 'potion_id');
+  if (!pid) return;
   insertHtmlAfterBegin(
     btn.parentNode,
     `[ <span class="fsh-quick-collect"><button class="fshBl fsh-bli" type="button" value="${
