@@ -7,9 +7,9 @@ import on from '../common/on';
 import onclick from '../common/onclick';
 import partial from '../common/partial';
 import querySelector from '../common/querySelector';
-import regExpFirstCapture from '../common/regExpFirstCapture';
 import setInnerHtml from '../dom/setInnerHtml';
 import { pcc } from '../support/layout';
+import getPackageId from './getPackageId';
 
 async function search(injector, e) {
   sendEvent('buffmarket', 'search');
@@ -49,13 +49,12 @@ async function doIntercept(e, packageId) {
 }
 
 function interceptBuy(e) {
+  const packageId = getPackageId(e.target);
+  // Without an id, leave the click to the game
+  if (!packageId) return;
   sendEvent('buffmarket', 'interceptBuy');
   e.stopPropagation();
-  const packageId = regExpFirstCapture(
-    /id=(?<id>\d+)/,
-    e.target.getAttribute('onclick'),
-  );
-  if (packageId) doIntercept(e, packageId);
+  doIntercept(e, packageId);
 }
 
 function interceptClick(e) {
