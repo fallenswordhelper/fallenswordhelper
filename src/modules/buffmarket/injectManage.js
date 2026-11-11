@@ -15,14 +15,15 @@ import querySelectorArray from '../common/querySelectorArray';
 import setText from '../dom/setText';
 import ModalConfirm from '../modal/ModalConfirm.svelte';
 import { pcc } from '../support/layout';
-
-const getPackageId = (button) =>
-  button.getAttribute('onclick').match(/id=(\d+)/)?.[1];
+import getPackageId from './getPackageId';
 
 function replaceOnClick(target, fn) {
   const packageId = getPackageId(target);
   if (!packageId) return;
-  target.setAttribute('onclick', '');
+  target.removeAttribute('onclick');
+  // Stop the game's own data-fs-post handler running as well
+  delete target.dataset.fsPost;
+  delete target.dataset.fsConfirm;
   target.setAttribute('data-packageId', packageId);
   onclick(target, fn);
 }
