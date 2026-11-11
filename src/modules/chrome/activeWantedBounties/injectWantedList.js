@@ -1,3 +1,4 @@
+import escapeHtml from '../../system/escapeHtml';
 import { getWantedListDiv } from './createDivs';
 import injectList from './injectList';
 import listRow from './listRow';
@@ -15,10 +16,13 @@ function makeMouseOver(el) {
   }<br>Posted: ${el.posted}<br>Tickets Req.:  ${el.tickets}`;
 }
 
-function acceptBtn(bounty) {
-  return bounty.accept
-    ? `<span class="xsGreen" onclick="${bounty.accept}">[a]</span>&nbsp;`
-    : '';
+// The game's own [data-confirm] handler asks, then goes to the href.
+// Lists stored before game 4.6 have an onclick string here; skip those.
+function acceptBtn({ accept }) {
+  if (!accept?.href) return '';
+  return `<span class="xsGreen" data-confirm="${escapeHtml(
+    accept.confirm ?? '',
+  )}" data-confirm-href="${escapeHtml(accept.href)}">[a]</span>&nbsp;`;
 }
 
 function wantedRow(bounty) {

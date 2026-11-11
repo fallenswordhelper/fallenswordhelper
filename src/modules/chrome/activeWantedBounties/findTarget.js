@@ -3,12 +3,11 @@ import calf from '../../support/calf';
 import basicBounty from './basicBounty';
 import { getWantedArray, getWantedList } from './lists';
 
+// Game 4.6 accept button: <input data-confirm="..." data-confirm-href="...">
 function acceptBtn(theCells) {
-  const cell = theCells[6];
-  if (getTextTrim(cell) !== '[n/a]') {
-    return cell.children[0].children[0].getAttribute('onclick');
-  }
-  return '';
+  const btn = theCells[6].querySelector('[data-confirm-href]');
+  if (!btn) return;
+  return { confirm: btn.dataset.confirm, href: btn.dataset.confirmHref };
 }
 
 function getTarget(theCells) {
